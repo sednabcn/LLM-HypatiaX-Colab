@@ -16,7 +16,8 @@ requirements = config['build-system']['requires']
 
 # Conditional requirements based on architecture
 if architecture == '64bit':
-    requirements.append('transformers==4.40.0','spacy-transformers==1.3.4')
+    requirements.append('transformers>=4.40.0,<5.0')
+    requirements.append('spacy-transformers>=1.3.0,<2.0')
 else:
     requirements.append('')  # Alternative package for 32-bit systems
     
@@ -38,6 +39,8 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         "Topic :: Software Development :: Libraries :: Python Modules",
       ],
       url='http://github.com/sednabcn/LLM-HypatiaX',
