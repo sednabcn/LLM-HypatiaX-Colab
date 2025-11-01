@@ -1,0 +1,7 @@
+from hypatiax.utils.utils import rename_queries_to_tableau
+
+import os
+
+path_dir="home/agagora/Downloads/GEN_AI/PROJECTS/FORMULAS/LLM-HypatiaX/hypatiax"
+
+rename_queries_to_tableau(path_dir)

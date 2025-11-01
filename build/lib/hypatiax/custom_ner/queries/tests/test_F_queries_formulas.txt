@@ -1,0 +1,29 @@
+──(agagora㉿kali)-[~/Downloads/GEN_AI/PROJECTS/FORMULAS/LLM-HypatiaX/hypatiax/custom_ner/queries]
+└─$  ./proc_time.py                                                                                    
+type= <class 'type'>
+/home/agagora/Downloads/GEN_AI/PROJECTS/FORMULAS/LLM-HypatiaX/hypatiax/data_spacy/queries/ner_queries_formulas
+File ner_queries_formulas loaded successfully
+=============================================
+['tok2vec', 'tagger', 'parser', 'attribute_ruler', 'lemmatizer', 'ruler_intj', 'ruler_verb', 'ruler_num', 'ruler_adv', 'ruler_pron', 'ruler_adp', 'ruler_noun', 'ruler_adj', 'ruler_propn', 'ruler_arg', 'ruler_argn', 'ruler_numm', 'ruler_advv', 'ruler_oper', 'ruler_adpp', 'ruler_nounn', 'ruler_adjj', 'ruler_sort_command', 'ner']
+=============================================
+SUM ( Sepal Length ) AVG ( Sepal Length )
+SUM OPER
+Sepal Length ARGN
+AVG OPER
+Sepal Length ARGN
+ SORT ( [ Species ] , DESC ) 
+SORT OPER
+Species ARGN
+DESC ADV
+ SORT ( [ Species ] , DESC ) INDEX ( ) < = 3 SORT BY [ Petal Length ] ASC
+SORT OPER
+Species ARGN
+DESC ADV
+INDEX OPER
+< = ADP
+3 NUM
+SORT OPER
+BY OPER
+Petal Length ARGN
+ASC ADV
+The function took 2.0 minutes and 0.9710836860003838 seconds to run.

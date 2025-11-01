@@ -1,0 +1,45 @@
+True
+['tok2vec', 'tagger', 'parser', 'attribute_ruler', 'lemmatizer', 'custom_queries_desc_ruler', 'ner']
+=============================================
+['tok2vec', 'tagger', 'parser', 'attribute_ruler', 'lemmatizer', 'custom_queries_desc_ruler', 'ner']
+=============================================
+Sum of Sepal Length. Average Sepal Width across all entries . Count the number of records in the dataset
+Sum NOUN
+of ADP
+Sepal Length PROPN
+Average ADJ
+Sepal Width PROPN
+across ADP
+all PRON
+entries NOUN
+Count PROPN
+the PRON
+number NOUN
+of ADP
+records NOUN
+in ADP
+the PRON
+dataset NOUN
+=============================================
+Calculate the total of Petal Lengths
+Calculate ADJ
+the PRON
+total ADJ
+of ADP
+Lengths NOUN
+=============================================
+Minimum value of Sepal Length
+Minimum PROPN
+value NOUN
+of ADP
+Sepal Length PROPN
+=============================================
+Entries with Petal Length between 1.5 and 2.5
+Entries NOUN
+with ADP
+Petal Length PROPN
+between ADP
+1.5 CARDINAL
+and CONJ
+=============================================
+The function took 22.933564386999933 seconds to run.

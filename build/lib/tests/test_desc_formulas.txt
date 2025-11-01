@@ -1,0 +1,75 @@
+┌──(agagora㉿kali)-[~/Downloads/GEN_AI/PROJECTS/FORMULAS/LLM-HypatiaX/tests]
+└─$ python test_desc_formulas.py                                                                             
+Component tok2vec already exists in the primary model.
+Component tagger already exists in the primary model.
+Component parser already exists in the primary model.
+Component attribute_ruler already exists in the primary model.
+Component lemmatizer already exists in the primary model.
+Component ruler_conj isn't in the primary model.
+Component ruler_intj isn't in the primary model.
+Component ruler_verb isn't in the primary model.
+Component ruler_num isn't in the primary model.
+Component ruler_adv isn't in the primary model.
+Component ruler_pron isn't in the primary model.
+Component ruler_adp isn't in the primary model.
+Component ruler_noun isn't in the primary model.
+Component ruler_adj isn't in the primary model.
+Component ruler_propn isn't in the primary model.
+Component ner already exists in the primary model.
+=============================================
+['tok2vec', 'tagger', 'parser', 'attribute_ruler', 'lemmatizer', 'ruler_conj', 'ruler_intj', 'ruler_verb', 'ruler_num', 'ruler_adv', 'ruler_pron', 'ruler_adp', 'ruler_noun', 'ruler_adj', 'ruler_propn', 'ruler_arg', 'ruler_argn', 'ruler_numm', 'ruler_advv', 'ruler_oper', 'ruler_adpp', 'ruler_nounn', 'ruler_adjj', 'ruler_sort_command', 'ner']
+=============================================
+Calculate the total of Petal Lengths :  SUM ( [ Petal Length ] )
+Calculate ADJ
+the PRON
+total ADJ
+of ADP
+Lengths NOUN
+SUM OPER
+Petal Length ARGN
+=============================================
+Minimum value of Sepal Length : MIN ( Sepal Length ) 
+Minimum PROPN
+value NOUN
+of ADP
+Sepal Length ARGN
+MIN OPER
+Sepal Length ARGN
+=============================================
+Entries with Petal Length between 1.5 and 2.5 : Petal Length BETWEEN 1.5 AND 2.5
+Entries NOUN
+with ADP
+Petal Length ARGN
+between ADP
+1.5 NUM
+and CONJ
+2.5 NUM
+Petal Length ARGN
+BETWEEN ADP
+1.5 NUM
+AND ADP
+2.5 NUM
+=============================================
+
+┌──(agagora㉿kali)-[~/Downloads/GEN_AI/PROJECTS/FORMULAS/LLM-HypatiaX/tests]
+└─$ ls                                                                                                       
+docs.py            __pycache__             test_desc.py             test_formulas.py
+__init__.py        test_desc_formulas.py   test_entity_desc.py      test_read_files.py
+ner_desc_formulas  test_desc_formulas.py~  test_entity_formulas.py
+
+┌──(agagora㉿kali)-[~/Downloads/GEN_AI/PROJECTS/FORMULAS/LLM-HypatiaX/tests]
+└─$ ls -all ner_desc_formulas                                                                                
+total 136
+drwxr-xr-x 10 agagora agagora  4096 Apr 29 21:34 .
+drwxr-xr-x  4 agagora agagora  4096 Apr 29 21:41 ..
+drwxr-xr-x  2 agagora agagora  4096 Apr 29 21:34 attribute_ruler
+-rw-r--r--  1 agagora agagora  6701 Apr 29 21:34 config.cfg
+drwxr-xr-x  3 agagora agagora  4096 Apr 29 21:34 lemmatizer
+-rw-r--r--  1 agagora agagora 10801 Apr 29 21:34 meta.json
+drwxr-xr-x  2 agagora agagora  4096 Apr 29 21:34 ner
+drwxr-xr-x  2 agagora agagora  4096 Apr 29 21:34 parser
+drwxr-xr-x  2 agagora agagora  4096 Apr 29 21:34 senter
+drwxr-xr-x  2 agagora agagora  4096 Apr 29 21:34 tagger
+drwxr-xr-x  2 agagora agagora  4096 Apr 29 21:34 tok2vec
+-rw-r--r--  1 agagora agagora 77066 Apr 29 21:34 tokenizer
+drwxr-xr-x  2 agagora agagora  4096 Apr 29 21:34 vocab

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  hypatiax-py310:
+    build:
+      context: .
+      target: py310
+    image: hypatiax:py310-colab
+    container_name: hypatiax-colab
+    volumes:
+      - .:/app
+    ports:
+      - "8888:8888"
+    command: jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+
+  hypatiax-py311:
+    build:
+      context: .
+      target: py311
+    image: hypatiax:py311-stable
+    container_name: hypatiax-stable
+    volumes:
+      - .:/app
+    ports:
+      - "8889:8888"
+    command: jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+
+  hypatiax-py313:
+    build:
+      context: .
+      target: py313
+    image: hypatiax:py313-latest
+    container_name: hypatiax-latest
+    volumes:
+      - .:/app
+    ports:
+      - "8890:8888"
+    command: jupyter notebook --ip=0.0.0.0 --no-browser --allow-root

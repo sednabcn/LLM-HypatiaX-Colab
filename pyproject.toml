@@ -1,0 +1,62 @@
+[build-system]
+#requires = ["setuptools", "setuptools-scm"]
+requires = ["setuptools", "wheel", "versioneer>=0.29", "setuptools_scm[toml]>=3.4"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hypatiax"
+dynamic = ["version"]  
+description ="HypatiaX: AI-Driven Formula Discovery with LLM"
+authors = [{name = "Ruperto Pedro Bonet Chaple", email="ruperto.bonet@modelphysmat.com"}]
+license = {text="MIT"}
+readme = "README.rst"
+requires-python = ">=3.6, <4.0"
+
+dependencies = [
+    'numpy==1.24.4; python_version=="3.11"',
+    'numpy==1.25.2; python_version=="3.10"',
+    'pandas==2.2.1; python_version=="3.11"',
+    'pandas==2.0.3; python_version=="3.10"',
+    'scikit-learn==1.4.2; python_version=="3.11"',
+    'scikit-learn==1.2.2; python_version=="3.10"',
+    "spacy==3.7.4",
+    "nltk==3.8.1",
+    "matplotlib==3.7.1"]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules"]
+
+keywords=["Large Language Models", "AI", "formula discovery", "natural language processing","transformers","spacy"]
+
+[project.scripts]
+pattern_gen="hypatiax.scripts_.script_custom_patterns:pattern_gen"
+get_ner_component="hypatiax.scripts_.script_custom_ner:get_ner_component"
+get_ner_entity="hypatiax.scripts_.script_custom_entities:get_ner_entity"
+make_combined_data="hypatiax.scripts_.script_combined_data:make_combined_data"
+
+[project.urls]
+"Homepage" = "http://github.com/sednabcn/LLM-HypatiaX"
+"Bug Tracker" = "https://github.com/sednabcn/LLM-HypatiaX/issues"
+
+[tool.setuptools_scm]
+fallback_version = "0.1.0"
+write_to = "_version.py"
+
+[tool.septuptools]
+packages = ["find:"]
+package-dir = {"" = "hypatiax"}
+
+#[tool.setuptools.packages.find]
+#where = ["."]
+#include = ["core","custom_entities","custom_ner","datasets","data_spacy","mappings","models","patterns","scripts_","utils"]
+exclude = ["*.gitignore", "**/__pycache__", "*.~", "#*", ".#*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.xlsx", "*.json", "*.spacy", "*.cfg", "*.txt", "*.bin"]
+"hypatiax.data_spacy" = ["corpus/*", "embedding/*","pipelines/*","pre_trained_models/*","queries/*","queries/tableau/*","queries/tableau/ner_queries/*","queries/tableau/ner_queries_desc/*","queries/tableau/ner_queries_formulas/*","queries/tableau/ner_versions/*","queries/tableau/testing_spacy/*","queries/tableau/training_spacy/*","queries/tableau/vocab/*"]
+"hypatiax.datasets" =["queries/*","queries/tableau/*","queries/combined/*","queries/data/*","queries/tableau/testing/*","queries/tableau/testing_spacy/*","queries/tableau/training/*","queries/tableau/training_spacy/*","queries/tableau/validation/*"]
+"hypatiax.models"= ["queries/*","queries/tableau/*","queries/tableau/checkpoints/*","queries/tableau/model_configs/*","queries/tableau/trained_models/*","queries/tableau/trained_models/versions/*","queries/tableau/training_history/*"]

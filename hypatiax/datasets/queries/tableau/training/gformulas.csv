@@ -1,0 +1,109 @@
+,Description,Formulas
+0,Sum of Sepal Length,SUM(Sepal Length)
+1,Average Sepal Width across all entries,AVG(Sepal Width)
+2,Find the median Petal Length,MEDIAN(Petal Length)
+3,Count the number of records in the dataset,COUNT(*)
+4,Count distinct species in the dataset,COUNT DISTINCT(Species)
+5,Minimum value of Sepal Length,MIN(Sepal Length)
+6,Maximum Petal Width found in the dataset,MAX(Petal Width)
+7,Group records by Species,GROUP BY(Species)
+8,Sort the entries by Sepal Length in ascending order,ORDER BY(Sepal Length ASC)
+9,List Species alphabetically,ORDER BY(Species ASC)
+10,Entries with Sepal Length at least 5.0,Sepal Length >= 5.0
+11,Entries with Petal Length between 1.5 and 2.5,Petal Length BETWEEN 1.5 AND 2.5
+12,Top 3 entries with the highest Sepal Width,TOP 3 BY(Sepal Width DESC)
+13,Species is 'Setosa',Species = 'Setosa'
+14,Species starts with 'Se',Species STARTS WITH 'Se'
+15,Calculate the total of Petal Lengths, SUM([Petal Length])
+16,What is the average Petal Width?, AVG([Petal Width])
+17,Determine the middle value of Sepal Widths,MEDIAN([Sepal Width])
+18,How many data points are there?,COUNT([Sepal Length])
+19,Number of unique flower types,COUNTD([Species])
+20,Lowest Sepal Length recorded,MIN([Sepal Length])
+21,Highest value of Petal Width found,MAX([Petal Width])
+22,Organize data by Species in descending order,"SORT([Species], DESC)"
+23,Rank Sepal Lengths from low to high,"SORT([Sepal Length], ASC)"
+24,Filter for Sepal Length greater than or equal to 4.5,[Sepal Length] >= 4.5
+25,Select entries with Petal Width less than 2.0,[Petal Width] < 2.0
+26,Show entries where Sepal Width is not 3.0,[Sepal Width] != 3.0
+27,List all where the Species name ends with 'ica',"ENDSWITH([Species], ""ica"")"
+28,Entries with a Sepal Length of exactly 5.0,[Sepal Length] = 5.0
+29,Display the top 5 Species by Sepal Width, INDEX() <= 5 SORT BY SUM([Sepal Width]) DESC
+30,Find the 3 smallest Petal Lengths, INDEX() <= 3 SORT BY [Petal Length] ASC
+31,Count occurrences where Petal Length is between 4 and 5,IF [Petal Length] >= 4 AND [Petal Length] <= 5 THEN 1 ELSE 0 END
+32,Aggregate data by the month of observation (assuming there's a Date field),"DATETRUNC('month', [Date])"
+33,Filter records from last year (assuming there's a Date field),YEAR([Date]) = YEAR(TODAY()) - 1
+34,Show only the data starting from January this year,"[Date] >= DATETRUNC('year' , TODAY())"
+35,"Find the average Sepal Length for each Species, sorted alphabetically", AVG([Sepal Length]) GROUP BY [Species] SORT BY [Species] ASC
+36,Count how many Species start with 'C', COUNTD(IF LEFT([Species] 1) = 'C' THEN [Species] ELSE NULL END)
+37,Entries with Petal Length and Sepal Length both above 4.0, [Petal Length] > 4.0 AND [Sepal Length] > 4.0
+38,List Species with Petal Width in the top 10%, RANK_PERCENTILE([Petal Width]) <= 0.1
+39,Total Sepal Length for all Iris flowers,SUM([Sepal Length])
+40,Average Petal Width across all species,AVG([Petal Width])
+41,Median Sepal Width for Iris setosa,"{ FIXED [Species] = ""setosa"" : MEDIAN([Sepal Width]) }"
+42,Count of Iris versicolor flowers,"SUM(IF [Species] = ""versicolor"" THEN 1 ELSE 0 END)"
+43,Distinct count of species with Sepal Length over 5.0,COUNTD(IF [Sepal Length] > 5.0 THEN [Species] ELSE NULL END)
+44,Minimum Petal Length for Iris virginica,"{ FIXED [Species] = ""virginica"" : MIN([Petal Length]) }"
+45,Maximum Sepal Width across Iris setosa,"{ FIXED [Species] = ""setosa"" : MAX([Sepal Width]) }"
+46,Total number of records grouped by Species, SORTED BY Species alphabetically COUNT([Species]) GROUP BY [Species] ORDER BY [Species] ASC
+47,Filter to show only Iris versicolor with Sepal Width at least 3.0,"[Species] = ""versicolor"" AND [Sepal Width] >= 3.0"
+48,Show top 5 Sepal Lengths within Iris virginica only,"RANK([Sepal Length]) <= 5 AND [Species] = ""virginica"""
+49,Iris flowers with Petal Width in the bottom 10th percentile,RANK_PERCENTILE([Petal Width]) >= 0.9
+50,Average Sepal Length for each species,LISTED FROM highest to lowest AVG([Sepal Length]) GROUP BY [Species] ORDER BY AVG([Sepal Length]) DESC
+51,Entries with Petal Length between 4.0 and 5.0 for Iris setosa,"[Species] = ""setosa"" AND [Petal Length] BETWEEN 4.0 AND 5.0"
+52,Count Iris flowers where the Species name contains 'color',"SUM(IF CONTAINS([Species] ""color"") THEN 1 ELSE 0 END)"
+53,List all Iris flowers where the Species name starts with 'Iri' and ends with 'a'," STARTSWITH([Species] ""Iri"") AND ENDSWITH([Species], “a”)"
+54,Total Sepal Width in the dataset,SUM(Sepal Width)
+55,Average Petal Length across all flowers,AVG(Petal Length)
+56,Median of Sepal Width,MEDIAN(Sepal Width)
+57,Number of entries in the database,COUNT(*)
+58,Unique count of Petal Lengths,COUNT DISTINCT(Petal Length)
+59,Smallest Petal Width,MIN(Petal Width)
+60,Largest Sepal Length,MAX(Sepal Length)
+61,Categorize flowers by Petal Length,GROUP BY(Petal Length)
+62,Organize data by Petal Width in descending order,ORDER BY(Petal Width DESC)
+63,Alphabetize entries by Species name,ORDER BY(Species ASC)
+64,Flowers with Petal Width greater than 2.0,Petal Width > 2.0
+65,Range of Sepal Width is from 2.8 to 3.8,Sepal Width BETWEEN 2.8 AND 3.8
+66,Top 5 Species with the lowest Petal Length,TOP 5 BY(Petal Length ASC)
+67,Identify Iris Setosa flowers,Species = 'Iris Setosa'
+68,Species beginning with 'Iris',Species STARTS WITH 'Iris'
+69,Sum of all Sepal Widths, SUM([Sepal Width])
+70,What is the median Petal Length?, MEDIAN([Petal Length])
+71,Calculate the average of all Sepal Lengths, AVG([Sepal Length])
+72,How many unique Petal Widths are recorded?,COUNTD([Petal Width])
+73,Total number of Iris versicolor specimens,COUNTD(IF [Species] = 'Iris versicolor' THEN [Species] ELSE NULL END)
+74,Minimum value of Petal Width recorded,MIN([Petal Width])
+75,Maximum Sepal Width in the collection,MAX([Sepal Width])
+76,Sort Species in reverse alphabetical order,"SORT([Species], ASC)"
+77,List Sepal Widths from highest to lowest,"SORT([Sepal Width], DESC)"
+78,Filter for entries with Petal Length over 3.5,[Petal Length] > 3.5
+79,Select data with Sepal Length under 6.0,[Sepal Length] < 6.0
+80,Exclude entries where Petal Width equals 1.0,[Petal Width] != 1.0
+81,Species ending with 'osa',"ENDSWITH([Species], 'osa')"
+82,Flowers with exactly 4.5 cm Sepal Width,[Sepal Width] = 4.5
+83,Top 10 Sepal Lengths across all Iris species, INDEX() <= 10 SORT BY SUM([Sepal Length]) DESC
+84,Three highest Sepal Widths, INDEX() <= 3 SORT BY [Sepal Width] DESC
+85,Count flowers with Sepal Width between 3.0 and 3.5,IF [Sepal Width] >= 3.0 AND [Sepal Width] <= 3.5 THEN 1 ELSE 0 END
+86,Group by observation month,"DATETRUNC('month', [Date])"
+87,Select records from the current year,YEAR([Date]) = YEAR(TODAY())
+88,Show data since the start of the current month,"[Date] >= DATETRUNC('month' , TODAY())"
+89,"Average Petal Width for each Species, sorted in reverse order", AVG([Petal Width]) GROUP BY [Species] SORT BY [Species] DESC
+90,Count Species that start with 'P', COUNTD(IF LEFT([Species]: 1) = 'P' THEN [Species] ELSE NULL END)
+91,Entries where both Sepal and Petal Lengths are above 5.0, [Sepal Length] > 5.0 AND [Petal Length] > 5.0
+92,Species with Sepal Length in the lowest 10%, RANK_PERCENTILE([Sepal Length]) >= 0.9
+93,Sum of Petal Lengths for 'Iris versicolor',SUM(IF [Species] = 'Iris versicolor' THEN [Petal Length] ELSE 0 END)
+94,Median Petal Width among all flowers,MEDIAN([Petal Width])
+95,Average Sepal Length of 'Iris virginica',AVG(IF [Species] = 'Iris virginica' THEN [Sepal Length] ELSE NULL END)
+96,Count of 'Iris setosa' with Sepal Length more than 4.5,SUM(IF [Species] = 'Iris setosa' AND [Sepal Length] > 4.5 THEN 1 ELSE 0 END)
+97,Distinct species with Petal Width above 3.0,COUNTD(IF [Petal Width] > 3.0 THEN [Species] ELSE NULL END)
+98,Minimum Sepal Width for 'Iris virginica',{ FIXED [Species] = 'Iris virginica' : MIN([Sepal Width]) }
+99,Max Petal Length across 'Iris setosa',MAX(IF [Species] = 'Iris setosa' THEN [Petal Length] ELSE NULL END)
+100,Total records by Species in descending order, COUNT([Species]) GROUP BY [Species] ORDER BY COUNT([Species]) DESC
+101,Iris versicolor with Petal Length over 3.5,[Species] = 'Iris versicolor' AND [Petal Length] > 3.5
+102,Show the shortest 5 Petal Widths in 'Iris virginica',RANK([Petal Width]) <= 5 AND [Species] = 'Iris virginica'
+103,Iris species with Sepal Width in the upper 10th percentile,RANK_PERCENTILE([Sepal Width]) <= 0.1
+104,List Species with average Sepal Width in descending, AVG([Sepal Width]) GROUP BY [Species] ORDER BY AVG([Sepal Width]) DESC
+105,Entries with Sepal Width between 3.2 and 4.0 for 'Iris setosa',[Species] = 'Iris setosa' AND [Sepal Width] BETWEEN 3.2 AND 4.0
+106,Count 'Iris' flowers with 'color' in the name,"SUM(IF CONTAINS([Species],'color') THEN 1 ELSE 0 END)"
+107,Species starting with 'Iris' and ending with 'ca',"STARTSWITH([Species], 'Iris') AND ENDSWITH([Species], 'ca')"

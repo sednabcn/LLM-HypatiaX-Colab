@@ -1,0 +1,35 @@
+{
+  "name": "HypatiaX Development (Python 3.13)",
+  "image": "mcr.microsoft.com/devcontainers/python:3.13",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.13",
+      "installTools": true
+    }
+  },
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "charliermarsh.ruff",
+        "ms-python.black-formatter"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python3.13",
+        "python.linting.enabled": true,
+        "python.formatting.provider": "black",
+        "python.testing.pytestEnabled": true
+      }
+    }
+  },
+  
+  "postCreateCommand": "bash .devcontainer/setup.sh 3.13",
+  
+  "forwardPorts": [8888, 5000, 8000],
+  
+  "remoteUser": "vscode"
+}

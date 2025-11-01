@@ -1,0 +1,45 @@
+['tok2vec', 'tagger', 'parser', 'attribute_ruler', 'lemmatizer', 'custom_queries_formulas_ruler', 'ruler_sort_command', 'ner']
+=============================================
+['tok2vec', 'tagger', 'parser', 'attribute_ruler', 'lemmatizer', 'custom_queries_formulas_ruler', 'ruler_sort_command', 'ner']
+=============================================
+SUM ( Sepal Length ) AVG ( Sepal Length ) 
+SUM OPER
+Sepal Length ARGN
+AVG OPER
+Sepal Length ARGN
+ SORT [ Species ] , DESC  
+SORT OPER
+[ Species ] ARG
+DESC ADV
+ SORT ( [ Species ] , DESC ) INDEX ( ) < = 3 SORT BY [ Petal Length ] ASC
+SORT OPER
+[ Species ] ARG
+DESC ADV
+INDEX OPER
+< = ADP
+3 NUM
+SORT OPER
+BY OPER
+[ Petal Length ] ARG
+ASC ADV
+SUM ( Sepal Length ) AVG ( Sepal Length )
+SUM OPER
+Sepal Length ARGN
+AVG OPER
+Sepal Length ARGN
+ SORT ( [ Species ] , DESC ) 
+SORT OPER
+[ Species ] ARG
+DESC ADV
+ SORT ( [ Species ] , DESC ) INDEX ( ) < = 3 SORT BY [ Petal Length ] ASC
+SORT OPER
+[ Species ] ARG
+DESC ADV
+INDEX OPER
+< = ADP
+3 NUM
+SORT OPER
+BY OPER
+[ Petal Length ] ARG
+ASC ADV
+The function took 18.045809597002517 seconds to run.

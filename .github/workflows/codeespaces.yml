@@ -1,0 +1,10 @@
+Option B: GitHub Codespaces (Even Better!)
+
+Go to your GitHub repo
+Click Code → Codespaces → Create codespace on main
+Wait 2 minutes for it to load
+You get a full VS Code environment in the browser with plenty of disk space
+Run:
+
+bashpip install spacy torch transformers pandas numpy
+python -m spacy download en_core_web_sm
