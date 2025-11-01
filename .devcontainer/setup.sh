@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+# Ensure the script runs from the repo root directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"  # This ensures you're always in the root of your repo
+
 PYTHON_VERSION=${1:-"3.13"}
 
 echo "=========================================="
@@ -31,7 +35,6 @@ echo ""
 echo "Installing dependencies for Python $PYTHON_VERSION..."
 
 if [ "$PYTHON_VERSION" = "3.10" ]; then
-    # Colab-like environment
     echo "📦 Installing Colab-compatible versions..."
     if [ -f "requirements-py310.txt" ]; then
         $PYTHON_CMD -m pip install -r requirements-py310.txt
@@ -47,7 +50,6 @@ if [ "$PYTHON_VERSION" = "3.10" ]; then
             jupyter notebook ipython
     fi
 elif [ "$PYTHON_VERSION" = "3.11" ]; then
-    # Python 3.11 stable versions
     echo "📦 Installing Python 3.11 compatible versions..."
     if [ -f "requirements-py311.txt" ]; then
         $PYTHON_CMD -m pip install -r requirements-py311.txt
@@ -62,9 +64,7 @@ elif [ "$PYTHON_VERSION" = "3.11" ]; then
             matplotlib==3.8.0 \
             jupyter notebook ipython
     fi
-
 elif [ "$PYTHON_VERSION" = "3.12" ] || [ "$PYTHON_VERSION" = "3.12.2" ]; then
-    # Python 3.12 compatibility
     echo "📦 Installing Python 3.12 compatible versions..."
     if [ -f "requirements-py312.txt" ]; then
         $PYTHON_CMD -m pip install -r requirements-py312.txt
@@ -80,7 +80,6 @@ elif [ "$PYTHON_VERSION" = "3.12" ] || [ "$PYTHON_VERSION" = "3.12.2" ]; then
             jupyter notebook ipython
     fi
 else
-    # Python 3.13 latest versions
     echo "📦 Installing latest versions for Python 3.13..."
     if [ -f "requirements.txt" ]; then
         $PYTHON_CMD -m pip install -r requirements.txt
@@ -129,4 +128,4 @@ $PYTHON_CMD -c "import hypatiax; print('✅ HypatiaX package installed')" 2>/dev
 echo ""
 echo "=========================================="
 echo "Setup Complete for Python $PYTHON_VERSION!"
-echo "=========================================="
+echo "==========================================
