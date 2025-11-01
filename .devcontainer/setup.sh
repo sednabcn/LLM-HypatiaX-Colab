@@ -12,6 +12,8 @@ if [ "$PYTHON_VERSION" = "3.10" ]; then
     PYTHON_CMD="python3.10"
 elif [ "$PYTHON_VERSION" = "3.11" ]; then
     PYTHON_CMD="python3.11"
+elif [ "$PYTHON_VERSION" = "3.12" ] || [ "$PYTHON_VERSION" = "3.12.2" ]; then
+    PYTHON_CMD="python3.12"
 elif [ "$PYTHON_VERSION" = "3.13" ]; then
     PYTHON_CMD="python3.13"
 else
@@ -58,6 +60,23 @@ elif [ "$PYTHON_VERSION" = "3.11" ]; then
             numpy==1.26.0 \
             nltk==3.8.1 \
             matplotlib==3.8.0 \
+            jupyter notebook ipython
+    fi
+
+elif [ "$PYTHON_VERSION" = "3.12" ] || [ "$PYTHON_VERSION" = "3.12.2" ]; then
+    # Python 3.12 compatibility
+    echo "📦 Installing Python 3.12 compatible versions..."
+    if [ -f "requirements-py312.txt" ]; then
+        $PYTHON_CMD -m pip install -r requirements-py312.txt
+    else
+        $PYTHON_CMD -m pip install \
+            spacy==3.8.2 \
+            torch==2.2.0 \
+            transformers==4.41.2 \
+            pandas==2.2.1 \
+            numpy==1.26.4 \
+            nltk==3.8.1 \
+            matplotlib==3.8.3 \
             jupyter notebook ipython
     fi
 else
