@@ -431,3 +431,9 @@ This setup ensures that LLM-HypatiaX can be deployed efficiently in any environm
 
 
 
+
+## Python Version Support
+- Python 3.10.13 (Legacy Colab)
+- Python 3.11.7 (Stable)
+- Python 3.12.2 (Current Colab) ← NEW
+- Python 3.13.0 (Latest)

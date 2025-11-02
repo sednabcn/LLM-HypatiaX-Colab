@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "master", "main", "features/*"]
+    branches: [ "master", "features/*"]
   pull_request:
-    branches: [ "master", "main", "features/*"]
+    branches: [ "master", "features/*"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.11]
+        python-version: [3.12]
         os: [ubuntu-latest]
  
     # Steps represent a sequence of tasks that will be executed as part of the job

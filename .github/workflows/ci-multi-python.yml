@@ -2,9 +2,9 @@ name: HypatiaX Multi-Python CI
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ master, develop ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ master, develop ]
   workflow_dispatch:
 
 jobs:
@@ -14,15 +14,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.10', '3.11', '3.13']
+        python-version: ['3.12', '3.13']
         include:
-          - python-version: '3.10'
-            requirements-file: 'requirements-py310.txt'
+          - python-version: '3.12'
+            requirements-file: 'requirements-py312.txt'
             label: 'Colab-like'
-          - python-version: '3.11'
-            requirements-file: 'requirements-py311.txt'
-            label: 'Stable'
-          - python-version: '3.13'
+           - python-version: '3.13'
             requirements-file: 'requirements.txt'
             label: 'Latest'
     
@@ -88,8 +85,7 @@ jobs:
         echo "" >> comparison.md
         echo "| Python Version | Label | Requirements File |" >> comparison.md
         echo "|---|---|---|" >> comparison.md
-        echo "| 3.10 | Colab-like | requirements-py310.txt |" >> comparison.md
-        echo "| 3.11 | Stable | requirements-py311.txt |" >> comparison.md
+        echo "| 3.12 | Colab-like | requirements-py310.txt |" >> comparison.md
         echo "| 3.13 | Latest | requirements.txt |" >> comparison.md
     - uses: actions/upload-artifact@v4
       with:
