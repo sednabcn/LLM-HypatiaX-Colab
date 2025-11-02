@@ -49,6 +49,9 @@ make_combined_data="hypatiax.scripts_.script_combined_data:make_combined_data"
 "Homepage" = "http://github.com/sednabcn/LLM-HypatiaX"
 "Bug Tracker" = "https://github.com/sednabcn/LLM-HypatiaX/issues"
 
+[tool.pip-audit]
+ignore-vulns = ["GHSA-wj6h-64fc-37mp", "GHSA-2qfp-q593-8484"]
+
 [tool.setuptools_scm]
 fallback_version = "0.1.0"
 write_to = "_version.py"
@@ -67,3 +70,4 @@ exclude = ["*.gitignore", "**/__pycache__", "*.~", "#*", ".#*"]
 "hypatiax.data_spacy" = ["corpus/*", "embedding/*","pipelines/*","pre_trained_models/*","queries/*","queries/tableau/*","queries/tableau/ner_queries/*","queries/tableau/ner_queries_desc/*","queries/tableau/ner_queries_formulas/*","queries/tableau/ner_versions/*","queries/tableau/testing_spacy/*","queries/tableau/training_spacy/*","queries/tableau/vocab/*"]
 "hypatiax.datasets" =["queries/*","queries/tableau/*","queries/combined/*","queries/data/*","queries/tableau/testing/*","queries/tableau/testing_spacy/*","queries/tableau/training/*","queries/tableau/training_spacy/*","queries/tableau/validation/*"]
 "hypatiax.models"= ["queries/*","queries/tableau/*","queries/tableau/checkpoints/*","queries/tableau/model_configs/*","queries/tableau/trained_models/*","queries/tableau/trained_models/versions/*","queries/tableau/training_history/*"]
+

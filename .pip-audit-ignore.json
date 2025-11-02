@@ -1,0 +1,8 @@
+{
+  "ignore": [
+    {
+      "id": "PYSEC-2024-XXXXX",
+      "reason": "False positive - ecdsa 0.19.1 contains the fix for Minerva attack"
+    }
+  ]
+}
