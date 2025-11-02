@@ -13,16 +13,6 @@ readme = "README.rst"
 requires-python = ">=3.6, <4.0"
 
 dependencies = [
-    # Python 3.10 (Legacy Colab)
-    'numpy==1.25.2; python_version=="3.10"',
-    'pandas==2.0.3; python_version=="3.10"',
-    'scikit-learn==1.2.2; python_version=="3.10"',
-    
-    # Python 3.11 (Stable)
-    'numpy==1.24.4; python_version=="3.11"',
-    'pandas==2.2.1; python_version=="3.11"',
-    'scikit-learn==1.4.2; python_version=="3.11"',
-    
     # Python 3.12 (Current Colab)
     'numpy>=1.26.0,<2.0; python_version=="3.12"',
     'pandas>=2.1.0,<3.0; python_version=="3.12"',
@@ -42,8 +32,6 @@ dependencies = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",	
     "Topic :: Software Development :: Libraries :: Python Modules"
