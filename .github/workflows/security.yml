@@ -1,0 +1,117 @@
+name: Security Scanning
+
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '0 2 * * 1'  # Weekly on Monday
+  workflow_dispatch:
+    inputs:
+      severity_level:
+        description: 'Minimum severity to report'
+        type: choice
+        options: [critical, high, medium, low]
+        default: 'high'
+
+jobs:
+  # =============================================================================
+  # DEPENDENCY SCANNING
+  # =============================================================================
+  scan-dependencies:
+    name: Scan Dependencies
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install security tools
+      run: |
+        pip install pip-audit safety bandit
+    
+    - name: Install dependencies
+      run: |
+        if [ -f requirements.txt ]; then
+          pip install -r requirements.txt
+        fi
+    
+    - name: Run pip-audit
+      continue-on-error: true
+      run: |
+        pip-audit --desc --format json > audit-results.json
+        pip-audit --desc || true
+    
+    - name: Run safety check
+      continue-on-error: true
+      run: |
+        safety check --json > safety-results.json || true
+        safety check || true
+    
+    - name: Run bandit (code security)
+      continue-on-error: true
+      run: |
+        bandit -r hypatiax/ -f json -o bandit-results.json || true
+        bandit -r hypatiax/ || true
+    
+    - name: Upload scan results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: security-scan-results
+        path: |
+          audit-results.json
+          safety-results.json
+          bandit-results.json
+        retention-days: 90
+
+  # =============================================================================
+  # CODEQL ANALYSIS
+  # =============================================================================
+  codeql:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: python
+    
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+
+  # =============================================================================
+  # DOCKER IMAGE SCANNING
+  # =============================================================================
+  scan-docker:
+    name: Scan Docker Images
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build image
+      run: |
+        docker build --target production -t hypatiax:scan .
+    
+    - name: Run Trivy scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'hypatiax:scan'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+    
+    - name: Upload Trivy results
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: 'trivy-results.sarif'

@@ -1,7 +1,8 @@
 import pandas as pd
-from hypatiax.utils.files_local import load
+from hypatiax.utils.files import FilesManager
 
-def combined_process(path_data, path_out, option=None):
+
+def combined_process(path_data, path_out, actions, option=None):
     """
     Combined process of Description and Formulas.
 
@@ -14,7 +15,8 @@ def combined_process(path_data, path_out, option=None):
         pd.DataFrame: DataFrame with an additional column 'both' combining the first two columns.
     """
     filename, ext = path_data.split('/')[-1].split('.')
-    data = load(path_data)
+    F=FilesManager('datasets','queries','tableau',actions)
+    data = F.load(path_data)
     nrows,ncols=data.shape
     if isinstance(data, pd.DataFrame) and len(data.columns) == 2:
         # Combine the two columns with a colon in between

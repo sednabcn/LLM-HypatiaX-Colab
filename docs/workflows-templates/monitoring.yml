@@ -1,0 +1,147 @@
+name: Production Monitoring
+
+on:
+  schedule:
+    # Check health every 15 minutes
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check API health
+        id: health
+        run: |
+          # Replace with your actual production URL
+          HEALTH_URL="${{ secrets.PRODUCTION_URL }}/health"
+          
+          echo "Checking $HEALTH_URL"
+          response=$(curl -s -o /dev/null -w "%{http_code}" $HEALTH_URL || echo "000")
+          
+          if [ "$response" -eq 200 ]; then
+            echo "status=healthy" >> $GITHUB_OUTPUT
+            echo "✅ Service is healthy"
+          else
+            echo "status=unhealthy" >> $GITHUB_OUTPUT
+            echo "❌ Service unhealthy (HTTP $response)"
+            exit 1
+          fi
+      
+      - name: Create incident issue
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const existingIssues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'incident,monitoring'
+            });
+            
+            if (existingIssues.data.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '🚨 Production Health Check Failed',
+                body: `## Incident Report
+                
+                **Time:** ${new Date().toISOString()}
+                **Status:** Service Unhealthy
+                **Workflow:** [${context.workflow}](${context.payload.repository.html_url}/actions/runs/${context.runId})
+                
+                ### Next Steps
+                - [ ] Investigate service logs
+                - [ ] Check infrastructure status
+                - [ ] Verify database connectivity
+                - [ ] Review recent deployments
+                
+                This issue was automatically created by the monitoring workflow.`,
+                labels: ['incident', 'monitoring', 'critical']
+              });
+            }
+
+  performance-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Collect response time metrics
+        run: |
+          # Check API response times
+          ENDPOINTS=(
+            "/health"
+            "/api/v1/status"
+            "/api/v1/analyze"
+          )
+          
+          for endpoint in "${ENDPOINTS[@]}"; do
+            url="${{ secrets.PRODUCTION_URL }}${endpoint}"
+            echo "Testing $url"
+            
+            response_time=$(curl -o /dev/null -s -w '%{time_total}' $url || echo "999")
+            echo "Response time: ${response_time}s"
+            
+            # Alert if response time > 2 seconds
+            if (( $(echo "$response_time > 2.0" | bc -l) )); then
+              echo "⚠️ Slow response detected: ${response_time}s"
+            fi
+          done
+      
+      - name: Check error rates
+        run: |
+          # This would typically query your logging/monitoring service
+          echo "Checking error rates from logs..."
+          # Example: query Datadog, New Relic, CloudWatch, etc.
+
+  database-health:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Check database connectivity
+        run: |
+          pip install psycopg2-binary pymongo redis
+          python << 'EOF'
+          import os
+          import sys
+          
+          def check_postgres():
+              try:
+                  import psycopg2
+                  conn = psycopg2.connect(os.environ.get('DATABASE_URL'))
+                  conn.close()
+                  print("✅ PostgreSQL: Connected")
+                  return True
+              except Exception as e:
+                  print(f"❌ PostgreSQL: {e}")
+                  return False
+          
+          def check_mongodb():
+              try:
+                  from pymongo import MongoClient
+                  client = MongoClient(os.environ.get('MONGODB_URL'))
+                  client.server_info()
+                  print("✅ MongoDB: Connected")
+                  return True
+              except Exception as e:
+                  print(f"❌ MongoDB: {e}")
+                  return False
+          
+          def check_redis():
+              try:
+                  import redis
+                  r = redis.from_url(os.environ.get('REDIS_URL'))
+                  r.ping()
+                  print("✅ Redis: Connected")
+                  return True
+              except Exception as e:
+                  print(f"❌ Redis: {e}")
+                  return False
+          
+          results

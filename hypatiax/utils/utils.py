@@ -1,9 +1,11 @@
 # Functions to use to get tokens and components
-#rename_files,load_data_from_json,save_data_to_json,save_entity_model,call_main_script,elapsed_run_time,run_script,get_formatted_patterns,get_ner_desc_formulas, convert_json_to_spacy,dict_list_to_dict_dict, matcher_docs,gather_sym,load_model_from_package,load_spacy_models_from_subdirectory,plot_history_model,make_predictions, evaluate_the_model_in_batches,evaluate_the_model,main_evaluation_function,evaluation_profiler, save_spacy_training_data, upload_spacy_training_data,save_spacy_training_data_to_json, upload_spacy_training_data_from_json,normalize_formula, dataset_normalized, get_pos_,get_patterns,set_entity,create_ruler, preproc_ent,tok_formulas
+#get_file_hash,rename_files, load_data_from_json,save_data_to_json,save_entity_model,call_main_script,elapsed_run_time,run_script,get_formatted_patterns,get_ner_desc_formulas, get_ner_desc_formulas_simple, auto_migrate_to_new_format, convert_json_to_spacy,dict_list_to_dict_dict, matcher_docs,gather_sym,load_model_from_package,load_spacy_models_from_subdirectory,plot_history_model,make_predictions, evaluate_the_model_in_batches,evaluate_the_model,main_evaluation_function,evaluation_profiler, save_spacy_training_data, upload_spacy_training_data,save_spacy_training_data_to_json, upload_spacy_training_data_from_json,normalize_formula, dataset_normalized, get_pos_,get_patterns,set_entity,create_ruler, preproc_ent,tok_formulas
 import os
+import sys
 import re
 import platform
 import nltk
+import shutil
 import spacy
 import pandas as pd
 import subprocess
@@ -11,18 +13,31 @@ import datetime
 import cProfile
 import pstats
 import json
+import logging
+import hashlib
 
 import matplotlib.pyplot as plt
+from pathlib import Path
+from typing import Optional, List, Tuple
+from datetime import datetime
 from spacy import displacy
 from spacy.matcher import Matcher
 from spacy.training import Example
 from spacy.tokens import DocBin
 from spacy.pipeline import EntityRuler
-
+from spacy.language import Language
 from nltk.tokenize import word_tokenize, sent_tokenize, wordpunct_tokenize
 from spacy.pipeline import EntityRuler
 from importlib import resources
 from hypatiax.utils.tree_id_op import TreeNode, TreeDict, TreeOPDict
+
+def get_file_hash(filepath):
+    """Calculate MD5 hash of file to detect if it changed"""
+    hash_md5 = hashlib.md5()
+    with open(filepath, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
 
 def rename_files(directory,in_,out_):
     for root, dirs, files in os.walk(directory):
@@ -128,6 +143,85 @@ def integrate_nlp_pipelines(nlp, mlp, ruler_threshold, priority='nlp'):
         else:
             print(f"Component {name} already exists in the primary model.")
     return nlp
+
+def auto_migrate_to_new_format(base_name="ruler_tableau_desc", version="version1"):
+    """
+    Automatically create backup if file changed or version1 doesn't exist.
+    
+    Args:
+        base_name: Base name of the ruler file (e.g., "ruler_tableau_desc")
+        version: Version string (e.g., "version1")
+    
+    Returns:
+        bool: True if backup was created, False otherwise
+    """
+    script_dir = Path(__file__).parent
+    
+    # Files
+    base_file = script_dir / f"{base_name}.jsonl"
+    version_file = script_dir / f"{base_name}_{version}.jsonl"
+    versions_dir = script_dir / "rules_versions"
+    
+    # Create versions directory if it doesn't exist
+    versions_dir.mkdir(exist_ok=True)
+    
+    # Check if base file exists
+    if not base_file.exists():
+        print(f"⚠️  Base file not found: {base_file}")
+        return False
+    
+    # CASE 1: version1 file doesn't exist yet - CREATE IT
+    if not version_file.exists():
+        try:
+            print(f"📄 Creating {version_file.name} from {base_file.name}...")
+            shutil.copy2(base_file, version_file)
+            print(f"✅ Created {version_file.name}")
+            
+            # Create initial backup
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            backup_name = f"{base_name}_v1_initial_{timestamp}.jsonl"
+            backup_path = versions_dir / backup_name
+            shutil.copy2(base_file, backup_path)
+            print(f"📦 Initial backup: {backup_name}")
+            
+            return True
+            
+        except Exception as e:
+            print(f"❌ Failed to create version file: {e}")
+            return False
+    
+    # CASE 2: version1 exists - CHECK IF BASE FILE CHANGED
+    else:
+        # Compare base file with version1 file
+        base_hash = get_file_hash(base_file)
+        version_hash = get_file_hash(version_file)
+        
+        if base_hash != version_hash:
+            # Files are different - base file was modified!
+            print(f"🔄 Detected changes in {base_file.name}")
+            
+            try:
+                # Create backup of OLD version1 before updating
+                timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+                backup_name = f"{base_name}_v1_backup_{timestamp}.jsonl"
+                backup_path = versions_dir / backup_name
+                shutil.copy2(version_file, backup_path)
+                print(f"📦 Backed up old version: {backup_name}")
+                
+                # Update version1 file with new content from base
+                shutil.copy2(base_file, version_file)
+                print(f"✅ Updated {version_file.name} with changes")
+                
+                return True
+                
+            except Exception as e:
+                print(f"❌ Failed to backup changes: {e}")
+                return False
+        else:
+            # Files are identical - no backup needed
+            print(f"✓ {base_name}.jsonl unchanged, no backup needed")
+            return False
+
 
 def convert_json_to_spacy(input_file, output_dir, language='en'):
     import subprocess
@@ -405,10 +499,146 @@ def get_patterns(data,col_name,nlp):
          patterns.update({key:list(set([d[key] for d in dp if  key==list(d.keys())[0] and d[key] not in data["stopwords"]]))})
      return patterns
 
-# Function to get entities in the format (text, ent.start_char, ent.end_char, ent.label_) 
+
+
+def get_ner_desc_formulas(nlp_formulas, nlp_desc, ruler_name='ruler_arg'):
+    """
+    Merge two spaCy NLP pipelines (formulas and descriptions) into one.
+    
+    Args:
+        nlp_formulas: spaCy nlp object with formulas NER pipeline
+        nlp_desc: spaCy nlp object with descriptions NER pipeline
+        ruler_name: Name of the ruler component to merge (default: 'ruler_arg')
+    
+    Returns:
+        Merged spaCy nlp object containing components from both pipelines
+    """
+    # Start with a copy of the desc pipeline as base
+    nlp = nlp_desc
+    
+    # Get the ruler component from formulas pipeline if it exists
+    if ruler_name in nlp_formulas.pipe_names:
+        formulas_ruler = nlp_formulas.get_pipe(ruler_name)
+        
+        # Check if ruler already exists in desc pipeline
+        if ruler_name in nlp.pipe_names:
+            # Get existing ruler from desc pipeline
+            desc_ruler = nlp.get_pipe(ruler_name)
+            
+            # Merge patterns from both rulers
+            if isinstance(formulas_ruler, EntityRuler) and isinstance(desc_ruler, EntityRuler):
+                # Get patterns from both rulers
+                formulas_patterns = formulas_ruler.patterns
+                desc_patterns = desc_ruler.patterns
+                
+                # Combine patterns (avoiding duplicates)
+                combined_patterns = desc_patterns + [
+                    p for p in formulas_patterns 
+                    if p not in desc_patterns
+                ]
+                
+                # Remove old ruler and add new one with combined patterns
+                nlp.remove_pipe(ruler_name)
+                ruler = nlp.add_pipe("entity_ruler", name=ruler_name, before="ner")
+                ruler.add_patterns(combined_patterns)
+                
+                print(f"✅ Merged {len(desc_patterns)} desc patterns + {len(formulas_patterns)} formulas patterns")
+                print(f"   Total unique patterns: {len(combined_patterns)}")
+        else:
+            # Add formulas ruler to desc pipeline if it doesn't exist
+            nlp.add_pipe(ruler_name, source=nlp_formulas, before="ner")
+            print(f"✅ Added '{ruler_name}' component from formulas pipeline")
+    
+    # Optionally merge other custom components from formulas pipeline
+    for pipe_name in nlp_formulas.pipe_names:
+        if pipe_name.startswith('custom_') and pipe_name not in nlp.pipe_names:
+            nlp.add_pipe(pipe_name, source=nlp_formulas, last=True)
+            print(f"✅ Added custom component '{pipe_name}' from formulas pipeline")
+    
+    print(f"\n📋 Final pipeline: {nlp.pipe_names}")
+    
+    return nlp
+
+
+# Alternative simpler version if you just want to combine NER entities
+def get_ner_desc_formulas_simple(nlp_formulas, nlp_desc, ruler_name='ruler_arg'):
+    """
+    Simple version: Use desc pipeline and add formulas ruler patterns.
+    
+    Args:
+        nlp_formulas: spaCy nlp object with formulas NER pipeline
+        nlp_desc: spaCy nlp object with descriptions NER pipeline  
+        ruler_name: Name of the ruler component to extract patterns from
+    
+    Returns:
+        Combined spaCy nlp object
+    """
+    nlp = nlp_desc
+    
+    # Extract patterns from both pipelines
+    patterns = []
+    
+    if ruler_name in nlp_desc.pipe_names:
+        desc_ruler = nlp_desc.get_pipe(ruler_name)
+        if isinstance(desc_ruler, EntityRuler):
+            patterns.extend(desc_ruler.patterns)
+    
+    if ruler_name in nlp_formulas.pipe_names:
+        formulas_ruler = nlp_formulas.get_pipe(ruler_name)
+        if isinstance(formulas_ruler, EntityRuler):
+            patterns.extend(formulas_ruler.patterns)
+    
+    # Remove duplicates while preserving order
+    seen = set()
+    unique_patterns = []
+    for p in patterns:
+        p_str = str(p)
+        if p_str not in seen:
+            seen.add(p_str)
+            unique_patterns.append(p)
+    
+    # Replace ruler with combined patterns
+    if ruler_name in nlp.pipe_names:
+        nlp.remove_pipe(ruler_name)
+    
+    ruler = nlp.add_pipe("entity_ruler", name=ruler_name, before="ner")
+    ruler.add_patterns(unique_patterns)
+    
+    print(f"✅ Combined {len(unique_patterns)} unique patterns")
+    print(f"📋 Pipeline: {nlp.pipe_names}")
+    
+    return nlp
+
+
+# Usage example:
+#if __name__ == "__main__":
+#    from hypatiax.utils.files import FilesManager
+    
+#    F = FilesManager('data_spacy', 'queries', 'tableau', '')
+    
+#    # Load both models
+#    nlp_formulas = F.load('ner_tableau_formulas', 'ner')
+#    nlp_desc = F.load('ner_tableau_desc', 'ner')
+    
+#    # Merge them
+#    nlp = get_ner_desc_formulas(nlp_formulas, nlp_desc, 'ruler_arg')
+    
+#    # Test
+#    text = "Sum of Sales and Average Profit across all entries"
+#    doc = nlp(text)
+    
+#    print(f"\nTest: {text}")
+#    for ent in doc.ents:
+#        print(f"  {ent.text:30} -> {ent.label_}")
+        
+# Function to get entities in the format (text, ent.start_char, ent.end_char, ent.label_)
+
+
 def set_entity(data, col_name, ner_base_entity=None):
     if not isinstance(col_name, str):
         raise ValueError("col_name must be a string representing the column name.")
+
+    
     if col_name not in data.columns:
         raise ValueError(f"Column {col_name} not found in the data.")
 
@@ -454,36 +684,135 @@ def create_ruler(rules,nlp=None,ner_base_model=None):
        return ruler
 
 
-# Function to transform data 
+# Function to transform data
+
 def preproc_ent(path_data, stopwords, train=True):
-    # Validate parameters
-
-    if not isinstance(str(path_data), str):
-        raise ValueError("path_data must be a string representing the file path.")
-    # Load data
-    file_data=str(path_data).split('/')[-1]
-    try:
-        if file_data.endswith(('.xlsx', '.xls')):
-            df = pd.read_excel(path_data)
-        elif file_data.endswith('.csv'):
-            df = pd.read_csv(path_data)
-        else:
-            raise ValueError("Unsupported file format. Only Excel and CSV files are supported.")
-    except Exception as e:
-        raise IOError(f"An error occurred while loading the data: {e}")
-
-    df[df.columns[1]] = df[df.columns[1]].apply(lambda x: normalize_formula(x))
+    """
+    Process entity data from file path or DataFrame.
     
-    if train:          
+    Args:
+        path_data: Either a file path (str/Path) or a pandas DataFrame
+        stopwords: List of stopwords for filtering
+        train: Boolean indicating training mode
+        
+    Returns:
+        If train=True: tuple of (out_d, out_f) dictionaries
+        If train=False: DataFrame
+    """
+    # Check if input is already a DataFrame
+    if isinstance(path_data, pd.DataFrame):
+        df = path_data
+    else:
+        # Validate path parameter
+        if not isinstance(path_data, (str, Path)):
+            raise ValueError("path_data must be a string/Path representing the file path or a DataFrame.")
+        
+        # Load data from file
+        path_str = str(path_data)
+        file_data = path_str.split('/')[-1]
+        
+        try:
+            if file_data.endswith(('.xlsx', '.xls')):
+                df = pd.read_excel(path_data)
+            elif file_data.endswith('.csv'):
+                df = pd.read_csv(path_data)
+            else:
+                raise ValueError("Unsupported file format. Only Excel and CSV files are supported.")
+        except Exception as e:
+            raise IOError(f"An error occurred while loading the data: {e}")
+    
+    # Normalize formulas in the second column (index 1)
+    if len(df.columns) > 1:
+        df[df.columns[1]] = df[df.columns[1]].apply(lambda x: normalize_formula(x))
+    
+    if train:
+        # Ensure stopwords is a list or tuple with at least 2 elements
+        if isinstance(stopwords, list) and not isinstance(stopwords[0], list):
+            # Single list provided, use same stopwords for both
+            stopwords = [stopwords, stopwords]
+        
         out_d = {"stopwords": stopwords[0], "text": [], "vocab": []}
         out_f = {"stopwords": stopwords[1], "text": [], "vocab": []}
         
         # Tokenize data
-        dg_tok = df.apply(lambda x: [wordpunct_tokenize(y) for y in x])
-        for col in df.columns[:2]:  # Assumes the relevant columns are the first two
-            out = out_d if col == df.columns[0] else out_f
-            out['text'] = [sentence for sentence in df[col]]
-            out['vocab'] = list(set(word for sentence in dg_tok[col] for word in sentence if word not in out['stopwords']))
+        dg_tok = df.apply(lambda x: [wordpunct_tokenize(str(y)) for y in x])
+        
+        # Process first two columns
+        for idx, col in enumerate(df.columns[:2]):
+            out = out_d if idx == 0 else out_f
+            out['text'] = [str(sentence) for sentence in df[col]]
+            out['vocab'] = list(set(
+                word for sentence in dg_tok[col] 
+                for word in sentence 
+                if word not in out['stopwords']
+            ))
+        
+        return out_d, out_f
+    else:
+        return df
+
+# Functions to tokenize "FORMULAS" with symbols and get the operators
+# Function to transform data 
+def preproc_ent(path_data, stopwords, train=True):
+    """
+    Process entity data from file path or DataFrame.
+    
+    Args:
+        path_data: Either a file path (str/Path) or a pandas DataFrame
+        stopwords: List of stopwords for filtering
+        train: Boolean indicating training mode
+        
+    Returns:
+        If train=True: tuple of (out_d, out_f) dictionaries
+        If train=False: DataFrame
+    """
+    # Check if input is already a DataFrame
+    if isinstance(path_data, pd.DataFrame):
+        df = path_data
+    else:
+        # Validate path parameter
+        if not isinstance(path_data, (str, Path)):
+            raise ValueError("path_data must be a string/Path representing the file path or a DataFrame.")
+        
+        # Load data from file
+        path_str = str(path_data)
+        file_data = path_str.split('/')[-1]
+        
+        try:
+            if file_data.endswith(('.xlsx', '.xls')):
+                df = pd.read_excel(path_data)
+            elif file_data.endswith('.csv'):
+                df = pd.read_csv(path_data)
+            else:
+                raise ValueError("Unsupported file format. Only Excel and CSV files are supported.")
+        except Exception as e:
+            raise IOError(f"An error occurred while loading the data: {e}")
+    
+    # Normalize formulas in the second column (index 1)
+    if len(df.columns) > 1:
+        df[df.columns[1]] = df[df.columns[1]].apply(lambda x: normalize_formula(x))
+    
+    if train:
+        # Ensure stopwords is a list or tuple with at least 2 elements
+        if isinstance(stopwords, list) and not isinstance(stopwords[0], list):
+            # Single list provided, use same stopwords for both
+            stopwords = [stopwords, stopwords]
+        
+        out_d = {"stopwords": stopwords[0], "text": [], "vocab": []}
+        out_f = {"stopwords": stopwords[1], "text": [], "vocab": []}
+        
+        # Tokenize data
+        dg_tok = df.apply(lambda x: [wordpunct_tokenize(str(y)) for y in x])
+        
+        # Process first two columns
+        for idx, col in enumerate(df.columns[:2]):
+            out = out_d if idx == 0 else out_f
+            out['text'] = [str(sentence) for sentence in df[col]]
+            out['vocab'] = list(set(
+                word for sentence in dg_tok[col] 
+                for word in sentence 
+                if word not in out['stopwords']
+            ))
         
         return out_d, out_f
     else:
@@ -492,35 +821,53 @@ def preproc_ent(path_data, stopwords, train=True):
 # Functions to tokenize "FORMULAS" with symbols and get the operators
 
 def tok_formulas(path_data, not_oper):
-    # Validate input parameters
-    if not isinstance(str(path_data), str):
-        raise ValueError("path_data must be a string representing the file path.")
+    """
+    Tokenize formulas and extract operators.
+    
+    Args:
+        path_data: Either a file path (str/Path) or a pandas DataFrame
+        not_oper: List of strings representing non-operator tokens
+        
+    Returns:
+        List of extracted operators
+    """
+    # Validate not_oper parameter
     if not isinstance(not_oper, list):
         raise ValueError("not_oper must be a list of strings representing non-operator tokens.")
 
-    # Check the file format and read the file accordingly
-    file_data=str(path_data).split('/')[-1]
-    if file_data.endswith('.xlsx') or file_data.endswith('.xls'):
-        try:
-            df = pd.read_excel(path_data)
-        except Exception as e:
-            raise IOError(f"Failed to load Excel file: {e}")
-    elif path_data.endswith('.csv'):
-        try:
-            df = pd.read_csv(path_data)
-        except Exception as e:
-            raise IOError(f"Failed to load CSV file: {e}")
+    # Check if input is already a DataFrame
+    if isinstance(path_data, pd.DataFrame):
+        df = path_data
     else:
-        raise ValueError("Unsupported file format. Only Excel and CSV files are supported.")
+        # Validate path parameter
+        if not isinstance(path_data, (str, Path)):
+            raise ValueError("path_data must be a string/Path representing the file path or a DataFrame.")
+        
+        # Check the file format and read the file accordingly
+        path_str = str(path_data)
+        file_data = path_str.split('/')[-1]
+        
+        if file_data.endswith(('.xlsx', '.xls')):
+            try:
+                df = pd.read_excel(path_data)
+            except Exception as e:
+                raise IOError(f"Failed to load Excel file: {e}")
+        elif file_data.endswith('.csv'):
+            try:
+                df = pd.read_csv(path_data)
+            except Exception as e:
+                raise IOError(f"Failed to load CSV file: {e}")
+        else:
+            raise ValueError("Unsupported file format. Only Excel and CSV files are supported.")
     
     # Define regex pattern for splitting
     patterns = r'\(| = | >= | > | \[ | \) | \{ | \]'
     tr_0 = []
 
-    # Process each row in the specified column
+    # Process each row in the specified column (formulas column is index 1)
     for tr in df[df.columns[1]]:
         try:
-            items = re.split(patterns, tr)
+            items = re.split(patterns, str(tr))
             if len(items) >= 2:
                 it0, it1 = items[0:2]
             else:

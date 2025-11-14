@@ -14,7 +14,8 @@ if os.path.exists(dir_path):
               if filename.lower().endswith('.csv') or \
               filename.lower().endswith('.xlsx') \
               or filename.lower().endswith('.xls'):
-                 df = load(filename)
+                full_path = os.path.join(root, filename)
+                 df = load(full_path)
                  if df is not None:
                     print(df.head(5))
                     print("=================================")

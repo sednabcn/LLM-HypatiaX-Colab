@@ -1,0 +1,180 @@
+name: Deploy to Production
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+      version:
+        description: 'Version to deploy'
+        required: true
+        type: string
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  pre-deployment-checks:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" == "release" ]; then
+            VERSION=${{ github.event.release.tag_name }}
+          elif [ -n "${{ github.event.inputs.version }}" ]; then
+            VERSION=${{ github.event.inputs.version }}
+          else
+            VERSION=$(git describe --tags --always)
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Deploying version: ${VERSION}"
+      
+      - name: Verify tests passed
+        run: |
+          echo "Checking if all tests passed for this version..."
+          # Add logic to verify CI passed for this commit/tag
+
+  build-and-push:
+    needs: pre-deployment-checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+            type=raw,value=latest,enable={{is_default_branch}}
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            VERSION=${{ needs.pre-deployment-checks.outputs.version }}
+            BUILD_DATE=${{ github.event.repository.updated_at }}
+
+  deploy-staging:
+    needs: [pre-deployment-checks, build-and-push]
+    if: github.event.inputs.environment == 'staging' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://staging.hypatiax.example.com
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy to staging
+        run: |
+          echo "Deploying to staging environment..."
+          # Add your deployment logic here:
+          # - kubectl apply
+          # - helm upgrade
+          # - docker-compose pull && docker-compose up -d
+          # - AWS ECS update-service
+          # - etc.
+      
+      - name: Run smoke tests
+        run: |
+          echo "Running smoke tests against staging..."
+          # curl https://staging.hypatiax.example.com/health
+          # pytest tests/smoke/
+
+  deploy-production:
+    needs: [pre-deployment-checks, build-and-push, deploy-staging]
+    if: github.event.inputs.environment == 'production' || github.event_name == 'release'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://hypatiax.example.com
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Create deployment
+        uses: chrnorm/deployment-action@v2
+        id: deployment
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
+          initial-status: in_progress
+      
+      - name: Deploy to production
+        run: |
+          echo "Deploying version ${{ needs.pre-deployment-checks.outputs.version }} to production..."
+          # Add your production deployment logic here
+      
+      - name: Run health checks
+        run: |
+          echo "Running health checks..."
+          # curl https://hypatiax.example.com/health
+          # Wait for service to be healthy
+      
+      - name: Update deployment status
+        if: always()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+          state: ${{ job.status }}
+          environment-url: https://hypatiax.example.com
+      
+      - name: Notify deployment
+        if: always()
+        run: |
+          echo "Deployment ${{ job.status }}"
+          # Add notifications:
+          # - Slack webhook
+          # - Discord webhook
+          # - Email
+          # - PagerDuty
+
+  rollback:
+    needs: deploy-production
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rollback deployment
+        run: |
+          echo "Rolling back deployment..."
+          # Add rollback logic:
+          # - kubectl rollout undo
+          # - helm rollback
+          # - Redeploy previous version

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - HypatiaX</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🔬 HypatiaX</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="ner-demo.html">NER Demo</a></li>
+                <li><a href="docs.html" class="active">Docs</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard-header">
+        <div class="container">
+            <h1>Documentation</h1>
+            <p>Complete guide to using HypatiaX</p>
+        </div>
+    </section>
+
+    <section class="dashboard-content">
+        <div class="container">
+            <div class="dashboard-section">
+                <h2>Getting Started</h2>
+                <p>HypatiaX is an advanced Named Entity Recognition system designed for Tableau query processing.</p>
+                
+                <h3>Quick Start</h3>
+                <ol>
+                    <li>Navigate to the <a href="ner-demo.html">NER Demo</a></li>
+                    <li>Enter your Tableau query</li>
+                    <li>Select a mapping method</li>
+                    <li>Click "Extract Entities" to process</li>
+                </ol>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>API Reference</h2>
+                <h3>Endpoints</h3>
+                
+                <h4>POST /api/map</h4>
+                <p>Map natural language description to Tableau formula</p>
+                <pre class="json-display">{
+  "description": "Sum of sales by year",
+  "method": "vocab"
+}</pre>
+
+                <h4>GET /api/health</h4>
+                <p>Check backend server status</p>
+                
+                <h4>GET /api/test</h4>
+                <p>Run test suite with sample data</p>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>Model Information</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>ner_tableau_desc</h3>
+                        <p>Specialized for Tableau descriptions</p>
+                        <p><strong>Accuracy:</strong> 95.2%</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>ner_tableau_formulas</h3>
+                        <p>Optimized for formula extraction</p>
+                        <p><strong>Accuracy:</strong> 93.8%</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>ner_tableau</h3>
+                        <p>Combined hybrid model</p>
+                        <p><strong>Accuracy:</strong> 94.5%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 HypatiaX. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

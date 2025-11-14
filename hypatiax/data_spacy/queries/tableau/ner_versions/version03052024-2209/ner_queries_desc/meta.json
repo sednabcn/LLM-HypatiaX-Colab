@@ -152,7 +152,7 @@
     "parser",
     "attribute_ruler",
     "lemmatizer",
-    "custom_queries_desc_ruler",
+    "custom_tableau_desc_ruler",
     "ner"
   ],
   "components":[
@@ -162,7 +162,7 @@
     "senter",
     "attribute_ruler",
     "lemmatizer",
-    "custom_queries_desc_ruler",
+    "custom_tableau_desc_ruler",
     "ner"
   ],
   "disabled":[

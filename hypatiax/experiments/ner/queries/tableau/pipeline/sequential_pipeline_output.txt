@@ -1,0 +1,79 @@
+======================================================================
+SEQUENTIAL PIPELINE: Description → Formula Generation
+======================================================================
+
+Pipeline Architecture:
+1. Description → Entities[Desc] (Supervised NER)
+2. Formulas → Entities[Formula] (Supervised NER, for training)
+3. (Desc, Entities[Desc]) → Mapping → (Formula, Entities[Formula])
+4. Entities[Formula] → Formula Generation (Classification)
+======================================================================
+
+======================================================================
+INPUT: 'calculate area of circle'
+EXPECTED OUTPUT: 'A = pi * r^2'
+======================================================================
+
+──────────────────────────────────────────────────────────────────────
+[STEP 1] Description → Entities[Desc] (Supervised NER)
+──────────────────────────────────────────────────────────────────────
+Extracted entities: [{'text': 'calculate', 'label': 'OPER', 'position': 0}, {'text': 'area', 'label': 'TARGET', 'position': 1}, {'text': 'circle', 'label': 'OBJECT', 'position': 3}]
+
+📊 STEP 1 METRICS:
+   • Exact Match Accuracy: 100.00%
+   • Token Accuracy: 100.00%
+   • Precision: 1.000
+   • Recall: 1.000
+   • F1-Score: 1.000
+
+──────────────────────────────────────────────────────────────────────
+[STEP 2] Formulas → Entities[Formula] (Supervised NER)
+──────────────────────────────────────────────────────────────────────
+(Training step - extracting entities from ground-truth formulas)
+
+📊 STEP 2 METRICS:
+   • Exact Match Accuracy: 50.00%
+   • Token Accuracy: 100.00%
+   • Precision: 1.000
+   • Recall: 1.000
+   • F1-Score: 1.000
+
+──────────────────────────────────────────────────────────────────────
+[STEP 3] (Desc, Entities[Desc]) → Mapping → (Formula Type, Entities[Formula])
+──────────────────────────────────────────────────────────────────────
+Formula Type: circle_area
+Mapped formula entities: [{'text': 'A', 'label': 'VAR', 'position': 0}, {'text': 'pi', 'label': 'CONST', 'position': 1}, {'text': 'r', 'label': 'VAR', 'position': 2}, {'text': '^', 'label': 'OPER', 'position': 3}]
+
+📊 STEP 3 METRICS:
+   • Formula Type Classification Accuracy: 100.00%
+   • Entity Sequence Accuracy: 100.00%
+
+──────────────────────────────────────────────────────────────────────
+[STEP 4] Entities[Formula] → Formula Generation
+──────────────────────────────────────────────────────────────────────
+Generated formula: 'A = pi * r^2'
+
+📊 STEP 4 METRICS:
+   • Exact Match Accuracy: 100.00%
+   • Syntactic Accuracy: 100.00%
+
+======================================================================
+FINAL RESULTS
+======================================================================
+Input Description:  'calculate area of circle'
+Generated Formula:  'A = pi * r^2'
+Expected Formula:   'A = pi * r^2'
+✓ Match: True
+
+======================================================================
+PIPELINE PERFORMANCE SUMMARY
+======================================================================
+Step 1 - Description NER:      100.00% (F1)
+Step 2 - Formula NER:          100.00% (F1)
+Step 3 - Entity Mapping:       100.00% (Type Acc)
+Step 4 - Formula Generation:   100.00% (Syn Acc)
+======================================================================
+
+💡 ERROR PROPAGATION ANALYSIS:
+   Pipeline accuracy ≈ 100.00%
+   (Product of component accuracies)

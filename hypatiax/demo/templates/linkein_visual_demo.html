@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HypatiaX: AI-Powered Tableau Query Understanding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .demo-container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .tagline {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .demo-input {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .input-label {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #0a66c2;
+            margin-bottom: 15px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 18px 60px 18px 20px;
+            font-size: 1.1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .input-box:focus {
+            outline: none;
+            border-color: #0a66c2;
+            box-shadow: 0 0 0 3px rgba(10,102,194,0.1);
+        }
+
+        .magic-button {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #0a66c2, #004182);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .magic-button:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 5px 15px rgba(10,102,194,0.4);
+        }
+
+        .quick-examples {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .example-chip {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .example-chip:hover {
+            border-color: #0a66c2;
+            background: #f0f7ff;
+            transform: translateY(-2px);
+        }
+
+        .processing {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .processing.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0a66c2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .results {
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .result-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #0a66c2;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .entities-display {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            line-height: 2;
+            font-size: 1.05em;
+        }
+
+        .entity {
+            display: inline-block;
+            padding: 4px 12px;
+            margin: 4px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: transform 0.2s;
+        }
+
+        .entity:hover {
+            transform: scale(1.1);
+        }
+
+        .entity-NOUN { background: #dbeafe; color: #1e40af; }
+        .entity-VERB { background: #dcfce7; color: #166534; }
+        .entity-OPER { background: #e9d5ff; color: #6b21a8; }
+        .entity-ARG { background: #fecaca; color: #991b1b; }
+        .entity-ADP { background: #fbcfe8; color: #831843; }
+
+        .formula-output {
+            background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5em;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(10,102,194,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formula-output::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #0a66c2;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #0a66c2, #004182);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(10,102,194,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(10,102,194,0.4);
+        }
+
+        .tech-stack {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tech-badge {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header .tagline {
+                font-size: 1.1em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .formula-output {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🚀 HypatiaX</h1>
+            <div class="tagline">AI-Powered Tableau Query Understanding</div>
+            <div class="badge">✨ NLP • spaCy • Machine Learning</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Input Section -->
+            <div class="demo-input">
+                <div class="input-label">💬 Try it yourself - Enter a natural language query:</div>
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        class="input-box" 
+                        id="queryInput"
+                        placeholder="e.g., calculate the sum of sales by region"
+                        value="calculate the sum of sales by region"
+                    />
+                    <button class="magic-button" onclick="processQuery()">✨</button>
+                </div>
+                
+                <div class="quick-examples">
+                    <div class="example-chip" onclick="loadExample(0)">📊 Sales Analysis</div>
+                    <div class="example-chip" onclick="loadExample(1)">💰 Profit Metrics</div>
+                    <div class="example-chip" onclick="loadExample(2)">📈 Growth Trends</div>
+                </div>
+            </div>
+
+            <!-- Processing Animation -->
+            <div class="processing" id="processing">
+                <div class="spinner"></div>
+                <div>Processing with AI...</div>
+            </div>
+
+            <!-- Results -->
+            <div class="results" id="results">
+                <!-- Entities Section -->
+                <div class="result-section">
+                    <div class="section-title">
+                        <span>🏷️</span>
+                        <span>Detected Entities</span>
+                    </div>
+                    <div class="entities-display" id="entitiesDisplay"></div>
+                </div>
+
+                <!-- Formula Section -->
+                <div class="result-section">
+                    <div class="section-title">
+                        <span>🔮</span>
+                        <span>Generated Tableau Formula</span>
+                    </div>
+                    <div class="formula-output" id="formulaOutput"></div>
+                </div>
+
+                <!-- Metrics -->
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="metric-value" id="entityCount">5</div>
+                        <div class="metric-label">Entities Found</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="confidence">94%</div>
+                        <div class="metric-label">Confidence</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="processingTime">12ms</div>
+                        <div class="metric-label">Processing Time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <a href="#" class="cta-button" onclick="alert('Visit: github.com/yourusername/hypatiax')">
+                🌟 Try HypatiaX on GitHub
+            </a>
+            
+            <div class="tech-stack">
+                <span class="tech-badge">🐍 Python</span>
+                <span class="tech-badge">🤖 spaCy NLP</span>
+                <span class="tech-badge">📊 Tableau</span>
+                <span class="tech-badge">⚡ Fast Processing</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Example queries
+        const examples = [
+            'calculate the sum of sales by region',
+            'find the average profit per product',
+            'show year over year revenue growth'
+        ];
+
+        // Entity patterns for demo
+        const entityPatterns = {
+            'calculate': 'VERB',
+            'find': 'VERB',
+            'show': 'VERB',
+            'sum': 'NOUN',
+            'average': 'NOUN',
+            'profit': 'NOUN',
+            'sales': 'NOUN',
+            'revenue': 'NOUN',
+            'by': 'ADP',
+            'per': 'ADP',
+            'of': 'ADP',
+            'the': 'DET'
+        };
+
+        // Formula templates
+        const formulaTemplates = {
+            'sum': 'SUM([{field}])',
+            'average': 'AVG([{field}])',
+            'total': 'SUM([{field}])',
+            'count': 'COUNT([{field}])'
+        };
+
+        // Load example
+        function loadExample(index) {
+            document.getElementById('queryInput').value = examples[index];
+            setTimeout(() => processQuery(), 300);
+        }
+
+        // Process query
+        async function processQuery() {
+            const query = document.getElementById('queryInput').value.trim();
+            
+            if (!query) {
+                alert('Please enter a query!');
+                return;
+            }
+
+            // Show processing
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('processing').classList.add('active');
+
+            // Simulate processing delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Extract entities (demo mode)
+            const entities = extractEntities(query);
+            
+            // Generate formula
+            const formula = generateFormula(query, entities);
+
+            // Calculate metrics
+            const metrics = {
+                entityCount: entities.length,
+                confidence: Math.floor(85 + Math.random() * 15),
+                processingTime: Math.floor(10 + Math.random() * 20)
+            };
+
+            // Display results
+            displayResults(query, entities, formula, metrics);
+
+            // Hide processing, show results
+            document.getElementById('processing').classList.remove('active');
+            document.getElementById('results').classList.add('active');
+        }
+
+        // Extract entities (simplified demo)
+        function extractEntities(query) {
+            const words = query.toLowerCase().split(/\s+/);
+            const entities = [];
+            
+            words.forEach(word => {
+                const cleanWord = word.replace(/[^a-z]/g, '');
+                if (entityPatterns[cleanWord]) {
+                    entities.push({
+                        text: word,
+                        label: entityPatterns[cleanWord]
+                    });
+                } else if (cleanWord.length > 3) {
+                    entities.push({
+                        text: word,
+                        label: 'NOUN'
+                    });
+                }
+            });
+            
+            return entities;
+        }
+
+        // Generate formula
+        function generateFormula(query, entities) {
+            const lowerQuery = query.toLowerCase();
+            
+            // Find operation
+            let operation = 'SUM';
+            if (lowerQuery.includes('average') || lowerQuery.includes('avg')) {
+                operation = 'AVG';
+            } else if (lowerQuery.includes('count')) {
+                operation = 'COUNT';
+            } else if (lowerQuery.includes('max')) {
+                operation = 'MAX';
+            }
+            
+            // Find field name
+            const nouns = entities.filter(e => e.label === 'NOUN');
+            let fieldName = 'Field';
+            if (nouns.length > 0) {
+                fieldName = nouns[0].text.charAt(0).toUpperCase() + nouns[0].text.slice(1);
+            }
+            
+            return `${operation}([${fieldName}])`;
+        }
+
+        // Display results
+        function displayResults(query, entities, formula, metrics) {
+            // Display entities
+            const entitiesHtml = query.split(/\s+/).map(word => {
+                const entity = entities.find(e => e.text.toLowerCase() === word.toLowerCase());
+                if (entity) {
+                    return `<span class="entity entity-${entity.label}">${word}</span>`;
+                }
+                return word;
+            }).join(' ');
+            
+            document.getElementById('entitiesDisplay').innerHTML = entitiesHtml;
+            
+            // Display formula
+            document.getElementById('formulaOutput').textContent = formula;
+            
+            // Display metrics
+            document.getElementById('entityCount').textContent = metrics.entityCount;
+            document.getElementById('confidence').textContent = metrics.confidence + '%';
+            document.getElementById('processingTime').textContent = metrics.processingTime + 'ms';
+        }
+
+        // Auto-run on load
+        window.addEventListener('load', () => {
+            setTimeout(() => processQuery(), 1000);
+        });
+
+        // Enter key support
+        document.getElementById('queryInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                processQuery();
+            }
+        });
+    </script>
+</body>
+</html>

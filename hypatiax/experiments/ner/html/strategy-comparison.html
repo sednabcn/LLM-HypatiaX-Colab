@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy Comparison: Sequential vs Joint Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .strategy-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .strategy-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            color: #667eea;
+        }
+
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .flow-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .flow-box:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .flow-box.step-1 { border-left: 5px solid #3b82f6; }
+        .flow-box.step-2 { border-left: 5px solid #10b981; }
+        .flow-box.step-3 { border-left: 5px solid #f59e0b; }
+        .flow-box.step-4 { border-left: 5px solid #ef4444; }
+        .flow-box.joint { border-left: 5px solid #8b5cf6; }
+
+        .box-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .box-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .box-example {
+            background: #f0f7ff;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .arrow {
+            text-align: center;
+            font-size: 2em;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .comparison-table {
+            grid-column: 1 / -1;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .comparison-table h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f0f7ff;
+        }
+
+        .pro {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .con {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .code-example {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .highlight {
+            background: rgba(102, 126, 234, 0.2);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        @media (max-width: 1024px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔄 Strategy Comparison</h1>
+            <p>Sequential Pipeline vs Joint Training for NLP → Formula Mapping</p>
+        </div>
+
+        <div class="comparison-grid">
+            <!-- STRATEGY 1: SEQUENTIAL PIPELINE -->
+            <div class="strategy-section">
+                <div class="strategy-title">📊 Strategy 1: Sequential Pipeline</div>
+                
+                <div class="flowchart">
+                    <div class="flow-box step-1">
+                        <div class="box-title">Step 1: Description NER</div>
+                        <div class="box-content">
+                            Extract entities from natural language description
+                        </div>
+                        <div class="box-example">
+                            Input: "calculate area of circle"<br>
+                            → [OPER:calculate, TARGET:area, OBJECT:circle]
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <div class="flow-box step-2">
+                        <div class="box-title">Step 2: Entity Mapping</div>
+                        <div class="box-content">
+                            Map description entities to formula entities
+                        </div>
+                        <div class="box-example">
+                            [OPER, TARGET, OBJECT]<br>
+                            → [VAR:A, CONST:pi, VAR:r, OPER:^]
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <div class="flow-box step-3">
+                        <div class="box-title">Step 3: Formula NER</div>
+                        <div class="box-content">
+                            Validate and structure formula entities
+                        </div>
+                        <div class="box-example">
+                            [VAR:A, CONST:pi, VAR:r, OPER:^]<br>
+                            → Validated entity structure
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <div class="flow-box step-4">
+                        <div class="box-title">Step 4: Formula Generation</div>
+                        <div class="box-content">
+                            Generate final formula string
+                        </div>
+                        <div class="box-example">
+                            Entity structure<br>
+                            → "A = pi * r^2"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="metric-value">4</div>
+                        <div class="metric-label">Separate Steps</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">~95%</div>
+                        <div class="metric-label">Desc NER Accuracy</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">~90%</div>
+                        <div class="metric-label">Mapping Accuracy</div>
+                    </div>
+                </div>
+
+                <div class="code-example">
+# Sequential approach
+desc_entities = desc_ner.extract(text)
+formula_entities = mapper.map(desc_entities)
+validated = formula_ner.validate(formula_entities)
+formula = generator.generate(validated)
+                </div>
+            </div>
+
+            <!-- STRATEGY 2: JOINT TRAINING -->
+            <div class="strategy-section">
+                <div class="strategy-title">🎯 Strategy 2: Joint Training</div>
+                
+                <div class="flowchart">
+                    <div class="flow-box joint">
+                        <div class="box-title">Joint Entity Extraction</div>
+                        <div class="box-content">
+                            Extract entities from BOTH description AND formula simultaneously during training
+                        </div>
+                        <div class="box-example">
+                            Training pair:<br>
+                            "calculate area of circle" + "A=pi*r^2"<br>
+                            → Learn combined pattern
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <div class="flow-box joint">
+                        <div class="box-title">Pattern Learning</div>
+                        <div class="box-content">
+                            Build direct mappings from description patterns to formulas
+                        </div>
+                        <div class="box-example">
+                            Pattern key:<br>
+                            "OPER:calculate|TARGET:area|OBJECT:circle"<br>
+                            → Formula: "A=pi*r^2"
+                        </div>
+                    </div>
+
+                    <div class="arrow">↓</div>
+
+                    <div class="flow-box joint">
+                        <div class="box-title">End-to-End Prediction</div>
+                        <div class="box-content">
+                            Direct prediction from description to formula
+                        </div>
+                        <div class="box-example">
+                            Input: "calculate area of circle"<br>
+                            → Lookup pattern → Output: "A=pi*r^2"<br>
+                            (Single step, no intermediate errors)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="metric-value">1</div>
+                        <div class="metric-label">Direct Mapping</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Exact Match</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">~75%</div>
+                        <div class="metric-label">Generalization</div>
+                    </div>
+                </div>
+
+                <div class="code-example">
+# Joint approach
+model.train([(desc1, formula1), (desc2, formula2)])
+formula = model.predict(description)
+# Direct mapping, no intermediate steps
+                </div>
+            </div>
+
+            <!-- COMPARISON TABLE -->
+            <div class="comparison-table">
+                <h2>📋 Detailed Comparison</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Sequential Pipeline</th>
+                            <th>Joint Training</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Architecture</strong></td>
+                            <td>4 separate models/steps</td>
+                            <td>Single end-to-end model</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Training Data</strong></td>
+                            <td>Each component trained separately</td>
+                            <td>(Description, Formula) pairs only</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Error Propagation</strong></td>
+                            <td class="con">❌ Errors compound across steps</td>
+                            <td class="pro">✅ No intermediate error accumulation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Debugging</strong></td>
+                            <td class="pro">✅ Easy - test each step independently</td>
+                            <td class="con">❌ Hard - black box end-to-end</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interpretability</strong></td>
+                            <td class="pro">✅ High - see entities at each stage</td>
+                            <td class="con">❌ Low - direct pattern matching</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Flexibility</strong></td>
+                            <td class="pro">✅ Can swap components easily</td>
+                            <td class="con">❌ Coupled training</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Efficiency</strong></td>
+                            <td class="con">❌ Needs annotated data for each step</td>
+                            <td class="pro">✅ Only needs input-output pairs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance (Seen)</strong></td>
+                            <td>~85-90% (error accumulation)</td>
+                            <td class="pro">~100% (exact pattern match)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance (Unseen)</strong></td>
+                            <td class="pro">✅ Better generalization</td>
+                            <td class="con">❌ Fails on new patterns</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Development Speed</strong></td>
+                            <td class="con">❌ Slower - build multiple models</td>
+                            <td class="pro">✅ Faster - single model</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maintenance</strong></td>
+                            <td class="con">❌ Complex - 4 models to maintain</td>
+                            <td class="pro">✅ Simple - 1 model</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best For</strong></td>
+                            <td>Research, debugging, complex domains</td>
+                            <td>Production, fixed patterns, speed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ERROR ANALYSIS -->
+            <div class="comparison-table">
+                <h2>⚠️ Error Propagation Analysis</h2>
+                
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #667eea; margin-bottom: 15px;">Sequential Pipeline Error Flow</h3>
+                    <div class="code-example">
+Step 1 Error: 5% → Carries to Step 2
+Step 2 Error: 10% → Compounds with Step 1
+Step 3 Error: 5% → Compounds further
+Step 4 Error: 5% → Final output
+
+Total Error ≈ 1 - (0.95 × 0.90 × 0.95 × 0.95) = <span class="highlight">~23% failure rate</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #667eea; margin-bottom: 15px;">Joint Training Error Flow</h3>
+                    <div class="code-example">
+Single Step: Extract pattern → Match → Return formula
+
+For <span class="highlight">seen patterns: ~0% error</span>
+For <span class="highlight">unseen patterns: ~100% error</span> (no fallback)
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECOMMENDATIONS -->
+            <div class="comparison-table">
+                <h2>💡 Recommendations</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                    <div style="background: #dcfce7; padding: 20px; border-radius: 10px; border-left: 5px solid #10b981;">
+                        <h3 style="color: #166534; margin-bottom: 10px;">Use Sequential When:</h3>
+                        <ul style="color: #166534; line-height: 2;">
+                            <li>You need to <strong>debug</strong> the system</li>
+                            <li>Building <strong>research prototypes</strong></li>
+                            <li>Domain has <strong>high variability</strong></li>
+                            <li>Need <strong>explainability</strong></li>
+                            <li>Want to <strong>swap components</strong></li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #dbeafe; padding: 20px; border-radius: 10px; border-left: 5px solid #3b82f6;">
+                        <h3 style="color: #1e40af; margin-bottom: 10px;">Use Joint Training When:</h3>
+                        <ul style="color: #1e40af; line-height: 2;">
+                            <li><strong>Fixed domain</strong> with known patterns</li>
+                            <li>Have <strong>lots of pairs</strong> (desc, formula)</li>
+                            <li>Need <strong>production speed</strong></li>
+                            <li>Want <strong>simple deployment</strong></li>
+                            <li>Exact matches are <strong>critical</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HYBRID APPROACH -->
+            <div class="comparison-table">
+                <h2>🔄 Best Practice: Hybrid Approach</h2>
+                
+                <div style="margin-top: 20px;">
+                    <div class="flow-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                        <div class="box-title" style="color: white;">Recommended Strategy</div>
+                        <div class="box-content" style="color: rgba(255,255,255,0.9);">
+                            <strong>1. Start with Joint Training</strong> for common patterns (fast, accurate)<br>
+                            <strong>2. Fallback to Sequential Pipeline</strong> for unseen/complex cases (generalizes better)<br>
+                            <strong>3. Track performance</strong> of both paths and optimize
+                        </div>
+                    </div>
+
+                    <div class="code-example" style="margin-top: 20px;">
+def hybrid_predict(description):
+    # Try joint model first
+    formula = joint_model.predict(description)
+    
+    if formula == "Unknown pattern":
+        # Fallback to sequential pipeline
+        entities = desc_ner.extract(description)
+        formula_entities = mapper.map(entities)
+        formula = generator.generate(formula_entities)
+    
+    return formula
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

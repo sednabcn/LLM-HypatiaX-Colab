@@ -1,8 +1,9 @@
 import numpy as np
+from importlib import resources
 from sklearn.model_selection import train_test_split
 from hypatiax.utils.files import FilesManager
 from hypatiax.custom_entities.ner_entity import Custom_ner_entities
-#Copy the original training and testing files to run_time without file_initials 
+from hypatiax.utils.data_utils import save_spacy_training_data_to_json  # Add this import
 
 def split_data(data, test_size, val_data, val_ratio):
     """
@@ -14,49 +15,86 @@ def split_data(data, test_size, val_data, val_ratio):
         return X_train, X_val, X_test
     return X_train, None, X_test
 
-def preparation_data(modules, domain, sub_domain,actions, filename,dtype, sizefile='sm',test_size=0.2,task_type='single',ner_entity=None, dataset_normalized=None, val_data=False, option=None):
-    if task_type=='single':        
-        X_train,X_val,X_test=prepare_unlabeled_data_single(modules, domain, sub_domain, actions, filename,dtype,sizefile,test_size=0.2,ner_entity=None,dataset_normalized=None,val_data=False,  option=None)
-    elif task_type=='multitask':
-        X_train,X_test=prepare_unlabeled_data_multitask(modules, domain, sub_domain,actions, filename,dtype,sizefile,test_size=0.2,ner_entity=None, dataset_normalized=None,val_data=False, option=None)
-    else:
-        pass
-        
-def prepare_unlabeled_data_multitask(modules, domain,sub_domain,actions, filename, dtype,sizefile='sm',test_size=0.2,ner_entity=None,dataset_normalized=None, val_data=False,  option=None):
+def preparation_data(modules, domain, sub_domain, actions, filename, dtype, sizefile='sm', 
+                    test_size=0.2, task_type='single', ner_entity=None, 
+                    dataset_normalized=None, val_data=False, option=None):
     """
-    Prepare data for operations that do not require labeled data.
-    This function loads and processes data for multitask learning scenarios, allowing for different options to manage data such as predefined loading or splitting data for model training.
+    Main entry point for data preparation.
+    
     Parameters:
         modules (str): Module name.
         domain (str): Domain name.
-        sub_domain (str): sub_domain name.
+        sub_domain (str): Sub-domain name.
+        actions (str): Specific action.
+        filename (str): Filename to load.
+        dtype (str): Data type (desc, formulas, combined).
+        sizefile (str): File size ('sm' or 'bg').
+        test_size (float): Fraction for test set.
+        task_type (str): 'single' or 'multitask'.
+        ner_entity (str): NER entity type.
+        dataset_normalized: Dataset normalization flag.
+        val_data (bool): Whether to create validation set.
+        option (str): Data handling option ('None', 'split', 'build').
+    
+    Returns:
+        Data splits (X_train, X_val, X_test) or (X_train, X_test).
+    """
+    if task_type == 'single':        
+        return prepare_unlabeled_data_single(
+            modules, domain, sub_domain, actions, filename, dtype, 
+            sizefile, test_size, ner_entity, dataset_normalized, val_data, option
+        )
+    elif task_type == 'multitask':
+        return prepare_unlabeled_data_multitask(
+            modules, domain, sub_domain, actions, filename, dtype, 
+            sizefile, test_size, ner_entity, dataset_normalized, val_data, option
+        )
+    else:
+        raise ValueError(f"Invalid task_type: {task_type}. Must be 'single' or 'multitask'.")
+
+def prepare_unlabeled_data_multitask(modules, domain, sub_domain, actions, filename, dtype, 
+                                     sizefile='sm', test_size=0.2, ner_entity=None, 
+                                     dataset_normalized=None, val_data=False, option=None):
+    """
+    Prepare data for multitask learning scenarios.
+    
+    Parameters:
+        modules (str): Module name.
+        domain (str): Domain name.
+        sub_domain (str): Sub-domain name.
         actions (str): Specific action.
         filename (str): Filename to load for 'build' option.
-        sizefile (str): 'sm': 'formulas_*','bg':'gformulas_*'
-        dtype (str): Type of NER entity such as "desc", "formulas", "combined".
-        ner_entity(str): spacy entity like ner_desc, ner_formulas,ner_both
-        val_data (bool): Indicates if validation data should be prepared.
+        dtype (str): Type of NER entity (desc, formulas, combined).
+        sizefile (str): 'sm' or 'bg'.
         test_size (float): Fraction of data to be used as test set.
+        ner_entity (str): Spacy entity like ner_desc, ner_formulas, ner_both.
+        dataset_normalized: Dataset normalization flag.
+        val_data (bool): Indicates if validation data should be prepared.
         option (str): Option to manage data ('None', 'split', 'build').
+    
     Returns:
         Tuple of datasets depending on `val_data` parameter.
     """
-    Tr = FilesManager(modules, domain,sub_domain, 'training_spacy')
-    T = FilesManager(modules, domain,sub_domain, 'testing_spacy')
-    V = FilesManager(modules, domain,sub_domain, 'validation_spacy')
+    Tr = FilesManager(modules, domain, sub_domain, 'training_spacy')
+    T = FilesManager(modules, domain, sub_domain, 'testing_spacy')
+    V = FilesManager(modules, domain, sub_domain, 'validation_spacy')
 
     if option == 'None':
         # Load predefined datasets
-        X_train = [Tr.load(f'Train_{sub_domain}_desc_{sizefile}_data.json', style='entity'),
-                   Tr.load(f'Train_{sub_domain}_formulas_{sizefile}_data.json', style='entity')]
+        X_train = [
+            Tr.load(f'Train_{sub_domain}_desc_{sizefile}_data.json', style='entity'),
+            Tr.load(f'Train_{sub_domain}_formulas_{sizefile}_data.json', style='entity')
+        ]
         X_test = T.load(f'Test_{sub_domain}_both_{sizefile}_data.json', style='entity')
 
         if val_data:
-            X_val = [V.load(f'Val_{sub_domain}_desc_{sizefile}_data.json', style='entity'),
-                     V.load(f'Val_{sub_domain}_formulas_{sizefile}_data.json', style='entity')]
+            X_val = [
+                V.load(f'Val_{sub_domain}_desc_{sizefile}_data.json', style='entity'),
+                V.load(f'Val_{sub_domain}_formulas_{sizefile}_data.json', style='entity')
+            ]
             return X_train, X_val, X_test
 
-        return X_train, X_test
+        return X_train, None, X_test
 
     elif option in ["split", "build"]:
         if option == "split":
@@ -72,9 +110,14 @@ def prepare_unlabeled_data_multitask(modules, domain,sub_domain,actions, filenam
                 _, data_formulas = Custom_ner_entities(data, entity_path, 'Formulas').get_entity()
                 if 'Combined' in data.columns:
                     entity_path = f"{modules}/{domain}/{sub_domain}/ner_{sub_domain}"
-                    _, data_formulas = Custom_ner_entities(data, entity_path, 'Combined').get_entity()
-            except FileNotFoundError:
-                print("Filename not found")
+                    _, data_combined = Custom_ner_entities(data, entity_path, 'Combined').get_entity()
+                    # Use combined data for formulas if available
+                    data_formulas = data_combined
+            except FileNotFoundError as e:
+                print(f"Filename not found: {e}")
+                return None, None, None
+            except Exception as e:
+                print(f"Error loading data: {e}")
                 return None, None, None
 
         # Split data
@@ -84,46 +127,53 @@ def prepare_unlabeled_data_multitask(modules, domain,sub_domain,actions, filenam
 
         X_train = [X_train_0, X_train_1]
         X_test = [X_test_0, X_test_1]
+        
         if val_data:
             X_val = [X_val_0, X_val_1]
             
-            # output files
-            file_output=f'Valid_{sub_domain}_{sizefile}_data.json'
-            # save to datasets/queries/tableau/validation_spacy dir
+            # Output files
+            file_output = f'Valid_{sub_domain}_{sizefile}_data.json'
+            # Save to datasets/queries/tableau/validation_spacy dir
             json_dir_path = resources.files(f'hypatiax.datasets.{domain}.{sub_domain}.validation_spacy')
             print(f"Saving {file_output} to {json_dir_path}")
-            save_spacy_training_data_to_json(json_dir_path,X_val, file_output)
+            save_spacy_training_data_to_json(json_dir_path, X_val, file_output)
 
             return X_train, X_val, X_test
 
-        return X_train, X_test
+        return X_train, None, X_test
 
     else:
-        print("Invalid option specified.")
-        return None, None, None  # Proper error handling should be implemented here
+        raise ValueError(f"Invalid option: {option}. Must be 'None', 'split', or 'build'.")
 
 
-def prepare_unlabeled_data_single(modules, domain,sub_domain, actions, filename,dtype,sizefile='sm',test_size=0.2,ner_entity=None,dataset_normalized=None, val_data=False,  option=None):
+def prepare_unlabeled_data_single(modules, domain, sub_domain, actions, filename, dtype, 
+                                  sizefile='sm', test_size=0.2, ner_entity=None, 
+                                  dataset_normalized=None, val_data=False, option=None):
     """
-    Prepare data for operations that do not require labeled data.
+    Prepare data for single-task learning.
+    
     Parameters:
         modules (str): Module name.
         domain (str): Domain name.
+        sub_domain (str): Sub-domain name.
         actions (str): Specific action.
         filename (str): Filename to load for 'build' option.
-        dtype (str): like "desc","formulas","combined".
-        ner_entity(str): spacy entity like ner_desc, ner_formulas,ner_both
-        sizefile (str): 'sm': 'formulas_*','bg':'gformulas_*'
-        val_data (bool): Indicates if validation data should be prepared.
+        dtype (str): Data type (desc, formulas, combined).
+        sizefile (str): 'sm' or 'bg'.
         test_size (float): Fraction of data to be used as test set.
+        ner_entity (str): Spacy entity like ner_desc, ner_formulas, ner_both.
+        dataset_normalized: Dataset normalization flag.
+        val_data (bool): Indicates if validation data should be prepared.
         option (str): Option to manage data ('None', 'split', 'build').
+    
     Returns:
         Data splits depending on `val_data` parameter.
     """
-    F = FilesManager(modules, domain, sub_domain,actions)
-    Tr=FilesManager(modules,domain,sub_domain,'training_spacy')
-    T=FilesManager(modules,domain,sub_domain,'testing_spacy')
-    V=FilesManager(modules,domain,sub_domain,'validation_spacy')
+    F = FilesManager(modules, domain, sub_domain, actions)
+    Tr = FilesManager(modules, domain, sub_domain, 'training_spacy')
+    T = FilesManager(modules, domain, sub_domain, 'testing_spacy')
+    V = FilesManager(modules, domain, sub_domain, 'validation_spacy')
+    
     if option == 'None':
         # Load predefined datasets
         X_train = Tr.load(f'Train_{sub_domain}_{dtype}_{sizefile}_data.json', style='entity')
@@ -131,7 +181,7 @@ def prepare_unlabeled_data_single(modules, domain,sub_domain, actions, filename,
         if val_data:
             X_val = V.load(f'Val_{sub_domain}_{dtype}_{sizefile}_data.json', style='entity')
             return X_train, X_val, X_test
-        return X_train, X_test
+        return X_train, None, X_test
     
     elif option == "split":
         # Load data for splitting
@@ -141,58 +191,39 @@ def prepare_unlabeled_data_single(modules, domain,sub_domain, actions, filename,
         if val_data:
             X_train, X_val = train_test_split(X_train, test_size=0.5 * test_size)
             return X_train, X_val, X_test
-        return X_train, X_test
+        return X_train, None, X_test
     
     elif option == "build":
         # Load and potentially transform/build features for the data
         try:
             data = F.load(filename)
             # Assume entity_path and Custom_ner_entities can be correctly set up
-            entity_path = f"{modules}/{domain}/{sub_domain}/ner_{sub_domain}" # Modify as required
-            _,data_ = Custom_ner_entities(data, entity_path, 'Combined').get_entity()
+            entity_path = f"{modules}/{domain}/{sub_domain}/ner_{sub_domain}"
+            _, data_ = Custom_ner_entities(data, entity_path, 'Combined').get_entity()
 
             # Add any specific transformations or feature engineering steps here
             print("Building features...")
             
-        except FileNotFoundError:
-            print("Filename not found")
+        except FileNotFoundError as e:
+            print(f"Filename not found: {e}")
             return None, None, None
+        except Exception as e:
+            print(f"Error loading data: {e}")
+            return None, None, None
+            
         X = data_
         X_train, X_test = train_test_split(X, test_size=test_size)
         if val_data:
             X_train, X_val = train_test_split(X_train, test_size=0.5 * test_size)
-            # output files
-            file_output=f'Valid_{sub_domain}_{sizefile}_data.json'
-            # save to datasets/queries/tableau/validation_spacy dir
+            # Output files
+            file_output = f'Valid_{sub_domain}_{sizefile}_data.json'
+            # Save to datasets/queries/tableau/validation_spacy dir
             json_dir_path = resources.files(f'hypatiax.datasets.{domain}.{sub_domain}.validation_spacy')
             print(f"Saving {file_output} to {json_dir_path}")
-            save_spacy_training_data_to_json(json_dir_path,X_val, file_output)
+            save_spacy_training_data_to_json(json_dir_path, X_val, file_output)
             
             return X_train, X_val, X_test
-        return X_train, X_test
+        return X_train, None, X_test
 
     else:
-        # Handle the case where option is neither None, split, nor build
-        print("Invalid option specified.")
-        return None, None, None  # Proper error handling should be implemented here
-"""
-Explanation:
-"None" Option: Assumes that the data splits have already been pre-created and loads them directly from the specified files.
-"Split" Option: Loads the data and splits it into training and test sets. If val_data is true, it further splits the training data to create a validation set.
-"Build" Option: This is intended for scenarios where you need to preprocess or transform the data before splitting. After preprocessing, the data is split similarly to the "split" option.
-This function layout ensures clear separation of functionalities based on the option parameter, making the data preparation flexible depending on the scenario.
-
-Your function prepare_unlabeled_data_multitask is well-structured to handle different types of data processing based on the option parameter for multitasking scenarios. It appears to be a dedicated approach to handle the nuances of training data from multiple domains or types (like descriptions and formulas), which is great for specialization and clarity. Here are a few suggestions to enhance your implementation:
-
-Suggestions for Improvement
-Error Handling and Logging: It's beneficial to have more comprehensive error handling beyond file not found exceptions. Consider logging errors or warnings to help with debugging.
-Code Duplication: There is a repeated pattern of splitting data in both the "split" and "build" options. Consider creating a helper function to handle the repetitive splitting and validation division to reduce code duplication and improve maintainability.
-Configuration for Paths: Hard-coding paths and file names can limit flexibility. Consider passing configuration objects or using environment variables to manage paths and file names.
-Documentation: Improve the function documentation to describe the expected format of the input files and the structure of the outputs. It will help other developers understand how to use the function effectively.
-Function Modularity: Consider separating the logic of loading data and the logic of manipulating it (e.g., splitting). This can improve the modularity and reusability of your code.
-Explanation:
-FilesManager Instances: Each set of files is handled by its own FilesManager instance, ensuring that operations are performed on the correct subset of data (training, testing, or validation).
-Usage of Instances: The use of these specific instances (Tr, T, V) makes the function clearer and respects the separation of concerns for handling different types of data sets.
-Flexibility: This approach maintains flexibility in how data is loaded and processed, ensuring easy adaptability and maintenance of the code.
-"""
-
+        raise ValueError(f"Invalid option: {option}. Must be 'None', 'split', or 'build'.")

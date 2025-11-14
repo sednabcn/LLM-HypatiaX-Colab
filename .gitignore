@@ -1,22 +1,160 @@
-### AL ###
-#Template for AL projects for Dynamics 365 Business Central
-#launch.json folder
+# ============================================
+# HypatiaX Project - .gitignore
+# ============================================
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+virtualenv/
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# === Testing ===
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.cache/
+nosetests.xml
+coverage.xml
+*.cover
+
+# === Jupyter Notebooks ===
+.ipynb_checkpoints/
+*.ipynb
+
+# === IDEs ===
 .vscode/
-#Cache folder
-.alcache/
-#Symbols folder
-.alpackages/
-#Snapshots folder
-.snapshots/
-#Testing Output folder
-.output/
-#Extension App-file
-*.app
-#Rapid Application Development File
-rad.json
-#Translation Base-file
-*.g.xlf
-#License-file
-*.flf
-#Test results file
-TestResults.xml
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Environment Variables ===
+.env
+.env.local
+.env.*.local
+*.env
+
+# === Logs ===
+*.log
+logs/
+
+# === Database ===
+*.db
+*.sqlite
+*.sqlite3
+
+# === Security ===
+secrets/
+credentials.json
+*.pem
+*.key
+
+# === Machine Learning Models ===
+*.bin
+*.pkl
+*.h5
+*.pt
+models/
+
+# spaCy models (download on deployment)
+en_core_web_sm/
+en_core_web_md/
+en_core_web_lg/
+en_core_web_trf/
+
+# === Project Specific ===
+# Outputs
+outputs/
+ci_outputs/
+
+# Auto-migrate backups
+.versions/
+state.json
+
+# Migrations
+migrations/*.log
+migrations/.backup/
+
+# Legacy folders
+NEW-FROM-OCT4/
+setup/
+github/
+web/
+pytools/
+
+# Legacy files
+version.py
+*activate_hypatiax.sh
+setup_old.py
+
+# === Frontend (if applicable) ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+frontend/build/
+frontend/dist/
+backend/dist/
+
+# === Optional: Large Data Files ===
+# Uncomment if you want to exclude datasets from version control
+# *.xlsx
+# *.csv
+# *.spacy
+# *.jsonl
+
+# === Build Artifacts ===
+*.whl
+
+# === Directories to Exclude ===
+# === pytools - Ignore only generated files ===
+pytools/**/*.log
+pytools/**/installation_report.txt
+pytools/**/verification-report.json
+pytools/**/__pycache__/
+pytools/**/*.pyc
+
+# === Frontend (if applicable) ===
+node_modules/
+npm-debug.log*
+frontend/build/
+frontend/dist/
+.github/workflows-templates/

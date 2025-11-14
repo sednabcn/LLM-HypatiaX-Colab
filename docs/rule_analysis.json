@@ -1,0 +1,155 @@
+{
+  "findings": {
+    "existing_files": [
+      "ruler_tableau_desc_initial_20251114_113832.jsonl",
+      "ruler_tableau_both_initial_20251114_113837.jsonl",
+      "ruler_tableau_formulas_initial_20251114_113835.jsonl",
+      "ruler_tableau.jsonl",
+      "ruler_tableau_formulas.jsonl",
+      "ruler_tableau_desc.jsonl",
+      "ruler_tableau_both.jsonl",
+      "ruler_tableau.jsonl",
+      "ruler_tableau_formulas.jsonl",
+      "ruler_tableau_desc.jsonl",
+      "ruler_tableau_both.jsonl"
+    ],
+    "expected_files": [
+      "rules_tableau_desc_version1.jsonl",
+      "rules_tableau_formulas_version1.jsonl",
+      "rules_tableau_version1.jsonl"
+    ],
+    "missing_files": [
+      "rules_tableau_desc_version1.jsonl",
+      "rules_tableau_formulas_version1.jsonl",
+      "rules_tableau_version1.jsonl"
+    ],
+    "version_directories": [
+      {
+        "path": ".versions/custom_ner/queries/tableau/rules",
+        "contents": [
+          "ruler_tableau_desc_initial_20251114_113832.jsonl",
+          "ruler_tableau_both_initial_20251114_113837.jsonl",
+          "ruler_tableau_formulas_initial_20251114_113835.jsonl"
+        ]
+      },
+      {
+        "path": "custom_ner/queries/tableau/rules",
+        "contents": [
+          "ruler_tableau.jsonl",
+          "ruler_tableau_formulas.jsonl",
+          "ruler_tableau_desc.jsonl",
+          "ruler_tableau_both.jsonl",
+          "__init__.py",
+          "__pycache__"
+        ]
+      },
+      {
+        "path": "backup_before_extension/custom_ner/queries/tableau/rules",
+        "contents": [
+          "ruler_tableau.jsonl",
+          "ruler_tableau_formulas.jsonl",
+          "ruler_tableau_desc.jsonl",
+          "ruler_tableau_both.jsonl",
+          "__init__.py",
+          "__pycache__"
+        ]
+      }
+    ],
+    "jsonl_files": [
+      {
+        "path": ".versions/custom_ner/queries/tableau/rules/ruler_tableau_desc_initial_20251114_113832.jsonl",
+        "size": 5327,
+        "name": "ruler_tableau_desc_initial_20251114_113832.jsonl"
+      },
+      {
+        "path": ".versions/custom_ner/queries/tableau/rules/ruler_tableau_both_initial_20251114_113837.jsonl",
+        "size": 8381,
+        "name": "ruler_tableau_both_initial_20251114_113837.jsonl"
+      },
+      {
+        "path": ".versions/custom_ner/queries/tableau/rules/ruler_tableau_formulas_initial_20251114_113835.jsonl",
+        "size": 2984,
+        "name": "ruler_tableau_formulas_initial_20251114_113835.jsonl"
+      },
+      {
+        "path": "custom_ner/queries/tableau/rules/ruler_tableau.jsonl",
+        "size": 7272,
+        "name": "ruler_tableau.jsonl"
+      },
+      {
+        "path": "custom_ner/queries/tableau/rules/ruler_tableau_formulas.jsonl",
+        "size": 2984,
+        "name": "ruler_tableau_formulas.jsonl"
+      },
+      {
+        "path": "custom_ner/queries/tableau/rules/ruler_tableau_desc.jsonl",
+        "size": 5327,
+        "name": "ruler_tableau_desc.jsonl"
+      },
+      {
+        "path": "custom_ner/queries/tableau/rules/ruler_tableau_both.jsonl",
+        "size": 8381,
+        "name": "ruler_tableau_both.jsonl"
+      },
+      {
+        "path": "backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau.jsonl",
+        "size": 7272,
+        "name": "ruler_tableau.jsonl"
+      },
+      {
+        "path": "backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau_formulas.jsonl",
+        "size": 2984,
+        "name": "ruler_tableau_formulas.jsonl"
+      },
+      {
+        "path": "backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau_desc.jsonl",
+        "size": 5327,
+        "name": "ruler_tableau_desc.jsonl"
+      },
+      {
+        "path": "backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau_both.jsonl",
+        "size": 8381,
+        "name": "ruler_tableau_both.jsonl"
+      }
+    ]
+  },
+  "fixes": {
+    "option_1_rename": [
+      {
+        "old": "hypatiax/custom_ner/queries/tableau/rules/ruler_tableau_desc.jsonl",
+        "new": "hypatiax/custom_ner/queries/tableau/rules/rules_tableau_desc_version1.jsonl",
+        "command": "mv 'hypatiax/custom_ner/queries/tableau/rules/ruler_tableau_desc.jsonl' 'hypatiax/custom_ner/queries/tableau/rules/rules_tableau_desc_version1.jsonl'"
+      },
+      {
+        "old": "hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau_desc.jsonl",
+        "new": "hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/rules_tableau_desc_version1.jsonl",
+        "command": "mv 'hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau_desc.jsonl' 'hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/rules_tableau_desc_version1.jsonl'"
+      },
+      {
+        "old": "hypatiax/custom_ner/queries/tableau/rules/ruler_tableau_formulas.jsonl",
+        "new": "hypatiax/custom_ner/queries/tableau/rules/rules_tableau_formulas_version1.jsonl",
+        "command": "mv 'hypatiax/custom_ner/queries/tableau/rules/ruler_tableau_formulas.jsonl' 'hypatiax/custom_ner/queries/tableau/rules/rules_tableau_formulas_version1.jsonl'"
+      },
+      {
+        "old": "hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau_formulas.jsonl",
+        "new": "hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/rules_tableau_formulas_version1.jsonl",
+        "command": "mv 'hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau_formulas.jsonl' 'hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/rules_tableau_formulas_version1.jsonl'"
+      },
+      {
+        "old": "hypatiax/custom_ner/queries/tableau/rules/ruler_tableau.jsonl",
+        "new": "hypatiax/custom_ner/queries/tableau/rules/rules_tableau_version1.jsonl",
+        "command": "mv 'hypatiax/custom_ner/queries/tableau/rules/ruler_tableau.jsonl' 'hypatiax/custom_ner/queries/tableau/rules/rules_tableau_version1.jsonl'"
+      },
+      {
+        "old": "hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau.jsonl",
+        "new": "hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/rules_tableau_version1.jsonl",
+        "command": "mv 'hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau.jsonl' 'hypatiax/backup_before_extension/custom_ner/queries/tableau/rules/rules_tableau_version1.jsonl'"
+      }
+    ],
+    "option_2_generate": [
+      "patterns/queries/tableau/test_create_ruler_tableau.py",
+      "backup_before_extension/patterns/queries/tableau/test_create_ruler_tableau.py"
+    ],
+    "option_3_code_change": []
+  }
+}

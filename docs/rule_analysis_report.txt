@@ -1,0 +1,69 @@
+======================================================================
+HYPATIAX RULE FILE ANALYSIS REPORT
+======================================================================
+
+📄 EXISTING JSONL FILES:
+----------------------------------------------------------------------
+  ✓ .versions/custom_ner/queries/tableau/rules/ruler_tableau_desc_initial_20251114_113832.jsonl
+    Size: 5.20 KB
+  ✓ .versions/custom_ner/queries/tableau/rules/ruler_tableau_both_initial_20251114_113837.jsonl
+    Size: 8.18 KB
+  ✓ .versions/custom_ner/queries/tableau/rules/ruler_tableau_formulas_initial_20251114_113835.jsonl
+    Size: 2.91 KB
+  ✓ custom_ner/queries/tableau/rules/ruler_tableau.jsonl
+    Size: 7.10 KB
+  ✓ custom_ner/queries/tableau/rules/ruler_tableau_formulas.jsonl
+    Size: 2.91 KB
+  ✓ custom_ner/queries/tableau/rules/ruler_tableau_desc.jsonl
+    Size: 5.20 KB
+  ✓ custom_ner/queries/tableau/rules/ruler_tableau_both.jsonl
+    Size: 8.18 KB
+  ✓ backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau.jsonl
+    Size: 7.10 KB
+  ✓ backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau_formulas.jsonl
+    Size: 2.91 KB
+  ✓ backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau_desc.jsonl
+    Size: 5.20 KB
+  ✓ backup_before_extension/custom_ner/queries/tableau/rules/ruler_tableau_both.jsonl
+    Size: 8.18 KB
+
+🎯 EXPECTED FILES (from code):
+----------------------------------------------------------------------
+  ❌ MISSING rules_tableau_desc_version1.jsonl
+  ❌ MISSING rules_tableau_formulas_version1.jsonl
+  ❌ MISSING rules_tableau_version1.jsonl
+
+📁 RULES DIRECTORIES:
+----------------------------------------------------------------------
+  📂 .versions/custom_ner/queries/tableau/rules
+     - ruler_tableau_desc_initial_20251114_113832.jsonl
+     - ruler_tableau_both_initial_20251114_113837.jsonl
+     - ruler_tableau_formulas_initial_20251114_113835.jsonl
+  📂 custom_ner/queries/tableau/rules
+     - ruler_tableau.jsonl
+     - ruler_tableau_formulas.jsonl
+     - ruler_tableau_desc.jsonl
+     - ruler_tableau_both.jsonl
+     - __init__.py
+     - __pycache__
+  📂 backup_before_extension/custom_ner/queries/tableau/rules
+     - ruler_tableau.jsonl
+     - ruler_tableau_formulas.jsonl
+     - ruler_tableau_desc.jsonl
+     - ruler_tableau_both.jsonl
+     - __init__.py
+     - __pycache__
+
+🔍 ANALYSIS:
+----------------------------------------------------------------------
+  ⚠️  PROBLEM IDENTIFIED:
+     The code expects versioned rule files (rules_*_version1.jsonl)
+     but only non-versioned files (ruler_*.jsonl) exist.
+
+  💡 POSSIBLE SOLUTIONS:
+     1. Rename existing ruler_*.jsonl → rules_*_version1.jsonl
+     2. Look for a script that generates versioned rules
+     3. Check if rules_versions/ should contain these files
+     4. Update code to use ruler_*.jsonl naming convention
+
+======================================================================

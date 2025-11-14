@@ -4,14 +4,25 @@ import pandas as pd
 import spacy
 from importlib import resources
 from hypatiax.utils.utils import upload_spacy_training_data, upload_spacy_training_data_from_json
+from hypatiax.auto_migrate import migrate
 
 class FilesManager:
     def __init__(self, modules, domains, sub_domains,actions, package="hypatiax"):
         self.package = package
         self.path_domains = f'{self.package}.{modules}.{domains}.{sub_domains}'
         self.path_dir = f'{self.path_domains}.{actions}'
+        self.modules = modules
+        self.actions = actions
 
     def load(self, filename='default', style=None):
+        
+        migrate(filename, style, 
+                package=self.package,
+                modules=self.modules,
+                domains=self.domains,
+                sub_domains=self.sub_domains,
+                folder=self.actions)
+        
         if filename.endswith('.csv'):
             return self._load_csv(filename)
         elif filename.endswith(('.xls', '.xlsx')):

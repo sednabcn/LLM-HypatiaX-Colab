@@ -1,0 +1,84 @@
+name: Main Orchestrator
+
+on:
+  push:
+    branches: [develop, master, main]
+  pull_request:
+    branches: [develop, master, main]
+  schedule:
+    # Run security scans daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+jobs:
+  # Determine what workflows to run based on changes
+  check-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      run-ci: ${{ steps.filter.outputs.code }}
+      run-docker: ${{ steps.filter.outputs.docker }}
+      run-security: ${{ steps.filter.outputs.security }}
+      run-docs: ${{ steps.filter.outputs.docs }}
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            code:
+              - 'hypatiax/**'
+              - 'tests/**'
+              - '*.py'
+              - 'requirements*.txt'
+              - 'setup.py'
+              - 'pyproject.toml'
+            docker:
+              - 'Dockerfile*'
+              - 'docker-compose*.yml'
+              - '.dockerignore'
+            security:
+              - 'requirements*.txt'
+              - 'setup.py'
+              - 'pyproject.toml'
+            docs:
+              - 'docs/**'
+              - '*.md'
+              - 'README*'
+
+  # Trigger appropriate workflows
+  run-ci:
+    needs: check-changes
+    if: needs.check-changes.outputs.run-ci == 'true' || github.event_name == 'pull_request'
+    uses: ./.github/workflows/ci.yml
+
+  run-docker:
+    needs: check-changes
+    if: needs.check-changes.outputs.run-docker == 'true' || github.event_name == 'push'
+    uses: ./.github/workflows/docker.yml
+    secrets: inherit
+
+  run-security:
+    needs: check-changes
+    if: needs.check-changes.outputs.run-security == 'true' || github.event_name == 'schedule'
+    uses: ./.github/workflows/security.yml
+    secrets: inherit
+
+  # Summary job
+  status-check:
+    runs-on: ubuntu-latest
+    needs: [check-changes, run-ci, run-docker, run-security]
+    if: always()
+    steps:
+      - name: Check all jobs status
+        run: |
+          echo "CI Status: ${{ needs.run-ci.result }}"
+          echo "Docker Status: ${{ needs.run-docker.result }}"
+          echo "Security Status: ${{ needs.run-security.result }}"
+          
+          if [[ "${{ needs.run-ci.result }}" == "failure" ]] || 
+             [[ "${{ needs.run-docker.result }}" == "failure" ]] || 
+             [[ "${{ needs.run-security.result }}" == "failure" ]]; then
+            echo "❌ One or more checks failed"
+            exit 1
+          fi
+          echo "✅ All checks passed"

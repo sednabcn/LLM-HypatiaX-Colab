@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HypatiaX Demo Workspace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .btn-run { background: #2563eb; color: white; }
+        .btn-run:hover { background: #1d4ed8; }
+        .btn-save { background: #16a34a; color: white; }
+        .btn-save:hover { background: #15803d; }
+        .btn-export { background: #9333ea; color: white; }
+        .btn-export:hover { background: #7e22ce; }
+        .btn-copy { background: #475569; color: white; }
+        .btn-copy:hover { background: #334155; }
+        .btn-clear { background: #dc2626; color: white; }
+        .btn-clear:hover { background: #b91c1c; }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid;
+        }
+
+        .alert-success {
+            background: rgba(22, 163, 74, 0.2);
+            border-color: rgba(22, 163, 74, 0.5);
+            color: #86efac;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .card label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            color: #e2e8f0;
+            font-family: inherit;
+            font-size: 0.875rem;
+        }
+
+        textarea {
+            resize: vertical;
+            font-family: 'Courier New', monospace;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .status-not-started { background: #6b7280; }
+        .status-running { background: #eab308; animation: pulse 1s infinite; }
+        .status-success { background: #22c55e; }
+        .status-failed { background: #ef4444; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .output-box {
+            min-height: 100px;
+            padding: 12px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            white-space: pre-wrap;
+        }
+
+        .output-placeholder {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .test-results {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .test-result {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid;
+        }
+
+        .test-success {
+            background: rgba(22, 163, 74, 0.2);
+            border-color: rgba(22, 163, 74, 0.3);
+        }
+
+        .test-failed {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .test-details {
+            font-size: 0.875rem;
+        }
+
+        .test-details div {
+            margin-bottom: 4px;
+        }
+
+        .checklist {
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .checklist h3 {
+            color: #93c5fd;
+            margin-bottom: 15px;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .checklist-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .checklist h4 {
+            color: #bfdbfe;
+            margin-bottom: 10px;
+        }
+
+        .checklist ul {
+            list-style: none;
+            color: #cbd5e1;
+        }
+
+        .checklist li {
+            margin-bottom: 6px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #60a5fa;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 HypatiaX Demo Workspace</h1>
+            <p class="subtitle">Thursday Demo Builder - Get ONE thing working!</p>
+        </header>
+
+        <div class="actions">
+            <button class="btn-run" onclick="runDemo()">
+                <span>▶</span> Run Demo
+            </button>
+            <button class="btn-save" onclick="saveDemo()">
+                <span>💾</span> Save Progress
+            </button>
+            <button class="btn-export" onclick="exportMarkdown()">
+                <span>⬇</span> Export MD
+            </button>
+            <button class="btn-copy" onclick="copyToClipboard()">
+                <span id="copyIcon">📋</span> <span id="copyText">Copy</span>
+            </button>
+            <button class="btn-clear" onclick="clearAll()">
+                <span>🗑️</span> Clear All
+            </button>
+        </div>
+
+        <div id="saveAlert" class="alert alert-success hidden"></div>
+
+        <div class="grid">
+            <!-- Left Column -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="card">
+                    <label>Demo Title</label>
+                    <input type="text" id="title" value="Calculate Area of Circle Demo" placeholder="e.g., Calculate Area of Circle Demo">
+                </div>
+
+                <div class="card">
+                    <div class="status-badge">
+                        <label style="margin: 0;">Status</label>
+                        <div class="status-indicator">
+                            <div id="statusDot" class="status-dot status-not-started"></div>
+                            <span id="statusText" style="font-family: monospace; text-transform: uppercase; font-size: 0.875rem;">not-started</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <label>Input Text (Natural Language)</label>
+                    <textarea id="inputText" rows="3" placeholder="e.g., calculate area of circle">calculate area of circle</textarea>
+                </div>
+
+                <div class="card">
+                    <label>Expected Output (LaTeX)</label>
+                    <textarea id="expectedOutput" rows="3" placeholder="e.g., A = πr²">A = πr²</textarea>
+                </div>
+
+                <div class="card">
+                    <label>Process (What Happens)</label>
+                    <textarea id="process" rows="5" placeholder="Describe what happens step by step..."></textarea>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="card">
+                    <label>Actual Output</label>
+                    <div id="actualOutput" class="output-box">
+                        <span class="output-placeholder">Run the demo to see output...</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <label>Test Results</label>
+                    <div id="testResults" class="test-results">
+                        <p style="color: #64748b; font-style: italic; font-size: 0.875rem;">No tests run yet</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <label>Notes & Issues</label>
+                    <textarea id="notes" rows="8" placeholder="Document bugs fixed, dependencies updated, blockers encountered..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="checklist">
+            <h3>📋 Thursday Demo Checklist</h3>
+            <div class="checklist-grid">
+                <div>
+                    <h4>Before Starting:</h4>
+                    <ul>
+                        <li>Pick the SIMPLEST scenario</li>
+                        <li>Not most impressive, just FUNCTIONAL</li>
+                        <li>Have exact input text ready</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>After Testing:</h4>
+                    <ul>
+                        <li>Document what was fixed</li>
+                        <li>Save actual output</li>
+                        <li>Export markdown for documentation</li>
+                        <li>Take screenshot/video if possible</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let testHistory = [];
+
+        function updateStatus(status) {
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            
+            statusDot.className = 'status-dot status-' + status;
+            statusText.textContent = status;
+        }
+
+        function runDemo() {
+            const inputText = document.getElementById('inputText').value;
+            const expectedOutput = document.getElementById('expectedOutput').value;
+            
+            if (!inputText) {
+                alert('Please enter input text first!');
+                return;
+            }
+
+            updateStatus('running');
+            
+            // Simulate running the demo
+            setTimeout(() => {
+                const success = Math.random() > 0.3; // Simulate success/failure
+                const timestamp = new Date().toLocaleTimeString();
+                const output = success ? expectedOutput : 'ERROR: Missing dependency';
+                const duration = (Math.random() * 2 + 0.5).toFixed(2);
+
+                // Update actual output
+                const actualOutput = document.getElementById('actualOutput');
+                actualOutput.innerHTML = output;
+                actualOutput.classList.remove('output-placeholder');
+
+                // Add to test history
+                const result = {
+                    timestamp,
+                    input: inputText,
+                    output,
+                    success,
+                    duration
+                };
+                testHistory.unshift(result);
+
+                // Update test results display
+                updateTestResults();
+
+                // Update status
+                updateStatus(success ? 'success' : 'failed');
+            }, 1500);
+        }
+
+        function updateTestResults() {
+            const container = document.getElementById('testResults');
+            
+            if (testHistory.length === 0) {
+                container.innerHTML = '<p style="color: #64748b; font-style: italic; font-size: 0.875rem;">No tests run yet</p>';
+                return;
+            }
+
+            container.innerHTML = testHistory.map((result, idx) => `
+                <div class="test-result ${result.success ? 'test-success' : 'test-failed'}">
+                    <div class="test-header">
+                        <span style="color: ${result.success ? '#86efac' : '#fca5a5'}">
+                            ${result.success ? '✅ PASSED' : '❌ FAILED'}
+                        </span>
+                        <span style="font-size: 0.75rem; color: #94a3b8;">${result.timestamp}</span>
+                    </div>
+                    <div class="test-details">
+                        <div><span style="color: #94a3b8;">Input:</span> ${result.input}</div>
+                        <div><span style="color: #94a3b8;">Output:</span> ${result.output}</div>
+                        <div style="color: #94a3b8; font-size: 0.75rem;">Duration: ${result.duration}s</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function saveDemo() {
+            const data = {
+                title: document.getElementById('title').value,
+                inputText: document.getElementById('inputText').value,
+                expectedOutput: document.getElementById('expectedOutput').value,
+                actualOutput: document.getElementById('actualOutput').textContent,
+                process: document.getElementById('process').value,
+                notes: document.getElementById('notes').value,
+                status: document.getElementById('statusText').textContent,
+                testHistory,
+                savedAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('hypatiax-demo', JSON.stringify(data));
+
+            const alert = document.getElementById('saveAlert');
+            alert.textContent = '✅ Demo saved successfully at ' + new Date().toLocaleString();
+            alert.classList.remove('hidden');
+            setTimeout(() => alert.classList.add('hidden'), 3000);
+        }
+
+        function loadDemo() {
+            const saved = localStorage.getItem('hypatiax-demo');
+            if (!saved) return;
+
+            const data = JSON.parse(saved);
+            document.getElementById('title').value = data.title || '';
+            document.getElementById('inputText').value = data.inputText || '';
+            document.getElementById('expectedOutput').value = data.expectedOutput || '';
+            document.getElementById('process').value = data.process || '';
+            document.getElementById('notes').value = data.notes || '';
+            
+            if (data.actualOutput && data.actualOutput !== 'Run the demo to see output...') {
+                document.getElementById('actualOutput').textContent = data.actualOutput;
+            }
+            
+            if (data.testHistory) {
+                testHistory = data.testHistory;
+                updateTestResults();
+            }
+
+            if (data.status) {
+                updateStatus(data.status);
+            }
+        }
+
+        function exportMarkdown() {
+            const title = document.getElementById('title').value;
+            const inputText = document.getElementById('inputText').value;
+            const expectedOutput = document.getElementById('expectedOutput').value;
+            const actualOutput = document.getElementById('actualOutput').textContent;
+            const process = document.getElementById('process').value;
+            const notes = document.getElementById('notes').value;
+            const status = document.getElementById('statusText').textContent;
+
+            const markdown = `# ${title}
+
+## Status: ${status.toUpperCase()}
+
+### Input
+\`\`\`
+${inputText}
+\`\`\`
+
+### Expected Output
+\`\`\`
+${expectedOutput}
+\`\`\`
+
+### Actual Output
+\`\`\`
+${actualOutput}
+\`\`\`
+
+### Process
+${process || 'Not documented yet'}
+
+### Notes
+${notes || 'No notes yet'}
+
+### Test Results
+${testHistory.length === 0 ? 'No tests run yet' : testHistory.map((r, i) => 
+  `- **Test ${i + 1}** (${r.timestamp}): ${r.success ? '✅ PASSED' : '❌ FAILED'} - ${r.duration}s
+  - Input: \`${r.input}\`
+  - Output: \`${r.output}\``
+).join('\n')}
+
+---
+Generated: ${new Date().toLocaleString()}
+`;
+
+            const blob = new Blob([markdown], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = title.replace(/\s+/g, '_').toLowerCase() + '_demo.md';
+            a.click();
+        }
+
+        function copyToClipboard() {
+            const title = document.getElementById('title').value;
+            const inputText = document.getElementById('inputText').value;
+            const expectedOutput = document.getElementById('expectedOutput').value;
+            const actualOutput = document.getElementById('actualOutput').textContent;
+            const status = document.getElementById('statusText').textContent;
+
+            const text = `Title: ${title}
+Input: ${inputText}
+Expected: ${expectedOutput}
+Actual: ${actualOutput}
+Status: ${status}`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                document.getElementById('copyIcon').textContent = '✓';
+                document.getElementById('copyText').textContent = 'Copied!';
+                setTimeout(() => {
+                    document.getElementById('copyIcon').textContent = '📋';
+                    document.getElementById('copyText').textContent = 'Copy';
+                }, 2000);
+            });
+        }
+
+        function clearAll() {
+            if (!confirm('Are you sure you want to clear all data?')) return;
+            
+            document.getElementById('title').value = 'Calculate Area of Circle Demo';
+            document.getElementById('inputText').value = 'calculate area of circle';
+            document.getElementById('expectedOutput').value = 'A = πr²';
+            document.getElementById('actualOutput').innerHTML = '<span class="output-placeholder">Run the demo to see output...</span>';
+            document.getElementById('process').value = '';
+            document.getElementById('notes').value = '';
+            testHistory = [];
+            updateTestResults();
+            updateStatus('not-started');
+            localStorage.removeItem('hypatiax-demo');
+        }
+
+        // Load saved data on page load
+        window.addEventListener('load', loadDemo);
+    </script>
+</body>
+</html>

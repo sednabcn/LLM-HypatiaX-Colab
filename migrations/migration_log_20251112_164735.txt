@@ -1,0 +1,156 @@
+[INFO] ======================================================================
+[INFO] HYPATIAX ARCHITECTURE EXTENSION MIGRATION
+[INFO] ======================================================================
+[INFO] 
+[INFO] ======================================================================
+[INFO] CREATING BACKUP OF CURRENT STRUCTURE
+[INFO] ======================================================================
+[INFO]   📦 Backing up config...
+[INFO]   📦 Backing up core...
+[INFO]   📦 Backing up custom_entities...
+[INFO]   📦 Backing up custom_ner...
+[INFO]   📦 Backing up datasets...
+[INFO]   📦 Backing up data_spacy...
+[INFO]   📦 Backing up models...
+[INFO]   📦 Backing up mappings...
+[INFO]   📦 Backing up patterns...
+[INFO]   📦 Backing up utils...
+[INFO]   📦 Backing up scripts_...
+[INFO]   📦 Backing up demo...
+[INFO]   📦 Backing up docs...
+[INFO]   📦 Backing up examples...
+[INFO]   📦 Backing up experiments...
+[INFO] ✅ Backup created at: /home/agagora/Downloads/LLM-HypatiaX-OLD/hypatiax/backup_before_extension
+
+[INFO] ======================================================================
+[INFO] CREATING EXTENDED DIRECTORY STRUCTURE
+[INFO] ======================================================================
+[INFO]   📁 Created tools/
+[INFO]   📁 Created tools/symbolic/
+[INFO]   📁 Created tools/numerical/
+[INFO]   📁 Created tools/formal/
+[INFO]   📁 Created tools/visualization/
+[INFO]   📁 Created tools/llm_providers/
+[INFO]   📁 Created tools/transformers/
+[INFO]   📁 Created tools/validation/
+[INFO]   📁 Created agents/
+[INFO]   📁 Created agents/base/
+[INFO]   📁 Created agents/specialists/
+[INFO]   📁 Created agents/coordinators/
+[INFO]   📁 Created agents/workflows/
+[INFO]   📁 Created agents/memory/
+[INFO]   📁 Created agents/learning/
+[INFO]   📁 Created tests/
+[INFO]   📁 Created tests/unit/test_ner/
+[INFO]   📁 Created tests/unit/test_transformers/
+[INFO]   📁 Created tests/unit/test_llm/
+[INFO]   📁 Created tests/unit/test_agents/
+[INFO]   📁 Created tests/unit/test_tools/
+[INFO]   📁 Created tests/integration/
+[INFO]   📁 Created tests/e2e/
+[INFO]   📁 Created requirements/
+[INFO]   📁 Created custom_ner/queries/tableau/transformer/
+[INFO]   📁 Created custom_ner/queries/tableau/hybrid/
+[INFO]   📁 Created datasets/queries/tableau/transformer/
+[INFO]   📁 Created datasets/queries/tableau/llm/
+[INFO]   📁 Created datasets/queries/tableau/agent/
+[INFO]   📁 Created models/queries/tableau/transformers/
+[INFO]   📁 Created models/queries/tableau/llm/
+[INFO]   📁 Created models/queries/tableau/agents/
+[INFO]   📁 Created experiments/transformers/
+[INFO]   📁 Created experiments/llm/
+[INFO]   📁 Created experiments/agents/
+[INFO]   📁 Created experiments/hybrid/
+[INFO]   📁 Created scripts_/migration/
+[INFO]   ✓ Created tools/__init__.py
+[INFO]   ✓ Created agents/__init__.py
+[INFO]   ✓ Created tests/__init__.py
+[INFO] ✅ Directory structure created
+
+[INFO] ======================================================================
+[INFO] CREATING CONFIGURATION FILES
+[INFO] ======================================================================
+[INFO]   ✓ Created config/transformer_config.py
+[INFO]   ✓ Created config/llm_config.py
+[INFO]   ✓ Created config/agent_config.py
+[INFO]   ✓ Created config/tool_config.py
+[INFO] ✅ Configuration files created
+
+[INFO] ======================================================================
+[INFO] CREATING CORE EXTENSIONS
+[INFO] ======================================================================
+[INFO]   ✓ Created core/preprocessing/transformer_prep.py
+[INFO]   ✓ Created core/preprocessing/llm_prep.py
+[INFO]   ✓ Created core/training/training_transformer.py
+[INFO] ✅ Core extensions created
+
+[INFO] ======================================================================
+[INFO] CREATING TOOLS DIRECTORY
+[INFO] ======================================================================
+[INFO]   ✓ Created tools/symbolic/sympy_wrapper.py
+[INFO]   ✓ Created tools/llm_providers/base_provider.py
+[INFO]   ✓ Created tools/llm_providers/openai_provider.py
+[INFO]   ✓ Created tools/validation/symbolic_validator.py
+[INFO] ✅ Tools directory created
+
+[INFO] ======================================================================
+[INFO] CREATING AGENTS DIRECTORY
+[INFO] ======================================================================
+[INFO]   ✓ Created agents/base/agent.py
+[INFO]   ✓ Created agents/specialists/parser_agent.py
+[INFO]   ✓ Created agents/workflows/hybrid_workflow.py
+[INFO] ✅ Agents directory created
+
+[INFO] ======================================================================
+[INFO] CREATING MAPPING EXTENSIONS
+[INFO] ======================================================================
+[INFO]   ✓ Created mappings/transformer_mapping.py
+[INFO]   ✓ Created mappings/llm_mapping.py
+[INFO]   ✓ Created mappings/agent_mapping.py
+[INFO]   ✓ Created mappings/hybrid_mapping.py
+[INFO] ✅ Mapping extensions created
+
+[INFO] ======================================================================
+[INFO] CREATING REQUIREMENTS FILES
+[INFO] ======================================================================
+[INFO]   ✓ Created requirements/base.txt
+[INFO]   ✓ Created requirements/ner.txt
+[INFO]   ✓ Created requirements/transformers.txt
+[INFO]   ✓ Created requirements/llm.txt
+[INFO]   ✓ Created requirements/agents.txt
+[INFO]   ✓ Created requirements/tools.txt
+[INFO]   ✓ Created requirements/dev.txt
+[INFO] ✅ Requirements files created
+
+[INFO] ======================================================================
+[INFO] CREATING EXAMPLE SCRIPTS
+[INFO] ======================================================================
+[INFO]   ✓ Created examples/transformer_example.py
+[INFO]   ✓ Created examples/llm_example.py
+[INFO]   ✓ Created examples/agent_example.py
+[INFO]   ✓ Created examples/hybrid_example.py
+[INFO] ✅ Example scripts created
+
+[INFO] ======================================================================
+[INFO] CREATING ENVIRONMENT TEMPLATE
+[INFO] ======================================================================
+[INFO]   ✓ Created .env.example
+[INFO] ✅ Environment template created
+
+[INFO] ======================================================================
+[INFO] CREATING DOCUMENTATION
+[INFO] ======================================================================
+[INFO]   ✓ Created docs/architecture.md
+[INFO] ✅ Documentation created
+
+[INFO] ======================================================================
+[INFO] CREATING UPDATED README
+[INFO] ======================================================================
+[INFO]   ✓ Created README.md
+[INFO] ✅ README updated
+
+[INFO] ======================================================================
+[INFO] UPDATING .GITIGNORE
+[INFO] ======================================================================
+[INFO]   ✓ Created new .gitignore
+[INFO] ✅ .gitignore updated

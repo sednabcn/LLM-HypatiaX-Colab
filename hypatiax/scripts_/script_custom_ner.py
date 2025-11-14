@@ -10,8 +10,8 @@ def get_ner_component(domain,sub_domain,type,python_version):
     return output
 
 if __name__=='__main__':
-     get_ner_component('queries','tableau','desc','python3.11')
-     get_ner_component('queries','tableau','formulas','python3.11')
-     get_ner_component('queries','tableau','both','python3.11')
+     get_ner_component('queries','tableau','desc','python3.12')
+     get_ner_component('queries','tableau','formulas','python3.12')
+     get_ner_component('queries','tableau','both','python3.12')
    
      

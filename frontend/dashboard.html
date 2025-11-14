@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - HypatiaX</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🔬 HypatiaX</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="ner-demo.html">NER Demo</a></li>
+                <li><a href="docs.html">Docs</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+        <div class="container">
+            <h1>System Dashboard</h1>
+            <p>Real-time monitoring and analytics</p>
+        </div>
+    </section>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard-content">
+        <div class="container">
+            <!-- Metrics Row -->
+            <div class="metrics-row">
+                <div class="metric-card">
+                    <h4>Active Models</h4>
+                    <p class="metric-value" id="active-models">8</p>
+                    <span class="metric-change positive">+2 this week</span>
+                </div>
+                <div class="metric-card">
+                    <h4>API Requests</h4>
+                    <p class="metric-value" id="api-requests">1,234</p>
+                    <span class="metric-change positive">+15%</span>
+                </div>
+                <div class="metric-card">
+                    <h4>Avg Response Time</h4>
+                    <p class="metric-value" id="response-time">125ms</p>
+                    <span class="metric-change positive">-10ms</span>
+                </div>
+                <div class="metric-card">
+                    <h4>Error Rate</h4>
+                    <p class="metric-value" id="error-rate">0.2%</p>
+                    <span class="metric-change negative">+0.1%</span>
+                </div>
+            </div>
+
+            <!-- Models Section -->
+            <div class="dashboard-section">
+                <h2>Model Status</h2>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Model Name</th>
+                                <th>Status</th>
+                                <th>Accuracy</th>
+                                <th>Last Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="models-table">
+                            <tr>
+                                <td>ner_tableau_desc</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td>95.2%</td>
+                                <td>2 hours ago</td>
+                                <td>
+                                    <button class="btn-small btn-primary">View</button>
+                                    <button class="btn-small btn-secondary">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ner_tableau_formulas</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td>93.8%</td>
+                                <td>5 hours ago</td>
+                                <td>
+                                    <button class="btn-small btn-primary">View</button>
+                                    <button class="btn-small btn-secondary">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ner_tableau</td>
+                                <td><span class="badge badge-warning">Training</span></td>
+                                <td>91.5%</td>
+                                <td>1 day ago</td>
+                                <td>
+                                    <button class="btn-small btn-primary">View</button>
+                                    <button class="btn-small btn-secondary">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="dashboard-section">
+                <h2>Recent Activity</h2>
+                <div class="activity-list" id="activity-list">
+                    <div class="activity-item">
+                        <span class="activity-icon">✅</span>
+                        <div class="activity-content">
+                            <p><strong>Model Training Completed</strong></p>
+                            <p class="activity-time">ner_tableau_desc - 2 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-icon">📊</span>
+                        <div class="activity-content">
+                            <p><strong>Dataset Updated</strong></p>
+                            <p class="activity-time">training_spacy - 5 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-icon">🔄</span>
+                        <div class="activity-content">
+                            <p><strong>Version Snapshot Created</strong></p>
+                            <p class="activity-time">snapshot_42 - 1 day ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 HypatiaX. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

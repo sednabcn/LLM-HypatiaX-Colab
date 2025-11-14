@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NER Demo - HypatiaX</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🔬 HypatiaX</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="ner-demo.html" class="active">NER Demo</a></li>
+                <li><a href="docs.html">Docs</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Demo Section -->
+    <section class="demo-section">
+        <div class="container">
+            <h1>Named Entity Recognition Demo</h1>
+            <p>Extract entities from Tableau queries in real-time</p>
+
+            <!-- Model Selection -->
+            <div class="demo-controls">
+                <label for="model-select">Select Model:</label>
+                <select id="model-select" class="form-select">
+                    <option value="ner_tableau_desc">NER Tableau Description</option>
+                    <option value="ner_tableau_formulas">NER Tableau Formulas</option>
+                    <option value="ner_tableau">NER Tableau (Combined)</option>
+                </select>
+            </div>
+
+            <!-- Input Area -->
+            <div class="demo-input">
+                <h3>Input Text</h3>
+                <textarea 
+                    id="input-text" 
+                    class="demo-textarea" 
+                    placeholder="Enter your Tableau query here...
+Example: Show me the sum of sales by region for last quarter"
+                    rows="6"
+                ></textarea>
+                
+                <div class="demo-buttons">
+                    <button id="extract-btn" class="btn btn-primary">
+                        🎯 Extract Entities
+                    </button>
+                    <button id="clear-btn" class="btn btn-secondary">
+                        🗑️ Clear
+                    </button>
+                    <button id="example-btn" class="btn btn-secondary">
+                        📝 Load Example
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Processing...</p>
+            </div>
+
+            <!-- Results Area -->
+            <div id="results-section" class="demo-results hidden">
+                <h3>Extracted Entities</h3>
+                
+                <!-- Highlighted Text -->
+                <div class="result-card">
+                    <h4>Annotated Text</h4>
+                    <div id="highlighted-text" class="highlighted-text"></div>
+                </div>
+
+                <!-- Entity List -->
+                <div class="result-card">
+                    <h4>Entity List</h4>
+                    <div id="entity-list" class="entity-list"></div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="result-card">
+                    <h4>Statistics</h4>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Entities:</span>
+                            <span id="total-entities" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Processing Time:</span>
+                            <span id="processing-time" class="stat-value">0ms</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Confidence:</span>
+                            <span id="confidence" class="stat-value">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Raw JSON -->
+                <div class="result-card">
+                    <h4>Raw JSON Response</h4>
+                    <pre id="raw-json" class="json-display"></pre>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error-message" class="error-message hidden"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 HypatiaX. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/ner-demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "technology": "transformers",
+  "description": "Transformer model experiments (BERT/T5) for expression mapping",
+  "default_metrics": [
+    "bleu_score",
+    "accuracy",
+    "training_time",
+    "inference_time",
+    "model_size"
+  ],
+  "common_tags": [
+    "bert",
+    "t5",
+    "fine-tuning",
+    "seq2seq"
+  ]
+}

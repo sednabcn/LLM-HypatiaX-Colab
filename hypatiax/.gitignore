@@ -1,0 +1,26 @@
+# Extended HypatiaX patterns
+__pycache__/
+*.py[cod]
+.env
+.env.local
+logs/
+*.log
+*.bin
+*.pt
+*.pth
+models/queries/tableau/transformers/*/checkpoint-*/
+backup_*/
+*.bak
+.vscode/
+.idea/
+.DS_Store
+.coverage
+htmlcov/
+.pytest_cache/
+# API Keys and Secrets
+.env
+.api_keys.encrypted
+.encryption.key
+config/.env
+config/.api_keys.encrypted
+config/.encryption.key

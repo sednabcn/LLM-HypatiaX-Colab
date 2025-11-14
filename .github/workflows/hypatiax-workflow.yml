@@ -1,0 +1,58 @@
+name: HypatiaX Workflow
+
+on:
+  push:
+    branches: [ master, develop ]
+    paths:
+      - 'hypatiax/**'
+      - 'tests/**'
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      modules:
+        description: 'Modules to run (space-separated)'
+        required: false
+      python_version:
+        description: 'Python version'
+        type: choice
+        options: ['3.12', '3.13']
+        default: '3.12'
+
+jobs:
+  workflow-test:
+    name: Run Workflow - Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ${{ github.event.inputs.python_version && fromJSON(format('["{0}"]', github.event.inputs.python_version)) || fromJSON('["3.12", "3.13"]') }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        PYVERSION=$(python -c "import sys; print(f'{sys.version_info.major}{sys.version_info.minor}')")
+        pip install -r requirements-py${PYVERSION}.txt || pip install -r requirements.txt
+        pip install -e .
+    
+    - name: Run workflow
+      run: |
+        if [ -f ".github/scripts/workflow_runner.py" ]; then
+          python .github/scripts/workflow_runner.py ${{ github.event.inputs.modules }}
+        else
+          echo "No workflow runner found"
+        fi
+    
+    - name: Upload results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: workflow-results-py${{ matrix.python-version }}
+        path: workflow_reports/

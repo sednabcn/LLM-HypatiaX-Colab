@@ -8,7 +8,7 @@ def patterns_rules(data,ind):
         stopwords_desc= ['\\','Iri','Se','C','Sepal','ica','Length',"'s",'.',"'", 's', 'a','(',')','Petal','Distinct',"Width",',',"'","[","]"]
         stopwords_formulas=['\\','Iri','Se','C','Sepal','ica','Length',"'s",'.',"'", 's', 'a','(',')','Petal','Distinct','distinct',"Width",',','BY','by','from',"[","]"]
         stopwords=[stopwords_desc,stopwords_formulas]
-        if ind=="S":
+        if ind=="D":
             return Generation_custom_tableau_patterns(data,stopwords).rules_tableau_desc
         elif ind=="F":
             return Generation_custom_tableau_patterns(data,stopwords).rules_tableau_formulas
@@ -20,7 +20,7 @@ if __name__=='__main__':
       from importlib import resources
       path_data=resources.files('hypatiax.datasets.queries.tableau.training').joinpath('formulas.xlsx')
       
-      for ind in ["S","F"]:
+      for ind in ["D","F"]:
            print(patterns_rules(path_data,ind))
            print("============================")
 

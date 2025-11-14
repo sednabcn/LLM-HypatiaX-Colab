@@ -4,7 +4,7 @@ from hypatiax.utils.files_local import load
 import pandas as pd
 #Test1:
 
-dir_path=resources.files('hypatiax.datasets.queries').joinpath('training_spacy')
+dir_path=resources.files('hypatiax.datasets.queries.tableau').joinpath('training_spacy')
 
 if os.path.exists(dir_path):
     n=1
@@ -12,16 +12,18 @@ if os.path.exists(dir_path):
         for filename in files:
               if filename.lower().endswith('.json') or \
               filename.lower().endswith('.spacy'):
-                 df = load(filename,'entity')
+                 full_path = os.path.join(root, filename)
+                 df = load(full_path,style='entity')
                  if df is not None:
                     for item in df:
                         print(item)
                     print("=================================")
                     print(f"Test{n} passed")
-                    print("=================================") 
+                    print("=================================")
+                    n += 1
                  else:
                     print(f"Test{n} failed to load data.")
-              n += 1
+                    n += 1
 else:
     print("Directory not found")
 

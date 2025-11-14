@@ -1,0 +1,849 @@
+{
+  "entry_points": [
+    {
+      "path": "auto_migrate.py",
+      "type": "script",
+      "docstring": "Smart Auto-Migrate System with Automatic Backup\n================================================\nKeeps ALL older versions with timestamps\nAutomatic backup before/after file operations\nAuto-restore on validation failure\n\nFeatures:\n- Tracks all file/directory changes\n- Creates timestamped backups automatically\n- Validates content (JSONL, JSON, NER models)\n- Auto-restores from last good backup if broken\n- Decorator & context manager for automatic protection\n- Version history with rollback capability"
+    },
+    {
+      "path": "custom_ner/rule_file_analyzer.py",
+      "type": "script",
+      "docstring": "HypatiaX Rule File Analyzer\n============================\nAnalyzes the rule file versioning system and identifies the disconnect\nbetween expected and actual rule file naming conventions.\n\nThis script helps solve the BLOCKER identified in the morning assessment."
+    },
+    {
+      "path": "demo/engine.py",
+      "type": "script",
+      "docstring": "HypatiaX Engine - Core Processing Logic\nHandles NER model integration, entity extraction, and formula generation"
+    },
+    {
+      "path": "demo/ui.py",
+      "type": "script",
+      "docstring": "HypatiaX UI Components - Reusable UI building blocks\nProvides rich console output, visualizations, and interactive components"
+    },
+    {
+      "path": "demo/examples.py",
+      "type": "script",
+      "docstring": "HypatiaX Examples - Advanced example management and generation\nHandles example datasets, validation, and benchmarking"
+    },
+    {
+      "path": "demo/demo_web_api.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "demo/demo_examples.py",
+      "type": "script",
+      "docstring": "HypatiaX Demo Examples\nCurated examples for demonstrating different capabilities\n\nCurated example library\n50+ example queries organized by category\nDescription, formula, and combined examples\nReal-world use cases\nEasy to access programmatically"
+    },
+    {
+      "path": "demo/config.py",
+      "type": "script",
+      "docstring": "HypatiaX Demo Configuration\nCentralized configuration for all demo components\nEasy to update and maintain"
+    },
+    {
+      "path": "demo/demo_interactive.py",
+      "type": "script",
+      "docstring": "HypatiaX Interactive Demo\nDemonstrates NER capabilities for Tableau query processing\n\nMain command-line demo\n\nInteractive menu system\nMultiple demo modes (desc, formulas, both)\nBatch processing\nModel comparison\nWorks with OR without trained models"
+    },
+    {
+      "path": "datasets/hypatiax_dataset.py",
+      "type": "script",
+      "docstring": "HypatiaX Complete Dataset Generator\nGenerates comprehensive datasets for DeFi formula testing and validation"
+    },
+    {
+      "path": "datasets/dataset-generator.py",
+      "type": "script",
+      "docstring": "HypatiaX Complete Dataset Generator\nGenerates comprehensive datasets for DeFi formula testing and validation"
+    },
+    {
+      "path": "experiments/experiment_tracker.py",
+      "type": "script",
+      "docstring": "Experiment tracking utility for HypatiaX\nRegisters and tracks experiments across all technologies"
+    },
+    {
+      "path": "utils/path_manager.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "utils/utils.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "core/run_complete_pipeline.py",
+      "type": "script",
+      "docstring": "MASTER INTEGRATION SCRIPT\nExecutes complete pipeline from data preparation to deployment\nAll steps: Preprocessing \u2192 Training \u2192 Evaluation \u2192 Deployment"
+    },
+    {
+      "path": "config/google_credentials_manager.py",
+      "type": "script",
+      "docstring": "Google Credentials Manager for HypatiaX\nHandles Google Cloud API keys and OAuth credentials\nLocation: hypatiax/config/google_credentials_manager.py"
+    },
+    {
+      "path": "config/api_key_management.py",
+      "type": "script",
+      "docstring": "API Key Manager for HypatiaX\nSecure storage, retrieval, and validation of API keys\nLocation: hypatiax/config/api_key_manager.py"
+    },
+    {
+      "path": "config/config.py",
+      "type": "script",
+      "docstring": "Universal configuration for HypatiaX project.\nWorks in: Local development, GitHub Actions, Docker, Cloud environments."
+    },
+    {
+      "path": "mappings/mapping_.py",
+      "type": "script",
+      "docstring": "Improved Description-to-Formula Mapping System\nSupports multiple strategies: vocab mapping, sentence mapping, regex, NER-based, and ML models"
+    },
+    {
+      "path": "mappings/modern-llm-first-mapper.py",
+      "type": "script",
+      "docstring": "Modern LLM-First Formula Mapping (2025 Trends)\nPrimary: Few-shot prompting with GPT-4/Claude\nFallback: Fine-tuned smaller models for cost/latency"
+    },
+    {
+      "path": "mappings/mapping_hybrid.py",
+      "type": "script",
+      "docstring": "Hybrid Formula Mapping System\nIntegrates ALL techniques: spaCy NER, Transformers, RAG, LLM, Rule-based, Ensemble"
+    },
+    {
+      "path": "mappings/mapping_plus.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "scripts_/run_test_parallel_code_integration.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "scripts_/ner_test_simultion_package.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "scripts_/script_custom_ner.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "scripts_/run_time_code.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "scripts_/script_custom_entities.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "scripts_/script_custom_patterns.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "scripts_/run_time_bundle_code.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "scripts_/run_time_code_seq.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "scripts_/run_time_parallel_code.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "scripts_/script_combined_data.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "examples/modern-llm-first-mapper.py",
+      "type": "script",
+      "docstring": "Modern LLM-First Formula Mapping (2025 Trends)\nPrimary: Few-shot prompting with GPT-4/Claude\nFallback: Fine-tuned smaller models for cost/latency"
+    },
+    {
+      "path": "examples/llm_example.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "examples/hybrid_example.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "examples/agent_example.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "examples/transformer_example.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "custom_ner/queries/tableau/custom_tableau_components.py",
+      "type": "script",
+      "docstring": "Custom Tableau Components with Auto-Migration\nLoads NER rules with automatic change detection and backup for combined tableau rules."
+    },
+    {
+      "path": "custom_ner/queries/tableau/custom_tableau_formulas_components.py",
+      "type": "script",
+      "docstring": "Custom Tableau Formulas Components with Auto-Migration\nLoads NER rules with automatic change detection and backup."
+    },
+    {
+      "path": "tools/visualization/hypatiax_visualizer.py",
+      "type": "script",
+      "docstring": "HypatiaX Visualization Scripts\nBeautiful, professional charts for DeFi analysis"
+    },
+    {
+      "path": "tools/visualization/hypatiax-visualization-scripts.py",
+      "type": "script",
+      "docstring": "HypatiaX Visualization Scripts\nBeautiful, professional charts for DeFi analysis"
+    },
+    {
+      "path": "demo/update/compare_old_vs_new.py",
+      "type": "script",
+      "docstring": "Comparison Demo: Old Sequential Pipeline vs Modern LLM (2025)\n============================================================\nShows side-by-side comparison to demonstrate why LLMs are better.\n\nUsage:\n    python compare_old_vs_new.py"
+    },
+    {
+      "path": "demo/update/modern_llm_mapper.py",
+      "type": "script",
+      "docstring": "Modern LLM-Based Formula Mapper (2025 Approach)\n==============================================\nUses GPT-4/Claude API with few-shot prompting for formula generation.\nNO training required. 95%+ accuracy out of the box.\n\nUsage:\n    python modern_llm_mapper.py --input \"calculate area of circle\"\n    python modern_llm_mapper.py --batch test_sentences.txt\n    python modern_llm_mapper.py --demo"
+    },
+    {
+      "path": "demo/complete-system-guide/custom_demos/batch_processing_demo.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "demo/complete-system-guide/custom_demos/simple_clidemo.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "demo/complete-system-guide/integration-patterns/pattern5.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "datasets/queries/normalize/normalize_data.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "datasets/queries/normalize/test.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "datasets/queries/agent/test.py",
+      "type": "script",
+      "docstring": "Test module for data processing."
+    },
+    {
+      "path": "datasets/queries/agent/agent_queries.py",
+      "type": "script",
+      "docstring": "AGENT processing for queries domain."
+    },
+    {
+      "path": "datasets/queries/analytics/test.py",
+      "type": "script",
+      "docstring": "Test module for data processing."
+    },
+    {
+      "path": "datasets/queries/analytics/analytics_data.py",
+      "type": "script",
+      "docstring": "Analytics operations for queries data.\nProvides visualization and metrics computation."
+    },
+    {
+      "path": "datasets/queries/llm/test.py",
+      "type": "script",
+      "docstring": "Test module for data processing."
+    },
+    {
+      "path": "datasets/queries/llm/llm_queries.py",
+      "type": "script",
+      "docstring": "LLM processing for queries domain."
+    },
+    {
+      "path": "datasets/queries/transformer/test.py",
+      "type": "script",
+      "docstring": "Test module for data processing."
+    },
+    {
+      "path": "datasets/queries/transformer/transformer_queries.py",
+      "type": "script",
+      "docstring": "TRANSFORMER processing for queries domain."
+    },
+    {
+      "path": "experiments/ner/queries/tableau/custom_ner/entities_mapping.py",
+      "type": "script",
+      "docstring": "Strategy 1 - Point 2 & 3 Implementation\nPoint 2: Entities[Desc] \u2192 Entities[Formula] (Entity Mapping)\nPoint 3: Entities[Formula] \u2192 Formula String (Formula Generation)"
+    },
+    {
+      "path": "experiments/ner/queries/tableau/pipeline/sequential_pipeline.py",
+      "type": "script",
+      "docstring": "Strategy 1: Sequential Pipeline for Description \u2192 Formula Generation\nInput: Natural language description\nOutput: Mathematical formula\n\nPipeline Steps:\n1. Description \u2192 Entities[Desc] (Supervised NER)\n2. Formulas \u2192 Entities[Formula] (Supervised NER for training data)\n3. (Desc, Entities[Desc]) \u2192 Mapping \u2192 (Formula, Entities[Formula]) (Supervised)\n4. Entities[Formula] \u2192 Formula Generation (Classification/Rule-based)\n\nEach step is evaluated independently with metrics."
+    },
+    {
+      "path": "experiments/ner/queries/tableau/pipeline/joint_training.py",
+      "type": "script",
+      "docstring": "Strategy 2: Joint Training on (Description, Formula) Pairs\nEnd-to-end training with realistic error propagation"
+    },
+    {
+      "path": "patterns/queries/tableau/test_create_ruler_tableau.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "patterns/queries/tableau/test_rules_tableau_patterns.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "core/deployment/evaluation_unified.py",
+      "type": "script",
+      "docstring": "Unified Evaluation Framework\nEvaluates all models (spaCy, Transformer, RAG, LLM, Ensemble)"
+    },
+    {
+      "path": "core/deployment/evaluate_model.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "core/deployment/deployment-evaluate_model.py",
+      "type": "script",
+      "docstring": "Updated Model Evaluation for Deployment\nEvaluates formula accuracy, not just NER entities"
+    },
+    {
+      "path": "core/deployment/deployment_api.py",
+      "type": "script",
+      "docstring": "REST API for Formula Generation\nProvides endpoints for real-time formula mapping"
+    },
+    {
+      "path": "core/deployment/deployment_pipeline.py",
+      "type": "script",
+      "docstring": "Deployment Pipeline for Formula Mapping Models\nHandles model serving, API creation, and production deployment"
+    },
+    {
+      "path": "core/deployment/deployment_batch.py",
+      "type": "script",
+      "docstring": "Batch Processing for Formula Generation\nProcess large batches of descriptions efficiently"
+    },
+    {
+      "path": "core/preprocessing/preprocessing_pipeline.py",
+      "type": "script",
+      "docstring": "Data Preprocessing Pipeline for Formula Mapping\nHandles data loading, cleaning, augmentation, and format conversion"
+    },
+    {
+      "path": "core/training/training_transformer_.py",
+      "type": "script",
+      "docstring": "Modern Transformer Training (2025 Best Practices)\nUses: LoRA fine-tuning on modern open-source models\nReplaces: Full fine-tuning of outdated models like T5-small"
+    },
+    {
+      "path": "core/training/training_llm.py",
+      "type": "script",
+      "docstring": "Modern LLM Training for Formula Mapping (2025)\nPrimary approach: Few-shot prompting with prompt optimization\nFeatures:\n- Prompt caching for cost reduction\n- Batch processing with rate limiting\n- Automatic prompt optimization\n- Structured output parsing\n- Multi-provider support (OpenAI, Anthropic, local LLMs)"
+    },
+    {
+      "path": "core/training/training_tranformer_.py",
+      "type": "script",
+      "docstring": "Transformer-based Training for Formula Mapping\nUses BERT/T5 models via Hugging Face Transformers"
+    },
+    {
+      "path": "core/training/training_rag.py",
+      "type": "script",
+      "docstring": "Modern RAG System (2025 Best Practices)\nUses: Vector DB + Reranking + LLM Generation (not just retrieval)\nReplaces: Simple vector search with voting"
+    },
+    {
+      "path": "core/training/training_rag_.py",
+      "type": "script",
+      "docstring": "RAG (Retrieval Augmented Generation) Training for Formula Mapping\nUses vector embeddings and similarity search"
+    },
+    {
+      "path": "core/training/training_llm_.py",
+      "type": "script",
+      "docstring": "LLM-based Formula Mapping\nUses GPT/Claude APIs with few-shot prompting"
+    },
+    {
+      "path": "core/evaluation/testing_model.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/custom_ner/rule_file_analyzer.py",
+      "type": "script",
+      "docstring": "HypatiaX Rule File Analyzer\n============================\nAnalyzes the rule file versioning system and identifies the disconnect\nbetween expected and actual rule file naming conventions.\n\nThis script helps solve the BLOCKER identified in the morning assessment."
+    },
+    {
+      "path": "backup_before_extension/demo/engine.py",
+      "type": "script",
+      "docstring": "HypatiaX Engine - Core Processing Logic\nHandles NER model integration, entity extraction, and formula generation"
+    },
+    {
+      "path": "backup_before_extension/demo/ui.py",
+      "type": "script",
+      "docstring": "HypatiaX UI Components - Reusable UI building blocks\nProvides rich console output, visualizations, and interactive components"
+    },
+    {
+      "path": "backup_before_extension/demo/examples.py",
+      "type": "script",
+      "docstring": "HypatiaX Examples - Advanced example management and generation\nHandles example datasets, validation, and benchmarking"
+    },
+    {
+      "path": "backup_before_extension/demo/demo_web_api.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/demo/demo_examples.py",
+      "type": "script",
+      "docstring": "HypatiaX Demo Examples\nCurated examples for demonstrating different capabilities\n\nCurated example library\n50+ example queries organized by category\nDescription, formula, and combined examples\nReal-world use cases\nEasy to access programmatically"
+    },
+    {
+      "path": "backup_before_extension/demo/config.py",
+      "type": "script",
+      "docstring": "HypatiaX Demo Configuration\nCentralized configuration for all demo components\nEasy to update and maintain"
+    },
+    {
+      "path": "backup_before_extension/demo/demo_interactive.py",
+      "type": "script",
+      "docstring": "HypatiaX Interactive Demo\nDemonstrates NER capabilities for Tableau query processing\n\nMain command-line demo\n\nInteractive menu system\nMultiple demo modes (desc, formulas, both)\nBatch processing\nModel comparison\nWorks with OR without trained models"
+    },
+    {
+      "path": "backup_before_extension/experiments/experiment_tracker.py",
+      "type": "script",
+      "docstring": "Experiment tracking utility for HypatiaX\nRegisters and tracks experiments across all technologies"
+    },
+    {
+      "path": "backup_before_extension/utils/path_manager.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/utils/utils.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/scripts_/run_test_parallel_code_integration.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/scripts_/ner_test_simultion_package.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/scripts_/script_custom_ner.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/scripts_/run_time_code.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/scripts_/script_custom_entities.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/scripts_/script_custom_patterns.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/scripts_/run_time_bundle_code.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/scripts_/run_time_code_seq.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/scripts_/run_time_parallel_code.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/scripts_/script_combined_data.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/custom_ner/queries/tableau/custom_tableau_components.py",
+      "type": "script",
+      "docstring": "Custom Tableau Components with Auto-Migration\nLoads NER rules with automatic change detection and backup for combined tableau rules."
+    },
+    {
+      "path": "backup_before_extension/custom_ner/queries/tableau/custom_tableau_formulas_components.py",
+      "type": "script",
+      "docstring": "Custom Tableau Formulas Components with Auto-Migration\nLoads NER rules with automatic change detection and backup."
+    },
+    {
+      "path": "backup_before_extension/demo/update/compare_old_vs_new.py",
+      "type": "script",
+      "docstring": "Comparison Demo: Old Sequential Pipeline vs Modern LLM (2025)\n============================================================\nShows side-by-side comparison to demonstrate why LLMs are better.\n\nUsage:\n    python compare_old_vs_new.py"
+    },
+    {
+      "path": "backup_before_extension/demo/update/modern_llm_mapper.py",
+      "type": "script",
+      "docstring": "Modern LLM-Based Formula Mapper (2025 Approach)\n==============================================\nUses GPT-4/Claude API with few-shot prompting for formula generation.\nNO training required. 95%+ accuracy out of the box.\n\nUsage:\n    python modern_llm_mapper.py --input \"calculate area of circle\"\n    python modern_llm_mapper.py --batch test_sentences.txt\n    python modern_llm_mapper.py --demo"
+    },
+    {
+      "path": "backup_before_extension/demo/complete-system-guide/custom_demos/batch_processing_demo.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/demo/complete-system-guide/custom_demos/simple_clidemo.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/demo/complete-system-guide/integration-patterns/pattern5.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/datasets/queries/normalize/normalize_data.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/datasets/queries/normalize/test.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/experiments/ner/queries/tableau/custom_ner/entities_mapping.py",
+      "type": "script",
+      "docstring": "Strategy 1 - Point 2 & 3 Implementation\nPoint 2: Entities[Desc] \u2192 Entities[Formula] (Entity Mapping)\nPoint 3: Entities[Formula] \u2192 Formula String (Formula Generation)"
+    },
+    {
+      "path": "backup_before_extension/experiments/ner/queries/tableau/pipeline/sequential_pipeline.py",
+      "type": "script",
+      "docstring": "Strategy 1: Sequential Pipeline for Description \u2192 Formula Generation\nInput: Natural language description\nOutput: Mathematical formula\n\nPipeline Steps:\n1. Description \u2192 Entities[Desc] (Supervised NER)\n2. Formulas \u2192 Entities[Formula] (Supervised NER for training data)\n3. (Desc, Entities[Desc]) \u2192 Mapping \u2192 (Formula, Entities[Formula]) (Supervised)\n4. Entities[Formula] \u2192 Formula Generation (Classification/Rule-based)\n\nEach step is evaluated independently with metrics."
+    },
+    {
+      "path": "backup_before_extension/experiments/ner/queries/tableau/pipeline/joint_training.py",
+      "type": "script",
+      "docstring": "Strategy 2: Joint Training on (Description, Formula) Pairs\nEnd-to-end training with realistic error propagation"
+    },
+    {
+      "path": "backup_before_extension/patterns/queries/tableau/test_create_ruler_tableau.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/patterns/queries/tableau/test_rules_tableau_patterns.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/core/deployment/evaluate_model.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/core/evaluation/testing_model.py",
+      "type": "script",
+      "docstring": "No description available"
+    },
+    {
+      "path": "setup.py",
+      "type": "package_entry",
+      "docstring": "Package entry points defined in setup.py"
+    }
+  ],
+  "test_files": [
+    {
+      "path": "tests/unit/test_entity_formulas.py",
+      "name": "test_entity_formulas",
+      "docstring": "Test entity formulas with proper path management.\nWorks from any location - no hardcoded paths!"
+    },
+    {
+      "path": "tests/unit/test_description_model.py",
+      "name": "test_description_model",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/unit/test_comb_multi_task_model.py",
+      "name": "test_comb_multi_task_model",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/unit/test_config.py",
+      "name": "test_config",
+      "docstring": "Unit tests for configuration system.\nTests paths, model configs, and constants."
+    },
+    {
+      "path": "tests/unit/test_entity_desc.py",
+      "name": "test_entity_desc",
+      "docstring": "Test entity description with proper path management.\nWorks from any location - no hardcoded paths!"
+    },
+    {
+      "path": "tests/unit/test_formulas_model.py",
+      "name": "test_formulas_model",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/unit/test_rename_files.py",
+      "name": "test_rename_files",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_entity_formulas.py",
+      "name": "test_entity_formulas",
+      "docstring": "Test entity formulas with proper path management.\nWorks from any location - no hardcoded paths!"
+    },
+    {
+      "path": "tests/integration/test_desc_formulas.py",
+      "name": "test_desc_formulas",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_F_ner_tableau_formulas.py",
+      "name": "test_F_ner_tableau_formulas",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_training_spacy.py",
+      "name": "test_training_spacy",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_ner_formulas.py",
+      "name": "test_ner_formulas",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_testing_spacy.py",
+      "name": "test_testing_spacy",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_loading_formulas_test.py",
+      "name": "test_loading_formulas_test",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_desc.py",
+      "name": "test_desc",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_update_labels.py",
+      "name": "test_update_labels",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_tableau_formulas.py",
+      "name": "test_tableau_formulas",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_loading_data_testing_spacy.py",
+      "name": "test_loading_data_testing_spacy",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_runner_multi.py",
+      "name": "test_runner_multi",
+      "docstring": "Test Runner for HypatiaX Project\nDiscovers and runs all test files in the project structure"
+    },
+    {
+      "path": "tests/integration/test_entity_desc.py",
+      "name": "test_entity_desc",
+      "docstring": "Test entity description with proper path management.\nWorks from any location - no hardcoded paths!"
+    },
+    {
+      "path": "tests/integration/test_tableau.py",
+      "name": "test_tableau",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_formulas.py",
+      "name": "test_formulas",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_runner.py",
+      "name": "test_runner",
+      "docstring": "Test Runner for HypatiaX Project\nDiscovers and runs all test files in the project structure"
+    },
+    {
+      "path": "tests/integration/test_loading_formulas_combined_test.py",
+      "name": "test_loading_formulas_combined_test",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_normalize.py",
+      "name": "test_normalize",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_tableau_data_csv.py",
+      "name": "test_tableau_data_csv",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_ner_desc.py",
+      "name": "test_ner_desc",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_F_ner_tableau_desc.py",
+      "name": "test_F_ner_tableau_desc",
+      "docstring": "No description available"
+    },
+    {
+      "path": "tests/integration/test_tableau_desc.py",
+      "name": "test_tableau_desc",
+      "docstring": "No description available"
+    }
+  ],
+  "examples": [
+    {
+      "path": "demo/examples.py",
+      "docstring": "HypatiaX Examples - Advanced example management and generation\nHandles example datasets, validation, and benchmarking"
+    },
+    {
+      "path": "demo/demo_examples.py",
+      "docstring": "HypatiaX Demo Examples\nCurated examples for demonstrating different capabilities\n\nCurated example library\n50+ example queries organized by category\nDescription, formula, and combined examples\nReal-world use cases\nEasy to access programmatically"
+    },
+    {
+      "path": "examples/training_example.py",
+      "docstring": "No description available"
+    },
+    {
+      "path": "examples/llm_example.py",
+      "docstring": "No description available"
+    },
+    {
+      "path": "examples/hybrid_example.py",
+      "docstring": "No description available"
+    },
+    {
+      "path": "examples/agent_example.py",
+      "docstring": "No description available"
+    },
+    {
+      "path": "examples/evaluation_example.py",
+      "docstring": "No description available"
+    },
+    {
+      "path": "examples/transformer_example.py",
+      "docstring": "No description available"
+    },
+    {
+      "path": "demo/complete-system-guide/usage_examples.py",
+      "docstring": "3. examples.py - Example Management System\nPurpose: Manage training/test examples with categorization and validation\nKey Classes:\n\nExample: Single example with metadata\nExampleManager: Full example collection management\nExampleCategory: Enum for categories\n\nFeatures:\n\n\u2705 15+ default examples across 5 categories\n\u2705 Filter by category, difficulty, tags\n\u2705 Random sampling with constraints\n\u2705 Train/val/test splitting\n\u2705 Generate example variations\n\u2705 Export to JSON/CSV/spaCy format\n\u2705 Collection statistics\n\nDefault Categories:\n\nBASIC: Simple aggregations (sum, avg, count)\nINTERMEDIATE: With grouping (by region, per product)\nADVANCED: Complex calculations (YoY growth, ratios)\nEDGE_CASE: Special cases (COUNTD, MEDIAN, PERCENTILE)\nTRAINING/VALIDATION/TEST: For model training"
+    },
+    {
+      "path": "demo/complete-system-guide/example_ui.py",
+      "docstring": "2. ui.py - Reusable UI Components\nPurpose: Rich console output, visualizations, and interactive components\nKey Classes:\n\nUIComponents: Static UI building blocks\nInteractiveDemo: Full interactive demo runner\nColors: ANSI color codes\n\nUI Components Available:\n\n\ud83d\udcca Headers, subheaders, dividers\n\ud83d\udce6 Text boxes and tables\n\ud83d\udcc8 Progress bars\n\ud83c\udfa8 Entity visualization with colors\n\ud83d\udcdd Formula display with confidence\n\ud83d\udcca Metric cards\n\ud83d\udd04 Comparison tables\n\u2705 Status messages (success/error/warning/info)"
+    },
+    {
+      "path": "demo/complete-system-guide/example_engine.py",
+      "docstring": "1. engine.py - Core Processing Engine\nPurpose: Handles NER model integration, entity extraction, and formula generation\nKey Classes:\n\nHypatiaXEngine: Main processing engine\nEntity: Represents extracted entities\nProcessingResult: Container for results\n\nFeatures:\n\n\u2705 Multiple mapping methods (vocab, sentence, regex, NER)\n\u2705 GPU acceleration support\n\u2705 Fallback to rule-based when models unavailable\n\u2705 Batch processing with statistics\n\u2705 Export to CSV/JSON/Excel"
+    },
+    {
+      "path": "backup_before_extension/demo/examples.py",
+      "docstring": "HypatiaX Examples - Advanced example management and generation\nHandles example datasets, validation, and benchmarking"
+    },
+    {
+      "path": "backup_before_extension/demo/demo_examples.py",
+      "docstring": "HypatiaX Demo Examples\nCurated examples for demonstrating different capabilities\n\nCurated example library\n50+ example queries organized by category\nDescription, formula, and combined examples\nReal-world use cases\nEasy to access programmatically"
+    },
+    {
+      "path": "backup_before_extension/examples/training_example.py",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/examples/evaluation_example.py",
+      "docstring": "No description available"
+    },
+    {
+      "path": "backup_before_extension/demo/complete-system-guide/usage_examples.py",
+      "docstring": "3. examples.py - Example Management System\nPurpose: Manage training/test examples with categorization and validation\nKey Classes:\n\nExample: Single example with metadata\nExampleManager: Full example collection management\nExampleCategory: Enum for categories\n\nFeatures:\n\n\u2705 15+ default examples across 5 categories\n\u2705 Filter by category, difficulty, tags\n\u2705 Random sampling with constraints\n\u2705 Train/val/test splitting\n\u2705 Generate example variations\n\u2705 Export to JSON/CSV/spaCy format\n\u2705 Collection statistics\n\nDefault Categories:\n\nBASIC: Simple aggregations (sum, avg, count)\nINTERMEDIATE: With grouping (by region, per product)\nADVANCED: Complex calculations (YoY growth, ratios)\nEDGE_CASE: Special cases (COUNTD, MEDIAN, PERCENTILE)\nTRAINING/VALIDATION/TEST: For model training"
+    },
+    {
+      "path": "backup_before_extension/demo/complete-system-guide/example_ui.py",
+      "docstring": "2. ui.py - Reusable UI Components\nPurpose: Rich console output, visualizations, and interactive components\nKey Classes:\n\nUIComponents: Static UI building blocks\nInteractiveDemo: Full interactive demo runner\nColors: ANSI color codes\n\nUI Components Available:\n\n\ud83d\udcca Headers, subheaders, dividers\n\ud83d\udce6 Text boxes and tables\n\ud83d\udcc8 Progress bars\n\ud83c\udfa8 Entity visualization with colors\n\ud83d\udcdd Formula display with confidence\n\ud83d\udcca Metric cards\n\ud83d\udd04 Comparison tables\n\u2705 Status messages (success/error/warning/info)"
+    },
+    {
+      "path": "backup_before_extension/demo/complete-system-guide/example_engine.py",
+      "docstring": "1. engine.py - Core Processing Engine\nPurpose: Handles NER model integration, entity extraction, and formula generation\nKey Classes:\n\nHypatiaXEngine: Main processing engine\nEntity: Represents extracted entities\nProcessingResult: Container for results\n\nFeatures:\n\n\u2705 Multiple mapping methods (vocab, sentence, regex, NER)\n\u2705 GPU acceleration support\n\u2705 Fallback to rule-based when models unavailable\n\u2705 Batch processing with statistics\n\u2705 Export to CSV/JSON/Excel"
+    }
+  ],
+  "components": {
+    "ner": [
+      "custom_ner/rule_file_analyzer.py",
+      "custom_ner/custom_ruler.py",
+      "custom_ner/queries/tableau/custom_tableau_components.py",
+      "custom_ner/queries/tableau/custom_tableau_formulas_components.py",
+      "custom_ner/queries/tableau/custom_tableau_desc_components.py",
+      "custom_ner/queries/tableau/components/ruler_tableau_formulas.py",
+      "custom_ner/queries/tableau/components/ruler_tableau_desc.py",
+      "custom_ner/queries/tableau/components/ruler_tableau.py",
+      "experiments/ner/queries/tableau/custom_ner/entities_mapping.py",
+      "backup_before_extension/custom_ner/rule_file_analyzer.py",
+      "backup_before_extension/custom_ner/custom_ruler.py",
+      "backup_before_extension/custom_ner/queries/tableau/custom_tableau_components.py",
+      "backup_before_extension/custom_ner/queries/tableau/custom_tableau_formulas_components.py",
+      "backup_before_extension/custom_ner/queries/tableau/custom_tableau_desc_components.py",
+      "backup_before_extension/custom_ner/queries/tableau/components/ruler_tableau_formulas.py",
+      "backup_before_extension/custom_ner/queries/tableau/components/ruler_tableau_desc.py",
+      "backup_before_extension/custom_ner/queries/tableau/components/ruler_tableau.py",
+      "backup_before_extension/experiments/ner/queries/tableau/custom_ner/entities_mapping.py"
+    ],
+    "training": [
+      "datasets/queries/tableau/training/test_combined.py",
+      "datasets/queries/tableau/training/test.py",
+      "datasets/queries/tableau/training/test_update_labels.py",
+      "core/training/training_transformer.py",
+      "core/training/training_transformer_.py",
+      "core/training/training_llm.py",
+      "core/training/training_spacy.py",
+      "core/training/training_tranformer_.py",
+      "core/training/training_rag.py",
+      "core/training/training_rag_.py",
+      "core/training/training_llm_.py",
+      "backup_before_extension/datasets/queries/tableau/training/test_combined.py",
+      "backup_before_extension/datasets/queries/tableau/training/test.py",
+      "backup_before_extension/datasets/queries/tableau/training/test_update_labels.py",
+      "backup_before_extension/core/training/training_spacy.py"
+    ],
+    "evaluation": [
+      "core/evaluation/testing_model.py",
+      "backup_before_extension/core/evaluation/testing_model.py"
+    ],
+    "preprocessing": [
+      "core/preprocessing/llm_prep.py",
+      "core/preprocessing/preparation_data.py",
+      "core/preprocessing/transformer_prep.py",
+      "core/preprocessing/preprocessing_pipeline.py",
+      "backup_before_extension/core/preprocessing/preparation_data.py"
+    ],
+    "deployment": [
+      "core/deployment/evaluation_unified.py",
+      "core/deployment/evaluate_model.py",
+      "core/deployment/deployment-evaluate_model.py",
+      "core/deployment/deployment_api.py",
+      "core/deployment/deployment_pipeline.py",
+      "core/deployment/deployment_batch.py",
+      "backup_before_extension/core/deployment/evaluate_model.py"
+    ]
+  }
+}

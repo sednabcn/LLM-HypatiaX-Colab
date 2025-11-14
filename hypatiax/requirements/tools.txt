@@ -1,0 +1,11 @@
+-r base.txt
+
+# Symbolic computation
+sympy>=1.12
+
+# Numerical computation
+scipy>=1.11.0
+
+# Visualization
+plotly>=5.17.0
+matplotlib>=3.8.0

@@ -152,7 +152,7 @@
     "parser",
     "attribute_ruler",
     "lemmatizer",
-    "custom_queries_formulas_ruler",
+    "custom_tableau_formulas_ruler",
     "ruler_sort_command",
     "ner"
   ],
@@ -163,7 +163,7 @@
     "senter",
     "attribute_ruler",
     "lemmatizer",
-    "custom_queries_formulas_ruler",
+    "custom_tableau_formulas_ruler",
     "ruler_sort_command",
     "ner"
   ],

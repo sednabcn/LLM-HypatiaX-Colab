@@ -1,0 +1,16 @@
+{
+  "technology": "agents",
+  "description": "AI agent system experiments for autonomous mathematical reasoning",
+  "default_metrics": [
+    "workflow_success_rate",
+    "avg_iterations",
+    "validation_accuracy",
+    "total_time"
+  ],
+  "common_tags": [
+    "multi-agent",
+    "workflows",
+    "langgraph",
+    "reinforcement-learning"
+  ]
+}

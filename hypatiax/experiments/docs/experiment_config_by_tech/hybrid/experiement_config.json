@@ -1,0 +1,16 @@
+{
+  "technology": "hybrid",
+  "description": "Ensemble experiments combining multiple technologies",
+  "default_metrics": [
+    "overall_accuracy",
+    "ensemble_improvement",
+    "method_agreement",
+    "total_latency"
+  ],
+  "common_tags": [
+    "ensemble",
+    "comparative",
+    "multi-method",
+    "best-of-all"
+  ]
+}

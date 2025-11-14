@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HypatiaX Demo - Tableau Formula Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .status-bar {
+            background: #f8f9fa;
+            padding: 15px 40px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #28a745;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .label {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 15px;
+            font-size: 1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .input-box:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .method-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .method-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .method-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .method-card.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .examples-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .example-chip {
+            display: inline-block;
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .example-chip:hover {
+            border-color: #667eea;
+            background: #f0f7ff;
+        }
+
+        .process-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .process-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .process-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .result-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .entities-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            line-height: 2;
+        }
+
+        .entity {
+            display: inline-block;
+            padding: 4px 10px;
+            margin: 3px;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .entity-OPER { background: #e9d5ff; color: #6b21a8; }
+        .entity-ARG { background: #dbeafe; color: #1e40af; }
+        .entity-VERB { background: #dcfce7; color: #166534; }
+        .entity-ADP { background: #fef3c7; color: #92400e; }
+        .entity-NOUN { background: #fecaca; color: #991b1b; }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5em;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 20px;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .metric-label {
+            color: #666;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #fee;
+            border: 2px solid #fcc;
+            color: #c33;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 HypatiaX Demo</h1>
+            <p>Transform Natural Language into Tableau Formulas</p>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-indicator">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">Connecting...</span>
+            </div>
+            <div id="serverInfo"></div>
+        </div>
+
+        <div class="main-content">
+            <!-- Input Section -->
+            <div class="input-section">
+                <label class="label">💬 Enter your description:</label>
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        class="input-box" 
+                        id="descriptionInput"
+                        placeholder="e.g., sum of sales by region"
+                    />
+                </div>
+            </div>
+
+            <!-- Examples -->
+            <div class="examples-section">
+                <label class="label">📝 Quick Examples:</label>
+                <div id="examplesContainer">
+                    <span class="example-chip" onclick="loadExample('sum of sales')">Sum of sales</span>
+                    <span class="example-chip" onclick="loadExample('average profit per product')">Average profit</span>
+                    <span class="example-chip" onclick="loadExample('count total customers')">Count customers</span>
+                    <span class="example-chip" onclick="loadExample('maximum revenue by year')">Max revenue</span>
+                </div>
+            </div>
+
+            <!-- Method Selector -->
+            <div class="input-section">
+                <label class="label">🛠️ Select Mapping Method:</label>
+                <div class="method-selector">
+                    <div class="method-card active" data-method="vocab" onclick="selectMethod('vocab')">
+                        <div style="font-size: 2em; margin-bottom: 10px;">📚</div>
+                        <strong>Vocab</strong>
+                        <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.8;">Dictionary-based</div>
+                    </div>
+                    <div class="method-card" data-method="sentence" onclick="selectMethod('sentence')">
+                        <div style="font-size: 2em; margin-bottom: 10px;">📝</div>
+                        <strong>Sentence</strong>
+                        <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.8;">Pattern matching</div>
+                    </div>
+                    <div class="method-card" data-method="regex" onclick="selectMethod('regex')">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🔍</div>
+                        <strong>Regex</strong>
+                        <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.8;">Rule-based</div>
+                    </div>
+                    <div class="method-card" data-method="ner" onclick="selectMethod('ner')">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🎯</div>
+                        <strong>NER</strong>
+                        <div style="font-size: 0.85em; margin-top: 5px; opacity: 0.8;">ML-powered</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process Button -->
+            <button class="process-btn" id="processBtn" onclick="processQuery()">
+                ✨ Generate Formula
+            </button>
+
+            <!-- Loading -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <div>Processing your query...</div>
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage"></div>
+
+            <!-- Results -->
+            <div class="result-section" id="resultSection">
+                <div class="section-title">🏷️ Detected Entities</div>
+                <div class="entities-box" id="entitiesBox"></div>
+
+                <div class="section-title">🔮 Generated Formula</div>
+                <div class="formula-box" id="formulaBox"></div>
+
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="metric-value" id="confidenceMetric">--</div>
+                        <div class="metric-label">Confidence</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="entitiesMetric">--</div>
+                        <div class="metric-label">Entities Found</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="timeMetric">--</div>
+                        <div class="metric-label">Processing Time</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="methodMetric">--</div>
+                        <div class="metric-label">Method Used</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        let selectedMethod = 'vocab';
+
+        // Check server status on load
+        async function checkServerStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                
+                document.getElementById('statusText').textContent = 
+                    `Connected - ${data.mode} mode`;
+                document.getElementById('serverInfo').textContent = 
+                    `v${data.version} | ${data.stats.total_requests} requests`;
+            } catch (error) {
+                document.getElementById('statusText').textContent = 'Server offline';
+                document.getElementById('statusDot').style.background = '#dc3545';
+            }
+        }
+
+        // Select mapping method
+        function selectMethod(method) {
+            selectedMethod = method;
+            document.querySelectorAll('.method-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event.target.closest('.method-card').classList.add('active');
+        }
+
+        // Load example
+        function loadExample(text) {
+            document.getElementById('descriptionInput').value = text;
+        }
+
+        // Process query
+        async function processQuery() {
+            const description = document.getElementById('descriptionInput').value.trim();
+            
+            if (!description) {
+                showError('Please enter a description');
+                return;
+            }
+
+            // Show loading
+            hideError();
+            document.getElementById('resultSection').classList.remove('show');
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('processBtn').disabled = true;
+
+            try {
+                const response = await fetch(`${API_BASE}/map`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        description: description,
+                        method: selectedMethod
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    displayResults(data);
+                } else {
+                    showError(data.error || 'Processing failed');
+                }
+            } catch (error) {
+                showError(`Connection error: ${error.message}`);
+            } finally {
+                document.getElementById('loading').classList.remove('show');
+                document.getElementById('processBtn').disabled = false;
+            }
+        }
+
+        // Display results
+        function displayResults(data) {
+            // Entities
+            const entitiesBox = document.getElementById('entitiesBox');
+            if (data.entities && data.entities.length > 0) {
+                entitiesBox.innerHTML = data.entities.map(e => 
+                    `<span class="entity entity-${e.label}">${e.text} <small>(${e.label})</small></span>`
+                ).join('');
+            } else {
+                entitiesBox.innerHTML = '<span style="color: #999;">No entities detected</span>';
+            }
+
+            // Formula
+            document.getElementById('formulaBox').textContent = data.formula;
+
+            // Metrics
+            document.getElementById('confidenceMetric').textContent = 
+                `${Math.round(data.confidence * 100)}%`;
+            document.getElementById('entitiesMetric').textContent = 
+                data.entity_count || 0;
+            document.getElementById('timeMetric').textContent = 
+                `${data.processing_time.toFixed(1)}ms`;
+            document.getElementById('methodMetric').textContent = 
+                data.method.charAt(0).toUpperCase() + data.method.slice(1);
+
+            // Show results
+            document.getElementById('resultSection').classList.add('show');
+        }
+
+        // Error handling
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = `❌ ${message}`;
+            errorDiv.classList.add('show');
+        }
+
+        function hideError() {
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
+        // Enter key support
+        document.getElementById('descriptionInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                processQuery();
+            }
+        });
+
+        // Initialize
+        checkServerStatus();
+    </script>
+</body>
+</html>

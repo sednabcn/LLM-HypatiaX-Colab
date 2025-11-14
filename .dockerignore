@@ -1,0 +1,93 @@
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Python cache and compiled files
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+test-results/
+
+# Documentation
+docs/_build/
+*.md
+LICENSE
+
+# Docker files (don't copy Docker files into Docker)
+Dockerfile
+Dockerfile.*
+docker-compose*.yml
+.dockerignore
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.*
+
+# Large data files (uncomment if you have data directories)
+# data/
+# datasets/
+# models/
+
+# Output directories (they will be mounted as volumes)
+outputs/
+output/
+
+# Node modules (if you have any JS)
+node_modules/
+
+# Backup files
+*.bak
+*.backup

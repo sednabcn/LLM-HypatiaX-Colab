@@ -1,0 +1,17 @@
+{
+  "technology": "llm",
+  "description": "LLM-based experiments for mathematical expression generation",
+  "default_metrics": [
+    "accuracy",
+    "response_time",
+    "cost_per_query",
+    "success_rate"
+  ],
+  "common_tags": [
+    "gpt-4",
+    "claude",
+    "prompt-engineering",
+    "few-shot",
+    "chain-of-thought"
+  ]
+}

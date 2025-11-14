@@ -1,0 +1,107 @@
+============================================================
+STRATEGY 2: Joint Training on (Description, Formula) Pairs
+============================================================
+
+[TRAINING] Processing training pairs...
+  Pair 1: 'calculate area of circle' → 'A=pi*r^2'
+  Pair 2: 'compute area of circle' → 'A=pi*r^2'
+  Pair 3: 'find area of square' → 'A=a^2'
+  Pair 4: 'calculate volume of sphere' → 'V=4/3*pi*r^3'
+  Pair 5: 'find perimeter of square' → 'P=4*a'
+
+Trained on 5 pairs
+Learned 5 unique patterns
+
+[EVALUATION] Testing on held-out data...
+  Test 1 [✓ EXACT]:
+    Input:    'calculate area of circle'
+    Expected: 'A=pi*r^2'
+    Predicted: 'A=pi*r^2'
+  Test 2 [✗ FAIL]:
+    Input:    'compute area of square'
+    Expected: 'A=a^2'
+    Predicted: 'Unknown pattern'
+
+============================================================
+RESULTS SUMMARY:
+============================================================
+Total test cases:      2
+Exact matches:         1 (50.0%)
+Partial matches:       1 (50.0%)
+Exact match accuracy:  50.0%
+
+============================================================
+
+[ERROR ANALYSIS]
+Input: 'calculate area of circle'
+
+Extracted Description Entities:
+  - calculate (OPER)
+  - area (TARGET)
+  - circle (OBJECT)
+
+Expected Formula Entities:
+  - A (VAR)
+  - pi (CONST)
+  - * (OPER)
+  - r (VAR)
+  - ^ (OPER)
+
+Expected:  'A=pi*r^2'
+Predicted: 'A=pi*r^2'
+
+============================================================
+ORIGINAL EXAMPLE:
+============================================================
+Input:  'calculate area of circle'
+Output: 'A=pi*r^2'
+Expected: 'A=pi*r^2'
+Match: True
+
+Looking at joint_training.py, this is indeed a simpler strategy! Let me analyze it:
+Strategy Comparison
+Strategy 1 (Sequential Pipeline) - Complex
+
+4 separate supervised steps
+Each step has its own evaluation metrics
+Error compounds through the pipeline
+Requires labeled data at each stage
+
+Strategy 2 (Joint Training) - Simple
+
+Single end-to-end model
+Learns directly from (description, formula) pairs
+No intermediate steps
+Only needs pairs of (input description, output formula)
+
+Key Advantages of Joint Training
+
+Simpler data requirements: Just need (description, formula) pairs - no entity annotations needed
+No error propagation: Errors don't cascade through multiple steps
+Easier to train: One model vs. 4 separate models
+More realistic: Mimics how you'd actually use the system
+
+How it works
+python# Training: Learn patterns from pairs
+training_data = [
+    ("calculate area of circle", "A=pi*r^2"),
+    ("compute area of circle", "A=pi*r^2"),
+    # ... more pairs
+]
+
+# At prediction time:
+input: "calculate area of circle"
+→ Extract entities: [calculate, area, circle]
+→ Pattern match: "OPER:calculate|TARGET:area|OBJECT:circle"
+→ Lookup: Return stored formula "A=pi*r^2"
+Questions about this approach:
+
+Is this using a lookup table? Yes, essentially. It's pattern-matching based, not really "learning" - just memorizing patterns.
+How would it handle unseen patterns? Currently returns "Unknown pattern" - not great for generalization.
+Is this realistic? For a small, fixed domain (geometry formulas) this could work. For open-ended math problems, you'd need something more sophisticated (like a neural seq2seq model).
+
+Would you like me to:
+
+Add evaluation metrics similar to Strategy 1?
+Improve the generalization capability?
+Add a comparison showing where each strategy succeeds/fails?

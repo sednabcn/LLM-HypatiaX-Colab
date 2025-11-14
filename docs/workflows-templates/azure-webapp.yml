@@ -1,0 +1,103 @@
+name: Deploy to Azure App Service
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - production
+  push:
+    branches:
+      - main
+
+env:
+  AZURE_WEBAPP_NAME: hypatiax-app
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+  PYTHON_VERSION: '3.12'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Create and start virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Zip artifact for deployment
+        run: |
+          zip -r release.zip . -x "*.git*" -x "*venv*" -x "*tests*"
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-app
+          path: release.zip
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: ${{ github.event.inputs.environment || 'dev' }}
+      url: ${{ steps.deploy.outputs.webapp-url }}
+    
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: python-app
+      
+      - name: Unzip artifact
+        run: unzip release.zip
+      
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Deploy to Azure Web App
+        id: deploy
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      
+      - name: Configure App Settings
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          app-settings-json: |
+            [
+              {
+                "name": "ENVIRONMENT",
+                "value": "${{ github.event.inputs.environment }}",
+                "slotSetting": false
+              },
+              {
+                "name": "SCM_DO_BUILD_DURING_DEPLOYMENT",
+                "value": "true",
+                "slotSetting": false
+              }
+            ]
+      
+      - name: Health check
+        run: |
+          sleep 30
+          curl -f ${{ steps.deploy.outputs.webapp-url }}/health

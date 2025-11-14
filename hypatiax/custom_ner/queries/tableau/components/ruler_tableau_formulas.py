@@ -11,10 +11,10 @@ from hypatiax.utils.utils import create_ruler
 nlp = spacy.load("en_core_web_sm")
 
 @Language.component("custom_tableau_formulas_ruler")
-def custom_tableau_formulas_ruler_component(doc,nlp=nlp, name='custom_tableau_formulas_ruler', rules_version="version1", sub_domain="tableau", type="formulas", path_to_file=None):
+def custom_tableau_formulas_ruler_component(doc,nlp=nlp, name='custom_tableau_formulas_ruler', sub_domain="tableau", type="formulas", path_to_file=None):
     if path_to_file is None:
         # Dynamically construct the path based on provided parameters
-        path_to_file =resources.files('hypatiax.custom_ner.queries.tableau.rules').joinpath(f'rules_{sub_domain}_{type}_{rules_version}.jsonl')
+        path_to_file =resources.files('hypatiax.custom_ner.queries.tableau.rules').joinpath(f'ruler_{sub_domain}_{type}.jsonl')
             
     try:
         rules = load(path=path_to_file,style="rules")

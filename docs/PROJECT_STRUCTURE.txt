@@ -1,0 +1,50 @@
+
+HypatiaX Project Structure
+==========================
+
+project/
+│
+├── frontend/                    # Frontend web interface
+│   ├── index.html              # Homepage
+│   ├── dashboard.html          # System dashboard
+│   ├── ner-demo.html          # NER demo interface
+│   ├── docs.html              # Documentation
+│   ├── css/
+│   │   ├── main.css           # Main styles
+│   │   └── components.css     # Component styles
+│   ├── js/
+│   │   ├── main.js            # Main JavaScript
+│   │   ├── api-client.js      # API communication
+│   │   ├── ner-demo.js        # NER demo logic
+│   │   └── dashboard.js       # Dashboard logic
+│   └── assets/
+│       ├── images/
+│       └── fonts/
+│
+├── backend/                     # Backend API server
+│   ├── app.py                  # Main Flask application
+│   ├── config.py               # Configuration
+│   ├── requirements.txt        # Python dependencies
+│   ├── .env.example           # Environment template
+│   ├── api/
+│   │   ├── routes/            # API endpoints
+│   │   ├── middleware/        # Custom middleware
+│   │   └── schemas/           # Data schemas
+│   ├── tests/                 # Unit tests
+│   └── logs/                  # Application logs
+│
+├── hypatiax/                    # Your existing HypatiaX code
+│   ├── agents/
+│   ├── custom_ner/
+│   ├── datasets/
+│   ├── mappings/
+│   │   └── mapping.py         # Core mapping logic
+│   └── data_spacy/
+│       └── queries/tableau/
+│           ├── ner_tableau_desc/       # NER model
+│           └── ner_tableau_formulas/   # NER model
+│
+└── docs/                        # Documentation
+    └── setup/
+        ├── QUICK_START.md
+        └── DEPLOYMENT.md

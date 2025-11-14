@@ -1,0 +1,16 @@
+{
+  "technology": "ner",
+  "description": "Named Entity Recognition experiments for mathematical entities",
+  "default_metrics": [
+    "precision",
+    "recall",
+    "f1_score",
+    "entity_coverage"
+  ],
+  "common_tags": [
+    "spacy",
+    "custom-rules",
+    "entity-extraction",
+    "tableau-formulas"
+  ]
+}

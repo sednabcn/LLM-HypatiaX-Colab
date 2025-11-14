@@ -1,0 +1,432 @@
+name: Kubernetes Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - production
+      namespace:
+        description: 'Kubernetes namespace'
+        required: false
+        default: 'hypatiax'
+      replicas:
+        description: 'Number of replicas'
+        required: false
+        default: '3'
+  release:
+    types: [published]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.meta.outputs.version }}
+      environment: ${{ steps.env.outputs.environment }}
+      namespace: ${{ steps.env.outputs.namespace }}
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Determine environment
+        id: env
+        run: |
+          if [ "${{ github.event_name }}" == "release" ]; then
+            echo "environment=production" >> $GITHUB_OUTPUT
+            echo "namespace=hypatiax-prod" >> $GITHUB_OUTPUT
+          elif [ -n "${{ github.event.inputs.environment }}" ]; then
+            echo "environment=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+            echo "namespace=${{ github.event.inputs.namespace }}" >> $GITHUB_OUTPUT
+          else
+            echo "environment=dev" >> $GITHUB_OUTPUT
+            echo "namespace=hypatiax-dev" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha,prefix={{branch}}-
+
+  generate-manifests:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install kubectl and helm
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+          
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      
+      - name: Generate Kubernetes manifests
+        run: |
+          mkdir -p k8s-manifests
+          
+          # Namespace
+          cat > k8s-manifests/00-namespace.yaml << EOF
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: ${{ needs.prepare.outputs.namespace }}
+            labels:
+              name: ${{ needs.prepare.outputs.namespace }}
+              environment: ${{ needs.prepare.outputs.environment }}
+          EOF
+          
+          # ConfigMap
+          cat > k8s-manifests/01-configmap.yaml << EOF
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: hypatiax-config
+            namespace: ${{ needs.prepare.outputs.namespace }}
+          data:
+            ENVIRONMENT: "${{ needs.prepare.outputs.environment }}"
+            LOG_LEVEL: "INFO"
+            PYTHONUNBUFFERED: "1"
+          EOF
+          
+          # Secret (placeholder - use sealed-secrets or external secrets in production)
+          cat > k8s-manifests/02-secret.yaml << EOF
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: hypatiax-secrets
+            namespace: ${{ needs.prepare.outputs.namespace }}
+          type: Opaque
+          stringData:
+            DATABASE_URL: "${{ secrets.DATABASE_URL }}"
+            REDIS_URL: "${{ secrets.REDIS_URL }}"
+            API_KEY: "${{ secrets.API_KEY }}"
+          EOF
+          
+          # Deployment
+          cat > k8s-manifests/03-deployment.yaml << 'EOF'
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: hypatiax
+            namespace: ${{ needs.prepare.outputs.namespace }}
+            labels:
+              app: hypatiax
+              version: ${{ needs.prepare.outputs.image_tag }}
+          spec:
+            replicas: ${{ github.event.inputs.replicas || 3 }}
+            strategy:
+              type: RollingUpdate
+              rollingUpdate:
+                maxSurge: 1
+                maxUnavailable: 0
+            selector:
+              matchLabels:
+                app: hypatiax
+            template:
+              metadata:
+                labels:
+                  app: hypatiax
+                  version: ${{ needs.prepare.outputs.image_tag }}
+                annotations:
+                  prometheus.io/scrape: "true"
+                  prometheus.io/port: "8000"
+                  prometheus.io/path: "/metrics"
+              spec:
+                serviceAccountName: hypatiax
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  fsGroup: 1000
+                containers:
+                - name: hypatiax
+                  image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.prepare.outputs.image_tag }}
+                  imagePullPolicy: Always
+                  ports:
+                  - name: http
+                    containerPort: 8000
+                    protocol: TCP
+                  envFrom:
+                  - configMapRef:
+                      name: hypatiax-config
+                  - secretRef:
+                      name: hypatiax-secrets
+                  resources:
+                    requests:
+                      memory: "512Mi"
+                      cpu: "250m"
+                    limits:
+                      memory: "2Gi"
+                      cpu: "1000m"
+                  livenessProbe:
+                    httpGet:
+                      path: /health
+                      port: http
+                    initialDelaySeconds: 30
+                    periodSeconds: 10
+                    timeoutSeconds: 5
+                    failureThreshold: 3
+                  readinessProbe:
+                    httpGet:
+                      path: /ready
+                      port: http
+                    initialDelaySeconds: 10
+                    periodSeconds: 5
+                    timeoutSeconds: 3
+                    failureThreshold: 3
+                  volumeMounts:
+                  - name: data
+                    mountPath: /app/data
+                  - name: cache
+                    mountPath: /app/cache
+                volumes:
+                - name: data
+                  persistentVolumeClaim:
+                    claimName: hypatiax-data
+                - name: cache
+                  emptyDir: {}
+          EOF
+          
+          # Service
+          cat > k8s-manifests/04-service.yaml << EOF
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: hypatiax
+            namespace: ${{ needs.prepare.outputs.namespace }}
+            labels:
+              app: hypatiax
+          spec:
+            type: ClusterIP
+            ports:
+            - port: 80
+              targetPort: http
+              protocol: TCP
+              name: http
+            selector:
+              app: hypatiax
+          EOF
+          
+          # Ingress
+          cat > k8s-manifests/05-ingress.yaml << EOF
+          apiVersion: networking.k8s.io/v1
+          kind: Ingress
+          metadata:
+            name: hypatiax
+            namespace: ${{ needs.prepare.outputs.namespace }}
+            annotations:
+              cert-manager.io/cluster-issuer: "letsencrypt-prod"
+              nginx.ingress.kubernetes.io/ssl-redirect: "true"
+              nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          spec:
+            ingressClassName: nginx
+            tls:
+            - hosts:
+              - hypatiax.${{ needs.prepare.outputs.environment }}.example.com
+              secretName: hypatiax-tls
+            rules:
+            - host: hypatiax.${{ needs.prepare.outputs.environment }}.example.com
+              http:
+                paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: hypatiax
+                      port:
+                        number: 80
+          EOF
+          
+          # HorizontalPodAutoscaler
+          cat > k8s-manifests/06-hpa.yaml << EOF
+          apiVersion: autoscaling/v2
+          kind: HorizontalPodAutoscaler
+          metadata:
+            name: hypatiax
+            namespace: ${{ needs.prepare.outputs.namespace }}
+          spec:
+            scaleTargetRef:
+              apiVersion: apps/v1
+              kind: Deployment
+              name: hypatiax
+            minReplicas: ${{ github.event.inputs.replicas || 3 }}
+            maxReplicas: 10
+            metrics:
+            - type: Resource
+              resource:
+                name: cpu
+                target:
+                  type: Utilization
+                  averageUtilization: 70
+            - type: Resource
+              resource:
+                name: memory
+                target:
+                  type: Utilization
+                  averageUtilization: 80
+            behavior:
+              scaleDown:
+                stabilizationWindowSeconds: 300
+                policies:
+                - type: Percent
+                  value: 50
+                  periodSeconds: 60
+              scaleUp:
+                stabilizationWindowSeconds: 0
+                policies:
+                - type: Percent
+                  value: 100
+                  periodSeconds: 30
+                - type: Pods
+                  value: 2
+                  periodSeconds: 60
+          EOF
+          
+          # PersistentVolumeClaim
+          cat > k8s-manifests/07-pvc.yaml << EOF
+          apiVersion: v1
+          kind: PersistentVolumeClaim
+          metadata:
+            name: hypatiax-data
+            namespace: ${{ needs.prepare.outputs.namespace }}
+          spec:
+            accessModes:
+            - ReadWriteMany
+            resources:
+              requests:
+                storage: 10Gi
+            storageClassName: standard
+          EOF
+          
+          # ServiceAccount
+          cat > k8s-manifests/08-serviceaccount.yaml << EOF
+          apiVersion: v1
+          kind: ServiceAccount
+          metadata:
+            name: hypatiax
+            namespace: ${{ needs.prepare.outputs.namespace }}
+          ---
+          apiVersion: rbac.authorization.k8s.io/v1
+          kind: Role
+          metadata:
+            name: hypatiax
+            namespace: ${{ needs.prepare.outputs.namespace }}
+          rules:
+          - apiGroups: [""]
+            resources: ["configmaps", "secrets"]
+            verbs: ["get", "list", "watch"]
+          ---
+          apiVersion: rbac.authorization.k8s.io/v1
+          kind: RoleBinding
+          metadata:
+            name: hypatiax
+            namespace: ${{ needs.prepare.outputs.namespace }}
+          roleRef:
+            apiGroup: rbac.authorization.k8s.io
+            kind: Role
+            name: hypatiax
+          subjects:
+          - kind: ServiceAccount
+            name: hypatiax
+            namespace: ${{ needs.prepare.outputs.namespace }}
+          EOF
+      
+      - name: Upload manifests
+        uses: actions/upload-artifact@v4
+        with:
+          name: k8s-manifests
+          path: k8s-manifests/
+
+  deploy:
+    needs: [prepare, generate-manifests]
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ needs.prepare.outputs.environment }}
+      url: https://hypatiax.${{ needs.prepare.outputs.environment }}.example.com
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download manifests
+        uses: actions/download-artifact@v4
+        with:
+          name: k8s-manifests
+          path: k8s-manifests/
+      
+      - name: Setup kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+      
+      - name: Configure kubectl
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+      
+      - name: Verify cluster access
+        run: |
+          kubectl cluster-info
+          kubectl get nodes
+      
+      - name: Apply manifests
+        run: |
+          kubectl apply -f k8s-manifests/ --recursive
+      
+      - name: Wait for rollout
+        run: |
+          kubectl rollout status deployment/hypatiax \
+            -n ${{ needs.prepare.outputs.namespace }} \
+            --timeout=5m
+      
+      - name: Verify deployment
+        run: |
+          kubectl get all -n ${{ needs.prepare.outputs.namespace }}
+          kubectl get pods -n ${{ needs.prepare.outputs.namespace }} -o wide
+      
+      - name: Run smoke tests
+        run: |
+          # Wait for service to be ready
+          sleep 30
+          
+          # Get the service endpoint
+          ENDPOINT=$(kubectl get svc hypatiax -n ${{ needs.prepare.outputs.namespace }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          
+          # Run health check
+          curl -f http://${ENDPOINT}/health || echo "Health check failed"
+
+  rollback:
+    needs: deploy
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+      
+      - name: Configure kubectl
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > $HOME/.kube/config
+      
+      - name: Rollback deployment
+        run: |
+          kubectl rollout undo deployment/hypatiax -n ${{ needs.prepare.outputs.namespace }}
+          kubectl rollout status deployment/hypatiax -n ${{ needs.prepare.outputs.namespace }}

@@ -14,15 +14,17 @@ if os.path.exists(dir_path):
               if filename.lower().endswith('.csv') or \
               filename.lower().endswith('.xlsx') \
               or filename.lower().endswith('.xls'):
-                 df = load(filename)
+                 full_path = os.path.join(root, filename)
+                 df = load(full_path)
                  if df is not None:
                     print(df.head(5))
                     print("=================================")
                     print(f"Test{n} passed")
-                    print("=================================") 
+                    print("=================================")
+                    n +=1
                  else:
                     print(f"Test{n} failed to load data.")
-              n += 1
+                    n += 1
 else:
     print("Directory not found")
 

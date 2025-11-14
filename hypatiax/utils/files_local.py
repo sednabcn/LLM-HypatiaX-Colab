@@ -6,23 +6,80 @@ import spacy
 from importlib import resources
 from hypatiax.utils.utils import upload_spacy_training_data,upload_spacy_training_data_from_json
 from hypatiax.custom_ner.queries.tableau import custom_tableau_desc_components, custom_tableau_formulas_components
+from hypatiax.auto_migrate import migrate
 
-def load(filename=None, path=None, style=None):
+def load(filename=None, path=None, style=None, auto_migrate=True):
     """
     Load files like datasets, ner, entities, models, rules
-    style:
-    1) datasets
-    2) ner
-    3) entities
-    4) models
-    5) rules
+    
+    Args:
+        filename: Name of file to load
+        path: Optional path override
+        style: Type of file ('datasets', 'ner', 'entity', 'models', 'rules')
+        auto_migrate: If True, automatically backup and validate (default: True)
+    
+    Style options:
+        1) datasets
+        2) ner
+        3) entity
+        4) models
+        5) rules
     """
 
     if filename is None or not isinstance(filename, str):
         raise ValueError("Filename must be a non-empty string.")
 
-    if style not in [None, 'datasets', 'ner', 'entities', 'models', 'rules']:
-        raise ValueError("Invalid style specified. Must be one of ['datasets', 'ner', 'entities', 'models', 'rules'] or None.")
+    if style not in [None, 'datasets', 'ner', 'entity', 'models', 'rules']:
+        raise ValueError("Invalid style specified. Must be one of ['datasets', 'ner', 'entity', 'models', 'rules'] or None.")
+
+    # ============================================
+    # AUTO-MIGRATE BLOCK - Backup and validation
+    # ============================================
+    if auto_migrate and style in ['ner', 'entity', 'models', 'rules']:
+        try:
+            from hypatiax.auto_migrate import migrate
+            
+            # Determine file path for migration
+            file_to_migrate = path if path else filename
+            
+            # Determine modules and folder based on style
+            if style == 'rules':
+                modules = 'custom_ner'
+                folder = 'rules'
+            elif style == 'ner' or style == 'models':
+                modules = 'data_spacy'
+                folder = ''
+            elif style == 'entity':
+                # Determine if training or testing
+                if 'Train' in filename:
+                    modules = 'datasets'
+                    folder = 'training_spacy'
+                elif 'Test' in filename:
+                    modules = 'datasets'
+                    folder = 'testing_spacy'
+                else:
+                    modules = 'datasets'
+                    folder = 'training_spacy'
+            else:
+                modules = 'custom_ner'
+                folder = 'rules'
+            
+            # Execute migration (detects changes, creates backups, auto-restores if broken)
+            migrate(
+                filename=filename,
+                style=style,
+                modules=modules,
+                domains='queries',
+                sub_domains='tableau',
+                folder=folder
+            )
+            
+        except ImportError:
+            # auto_migrate.py not available, continue without migration
+            pass
+        except Exception as e:
+            # Migration failed, log but continue
+            print(f"⚠️  Migration warning: {e}")
 
     try:
         if filename.endswith('.csv'):

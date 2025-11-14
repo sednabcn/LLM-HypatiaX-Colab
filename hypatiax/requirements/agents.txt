@@ -1,0 +1,5 @@
+-r llm.txt
+
+# Agent frameworks
+langgraph>=0.0.20
+crewai>=0.1.0
