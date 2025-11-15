@@ -49,7 +49,7 @@ jobs:
       run: |
         test -d hypatiax || { echo "❌ hypatiax/ not found"; exit 1; }
         test -d hypatiax/datasets || { echo "❌ datasets not found"; exit 1; }
-        test -f hypatiax/config.py || { echo "❌ config.py not found"; exit 1; }
+        test -f hypatiax/config/config.py || { echo "❌ config.py not found"; exit 1; }
         echo "✅ Structure validated"
 
   # =============================================================================
