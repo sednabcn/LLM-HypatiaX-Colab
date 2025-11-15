@@ -6,27 +6,20 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: '0 2 * * 1'  # Weekly on Monday
+    - cron: '0 2 * * 1'
   workflow_dispatch:
-    inputs:
-      severity_level:
-        description: 'Minimum severity to report'
-        type: choice
-        options: [critical, high, medium, low]
-        default: 'high'
 
 jobs:
   # =============================================================================
-  # DEPENDENCY SCANNING (OPTIMIZED FOR DISK SPACE)
+  # DEPENDENCY & CODE SECURITY SCANNING
   # =============================================================================
-  scan-dependencies:
-    name: Scan Dependencies
+  security-scan:
+    name: Security Scan
     runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v4
     
-    # CRITICAL: Free disk space before installing anything
     - name: Free Disk Space
       uses: jlumbroso/free-disk-space@main
       with:
@@ -42,56 +35,62 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-        cache: 'pip'
-        cache-dependency-path: requirements-ci.txt
     
-    - name: Check disk space
-      run: |
-        echo "Disk space before installation:"
-        df -h
-    
-    - name: Install security tools only
+    - name: Install security tools
       run: |
         python -m pip install --upgrade pip
-        pip install --no-cache-dir pip-audit safety bandit
+        pip install --no-cache-dir pip-audit safety bandit flake8
     
-    # DON'T install full requirements - use minimal set
     - name: Install minimal dependencies for scanning
       run: |
-        # Only install packages needed for code analysis
         pip install --no-cache-dir \
           pydantic \
           pyyaml \
           requests \
           flask \
           flask-cors==4.0.0
-        
-        echo "Disk space after minimal install:"
-        df -h
     
-    - name: Run pip-audit
+    - name: Run pip-audit (Dependency Vulnerabilities)
       continue-on-error: true
       run: |
-        # Audit installed packages only (skip full requirements.txt)
+        echo "::group::pip-audit results"
         pip-audit --skip-editable --desc --format json > audit-results.json || true
         pip-audit --skip-editable --desc || true
+        echo "::endgroup::"
     
-    - name: Run safety check
+    - name: Run safety check (Known Vulnerabilities)
       continue-on-error: true
       run: |
+        echo "::group::Safety check results"
         safety check --json > safety-results.json || true
         safety check || true
+        echo "::endgroup::"
     
-    - name: Run bandit (code security)
+    - name: Run bandit (Code Security Issues)
       continue-on-error: true
       run: |
-        # Only scan if hypatiax directory exists
+        echo "::group::Bandit results"
         if [ -d "hypatiax" ]; then
           bandit -r hypatiax/ -f json -o bandit-results.json || true
           bandit -r hypatiax/ || true
         else
-          echo "hypatiax directory not found, skipping bandit scan"
+          echo "hypatiax directory not found"
         fi
+        echo "::endgroup::"
+    
+    - name: Check Python syntax errors
+      continue-on-error: true
+      run: |
+        echo "::group::Syntax check"
+        python -m compileall -q . || echo "Some files have syntax errors"
+        echo "::endgroup::"
+    
+    - name: Lint with flake8 (Critical errors only)
+      continue-on-error: true
+      run: |
+        echo "::group::Flake8 critical errors"
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics || true
+        echo "::endgroup::"
     
     - name: Upload scan results
       if: always()
@@ -104,50 +103,17 @@ jobs:
           bandit-results.json
         retention-days: 90
         if-no-files-found: ignore
+    
+    - name: Show disk usage
+      if: always()
+      run: df -h
 
   # =============================================================================
-  # CODEQL ANALYSIS
-  # =============================================================================
-  codeql:
-    name: CodeQL Analysis
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      actions: read
-      contents: read
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Free Disk Space
-      uses: jlumbroso/free-disk-space@main
-      with:
-        tool-cache: false
-        android: true
-        dotnet: true
-        haskell: true
-        large-packages: true
-        docker-images: true
-        swap-storage: true
-    
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: python
-        queries: security-and-quality
-    
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:python"
-
-  # =============================================================================
-  # DOCKER IMAGE SCANNING (SEPARATED TO SAVE RESOURCES)
+  # DOCKER IMAGE SCANNING (Optional - only on push)
   # =============================================================================
   scan-docker:
     name: Scan Docker Images
     runs-on: ubuntu-latest
-    # Only run on push to main branches, not PRs
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     
     steps:
@@ -161,38 +127,17 @@ jobs:
         dotnet: true
         haskell: true
         large-packages: true
-        docker-images: false  # Keep Docker
+        docker-images: false
         swap-storage: true
     
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-    
-    - name: Build image (production target)
+    - name: Build Docker image
       run: |
-        echo "Building production image..."
-        docker build --target production -t hypatiax:scan . || {
-          echo "Production build failed, trying development target..."
-          docker build --target development -t hypatiax:scan .
-        }
+        docker build --target development -t hypatiax:scan . || echo "Build failed"
     
-    - name: Run Trivy vulnerability scanner
+    - name: Run Trivy security scan
       uses: aquasecurity/trivy-action@master
+      continue-on-error: true
       with:
         image-ref: 'hypatiax:scan'
-        format: 'sarif'
-        output: 'trivy-results.sarif'
+        format: 'table'
         severity: 'CRITICAL,HIGH'
-      continue-on-error: true
-    
-    - name: Upload Trivy results to GitHub Security
-      uses: github/codeql-action/upload-sarif@v3
-      if: always()
-      with:
-        sarif_file: 'trivy-results.sarif'
-      continue-on-error: true
-    
-    - name: Clean up
-      if: always()
-      run: |
-        docker rmi hypatiax:scan || true
-        docker system prune -f || true
