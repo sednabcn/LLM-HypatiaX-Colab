@@ -1,0 +1,156 @@
+name: HypatiaX CI/CD with GCS
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+env:
+  PYTHON_VERSION: '3.12'
+  GCS_BUCKET: 'hypatia-artifacts'
+  GCS_WHEELS_PATH: 'wheels'
+  GCS_REPORTS_PATH: 'reports'
+  GCS_MODELS_PATH: 'models'
+
+jobs:
+  # Job 1: Build and Test
+  build-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install build pytest pytest-cov
+      
+      - name: Run tests
+        run: |
+          pytest --cov=hypatia_x --cov-report=xml --cov-report=html
+      
+      - name: Build wheel
+        run: |
+          python -m build
+      
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+      
+      - name: Upload wheel to GCS
+        run: |
+          VERSION=$(python setup.py --version)
+          COMMIT_SHA=$(git rev-parse --short HEAD)
+          
+          # Upload with version and commit info
+          gsutil cp dist/*.whl gs://${{ env.GCS_BUCKET }}/${{ env.GCS_WHEELS_PATH }}/${VERSION}/
+          gsutil cp dist/*.whl gs://${{ env.GCS_BUCKET }}/${{ env.GCS_WHEELS_PATH }}/latest/
+          
+          # Add metadata
+          gsutil setmeta \
+            -h "x-goog-meta-commit:${COMMIT_SHA}" \
+            -h "x-goog-meta-branch:${GITHUB_REF_NAME}" \
+            -h "x-goog-meta-build-date:$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            gs://${{ env.GCS_BUCKET }}/${{ env.GCS_WHEELS_PATH }}/${VERSION}/*.whl
+      
+      - name: Upload test reports to GCS
+        if: always()
+        run: |
+          gsutil -m cp -r htmlcov/ \
+            gs://${{ env.GCS_BUCKET }}/${{ env.GCS_REPORTS_PATH }}/${GITHUB_SHA}/
+          gsutil cp coverage.xml \
+            gs://${{ env.GCS_BUCKET }}/${{ env.GCS_REPORTS_PATH }}/${GITHUB_SHA}/
+      
+      - name: Generate GCS URLs
+        run: |
+          echo "### 📦 Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Wheel: https://storage.googleapis.com/${{ env.GCS_BUCKET }}/${{ env.GCS_WHEELS_PATH }}/latest/" >> $GITHUB_STEP_SUMMARY
+          echo "Reports: https://storage.googleapis.com/${{ env.GCS_BUCKET }}/${{ env.GCS_REPORTS_PATH }}/${GITHUB_SHA}/" >> $GITHUB_STEP_SUMMARY
+
+  # Job 2: Train Model and Upload to GCS
+  train-model:
+    needs: build-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+      
+      - name: Download latest wheel from GCS
+        run: |
+          gsutil cp gs://${{ env.GCS_BUCKET }}/${{ env.GCS_WHEELS_PATH }}/latest/*.whl ./
+          pip install *.whl
+      
+      - name: Download training data from GCS
+        run: |
+          gsutil -m cp -r gs://${{ env.GCS_BUCKET }}/datasets/ ./data/
+      
+      - name: Train model
+        run: |
+          python scripts/train_model.py \
+            --data-dir ./data \
+            --output-dir ./models
+      
+      - name: Upload trained model to GCS
+        run: |
+          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+          
+          # Upload with timestamp
+          gsutil -m cp -r ./models/ \
+            gs://${{ env.GCS_BUCKET }}/${{ env.GCS_MODELS_PATH }}/${TIMESTAMP}/
+          
+          # Also update 'latest'
+          gsutil -m cp -r ./models/ \
+            gs://${{ env.GCS_BUCKET }}/${{ env.GCS_MODELS_PATH }}/latest/
+          
+          # Add metadata
+          gsutil setmeta \
+            -h "x-goog-meta-commit:${GITHUB_SHA}" \
+            -h "x-goog-meta-training-date:${TIMESTAMP}" \
+            gs://${{ env.GCS_BUCKET }}/${{ env.GCS_MODELS_PATH }}/${TIMESTAMP}/**
+
+  # Job 3: Deploy to Cloud Run
+  deploy:
+    needs: train-model
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+      
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: hypatia-x
+          region: us-central1
+          source: .
+          env_vars: |
+            GCS_BUCKET=${{ env.GCS_BUCKET }}
+            GCS_MODELS_PATH=${{ env.GCS_MODELS_PATH }}/latest
