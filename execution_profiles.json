@@ -1,0 +1,30 @@
+# Hybrid workflow (combines NER + LLM)
+"hybrid": [
+    "config",
+    "datasets",
+    "patterns",
+    "custom_entities",
+    "utils",
+    "tools",
+    "mappings",
+    "models",
+    "model_implementations",
+    "custom_ner",
+    "data_spacy",
+    "agents",
+    "core",
+    "experiments",
+    "scripts_",
+    "tests",
+],
+
+# Evaluation-only workflow (no training)
+"evaluation": [
+    "config",
+    "datasets",
+    "utils",
+    "models",
+    "model_implementations",
+    "core",  # evaluation only
+    "tests",
+],

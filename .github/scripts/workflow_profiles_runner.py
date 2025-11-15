@@ -1,19 +1,14 @@
 #!/usr/bin/env python3
 """
-HypatiaX Hybrid Workflow Runner for GitHub Actions
-Combines the best of both versions with full backward compatibility
+HypatiaX Workflow Runner for GitHub Actions
+Executes all tests and scripts across directories in specified order
+Generates comprehensive reports for each execution
 
-Features from Version 2 (Priority):
-- Multiple execution profiles (NER, LLM, agents, transformers)
-- Architecture notes and documentation
-- Better file detection and filtering
-- Test directory awareness
-- Flexible module organization
-
-Features from Version 1 (Preserved):
-- Simple default execution order
-- Clean reporting structure
-- Robust error handling
+Updated to match actual HypatiaX architecture with:
+- agents/ (base, coordinators, learning, memory, specialists, workflows)
+- tools/ (formal, llm_providers, numerical, symbolic, transformers, validation, visualization)
+- model_implementations/ (agents, llm, ner, transformers)
+- tests/ (unit, integration, e2e)
 """
 
 import os
@@ -23,196 +18,111 @@ import json
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional, Set
+from typing import List, Dict, Tuple, Optional
 import traceback
 
 
 class WorkflowRunner:
-    """Execute tests and scripts across HypatiaX project with comprehensive reporting"""
+    """Execute tests and scripts across HypatiaX project with reporting"""
     
-    def __init__(self, base_path: str = ".", profile: str = "auto"):
+    def __init__(self, base_path: str = "."):
         self.base_path = Path(base_path).resolve()
         self.report_dir = self.base_path / "workflow_reports"
         self.report_dir.mkdir(exist_ok=True)
         
         # Execution order profiles for different workflows
         self.execution_profiles = {
-            # NER-focused workflow (original Version 1 structure)
+            # NER-focused workflow (original)
             "ner": [
-                "config",
-                "datasets",
-                "patterns", 
-                "custom_entities",
-                "custom_ner",
-                "data_spacy",
-                "mappings",
-                "models",
-                "model_implementations",
-                "core",
-                "tools",
-                "agents",
-                "utils",
-                "scripts_",
-                "experiments",
-                "tests",
+                "config",                    # Configuration first
+                "datasets",                  # Data preparation
+                "patterns",                  # Pattern definitions
+                "custom_entities",           # Custom entity definitions
+                "custom_ner",                # Custom NER components
+                "data_spacy",                # SpaCy data processing
+                "mappings",                  # Mappings and schemas
+                "models",                    # Base models
+                "model_implementations",     # Model implementations (ner, llm, transformers, agents)
+                "core",                      # Core training/evaluation/deployment
+                "tools",                     # Tools (formal, numerical, symbolic, llm_providers, etc.)
+                "agents",                    # Agent systems (base, coordinators, specialists, workflows)
+                "utils",                     # Utilities
+                "scripts_",                  # Scripts
+                "experiments",               # Experiments
+                "tests",                     # All tests (unit, integration, e2e)
             ],
             
             # LLM-focused workflow (optimized for language models)
             "llm": [
-                "config",
-                "datasets",
-                "utils",
-                "tools",
-                "mappings",
-                "models",
-                "model_implementations",
-                "agents",
-                "core",
-                "experiments",
-                "scripts_",
-                "tests",
+                "config",                    # 1. Configuration first
+                "datasets",                  # 2. Data preparation (raw data collection)
+                "utils",                     # 3. Utilities (preprocessing helpers)
+                "tools",                     # 4. Tools (llm_providers, validation, formal, numerical)
+                "mappings",                  # 5. Mappings and schemas
+                "models",                    # 6. Base model definitions
+                "model_implementations",     # 7. LLM implementations (llm/, transformers/)
+                "agents",                    # 8. Agent systems (coordinators, specialists for LLM orchestration)
+                "core",                      # 9. Training/evaluation/deployment
+                "experiments",               # 10. Experiments (fine-tuning, prompt engineering)
+                "scripts_",                  # 11. Scripts (deployment, batch processing)
+                "tests",                     # 12. Tests (unit, integration, e2e)
             ],
             
             # Agent-focused workflow (multi-agent systems)
             "agents": [
-                "config",
-                "datasets",
-                "tools",
-                "utils",
-                "models",
-                "model_implementations",
-                "agents",
-                "core",
-                "experiments",
-                "scripts_",
-                "tests",
+                "config",                    # 1. Configuration
+                "datasets",                  # 2. Data preparation
+                "tools",                     # 3. Tools (llm_providers, validation)
+                "utils",                     # 4. Utilities
+                "models",                    # 5. Base models
+                "model_implementations",     # 6. Agent model implementations
+                "agents",                    # 7. Agent systems (base, coordinators, specialists, workflows)
+                "core",                      # 8. Core functionality
+                "experiments",               # 9. Agent experiments
+                "scripts_",                  # 10. Scripts
+                "tests",                     # 11. Tests
             ],
             
             # Transformer-focused workflow
             "transformers": [
-                "config",
-                "datasets",
-                "utils",
-                "mappings",
-                "tools",
-                "models",
-                "model_implementations",
-                "core",
-                "experiments",
-                "scripts_",
-                "tests",
-            ],
-            
-            # Simple/Legacy workflow (Version 1 compatibility)
-            "legacy": [
-                "datasets",
-                "patterns", 
-                "custom_ner",
-                "data_spacy",
-                "models",
-                "core",
-                "mappings",
-                "scripts_"
+                "config",                    # 1. Configuration
+                "datasets",                  # 2. Data preparation
+                "utils",                     # 3. Utilities
+                "mappings",                  # 4. Mappings
+                "tools",                     # 5. Tools (transformers, validation)
+                "models",                    # 6. Base models
+                "model_implementations",     # 7. Transformer implementations
+                "core",                      # 8. Training/evaluation
+                "experiments",               # 9. Experiments
+                "scripts_",                  # 10. Scripts
+                "tests",                     # 11. Tests
             ],
         }
         
-        # Auto-detect best profile or use specified
-        self.profile = self._detect_profile() if profile == "auto" else profile
-        self.execution_order = self.execution_profiles.get(
-            self.profile, 
-            self.execution_profiles["ner"]
-        )
+        # Default to NER workflow for backward compatibility
+        self.execution_order = self.execution_profiles["ner"]
         
         # Define which directories contain tests vs scripts
-        self.test_directories: Set[str] = {
-            "tests",
-            "test",
+        self.test_directories = {
+            "tests",                     # Main test directory
         }
-        
-        # Architecture detection and notes
-        self.architecture_info = self._detect_architecture()
         
         self.results = {
             "timestamp": datetime.now().isoformat(),
             "base_path": str(self.base_path),
             "python_version": f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}",
             "platform": sys.platform,
-            "profile": self.profile,
-            "detected_architecture": self.architecture_info,
-            "modules": {}
+            "modules": {},
+            "architecture_notes": {
+                "agents": "Multi-agent system with coordinators, specialists, and workflows",
+                "tools": "Formal, numerical, symbolic, transformers, validation, visualization",
+                "model_implementations": "Implementations for agents, llm, ner, transformers",
+                "tests": "Unit, integration, and end-to-end tests"
+            }
         }
         
         # GitHub Actions specific
         self.is_github_actions = os.getenv('GITHUB_ACTIONS') == 'true'
-        
-    def _detect_architecture(self) -> Dict[str, any]:
-        """Detect project architecture and provide notes"""
-        arch_info = {
-            "type": "unknown",
-            "has_agents": False,
-            "has_tools": False,
-            "has_model_implementations": False,
-            "has_tests_dir": False,
-            "notes": {}
-        }
-        
-        # Check for key directories
-        if (self.base_path / "agents").exists():
-            arch_info["has_agents"] = True
-            subdirs = [d.name for d in (self.base_path / "agents").iterdir() if d.is_dir()]
-            arch_info["notes"]["agents"] = f"Multi-agent system: {', '.join(subdirs)}"
-            
-        if (self.base_path / "tools").exists():
-            arch_info["has_tools"] = True
-            subdirs = [d.name for d in (self.base_path / "tools").iterdir() if d.is_dir()]
-            arch_info["notes"]["tools"] = f"Tool modules: {', '.join(subdirs)}"
-            
-        if (self.base_path / "model_implementations").exists():
-            arch_info["has_model_implementations"] = True
-            subdirs = [d.name for d in (self.base_path / "model_implementations").iterdir() if d.is_dir()]
-            arch_info["notes"]["model_implementations"] = f"Implementations: {', '.join(subdirs)}"
-            
-        if (self.base_path / "tests").exists():
-            arch_info["has_tests_dir"] = True
-            subdirs = [d.name for d in (self.base_path / "tests").iterdir() if d.is_dir()]
-            arch_info["notes"]["tests"] = f"Test structure: {', '.join(subdirs)}"
-        
-        # Determine architecture type
-        if arch_info["has_agents"] and arch_info["has_tools"]:
-            arch_info["type"] = "full_multi_component"
-        elif arch_info["has_agents"]:
-            arch_info["type"] = "agent_focused"
-        elif arch_info["has_model_implementations"]:
-            arch_info["type"] = "model_focused"
-        elif (self.base_path / "custom_ner").exists():
-            arch_info["type"] = "ner_focused"
-        else:
-            arch_info["type"] = "simple"
-            
-        return arch_info
-    
-    def _detect_profile(self) -> str:
-        """Auto-detect the best execution profile based on project structure"""
-        arch = self._detect_architecture()
-        
-        # Priority order: agents > llm > transformers > ner > legacy
-        if arch["has_agents"] and arch["has_tools"]:
-            if (self.base_path / "model_implementations" / "llm").exists():
-                return "llm"
-            return "agents"
-        
-        if (self.base_path / "model_implementations" / "transformers").exists():
-            return "transformers"
-            
-        if (self.base_path / "custom_ner").exists() or (self.base_path / "data_spacy").exists():
-            return "ner"
-            
-        # Check for legacy structure (Version 1)
-        legacy_dirs = ["datasets", "patterns", "custom_ner", "data_spacy"]
-        if all((self.base_path / d).exists() for d in legacy_dirs[:2]):
-            return "legacy"
-            
-        return "ner"  # Default fallback
         
     def log(self, message: str, level: str = "info"):
         """Log with GitHub Actions annotations support"""
@@ -227,78 +137,50 @@ class WorkflowRunner:
                 print(f"::notice::{message}")
         
     def find_executable_files(self, directory: Path) -> Tuple[List[Path], List[Path]]:
-        """Find all test files and script files in directory with smart filtering"""
+        """Find all test files and script files in directory"""
         tests = []
         scripts = []
         
         if not directory.exists():
             return tests, scripts
-        
-        # Files and patterns to exclude
-        exclude_patterns = {
-            "__pycache__",
-            ".pytest_cache",
-            ".mypy_cache",
-            ".tox",
-            "backup_before_extension",
-            ".backup",
-            "node_modules",
-            "venv",
-            ".venv",
-        }
-        
+            
         for item in directory.rglob("*.py"):
-            # Skip if in excluded directory
-            if any(pattern in str(item) for pattern in exclude_patterns):
+            # Skip __init__.py and __pycache__
+            if item.name == "__init__.py" or "__pycache__" in str(item):
                 continue
             
-            # Skip __init__.py
-            if item.name == "__init__.py":
-                continue
-            
-            # Skip backup and hidden files
+            # Skip backup files and hidden files
             if (item.name.endswith("~") or 
-                item.name.endswith(".bak") or
                 item.name.startswith("#") or 
                 item.name.startswith(".")):
                 continue
+            
+            # Skip backup_before_extension directory
+            if "backup_before_extension" in str(item):
+                continue
                 
-            # Get parent directory name for context
+            # Categorize by filename pattern or directory
             parent_name = item.parent.name
-            rel_path = str(item.relative_to(directory))
             
-            # Categorize files
-            is_test = False
-            is_script = False
-            
-            # Test file detection (high priority)
+            # Files in tests/ directory or test_ prefix
             if (item.name.startswith("test_") or 
                 item.name.startswith("Test_") or
-                item.name.endswith("_test.py") or
-                "tests" in rel_path or
-                parent_name in ["unit", "integration", "e2e", "functional"]):
-                is_test = True
-            
-            # Script file detection
-            elif (item.name.startswith("script_") or
-                  item.name.startswith("run_") or
-                  "script" in item.name.lower() or
-                  parent_name in ["scripts", "scripts_", "migration", "deploy"]):
-                is_script = True
-            
-            # Training/evaluation/workflow files
-            elif any(keyword in item.name.lower() for keyword in [
-                "train", "training", "evaluate", "evaluation", "deploy", "deployment",
-                "workflow", "pipeline", "proc_time", "benchmark", "experiment"
-            ]):
-                is_script = True
-            
-            # Add to appropriate list
-            if is_test:
+                "tests" in str(item.parent) or
+                parent_name in ["unit", "integration", "e2e"]):
                 tests.append(item)
-            elif is_script:
+            
+            # Script files
+            elif (item.name.startswith("script_") or 
+                  "script" in item.name.lower() or
+                  parent_name in ["scripts_", "migration"]):
                 scripts.append(item)
-            # Else: ignore files that don't match patterns
+            
+            # Training, evaluation, deployment files
+            elif any(x in item.name.lower() for x in [
+                "run_", "train", "evaluate", "deploy", 
+                "workflow", "pipeline", "proc_time"
+            ]):
+                scripts.append(item)
                 
         return sorted(tests), sorted(scripts)
     
@@ -385,13 +267,11 @@ class WorkflowRunner:
             print(f"::group::Module: {module_name}")
         
         module_path = self.base_path / module_name
-        is_test_dir = module_name in self.test_directories
-        
         module_result = {
             "module": module_name,
             "path": str(module_path.relative_to(self.base_path)) if module_path.exists() else module_name,
             "exists": module_path.exists(),
-            "is_test_directory": is_test_dir,
+            "is_test_directory": module_name in self.test_directories,
             "tests": [],
             "scripts": [],
             "summary": {
@@ -417,17 +297,30 @@ class WorkflowRunner:
         self.log(f"\nFound {len(tests)} test files")
         self.log(f"Found {len(scripts)} script files")
         
-        # Execute tests first (always)
-        for test_file in tests:
-            result = self.execute_file(test_file, "test")
-            module_result["tests"].append(result)
-            self._update_summary(module_result["summary"], result)
-        
-        # Then execute scripts
-        for script_file in scripts:
-            result = self.execute_file(script_file, "script")
-            module_result["scripts"].append(result)
-            self._update_summary(module_result["summary"], result)
+        # For test directories, prioritize tests
+        if module_name in self.test_directories:
+            # Execute tests first
+            for test_file in tests:
+                result = self.execute_file(test_file, "test")
+                module_result["tests"].append(result)
+                self._update_summary(module_result["summary"], result)
+            
+            # Scripts are less common in test directories
+            for script_file in scripts:
+                result = self.execute_file(script_file, "script")
+                module_result["scripts"].append(result)
+                self._update_summary(module_result["summary"], result)
+        else:
+            # For other directories, execute in order found
+            for test_file in tests:
+                result = self.execute_file(test_file, "test")
+                module_result["tests"].append(result)
+                self._update_summary(module_result["summary"], result)
+            
+            for script_file in scripts:
+                result = self.execute_file(script_file, "script")
+                module_result["scripts"].append(result)
+                self._update_summary(module_result["summary"], result)
         
         # Log module summary
         summary = module_result["summary"]
@@ -466,7 +359,6 @@ class WorkflowRunner:
             f.write(f"Timestamp: {self.results['timestamp']}\n")
             f.write(f"Python Version: {self.results['python_version']}\n")
             f.write(f"Platform: {self.results['platform']}\n")
-            f.write(f"Profile: {self.profile}\n")
             f.write(f"Module Path: {module_result['path']}\n")
             f.write(f"Module Exists: {module_result['exists']}\n")
             f.write(f"Is Test Directory: {module_result['is_test_directory']}\n\n")
@@ -530,16 +422,14 @@ class WorkflowRunner:
     def run(self, modules: Optional[List[str]] = None):
         """Execute complete workflow"""
         self.log("\n" + "="*80)
-        self.log("HypatiaX Hybrid Workflow Runner")
+        self.log("HypatiaX Workflow Runner")
         self.log("="*80)
         self.log(f"Base Path: {self.base_path}")
         self.log(f"Report Directory: {self.report_dir}")
         self.log(f"Python Version: {self.results['python_version']}")
         self.log(f"Platform: {self.results['platform']}")
-        self.log(f"Profile: {self.profile}")
-        self.log(f"Architecture Type: {self.architecture_info['type']}")
         
-        # Use custom modules if provided, otherwise use detected profile order
+        # Use custom modules if provided, otherwise use default order
         execution_list = modules if modules else self.execution_order
         self.log(f"Execution Order: {' → '.join(execution_list)}")
         self.log("="*80 + "\n")
@@ -609,24 +499,13 @@ class WorkflowRunner:
             f.write(f"Base Path: {self.results['base_path']}\n")
             f.write(f"Python Version: {self.results['python_version']}\n")
             f.write(f"Platform: {self.results['platform']}\n")
-            f.write(f"Profile Used: {self.profile}\n")
             f.write(f"Total Duration: {self.results['total_duration']}s\n\n")
             
-            # Architecture information
-            arch = self.results.get("detected_architecture", {})
-            f.write("DETECTED ARCHITECTURE\n")
+            f.write("ARCHITECTURE NOTES\n")
             f.write("-"*80 + "\n")
-            f.write(f"Type: {arch.get('type', 'unknown')}\n")
-            f.write(f"Has Agents: {arch.get('has_agents', False)}\n")
-            f.write(f"Has Tools: {arch.get('has_tools', False)}\n")
-            f.write(f"Has Model Implementations: {arch.get('has_model_implementations', False)}\n")
-            f.write(f"Has Tests Directory: {arch.get('has_tests_dir', False)}\n\n")
-            
-            if arch.get("notes"):
-                f.write("Architecture Notes:\n")
-                for key, note in arch["notes"].items():
-                    f.write(f"  {key}: {note}\n")
-                f.write("\n")
+            for key, note in self.results.get("architecture_notes", {}).items():
+                f.write(f"{key}: {note}\n")
+            f.write("\n")
             
             f.write("MODULE SUMMARIES\n")
             f.write("-"*80 + "\n\n")
@@ -643,8 +522,6 @@ class WorkflowRunner:
                 summary = module.get("summary", {})
                 
                 f.write(f"{module_name.upper()}\n")
-                f.write(f"  Path: {module.get('path', 'N/A')}\n")
-                f.write(f"  Exists: {module.get('exists', False)}\n")
                 f.write(f"  Total Files: {summary.get('total_files', 0)}\n")
                 f.write(f"  Successful: {summary.get('successful', 0)}\n")
                 f.write(f"  Failed: {summary.get('failed', 0)}\n")
@@ -663,8 +540,7 @@ class WorkflowRunner:
             f.write(f"Total Errors: {overall['errors']}\n")
             f.write(f"Total Timeouts: {overall['timeouts']}\n")
             if overall['total_files'] > 0:
-                success_rate = (overall['successful']/overall['total_files']*100)
-                f.write(f"Success Rate: {success_rate:.1f}%\n")
+                f.write(f"Success Rate: {(overall['successful']/overall['total_files']*100):.1f}%\n")
         
         self.log(f"\n✓ Master reports saved:")
         self.log(f"  - {json_path}")
@@ -676,24 +552,7 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(
-        description="HypatiaX Hybrid Workflow Runner - Execute tests and scripts with comprehensive reporting",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  # Auto-detect profile and run all modules
-  python workflow_runner.py
-  
-  # Use specific profile
-  python workflow_runner.py --profile llm
-  
-  # Run specific modules only
-  python workflow_runner.py --modules datasets models tests
-  
-  # Combine profile with specific modules
-  python workflow_runner.py --profile agents --modules agents tools tests
-  
-Available profiles: ner, llm, agents, transformers, legacy, auto
-        """
+        description="HypatiaX Workflow Runner - Execute tests and scripts with reporting"
     )
     parser.add_argument(
         "--base-path",
@@ -703,36 +562,12 @@ Available profiles: ner, llm, agents, transformers, legacy, auto
     parser.add_argument(
         "--modules",
         nargs="+",
-        help="Specific modules to run (space-separated, overrides profile)"
-    )
-    parser.add_argument(
-        "--profile",
-        default="auto",
-        choices=["auto", "ner", "llm", "agents", "transformers", "legacy"],
-        help="Execution profile to use (default: auto-detect)"
-    )
-    parser.add_argument(
-        "--list-profiles",
-        action="store_true",
-        help="List available profiles and exit"
+        help="Specific modules to run (space-separated)"
     )
     
     args = parser.parse_args()
     
-    # List profiles if requested
-    if args.list_profiles:
-        print("\nAvailable Execution Profiles:\n")
-        runner = WorkflowRunner(args.base_path, profile="auto")
-        for profile_name, modules in runner.execution_profiles.items():
-            print(f"{profile_name}:")
-            print(f"  Modules: {' → '.join(modules)}")
-            print()
-        print(f"Auto-detected profile for current project: {runner.profile}")
-        print(f"Architecture type: {runner.architecture_info['type']}\n")
-        return 0
-    
-    # Create runner with specified profile
-    runner = WorkflowRunner(args.base_path, profile=args.profile)
+    runner = WorkflowRunner(args.base_path)
     
     try:
         exit_code = runner.run(modules=args.modules)

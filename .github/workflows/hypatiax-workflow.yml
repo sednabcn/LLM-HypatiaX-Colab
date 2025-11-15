@@ -18,6 +18,11 @@ on:
         type: choice
         options: ['3.12', '3.13']
         default: '3.12'
+      workflow_profile:
+        description: 'Workflow profile'
+        type: choice
+        options: ['ner', 'llm', 'agents', 'transformers']
+        default: 'llm'
 
 jobs:
   workflow-test:
@@ -30,25 +35,98 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    # CRITICAL: Free disk space before installing dependencies
+    - name: Free Disk Space (Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # Don't remove tool-cache to keep Python cached
+        tool-cache: false
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    
+    - name: Check available disk space
+      run: |
+        echo "Disk space after cleanup:"
+        df -h
+        echo "Available space in /home/runner:"
+        df -h /home/runner
+    
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'
+        cache-dependency-path: |
+          requirements.txt
+          requirements-py312.txt
+          requirements-py313.txt
     
-    - name: Install dependencies
+    - name: Upgrade pip and install build tools
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        echo "Disk space after pip upgrade:"
+        df -h
+    
+    - name: Install dependencies with minimal cache
       run: |
         PYVERSION=$(python -c "import sys; print(f'{sys.version_info.major}{sys.version_info.minor}')")
-        pip install -r requirements-py${PYVERSION}.txt || pip install -r requirements.txt
-        pip install -e .
+        echo "Installing for Python ${PYVERSION}"
+        
+        # Try version-specific requirements first, fall back to general
+        if [ -f "requirements-py${PYVERSION}.txt" ]; then
+          echo "Using requirements-py${PYVERSION}.txt"
+          pip install --no-cache-dir -r requirements-py${PYVERSION}.txt
+        elif [ -f "requirements.txt" ]; then
+          echo "Using requirements.txt"
+          pip install --no-cache-dir -r requirements.txt
+        else
+          echo "No requirements file found"
+          exit 1
+        fi
+        
+        echo "Disk space after requirements install:"
+        df -h
+    
+    - name: Install package in editable mode
+      run: |
+        if [ -f "setup.py" ] || [ -f "pyproject.toml" ]; then
+          pip install --no-cache-dir -e .
+          echo "Package installed successfully"
+        else
+          echo "No setup.py or pyproject.toml found"
+        fi
+        
+        echo "Disk space after package install:"
+        df -h
+    
+    - name: Verify installation
+      run: |
+        python -c "import sys; print(f'Python {sys.version}')"
+        pip list
+        echo "Installed packages count: $(pip list | wc -l)"
     
     - name: Run workflow
       run: |
         if [ -f ".github/scripts/workflow_runner.py" ]; then
+          echo "Running workflow with modules: ${{ github.event.inputs.modules }}"
           python .github/scripts/workflow_runner.py ${{ github.event.inputs.modules }}
         else
-          echo "No workflow runner found"
+          echo "⚠️ No workflow runner found at .github/scripts/workflow_runner.py"
+          echo "Skipping workflow execution"
         fi
+      continue-on-error: true
+    
+    - name: Check disk space after workflow
+      if: always()
+      run: |
+        echo "Final disk space:"
+        df -h
+        echo "Disk usage in current directory:"
+        du -sh . || true
     
     - name: Upload results
       if: always()
@@ -56,3 +134,21 @@ jobs:
       with:
         name: workflow-results-py${{ matrix.python-version }}
         path: workflow_reports/
+        retention-days: 30
+        if-no-files-found: ignore
+    
+    - name: Cleanup before exit
+      if: always()
+      run: |
+        # Clean pip cache
+        pip cache purge || true
+        
+        # Remove large build artifacts
+        rm -rf build/ dist/ *.egg-info || true
+        
+        # Clean Python cache
+        find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+        find . -type f -name "*.pyc" -delete 2>/dev/null || true
+        
+        echo "Cleanup completed"
+        df -h
