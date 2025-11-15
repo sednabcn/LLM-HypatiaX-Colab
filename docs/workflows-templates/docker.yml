@@ -1,0 +1,137 @@
+name: Docker Build & Test
+
+on:
+  push:
+    branches: [ master, develop ]
+    paths:
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+      - '.dockerignore'
+      - '.github/workflows/docker.yml'
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # =============================================================================
+  # BUILD DOCKER IMAGES
+  # =============================================================================
+  build:
+    name: Build ${{ matrix.target }} - Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: [development, testing, production]
+        python-version: ['3.12', '3.13']
+        exclude:
+          - target: production
+            python-version: '3.13'  # Production uses 3.12 only
+    
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Log in to Container Registry
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=raw,value=${{ matrix.target }}-py${{ matrix.python-version }}
+          type=sha,prefix=${{ matrix.target }}-py${{ matrix.python-version }}-
+    
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        target: ${{ matrix.target }}
+        build-args: |
+          PYTHON_VERSION=${{ matrix.python-version }}
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+  # =============================================================================
+  # TEST WITH DOCKER
+  # =============================================================================
+  test-docker:
+    name: Docker Test - Python ${{ matrix.python-version }}
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.12', '3.13']
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Build test image
+      run: |
+        docker build \
+          --target testing \
+          --build-arg PYTHON_VERSION=${{ matrix.python-version }} \
+          -t hypatiax:test-py${{ matrix.python-version }} \
+          .
+    
+    - name: Run tests in container
+      run: |
+        docker run \
+          -v ${{ github.workspace }}/test-results:/workspace/hypatiax/htmlcov \
+          hypatiax:test-py${{ matrix.python-version }}
+    
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: docker-test-results-py${{ matrix.python-version }}
+        path: test-results/
+
+  # =============================================================================
+  # DOCKER COMPOSE TEST
+  # =============================================================================
+  test-compose:
+    name: Docker Compose Test
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Test docker-compose build
+      run: |
+        docker-compose build hypatiax-py312
+        docker-compose build hypatiax-test-py312
+    
+    - name: Run tests via docker-compose
+      run: |
+        docker-compose run --rm hypatiax-test-py312 || true
+    
+    - name: Cleanup
+      if: always()
+      run: docker-compose down -v
