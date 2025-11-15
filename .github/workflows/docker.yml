@@ -29,7 +29,7 @@ jobs:
         python-version: ['3.12', '3.13']
         exclude:
           - target: production
-            python-version: '3.13'  # Production uses 3.12 only
+            python-version: '3.12'  # Production uses 3.12 only
     
     permissions:
       contents: read
