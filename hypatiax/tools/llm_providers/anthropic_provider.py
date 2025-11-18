@@ -1,13 +1,13 @@
-tools/llm_providers/anthropic_provider.py
 #!/usr/bin/env python3
 """
 Anthropic Claude API Provider for Formula Generation
-Part of HypatiaX tools/ directory
+Part of HypatiaX tools/llm_providers/anthropic_provider.py
 """
 import anthropic
 import json
 from typing import Dict, Any, Optional, List
 from pathlib import Path
+
 
 class AnthropicProvider:
     """
@@ -176,3 +176,34 @@ Return ONLY valid JSON with the same structure as before.
         
         content = message.content[0].text
         return self._parse_response(content)
+
+
+# Example usage and testing
+if __name__ == "__main__":
+    import os
+    from dotenv import load_dotenv
+    
+    load_dotenv()
+    api_key = os.getenv('ANTHROPIC_API_KEY')
+    
+    if not api_key:
+        print("❌ ANTHROPIC_API_KEY not found in environment")
+        exit(1)
+    
+    provider = AnthropicProvider(api_key=api_key)
+    
+    print("Testing Anthropic Provider...")
+    print("=" * 60)
+    
+    # Test formula generation
+    results = provider.generate_formula(
+        requirements="Calculate impermanent loss for Uniswap V2 pools",
+        domain="defi",
+        n_candidates=1
+    )
+    
+    formula = results[0]
+    print(f"\n📐 Formula: {formula['formula_latex']}")
+    print(f"\n💻 Implementation:\n{formula['formula_python']}")
+    print(f"\n📝 Explanation: {formula['explanation']}")
+    print("\n✓ Test completed!")

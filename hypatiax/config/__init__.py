@@ -1,39 +1,24 @@
 """
 HypatiaX Configuration Module
-
-This module provides centralized configuration management for:
-- Paths (datasets, models, outputs)
-- Model training parameters
-- Data processing settings
-- Entity labels and constants
-
-Usage:
-    from hypatiax.config import config, paths, ModelConfig
-    
-    # Access paths
-    datasets_path = paths.datasets
-    
-    # Access model config
-    training_params = ModelConfig.training_desc()
 """
 
-from .base import Config
-from .paths import PathConfig, paths
-from .model_configs import ModelConfig, TrainingConfig, DataConfig
-from .constants import EntityLabels, FileFormats, DEFAULT_STOPWORDS
+from hypatiax.config.paths import PathConfig, config
 
-# Global config instance
-config = Config()
+# Try to import SecretsConfig
+try:
+    from hypatiax.config.config_secret_keys import SecretsConfig, secrets
+    _has_secrets = True
+except ImportError as e:
+    SecretsConfig = None
+    secrets = None
+    _has_secrets = False
+    import warnings
+    warnings.warn(f"SecretsConfig not available: {e}")
 
 __all__ = [
-    'config',
-    'paths',
-    'Config',
     'PathConfig',
-    'ModelConfig',
-    'TrainingConfig',
-    'DataConfig',
-    'EntityLabels',
-    'FileFormats',
-    'DEFAULT_STOPWORDS'
+    'config',
 ]
+
+if _has_secrets:
+    __all__.extend(['SecretsConfig', 'secrets'])
