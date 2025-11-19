@@ -1,7 +1,8 @@
 """
 HypatiaX Secrets Configuration - Complements PathConfig
 
-UPDATED: Now searches for .env in both project root AND hypatiax/ directory
+Add this to your existing config.py file, or save as secrets_config.py
+Works alongside the existing PathConfig class for managing API keys and secrets.
 """
 
 import os
@@ -17,12 +18,21 @@ class SecretsConfig:
     """
     Manage API keys and secrets for HypatiaX.
     
-    UPDATED: Searches for .env files in multiple locations:
-    1. Project root (.env)
-    2. hypatiax/ directory (hypatiax/.env)  # NEW!
-    3. Current working directory
-    4. Script directory
-    5. Parent directories
+    Integrates with existing PathConfig and works in:
+    - Local development (reads from .env file)
+    - GitHub Actions (reads from secrets via environment variables)
+    - Docker (reads from environment variables)
+    - Cloud deployments (GCP, AWS, Azure)
+    
+    Usage:
+        from hypatiax.config.config import secrets
+        from hypatiax.config.config_path import PathConfig, config_path
+        
+        # Use paths from PathConfig
+        data_path = config_path.datasets / "training_data.json"
+        
+        # Use secrets from SecretsConfig
+        client = OpenAI(api_key=secrets.openai_api_key)
     """
     
     def __init__(self, env_file: Optional[str] = ".env", path_config: Optional[Any] = None):
@@ -30,19 +40,18 @@ class SecretsConfig:
         Initialize secrets configuration.
         
         Args:
-            env_file: Name of .env file (default: ".env")
+            env_file: Path to .env file (relative to project root)
             path_config: Optional PathConfig instance for resolving paths
         """
         self.path_config = path_config
         self.environment = self._detect_environment()
         self._source = "not_loaded"
-        self._loaded_files = []
         
-        # Load environment variables from multiple locations
-        self._load_env_files(env_file)
+        # Load environment variables
+        self._load_env_file(env_file)
         self._load_secrets()
         
-        logger.info(f"SecretsConfig initialized: environment={self.environment}, loaded={len(self._loaded_files)} file(s)")
+        logger.info(f"SecretsConfig initialized: environment={self.environment}, source={self._source}")
     
     def _detect_environment(self) -> str:
         """Detect execution environment (sync with PathConfig)."""
@@ -61,21 +70,14 @@ class SecretsConfig:
         else:
             return 'local'
     
-    def _load_env_files(self, env_file: str):
-        """
-        Load .env files from multiple locations.
-        
-        NEW: Now loads from BOTH root and hypatiax/ directories!
-        This allows you to keep:
-        - Project config in root .env (HYPATIAX_ROOT, etc.)
-        - API keys in hypatiax/.env (OPENAI_API_KEY, etc.)
-        """
+    def _load_env_file(self, env_file: str):
+        """Load .env file if it exists."""
+        # Try to find .env file
         env_paths = []
         
-        # 1. If we have PathConfig, use project root AND hypatiax directory
+        # 1. If we have PathConfig, use project root
         if self.path_config:
             env_paths.append(self.path_config.root / env_file)
-            env_paths.append(self.path_config.hypatiax / env_file)  # NEW!
         
         # 2. Current working directory
         env_paths.append(Path.cwd() / env_file)
@@ -89,30 +91,21 @@ class SecretsConfig:
             env_paths.append(current / env_file)
             current = current.parent
         
-        # Try each path and load ALL that exist
-        loaded_count = 0
+        # Try each path
         for env_path in env_paths:
-            if env_path.exists() and env_path not in self._loaded_files:
-                try:
-                    load_dotenv(env_path, override=False)  # Don't override existing vars
-                    self._loaded_files.append(env_path)
-                    loaded_count += 1
-                    logger.info(f"Loaded environment from {env_path}")
-                except Exception as e:
-                    logger.warning(f"Failed to load {env_path}: {e}")
+            if env_path.exists():
+                load_dotenv(env_path)
+                self._source = f"local {env_path}"
+                logger.info(f"Loaded environment from {env_path}")
+                return
         
-        # Set source information
-        if loaded_count == 0:
-            self._source = "environment variables only"
-            if self.environment == 'local':
-                logger.warning(
-                    f"No .env file found. Searched locations:\n" + 
-                    "\n".join(f"  - {p}" for p in env_paths[:5])
-                )
-        elif loaded_count == 1:
-            self._source = f"local {self._loaded_files[0]}"
-        else:
-            self._source = f"local {loaded_count} files: " + ", ".join(str(f) for f in self._loaded_files)
+        # No .env file found - will use environment variables
+        self._source = "environment variables"
+        if self.environment == 'local':
+            logger.warning(
+                f"No .env file found. Searched locations:\n" + 
+                "\n".join(f"  - {p}" for p in env_paths[:3])
+            )
     
     def _load_secrets(self):
         """Load all secrets from environment variables."""
@@ -129,7 +122,7 @@ class SecretsConfig:
         self.google_cloud_project = os.getenv('GOOGLE_CLOUD_PROJECT')
         
         self.huggingface_token = os.getenv('HUGGINGFACE_TOKEN')
-        self.huggingface_hub_token = os.getenv('HF_TOKEN')
+        self.huggingface_hub_token = os.getenv('HF_TOKEN')  # Alternative name
         
         self.cohere_api_key = os.getenv('COHERE_API_KEY')
         
@@ -214,6 +207,9 @@ class SecretsConfig:
             
         Raises:
             ValueError: If any required keys are missing and raise_error=True
+            
+        Example:
+            secrets.validate(['openai_api_key', 'gcp_project_id'])
         """
         missing = []
         status = {}
@@ -236,7 +232,7 @@ class SecretsConfig:
             )
             
             if self.environment == 'local':
-                error_msg += f"  - Add to .env file in project root or hypatiax/ directory:\n"
+                error_msg += f"  - Create .env file in project root with:\n"
                 for key in missing:
                     error_msg += f"      {key.upper()}=your-key-here\n"
             elif self.environment == 'github':
@@ -254,7 +250,20 @@ class SecretsConfig:
         return status
     
     def get_llm_client(self, provider: str = 'openai', **kwargs):
-        """Get LLM client for specified provider."""
+        """
+        Get LLM client for specified provider.
+        
+        Args:
+            provider: One of 'openai', 'anthropic', 'google', 'cohere', 'azure'
+            **kwargs: Additional arguments passed to client constructor
+            
+        Returns:
+            Configured client instance
+            
+        Example:
+            client = secrets.get_llm_client('openai')
+            response = client.chat.completions.create(...)
+        """
         if provider == 'openai':
             if not self.openai_api_key:
                 raise ValueError(
@@ -305,7 +314,19 @@ class SecretsConfig:
             )
     
     def get_masked_key(self, key_name: str) -> str:
-        """Get masked version of API key for safe logging."""
+        """
+        Get masked version of API key for safe logging.
+        
+        Args:
+            key_name: Name of the key attribute
+            
+        Returns:
+            Masked key string (e.g., "sk-proj-...x7Qz")
+            
+        Example:
+            logger.info(f"Using key: {secrets.get_masked_key('openai_api_key')}")
+            # Output: Using key: sk-proj-...x7Qz
+        """
         key = getattr(self, key_name, None)
         if not key:
             return "NOT_SET"
@@ -315,30 +336,39 @@ class SecretsConfig:
     
     @property
     def is_github_actions(self) -> bool:
+        """Check if running in GitHub Actions."""
         return self.environment == 'github'
     
     @property
     def is_local(self) -> bool:
+        """Check if running in local development."""
         return self.environment == 'local'
     
     @property
     def is_production(self) -> bool:
+        """Check if running in production environment."""
         return self.environment_name == 'production'
     
     @property
     def is_cloud(self) -> bool:
+        """Check if running in cloud environment."""
         return self.environment in ['aws', 'gcp', 'azure']
     
     def to_dict(self, mask_secrets: bool = True) -> Dict[str, Any]:
-        """Export configuration as dictionary."""
+        """
+        Export configuration as dictionary.
+        
+        Args:
+            mask_secrets: Whether to mask secret values (default: True)
+        """
         config_dict = {
             'environment': self.environment,
             'source': self._source,
-            'loaded_files': [str(f) for f in self._loaded_files],
             'environment_name': self.environment_name,
             'debug': self.debug,
         }
         
+        # Add API key status
         api_keys = [
             'openai_api_key', 'anthropic_api_key', 'google_api_key',
             'huggingface_token', 'cohere_api_key', 'azure_openai_key'
@@ -359,10 +389,6 @@ class SecretsConfig:
         print("=" * 70)
         print(f"Environment:      {self.environment}")
         print(f"Source:           {self._source}")
-        if self._loaded_files:
-            print(f"Loaded files:")
-            for f in self._loaded_files:
-                print(f"  - {f}")
         print(f"Environment Name: {self.environment_name}")
         print(f"Debug Mode:       {self.debug}")
         print()
@@ -393,20 +419,124 @@ class SecretsConfig:
         return (
             f"SecretsConfig("
             f"environment={self.environment}, "
-            f"loaded={len(self._loaded_files)} file(s))"
+            f"source={self._source})"
         )
 
 
-def create_secrets(custom_root: Optional[Path] = None, path_config=None) -> SecretsConfig:
-    """Create a new SecretsConfig instance."""
-    if path_config is None and custom_root:
-        try:
-            from hypatiax.config.config_path import PathConfig
-            path_config = PathConfig(custom_root)
-        except ImportError:
-            logger.warning("Could not import PathConfig")
+# ============================================================
+# Integration with existing PathConfig
+# ============================================================
+
+def initialize_configs(custom_root: Optional[Path] = None):
+    """
+    Initialize both PathConfig and SecretsConfig together.
     
-    return SecretsConfig(path_config=path_config)
+    Args:
+        custom_root: Optional custom root for PathConfig
+        
+    Returns:
+        Tuple of (PathConfig, SecretsConfig)
+    """
+    # Import PathConfig from the same module
+    from hypatiax.config.config_path import PathConfig, config_path  as path_config
+    
+    # Use existing path_config or create new one
+    if custom_root:
+        path_cfg = PathConfig(custom_root)
+    else:
+        path_cfg = path_config if path_config else PathConfig()
+    
+    # Create secrets config with path config reference
+    secrets_cfg = SecretsConfig(path_config=path_cfg)
+    
+    return path_cfg, secrets_cfg
+
+
+# Global secrets instance
+try:
+    # Try to import existing PathConfig
+    from hypatiax.config.config_path import config_path as path_config
+    secrets = SecretsConfig(path_config=path_config)
+except (ImportError, Exception) as e:
+    logger.warning(f"Could not integrate with PathConfig: {e}")
+    secrets = SecretsConfig()
+
+
+# ============================================================
+# Convenience Functions
+# ============================================================
+
+def get_secrets(custom_root: Optional[Path] = None) -> SecretsConfig:
+    """
+    Get or create secrets configuration instance.
+    
+    Args:
+        custom_root: Optional custom root directory
+        
+    Returns:
+        SecretsConfig instance
+    """
+    if custom_root:
+        from hypatiax.config.config_path import PathConfig
+        path_cfg = PathConfig(custom_root)
+        return SecretsConfig(path_config=path_cfg)
+    
+    return secrets
+
+
+def show_secrets():
+    """Print current secrets configuration (for debugging)."""
+    if secrets:
+        secrets.print_status()
+    else:
+        print("⚠️  Secrets configuration not initialized")
+
+
+# ============================================================
+# Usage Examples
+# ============================================================
+
+def example_basic_usage():
+    """Example 1: Basic usage with existing PathConfig"""
+    from hypatiax.config.config import secrets
+    from hypatiax.config.config_path import config_path
+    
+    # Use paths from PathConfig
+    training_data = config_path.datasets / "training_data.json"
+    print(f"Loading data from: {training_data}")
+    
+    # Use secrets from SecretsConfig
+    secrets.validate(['openai_api_key'])
+    client = secrets.get_llm_client('openai')
+    
+    print("✅ Configuration ready!")
+
+
+def example_standalone():
+    """Example 2: Using SecretsConfig standalone"""
+    secrets_cfg = SecretsConfig()
+    
+    # Validate required keys
+    try:
+        secrets_cfg.validate(['openai_api_key', 'anthropic_api_key'])
+        print("✅ All required secrets present")
+    except ValueError as e:
+        print(f"❌ Missing secrets:\n{e}")
+
+
+def example_github_actions():
+    """Example 3: Usage in GitHub Actions"""
+    from hypatiax.config.config import secrets
+    
+    if secrets.is_github_actions:
+        print("Running in GitHub Actions")
+        # Secrets are loaded from GitHub Secrets automatically
+    else:
+        print("Running locally")
+        # Secrets are loaded from .env file
+    
+    # Same code works in both environments!
+    client = secrets.get_llm_client('openai')
 
 
 if __name__ == "__main__":
@@ -414,6 +544,17 @@ if __name__ == "__main__":
     print("HypatiaX Secrets Configuration Test")
     print("=" * 70 + "\n")
     
-    print("Creating SecretsConfig instance...")
-    secrets_test = create_secrets()
-    secrets_test.print_status()
+    show_secrets()
+    
+    print("\n" + "=" * 70)
+    print("Integration Test")
+    print("=" * 70 + "\n")
+    
+    try:
+        from hypatiax.config.config_path import config_path
+        print("✅ PathConfig loaded successfully")
+        print(f"   Project root: {config_path.root}")
+    except Exception as e:
+        print(f"⚠️  Could not load PathConfig: {e}")
+    
+    print("\n✅ SecretsConfig ready for use!")

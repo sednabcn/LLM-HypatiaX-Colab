@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 class PathManager:
     """Universal path manager for local, GitHub, and cloud environments"""
     
-    def __init__(self, project_name: str = "LLM-HypatiaX-OLD"):
+    def __init__(self, project_name: str = "LLM-HypatiaX-Colab"):
         self.project_name = project_name
         self.environment = self._detect_environment()
         self.project_root = self._get_project_root()

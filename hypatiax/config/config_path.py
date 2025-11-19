@@ -464,7 +464,7 @@ class PathConfig:
             'tools': str(self.tools),
         }
     
-    def print_config(self):
+    def print_config_path(self):
         """Print complete configuration for debugging."""
         print("=" * 80)
         print("HypatiaX Path Configuration")
@@ -539,10 +539,10 @@ class PathConfig:
 
 # Global configuration instance
 try:
-    config = PathConfig()
+    config_path = PathConfig()
 except Exception as e:
     logger.error(f"Failed to initialize default config: {e}")
-    config = None
+    config_path = None
 
 
 def get_config(custom_root: Optional[Path] = None) -> PathConfig:
@@ -558,20 +558,20 @@ def get_config(custom_root: Optional[Path] = None) -> PathConfig:
     if custom_root:
         return PathConfig(custom_root)
     
-    if config is None:
+    if config_path is None:
         return PathConfig()
     
-    return config
+    return config_path
 
 
-def show_config():
+def show_config_path():
     """Print current configuration (for debugging)."""
-    if config:
-        config.print_config()
+    if config_path:
+        config_path.print_config_path()
     else:
         print("⚠️  Configuration not initialized")
         print("Try: from hypatiax.config import PathConfig; PathConfig().print_config()")
 
 
 if __name__ == "__main__":
-    show_config()
+    show_config_path()
