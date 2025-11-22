@@ -1,11 +1,22 @@
-/* HypatiaX Component Styles */
+/**
+ * HypatiaX Component Styles
+ * Reusable UI components
+ * File: frontend/css/components.css
+ */
 
-/* Dashboard */
+/* ============================================================================
+   DASHBOARD COMPONENTS
+   ============================================================================ */
+
 .dashboard-header {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
     padding: 3rem 0;
     text-align: center;
+}
+
+.dashboard-header h1 {
+    margin-bottom: 0.5rem;
 }
 
 .dashboard-content {
@@ -22,20 +33,28 @@
 .metric-card {
     background: white;
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 .metric-card h4 {
-    color: #666;
+    color: #6b7280;
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .metric-value {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--dark-color);
     margin: 0.5rem 0;
@@ -43,11 +62,11 @@
 
 .metric-change {
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .metric-change.positive {
-    color: var(--secondary-color);
+    color: var(--success-color);
 }
 
 .metric-change.negative {
@@ -57,9 +76,10 @@
 .dashboard-section {
     background: white;
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: var(--shadow);
     margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
 }
 
 .dashboard-section h2 {
@@ -68,7 +88,10 @@
     font-size: 1.5rem;
 }
 
-/* Tables */
+/* ============================================================================
+   TABLES
+   ============================================================================ */
+
 .table-container {
     overflow-x: auto;
 }
@@ -86,18 +109,25 @@
 }
 
 .data-table th {
-    background-color: var(--light-color);
+    background-color: #f9fafb;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.875rem;
-    color: #666;
+    color: #6b7280;
+}
+
+.data-table tbody tr {
+    transition: background-color 0.2s;
 }
 
 .data-table tbody tr:hover {
-    background-color: #f8f9fa;
+    background-color: #f9fafb;
 }
 
-/* Badges */
+/* ============================================================================
+   BADGES
+   ============================================================================ */
+
 .badge {
     display: inline-block;
     padding: 0.25rem 0.75rem;
@@ -108,21 +138,24 @@
 }
 
 .badge-success {
-    background-color: #d4edda;
-    color: #155724;
+    background-color: #d1fae5;
+    color: #065f46;
 }
 
 .badge-warning {
-    background-color: #fff3cd;
-    color: #856404;
+    background-color: #fef3c7;
+    color: #92400e;
 }
 
 .badge-danger {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #fee2e2;
+    color: #991b1b;
 }
 
-/* Activity List */
+/* ============================================================================
+   ACTIVITY LIST
+   ============================================================================ */
+
 .activity-list {
     display: flex;
     flex-direction: column;
@@ -134,12 +167,18 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 1rem;
-    background-color: #f8f9fa;
-    border-radius: 4px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.activity-item:hover {
+    background-color: #f3f4f6;
 }
 
 .activity-icon {
     font-size: 1.5rem;
+    flex-shrink: 0;
 }
 
 .activity-content p {
@@ -148,19 +187,22 @@
 
 .activity-time {
     font-size: 0.875rem;
-    color: #666;
+    color: #6b7280;
 }
 
-/* Demo Section */
+/* ============================================================================
+   NER DEMO COMPONENTS
+   ============================================================================ */
+
 .demo-section {
     padding: 2rem 0;
-    min-height: calc(100vh - 200px);
+    min-height: calc(100vh - 300px);
 }
 
 .demo-controls {
     background: white;
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: var(--shadow);
     margin-bottom: 2rem;
     display: flex;
@@ -172,27 +214,43 @@
     flex: 1;
     max-width: 400px;
     padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
     font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
 }
 
 .demo-input {
     background: white;
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: var(--shadow);
     margin-bottom: 2rem;
+}
+
+.demo-input h3 {
+    margin-bottom: 1rem;
 }
 
 .demo-textarea {
     width: 100%;
     padding: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
     font-family: inherit;
     font-size: 1rem;
     resize: vertical;
+    transition: border-color 0.2s;
+}
+
+.demo-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
 }
 
 .demo-buttons {
@@ -202,20 +260,32 @@
     flex-wrap: wrap;
 }
 
-/* Loading */
+/* ============================================================================
+   LOADING
+   ============================================================================ */
+
 .loading {
     text-align: center;
     padding: 3rem;
     background: white;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: var(--shadow);
+}
+
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    gap: 1rem;
 }
 
 .spinner {
     width: 50px;
     height: 50px;
     margin: 0 auto 1rem;
-    border: 4px solid var(--light-color);
+    border: 4px solid #f3f4f6;
     border-top: 4px solid var(--primary-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -230,7 +300,10 @@
     display: none !important;
 }
 
-/* Results */
+/* ============================================================================
+   RESULTS & OUTPUT
+   ============================================================================ */
+
 .demo-results {
     display: flex;
     flex-direction: column;
@@ -240,27 +313,29 @@
 .result-card {
     background: white;
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
 }
 
-.result-card h4 {
+.result-card h3, .result-card h4 {
     margin-bottom: 1rem;
     color: var(--dark-color);
 }
 
 .highlighted-text {
     padding: 1rem;
-    background-color: #f8f9fa;
-    border-radius: 4px;
+    background-color: #f9fafb;
+    border-radius: 8px;
     line-height: 2;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
+    border: 1px solid var(--border-color);
 }
 
 .entity-highlight {
     padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-    font-weight: 500;
+    border-radius: 4px;
+    font-weight: 600;
     cursor: help;
 }
 
@@ -275,32 +350,118 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem;
-    background-color: #f8f9fa;
-    border-radius: 4px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
 }
 
 .json-display {
-    background-color: #2c3e50;
-    color: #ecf0f1;
+    background-color: #1f2937;
+    color: #f3f4f6;
     padding: 1rem;
-    border-radius: 4px;
+    border-radius: 8px;
     overflow-x: auto;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
+    font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* ============================================================================
+   MESSAGES
+   ============================================================================ */
+
+.error-message,
+.success-message,
+.warning-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
 }
 
 .error-message {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 1rem;
-    border-radius: 4px;
+    background-color: #fee2e2;
+    color: #991b1b;
     border-left: 4px solid var(--danger-color);
 }
+
+.success-message {
+    background-color: #d1fae5;
+    color: #065f46;
+    border-left: 4px solid var(--success-color);
+}
+
+.warning-message {
+    background-color: #fef3c7;
+    color: #92400e;
+    border-left: 4px solid var(--warning-color);
+}
+
+.error-icon,
+.success-icon,
+.warning-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.error-content h4,
+.success-content h4,
+.warning-content h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.error-content p,
+.success-content p,
+.warning-content p {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+/* ============================================================================
+   API STATUS
+   ============================================================================ */
+
+.api-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.api-status.online {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+.api-status.offline {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+}
+
+.api-status.demo {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #f59e0b;
+}
+
+/* ============================================================================
+   STATS & METRICS
+   ============================================================================ */
 
 .stat-item {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -310,7 +471,7 @@
 
 .stat-label {
     font-weight: 600;
-    color: #666;
+    color: #6b7280;
 }
 
 .stat-value {
@@ -318,7 +479,36 @@
     color: var(--primary-color);
 }
 
-/* Responsive */
+/* ============================================================================
+   ENTITY STYLING
+   ============================================================================ */
+
+.entity-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.entity-badge {
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+mark {
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
 @media (max-width: 768px) {
     .demo-controls {
         flex-direction: column;
@@ -331,5 +521,33 @@
     
     .metrics-row {
         grid-template-columns: 1fr;
+    }
+    
+    .metric-value {
+        font-size: 2rem;
+    }
+    
+    .demo-buttons {
+        flex-direction: column;
+    }
+    
+    .demo-buttons .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .result-card {
+        padding: 1rem;
+    }
+    
+    .dashboard-section {
+        padding: 1rem;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 0.5rem;
+        font-size: 0.875rem;
     }
 }

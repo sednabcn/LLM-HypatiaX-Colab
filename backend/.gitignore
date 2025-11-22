@@ -15,6 +15,7 @@ instance/
 
 # Environment
 .env
+.env.local
 
 # Logs
 logs/
@@ -34,3 +35,7 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Data directories
+data/uploads/
+data/cache/

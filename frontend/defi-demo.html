@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeFi Calculator - HypatiaX</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🔬 HypatiaX</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="ner-demo.html">NER Demo</a></li>
+                <li><a href="defi-demo.html" class="active">DeFi Calculator</a></li>
+                <li><a href="docs.html">Docs</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 0;">
+        <div class="container">
+            <h1 class="hero-title" style="color: white;">💎 DeFi Position Analyzer</h1>
+            <p class="hero-subtitle" style="color: rgba(255,255,255,0.9);">
+                Calculate impermanent loss and analyze your liquidity pool positions
+            </p>
+        </div>
+    </section>
+
+    <!-- API Status -->
+    <section class="dashboard-content">
+        <div class="container">
+            <div id="api-status" class="api-status">Checking connection...</div>
+        </div>
+    </section>
+
+    <!-- Quick IL Calculator Section -->
+    <section class="dashboard-content">
+        <div class="container">
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                    <div style="font-size: 3em;">⚡</div>
+                    <div>
+                        <h2 style="margin: 0;">Quick IL Calculator</h2>
+                        <p style="color: #6b7280; margin: 5px 0 0 0;">
+                            Calculate impermanent loss based on price change
+                        </p>
+                    </div>
+                </div>
+                
+                <form id="quick-il-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Initial Price (USD):</label>
+                            <input 
+                                type="number" 
+                                name="initial_price" 
+                                step="0.01" 
+                                placeholder="e.g., 2000" 
+                                required 
+                            />
+                            <small style="color: #6b7280;">Price when you entered the pool</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Price (USD):</label>
+                            <input 
+                                type="number" 
+                                name="current_price" 
+                                step="0.01" 
+                                placeholder="e.g., 2400" 
+                                required 
+                            />
+                            <small style="color: #6b7280;">Current market price</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Price Change Preview -->
+                    <div id="price-change-preview"></div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button type="submit" class="btn-primary" style="flex: 1;">
+                            ⚡ Calculate IL
+                        </button>
+                        <button type="button" class="btn-secondary" onclick="document.getElementById('quick-il-form').reset(); document.getElementById('price-change-preview').innerHTML = ''; document.getElementById('quick-il-result').style.display = 'none';">
+                            🔄 Reset
+                        </button>
+                    </div>
+                </form>
+                
+                <div id="quick-il-result"></div>
+                
+                <!-- Educational Info -->
+                <details style="margin-top: 20px; padding: 15px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                    <summary style="cursor: pointer; font-weight: bold; color: #3b82f6; user-select: none;">
+                        ℹ️ What is Impermanent Loss?
+                    </summary>
+                    <div style="margin-top: 15px; line-height: 1.6; color: #4b5563;">
+                        <p><strong>Impermanent Loss (IL)</strong> is the difference between holding tokens in a liquidity pool versus holding them in your wallet.</p>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li><strong>0% to -1%:</strong> Minimal loss - generally acceptable</li>
+                            <li><strong>-1% to -5%:</strong> Moderate loss - monitor carefully</li>
+                            <li><strong>-5% to -10%:</strong> Significant loss - fees should compensate</li>
+                            <li><strong>Below -10%:</strong> Severe loss - consider exiting unless high APY</li>
+                        </ul>
+                        <p style="margin-top: 10px;">
+                            <strong>Note:</strong> IL can be offset by trading fees earned from the pool. Use the Complete Position Analysis below for a full picture.
+                        </p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Complete Position Analysis Section -->
+    <section class="dashboard-content">
+        <div class="container">
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                    <div style="font-size: 3em;">📊</div>
+                    <div>
+                        <h2 style="margin: 0;">Complete Position Analysis</h2>
+                        <p style="color: #6b7280; margin: 5px 0 0 0;">
+                            Comprehensive analysis including fees, ROI, and recommendations
+                        </p>
+                    </div>
+                </div>
+                
+                <form id="position-analysis-form">
+                    <div class="section-header">
+                        <h3>💰 Initial Position</h3>
+                        <p style="color: #6b7280; font-size: 0.9em;">Your starting token amounts</p>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Token A Amount:</label>
+                            <input 
+                                type="number" 
+                                name="initial_token_a" 
+                                step="0.01" 
+                                placeholder="e.g., 10 ETH" 
+                                required 
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label>Token B Amount:</label>
+                            <input 
+                                type="number" 
+                                name="initial_token_b" 
+                                step="0.01" 
+                                placeholder="e.g., 20000 USDC" 
+                                required 
+                            />
+                        </div>
+                    </div>
+                    
+                    <div class="section-header">
+                        <h3>💵 Prices</h3>
+                        <p style="color: #6b7280; font-size: 0.9em;">Token A price in Token B units</p>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Initial Price:</label>
+                            <input 
+                                type="number" 
+                                name="initial_price" 
+                                step="0.01" 
+                                placeholder="e.g., 2000" 
+                                required 
+                            />
+                            <small style="color: #6b7280;">Price when you entered</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Price:</label>
+                            <input 
+                                type="number" 
+                                name="current_price" 
+                                step="0.01" 
+                                placeholder="e.g., 2400" 
+                                required 
+                            />
+                            <small style="color: #6b7280;">Current market price</small>
+                        </div>
+                    </div>
+                    
+                    <div class="section-header">
+                        <h3>🏊 Pool Information</h3>
+                        <p style="color: #6b7280; font-size: 0.9em;">Data about the liquidity pool</p>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Daily Volume (USD):</label>
+                            <input 
+                                type="number" 
+                                name="daily_volume_usd" 
+                                step="1" 
+                                placeholder="e.g., 500000" 
+                                required 
+                            />
+                            <small style="color: #6b7280;">24h trading volume</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Pool TVL (USD):</label>
+                            <input 
+                                type="number" 
+                                name="pool_tvl_usd" 
+                                step="1" 
+                                placeholder="e.g., 10000000" 
+                                required 
+                            />
+                            <small style="color: #6b7280;">Total Value Locked in pool</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Days Elapsed:</label>
+                            <input 
+                                type="number" 
+                                name="days_elapsed" 
+                                min="1" 
+                                placeholder="e.g., 30" 
+                                required 
+                            />
+                            <small style="color: #6b7280;">Days since entering pool</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Fee Rate (%):</label>
+                            <input 
+                                type="number" 
+                                name="fee_rate" 
+                                value="0.003" 
+                                step="0.001" 
+                                placeholder="0.003" 
+                            />
+                            <small style="color: #6b7280;">0.003 = 0.3% (Uniswap v3)</small>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button type="submit" class="btn-primary" style="flex: 1;">
+                            📊 Analyze Position
+                        </button>
+                        <button type="button" class="btn-secondary" onclick="window.location.href='?example=true'">
+                            📝 Load Example
+                        </button>
+                    </div>
+                </form>
+                
+                <div id="position-analysis-result"></div>
+                
+                <!-- Educational Info -->
+                <details style="margin-top: 20px; padding: 15px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #8b5cf6;">
+                    <summary style="cursor: pointer; font-weight: bold; color: #8b5cf6; user-select: none;">
+                        ℹ️ Understanding the Metrics
+                    </summary>
+                    <div style="margin-top: 15px; line-height: 1.6; color: #4b5563;">
+                        <h4 style="color: #8b5cf6; margin-top: 0;">Key Metrics Explained:</h4>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li><strong>Net P&L:</strong> Total profit/loss including fees and IL</li>
+                            <li><strong>Fee Income:</strong> Trading fees earned from the pool</li>
+                            <li><strong>HODL Value:</strong> What your tokens would be worth if you just held them</li>
+                            <li><strong>Pool Quality Score:</strong> 0-100 rating based on volume and TVL</li>
+                            <li><strong>Daily Turnover:</strong> Daily volume as % of TVL (higher = more fees)</li>
+                            <li><strong>Days to Break Even:</strong> How long until fees offset IL</li>
+                        </ul>
+                        <h4 style="color: #8b5cf6; margin-top: 15px;">Quality Score Ranges:</h4>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li><strong>80-100:</strong> Excellent - High volume, good for LPs</li>
+                            <li><strong>60-79:</strong> Good - Decent fee generation</li>
+                            <li><strong>40-59:</strong> Average - Monitor performance</li>
+                            <li><strong>Below 40:</strong> Poor - Consider alternatives</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Common Pools Reference -->
+    <section class="dashboard-content">
+        <div class="container">
+            <div class="card">
+                <h3>📚 Common Pool Examples</h3>
+                <p style="color: #6b7280; margin-bottom: 20px;">Reference data for popular liquidity pools</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                    <div style="padding: 15px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                        <h4 style="margin: 0 0 10px 0; color: #3b82f6;">ETH/USDC (0.3%)</h4>
+                        <div style="font-size: 0.9em; color: #4b5563; line-height: 1.6;">
+                            <p><strong>Typical Daily Volume:</strong> $500M - $2B</p>
+                            <p><strong>Typical TVL:</strong> $200M - $500M</p>
+                            <p><strong>Fee Rate:</strong> 0.003 (0.3%)</p>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 15px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #10b981;">
+                        <h4 style="margin: 0 0 10px 0; color: #10b981;">USDC/USDT (0.01%)</h4>
+                        <div style="font-size: 0.9em; color: #4b5563; line-height: 1.6;">
+                            <p><strong>Typical Daily Volume:</strong> $100M - $500M</p>
+                            <p><strong>Typical TVL:</strong> $300M - $800M</p>
+                            <p><strong>Fee Rate:</strong> 0.0001 (0.01%)</p>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 15px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                        <h4 style="margin: 0 0 10px 0; color: #f59e0b;">WBTC/ETH (0.3%)</h4>
+                        <div style="font-size: 0.9em; color: #4b5563; line-height: 1.6;">
+                            <p><strong>Typical Daily Volume:</strong> $50M - $200M</p>
+                            <p><strong>Typical TVL:</strong> $100M - $300M</p>
+                            <p><strong>Fee Rate:</strong> 0.003 (0.3%)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 HypatiaX. All rights reserved.</p>
+            <p>⚠️ Not financial advice. Always DYOR (Do Your Own Research)</p>
+        </div>
+    </footer>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/defi-demo.js"></script>
+</body>
+</html>

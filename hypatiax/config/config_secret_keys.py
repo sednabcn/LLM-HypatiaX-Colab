@@ -65,7 +65,7 @@ class HypatiaConfig:
         self.openai_api_key = os.getenv('OPENAI_API_KEY')
         self.anthropic_api_key = os.getenv('ANTHROPIC_API_KEY')
         self.google_api_key = os.getenv('GOOGLE_API_KEY')
-        self.huggingface_token = os.getenv('HUGGINGFACE_TOKEN')
+        self.huggingface_token = os.getenv('HUGGINGFACE_AP_KEY')
         self.cohere_api_key = os.getenv('COHERE_API_KEY')
         
         # ============================================================

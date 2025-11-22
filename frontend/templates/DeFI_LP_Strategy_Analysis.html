@@ -1,0 +1,335 @@
+import React, { useState } from 'react';
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ScatterChart, Scatter } from 'recharts';
+import { ChevronDown, TrendingUp, TrendingDown } from 'lucide-react';
+
+export default function DeFiAnalysis() {
+  const [activeTab, setActiveTab] = useState('comparative');
+
+  // Backtest results data
+  const backtestData = [
+    {
+      pair: 'USDT/USDC',
+      duration: 90,
+      initialTokens: '10000 USDT',
+      initialUSDC: '$10,000',
+      startPrice: '$1.00',
+      endPrice: '$1.00',
+      priceChange: '-0.05%',
+      feesEarned: '$2,700',
+      finalIL: '$0.00',
+      lpAdvantage: '$+2,700.00',
+      daysWon: 90,
+      winRate: '100%',
+      avgDaily: '$+1,365.00',
+      volatility: '$0.00',
+      category: 'Stablecoin',
+      maxDrawdown: '$+30.00'
+    },
+    {
+      pair: 'DAI/USDC',
+      duration: 91,
+      initialTokens: '10,000 DAI',
+      initialUSDC: '$10,000',
+      startPrice: '$1.00',
+      endPrice: '$1.00',
+      priceChange: '-0.07%',
+      feesEarned: '$2,184',
+      finalIL: '$0.00',
+      lpAdvantage: '$+2,184.00',
+      daysWon: 91,
+      winRate: '100%',
+      avgDaily: '$+1,104.00',
+      volatility: '$0.00',
+      category: 'Stablecoin',
+      maxDrawdown: '$+24.00'
+    },
+    {
+      pair: 'ETH/USDC',
+      duration: 90,
+      initialTokens: '10 ETH',
+      initialUSDC: '$20,000',
+      startPrice: '$4,778.11',
+      endPrice: '$2,760.57',
+      priceChange: '-42.22%',
+      feesEarned: '$1,350',
+      finalIL: '-$2,472.43',
+      lpAdvantage: '$+738.51',
+      daysWon: 7,
+      winRate: '7.8%',
+      avgDaily: '$-2,955.09',
+      volatility: '$485.56',
+      category: 'Volatile',
+      maxDrawdown: '$-5,939.82'
+    },
+    {
+      pair: 'SHIB/USDC',
+      duration: 91,
+      initialTokens: '1,000,000 SHIB',
+      initialUSDC: '$10,000',
+      startPrice: '$0.00',
+      endPrice: '$0.00',
+      priceChange: '-39.77%',
+      feesEarned: '$546',
+      finalIL: '-$313.42',
+      lpAdvantage: '$-8,902.74',
+      daysWon: 0,
+      winRate: '0%',
+      avgDaily: '$-9,068.34',
+      volatility: '$0.00',
+      category: 'Volatile',
+      maxDrawdown: '$-9,306.25'
+    }
+  ];
+
+  // Fee tier optimization data
+  const feeTierData = [
+    { volatility: 'Ultra-Low (0-0.5%)', feeTier: '0.01%', recommendation: 'Optimal', expectedFees: '$2,400-$2,800', ilRisk: 'Negligible', strategy: 'Tight ranges, max capital efficiency' },
+    { volatility: 'Low (0.5-3%)', feeTier: '0.05%', recommendation: 'Optimal', expectedFees: '$1,800-$2,200', ilRisk: 'Minimal', strategy: 'Concentrated liquidity near current price' },
+    { volatility: 'Medium (3-10%)', feeTier: '0.30%', recommendation: 'Optimal', expectedFees: '$800-$1,200', ilRisk: 'Moderate', strategy: 'Standard range, 80/20 capital allocation' },
+    { volatility: 'High (10-30%)', feeTier: '1.00%', recommendation: 'Optimal', expectedFees: '$300-$600', ilRisk: 'High', strategy: 'Wide ranges, 50/50 allocation, rebalancing' },
+    { volatility: 'Extreme (30%+)', feeTier: '1.00%', recommendation: 'Avoid/Cautious', expectedFees: '$100-$300', ilRisk: 'Very High', strategy: 'Only with active management & stops' }
+  ];
+
+  // Volatility vs LP performance scatter data
+  const volatilityComparison = [
+    { volatility: 0, lpAdvantage: 2700, pair: 'USDT/USDC', category: 'Stablecoin' },
+    { volatility: 0, lpAdvantage: 2184, pair: 'DAI/USDC', category: 'Stablecoin' },
+    { volatility: 485.56, lpAdvantage: 738.51, pair: 'ETH/USDC', category: 'Volatile' },
+    { volatility: 0, lpAdvantage: -8902.74, pair: 'SHIB/USDC', category: 'Volatile' }
+  ];
+
+  // Fees vs IL tradeoff
+  const tradeoffData = [
+    { pair: 'USDT/USDC', fees: 2700, il: 0, net: 2700 },
+    { pair: 'DAI/USDC', fees: 2184, il: 0, net: 2184 },
+    { pair: 'ETH/USDC', fees: 1350, il: -2472.43, net: 738.51 },
+    { pair: 'SHIB/USDC', fees: 546, il: -313.42, net: -8902.74 }
+  ];
+
+  return (
+    <div className="w-full max-w-7xl mx-auto p-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100 rounded-xl shadow-2xl">
+      <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+        DeFi LP Strategy Analysis
+      </h1>
+      <p className="text-slate-400 mb-8">Comparative backtest results & fee tier optimization framework</p>
+
+      {/* Tab Navigation */}
+      <div className="flex gap-4 mb-8 border-b border-slate-700">
+        <button
+          onClick={() => setActiveTab('comparative')}
+          className={`px-6 py-3 font-semibold transition-all ${
+            activeTab === 'comparative'
+              ? 'text-cyan-400 border-b-2 border-cyan-400'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          📊 Comparative Table
+        </button>
+        <button
+          onClick={() => setActiveTab('feetier')}
+          className={`px-6 py-3 font-semibold transition-all ${
+            activeTab === 'feetier'
+              ? 'text-cyan-400 border-b-2 border-cyan-400'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          ⚙️ Fee Tier Strategy
+        </button>
+        <button
+          onClick={() => setActiveTab('charts')}
+          className={`px-6 py-3 font-semibold transition-all ${
+            activeTab === 'charts'
+              ? 'text-cyan-400 border-b-2 border-cyan-400'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          📈 Visualizations
+        </button>
+      </div>
+
+      {/* TAB 1: Comparative Table */}
+      {activeTab === 'comparative' && (
+        <div className="space-y-8">
+          <div className="overflow-x-auto rounded-lg border border-slate-700 bg-slate-800/50">
+            <table className="w-full text-sm">
+              <thead className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border-b border-slate-600">
+                <tr>
+                  <th className="px-4 py-3 text-left font-bold text-cyan-300">Pair</th>
+                  <th className="px-4 py-3 text-center font-bold text-cyan-300">Duration</th>
+                  <th className="px-4 py-3 text-center font-bold text-cyan-300">Price Change</th>
+                  <th className="px-4 py-3 text-right font-bold text-cyan-300">Fees Earned</th>
+                  <th className="px-4 py-3 text-right font-bold text-cyan-300">Impermanent Loss</th>
+                  <th className="px-4 py-3 text-right font-bold text-cyan-300">LP Advantage</th>
+                  <th className="px-4 py-3 text-center font-bold text-cyan-300">Win Rate</th>
+                  <th className="px-4 py-3 text-center font-bold text-cyan-300">Volatility</th>
+                </tr>
+              </thead>
+              <tbody>
+                {backtestData.map((row, idx) => {
+                  const isPositive = parseFloat(row.lpAdvantage) > 0;
+                  const isCoin = row.category === 'Stablecoin';
+                  return (
+                    <tr key={idx} className={`border-b border-slate-700 ${idx % 2 === 0 ? 'bg-slate-800/20' : 'bg-slate-700/20'}`}>
+                      <td className={`px-4 py-3 font-bold ${isCoin ? 'text-green-400' : 'text-orange-400'}`}>
+                        {row.pair}
+                      </td>
+                      <td className="px-4 py-3 text-center">{row.duration} days</td>
+                      <td className={`px-4 py-3 text-center font-semibold ${parseFloat(row.priceChange) < 0 ? 'text-red-400' : 'text-green-400'}`}>
+                        {row.priceChange}
+                      </td>
+                      <td className="px-4 py-3 text-right text-green-400 font-semibold">{row.feesEarned}</td>
+                      <td className={`px-4 py-3 text-right font-semibold ${parseFloat(row.finalIL) < 0 ? 'text-red-400' : 'text-slate-300'}`}>
+                        {row.finalIL}
+                      </td>
+                      <td className={`px-4 py-3 text-right font-bold text-lg ${isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                        {row.lpAdvantage}
+                      </td>
+                      <td className={`px-4 py-3 text-center font-semibold ${parseFloat(row.winRate) > 50 ? 'text-green-400' : 'text-red-400'}`}>
+                        {row.winRate}
+                      </td>
+                      <td className="px-4 py-3 text-center text-slate-400">{row.volatility}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-slate-800/50 border border-slate-700 p-4 rounded-lg">
+              <h3 className="font-bold text-green-400 mb-2">✅ Stablecoin Pairs</h3>
+              <p className="text-sm text-slate-300">Consistent winners with high fees and zero IL. Best for capital preservation strategies.</p>
+            </div>
+            <div className="bg-slate-800/50 border border-slate-700 p-4 rounded-lg">
+              <h3 className="font-bold text-red-400 mb-2">⚠️ Volatile Pairs</h3>
+              <p className="text-sm text-slate-300">Performance highly dependent on price momentum. IL can quickly exceed fee earnings.</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 2: Fee Tier Strategy */}
+      {activeTab === 'feetier' && (
+        <div className="space-y-8">
+          <div className="bg-blue-900/20 border border-blue-700/50 p-4 rounded-lg mb-6">
+            <p className="text-slate-200"><strong>📌 Framework:</strong> Fee tier selection depends on volatility. Lower volatility = tighter fee tier possible. Higher volatility = higher fee tier needed to offset IL.</p>
+          </div>
+
+          <div className="overflow-x-auto rounded-lg border border-slate-700 bg-slate-800/50">
+            <table className="w-full text-sm">
+              <thead className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 border-b border-slate-600">
+                <tr>
+                  <th className="px-4 py-3 text-left font-bold text-purple-300">Volatility Level</th>
+                  <th className="px-4 py-3 text-center font-bold text-purple-300">Optimal Fee</th>
+                  <th className="px-4 py-3 text-center font-bold text-purple-300">Recommendation</th>
+                  <th className="px-4 py-3 text-center font-bold text-purple-300">Expected Fees</th>
+                  <th className="px-4 py-3 text-center font-bold text-purple-300">IL Risk</th>
+                  <th className="px-4 py-3 text-left font-bold text-purple-300">Strategy</th>
+                </tr>
+              </thead>
+              <tbody>
+                {feeTierData.map((row, idx) => {
+                  const isOptimal = row.recommendation === 'Optimal';
+                  return (
+                    <tr key={idx} className={`border-b border-slate-700 ${idx % 2 === 0 ? 'bg-slate-800/20' : 'bg-slate-700/20'}`}>
+                      <td className="px-4 py-3 font-semibold text-slate-200">{row.volatility}</td>
+                      <td className={`px-4 py-3 text-center font-bold text-lg ${isOptimal ? 'text-cyan-400' : 'text-red-400'}`}>
+                        {row.feeTier}
+                      </td>
+                      <td className={`px-4 py-3 text-center font-bold ${isOptimal ? 'text-green-400' : 'text-red-400'}`}>
+                        {row.recommendation}
+                      </td>
+                      <td className="px-4 py-3 text-center text-green-300">{row.expectedFees}</td>
+                      <td className={`px-4 py-3 text-center font-semibold ${
+                        row.ilRisk === 'Negligible' ? 'text-green-400' :
+                        row.ilRisk === 'Minimal' ? 'text-green-400' :
+                        row.ilRisk === 'Moderate' ? 'text-yellow-400' :
+                        'text-red-400'
+                      }`}>
+                        {row.ilRisk}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-slate-300">{row.strategy}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-slate-800/50 border border-slate-700 p-4 rounded-lg">
+              <h4 className="font-bold text-cyan-400 mb-3">💡 Key Insights</h4>
+              <ul className="space-y-2 text-sm text-slate-300">
+                <li>• <strong>Stablecoins (0% vol):</strong> Use 0.01-0.05% tiers for maximum fees with zero IL</li>
+                <li>• <strong>Low vol (0.5-3%):</strong> 0.05% tier works; tight ranges maximize APY</li>
+                <li>• <strong>Medium vol (3-10%):</strong> 0.30% becomes essential; cap APY gains but protects capital</li>
+                <li>• <strong>High vol (10%+):</strong> 1.00% tier or avoid; fees rarely cover IL</li>
+              </ul>
+            </div>
+            <div className="bg-slate-800/50 border border-slate-700 p-4 rounded-lg">
+              <h4 className="font-bold text-orange-400 mb-3">⚡ Capital Allocation</h4>
+              <ul className="space-y-2 text-sm text-slate-300">
+                <li>• <strong>Ultra-low vol:</strong> 100% capital in tight ranges</li>
+                <li>• <strong>Low vol:</strong> 90% capital near price, 10% reserved</li>
+                <li>• <strong>Medium vol:</strong> 80/20 split across wider ranges</li>
+                <li>• <strong>High vol:</strong> 50/50 split, active rebalancing required</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 3: Charts */}
+      {activeTab === 'charts' && (
+        <div className="space-y-8">
+          {/* Fees vs IL */}
+          <div className="bg-slate-800/50 border border-slate-700 p-6 rounded-lg">
+            <h3 className="text-lg font-bold text-cyan-400 mb-4">Fees vs Impermanent Loss Tradeoff</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={tradeoffData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
+                <XAxis dataKey="pair" tick={{ fill: '#cbd5e1' }} />
+                <YAxis tick={{ fill: '#cbd5e1' }} />
+                <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} />
+                <Legend />
+                <Bar dataKey="fees" fill="#22c55e" name="Fees Earned" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="il" fill="#ef4444" name="IL Loss" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="net" fill="#3b82f6" name="Net Result" radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Volatility Impact */}
+          <div className="bg-slate-800/50 border border-slate-700 p-6 rounded-lg">
+            <h3 className="text-lg font-bold text-cyan-400 mb-4">Volatility Impact on LP Performance</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
+                <XAxis type="number" dataKey="volatility" name="Price Volatility" tick={{ fill: '#cbd5e1' }} />
+                <YAxis type="number" dataKey="lpAdvantage" name="LP Advantage ($)" tick={{ fill: '#cbd5e1' }} />
+                <Tooltip cursor={{ strokeDasharray: '3 3' }} contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} />
+                <Scatter name="Stablecoins" data={volatilityComparison.filter(d => d.category === 'Stablecoin')} fill="#22c55e" />
+                <Scatter name="Volatile Pairs" data={volatilityComparison.filter(d => d.category === 'Volatile')} fill="#ef4444" />
+              </ScatterChart>
+            </ResponsiveContainer>
+            <p className="text-sm text-slate-400 mt-4">Lower volatility = more predictable LP profits. High volatility pairs show extreme divergence.</p>
+          </div>
+
+          {/* Win Rate Analysis */}
+          <div className="bg-slate-800/50 border border-slate-700 p-6 rounded-lg">
+            <h3 className="text-lg font-bold text-cyan-400 mb-4">LP vs HODL Win Rate by Pair</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={backtestData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#475569" />
+                <XAxis dataKey="pair" tick={{ fill: '#cbd5e1' }} />
+                <YAxis tick={{ fill: '#cbd5e1' }} label={{ value: 'Days Won (%)', angle: -90, position: 'insideLeft' }} />
+                <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: '1px solid #475569', borderRadius: '8px' }} />
+                <Bar dataKey="daysWon" fill="#06b6d4" name="LP Win Days" radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

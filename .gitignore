@@ -119,6 +119,7 @@ setup/
 github/
 web/
 pytools/
+strategy/
 
 # Legacy files
 version.py

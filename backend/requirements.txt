@@ -4,17 +4,31 @@
 # Web Framework
 flask==3.0.0
 flask-cors==6.0.0
+marshmallow==3.20.0
 
 # NLP & ML
-spacy==3.7.2
+spacy==3.8.8
 pandas==2.1.4
 numpy==1.26.2
+sympy==1.13.3
+torch==2.9.0
 
 # Data Processing
 openpyxl==3.1.2
 
 # Utilities
+requests==2.31.0
 python-dotenv==1.0.0
+safety==3.6.2
+typer==0.16.0
+
+# llm_providers
+anthropic==0.7.0
 
 # Note: After installation, download spaCy model with:
 # python -m spacy download en_core_web_sm
+
+
+
+
+

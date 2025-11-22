@@ -128,7 +128,7 @@ class SecretsConfig:
         self.google_api_key = os.getenv('GOOGLE_API_KEY')
         self.google_cloud_project = os.getenv('GOOGLE_CLOUD_PROJECT')
         
-        self.huggingface_token = os.getenv('HUGGINGFACE_TOKEN')
+        self.huggingface_token = os.getenv('HUGGINGFACE_API_KEY')
         self.huggingface_hub_token = os.getenv('HF_TOKEN')
         
         self.cohere_api_key = os.getenv('COHERE_API_KEY')

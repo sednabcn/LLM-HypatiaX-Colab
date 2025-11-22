@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeFi LP Strategy Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #f1f5f9;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #22d3ee, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: #94a3b8;
+            margin-bottom: 40px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 20px;
+            border-bottom: 2px solid #334155;
+            margin-bottom: 40px;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .tab:hover {
+            color: #e2e8f0;
+        }
+        
+        .tab.active {
+            color: #22d3ee;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #22d3ee;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid #334155;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        thead {
+            background: linear-gradient(to right, rgba(8, 145, 178, 0.3), rgba(37, 99, 235, 0.3));
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            color: #67e8f9;
+            font-size: 0.9rem;
+        }
+        
+        td {
+            padding: 15px;
+            border-top: 1px solid #334155;
+        }
+        
+        tr:nth-child(even) {
+            background: rgba(51, 65, 85, 0.2);
+        }
+        
+        .positive {
+            color: #22c55e;
+            font-weight: bold;
+        }
+        
+        .negative {
+            color: #ef4444;
+            font-weight: bold;
+        }
+        
+        .stablecoin {
+            color: #22c55e;
+            font-weight: bold;
+        }
+        
+        .volatile {
+            color: #fb923c;
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid #334155;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .info-box h3 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .chart-container {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid #334155;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .chart-title {
+            color: #22d3ee;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        canvas {
+            max-height: 400px;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+        
+        strong {
+            color: #e2e8f0;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-right {
+            text-align: right;
+        }
+        
+        .alert {
+            background: rgba(30, 64, 175, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DeFi LP Strategy Analysis</h1>
+        <p class="subtitle">Comparative backtest results & fee tier optimization framework</p>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('comparative')">📊 Comparative Table</button>
+            <button class="tab" onclick="showTab('feetier')">⚙️ Fee Tier Strategy</button>
+            <button class="tab" onclick="showTab('charts')">📈 Visualizations</button>
+        </div>
+        
+        <!-- TAB 1: Comparative Table -->
+        <div id="comparative" class="tab-content active">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pair</th>
+                        <th class="text-center">Duration</th>
+                        <th class="text-center">Price Change</th>
+                        <th class="text-right">Fees Earned</th>
+                        <th class="text-right">Impermanent Loss</th>
+                        <th class="text-right">LP Advantage</th>
+                        <th class="text-center">Win Rate</th>
+                        <th class="text-center">Volatility</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="stablecoin">USDT/USDC</td>
+                        <td class="text-center">90 days</td>
+                        <td class="text-center negative">-0.05%</td>
+                        <td class="text-right positive">$2,700</td>
+                        <td class="text-right">$0.00</td>
+                        <td class="text-right positive" style="font-size: 1.1rem;">$+2,700.00</td>
+                        <td class="text-center positive">100%</td>
+                        <td class="text-center" style="color: #94a3b8;">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td class="stablecoin">DAI/USDC</td>
+                        <td class="text-center">91 days</td>
+                        <td class="text-center negative">-0.07%</td>
+                        <td class="text-right positive">$2,184</td>
+                        <td class="text-right">$0.00</td>
+                        <td class="text-right positive" style="font-size: 1.1rem;">$+2,184.00</td>
+                        <td class="text-center positive">100%</td>
+                        <td class="text-center" style="color: #94a3b8;">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td class="volatile">ETH/USDC</td>
+                        <td class="text-center">90 days</td>
+                        <td class="text-center negative">-42.22%</td>
+                        <td class="text-right positive">$1,350</td>
+                        <td class="text-right negative">-$2,472.43</td>
+                        <td class="text-right positive" style="font-size: 1.1rem;">$+738.51</td>
+                        <td class="text-center negative">7.8%</td>
+                        <td class="text-center" style="color: #94a3b8;">$485.56</td>
+                    </tr>
+                    <tr>
+                        <td class="volatile">SHIB/USDC</td>
+                        <td class="text-center">91 days</td>
+                        <td class="text-center negative">-39.77%</td>
+                        <td class="text-right positive">$546</td>
+                        <td class="text-right negative">-$313.42</td>
+                        <td class="text-right negative" style="font-size: 1.1rem;">$-8,902.74</td>
+                        <td class="text-center negative">0%</td>
+                        <td class="text-center" style="color: #94a3b8;">$0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3 style="color: #22c55e;">✅ Stablecoin Pairs</h3>
+                    <p>Consistent winners with high fees and zero IL. Best for capital preservation strategies.</p>
+                </div>
+                <div class="info-box">
+                    <h3 style="color: #ef4444;">⚠️ Volatile Pairs</h3>
+                    <p>Performance highly dependent on price momentum. IL can quickly exceed fee earnings.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB 2: Fee Tier Strategy -->
+        <div id="feetier" class="tab-content">
+            <div class="alert">
+                <strong>📌 Framework:</strong> Fee tier selection depends on volatility. Lower volatility = tighter fee tier possible. Higher volatility = higher fee tier needed to offset IL.
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Volatility Level</th>
+                        <th class="text-center">Optimal Fee</th>
+                        <th class="text-center">Recommendation</th>
+                        <th class="text-center">Expected Fees</th>
+                        <th class="text-center">IL Risk</th>
+                        <th>Strategy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ultra-Low (0-0.5%)</strong></td>
+                        <td class="text-center positive" style="font-size: 1.1rem;">0.01%</td>
+                        <td class="text-center positive">Optimal</td>
+                        <td class="text-center positive">$2,400-$2,800</td>
+                        <td class="text-center positive">Negligible</td>
+                        <td>Tight ranges, max capital efficiency</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Low (0.5-3%)</strong></td>
+                        <td class="text-center positive" style="font-size: 1.1rem;">0.05%</td>
+                        <td class="text-center positive">Optimal</td>
+                        <td class="text-center positive">$1,800-$2,200</td>
+                        <td class="text-center positive">Minimal</td>
+                        <td>Concentrated liquidity near current price</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Medium (3-10%)</strong></td>
+                        <td class="text-center positive" style="font-size: 1.1rem;">0.30%</td>
+                        <td class="text-center positive">Optimal</td>
+                        <td class="text-center positive">$800-$1,200</td>
+                        <td class="text-center" style="color: #facc15;">Moderate</td>
+                        <td>Standard range, 80/20 capital allocation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>High (10-30%)</strong></td>
+                        <td class="text-center positive" style="font-size: 1.1rem;">1.00%</td>
+                        <td class="text-center positive">Optimal</td>
+                        <td class="text-center positive">$300-$600</td>
+                        <td class="text-center negative">High</td>
+                        <td>Wide ranges, 50/50 allocation, rebalancing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Extreme (30%+)</strong></td>
+                        <td class="text-center negative" style="font-size: 1.1rem;">1.00%</td>
+                        <td class="text-center negative">Avoid/Cautious</td>
+                        <td class="text-center positive">$100-$300</td>
+                        <td class="text-center negative">Very High</td>
+                        <td>Only with active management & stops</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3 style="color: #22d3ee;">💡 Key Insights</h3>
+                    <ul>
+                        <li>• <strong>Stablecoins (0% vol):</strong> Use 0.01-0.05% tiers for maximum fees with zero IL</li>
+                        <li>• <strong>Low vol (0.5-3%):</strong> 0.05% tier works; tight ranges maximize APY</li>
+                        <li>• <strong>Medium vol (3-10%):</strong> 0.30% becomes essential; cap APY gains but protects capital</li>
+                        <li>• <strong>High vol (10%+):</strong> 1.00% tier or avoid; fees rarely cover IL</li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h3 style="color: #fb923c;">⚡ Capital Allocation</h3>
+                    <ul>
+                        <li>• <strong>Ultra-low vol:</strong> 100% capital in tight ranges</li>
+                        <li>• <strong>Low vol:</strong> 90% capital near price, 10% reserved</li>
+                        <li>• <strong>Medium vol:</strong> 80/20 split across wider ranges</li>
+                        <li>• <strong>High vol:</strong> 50/50 split, active rebalancing required</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB 3: Visualizations -->
+        <div id="charts" class="tab-content">
+            <div class="chart-container">
+                <div class="chart-title">Fees vs Impermanent Loss Tradeoff</div>
+                <canvas id="feesChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title">LP vs HODL Win Rate by Pair</div>
+                <canvas id="winRateChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title">Net LP Advantage Comparison</div>
+                <canvas id="netChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Chart data
+        const pairs = ['USDT/USDC', 'DAI/USDC', 'ETH/USDC', 'SHIB/USDC'];
+        const fees = [2700, 2184, 1350, 546];
+        const il = [0, 0, -2472.43, -313.42];
+        const net = [2700, 2184, 738.51, -8902.74];
+        const winRates = [90, 91, 7, 0];
+        
+        // Fees vs IL Chart
+        const feesCtx = document.getElementById('feesChart').getContext('2d');
+        new Chart(feesCtx, {
+            type: 'bar',
+            data: {
+                labels: pairs,
+                datasets: [{
+                    label: 'Fees Earned',
+                    data: fees,
+                    backgroundColor: '#22c55e',
+                    borderRadius: 8
+                }, {
+                    label: 'IL Loss',
+                    data: il,
+                    backgroundColor: '#ef4444',
+                    borderRadius: 8
+                }, {
+                    label: 'Net Result',
+                    data: net,
+                    backgroundColor: '#3b82f6',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        labels: { color: '#cbd5e1' }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#cbd5e1' },
+                        grid: { color: '#475569' }
+                    },
+                    x: {
+                        ticks: { color: '#cbd5e1' },
+                        grid: { color: '#475569' }
+                    }
+                }
+            }
+        });
+        
+        // Win Rate Chart
+        const winRateCtx = document.getElementById('winRateChart').getContext('2d');
+        new Chart(winRateCtx, {
+            type: 'bar',
+            data: {
+                labels: pairs,
+                datasets: [{
+                    label: 'LP Win Days',
+                    data: winRates,
+                    backgroundColor: '#06b6d4',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        labels: { color: '#cbd5e1' }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#cbd5e1' },
+                        grid: { color: '#475569' },
+                        title: {
+                            display: true,
+                            text: 'Days Won',
+                            color: '#cbd5e1'
+                        }
+                    },
+                    x: {
+                        ticks: { color: '#cbd5e1' },
+                        grid: { color: '#475569' }
+                    }
+                }
+            }
+        });
+        
+        // Net Advantage Chart
+        const netCtx = document.getElementById('netChart').getContext('2d');
+        new Chart(netCtx, {
+            type: 'bar',
+            data: {
+                labels: pairs,
+                datasets: [{
+                    label: 'LP Advantage ($)',
+                    data: net,
+                    backgroundColor: net.map(v => v > 0 ? '#22c55e' : '#ef4444'),
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        labels: { color: '#cbd5e1' }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#cbd5e1' },
+                        grid: { color: '#475569' }
+                    },
+                    x: {
+                        ticks: { color: '#cbd5e1' },
+                        grid: { color: '#475569' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

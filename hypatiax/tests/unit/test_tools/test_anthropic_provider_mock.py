@@ -260,14 +260,28 @@ def main():
     
     # Execute IL formula
     print("Testing Impermanent Loss calculation:")
-    exec(result[0]['formula_python'])
-    il_result = calculate_il(2.0)  # Price doubled
-    print(f"  Price doubled (2x): IL = {il_result:.4f} ({il_result*100:.2f}%)")
-    
-    il_result = calculate_il(0.5)  # Price halved
-    print(f"  Price halved (0.5x): IL = {il_result:.4f} ({il_result*100:.2f}%)")
+
+    # We need to regenerate the IL formula, because 'result' currently holds the LP ROI formula.
+    il_result_data = provider.generate_formula(
+        requirements="impermanent loss",
+        domain="defi",
+        n_candidates=1
+    )[0]
+
+    # Execute the IL formula into a namespace
+    il_namespace = {}
+    exec(il_result_data['formula_python'], il_namespace)
+
+    calculate_il = il_namespace['calculate_il']
+
+    # Test values
+    il_value = calculate_il(2.0)  # Price doubled
+    print(f"  Price doubled (2x): IL = {il_value:.4f} ({il_value*100:.2f}%)")
+
+    il_value = calculate_il(0.5)  # Price halved
+    print(f"  Price halved (0.5x): IL = {il_value:.4f} ({il_value*100:.2f}%)")
     print()
-    
+
     # Summary
     print("=" * 70)
     print("Test Summary")

@@ -89,6 +89,7 @@ def main():
         print(f"✓ Anthropic API Key loaded: {masked_key}")
     
     print()
+
     
     # Import provider
     try:
@@ -102,6 +103,7 @@ def main():
     # Initialize provider
     provider = AnthropicProvider(api_key=api_key)
     logger.info("✓ AnthropicProvider initialized")
+    
     print()
     
     # Test 1: Basic Impermanent Loss Formula

@@ -6,8 +6,137 @@
     <title>Documentation - HypatiaX</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/components.css">
+    <style>
+        /* Additional documentation-specific styles */
+        .docs-nav {
+            position: sticky;
+            top: 80px;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .docs-nav h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--text-color);
+        }
+        
+        .docs-nav ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .docs-nav ul li {
+            margin: 0.5rem 0;
+        }
+        
+        .docs-nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .docs-nav ul li a:hover {
+            background: #f3f4f6;
+            color: var(--primary-color);
+            padding-left: 1rem;
+        }
+        
+        .code-block {
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+        
+        .endpoint {
+            background: #f9fafb;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .endpoint h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+            font-family: monospace;
+        }
+        
+        .endpoint .method {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+        
+        .method.post { background: #10b981; }
+        .method.get { background: #3b82f6; }
+        .method.put { background: #f59e0b; }
+        .method.delete { background: #ef4444; }
+        
+        .parameter-table {
+            width: 100%;
+            margin: 1rem 0;
+        }
+        
+        .parameter-table th {
+            text-align: left;
+            padding: 0.75rem;
+            background: #f3f4f6;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .parameter-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .type-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: #e0e7ff;
+            color: #3730a3;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: monospace;
+        }
+        
+        .docs-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        
+        @media (max-width: 968px) {
+            .docs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .docs-nav {
+                position: static;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
@@ -17,80 +146,483 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="ner-demo.html">NER Demo</a></li>
+                <li><a href="defi-demo.html">DeFi Calculator</a></li>
                 <li><a href="docs.html" class="active">Docs</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- Header -->
     <section class="dashboard-header">
         <div class="container">
-            <h1>Documentation</h1>
-            <p>Complete guide to using HypatiaX</p>
+            <h1>📚 Documentation</h1>
+            <p>Complete guide to using HypatiaX APIs and features</p>
         </div>
     </section>
 
+    <!-- Documentation Content -->
     <section class="dashboard-content">
         <div class="container">
-            <div class="dashboard-section">
-                <h2>Getting Started</h2>
-                <p>HypatiaX is an advanced Named Entity Recognition system designed for Tableau query processing.</p>
-                
-                <h3>Quick Start</h3>
-                <ol>
-                    <li>Navigate to the <a href="ner-demo.html">NER Demo</a></li>
-                    <li>Enter your Tableau query</li>
-                    <li>Select a mapping method</li>
-                    <li>Click "Extract Entities" to process</li>
-                </ol>
-            </div>
+            <div class="docs-grid">
+                <!-- Sidebar Navigation -->
+                <aside class="docs-nav">
+                    <h4>📖 Contents</h4>
+                    <ul>
+                        <li><a href="#getting-started">Getting Started</a></li>
+                        <li><a href="#hypatiax-api">HypatiaX API</a></li>
+                        <li><a href="#ner-api">NER API</a></li>
+                        <li><a href="#defi-api">DeFi API</a></li>
+                        <li><a href="#models">Models</a></li>
+                        <li><a href="#examples">Examples</a></li>
+                    </ul>
+                </aside>
 
-            <div class="dashboard-section">
-                <h2>API Reference</h2>
-                <h3>Endpoints</h3>
-                
-                <h4>POST /api/map</h4>
-                <p>Map natural language description to Tableau formula</p>
-                <pre class="json-display">{
-  "description": "Sum of sales by year",
-  "method": "vocab"
-}</pre>
+                <!-- Main Content -->
+                <main>
+                    <!-- Getting Started -->
+                    <div class="dashboard-section" id="getting-started">
+                        <h2>🚀 Getting Started</h2>
+                        <p>HypatiaX is an advanced AI-powered system that combines Named Entity Recognition (NER), Formula Mapping, and DeFi calculations.</p>
+                        
+                        <h3>Quick Start</h3>
+                        <ol>
+                            <li><strong>Formula Mapping:</strong> Navigate to <a href="index.html">Home</a> to convert natural language to Tableau formulas</li>
+                            <li><strong>NER Demo:</strong> Visit <a href="ner-demo.html">NER Demo</a> to extract entities from text</li>
+                            <li><strong>DeFi Calculator:</strong> Go to <a href="defi-demo.html">DeFi Calculator</a> for impermanent loss analysis</li>
+                        </ol>
 
-                <h4>GET /api/health</h4>
-                <p>Check backend server status</p>
-                
-                <h4>GET /api/test</h4>
-                <p>Run test suite with sample data</p>
-            </div>
+                        <h3>Installation</h3>
+                        <div class="code-block">
+# Clone the repository
+git clone https://github.com/yourusername/hypatiax.git
 
-            <div class="dashboard-section">
-                <h2>Model Information</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>ner_tableau_desc</h3>
-                        <p>Specialized for Tableau descriptions</p>
-                        <p><strong>Accuracy:</strong> 95.2%</p>
+# Install dependencies
+pip install -r requirements.txt
+
+# Start the backend server
+python app.py
+
+# Open frontend in browser
+open index.html
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <h3>ner_tableau_formulas</h3>
-                        <p>Optimized for formula extraction</p>
-                        <p><strong>Accuracy:</strong> 93.8%</p>
+
+                    <!-- HypatiaX API -->
+                    <div class="dashboard-section" id="hypatiax-api">
+                        <h2>🎯 HypatiaX API</h2>
+                        <p>Convert natural language descriptions to Tableau formulas.</p>
+
+                        <div class="endpoint">
+                            <h4><span class="method post">POST</span>/api/hypatiax/map</h4>
+                            <p>Map a natural language description to a Tableau formula.</p>
+                            
+                            <h5>Request Body:</h5>
+                            <div class="code-block">
+{
+  "description": "Calculate the total of Sales",
+  "method": "vocab"  // or "semantic"
+}
+                            </div>
+
+                            <h5>Parameters:</h5>
+                            <table class="parameter-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>description</code></td>
+                                        <td><span class="type-badge">string</span></td>
+                                        <td>Natural language query describing the calculation</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>method</code></td>
+                                        <td><span class="type-badge">string</span></td>
+                                        <td>Mapping method: "vocab" or "semantic"</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h5>Response:</h5>
+                            <div class="code-block">
+{
+  "formula": "SUM([Sales])",
+  "confidence": 0.95,
+  "method": "vocab",
+  "processing_time_ms": 45,
+  "entities": [
+    {
+      "text": "total",
+      "label": "AGGREGATION",
+      "start": 14,
+      "end": 19
+    },
+    {
+      "text": "Sales",
+      "label": "FIELD",
+      "start": 23,
+      "end": 28
+    }
+  ]
+}
+                            </div>
+                        </div>
+
+                        <div class="endpoint">
+                            <h4><span class="method get">GET</span>/api/hypatiax/test</h4>
+                            <p>Run test suite with predefined sample queries.</p>
+                            
+                            <h5>Response:</h5>
+                            <div class="code-block">
+{
+  "test_results": [
+    {
+      "description": "Calculate the total of Sales",
+      "formula": "SUM([Sales])",
+      "status": "pass",
+      "confidence": 0.95
+    }
+  ],
+  "passed": 8,
+  "failed": 0,
+  "total": 8
+}
+                            </div>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <h3>ner_tableau</h3>
-                        <p>Combined hybrid model</p>
-                        <p><strong>Accuracy:</strong> 94.5%</p>
+
+                    <!-- NER API -->
+                    <div class="dashboard-section" id="ner-api">
+                        <h2>🔍 NER API</h2>
+                        <p>Named Entity Recognition for formula extraction and text analysis.</p>
+
+                        <div class="endpoint">
+                            <h4><span class="method post">POST</span>/api/ner/extract-formula</h4>
+                            <p>Extract mathematical formulas from text.</p>
+                            
+                            <h5>Request Body:</h5>
+                            <div class="code-block">
+{
+  "text": "The quadratic formula is x = (-b ± √(b²-4ac)) / 2a",
+  "domain": "general"  // or "defi", "finance", "physics"
+}
+                            </div>
+
+                            <h5>Response:</h5>
+                            <div class="code-block">
+{
+  "formula": "(-b ± √(b²-4ac)) / 2a",
+  "domain": "mathematics",
+  "confidence": 0.92,
+  "latex": "x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}"
+}
+                            </div>
+                        </div>
+
+                        <div class="endpoint">
+                            <h4><span class="method post">POST</span>/api/ner/recognize-entities</h4>
+                            <p>Recognize and extract entities from text.</p>
+                            
+                            <h5>Request Body:</h5>
+                            <div class="code-block">
+{
+  "text": "Show me the sum of sales by region for last quarter"
+}
+                            </div>
+
+                            <h5>Response:</h5>
+                            <div class="code-block">
+{
+  "entities": [
+    {
+      "text": "sum",
+      "label": "AGGREGATION",
+      "start": 12,
+      "end": 15,
+      "confidence": 0.98
+    },
+    {
+      "text": "sales",
+      "label": "FIELD",
+      "start": 19,
+      "end": 24,
+      "confidence": 0.95
+    },
+    {
+      "text": "region",
+      "label": "DIMENSION",
+      "start": 28,
+      "end": 34,
+      "confidence": 0.93
+    }
+  ],
+  "processing_time_ms": 32
+}
+                            </div>
+                        </div>
+
+                        <div class="endpoint">
+                            <h4><span class="method post">POST</span>/api/ner/convert-to-latex</h4>
+                            <p>Convert formula to LaTeX format.</p>
+                            
+                            <h5>Request Body:</h5>
+                            <div class="code-block">
+{
+  "formula": "E = mc^2"
+}
+                            </div>
+
+                            <h5>Response:</h5>
+                            <div class="code-block">
+{
+  "latex": "E = mc^{2}",
+  "domain": "physics"
+}
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                    <!-- DeFi API -->
+                    <div class="dashboard-section" id="defi-api">
+                        <h2>💎 DeFi API</h2>
+                        <p>Calculate impermanent loss and analyze liquidity pool positions.</p>
+
+                        <div class="endpoint">
+                            <h4><span class="method post">POST</span>/api/defi/il-percentage</h4>
+                            <p>Calculate impermanent loss percentage based on price change.</p>
+                            
+                            <h5>Request Body:</h5>
+                            <div class="code-block">
+{
+  "initial_price": 2000,
+  "current_price": 2400
+}
+                            </div>
+
+                            <h5>Response:</h5>
+                            <div class="code-block">
+{
+  "il_percentage": -2.02,
+  "price_ratio": 1.2,
+  "interpretation": "Moderate impermanent loss. Price increased by 20%."
+}
+                            </div>
+                        </div>
+
+                        <div class="endpoint">
+                            <h4><span class="method post">POST</span>/api/defi/analyze-position</h4>
+                            <p>Complete analysis of a liquidity pool position including fees and ROI.</p>
+                            
+                            <h5>Request Body:</h5>
+                            <div class="code-block">
+{
+  "initial_token_a": 10,
+  "initial_token_b": 20000,
+  "initial_price": 2000,
+  "current_price": 2400,
+  "daily_volume_usd": 500000,
+  "pool_tvl_usd": 10000000,
+  "days_elapsed": 30,
+  "fee_rate": 0.003
+}
+                            </div>
+
+                            <h5>Response:</h5>
+                            <div class="code-block">
+{
+  "initial_value_usd": 40000,
+  "current_position": {
+    "token_a": 9.13,
+    "token_b": 21912,
+    "value_usd": 43824
+  },
+  "hodl_value_usd": 44000,
+  "il_percentage": -2.02,
+  "fee_income_usd": 600,
+  "net_pnl_usd": 424,
+  "pool_quality_score": 75,
+  "daily_turnover_rate": 5.0,
+  "days_to_breakeven": 15.2,
+  "recommendation": "Good position. Fees are offsetting IL."
+}
+                            </div>
+                        </div>
+
+                        <div class="endpoint">
+                            <h4><span class="method post">POST</span>/api/defi/quality-score</h4>
+                            <p>Calculate pool quality score based on volume and TVL.</p>
+                            
+                            <h5>Request Body:</h5>
+                            <div class="code-block">
+{
+  "daily_volume_usd": 500000,
+  "pool_tvl_usd": 10000000
+}
+                            </div>
+
+                            <h5>Response:</h5>
+                            <div class="code-block">
+{
+  "quality_score": 75,
+  "daily_turnover_rate": 5.0,
+  "rating": "Good"
+}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Health Check -->
+                    <div class="dashboard-section">
+                        <h2>🏥 Health & Status</h2>
+
+                        <div class="endpoint">
+                            <h4><span class="method get">GET</span>/api/health</h4>
+                            <p>Check backend server health and status.</p>
+                            
+                            <h5>Response:</h5>
+                            <div class="code-block">
+{
+  "status": "online",
+  "version": "1.0.0",
+  "mode": "production",
+  "models_loaded": true,
+  "timestamp": "2024-01-15T10:30:00Z"
+}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Models -->
+                    <div class="dashboard-section" id="models">
+                        <h2>🤖 Models</h2>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">🎯</div>
+                                <h3>ner_tableau_desc</h3>
+                                <p>Specialized for Tableau natural language descriptions</p>
+                                <p><strong>Accuracy:</strong> 95.2%</p>
+                                <p><strong>Use Case:</strong> Query understanding</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">📐</div>
+                                <h3>ner_tableau_formulas</h3>
+                                <p>Optimized for formula extraction and parsing</p>
+                                <p><strong>Accuracy:</strong> 93.8%</p>
+                                <p><strong>Use Case:</strong> Formula generation</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">🔄</div>
+                                <h3>ner_tableau</h3>
+                                <p>Combined hybrid model for general use</p>
+                                <p><strong>Accuracy:</strong> 94.5%</p>
+                                <p><strong>Use Case:</strong> General queries</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Examples -->
+                    <div class="dashboard-section" id="examples">
+                        <h2>💡 Examples</h2>
+                        
+                        <h3>Formula Mapping Examples</h3>
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Formula</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Calculate the total of Sales</td>
+                                    <td><code>SUM([Sales])</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Average of Profit</td>
+                                    <td><code>AVG([Profit])</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Count of Orders</td>
+                                    <td><code>COUNT([Orders])</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Maximum sales value</td>
+                                    <td><code>MAX([Sales])</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>DeFi Calculation Examples</h3>
+                        <div class="code-block">
+// Example 1: ETH/USDC pool with 20% price increase
+Initial Price: $2000
+Current Price: $2400
+Expected IL: -2.02%
+
+// Example 2: Stable pair USDC/USDT
+Initial Price: $1.00
+Current Price: $1.01
+Expected IL: -0.0025% (minimal)
+
+// Example 3: Volatile pair with 2x price change
+Initial Price: $100
+Current Price: $200
+Expected IL: -5.72%
+                        </div>
+                    </div>
+
+                    <!-- Error Codes -->
+                    <div class="dashboard-section">
+                        <h2>⚠️ Error Codes</h2>
+                        <table class="parameter-table">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Message</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>400</code></td>
+                                    <td>Bad Request</td>
+                                    <td>Invalid parameters or missing required fields</td>
+                                </tr>
+                                <tr>
+                                    <td><code>404</code></td>
+                                    <td>Not Found</td>
+                                    <td>Endpoint does not exist</td>
+                                </tr>
+                                <tr>
+                                    <td><code>500</code></td>
+                                    <td>Internal Server Error</td>
+                                    <td>Server-side error during processing</td>
+                                </tr>
+                                <tr>
+                                    <td><code>503</code></td>
+                                    <td>Service Unavailable</td>
+                                    <td>Server is offline or overloaded</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </main>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 HypatiaX. All rights reserved.</p>
+            <p>Need help? Contact us at support@hypatiax.com</p>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/api-client.js"></script>
 </body>
 </html>

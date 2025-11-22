@@ -1,0 +1,94 @@
+──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/tools/llm_providers/google_provider.py                                                         
+Available Gemini models:
+============================================================
+  • models/gemini-2.5-pro-preview-03-25
+  • models/gemini-2.5-flash
+  • models/gemini-2.5-pro-preview-05-06
+  • models/gemini-2.5-pro-preview-06-05
+  • models/gemini-2.5-pro
+  • models/gemini-2.0-flash-exp
+  • models/gemini-2.0-flash
+  • models/gemini-2.0-flash-001
+  • models/gemini-2.0-flash-lite-001
+  • models/gemini-2.0-flash-lite
+  • models/gemini-2.0-flash-lite-preview-02-05
+  • models/gemini-2.0-flash-lite-preview
+  • models/gemini-2.0-pro-exp
+  • models/gemini-2.0-pro-exp-02-05
+  • models/gemini-exp-1206
+  • models/gemini-2.0-flash-thinking-exp-01-21
+  • models/gemini-2.0-flash-thinking-exp
+  • models/gemini-2.0-flash-thinking-exp-1219
+  • models/gemini-2.5-flash-preview-tts
+  • models/gemini-2.5-pro-preview-tts
+  • models/learnlm-2.0-flash-experimental
+  • models/gemma-3-1b-it
+  • models/gemma-3-4b-it
+  • models/gemma-3-12b-it
+  • models/gemma-3-27b-it
+  • models/gemma-3n-e4b-it
+  • models/gemma-3n-e2b-it
+  • models/gemini-flash-latest
+  • models/gemini-flash-lite-latest
+  • models/gemini-pro-latest
+  • models/gemini-2.5-flash-lite
+  • models/gemini-2.5-flash-image-preview
+  • models/gemini-2.5-flash-image
+  • models/gemini-2.5-flash-preview-09-2025
+  • models/gemini-2.5-flash-lite-preview-09-2025
+  • models/gemini-3-pro-preview
+  • models/gemini-robotics-er-1.5-preview
+  • models/gemini-2.5-computer-use-preview-10-2025
+
+============================================================
+✅ Using model: models/gemini-2.5-flash
+Testing Google Gemini Provider...
+============================================================
+
+📐 Formula: IL = 1 - \frac{2\sqrt{r}}{r+1} \quad \text{where } r = \frac{P_1}{P_0}
+
+💻 Implementation:
+import math
+
+def calculate_impermanent_loss_v2(initial_price_ratio: float, current_price_ratio: float) -> float:
+    """
+    Calculates the impermanent loss for a Uniswap V2 (constant product) liquidity pool.
+
+    Impermanent Loss (IL) is the difference in value between holding assets outside
+    an AMM pool versus providing liquidity to the pool, given a change in the price ratio
+    of the assets.
+
+    Args:
+        initial_price_ratio (float): The initial price ratio of Token A to Token B (P_A / P_B)
+                                     when liquidity was first provided.
+        current_price_ratio (float): The current price ratio of Token A to Token B (P_A / P_B).
+
+    Returns:
+        float: The impermanent loss as a decimal (e.g., 0.05 for 5% loss).
+               A positive value indicates a loss relative to simply holding the assets.
+               Returns 0 if the price ratio has not changed.
+               Returns NaN if price ratios are invalid (non-positive).
+    """
+    if initial_price_ratio <= 0 or current_price_ratio <= 0:
+        return float('nan') # Price ratios must be positive
+
+    # r is the ratio of the current price to the initial price
+    r = current_price_ratio / initial_price_ratio
+
+    # The impermanent loss formula for constant product AMMs
+    # This formula is computationally stable for r > 0.
+    impermanent_loss = 1 - (2 * math.sqrt(r)) / (r + 1)
+
+    return impermanent_loss
+
+📝 Explanation: This formula calculates the impermanent loss (IL) for liquidity providers (LPs) in a Uniswap V2-style constant product automated market maker (AMM) pool. Impermanent loss represents the divergence in value between holding assets directly (HODL) and providing them as liquidity to an AMM pool when the price ratio of the assets changes. The formula quantifies this loss as a fraction of the value that would have been held had the assets not been provided to the pool. It is derived from the constant product formula (x * y = k) which governs Uniswap V2 pools, where 'x' and 'y' are the quantities of the two tokens in the pool, and 'k' is a constant. The formula assumes an initial deposit of tokens in equal value.
+
+🎯 Novelty Score: 5/10
+
+✅ Advantages: Provides a widely accepted and fundamental metric for assessing risk in constant product AMM liquidity provision., Simple and computationally stable, making it easy to implement and understand., Clearly highlights the financial impact of price divergence for LPs relative to a HODL strategy.
+
+⚠  Limitations: Does not account for trading fees earned by LPs, which can often offset or even surpass impermanent loss., Does not consider potential capital gains or losses on the underlying assets themselves, only the relative difference compared to HODLing., Not applicable to more complex AMM designs like concentrated liquidity (e.g., Uniswap V3) or bonding curve AMMs, which have different IL characteristics., It's a snapshot calculation based on price ratios; it doesn't model the dynamic effects of continuous rebalancing and fee accumulation over time.
+
+✅ Test completed!
+
