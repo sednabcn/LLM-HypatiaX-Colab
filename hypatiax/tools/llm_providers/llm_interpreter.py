@@ -3,6 +3,8 @@ from anthropic import Anthropic
 from typing import Dict
 from dataclasses import dataclass
 import json
+import re
+from dotenv import load_dotenv
 
 @dataclass
 class InterpretationConfig:
@@ -12,6 +14,7 @@ class InterpretationConfig:
 
 class LLMInterpreter:
     def __init__(self, config: InterpretationConfig = None):
+        load_dotenv()
         self.config = config or InterpretationConfig()
         api_key = os.getenv('ANTHROPIC_API_KEY')
         if not api_key:
@@ -39,6 +42,7 @@ Provide structured analysis:
 4. PREDICTIONS: What does this expression enable?
 5. LIMITATIONS: Under what conditions might it fail?
 
+CRITICAL: Respond with ONLY valid JSON, no markdown code fences, no preamble.
 Format as JSON with keys: interpretation, analogies, novelty, predictions, limitations""",
 
             'risk': """You are interpreting a DISCOVERED analytical expression from Risk Management data.
@@ -58,8 +62,17 @@ Provide structured analysis:
 4. PRACTICAL USE: How would risk managers apply this?
 5. VALIDATION NEEDS: What additional tests required?
 
+CRITICAL: Respond with ONLY valid JSON, no markdown code fences, no preamble.
 Format as JSON with keys: interpretation, regulatory, known_formulas, practical_use, validation"""
         }
+    
+    def _extract_json(self, text: str) -> str:
+        """Extract JSON from text that may contain markdown code fences."""
+        # Remove markdown code fences
+        text = re.sub(r'^```json\s*\n', '', text, flags=re.MULTILINE)
+        text = re.sub(r'\n```\s*$', '', text, flags=re.MULTILINE)
+        text = text.strip()
+        return text
     
     def interpret(self, expression: str, domain: str, 
                   variables: Dict, r2: float) -> Dict:
@@ -82,11 +95,16 @@ Format as JSON with keys: interpretation, regulatory, known_formulas, practical_
         response_text = response.content[0].text
         
         try:
-            interpretation = json.loads(response_text)
-        except json.JSONDecodeError:
+            # Clean the response text before parsing
+            clean_text = self._extract_json(response_text)
+            interpretation = json.loads(clean_text)
+        except json.JSONDecodeError as e:
+            print(f"JSON parsing error: {e}")
+            print(f"Response text: {response_text[:500]}...")
             interpretation = {
                 'raw_text': response_text,
-                'status': 'unparsed'
+                'status': 'unparsed',
+                'error': str(e)
             }
         
         interpretation['expression'] = expression
@@ -105,4 +123,9 @@ if __name__ == "__main__":
         r2=0.98
     )
     
-    print(json.dumps(result, indent=2))
+    # print(json.dumps(result, indent=2, ensure_ascii=False)))
+
+    from hypatiax.tools.formatters.formatter import InterpretationFormatter
+
+    formatter = InterpretationFormatter()
+    formatter.to_rich_panel(result)  # Beautiful terminal output

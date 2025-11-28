@@ -1,0 +1,962 @@
+──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/datasets/defi_dataset_generator.py                                             
+
+######################################################################
+# DeFi Formula Discovery Dataset Generation
+# Timestamp: 2025-11-26T20:54:10.157666
+# Samples per formula: 100
+# Random seed: 42
+######################################################################
+
+======================================================================
+Generating Formula 1: Impermanent Loss
+======================================================================
+Generated 100 samples
+Price ratio range: [0.15, 9.87]
+IL range: [-0.4361, 0.0241]
+
+======================================================================
+WORKFLOW: Impermanent Loss in AMM Pool
+Domain: DEFI
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+✓ Found: (price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694
+  R² Score: 0.9919
+  Complexity: 11
+
+[2/3] ✓ Validating expression across 4 layers...
+✓ Overall Score: 85.5/100
+  Layer Scores:
+    ⚠ Symbolic: 67.0
+    ✓ Dimensional: 100.0
+    ✓ Domain: 90.0
+    ✓ Numerical: 100.0
+
+  ℹ Warnings (6):
+    - Verify price bounds and slippage limits
+    - Check AMM constant product invariant preservation
+    - Division by zero risk: price_ratio + 1.4091635
+    ... and 3 more
+
+[3/3] 🤖 Interpreting with LLM...
+✓ Interpretation complete
+  Summary: This expression models a DeFi metric as a function of price ratio with three key components: (1) A power-law decay term price_ratio/(price_ratio + 1.4...
+
+======================================================================
+Workflow complete. Result stored (1/100)
+======================================================================
+
+
+
+╭─────────────────────────────────────── Discovery Report ────────────────────────────────────────╮
+│                                                                                                 │
+│  Impermanent Loss in AMM Pool                                                                   │
+│  Domain: DEFI                                                                                   │
+│  Timestamp: 2025-11-26T20:55:37.723606                                                          │
+│  Samples: 100 | Features: 1                                                                     │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────╮
+│                                                                                                 │
+│  (price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694                      │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+                       
+  R² Score     0.9919  
+  Complexity   11      
+                       
+
+
+╭───────────────────────────────────── ✓ Validation Results ──────────────────────────────────────╮
+│  ✓ Overall Score: 85.5/100                                                                      │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  67.0 │   ✗    │
+│ Dimensional │ 100.0 │   ✓    │
+│ Domain      │  90.0 │   ✓    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+ℹ Warnings:
+  1. Verify price bounds and slippage limits
+  2. Check AMM constant product invariant preservation
+  3. Division by zero risk: price_ratio + 1.4091635
+  4. Division by zero risk: price_ratio + 1.4091635
+  5. Variable 'price' should be positive - add validation
+  ... and 1 more
+
+💡 Recommendations:
+  1. IMPROVE: Simplify expression to: 4.3896694*price_ratio/(price_ratio + 1.4091635)**2.3158338 - 
+0.562908860438754
+  2. REVIEW: Address domain-specific warnings for defi
+
+
+╭─────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 AI Interpretation                                                                            │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🔍 Interpretation
+This expression models a DeFi metric as a function of price ratio with three key components: (1) A 
+power-law decay term price_ratio/(price_ratio + 1.4091635)^2.3158338 that approaches zero as 
+price_ratio increases, suggesting diminishing returns or saturation effects; (2) A baseline offset 
+of -0.12823491 that shifts the entire function downward, possibly representing fixed costs or 
+minimum thresholds; (3) A scaling factor of 4.3896694 that amplifies the net effect. The critical 
+price ratio of 1.4091635 appears to be an inflection point where behavior transitions.
+
+🔗 Known Analogies
+The functional form resembles Hill equations in biochemistry for cooperative binding, 
+Michaelis-Menten kinetics with inhibition, and dose-response curves in pharmacology. In finance, it
+parallels utility functions with diminishing marginal returns, option pricing models with 
+price-dependent sensitivity, and risk-adjusted return metrics. The power-law exponent 2.3158338 is 
+reminiscent of scaling laws in complex systems and critical phenomena.
+
+✨ Novel Aspects
+The specific combination of parameters suggests a DeFi-native phenomenon not captured by 
+traditional finance models. The critical ratio of ~1.41 may represent a unique equilibrium point in
+automated market makers or liquidity pools. The negative baseline indicates the metric can go 
+negative, unusual for many financial ratios but consistent with DeFi concepts like impermanent loss
+or slippage costs.
+
+🎯 Predictions
+The model predicts maximum values occur at low price ratios (near 1), rapid decay as prices 
+increase beyond the critical point, and asymptotic approach to the baseline offset at high price 
+ratios. It suggests optimal DeFi strategies should focus on price ratios below 1.41, and provides 
+quantitative thresholds for risk management and position sizing in volatile DeFi environments.
+
+⚠ Limitations
+May fail during extreme market conditions, flash crashes, or when price_ratio approaches zero. The 
+model assumes continuous price movements and may not capture discrete jumps or oracle failures 
+common in DeFi. Limited to the price range observed in training data, and may not generalize across
+different DeFi protocols, token pairs, or market regimes with different volatility characteristics.
+
+======================================================================
+Generating Formula 2: AMM Swap Output (Uniswap V2)
+======================================================================
+Generated 100 samples
+Amount in range: [1.51, 99.46]
+Output range: [0.95, 583.91]
+
+======================================================================
+WORKFLOW: Uniswap V2 Swap Output with 0.3% Fee
+Domain: DEFI
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+✓ Found: amount_in*(-0.61682767 - (-0.56763846)*(amount_in - 2.963231)/reserve_in)*(0.0053935577 + reserve_out*(-1.6136296)/reserve_in) - 1*(-0.13659051)
+  R² Score: 1.0000
+  Complexity: 21
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 74.9/100
+  Layer Scores:
+    ⚠ Symbolic: 69.0
+    ⚠ Dimensional: 55.0
+    ✓ Domain: 90.0
+    ✓ Numerical: 100.0
+
+  ⚠ Errors (3):
+    - Invalid unit for 'amount_in': 'tokens' - 'tokens' is not defined in the unit registry
+    - Invalid unit for 'reserve_in': 'tokens' - 'tokens' is not defined in the unit registry
+    - Invalid unit for 'reserve_out': 'tokens' - 'tokens' is not defined in the unit registry
+
+  ℹ Warnings (6):
+    - Can be simplified to: (-amount_in*(0.0053935577*reserve_in - 1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 0.13659051*reserve_in**2)/reserve_in**2
+    - Check AMM constant product invariant preservation
+    - Multiple subtractions may cause precision loss
+    ... and 3 more
+
+[3/3] ⊗ Interpretation skipped (validation failed)
+  Recommendations:
+    • IMPROVE: Simplify expression to: (-amount_in*(0.0053935577*reserve_in - 1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 0.13659051*reserve_in**2)/reserve_in**2
+    • FIX CRITICAL: Resolve dimensional inconsistencies
+    • REVIEW: Address domain-specific warnings for defi
+
+======================================================================
+Workflow complete. Result stored (2/100)
+======================================================================
+
+
+
+╭─────────────────────────────────────── Discovery Report ────────────────────────────────────────╮
+│                                                                                                 │
+│  Uniswap V2 Swap Output with 0.3% Fee                                                           │
+│  Domain: DEFI                                                                                   │
+│  Timestamp: 2025-11-26T20:55:54.771093                                                          │
+│  Samples: 100 | Features: 3                                                                     │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────╮
+│                                                                                                 │
+│  amount_in*(-0.61682767 - (-0.56763846)*(amount_in - 2.963231)/reserve_in)*(0.0053935577 +      │
+│  reserve_out*(-1.6136296)/reserve_in) - 1*(-0.13659051)                                         │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+                       
+  R² Score     1.0000  
+  Complexity   21      
+                       
+
+
+╭───────────────────────────────────── ✓ Validation Results ──────────────────────────────────────╮
+│  ✗ Overall Score: 74.9/100                                                                      │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  69.0 │   ✗    │
+│ Dimensional │  55.0 │   ✗    │
+│ Domain      │  90.0 │   ✓    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+⚠ Errors:
+  1. Invalid unit for 'amount_in': 'tokens' - 'tokens' is not defined in the unit registry
+  2. Invalid unit for 'reserve_in': 'tokens' - 'tokens' is not defined in the unit registry
+  3. Invalid unit for 'reserve_out': 'tokens' - 'tokens' is not defined in the unit registry
+
+ℹ Warnings:
+  1. Can be simplified to: (-amount_in*(0.0053935577*reserve_in - 
+1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 
+0.13659051*reserve_in**2)/reserve_in**2
+  2. Check AMM constant product invariant preservation
+  3. Multiple subtractions may cause precision loss
+  4. Variable 'reserve' should be positive - add validation
+  5. Variable 'amount' should be positive - add validation
+  ... and 1 more
+
+💡 Recommendations:
+  1. IMPROVE: Simplify expression to: (-amount_in*(0.0053935577*reserve_in - 
+1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 
+0.13659051*reserve_in**2)/reserve_in**2
+  2. FIX CRITICAL: Resolve dimensional inconsistencies
+  3. REVIEW: Address domain-specific warnings for defi
+
+======================================================================
+Generating Formula 3: Lending Pool Utilization Rate
+======================================================================
+Generated 100 samples
+Borrowed range: [51.82, 989.96]
+Supplied range: [114.30, 2519.24]
+Utilization range: [0.2927, 0.8867]
+
+======================================================================
+WORKFLOW: Lending Pool Utilization Rate
+Domain: DEFI
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+✓ Found: borrowed/supplied
+  R² Score: 0.9960
+  Complexity: 3
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 91.3/100
+  Layer Scores:
+    ✓ Symbolic: 98.0
+    ⚠ Dimensional: 68.0
+    ✓ Domain: 100.0
+    ✓ Numerical: 100.0
+
+  ⚠ Errors (2):
+    - Invalid unit for 'borrowed': 'USD' - 'USD' is not defined in the unit registry
+    - Invalid unit for 'supplied': 'USD' - 'USD' is not defined in the unit registry
+
+  ℹ Warnings (2):
+    - Check AMM constant product invariant preservation
+    - Multiplication detected - verify resulting dimensions are correct
+
+[3/3] ⊗ Interpretation skipped (validation failed)
+  Recommendations:
+    • FIX CRITICAL: Resolve dimensional inconsistencies
+
+======================================================================
+Workflow complete. Result stored (3/100)
+======================================================================
+
+
+
+╭─────────────────────────────────────── Discovery Report ────────────────────────────────────────╮
+│                                                                                                 │
+│  Lending Pool Utilization Rate                                                                  │
+│  Domain: DEFI                                                                                   │
+│  Timestamp: 2025-11-26T20:56:09.809273                                                          │
+│  Samples: 100 | Features: 2                                                                     │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────╮
+│                                                                                                 │
+│  borrowed/supplied                                                                              │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+                       
+  R² Score     0.9960  
+  Complexity   3       
+                       
+
+
+╭───────────────────────────────────── ✓ Validation Results ──────────────────────────────────────╮
+│  ✗ Overall Score: 91.3/100                                                                      │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  98.0 │   ✓    │
+│ Dimensional │  68.0 │   ✗    │
+│ Domain      │ 100.0 │   ✓    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+⚠ Errors:
+  1. Invalid unit for 'borrowed': 'USD' - 'USD' is not defined in the unit registry
+  2. Invalid unit for 'supplied': 'USD' - 'USD' is not defined in the unit registry
+
+ℹ Warnings:
+  1. Check AMM constant product invariant preservation
+  2. Multiplication detected - verify resulting dimensions are correct
+
+💡 Recommendations:
+  1. FIX CRITICAL: Resolve dimensional inconsistencies
+
+======================================================================
+Generating Formula 4: Liquidity Pool Value
+======================================================================
+Generated 100 samples
+Reserve0 range: [102.35, 9993.60]
+Reserve1 range: [111.09, 9963.72]
+Value range: [659.14, 18979.06]
+
+======================================================================
+WORKFLOW: Constant Product Pool Total Value
+Domain: DEFI
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+✓ Found: 2.00019239074645*sqrt(reserve0*reserve1)
+  R² Score: 1.0000
+  Complexity: 6
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 89.8/100
+  Layer Scores:
+    ✓ Symbolic: 98.0
+    ⚠ Dimensional: 68.0
+    ✓ Domain: 95.0
+    ✓ Numerical: 100.0
+
+  ⚠ Errors (2):
+    - Invalid unit for 'reserve0': 'USD' - 'USD' is not defined in the unit registry
+    - Invalid unit for 'reserve1': 'USD' - 'USD' is not defined in the unit registry
+
+  ℹ Warnings (4):
+    - Check AMM constant product invariant preservation
+    - Multiplication detected - verify resulting dimensions are correct
+    - Variable 'reserve' should be positive - add validation
+    ... and 1 more
+
+[3/3] ⊗ Interpretation skipped (validation failed)
+  Recommendations:
+    • FIX CRITICAL: Resolve dimensional inconsistencies
+    • REVIEW: Address domain-specific warnings for defi
+
+======================================================================
+Workflow complete. Result stored (4/100)
+======================================================================
+
+
+
+╭─────────────────────────────────────── Discovery Report ────────────────────────────────────────╮
+│                                                                                                 │
+│  Constant Product Pool Total Value                                                              │
+│  Domain: DEFI                                                                                   │
+│  Timestamp: 2025-11-26T20:56:24.297730                                                          │
+│  Samples: 100 | Features: 2                                                                     │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────╮
+│                                                                                                 │
+│  2.00019239074645*sqrt(reserve0*reserve1)                                                       │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+                       
+  R² Score     1.0000  
+  Complexity   6       
+                       
+
+
+╭───────────────────────────────────── ✓ Validation Results ──────────────────────────────────────╮
+│  ✗ Overall Score: 89.8/100                                                                      │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  98.0 │   ✓    │
+│ Dimensional │  68.0 │   ✗    │
+│ Domain      │  95.0 │   ✓    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+⚠ Errors:
+  1. Invalid unit for 'reserve0': 'USD' - 'USD' is not defined in the unit registry
+  2. Invalid unit for 'reserve1': 'USD' - 'USD' is not defined in the unit registry
+
+ℹ Warnings:
+  1. Check AMM constant product invariant preservation
+  2. Multiplication detected - verify resulting dimensions are correct
+  3. Variable 'reserve' should be positive - add validation
+  4. Verify constant product invariant (x*y=k) is maintained
+
+💡 Recommendations:
+  1. FIX CRITICAL: Resolve dimensional inconsistencies
+  2. REVIEW: Address domain-specific warnings for defi
+✓ Exported 4 results to data/defi_formulas_20251126_205624.json
+✓ Exported 4 results to data/defi_summary_20251126_205624.csv
+
+======================================================================
+FINAL SUMMARY
+======================================================================
+
+Total formulas: 4
+Valid formulas: 1
+Invalid formulas: 3
+Success rate: 25.0%
+Average R² score: 0.9970
+Average validation score: 85.4/100
+
+Individual Results:
+----------------------------------------------------------------------
+
+1. Impermanent Loss in AMM Pool
+   Expression: (price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694
+   R² Score: 0.9919
+   Validation: ✓ 85.5/100
+
+2. Uniswap V2 Swap Output with 0.3% Fee
+   Expression: amount_in*(-0.61682767 - (-0.56763846)*(amount_in - 2.963231)/reserve_in)*(0.0053935577 + reserve_out*(-1.6136296)/reserve_in) - 1*(-0.13659051)
+   R² Score: 1.0000
+   Validation: ✗ 74.9/100
+   Errors: 3
+     - Invalid unit for 'amount_in': 'tokens' - 'tokens' is not defined in the unit registry
+     - Invalid unit for 'reserve_in': 'tokens' - 'tokens' is not defined in the unit registry
+
+3. Lending Pool Utilization Rate
+   Expression: borrowed/supplied
+   R² Score: 0.9960
+   Validation: ✗ 91.3/100
+   Errors: 2
+     - Invalid unit for 'borrowed': 'USD' - 'USD' is not defined in the unit registry
+     - Invalid unit for 'supplied': 'USD' - 'USD' is not defined in the unit registry
+
+4. Constant Product Pool Total Value
+   Expression: 2.00019239074645*sqrt(reserve0*reserve1)
+   R² Score: 1.0000
+   Validation: ✗ 89.8/100
+   Errors: 2
+     - Invalid unit for 'reserve0': 'USD' - 'USD' is not defined in the unit registry
+     - Invalid unit for 'reserve1': 'USD' - 'USD' is not defined in the unit registry
+
+======================================================================
+
+✓ Complete! Results saved to:
+  JSON: data/defi_formulas_20251126_205624.json
+  CSV:  data/defi_summary_20251126_205624.csv
+
+──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/datasets/defi_dataset_generator.py                                             
+
+######################################################################
+# DeFi Formula Discovery Dataset Generation
+# Timestamp: 2025-11-26T20:54:10.157666
+# Samples per formula: 100
+# Random seed: 42
+######################################################################
+
+======================================================================
+Generating Formula 1: Impermanent Loss
+======================================================================
+Generated 100 samples
+Price ratio range: [0.15, 9.87]
+IL range: [-0.4361, 0.0241]
+
+======================================================================
+WORKFLOW: Impermanent Loss in AMM Pool
+Domain: DEFI
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+✓ Found: (price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694
+  R² Score: 0.9919
+  Complexity: 11
+
+[2/3] ✓ Validating expression across 4 layers...
+✓ Overall Score: 85.5/100
+  Layer Scores:
+    ⚠ Symbolic: 67.0
+    ✓ Dimensional: 100.0
+    ✓ Domain: 90.0
+    ✓ Numerical: 100.0
+
+  ℹ Warnings (6):
+    - Verify price bounds and slippage limits
+    - Check AMM constant product invariant preservation
+    - Division by zero risk: price_ratio + 1.4091635
+    ... and 3 more
+
+[3/3] 🤖 Interpreting with LLM...
+✓ Interpretation complete
+  Summary: This expression models a DeFi metric as a function of price ratio with three key components: (1) A power-law decay term price_ratio/(price_ratio + 1.4...
+
+======================================================================
+Workflow complete. Result stored (1/100)
+======================================================================
+
+
+
+╭─────────────────────────────────────── Discovery Report ────────────────────────────────────────╮
+│                                                                                                 │
+│  Impermanent Loss in AMM Pool                                                                   │
+│  Domain: DEFI                                                                                   │
+│  Timestamp: 2025-11-26T20:55:37.723606                                                          │
+│  Samples: 100 | Features: 1                                                                     │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────╮
+│                                                                                                 │
+│  (price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694                      │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+                       
+  R² Score     0.9919  
+  Complexity   11      
+                       
+
+
+╭───────────────────────────────────── ✓ Validation Results ──────────────────────────────────────╮
+│  ✓ Overall Score: 85.5/100                                                                      │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  67.0 │   ✗    │
+│ Dimensional │ 100.0 │   ✓    │
+│ Domain      │  90.0 │   ✓    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+ℹ Warnings:
+  1. Verify price bounds and slippage limits
+  2. Check AMM constant product invariant preservation
+  3. Division by zero risk: price_ratio + 1.4091635
+  4. Division by zero risk: price_ratio + 1.4091635
+  5. Variable 'price' should be positive - add validation
+  ... and 1 more
+
+💡 Recommendations:
+  1. IMPROVE: Simplify expression to: 4.3896694*price_ratio/(price_ratio + 1.4091635)**2.3158338 - 
+0.562908860438754
+  2. REVIEW: Address domain-specific warnings for defi
+
+
+╭─────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 AI Interpretation                                                                            │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🔍 Interpretation
+This expression models a DeFi metric as a function of price ratio with three key components: (1) A 
+power-law decay term price_ratio/(price_ratio + 1.4091635)^2.3158338 that approaches zero as 
+price_ratio increases, suggesting diminishing returns or saturation effects; (2) A baseline offset 
+of -0.12823491 that shifts the entire function downward, possibly representing fixed costs or 
+minimum thresholds; (3) A scaling factor of 4.3896694 that amplifies the net effect. The critical 
+price ratio of 1.4091635 appears to be an inflection point where behavior transitions.
+
+🔗 Known Analogies
+The functional form resembles Hill equations in biochemistry for cooperative binding, 
+Michaelis-Menten kinetics with inhibition, and dose-response curves in pharmacology. In finance, it
+parallels utility functions with diminishing marginal returns, option pricing models with 
+price-dependent sensitivity, and risk-adjusted return metrics. The power-law exponent 2.3158338 is 
+reminiscent of scaling laws in complex systems and critical phenomena.
+
+✨ Novel Aspects
+The specific combination of parameters suggests a DeFi-native phenomenon not captured by 
+traditional finance models. The critical ratio of ~1.41 may represent a unique equilibrium point in
+automated market makers or liquidity pools. The negative baseline indicates the metric can go 
+negative, unusual for many financial ratios but consistent with DeFi concepts like impermanent loss
+or slippage costs.
+
+🎯 Predictions
+The model predicts maximum values occur at low price ratios (near 1), rapid decay as prices 
+increase beyond the critical point, and asymptotic approach to the baseline offset at high price 
+ratios. It suggests optimal DeFi strategies should focus on price ratios below 1.41, and provides 
+quantitative thresholds for risk management and position sizing in volatile DeFi environments.
+
+⚠ Limitations
+May fail during extreme market conditions, flash crashes, or when price_ratio approaches zero. The 
+model assumes continuous price movements and may not capture discrete jumps or oracle failures 
+common in DeFi. Limited to the price range observed in training data, and may not generalize across
+different DeFi protocols, token pairs, or market regimes with different volatility characteristics.
+
+======================================================================
+Generating Formula 2: AMM Swap Output (Uniswap V2)
+======================================================================
+Generated 100 samples
+Amount in range: [1.51, 99.46]
+Output range: [0.95, 583.91]
+
+======================================================================
+WORKFLOW: Uniswap V2 Swap Output with 0.3% Fee
+Domain: DEFI
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+✓ Found: amount_in*(-0.61682767 - (-0.56763846)*(amount_in - 2.963231)/reserve_in)*(0.0053935577 + reserve_out*(-1.6136296)/reserve_in) - 1*(-0.13659051)
+  R² Score: 1.0000
+  Complexity: 21
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 74.9/100
+  Layer Scores:
+    ⚠ Symbolic: 69.0
+    ⚠ Dimensional: 55.0
+    ✓ Domain: 90.0
+    ✓ Numerical: 100.0
+
+  ⚠ Errors (3):
+    - Invalid unit for 'amount_in': 'tokens' - 'tokens' is not defined in the unit registry
+    - Invalid unit for 'reserve_in': 'tokens' - 'tokens' is not defined in the unit registry
+    - Invalid unit for 'reserve_out': 'tokens' - 'tokens' is not defined in the unit registry
+
+  ℹ Warnings (6):
+    - Can be simplified to: (-amount_in*(0.0053935577*reserve_in - 1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 0.13659051*reserve_in**2)/reserve_in**2
+    - Check AMM constant product invariant preservation
+    - Multiple subtractions may cause precision loss
+    ... and 3 more
+
+[3/3] ⊗ Interpretation skipped (validation failed)
+  Recommendations:
+    • IMPROVE: Simplify expression to: (-amount_in*(0.0053935577*reserve_in - 1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 0.13659051*reserve_in**2)/reserve_in**2
+    • FIX CRITICAL: Resolve dimensional inconsistencies
+    • REVIEW: Address domain-specific warnings for defi
+
+======================================================================
+Workflow complete. Result stored (2/100)
+======================================================================
+
+
+
+╭─────────────────────────────────────── Discovery Report ────────────────────────────────────────╮
+│                                                                                                 │
+│  Uniswap V2 Swap Output with 0.3% Fee                                                           │
+│  Domain: DEFI                                                                                   │
+│  Timestamp: 2025-11-26T20:55:54.771093                                                          │
+│  Samples: 100 | Features: 3                                                                     │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────╮
+│                                                                                                 │
+│  amount_in*(-0.61682767 - (-0.56763846)*(amount_in - 2.963231)/reserve_in)*(0.0053935577 +      │
+│  reserve_out*(-1.6136296)/reserve_in) - 1*(-0.13659051)                                         │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+                       
+  R² Score     1.0000  
+  Complexity   21      
+                       
+
+
+╭───────────────────────────────────── ✓ Validation Results ──────────────────────────────────────╮
+│  ✗ Overall Score: 74.9/100                                                                      │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  69.0 │   ✗    │
+│ Dimensional │  55.0 │   ✗    │
+│ Domain      │  90.0 │   ✓    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+⚠ Errors:
+  1. Invalid unit for 'amount_in': 'tokens' - 'tokens' is not defined in the unit registry
+  2. Invalid unit for 'reserve_in': 'tokens' - 'tokens' is not defined in the unit registry
+  3. Invalid unit for 'reserve_out': 'tokens' - 'tokens' is not defined in the unit registry
+
+ℹ Warnings:
+  1. Can be simplified to: (-amount_in*(0.0053935577*reserve_in - 
+1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 
+0.13659051*reserve_in**2)/reserve_in**2
+  2. Check AMM constant product invariant preservation
+  3. Multiple subtractions may cause precision loss
+  4. Variable 'reserve' should be positive - add validation
+  5. Variable 'amount' should be positive - add validation
+  ... and 1 more
+
+💡 Recommendations:
+  1. IMPROVE: Simplify expression to: (-amount_in*(0.0053935577*reserve_in - 
+1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 
+0.13659051*reserve_in**2)/reserve_in**2
+  2. FIX CRITICAL: Resolve dimensional inconsistencies
+  3. REVIEW: Address domain-specific warnings for defi
+
+======================================================================
+Generating Formula 3: Lending Pool Utilization Rate
+======================================================================
+Generated 100 samples
+Borrowed range: [51.82, 989.96]
+Supplied range: [114.30, 2519.24]
+Utilization range: [0.2927, 0.8867]
+
+======================================================================
+WORKFLOW: Lending Pool Utilization Rate
+Domain: DEFI
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+✓ Found: borrowed/supplied
+  R² Score: 0.9960
+  Complexity: 3
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 91.3/100
+  Layer Scores:
+    ✓ Symbolic: 98.0
+    ⚠ Dimensional: 68.0
+    ✓ Domain: 100.0
+    ✓ Numerical: 100.0
+
+  ⚠ Errors (2):
+    - Invalid unit for 'borrowed': 'USD' - 'USD' is not defined in the unit registry
+    - Invalid unit for 'supplied': 'USD' - 'USD' is not defined in the unit registry
+
+  ℹ Warnings (2):
+    - Check AMM constant product invariant preservation
+    - Multiplication detected - verify resulting dimensions are correct
+
+[3/3] ⊗ Interpretation skipped (validation failed)
+  Recommendations:
+    • FIX CRITICAL: Resolve dimensional inconsistencies
+
+======================================================================
+Workflow complete. Result stored (3/100)
+======================================================================
+
+
+
+╭─────────────────────────────────────── Discovery Report ────────────────────────────────────────╮
+│                                                                                                 │
+│  Lending Pool Utilization Rate                                                                  │
+│  Domain: DEFI                                                                                   │
+│  Timestamp: 2025-11-26T20:56:09.809273                                                          │
+│  Samples: 100 | Features: 2                                                                     │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────╮
+│                                                                                                 │
+│  borrowed/supplied                                                                              │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+                       
+  R² Score     0.9960  
+  Complexity   3       
+                       
+
+
+╭───────────────────────────────────── ✓ Validation Results ──────────────────────────────────────╮
+│  ✗ Overall Score: 91.3/100                                                                      │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  98.0 │   ✓    │
+│ Dimensional │  68.0 │   ✗    │
+│ Domain      │ 100.0 │   ✓    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+⚠ Errors:
+  1. Invalid unit for 'borrowed': 'USD' - 'USD' is not defined in the unit registry
+  2. Invalid unit for 'supplied': 'USD' - 'USD' is not defined in the unit registry
+
+ℹ Warnings:
+  1. Check AMM constant product invariant preservation
+  2. Multiplication detected - verify resulting dimensions are correct
+
+💡 Recommendations:
+  1. FIX CRITICAL: Resolve dimensional inconsistencies
+
+======================================================================
+Generating Formula 4: Liquidity Pool Value
+======================================================================
+Generated 100 samples
+Reserve0 range: [102.35, 9993.60]
+Reserve1 range: [111.09, 9963.72]
+Value range: [659.14, 18979.06]
+
+======================================================================
+WORKFLOW: Constant Product Pool Total Value
+Domain: DEFI
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+✓ Found: 2.00019239074645*sqrt(reserve0*reserve1)
+  R² Score: 1.0000
+  Complexity: 6
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 89.8/100
+  Layer Scores:
+    ✓ Symbolic: 98.0
+    ⚠ Dimensional: 68.0
+    ✓ Domain: 95.0
+    ✓ Numerical: 100.0
+
+  ⚠ Errors (2):
+    - Invalid unit for 'reserve0': 'USD' - 'USD' is not defined in the unit registry
+    - Invalid unit for 'reserve1': 'USD' - 'USD' is not defined in the unit registry
+
+  ℹ Warnings (4):
+    - Check AMM constant product invariant preservation
+    - Multiplication detected - verify resulting dimensions are correct
+    - Variable 'reserve' should be positive - add validation
+    ... and 1 more
+
+[3/3] ⊗ Interpretation skipped (validation failed)
+  Recommendations:
+    • FIX CRITICAL: Resolve dimensional inconsistencies
+    • REVIEW: Address domain-specific warnings for defi
+
+======================================================================
+Workflow complete. Result stored (4/100)
+======================================================================
+
+
+
+╭─────────────────────────────────────── Discovery Report ────────────────────────────────────────╮
+│                                                                                                 │
+│  Constant Product Pool Total Value                                                              │
+│  Domain: DEFI                                                                                   │
+│  Timestamp: 2025-11-26T20:56:24.297730                                                          │
+│  Samples: 100 | Features: 2                                                                     │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭─────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────╮
+│                                                                                                 │
+│  2.00019239074645*sqrt(reserve0*reserve1)                                                       │
+│                                                                                                 │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+                       
+  R² Score     1.0000  
+  Complexity   6       
+                       
+
+
+╭───────────────────────────────────── ✓ Validation Results ──────────────────────────────────────╮
+│  ✗ Overall Score: 89.8/100                                                                      │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  98.0 │   ✓    │
+│ Dimensional │  68.0 │   ✗    │
+│ Domain      │  95.0 │   ✓    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+⚠ Errors:
+  1. Invalid unit for 'reserve0': 'USD' - 'USD' is not defined in the unit registry
+  2. Invalid unit for 'reserve1': 'USD' - 'USD' is not defined in the unit registry
+
+ℹ Warnings:
+  1. Check AMM constant product invariant preservation
+  2. Multiplication detected - verify resulting dimensions are correct
+  3. Variable 'reserve' should be positive - add validation
+  4. Verify constant product invariant (x*y=k) is maintained
+
+💡 Recommendations:
+  1. FIX CRITICAL: Resolve dimensional inconsistencies
+  2. REVIEW: Address domain-specific warnings for defi
+✓ Exported 4 results to data/defi_formulas_20251126_205624.json
+✓ Exported 4 results to data/defi_summary_20251126_205624.csv
+
+======================================================================
+FINAL SUMMARY
+======================================================================
+
+Total formulas: 4
+Valid formulas: 1
+Invalid formulas: 3
+Success rate: 25.0%
+Average R² score: 0.9970
+Average validation score: 85.4/100
+
+Individual Results:
+----------------------------------------------------------------------
+
+1. Impermanent Loss in AMM Pool
+   Expression: (price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694
+   R² Score: 0.9919
+   Validation: ✓ 85.5/100
+
+2. Uniswap V2 Swap Output with 0.3% Fee
+   Expression: amount_in*(-0.61682767 - (-0.56763846)*(amount_in - 2.963231)/reserve_in)*(0.0053935577 + reserve_out*(-1.6136296)/reserve_in) - 1*(-0.13659051)
+   R² Score: 1.0000
+   Validation: ✗ 74.9/100
+   Errors: 3
+     - Invalid unit for 'amount_in': 'tokens' - 'tokens' is not defined in the unit registry
+     - Invalid unit for 'reserve_in': 'tokens' - 'tokens' is not defined in the unit registry
+
+3. Lending Pool Utilization Rate
+   Expression: borrowed/supplied
+   R² Score: 0.9960
+   Validation: ✗ 91.3/100
+   Errors: 2
+     - Invalid unit for 'borrowed': 'USD' - 'USD' is not defined in the unit registry
+     - Invalid unit for 'supplied': 'USD' - 'USD' is not defined in the unit registry
+
+4. Constant Product Pool Total Value
+   Expression: 2.00019239074645*sqrt(reserve0*reserve1)
+   R² Score: 1.0000
+   Validation: ✗ 89.8/100
+   Errors: 2
+     - Invalid unit for 'reserve0': 'USD' - 'USD' is not defined in the unit registry
+     - Invalid unit for 'reserve1': 'USD' - 'USD' is not defined in the unit registry
+
+======================================================================
+
+✓ Complete! Results saved to:
+  JSON: data/defi_formulas_20251126_205624.json
+  CSV:  data/defi_summary_20251126_205624.csv
+

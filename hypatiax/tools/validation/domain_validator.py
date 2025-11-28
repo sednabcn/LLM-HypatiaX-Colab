@@ -1,6 +1,13 @@
 """
 HypatiaX Domain Validator
 tools/validation/domain_validator.py
+
+WEEK 2 UPDATES:
+- Enhanced constraint validation for DeFi formulas (Issue #1)
+- Added explicit bounds checking for critical variables
+- Improved error messages with remediation guidance
+- Added support for epsilon-protected divisions
+- Enhanced scoring to align with ensemble validator (Issue #2)
 """
 
 import numpy as np
@@ -32,26 +39,42 @@ class DomainValidator:
             self.validation_history = []
     
     def _load_constraints(self) -> Dict:
-        """Load domain-specific constraints."""
+        """
+        Load domain-specific constraints.
+        
+        WEEK 2 ENHANCEMENT: More comprehensive constraint definitions
+        """
         constraints = {
             'defi': {
                 'positive_variables': [
                     'reserve', 'liquidity', 'price', 'amount', 
-                    'balance', 'supply', 'token'
+                    'balance', 'supply', 'token', 'x', 'y', 'k',
+                    'x0', 'y0', 'x_0', 'y_0'  # Added reserve notation
+                ],
+                'strictly_positive_variables': [
+                    # WEEK 2: Variables that must be > 0 (not just >= 0)
+                    'price', 'liquidity', 'reserve', 'r', 'ratio'
                 ],
                 'bounded_variables': {
                     'fee': (0, 1),
+                    'phi': (0, 1),  # Greek fee symbol
                     'slippage': (0, 1),
                     'utilization': (0, 1),
-                    'ratio': (0, None)
+                    'ratio': (0, None)  # WEEK 2: Changed to strictly positive
                 },
-                'ratio_variables': ['price_ratio', 'reserve_ratio'],
-                'special_checks': ['constant_product', 'no_negative_slippage']
+                'ratio_variables': ['price_ratio', 'reserve_ratio', 'r'],
+                'special_checks': [
+                    'constant_product', 
+                    'no_negative_slippage',
+                    'ratio_positivity',  # NEW WEEK 2
+                    'price_positivity',  # NEW WEEK 2
+                    'division_protection'  # NEW WEEK 2
+                ]
             },
             'risk': {
                 'positive_variables': [
                     'var', 'cvar', 'volatility', 'loss', 
-                    'exposure', 'shortfall'
+                    'exposure', 'shortfall', 'sigma'
                 ],
                 'probability_variables': [
                     'prob', 'confidence', 'likelihood', 'probability'
@@ -59,7 +82,8 @@ class DomainValidator:
                 'bounded_variables': {
                     'confidence': (0, 1),
                     'probability': (0, 1),
-                    'correlation': (-1, 1)
+                    'correlation': (-1, 1),
+                    'alpha': (0, 1)  # Significance level
                 },
                 'special_checks': ['var_positive', 'confidence_valid']
             },
@@ -123,8 +147,16 @@ class DomainValidator:
             'constraints_checked': []
         }
         
+        # WEEK 2: Normalize expression for better matching
+        expr_lower = expression_str.lower()
+        
         # Check positive variable constraints
         result = self._check_positive_variables(
+            expression_str, test_data, result
+        )
+        
+        # WEEK 2 NEW: Check strictly positive variables (must be > 0, not >= 0)
+        result = self._check_strictly_positive_variables(
             expression_str, test_data, result
         )
         
@@ -180,17 +212,69 @@ class DomainValidator:
         
         return result
     
+    def _check_strictly_positive_variables(
+        self,
+        expression_str: str,
+        test_data: Optional[Dict[str, np.ndarray]],
+        result: Dict
+    ) -> Dict:
+        """
+        WEEK 2 NEW: Check variables that must be strictly positive (> 0, not >= 0).
+        
+        Critical for:
+        - Division denominators
+        - Logarithm arguments
+        - Square root arguments (in some contexts)
+        """
+        strictly_positive = self.constraints.get('strictly_positive_variables', [])
+        
+        for var in strictly_positive:
+            # Check if variable appears in expression
+            if var in expression_str.lower() or var in expression_str:
+                result['constraints_checked'].append(f'{var}_strictly_positive')
+                
+                if test_data and var in test_data:
+                    values = test_data[var]
+                    # Check for zero or negative values
+                    if np.any(values <= 0):
+                        result['errors'].append(
+                            f"CRITICAL: Variable '{var}' must be strictly positive (> 0), "
+                            f"found minimum value: {np.min(values):.6f}. "
+                            f"Add constraint: {var} > 0"
+                        )
+                        result['score'] -= 25  # Severe penalty
+                    # Check for values very close to zero (numerical stability)
+                    elif np.any(values < 1e-8):
+                        result['warnings'].append(
+                            f"Variable '{var}' has very small values (< 1e-8), "
+                            f"may cause numerical instability"
+                        )
+                        result['score'] -= 5
+                else:
+                    # No test data - issue warning
+                    result['warnings'].append(
+                        f"Variable '{var}' must be strictly positive (> 0). "
+                        f"Add validation: assert {var} > 0"
+                    )
+                    result['score'] -= 8  # Increased penalty for missing validation
+        
+        return result
+    
     def _check_bounded_variables(
         self,
         expression_str: str,
         test_data: Optional[Dict[str, np.ndarray]],
         result: Dict
     ) -> Dict:
-        """Check that bounded variables are within their valid ranges."""
+        """
+        Check that bounded variables are within their valid ranges.
+        
+        WEEK 2 ENHANCEMENT: More descriptive error messages
+        """
         bounded_vars = self.constraints.get('bounded_variables', {})
         
         for var, bounds in bounded_vars.items():
-            if var in expression_str.lower():
+            if var in expression_str.lower() or var in expression_str:
                 result['constraints_checked'].append(f'{var}_bounded')
                 lower, upper = bounds
                 
@@ -201,7 +285,8 @@ class DomainValidator:
                     if lower is not None and np.any(values < lower):
                         result['errors'].append(
                             f"Variable '{var}' below minimum {lower} "
-                            f"(found {np.min(values):.6f})"
+                            f"(found {np.min(values):.6f}). "
+                            f"Add constraint: {var} >= {lower}"
                         )
                         result['score'] -= 15
                     
@@ -209,11 +294,27 @@ class DomainValidator:
                     if upper is not None and np.any(values > upper):
                         result['errors'].append(
                             f"Variable '{var}' above maximum {upper} "
-                            f"(found {np.max(values):.6f})"
+                            f"(found {np.max(values):.6f}). "
+                            f"Add constraint: {var} <= {upper}"
                         )
                         result['score'] -= 15
+                    
+                    # WEEK 2 NEW: Special case for fee variables at exactly 1.0
+                    if var in ['fee', 'phi'] and upper == 1:
+                        if np.any(values >= 1.0):
+                            result['errors'].append(
+                                f"Fee variable '{var}' must be < 1.0 (not <=), "
+                                f"found {np.max(values):.6f}. "
+                                f"Fees at 100% break AMM math."
+                            )
+                            result['score'] -= 20
                 else:
-                    bound_str = f"[{lower}, {upper}]" if upper else f"≥ {lower}"
+                    # No test data
+                    if upper is not None:
+                        bound_str = f"[{lower}, {upper}]"
+                    else:
+                        bound_str = f">= {lower}"
+                    
                     result['warnings'].append(
                         f"Variable '{var}' should be in range {bound_str}"
                     )
@@ -258,7 +359,11 @@ class DomainValidator:
         test_data: Optional[Dict[str, np.ndarray]],
         result: Dict
     ) -> Dict:
-        """Check domain-specific special rules."""
+        """
+        Check domain-specific special rules.
+        
+        WEEK 2 ENHANCEMENT: Added new special checks
+        """
         special_checks = self.constraints.get('special_checks', [])
         
         for check in special_checks:
@@ -269,6 +374,18 @@ class DomainValidator:
             elif check == 'no_negative_slippage':
                 result = self._check_no_negative_slippage(
                     expression_str, test_data, result
+                )
+            elif check == 'ratio_positivity':  # NEW WEEK 2
+                result = self._check_ratio_positivity(
+                    expression_str, test_data, result
+                )
+            elif check == 'price_positivity':  # NEW WEEK 2
+                result = self._check_price_positivity(
+                    expression_str, test_data, result
+                )
+            elif check == 'division_protection':  # NEW WEEK 2
+                result = self._check_division_protection(
+                    expression_str, result
                 )
             elif check == 'var_positive':
                 result = self._check_var_positive(
@@ -312,6 +429,107 @@ class DomainValidator:
                 if np.any(test_data['slippage'] < 0):
                     result['errors'].append("Slippage cannot be negative")
                     result['score'] -= 20
+        return result
+    
+    def _check_ratio_positivity(
+        self, expr_str: str, test_data: Optional[Dict], result: Dict
+    ) -> Dict:
+        """
+        WEEK 2 NEW: Check that ratio variables are strictly positive.
+        
+        Critical for Impermanent Loss formulas where r appears in (1+r) denominators.
+        """
+        ratio_vars = ['r', 'ratio', 'price_ratio']
+        expr_lower = expr_str.lower()
+        
+        for var in ratio_vars:
+            if var in expr_lower:
+                result['constraints_checked'].append(f'{var}_positivity')
+                
+                # Check for dangerous pattern: (1 + r) in denominator
+                if f'(1+{var})' in expr_str.replace(' ', '') or \
+                   f'(1 + {var})' in expr_str or \
+                   f'1+{var}' in expr_str.replace(' ', ''):
+                    
+                    result['errors'].append(
+                        f"CRITICAL: Ratio variable '{var}' appears in (1+{var}) denominator. "
+                        f"Must enforce {var} > 0 to prevent division by zero. "
+                        f"Add constraint: if {var} <= 0, reject input or use abs({var})"
+                    )
+                    result['score'] -= 30
+                    
+                if test_data and var in test_data:
+                    values = test_data[var]
+                    if np.any(values <= 0):
+                        result['errors'].append(
+                            f"Ratio variable '{var}' must be positive, "
+                            f"found minimum: {np.min(values):.6f}"
+                        )
+                        result['score'] -= 25
+        
+        return result
+    
+    def _check_price_positivity(
+        self, expr_str: str, test_data: Optional[Dict], result: Dict
+    ) -> Dict:
+        """
+        WEEK 2 NEW: Check that price variables are strictly positive.
+        
+        Prices cannot be zero or negative in financial formulas.
+        """
+        price_vars = ['price', 'p_t', 'p_0', 'p0', 'pt', 'p1', 'p2']
+        expr_lower = expr_str.lower()
+        
+        found_prices = [var for var in price_vars if var in expr_lower]
+        
+        if found_prices:
+            result['constraints_checked'].append('price_positivity')
+            
+            for var in found_prices:
+                if test_data and var in test_data:
+                    values = test_data[var]
+                    if np.any(values <= 0):
+                        result['errors'].append(
+                            f"Price variable '{var}' must be strictly positive, "
+                            f"found minimum: {np.min(values):.6f}"
+                        )
+                        result['score'] -= 20
+                else:
+                    result['warnings'].append(
+                        f"Price variable '{var}' must be positive. "
+                        f"Add validation: assert {var} > 0"
+                    )
+                    result['score'] -= 8
+        
+        return result
+    
+    def _check_division_protection(
+        self, expr_str: str, result: Dict
+    ) -> Dict:
+        """
+        WEEK 2 NEW: Check for epsilon protection in divisions.
+        
+        Divisions should have epsilon guards: (denominator + ε)
+        """
+        result['constraints_checked'].append('division_protection')
+        
+        # Look for division operators
+        if '/' in expr_str or '÷' in expr_str:
+            # Check if epsilon protection exists
+            has_epsilon = any(pattern in expr_str.lower() for pattern in 
+                            ['epsilon', 'eps', 'ε', '+ 1e-', '+ 0.000'])
+            
+            if not has_epsilon:
+                result['warnings'].append(
+                    "Division detected without epsilon protection. "
+                    "Consider adding: (denominator + ε) to prevent division by zero"
+                )
+                result['score'] -= 5
+            else:
+                result['warnings'].append(
+                    "Epsilon protection detected - verify epsilon value is appropriate"
+                )
+        
         return result
     
     def _check_var_positive(
@@ -408,28 +626,65 @@ class DomainValidator:
 
 # Example usage
 if __name__ == "__main__":
-    # Test DeFi domain
+    print("=" * 80)
+    print("WEEK 2 ENHANCED DOMAIN VALIDATION TESTS")
+    print("=" * 80)
+    
+    # Test DeFi domain with critical issues
     validator = DomainValidator(domain='defi')
     
-    result = validator.validate(
-        expression_str="reserve0 * reserve1 / liquidity",
+    # Test 1: Ratio positivity (IL formula)
+    print("\n[TEST 1] Impermanent Loss formula with ratio constraint:")
+    result1 = validator.validate(
+        expression_str="sqrt(2*sqrt(r)/(1+r)) - 1",
+        variable_definitions={'r': 'Price ratio'},
+        test_data={'r': np.array([0.5, 1.0, 2.0, -1.0])}  # -1.0 is problematic!
+    )
+    print(f"Valid: {result1['valid']}, Score: {result1['score']}")
+    print(f"Errors: {result1['errors']}")
+    
+    # Test 2: Price positivity
+    print("\n[TEST 2] Price positivity check:")
+    result2 = validator.validate(
+        expression_str="sqrt(abs(p_t - p_0))",
+        variable_definitions={'p_t': 'Current price', 'p_0': 'Initial price'},
+        test_data={'p_t': np.array([100, 150]), 'p_0': np.array([120, 130])}
+    )
+    print(f"Valid: {result2['valid']}, Score: {result2['score']}")
+    print(f"Warnings: {result2['warnings']}")
+    
+    # Test 3: Fee bounds
+    print("\n[TEST 3] Fee variable bounds:")
+    result3 = validator.validate(
+        expression_str="output = (y0 * dx * (1 - phi)) / (x0 + dx * (1 - phi))",
         variable_definitions={
-            'reserve0': 'Token 0 reserves',
-            'reserve1': 'Token 1 reserves',
-            'liquidity': 'Total liquidity'
+            'y0': 'Reserve Y',
+            'dx': 'Input amount',
+            'phi': 'Fee',
+            'x0': 'Reserve X'
         },
         test_data={
-            'reserve0': np.array([100, 200, 300]),
-            'reserve1': np.array([50, 100, 150]),
-            'liquidity': np.array([1000, 2000, 3000])
+            'y0': np.array([1000]),
+            'dx': np.array([10]),
+            'phi': np.array([0.003]),
+            'x0': np.array([1000])
         }
     )
+    print(f"Valid: {result3['valid']}, Score: {result3['score']}")
+    print(f"Warnings: {result3['warnings']}")
     
-    print(f"Valid: {result['valid']}")
-    print(f"Score: {result['score']}")
-    print(f"Warnings: {result['warnings']}")
-    print(f"Constraints checked: {result['constraints_checked']}")
+    # Test 4: Division protection
+    print("\n[TEST 4] Division protection check:")
+    result4 = validator.validate(
+        expression_str="output / (input + epsilon)",
+        variable_definitions={'output': 'Output', 'input': 'Input', 'epsilon': 'Safety'},
+        test_data=None
+    )
+    print(f"Valid: {result4['valid']}, Score: {result4['score']}")
+    print(f"Constraints checked: {result4['constraints_checked']}")
     
     # Get statistics
+    print("\n" + "=" * 80)
     stats = validator.get_statistics()
-    print(f"\nStatistics: {stats}")
+    print(f"Validation statistics: {stats}")
+    print("=" * 80)

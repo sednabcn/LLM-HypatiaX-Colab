@@ -1,0 +1,5 @@
+Timestamp,Description,Domain,Expression,R2_Score,Validation_Score,Valid,Complexity
+2025-11-26T21:12:55.625535,Impermanent Loss in AMM Pool,defi,-0.53534603*log(sqrt(0.49525717/price_ratio**0.9820758 + 0.49525717*price_ratio)),0.9958377386246736,83.7,True,11
+2025-11-26T21:13:32.912690,Uniswap V2 Swap Output with 0.3% Fee,defi,1.0981569*amount_in_ratio*reserve_out_ratio*(amount_in_ratio*log(reserve_in_ratio)/reserve_in_ratio + 37.3832927518718/reserve_in_ratio)**1.0172031,0.9999380941689904,82.9,True,20
+2025-11-26T21:14:08.179842,Lending Pool Utilization Rate,defi,borrowed/supplied,0.9960095145108544,98.8,True,3
+2025-11-26T21:14:40.991016,Constant Product Pool Total Value,defi,10012.5205*sqrt(reserve0_ratio*reserve1_ratio),0.9999959693807825,95.8,True,6

@@ -3,6 +3,13 @@
 Symbolic Validation for Generated Formulas
 Uses SymPy for mathematical validation
 Part of HypatiaX tools/validation/
+
+WEEK 2 UPDATES:
+- Added empty expression validation (Issue #1)
+- Enhanced division-by-zero detection (Issue #1)
+- Added overflow risk detection (Issue #1)
+- Improved numerical stability checks
+- Added explicit constraint validation for DeFi formulas
 """
 import sympy as sp
 from sympy import sympify, simplify
@@ -86,6 +93,18 @@ class SymbolicValidator:
             'canonical_form': None
         }
         
+        # WEEK 2 FIX: Edge Case #1 - Empty expression validation
+        if not expression or not expression.strip():
+            results['errors'].append("Empty expression not allowed")
+            results['valid'] = False
+            return self._finalize_results(results)
+        
+        # WEEK 2 FIX: Edge Case #2 - Check for whitespace-only expressions
+        if expression.strip() == '':
+            results['errors'].append("Expression contains only whitespace")
+            results['valid'] = False
+            return self._finalize_results(results)
+        
         try:
             # 1. Parse expression
             if from_latex:
@@ -154,10 +173,15 @@ class SymbolicValidator:
             if not domain_check['valid']:
                 results['valid'] = False
             
-            # 7. Numerical stability analysis
+            # 7. Numerical stability analysis (ENHANCED IN WEEK 2)
             stability = self._check_numerical_stability(expr)
             results['numerically_stable'] = stability['stable']
             results['warnings'].extend(stability['warnings'])
+            results['errors'].extend(stability.get('errors', []))
+            
+            # WEEK 2 FIX: Fail validation if critical stability errors found
+            if stability.get('errors'):
+                results['valid'] = False
             
         except Exception as e:
             results['errors'].append(f"Validation error: {str(e)}")
@@ -207,21 +231,30 @@ class SymbolicValidator:
     
     def _check_numerical_stability(self, expr) -> Dict[str, Any]:
         """
-        Numerical stability analysis.
+        ENHANCED WEEK 2: Numerical stability analysis.
         
         Checks:
-        1. Division by zero risks
-        2. Overflow/underflow potential
+        1. Division by zero risks (ENHANCED)
+        2. Overflow/underflow potential (ENHANCED)
         3. Precision loss in operations
         4. Subtractive cancellation
+        5. Large number handling (NEW)
         """
         warnings = []
+        errors = []  # NEW: Critical stability issues
         
-        # 1. Find all denominators
+        # 1. ENHANCED: Find all denominators and flag unprotected divisions
         denominators = self._extract_denominators(expr)
         for denom in denominators:
             if self._could_be_zero(denom):
-                warnings.append(f"Division by zero risk: {denom}")
+                # Check if epsilon protection exists
+                if not self._has_epsilon_protection(denom):
+                    errors.append(
+                        f"CRITICAL: Unprotected division by zero risk: {denom}. "
+                        f"Add epsilon guard: (denominator + ε)"
+                    )
+                else:
+                    warnings.append(f"Division by zero risk mitigated: {denom}")
         
         # 2. Check for subtractive cancellation
         subtractions = self._find_subtractions(expr)
@@ -230,31 +263,45 @@ class SymbolicValidator:
                 "Multiple subtractions may cause precision loss"
             )
         
-        # 3. Check for exponentials (overflow risk)
+        # 3. ENHANCED: Check for exponentials with overflow detection
         if expr.has(sp.exp):
-            warnings.append(
-                "Exponential functions may overflow - validate input ranges"
-            )
+            exp_args = self._extract_exp_arguments(expr)
+            for arg in exp_args:
+                # Check if exponent could be very large
+                if self._could_overflow_exp(arg):
+                    warnings.append(
+                        f"Exponential overflow risk: exp({arg}). "
+                        f"Recommend capping argument or using safe_exp"
+                    )
         
-        # 4. Check for products (overflow risk)
+        # 4. ENHANCED: Check for products with overflow detection
         if expr.has(sp.Mul):
-            mul_terms = [arg for arg in expr.args if arg.is_Mul]
+            mul_terms = self._extract_multiplication_chains(expr)
             if len(mul_terms) > 3:
                 warnings.append(
-                    "Multiple multiplications - check for overflow"
+                    f"Multiple multiplications ({len(mul_terms)} terms) - "
+                    f"check for overflow. Consider: {' * '.join(map(str, mul_terms[:3]))}..."
                 )
         
         # 5. Check sqrt of potentially negative values
         if expr.has(sp.sqrt):
-            warnings.append(
-                "Square root present - ensure non-negative inputs"
-            )
+            sqrt_args = self._extract_sqrt_arguments(expr)
+            for arg in sqrt_args:
+                if not self._guaranteed_positive(arg):
+                    warnings.append(
+                        f"Square root of potentially negative value: sqrt({arg}). "
+                        f"Add validation or use abs()"
+                    )
         
         # 6. Check for logarithms (domain issues)
         if expr.has(sp.log):
-            warnings.append(
-                "Logarithm present - ensure positive inputs"
-            )
+            log_args = self._extract_log_arguments(expr)
+            for arg in log_args:
+                if not self._guaranteed_positive(arg):
+                    warnings.append(
+                        f"Logarithm of non-positive value risk: log({arg}). "
+                        f"Ensure {arg} > 0"
+                    )
         
         # 7. Check for trigonometric functions (range issues)
         if any(expr.has(func) for func in [sp.sin, sp.cos, sp.tan]):
@@ -262,10 +309,133 @@ class SymbolicValidator:
                 "Trigonometric functions - verify input ranges"
             )
         
+        # 8. NEW WEEK 2: Check for power operations with large exponents
+        if expr.has(sp.Pow):
+            power_terms = self._extract_power_terms(expr)
+            for base, exp_val in power_terms:
+                if self._could_overflow_power(base, exp_val):
+                    warnings.append(
+                        f"Power overflow risk: ({base})^({exp_val}). "
+                        f"Verify bounds on base and exponent"
+                    )
+        
         return {
-            'stable': len(warnings) == 0,
-            'warnings': warnings
+            'stable': len(warnings) == 0 and len(errors) == 0,
+            'warnings': warnings,
+            'errors': errors
         }
+    
+    # NEW WEEK 2: Helper methods for enhanced stability checks
+    
+    def _has_epsilon_protection(self, expr) -> bool:
+        """Check if expression has epsilon protection for division."""
+        expr_str = str(expr).lower()
+        # Look for common epsilon patterns
+        epsilon_patterns = ['epsilon', 'eps', 'ε', '+ 1e-', '+ 0.000']
+        return any(pattern in expr_str for pattern in epsilon_patterns)
+    
+    def _extract_exp_arguments(self, expr) -> List:
+        """Extract arguments to exponential functions."""
+        args = []
+        if expr.func == sp.exp:
+            args.append(expr.args[0])
+        if hasattr(expr, 'args'):
+            for arg in expr.args:
+                args.extend(self._extract_exp_arguments(arg))
+        return args
+    
+    def _could_overflow_exp(self, arg) -> bool:
+        """Check if exponential argument could cause overflow."""
+        # Conservative: if arg contains multiplication or powers, flag it
+        arg_str = str(arg)
+        if '*' in arg_str or '**' in arg_str or '^' in arg_str:
+            return True
+        # If arg is a symbol without bounds, flag it
+        if arg.free_symbols and not arg.is_Number:
+            return True
+        return False
+    
+    def _extract_multiplication_chains(self, expr) -> List:
+        """Extract terms in multiplication chains."""
+        terms = []
+        if expr.is_Mul:
+            terms.extend(expr.args)
+        if hasattr(expr, 'args'):
+            for arg in expr.args:
+                if arg.is_Mul:
+                    terms.extend(arg.args)
+        return terms
+    
+    def _extract_sqrt_arguments(self, expr) -> List:
+        """Extract arguments to square root functions."""
+        args = []
+        if expr.func == sp.sqrt:
+            args.append(expr.args[0])
+        if hasattr(expr, 'args'):
+            for arg in expr.args:
+                args.extend(self._extract_sqrt_arguments(arg))
+        return args
+    
+    def _extract_log_arguments(self, expr) -> List:
+        """Extract arguments to logarithm functions."""
+        args = []
+        if expr.func == sp.log:
+            args.append(expr.args[0])
+        if hasattr(expr, 'args'):
+            for arg in expr.args:
+                args.extend(self._extract_log_arguments(arg))
+        return args
+    
+    def _extract_power_terms(self, expr) -> List[tuple]:
+        """Extract (base, exponent) pairs from power operations."""
+        terms = []
+        if expr.is_Pow:
+            terms.append((expr.args[0], expr.args[1]))
+        if hasattr(expr, 'args'):
+            for arg in expr.args:
+                terms.extend(self._extract_power_terms(arg))
+        return terms
+    
+    def _could_overflow_power(self, base, exponent) -> bool:
+        """Check if power operation could overflow."""
+        # If exponent is > 10 or contains variables, flag it
+        if exponent.is_Number:
+            try:
+                exp_val = float(exponent)
+                if abs(exp_val) > 10:
+                    return True
+            except:
+                pass
+        # If exponent contains free symbols, flag it
+        if exponent.free_symbols:
+            return True
+        return False
+    
+    def _guaranteed_positive(self, expr) -> bool:
+        """Check if expression is guaranteed to be positive."""
+        # If it's a positive number
+        if expr.is_Number:
+            try:
+                return float(expr) > 0
+            except:
+                return False
+        
+        # If it's an absolute value
+        if expr.func == sp.Abs:
+            return True
+        
+        # If it's a square
+        if expr.is_Pow and expr.args[1] == 2:
+            return True
+        
+        # If it's wrapped in abs() or sqrt(x^2)
+        expr_str = str(expr).lower()
+        if 'abs(' in expr_str:
+            return True
+        
+        return False
+    
+    # Original helper methods (kept for compatibility)
     
     def _extract_denominators(self, expr) -> List:
         """Extract all denominators from expression."""
@@ -295,6 +465,11 @@ class SymbolicValidator:
         if expr.is_Add:
             return True
         
+        # Check for (1 + r) patterns where r could be -1
+        expr_str = str(expr)
+        if '+ r' in expr_str or '+ ratio' in expr_str:
+            return True
+        
         return False
     
     def _find_subtractions(self, expr) -> List:
@@ -315,26 +490,61 @@ class SymbolicValidator:
         
         return subs
     
-    # Domain-specific validation rules
+    # Domain-specific validation rules (ENHANCED IN WEEK 2)
     
     def _defi_rules(
         self, 
         expr, 
         variable_definitions: Dict[str, str]
     ) -> Dict[str, Any]:
-        """DeFi-specific validation rules."""
+        """
+        ENHANCED WEEK 2: DeFi-specific validation rules.
+        
+        New checks:
+        - Impermanent Loss ratio constraints (r > 0)
+        - Price positivity requirements
+        - Fee bounds (0 ≤ φ < 1)
+        """
         errors = []
         warnings = []
         
-        # Check: Liquidity must be positive
-        if 'liquidity' in [str(s) for s in expr.free_symbols]:
+        # WEEK 2 FIX: Check for IL formula with ratio variable
+        expr_str = str(expr).lower()
+        free_vars = [str(s).lower() for s in expr.free_symbols]
+        
+        # Check 1: Impermanent Loss ratio constraint
+        if ('r' in free_vars or 'ratio' in free_vars) and 'sqrt' in expr_str:
+            # Look for (1+r) in denominator - IL formula pattern
+            if '1 + r' in expr_str or '(1+r)' in expr_str:
+                errors.append(
+                    "CRITICAL: Impermanent Loss formula requires r > 0. "
+                    "Add constraint: if r ≤ 0, reject or use abs(r)"
+                )
+        
+        # Check 2: Price positivity
+        price_vars = [v for v in free_vars if 'price' in v or 'p_' in v or 'p0' in v or 'pt' in v]
+        if price_vars:
+            warnings.append(
+                f"Price variables {price_vars} must be positive. "
+                f"Add validation: assert all(p > 0 for p in prices)"
+            )
+        
+        # Check 3: Fee bounds
+        if 'fee' in free_vars or 'phi' in free_vars or 'φ' in expr_str:
+            warnings.append(
+                "Fee variable must satisfy 0 ≤ fee < 1. "
+                "Add validation: assert 0 <= fee < 1"
+            )
+        
+        # Check 4: Liquidity must be positive
+        if 'liquidity' in free_vars:
             warnings.append("Ensure liquidity is always positive")
         
-        # Check: Price impact should be bounded
-        if 'price' in str(expr).lower():
+        # Check 5: Price impact should be bounded
+        if 'price' in expr_str:
             warnings.append("Verify price bounds and slippage limits")
         
-        # Check: x*y = k invariant considerations
+        # Check 6: x*y = k invariant considerations
         if expr.has(sp.Mul) and expr.has(sp.Pow):
             warnings.append(
                 "Check AMM constant product invariant preservation"
@@ -445,8 +655,8 @@ class SymbolicValidator:
         if results['domain_valid']: score += 25
         if results['numerically_stable']: score += 25
         
-        # Penalties
-        score -= len(results['errors']) * 10
+        # WEEK 2 ENHANCEMENT: Harsher penalties for critical errors
+        score -= len(results['errors']) * 15  # Increased from 10
         score -= len(results.get('warnings', [])) * 2
         
         return max(0, min(100, score))
@@ -501,33 +711,52 @@ class SymbolicValidator:
 if __name__ == "__main__":
     validator = SymbolicValidator()
     
-    # Test case 1: Simple valid expression
+    print("=" * 80)
+    print("WEEK 2 ENHANCED VALIDATION TESTS")
+    print("=" * 80)
+    
+    # Test case 1: Empty expression (NEW WEEK 2)
+    print("\n[TEST 1] Empty expression detection:")
     result1 = validator.validate(
-        expression="2*x + 3",
-        variable_definitions={'x': 'Input variable'},
+        expression="",
+        variable_definitions={},
         domain='finance'
     )
-    print(f"Test 1 - Valid: {result1['valid']}, Score: {result1['score']}")
-    print(f"Canonical form: {result1['canonical_form']}")
+    print(f"Valid: {result1['valid']}, Score: {result1['score']}")
+    print(f"Errors: {result1['errors']}")
     
-    # Test case 2: Expression with undefined variable
+    # Test case 2: Division by zero without protection
+    print("\n[TEST 2] Unprotected division by zero:")
     result2 = validator.validate(
-        expression="2*x + y",
-        variable_definitions={'x': 'Input variable'},
+        expression="sqrt(2*sqrt(r)/(1+r)) - 1",
+        variable_definitions={'r': 'Price ratio'},
         domain='defi'
     )
-    print(f"\nTest 2 - Valid: {result2['valid']}, Score: {result2['score']}")
+    print(f"Valid: {result2['valid']}, Score: {result2['score']}")
     print(f"Errors: {result2['errors']}")
     
-    # Test case 3: Expression with stability issues
+    # Test case 3: Price without positivity constraint
+    print("\n[TEST 3] Price positivity check:")
     result3 = validator.validate(
-        expression="sqrt(x) / (y - z)",
-        variable_definitions={'x': 'Value 1', 'y': 'Value 2', 'z': 'Value 3'},
-        domain='risk'
+        expression="sqrt(abs(P_t - P_0))",
+        variable_definitions={'P_t': 'Current price', 'P_0': 'Initial price'},
+        domain='defi'
     )
-    print(f"\nTest 3 - Valid: {result3['valid']}, Score: {result3['score']}")
+    print(f"Valid: {result3['valid']}, Score: {result3['score']}")
     print(f"Warnings: {result3['warnings']}")
     
+    # Test case 4: Overflow risk detection
+    print("\n[TEST 4] Overflow risk in exponential:")
+    result4 = validator.validate(
+        expression="exp(lambda_val * sigma**2)",
+        variable_definitions={'lambda_val': 'Sensitivity', 'sigma': 'Volatility'},
+        domain='risk'
+    )
+    print(f"Valid: {result4['valid']}, Score: {result4['score']}")
+    print(f"Warnings: {result4['warnings']}")
+    
     # Get statistics
+    print("\n" + "=" * 80)
     stats = validator.get_statistics()
-    print(f"\nValidation statistics: {stats}")
+    print(f"Validation statistics: {stats}")
+    print("=" * 80)

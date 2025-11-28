@@ -1,0 +1,91 @@
+<!--DAY 3: LANDING PAGE + LAUNCH (8 hours)
+<!- Simple Landing Page:
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QuantAPI - Finance Formulas API</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; max-width: 1200px; margin: 0 auto; padding: 40px; }
+        .hero { text-align: center; padding: 80px 0; }
+        .cta { background: #0066FF; color: white; padding: 15px 40px; border-radius: 8px; }
+        .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>QuantAPI - Finance Formulas API</h1>
+        <p>580+ Production-Ready DeFi & Risk Formulas</p>
+        <p>✅ Validated • ⚡ Fast (<200ms) • 📊 Battle-Tested</p>
+        <button class="cta" onclick="window.location='/docs'">Get Started Free</button>
+    </div>
+    
+    <div class="features">
+        <div>
+            <h3>🔢 280 DeFi Formulas</h3>
+            <ul>
+                <li>Uniswap V2/V3/V4</li>
+                <li>Impermanent Loss</li>
+                <li>Liquidity Positions</li>
+                <li>Slippage & Price Impact</li>
+            </ul>
+        </div>
+        
+        <div>
+            <h3>📈 300 Risk Formulas</h3>
+            <ul>
+                <li>VaR & CVaR</li>
+                <li>Sharpe & Sortino</li>
+                <li>Beta & Drawdowns</li>
+                <li>Portfolio Analytics</li>
+            </ul>
+        </div>
+        
+        <div>
+            <h3>✅ Multi-Layer Validation</h3>
+            <ul>
+                <li>Symbolic validation</li>
+                <li>Dimensional analysis</li>
+                <li>Domain constraints</li>
+                <li>Backtested results</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h2>Quick Example</h2>
+    <pre><code>
+curl -X POST https://api.yourcompany.com/defi/impermanent-loss \
+  -H "Authorization: Bearer YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"price_ratio": 2.0}'
+
+# Response:
+{
+  "impermanent_loss": -0.0572,
+  "percentage": -5.72,
+  "interpretation": "At 2.0x price change, LP loses 5.72% vs holding"
+}
+    </code></pre>
+    
+    <h2>Pricing</h2>
+    <table>
+        <tr>
+            <th>Free</th>
+            <th>Pro</th>
+            <th>Enterprise</th>
+        </tr>
+        <tr>
+            <td>100 requests/day</td>
+            <td>10K requests/day</td>
+            <td>Unlimited</td>
+        </tr>
+        <tr>
+            <td>$0</td>
+            <td>$99/month</td>
+            <td>$499/month</td>
+        </tr>
+    </table>
+    
+    <a href="/docs">API Documentation →</a>
+</body>
+</html>

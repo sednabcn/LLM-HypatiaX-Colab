@@ -1,0 +1,10 @@
+[run]
+branch = True
+omit =
+    tests/*
+    .github/*
+    run_tests.py
+
+[report]
+show_missing = True
+skip_covered = False

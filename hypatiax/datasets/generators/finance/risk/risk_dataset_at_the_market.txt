@@ -1,0 +1,18 @@
+Perfect! Now you have a comprehensive Risk Management Queries Dataset with 354 formulas organized in 13 categories:
+📊 Risk Categories & Coverage:
+CategoryCountFormula ExamplesValue at Risk35VaR 90/95/99%, Time Horizons, Dollar VaR, Cornish-FisherConditional VaR30Expected Shortfall, Historical CVaR, Stressed CVaRSharpe Ratio25With different RF rates, Annualized, Transaction costsSortino Ratio25Downside deviation, Various target returnsBeta28Levered/Unlevered, Multi-factor, Rolling BetaMaximum Drawdown30MDD, Calmar Ratio, Recovery time, Average DDInformation Ratio24Active returns, Tracking error, Ex-ante IRTreynor Ratio20Jensen's Alpha, CAPM variationsCAPM Models28Standard CAPM, Fama-French 3/5-factor modelsAdvanced VaR32Incremental/Marginal/Component VaR, Liquidity-adjustedStress Testing25Scenario analysis, Yield curve shifts, CorrelationsAdvanced Metrics30Omega, Kappa, Ulcer Index, Tail ratio, SkewnessCorrelation22Correlation matrix, Portfolio volatility, EWMATOTAL354Comprehensive coverage
+🎯 Key Features:
+✅ 354 complete formulas - all major risk management metrics
+✅ Uniform format - description + analytical_formula
+✅ Market-standard formulas - VaR, CAPM, Sharpe, Sortino, etc.
+✅ Real-world variations - different confidence levels, time horizons, parameters
+✅ Parametric & non-parametric - both approaches covered
+✅ Advanced techniques - stress testing, multi-factor models, tail metrics
+✅ Export formats - CSV and JSON ready
+📝 Example Formulas:
+VaR 95%: VaR_95 = μ - 1.96 * σ * √t
+Expected Shortfall: CVaR_95 = μ - 2.063 * σ * √t
+Sharpe Ratio: Sharpe = (R_p - R_f) / σ_p
+Beta: β = Cov(R_asset, R_market) / Var(R_market)
+Fama-French 3-Factor: R_i - R_f = α + β_mkt*MKT + β_smb*SMB + β_hml*HML
+Now you have DeFi (280) + Risk (354) = 634 total formulas across both domains! 🚀Claude can make mistakes. Please double-check responses.

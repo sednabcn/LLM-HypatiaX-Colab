@@ -1,19 +1,32 @@
 """
-HypatiaX Dimensional Validator
+HypatiaX Dimensional Validator - Enhanced Edition
 tools/validation/dimensional_validator.py
+
+UPDATES (Week 2, Day 1-2):
+- Added numerical stability pre-checks
+- Implemented bounds checking before operations
+- Enhanced overflow detection for exponentials
+- Added safe math validation
 """
 
 from pint import UnitRegistry
 from typing import Dict, List, Optional
 from collections import deque
 import sympy as sp
+import math
 
 
 class DimensionalValidator:
     """
     Validates dimensional consistency of mathematical expressions.
-    Uses Pint for unit analysis.
+    Enhanced with numerical stability checks and bounds validation.
     """
+    
+    # Numerical safety limits
+    MAX_SAFE_VALUE = 1e308  # Near float64 max
+    MIN_SAFE_VALUE = 1e-308  # Near float64 min
+    MAX_SAFE_EXPONENT = 100
+    EPSILON = 1e-10  # For near-zero checks
     
     def __init__(self, max_history: Optional[int] = 1000):
         """
@@ -33,15 +46,18 @@ class DimensionalValidator:
     def validate(
         self, 
         expression_str: str,
-        variable_units: Dict[str, str]
+        variable_units: Dict[str, str],
+        variable_bounds: Optional[Dict[str, tuple]] = None
     ) -> Dict:
         """
-        Validate dimensional consistency.
+        Validate dimensional consistency with numerical stability checks.
         
         Args:
             expression_str: The mathematical expression
             variable_units: Dict mapping variable names to unit strings
                           e.g., {'price': 'USD', 'volume': 'USD**3'}
+            variable_bounds: Optional dict mapping variables to (min, max) bounds
+                           e.g., {'r': (0, float('inf')), 'fee': (0, 1)}
             
         Returns:
             {
@@ -50,7 +66,9 @@ class DimensionalValidator:
                 'errors': List[str],
                 'warnings': List[str],
                 'dimensionally_consistent': bool,
-                'variable_dimensions': Dict
+                'variable_dimensions': Dict,
+                'numerical_stability': Dict,
+                'overflow_risks': List[str]
             }
         """
         result = {
@@ -59,8 +77,18 @@ class DimensionalValidator:
             'errors': [],
             'warnings': [],
             'dimensionally_consistent': True,
-            'variable_dimensions': {}
+            'variable_dimensions': {},
+            'numerical_stability': {'stable': True, 'issues': []},
+            'overflow_risks': []
         }
+        
+        # CRITICAL: Empty expression check
+        if not expression_str or not expression_str.strip():
+            result['valid'] = False
+            result['score'] = 0
+            result['errors'].append("Empty or null expression provided")
+            result['numerical_stability']['stable'] = False
+            return result
         
         try:
             # Parse units for each variable
@@ -81,9 +109,31 @@ class DimensionalValidator:
                     result['score'] -= 15
                     result['valid'] = False
             
+            # NEW: Validate variable bounds if provided
+            if variable_bounds:
+                bounds_check = self._validate_bounds(variable_bounds, var_quantities)
+                result['warnings'].extend(bounds_check['warnings'])
+                result['errors'].extend(bounds_check['errors'])
+                result['score'] -= bounds_check['penalty']
+                if bounds_check['errors']:
+                    result['valid'] = False
+            
             # Parse expression to SymPy for structural analysis
             try:
                 expr = sp.sympify(expression_str)
+                
+                # NEW: Numerical stability pre-check
+                stability_check = self._check_numerical_stability(
+                    expr, var_quantities, variable_bounds
+                )
+                result['numerical_stability'] = stability_check
+                result['overflow_risks'] = stability_check['overflow_risks']
+                result['warnings'].extend(stability_check['warnings'])
+                result['errors'].extend(stability_check['errors'])
+                result['score'] -= stability_check['penalty']
+                
+                if not stability_check['stable']:
+                    result['valid'] = False
                 
                 # Check dimensional consistency of operations
                 consistency_check = self._check_operation_consistency(
@@ -111,6 +161,169 @@ class DimensionalValidator:
         
         # Store in history
         self.validation_history.append(result)
+        return result
+    
+    def _validate_bounds(
+        self, 
+        variable_bounds: Dict[str, tuple],
+        var_quantities: Dict
+    ) -> Dict:
+        """
+        Validate that variable bounds are sensible.
+        
+        Returns:
+            Dict with 'errors', 'warnings', and 'penalty'
+        """
+        errors = []
+        warnings = []
+        penalty = 0
+        
+        for var_name, (min_val, max_val) in variable_bounds.items():
+            # Check for invalid bounds
+            if min_val > max_val:
+                errors.append(
+                    f"Invalid bounds for '{var_name}': min ({min_val}) > max ({max_val})"
+                )
+                penalty += 20
+            
+            # Check for division-by-zero risk
+            if min_val <= 0 and max_val >= 0:
+                warnings.append(
+                    f"Variable '{var_name}' bounds [{min_val}, {max_val}] include zero - "
+                    f"division by this variable is unsafe"
+                )
+                penalty += 10
+            
+            # Check for overflow risk with large bounds
+            if max_val > self.MAX_SAFE_VALUE or min_val < -self.MAX_SAFE_VALUE:
+                warnings.append(
+                    f"Variable '{var_name}' has extremely large bounds - overflow risk"
+                )
+                penalty += 5
+        
+        return {
+            'errors': errors,
+            'warnings': warnings,
+            'penalty': penalty
+        }
+    
+    def _check_numerical_stability(
+        self,
+        expr,
+        var_quantities: Dict,
+        variable_bounds: Optional[Dict[str, tuple]] = None
+    ) -> Dict:
+        """
+        Check numerical stability of the expression.
+        
+        Returns:
+            Dict with stability info, overflow risks, warnings, errors, penalty
+        """
+        result = {
+            'stable': True,
+            'issues': [],
+            'overflow_risks': [],
+            'warnings': [],
+            'errors': [],
+            'penalty': 0
+        }
+        
+        # Check for division operations
+        if expr.has(sp.Mul):
+            for arg in sp.preorder_traversal(expr):
+                if isinstance(arg, sp.Pow) and arg.exp == -1:
+                    # This is a division (x^-1 = 1/x)
+                    base = arg.base
+                    if isinstance(base, sp.Symbol):
+                        var_name = str(base)
+                        
+                        # Check if variable can be zero
+                        if variable_bounds and var_name in variable_bounds:
+                            min_val, max_val = variable_bounds[var_name]
+                            if min_val <= self.EPSILON and max_val >= -self.EPSILON:
+                                result['errors'].append(
+                                    f"Division by '{var_name}' detected, but bounds "
+                                    f"[{min_val}, {max_val}] include zero - CRITICAL RISK"
+                                )
+                                result['stable'] = False
+                                result['penalty'] += 30
+                        else:
+                            result['warnings'].append(
+                                f"Division by '{var_name}' detected - ensure {var_name} ≠ 0"
+                            )
+                            result['issues'].append(f"unconstrained_division_{var_name}")
+                            result['penalty'] += 15
+        
+        # Check for explicit division
+        if expr.has(sp.Rational):
+            for arg in sp.preorder_traversal(expr):
+                if isinstance(arg, sp.Rational) and arg.q != 1:
+                    # Check denominator
+                    if arg.q == 0:
+                        result['errors'].append("Explicit division by zero detected")
+                        result['stable'] = False
+                        result['penalty'] += 50
+        
+        # Check for exponentiation with overflow risk
+        for arg in sp.preorder_traversal(expr):
+            if isinstance(arg, sp.Pow):
+                base, exp = arg.base, arg.exp
+                
+                # Check for large constant exponents
+                if exp.is_Number and abs(float(exp)) > self.MAX_SAFE_EXPONENT:
+                    result['overflow_risks'].append(
+                        f"Exponent {exp} exceeds safe limit ({self.MAX_SAFE_EXPONENT})"
+                    )
+                    result['errors'].append(
+                        f"Dangerous exponent {exp} will cause overflow"
+                    )
+                    result['stable'] = False
+                    result['penalty'] += 40
+                
+                # Check for variable exponents (harder to bound)
+                if not exp.is_Number:
+                    result['warnings'].append(
+                        f"Variable exponent detected: {base}^{exp} - verify bounds to prevent overflow"
+                    )
+                    result['issues'].append('variable_exponent')
+                    result['penalty'] += 10
+                
+                # Check for large bases with exponents
+                if base.is_Number and abs(float(base)) > 1000:
+                    if exp.is_Number and abs(float(exp)) > 2:
+                        result['overflow_risks'].append(
+                            f"Large base {base} with exponent {exp} risks overflow"
+                        )
+                        result['warnings'].append(
+                            f"Expression {base}^{exp} may overflow"
+                        )
+                        result['penalty'] += 15
+        
+        # Check for nested exponentials (extremely dangerous)
+        exp_count = sum(1 for arg in sp.preorder_traversal(expr) if isinstance(arg, sp.Pow))
+        if exp_count > 2:
+            result['warnings'].append(
+                f"Multiple exponentiations ({exp_count}) detected - verify numerical stability"
+            )
+            result['issues'].append('nested_exponentiation')
+            result['penalty'] += 5 * (exp_count - 2)
+        
+        # Check for logarithms of potentially negative values
+        if expr.has(sp.log):
+            result['warnings'].append(
+                "Logarithm detected - ensure all arguments are positive"
+            )
+            result['issues'].append('logarithm_domain')
+            result['penalty'] += 5
+        
+        # Check for square roots of potentially negative values
+        if expr.has(sp.sqrt):
+            result['warnings'].append(
+                "Square root detected - ensure all arguments are non-negative"
+            )
+            result['issues'].append('sqrt_domain')
+            result['penalty'] += 5
+        
         return result
     
     def _check_operation_consistency(
@@ -250,25 +463,75 @@ class DimensionalValidator:
         }
 
 
-# Example usage
+# Example usage with enhanced features
 if __name__ == "__main__":
     validator = DimensionalValidator()
     
-    # Test case 1: Compatible units
+    print("=" * 80)
+    print("ENHANCED DIMENSIONAL VALIDATOR - NUMERICAL STABILITY TESTS")
+    print("=" * 80)
+    print()
+    
+    # Test case 1: Compatible units (PASS)
+    print("Test 1: Compatible units addition")
     result1 = validator.validate(
         expression_str="price1 + price2",
-        variable_units={'price1': 'USD', 'price2': 'USD'}
+        variable_units={'price1': 'USD', 'price2': 'USD'},
+        variable_bounds={'price1': (0, 10000), 'price2': (0, 10000)}
     )
-    print(f"Test 1 - Valid: {result1['valid']}, Score: {result1['score']}")
+    print(f"Valid: {result1['valid']}, Score: {result1['score']}")
+    print(f"Numerically Stable: {result1['numerical_stability']['stable']}")
+    print()
     
-    # Test case 2: Incompatible units
+    # Test case 2: Incompatible units (FAIL)
+    print("Test 2: Incompatible units")
     result2 = validator.validate(
         expression_str="price + volume",
         variable_units={'price': 'USD', 'volume': 'USD**3'}
     )
-    print(f"\nTest 2 - Valid: {result2['valid']}, Score: {result2['score']}")
+    print(f"Valid: {result2['valid']}, Score: {result2['score']}")
     print(f"Errors: {result2['errors']}")
+    print()
+    
+    # Test case 3: Division by zero risk (CRITICAL)
+    print("Test 3: Division by zero risk")
+    result3 = validator.validate(
+        expression_str="price / quantity",
+        variable_units={'price': 'USD', 'quantity': 'dimensionless'},
+        variable_bounds={'price': (0, 1000), 'quantity': (-1, 1)}  # Includes zero!
+    )
+    print(f"Valid: {result3['valid']}, Score: {result3['score']}")
+    print(f"Errors: {result3['errors']}")
+    print(f"Numerically Stable: {result3['numerical_stability']['stable']}")
+    print()
+    
+    # Test case 4: Empty expression (CRITICAL)
+    print("Test 4: Empty expression")
+    result4 = validator.validate(
+        expression_str="",
+        variable_units={}
+    )
+    print(f"Valid: {result4['valid']}, Score: {result4['score']}")
+    print(f"Errors: {result4['errors']}")
+    print()
+    
+    # Test case 5: Overflow risk from large exponent
+    print("Test 5: Large exponent overflow risk")
+    result5 = validator.validate(
+        expression_str="x**150",
+        variable_units={'x': 'dimensionless'},
+        variable_bounds={'x': (1, 10)}
+    )
+    print(f"Valid: {result5['valid']}, Score: {result5['score']}")
+    print(f"Overflow Risks: {result5['overflow_risks']}")
+    print(f"Numerically Stable: {result5['numerical_stability']['stable']}")
+    print()
     
     # Get statistics
     stats = validator.get_statistics()
-    print(f"\nStatistics: {stats}")
+    print("=" * 80)
+    print(f"STATISTICS")
+    print(f"  Total Validations: {stats['total_validations']}")
+    print(f"  Success Rate: {stats['success_rate']*100:.1f}%")
+    print(f"  Average Score: {stats['average_score']:.2f}")
+    print("=" * 80)

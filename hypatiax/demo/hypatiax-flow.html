@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HypatiaX Complete Algorithm Flow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .legend-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+        }
+
+        .phase {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .phase-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .step {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .step-number {
+            position: absolute;
+            left: -42px;
+            top: 20px;
+            width: 35px;
+            height: 35px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+        }
+
+        .step-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .step-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .step-files {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .file-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .file-path {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #2d3748;
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .inputs, .outputs {
+            margin-top: 15px;
+        }
+
+        .io-label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-label {
+            color: #10b981;
+        }
+
+        .output-label {
+            color: #f59e0b;
+        }
+
+        .io-item {
+            background: #f1f5f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 6px;
+            border-left: 4px solid;
+        }
+
+        .io-item.input {
+            border-left-color: #10b981;
+        }
+
+        .io-item.output {
+            border-left-color: #f59e0b;
+        }
+
+        .arrow {
+            text-align: center;
+            font-size: 2em;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .data-type {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .final-output {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .final-output h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .final-output ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .final-output li {
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .step-number {
+                position: static;
+                margin-bottom: 10px;
+            }
+            
+            .steps {
+                padding-left: 0;
+                border-left: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ðŸš€ HypatiaX Complete Algorithm Flow</h1>
+        <p class="subtitle">From Raw Data to Trained NER Models for Tableau Query Processing</p>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box" style="background: #10b981;"></div>
+                <span>Input Data</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #667eea;"></div>
+                <span>Processing</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #f59e0b;"></div>
+                <span>Output Files</span>
+            </div>
+        </div>
+
+        <!-- PHASE 1: DATA PREPARATION -->
+        <div class="phase">
+            <div class="phase-header">ðŸ“Š PHASE 1: DATA PREPARATION & LOADING</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Load Training Data</div>
+                    <div class="step-description">
+                        Load Excel files containing Tableau queries (descriptions and formulas)
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ“ Location:</div>
+                        <div class="file-path">hypatiax/datasets/queries/tableau/training/formulas.xlsx</div>
+                    </div>
+                    <div class="inputs">
+                        <div class="io-label input-label">ðŸ“¥ INPUTS:</div>
+                        <div class="io-item input">
+                            <strong>formulas.xlsx</strong> - Contains two columns:
+                            <ul style="margin-top: 8px; margin-left: 20px;">
+                                <li>Column 1: Descriptions (natural language)</li>
+                                <li>Column 2: Formulas (Tableau syntax)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUTS:</div>
+                        <div class="io-item output">pandas DataFrame with validated data</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Data Validation & Cleaning</div>
+                    <div class="step-description">
+                        Convert all values to strings, remove NaN values, clean empty rows
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Function:</div>
+                        <div class="file-path">test_create_ruler_tableau.py â†’ load_and_validate_data()</div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUTS:</div>
+                        <div class="io-item output">Cleaned DataFrame ready for tokenization</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">â¬‡ï¸</div>
+
+        <!-- PHASE 2: PATTERN GENERATION -->
+        <div class="phase">
+            <div class="phase-header">ðŸ”¤ PHASE 2: TOKENIZATION & PATTERN GENERATION</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Initialize Pattern Generator</div>
+                    <div class="step-description">
+                        Create Generation_custom_tableau_patterns instance with data and stopwords
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ“„ Class:</div>
+                        <div class="file-path">hypatiax/patterns/queries/tableau/generation.py â†’ Generation_custom_tableau_patterns</div>
+                    </div>
+                    <div class="inputs">
+                        <div class="io-label input-label">ðŸ“¥ INPUTS:</div>
+                        <div class="io-item input">DataFrame from Phase 1</div>
+                        <div class="io-item input">Stopwords list (filters unwanted tokens)</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Normalize Formulas</div>
+                    <div class="step-description">
+                        Add spaces around operators, brackets, parentheses for proper tokenization
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Function:</div>
+                        <div class="file-path">utils.py â†’ normalize_formula()</div>
+                    </div>
+                    <div class="data-type">
+                        <strong>Example Transformation:</strong><br>
+                        <code>"SUM([Sales])" â†’ "SUM ( [ Sales ] )"</code><br>
+                        <code>"Value>=5" â†’ "Value >= 5"</code>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-title">Preprocess Entities</div>
+                    <div class="step-description">
+                        Tokenize text using NLTK wordpunct_tokenize, extract vocabulary, filter stopwords
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Function:</div>
+                        <div class="file-path">utils.py â†’ preproc_ent()</div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUTS:</div>
+                        <div class="io-item output">
+                            <strong>out_d</strong>: Dictionary with description tokens, vocabulary, stopwords
+                        </div>
+                        <div class="io-item output">
+                            <strong>out_f</strong>: Dictionary with formula tokens, vocabulary, stopwords
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-title">Get POS Tags</div>
+                    <div class="step-description">
+                        Use spaCy to identify Part-of-Speech tags (NOUN, VERB, ADJ, etc.)
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Function:</div>
+                        <div class="file-path">utils.py â†’ get_pos_() â†’ get_patterns()</div>
+                    </div>
+                    <div class="data-type">
+                        <strong>POS Categories:</strong><br>
+                        NOUN, VERB, ADJ, ADV, ADP, CONJ, PROPN, NUM, etc.
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <div class="step-title">Generate Description Patterns</div>
+                    <div class="step-description">
+                        Group tokens by POS tags, merge categories (CCONJ+SCONJâ†’CONJ, VERB+AUXâ†’VERB, etc.)
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Method:</div>
+                        <div class="file-path">generation.py â†’ gen_patterns_tableau_desc()</div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUTS:</div>
+                        <div class="io-item output">
+                            <strong>patterns_tableau_desc</strong>: List of {POS_TAG: [words]} dictionaries
+                        </div>
+                    </div>
+                    <div class="data-type">
+                        <strong>Example Patterns:</strong><br>
+                        <code>{"NOUN": ["sum", "average", "count", "total"]}</code><br>
+                        <code>{"VERB": ["calculate", "show", "display"]}</code><br>
+                        <code>{"ADJ": ["total", "distinct", "unique"]}</code>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">8</div>
+                    <div class="step-title">Generate Formula Patterns</div>
+                    <div class="step-description">
+                        Extract operators (SUM, AVG, IF, CONTAINS, etc.), arguments ([Field Names]), and syntax elements
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Method:</div>
+                        <div class="file-path">generation.py â†’ gen_patterns_tableau_formulas()</div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUTS:</div>
+                        <div class="io-item output">
+                            <strong>patterns_tableau_formulas</strong>: Specialized pattern categories
+                        </div>
+                    </div>
+                    <div class="data-type">
+                        <strong>Pattern Categories:</strong><br>
+                        â€¢ <strong>ARG</strong>: Field names in brackets [Sepal Length]<br>
+                        â€¢ <strong>ARGN</strong>: Field names without brackets<br>
+                        â€¢ <strong>OPER</strong>: Tableau functions (SUM, AVG, IF, CONTAINS)<br>
+                        â€¢ <strong>NUM</strong>: Numeric values<br>
+                        â€¢ <strong>ADP</strong>: Comparison operators (>=, <=, !=, AND)<br>
+                        â€¢ <strong>ADV</strong>: Sorting keywords (ASC, DESC, NULL)
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">9</div>
+                    <div class="step-title">Extract Formula Operators</div>
+                    <div class="step-description">
+                        Parse formulas to identify function names and operators using regex splitting
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Function:</div>
+                        <div class="file-path">utils.py â†’ tok_formulas()</div>
+                    </div>
+                    <div class="data-type">
+                        <strong>Regex Pattern:</strong><br>
+                        <code>r'\(| = | >= | > | \[ | \) | \{ | \]'</code><br>
+                        Splits on parentheses, brackets, comparison operators
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">â¬‡ï¸</div>
+
+        <!-- PHASE 3: RULE FORMATTING -->
+        <div class="phase">
+            <div class="phase-header">ðŸ“‹ PHASE 3: RULE FORMATTING FOR SPACY</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">10</div>
+                    <div class="step-title">Format Description Rules</div>
+                    <div class="step-description">
+                        Convert pattern dictionaries to spaCy EntityRuler format: {"label": "NOUN", "pattern": "sum"}
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Method:</div>
+                        <div class="file-path">generation.py â†’ get_rules_tableau_desc()</div>
+                        <div class="file-path">utils.py â†’ get_formatted_patterns()</div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUTS:</div>
+                        <div class="io-item output">
+                            <strong>rules_tableau_desc</strong>: List of spaCy-compatible rule dictionaries
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">11</div>
+                    <div class="step-title">Format Formula Rules</div>
+                    <div class="step-description">
+                        Convert formula patterns to spaCy EntityRuler format with specialized labels
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Method:</div>
+                        <div class="file-path">generation.py â†’ get_rules_tableau_formulas()</div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUTS:</div>
+                        <div class="io-item output">
+                            <strong>rules_tableau_formulas</strong>: List of formula-specific rules
+                        </div>
+                    </div>
+                    <div class="data-type">
+                        <strong>Example Formatted Rules:</strong><br>
+                        <code>{"label": "OPER", "pattern": "SUM"}</code><br>
+                        <code>{"label": "ARG", "pattern": "[Sepal Length]"}</code><br>
+                        <code>{"label": "ADP", "pattern": ">="}</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">â¬‡ï¸</div>
+
+        <!-- PHASE 4: ENTITY RULER CREATION -->
+        <div class="phase">
+            <div class="phase-header">ðŸŽ¯ PHASE 4: ENTITY RULER CREATION & PERSISTENCE</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">12</div>
+                    <div class="step-title">Create EntityRuler Pipeline</div>
+                    <div class="step-description">
+                        Initialize spaCy EntityRuler component and add pattern rules based on type (desc/formulas/both)
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Method:</div>
+                        <div class="file-path">generation.py â†’ create_ruler_tableau()</div>
+                    </div>
+                    <div class="inputs">
+                        <div class="io-label input-label">ðŸ“¥ INPUTS:</div>
+                        <div class="io-item input">
+                            <strong>nlp</strong>: spaCy language model (en_core_web_sm)
+                        </div>
+                        <div class="io-item input">
+                            <strong>type</strong>: 'desc', 'formulas', or 'both'
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">13</div>
+                    <div class="step-title">Save Ruler to Disk</div>
+                    <div class="step-description">
+                        Persist EntityRuler patterns as .jsonl files for reuse without regeneration
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Method:</div>
+                        <div class="file-path">spacy.pipeline.EntityRuler.to_disk()</div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUT FILES:</div>
+                        <div class="io-item output">
+                            ðŸ“„ hypatiax/custom_ner/queries/tableau/rules/ruler_tableau_desc.jsonl
+                        </div>
+                        <div class="io-item output">
+                            ðŸ“„ hypatiax/custom_ner/queries/tableau/rules/ruler_tableau_formulas.jsonl
+                        </div>
+                        <div class="io-item output">
+                            ðŸ“„ hypatiax/custom_ner/queries/tableau/rules/ruler_tableau.jsonl
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">â¬‡ï¸</div>
+
+        <!-- PHASE 5: TRAINING DATA PREPARATION -->
+        <div class="phase">
+            <div class="phase-header">ðŸ‹ï¸ PHASE 5: TRAINING DATA PREPARATION</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">14</div>
+                    <div class="step-title">Generate Entity Annotations</div>
+                    <div class="step-description">
+                        Apply EntityRuler to training texts to create entity annotations (start_char, end_char, label)
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Function:</div>
+                        <div class="file-path">utils.py â†’ set_entity()</div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUTS:</div>
+                        <div class="io-item output">
+                            Training data format: [(text, {"entities": [(start, end, label), ...]}), ...]
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">15</div>
+                    <div class="step-title">Convert to spaCy Format</div>
+                    <div class="step-description">
+                        Transform annotations into spaCy's DocBin format for efficient training
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Function:</div>
+                        <div class="file-path">utils.py â†’ save_spacy_training_data()</div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUT FILES:</div>
+                        <div class="io-item output">
+                            ðŸ“„ hypatiax/data_spacy/queries/tableau/training_spacy/Train_desc_data.spacy
+                        </div>
+                        <div class="io-item output">
+                            ðŸ“„ hypatiax/data_spacy/queries/tableau/training_spacy/Train_formulas_data.spacy
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">16</div>
+                    <div class="step-title">Prepare Test Data</div>
+                    <div class="step-description">
+                        Process test dataset similarly for model evaluation
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUT FILES:</div>
+                        <div class="io-item output">
+                            ðŸ“„ hypatiax/data_spacy/queries/tableau/testing_spacy/Test_desc_data.spacy
+                        </div>
+                        <div class="io-item output">
+                            ðŸ“„ hypatiax/data_spacy/queries/tableau/testing_spacy/Test_formulas_data.spacy
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">â¬‡ï¸</div>
+
+        <!-- PHASE 6: MODEL TRAINING -->
+        <div class="phase">
+            <div class="phase-header">ðŸ¤– PHASE 6: NER MODEL TRAINING</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">17</div>
+                    <div class="step-title">Configure Training Pipeline</div>
+                    <div class="step-description">
+                        Set up spaCy training configuration with NER component, learning rate, batch size, etc.
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ“ Location:</div>
+                        <div class="file-path">hypatiax/models/queries/tableau/model_configs/</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">18</div>
+                    <div class="step-title">Train Description NER Model</div>
+                    <div class="step-description">
+                        Train spaCy NER model on description patterns using Train_desc_data.spacy
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Script:</div>
+                        <div class="file-path">hypatiax/core/training/training_spacy.py</div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUT:</div>
+                        <div class="io-item output">
+                            ðŸ“ hypatiax/data_spacy/queries/tableau/ner_tableau_desc/ (trained model)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">19</div>
+                    <div class="step-title">Train Formula NER Model</div>
+                    <div class="step-description">
+                        Train spaCy NER model on formula patterns using Train_formulas_data.spacy
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUT:</div>
+                        <div class="io-item output">
+                            ðŸ“ hypatiax/data_spacy/queries/tableau/ner_tableau_formulas/ (trained model)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">20</div>
+                    <div class="step-title">Save Training History</div>
+                    <div class="step-description">
+                        Record loss metrics, F1 scores, precision, recall during training
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUT:</div>
+                        <div class="io-item output">
+                            ðŸ“ hypatiax/models/queries/tableau/training_history/
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">â¬‡ï¸</div>
+
+        <!-- PHASE 7: EVALUATION -->
+        <div class="phase">
+            <div class="phase-header">ðŸ“Š PHASE 7: MODEL EVALUATION & TESTING</div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">21</div>
+                    <div class="step-title">Load Test Data</div>
+                    <div class="step-description">
+                        Load Test_desc_data.spacy and Test_formulas_data.spacy
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Function:</div>
+                        <div class="file-path">utils.py â†’ upload_spacy_training_data()</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">22</div>
+                    <div class="step-title">Evaluate Model Performance</div>
+                    <div class="step-description">
+                        Calculate precision, recall, F1-score for each entity type
+                    </div>
+                    <div class="step-files">
+                        <div class="file-label">ðŸ”§ Function:</div>
+                        <div class="file-path">utils.py â†’ evaluate_the_model()</div>
+                        <div class="file-path">hypatiax/core/evaluation/testing_model.py</div>
+                    </div>
+                    <div class="outputs">
+                        <div class="io-label output-label">ðŸ“¤ OUTPUTS:</div>
+                        <div class="io-item output">Precision, Recall, F1-Score metrics</div>
+                        <div class="io-item output">Per-entity-type performance breakdown</div>
+			</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FINAL OUTPUT SUMMARY -->
+        <div class="final-output">
+            <h2>🎉 Final Deliverables</h2>
+            <p style="margin-bottom: 20px;">Complete HypatiaX NER System for Tableau Query Processing</p>
+            <ul>
+                <li>📊 <strong>Trained NER Models:</strong> Description & Formula entity recognition models</li>
+                <li>📋 <strong>EntityRuler Patterns:</strong> Reusable .jsonl pattern files</li>
+                <li>📈 <strong>Training Data:</strong> Annotated .spacy format datasets</li>
+                <li>🎯 <strong>Evaluation Metrics:</strong> Precision, Recall, F1-Score reports</li>
+                <li>📚 <strong>Training History:</strong> Loss curves and performance tracking</li>
+            </ul>
+        </div>
+
+        <!-- KEY FEATURES SECTION -->
+        <div style="margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 15px;">
+            <h2 style="color: #667eea; margin-bottom: 20px; text-align: center;">🔑 Key Features</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #667eea;">
+                    <h3 style="color: #667eea; margin-bottom: 10px;">🎯 Pattern-Based NER</h3>
+                    <p style="color: #666;">Automatically extracts patterns from training data using POS tagging and formula parsing</p>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #10b981;">
+                    <h3 style="color: #10b981; margin-bottom: 10px;">🔄 Dual Model System</h3>
+                    <p style="color: #666;">Separate models for natural language descriptions and Tableau formula syntax</p>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #f59e0b;">
+                    <h3 style="color: #f59e0b; margin-bottom: 10px;">💾 Persistent Patterns</h3>
+                    <p style="color: #666;">EntityRuler patterns saved as .jsonl files for fast reloading without regeneration</p>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #ef4444;">
+                    <h3 style="color: #ef4444; margin-bottom: 10px;">📊 Comprehensive Evaluation</h3>
+                    <p style="color: #666;">Detailed metrics per entity type with precision, recall, and F1-score tracking</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TECHNOLOGY STACK -->
+        <div style="margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white;">
+            <h2 style="margin-bottom: 20px; text-align: center;">⚙️ Technology Stack</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 8px; font-weight: bold;">
+                    🐍 Python
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 8px; font-weight: bold;">
+                    🤖 spaCy NLP
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 8px; font-weight: bold;">
+                    📚 NLTK
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 8px; font-weight: bold;">
+                    🐼 Pandas
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 8px; font-weight: bold;">
+                    📊 Tableau Syntax
+                </div>
+            </div>
+        </div>
+
+        <!-- WORKFLOW SUMMARY -->
+        <div style="margin-top: 40px; padding: 30px; background: white; border: 2px solid #e0e0e0; border-radius: 15px;">
+            <h2 style="color: #667eea; margin-bottom: 20px; text-align: center;">📝 Workflow Summary</h2>
+            <div style="color: #666; line-height: 1.8;">
+                <p style="margin-bottom: 15px;">
+                    <strong style="color: #667eea;">Step 1-2:</strong> Load and clean Excel training data containing Tableau query descriptions and formulas
+                </p>
+                <p style="margin-bottom: 15px;">
+                    <strong style="color: #667eea;">Step 3-9:</strong> Generate patterns by tokenizing, POS tagging, and extracting operators from formulas
+                </p>
+                <p style="margin-bottom: 15px;">
+                    <strong style="color: #667eea;">Step 10-11:</strong> Format patterns into spaCy EntityRuler compatible rule dictionaries
+                </p>
+                <p style="margin-bottom: 15px;">
+                    <strong style="color: #667eea;">Step 12-13:</strong> Create and persist EntityRuler pipelines as reusable .jsonl files
+                </p>
+                <p style="margin-bottom: 15px;">
+                    <strong style="color: #667eea;">Step 14-16:</strong> Generate entity annotations and convert to spaCy DocBin format
+                </p>
+                <p style="margin-bottom: 15px;">
+                    <strong style="color: #667eea;">Step 17-20:</strong> Train separate NER models for descriptions and formulas, save training history
+                </p>
+                <p>
+                    <strong style="color: #667eea;">Step 21-22:</strong> Evaluate models on test data and generate performance metrics
+                </p>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div style="margin-top: 40px; text-align: center; color: #999; padding: 20px;">
+            <p style="font-size: 0.9em;">
+                🚀 HypatiaX Algorithm Flow Documentation<br>
+                End-to-End NER Training Pipeline for Tableau Query Processing
+            </p>
+        </div>
+    </div>
+</body>
+</html>

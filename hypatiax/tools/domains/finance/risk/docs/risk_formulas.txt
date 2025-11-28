@@ -1,0 +1,100 @@
+📁 risk_formulas.py
+Core risk calculations and portfolio testing
+Features:
+
+8 Risk Formulas Implemented:
+
+Value at Risk (VaR) 95%
+Conditional VaR (CVaR/Expected Shortfall)
+Sharpe Ratio
+Sortino Ratio
+Beta (Systematic Risk)
+Treynor Ratio
+Information Ratio
+Maximum Drawdown
+
+
+10 Test Portfolio Scenarios:
+
+Conservative Bonds
+Aggressive Tech Stocks
+Balanced 60/40
+High Dividend Value
+Emerging Markets
+Gold & Commodities
+S&P 500 Index
+Crypto Portfolio
+REIT Portfolio
+Market Neutral Strategy
+
+
+Outputs:
+
+Formatted console table with all metrics
+Risk rating system (Excellent/Good/Moderate/Poor)
+CSV export of results
+
+
+
+
+📁 risk_backtest_analysis.py
+Historical backtesting and visualization
+Features:
+
+Real Data Integration:
+
+Fetches historical prices from CoinGecko
+Supports BTC, ETH, SPY, GLD, AGG
+
+
+Rolling Metrics:
+
+30-day rolling volatility
+Rolling Sharpe ratio
+Rolling VaR 95%
+Rolling maximum drawdown
+
+
+Stress Testing:
+
+Market crash scenarios (-30%, -20%, -10%, -5%)
+Bull rally scenario (+50%)
+Probability calculations for each scenario
+
+
+Comprehensive Dashboard:
+
+6-panel visualization showing:
+
+Portfolio value & drawdown
+Rolling volatility
+Rolling Sharpe ratio
+Value at Risk
+Returns distribution
+Cumulative returns
+
+
+
+
+Export Capabilities:
+
+Excel workbook with multiple sheets
+PNG dashboard image
+Detailed risk report
+
+
+🎯 Key Differences from Uniswap Scripts:
+
+Feature                             Uniswap V2                           Risk Analysis
+
+Focus                               DeFi liquidity & IL                   Portfolio risk metrics
+
+Formulas                            AMM, swap, IL                         VaR, Sharpe, Beta, etc.
+
+Data                                Synthetic LP positions                Real historical prices
+
+Scenarios                           10 crypto pairs                       10 portfolio types
+
+Visualization                       LP vs HODL comparison                 6-panel risk dashboard
+
+Both scripts follow the same professional structure with dataclasses, comprehensive testing, CSV export, and detailed reporting!
