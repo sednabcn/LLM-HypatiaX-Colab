@@ -33,9 +33,11 @@ Usage
 bash# Quick mode (default: realistic)
 python script.py quick
 
-# Realistic mode  
+# Realistic mode
+
 python script.py realistic
 
 # Full integration mode
+
 python script.py full
 The simulation automatically adapts metrics based on dtype and sizefile parameters from your original configurations!

@@ -325,7 +325,7 @@ Given your tools, I suggest:
 
 **Hybrid Approach:**
 ```
-User description 
+User description
   → 1. Search your 580 formulas first (100ms)
   → 2. If 90%+ match: Return + validate
   → 3. If <90% match: Use LLM to generate → PySR to discover → Validate

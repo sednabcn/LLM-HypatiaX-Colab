@@ -27,10 +27,10 @@ jobs:
   test-profile:
     name: Test ${{ github.event.inputs.profile }} Profile
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Free Disk Space
       uses: jlumbroso/free-disk-space@main
       with:
@@ -41,28 +41,28 @@ jobs:
         large-packages: true
         docker-images: true
         swap-storage: true
-    
+
     - name: Set up Python ${{ github.event.inputs.python_version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ github.event.inputs.python_version }}
         cache: 'pip'
-    
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install --no-cache-dir -r requirements.txt || true
-    
+
     - name: Show profile info
       run: |
         echo "Testing profile: ${{ github.event.inputs.profile }}"
         echo "Python version: ${{ github.event.inputs.python_version }}"
-        
+
     - name: Run workflow with profile
       run: |
         MODULES="${{ github.event.inputs.modules }}"
         PROFILE="${{ github.event.inputs.profile }}"
-        
+
         if [ -n "$MODULES" ]; then
           echo "Running custom modules: $MODULES"
           python .github/scripts/workflow_runner.py --base-path . --modules $MODULES
@@ -71,7 +71,7 @@ jobs:
           python .github/scripts/workflow_runner.py --base-path . --profile $PROFILE
         fi
       continue-on-error: true
-    
+
     - name: Upload results
       if: always()
       uses: actions/upload-artifact@v4

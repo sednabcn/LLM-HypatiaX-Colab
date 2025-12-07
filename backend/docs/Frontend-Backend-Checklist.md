@@ -3,22 +3,26 @@
 ## ✅ Files Created
 
 ### JavaScript Files (frontend/js/)
+
 - [x] **api-client.js** - Core API client with all endpoints
 - [x] **main.js** - HypatiaX Tableau formula mapping
 - [x] **dashboard.js** - DeFi position analysis
 - [x] **ner-demo.js** - Mathematical formula extraction
 
 ### CSS Files (frontend/css/)
+
 - [x] **components.css** - UI component styles
 - [ ] **main.css** - Base styles (needs creation)
 
 ### HTML Files
+
 - [ ] **index.html** - Update with scripts
 - [ ] **dashboard.html** - Update with scripts
 - [ ] **ner-demo.html** - Update with scripts
 - [x] **test_frontend.html** - Testing page
 
 ### Documentation
+
 - [x] **Integration Guide** - Complete setup instructions
 - [x] **Setup Checklist** - This file
 
@@ -123,18 +127,21 @@ Add these lines to the `<head>` section of each HTML file:
 Add these lines before closing `</body>` tag:
 
 **For index.html (HypatiaX):**
+
 ```html
 <script src="js/api-client.js"></script>
 <script src="js/main.js"></script>
 ```
 
 **For dashboard.html (DeFi):**
+
 ```html
 <script src="js/api-client.js"></script>
 <script src="js/dashboard.js"></script>
 ```
 
 **For ner-demo.html (NER):**
+
 ```html
 <script src="js/api-client.js"></script>
 <script src="js/ner-demo.js"></script>
@@ -152,6 +159,7 @@ python app.py
 ```
 
 Expected output:
+
 ```
 ================================================================================
 🚀 UNIFIED FORMULA API SERVER
@@ -183,11 +191,13 @@ Click "Test All Systems" button to verify everything works.
 ## 🧪 Quick Tests
 
 ### Test 1: Backend Health
+
 ```bash
 curl http://localhost:5000/api/health
 ```
 
 ### Test 2: HypatiaX
+
 ```bash
 curl -X POST http://localhost:5000/api/hypatiax/map \
   -H "Content-Type: application/json" \
@@ -195,6 +205,7 @@ curl -X POST http://localhost:5000/api/hypatiax/map \
 ```
 
 ### Test 3: DeFi
+
 ```bash
 curl -X POST http://localhost:5000/api/defi/il-percentage \
   -H "Content-Type: application/json" \
@@ -202,6 +213,7 @@ curl -X POST http://localhost:5000/api/defi/il-percentage \
 ```
 
 ### Test 4: NER
+
 ```bash
 curl -X POST http://localhost:5000/api/ner/extract-formula \
   -H "Content-Type: application/json" \
@@ -211,7 +223,9 @@ curl -X POST http://localhost:5000/api/ner/extract-formula \
 ## 🔧 Troubleshooting
 
 ### Issue: CORS Errors
+
 **Solution:** Backend already has CORS enabled. If you still see errors:
+
 ```python
 # In app.py, verify this line exists:
 from flask_cors import CORS
@@ -219,18 +233,24 @@ CORS(app)
 ```
 
 ### Issue: Connection Refused
+
 **Checklist:**
+
 - [ ] Backend running? `python app.py`
 - [ ] Port 5000 available? `lsof -i :5000`
 - [ ] Correct URL in api-client.js? `http://localhost:5000`
 
 ### Issue: 404 Errors
+
 **Solution:** Check endpoint URLs match:
+
 - Frontend: `api.mapToFormula()` → Backend: `/api/hypatiax/map`
 - All endpoints start with `/api/`
 
 ### Issue: Module Not Found
+
 **Solution:** Install missing Python packages:
+
 ```bash
 cd backend
 pip install -r requirements.txt
@@ -304,31 +324,35 @@ Your integration is successful when:
 
 ## 📞 Support Commands
 
-### Check if backend is running:
+### Check if backend is running
+
 ```bash
 curl -I http://localhost:5000/api/health
 ```
 
-### View backend logs:
+### View backend logs
+
 ```bash
 # Backend should print logs to console
 # Look for any error messages
 ```
 
-### Restart backend:
+### Restart backend
+
 ```bash
 # Press Ctrl+C to stop
 # Then run again:
 python app.py
 ```
 
-### Clear browser cache:
+### Clear browser cache
+
 ```
 Chrome: Cmd+Shift+Delete (Mac) or Ctrl+Shift+Delete (Windows)
 Then check "Cached images and files"
 ```
 
-## ✨ You're All Set!
+## ✨ You're All Set
 
 Once you complete all the checked items above, your frontend will be fully integrated with your backend API. Test everything with `test_frontend.html` first before using the main pages.
 
@@ -347,14 +371,12 @@ DeFi calculations
 Error handling & timeouts
 Utility functions
 
-
 main.js - HypatiaX (Tableau) interface:
 
 Natural language to formula conversion
 Entity recognition display
 Real-time suggestions
 Example queries
-
 
 dashboard.js - DeFi analytics:
 
@@ -363,15 +385,12 @@ Complete position analysis
 Quality score visualization
 Profitability metrics
 
-
 ner-demo.js - Formula extraction:
 
 Mathematical formula parsing
 Entity recognition with highlighting
 LaTeX conversion
 Multi-domain support
-
-
 
 CSS & UI:
 
@@ -384,14 +403,11 @@ Responsive design
 Entity highlighting
 Charts & metrics
 
-
 test_frontend.html - Testing page:
 
 Test all endpoints
 Visual status indicators
 One-click testing
-
-
 
 Documentation:
 
@@ -400,13 +416,16 @@ Setup Checklist - Quick reference with commands
 
 🚀 Quick Start (3 Steps)
 bash# 1. Copy files to frontend/js/ directory
+
 # 2. Update HTML files with script tags (see Integration Guide)
+
 # 3. Start backend and open test_frontend.html
 
 cd backend
 python app.py
 
 # Then open: frontend/test_frontend.html
+
 ✨ Key Features
 
 ✅ Zero-config API client - Just works with your backend
@@ -425,9 +444,7 @@ Formula Extraction            /api/ner/extract-formula              ner-demo.js
 Entity Recognition            /api/ner/recognize-entities            ner-demo.js
 LaTeX Conversion               /api/ner/convert-to-latex             ner-demo.js
 
-
 All files are production-ready with proper error handling, loading states, and responsive design. Just follow the Integration Guide artifact to connect everything! 🎉
-
 
 ```
 
@@ -461,6 +478,7 @@ All files are production-ready with proper error handling, loading states, and r
 
 ### 📁 **File Structure Now:**
 ```
+
 frontend/
 ├── index.html          → Formula Mapper (main feature)
 ├── dashboard.html      → Dashboard + DeFi Calculator
@@ -475,29 +493,37 @@ frontend/
 cd ~/Downloads/GITHUB/LLM-HypatiaX-Colab/backend/
 
 # 1. Rename the NER service file
+
 mv services/ner_services.py services/ner_service.py
 
-# 2. Ensure __init__.py files exist
-touch services/__init__.py
-touch api/__init__.py
-touch api/routes/__init__.py
-touch api/schemas/__init__.py
+# 2. Ensure **init**.py files exist
+
+touch services/**init**.py
+touch api/**init**.py
+touch api/routes/**init**.py
+touch api/schemas/**init**.py
 
 # 3. Replace app.py with the refactored version
+
 # (Copy the artifact content to app.py)
 
 # 4. Install dependencies if needed
+
 pip install sympy  # Required by ner_service.py
 
 # 5. Start the server
+
 python app.py
+
 ```
 
 **Expected startup output:**
 ```
+
 ================================================================================
 🚀 UNIFIED FORMULA API SERVER
 ================================================================================
+
 📊 HypatiaX (Tableau):    ✅ Loaded  (or ⚠️  Demo Mode)
 🔢 NER Service:           ✅ Loaded
 💰 DeFi Calculator:       ✅ Loaded
@@ -505,6 +531,6 @@ python app.py
 ✅ NER routes registered at /api/ner
 ✅ DeFi routes registered at /api/defi
 
-🌐 Server: http://localhost:5000
-📡 API Documentation: http://localhost:5000/
-❤️  Health Check: http://localhost:5000/api/health
+🌐 Server: <http://localhost:5000>
+📡 API Documentation: <http://localhost:5000/>
+❤️  Health Check: <http://localhost:5000/api/health>

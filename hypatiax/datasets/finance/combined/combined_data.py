@@ -1,4 +1,5 @@
 import pandas as pd
+
 from hypatiax.utils.files import FilesManager
 
 
@@ -14,24 +15,21 @@ def combined_process(path_data, path_out, actions, option=None):
     Returns:
         pd.DataFrame: DataFrame with an additional column 'both' combining the first two columns.
     """
-    filename, ext = path_data.split('/')[-1].split('.')
-    F=FilesManager('datasets','queries','tableau',actions)
+    filename, ext = path_data.split("/")[-1].split(".")
+    F = FilesManager("datasets", "queries", "tableau", actions)
     data = F.load(path_data)
-    nrows,ncols=data.shape
+    nrows, ncols = data.shape
     if isinstance(data, pd.DataFrame) and len(data.columns) == 2:
         # Combine the two columns with a colon in between
-        data['Combined'] = data[data.columns[0]] + ' : ' + data[data.columns[1]]
-        assert data.shape==(nrows,ncols+1),"Data does not have the expected shape."
+        data["Combined"] = data[data.columns[0]] + " : " + data[data.columns[1]]
+        assert data.shape == (nrows, ncols + 1), "Data does not have the expected shape."
     # Saving data to disk in the appropriate format
-    if ext in ['xls', 'xlsx']:
-        output_path = f'{path_out}/{filename}_combined.xlsx'
+    if ext in ["xls", "xlsx"]:
+        output_path = f"{path_out}/{filename}_combined.xlsx"
         data.to_excel(output_path)
-    elif ext == 'csv':
-        output_path = f'{path_out}/{filename}_combined.csv'
+    elif ext == "csv":
+        output_path = f"{path_out}/{filename}_combined.csv"
         data.to_csv(output_path)
-    
+
     # The function currently does not move the file, just saves it to a new location
     return data
-
-
-

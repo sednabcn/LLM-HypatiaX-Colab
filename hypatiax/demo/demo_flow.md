@@ -34,6 +34,7 @@ hypatiax/
 
 erfect! I've successfully completed your HypatiaX system with:
 ✅ What You Now Have:
+
 1. Fixed Visual Demo (Interactive Artifact)
 
 ✅ 3 tabs: Live Demo, Method Comparison, Architecture
@@ -89,12 +90,15 @@ pip install spacy pandas openpyxl flask flask-cors
 python -m spacy download en_core_web_sm
 
 # 2. Run interactive demo
+
 python -c "from demo.ui import InteractiveDemo; from demo.engine import HypatiaXEngine; InteractiveDemo(HypatiaXEngine()).run()"
 
 # 3. Process a query
+
 python -c "from demo.engine import HypatiaXEngine; e = HypatiaXEngine(); r = e.process('sum of sales'); print(r.formula)"
 
 # 4. View examples
+
 python -c "from demo.examples import ExampleManager; print(ExampleManager().get_statistics())"
 📁 Save These Files:
 

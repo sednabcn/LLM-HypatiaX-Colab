@@ -26,7 +26,7 @@ Supports multiple environments (local, Colab, GitHub Actions, etc.)
 
 Usage:
     from hypatiax.config import paths
-    
+
     # Access paths
     datasets_dir = paths.datasets
     output_file = paths.get_output_path('models', 'my_model')

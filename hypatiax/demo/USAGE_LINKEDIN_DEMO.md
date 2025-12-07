@@ -1,4 +1,5 @@
 🎯 What You Got:
+
 1. config.py - Configuration Hub ✅
 
 All settings in ONE place
@@ -28,9 +29,9 @@ Add captions like:
    🚀 Built HypatiaX: AI that understands Tableau queries
 
    ✨ Natural Language → Tableau Formulas
-   ⚡ Real-time entity extraction  
+   ⚡ Real-time entity extraction
    🎯 94% accuracy with spaCy NLP
-   
+
    #AI #MachineLearning #DataScience #Tableau
 Features Perfect for LinkedIn:
 

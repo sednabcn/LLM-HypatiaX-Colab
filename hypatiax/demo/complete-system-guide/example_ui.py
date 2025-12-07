@@ -20,10 +20,8 @@ UI Components Available:
 
 """
 
-
-
-from demo.ui import UIComponents, InteractiveDemo
 from demo.engine import HypatiaXEngine
+from demo.ui import InteractiveDemo, UIComponents
 
 ui = UIComponents()
 
@@ -32,8 +30,8 @@ print(ui.header("HypatiaX Demo", width=60))
 
 # Display entities with colors
 entities = [
-    {'text': 'sum', 'label': 'OPER', 'start': 0, 'end': 3},
-    {'text': 'sales', 'label': 'ARG', 'start': 7, 'end': 12}
+    {"text": "sum", "label": "OPER", "start": 0, "end": 3},
+    {"text": "sales", "label": "ARG", "start": 7, "end": 12},
 ]
 print(ui.entity_visualization("sum of sales", entities))
 
@@ -42,8 +40,8 @@ print(ui.formula_display("SUM([Sales])", 0.95))
 
 # Create comparison table
 results = [
-    {'method': 'vocab', 'formula': 'SUM([Sales])', 'confidence': 0.95, 'processing_time': 12},
-    {'method': 'regex', 'formula': 'SUM([Sales])', 'confidence': 0.88, 'processing_time': 8}
+    {"method": "vocab", "formula": "SUM([Sales])", "confidence": 0.95, "processing_time": 12},
+    {"method": "regex", "formula": "SUM([Sales])", "confidence": 0.88, "processing_time": 8},
 ]
 print(ui.comparison_table(results))
 

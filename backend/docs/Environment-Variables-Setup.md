@@ -16,6 +16,7 @@ touch .env
 ```
 
 ### **File: `backend/.env`**
+
 ```bash
 # Environment
 FLASK_ENV=development
@@ -45,11 +46,13 @@ DEFI_ENABLED=True
 ### **Load .env in your app:**
 
 Install python-dotenv:
+
 ```bash
 pip install python-dotenv
 ```
 
 Update your `app.py` (add at the top):
+
 ```python
 from dotenv import load_dotenv
 import os
@@ -61,6 +64,7 @@ load_dotenv()
 ```
 
 ### **Important: Add .env to .gitignore**
+
 ```bash
 echo ".env" >> .gitignore
 ```
@@ -88,6 +92,7 @@ python app.py
 ```
 
 **One-liner before running:**
+
 ```bash
 FLASK_ENV=development DEBUG=True LOG_LEVEL=INFO python app.py
 ```
@@ -99,6 +104,7 @@ FLASK_ENV=development DEBUG=True LOG_LEVEL=INFO python app.py
 Add to your shell configuration file (survives terminal restarts):
 
 ### **For Bash (`.bashrc` or `.bash_profile`):**
+
 ```bash
 # Edit your bash profile
 nano ~/.bashrc
@@ -114,6 +120,7 @@ source ~/.bashrc
 ```
 
 ### **For Zsh (`.zshrc`):**
+
 ```bash
 # Edit your zsh profile
 nano ~/.zshrc
@@ -133,6 +140,7 @@ source ~/.zshrc
 For production servers running as a service:
 
 ### **File: `/etc/systemd/system/hypatiax.service`**
+
 ```ini
 [Unit]
 Description=HypatiaX API Server
@@ -301,6 +309,7 @@ DATABASE_URL=postgresql://user:password@localhost:5432/hypatiax
 ```
 
 Load it with:
+
 ```bash
 python app.py --env production
 # Or
@@ -364,6 +373,7 @@ echo "2. Run: python app.py"
 ```
 
 Make it executable and run:
+
 ```bash
 chmod +x setup_env.sh
 ./setup_env.sh
@@ -391,6 +401,7 @@ print("\n✅ Environment variables loaded successfully!")
 ```
 
 Run it:
+
 ```bash
 python test_env.py
 ```
@@ -407,6 +418,7 @@ python test_env.py
 | Systemd | Production Linux | System-wide |
 
 **RECOMMENDED FOR YOU:**
+
 1. Create `.env` file in `backend/` directory
 2. Install `python-dotenv`
 3. Add `load_dotenv()` to top of `app.py`

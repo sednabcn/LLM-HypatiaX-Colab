@@ -1,15 +1,9 @@
 def calculate_quality_score(
-    daily_volume_usd,
-    fee_rate,
-    tvl_usd,
-    current_price,
-    initial_price,
-    amount_token_a,
-    amount_token_b
+    daily_volume_usd, fee_rate, tvl_usd, current_price, initial_price, amount_token_a, amount_token_b
 ):
     """
     Calculate pool quality score
-    
+
     quality_score > 1.0  = GOOD (collect more fees than IL loss)
     quality_score 0.5-1  = MODERATE (fees ≈ IL loss)
     quality_score < 0.5  = WORSE (IL loss > fees)
@@ -18,29 +12,30 @@ def calculate_quality_score(
     pool_share = position_value / pool_tvl
     daily_fees = daily_volume * fee_rate * pool_share
     """
-    
+
     # Step 1: Calculate daily fees (use current TVL and volume)
     position_value = amount_token_a * current_price + amount_token_b
-    daily_fees = daily_volume_usd * fee_rate * (position_value/tvl_usd) 
-    
+    daily_fees = daily_volume_usd * fee_rate * (position_value / tvl_usd)
+
     # Step 2: Calculate IL percentage (ratio of CURRENT to INITIAL price)
     price_ratio = current_price / initial_price
-    il_percent = (2 * (price_ratio ** 0.5) / (price_ratio + 1) - 1) * 100
-    
+    il_percent = (2 * (price_ratio**0.5) / (price_ratio + 1) - 1) * 100
+
     # Step 3: Calculate IL in dollars (use CURRENT price for valuation)
-    
+
     il_dollar_loss = abs(il_percent / 100 * position_value)
-    
+
     # Step 4: Calculate quality score
-    quality_score = daily_fees / il_dollar_loss if il_dollar_loss > 0 else float('inf')
-    
+    quality_score = daily_fees / il_dollar_loss if il_dollar_loss > 0 else float("inf")
+
     return {
-        'daily_fees': daily_fees,
-        'il_percent': il_percent,
-        'il_dollar': il_dollar_loss,
-        'quality_score': quality_score,
-        'tier': classify_tier(quality_score)
+        "daily_fees": daily_fees,
+        "il_percent": il_percent,
+        "il_dollar": il_dollar_loss,
+        "quality_score": quality_score,
+        "tier": classify_tier(quality_score),
     }
+
 
 def classify_tier(score):
     if score > 1.0:
@@ -49,6 +44,7 @@ def classify_tier(score):
         return "MODERATE ⚠️"
     else:
         return "WORSE ❌"
+
 
 """
 1. Improved Quality Score Method

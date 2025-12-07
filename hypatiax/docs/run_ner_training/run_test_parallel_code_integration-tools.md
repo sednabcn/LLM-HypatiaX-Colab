@@ -1,5 +1,6 @@
 Perfect! I've integrated all three simulation modes directly into the run_time_parallel_code.py file. Here's what changed:
 ✨ Key Integration Features
+
 1. Three Modes Built-In
 
 Quick: Instant mock results (< 1 second)
@@ -11,12 +12,15 @@ bash# Quick simulation (instant)
 python run_time_parallel_code.py --mode quick
 
 # Realistic simulation (default)
+
 python run_time_parallel_code.py --mode realistic
 
 # Full integration (requires hypatiax)
+
 python run_time_parallel_code.py --mode full
 
 # Custom worker count
+
 python run_time_parallel_code.py --mode realistic --workers 5
 3. Single run_test() Function
 The TODO section is now replaced with:
@@ -28,6 +32,7 @@ pythondef run_test(config: Dict, mode: str = 'realistic') -> Dict:
         return simulate_realistic_test(config)
     elif mode == 'full':
         return run_full_integration_test(config)
+
 ```
 
 ### **4. What You Get**
@@ -41,9 +46,11 @@ pythondef run_test(config: Dict, mode: str = 'realistic') -> Dict:
 
 ### **5. Output Example**
 ```
+
 ================================================================================
 TEST RESULTS SUMMARY
 ================================================================================
+
 test_id              name  status     dtype sizefile  val_f1  test_f1  training_time
       1  Description_Small completed  desc       sm  0.8734   0.8612          89.34
       2    Formulas_Small completed  formulas   sm  0.8521   0.8389          76.21
@@ -57,6 +64,7 @@ Failed/Errors:  0
 ================================================================================
 BEST PERFORMING MODEL
 ================================================================================
+
 Test ID:   3
 Name:      Combined_Large
 Model:     Combined_bsm

@@ -69,7 +69,7 @@ Entity labels for NER models.
 
 Usage:
     from hypatiax.config import EntityLabels
-    
+
     labels = EntityLabels.TABLEAU_DESC
     all_labels = EntityLabels.get_all_labels()
 

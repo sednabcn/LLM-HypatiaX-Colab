@@ -29,6 +29,7 @@ hypatiax/
 **Purpose**: RESTful API backend that exposes HypatiaX functionality over HTTP
 
 **Key Features**:
+
 - ✅ 10 API endpoints (health, map, batch, examples, validate, etc.)
 - ✅ CORS enabled for frontend integration
 - ✅ Automatic model loading with fallback
@@ -58,6 +59,7 @@ hypatiax/
 **Purpose**: Clean, user-friendly web UI for testing HypatiaX
 
 **Features**:
+
 - ✅ Real-time server status indicator
 - ✅ Quick example buttons
 - ✅ 4 mapping method cards
@@ -67,6 +69,7 @@ hypatiax/
 - ✅ Error handling
 
 **UI Components**:
+
 - Input field for natural language
 - Method selector (Vocab, Sentence, Regex, NER)
 - Example quick-load buttons
@@ -101,6 +104,7 @@ python demo_web_api.py --host 0.0.0.0 --port 8000 --debug
 ```
 
 **Expected Output**:
+
 ```
 ╔═══════════════════════════════════════════════════════════════╗
 ║                   HypatiaX Web API Server                     ║
@@ -144,6 +148,7 @@ curl -X POST http://localhost:5000/api/map \
 ```
 
 **Response**:
+
 ```json
 {
   "success": true,
@@ -221,6 +226,7 @@ curl -X POST http://localhost:5000/api/validate \
 ```
 
 **Response**:
+
 ```json
 {
   "success": true,
@@ -236,21 +242,25 @@ curl -X POST http://localhost:5000/api/validate \
 ## 🎨 Using the Web Interface
 
 ### 1. Enter Description
+
 - Type your natural language query
 - Or click one of the quick example buttons
 
 ### 2. Select Method
+
 - **Vocab**: Fast, dictionary-based (recommended)
 - **Sentence**: Pattern matching
 - **Regex**: Rule-based extraction
 - **NER**: ML-powered (requires trained models)
 
 ### 3. Generate Formula
+
 - Click "✨ Generate Formula"
 - Watch the loading animation
 - View results with color-coded entities
 
 ### 4. View Results
+
 - **Entities**: Highlighted with labels (OPER, ARG, VERB, etc.)
 - **Formula**: Generated Tableau formula
 - **Metrics**: Confidence, entity count, processing time, method
@@ -303,6 +313,7 @@ curl http://localhost:5000/api/health
 ```
 
 **Response**:
+
 ```json
 {
   "status": "online",
@@ -325,6 +336,7 @@ curl http://localhost:5000/api/test
 ```
 
 **Response**:
+
 ```json
 {
   "success": true,
@@ -415,6 +427,7 @@ docker run -p 5000:5000 hypatiax-api
 **Issue**: `Address already in use`
 
 **Solution**:
+
 ```bash
 # Find process using port 5000
 lsof -i :5000
@@ -431,6 +444,7 @@ python demo_web_api.py --port 8080
 **Issue**: CORS errors in browser console
 
 **Solution**:
+
 - Ensure Flask-CORS is installed: `pip install flask-cors`
 - Check server is running: `curl http://localhost:5000/api/health`
 - Verify API_BASE URL in demo.html matches server address
@@ -440,6 +454,7 @@ python demo_web_api.py --port 8080
 **Issue**: "Using rule-based processing"
 
 **Solution**:
+
 ```bash
 # Check model paths exist
 ls ../data_spacy/queries/tableau/ner_tableau_desc
@@ -453,6 +468,7 @@ ls ../data_spacy/queries/tableau/ner_tableau_desc
 **Issue**: No entities detected
 
 **Solution**:
+
 - Try different mapping methods
 - Check example queries work first
 - Ensure description has recognizable terms (sum, average, etc.)
@@ -469,14 +485,14 @@ import requests
 class HypatiaXClient:
     def __init__(self, base_url='http://localhost:5000/api'):
         self.base_url = base_url
-    
+
     def map_description(self, description, method='vocab'):
         response = requests.post(
             f'{self.base_url}/map',
             json={'description': description, 'method': method}
         )
         return response.json()
-    
+
     def get_examples(self, category=None):
         params = {'category': category} if category else {}
         response = requests.get(
@@ -509,7 +525,7 @@ class HypatiaXAPI {
   }
 
   async getExamples(category) {
-    const url = category 
+    const url = category
       ? `${this.baseURL}/examples?category=${category}`
       : `${this.baseURL}/examples`;
     const response = await fetch(url);
@@ -530,6 +546,7 @@ console.log(result.formula);
 ### 1. Use Batch Processing
 
 Instead of multiple single requests:
+
 ```python
 # Good: One batch request
 result = requests.post('/api/batch', json={
@@ -579,21 +596,25 @@ result = session.post('/api/map', json={...})
 ## 📚 Quick Reference
 
 ### Start Server
+
 ```bash
 python demo_web_api.py
 ```
 
 ### Access Web Interface
+
 ```
 http://localhost:5000/
 ```
 
 ### Health Check
+
 ```bash
 curl http://localhost:5000/api/health
 ```
 
 ### Map Description
+
 ```bash
 curl -X POST http://localhost:5000/api/map \
   -H "Content-Type: application/json" \
@@ -601,6 +622,7 @@ curl -X POST http://localhost:5000/api/map \
 ```
 
 ### View Stats
+
 ```bash
 curl http://localhost:5000/api/stats
 ```
@@ -611,10 +633,10 @@ curl http://localhost:5000/api/stats
 
 You now have a complete web-based demo system:
 
-✅ **Backend**: Flask REST API with 10 endpoints  
-✅ **Frontend**: Clean HTML/JS interface  
-✅ **Integration**: Easy to connect from any language  
-✅ **Deployment**: Multiple options (local, network, Docker)  
-✅ **Testing**: Built-in test suite and validation  
+✅ **Backend**: Flask REST API with 10 endpoints
+✅ **Frontend**: Clean HTML/JS interface
+✅ **Integration**: Easy to connect from any language
+✅ **Deployment**: Multiple options (local, network, Docker)
+✅ **Testing**: Built-in test suite and validation
 
 Ready to demonstrate HypatiaX to the world! 🚀

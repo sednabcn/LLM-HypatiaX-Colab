@@ -1,8 +1,8 @@
 # Pattern 4: Full Interactive Demo
 
 from demo.engine import HypatiaXEngine
-from demo.ui import InteractiveDemo
 from demo.examples import ExampleManager
+from demo.ui import InteractiveDemo
 
 # Initialize components
 engine = HypatiaXEngine()

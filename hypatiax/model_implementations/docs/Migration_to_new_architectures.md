@@ -1,11 +1,13 @@
 # Gradual Migration Strategy for model_implementations/
 
 ## Strategy: Incremental Adoption
+
 **Don't touch existing code. Use `model_implementations/` ONLY for new architectures.**
 
 ---
 
 ## Current State
+
 ```
 ✅ Keep as-is:
 ├── custom_ner/              # Leave existing NER code here
@@ -26,6 +28,7 @@
 ## Rules for Gradual Migration
 
 ### ✅ DO: Add New Architectures Here
+
 When building **new** model architectures, put them in `model_implementations/`:
 
 ```python
@@ -38,7 +41,7 @@ class BertNERModel:
     """New BERT-based NER model - separate from existing spaCy models"""
     def __init__(self, model_name="bert-base-uncased"):
         self.model = BertForTokenClassification.from_pretrained(model_name)
-    
+
     def predict(self, text):
         # Inference logic
         pass
@@ -54,6 +57,7 @@ def train_bert_ner():
 ```
 
 ### ✅ DO: New LLM Integrations
+
 ```python
 # model_implementations/llm/openai_wrapper.py
 class OpenAIWrapper:
@@ -61,13 +65,14 @@ class OpenAIWrapper:
     def __init__(self, api_key, model="gpt-4"):
         self.api_key = api_key
         self.model = model
-    
+
     def generate(self, prompt):
         # API call logic
         pass
 ```
 
 ### ✅ DO: New Transformer Models
+
 ```python
 # model_implementations/transformers/t5_model.py
 class T5ForQueryGeneration:
@@ -78,6 +83,7 @@ class T5ForQueryGeneration:
 ```
 
 ### ❌ DON'T: Touch Existing Code
+
 - **Don't refactor** `custom_ner/` → Leave it alone
 - **Don't move** existing training scripts
 - **Don't modify** working code paths
@@ -103,6 +109,7 @@ class T5ForQueryGeneration:
 ### Scenario: You want to add GPT-based entity extraction
 
 **Step 1: Create model architecture**
+
 ```python
 # model_implementations/llm/gpt_entity_extractor.py
 
@@ -110,12 +117,12 @@ import openai
 
 class GPTEntityExtractor:
     """GPT-based entity extraction for Tableau queries"""
-    
+
     def __init__(self, model="gpt-4", api_key=None):
         self.model = model
         self.api_key = api_key
         openai.api_key = api_key
-    
+
     def extract_entities(self, text):
         """Extract entities using GPT"""
         prompt = f"""
@@ -130,6 +137,7 @@ class GPTEntityExtractor:
 ```
 
 **Step 2: Create training/usage script**
+
 ```python
 # core/generation/llm_entity_extraction.py
 
@@ -143,6 +151,7 @@ def run_gpt_extraction(query_text):
 ```
 
 **Step 3: Use it**
+
 ```python
 # Your main script or notebook
 from hypatiax.core.generation import run_gpt_extraction
@@ -156,16 +165,19 @@ print(result)
 ## Migration Timeline (Optional - As Needed)
 
 ### Phase 1: NOW - Coexistence ✅
+
 - Keep all existing code as-is
 - Add new models only to `model_implementations/`
 - Both systems work in parallel
 
 ### Phase 2: LATER - When you have time
+
 - Gradually extract reusable model classes from `custom_ner/`
 - Move them to `model_implementations/ner/`
 - Update imports (one file at a time)
 
 ### Phase 3: FUTURE - Full migration (optional)
+
 - All model architectures in `model_implementations/`
 - All workflows in `core/`
 - Clean separation
@@ -174,10 +186,10 @@ print(result)
 
 ## Benefits of This Approach
 
-✅ **No immediate work** - Existing code keeps working  
-✅ **Clear separation** - New code goes in new place  
-✅ **Gradual improvement** - Refactor when you have time  
-✅ **Easy to understand** - Clear rule: "New architectures → model_implementations"  
+✅ **No immediate work** - Existing code keeps working
+✅ **Clear separation** - New code goes in new place
+✅ **Gradual improvement** - Refactor when you have time
+✅ **Easy to understand** - Clear rule: "New architectures → model_implementations"
 ✅ **Low risk** - No breaking changes to existing system
 
 ---
@@ -185,12 +197,14 @@ print(result)
 ## Quick Reference
 
 ### Adding New Model Checklist
+
 - [ ] Is this a NEW model architecture? → `model_implementations/`
 - [ ] Does it already exist in `custom_ner/`? → Keep it there
 - [ ] Is it a workflow/pipeline? → `core/`
 - [ ] Is it saved model weights? → `models/trained_models/`
 
 ### File Naming Convention
+
 ```
 model_implementations/
 ├── ner/

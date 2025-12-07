@@ -1,4 +1,5 @@
 # Extended Formula Reference Guide
+
 ## 60 Total Formulas (40 Original + 20 New)
 
 ---
@@ -28,17 +29,16 @@ Add more specialized formulas (exotic options, MEV, L2-specific)?
 Build a comprehensive calculator/dashboard for all 60 formulas?
 ==================================================================
 
-
-
-
 # NEW RISK MANAGEMENT FORMULAS (10)
 
 ## Risk Management Formulas (30)
 
 ### 1. Value at Risk (VaR) 95%
+
 **Formula:** `VaR₉₅ = μ - 1.96 × σ × √t`
 
 **Arguments:**
+
 - `μ` (mu): Expected return (percent)
 - `σ` (sigma): Volatility/standard deviation (percent, annualized)
 - `t`: Time horizon (days, typically 1-252 trading days)
@@ -48,9 +48,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 2. Sharpe Ratio
+
 **Formula:** `Sharpe = (R - Rf) / σ`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent, annualized)
 - `Rf` (risk_free): Risk-free rate (percent, annualized)
 - `σ` (volatility): Return volatility (percent, annualized)
@@ -60,9 +62,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 3. Conditional VaR (CVaR/ES) 95%
+
 **Formula:** `CVaR₉₅ = μ - φ⁻¹ × σ × √t` where `φ⁻¹ ≈ 2.063`
 
 **Arguments:**
+
 - `μ` (mu): Expected return (percent)
 - `σ` (sigma): Volatility (percent, annualized)
 - `t`: Time horizon (days)
@@ -72,9 +76,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 4. Beta
+
 **Formula:** `β = Cov(i,m) / Var(m)`
 
 **Arguments:**
+
 - `Cov(i,m)` (cov_im): Covariance between asset and market (percent²)
 - `Var(m)` (var_m): Market variance (percent²)
 
@@ -83,9 +89,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 5. Sortino Ratio
+
 **Formula:** `Sortino = (R - T) / σ_downside`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent, annualized)
 - `T` (target): Target or minimum acceptable return (percent)
 - `σ_downside` (downside_dev): Downside deviation (percent)
@@ -95,9 +103,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 6. Information Ratio
+
 **Formula:** `IR = α / TE`
 
 **Arguments:**
+
 - `α` (active_return): Portfolio return minus benchmark return (percent)
 - `TE` (tracking_error): Standard deviation of active returns (percent)
 
@@ -106,9 +116,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 7. Maximum Drawdown
+
 **Formula:** `MDD = (Trough - Peak) / Peak`
 
 **Arguments:**
+
 - `Peak` (peak): Peak portfolio value (currency units)
 - `Trough` (trough): Trough portfolio value after peak (currency units)
 
@@ -117,9 +129,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 8. Treynor Ratio
+
 **Formula:** `Treynor = (R - Rf) / β`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent, annualized)
 - `Rf` (risk_free): Risk-free rate (percent, annualized)
 - `β` (risk_beta): Systematic risk/beta (dimensionless)
@@ -129,9 +143,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 9. Calmar Ratio
+
 **Formula:** `Calmar = R_annual / MDD`
 
 **Arguments:**
+
 - `R_annual` (annual_return): Annualized return (percent)
 - `MDD` (max_drawdown): Maximum drawdown (percent, positive value)
 
@@ -140,9 +156,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 10. Omega Ratio
+
 **Formula:** `Ω = (Gains + ε) / (Losses + ε)` (simplified with epsilon for stability)
 
 **Arguments:**
+
 - `Gains` (gains): Expected gains above threshold (percent)
 - `Losses` (losses): Expected losses below threshold (percent)
 
@@ -151,9 +169,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 11. Value at Risk (VaR) 99%
+
 **Formula:** `VaR₉₉ = μ - 2.576 × σ × √t`
 
 **Arguments:**
+
 - `μ` (mu): Expected return (percent)
 - `σ` (sigma): Volatility (percent, annualized)
 - `t`: Time horizon (days)
@@ -163,9 +183,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 12. Modified Sharpe Ratio
+
 **Formula:** `Modified Sharpe = (R - Rf) / (σ × (1 + S/6))`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent, annualized)
 - `Rf` (risk_free): Risk-free rate (percent, annualized)
 - `σ` (volatility): Volatility (percent, annualized)
@@ -176,9 +198,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 13. Ulcer Index
+
 **Formula:** `UI = √(Σ(DD²) / n)`
 
 **Arguments:**
+
 - `DD²_sum` (dd_squared_sum): Sum of squared drawdowns (percent²)
 - `n` (periods): Number of periods (dimensionless)
 
@@ -187,9 +211,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 14. Martin Ratio (Ulcer Performance Index)
+
 **Formula:** `Martin = R / UI`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent, annualized)
 - `UI` (ulcer_index): Ulcer Index (percent)
 
@@ -198,9 +224,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 15. Kappa 3 Ratio
+
 **Formula:** `Kappa₃ = R / LPM₃^(1/3)`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent)
 - `LPM₃` (lpm3): Lower Partial Moment of 3rd order (percent³)
 
@@ -209,9 +237,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 16. Gain-Loss Ratio
+
 **Formula:** `G/L = Average_Win / Average_Loss`
 
 **Arguments:**
+
 - `Average_Win` (avg_gain): Average gain per winning trade (percent)
 - `Average_Loss` (avg_loss): Average loss per losing trade (percent)
 
@@ -220,9 +250,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 17. Upside Potential Ratio
+
 **Formula:** `UPR = Upside_Potential / Downside_Risk`
 
 **Arguments:**
+
 - `Upside_Potential` (upside_potential): Expected gains above MAR (percent)
 - `Downside_Risk` (downside_risk): Downside deviation below MAR (percent)
 
@@ -231,9 +263,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 18. Sterling Ratio
+
 **Formula:** `Sterling = (R - 10%) / AvgDD`
 
 **Arguments:**
+
 - `R` (annual_return): Annualized return (percent)
 - `AvgDD` (avg_drawdown): Average of largest drawdowns (percent)
 
@@ -242,9 +276,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 19. Burke Ratio
+
 **Formula:** `Burke = Excess_Return / √(Σ DD²)`
 
 **Arguments:**
+
 - `Excess_Return` (excess_return): Return above risk-free rate (percent)
 - `√(Σ DD²)` (sqrt_sum_dd): Square root of sum of squared drawdowns (percent)
 
@@ -253,19 +289,22 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 20. Pain Ratio
+
 **Formula:** `Pain = R / Pain_Index`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent)
 - `Pain_Index` (pain_index): Average drawdown over evaluation period (percent)
 
 **Usage:** Return per unit of average pain/drawdown. Pain Index measures average depth of underwater periods. Higher ratios indicate better return for experienced drawdowns. Simple but effective drawdown-adjusted metric.
 
-
 ## 21. Conditional Drawdown at Risk (CDaR)
+
 **Formula:** `CDaR = E[DD | DD ≥ DaR_α]`
 
 **Arguments:**
+
 - `DD` (drawdowns): Historical drawdown series (percent)
 - `α` (alpha): Confidence level (typically 0.95)
 
@@ -274,9 +313,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 22. Tail Ratio
+
 **Formula:** `Tail Ratio = |95th percentile| / |5th percentile|`
 
 **Arguments:**
+
 - `95th percentile`: 95th percentile of returns distribution (percent)
 - `5th percentile`: 5th percentile of returns distribution (percent)
 
@@ -285,9 +326,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 23. M² (M-Squared / Modigliani-Modigliani)
+
 **Formula:** `M² = Rf + Sharpe × σ_benchmark`
 
 **Arguments:**
+
 - `Rf` (risk_free): Risk-free rate (percent, annualized)
 - `Sharpe`: Portfolio Sharpe ratio (dimensionless)
 - `σ_benchmark` (benchmark_vol): Benchmark volatility (percent, annualized)
@@ -297,9 +340,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 24. Prospect Ratio (Gain-Loss Ratio with Probability)
+
 **Formula:** `Prospect = (P_win × Avg_win²) / (P_loss × Avg_loss²)`
 
 **Arguments:**
+
 - `P_win` (prob_win): Probability of winning (0-1)
 - `Avg_win` (avg_gain): Average gain magnitude (percent)
 - `P_loss` (prob_loss): Probability of loss (0-1)
@@ -310,9 +355,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 25. Rachev Ratio (Tail Risk Ratio)
+
 **Formula:** `Rachev = CVaR_α(returns) / CVaR_α(-returns)`
 
 **Arguments:**
+
 - `CVaR_α(returns)`: Conditional VaR of positive returns at confidence α
 - `CVaR_α(-returns)`: Conditional VaR of negative returns at confidence α
 - `α` (alpha): Confidence level (typically 0.95)
@@ -322,9 +369,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 26. D-Ratio (Downside Risk over Time)
+
 **Formula:** `D-Ratio = Σ(|Underwater_i| / N) / σ_total`
 
 **Arguments:**
+
 - `Underwater_i`: Percentage underwater on day i (negative values)
 - `N`: Total number of periods (days)
 - `σ_total` (total_vol): Total return volatility (percent)
@@ -334,9 +383,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 27. Return over Maximum Drawdown (RoMaD)
+
 **Formula:** `RoMaD = Annualized_Return / |Maximum_Drawdown|`
 
 **Arguments:**
+
 - `Annualized_Return`: Annual return (percent)
 - `Maximum_Drawdown`: Largest peak-to-trough decline (percent, positive value)
 
@@ -345,9 +396,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 28. Serenity Ratio
+
 **Formula:** `Serenity = (R - Rf) / Avg(|Underwater_periods|)`
 
 **Arguments:**
+
 - `R` (returns): Portfolio return (percent, annualized)
 - `Rf` (risk_free): Risk-free rate (percent, annualized)
 - `Avg(|Underwater_periods|)`: Average depth of underwater periods (percent)
@@ -357,9 +410,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 29. Stability Index
+
 **Formula:** `Stability = R² of equity curve regression`
 
 **Arguments:**
+
 - `R²`: Coefficient of determination from linear regression of cumulative returns over time
 
 **Usage:** Measures smoothness of equity curve. R² close to 1 indicates steady growth, close to 0 indicates erratic performance. Stability > 0.9 is excellent. Used to identify consistent vs volatile strategy performance regardless of total return.
@@ -367,9 +422,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 30. Recovery Factor
+
 **Formula:** `Recovery = Net_Profit / |Maximum_Drawdown|`
 
 **Arguments:**
+
 - `Net_Profit`: Total profit (currency or percent)
 - `Maximum_Drawdown`: Largest peak-to-trough decline (same units, positive value)
 
@@ -382,9 +439,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ## DeFi Formulas (30)
 
 ### 1. Impermanent Loss
+
 **Formula:** `IL = 2√(price_ratio) / (price_ratio + 1) - 1`
 
 **Arguments:**
+
 - `price_ratio`: Ratio of current price to initial price (dimensionless)
 
 **Usage:** Calculates loss experienced by liquidity providers due to price divergence in AMM pools. IL = 0 when price_ratio = 1 (no change). Always negative when prices change. At 2x price change, IL ≈ 5.7%. Critical for LP decision-making.
@@ -392,9 +451,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 2. AMM Swap Output (Uniswap V2)
+
 **Formula:** `Output = (Amount_in × 0.997 × Reserve_out) / (Reserve_in + Amount_in × 0.997)`
 
 **Arguments:**
+
 - `Amount_in`: Input token amount (normalized)
 - `Reserve_in`: Input token reserve (normalized)
 - `Reserve_out`: Output token reserve (normalized)
@@ -404,9 +465,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 3. Utilization Rate
+
 **Formula:** `U = Borrowed / Supplied`
 
 **Arguments:**
+
 - `Borrowed`: Total amount borrowed from pool (tokens)
 - `Supplied`: Total amount supplied to pool (tokens)
 
@@ -415,9 +478,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 4. Liquidity Pool Value
+
 **Formula:** `Value = 2 × √(Reserve₀ × Reserve₁)`
 
 **Arguments:**
+
 - `Reserve₀`: Reserve amount of token 0 (normalized)
 - `Reserve₁`: Reserve amount of token 1 (normalized)
 
@@ -426,9 +491,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 5. Compound Interest Rate Model
+
 **Formula:** `Rate = Base_Rate + Slope × Utilization`
 
 **Arguments:**
+
 - `Base_Rate`: Minimum interest rate at 0% utilization (decimal)
 - `Utilization`: Pool utilization ratio (0-1)
 - `Slope`: Rate increase per unit of utilization (decimal)
@@ -438,9 +505,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 6. Collateral Ratio
+
 **Formula:** `CR = Collateral_Value / Debt_Value`
 
 **Arguments:**
+
 - `Collateral_Value`: USD value of posted collateral
 - `Debt_Value`: USD value of borrowed assets
 
@@ -449,9 +518,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 7. Liquidation Price
+
 **Formula:** `P_liquidation = Entry_Price / Liquidation_Threshold`
 
 **Arguments:**
+
 - `Entry_Price`: Price when position opened
 - `Liquidation_Threshold`: Minimum collateral ratio (e.g., 1.3 for 130%)
 
@@ -460,9 +531,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 8. Yield Farming APY
+
 **Formula:** `APY = (Rewards_per_Block × Blocks_per_Year) / Total_Staked`
 
 **Arguments:**
+
 - `Rewards_per_Block`: Token rewards per block
 - `Blocks_per_Year`: Annual block count (~2,102,400 for Ethereum)
 - `Total_Staked`: Total tokens staked in pool
@@ -472,9 +545,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 9. Slippage
+
 **Formula:** `Slippage = Amount_in / (Reserve + Amount_in)`
 
 **Arguments:**
+
 - `Amount_in`: Trade input amount
 - `Reserve`: Pool reserve of input token
 
@@ -483,9 +558,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 10. LP Token Share
+
 **Formula:** `LP_Tokens = (Deposit / Total_Liquidity) × Total_Shares`
 
 **Arguments:**
+
 - `Deposit`: Amount being deposited
 - `Total_Liquidity`: Current total pool liquidity
 - `Total_Shares`: Outstanding LP token supply
@@ -495,9 +572,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 11. Health Factor (Aave)
+
 **Formula:** `HF = (Collateral × Liquidation_Threshold) / Debt`
 
 **Arguments:**
+
 - `Collateral`: Total collateral value (USD)
 - `Liquidation_Threshold`: Protocol-specific threshold (0.75-0.85 typical)
 - `Debt`: Total debt value (USD)
@@ -507,9 +586,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 12. Perpetual Funding Rate
+
 **Formula:** `Funding = (Mark_Price - Index_Price) / Index_Price / Interval`
 
 **Arguments:**
+
 - `Mark_Price`: Perpetual contract mark price
 - `Index_Price`: Underlying spot index price
 - `Interval`: Funding interval in hours (typically 8)
@@ -519,9 +600,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 13. Price Impact
+
 **Formula:** `Impact = (Trade_Size / Liquidity)^0.5`
 
 **Arguments:**
+
 - `Trade_Size`: Size of trade
 - `Liquidity`: Available liquidity depth
 
@@ -530,9 +613,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 14. Staking Rewards
+
 **Formula:** `Rewards = Staked × Rate × (Days / 365)`
 
 **Arguments:**
+
 - `Staked`: Amount staked
 - `Rate`: Annual reward rate (APR)
 - `Days`: Number of days staked
@@ -542,9 +627,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 15. Linear Bonding Curve
+
 **Formula:** `Price = Supply × Reserve_Ratio`
 
 **Arguments:**
+
 - `Supply`: Current token supply
 - `Reserve_Ratio`: Reserve ratio parameter (0-1)
 
@@ -553,9 +640,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 16. Flash Loan Fee
+
 **Formula:** `Fee = Loan_Amount × Fee_Rate`
 
 **Arguments:**
+
 - `Loan_Amount`: Amount of flash loan
 - `Fee_Rate`: Protocol fee rate (typically 0.05-0.09%)
 
@@ -564,9 +653,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 17. Linear Vesting Schedule
+
 **Formula:** `Vested = Total × (Time_Elapsed / Vesting_Period)`
 
 **Arguments:**
+
 - `Total`: Total tokens to vest
 - `Time_Elapsed`: Days since vesting start
 - `Vesting_Period`: Total vesting duration (days)
@@ -576,9 +667,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 18. Arbitrage Profit
+
 **Formula:** `Profit = (Price_B - Price_A) × Trade_Size`
 
 **Arguments:**
+
 - `Price_A`: Price on exchange A
 - `Price_B`: Price on exchange B (higher)
 - `Trade_Size`: Arbitrage trade size
@@ -588,9 +681,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 19. Gas Cost ROI
+
 **Formula:** `ROI = (Profit - Gas_Cost) / Gas_Cost`
 
 **Arguments:**
+
 - `Profit`: Transaction profit
 - `Gas_Cost`: Ethereum gas cost
 
@@ -599,9 +694,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ### 20. Concentrated Liquidity Position (Uniswap V3)
+
 **Formula:** `Amount₀ = L × (√P_upper - √P) / (√P × √P_upper)`
 
 **Arguments:**
+
 - `L` (liquidity): Position liquidity value
 - `√P`: Square root of current price
 - `√P_lower`: Square root of lower tick price
@@ -614,20 +711,25 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ## Usage Categories
 
 ### Risk Management Applications
+
 - **Portfolio Construction**: Sharpe, Sortino, Treynor ratios for strategy selection
 - **Risk Budgeting**: VaR, CVaR for position sizing and limits
 - **Performance Attribution**: Information Ratio, Beta for manager evaluation
 - **Stress Testing**: Maximum Drawdown, Ulcer Index for worst-case analysis
 
 ### DeFi Applications
+
 - **Liquidity Provision**: IL, Pool Value, LP Tokens for AMM participation
 - **Lending/Borrowing**: Utilization Rate, Collateral Ratio, Health Factor for loan management
 - **Trading**: Slippage, Price Impact, Arbitrage Profit for execution optimization
 - **Yield Optimization**: APY calculations, Gas ROI for strategy evaluation
+
 ## 21. Uniswap V3 Price from Tick
+
 **Formula:** `Price = 1.0001^tick`
 
 **Arguments:**
+
 - `tick`: Integer tick value in Uniswap V3 (-887272 to 887272)
 
 **Usage:** Converts Uniswap V3 tick to actual price. Tick spacing depends on fee tier (10 for 0.05%, 60 for 0.3%, 200 for 1%). Critical for understanding concentrated liquidity positions. Each tick represents 0.01% price change (1 basis point).
@@ -635,9 +737,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 22. Constant Sum AMM Output (mStable)
+
 **Formula:** `Output = Amount_in × (1 - fee)`
 
 **Arguments:**
+
 - `Amount_in`: Input token amount
 - `fee`: Trading fee rate (e.g., 0.003 for 0.3%)
 
@@ -646,9 +750,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 23. Curve StableSwap Invariant
+
 **Formula:** `D = (A × n^n × Σx_i + D^(n+1) / (n^n × Πx_i))^(1/2)` (simplified)
 
 **Arguments:**
+
 - `A`: Amplification coefficient (typically 50-1000)
 - `n`: Number of coins in pool
 - `x_i`: Reserve of coin i
@@ -659,10 +765,12 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 24. Aave Variable Borrow Rate
+
 **Formula:** `Rate = R_base + (U / U_optimal) × R_slope1` when U ≤ U_optimal
 `Rate = R_base + R_slope1 + ((U - U_optimal) / (1 - U_optimal)) × R_slope2` when U > U_optimal
 
 **Arguments:**
+
 - `U`: Utilization rate (0-1)
 - `U_optimal`: Optimal utilization (typically 0.8 or 80%)
 - `R_base`: Base rate (typically 0%)
@@ -674,9 +782,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 25. Compound Borrow APY (with COMP rewards)
+
 **Formula:** `Total_APY = Borrow_APR + (COMP_per_block × blocks_per_year × COMP_price / Total_Borrowed)`
 
 **Arguments:**
+
 - `Borrow_APR`: Interest rate paid on borrowing (decimal)
 - `COMP_per_block`: COMP tokens distributed per block
 - `blocks_per_year`: Blocks per year (~2,102,400 for Ethereum)
@@ -688,9 +798,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 26. Leverage Ratio (DeFi Lending)
+
 **Formula:** `Leverage = 1 / (1 - LTV)`
 
 **Arguments:**
+
 - `LTV`: Loan-to-Value ratio (0-1, e.g., 0.75 for 75%)
 
 **Usage:** Maximum leverage achievable through recursive borrowing. LTV=0.75 gives 4x leverage (1/(1-0.75)=4). Shows maximum capital efficiency. Leverage > 3x is considered risky. Used in leveraged yield farming and staking strategies.
@@ -698,9 +810,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 27. Protocol Revenue (Trading Fees)
+
 **Formula:** `Revenue = Volume × Fee_Rate × Protocol_Cut`
 
 **Arguments:**
+
 - `Volume`: Trading volume (USD)
 - `Fee_Rate`: Trading fee percentage (e.g., 0.003 for 0.3%)
 - `Protocol_Cut`: Portion going to protocol (0-1, e.g., 0.167 for 1/6)
@@ -710,9 +824,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 28. Maker DAO Stability Fee
+
 **Formula:** `Total_Fee = Principal × e^(rate × time) - Principal`
 
 **Arguments:**
+
 - `Principal`: DAI debt amount
 - `rate`: Annual stability fee rate (decimal, e.g., 0.05 for 5%)
 - `time`: Time in years (can be fractional)
@@ -722,9 +838,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 29. Liquidity Mining Dilution Rate
+
 **Formula:** `Dilution = (Emissions_per_year / Total_Supply) × 100`
 
 **Arguments:**
+
 - `Emissions_per_year`: Annual token emissions (tokens)
 - `Total_Supply`: Current total token supply (tokens)
 
@@ -733,9 +851,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 30. Impermanent Loss with Fees
+
 **Formula:** `Net_IL = IL - (Fee_APR × time × 2√(price_ratio) / (price_ratio + 1))`
 
 **Arguments:**
+
 - `IL`: Impermanent loss percentage (negative)
 - `Fee_APR`: Annual fee earnings (decimal)
 - `time`: Time period (years)
@@ -746,9 +866,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 31. Automated Market Maker (AMM) Price Impact (Multi-hop)
+
 **Formula:** `Total_Impact = 1 - Π(1 - Impact_i)` for n hops
 
 **Arguments:**
+
 - `Impact_i`: Price impact on hop i (decimal)
 - `n`: Number of swap hops
 
@@ -757,9 +879,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 32. Options Greeks - Delta (Black-Scholes)
+
 **Formula:** `Δ_call = N(d₁)` where `d₁ = (ln(S/K) + (r + σ²/2)T) / (σ√T)`
 
 **Arguments:**
+
 - `S`: Current spot price
 - `K`: Strike price
 - `r`: Risk-free rate (decimal)
@@ -772,9 +896,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 33. Perpetual Swap Basis
+
 **Formula:** `Basis = (Perpetual_Price - Spot_Price) / Spot_Price × (365 / Days_to_expiry)`
 
 **Arguments:**
+
 - `Perpetual_Price`: Perpetual contract price
 - `Spot_Price`: Spot market price
 - `Days_to_expiry`: Days until settlement (typically use 1 for annualized rate)
@@ -784,9 +910,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 34. Liquidity Depth (Order Book)
+
 **Formula:** `Depth = Σ(Volume_i) for |Price_i - Mid| ≤ threshold`
 
 **Arguments:**
+
 - `Volume_i`: Order volume at price level i
 - `Price_i`: Price at level i
 - `Mid`: Mid-market price
@@ -797,9 +925,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 35. Rebase Token Supply Adjustment
+
 **Formula:** `New_Supply = Current_Supply × (Current_Price / Target_Price)^elasticity`
 
 **Arguments:**
+
 - `Current_Supply`: Current token supply
 - `Current_Price`: Current market price
 - `Target_Price`: Target peg price
@@ -810,9 +940,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 36. Flash Loan Arbitrage Net Profit
+
 **Formula:** `Net_Profit = (Price_B - Price_A) × Amount - Fee_A - Fee_B - Gas_Cost - Flash_Fee`
 
 **Arguments:**
+
 - `Price_A`, `Price_B`: Prices on exchange A and B
 - `Amount`: Arbitrage size
 - `Fee_A`, `Fee_B`: Trading fees on both exchanges
@@ -824,9 +956,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 37. Token Vesting Cliff and Linear
+
 **Formula:** `Vested = 0` if `time < cliff`, else `min(Total × (time - cliff) / vesting_period, Total)`
 
 **Arguments:**
+
 - `Total`: Total tokens to vest
 - `time`: Time elapsed since start
 - `cliff`: Cliff period (no vesting)
@@ -837,9 +971,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 38. Bonding Curve Reserve Ratio (Bancor)
+
 **Formula:** `Price = Balance / (Supply × CW)`
 
 **Arguments:**
+
 - `Balance`: Reserve token balance
 - `Supply`: Bonded token supply
 - `CW`: Connector Weight (0-1, reserve ratio)
@@ -849,9 +985,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 39. Collateral Coverage Ratio
+
 **Formula:** `Coverage = (Σ Collateral_i × Liquidation_Threshold_i) / Total_Debt`
 
 **Arguments:**
+
 - `Collateral_i`: Value of collateral asset i
 - `Liquidation_Threshold_i`: Liquidation threshold for asset i (0-1)
 - `Total_Debt`: Total borrowed value
@@ -861,9 +999,11 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 ---
 
 ## 40. Yield Farming ROI (with principal)
+
 **Formula:** `ROI = (Farming_Rewards + Fee_Income + IL) / Initial_Capital - 1`
 
 **Arguments:**
+
 - `Farming_Rewards`: Token rewards earned (USD value)
 - `Fee_Income`: Trading fee share (USD)
 - `IL`: Impermanent loss (negative value, USD)
@@ -875,20 +1015,23 @@ Build a comprehensive calculator/dashboard for all 60 formulas?
 
 # IMPLEMENTATION NOTES
 
-## Risk Management Formula Categories:
+## Risk Management Formula Categories
+
 1. **Tail Risk**: CDaR, Tail Ratio, Rachev Ratio
 2. **Drawdown Analysis**: D-Ratio, RoMaD, Serenity Ratio, Recovery Factor
 3. **Performance Smoothness**: Stability Index, M²
 4. **Behavioral Finance**: Prospect Ratio
 
-## DeFi Formula Categories:
+## DeFi Formula Categories
+
 1. **AMM Mechanisms**: Uniswap V3 Tick, Constant Sum, Curve StableSwap
 2. **Lending Protocols**: Aave Variable Rate, Compound Rewards, Leverage Ratio
 3. **Protocol Economics**: Revenue, Dilution, Maker Stability Fee
 4. **Advanced Trading**: Multi-hop Impact, Options Greeks, Perpetual Basis
 5. **Tokenomics**: Rebase, Vesting, Bonding Curves
 
-## Usage Best Practices:
+## Usage Best Practices
+
 - Combine multiple metrics for comprehensive analysis
 - Consider time-varying nature of DeFi parameters
 - Account for gas costs in all on-chain calculations

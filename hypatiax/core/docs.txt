@@ -18,7 +18,3 @@ Separation: It's crucial that there is no overlap between these datasets to ensu
 Consistent Annotation: The method of annotating entities should be consistent across all datasets to prevent any bias or skew in how the model learns and is evaluated.
 Representativeness: Each dataset should ideally be representative of the full range of data the model is expected to handle in actual deployment.
 Organizing your data in this way helps in systematically developing, tuning, and validating the performance of machine learning models.
-
-
-
-

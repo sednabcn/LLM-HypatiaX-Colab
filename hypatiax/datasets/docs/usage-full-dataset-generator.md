@@ -1,5 +1,6 @@
 I've created a comprehensive dataset generator for your HypatiaX DeFi implementation! Here's what it includes:
 📊 7 Complete Datasets
+
 1. Historical Prices (90 days)
 
 ETH/USDC price data with realistic trends and volatility
@@ -52,15 +53,21 @@ python# Test your LLM provider with real scenarios
 from hypatiax_dataset import HypatiaXDatasetGenerator
 gen = HypatiaXDatasetGenerator()
 scenarios = gen.generate_uniswap_scenarios()
+
 # Feed scenarios[0] to your LLM for formula generation
+
 For Wednesday (Day 2):
 python# Validate formulas against test cases
 validation_cases = gen.generate_formula_validation_cases()
+
 # Run each through your SymbolicValidator
+
 For Thursday-Friday:
 python# Use historical data for backtesting
 prices = gen.generate_historical_prices()
+
 # Test IL calculator against each price point
+
 💾 File Export
 The generator saves everything as:
 
@@ -80,8 +87,6 @@ An Excel template with these datasets pre-loaded?
 Visualization scripts to chart the data?
 Additional test scenarios for specific DeFi protocols?
 
-
-
 I've created the generate_full_dataset.py script to scale up to 150 formulas. Here are the key features:
 Dataset Generation Strategy:
 
@@ -97,9 +102,6 @@ Bounded ratios (IL-like)
 Geometric means
 Share calculations
 
-
-
-
 Risk Domain (50 formulas):
 
 2-4 variables per formula
@@ -110,10 +112,6 @@ Sharpe-like ratios
 Portfolio variance
 Coefficient of variation
 Risk-adjusted returns
-
-
-
-
 
 Key Features:
 

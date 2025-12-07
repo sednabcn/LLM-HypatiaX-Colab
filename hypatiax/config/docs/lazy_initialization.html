@@ -75,15 +75,15 @@ _secrets_instance = None  # Start with None
 
 class _SecretsProxy:
     """Magic proxy that creates instance only when needed"""
-    
+
     def __getattr__(self, name):
         global _secrets_instance
-        
+
         # First time accessing? Create instance NOW!
         if _secrets_instance is None:
             print("🎯 First access detected! Creating instance...")
             _secrets_instance = SecretsConfig()
-        
+
         # Return the requested attribute
         return getattr(_secrets_instance, name)
 
@@ -122,12 +122,12 @@ key = secrets.openai_api_key
 # 5. Inside __getattr__:
 def __getattr__(self, name):  # name = 'openai_api_key'
     global _secrets_instance
-    
+
     # Check: Is this the first time?
     if _secrets_instance is None:
         # YES! Create the real SecretsConfig now
         _secrets_instance = SecretsConfig()
-    
+
     # Return the attribute from the REAL instance
     return getattr(_secrets_instance, name)
     # This returns: _secrets_instance.openai_api_key

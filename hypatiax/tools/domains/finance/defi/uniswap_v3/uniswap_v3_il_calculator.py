@@ -10,9 +10,9 @@ Key V3 Features:
 - Higher capital efficiency = higher IL risk
 """
 
-from typing import Dict, List, Tuple
-from decimal import Decimal, getcontext
 import math
+from decimal import Decimal, getcontext
+from typing import Dict, List, Tuple
 
 getcontext().prec = 28
 
@@ -21,7 +21,7 @@ class UniswapV3ILCalculator:
     """
     Impermanent Loss calculator for Uniswap V3 concentrated positions
     """
-    
+
     # V3 Fee Tiers
     FEE_TIERS = {
         'STABLE': 0.0001,   # 0.01% for stablecoin pairs
@@ -29,13 +29,13 @@ class UniswapV3ILCalculator:
         'MEDIUM': 0.003,    # 0.3% for most pairs
         'HIGH': 0.01        # 1% for exotic/volatile pairs
     }
-    
-    def __init__(self, price_lower: float, price_upper: float, 
+
+    def __init__(self, price_lower: float, price_upper: float,
                  price_initial: float, amount0: float, amount1: float,
                  fee_tier: float = 0.003):
         """
         Initialize V3 position
-        
+
         Args:
             price_lower: Lower price bound (Pa)
             price_upper: Upper price bound (Pb)
@@ -50,31 +50,31 @@ class UniswapV3ILCalculator:
         self.amount0_initial = Decimal(str(amount0))
         self.amount1_initial = Decimal(str(amount1))
         self.fee_tier = Decimal(str(fee_tier))
-        
+
         # Validate range
         if not (self.Pa < self.Pb):
             raise ValueError("price_lower must be less than price_upper")
-        
+
         if not (self.Pa <= self.P_initial <= self.Pb):
             print(f"WARNING: Initial price {price_initial} is outside range [{price_lower}, {price_upper}]")
-        
+
         # Calculate initial liquidity
         self.liquidity = self._calculate_liquidity(
             self.amount0_initial, self.amount1_initial, self.P_initial
         )
-        
+
         # Calculate initial value
         self.initial_value = self.amount0_initial * self.P_initial + self.amount1_initial
-    
+
     def _sqrt_price(self, price: Decimal) -> Decimal:
         """Calculate square root of price"""
         return price.sqrt()
-    
-    def _calculate_liquidity(self, amount0: Decimal, amount1: Decimal, 
+
+    def _calculate_liquidity(self, amount0: Decimal, amount1: Decimal,
                             price: Decimal) -> Decimal:
         """
         Calculate liquidity L for a V3 position
-        
+
         Formulas:
         - If P <= Pa: L = Δx * √Pa * √Pb / (√Pb - √Pa)
         - If P >= Pb: L = Δy / (√Pb - √Pa)
@@ -83,103 +83,103 @@ class UniswapV3ILCalculator:
         sqrt_Pa = self._sqrt_price(self.Pa)
         sqrt_Pb = self._sqrt_price(self.Pb)
         sqrt_P = self._sqrt_price(price)
-        
+
         if price <= self.Pa:
             # All token0
             if amount0 > 0:
                 liquidity = amount0 * sqrt_Pa * sqrt_Pb / (sqrt_Pb - sqrt_Pa)
             else:
                 liquidity = Decimal('0')
-        
+
         elif price >= self.Pb:
             # All token1
             if amount1 > 0:
                 liquidity = amount1 / (sqrt_Pb - sqrt_Pa)
             else:
                 liquidity = Decimal('0')
-        
+
         else:
             # Both tokens - in range
             if amount0 > 0:
                 L0 = amount0 * sqrt_P * sqrt_Pb / (sqrt_Pb - sqrt_P)
             else:
                 L0 = Decimal('inf')
-            
+
             if amount1 > 0:
                 L1 = amount1 / (sqrt_P - sqrt_Pa)
             else:
                 L1 = Decimal('inf')
-            
+
             liquidity = min(L0, L1)
-        
+
         return liquidity
-    
+
     def _get_amounts_for_liquidity(self, price: Decimal) -> Tuple[Decimal, Decimal]:
         """
         Calculate token amounts for given liquidity and price
-        
+
         Returns: (amount0, amount1)
         """
         sqrt_Pa = self._sqrt_price(self.Pa)
         sqrt_Pb = self._sqrt_price(self.Pb)
         sqrt_P = self._sqrt_price(price)
-        
+
         if price <= self.Pa:
             # All token0
             amount0 = self.liquidity * (sqrt_Pb - sqrt_Pa) / (sqrt_Pa * sqrt_Pb)
             amount1 = Decimal('0')
-        
+
         elif price >= self.Pb:
             # All token1
             amount0 = Decimal('0')
             amount1 = self.liquidity * (sqrt_Pb - sqrt_Pa)
-        
+
         else:
             # Both tokens
             amount0 = self.liquidity * (sqrt_Pb - sqrt_P) / (sqrt_P * sqrt_Pb)
             amount1 = self.liquidity * (sqrt_P - sqrt_Pa)
-        
+
         return amount0, amount1
-    
+
     def calculate_il_at_price(self, current_price: float) -> Dict[str, float]:
         """
         Calculate IL at a specific current price
-        
+
         Args:
             current_price: Current market price
-            
+
         Returns:
             Dictionary with comprehensive IL metrics
         """
         P_current = Decimal(str(current_price))
-        
+
         # Get current amounts in pool
         amount0_current, amount1_current = self._get_amounts_for_liquidity(P_current)
-        
+
         # Calculate values
         pool_value = amount0_current * P_current + amount1_current
         hodl_value = self.amount0_initial * P_current + self.amount1_initial
-        
+
         # Impermanent Loss
         il_absolute = pool_value - hodl_value
         il_percentage = (il_absolute / hodl_value * Decimal('100')) if hodl_value > 0 else Decimal('0')
-        
+
         # Check if in range
         in_range = self.Pa <= P_current <= self.Pb
-        
+
         # Price metrics
         price_change_pct = (P_current - self.P_initial) / self.P_initial * Decimal('100')
-        
+
         # Range metrics
         range_width = (self.Pb - self.Pa) / self.Pa * Decimal('100')
         distance_to_lower = (P_current - self.Pa) / self.Pa * Decimal('100')
         distance_to_upper = (self.Pb - P_current) / self.Pb * Decimal('100')
-        
+
         # Capital efficiency
         full_range_ratio = Decimal('100')  # Assume 100x would be "full range"
         actual_range_ratio = self.Pb / self.Pa
         capital_efficiency = full_range_ratio / actual_range_ratio
-        
+
         return {
             'current_price': float(P_current),
             'initial_price': float(self.P_initial),
@@ -202,30 +202,30 @@ class UniswapV3ILCalculator:
             'capital_efficiency': float(capital_efficiency),
             'fee_tier_bps': float(self.fee_tier * Decimal('10000'))
         }
-    
-    def calculate_il_with_fees(self, current_price: float, 
+
+    def calculate_il_with_fees(self, current_price: float,
                                days_elapsed: float,
                                daily_volume: float,
                                pool_liquidity: float = None) -> Dict[str, float]:
         """
         Calculate IL including earned fees
-        
+
         Args:
             current_price: Current price
             days_elapsed: Days since position opened
             daily_volume: Average daily trading volume in USD
             pool_liquidity: Total pool liquidity (if None, estimated from position)
-            
+
         Returns:
             Dictionary with IL and fee data
         """
         # Get base IL calculation
         il_data = self.calculate_il_at_price(current_price)
-        
+
         # Estimate time in range (simplified)
         # In reality, would need historical price data
         P_current = Decimal(str(current_price))
-        
+
         # Simple heuristic: if price moved outside range, estimate time in range
         if self.Pa <= P_current <= self.Pb:
             time_in_range_pct = 100.0  # Currently in range
@@ -235,12 +235,12 @@ class UniswapV3ILCalculator:
                 distance_out = float((self.Pa - P_current) / self.Pa * Decimal('100'))
             else:
                 distance_out = float((P_current - self.Pb) / self.Pb * Decimal('100'))
-            
+
             # Rough estimate: more distance = less time in range
             time_in_range_pct = max(0, 100 - distance_out)
-        
+
         time_in_range_days = days_elapsed * (time_in_range_pct / 100)
-        
+
         # Calculate fees earned
         # Fee share based on liquidity contribution
         if pool_liquidity is None:
@@ -249,32 +249,32 @@ class UniswapV3ILCalculator:
         else:
             position_tvl = il_data['pool_value']
             position_share = position_tvl / pool_liquidity if pool_liquidity > 0 else 0
-        
+
         # Apply capital efficiency multiplier
         effective_share = position_share * il_data['capital_efficiency']
-        
+
         # Total fees
         total_volume = daily_volume * time_in_range_days
         fees_earned = total_volume * float(self.fee_tier) * effective_share
-        
+
         # Calculate APR from fees
         if days_elapsed > 0:
             fee_apr = (fees_earned / float(self.initial_value)) * (365 / days_elapsed) * 100
         else:
             fee_apr = 0
-        
+
         # Net result
         net_result = fees_earned + il_data['il_dollar']
         net_percentage = (net_result / il_data['hodl_value']) * 100 if il_data['hodl_value'] > 0 else 0
-        
+
         # Breakeven
         daily_fees = fees_earned / time_in_range_days if time_in_range_days > 0 else 0
-        
+
         if daily_fees > 0 and il_data['il_dollar'] < 0:
             breakeven_days = abs(il_data['il_dollar']) / daily_fees
         else:
             breakeven_days = float('inf')
-        
+
         return {
             **il_data,
             'days_elapsed': days_elapsed,
@@ -288,21 +288,21 @@ class UniswapV3ILCalculator:
             'breakeven_days': breakeven_days if breakeven_days != float('inf') else None,
             'profitable': net_result > 0
         }
-    
-    def compare_ranges(self, current_price: float, 
+
+    def compare_ranges(self, current_price: float,
                       range_scenarios: List[Dict]) -> List[Dict]:
         """
         Compare performance across different range scenarios
-        
+
         Args:
             current_price: Current price
             range_scenarios: List of dicts with 'price_lower' and 'price_upper'
-            
+
         Returns:
             List of results for each scenario
         """
         results = []
-        
+
         for scenario in range_scenarios:
             calc = UniswapV3ILCalculator(
                 price_lower=scenario['price_lower'],
@@ -312,16 +312,16 @@ class UniswapV3ILCalculator:
                 amount1=float(self.amount1_initial),
                 fee_tier=float(self.fee_tier)
             )
-            
+
             result = calc.calculate_il_with_fees(
                 current_price=current_price,
                 days_elapsed=scenario.get('days', 30),
                 daily_volume=scenario.get('daily_volume', 1_000_000)
             )
-            
+
             result['scenario_name'] = scenario.get('name', f"Range {scenario['price_lower']}-{scenario['price_upper']}")
             results.append(result)
-        
+
         return results
 
 
@@ -329,28 +329,28 @@ def calculate_optimal_range(price_current: float, volatility_annual: float,
                            fee_tier: float = 0.003) -> Dict[str, float]:
     """
     Calculate suggested optimal range based on volatility
-    
+
     Args:
         price_current: Current price
         volatility_annual: Annual volatility (e.g., 0.80 for 80%)
         fee_tier: Fee tier
-        
+
     Returns:
         Suggested price range
     """
     # Convert annual volatility to daily
     volatility_daily = volatility_annual / math.sqrt(365)
-    
+
     # Use 2 standard deviations for range (95% confidence)
     # Adjust based on fee tier (higher fees = wider range tolerance)
     std_devs = 2.0 + (fee_tier / 0.003)  # More std devs for higher fee tiers
-    
+
     # Calculate range
     price_lower = price_current * (1 - std_devs * volatility_daily * math.sqrt(30))
     price_upper = price_current * (1 + std_devs * volatility_daily * math.sqrt(30))
-    
+
     range_width = ((price_upper - price_lower) / price_lower) * 100
-    
+
     return {
         'price_lower': round(price_lower, 2),
         'price_upper': round(price_upper, 2),
@@ -366,11 +366,11 @@ if __name__ == "__main__":
     print("UNISWAP V3 CONCENTRATED LIQUIDITY IL CALCULATOR")
     print("=" * 70)
     print()
-    
+
     # Example: ETH/USDC position
     print("Example: ETH/USDC Position")
     print("-" * 70)
-    
+
     # Initialize position: ±10% range around $2000
     calculator = UniswapV3ILCalculator(
         price_lower=1800,    # $1800
@@ -380,7 +380,7 @@ if __name__ == "__main__":
         amount1=1000,        # $1000 USDC
         fee_tier=0.003       # 0.3%
     )
-    
+
     print(f"Initial Setup:")
     print(f"  Price Range: $1800 - $2200")
     print(f"  Initial Price: $2000")
@@ -388,7 +388,7 @@ if __name__ == "__main__":
     print(f"  Fee Tier: 0.3%")
     print(f"  Range Width: ±10%")
     print()
-    
+
     # Scenario 1: Price stays in range
     print("Scenario 1: Price moves to $2100 (still in range)")
     result1 = calculator.calculate_il_with_fees(
@@ -403,7 +403,7 @@ if __name__ == "__main__":
     print(f"  Net Result: ${result1['net_result']:.2f}")
     print(f"  Fee APR: {result1['fee_apr']:.1f}%")
     print()
-    
+
     # Scenario 2: Price moves out of range
     print("Scenario 2: Price moves to $2500 (out of range)")
     result2 = calculator.calculate_il_with_fees(
@@ -418,22 +418,22 @@ if __name__ == "__main__":
     print(f"  Net Result: ${result2['net_result']:.2f}")
     print(f"  Time In Range: {result2['time_in_range_percent']:.1f}%")
     print()
-    
+
     # Compare different ranges
     print("Scenario 3: Comparing Different Range Strategies")
     print("-" * 70)
-    
+
     scenarios = [
         {'name': 'Tight ±5%', 'price_lower': 1900, 'price_upper': 2100, 'days': 30, 'daily_volume': 50_000_000},
         {'name': 'Medium ±15%', 'price_lower': 1700, 'price_upper': 2300, 'days': 30, 'daily_volume': 50_000_000},
         {'name': 'Wide ±30%', 'price_lower': 1400, 'price_upper': 2600, 'days': 30, 'daily_volume': 50_000_000},
     ]
-    
+
     comparison = calculator.compare_ranges(
         current_price=2100,
         range_scenarios=scenarios
     )
-    
+
     print(f"{'Strategy':<15} {'In Range':<10} {'IL%':<10} {'Fees':<12} {'Net $':<12} {'APR%':<10}")
     print("-" * 70)
     for result in comparison:
@@ -443,7 +443,7 @@ if __name__ == "__main__":
               f"${result['fees_earned']:<11,.0f} "
               f"${result['net_result']:<11,.0f} "
               f"{result['fee_apr']:<9.1f}%")
-    
+
     print()
     print("=" * 70)
     print("KEY TAKEAWAYS FOR V3:")

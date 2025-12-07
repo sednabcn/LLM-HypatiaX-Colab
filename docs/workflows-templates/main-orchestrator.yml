@@ -20,7 +20,7 @@ jobs:
       run-docs: ${{ steps.filter.outputs.docs }}
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: dorny/paths-filter@v2
         id: filter
         with:
@@ -74,9 +74,9 @@ jobs:
           echo "CI Status: ${{ needs.run-ci.result }}"
           echo "Docker Status: ${{ needs.run-docker.result }}"
           echo "Security Status: ${{ needs.run-security.result }}"
-          
-          if [[ "${{ needs.run-ci.result }}" == "failure" ]] || 
-             [[ "${{ needs.run-docker.result }}" == "failure" ]] || 
+
+          if [[ "${{ needs.run-ci.result }}" == "failure" ]] ||
+             [[ "${{ needs.run-docker.result }}" == "failure" ]] ||
              [[ "${{ needs.run-security.result }}" == "failure" ]]; then
             echo "❌ One or more checks failed"
             exit 1

@@ -12,4 +12,3 @@ models = client.list_models(parent=parent)
 
 for model in models:
     print(model.name, model.display_name)
-

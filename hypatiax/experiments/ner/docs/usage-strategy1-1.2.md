@@ -8,19 +8,15 @@ Recognizes (target, shape) patterns
 Maps to complete formula templates
 Example: ('area', 'circle') → Full entity sequence for A=pi*r^2
 
-
 Vocab-Based Mapping (Good for data operations)
 
 Maps entities one-by-one
 Example: OPER:sum → FUNC:SUM
 
-
 ML-Based Mapping (Placeholder)
 
 For seq2seq or transformer models
 Would learn from training pairs
-
-
 
 POINT 3: Formula Generation (Entities[Formula] → String)
 Features:

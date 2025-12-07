@@ -9,14 +9,14 @@ class APIClient {
         this.baseURL = baseURL;
         this.timeout = 30000; // 30 seconds
     }
-    
+
     /**
      * Generic request handler with error handling
      */
     async request(endpoint, options = {}) {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), this.timeout);
-        
+
         try {
             const response = await fetch(`${this.baseURL}${endpoint}`, {
                 ...options,
@@ -26,14 +26,14 @@ class APIClient {
                     ...options.headers
                 }
             });
-            
+
             clearTimeout(timeoutId);
-            
+
             if (!response.ok) {
                 const error = await response.json().catch(() => ({ error: 'Unknown error' }));
                 throw new Error(error.error || `HTTP ${response.status}`);
             }
-            
+
             return await response.json();
         } catch (error) {
             clearTimeout(timeoutId);
@@ -43,91 +43,91 @@ class APIClient {
             throw error;
         }
     }
-    
+
     // ============================================================================
     // HEALTH & INFO
     // ============================================================================
-    
+
     async healthCheck() {
         return this.request('/api/health');
     }
-    
+
     async getInfo() {
         return this.request('/');
     }
-    
+
     // ============================================================================
     // HYPATIAX - Tableau Formula Mapping
     // ============================================================================
-    
+
     async mapDescription(description, method = 'vocab') {
         return this.request('/api/hypatiax/map', {
             method: 'POST',
             body: JSON.stringify({ description, method })
         });
     }
-    
+
     async runTests() {
         return this.request('/api/hypatiax/test');
     }
-    
+
     // ============================================================================
     // NER - Formula Extraction
     // ============================================================================
-    
+
     async extractFormula(text, domain = 'general') {
         return this.request('/api/ner/extract-formula', {
             method: 'POST',
             body: JSON.stringify({ text, domain })
         });
     }
-    
+
     async recognizeEntities(text) {
         return this.request('/api/ner/recognize-entities', {
             method: 'POST',
             body: JSON.stringify({ text })
         });
     }
-    
+
     async convertToLatex(formula) {
         return this.request('/api/ner/convert-to-latex', {
             method: 'POST',
             body: JSON.stringify({ formula })
         });
     }
-    
+
     async parseFormula(formula) {
         return this.request('/api/ner/parse-structure', {
             method: 'POST',
             body: JSON.stringify({ formula })
         });
     }
-    
+
     async validateFormula(formula) {
         return this.request('/api/ner/validate-syntax', {
             method: 'POST',
             body: JSON.stringify({ formula })
         });
     }
-    
+
     async identifyDomain(formula) {
         return this.request('/api/ner/identify-domain', {
             method: 'POST',
             body: JSON.stringify({ formula })
         });
     }
-    
+
     async batchProcess(formulas) {
         return this.request('/api/ner/batch-process', {
             method: 'POST',
             body: JSON.stringify({ formulas })
         });
     }
-    
+
     // ============================================================================
     // DEFI - Calculations
     // ============================================================================
-    
+
     async calculateILPercentage(initialPrice, currentPrice) {
         return this.request('/api/defi/il-percentage', {
             method: 'POST',
@@ -137,21 +137,21 @@ class APIClient {
             })
         });
     }
-    
+
     async calculateQualityScore(params) {
         return this.request('/api/defi/quality-score', {
             method: 'POST',
             body: JSON.stringify(params)
         });
     }
-    
+
     async analyzePosition(params) {
         return this.request('/api/defi/analyze-position', {
             method: 'POST',
             body: JSON.stringify(params)
         });
     }
-    
+
     async calculateILLegacy(params) {
         return this.request('/api/defi/calculate-il', {
             method: 'POST',

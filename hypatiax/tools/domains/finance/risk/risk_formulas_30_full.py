@@ -17,12 +17,13 @@ Dependencies:
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Dict, List, Any, Optional
 import csv
+import math
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
+
 import numpy as np
 from scipy import stats
-import math
 
 EPSILON = 1e-12
 DAYS_PER_YEAR = 252
@@ -33,10 +34,10 @@ class PortfolioPosition:
     name: str
     initial_value: float
     current_value: float
-    returns: List[float]            # periodic returns (decimal), e.g., daily
+    returns: List[float]  # periodic returns (decimal), e.g., daily
     benchmark_returns: List[float]  # same frequency
-    risk_free_rate: float = 0.03    # annual decimal
-    target_return: float = 0.05     # annual decimal
+    risk_free_rate: float = 0.03  # annual decimal
+    target_return: float = 0.05  # annual decimal
 
 
 class RiskCalculator:
@@ -112,7 +113,9 @@ class RiskCalculator:
     # 6: Treynor Ratio (annualized)
     # -----------------------
     @staticmethod
-    def treynor_ratio(asset_returns: np.ndarray, market_returns: np.ndarray, risk_free_rate_annual: float) -> Dict[str, Any]:
+    def treynor_ratio(
+        asset_returns: np.ndarray, market_returns: np.ndarray, risk_free_rate_annual: float
+    ) -> Dict[str, Any]:
         rf_period = risk_free_rate_annual / DAYS_PER_YEAR
         beta_res = RiskCalculator.beta(asset_returns, market_returns)
         b = beta_res["beta"]
@@ -145,8 +148,14 @@ class RiskCalculator:
         drawdowns = (running_max - wealth) / (running_max + EPSILON)  # positive fraction
         max_dd = float(np.max(drawdowns))
         trough_idx = int(np.argmax(drawdowns))
-        peak_idx = int(np.argmax(wealth[:trough_idx + 1])) if trough_idx > 0 else 0
-        return {"max_drawdown": max_dd, "max_drawdown_pct": max_dd * 100.0, "peak_idx": peak_idx, "trough_idx": trough_idx, "drawdown_series": drawdowns}
+        peak_idx = int(np.argmax(wealth[: trough_idx + 1])) if trough_idx > 0 else 0
+        return {
+            "max_drawdown": max_dd,
+            "max_drawdown_pct": max_dd * 100.0,
+            "peak_idx": peak_idx,
+            "trough_idx": trough_idx,
+            "drawdown_series": drawdowns,
+        }
 
     # -----------------------
     # 9: Modified VaR (Cornish-Fisher) - better tail adjustment
@@ -160,10 +169,12 @@ class RiskCalculator:
         # standard z
         z = stats.norm.ppf(1.0 - confidence)
         # Cornish-Fisher expansion for left-tail quantile (approx)
-        z_cf = (z +
-                (1/6.0) * (z**2 - 1) * skew +
-                (1/24.0) * (z**3 - 3*z) * kurt -
-                (1/36.0) * (2*z**3 - 5*z) * (skew**2))
+        z_cf = (
+            z
+            + (1 / 6.0) * (z**2 - 1) * skew
+            + (1 / 24.0) * (z**3 - 3 * z) * kurt
+            - (1 / 36.0) * (2 * z**3 - 5 * z) * (skew**2)
+        )
         var_cf = mu + z_cf * sigma
         return {"var_cf": var_cf, "var_cf_pct": var_cf * 100.0, "skew": skew, "kurtosis": kurt}
 
@@ -183,7 +194,9 @@ class RiskCalculator:
     # 11: Long-horizon VaR scaling (square-root and linear options)
     # -----------------------
     @staticmethod
-    def var_long_horizon(returns: np.ndarray, days: int = 10, confidence: float = 0.95, method: str = "sqrt") -> Dict[str, Any]:
+    def var_long_horizon(
+        returns: np.ndarray, days: int = 10, confidence: float = 0.95, method: str = "sqrt"
+    ) -> Dict[str, Any]:
         mu = float(np.mean(returns)) * days
         sigma = float(np.std(returns, ddof=0)) * (math.sqrt(days) if method == "sqrt" else days)
         z = stats.norm.ppf(1.0 - confidence)
@@ -211,7 +224,7 @@ class RiskCalculator:
         wealth = np.cumprod(1.0 + returns)
         running_max = np.maximum.accumulate(wealth)
         drawdowns = (running_max - wealth) / (running_max + EPSILON)
-        ui = math.sqrt(float(np.mean(drawdowns ** 2)))
+        ui = math.sqrt(float(np.mean(drawdowns**2)))
         return {"ulcer_index": ui, "ulcer_index_pct": ui * 100.0}
 
     # -----------------------
@@ -267,7 +280,7 @@ class RiskCalculator:
     def upside_potential_ratio(returns: np.ndarray, mar: float = 0.0) -> Dict[str, Any]:
         gains = returns[returns > mar] - mar
         downside = returns[returns < mar] - mar
-        upside = float(np.sum(gains ** 1)) / (gains.size + EPSILON)
+        upside = float(np.sum(gains**1)) / (gains.size + EPSILON)
         downside_risk = math.sqrt(float(np.mean((np.minimum(0.0, downside) ** 2)))) if downside.size > 0 else EPSILON
         upr = upside / (downside_risk + EPSILON)
         return {"upr": upr, "upside": upside, "downside_risk": downside_risk, "mar": mar}
@@ -299,7 +312,7 @@ class RiskCalculator:
         wealth = np.cumprod(1.0 + returns)
         running_max = np.maximum.accumulate(wealth)
         drawdowns = (running_max - wealth) / (running_max + EPSILON)
-        sqrt_sum_sq = math.sqrt(float(np.sum(drawdowns ** 2))) + EPSILON
+        sqrt_sum_sq = math.sqrt(float(np.sum(drawdowns**2))) + EPSILON
         burke = excess / sqrt_sum_sq
         return {"burke_ratio": burke, "excess_return": excess, "sqrt_sum_sq_dd": sqrt_sum_sq}
 
@@ -313,7 +326,7 @@ class RiskCalculator:
         wealth = np.cumprod(1.0 + returns)
         running_max = np.maximum.accumulate(wealth)
         drawdowns = (running_max - wealth) / (running_max + EPSILON)
-        pain_index = math.sqrt(float(np.mean(drawdowns ** 2)))
+        pain_index = math.sqrt(float(np.mean(drawdowns**2)))
         pain = annual_return / (pain_index + EPSILON)
         return {"pain_ratio": pain, "annual_return": annual_return, "pain_index": pain_index}
 
@@ -362,8 +375,8 @@ class RiskCalculator:
         p_loss = float(losses.size) / returns.size if returns.size > 0 else 0.0
         avg_win = float(np.mean(wins)) if wins.size > 0 else 0.0
         avg_loss = abs(float(np.mean(losses))) if losses.size > 0 else 0.0
-        denom = (p_loss * (avg_loss ** 2)) if p_loss > 0 and avg_loss > 0 else EPSILON
-        prospect = (p_win * (avg_win ** 2)) / denom
+        denom = (p_loss * (avg_loss**2)) if p_loss > 0 and avg_loss > 0 else EPSILON
+        prospect = (p_win * (avg_win**2)) / denom
         return {"prospect_ratio": prospect, "p_win": p_win, "avg_win": avg_win, "avg_loss": avg_loss}
 
     # -----------------------
@@ -437,7 +450,7 @@ class RiskCalculator:
         if cum.size < 2:
             return {"stability_index": 0.0, "r_squared": 0.0}
         slope, intercept, r_value, p_value, std_err = stats.linregress(x, cum)
-        r2 = float(r_value ** 2)
+        r2 = float(r_value**2)
         return {"stability_index": r2, "slope": slope, "r_squared": r2}
 
     # -----------------------
@@ -515,9 +528,19 @@ def generate_test_positions(seed: int = 42) -> List[PortfolioPosition]:
     np.random.seed(seed)
     positions: List[PortfolioPosition] = []
     market = np.random.normal(0.0004, 0.002, DAYS_PER_YEAR)
+
     def add(name, mu, sigma, init, factor):
         r = np.random.normal(mu, sigma, DAYS_PER_YEAR)
-        positions.append(PortfolioPosition(name=name, initial_value=init, current_value=init*factor, returns=r.tolist(), benchmark_returns=market.tolist()))
+        positions.append(
+            PortfolioPosition(
+                name=name,
+                initial_value=init,
+                current_value=init * factor,
+                returns=r.tolist(),
+                benchmark_returns=market.tolist(),
+            )
+        )
+
     add("Conservative Bonds", 0.0002, 0.0006, 100000.0, 1.05)
     add("Aggressive Tech", 0.0008, 0.025, 100000.0, 1.20)
     add("Balanced 60/40", 0.0004, 0.012, 100000.0, 1.10)
@@ -543,11 +566,14 @@ def export_results_to_csv(results: List[Dict[str, Any]], filename: str = "risk_a
             row = {k: (v.tolist() if isinstance(v, np.ndarray) else v) for k, v in r.items()}
             w.writerow(row)
 
+
 # If run as script, produce a short demo
 if __name__ == "__main__":
     pos = generate_test_positions()
     analyzer = ComprehensiveRiskAnalyzer()
     results = [analyzer.analyze(p) for p in pos]
     for r in results[:3]:
-        print(f"{r['position_name']}: total_return_pct={r['total_return_pct']:.2f}, sharpe={r['sharpe']:.2f}, max_dd_pct={r['max_drawdown_pct']:.2f}")
+        print(
+            f"{r['position_name']}: total_return_pct={r['total_return_pct']:.2f}, sharpe={r['sharpe']:.2f}, max_dd_pct={r['max_drawdown_pct']:.2f}"
+        )
     export_results_to_csv(results)

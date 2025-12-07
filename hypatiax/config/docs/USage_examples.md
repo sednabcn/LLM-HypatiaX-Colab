@@ -216,15 +216,15 @@ from hypatiax.config import paths, ModelConfig
 def train_model(model_type='desc'):
     # Get configuration
     config = ModelConfig.training_desc() if model_type == 'desc' else ModelConfig.training_formulas()
-    
+
     # Get paths
     data_file = paths.get_dataset_path(
         action='training',
         filename=config.data.filename
     )
-    
+
     output_dir = paths.get_output_path('models', config.training.output_model_name)
-    
+
     # Your training code here
     print(f"Training with config: {config.to_dict()}")
     print(f"Data from: {data_file}")
@@ -242,20 +242,20 @@ from hypatiax.config import paths, EntityLabels, DEFAULT_STOPWORDS
 def process_data(dtype='desc'):
     # Get entity labels
     labels = EntityLabels.get_labels_for(dtype)
-    
+
     # Get data path
     data_path = paths.get_dataset_path(
         action='training',
         filename='formulas_nor.xlsx'
     )
-    
+
     # Load and process
     import pandas as pd
     df = pd.read_excel(data_path)
-    
+
     # Filter stopwords
     filtered = [word for word in df['text'] if word not in DEFAULT_STOPWORDS]
-    
+
     return filtered, labels
 
 # Use it
@@ -270,16 +270,16 @@ from hypatiax.config import paths, EvaluationConfig
 def evaluate_model(model_name):
     # Get evaluation config
     eval_config = EvaluationConfig(batch_size=27, save_results=True)
-    
+
     # Get model path
     model_path = paths.get_model_path(model_name=model_name)
-    
+
     # Get output path for results
     results_file = paths.get_output_path(
         'evaluation',
         f'{model_name}_results.json'
     )
-    
+
     # Your evaluation code
     print(f"Evaluating: {model_path}")
     print(f"Saving results to: {results_file}")

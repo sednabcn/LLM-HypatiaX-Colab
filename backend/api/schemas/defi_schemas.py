@@ -1,5 +1,6 @@
 from marshmallow import Schema, fields, validate
 
+
 class ILCalculationSchema(Schema):
     current_price = fields.Float(required=True, validate=validate.Range(min=0))
     initial_price = fields.Float(required=True, validate=validate.Range(min=0))

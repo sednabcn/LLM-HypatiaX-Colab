@@ -393,7 +393,7 @@
         function updateStatus(status) {
             const statusDot = document.getElementById('statusDot');
             const statusText = document.getElementById('statusText');
-            
+
             statusDot.className = 'status-dot status-' + status;
             statusText.textContent = status;
         }
@@ -401,14 +401,14 @@
         function runDemo() {
             const inputText = document.getElementById('inputText').value;
             const expectedOutput = document.getElementById('expectedOutput').value;
-            
+
             if (!inputText) {
                 alert('Please enter input text first!');
                 return;
             }
 
             updateStatus('running');
-            
+
             // Simulate running the demo
             setTimeout(() => {
                 const success = Math.random() > 0.3; // Simulate success/failure
@@ -441,7 +441,7 @@
 
         function updateTestResults() {
             const container = document.getElementById('testResults');
-            
+
             if (testHistory.length === 0) {
                 container.innerHTML = '<p style="color: #64748b; font-style: italic; font-size: 0.875rem;">No tests run yet</p>';
                 return;
@@ -495,11 +495,11 @@
             document.getElementById('expectedOutput').value = data.expectedOutput || '';
             document.getElementById('process').value = data.process || '';
             document.getElementById('notes').value = data.notes || '';
-            
+
             if (data.actualOutput && data.actualOutput !== 'Run the demo to see output...') {
                 document.getElementById('actualOutput').textContent = data.actualOutput;
             }
-            
+
             if (data.testHistory) {
                 testHistory = data.testHistory;
                 updateTestResults();
@@ -545,7 +545,7 @@ ${process || 'Not documented yet'}
 ${notes || 'No notes yet'}
 
 ### Test Results
-${testHistory.length === 0 ? 'No tests run yet' : testHistory.map((r, i) => 
+${testHistory.length === 0 ? 'No tests run yet' : testHistory.map((r, i) =>
   `- **Test ${i + 1}** (${r.timestamp}): ${r.success ? '✅ PASSED' : '❌ FAILED'} - ${r.duration}s
   - Input: \`${r.input}\`
   - Output: \`${r.output}\``
@@ -588,7 +588,7 @@ Status: ${status}`;
 
         function clearAll() {
             if (!confirm('Are you sure you want to clear all data?')) return;
-            
+
             document.getElementById('title').value = 'Calculate Area of Circle Demo';
             document.getElementById('inputText').value = 'calculate area of circle';
             document.getElementById('expectedOutput').value = 'A = πr²';

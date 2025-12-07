@@ -1,5 +1,5 @@
 ──(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab/backend]
-└─$ ./setup.sh                                                                                                    
+└─$ ./setup.sh
 
 ╔════════════════════════════════════════════════════════════════╗
 ║         🚀 HypatiaX Backend - Automated Setup                 ║
@@ -87,4 +87,3 @@ Requirement already satisfied: MarkupSafe>=2.0 in /home/agagora/.pyenv/versions/
    - Config:      Check config.py for all settings
 
 ═══════════════════════════════════════════════════════════════
-

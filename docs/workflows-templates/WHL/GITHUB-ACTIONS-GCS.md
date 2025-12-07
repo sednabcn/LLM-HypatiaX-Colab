@@ -75,20 +75,20 @@ permissions:
 jobs:
   upload:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - id: auth
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
           service_account: 'github-actions-sa@YOUR_PROJECT_ID.iam.gserviceaccount.com'
-      
+
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
-      
+
       - name: Upload to GCS
         run: |
           gsutil cp dist/*.whl gs://your-bucket/wheels/
@@ -140,17 +140,17 @@ on: [push]
 jobs:
   upload:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Authenticate to Google Cloud
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
         run: |
           echo "$GCP_SA_KEY" | base64 -d > /tmp/gcp-key.json
           gcloud auth activate-service-account --key-file=/tmp/gcp-key.json
-      
+
       - name: Upload to GCS
         run: |
           gsutil cp dist/*.whl gs://your-bucket/wheels/
@@ -178,26 +178,26 @@ permissions:
 jobs:
   build-and-upload:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      
+
       - name: Build wheel
         run: |
           pip install build
           python -m build
-      
+
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-      
+
       - name: Upload to GCS
         uses: google-github-actions/upload-cloud-storage@v2
         with:
@@ -222,23 +222,23 @@ permissions:
 jobs:
   process:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-      
+
       - name: Download data from GCS
         run: |
           gsutil -m cp -r gs://input-bucket/data/ ./data/
-      
+
       - name: Process data
         run: |
           python scripts/process_data.py
-      
+
       - name: Upload results to GCS
         run: |
           gsutil -m cp -r ./results/ gs://output-bucket/results/
@@ -261,15 +261,15 @@ permissions:
 jobs:
   sync-docs:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-      
+
       - name: Sync to GCS
         run: |
           # -m for parallel, -r for recursive, -d for delete extras
@@ -309,51 +309,51 @@ jobs:
   # Job 1: Build and Test
   build-test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
-      
+
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
           pip install build pytest pytest-cov
-      
+
       - name: Run tests
         run: |
           pytest --cov=hypatia_x --cov-report=xml --cov-report=html
-      
+
       - name: Build wheel
         run: |
           python -m build
-      
+
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-      
+
       - name: Upload wheel to GCS
         run: |
           VERSION=$(python setup.py --version)
           COMMIT_SHA=$(git rev-parse --short HEAD)
-          
+
           # Upload with version and commit info
           gsutil cp dist/*.whl gs://${{ env.GCS_BUCKET }}/${{ env.GCS_WHEELS_PATH }}/${VERSION}/
           gsutil cp dist/*.whl gs://${{ env.GCS_BUCKET }}/${{ env.GCS_WHEELS_PATH }}/latest/
-          
+
           # Add metadata
           gsutil setmeta \
             -h "x-goog-meta-commit:${COMMIT_SHA}" \
             -h "x-goog-meta-branch:${GITHUB_REF_NAME}" \
             -h "x-goog-meta-build-date:$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             gs://${{ env.GCS_BUCKET }}/${{ env.GCS_WHEELS_PATH }}/${VERSION}/*.whl
-      
+
       - name: Upload test reports to GCS
         if: always()
         run: |
@@ -361,7 +361,7 @@ jobs:
             gs://${{ env.GCS_BUCKET }}/${{ env.GCS_REPORTS_PATH }}/${GITHUB_SHA}/
           gsutil cp coverage.xml \
             gs://${{ env.GCS_BUCKET }}/${{ env.GCS_REPORTS_PATH }}/${GITHUB_SHA}/
-      
+
       - name: Generate GCS URLs
         run: |
           echo "### 📦 Artifacts" >> $GITHUB_STEP_SUMMARY
@@ -374,42 +374,42 @@ jobs:
     needs: build-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-      
+
       - name: Download latest wheel from GCS
         run: |
           gsutil cp gs://${{ env.GCS_BUCKET }}/${{ env.GCS_WHEELS_PATH }}/latest/*.whl ./
           pip install *.whl
-      
+
       - name: Download training data from GCS
         run: |
           gsutil -m cp -r gs://${{ env.GCS_BUCKET }}/datasets/ ./data/
-      
+
       - name: Train model
         run: |
           python scripts/train_model.py \
             --data-dir ./data \
             --output-dir ./models
-      
+
       - name: Upload trained model to GCS
         run: |
           TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-          
+
           # Upload with timestamp
           gsutil -m cp -r ./models/ \
             gs://${{ env.GCS_BUCKET }}/${{ env.GCS_MODELS_PATH }}/${TIMESTAMP}/
-          
+
           # Also update 'latest'
           gsutil -m cp -r ./models/ \
             gs://${{ env.GCS_BUCKET }}/${{ env.GCS_MODELS_PATH }}/latest/
-          
+
           # Add metadata
           gsutil setmeta \
             -h "x-goog-meta-commit:${GITHUB_SHA}" \
@@ -421,15 +421,15 @@ jobs:
     needs: train-model
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-      
+
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
@@ -451,22 +451,22 @@ jobs:
 jobs:
   test-and-upload:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Run tests
         id: tests
         run: |
           pytest --junitxml=results.xml
           echo "status=$?" >> $GITHUB_OUTPUT
-      
+
       - uses: google-github-actions/auth@v2
         if: steps.tests.outputs.status == '0'
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-      
+
       - name: Upload only if tests pass
         if: steps.tests.outputs.status == '0'
         run: |
@@ -482,15 +482,15 @@ jobs:
     strategy:
       matrix:
         environment: [dev, staging, prod]
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets[format('SA_{0}', matrix.environment)] }}
-      
+
       - name: Upload to environment-specific bucket
         run: |
           gsutil cp dist/*.whl gs://hypatia-${{ matrix.environment }}/wheels/
@@ -503,10 +503,10 @@ jobs:
   run: |
     VERSION=$(python setup.py --version)
     DATE=$(date +%Y-%m-%d)
-    
+
     # Upload to versioned path
     gsutil cp dist/*.whl gs://bucket/wheels/${VERSION}/
-    
+
     # Set lifecycle rule (auto-delete after 90 days)
     gsutil lifecycle set lifecycle.json gs://bucket
 ```
@@ -546,23 +546,23 @@ jobs:
 jobs:
   use-cached-data:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Cache GCS data
         uses: actions/cache@v4
         id: cache
         with:
           path: data/
           key: gcs-data-${{ hashFiles('data-version.txt') }}
-      
+
       - uses: google-github-actions/auth@v2
         if: steps.cache.outputs.cache-hit != 'true'
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-      
+
       - name: Download from GCS if not cached
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
@@ -749,53 +749,53 @@ env:
 jobs:
   build-upload:
     runs-on: ubuntu-latest
-    
+
     outputs:
       wheel-url: ${{ steps.upload.outputs.wheel-url }}
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      
+
       - name: Build wheel
         run: |
           pip install build
           python -m build
-          
+
           # Get wheel filename
           WHEEL=$(ls dist/*.whl)
           echo "WHEEL_FILE=${WHEEL}" >> $GITHUB_ENV
-      
+
       - uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-      
+
       - name: Upload to GCS
         id: upload
         run: |
           VERSION=$(python setup.py --version)
-          
+
           # Upload wheel
           gsutil cp ${WHEEL_FILE} gs://${BUCKET}/wheels/${VERSION}/
           gsutil cp ${WHEEL_FILE} gs://${BUCKET}/wheels/latest/
-          
+
           # Make publicly readable (optional)
           gsutil acl ch -u AllUsers:R gs://${BUCKET}/wheels/${VERSION}/*.whl
-          
+
           # Output URL
           URL="https://storage.googleapis.com/${BUCKET}/wheels/${VERSION}/$(basename ${WHEEL_FILE})"
           echo "wheel-url=${URL}" >> $GITHUB_OUTPUT
           echo "### 📦 Wheel Published" >> $GITHUB_STEP_SUMMARY
           echo "URL: ${URL}" >> $GITHUB_STEP_SUMMARY
-  
+
   test-install:
     needs: build-upload
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Test wheel installation
         run: |
@@ -807,11 +807,11 @@ jobs:
 
 ## Conclusion
 
-✅ **GitHub Actions + GCS works perfectly**  
-✅ **Workload Identity Federation = Most secure**  
-✅ **Native actions available** (`google-github-actions/*`)  
-✅ **Full gsutil/gcloud support**  
-✅ **Perfect for ML pipelines** (wheels, models, datasets)  
+✅ **GitHub Actions + GCS works perfectly**
+✅ **Workload Identity Federation = Most secure**
+✅ **Native actions available** (`google-github-actions/*`)
+✅ **Full gsutil/gcloud support**
+✅ **Perfect for ML pipelines** (wheels, models, datasets)
 
 **Recommended for HypatiaX**: Use WIF + upload wheels/models to GCS for deployment to Cloud Run, Vertex AI, or other GCP services.
 
@@ -839,7 +839,7 @@ steps:
     with:
       workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
       service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-  
+
   - name: Upload to GCS
     run: |
       gsutil cp dist/*.whl gs://your-bucket/wheels/

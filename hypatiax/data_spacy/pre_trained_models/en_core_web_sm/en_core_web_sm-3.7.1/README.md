@@ -1,4 +1,4 @@
-### Details: https://spacy.io/models/en#en_core_web_sm
+### Details: <https://spacy.io/models/en#en_core_web_sm>
 
 English pipeline optimized for CPU. Components: tok2vec, tagger, parser, senter, ner, attribute_ruler, lemmatizer.
 

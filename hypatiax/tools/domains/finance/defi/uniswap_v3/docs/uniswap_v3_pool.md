@@ -1,5 +1,6 @@
 I've created a comprehensive Uniswap V3 pool implementation with all the key features you need! Here's what it includes:
 Key Features
+
 1. Core V3 Math
 
 Price ↔ sqrtPriceX96 conversion (V3's internal format)

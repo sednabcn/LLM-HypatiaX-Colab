@@ -2,11 +2,11 @@ include README.rst
 include LICENSE
 exclude .git
 include hypatiax/datasets/*.xlsx
-include hypatiax/data_spacy/queries/ner_queries_desc/* 
-include data_spacy/queries/* 
-include data_spacy/queries/tableau/* *.* 
-include data_spacy/queries/tableau/ner_queries/* 
-include data_spacy/queries/tableau/ner_queries_formulas/* 
+include hypatiax/data_spacy/queries/ner_queries_desc/*
+include data_spacy/queries/*
+include data_spacy/queries/tableau/* *.*
+include data_spacy/queries/tableau/ner_queries/*
+include data_spacy/queries/tableau/ner_queries_formulas/*
 recursive-include data_spacy/queries/tableau/ner_queries_desc/lemmatizer/lookups *
 recursive-include data_spacy/queries/tableau/ner_queries_formulas/parser *
 recursive-include data_spacy/queries/tableau/ner_queries_formulas/vocab *
@@ -16,7 +16,7 @@ recursive-include data_spacy/queries/tableau/ner_queries/parser *
 recursive-include data_spacy/queries/tableau/ner_queries/vocab *
 recursive-include data_spacy/queries/tableau/ner_queries/tagger *
 recursive-include data_spacy/queries/tableau/ner_queries/tok2vec *
-recursive-include data_spacy/queries/tableau/ner_queries/* 
+recursive-include data_spacy/queries/tableau/ner_queries/*
 recursive-include datasets/queries/data/* *.*
 recursive-include datasets/queries/tableau/training/* *.*
 recursive-include datasets/queries/tableau/validation/* *.*

@@ -2,15 +2,17 @@
 # write all options of these training models according using ner_entities or pre-trained ner_entities
 # save fig of history plotting
 import os
-import spacy
 import random
-import pandas as pd
 import time
 from importlib import resources
-from spacy.util import minibatch, compounding
-from spacy.training import Example
-from spacy.tokens import DocBin
+
+import pandas as pd
+import spacy
 from matplotlib import pyplot as plt
+from spacy.tokens import DocBin
+from spacy.training import Example
+from spacy.util import compounding, minibatch
+
 (year,month,day,hr,minutes,sec,_,_,_)=time.localtime()
 
 class Training:
@@ -19,7 +21,7 @@ class Training:
         self.sub_domain=sub_domain
         self.train_data = train_data
         self.path_ner_model = resources.files(f'hypatiax.data_spacy.{domain}.{sub_domain}').joinpath(f'ner_{sub_domain}_{dtype}')
-        self.output_model=f'{output_model_name}_{sub_domain}_{niter}_{drop}_{batchsize}_data'  
+        self.output_model=f'{output_model_name}_{sub_domain}_{niter}_{drop}_{batchsize}_data'
         self.niter = niter
         self.drop = drop
         self.batchsize = batchsize
@@ -39,7 +41,7 @@ class Training:
             self.training_data = train_data
         else:
             raise ValueError("Invalid training data provided")
-        
+
     def train(self):
         # Method dispatch based on whether we have multitask training or not
         if hasattr(self, 'training_data_1') and hasattr(self, 'training_data_2'):
@@ -68,7 +70,7 @@ class Training:
                 losses = {}
                 for batch in batches:
                     nlp.update(batch, drop=self.drop, losses=losses, sgd=optimizer)
-            
+
                 if self.val_data:
                     val_losses = {}
                     for example in examples_val:
@@ -76,7 +78,7 @@ class Training:
                     validation_loss = val_losses['ner']
                     history.loc[i] = [i, losses['ner'], validation_loss]
                     print(f"Iteration {i}, Training Loss: {losses['ner']}, Validation Loss: {validation_loss}")
-                
+
                     if validation_loss < best_loss:
                         best_loss = validation_loss
                         best_model_path = os.path.join(self.path_dir,'trained_models',self.output_model"-best_model-" + str(self.stime))
@@ -91,7 +93,7 @@ class Training:
                     if no_improve >= self.patience:
                         print(f"Early stopping at iteration {i} due to no improvement in validation loss.")
                         break
-                    
+
                 else:
                     history.loc[i] = [i, losses['ner']]
                     print(f"Iteration {i}, Training Loss: {losses['ner']}")
@@ -134,7 +136,7 @@ class Training:
                     continue  # No operation defined for other options
 
                 # Calculate and log validation loss if validation data is provided
-                
+
                 if self.val_data:
                     val_losses = {}
                     for example in examples_val:
@@ -146,7 +148,7 @@ class Training:
                     if validation_loss < best_loss:
                         best_loss = validation_loss
                         best_model_path = os.path.join(self.path_dir,'trained_models',self.output_model"-best_model-" + str(self.stime))
-                        
+
                         nlp.to_disk(best_model_path)
                         history_model_path=os.path.join(self.path_dir,'training_history','history_'+self.output_model + '_' + str(self.stime))
                         history.to_excel(history_model_path)
@@ -158,7 +160,7 @@ class Training:
                     if no_improve >= self.patience:
                         print(f"Early stopping at iteration {i} due to no improvement in validation loss.")
                         break
-                    
+
 
                 else:
                     history.loc[i] = [i, losses['ner']]
@@ -166,7 +168,7 @@ class Training:
 
                 if i % self.n_checkpoint == 0:  # Save every 10 iterations
                     checkpoint_dir = os.path.join(self.path_dir,'checkpoints', + 'checkpoint_'+str(self.stime)+f'{i}')
-                  
+
                     nlp.to_disk(checkpoint_dir)
 
                      history_model_path_=os.path.join(self.path_dir,'training_history','history_'+self.output_model + '_' + str(self.stime) + f'{i}')
@@ -203,5 +205,3 @@ class Training:
 
         # Show the plot
         plt.show()
-  
-

@@ -327,15 +327,15 @@
             .header h1 {
                 font-size: 1.8em;
             }
-            
+
             .header .tagline {
                 font-size: 1.1em;
             }
-            
+
             .content {
                 padding: 20px;
             }
-            
+
             .formula-output {
                 font-size: 1.2em;
             }
@@ -357,16 +357,16 @@
             <div class="demo-input">
                 <div class="input-label">💬 Try it yourself - Enter a natural language query:</div>
                 <div class="input-wrapper">
-                    <input 
-                        type="text" 
-                        class="input-box" 
+                    <input
+                        type="text"
+                        class="input-box"
                         id="queryInput"
                         placeholder="e.g., calculate the sum of sales by region"
                         value="calculate the sum of sales by region"
                     />
                     <button class="magic-button" onclick="processQuery()">✨</button>
                 </div>
-                
+
                 <div class="quick-examples">
                     <div class="example-chip" onclick="loadExample(0)">📊 Sales Analysis</div>
                     <div class="example-chip" onclick="loadExample(1)">💰 Profit Metrics</div>
@@ -423,7 +423,7 @@
             <a href="#" class="cta-button" onclick="alert('Visit: github.com/yourusername/hypatiax')">
                 🌟 Try HypatiaX on GitHub
             </a>
-            
+
             <div class="tech-stack">
                 <span class="tech-badge">🐍 Python</span>
                 <span class="tech-badge">🤖 spaCy NLP</span>
@@ -474,7 +474,7 @@
         // Process query
         async function processQuery() {
             const query = document.getElementById('queryInput').value.trim();
-            
+
             if (!query) {
                 alert('Please enter a query!');
                 return;
@@ -489,7 +489,7 @@
 
             // Extract entities (demo mode)
             const entities = extractEntities(query);
-            
+
             // Generate formula
             const formula = generateFormula(query, entities);
 
@@ -512,7 +512,7 @@
         function extractEntities(query) {
             const words = query.toLowerCase().split(/\s+/);
             const entities = [];
-            
+
             words.forEach(word => {
                 const cleanWord = word.replace(/[^a-z]/g, '');
                 if (entityPatterns[cleanWord]) {
@@ -527,14 +527,14 @@
                     });
                 }
             });
-            
+
             return entities;
         }
 
         // Generate formula
         function generateFormula(query, entities) {
             const lowerQuery = query.toLowerCase();
-            
+
             // Find operation
             let operation = 'SUM';
             if (lowerQuery.includes('average') || lowerQuery.includes('avg')) {
@@ -544,14 +544,14 @@
             } else if (lowerQuery.includes('max')) {
                 operation = 'MAX';
             }
-            
+
             // Find field name
             const nouns = entities.filter(e => e.label === 'NOUN');
             let fieldName = 'Field';
             if (nouns.length > 0) {
                 fieldName = nouns[0].text.charAt(0).toUpperCase() + nouns[0].text.slice(1);
             }
-            
+
             return `${operation}([${fieldName}])`;
         }
 
@@ -565,12 +565,12 @@
                 }
                 return word;
             }).join(' ');
-            
+
             document.getElementById('entitiesDisplay').innerHTML = entitiesHtml;
-            
+
             // Display formula
             document.getElementById('formulaOutput').textContent = formula;
-            
+
             // Display metrics
             document.getElementById('entityCount').textContent = metrics.entityCount;
             document.getElementById('confidence').textContent = metrics.confidence + '%';

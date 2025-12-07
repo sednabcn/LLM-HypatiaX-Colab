@@ -19,6 +19,7 @@ backend/
 ### 2) NER Files Created
 
 I've created these three files for you:
+
 - ✅ `api/routes/ner_routes.py` - All NER API endpoints
 - ✅ `api/schemas/ner_schemas.py` - Validation schemas
 - ✅ `services/ner_service.py` - Core NER logic
@@ -50,15 +51,19 @@ touch tests/__init__.py
 ### Step 2: Create All Files
 
 #### A) Create `api/routes/ner_routes.py`
+
 Copy the content from the **ner_routes** artifact I created.
 
 #### B) Create `api/schemas/ner_schemas.py`
+
 Copy the content from the **ner_schemas** artifact I created.
 
 #### C) Create `services/ner_service.py`
+
 Copy the content from the **ner_service** artifact I created.
 
 #### D) Create test files in `tests/`
+
 - Copy **api_test_examples.sh** → `tests/api_test_examples.sh`
 - Copy **test_api_client.py** → `tests/test_api_client.py`
 - Copy **test_ner_service.py** → `tests/test_ner_service.py`
@@ -186,6 +191,7 @@ python app.py
 ```
 
 You should see:
+
 ```
  * Running on http://0.0.0.0:5000
  * Debug mode: on
@@ -254,6 +260,7 @@ curl -X POST http://localhost:5000/api/ner/identify-domain \
 ## 📊 All Available Endpoints
 
 ### NER Endpoints (NEW)
+
 ```
 GET  /api/ner/health               - Health check
 POST /api/ner/extract-formula      - Extract formulas from text
@@ -266,6 +273,7 @@ POST /api/ner/validate-syntax      - Validate expression syntax
 ```
 
 ### Your Existing Endpoints
+
 ```
 GET  /health                       - API health check
 POST /generate                     - Generate formula with LLM
@@ -300,6 +308,7 @@ pip install flask flask-cors marshmallow sympy
 ### Issue: CORS Errors
 
 Update `app.py`:
+
 ```python
 from flask_cors import CORS
 
@@ -351,6 +360,7 @@ lsof -ti:5000 | xargs kill -9  # Mac/Linux
 ## 📚 Quick Reference
 
 ### Project Structure
+
 ```
 backend/
 ├── api/routes/        # API endpoints
@@ -364,6 +374,7 @@ backend/
 ```
 
 ### Key Commands
+
 ```bash
 # Start server
 python app.py
@@ -380,6 +391,7 @@ pip install -r requirements.txt
 ---
 
 You now have a complete backend with:
+
 - ✅ NER formula extraction
 - ✅ DeFi calculations
 - ✅ Comprehensive testing

@@ -1,7 +1,7 @@
 # 2. Basic Usage
 from demo.engine import HypatiaXEngine
-from demo.ui import UIComponents, InteractiveDemo
 from demo.examples import ExampleManager
+from demo.ui import InteractiveDemo, UIComponents
 
 # Initialize engine
 engine = HypatiaXEngine()

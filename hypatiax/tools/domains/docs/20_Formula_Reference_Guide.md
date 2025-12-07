@@ -23,13 +23,14 @@ Advanced concepts (Funding Rates, Bonding Curves, Flash Loans, Concentrated Liqu
 
 Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is good", "HF < 1 triggers liquidation") to help users understand the results and make informed decisions.
 
-
 ## Risk Management Formulas (20)
 
 ### 1. Value at Risk (VaR) 95%
+
 **Formula:** `VaR₉₅ = μ - 1.96 × σ × √t`
 
 **Arguments:**
+
 - `μ` (mu): Expected return (percent)
 - `σ` (sigma): Volatility/standard deviation (percent, annualized)
 - `t`: Time horizon (days, typically 1-252 trading days)
@@ -39,9 +40,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 2. Sharpe Ratio
+
 **Formula:** `Sharpe = (R - Rf) / σ`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent, annualized)
 - `Rf` (risk_free): Risk-free rate (percent, annualized)
 - `σ` (volatility): Return volatility (percent, annualized)
@@ -51,9 +54,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 3. Conditional VaR (CVaR/ES) 95%
+
 **Formula:** `CVaR₉₅ = μ - φ⁻¹ × σ × √t` where `φ⁻¹ ≈ 2.063`
 
 **Arguments:**
+
 - `μ` (mu): Expected return (percent)
 - `σ` (sigma): Volatility (percent, annualized)
 - `t`: Time horizon (days)
@@ -63,9 +68,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 4. Beta
+
 **Formula:** `β = Cov(i,m) / Var(m)`
 
 **Arguments:**
+
 - `Cov(i,m)` (cov_im): Covariance between asset and market (percent²)
 - `Var(m)` (var_m): Market variance (percent²)
 
@@ -74,9 +81,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 5. Sortino Ratio
+
 **Formula:** `Sortino = (R - T) / σ_downside`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent, annualized)
 - `T` (target): Target or minimum acceptable return (percent)
 - `σ_downside` (downside_dev): Downside deviation (percent)
@@ -86,9 +95,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 6. Information Ratio
+
 **Formula:** `IR = α / TE`
 
 **Arguments:**
+
 - `α` (active_return): Portfolio return minus benchmark return (percent)
 - `TE` (tracking_error): Standard deviation of active returns (percent)
 
@@ -97,9 +108,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 7. Maximum Drawdown
+
 **Formula:** `MDD = (Trough - Peak) / Peak`
 
 **Arguments:**
+
 - `Peak` (peak): Peak portfolio value (currency units)
 - `Trough` (trough): Trough portfolio value after peak (currency units)
 
@@ -108,9 +121,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 8. Treynor Ratio
+
 **Formula:** `Treynor = (R - Rf) / β`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent, annualized)
 - `Rf` (risk_free): Risk-free rate (percent, annualized)
 - `β` (risk_beta): Systematic risk/beta (dimensionless)
@@ -120,9 +135,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 9. Calmar Ratio
+
 **Formula:** `Calmar = R_annual / MDD`
 
 **Arguments:**
+
 - `R_annual` (annual_return): Annualized return (percent)
 - `MDD` (max_drawdown): Maximum drawdown (percent, positive value)
 
@@ -131,9 +148,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 10. Omega Ratio
+
 **Formula:** `Ω = (Gains + ε) / (Losses + ε)` (simplified with epsilon for stability)
 
 **Arguments:**
+
 - `Gains` (gains): Expected gains above threshold (percent)
 - `Losses` (losses): Expected losses below threshold (percent)
 
@@ -142,9 +161,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 11. Value at Risk (VaR) 99%
+
 **Formula:** `VaR₉₉ = μ - 2.576 × σ × √t`
 
 **Arguments:**
+
 - `μ` (mu): Expected return (percent)
 - `σ` (sigma): Volatility (percent, annualized)
 - `t`: Time horizon (days)
@@ -154,9 +175,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 12. Modified Sharpe Ratio
+
 **Formula:** `Modified Sharpe = (R - Rf) / (σ × (1 + S/6))`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent, annualized)
 - `Rf` (risk_free): Risk-free rate (percent, annualized)
 - `σ` (volatility): Volatility (percent, annualized)
@@ -167,9 +190,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 13. Ulcer Index
+
 **Formula:** `UI = √(Σ(DD²) / n)`
 
 **Arguments:**
+
 - `DD²_sum` (dd_squared_sum): Sum of squared drawdowns (percent²)
 - `n` (periods): Number of periods (dimensionless)
 
@@ -178,9 +203,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 14. Martin Ratio (Ulcer Performance Index)
+
 **Formula:** `Martin = R / UI`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent, annualized)
 - `UI` (ulcer_index): Ulcer Index (percent)
 
@@ -189,9 +216,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 15. Kappa 3 Ratio
+
 **Formula:** `Kappa₃ = R / LPM₃^(1/3)`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent)
 - `LPM₃` (lpm3): Lower Partial Moment of 3rd order (percent³)
 
@@ -200,9 +229,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 16. Gain-Loss Ratio
+
 **Formula:** `G/L = Average_Win / Average_Loss`
 
 **Arguments:**
+
 - `Average_Win` (avg_gain): Average gain per winning trade (percent)
 - `Average_Loss` (avg_loss): Average loss per losing trade (percent)
 
@@ -211,9 +242,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 17. Upside Potential Ratio
+
 **Formula:** `UPR = Upside_Potential / Downside_Risk`
 
 **Arguments:**
+
 - `Upside_Potential` (upside_potential): Expected gains above MAR (percent)
 - `Downside_Risk` (downside_risk): Downside deviation below MAR (percent)
 
@@ -222,9 +255,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 18. Sterling Ratio
+
 **Formula:** `Sterling = (R - 10%) / AvgDD`
 
 **Arguments:**
+
 - `R` (annual_return): Annualized return (percent)
 - `AvgDD` (avg_drawdown): Average of largest drawdowns (percent)
 
@@ -233,9 +268,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 19. Burke Ratio
+
 **Formula:** `Burke = Excess_Return / √(Σ DD²)`
 
 **Arguments:**
+
 - `Excess_Return` (excess_return): Return above risk-free rate (percent)
 - `√(Σ DD²)` (sqrt_sum_dd): Square root of sum of squared drawdowns (percent)
 
@@ -244,9 +281,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 20. Pain Ratio
+
 **Formula:** `Pain = R / Pain_Index`
 
 **Arguments:**
+
 - `R` (returns): Portfolio returns (percent)
 - `Pain_Index` (pain_index): Average drawdown over evaluation period (percent)
 
@@ -257,9 +296,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ## DeFi Formulas (20)
 
 ### 1. Impermanent Loss
+
 **Formula:** `IL = 2√(price_ratio) / (price_ratio + 1) - 1`
 
 **Arguments:**
+
 - `price_ratio`: Ratio of current price to initial price (dimensionless)
 
 **Usage:** Calculates loss experienced by liquidity providers due to price divergence in AMM pools. IL = 0 when price_ratio = 1 (no change). Always negative when prices change. At 2x price change, IL ≈ 5.7%. Critical for LP decision-making.
@@ -267,9 +308,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 2. AMM Swap Output (Uniswap V2)
+
 **Formula:** `Output = (Amount_in × 0.997 × Reserve_out) / (Reserve_in + Amount_in × 0.997)`
 
 **Arguments:**
+
 - `Amount_in`: Input token amount (normalized)
 - `Reserve_in`: Input token reserve (normalized)
 - `Reserve_out`: Output token reserve (normalized)
@@ -279,9 +322,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 3. Utilization Rate
+
 **Formula:** `U = Borrowed / Supplied`
 
 **Arguments:**
+
 - `Borrowed`: Total amount borrowed from pool (tokens)
 - `Supplied`: Total amount supplied to pool (tokens)
 
@@ -290,9 +335,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 4. Liquidity Pool Value
+
 **Formula:** `Value = 2 × √(Reserve₀ × Reserve₁)`
 
 **Arguments:**
+
 - `Reserve₀`: Reserve amount of token 0 (normalized)
 - `Reserve₁`: Reserve amount of token 1 (normalized)
 
@@ -301,9 +348,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 5. Compound Interest Rate Model
+
 **Formula:** `Rate = Base_Rate + Slope × Utilization`
 
 **Arguments:**
+
 - `Base_Rate`: Minimum interest rate at 0% utilization (decimal)
 - `Utilization`: Pool utilization ratio (0-1)
 - `Slope`: Rate increase per unit of utilization (decimal)
@@ -313,9 +362,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 6. Collateral Ratio
+
 **Formula:** `CR = Collateral_Value / Debt_Value`
 
 **Arguments:**
+
 - `Collateral_Value`: USD value of posted collateral
 - `Debt_Value`: USD value of borrowed assets
 
@@ -324,9 +375,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 7. Liquidation Price
+
 **Formula:** `P_liquidation = Entry_Price / Liquidation_Threshold`
 
 **Arguments:**
+
 - `Entry_Price`: Price when position opened
 - `Liquidation_Threshold`: Minimum collateral ratio (e.g., 1.3 for 130%)
 
@@ -335,9 +388,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 8. Yield Farming APY
+
 **Formula:** `APY = (Rewards_per_Block × Blocks_per_Year) / Total_Staked`
 
 **Arguments:**
+
 - `Rewards_per_Block`: Token rewards per block
 - `Blocks_per_Year`: Annual block count (~2,102,400 for Ethereum)
 - `Total_Staked`: Total tokens staked in pool
@@ -347,9 +402,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 9. Slippage
+
 **Formula:** `Slippage = Amount_in / (Reserve + Amount_in)`
 
 **Arguments:**
+
 - `Amount_in`: Trade input amount
 - `Reserve`: Pool reserve of input token
 
@@ -358,9 +415,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 10. LP Token Share
+
 **Formula:** `LP_Tokens = (Deposit / Total_Liquidity) × Total_Shares`
 
 **Arguments:**
+
 - `Deposit`: Amount being deposited
 - `Total_Liquidity`: Current total pool liquidity
 - `Total_Shares`: Outstanding LP token supply
@@ -370,9 +429,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 11. Health Factor (Aave)
+
 **Formula:** `HF = (Collateral × Liquidation_Threshold) / Debt`
 
 **Arguments:**
+
 - `Collateral`: Total collateral value (USD)
 - `Liquidation_Threshold`: Protocol-specific threshold (0.75-0.85 typical)
 - `Debt`: Total debt value (USD)
@@ -382,9 +443,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 12. Perpetual Funding Rate
+
 **Formula:** `Funding = (Mark_Price - Index_Price) / Index_Price / Interval`
 
 **Arguments:**
+
 - `Mark_Price`: Perpetual contract mark price
 - `Index_Price`: Underlying spot index price
 - `Interval`: Funding interval in hours (typically 8)
@@ -394,9 +457,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 13. Price Impact
+
 **Formula:** `Impact = (Trade_Size / Liquidity)^0.5`
 
 **Arguments:**
+
 - `Trade_Size`: Size of trade
 - `Liquidity`: Available liquidity depth
 
@@ -405,9 +470,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 14. Staking Rewards
+
 **Formula:** `Rewards = Staked × Rate × (Days / 365)`
 
 **Arguments:**
+
 - `Staked`: Amount staked
 - `Rate`: Annual reward rate (APR)
 - `Days`: Number of days staked
@@ -417,9 +484,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 15. Linear Bonding Curve
+
 **Formula:** `Price = Supply × Reserve_Ratio`
 
 **Arguments:**
+
 - `Supply`: Current token supply
 - `Reserve_Ratio`: Reserve ratio parameter (0-1)
 
@@ -428,9 +497,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 16. Flash Loan Fee
+
 **Formula:** `Fee = Loan_Amount × Fee_Rate`
 
 **Arguments:**
+
 - `Loan_Amount`: Amount of flash loan
 - `Fee_Rate`: Protocol fee rate (typically 0.05-0.09%)
 
@@ -439,9 +510,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 17. Linear Vesting Schedule
+
 **Formula:** `Vested = Total × (Time_Elapsed / Vesting_Period)`
 
 **Arguments:**
+
 - `Total`: Total tokens to vest
 - `Time_Elapsed`: Days since vesting start
 - `Vesting_Period`: Total vesting duration (days)
@@ -451,9 +524,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 18. Arbitrage Profit
+
 **Formula:** `Profit = (Price_B - Price_A) × Trade_Size`
 
 **Arguments:**
+
 - `Price_A`: Price on exchange A
 - `Price_B`: Price on exchange B (higher)
 - `Trade_Size`: Arbitrage trade size
@@ -463,9 +538,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 19. Gas Cost ROI
+
 **Formula:** `ROI = (Profit - Gas_Cost) / Gas_Cost`
 
 **Arguments:**
+
 - `Profit`: Transaction profit
 - `Gas_Cost`: Ethereum gas cost
 
@@ -474,9 +551,11 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ---
 
 ### 20. Concentrated Liquidity Position (Uniswap V3)
+
 **Formula:** `Amount₀ = L × (√P_upper - √P) / (√P × √P_upper)`
 
 **Arguments:**
+
 - `L` (liquidity): Position liquidity value
 - `√P`: Square root of current price
 - `√P_lower`: Square root of lower tick price
@@ -489,12 +568,14 @@ Each formula includes practical interpretation guidelines (e.g., "Sharpe > 1 is 
 ## Usage Categories
 
 ### Risk Management Applications
+
 - **Portfolio Construction**: Sharpe, Sortino, Treynor ratios for strategy selection
 - **Risk Budgeting**: VaR, CVaR for position sizing and limits
 - **Performance Attribution**: Information Ratio, Beta for manager evaluation
 - **Stress Testing**: Maximum Drawdown, Ulcer Index for worst-case analysis
 
 ### DeFi Applications
+
 - **Liquidity Provision**: IL, Pool Value, LP Tokens for AMM participation
 - **Lending/Borrowing**: Utilization Rate, Collateral Ratio, Health Factor for loan management
 - **Trading**: Slippage, Price Impact, Arbitrage Profit for execution optimization

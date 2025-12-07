@@ -1,4 +1,5 @@
 Critical Errors Found and Fixed:
+
 1. Incorrect Scorer Usage ⚠️ MAJOR BUG
 Original:
 pythonscorer = Scorer(nlp)  # Wrong in spaCy v3+
@@ -54,6 +55,7 @@ python# For deployment
 scores = evaluate_spacy_model("models/my_ner_model", validation_data)
 
 # Check if model is good enough
+
 if scores['ents_f'] >= 0.85:
     print("Model ready for deployment!")
 else:

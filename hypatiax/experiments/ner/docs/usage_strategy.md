@@ -7,17 +7,13 @@ Description → Entities[Desc]:
 
 Extract: [OPER: calculate], [TARGET: area], [OBJECT: circle]
 
-
 Entities[Desc] → Entities[Formula]:
 
 Map: [FUNC: formula], [VAR: A], [SHAPE: circle]
 
-
 Entities[Formula] → Formula:
 
 Generate: A = pi * r^2
-
-
 
 Test separately: Measure accuracy at each stage with ground truth to isolate errors.
 
@@ -29,18 +25,13 @@ Extract joint entities:
 Desc entities: [OPER: calculate], [TARGET: area], [OBJECT: circle]
 Formula entities: [VAR: A], [CONST: pi], [VAR: r], [OPER: ^2]
 
-
 Train mapping:
 
 Learn pattern: [TARGET: area] + [OBJECT: circle] → A = pi * r^2
 
-
 Test end-to-end:
 
 Measure full pipeline performance with error propagation
-
-
-
 
 Key difference: Strategy
 
@@ -67,7 +58,6 @@ Tests each component separately to isolate errors
 Description NER accuracy
 Entity mapping accuracy
 Formula NER accuracy
-
 
 Measures performance at each stage with ground truth
 Prevents error propagation during testing

@@ -32,11 +32,13 @@ python setup-all.py
 ### Manual Setup
 
 #### 1. Setup Frontend
+
 ```bash
 python frontend-setup.py
 ```
 
 #### 2. Setup Backend
+
 ```bash
 python backend-setup.py
 cd backend
@@ -47,6 +49,7 @@ python -m spacy download en_core_web_sm
 ```
 
 #### 3. Run Application
+
 ```bash
 # Using Make
 make run
@@ -174,7 +177,7 @@ pip install pytest pytest-cov black flake8
 
 ### Web Interface
 
-1. Open http://localhost:8000 in your browser
+1. Open <http://localhost:8000> in your browser
 2. Navigate to NER Demo
 3. Enter a Tableau query like: "Sum of sales by year"
 4. Click "Extract Entities"
@@ -230,9 +233,11 @@ print(f"Entities: {result['entities']}")
 ### Endpoints
 
 #### `GET /api/health`
+
 Health check endpoint
 
 **Response:**
+
 ```json
 {
   "status": "online",
@@ -243,9 +248,11 @@ Health check endpoint
 ```
 
 #### `POST /api/map`
+
 Map natural language description to Tableau formula
 
 **Request:**
+
 ```json
 {
   "description": "Sum of sales by year",
@@ -254,6 +261,7 @@ Map natural language description to Tableau formula
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -265,18 +273,21 @@ Map natural language description to Tableau formula
 ```
 
 **Methods:**
+
 - `vocab`: Vocabulary-based mapping (recommended)
 - `sentence`: Sentence pattern matching
 - `regex`: Regular expression mapping
 - `ner`: Pure NER model
 
 #### `GET /api/test`
+
 Run test suite with sample queries
 
 #### `GET /metrics`
+
 Prometheus metrics endpoint
 
-For complete API documentation, visit: http://localhost:8000/docs.html
+For complete API documentation, visit: <http://localhost:8000/docs.html>
 
 ## 🛠️ Development
 
@@ -366,7 +377,7 @@ def test_custom_mapping(client):
         'description': 'Count of unique customers',
         'method': 'vocab'
     })
-    
+
     assert response.status_code == 200
     data = response.json
     assert 'formula' in data
@@ -408,6 +419,7 @@ docker-compose logs -f backend
 ### Production Deployment
 
 See [DEPLOYMENT.md](docs/setup/DEPLOYMENT.md) for detailed instructions on:
+
 - AWS deployment (EC2, ECS, Lambda)
 - Google Cloud deployment (Cloud Run, GKE)
 - Azure deployment (Container Instances, AKS)
@@ -432,9 +444,10 @@ WORKERS=4
 
 ### Metrics
 
-Access Prometheus metrics at: http://localhost:5000/metrics
+Access Prometheus metrics at: <http://localhost:5000/metrics>
 
 Key metrics:
+
 - `hypatiax_requests_total`: Total requests
 - `hypatiax_request_duration_seconds`: Request duration
 - `hypatiax_ner_extractions_total`: NER extractions

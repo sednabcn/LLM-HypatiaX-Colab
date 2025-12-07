@@ -25,6 +25,7 @@ Export functionality - Generate PDF or print-friendly version
 
 Which interactive features would be most useful for you? I can create an enhanced version with JavaScript interactivity!RetryR2,3,6,8 generating a flow chart output alsoInteractive HypatiaX Algorithm FlowInteractive artifact RetryRContinueInteractive HypatiaX Algorithm FlowInteractive artifact ∙ Version 2 Perfect! I've created an interactive version with all the features you requested:
 ✨ Interactive Features Added:
+
 1. Step Highlighting 🎯
 
 Hover: Steps scale and highlight on hover

@@ -4,8 +4,8 @@ bash
 pip install intel-extension-for-pytorch
 python
 
-import torch
 import intel_extension_for_pytorch as ipex
+import torch
 
 model = AutoModelForSequenceClassification.from_pretrained(model_name)
 model = model.to('cpu')
@@ -94,7 +94,7 @@ nlp.add_pipe("ner")
 # Train with CPU optimization
 with nlp.select_pipes(enable=["ner"]):
     optimizer = nlp.resume_training()
-    
+
     for epoch in range(20):
         for batch in spacy.util.minibatch(train_data, size=8):  # Small batches
             nlp.update(batch, sgd=optimizer, drop=0.5)

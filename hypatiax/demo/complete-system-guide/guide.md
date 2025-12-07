@@ -91,6 +91,7 @@ demo.run()
 **Purpose**: Handles NER model integration, entity extraction, and formula generation
 
 **Key Classes**:
+
 - `HypatiaXEngine`: Main processing engine
 - `Entity`: Represents extracted entities
 - `ProcessingResult`: Container for results
@@ -130,6 +131,7 @@ print(f"Success rate: {stats['successful_mappings'] / stats['total_queries']:.2%
 ```
 
 **Features**:
+
 - ✅ Multiple mapping methods (vocab, sentence, regex, NER)
 - ✅ GPU acceleration support
 - ✅ Fallback to rule-based when models unavailable
@@ -143,6 +145,7 @@ print(f"Success rate: {stats['successful_mappings'] / stats['total_queries']:.2%
 **Purpose**: Rich console output, visualizations, and interactive components
 
 **Key Classes**:
+
 - `UIComponents`: Static UI building blocks
 - `InteractiveDemo`: Full interactive demo runner
 - `Colors`: ANSI color codes
@@ -182,6 +185,7 @@ demo.run()  # Interactive menu-driven interface
 ```
 
 **UI Components Available**:
+
 - 📊 Headers, subheaders, dividers
 - 📦 Text boxes and tables
 - 📈 Progress bars
@@ -198,6 +202,7 @@ demo.run()  # Interactive menu-driven interface
 **Purpose**: Manage training/test examples with categorization and validation
 
 **Key Classes**:
+
 - `Example`: Single example with metadata
 - `ExampleManager`: Full example collection management
 - `ExampleCategory`: Enum for categories
@@ -256,6 +261,7 @@ print(f"Average difficulty: {stats['avg_difficulty']:.2f}")
 ```
 
 **Features**:
+
 - ✅ 15+ default examples across 5 categories
 - ✅ Filter by category, difficulty, tags
 - ✅ Random sampling with constraints
@@ -265,6 +271,7 @@ print(f"Average difficulty: {stats['avg_difficulty']:.2f}")
 - ✅ Collection statistics
 
 **Default Categories**:
+
 - `BASIC`: Simple aggregations (sum, avg, count)
 - `INTERMEDIATE`: With grouping (by region, per product)
 - `ADVANCED`: Complex calculations (YoY growth, ratios)
@@ -370,7 +377,7 @@ def map_description():
         query=data['description'],
         method=data.get('method', 'vocab')
     )
-    
+
     return jsonify({
         'formula': result.formula,
         'entities': [
@@ -412,12 +419,12 @@ print(ui.header("Benchmark Results"))
 for method in methods:
     correct = 0
     total = len(test_examples)
-    
+
     for example in test_examples:
         result = engine.process(example.description, method=method)
         if result.formula == example.expected_formula:
             correct += 1
-    
+
     accuracy = correct / total
     results[method] = accuracy
     print(f"{method.capitalize()}: {accuracy:.2%} ({correct}/{total})")
@@ -440,14 +447,14 @@ from demo.ui import UIComponents
 def run_simple_demo():
     engine = HypatiaXEngine()
     ui = UIComponents()
-    
+
     print(ui.header("Simple HypatiaX Demo"))
-    
+
     while True:
         query = input("\nEnter query (or 'quit'): ").strip()
         if query.lower() == 'quit':
             break
-        
+
         result = engine.process(query)
         print(ui.formula_display(result.formula, result.confidence))
 
@@ -463,17 +470,17 @@ import pandas as pd
 
 def batch_demo(input_file: str, output_file: str):
     engine = HypatiaXEngine()
-    
+
     # Read queries from file
     df = pd.read_csv(input_file)
     queries = df['query'].tolist()
-    
+
     # Process all
     results = engine.batch_process(queries)
-    
+
     # Save results
     engine.export_results(results, output_file, format='csv')
-    
+
     print(f"Processed {len(results)} queries")
     print(f"Results saved to {output_file}")
 
@@ -492,6 +499,7 @@ Simply open `linkedin_visual_demo.html` in your browser for a standalone demo.
 ### 2. With Backend (Full System)
 
 **Start Backend**:
+
 ```bash
 cd backend
 python app.py  # Runs on http://localhost:5000
@@ -564,6 +572,7 @@ manager.add_example(Example(
 ## 🎓 Next Steps
 
 1. **Test the System**: Run interactive demo
+
    ```bash
    python demo/ui.py
    ```
@@ -612,11 +621,12 @@ manager.add_example(Example(
 
 ---
 
-## 🎉 You're All Set!
+## 🎉 You're All Set
 
-You now have a complete, production-ready system for NLP-powered Tableau formula generation! 
+You now have a complete, production-ready system for NLP-powered Tableau formula generation!
 
 **Quick Links**:
+
 - Run demo: `python -c "from demo.ui import InteractiveDemo; from demo.engine import HypatiaXEngine; InteractiveDemo(HypatiaXEngine()).run()"`
 - View examples: `python -c "from demo.examples import ExampleManager; m = ExampleManager(); print(m.get_statistics())"`
 - Start web demo: Open `linkedin_visual_demo.html`

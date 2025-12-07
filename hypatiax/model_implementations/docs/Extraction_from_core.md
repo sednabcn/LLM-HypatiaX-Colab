@@ -7,6 +7,7 @@
 ## Current State Assessment
 
 ### ✅ What's Working (Don't Touch)
+
 ```
 core/
 ├── training/
@@ -39,6 +40,7 @@ core/
 ## Extraction Triggers
 
 ### 🔴 **Don't Extract If:**
+
 - File is < 200 lines
 - Code works fine
 - You're not currently editing it
@@ -46,6 +48,7 @@ core/
 - You're busy with other features
 
 ### 🟢 **Do Extract If:**
+
 - File is > 500 lines (too complex)
 - You're already editing it anyway
 - You need to reuse the model
@@ -57,9 +60,11 @@ core/
 ## Example Scenarios
 
 ### Scenario 1: Adding GPT-4 Integration
+
 **Question:** Should I extract existing LLM code first?
 
 **Answer:** ❌ NO
+
 ```python
 # Just add new file
 # model_implementations/llm/gpt4_wrapper.py
@@ -68,9 +73,11 @@ class GPT4Wrapper:
 ```
 
 ### Scenario 2: `training_spacy.py` has a bug
+
 **Question:** Should I extract while fixing?
 
 **Answer:** ❌ NO (unless file is huge)
+
 ```python
 # Just fix the bug in place
 # core/training/training_spacy.py
@@ -80,9 +87,11 @@ def train_spacy_model():
 ```
 
 ### Scenario 3: Need 3 different spaCy model variants
+
 **Question:** Should I extract now?
 
 **Answer:** ✅ YES
+
 ```python
 # Extract base class
 # model_implementations/ner/base_spacy_ner.py
@@ -100,9 +109,11 @@ class SpacyNERV2(BaseSpacyNER):
 ```
 
 ### Scenario 4: `training_transformer.py` is 800 lines
+
 **Question:** Should I extract?
 
 **Answer:** ✅ YES (file is too large)
+
 ```python
 # Extract model architecture
 # model_implementations/transformers/bert_classifier.py
@@ -125,26 +136,31 @@ def train_transformer():
 ## Your Action Plan
 
 ### **Week 1-4: Coexistence Phase** ✅ (You are here)
+
 ```
 Status: Add new models to model_implementations/, leave core/ alone
 ```
 
 **Do:**
+
 - Add new architectures to `model_implementations/`
 - Keep using existing `core/` files as-is
 - Document what's in each new file
 
 **Don't:**
+
 - Don't refactor working code
 - Don't extract from `core/` yet
 - Don't worry about the mess
 
 ### **Month 2+: Opportunistic Extraction** (Future)
+
 ```
 Status: Extract only when already editing that file
 ```
 
 **Rules:**
+
 1. Editing `training_spacy.py` for a new feature?
    - → Consider extracting while you're there
 2. File works fine and you're not touching it?
@@ -156,7 +172,8 @@ Status: Extract only when already editing that file
 
 ## Code Smells That Indicate "Time to Extract"
 
-### 🚨 Extract When You See:
+### 🚨 Extract When You See
+
 ```python
 # core/training/training_spacy.py
 
@@ -183,7 +200,8 @@ def evaluate():            # ← Evaluation
 
 **This file does TOO MUCH** → Time to extract
 
-### ✅ OK to Keep:
+### ✅ OK to Keep
+
 ```python
 # core/training/training_spacy.py
 
@@ -204,6 +222,7 @@ def train_spacy_model():   # ← Just training workflow
 **You want to add BERT-based NER:**
 
 ### ❌ Bad Approach (Premature Refactoring)
+
 ```
 1. Extract all models from core/training/
 2. Reorganize everything
@@ -214,6 +233,7 @@ def train_spacy_model():   # ← Just training workflow
 ```
 
 ### ✅ Good Approach (Your Strategy)
+
 ```
 1. Create model_implementations/ner/bert_ner.py
 2. Add BERT model directly there
@@ -258,6 +278,7 @@ Before extracting anything from `core/`, ask:
 ## Final Recommendation
 
 **Do this:**
+
 ```python
 # Add new models to model_implementations/
 model_implementations/llm/claude_wrapper.py     # NEW
@@ -265,12 +286,14 @@ model_implementations/transformers/t5_model.py  # NEW
 ```
 
 **Don't do this (yet):**
+
 ```python
 # Extract from existing core/ files
 core/training/training_spacy.py → model_implementations/ner/spacy_ner.py
 ```
 
 **Do this later (when needed):**
+
 ```python
 # Only when you're already editing training_spacy.py for other reasons
 ```

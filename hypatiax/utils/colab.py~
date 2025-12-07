@@ -21,11 +21,11 @@ def save_model(nlp, model_name, location):
         if location == 'remote':
             logging.info("Manual steps for saving model remotely provided.")
             return
-        
+
         if folder_path is None:
             logging.error("Invalid location provided. Use 'drive', 'colab', 'disk', or 'remote'.")
             return
-        
+
         if location == 'drive':
             drive.mount('/content/drive')
 
@@ -63,7 +63,7 @@ def files_management(option, filename):
         if option == 'update':
             # Add logic for update if specific
             logging.info(f"Update option selected for {filename}.")
-        
+
         # Upload or process files
         if not os.path.exists(file_path):
             files.upload()  # Upload if file doesn't exist

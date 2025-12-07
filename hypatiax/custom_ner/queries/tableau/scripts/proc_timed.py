@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+import os
 import subprocess
 import time
-import os
-from hypatiax.utils.utils import run_script,elapsed_run_time
+
+from hypatiax.utils.utils import elapsed_run_time, run_script
+
 # Record the start time
 start_time = time.perf_counter()
 
@@ -14,5 +16,4 @@ run_script("../tests/test_tableau_desc.py")
 end_time = time.perf_counter()
 
 # Calculate the elapsed time
-elapsed_run_time(start_time,end_time)
-     
+elapsed_run_time(start_time, end_time)

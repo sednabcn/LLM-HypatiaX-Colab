@@ -75,12 +75,12 @@ fi
 backup_requirements() {
     echo -e "${YELLOW}[1/5] Creating backup...${NC}"
     TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-    
+
     if [ -f "$REQUIREMENTS_FILE" ]; then
         cp "$REQUIREMENTS_FILE" "${REQUIREMENTS_FILE}.backup.${TIMESTAMP}"
         echo -e "${GREEN}✓ Backup created: ${REQUIREMENTS_FILE}.backup.${TIMESTAMP}${NC}"
     fi
-    
+
     # Create current state backup
     pip freeze > "requirements.freeze.${ENV_TYPE}.backup.${TIMESTAMP}.txt"
     echo -e "${GREEN}✓ Current packages saved: requirements.freeze.${ENV_TYPE}.backup.${TIMESTAMP}.txt${NC}\n"
@@ -103,24 +103,24 @@ install_security_tools() {
 # Function to scan vulnerabilities
 scan_vulnerabilities() {
     echo -e "${YELLOW}[4/5] Scanning for vulnerabilities...${NC}\n"
-    
+
     echo "=== pip-audit scan ==="
     pip-audit --desc || true
-    
+
     echo -e "\n=== safety scan ==="
     safety check || true
-    
+
     echo ""
 }
 
 # Function to fix critical vulnerabilities
 fix_critical() {
     echo -e "${YELLOW}[5/5] Fixing CRITICAL and HIGH severity vulnerabilities...${NC}\n"
-    
+
     # Critical fixes
     echo -e "${RED}Fixing CRITICAL issues...${NC}"
     pip install --upgrade 'h11>=0.14.0' || echo "h11 update failed (may not be installed)"
-    
+
     # High severity fixes
     echo -e "${RED}Fixing HIGH severity issues...${NC}"
     pip install --upgrade 'django>=4.2.11' || echo "django update failed (may not be installed)"
@@ -132,7 +132,7 @@ fix_critical() {
     pip install --upgrade 'setuptools>=70.0.0' || echo "setuptools already updated"
     pip install --upgrade 'redis>=5.0.3' || echo "redis update failed (may not be installed)"
     pip install --upgrade 'ecdsa>=0.19.0' || echo "ecdsa update failed (may not be installed)"
-    
+
     echo -e "\n${GREEN}✓ Critical and High severity fixes attempted${NC}\n"
 }
 
@@ -145,7 +145,7 @@ fix_all_auto() {
 # Function to update moderate/low severity packages
 fix_moderate_low() {
     echo -e "${YELLOW}Fixing MODERATE and LOW severity issues...${NC}\n"
-    
+
     pip install --upgrade 'pypdf>=4.1.0' || echo "pypdf update failed (may not be installed)"
     pip install --upgrade 'transformers>=4.38.0' || echo "transformers update failed (may not be installed)"
     pip install --upgrade 'urllib3>=2.2.1' || echo "urllib3 update failed (may not be installed)"
@@ -159,7 +159,7 @@ fix_moderate_low() {
     pip install --upgrade 'mitmproxy>=10.2.4' || echo "mitmproxy update failed (may not be installed)"
     pip install --upgrade 'h2>=4.1.0' || echo "h2 update failed (may not be installed)"
     pip install --upgrade 'pycares>=4.4.0' || echo "pycares update failed (may not be installed)"
-    
+
     echo -e "\n${GREEN}✓ Moderate and Low severity fixes attempted${NC}\n"
 }
 
@@ -176,7 +176,7 @@ show_summary() {
     echo -e "${GREEN}=== Fix Summary ===${NC}\n"
     echo -e "${BLUE}Environment: $ENV_TYPE${NC}"
     echo -e "${BLUE}Requirements File: $REQUIREMENTS_FILE${NC}\n"
-    
+
     echo "Backups created:"
     ls -lh *backup*.${ENV_TYPE}* 2>/dev/null || ls -lh ${REQUIREMENTS_FILE}.backup* 2>/dev/null || echo "  No backups found"
     echo ""
@@ -207,21 +207,21 @@ show_summary() {
 # Main execution
 main() {
     MODE=${1:-local}
-    
+
     echo -e "Running in ${GREEN}$MODE${NC} mode\n"
-    
+
     # Always create backup first
     backup_requirements
-    
+
     # Update core tools
     update_pip_tools
-    
+
     # Install security tools
     install_security_tools
-    
+
     # Initial scan
     scan_vulnerabilities
-    
+
     # Ask user what to fix
     echo -e "${YELLOW}What would you like to fix?${NC}"
     echo "1) Critical and High severity only (recommended)"
@@ -229,7 +229,7 @@ main() {
     echo "3) Everything including Moderate/Low"
     echo "4) Exit without fixing"
     read -p "Choose [1-4]: " choice
-    
+
     case $choice in
         1)
             fix_critical
@@ -250,14 +250,14 @@ main() {
             exit 1
             ;;
     esac
-    
+
     # Save new requirements
     save_requirements
-    
+
     # Final scan
     echo -e "\n${YELLOW}Running final security scan...${NC}\n"
     pip-audit --desc || true
-    
+
     # Show summary
     show_summary
 }

@@ -1,4 +1,5 @@
 Summary of Updates
+
 1. Enhanced config.py
 
 Multi-environment detection: Local, GitHub Actions, Docker, AWS, GCP, Azure, CI/CD
@@ -44,10 +45,12 @@ bash# Local development
 source activate_hypatiax.sh
 
 # Docker
+
 docker build --target development -t hypatiax:dev .
 docker run -v $(pwd):/app -it hypatiax:dev
 
 # In Python
+
 from hypatiax.config import config
 output_path = config.get_output_path('results', 'experiment.json')
 All artifacts are ready to use in your project!

@@ -1,48 +1,47 @@
-#/usr/bin/python3
- 
+# /usr/bin/python3
+
+
 class TreeNode:
     def __init__(self, name):
         self.name = name
         self.metrics = {}
         self.children = []
-        
-    def add_metric(self,key, value):
+
+    def add_metric(self, key, value):
         if key in self.metrics:
-            self.metrics[key]+= value
+            self.metrics[key] += value
         else:
             self.metrics[key] = value
-            
+
     def add_child(self, child):
-         self.children.append(child)
-         
-         
+        self.children.append(child)
+
     def __repr__(self):
         return f"{self.name}: {self.metrics}"
 
 
 class TreeDict(TreeNode):
-    def __init__(self,dictionary,name=None):
+    def __init__(self, dictionary, name=None):
         super().__init__(name)
-        self.dictionary=dictionary
+        self.dictionary = dictionary
 
-    def is_tree(self,value):
-         return isinstance(value, dict)
+    def is_tree(self, value):
+        return isinstance(value, dict)
 
     def check_for_trees(self):
-        """ Recursively check and print if a dictionary
-        contains tree-like nested dictionaries. """
+        """Recursively check and print if a dictionary
+        contains tree-like nested dictionaries."""
         for key, value in self.dictionary.items():
             if self.is_tree(value):
                 print(f"{key} is a tree : {value}")
                 # Recursive call to explore deeper if needed
-                check_for_trees(value)  
+                check_for_trees(value)
             else:
                 print(f"{key} is not a tree: {value}")
 
-     
     def identify_root_and_subtrees(self, depth=0):
-        """ Recursive function to print root and subtrees
-        with indentation based on depth. """
+        """Recursive function to print root and subtrees
+        with indentation based on depth."""
         if depth == 0:
             print("Root of the Tree:")
         else:
@@ -51,12 +50,12 @@ class TreeDict(TreeNode):
         for key, value in self.dictionary.items():
             if isinstance(value, dict):
                 # Print current key and value to
-                #indicate it's a nested dictionary (subtree)
+                # indicate it's a nested dictionary (subtree)
                 print("\t" * depth + f"{key}:")
                 self.identify_root_and_subtrees(value, depth + 1)
             else:
                 # Print current key and value to show
-                #it's a leaf or non-dictionary value
+                # it's a leaf or non-dictionary value
                 print("\t" * depth + f"{key}: {value}")
 
     def check_for_single_root(self):
@@ -85,13 +84,13 @@ class TreeDict(TreeNode):
         return overarching_root, roots, leaves
 
     def check_for_root(self):
-        leaves=[]
-        roots=[]
+        leaves = []
+        roots = []
         for key, data in self.dictionary.items():
             if self.is_tree(data):
                 root = TreeNode(key)
                 roots.append(key)
-                #print("Root for key:", key)
+                # print("Root for key:", key)
                 for ent_type, metrics in data.items():
                     child = TreeNode(ent_type)
                     for metric, value in metrics.items():
@@ -99,50 +98,50 @@ class TreeDict(TreeNode):
                     root.add_child(child)
             else:
                 leaves.append(key)
-                #print("No root for key:", key)
-        return root,roots,leaves
+                # print("No root for key:", key)
+        return root, roots, leaves
 
-    def add_metrics(self,node1, node2):
+    def add_metrics(self, node1, node2):
         # Assume both nodes have the same structure
         new_node = TreeNode(node1.name)
         for key in node1.metrics:
             new_node.metrics[key] = node1.metrics[key] + node2.metrics[key]
         return new_node
 
-    def avg_metrics(self,node,ntotal):
-        new_node=TreeNode(node.name)
+    def avg_metrics(self, node, ntotal):
+        new_node = TreeNode(node.name)
         for key in node.metrics:
-            new_node.metrics[key]/=ntotal
+            new_node.metrics[key] /= ntotal
+
 
 class TreeOPDict(TreeDict):
-       def __init__(self,dictionary=None,name=None):
-           super().__init__(dictionary,name)
+    def __init__(self, dictionary=None, name=None):
+        super().__init__(dictionary, name)
 
-       def merge_trees(self, total_root, batch_root):
-           for child in batch_root.children:
-               existing_child = self.find_child_by_name(total_root, child.name)
-               if existing_child:
-                   for key, value in child.metrics.items():
-                       existing_child.add_metric(key, value)
-               else:
-                   total_root.add_child(child)
-       
-       def find_child_by_name(self,node, name):
-          for child in node.children:
-              if child.name == name:
-                  return child
-          return None
+    def merge_trees(self, total_root, batch_root):
+        for child in batch_root.children:
+            existing_child = self.find_child_by_name(total_root, child.name)
+            if existing_child:
+                for key, value in child.metrics.items():
+                    existing_child.add_metric(key, value)
+            else:
+                total_root.add_child(child)
 
-       def average_tree_metrics(self,node, num_batches):
-           for key in node.metrics:
-              
-              node.metrics[key] /= num_batches
-              
-           for child in node.children:
-                  self.average_tree_metrics(child, num_batches)
-                    
-                    
-    
+    def find_child_by_name(self, node, name):
+        for child in node.children:
+            if child.name == name:
+                return child
+        return None
+
+    def average_tree_metrics(self, node, num_batches):
+        for key in node.metrics:
+
+            node.metrics[key] /= num_batches
+
+        for child in node.children:
+            self.average_tree_metrics(child, num_batches)
+
+
 """
 # Tests
 # Example dictionary with nested structures

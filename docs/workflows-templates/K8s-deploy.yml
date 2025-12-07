@@ -36,7 +36,7 @@ jobs:
       namespace: ${{ steps.env.outputs.namespace }}
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Determine environment
         id: env
         run: |
@@ -50,7 +50,7 @@ jobs:
             echo "environment=dev" >> $GITHUB_OUTPUT
             echo "namespace=hypatiax-dev" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
@@ -67,19 +67,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install kubectl and helm
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
-          
+
           curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-      
+
       - name: Generate Kubernetes manifests
         run: |
           mkdir -p k8s-manifests
-          
+
           # Namespace
           cat > k8s-manifests/00-namespace.yaml << EOF
           apiVersion: v1
@@ -90,7 +90,7 @@ jobs:
               name: ${{ needs.prepare.outputs.namespace }}
               environment: ${{ needs.prepare.outputs.environment }}
           EOF
-          
+
           # ConfigMap
           cat > k8s-manifests/01-configmap.yaml << EOF
           apiVersion: v1
@@ -103,7 +103,7 @@ jobs:
             LOG_LEVEL: "INFO"
             PYTHONUNBUFFERED: "1"
           EOF
-          
+
           # Secret (placeholder - use sealed-secrets or external secrets in production)
           cat > k8s-manifests/02-secret.yaml << EOF
           apiVersion: v1
@@ -117,7 +117,7 @@ jobs:
             REDIS_URL: "${{ secrets.REDIS_URL }}"
             API_KEY: "${{ secrets.API_KEY }}"
           EOF
-          
+
           # Deployment
           cat > k8s-manifests/03-deployment.yaml << 'EOF'
           apiVersion: apps/v1
@@ -201,7 +201,7 @@ jobs:
                 - name: cache
                   emptyDir: {}
           EOF
-          
+
           # Service
           cat > k8s-manifests/04-service.yaml << EOF
           apiVersion: v1
@@ -221,7 +221,7 @@ jobs:
             selector:
               app: hypatiax
           EOF
-          
+
           # Ingress
           cat > k8s-manifests/05-ingress.yaml << EOF
           apiVersion: networking.k8s.io/v1
@@ -251,7 +251,7 @@ jobs:
                       port:
                         number: 80
           EOF
-          
+
           # HorizontalPodAutoscaler
           cat > k8s-manifests/06-hpa.yaml << EOF
           apiVersion: autoscaling/v2
@@ -296,7 +296,7 @@ jobs:
                   value: 2
                   periodSeconds: 60
           EOF
-          
+
           # PersistentVolumeClaim
           cat > k8s-manifests/07-pvc.yaml << EOF
           apiVersion: v1
@@ -312,7 +312,7 @@ jobs:
                 storage: 10Gi
             storageClassName: standard
           EOF
-          
+
           # ServiceAccount
           cat > k8s-manifests/08-serviceaccount.yaml << EOF
           apiVersion: v1
@@ -345,7 +345,7 @@ jobs:
             name: hypatiax
             namespace: ${{ needs.prepare.outputs.namespace }}
           EOF
-      
+
       - name: Upload manifests
         uses: actions/upload-artifact@v4
         with:
@@ -360,53 +360,53 @@ jobs:
       url: https://hypatiax.${{ needs.prepare.outputs.environment }}.example.com
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Download manifests
         uses: actions/download-artifact@v4
         with:
           name: k8s-manifests
           path: k8s-manifests/
-      
+
       - name: Setup kubectl
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
-      
+
       - name: Configure kubectl
         run: |
           mkdir -p $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
-      
+
       - name: Verify cluster access
         run: |
           kubectl cluster-info
           kubectl get nodes
-      
+
       - name: Apply manifests
         run: |
           kubectl apply -f k8s-manifests/ --recursive
-      
+
       - name: Wait for rollout
         run: |
           kubectl rollout status deployment/hypatiax \
             -n ${{ needs.prepare.outputs.namespace }} \
             --timeout=5m
-      
+
       - name: Verify deployment
         run: |
           kubectl get all -n ${{ needs.prepare.outputs.namespace }}
           kubectl get pods -n ${{ needs.prepare.outputs.namespace }} -o wide
-      
+
       - name: Run smoke tests
         run: |
           # Wait for service to be ready
           sleep 30
-          
+
           # Get the service endpoint
           ENDPOINT=$(kubectl get svc hypatiax -n ${{ needs.prepare.outputs.namespace }} -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-          
+
           # Run health check
           curl -f http://${ENDPOINT}/health || echo "Health check failed"
 
@@ -420,12 +420,12 @@ jobs:
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
-      
+
       - name: Configure kubectl
         run: |
           mkdir -p $HOME/.kube
           echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > $HOME/.kube/config
-      
+
       - name: Rollback deployment
         run: |
           kubectl rollout undo deployment/hypatiax -n ${{ needs.prepare.outputs.namespace }}

@@ -106,7 +106,6 @@ DeFi twist: Many protocols compound every block (~7200 times/day on Ethereum), s
 
 This is exactly the kind of experimentation that builds intuition - keep testing different values! What DeFi formula do you want to explore next?
 
-
 Nov21.docx
 175 lines
 
@@ -150,6 +149,7 @@ This should feel much more like building Tableau dashboards than copying formula
 Want help with anything specific in today's plan? The backtest function, The Graph query, or analyzing results?
 
 This afternoon's work is the creative part - you get to:
+
 * Analyze "when does LP beat HODL?"
 * Find breakeven points
 * Visualize 90 days of real data  [Explain more] Improve the code
@@ -169,6 +169,7 @@ Net result = Fees - Impermanant Loss
 The Question: At what point do the fees you earn offset the impermanent loss?
 
 📊 The Three Key Metrics to Analyze
+
 1. Breakeven Point
 How many days until LP fees > impermanent loss?
 At what volatility level do fees compensate for IL?
@@ -183,7 +184,7 @@ Is it consistently better or volatile?
 
 💻 Improved Code with Better Analysis
 Enhanced DeFi LP Backtest Analysis
-Code 
+Code
 🎓 What This Code Does (The Creative Part!)
 Key Improvements:
 Comprehensive Analysis Engine

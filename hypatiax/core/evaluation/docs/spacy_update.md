@@ -1,4 +1,5 @@
 Key Fixes Applied:
+
 1. Deprecated API Usage (Critical)
 Original Issues:
 
@@ -90,9 +91,11 @@ entities = [(0, 10, "ORG"), (26, 36, "PERSON")]
 
 biluo_tags = offsets_to_biluo_tags(doc, entities)
 print(biluo_tags)
+
 # Output: ['B-ORG', 'L-ORG', 'O', 'O', 'O', 'B-PERSON', 'L-PERSON']
 
 # Display with tokens
+
 for token, tag in zip(doc, biluo_tags):
     print(f"{token.text:10} -> {tag}")
 Why This Matters
@@ -107,6 +110,7 @@ After prediction, you can convert back:
 pythonfrom spacy.training import biluo_tags_to_spans
 
 # Convert BILUO tags back to entity spans
+
 spans = biluo_tags_to_spans(doc, biluo_tags)
 doc.ents = spans  # Set entities on the document
 This is exactly what happens in the fixed testing code - it converts your offset annotations to BILUO format so spaCy can properly compare predicted vs. reference entities at the token level!

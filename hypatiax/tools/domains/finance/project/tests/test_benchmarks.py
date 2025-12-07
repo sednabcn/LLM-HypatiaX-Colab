@@ -1,13 +1,15 @@
 # tests/test_benchmarks.py
-from uniswap_v2_formulas_extended import DeFiAdvancedCalculator
 import pytest
+from uniswap_v2_formulas_extended import DeFiAdvancedCalculator
 
 calc = DeFiAdvancedCalculator()
+
 
 @pytest.mark.benchmark
 def test_benchmark_uniswap_tick(benchmark):
     # benchmark tick->price
     benchmark(calc.uniswap_v3_tick_to_price, 10000)
+
 
 @pytest.mark.benchmark
 def test_benchmark_curve_d(benchmark):

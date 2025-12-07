@@ -204,6 +204,7 @@ POST /generate_formula
 ```
 
 **Request:**
+
 ```json
 {
   "input_variables": ["price", "volume", "volatility"],
@@ -214,6 +215,7 @@ POST /generate_formula
 ```
 
 **Response:**
+
 ```json
 {
   "formula": "alpha = 0.5 * price + 0.3 * volume - 0.2 * volatility",
@@ -230,6 +232,7 @@ POST /validate_formula
 ```
 
 **Request:**
+
 ```json
 {
   "formula": "E = m * c^2",
@@ -239,6 +242,7 @@ POST /validate_formula
 ```
 
 **Response:**
+
 ```json
 {
   "is_valid": true,
@@ -256,6 +260,7 @@ POST /fine_tune
 ```
 
 **Request:**
+
 ```json
 {
   "dataset_path": "/data/custom_formulas.csv",
@@ -267,6 +272,7 @@ POST /fine_tune
 ```
 
 **Response:**
+
 ```json
 {
   "status": "training_started",
@@ -283,6 +289,7 @@ GET /experiments?technology=llm&status=completed
 ```
 
 **Response:**
+
 ```json
 {
   "experiments": [

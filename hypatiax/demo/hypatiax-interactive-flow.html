@@ -371,16 +371,16 @@
             .container {
                 padding: 20px;
             }
-            
+
             h1 {
                 font-size: 1.8em;
             }
-            
+
             .step-number {
                 position: static;
                 margin-bottom: 10px;
             }
-            
+
             .steps {
                 padding-left: 0;
                 border-left: none;
@@ -971,7 +971,7 @@
         // Handle step click
         function handleStepClick(stepNum) {
             const step = document.querySelector(`[data-step="${stepNum}"]`);
-            
+
             // Toggle completion
             if (completedSteps.has(stepNum)) {
                 completedSteps.delete(stepNum);
@@ -980,16 +980,16 @@
                 completedSteps.add(stepNum);
                 step.classList.add('completed');
             }
-            
+
             // Remove previous active
             if (currentActiveStep) {
                 currentActiveStep.classList.remove('active');
             }
-            
+
             // Set new active
             step.classList.add('active');
             currentActiveStep = step;
-            
+
             updateProgress();
             showConnections(stepNum);
             highlightConnectedSteps(stepNum);
@@ -1000,7 +1000,7 @@
             const total = 22;
             const completed = completedSteps.size;
             const percentage = (completed / total) * 100;
-            
+
             document.getElementById('progressFill').style.width = percentage + '%';
             document.getElementById('progressFill').textContent = Math.round(percentage) + '%';
             document.getElementById('progressText').textContent = `${completed} / ${total} Steps`;
@@ -1011,12 +1011,12 @@
             const step = document.querySelector(`[data-step="${stepNum}"]`);
             const inputs = step.dataset.inputs ? step.dataset.inputs.split(',') : [];
             const outputs = step.dataset.outputs ? step.dataset.outputs.split(',') : [];
-            
+
             const panel = document.getElementById('connectionsPanel');
             const list = document.getElementById('connectionsList');
-            
+
             let html = `<h3 style="color: #667eea; margin-bottom: 10px;">Step ${stepNum}</h3>`;
-            
+
             if (inputs.length > 0) {
                 html += '<div style="margin-bottom: 15px;"><strong style="color: #10b981;">📥 Receives from:</strong>';
                 inputs.forEach(input => {
@@ -1025,7 +1025,7 @@
                 });
                 html += '</div>';
             }
-            
+
             if (outputs.length > 0) {
                 html += '<div><strong style="color: #f59e0b;">📤 Sends to:</strong>';
                 outputs.forEach(output => {
@@ -1034,7 +1034,7 @@
                 });
                 html += '</div>';
             }
-            
+
             list.innerHTML = html;
             panel.classList.add('active');
         }
@@ -1043,11 +1043,11 @@
         function highlightConnectedSteps(stepNum) {
             // Remove all highlights
             document.querySelectorAll('.step').forEach(s => s.classList.remove('highlighted'));
-            
+
             const step = document.querySelector(`[data-step="${stepNum}"]`);
             const inputs = step.dataset.inputs ? step.dataset.inputs.split(',') : [];
             const outputs = step.dataset.outputs ? step.dataset.outputs.split(',') : [];
-            
+
             [...inputs, ...outputs].forEach(connectedStep => {
                 const num = connectedStep.replace('step', '');
                 const connectedElement = document.querySelector(`[data-step="${num}"]`);
@@ -1074,17 +1074,17 @@
         function generateFlowchart() {
             const modal = document.getElementById('flowchartModal');
             modal.style.display = 'block';
-            
+
             const canvas = document.getElementById('flowchartCanvas');
             const ctx = canvas.getContext('2d');
-            
+
             // Set canvas size
             canvas.width = canvas.offsetWidth;
             canvas.height = canvas.offsetHeight;
-            
+
             // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             // Drawing parameters
             const boxWidth = 150;
             const boxHeight = 60;
@@ -1092,7 +1092,7 @@
             const startY = 30;
             const horizontalSpacing = 200;
             const verticalSpacing = 100;
-            
+
             // Define phases and their steps
             const phases = [
                 { name: 'Phase 1', steps: [1, 2], color: '#667eea' },
@@ -1103,51 +1103,51 @@
                 { name: 'Phase 6', steps: [17, 18, 19, 20], color: '#8b5cf6' },
                 { name: 'Phase 7', steps: [21, 22], color: '#ec4899' }
             ];
-            
+
             let currentY = startY;
-            
+
             phases.forEach(phase => {
                 // Draw phase label
                 ctx.fillStyle = phase.color;
                 ctx.font = 'bold 14px Arial';
                 ctx.fillText(phase.name, 10, currentY + 25);
-                
+
                 let currentX = startX + 100;
-                
+
                 phase.steps.forEach((stepNum, index) => {
                     // Draw box
                     ctx.fillStyle = completedSteps.has(stepNum) ? '#10b981' : phase.color;
                     ctx.fillRect(currentX, currentY, boxWidth, boxHeight);
-                    
+
                     // Draw border
                     ctx.strokeStyle = '#333';
                     ctx.lineWidth = 2;
                     ctx.strokeRect(currentX, currentY, boxWidth, boxHeight);
-                    
+
                     // Draw step number
                     ctx.fillStyle = 'white';
                     ctx.font = 'bold 16px Arial';
                     ctx.textAlign = 'center';
                     ctx.fillText(`Step ${stepNum}`, currentX + boxWidth/2, currentY + boxHeight/2 + 5);
-                    
+
                     // Draw arrow to next step in same phase
                     if (index < phase.steps.length - 1) {
-                        drawArrow(ctx, currentX + boxWidth, currentY + boxHeight/2, 
+                        drawArrow(ctx, currentX + boxWidth, currentY + boxHeight/2,
                                      currentX + boxWidth + 30, currentY + boxHeight/2, '#666');
                     }
-                    
+
                     currentX += horizontalSpacing;
                 });
-                
+
                 // Draw arrow to next phase
                 if (phases.indexOf(phase) < phases.length - 1) {
-                    drawArrow(ctx, startX + 100 + boxWidth/2, currentY + boxHeight, 
+                    drawArrow(ctx, startX + 100 + boxWidth/2, currentY + boxHeight,
                                  startX + 100 + boxWidth/2, currentY + boxHeight + 30, '#667eea');
                 }
-                
+
                 currentY += verticalSpacing;
             });
-            
+
             ctx.textAlign = 'left';
         }
 
@@ -1156,12 +1156,12 @@
             ctx.strokeStyle = color;
             ctx.fillStyle = color;
             ctx.lineWidth = 2;
-            
+
             ctx.beginPath();
             ctx.moveTo(fromX, fromY);
             ctx.lineTo(toX, toY);
             ctx.stroke();
-            
+
             // Arrow head
             const angle = Math.atan2(toY - fromY, toX - fromX);
             ctx.beginPath();

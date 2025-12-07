@@ -1,0 +1,126 @@
+ ============================================================================
+# config/llm_provider_config.yaml
+# LLM provider configuration for Anthropic Claude and Google Gemini
+# ============================================================================
+
+llm_providers:
+  anthropic:
+    enabled: true
+    api_key_env_var: "ANTHROPIC_API_KEY"
+
+    models:
+      default: "claude-sonnet-4-5-20250929"
+      available:
+        - "claude-sonnet-4-5-20250929"
+        - "claude-opus-4-1-20250514"
+        - "claude-3-5-sonnet-20241022"
+
+    parameters:
+      max_tokens: 4096
+      temperature: 0.3
+      top_p: 0.95
+      timeout: 30.0
+
+    rate_limits:
+      requests_per_minute: 50
+      tokens_per_minute: 100000
+      concurrent_requests: 5
+
+    retry_config:
+      max_retries: 3
+      initial_delay: 1.0
+      exponential_backoff: true
+      backoff_multiplier: 2.0
+      max_delay: 10.0
+
+    performance_targets:
+      mean_latency_ms: 500
+      p95_latency_ms: 800
+      p99_latency_ms: 1200
+      error_rate_threshold: 0.01
+
+    features:
+      streaming: true
+      caching: true
+      function_calling: false
+
+  google:
+    enabled: true
+    api_key_env_var: "GEMINI_API_KEY"
+
+    models:
+      default: "gemini-2.5-flash"
+      available:
+        - "gemini-2.5-flash"
+        - "gemini-2.0-flash-exp"
+        - "gemini-1.5-pro"
+
+    parameters:
+      temperature: 0.2
+      top_p: 0.95
+      top_k: 40
+      timeout: 30.0
+
+    rate_limits:
+      requests_per_minute: 60
+      concurrent_requests: 10
+
+    retry_config:
+      max_retries: 3
+      initial_delay: 1.0
+      exponential_backoff: true
+      backoff_multiplier: 2.0
+      max_delay: 10.0
+
+    performance_targets:
+      mean_latency_ms: 400
+      p95_latency_ms: 600
+      p99_latency_ms: 900
+      error_rate_threshold: 0.01
+
+    features:
+      streaming: true
+      caching: false
+      function_calling: true
+
+# Fallback configuration
+fallback:
+  enabled: true
+  primary_provider: "anthropic"
+  fallback_provider: "google"
+
+  fallback_triggers:
+    - "rate_limit_exceeded"
+    - "timeout"
+    - "service_unavailable"
+    - "authentication_error"
+
+  fallback_delay_ms: 100
+
+# Caching configuration
+caching:
+  enabled: true
+  backend: "redis"
+  ttl_seconds: 3600
+
+  cache_keys:
+    formula_interpretation: "llm:interp:{formula_hash}"
+    validation_explanation: "llm:valid:{formula_hash}"
+
+  cache_hit_target: 0.40
+
+# Monitoring and logging
+monitoring:
+  enable_metrics: true
+  enable_tracing: true
+
+  metrics:
+    - "latency_ms"
+    - "tokens_used"
+    - "error_rate"
+    - "cache_hit_rate"
+    - "fallback_rate"
+
+  logging_level: "INFO"
+  log_requests: true
+  log_responses: false  # Contains sensitive data

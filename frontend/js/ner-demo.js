@@ -9,18 +9,18 @@ class NERDemo {
         this.apiClient = window.apiClient || new APIClient();
         this.initialize();
     }
-    
+
     async initialize() {
         console.log('Initializing NER Demo...');
         this.initializeElements();
         this.attachEventListeners();
         await this.checkAPIStatus();
     }
-    
+
     // ============================================================================
     // INITIALIZATION
     // ============================================================================
-    
+
     initializeElements() {
         // Demo controls
         this.modelSelect = document.getElementById('model-select');
@@ -28,7 +28,7 @@ class NERDemo {
         this.extractBtn = document.getElementById('extract-btn');
         this.clearBtn = document.getElementById('clear-btn');
         this.exampleBtn = document.getElementById('example-btn');
-        
+
         // Results
         this.loadingEl = document.getElementById('loading');
         this.resultsSection = document.getElementById('results-section');
@@ -39,32 +39,32 @@ class NERDemo {
         this.confidence = document.getElementById('confidence');
         this.rawJson = document.getElementById('raw-json');
         this.errorMessage = document.getElementById('error-message');
-        
+
         // Status
         this.apiStatus = document.getElementById('api-status');
     }
-    
+
     attachEventListeners() {
         if (this.extractBtn) {
             this.extractBtn.addEventListener('click', () => this.handleExtract());
         }
-        
+
         if (this.clearBtn) {
             this.clearBtn.addEventListener('click', () => this.handleClear());
         }
-        
+
         if (this.exampleBtn) {
             this.exampleBtn.addEventListener('click', () => this.loadExample());
         }
     }
-    
+
     // ============================================================================
     // API STATUS
     // ============================================================================
-    
+
     async checkAPIStatus() {
         if (!this.apiStatus) return;
-        
+
         try {
             const health = await this.apiClient.healthCheck();
             this.apiStatus.innerHTML = `✅ Backend Online - ${health.mode || 'production'} mode`;
@@ -75,31 +75,31 @@ class NERDemo {
             console.error('API Status check failed:', error);
         }
     }
-    
+
     // ============================================================================
     // EVENT HANDLERS
     // ============================================================================
-    
+
     async handleExtract() {
         const text = this.inputText.value.trim();
-        
+
         if (!text) {
             window.showToast('Please enter some text', 'error');
             return;
         }
-        
+
         // Show loading
         this.showLoading(true);
         this.hideError();
         this.hideResults();
-        
+
         const startTime = Date.now();
-        
+
         try {
             // Use the recognize entities endpoint
             const result = await this.apiClient.recognizeEntities(text);
             const processingTime = Date.now() - startTime;
-            
+
             this.displayResults(result, text, processingTime);
             window.showToast('Entities extracted successfully!', 'success');
         } catch (error) {
@@ -109,14 +109,14 @@ class NERDemo {
             this.showLoading(false);
         }
     }
-    
+
     handleClear() {
         this.inputText.value = '';
         this.hideResults();
         this.hideError();
         this.inputText.focus();
     }
-    
+
     loadExample() {
         const examples = [
             "Show me the sum of sales by region for last quarter",
@@ -125,23 +125,23 @@ class NERDemo {
             "Find total revenue by customer segment",
             "Display the maximum sales value for each year"
         ];
-        
+
         const randomExample = examples[Math.floor(Math.random() * examples.length)];
         this.inputText.value = randomExample;
         this.inputText.focus();
         window.showToast('Example loaded!', 'success');
     }
-    
+
     // ============================================================================
     // DISPLAY RESULTS
     // ============================================================================
-    
+
     displayResults(result, originalText, processingTime) {
         if (!result || !result.entities) {
             this.showError('No entities found in the response');
             return;
         }
-        
+
         // Update stats
         if (this.totalEntities) {
             this.totalEntities.textContent = result.entities.length;
@@ -150,67 +150,67 @@ class NERDemo {
             this.processingTime.textContent = processingTime + 'ms';
         }
         if (this.confidence) {
-            const avgConfidence = result.entities.length > 0 
+            const avgConfidence = result.entities.length > 0
                 ? (result.entities.reduce((sum, e) => sum + (e.confidence || 1), 0) / result.entities.length * 100).toFixed(0)
                 : 0;
             this.confidence.textContent = avgConfidence + '%';
         }
-        
+
         // Display highlighted text
         if (this.highlightedText) {
             this.highlightedText.innerHTML = this.createHighlightedText(originalText, result.entities);
         }
-        
+
         // Display entity list
         if (this.entityList) {
             this.entityList.innerHTML = this.createEntityList(result.entities);
         }
-        
+
         // Display raw JSON
         if (this.rawJson) {
             this.rawJson.textContent = JSON.stringify(result, null, 2);
         }
-        
+
         // Show results section
         this.showResults(true);
     }
-    
+
     createHighlightedText(text, entities) {
         if (!entities || entities.length === 0) {
             return escapeHtml(text);
         }
-        
+
         // Sort entities by start position
         const sortedEntities = [...entities].sort((a, b) => a.start - b.start);
-        
+
         let html = '';
         let lastIndex = 0;
-        
+
         sortedEntities.forEach(entity => {
             // Add text before entity
             html += escapeHtml(text.substring(lastIndex, entity.start));
-            
+
             // Add highlighted entity
             const color = this.getEntityColor(entity.label);
-            html += `<mark style="background-color: ${color}; padding: 2px 4px; border-radius: 3px;" 
+            html += `<mark style="background-color: ${color}; padding: 2px 4px; border-radius: 3px;"
                           title="${entity.label}">
                         ${escapeHtml(entity.text)}
                      </mark>`;
-            
+
             lastIndex = entity.end;
         });
-        
+
         // Add remaining text
         html += escapeHtml(text.substring(lastIndex));
-        
+
         return html;
     }
-    
+
     createEntityList(entities) {
         if (!entities || entities.length === 0) {
             return '<p class="empty-state">No entities found</p>';
         }
-        
+
         return entities.map(entity => {
             const color = this.getEntityColor(entity.label);
             return `
@@ -235,7 +235,7 @@ class NERDemo {
             `;
         }).join('');
     }
-    
+
     getEntityColor(label) {
         const colors = {
             'AGGREGATION': '#3b82f6',     // Blue
@@ -248,14 +248,14 @@ class NERDemo {
             'VALUE': '#f97316',            // Orange
             'FUNCTION': '#6366f1'          // Indigo
         };
-        
+
         return colors[label] || '#6b7280'; // Default gray
     }
-    
+
     // ============================================================================
     // UI STATE MANAGEMENT
     // ============================================================================
-    
+
     showLoading(show) {
         if (this.loadingEl) {
             this.loadingEl.classList.toggle('hidden', !show);
@@ -265,17 +265,17 @@ class NERDemo {
             this.extractBtn.textContent = show ? 'Processing...' : '🎯 Extract Entities';
         }
     }
-    
+
     showResults(show) {
         if (this.resultsSection) {
             this.resultsSection.classList.toggle('hidden', !show);
         }
     }
-    
+
     hideResults() {
         this.showResults(false);
     }
-    
+
     showError(message) {
         if (this.errorMessage) {
             this.errorMessage.innerHTML = `
@@ -288,7 +288,7 @@ class NERDemo {
             this.errorMessage.classList.remove('hidden');
         }
     }
-    
+
     hideError() {
         if (this.errorMessage) {
             this.errorMessage.classList.add('hidden');

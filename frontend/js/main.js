@@ -6,22 +6,22 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 HypatiaX Application Initializing...');
-    
+
     // Initialize API client (already done in api-client.js)
     const apiClient = window.apiClient;
-    
+
     // Check API status
     checkAPIStatus();
-    
+
     // Initialize Formula Form
     initializeFormulaForm();
-    
+
     // Initialize Test Button
     initializeTestButton();
-    
+
     // Add navigation highlighting
     highlightCurrentPage();
-    
+
     console.log('✨ HypatiaX Application Ready!');
 });
 
@@ -32,14 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
 async function checkAPIStatus() {
     const statusEl = document.getElementById('api-status');
     const demoWarning = document.getElementById('demo-warning');
-    
+
     if (!statusEl) return;
-    
+
     try {
         const health = await window.apiClient.healthCheck();
         statusEl.innerHTML = `✅ Backend Online - ${health.mode || 'production'} mode`;
         statusEl.className = 'api-status online';
-        
+
         if (health.mode === 'demo' && demoWarning) {
             demoWarning.innerHTML = `
                 <div class="warning-message">
@@ -50,7 +50,7 @@ async function checkAPIStatus() {
     } catch (error) {
         statusEl.innerHTML = '❌ Backend Offline - Cannot connect to server';
         statusEl.className = 'api-status offline';
-        
+
         if (demoWarning) {
             demoWarning.innerHTML = `
                 <div class="error-message">
@@ -71,23 +71,23 @@ function initializeFormulaForm() {
     const descriptionInput = document.getElementById('description-input');
     const methodSelect = document.getElementById('method-select');
     const quickSuggestion = document.getElementById('quick-suggestion');
-    
+
     if (!form) return;
-    
+
     // Handle form submission
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const description = descriptionInput.value.trim();
         const method = methodSelect.value;
-        
+
         if (!description) {
             window.showToast('Please enter a description', 'error');
             return;
         }
-        
+
         showLoading(resultDiv, 'Generating formula...');
-        
+
         try {
             const result = await window.apiClient.mapDescription(description, method);
             displayFormulaResult(result, resultDiv);
@@ -97,7 +97,7 @@ function initializeFormulaForm() {
             window.showToast('Error: ' + error.message, 'error');
         }
     });
-    
+
     // Handle example query buttons
     document.querySelectorAll('.example-query-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -105,7 +105,7 @@ function initializeFormulaForm() {
             descriptionInput.focus();
         });
     });
-    
+
     // Add quick suggestion on input
     if (descriptionInput && quickSuggestion) {
         descriptionInput.addEventListener('input', debounce(() => {
@@ -129,21 +129,21 @@ function initializeFormulaForm() {
 
 function displayFormulaResult(result, container) {
     if (!container) return;
-    
+
     let html = `
         <div class="result-card">
             <h3>Generated Formula</h3>
             <div class="formula-output" style="font-size: 1.2em; padding: 15px; background: #f3f4f6; border-radius: 8px; font-family: monospace;">
                 ${escapeHtml(result.formula)}
             </div>
-            
+
             <div class="result-meta" style="display: flex; gap: 20px; margin-top: 15px; color: #6b7280;">
                 <span>Confidence: <strong>${(result.confidence * 100).toFixed(0)}%</strong></span>
                 <span>Method: <strong>${result.method}</strong></span>
                 <span>Time: <strong>${result.processing_time_ms}ms</strong></span>
             </div>
     `;
-    
+
     if (result.entities && result.entities.length > 0) {
         html += `
             <div style="margin-top: 20px;">
@@ -158,9 +158,9 @@ function displayFormulaResult(result, container) {
             </div>
         `;
     }
-    
+
     html += '</div>';
-    
+
     container.innerHTML = html;
     container.style.display = 'block';
 }
@@ -172,12 +172,12 @@ function displayFormulaResult(result, container) {
 function initializeTestButton() {
     const testBtn = document.getElementById('test-hypatiax-btn');
     const testResults = document.getElementById('test-results');
-    
+
     if (!testBtn) return;
-    
+
     testBtn.addEventListener('click', async () => {
         showLoading(testResults, 'Running tests...');
-        
+
         try {
             const result = await window.apiClient.runTests();
             displayTestResults(result, testResults);
@@ -191,15 +191,15 @@ function initializeTestButton() {
 
 function displayTestResults(result, container) {
     if (!container) return;
-    
+
     const passed = result.test_results.filter(t => t.status === 'pass').length;
     const failed = result.test_results.filter(t => t.status === 'fail').length;
-    
+
     let html = `
         <div class="result-card">
             <h3>Test Results</h3>
             <p>Passed: <strong style="color: #10b981;">${passed}</strong> | Failed: <strong style="color: #ef4444;">${failed}</strong></p>
-            
+
             <div style="margin-top: 20px;">
                 ${result.test_results.map(test => `
                     <div style="padding: 10px; margin: 10px 0; background: ${test.status === 'pass' ? '#d1fae5' : '#fee2e2'}; border-radius: 4px;">
@@ -211,7 +211,7 @@ function displayTestResults(result, container) {
             </div>
         </div>
     `;
-    
+
     container.innerHTML = html;
     container.style.display = 'block';
 }
@@ -223,10 +223,10 @@ function displayTestResults(result, container) {
 function highlightCurrentPage() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-menu a');
-    
+
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
-        if (href === currentPath || 
+        if (href === currentPath ||
             (currentPath.endsWith('/') && href === 'index.html') ||
             (currentPath.endsWith('index.html') && href === 'index.html')) {
             link.classList.add('active');
@@ -250,9 +250,9 @@ function showToast(message, type = 'info') {
         z-index: 10000;
         animation: slideIn 0.3s ease-out;
     `;
-    
+
     document.body.appendChild(toast);
-    
+
     setTimeout(() => {
         toast.style.animation = 'slideOut 0.3s ease-in';
         setTimeout(() => toast.remove(), 300);

@@ -1,16 +1,17 @@
-import spacy
-from hypatiax.utils.files_local import load
-from hypatiax.utils.files import FilesManager
-from hypatiax.utils.utils import evaluate_the_model_in_batches,make_predictions
 from importlib import resources
-from hypatiax.custom_ner.queries.tableau import custom_tableau_formulas_components
 
+import spacy
+
+from hypatiax.custom_ner.queries.tableau import custom_tableau_formulas_components
+from hypatiax.utils.files import FilesManager
+from hypatiax.utils.files_local import load
+from hypatiax.utils.utils import evaluate_the_model_in_batches, make_predictions
 
 niter=400
 drop=0.5
 batchsize=8
 model_path=resources.files('hypatiax.models.queries.tableau.trained_models').\
-    joinpath(f"Formulas_sm_tableau_{niter}_{drop}_{batchsize}_data")) 
+    joinpath(f"Formulas_sm_tableau_{niter}_{drop}_{batchsize}_data"))
 #Requirement
 F=FilesManager('datasets','queries','tableau','testing')
 dff=F.load("formulas_test_nor.xlsx")

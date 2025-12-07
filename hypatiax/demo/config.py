@@ -24,24 +24,24 @@ DATA_SPACY_DIR = PROJECT_ROOT / "data_spacy" / "queries" / "tableau"
 # ============================================================================
 
 MODEL_CONFIG = {
-    'desc': {
-        'name': 'Description NER',
-        'path': DATA_SPACY_DIR / "ner_tableau_desc",
-        'description': 'Extracts entities from natural language descriptions',
-        'entity_types': ['NOUN', 'VERB', 'ADJ', 'ADP', 'CONJ'],
+    "desc": {
+        "name": "Description NER",
+        "path": DATA_SPACY_DIR / "ner_tableau_desc",
+        "description": "Extracts entities from natural language descriptions",
+        "entity_types": ["NOUN", "VERB", "ADJ", "ADP", "CONJ"],
     },
-    'formulas': {
-        'name': 'Formula NER',
-        'path': DATA_SPACY_DIR / "ner_tableau_formulas",
-        'description': 'Parses Tableau formula syntax',
-        'entity_types': ['OPER', 'ARG', 'ARGN', 'NUM', 'ADP', 'ADV'],
+    "formulas": {
+        "name": "Formula NER",
+        "path": DATA_SPACY_DIR / "ner_tableau_formulas",
+        "description": "Parses Tableau formula syntax",
+        "entity_types": ["OPER", "ARG", "ARGN", "NUM", "ADP", "ADV"],
     },
-    'both': {
-        'name': 'Combined NER',
-        'path': DATA_SPACY_DIR / "ner_tableau",
-        'description': 'Processes both descriptions and formulas',
-        'entity_types': ['NOUN', 'VERB', 'OPER', 'ARG', 'NUM'],
-    }
+    "both": {
+        "name": "Combined NER",
+        "path": DATA_SPACY_DIR / "ner_tableau",
+        "description": "Processes both descriptions and formulas",
+        "entity_types": ["NOUN", "VERB", "OPER", "ARG", "NUM"],
+    },
 }
 
 # ============================================================================
@@ -49,86 +49,83 @@ MODEL_CONFIG = {
 # ============================================================================
 
 DEMO_EXAMPLES = {
-    'basic': [
+    "basic": [
         {
-            'category': 'Aggregations',
-            'description': 'calculate the sum of sales',
-            'expected_formula': 'SUM([Sales])',
-            'difficulty': 'easy',
+            "category": "Aggregations",
+            "description": "calculate the sum of sales",
+            "expected_formula": "SUM([Sales])",
+            "difficulty": "easy",
         },
         {
-            'category': 'Aggregations',
-            'description': 'find the average profit',
-            'expected_formula': 'AVG([Profit])',
-            'difficulty': 'easy',
+            "category": "Aggregations",
+            "description": "find the average profit",
+            "expected_formula": "AVG([Profit])",
+            "difficulty": "easy",
         },
         {
-            'category': 'Counting',
-            'description': 'count total orders',
-            'expected_formula': 'COUNT([Orders])',
-            'difficulty': 'easy',
-        },
-    ],
-    
-    'intermediate': [
-        {
-            'category': 'Grouped Aggregations',
-            'description': 'sum of sales by region',
-            'expected_formula': 'SUM([Sales])',
-            'note': 'GROUP BY [Region]',
-            'difficulty': 'medium',
-        },
-        {
-            'category': 'Grouped Aggregations',
-            'description': 'average profit per category',
-            'expected_formula': 'AVG([Profit])',
-            'note': 'GROUP BY [Category]',
-            'difficulty': 'medium',
-        },
-        {
-            'category': 'Calculated Fields',
-            'description': 'calculate profit margin',
-            'expected_formula': 'SUM([Profit]) / SUM([Sales])',
-            'difficulty': 'medium',
+            "category": "Counting",
+            "description": "count total orders",
+            "expected_formula": "COUNT([Orders])",
+            "difficulty": "easy",
         },
     ],
-    
-    'advanced': [
+    "intermediate": [
         {
-            'category': 'Conditional Logic',
-            'description': 'if sales greater than 1000 then high else low',
-            'expected_formula': 'IF [Sales] > 1000 THEN "High" ELSE "Low"',
-            'difficulty': 'hard',
+            "category": "Grouped Aggregations",
+            "description": "sum of sales by region",
+            "expected_formula": "SUM([Sales])",
+            "note": "GROUP BY [Region]",
+            "difficulty": "medium",
         },
         {
-            'category': 'Complex Calculations',
-            'description': 'year over year growth rate',
-            'expected_formula': '(SUM([Sales]) - LOOKUP(SUM([Sales]), -1)) / LOOKUP(SUM([Sales]), -1)',
-            'difficulty': 'hard',
+            "category": "Grouped Aggregations",
+            "description": "average profit per category",
+            "expected_formula": "AVG([Profit])",
+            "note": "GROUP BY [Category]",
+            "difficulty": "medium",
+        },
+        {
+            "category": "Calculated Fields",
+            "description": "calculate profit margin",
+            "expected_formula": "SUM([Profit]) / SUM([Sales])",
+            "difficulty": "medium",
         },
     ],
-    
-    'real_world': [
+    "advanced": [
         {
-            'category': 'Retail Analytics',
-            'description': 'Sum of sales by year',
-            'expected_formula': 'SUM([Sales])',
-            'note': 'GROUP BY YEAR([Order Date])',
-            'use_case': 'Yearly sales trends dashboard',
+            "category": "Conditional Logic",
+            "description": "if sales greater than 1000 then high else low",
+            "expected_formula": 'IF [Sales] > 1000 THEN "High" ELSE "Low"',
+            "difficulty": "hard",
         },
         {
-            'category': 'Data Science',
-            'description': 'Average of Petal Length across all flowers',
-            'expected_formula': 'AVG([Petal Length])',
-            'use_case': 'Iris dataset analysis',
+            "category": "Complex Calculations",
+            "description": "year over year growth rate",
+            "expected_formula": "(SUM([Sales]) - LOOKUP(SUM([Sales]), -1)) / LOOKUP(SUM([Sales]), -1)",
+            "difficulty": "hard",
+        },
+    ],
+    "real_world": [
+        {
+            "category": "Retail Analytics",
+            "description": "Sum of sales by year",
+            "expected_formula": "SUM([Sales])",
+            "note": "GROUP BY YEAR([Order Date])",
+            "use_case": "Yearly sales trends dashboard",
         },
         {
-            'category': 'Customer Analytics',
-            'description': 'Total number of unique customers',
-            'expected_formula': 'COUNT DISTINCT([Customer ID])',
-            'use_case': 'Customer segmentation',
+            "category": "Data Science",
+            "description": "Average of Petal Length across all flowers",
+            "expected_formula": "AVG([Petal Length])",
+            "use_case": "Iris dataset analysis",
         },
-    ]
+        {
+            "category": "Customer Analytics",
+            "description": "Total number of unique customers",
+            "expected_formula": "COUNT DISTINCT([Customer ID])",
+            "use_case": "Customer segmentation",
+        },
+    ],
 }
 
 # ============================================================================
@@ -137,18 +134,17 @@ DEMO_EXAMPLES = {
 
 ENTITY_STYLES = {
     # Description entities
-    'NOUN': {'color': '#1e40af', 'bg': '#dbeafe', 'name': 'Noun'},
-    'VERB': {'color': '#166534', 'bg': '#dcfce7', 'name': 'Verb'},
-    'ADJ': {'color': '#92400e', 'bg': '#fef3c7', 'name': 'Adjective'},
-    'ADP': {'color': '#831843', 'bg': '#fbcfe8', 'name': 'Preposition'},
-    'CONJ': {'color': '#7c2d12', 'bg': '#fed7aa', 'name': 'Conjunction'},
-    
+    "NOUN": {"color": "#1e40af", "bg": "#dbeafe", "name": "Noun"},
+    "VERB": {"color": "#166534", "bg": "#dcfce7", "name": "Verb"},
+    "ADJ": {"color": "#92400e", "bg": "#fef3c7", "name": "Adjective"},
+    "ADP": {"color": "#831843", "bg": "#fbcfe8", "name": "Preposition"},
+    "CONJ": {"color": "#7c2d12", "bg": "#fed7aa", "name": "Conjunction"},
     # Formula entities
-    'OPER': {'color': '#6b21a8', 'bg': '#e9d5ff', 'name': 'Operator'},
-    'ARG': {'color': '#991b1b', 'bg': '#fecaca', 'name': 'Argument'},
-    'ARGN': {'color': '#9a3412', 'bg': '#fed7aa', 'name': 'Named Arg'},
-    'NUM': {'color': '#3730a3', 'bg': '#e0e7ff', 'name': 'Number'},
-    'ADV': {'color': '#065f46', 'bg': '#d1fae5', 'name': 'Adverb'},
+    "OPER": {"color": "#6b21a8", "bg": "#e9d5ff", "name": "Operator"},
+    "ARG": {"color": "#991b1b", "bg": "#fecaca", "name": "Argument"},
+    "ARGN": {"color": "#9a3412", "bg": "#fed7aa", "name": "Named Arg"},
+    "NUM": {"color": "#3730a3", "bg": "#e0e7ff", "name": "Number"},
+    "ADV": {"color": "#065f46", "bg": "#d1fae5", "name": "Adverb"},
 }
 
 # ============================================================================
@@ -156,30 +152,27 @@ ENTITY_STYLES = {
 # ============================================================================
 
 DEMO_CONFIG = {
-    'title': 'HypatiaX NER Demo',
-    'subtitle': 'Named Entity Recognition for Tableau Queries',
-    'version': '1.0.0',
-    'author': 'HypatiaX Team',
-    
-    'features': {
-        'live_processing': True,
-        'batch_mode': True,
-        'comparison_mode': True,
-        'export_results': True,
+    "title": "HypatiaX NER Demo",
+    "subtitle": "Named Entity Recognition for Tableau Queries",
+    "version": "1.0.0",
+    "author": "HypatiaX Team",
+    "features": {
+        "live_processing": True,
+        "batch_mode": True,
+        "comparison_mode": True,
+        "export_results": True,
     },
-    
-    'ui': {
-        'theme': 'gradient',  # 'gradient', 'dark', 'light'
-        'animation_speed': 'normal',  # 'fast', 'normal', 'slow'
-        'show_confidence': True,
-        'show_metrics': True,
+    "ui": {
+        "theme": "gradient",  # 'gradient', 'dark', 'light'
+        "animation_speed": "normal",  # 'fast', 'normal', 'slow'
+        "show_confidence": True,
+        "show_metrics": True,
     },
-    
-    'performance': {
-        'max_batch_size': 100,
-        'timeout_seconds': 30,
-        'cache_enabled': True,
-    }
+    "performance": {
+        "max_batch_size": 100,
+        "timeout_seconds": 30,
+        "cache_enabled": True,
+    },
 }
 
 # ============================================================================
@@ -187,37 +180,34 @@ DEMO_CONFIG = {
 # ============================================================================
 
 LINKEDIN_CONFIG = {
-    'title': '🚀 HypatiaX: AI-Powered Tableau Query Understanding',
-    'tagline': 'Transform natural language into Tableau formulas instantly',
-    
-    'showcase_examples': [
+    "title": "🚀 HypatiaX: AI-Powered Tableau Query Understanding",
+    "tagline": "Transform natural language into Tableau formulas instantly",
+    "showcase_examples": [
         {
-            'input': 'calculate the sum of sales by region',
-            'highlight': 'Business Intelligence',
-            'icon': '📊',
+            "input": "calculate the sum of sales by region",
+            "highlight": "Business Intelligence",
+            "icon": "📊",
         },
         {
-            'input': 'average profit margin per product',
-            'highlight': 'Financial Analytics',
-            'icon': '💰',
+            "input": "average profit margin per product",
+            "highlight": "Financial Analytics",
+            "icon": "💰",
         },
         {
-            'input': 'year over year revenue growth',
-            'highlight': 'Trend Analysis',
-            'icon': '📈',
+            "input": "year over year revenue growth",
+            "highlight": "Trend Analysis",
+            "icon": "📈",
         },
     ],
-    
-    'metrics_to_display': [
-        'Processing Speed',
-        'Entity Accuracy',
-        'Formula Generation Rate',
+    "metrics_to_display": [
+        "Processing Speed",
+        "Entity Accuracy",
+        "Formula Generation Rate",
     ],
-    
-    'call_to_action': {
-        'text': 'Try it yourself!',
-        'link': 'https://github.com/yourusername/hypatiax',
-    }
+    "call_to_action": {
+        "text": "Try it yourself!",
+        "link": "https://github.com/yourusername/hypatiax",
+    },
 }
 
 # ============================================================================
@@ -225,90 +215,91 @@ LINKEDIN_CONFIG = {
 # ============================================================================
 
 MOCK_PATTERNS = {
-    'desc': {
-        'calculate': 'VERB',
-        'compute': 'VERB',
-        'find': 'VERB',
-        'show': 'VERB',
-        'sum': 'NOUN',
-        'average': 'NOUN',
-        'total': 'NOUN',
-        'count': 'NOUN',
-        'sales': 'NOUN',
-        'profit': 'NOUN',
-        'revenue': 'NOUN',
-        'cost': 'NOUN',
-        'of': 'ADP',
-        'by': 'ADP',
-        'per': 'ADP',
-        'across': 'ADP',
+    "desc": {
+        "calculate": "VERB",
+        "compute": "VERB",
+        "find": "VERB",
+        "show": "VERB",
+        "sum": "NOUN",
+        "average": "NOUN",
+        "total": "NOUN",
+        "count": "NOUN",
+        "sales": "NOUN",
+        "profit": "NOUN",
+        "revenue": "NOUN",
+        "cost": "NOUN",
+        "of": "ADP",
+        "by": "ADP",
+        "per": "ADP",
+        "across": "ADP",
     },
-    
-    'formulas': {
-        'SUM': 'OPER',
-        'AVG': 'OPER',
-        'COUNT': 'OPER',
-        'MAX': 'OPER',
-        'MIN': 'OPER',
-        'IF': 'OPER',
-        'THEN': 'OPER',
-        'ELSE': 'OPER',
-        '[': 'ARG',
-        ']': 'ARG',
-        '(': 'NUM',
-        ')': 'NUM',
-        '>': 'ADP',
-        '<': 'ADP',
-        '=': 'ADP',
-    }
+    "formulas": {
+        "SUM": "OPER",
+        "AVG": "OPER",
+        "COUNT": "OPER",
+        "MAX": "OPER",
+        "MIN": "OPER",
+        "IF": "OPER",
+        "THEN": "OPER",
+        "ELSE": "OPER",
+        "[": "ARG",
+        "]": "ARG",
+        "(": "NUM",
+        ")": "NUM",
+        ">": "ADP",
+        "<": "ADP",
+        "=": "ADP",
+    },
 }
 
 FORMULA_TEMPLATES = {
-    'sum': 'SUM([{field}])',
-    'average': 'AVG([{field}])',
-    'avg': 'AVG([{field}])',
-    'count': 'COUNT([{field}])',
-    'total': 'SUM([{field}])',
-    'max': 'MAX([{field}])',
-    'maximum': 'MAX([{field}])',
-    'min': 'MIN([{field}])',
-    'minimum': 'MIN([{field}])',
+    "sum": "SUM([{field}])",
+    "average": "AVG([{field}])",
+    "avg": "AVG([{field}])",
+    "count": "COUNT([{field}])",
+    "total": "SUM([{field}])",
+    "max": "MAX([{field}])",
+    "maximum": "MAX([{field}])",
+    "min": "MIN([{field}])",
+    "minimum": "MIN([{field}])",
 }
 
 # ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
 
+
 def get_all_examples() -> List[Dict]:
     """Get all demo examples flattened"""
     all_examples = []
     for category, examples in DEMO_EXAMPLES.items():
         for ex in examples:
-            ex['example_category'] = category
+            ex["example_category"] = category
             all_examples.append(ex)
     return all_examples
+
 
 def get_examples_by_difficulty(difficulty: str) -> List[Dict]:
     """Get examples filtered by difficulty"""
     all_examples = get_all_examples()
-    return [ex for ex in all_examples if ex.get('difficulty') == difficulty]
+    return [ex for ex in all_examples if ex.get("difficulty") == difficulty]
+
 
 def get_examples_by_category(category: str) -> List[Dict]:
     """Get examples filtered by category"""
     all_examples = get_all_examples()
-    return [ex for ex in all_examples if ex.get('category') == category]
+    return [ex for ex in all_examples if ex.get("category") == category]
+
 
 def get_entity_style(label: str) -> Dict:
     """Get style configuration for an entity label"""
-    return ENTITY_STYLES.get(label, {
-        'color': '#666',
-        'bg': '#f3f4f6',
-        'name': label
-    })
+    return ENTITY_STYLES.get(label, {"color": "#666", "bg": "#f3f4f6", "name": label})
+
 
 def get_model_path(model_type: str) -> Path:
     """Get path to trained model"""
-    return MODEL_CONFIG.get(model_type, {}).get('path')
+    return MODEL_CONFIG.get(model_type, {}).get("path")
+
 
 # ============================================================================
 # EXPORT CONFIGURATION

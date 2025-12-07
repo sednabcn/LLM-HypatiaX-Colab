@@ -26,6 +26,6 @@ def log_memory_usage():
     process = psutil.Process()
     memory_info = process.memory_info()
     print(f"Memory usage: {memory_info.rss / 1024 / 1024:.2f} MB")
-    
+
 # Call this during training
 log_memory_usage()

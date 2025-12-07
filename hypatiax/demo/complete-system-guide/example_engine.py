@@ -21,9 +21,9 @@ from demo.engine import HypatiaXEngine
 
 # Initialize with custom models
 engine = HypatiaXEngine(
-    desc_model_path='data_spacy/queries/tableau/ner_tableau_desc',
-    formula_model_path='data_spacy/queries/tableau/ner_tableau_formulas',
-    use_gpu=False
+    desc_model_path="data_spacy/queries/tableau/ner_tableau_desc",
+    formula_model_path="data_spacy/queries/tableau/ner_tableau_formulas",
+    use_gpu=False,
 )
 
 # Load models (optional, falls back to rule-based)
@@ -31,17 +31,15 @@ engine.load_models()
 
 # Process single query
 result = engine.process(
-    query="average profit per product",
-    method='vocab',  # or 'sentence', 'regex', 'ner'
-    use_model=True
+    query="average profit per product", method="vocab", use_model=True  # or 'sentence', 'regex', 'ner'
 )
 
 # Batch process
 queries = ["sum of sales", "count customers", "max revenue"]
-results = engine.batch_process(queries, method='vocab')
+results = engine.batch_process(queries, method="vocab")
 
 # Export results
-engine.export_results(results, 'output.csv', format='csv')
+engine.export_results(results, "output.csv", format="csv")
 
 # View statistics
 stats = engine.get_stats()

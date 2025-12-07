@@ -54,36 +54,36 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <form id="quick-il-form">
                     <div class="form-row">
                         <div class="form-group">
                             <label>Initial Price (USD):</label>
-                            <input 
-                                type="number" 
-                                name="initial_price" 
-                                step="0.01" 
-                                placeholder="e.g., 2000" 
-                                required 
+                            <input
+                                type="number"
+                                name="initial_price"
+                                step="0.01"
+                                placeholder="e.g., 2000"
+                                required
                             />
                             <small style="color: #6b7280;">Price when you entered the pool</small>
                         </div>
                         <div class="form-group">
                             <label>Current Price (USD):</label>
-                            <input 
-                                type="number" 
-                                name="current_price" 
-                                step="0.01" 
-                                placeholder="e.g., 2400" 
-                                required 
+                            <input
+                                type="number"
+                                name="current_price"
+                                step="0.01"
+                                placeholder="e.g., 2400"
+                                required
                             />
                             <small style="color: #6b7280;">Current market price</small>
                         </div>
                     </div>
-                    
+
                     <!-- Price Change Preview -->
                     <div id="price-change-preview"></div>
-                    
+
                     <div style="display: flex; gap: 10px; margin-top: 20px;">
                         <button type="submit" class="btn-primary" style="flex: 1;">
                             ⚡ Calculate IL
@@ -93,9 +93,9 @@
                         </button>
                     </div>
                 </form>
-                
+
                 <div id="quick-il-result"></div>
-                
+
                 <!-- Educational Info -->
                 <details style="margin-top: 20px; padding: 15px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #3b82f6;">
                     <summary style="cursor: pointer; font-weight: bold; color: #3b82f6; user-select: none;">
@@ -131,7 +131,7 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <form id="position-analysis-form">
                     <div class="section-header">
                         <h3>💰 Initial Position</h3>
@@ -140,26 +140,26 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Token A Amount:</label>
-                            <input 
-                                type="number" 
-                                name="initial_token_a" 
-                                step="0.01" 
-                                placeholder="e.g., 10 ETH" 
-                                required 
+                            <input
+                                type="number"
+                                name="initial_token_a"
+                                step="0.01"
+                                placeholder="e.g., 10 ETH"
+                                required
                             />
                         </div>
                         <div class="form-group">
                             <label>Token B Amount:</label>
-                            <input 
-                                type="number" 
-                                name="initial_token_b" 
-                                step="0.01" 
-                                placeholder="e.g., 20000 USDC" 
-                                required 
+                            <input
+                                type="number"
+                                name="initial_token_b"
+                                step="0.01"
+                                placeholder="e.g., 20000 USDC"
+                                required
                             />
                         </div>
                     </div>
-                    
+
                     <div class="section-header">
                         <h3>💵 Prices</h3>
                         <p style="color: #6b7280; font-size: 0.9em;">Token A price in Token B units</p>
@@ -167,28 +167,28 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Initial Price:</label>
-                            <input 
-                                type="number" 
-                                name="initial_price" 
-                                step="0.01" 
-                                placeholder="e.g., 2000" 
-                                required 
+                            <input
+                                type="number"
+                                name="initial_price"
+                                step="0.01"
+                                placeholder="e.g., 2000"
+                                required
                             />
                             <small style="color: #6b7280;">Price when you entered</small>
                         </div>
                         <div class="form-group">
                             <label>Current Price:</label>
-                            <input 
-                                type="number" 
-                                name="current_price" 
-                                step="0.01" 
-                                placeholder="e.g., 2400" 
-                                required 
+                            <input
+                                type="number"
+                                name="current_price"
+                                step="0.01"
+                                placeholder="e.g., 2400"
+                                required
                             />
                             <small style="color: #6b7280;">Current market price</small>
                         </div>
                     </div>
-                    
+
                     <div class="section-header">
                         <h3>🏊 Pool Information</h3>
                         <p style="color: #6b7280; font-size: 0.9em;">Data about the liquidity pool</p>
@@ -196,53 +196,53 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Daily Volume (USD):</label>
-                            <input 
-                                type="number" 
-                                name="daily_volume_usd" 
-                                step="1" 
-                                placeholder="e.g., 500000" 
-                                required 
+                            <input
+                                type="number"
+                                name="daily_volume_usd"
+                                step="1"
+                                placeholder="e.g., 500000"
+                                required
                             />
                             <small style="color: #6b7280;">24h trading volume</small>
                         </div>
                         <div class="form-group">
                             <label>Pool TVL (USD):</label>
-                            <input 
-                                type="number" 
-                                name="pool_tvl_usd" 
-                                step="1" 
-                                placeholder="e.g., 10000000" 
-                                required 
+                            <input
+                                type="number"
+                                name="pool_tvl_usd"
+                                step="1"
+                                placeholder="e.g., 10000000"
+                                required
                             />
                             <small style="color: #6b7280;">Total Value Locked in pool</small>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
                             <label>Days Elapsed:</label>
-                            <input 
-                                type="number" 
-                                name="days_elapsed" 
-                                min="1" 
-                                placeholder="e.g., 30" 
-                                required 
+                            <input
+                                type="number"
+                                name="days_elapsed"
+                                min="1"
+                                placeholder="e.g., 30"
+                                required
                             />
                             <small style="color: #6b7280;">Days since entering pool</small>
                         </div>
                         <div class="form-group">
                             <label>Fee Rate (%):</label>
-                            <input 
-                                type="number" 
-                                name="fee_rate" 
-                                value="0.003" 
-                                step="0.001" 
-                                placeholder="0.003" 
+                            <input
+                                type="number"
+                                name="fee_rate"
+                                value="0.003"
+                                step="0.001"
+                                placeholder="0.003"
                             />
                             <small style="color: #6b7280;">0.003 = 0.3% (Uniswap v3)</small>
                         </div>
                     </div>
-                    
+
                     <div style="display: flex; gap: 10px; margin-top: 20px;">
                         <button type="submit" class="btn-primary" style="flex: 1;">
                             📊 Analyze Position
@@ -252,9 +252,9 @@
                         </button>
                     </div>
                 </form>
-                
+
                 <div id="position-analysis-result"></div>
-                
+
                 <!-- Educational Info -->
                 <details style="margin-top: 20px; padding: 15px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #8b5cf6;">
                     <summary style="cursor: pointer; font-weight: bold; color: #8b5cf6; user-select: none;">
@@ -289,7 +289,7 @@
             <div class="card">
                 <h3>📚 Common Pool Examples</h3>
                 <p style="color: #6b7280; margin-bottom: 20px;">Reference data for popular liquidity pools</p>
-                
+
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
                     <div style="padding: 15px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #3b82f6;">
                         <h4 style="margin: 0 0 10px 0; color: #3b82f6;">ETH/USDC (0.3%)</h4>
@@ -299,7 +299,7 @@
                             <p><strong>Fee Rate:</strong> 0.003 (0.3%)</p>
                         </div>
                     </div>
-                    
+
                     <div style="padding: 15px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #10b981;">
                         <h4 style="margin: 0 0 10px 0; color: #10b981;">USDC/USDT (0.01%)</h4>
                         <div style="font-size: 0.9em; color: #4b5563; line-height: 1.6;">
@@ -308,7 +308,7 @@
                             <p><strong>Fee Rate:</strong> 0.0001 (0.01%)</p>
                         </div>
                     </div>
-                    
+
                     <div style="padding: 15px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #f59e0b;">
                         <h4 style="margin: 0 0 10px 0; color: #f59e0b;">WBTC/ETH (0.3%)</h4>
                         <div style="font-size: 0.9em; color: #4b5563; line-height: 1.6;">

@@ -1,4 +1,5 @@
 Critical Errors Fixed:
+
 1. Missing Import ⚠️ CRITICAL
 Original:
 python# pd was used but never imported!
@@ -33,7 +34,9 @@ test_spacy_model(str(model_path), X_test)
 5. Tuple Unpacking Issue
 Original:
 pythonX_train, X_val, X_test = preparation_data(...)
-# But val_data=False, so only 2 values returned!
+
+# But val_data=False, so only 2 values returned
+
 Fixed:
 pythonresult = preparation_data(...)
 if config_data_preparation['val_data']:
@@ -54,7 +57,7 @@ python.joinpath(f'config_data_preparation_{i}.csv')
 8. Serialization Issues
 Original: Tried to save DataFrame with complex objects (train_data, val_data)
 Fixed:
-pythonconfig_training_save = {k: v for k, v in config_training.items() 
+pythonconfig_training_save = {k: v for k, v in config_training.items()
                        if k not in ['train_data', 'val_data']}
 config_training_save['train_samples'] = len(X_train) if X_train else 0
 9. No Error Handling
@@ -83,6 +86,7 @@ python# Run the entire pipeline
 python run_time_code.py
 
 # Or import and use programmatically
+
 from run_time_code import main
 results = main()
 print(f"Model F1-Score: {results['test_scores']['ents_f']:.4f}")

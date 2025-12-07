@@ -1,5 +1,6 @@
 Perfect! I've created a comprehensive DeFi Data Manager class system that covers all the database connection patterns you mentioned.
 📦 What's Included:
+
 1. CoinGeckoAPI Class
 
 Fetch current prices
@@ -37,21 +38,25 @@ Easy-to-use interface
 🚀 How to Use:
 
 # Initialize
+
 manager = DeFiDataManager()
 
 # Fetch and store ETH prices
+
 prices = manager.fetch_and_store_prices("ethereum", days=90)
 
 # Query Uniswap pool
+
 eth_usdc_pool = "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc"
 pool_data = manager.fetch_and_store_pool(eth_usdc_pool)
 
 # SQL-style queries from local storage
+
 recent_prices = manager.db.query_prices(coin_id="ethereum")
 
 # Export everything to Excel
-manager.export_all_data("my_defi_data.xlsx")
 
+manager.export_all_data("my_defi_data.xlsx")
 
 # main_analysis.py
 
@@ -59,11 +64,14 @@ from hypatiax.tools.database.defi_data_manager import DeFiDataManager
 from hypatiax.tools.domain.finance.defi.uniswap_v2_backtest_analysis import run_complete_backtest
 
 # Fetch real data
+
 manager = DeFiDataManager()
 prices = manager.fetch_and_store_prices("ethereum", days=90)
 
 # Run backtest with real data
+
 results = run_complete_backtest(days=90)
 
 # Export combined results
+
 manager.export_all_data("complete_analysis.xlsx")

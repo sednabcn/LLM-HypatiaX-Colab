@@ -86,10 +86,11 @@ Pool contains: $1,000,000 in tokens
 [Just sitting there, available]
 Volume (Dynamic):
 Day 1: $500,000 traded
-  - Trade 1: $100k
-  - Trade 2: $50k
-  - Trade 3: $200k
-  - ...hundreds more trades
+
+- Trade 1: $100k
+- Trade 2: $50k
+- Trade 3: $200k
+- ...hundreds more trades
   Total: $500,000 moved through the pool
 Key Difference
 
@@ -130,7 +131,6 @@ Impermanent loss (if token prices change)
 Gas fees to deposit/withdraw
 Might earn less than expected
 
-
 Traders
 What they do:
 
@@ -157,7 +157,6 @@ Slippage (price moves during trade)
 Gas fees for the swap
 Market risk (price might move against them)
 
-
 Side-by-Side Comparison
 AspectLiquidity Providers (LPs)TradersActionDeposit both tokens in a pairSwap one token for anotherDurationLong-term (days/months)Instant (one transaction)FeesEarn 0.3% of tradesPay 0.3% per tradeRoleSupply side (provide inventory)Demand side (use inventory)GoalPassive income from feesGet the token they wantNeedsBoth tokens in the pairJust one token
 
@@ -181,7 +180,6 @@ LPs provide the service (liquidity)
 Traders pay for the service (0.3% fee)
 Everyone benefits when volume is high
 
-
 Real-World Analogy
 Market stall:
 
@@ -190,6 +188,7 @@ Trader = Customer who comes to buy fruit (pays for the fruit)
 
 The stall owner (LP) needs customers (traders), and customers need the stall owner's inventory!
 Does that clarify the difference?RetrySWhen the trader earn profitGreat question! Traders earn profit through different strategies:
+
 1. Price Speculation (Most Common)
 Buy low, sell high:
 
@@ -211,8 +210,6 @@ The opportunity:
 Buy ETH on Uniswap for $2,000
 Immediately sell on Coinbase for $2,050
 Profit: $50 per ETH (minus fees)
-
-
 
 Arbitrageurs make prices consistent across platforms and profit from temporary differences.
 3. Token Conversion for Use
@@ -248,7 +245,6 @@ Swap from a losing token to cut losses
 Rebalance portfolio (e.g., 60% ETH / 40% stablecoins)
 "Profit" = better long-term position or tax benefits
 
-
 Key Difference from LPs
 Traders profit from:
 
@@ -261,7 +257,6 @@ LPs profit from:
 ✅ Trading fees (passive income)
 ✅ Volume in the pool
 ✅ NOT from price movements (actually risk impermanent loss)
-
 
 The Reality Check
 Not all traders profit:

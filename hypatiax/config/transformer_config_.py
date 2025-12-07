@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
+
 @dataclass
 class TransformerConfig:
     """Configuration for transformer training"""
+
     model_name: str = "google/flan-t5-base"
     use_lora: bool = True
     lora_r: int = 8

@@ -45,7 +45,7 @@
             <h1>DeFi LP Calculator Workbook</h1>
             <p>Professional Analysis Tool for Liquidity Providers</p>
         </div>
-        
+
         <div class="tabs">
             <button class="tab active" onclick="showSheet('sheet1')">IL Calculator</button>
             <button class="tab" onclick="showSheet('sheet2')">Backtest</button>
@@ -53,7 +53,7 @@
             <button class="tab" onclick="showSheet('sheet4')">Fee Calculator</button>
             <button class="tab" onclick="showSheet('sheet5')">Optimizer</button>
         </div>
-        
+
         <div id="sheet1" class="sheet active">
             <h2 class="sheet-title">Impermanent Loss Calculator</h2>
             <div class="section">
@@ -82,7 +82,7 @@
                 </div>
                 <button class="calculate-btn" onclick="calculateIL()">Calculate</button>
             </div>
-            
+
             <div class="section">
                 <div class="section-header">Results</div>
                 <div class="output-grid">
@@ -116,7 +116,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="sheet2" class="sheet">
             <h2 class="sheet-title">Backtest Analysis</h2>
             <div class="section">
@@ -145,7 +145,7 @@
                 </div>
                 <button class="calculate-btn" onclick="calculateBacktest()">Run Backtest</button>
             </div>
-            
+
             <div class="section">
                 <div class="section-header">Performance</div>
                 <div class="output-grid">
@@ -167,7 +167,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="sheet3" class="sheet">
             <h2 class="sheet-title">Risk Scoring</h2>
             <div class="section">
@@ -197,7 +197,7 @@
                 </div>
                 <button class="calculate-btn" onclick="calculateRisk()">Calculate Risk</button>
             </div>
-            
+
             <div class="section">
                 <div class="section-header">Risk Score</div>
                 <div class="output-box" style="max-width: 400px; margin: 20px auto;">
@@ -215,7 +215,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="sheet4" class="sheet">
             <h2 class="sheet-title">Fee Calculator</h2>
             <div class="section">
@@ -245,7 +245,7 @@
                 </div>
                 <button class="calculate-btn" onclick="calculateFees()">Calculate Fees</button>
             </div>
-            
+
             <div class="section">
                 <div class="section-header">Fee Projections</div>
                 <div class="output-grid">
@@ -267,7 +267,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="sheet5" class="sheet">
             <h2 class="sheet-title">Position Optimizer</h2>
             <div class="section">
@@ -288,7 +288,7 @@
                 </div>
                 <button class="calculate-btn" onclick="optimizePosition()">Generate Portfolio</button>
             </div>
-            
+
             <div class="section">
                 <div class="section-header">Recommended Allocation</div>
                 <table>
@@ -317,10 +317,10 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         var ilChart, backtestChart, feeChart;
-        
+
         function showSheet(sheetId) {
             var sheets = document.querySelectorAll('.sheet');
             var tabs = document.querySelectorAll('.tab');
@@ -329,22 +329,22 @@
             document.getElementById(sheetId).classList.add('active');
             event.target.classList.add('active');
         }
-        
+
         function calculateIL() {
             var tokenA = parseFloat(document.getElementById('il_tokenA').value) || 0;
             var tokenB = parseFloat(document.getElementById('il_tokenB').value) || 0;
             var priceStart = parseFloat(document.getElementById('il_priceStart').value) || 0;
             var priceCurrent = parseFloat(document.getElementById('il_priceCurrent').value) || 0;
             var fees = parseFloat(document.getElementById('il_fees').value) || 0;
-            
+
             if (tokenA <= 0 || tokenB <= 0 || priceStart <= 0 || priceCurrent <= 0) return;
-            
+
             var hodlValue = tokenA * priceCurrent + tokenB;
             var lpValue = 2 * Math.sqrt(tokenA * priceStart * tokenB * priceCurrent);
             var ilAmount = lpValue - hodlValue;
             var ilPercent = (ilAmount / hodlValue) * 100;
             var netResult = ilAmount + fees;
-            
+
             document.getElementById('il_hodlValue').textContent = '$' + hodlValue.toFixed(2);
             document.getElementById('il_lpValue').textContent = '$' + lpValue.toFixed(2);
             document.getElementById('il_ilAmount').textContent = '$' + ilAmount.toFixed(2);
@@ -352,7 +352,7 @@
             document.getElementById('il_feesEarned').textContent = '$' + fees.toFixed(2);
             document.getElementById('il_netResult').textContent = '$' + netResult.toFixed(2);
             document.getElementById('il_netResult').className = 'output-value ' + (netResult >= 0 ? 'positive' : 'negative');
-            
+
             var ctx = document.getElementById('ilChart');
             if (ilChart) ilChart.destroy();
             ilChart = new Chart(ctx, {
@@ -367,31 +367,31 @@
                 options: { responsive: true, plugins: { legend: { display: false } } }
             });
         }
-        
+
         function calculateBacktest() {
             var capital = parseFloat(document.getElementById('bt_capital').value) || 0;
             var startPrice = parseFloat(document.getElementById('bt_startPrice').value) || 0;
             var endPrice = parseFloat(document.getElementById('bt_endPrice').value) || 0;
             var duration = parseInt(document.getElementById('bt_duration').value) || 0;
             var fees = parseFloat(document.getElementById('bt_fees').value) || 0;
-            
+
             if (capital <= 0 || startPrice <= 0 || endPrice <= 0 || duration <= 0) return;
-            
+
             var tokenA = capital / 2 / startPrice;
             var tokenB = capital / 2;
             var hodlFinal = tokenA * endPrice + tokenB;
             var lpValue = 2 * Math.sqrt(tokenA * startPrice * tokenB * endPrice);
             var lpFinal = lpValue + fees;
             var advantage = lpFinal - hodlFinal;
-            
+
             document.getElementById('bt_hodlFinal').textContent = '$' + hodlFinal.toFixed(2);
             document.getElementById('bt_lpFinal').textContent = '$' + lpFinal.toFixed(2);
             document.getElementById('bt_advantage').textContent = '$' + advantage.toFixed(2);
             document.getElementById('bt_advantage').className = 'output-value ' + (advantage >= 0 ? 'positive' : 'negative');
-            
+
             var ctx = document.getElementById('backtestChart');
             if (backtestChart) backtestChart.destroy();
-            
+
             var lpData = [];
             var hodlData = [];
             for (var i = 0; i <= Math.min(duration, 90); i++) {
@@ -401,7 +401,7 @@
                 lpData.push(lpVal);
                 hodlData.push(hodlVal);
             }
-            
+
             backtestChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -414,54 +414,54 @@
                 options: { responsive: true, scales: { x: { display: false } } }
             });
         }
-        
+
         function calculateRisk() {
             var volatility = parseFloat(document.getElementById('risk_volatility').value) || 0;
             var duration = parseInt(document.getElementById('risk_duration').value) || 0;
             var poolType = document.getElementById('risk_poolType').value;
             var currentIL = parseFloat(document.getElementById('risk_currentIL').value) || 0;
-            
+
             var poolMult = { 'stablecoin': 0.5, 'bluechip': 1.0, 'altcoin': 1.5, 'memecoin': 2.0 };
             var ilRisk = (currentIL + volatility / 2) * 0.4;
             var volRisk = (volatility / 100) * 35;
             var timeRisk = (duration / 365) * 15;
             var poolRisk = poolMult[poolType] * 10;
             var totalRisk = Math.min(100, ilRisk + volRisk + timeRisk + poolRisk);
-            
+
             var rating = totalRisk < 30 ? 'Low Risk' : totalRisk < 60 ? 'Medium Risk' : 'High Risk';
             var color = totalRisk < 30 ? '#10b981' : totalRisk < 60 ? '#f59e0b' : '#dc2626';
-            
+
             document.getElementById('risk_score').textContent = totalRisk.toFixed(0);
             document.getElementById('risk_score').style.color = color;
             document.getElementById('risk_rating').textContent = rating;
             document.getElementById('risk_rating').style.color = color;
             document.getElementById('risk_indicator').style.left = totalRisk + '%';
         }
-        
+
         function calculateFees() {
             var tvl = parseFloat(document.getElementById('fee_tvl').value) || 0;
             var volume = parseFloat(document.getElementById('fee_volume').value) || 0;
             var position = parseFloat(document.getElementById('fee_position').value) || 0;
             var feeTier = parseFloat(document.getElementById('fee_tier').value) / 100;
-            
+
             if (tvl <= 0 || volume <= 0 || position <= 0) return;
-            
+
             var dailyPoolFees = volume * feeTier;
             var yourShare = position / tvl;
             var dailyFees = dailyPoolFees * yourShare;
             var monthlyFees = dailyFees * 30;
             var apr = (dailyFees * 365 / position) * 100;
-            
+
             document.getElementById('fee_daily').textContent = '$' + dailyFees.toFixed(2);
             document.getElementById('fee_monthly').textContent = '$' + monthlyFees.toFixed(2);
             document.getElementById('fee_apr').textContent = apr.toFixed(2) + '%';
-            
+
             var ctx = document.getElementById('feeChart');
             if (feeChart) feeChart.destroy();
-            
+
             var cumulative = [];
             for (var i = 1; i <= 30; i++) cumulative.push(dailyFees * i);
-            
+
             feeChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -471,12 +471,12 @@
                 options: { responsive: true, scales: { x: { display: false } } }
             });
         }
-        
+
         function optimizePosition() {
             var capital = parseFloat(document.getElementById('opt_capital').value) || 0;
             var risk = document.getElementById('opt_risk').value;
             if (capital <= 0) return;
-            
+
             var pools = {
                 'conservative': [
                     { name: 'USDT/USDC 0.01%', alloc: 0.60, apr: 25 },
@@ -496,27 +496,27 @@
                     { name: 'Memecoin 1.00%', alloc: 0.25, apr: 200 }
                 ]
             };
-            
+
             var portfolio = pools[risk];
             var totalAPR = 0;
             var monthlyIncome = 0;
             var tbody = document.getElementById('opt_tbody');
             tbody.innerHTML = '';
-            
+
             portfolio.forEach(function(pool) {
                 var amount = capital * pool.alloc;
                 var monthly = (amount * pool.apr / 100) / 12;
                 totalAPR += pool.apr * pool.alloc;
                 monthlyIncome += monthly;
-                
+
                 var row = tbody.insertRow();
                 row.innerHTML = '<td>' + pool.name + '</td><td>' + (pool.alloc * 100).toFixed(0) + '%</td><td>$' + amount.toFixed(0) + '</td><td>' + pool.apr + '%</td>';
             });
-            
+
             document.getElementById('opt_portfolioAPR').textContent = totalAPR.toFixed(1) + '%';
             document.getElementById('opt_monthlyIncome').textContent = '$' + monthlyIncome.toFixed(2);
         }
-        
+
         window.addEventListener('load', function() { calculateIL(); });
     </script>
 </body>

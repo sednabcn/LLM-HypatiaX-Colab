@@ -4,10 +4,9 @@ DAY 2: Prototype B - "LLM Generator" (Fast & Flexible)
 DAY 3: Prototype C - "Hybrid Discovery" (Slow & Powerful)
 Then Day 4: Compare results, pick winner, build production version
 
-
 PROTOTYPE A: "Smart Lookup" (Semantic Search)
 Architecture
-User description 
+User description
   → Embed with sentence-transformers
   → Search your 580 formulas (vector similarity)
   → Return best match + validation metadata
@@ -31,7 +30,6 @@ Pros/Cons
 ❌ Unreliable: LLMs hallucinate
 ❌ Expensive: $0.01-0.05 per request
 ❌ Requires validation: Extra step needed
-
 
 PROTOTYPE C:
 

@@ -5,27 +5,33 @@ from hypatiax.tools.database import DeFiDataManager
 from hypatiax.tools.domains.finance.defi.uniswap_v2 import fetch_pool_data
 
 # Fetch domain-specific data
+
 data_manager = DeFiDataManager()
 pool_data = fetch_pool_data("ETH-USDC")
 
 # Preprocess with core
+
 from hypatiax.core.preprocessing import prepare_training_data
 train_data = prepare_training_data(pool_data)
 
 # Train model from model_implementations
+
 from hypatiax.model_implementations.transformers import T5ForFinance
 model = T5ForFinance()
 
 # Train with core
+
 from hypatiax.core.training import train_model
 trained_model = train_model(model, train_data)
 
 # Validate with tools
+
 from hypatiax.tools.validation import BacktestValidator
 validator = BacktestValidator()
 results = validator.validate(trained_model, test_data)
 
 # Visualize with tools
+
 from hypatiax.tools.visualization import plot_results
 plot_results(results)
 Example 2: LLM-Powered Formula Generation
@@ -33,18 +39,22 @@ python# Use LLM provider from tools
 from hypatiax.tools.llm_providers import AnthropicProvider
 
 # Generate formula using LLM
+
 llm = AnthropicProvider(api_key="your-key")
 formula = llm.generate("Create a Tableau formula for YTD sales")
 
 # Validate with symbolic engine
+
 from hypatiax.tools.symbolic import SymbolicEngine
 engine = SymbolicEngine()
 is_valid = engine.validate_formula(formula)
 
 # Use dimensional validator
+
 from hypatiax.tools.validation import DimensionalValidator
 dim_validator = DimensionalValidator()
 dim_check = dim_validator.check(formula)
+
 ```
 
 ---
@@ -63,19 +73,19 @@ dim_check = dim_validator.check(formula)
 ## **When to Use `tools/` vs `model_implementations/`:**
 
 ### Use `tools/`:
-✅ LLM API wrappers (external services)  
-✅ Mathematical engines (symbolic, numerical)  
-✅ Domain-specific calculators (DeFi, finance)  
-✅ Validation logic  
-✅ Visualization utilities  
-✅ Data fetching/management  
+✅ LLM API wrappers (external services)
+✅ Mathematical engines (symbolic, numerical)
+✅ Domain-specific calculators (DeFi, finance)
+✅ Validation logic
+✅ Visualization utilities
+✅ Data fetching/management
 
 ### Use `model_implementations/`:
-✅ Neural network architectures  
-✅ Transformer models (your own)  
-✅ Custom NER models  
-✅ RL agents  
-✅ Model classes you train  
+✅ Neural network architectures
+✅ Transformer models (your own)
+✅ Custom NER models
+✅ RL agents
+✅ Model classes you train
 
 ---
 
@@ -93,6 +103,7 @@ dim_check = dim_validator.check(formula)
 
 ## **Your Migration Strategy (Updated):**
 ```
+
 ✅ Keep as-is:
 ├── tools/                  # Already well-organized!
 ├── custom_ner/            # Existing NER code
@@ -136,13 +147,13 @@ The file is huge and confusing (500+ lines)
 You want to reuse the model architecture elsewhere
 You're adding a new variant of an existing model
 
-
 Recommended Approach:
 Phase 1: NOW (What you decided) ✅
 python# Keep core/ as-is
 core/training/training_spacy.py     # Leave alone
 
 # Add NEW models to model_implementations/
+
 model_implementations/llm/claude_wrapper.py  # NEW model
 Phase 2: OPPORTUNISTIC (When touching old code)
 Example: You need to modify training_spacy.py
@@ -153,7 +164,7 @@ class CustomSpacyNER:  # Model architecture
     def __init__(self):
         self.nlp = spacy.blank("en")
         self.ner = self.nlp.add_pipe("ner")
-    
+
     def add_labels(self, labels):
         for label in labels:
             self.ner.add_label(label)
@@ -175,27 +186,29 @@ class CustomSpacyNER:
     def __init__(self):
         self.nlp = spacy.blank("en")
         self.ner = self.nlp.add_pipe("ner")
-    
+
     def add_labels(self, labels):
         for label in labels:
             self.ner.add_label(label)
-    
+
     def save(self, path):
         self.nlp.to_disk(path)
 
 # core/training/training_spacy.py - WORKFLOW ONLY
+
 from hypatiax.model_implementations.ner import CustomSpacyNER
 
 def train_spacy_model(data_path, output_path):
     """Training workflow for spaCy NER"""
     model = CustomSpacyNER()
     train_data = load_data(data_path)
-    
+
     for epoch in range(30):
         losses = {}
         model.nlp.update(train_data, losses=losses)
-    
+
     model.save(output_path)
+
 ```
 
 **Benefit:** You only refactor when you're already in that code!
@@ -204,6 +217,7 @@ def train_spacy_model(data_path, output_path):
 
 ## **Quick Decision Tree:**
 ```
+
 Are you adding a NEW model?
 ├─ YES → Put in model_implementations/ ✅
 └─ NO → Are you editing existing core/ file?
@@ -221,6 +235,7 @@ My Recommendation:Should I Extract from core/? - Decision GuideDocument # Shoul
 ## Current State Assessment
 
 ### ✅ What's Working (Don't Touch)
+
 ```
 core/
 ├── training/

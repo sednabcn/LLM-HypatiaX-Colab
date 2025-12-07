@@ -1,5 +1,6 @@
 # Calculate IL
-curl -X POST http://localhost:5000/api/defi/calculate-il \
+
+curl -X POST <http://localhost:5000/api/defi/calculate-il> \
   -H "Content-Type: application/json" \
   -d '{
     "initial_price": 2000,
@@ -7,7 +8,8 @@ curl -X POST http://localhost:5000/api/defi/calculate-il \
   }'
 
 # Analyze complete position
-curl -X POST http://localhost:5000/api/defi/analyze-position \
+
+curl -X POST <http://localhost:5000/api/defi/analyze-position> \
   -H "Content-Type: application/json" \
   -d '{
     "initial_token_a": 1.0,
@@ -20,8 +22,8 @@ curl -X POST http://localhost:5000/api/defi/analyze-position \
     "fee_rate": 0.003
   }'
 
-
 Summary of What I've Created for You:
+
 1. Enhanced Flask App (app.py)
 ✅ All DeFi formulas integrated into one API
 ✅ Quality score calculation included
@@ -48,20 +50,17 @@ Calculates: daily_fees / daily_il_rate
 Returns tier (GOOD/MODERATE/POOR)
 Shows pool share percentage
 
-
 Batch Analysis
 
 Analyze multiple positions in one request
 Get summary statistics
 Compare different pools
 
-
 Better Error Handling
 
 Field validation
 Helpful error messages
 Type conversion safety
-
 
 Daily IL Rate Calculation
 
@@ -76,9 +75,11 @@ bash# Make bash script executable
 chmod +x api_test_examples.sh
 
 # Run tests
+
 ./api_test_examples.sh
 
 # Or use Python client
+
 python test_api_client.py
 Example Response for DAI/USDC:
 json{
@@ -93,6 +94,7 @@ json{
 }
 Do you need an independent API? → No! This single Flask app handles everything. You only need separate APIs if you want microservices architecture or independent scaling.
 Would you like me to help you integrate this into your existing codebase or create a frontend to visualize the results?RetryR1)Where store api_test_examples.sh / test_api_client.py ? 2)create ner_routes.py/ner_schemas.py/ner_services.pyGreat questions! Let me help you organize your backend structure properly.
+
 1) Where to store test files:
 backend/
 ├── api/
@@ -145,10 +147,12 @@ sys.path.insert(0, os.path.abspath(os.pPerfect! Now let me create a final summar
 Store them in the `tests/` directory:
 
 ```
+
 backend/
 ├── tests/                          # ← CREATE THIS FOLDER
 │   ├── __init__.py                # EmpSummary
 I've created a complete backend structure for you! Here's what you now have:
+
 1) Test Files Location ✅
 Store in backend/tests/:
 
@@ -176,7 +180,7 @@ Batch processing
 
 Example Usage:
 bash# Extract DeFi formula
-curl -X POST http://localhost:5000/api/ner/extract-formula \
+curl -X POST <http://localhost:5000/api/ner/extract-formula> \
   -d '{"text": "IL = 2*sqrt(r)/(r+1) - 1", "domain": "defi"}'
 All artifacts are ready to copy into your backend! Follow the Complete Setup Guide artifact for step-by-step instructions.
 Would you like me to help you with:
@@ -185,15 +189,17 @@ Frontend integration for these APIs?
 Database setup for storing formulas?
 Adding more DeFi formulas (Uniswap V3, Curve, etc.)?
 
-
 Usage:
+
 # Test HypatiaX
-curl -X POST http://localhost:5000/api/hypatiax/map \
+
+curl -X POST <http://localhost:5000/api/hypatiax/map> \
   -H "Content-Type: application/json" \
   -d '{"description": "sum of sales"}'
 
 # Test DeFi
-curl -X POST http://localhost:5000/api/defi/analyze-position \
+
+curl -X POST <http://localhost:5000/api/defi/analyze-position> \
   -H "Content-Type: application/json" \
   -d '{
     "initial_token_a": 1.0,
@@ -206,6 +212,7 @@ curl -X POST http://localhost:5000/api/defi/analyze-position \
   }'
 
 # Test NER (if blueprint registered)
-curl -X POST http://localhost:5000/api/ner/extract-formula \
+
+curl -X POST <http://localhost:5000/api/ner/extract-formula> \
   -H "Content-Type: application/json" \
   -d '{"text": "IL = 2*sqrt(r)/(r+1) - 1", "domain": "defi"}'

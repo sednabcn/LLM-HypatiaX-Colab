@@ -1,4 +1,5 @@
 Key Enhancements
+
 1. Structured Output Extraction
 
 Parses LLM response into sections: Formula, LaTeX, Python, Variables, Assumptions, Explanation
@@ -14,8 +15,10 @@ Handles errors gracefully
 
 3. Comprehensive Test Suite
 pythonTest Cases:
+
 - DeFi: Impermanent Loss, Liquidation Price
 - Risk: VaR 95%, Sharpe Ratio
+
 4. Enhanced Prompting
 
 Domain-specific context
@@ -43,6 +46,7 @@ Basic Usage
 pythonbaseline = PureLLMBaseline()
 
 # Generate single formula
+
 result = baseline.generate_formula(
     description="Sharpe ratio",
     domain="risk",
@@ -57,17 +61,20 @@ X = np.random.randn(100, 2)
 y_true = X[:, 0] - 1.96 * X[:, 1]
 
 # Generate and test
+
 result = baseline.generate_formula("VaR at 95%", "risk")
 metrics = baseline.test_formula_accuracy(result, X, y_true)
 print(f"R² Score: {metrics['r2']:.4f}")
 Comprehensive Test
 bashpython baseline_pure_llm.py
+
 ```
 
 Output:
 ```
+
 ======================================================================
-                   Pure LLM Baseline Evaluation                      
+                   Pure LLM Baseline Evaluation
 ======================================================================
 
 Testing Domain: DEFI
@@ -87,10 +94,12 @@ Testing Domain: DEFI
 
 Testing Domain: RISK
 ----------------------------------------------------------------------
+
 ...
 
 Summary
 ----------------------------------------------------------------------
+
 Total test cases: 4
 Successfully evaluated: 4/4 (100.0%)
 Average R² score: 0.9924
@@ -127,13 +136,16 @@ response = self.client.messages.create(
     model="claude-sonnet-4-20250514",  # Pre-trained model
     messages=[{"role": "user", "content": prompt}]
 )
-# That's it - no training!
+
+# That's it - no training
+
 ```
 
 ### Purpose as a Baseline:
 
 It's called a **"baseline"** because it establishes a **reference point** to compare against your hybrid system:
 ```
+
 Comparison:
 ┌─────────────────────────────────────────────────────┐
 │ Pure LLM Baseline (this code)                       │

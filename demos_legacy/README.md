@@ -1,9 +1,11 @@
 cat > demos/README.md << 'EOF'
+
 # HypatiaX Demo Framework
 
 This directory contains demo scripts, strategies, and workspaces for testing and documenting HypatiaX functionality.
 
 ## Directory Structure
+
 ```
 demos/
 ├── scripts/           # Executable demo scripts
@@ -25,26 +27,31 @@ demos/
 ## Quick Start
 
 ### Run Thursday Demo
+
 ```bash
 python demos/scripts/thursday_demo.py
 ```
 
 ### Test Strategy 1 (Sequential Pipeline)
+
 ```bash
 python demos/strategies/strategy01.py
 ```
 
 ### Test Strategy 2 (Joint Training)
+
 ```bash
 python demos/strategies/strategy02.py
 ```
 
 ### Use Demo Workspace
+
 Open `demos/workspaces/demo_workspace.html` in your browser.
 
 ## Existing HypatiaX Demo Integration
 
 Your existing demo structure:
+
 ```
 hypatiax/demo/
 ├── raw_sentences/
@@ -54,26 +61,32 @@ hypatiax/demo/
 ```
 
 These demos/ files complement (not replace) your existing structure.
+
 - `hypatiax/demo/` = Core demo functionality (keep as-is)
 - `demos/` = Testing, strategies, and documentation (new organization)
 
 ## Usage Patterns
 
 ### For Quick Tests
+
 Use files in `demos/scripts/`
 
 ### For Strategy Comparison
+
 Use files in `demos/strategies/`
 
 ### For Documentation & Tracking
+
 Use HTML workspaces in `demos/workspaces/`
 
 ### For Learning & Reference
+
 Read guides in `demos/documentation/`
 
 ## Integration with Existing Code
 
 The demo files work with your existing structure:
+
 ```python
 # In demos/scripts/thursday_demo.py
 from hypatiax.demo.demo_runner import DemoRunner  # Your existing code

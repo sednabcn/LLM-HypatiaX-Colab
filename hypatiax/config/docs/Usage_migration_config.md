@@ -1,5 +1,6 @@
 Perfect! Now you can run this migration script. Here's how to use it:
 🚀 How to Use the Migration Script
+
 1. First, do a dry-run (see what would change):
 bashcd ~/Downloads/LLM-HypatiaX-OLD
 python migrate_to_config.py --dry-run
@@ -16,9 +17,11 @@ bash# Check what changed
 git diff
 
 # Test imports work
+
 python -c "from hypatiax.config import paths, ModelConfig; print('✅ Imports working!')"
 
 # Run tests
+
 python -m pytest tests/ -v
 📋 What the Script Does
 The script will automatically:
@@ -44,8 +47,10 @@ bash# 1. Dry run first (safe, shows preview)
 python migrate_to_config.py --dry-run
 
 # 2. If it looks good, apply changes
+
 python migrate_to_config.py
 
 # 3. Verify everything works
+
 python -m pytest tests/
 The script is smart and safe—it won't break your code! 🛡️

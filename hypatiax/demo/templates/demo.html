@@ -335,9 +335,9 @@
             <div class="input-section">
                 <label class="label">💬 Enter your description:</label>
                 <div class="input-group">
-                    <input 
-                        type="text" 
-                        class="input-box" 
+                    <input
+                        type="text"
+                        class="input-box"
                         id="descriptionInput"
                         placeholder="e.g., sum of sales by region"
                     />
@@ -435,10 +435,10 @@
             try {
                 const response = await fetch(`${API_BASE}/health`);
                 const data = await response.json();
-                
-                document.getElementById('statusText').textContent = 
+
+                document.getElementById('statusText').textContent =
                     `Connected - ${data.mode} mode`;
-                document.getElementById('serverInfo').textContent = 
+                document.getElementById('serverInfo').textContent =
                     `v${data.version} | ${data.stats.total_requests} requests`;
             } catch (error) {
                 document.getElementById('statusText').textContent = 'Server offline';
@@ -463,7 +463,7 @@
         // Process query
         async function processQuery() {
             const description = document.getElementById('descriptionInput').value.trim();
-            
+
             if (!description) {
                 showError('Please enter a description');
                 return;
@@ -507,7 +507,7 @@
             // Entities
             const entitiesBox = document.getElementById('entitiesBox');
             if (data.entities && data.entities.length > 0) {
-                entitiesBox.innerHTML = data.entities.map(e => 
+                entitiesBox.innerHTML = data.entities.map(e =>
                     `<span class="entity entity-${e.label}">${e.text} <small>(${e.label})</small></span>`
                 ).join('');
             } else {
@@ -518,13 +518,13 @@
             document.getElementById('formulaBox').textContent = data.formula;
 
             // Metrics
-            document.getElementById('confidenceMetric').textContent = 
+            document.getElementById('confidenceMetric').textContent =
                 `${Math.round(data.confidence * 100)}%`;
-            document.getElementById('entitiesMetric').textContent = 
+            document.getElementById('entitiesMetric').textContent =
                 data.entity_count || 0;
-            document.getElementById('timeMetric').textContent = 
+            document.getElementById('timeMetric').textContent =
                 `${data.processing_time.toFixed(1)}ms`;
-            document.getElementById('methodMetric').textContent = 
+            document.getElementById('methodMetric').textContent =
                 data.method.charAt(0).toUpperCase() + data.method.slice(1);
 
             // Show results

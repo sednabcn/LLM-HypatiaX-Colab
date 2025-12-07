@@ -1,12 +1,13 @@
 
 🎯 Recommended Setup for Your Use Case
 For your NER training pipeline, I recommend:
-    
+
 python
 # Add this to your run_time_parallel_code.py
 
-import torch
 import os
+
+import torch
 
 # Force CPU usage
 os.environ["CUDA_VISIBLE_DEVICES"] = ""

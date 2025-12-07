@@ -2,12 +2,13 @@
 """
 List available Gemini models for your API key
 """
-import google.generativeai as genai
 import os
+
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-api_key = os.getenv('GOOGLE_API_KEY')
+api_key = os.getenv("GOOGLE_API_KEY")
 
 if not api_key:
     print("❌ GOOGLE_API_KEY not found")
@@ -19,14 +20,14 @@ print("Available Gemini Models:")
 print("=" * 60)
 
 for model in genai.list_models():
-    if 'generateContent' in model.supported_generation_methods:
+    if "generateContent" in model.supported_generation_methods:
         print(f"\n✓ {model.name}")
         print(f"  Display Name: {model.display_name}")
         print(f"  Description: {model.description}")
 
 """
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/tools/llm_providers/list_gemini_models.py                                      
+└─$ python hypatiax/tools/llm_providers/list_gemini_models.py
 Available Gemini Models:
 ============================================================
 
@@ -116,27 +117,27 @@ Available Gemini Models:
 
 ✓ models/gemma-3-1b-it
   Display Name: Gemma 3 1B
-  Description: 
+  Description:
 
 ✓ models/gemma-3-4b-it
   Display Name: Gemma 3 4B
-  Description: 
+  Description:
 
 ✓ models/gemma-3-12b-it
   Display Name: Gemma 3 12B
-  Description: 
+  Description:
 
 ✓ models/gemma-3-27b-it
   Display Name: Gemma 3 27B
-  Description: 
+  Description:
 
 ✓ models/gemma-3n-e4b-it
   Display Name: Gemma 3n E4B
-  Description: 
+  Description:
 
 ✓ models/gemma-3n-e2b-it
   Display Name: Gemma 3n E2B
-  Description: 
+  Description:
 
 ✓ models/gemini-flash-latest
   Display Name: Gemini Flash Latest

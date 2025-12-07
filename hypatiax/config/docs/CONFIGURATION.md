@@ -74,6 +74,7 @@ HypatiaX automatically detects and configures itself for:
 ### Initial Setup
 
 1. **Run Setup Script**
+
    ```bash
    ./setup_environment.sh
    ```
@@ -85,15 +86,17 @@ HypatiaX automatically detects and configures itself for:
    - `.gitignore` - Git ignore rules
 
 2. **Activate Environment**
+
    ```bash
    source activate_hypatiax.sh
    ```
 
 3. **Make Permanent (Optional)**
+
    ```bash
    # For bash
    echo 'source /path/to/hypatiax/activate_hypatiax.sh' >> ~/.bashrc
-   
+
    # For zsh
    echo 'source /path/to/hypatiax/activate_hypatiax.sh' >> ~/.zshrc
    ```
@@ -154,26 +157,31 @@ docker build --target notebook -t hypatiax:notebook .
 ### Running Containers
 
 **Development with live code updates:**
+
 ```bash
 docker run -v $(pwd):/app -it hypatiax:dev bash
 ```
 
 **Run tests:**
+
 ```bash
 docker run hypatiax:test
 ```
 
 **Production with output volume:**
+
 ```bash
 docker run -v /host/outputs:/tmp/hypatiax_outputs hypatiax:prod
 ```
 
 **API server:**
+
 ```bash
 docker run -p 8000:8000 hypatiax:api
 ```
 
 **Jupyter notebook:**
+
 ```bash
 docker run -p 8888:8888 -v $(pwd):/app hypatiax:notebook
 ```
@@ -219,6 +227,7 @@ services:
 ```
 
 Run with:
+
 ```bash
 docker-compose up -d
 ```
@@ -239,26 +248,26 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-    
+
     - name: Setup HypatiaX Environment
       run: ./setup_environment.sh
-    
+
     - name: Install Dependencies
       run: |
         pip install -r requirements.txt
-    
+
     - name: Run Tests
       run: |
         pytest tests/ -v --cov=hypatiax
-    
+
     - name: Upload Coverage
       uses: codecov/codecov-action@v3
       with:
@@ -268,6 +277,7 @@ jobs:
 ### Environment Variables Set
 
 The setup script automatically sets:
+
 - `HYPATIAX_ROOT` - Project root directory
 - `PYTHONPATH` - Python import path
 - `HYPATIAX_OUTPUT_DIR` - Output directory (`ci_outputs/`)
@@ -279,6 +289,7 @@ The setup script automatically sets:
 ### AWS Lambda
 
 **Function Configuration:**
+
 ```python
 # lambda_function.py
 from hypatiax.config import config
@@ -286,9 +297,9 @@ from hypatiax.config import config
 def lambda_handler(event, context):
     # Config automatically uses /tmp for outputs
     output_path = config.get_output_path('results.json')
-    
+
     # Your code here
-    
+
     return {
         'statusCode': 200,
         'body': 'Success'
@@ -296,6 +307,7 @@ def lambda_handler(event, context):
 ```
 
 **Environment Variables:**
+
 ```bash
 HYPATIAX_ROOT=/var/task
 HYPATIAX_OUTPUT_DIR=/tmp/hypatiax_outputs
@@ -304,6 +316,7 @@ HYPATIAX_OUTPUT_DIR=/tmp/hypatiax_outputs
 ### AWS EC2 / ECS
 
 **User Data Script:**
+
 ```bash
 #!/bin/bash
 cd /opt/hypatiax
@@ -315,6 +328,7 @@ export DOCKER_CONTAINER=1
 ### Google Cloud Run
 
 **Dockerfile:**
+
 ```dockerfile
 FROM hypatiax:prod
 ENV HYPATIAX_OUTPUT_DIR=/tmp/hypatiax_outputs
@@ -324,6 +338,7 @@ CMD ["python", "-m", "hypatiax.api"]
 ### Azure Functions
 
 **Function App Configuration:**
+
 ```json
 {
   "version": "2.0",
@@ -428,16 +443,19 @@ config.print_config()
 ### "Module 'hypatiax' not found"
 
 **Solution 1:** Activate the environment
+
 ```bash
 source activate_hypatiax.sh
 ```
 
 **Solution 2:** Set PYTHONPATH manually
+
 ```bash
 export PYTHONPATH="/path/to/hypatiax:$PYTHONPATH"
 ```
 
 **Solution 3:** Install in development mode
+
 ```bash
 pip install -e /path/to/hypatiax
 ```
@@ -451,11 +469,13 @@ pip install -e /path/to/hypatiax
 ### "Permission denied" when creating output directories
 
 **Local Development:**
+
 ```bash
 sudo chown -R $USER:$USER /path/to/hypatiax/outputs
 ```
 
 **Docker:**
+
 ```bash
 docker run -v $(pwd)/outputs:/tmp/hypatiax_outputs \
            -e HYPATIAX_OUTPUT_DIR=/tmp/hypatiax_outputs \
@@ -467,6 +487,7 @@ docker run -v $(pwd)/outputs:/tmp/hypatiax_outputs \
 ### Paths not found in Docker
 
 Ensure volumes are mounted correctly:
+
 ```bash
 # Mount entire project
 docker run -v $(pwd):/app hypatiax:dev
@@ -480,6 +501,7 @@ docker run -v $(pwd)/hypatiax:/app/hypatiax \
 ### GitHub Actions failing
 
 Check that setup script is executable:
+
 ```yaml
 - name: Make setup script executable
   run: chmod +x setup_environment.sh
@@ -493,20 +515,23 @@ Check that setup script is executable:
 ## Best Practices
 
 1. **Always use config paths** instead of hardcoded paths
+
    ```python
    # ❌ Bad
    path = "/home/user/hypatiax/outputs/result.json"
-   
+
    # ✅ Good
    path = config.get_output_path('result.json')
    ```
 
 2. **Use environment activation** for local development
+
    ```bash
    source activate_hypatiax.sh
    ```
 
 3. **Check paths exist** before using them
+
    ```python
    if config.exists('datasets'):
        dataset_path = config.get_dataset_path('data.json')
@@ -518,6 +543,7 @@ Check that setup script is executable:
    - Cloud: `/tmp/hypatiax_outputs/` (temporary)
 
 5. **Test configuration** after setup
+
    ```bash
    python -c 'from hypatiax.config import config; config.print_config()'
    ```
@@ -526,11 +552,12 @@ Check that setup script is executable:
 
 ## Support
 
-- **Documentation:** https://docs.hypatiax.io
-- **Issues:** https://github.com/yourorg/hypatiax/issues
-- **Discussions:** https://github.com/yourorg/hypatiax/discussions
+- **Documentation:** <https://docs.hypatiax.io>
+- **Issues:** <https://github.com/yourorg/hypatiax/issues>
+- **Discussions:** <https://github.com/yourorg/hypatiax/discussions>
 
 For configuration-specific issues, include the output of:
+
 ```bash
 python -c 'from hypatiax.config import config; config.print_config()'
 ```

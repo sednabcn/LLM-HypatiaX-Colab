@@ -9,14 +9,12 @@ Validation rates from hybrid and LLM results
 R² scores from all methods
 Extrapolation errors from validation results
 
-
 Formatted output: Uses percentage formatting for rates and errors, making the comparison table more readable
 Detailed analysis: Adds a "KEY FINDINGS" section that summarizes the main insights
 Two output files:
 
 method_comparison.csv: The main comparison table
 detailed_metrics.json: Raw metrics for further analysis
-
 
 Better error handling: Gracefully handles missing data and provides meaningful defaults
 

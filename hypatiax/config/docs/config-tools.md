@@ -16,10 +16,13 @@ config = {
 }
 
 # preprocess.py (different file)
+
 data_path = 'hypatiax/datasets/queries/tableau/training/formulas_nor.xlsx'  # DUPLICATE!
-# Typo here? Good luck finding it!
+
+# Typo here? Good luck finding it
 
 # evaluate.py (another file)
+
 data_path = 'hypatiax/datasets/queries/tableau/testing/formulas_nor.xlsx'  # DUPLICATE AGAIN!
 Problems:
 
@@ -37,10 +40,12 @@ output_path = paths.get_output_path('models', 'ner_desc')
 config = ModelConfig.training_desc(niter=100, batchsize=8)
 
 # preprocess.py
+
 from hypatiax.config import paths
 data_path = paths.training_data / 'formulas_nor.xlsx'  # Same path, no duplication!
 
 # evaluate.py
+
 from hypatiax.config import paths
 data_path = paths.testing_data / 'formulas_nor.xlsx'  # Consistent!
 Benefits:
@@ -50,11 +55,12 @@ Benefits:
 ✅ Validated paths
 ✅ Easy to test
 
-
 🚀 Is It Necessary on GitHub?
 YES, especially for GitHub! Here's why:
+
 1. GitHub Actions (CI/CD)
 yaml# .github/workflows/test.yml
+
 - name: Run tests
   run: |
     export HYPATIAX_ROOT=${{ github.workspace }}
@@ -76,13 +82,15 @@ With config: Auto-detects → everyone's code works
 3. Different Environments
 pythonfrom hypatiax.config import config
 
-# Automatically detects:
+# Automatically detects
+
 if config.environment == 'github':
     # Use smaller test data for CI
     config = ModelConfig.quick_test()
 elif config.environment == 'local':
     # Use full training locally
     config = ModelConfig.training_desc(niter=200)
+
 ```
 
 ---
@@ -112,6 +120,7 @@ elif config.environment == 'local':
 
 Based on your project structure:
 ```
+
 - Multiple modules (datasets, custom_ner, data_spacy)
 - Complex path structure
 - Likely multiple scripts
@@ -125,7 +134,6 @@ You should keep it because:
 ✅ Complex paths → one place to manage them
 ✅ Multiple scripts → avoid duplicating paths
 
-
 💰 Time Investment vs. Return
 InvestmentReturn30 min setup (done!)Save 10+ hours of debugging path issuesLearn onceUse forever in all projects5 files to maintainEliminate 100+ hard-coded paths
 
@@ -134,9 +142,12 @@ Try this experiment:
 Without config:
 bash# Count how many times you hard-code paths
 grep -r "hypatiax/datasets" --include="*.py" | wc -l
-# Probably 20+ times!
+
+# Probably 20+ times
+
 With config:
 pythonfrom hypatiax.config import paths
+
 # ONE place to change if you rename "datasets" to "data"
 
 ✅ My Recommendation
@@ -153,7 +164,6 @@ This is a throwaway prototype
 You'll never run tests
 You'll never share the code
 You only run locally, forever
-
 
 🎓 What You Learned
 Even if you don't use it now, you learned:

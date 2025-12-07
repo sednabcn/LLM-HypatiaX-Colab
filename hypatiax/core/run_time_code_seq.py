@@ -1,12 +1,19 @@
+import time
+from importlib import resources
+
 import pandas as pd
 import spacy
-import time
 from spacy.training import Example
-from hypatiax.core.preprocessing.preparation_data import preparation_data, preparation_unlabeled_multitask_data, preparation_unlabeled_single_data
-from hypatiax.core.training.training_spacy import Training
+
 from hypatiax.core.deployment.evaluation_model import evaluate_spacy_model
 from hypatiax.core.evaluation.testing_model import test_spacy_model
-from importlib import resources
+from hypatiax.core.preprocessing.preparation_data import (
+    preparation_data,
+    preparation_unlabeled_multitask_data,
+    preparation_unlabeled_single_data,
+)
+from hypatiax.core.training.training_spacy import Training
+
 
 def save_config(test_id,config,time_id):
         config_data_prep=pd.DataFrame.from_dict(config[0],columns=list(config[0].keys()))
@@ -16,7 +23,7 @@ def save_config(test_id,config,time_id):
         config_training_path=resources.files('hypatiax.models.queries.tableau.model_configs').joinpath(f'config_training_{test_id}_{time_id}')
         config_data_prep.to_csv(config_training_path)
 
- 
+
 def run_test(test_id,config):
     """
     Simulate running a test given a configuration.
@@ -33,13 +40,13 @@ def run_test(test_id,config):
     # Training the model
     trainer = Training(**config[1])
     history, nlp = trainer.train()
- 
+
     # Save the trained model
     trainer.save_model()
     trainer.plot_history(history)
 
     # Determine the appropriate entity path based on the dtype
-    ner_model_file=f'ner_{config[1]["sub_domain"]}_{config[1]["dtype"]}' 
+    ner_model_file=f'ner_{config[1]["sub_domain"]}_{config[1]["dtype"]}'
     if config[1]["dtype"] == "both":
           ner_model_file=f'ner_{config[1]["sub_domain"]}'
     entity_path = resources.files(f'hypatiax.data_spacy.{config[1]["domain"]}.{config[1]["sub_domain"]}').joinpath(ner_model_file)
@@ -51,7 +58,7 @@ def run_test(test_id,config):
         results['test_result'] = test_spacy_model(entity_path, X_test)
 
     return results
- 
+
 # Running all tests and collecting results
 (year,month,day,hr,minutes,sec,_,_,_)=time.localtime()
 time_proc=f'{year}_{month)_{day}_{hr}_{minutes}_{sec}'

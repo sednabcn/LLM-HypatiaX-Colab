@@ -7,13 +7,11 @@ Hypatiax Tools Package
 from hypatiax.tools.database.defi_data_manager import DeFiDataManager
 
 # DeFi analysis tools
-from hypatiax.tools.domains.finance.defi.uniswap_v2.uniswap_v2_backtest_analysis import (
-    run_complete_backtest
-)
+from hypatiax.tools.domains.finance.defi.uniswap_v2.uniswap_v2_backtest_analysis import run_complete_backtest
 
 __all__ = [
-    'DeFiDataManager',
-    'run_complete_backtest',
+    "DeFiDataManager",
+    "run_complete_backtest",
 ]
 
-__version__ = '0.1.0'
+__version__ = "0.1.0"

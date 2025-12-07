@@ -1,17 +1,16 @@
 import os
-from dotenv import load_dotenv
+
 import anthropic
+from dotenv import load_dotenv
 
 load_dotenv()
-api_key = os.getenv('ANTHROPIC_API_KEY')
+api_key = os.getenv("ANTHROPIC_API_KEY")
 
 try:
     client = anthropic.Anthropic(api_key=api_key)
     # Try to make a minimal request
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=10,
-        messages=[{"role": "user", "content": "Hi"}]
+        model="claude-sonnet-4-20250514", max_tokens=10, messages=[{"role": "user", "content": "Hi"}]
     )
     print("✅ Key is ACTIVE and WORKING")
     print(f"Response: {response.content[0].text}")

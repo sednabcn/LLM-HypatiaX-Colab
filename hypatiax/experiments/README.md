@@ -3,6 +3,7 @@
 This directory contains all experiments across different technologies.
 
 ## Directory Structure
+
 ```
 experiments/
 ├── ner/          # Named Entity Recognition experiments
@@ -15,6 +16,7 @@ experiments/
 ## Usage
 
 ### Register a New Experiment
+
 ```bash
 python experiment_tracker.py register \
   --name "BERT Fine-tuning v1" \
@@ -25,6 +27,7 @@ python experiment_tracker.py register \
 ```
 
 ### List Experiments
+
 ```bash
 # List all experiments
 python experiment_tracker.py list
@@ -37,6 +40,7 @@ python experiment_tracker.py list --status completed
 ```
 
 ### Update Experiment
+
 ```bash
 python experiment_tracker.py update \
   --id transformers_20250112_143022 \
@@ -45,6 +49,7 @@ python experiment_tracker.py update \
 ```
 
 ### Generate Report
+
 ```bash
 python experiment_tracker.py report
 ```
@@ -58,6 +63,7 @@ python experiment_tracker.py report
 5. **Generate report** to document progress
 
 ## Example Experiment Script
+
 ```python
 from experiments.experiment_tracker import ExperimentTracker, TechnologyType, ExperimentStatus
 

@@ -20,16 +20,16 @@
     --text-color: #333;
     --text-light: #6b7280;
     --border-color: #e5e7eb;
-    
+
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    
+
     /* Shadows */
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
-    
+
     /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
@@ -475,29 +475,29 @@ button:disabled {
     .hero-title {
         font-size: 2rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1.2rem;
     }
-    
+
     .hero-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .nav-menu {
         gap: 0.5rem;
         font-size: 0.9rem;
     }
-    
+
     .form-row {
         grid-template-columns: 1fr;
     }
-    
+
     .container {
         padding: 0 var(--spacing-sm);
     }
-    
+
     h1 { font-size: 2rem; }
     h2 { font-size: 1.75rem; }
     h3 { font-size: 1.25rem; }
@@ -508,11 +508,11 @@ button:disabled {
         flex-wrap: wrap;
         justify-content: center;
     }
-    
+
     .hero {
         padding: 3rem 0;
     }
-    
+
     .stat-card h3 {
         font-size: 2.5rem;
     }

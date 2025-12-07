@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hypatiax"
-dynamic = ["version"]  
+dynamic = ["version"]
 description ="HypatiaX: AI-Driven Formula Discovery with LLM"
 authors = [{name = "Ruperto Pedro Bonet Chaple", email="ruperto.bonet@modelphysmat.com"}]
 license = {text="MIT"}
@@ -17,12 +17,12 @@ dependencies = [
     'numpy>=1.26.0,<3.0; python_version=="3.12"',
     'pandas>=2.1.0,<3.0; python_version=="3.12"',
     'scikit-learn>=1.3.0,<2.0; python_version=="3.12"',
-    
+
     # Python 3.13 (Latest)
     'numpy>=1.26.0,<3.0; python_version>="3.13"',
     'pandas>=2.2.0,<3.0; python_version>="3.13"',
     'scikit-learn>=1.4.0,<2.0; python_version>="3.13"',
-    
+
     # Common packages (all versions)
     "spacy>=3.7.0,<4.0",
     "nltk>=3.8.0,<4.0",
@@ -33,7 +33,7 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",	
+    "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 

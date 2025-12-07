@@ -122,7 +122,7 @@ Step 1 (Sequential Pipeline):
 Description → Entities[Desc] → Entities[Formula] → Formula
 Step 2 (Joint Training):
 Input: (Desc, Formula) pairs
-→ Extract: Entities(Desc, Formulas) 
+→ Extract: Entities(Desc, Formulas)
 → Train & Test on combined entity pairs
 
 My Initial Reaction:
@@ -145,7 +145,7 @@ In Step 1, remember each model is tested separately to control the error propaga
 Ah! Critical clarification - thank you!
 So Step 1 is actually:
 Test A: Description → Entities[Desc] (measure NER accuracy on descriptions)
-Test B: Formula → Entities[Formula] (measure NER accuracy on formulas)  
+Test B: Formula → Entities[Formula] (measure NER accuracy on formulas)
 Test C: Entities[Desc] → Entities[Formula] (measure mapping accuracy in isolation)
 This is smart experimental design! You're measuring:
     • Component-level performance (A, B individually)
@@ -166,4 +166,3 @@ Key questions for your report:
         ◦ Entity mapping accuracy?
     2. Step 1 vs Step 2: How much does performance drop when chained together?
     3. The mapping function (Test C): What method did you use for Entities[Desc]→Entities[Formula]?
-

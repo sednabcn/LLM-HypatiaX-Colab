@@ -12,10 +12,10 @@ This module provides centralized configuration management for:
 
 Usage:
     from hypatiax.config import config, paths, ModelConfig
-    
+
     # Access paths
     datasets_path = paths.datasets
-    
+
     # Access model config
     training_params = ModelConfig.training_desc()
 

@@ -1,10 +1,12 @@
 # run_tests.py
-import sys
 import subprocess
+import sys
+
 
 def run(cmd):
     print(">", " ".join(cmd))
     subprocess.check_call(cmd)
+
 
 if __name__ == "__main__":
     # Default: run full tests with coverage

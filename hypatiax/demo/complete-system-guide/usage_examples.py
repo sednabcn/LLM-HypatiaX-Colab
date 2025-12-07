@@ -27,8 +27,7 @@ TRAINING/VALIDATION/TEST: For model training
 
 """
 
-
-from demo.examples import ExampleManager, Example, ExampleCategory
+from demo.examples import Example, ExampleCategory, ExampleManager
 
 # Initialize manager (loads defaults)
 manager = ExampleManager()
@@ -40,37 +39,29 @@ new_example = Example(
     expected_formula="MEDIAN([Order Value])",
     category=ExampleCategory.INTERMEDIATE.value,
     difficulty=3,
-    tags=["aggregation", "median", "statistical"]
+    tags=["aggregation", "median", "statistical"],
 )
 manager.add_example(new_example)
 
 # Filter examples
-basic_examples = manager.filter_by_category('basic')
+basic_examples = manager.filter_by_category("basic")
 hard_examples = manager.filter_by_difficulty(4, 5)
-sales_examples = manager.filter_by_tags(['sales'])
+sales_examples = manager.filter_by_tags(["sales"])
 
 # Get random examples
-random_sample = manager.get_random_examples(
-    count=5,
-    category='basic',
-    difficulty=1
-)
+random_sample = manager.get_random_examples(count=5, category="basic", difficulty=1)
 
 # Split for training
-train, val, test = manager.split_dataset(
-    train_ratio=0.7,
-    val_ratio=0.15,
-    test_ratio=0.15
-)
+train, val, test = manager.split_dataset(train_ratio=0.7, val_ratio=0.15, test_ratio=0.15)
 
 # Generate variations
-base = manager.get_example('basic_sum_01')
+base = manager.get_example("basic_sum_01")
 variations = manager.generate_variations(base, count=3)
 
 # Export
-manager.save_to_file('examples.json', format='json')
-manager.save_to_file('examples.csv', format='csv')
-manager.export_for_training('training_data/', split=True)
+manager.save_to_file("examples.json", format="json")
+manager.save_to_file("examples.csv", format="csv")
+manager.export_for_training("training_data/", split=True)
 
 # Statistics
 stats = manager.get_statistics()

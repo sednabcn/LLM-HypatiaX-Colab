@@ -5,29 +5,29 @@ Executes all tests and scripts across directories in specified order
 Generates comprehensive reports for each execution
 """
 
-import os
-import sys
-import subprocess
 import json
+import os
+import subprocess
+import sys
 import time
+import traceback
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Tuple
-import traceback
+from typing import Dict, List, Tuple
 
 
 class WorkflowRunner:
     """Execute tests and scripts across HypatiaX project with reporting"""
-    
+
     def __init__(self, base_path: str = "."):
         self.base_path = Path(base_path).resolve()
         self.report_dir = self.base_path / "workflow_reports"
         self.report_dir.mkdir(exist_ok=True)
-        
+
         # Execution order as specified
         self.execution_order = [
             "datasets",
-            "patterns", 
+            "patterns",
             "custom_ner",
             "data_spacy",
             "models",
@@ -35,7 +35,7 @@ class WorkflowRunner:
             "mappings",
             "scripts_"
         ]
-        
+
         self.results = {
             "timestamp": datetime.now().isoformat(),
             "base_path": str(self.base_path),
@@ -43,14 +43,14 @@ class WorkflowRunner:
             "platform": sys.platform,
             "modules": {}
         }
-        
+
         # GitHub Actions specific
         self.is_github_actions = os.getenv('GITHUB_ACTIONS') == 'true'
-        
+
     def log(self, message: str, level: str = "info"):
         """Log with GitHub Actions annotations support"""
         print(message)
-        
+
         if self.is_github_actions:
             if level == "error":
                 print(f"::error::{message}")
@@ -58,24 +58,24 @@ class WorkflowRunner:
                 print(f"::warning::{message}")
             elif level == "notice":
                 print(f"::notice::{message}")
-        
+
     def find_executable_files(self, directory: Path) -> Tuple[List[Path], List[Path]]:
         """Find all test files and script files in directory"""
         tests = []
         scripts = []
-        
+
         if not directory.exists():
             return tests, scripts
-            
+
         for item in directory.rglob("*.py"):
             # Skip __init__.py and __pycache__
             if item.name == "__init__.py" or "__pycache__" in str(item):
                 continue
-            
+
             # Skip backup files
             if item.name.endswith("~") or item.name.startswith("#"):
                 continue
-                
+
             # Categorize by filename pattern
             if item.name.startswith("test_") or item.name.startswith("Test_"):
                 tests.append(item)
@@ -83,9 +83,9 @@ class WorkflowRunner:
                 scripts.append(item)
             elif any(x in item.name for x in ["run_time", "proc_time", "evaluate", "training"]):
                 scripts.append(item)
-                
+
         return sorted(tests), sorted(scripts)
-    
+
     def execute_file(self, filepath: Path, file_type: str) -> Dict:
         """Execute a single Python file and capture results"""
         result = {
@@ -100,19 +100,19 @@ class WorkflowRunner:
             "return_code": None,
             "error": None
         }
-        
+
         self.log(f"\n{'='*80}")
         self.log(f"Executing: {result['file']}")
         self.log(f"Type: {file_type}")
         self.log(f"{'='*80}")
-        
+
         # GitHub Actions grouping
         if self.is_github_actions:
             print(f"::group::Executing {result['file']}")
-        
+
         result["start_time"] = datetime.now().isoformat()
         start = time.time()
-        
+
         try:
             # Execute with timeout
             proc = subprocess.run(
@@ -122,11 +122,11 @@ class WorkflowRunner:
                 text=True,
                 timeout=300  # 5 minute timeout
             )
-            
+
             result["stdout"] = proc.stdout
             result["stderr"] = proc.stderr
             result["return_code"] = proc.returncode
-            
+
             if proc.returncode == 0:
                 result["status"] = "success"
                 self.log(f"✓ SUCCESS", "notice")
@@ -135,38 +135,38 @@ class WorkflowRunner:
                 self.log(f"✗ FAILED (return code: {proc.returncode})", "warning")
                 if proc.stderr:
                     self.log(f"STDERR: {proc.stderr[:500]}", "warning")
-                
+
         except subprocess.TimeoutExpired:
             result["status"] = "timeout"
             result["error"] = "Execution timeout (5 minutes)"
             self.log(f"⏱ TIMEOUT", "warning")
-            
+
         except Exception as e:
             result["status"] = "error"
             result["error"] = str(e)
             result["traceback"] = traceback.format_exc()
             self.log(f"⚠ ERROR: {e}", "error")
-        
+
         finally:
             end = time.time()
             result["end_time"] = datetime.now().isoformat()
             result["duration"] = round(end - start, 2)
             self.log(f"Duration: {result['duration']}s")
-            
+
             if self.is_github_actions:
                 print("::endgroup::")
-            
+
         return result
-    
+
     def process_module(self, module_name: str) -> Dict:
         """Process all tests and scripts in a module"""
         self.log(f"\n{'#'*80}")
         self.log(f"# MODULE: {module_name.upper()}")
         self.log(f"{'#'*80}")
-        
+
         if self.is_github_actions:
             print(f"::group::Module: {module_name}")
-        
+
         module_path = self.base_path / module_name
         module_result = {
             "module": module_name,
@@ -184,48 +184,48 @@ class WorkflowRunner:
                 "total_duration": 0
             }
         }
-        
+
         if not module_path.exists():
             self.log(f"⚠ Module not found: {module_path}", "warning")
             if self.is_github_actions:
                 print("::endgroup::")
             return module_result
-        
+
         # Find all executable files
         tests, scripts = self.find_executable_files(module_path)
-        
+
         self.log(f"\nFound {len(tests)} test files")
         self.log(f"Found {len(scripts)} script files")
-        
+
         # Execute tests first
         for test_file in tests:
             result = self.execute_file(test_file, "test")
             module_result["tests"].append(result)
             self._update_summary(module_result["summary"], result)
-        
+
         # Then execute scripts
         for script_file in scripts:
             result = self.execute_file(script_file, "script")
             module_result["scripts"].append(result)
             self._update_summary(module_result["summary"], result)
-        
+
         # Log module summary
         summary = module_result["summary"]
         self.log(f"\nModule Summary:")
         self.log(f"  Total: {summary['total_files']}, Success: {summary['successful']}, "
                 f"Failed: {summary['failed']}, Errors: {summary['errors']}, "
                 f"Timeouts: {summary['timeouts']}")
-        
+
         if self.is_github_actions:
             print("::endgroup::")
-        
+
         return module_result
-    
+
     def _update_summary(self, summary: Dict, result: Dict):
         """Update summary statistics"""
         summary["total_files"] += 1
         summary["total_duration"] += result["duration"]
-        
+
         if result["status"] == "success":
             summary["successful"] += 1
         elif result["status"] == "failed":
@@ -236,7 +236,7 @@ class WorkflowRunner:
             summary["timeouts"] += 1
         else:
             summary["skipped"] += 1
-    
+
     def generate_text_report(self, module_result: Dict, filepath: Path):
         """Generate human-readable text report"""
         with open(filepath, 'w') as f:
@@ -248,7 +248,7 @@ class WorkflowRunner:
             f.write(f"Platform: {self.results['platform']}\n")
             f.write(f"Module Path: {module_result['path']}\n")
             f.write(f"Module Exists: {module_result['exists']}\n\n")
-            
+
             summary = module_result['summary']
             f.write("SUMMARY\n")
             f.write("-"*80 + "\n")
@@ -258,21 +258,21 @@ class WorkflowRunner:
             f.write(f"Errors: {summary['errors']}\n")
             f.write(f"Timeouts: {summary['timeouts']}\n")
             f.write(f"Total Duration: {summary['total_duration']:.2f}s\n\n")
-            
+
             # Test Results
             if module_result['tests']:
                 f.write("TEST RESULTS\n")
                 f.write("-"*80 + "\n")
                 for test in module_result['tests']:
                     self._write_execution_detail(f, test)
-            
+
             # Script Results
             if module_result['scripts']:
                 f.write("\nSCRIPT RESULTS\n")
                 f.write("-"*80 + "\n")
                 for script in module_result['scripts']:
                     self._write_execution_detail(f, script)
-    
+
     def _write_execution_detail(self, f, result: Dict):
         """Write detailed execution information"""
         status_symbol = {
@@ -282,29 +282,29 @@ class WorkflowRunner:
             "timeout": "⏱",
             "not_run": "○"
         }.get(result["status"], "?")
-        
+
         f.write(f"\n{status_symbol} {result['file']}\n")
         f.write(f"   Status: {result['status'].upper()}\n")
         f.write(f"   Duration: {result['duration']}s\n")
-        
+
         if result.get("return_code") is not None:
             f.write(f"   Return Code: {result['return_code']}\n")
-        
+
         if result.get("error"):
             f.write(f"   Error: {result['error']}\n")
-        
+
         if result["stdout"]:
             f.write(f"\n   STDOUT (first 50 lines):\n")
             for line in result["stdout"].split('\n')[:50]:
                 f.write(f"   {line}\n")
-        
+
         if result["stderr"]:
             f.write(f"\n   STDERR (first 50 lines):\n")
             for line in result["stderr"].split('\n')[:50]:
                 f.write(f"   {line}\n")
-        
+
         f.write("\n")
-    
+
     def run(self):
         """Execute complete workflow"""
         self.log("\n" + "="*80)
@@ -316,62 +316,62 @@ class WorkflowRunner:
         self.log(f"Platform: {self.results['platform']}")
         self.log(f"Execution Order: {' → '.join(self.execution_order)}")
         self.log("="*80 + "\n")
-        
+
         start_time = time.time()
-        
+
         # Process each module in order
         for module_name in self.execution_order:
             module_result = self.process_module(module_name)
             self.results["modules"][module_name] = module_result
-            
+
             # Generate individual module reports
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            
+
             # JSON report
             json_path = self.report_dir / f"{module_name}_{timestamp}.json"
             with open(json_path, 'w') as f:
                 json.dump(module_result, f, indent=2)
-            
+
             # Text report
             txt_path = self.report_dir / f"{module_name}_{timestamp}.txt"
             self.generate_text_report(module_result, txt_path)
-            
+
             self.log(f"\n✓ Reports saved:")
             self.log(f"  - {json_path}")
             self.log(f"  - {txt_path}")
-        
+
         # Generate master summary report
         total_time = time.time() - start_time
         self.results["total_duration"] = round(total_time, 2)
         self._generate_master_report()
-        
+
         self.log("\n" + "="*80)
         self.log("WORKFLOW COMPLETE")
         self.log("="*80)
         self.log(f"Total Duration: {total_time:.2f}s")
         self.log(f"Reports Directory: {self.report_dir}")
-        
+
         # Calculate overall success
         total_files = sum(m['summary']['total_files'] for m in self.results['modules'].values())
         failed = sum(m['summary']['failed'] for m in self.results['modules'].values())
         errors = sum(m['summary']['errors'] for m in self.results['modules'].values())
-        
+
         if failed > 0 or errors > 0:
             self.log(f"\n⚠ Workflow completed with {failed} failures and {errors} errors", "warning")
             return 1
         else:
             self.log(f"\n✓ All {total_files} files executed successfully", "notice")
             return 0
-    
+
     def _generate_master_report(self):
         """Generate master summary report for all modules"""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
+
         # JSON master report
         json_path = self.report_dir / f"master_report_{timestamp}.json"
         with open(json_path, 'w') as f:
             json.dump(self.results, f, indent=2)
-        
+
         # Text master report
         txt_path = self.report_dir / f"master_report_{timestamp}.txt"
         with open(txt_path, 'w') as f:
@@ -383,10 +383,10 @@ class WorkflowRunner:
             f.write(f"Python Version: {self.results['python_version']}\n")
             f.write(f"Platform: {self.results['platform']}\n")
             f.write(f"Total Duration: {self.results['total_duration']}s\n\n")
-            
+
             f.write("MODULE SUMMARIES\n")
             f.write("-"*80 + "\n\n")
-            
+
             overall = {
                 "total_files": 0,
                 "successful": 0,
@@ -430,7 +430,7 @@ jobs:
     outputs:
       python_versions: ${{ steps.set-versions.outputs.versions }}
       modules: ${{ steps.set-modules.outputs.modules }}
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -455,7 +455,7 @@ jobs:
           echo "=== Validating HypatiaX Project Structure ==="
           required_dirs=("datasets" "patterns" "custom_ner" "data_spacy" "models" "core" "mappings" "scripts_")
           missing_dirs=()
-          
+
           for dir in "${required_dirs[@]}"; do
             if [ -d "$dir" ]; then
               echo "✓ Found: $dir"
@@ -464,7 +464,7 @@ jobs:
               missing_dirs+=("$dir")
             fi
           done
-          
+
           if [ ${#missing_dirs[@]} -gt 0 ]; then
             echo ""
             echo "Warning: ${#missing_dirs[@]} directories missing"
@@ -494,7 +494,7 @@ jobs:
       matrix:
         python-version: ${{ fromJson(needs.setup.outputs.python_versions) }}
       fail-fast: false
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -529,13 +529,13 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel
-          
+
           PYVERSION=$(python -c "import sys; print(f'{sys.version_info.major}{sys.version_info.minor}')")
           REQ_FILE="requirements-py${PYVERSION}.txt"
-          
+
           echo "Python version: ${{ matrix.python-version }}"
           echo "Looking for: $REQ_FILE"
-          
+
           if [ -f "$REQ_FILE" ]; then
             echo "Installing from $REQ_FILE"
             pip install -r "$REQ_FILE"
@@ -545,7 +545,7 @@ jobs:
           else
             echo "Warning: No requirements file found"
           fi
-          
+
           pip install pytest pytest-cov pytest-timeout pytest-xdist
 
       - name: Download spaCy models
@@ -573,7 +573,7 @@ jobs:
         id: locate-script
         run: |
           SCRIPT_PATH=""
-          
+
           if [ -f ".github/scripts/workflow_runner.py" ]; then
             SCRIPT_PATH=".github/scripts/workflow_runner.py"
           elif [ -f "scripts/workflow_runner.py" ]; then
@@ -586,7 +586,7 @@ jobs:
             echo "Error: workflow_runner.py not found"
             exit 1
           fi
-          
+
           echo "script_path=$SCRIPT_PATH" >> $GITHUB_OUTPUT
           echo "Found workflow runner at: $SCRIPT_PATH"
 
@@ -596,9 +596,9 @@ jobs:
         timeout-minutes: 45
         run: |
           cd ${{ github.workspace }}
-          
+
           MODULES="${{ needs.setup.outputs.modules }}"
-          
+
           if [ -n "$MODULES" ]; then
             echo "Running specific modules: $MODULES"
             python .github/scripts/workflow_runner.py --base-path . --modules $MODULES
@@ -623,10 +623,10 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Status**: ${{ steps.run-workflow.outcome }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ -d "${{ env.WORKFLOW_REPORTS_DIR }}" ]; then
             latest_report=$(ls -t ${{ env.WORKFLOW_REPORTS_DIR }}/master_report_*.txt 2>/dev/null | head -1)
-            
+
             if [ -f "$latest_report" ]; then
               echo "### Summary Report" >> $GITHUB_STEP_SUMMARY
               echo '```' >> $GITHUB_STEP_SUMMARY
@@ -635,7 +635,7 @@ jobs:
             else
               echo "⚠️ No master report generated" >> $GITHUB_STEP_SUMMARY
             fi
-            
+
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "### Generated Reports" >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
@@ -651,27 +651,27 @@ jobs:
         run: |
           if [ -d "${{ env.WORKFLOW_REPORTS_DIR }}" ]; then
             latest_json=$(ls -t ${{ env.WORKFLOW_REPORTS_DIR }}/master_report_*.json 2>/dev/null | head -1)
-            
+
             if [ -f "$latest_json" ]; then
               python << 'EOFPYTHON'
           import json
-          import sys
           import os
-          
+          import sys
+
           try:
               latest_json = "$latest_json"
               with open(latest_json) as f:
                   data = json.load(f)
-              
+
               total = sum(m.get('summary', {}).get('total_files', 0) for m in data.get('modules', {}).values())
               success = sum(m.get('summary', {}).get('successful', 0) for m in data.get('modules', {}).values())
               failed = sum(m.get('summary', {}).get('failed', 0) for m in data.get('modules', {}).values())
-              
+
               with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
                   f.write(f"total_files={total}\n")
                   f.write(f"successful={success}\n")
                   f.write(f"failed={failed}\n")
-              
+
               print(f"📊 Results: {success}/{total} successful, {failed} failed")
           except Exception as e:
               print(f"Could not parse results: {e}")
@@ -706,7 +706,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test-workflow
     if: always()
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -726,17 +726,17 @@ jobs:
       - name: Analyze combined results
         run: |
           python << 'EOFPYTHON'
-          import json
           import glob
-          from pathlib import Path
+          import json
           from datetime import datetime
-          
+          from pathlib import Path
+
           reports_dir = Path("all-reports")
-          
+
           if not reports_dir.exists():
               print("⚠️ No reports found")
               exit(0)
-          
+
           all_results = {
               "total_files": 0,
               "successful": 0,
@@ -746,20 +746,20 @@ jobs:
               "by_module": {},
               "by_python_version": {}
           }
-          
+
           report_files = list(reports_dir.glob("master_report_*.json"))
           print(f"Found {len(report_files)} report files")
-          
+
           for report_file in report_files:
               try:
                   with open(report_file) as f:
                       data = json.load(f)
-                  
+
                   python_version = data.get("python_version", "unknown")
-                  
+
                   for module_name, module_data in data.get("modules", {}).items():
                       summary = module_data.get("summary", {})
-                      
+
                       if module_name not in all_results["by_module"]:
                           all_results["by_module"][module_name] = {
                               "total_files": 0,
@@ -768,25 +768,25 @@ jobs:
                               "errors": 0,
                               "timeouts": 0
                           }
-                      
+
                       if python_version not in all_results["by_python_version"]:
                           all_results["by_python_version"][python_version] = {
                               "total_files": 0,
                               "successful": 0,
                               "failed": 0
                           }
-                      
+
                       for key in ["total_files", "successful", "failed", "errors", "timeouts"]:
                           value = summary.get(key, 0)
                           all_results[key] += value
                           all_results["by_module"][module_name][key] += value
-                          
+
                           if key in ["total_files", "successful", "failed"]:
                               all_results["by_python_version"][python_version][key] += value
-              
+
               except Exception as e:
                   print(f"⚠️ Error processing {report_file}: {e}")
-          
+
           print("\n" + "="*80)
           print("COMBINED WORKFLOW RESULTS")
           print("="*80)
@@ -795,11 +795,11 @@ jobs:
           print(f"❌ Failed: {all_results['failed']}")
           print(f"⚠️ Errors: {all_results['errors']}")
           print(f"⏱️ Timeouts: {all_results['timeouts']}")
-          
+
           if all_results['total_files'] > 0:
               success_rate = (all_results['successful'] / all_results['total_files']) * 100
               print(f"Success Rate: {success_rate:.1f}%")
-          
+
           if all_results['by_python_version']:
               print("\n" + "-"*80)
               print("By Python Version:")
@@ -809,7 +809,7 @@ jobs:
                       rate = (stats['successful'] / stats['total_files']) * 100
                       print(f"\nPython {version}")
                       print(f"  Total: {stats['total_files']}, Success: {stats['successful']}, Failed: {stats['failed']} ({rate:.1f}%)")
-          
+
           if all_results['by_module']:
               print("\n" + "-"*80)
               print("By Module:")
@@ -818,11 +818,11 @@ jobs:
                   if stats['total_files'] > 0:
                       print(f"\n{module.upper()}")
                       print(f"  Total: {stats['total_files']}, Success: {stats['successful']}, Failed: {stats['failed']}")
-          
+
           all_results["timestamp"] = datetime.now().isoformat()
           with open("combined_results.json", "w") as f:
               json.dump(all_results, f, indent=2)
-          
+
           print("\n" + "="*80)
           print("Results saved to combined_results.json")
           EOFPYTHON
@@ -841,57 +841,57 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            
+
             let comment = '## 🧪 HypatiaX Workflow Test Results\n\n';
-            
+
             try {
               if (!fs.existsSync('combined_results.json')) {
                 comment += '⚠️ No results file found\n';
                 return;
               }
-              
+
               const results = JSON.parse(fs.readFileSync('combined_results.json', 'utf8'));
-              
+
               comment += '### Summary\n\n';
               comment += `- **Total Files**: ${results.total_files}\n`;
               comment += `- **✅ Successful**: ${results.successful}\n`;
               comment += `- **❌ Failed**: ${results.failed}\n`;
               comment += `- **⚠️ Errors**: ${results.errors}\n`;
               comment += `- **⏱️ Timeouts**: ${results.timeouts}\n`;
-              
+
               if (results.total_files > 0) {
                 const successRate = (results.successful / results.total_files * 100).toFixed(1);
                 comment += `- **Success Rate**: ${successRate}%\n`;
               }
-              
+
               if (results.by_python_version && Object.keys(results.by_python_version).length > 0) {
                 comment += '\n### By Python Version\n\n';
                 comment += '| Version | Total | Success | Failed | Rate |\n';
                 comment += '|---------|-------|---------|--------|------|\n';
-                
+
                 for (const [version, stats] of Object.entries(results.by_python_version)) {
                   const rate = stats.total_files > 0 ? (stats.successful / stats.total_files * 100).toFixed(1) : '0.0';
                   comment += `| ${version} | ${stats.total_files} | ${stats.successful} | ${stats.failed} | ${rate}% |\n`;
                 }
               }
-              
+
               if (results.by_module && Object.keys(results.by_module).length > 0) {
                 comment += '\n### By Module\n\n';
                 comment += '| Module | Total | Success | Failed |\n';
                 comment += '|--------|-------|---------|--------|\n';
-                
+
                 for (const [module, stats] of Object.entries(results.by_module)) {
                   comment += `| ${module} | ${stats.total_files} | ${stats.successful} | ${stats.failed} |\n`;
                 }
               }
-              
+
               comment += '\n📊 Detailed reports are available in the workflow artifacts.\n';
-              
+
             } catch (error) {
               comment += '⚠️ Could not parse test results.\n';
               comment += `Error: ${error.message}\n`;
             }
-            
+
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -904,7 +904,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test-workflow, analyze-results]
     if: always() && (github.event_name == 'schedule' || github.event_name == 'push')
-    
+
     steps:
       - name: Send notification summary
         run: |
@@ -914,7 +914,7 @@ jobs:
             for module_name in self.execution_order:
                 module = self.results["modules"].get(module_name, {})
                 summary = module.get("summary", {})
-                
+
                 f.write(f"{module_name.upper()}\n")
                 f.write(f"  Total Files: {summary.get('total_files', 0)}\n")
                 f.write(f"  Successful: {summary.get('successful', 0)}\n")
@@ -922,10 +922,10 @@ jobs:
                 f.write(f"  Errors: {summary.get('errors', 0)}\n")
                 f.write(f"  Timeouts: {summary.get('timeouts', 0)}\n")
                 f.write(f"  Duration: {summary.get('total_duration', 0):.2f}s\n\n")
-                
+
                 for key in overall:
                     overall[key] += summary.get(key, 0)
-            
+
             f.write("\nOVERALL SUMMARY\n")
             f.write("-"*80 + "\n")
             f.write(f"Total Files Executed: {overall['total_files']}\n")
@@ -935,7 +935,7 @@ jobs:
             f.write(f"Total Timeouts: {overall['timeouts']}\n")
             if overall['total_files'] > 0:
                 f.write(f"Success Rate: {(overall['successful']/overall['total_files']*100):.1f}%\n")
-        
+
         self.log(f"\n✓ Master reports saved:")
         self.log(f"  - {json_path}")
         self.log(f"  - {txt_path}")
@@ -944,7 +944,7 @@ jobs:
 def main():
     """Main entry point"""
     import argparse
-    
+
     parser = argparse.ArgumentParser(
         description="HypatiaX Workflow Runner - Execute tests and scripts with reporting"
     )
@@ -958,15 +958,15 @@ def main():
         nargs="+",
         help="Specific modules to run (default: all in order)"
     )
-    
+
     args = parser.parse_args()
-    
+
     runner = WorkflowRunner(args.base_path)
-    
+
     if args.modules:
         # Override execution order with specified modules
         runner.execution_order = args.modules
-    
+
     try:
         exit_code = runner.run()
         sys.exit(exit_code)

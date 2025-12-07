@@ -1,4 +1,5 @@
 Key Enhancements
+
 1. Comprehensive Statistics
 
 Overall metrics (total, valid, success rate)
@@ -27,22 +28,28 @@ bash# Basic validation
 python scripts/validate_dataset.py
 
 # Custom directory
+
 python scripts/validate_dataset.py --dir results/batch1
 
 # Specific files only
+
 python scripts/validate_dataset.py --pattern "defi*.json"
 
 # Quiet mode (minimal output)
+
 python scripts/validate_dataset.py --quiet
 
 # Skip JSON export
+
 python scripts/validate_dataset.py --no-export
 As module:
 pythonfrom scripts.validate_dataset import validate_dataset
 
 # Get statistics programmatically
+
 stats = validate_dataset(data_dir='data', verbose=True)
 print(f"Success rate: {stats['success_rate']:.1%}")
+
 ```
 
 ### 5. **Export Capabilities**
@@ -61,12 +68,14 @@ Generates `data/validation_report.json` with:
 
 Example output:
 ```
+
 ======================================================================
-                      DATASET VALIDATION REPORT                      
+                      DATASET VALIDATION REPORT
 ======================================================================
 
 OVERALL STATISTICS
 ----------------------------------------------------------------------
+
   Total formulas:            25
   Valid formulas:            23
   Invalid formulas:           2
@@ -80,11 +89,12 @@ OVERALL STATISTICS
     Std deviation:          8.4
 
 ======================================================================
-                           DOMAIN BREAKDOWN                          
+                           DOMAIN BREAKDOWN
 ======================================================================
 
 Domain: DEFI
 ----------------------------------------------------------------------
+
   Total:             15
   Valid:             14/15 (93.3%)
   Avg score:       88.2/100

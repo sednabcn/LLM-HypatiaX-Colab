@@ -26,6 +26,7 @@ python demo/demo_interactive.py
 ```
 
 This launches an interactive menu with multiple demo options:
+
 - **Description NER Demo** - Extract entities from natural language
 - **Formula NER Demo** - Parse Tableau formula syntax
 - **Combined NER Demo** - Process description + formula pairs
@@ -41,7 +42,7 @@ pip install flask
 python demo/demo_web_app.py
 ```
 
-Then open http://localhost:5000 in your browser.
+Then open <http://localhost:5000> in your browser.
 
 ## 📋 Demo Options
 
@@ -103,6 +104,7 @@ demo.run_examples(examples)
 ```
 
 **Expected Output:**
+
 ```
 Entity: "calculate" → OPERATION
 Entity: "sum" → FUNCTION
@@ -127,6 +129,7 @@ demo.run_examples(examples)
 ```
 
 **Expected Output:**
+
 ```
 Entity: "SUM" → FUNCTION
 Entity: "[Sales]" → FIELD
@@ -176,12 +179,14 @@ combined_examples = get_examples('combined', 'simple_mappings')
 **Available Categories:**
 
 **Description Examples:**
+
 - `basic_calculations` - Simple aggregations
 - `aggregations_with_dimensions` - Group by operations
 - `time_based` - Time-series queries
 - `complex_queries` - Advanced queries
 
 **Formula Examples:**
+
 - `basic_aggregations` - SUM, AVG, COUNT, etc.
 - `calculated_fields` - Complex calculations
 - `conditional_logic` - IF/CASE statements
@@ -189,6 +194,7 @@ combined_examples = get_examples('combined', 'simple_mappings')
 - `date_operations` - Date functions
 
 **Combined Examples:**
+
 - `simple_mappings` - Basic description → formula
 - `aggregations_with_dimensions` - Group by mappings
 - `calculated_metrics` - Complex metric calculations
@@ -223,6 +229,7 @@ The demo can run in two modes:
 ### 1. Mock Mode (No Models Required)
 
 If trained models aren't available, the demo uses pattern matching to simulate entity extraction. Great for:
+
 - Testing the demo infrastructure
 - Showcasing the UI/UX
 - Demonstrations without model files
@@ -275,6 +282,7 @@ python demo/joint_training_demo.py
 ```
 
 These demonstrate:
+
 - How entity extraction pipelines work
 - Error propagation in sequential vs joint models
 - Training data requirements
@@ -291,15 +299,18 @@ These demonstrate:
 ## 🐛 Troubleshooting
 
 **"Could not load model" warning:**
+
 - Demo runs in mock mode automatically
 - Install models or use mock mode for testing
 
 **Web demo not starting:**
+
 ```bash
 pip install flask
 ```
 
 **Port already in use:**
+
 ```bash
 # Use a different port
 python demo/demo_web_app.py --port 5001
@@ -308,6 +319,7 @@ python demo/demo_web_app.py --port 5001
 ## 📈 Performance
 
 Demo performance varies by mode:
+
 - **Mock Mode**: Instant (pattern matching)
 - **Full Mode**: ~10-50ms per query (spaCy model inference)
 
@@ -323,7 +335,7 @@ from demo.demo_examples import get_examples
 class MyCustomDemo:
     def __init__(self):
         self.demo = HypatiaXDemo(model_type='both')
-    
+
     def process_batch(self, queries):
         return [self.demo.process_text(q) for q in queries]
 ```

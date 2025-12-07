@@ -10,14 +10,12 @@ Batch processing
 Model comparison
 Works with OR without trained models
 
-
 demo_examples.py - Curated example library
 
 50+ example queries organized by category
 Description, formula, and combined examples
 Real-world use cases
 Easy to access programmatically
-
 
 demo_web_app.py - Web-based visual demo
 
@@ -26,15 +24,12 @@ Real-time entity extraction
 Example buttons
 Visual entity display with confidence scores
 
-
 README.md - Complete documentation
 
 Quick start guides
 Usage examples
 Troubleshooting
 Integration tips
-
-
 
 🚀 Recommended Directory Structure
 bashhypatiax/
@@ -63,18 +58,25 @@ bashhypatiax/
 bashcd ~/Downloads/LLM-HypatiaX-OLD/hypatiax
 
 # Create demo structure
+
 mkdir -p demo/utils demo/templates
 
 # Move existing files (if you want to keep them)
+
 mv demo/utils/demo_helpers.py demo/utils/demo_helpers.py.bak  # backup
 
-# The artifacts I created are ready to copy into these locations:
+# The artifacts I created are ready to copy into these locations
+
 # - demo_interactive.py → demo/demo_interactive.py
+
 # - demo_examples.py → demo/demo_examples.py
+
 # - demo_web_app.py → demo/demo_web_app.py
+
 # - README.md → demo/README.md
 
 # Move your strategy files to experiments
+
 mkdir -p experiments
 mv simpler_sequential_pipeline_mapper.py experiments/sequential_pipeline.py
 mv simpler_training_pairs_mapper.py experiments/joint_training.py
@@ -93,7 +95,9 @@ Then select from menu:
 Option 2: Web Interface (Visual)
 bashpip install flask
 python demo/demo_web_app.py
-# Open browser to http://localhost:5000
+
+# Open browser to <http://localhost:5000>
+
 Option 3: Programmatic
 pythonfrom demo.demo_interactive import HypatiaXDemo
 

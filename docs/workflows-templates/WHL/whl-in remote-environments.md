@@ -54,12 +54,12 @@ Pro tip: For HypatiaX, I'd recommend storing wheels in Cloud Storage (GCS) + Git
 ## Why Use Wheel Files
 
 ### Advantages:
-✅ **Pre-built binaries** - No compilation needed on remote machines  
-✅ **Faster installation** - Skip the build step  
-✅ **Consistent dependencies** - Exact versions guaranteed  
-✅ **Private packages** - No need for PyPI publishing  
-✅ **Version control** - Track specific builds  
-✅ **Offline installation** - Works without internet access  
+✅ **Pre-built binaries** - No compilation needed on remote machines
+✅ **Faster installation** - Skip the build step
+✅ **Consistent dependencies** - Exact versions guaranteed
+✅ **Private packages** - No need for PyPI publishing
+✅ **Version control** - Track specific builds
+✅ **Offline installation** - Works without internet access
 
 ### Use Cases:
 - Internal/proprietary packages
@@ -120,42 +120,42 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      
+
       - name: Build wheel
         run: |
           pip install build
           python -m build
-      
+
       - name: Upload wheel artifact
         uses: actions/upload-artifact@v4
         with:
           name: python-wheel
           path: dist/*.whl
           retention-days: 90
-  
+
   test:
     needs: build
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Download wheel
         uses: actions/download-artifact@v4
         with:
           name: python-wheel
           path: dist/
-      
+
       - name: Install from wheel
         run: |
           pip install dist/*.whl
-      
+
       - name: Run tests
         run: |
           python -c "import your_package; your_package.test()"
@@ -166,7 +166,7 @@ jobs:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  
+
   - name: Install from committed wheel
     run: |
       pip install wheels/your_package-0.1.0-py3-none-any.whl
@@ -195,15 +195,15 @@ steps:
   - name: 'python:3.12'
     entrypoint: 'pip'
     args: ['install', 'build']
-  
+
   - name: 'python:3.12'
     entrypoint: 'python'
     args: ['-m', 'build']
-  
+
   # Upload to Cloud Storage
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['cp', 'dist/*.whl', 'gs://${_BUCKET}/wheels/']
-  
+
   # Install in Cloud Run/Functions
   - name: 'python:3.12'
     entrypoint: 'pip'
@@ -346,17 +346,17 @@ steps:
   - task: UsePythonVersion@0
     inputs:
       versionSpec: '3.12'
-  
+
   - script: |
       pip install build
       python -m build
     displayName: 'Build wheel'
-  
+
   - task: PublishBuildArtifacts@1
     inputs:
       pathToPublish: 'dist'
       artifactName: 'wheels'
-  
+
   - script: |
       pip install dist/*.whl
     displayName: 'Install wheel'
@@ -591,25 +591,25 @@ on:
 jobs:
   build-wheel:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      
+
       - name: Build wheel
         run: |
           pip install build
           python -m build
-      
+
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: dist/*.whl
-      
+
       - name: Upload to Cloud Storage
         env:
           GCP_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
@@ -618,7 +618,7 @@ jobs:
           export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp-key.json
           pip install gsutil
           gsutil cp dist/*.whl gs://hypatia-wheels/
-      
+
       - name: Deploy to Cloud Run
         run: |
           gcloud builds submit --config cloudbuild.yaml
@@ -626,12 +626,12 @@ jobs:
   test-wheel:
     needs: build-wheel
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Download wheel
         run: |
           wget https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/hypatia_x-*.whl
-      
+
       - name: Test installation
         run: |
           pip install hypatia_x-*.whl
@@ -670,10 +670,10 @@ unzip -l dist/*.whl
 
 ## Conclusion
 
-✅ **Wheels work excellently in remote environments**  
-✅ **Faster and more reliable than source installations**  
-✅ **Supported by all major cloud platforms**  
-✅ **Perfect for private/proprietary packages**  
+✅ **Wheels work excellently in remote environments**
+✅ **Faster and more reliable than source installations**
+✅ **Supported by all major cloud platforms**
+✅ **Perfect for private/proprietary packages**
 
 The key is choosing the right distribution method:
 - **GitHub**: Releases or Artifacts

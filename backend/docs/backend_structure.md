@@ -95,6 +95,7 @@ mv test_api_client.py tests/
 ### Step 3: Create NER Files
 
 Create these files with the content I provided:
+
 - `api/routes/ner_routes.py` (from artifact)
 - `api/schemas/ner_schemas.py` (from artifact)
 - `services/ner_service.py` (from artifact)
@@ -227,6 +228,7 @@ curl -X POST http://localhost:5000/api/ner/convert-to-latex \
 ## API Endpoints Summary
 
 ### NER Endpoints (NEW)
+
 - `GET /api/ner/health` - Health check
 - `POST /api/ner/extract-formula` - Extract formulas from text
 - `POST /api/ner/recognize-entities` - Recognize mathematical entities
@@ -237,6 +239,7 @@ curl -X POST http://localhost:5000/api/ner/convert-to-latex \
 - `POST /api/ner/validate-syntax` - Validate expression syntax
 
 ### Existing Endpoints
+
 - `POST /generate` - Generate formula with LLM
 - `POST /calculate-il` - Calculate impermanent loss
 - `POST /validate` - Validate formula

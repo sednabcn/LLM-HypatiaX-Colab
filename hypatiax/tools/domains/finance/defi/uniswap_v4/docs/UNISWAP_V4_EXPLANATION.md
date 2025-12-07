@@ -1,6 +1,7 @@
 # UNISWAP V4: COMPREHENSIVE EXPLANATION
 
 ## 📋 Table of Contents
+
 1. [What is Uniswap V4?](#what-is-uniswap-v4)
 2. [Key Innovations](#key-innovations)
 3. [What Changed from V3](#what-changed-from-v3)
@@ -20,6 +21,7 @@ Uniswap V4 is the **fourth iteration** of the Uniswap decentralized exchange pro
 **V4 = V3's Math + Hooks + Gas Optimization**
 
 Think of V4 as V3 with:
+
 - 🪝 **Hooks** - Custom plugins for any use case
 - 🎯 **Singleton** - All pools in one contract
 - ⚡ **Flash Accounting** - Net settlement only
@@ -38,18 +40,20 @@ Hooks are smart contracts that execute custom logic at specific points in a pool
 ```
 Pool Lifecycle Events:
 ├─ beforeInitialize / afterInitialize
-├─ beforeSwap / afterSwap  
+├─ beforeSwap / afterSwap
 ├─ beforeAddLiquidity / afterAddLiquidity
 ├─ beforeRemoveLiquidity / afterRemoveLiquidity
 └─ beforeDonate / afterDonate
 ```
 
 **Why hooks matter:**
+
 - 🎨 **Unlimited Customization** - Add ANY logic without forking
 - 🔧 **Modular Design** - Mix and match hooks
 - 🚀 **Rapid Innovation** - New features without protocol changes
 
 **Hook Examples:**
+
 - **Dynamic Fees** - Adjust fees based on volatility
 - **TWAMM** - Time-weighted AMM for large orders
 - **Limit Orders** - On-chain limit orders
@@ -61,11 +65,13 @@ Pool Lifecycle Events:
 ### 2. 🎯 SINGLETON ARCHITECTURE
 
 **V3 Problem:**
+
 - Each pool = Separate contract
 - Creating pool = Deploy contract (~2M gas)
 - Multi-hop swap = Transfer tokens between contracts
 
 **V4 Solution:**
+
 - ALL pools in ONE contract (PoolManager)
 - Creating pool = State update (~20k gas)
 - **99% gas savings** on pool creation!
@@ -81,11 +87,13 @@ V4: [Pool A, Pool B, Pool C, Pool D]  (one singleton)
 
 **V3 Problem:**
 Multi-hop swap (USDC → ETH → WBTC) requires:
+
 1. Transfer USDC to Pool 1
 2. Transfer ETH from Pool 1 to Pool 2
 3. Transfer WBTC from Pool 2 to user
 
 **V4 Solution:**
+
 1. Track delta: +USDC
 2. Track delta: +ETH, -ETH  (cancels out!)
 3. Track delta: +WBTC
@@ -104,6 +112,7 @@ Multi-hop swap (USDC → ETH → WBTC) requires:
 **V4:** **ANY fee tier** + hooks can modify fees dynamically
 
 Example: Fee adjusts based on volatility
+
 - Low volatility = 0.05% fee
 - High volatility = 1% fee (protect LPs)
 
@@ -125,9 +134,10 @@ Example: Fee adjusts based on volatility
 
 ## What DIDN'T Change
 
-### ✅ CRITICAL: V4 Uses V3's Math!
+### ✅ CRITICAL: V4 Uses V3's Math
 
 **THESE ARE IDENTICAL:**
+
 1. **Concentrated Liquidity** - Same formula
 2. **Tick System** - Same tick spacing
 3. **Position NFTs** - Same structure
@@ -184,8 +194,9 @@ If Pa ≤ P ≤ Pb:  (both tokens)
 ### Hook System
 
 **Hook Permissions (bit flags):**
+
 ```solidity
-uint16 permissions = 
+uint16 permissions =
     BEFORE_SWAP_FLAG |
     AFTER_SWAP_FLAG |
     BEFORE_ADD_LIQUIDITY_FLAG;
@@ -193,12 +204,14 @@ uint16 permissions =
 
 **Hook Address Encoding:**
 Hook address encodes permissions in its prefix:
+
 ```
 0x8000... = BEFORE_SWAP enabled
 0x4000... = AFTER_SWAP enabled
 ```
 
 **Hook Execution Flow:**
+
 ```
 User calls swap()
     ↓
@@ -216,11 +229,13 @@ PoolManager.lock() (settle deltas)
 ### Flash Accounting Deep Dive
 
 **EIP-1153 Transient Storage:**
+
 - Data exists only during transaction
 - Cleared at end of transaction
 - ~100 gas (vs ~20,000 for SSTORE)
 
 **Delta Tracking:**
+
 ```python
 # Initialize deltas
 deltas = {'ETH': 0, 'USDC': 0, 'WBTC': 0}
@@ -244,6 +259,7 @@ transfer_out(WBTC, 0.02)
 ## Use Cases
 
 ### 1. Dynamic Fee Pools
+
 ```python
 # Hook adjusts fee based on volatility
 def beforeSwap(amount_in, price):
@@ -253,11 +269,13 @@ def beforeSwap(amount_in, price):
 ```
 
 ### 2. TWAMM (Time-Weighted AMM)
+
 - Execute large orders over time
 - Minimize price impact
 - Protect against MEV
 
 ### 3. On-Chain Limit Orders
+
 ```python
 # Hook executes limit order when price reached
 def beforeSwap(price):
@@ -266,11 +284,13 @@ def beforeSwap(price):
 ```
 
 ### 4. MEV Protection
+
 - Delay execution
 - Batch transactions
 - Fair ordering
 
 ### 5. Loyalty Programs
+
 ```python
 # Hook rewards frequent traders
 def afterSwap(user, amount):
@@ -278,11 +298,13 @@ def afterSwap(user, amount):
 ```
 
 ### 6. Auto-Compounding
+
 - Reinvest fees automatically
 - No manual claiming needed
 - Higher APY
 
 ### 7. Compliance/KYC
+
 ```python
 # Hook restricts access
 def beforeSwap(user):
@@ -386,12 +408,14 @@ V4:
 ## Migration Guide: V3 → V4
 
 ### What to Keep
+
 ✅ Your position sizing strategy
 ✅ Your range selection approach
 ✅ Your IL understanding
 ✅ Your fee tier choices
 
 ### What to Add
+
 🆕 Choose appropriate hooks
 🆕 Enable dynamic fees if beneficial
 🆕 Take advantage of native ETH
@@ -421,22 +445,26 @@ v4_pool_manager.initialize_pool(v4_pool_key, price)
 ## Best Practices
 
 ### 1. Hook Selection
+
 - ✅ Use established, audited hooks
 - ✅ Understand hook permissions
 - ⚠️ Be cautious with untrusted hooks
 - ❌ Never use unaudited hooks with large amounts
 
 ### 2. Fee Optimization
+
 - Dynamic fees can increase earnings 20-50%
 - But adds complexity
 - Test thoroughly before production
 
 ### 3. Gas Optimization
+
 - Multi-hop routes benefit most from V4
 - Native ETH saves 15% on gas
 - Batch operations when possible
 
 ### 4. Position Management
+
 - Same strategies as V3 work in V4
 - Monitor hook behavior
 - Rebalance based on hook logic
@@ -446,16 +474,21 @@ v4_pool_manager.initialize_pool(v4_pool_key, price)
 ## Common Misconceptions
 
 ### ❌ "V4 changes the liquidity model"
+
 **✅ FALSE:** V4 uses V3's concentrated liquidity
 
 ### ❌ "IL calculation is different in V4"
+
 **✅ FALSE:** IL formula is identical to V3
 
 ### ❌ "Hooks are required"
+
 **✅ FALSE:** You can use V4 exactly like V3 (no hooks)
 
 ### ❌ "V4 is more complex"
-**✅ PARTIALLY TRUE:** 
+
+**✅ PARTIALLY TRUE:**
+
 - Core math is same
 - Hooks add optional complexity
 - You choose complexity level
@@ -495,10 +528,10 @@ V4 = V3's Proven Math + Modern Infrastructure + Unlimited Customization
 
 ## Resources
 
-- **Whitepaper:** https://github.com/Uniswap/v4-core/blob/main/docs/whitepaper/whitepaper-v4.pdf
-- **Documentation:** https://docs.uniswap.org/contracts/v4/overview
-- **Hook Examples:** https://github.com/fewwwww/awesome-uniswap-hooks
-- **Code:** https://github.com/Uniswap/v4-core
+- **Whitepaper:** <https://github.com/Uniswap/v4-core/blob/main/docs/whitepaper/whitepaper-v4.pdf>
+- **Documentation:** <https://docs.uniswap.org/contracts/v4/overview>
+- **Hook Examples:** <https://github.com/fewwwww/awesome-uniswap-hooks>
+- **Code:** <https://github.com/Uniswap/v4-core>
 
 ---
 

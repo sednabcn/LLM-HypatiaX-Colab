@@ -422,12 +422,12 @@
             .header h1 {
                 font-size: 1.8em;
             }
-            
+
             .tab-btn {
                 font-size: 0.9em;
                 padding: 15px 10px;
             }
-            
+
             .formula-output {
                 font-size: 1.2em;
             }
@@ -461,16 +461,16 @@
             <div class="demo-input">
                 <div class="input-label">💬 Enter a natural language query:</div>
                 <div class="input-wrapper">
-                    <input 
-                        type="text" 
-                        class="input-box" 
+                    <input
+                        type="text"
+                        class="input-box"
                         id="queryInput"
                         placeholder="e.g., calculate the sum of sales by region"
                         value="calculate the sum of sales by region"
                     />
                     <button class="magic-button" onclick="processQuery()">✨</button>
                 </div>
-                
+
                 <div class="quick-examples">
                     <div class="example-chip" onclick="loadExample(0)">📊 Sales Analysis</div>
                     <div class="example-chip" onclick="loadExample(1)">💰 Profit Metrics</div>
@@ -567,7 +567,7 @@
         <!-- ARCHITECTURE TAB -->
         <div id="architectureTab" class="tab-content">
             <h2 style="color: #0a66c2; margin-bottom: 20px;">System Architecture</h2>
-            
+
             <div class="pipeline-flow">
                 <div class="flow-step">
                     <strong>Input</strong>
@@ -656,7 +656,7 @@
         function switchTab(tabName) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
+
             event.target.classList.add('active');
             document.getElementById(tabName + 'Tab').classList.add('active');
         }
@@ -674,7 +674,7 @@
 
         async function processQuery() {
             const query = document.getElementById('queryInput').value.trim();
-            
+
             if (!query) {
                 alert('Please enter a query!');
                 return;
@@ -702,7 +702,7 @@
         function extractEntities(query) {
             const words = query.toLowerCase().split(/\s+/);
             const entities = [];
-            
+
             words.forEach(word => {
                 const cleanWord = word.replace(/[^a-z]/g, '');
                 if (entityPatterns[cleanWord]) {
@@ -717,13 +717,13 @@
                     });
                 }
             });
-            
+
             return entities;
         }
 
         function generateFormula(query, entities) {
             const lowerQuery = query.toLowerCase();
-            
+
             let operation = 'SUM';
             if (lowerQuery.includes('average') || lowerQuery.includes('avg')) {
                 operation = 'AVG';
@@ -734,13 +734,13 @@
             } else if (lowerQuery.includes('min')) {
                 operation = 'MIN';
             }
-            
+
             const argEntities = entities.filter(e => e.label === 'ARG');
             let fieldName = 'Field';
             if (argEntities.length > 0) {
                 fieldName = argEntities[0].text.charAt(0).toUpperCase() + argEntities[0].text.slice(1);
             }
-            
+
             return `${operation}([${fieldName}])`;
         }
 
@@ -752,7 +752,7 @@
                 }
                 return word;
             }).join(' ');
-            
+
             document.getElementById('entitiesDisplay').innerHTML = entitiesHtml;
             document.getElementById('formulaOutput').textContent = formula;
             document.getElementById('entityCount').textContent = metrics.entityCount;

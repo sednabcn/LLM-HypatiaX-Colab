@@ -17,21 +17,21 @@
             box-shadow: var(--shadow);
             margin-bottom: 2rem;
         }
-        
+
         .docs-nav h4 {
             margin: 0 0 0.5rem 0;
             color: var(--text-color);
         }
-        
+
         .docs-nav ul {
             list-style: none;
             padding-left: 0;
         }
-        
+
         .docs-nav ul li {
             margin: 0.5rem 0;
         }
-        
+
         .docs-nav ul li a {
             color: var(--text-light);
             text-decoration: none;
@@ -40,13 +40,13 @@
             border-radius: 4px;
             transition: all 0.2s;
         }
-        
+
         .docs-nav ul li a:hover {
             background: #f3f4f6;
             color: var(--primary-color);
             padding-left: 1rem;
         }
-        
+
         .code-block {
             background: #1f2937;
             color: #f3f4f6;
@@ -58,7 +58,7 @@
             line-height: 1.6;
             margin: 1rem 0;
         }
-        
+
         .endpoint {
             background: #f9fafb;
             border-left: 4px solid var(--primary-color);
@@ -66,13 +66,13 @@
             margin: 1.5rem 0;
             border-radius: 8px;
         }
-        
+
         .endpoint h4 {
             margin: 0 0 0.5rem 0;
             color: var(--primary-color);
             font-family: monospace;
         }
-        
+
         .endpoint .method {
             display: inline-block;
             padding: 0.25rem 0.5rem;
@@ -83,29 +83,29 @@
             font-weight: 600;
             margin-right: 0.5rem;
         }
-        
+
         .method.post { background: #10b981; }
         .method.get { background: #3b82f6; }
         .method.put { background: #f59e0b; }
         .method.delete { background: #ef4444; }
-        
+
         .parameter-table {
             width: 100%;
             margin: 1rem 0;
         }
-        
+
         .parameter-table th {
             text-align: left;
             padding: 0.75rem;
             background: #f3f4f6;
             border-bottom: 2px solid var(--border-color);
         }
-        
+
         .parameter-table td {
             padding: 0.75rem;
             border-bottom: 1px solid var(--border-color);
         }
-        
+
         .type-badge {
             display: inline-block;
             padding: 0.25rem 0.5rem;
@@ -116,19 +116,19 @@
             font-weight: 600;
             font-family: monospace;
         }
-        
+
         .docs-grid {
             display: grid;
             grid-template-columns: 250px 1fr;
             gap: 2rem;
             align-items: start;
         }
-        
+
         @media (max-width: 968px) {
             .docs-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .docs-nav {
                 position: static;
             }
@@ -183,7 +183,7 @@
                     <div class="dashboard-section" id="getting-started">
                         <h2>🚀 Getting Started</h2>
                         <p>HypatiaX is an advanced AI-powered system that combines Named Entity Recognition (NER), Formula Mapping, and DeFi calculations.</p>
-                        
+
                         <h3>Quick Start</h3>
                         <ol>
                             <li><strong>Formula Mapping:</strong> Navigate to <a href="index.html">Home</a> to convert natural language to Tableau formulas</li>
@@ -215,7 +215,7 @@ open index.html
                         <div class="endpoint">
                             <h4><span class="method post">POST</span>/api/hypatiax/map</h4>
                             <p>Map a natural language description to a Tableau formula.</p>
-                            
+
                             <h5>Request Body:</h5>
                             <div class="code-block">
 {
@@ -275,7 +275,7 @@ open index.html
                         <div class="endpoint">
                             <h4><span class="method get">GET</span>/api/hypatiax/test</h4>
                             <p>Run test suite with predefined sample queries.</p>
-                            
+
                             <h5>Response:</h5>
                             <div class="code-block">
 {
@@ -303,7 +303,7 @@ open index.html
                         <div class="endpoint">
                             <h4><span class="method post">POST</span>/api/ner/extract-formula</h4>
                             <p>Extract mathematical formulas from text.</p>
-                            
+
                             <h5>Request Body:</h5>
                             <div class="code-block">
 {
@@ -326,7 +326,7 @@ open index.html
                         <div class="endpoint">
                             <h4><span class="method post">POST</span>/api/ner/recognize-entities</h4>
                             <p>Recognize and extract entities from text.</p>
-                            
+
                             <h5>Request Body:</h5>
                             <div class="code-block">
 {
@@ -368,7 +368,7 @@ open index.html
                         <div class="endpoint">
                             <h4><span class="method post">POST</span>/api/ner/convert-to-latex</h4>
                             <p>Convert formula to LaTeX format.</p>
-                            
+
                             <h5>Request Body:</h5>
                             <div class="code-block">
 {
@@ -394,7 +394,7 @@ open index.html
                         <div class="endpoint">
                             <h4><span class="method post">POST</span>/api/defi/il-percentage</h4>
                             <p>Calculate impermanent loss percentage based on price change.</p>
-                            
+
                             <h5>Request Body:</h5>
                             <div class="code-block">
 {
@@ -416,7 +416,7 @@ open index.html
                         <div class="endpoint">
                             <h4><span class="method post">POST</span>/api/defi/analyze-position</h4>
                             <p>Complete analysis of a liquidity pool position including fees and ROI.</p>
-                            
+
                             <h5>Request Body:</h5>
                             <div class="code-block">
 {
@@ -455,7 +455,7 @@ open index.html
                         <div class="endpoint">
                             <h4><span class="method post">POST</span>/api/defi/quality-score</h4>
                             <p>Calculate pool quality score based on volume and TVL.</p>
-                            
+
                             <h5>Request Body:</h5>
                             <div class="code-block">
 {
@@ -482,7 +482,7 @@ open index.html
                         <div class="endpoint">
                             <h4><span class="method get">GET</span>/api/health</h4>
                             <p>Check backend server health and status.</p>
-                            
+
                             <h5>Response:</h5>
                             <div class="code-block">
 {
@@ -527,7 +527,7 @@ open index.html
                     <!-- Examples -->
                     <div class="dashboard-section" id="examples">
                         <h2>💡 Examples</h2>
-                        
+
                         <h3>Formula Mapping Examples</h3>
                         <table class="parameter-table">
                             <thead>

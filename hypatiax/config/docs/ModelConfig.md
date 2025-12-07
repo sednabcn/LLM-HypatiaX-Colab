@@ -1,14 +1,17 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/LLM-HypatiaX-OLD/hypatiax/config]
-└─$ python -c "from hypatiax.config import config; config.print_all()"                                               
+└─$ python -c "from hypatiax.config import config; config.print_all()"
 ======================================================================
+
 HypatiaX Configuration
 ======================================================================
+
 Environment: local
 Debug Mode:  False
 
 ======================================================================
 Path Configuration
 ======================================================================
+
 Environment:      local
 Root:             /home/agagora/Downloads/LLM-HypatiaX-OLD
 HypatiaX:         /home/agagora/Downloads/LLM-HypatiaX-OLD/hypatiax
@@ -29,12 +32,14 @@ Model Directories:
 ======================================================================
 
 Model Configurations Available:
-  - ModelConfig.training_desc()
-  - ModelConfig.training_formulas()
-  - ModelConfig.training_combined()
+
+- ModelConfig.training_desc()
+- ModelConfig.training_formulas()
+- ModelConfig.training_combined()
 ======================================================================
 
 🎯 Immediate Next Steps
+
 1. Replace Hard-Coded Paths (Most Important!)
 Go through your existing scripts and replace hard-coded paths:
 Before:
@@ -59,6 +64,7 @@ cd ~/Downloads/LLM-HypatiaX-OLD
 python -c "from hypatiax.config import paths; print(paths.training_data)"
 
 # Run a script that uses the config
+
 python hypatiax/your_training_script.py
 
 🔍 Quick Audit

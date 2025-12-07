@@ -7,6 +7,7 @@ from spacy.training import Example
 
 from hypatiax.core.preprocessing.preparation_data import preparation_data
 from hypatiax.core.training.training_sCritical Errors Fixed:
+
 1. Syntax Errors ⚠️ CRITICAL
 Line 14 - Missing parenthesis:
 pythontime_proc=f'{year}_{month)_{day}_{hr}_{minutes}_{sec}'  # ) instead of }
@@ -14,7 +15,9 @@ Fixed:
 pythontime_proc = f'{year}_{month}_{day}_{hr}_{minutes}_{sec}'
 Line 21 - Invalid dict assignment:
 pythontest_configurations =  # Empty assignment!
-# single-non-split-desc-sm,
+
+# single-non-split-desc-sm
+
 {'1':[...]}  # Separated from assignment
 Fixed:
 pythontest_configurations = {
@@ -48,7 +51,9 @@ pythonsave_config(test_id, config, time_proc)
 5. Wrong Model Path ⚠️ CRITICAL
 Original:
 pythonentity_path = resources.files(f'hypatiax.data_spacy...').joinpath(ner_model_file)
-# This points to entity definitions, NOT the trained model!
+
+# This points to entity definitions, NOT the trained model
+
 evaluate_spacy_model(entity_path, X_val)
 Fixed:
 pythonmodel_base_path = resources.files(f'hypatiax.models.{domain}.{sub_domain}')

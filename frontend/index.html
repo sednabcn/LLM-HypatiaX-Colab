@@ -96,27 +96,27 @@
         <div class="container">
             <!-- API Status -->
             <div id="api-status" class="api-status">Checking connection...</div>
-            
+
             <!-- Demo Warning (shown in demo mode) -->
             <div id="demo-warning"></div>
-            
+
             <!-- Main Form -->
             <div class="card">
                 <h1>HypatiaX Formula Mapper</h1>
                 <p>Convert natural language to Tableau formulas</p>
-                
+
                 <form id="formula-form">
                     <div class="form-group">
                         <label for="description-input">Describe what you want to calculate:</label>
-                        <input 
-                            type="text" 
-                            id="description-input" 
-                            name="description" 
+                        <input
+                            type="text"
+                            id="description-input"
+                            name="description"
                             placeholder="e.g., Calculate the total of Sales"
                             required
                         />
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="method-select">Method:</label>
                         <select id="method-select" name="method">
@@ -124,13 +124,13 @@
                             <option value="semantic">Semantic Analysis</option>
                         </select>
                     </div>
-                    
+
                     <!-- Quick Suggestion -->
                     <div id="quick-suggestion"></div>
-                    
+
                     <button type="submit" class="btn-primary">Generate Formula</button>
                 </form>
-                
+
                 <!-- Example Queries -->
                 <div class="examples">
                     <h3>Try these examples:</h3>
@@ -145,10 +145,10 @@
                     </button>
                 </div>
             </div>
-            
+
             <!-- Results -->
             <div id="formula-result"></div>
-            
+
             <!-- Test Button -->
             <button id="test-hypatiax-btn" class="btn-secondary">Run Tests</button>
             <div id="test-results"></div>

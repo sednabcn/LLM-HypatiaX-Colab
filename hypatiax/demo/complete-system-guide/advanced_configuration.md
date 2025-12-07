@@ -25,6 +25,7 @@ from demo.examples import ExampleManager, Example
 manager = ExampleManager()
 
 # Add domain-specific examples
+
 manager.add_example(Example(
     id="healthcare_01",
     description="average patient wait time by department",
@@ -33,7 +34,6 @@ manager.add_example(Example(
     difficulty=2,
     tags=["healthcare", "average", "time"]
 ))
-
 
 🎓 Next Steps
 

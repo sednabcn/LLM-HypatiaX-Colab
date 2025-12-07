@@ -1,4 +1,5 @@
 I've created an interactive dashboard with three tabs:
+
 1) Comparative Table - Shows all four backtests side-by-side with key metrics:
 
 Stablecoin pairs (USDT/USDC, DAI/USDC) dominated with 100% win rates

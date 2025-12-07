@@ -1,7 +1,9 @@
-#FOR FUTURE >>>
-import pandas as pd
+# FOR FUTURE >>>
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+import pandas as pd
+
 """
 To enhance the earlier example by adding error handling, logging, and potentially preparing it for scalability through asynchronous execution, you would need to make a few modifications. Here's how you can incorporate these considerations:
 
@@ -10,16 +12,44 @@ Logging: Use Python's built-in logging module to log detailed information about 
 Scalability: Utilize Python's concurrent.futures module for simple asynchronous execution if the tests are independent and could benefit from parallel processing.
 """
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 
 # Example configurations for each test
 test_configurations = [
-    {'test_id': 1, 'modules': 'datasets', 'domain': 'queries','sub_domain':'tableau', 'dtype': 'desc', 'filename': 'formulas_nor.xlsx', 'sizefile': 'sm','ner_entity': 'ner_tableau_desc' },
-    {'test_id': 2, 'modules': 'datasets', 'domain': 'queries','sub_domain':'tableau', 'dtype': 'formulas', 'filename': 'formulas_nor.xlsx','sizefile': 'sm', 'ner_entity': 'ner_tableau_formulas'},
-    {'test_id': 3, 'modules': 'datasets', 'domain': 'queries','sub_domain':'tableau', 'dtype': 'combined', 'filename': 'gformulas_nor_combined.xlsx', 'sizefile': 'bdsm', 'ner_entity': 'ner_tableau'}
+    {
+        "test_id": 1,
+        "modules": "datasets",
+        "domain": "queries",
+        "sub_domain": "tableau",
+        "dtype": "desc",
+        "filename": "formulas_nor.xlsx",
+        "sizefile": "sm",
+        "ner_entity": "ner_tableau_desc",
+    },
+    {
+        "test_id": 2,
+        "modules": "datasets",
+        "domain": "queries",
+        "sub_domain": "tableau",
+        "dtype": "formulas",
+        "filename": "formulas_nor.xlsx",
+        "sizefile": "sm",
+        "ner_entity": "ner_tableau_formulas",
+    },
+    {
+        "test_id": 3,
+        "modules": "datasets",
+        "domain": "queries",
+        "sub_domain": "tableau",
+        "dtype": "combined",
+        "filename": "gformulas_nor_combined.xlsx",
+        "sizefile": "bdsm",
+        "ner_entity": "ner_tableau",
+    },
     # Add more configurations for other tests
 ]
+
 
 def run_test(config):
     """
@@ -28,20 +58,21 @@ def run_test(config):
     try:
         logging.info(f"Starting test {config['test_id']} with configuration: {config}")
         # Placeholder for running a test, replace with actual function calls
-        #X_train, X_val, X_test = preparation_data(**config)
+        # X_train, X_val, X_test = preparation_data(**config)
         # trainer = Training(**config)
         # history, nlp = trainer.train()
         # results = evaluate_spacy_model(nlp, X_val)
         # return {'test_id': config['test_id'], 'result': results}
-        
+
         # Simulate a result
-        simulated_result = {'test_id': config['test_id'], 'result': f"Result for {config['test_id']}"}
+        simulated_result = {"test_id": config["test_id"], "result": f"Result for {config['test_id']}"}
         logging.info(f"Completed test {config['test_id']} successfully.")
         return simulated_result
 
     except Exception as e:
         logging.error(f"Error running test {config['test_id']}: {e}", exc_info=True)
-        return {'test_id': config['test_id'], 'error': str(e)}
+        return {"test_id": config["test_id"], "error": str(e)}
+
 
 def run_all_tests_concurrently():
     """
@@ -54,6 +85,7 @@ def run_all_tests_concurrently():
             results.append(future.result())
 
     return results
+
 
 # Run tests concurrently and collect results
 results = run_all_tests_concurrently()

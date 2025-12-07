@@ -2,11 +2,39 @@ import pandas as pd
 
 # Example configurations for each test
 test_configurations = [
-    {'test_id': 1, 'modules': 'datasets', 'domain': 'queries','sub_domain':'tableau', 'dtype': 'desc', 'filename': 'formulas_nor.xlsx','sizefile': 'sm', 'ner_entity': 'ner_tableau_desc'},
-    {'test_id': 2, 'modules': 'datasets', 'domain': 'queries','sub_domain':'tableau', 'dtype': 'formulas', 'filename': 'formulas_nor.xlsx','sizefile': 'sm', 'ner_entity': 'ner_tableau_formulas'},
-    {'test_id': 3, 'modules': 'datasets', 'domain': 'queries','sub_domain':'tableau', 'dtype': 'combined', 'filename': 'gformulas_nor_combined.xlsx','sizefile': 'bdsm', 'ner_entity': 'ner_tableau'},
+    {
+        "test_id": 1,
+        "modules": "datasets",
+        "domain": "queries",
+        "sub_domain": "tableau",
+        "dtype": "desc",
+        "filename": "formulas_nor.xlsx",
+        "sizefile": "sm",
+        "ner_entity": "ner_tableau_desc",
+    },
+    {
+        "test_id": 2,
+        "modules": "datasets",
+        "domain": "queries",
+        "sub_domain": "tableau",
+        "dtype": "formulas",
+        "filename": "formulas_nor.xlsx",
+        "sizefile": "sm",
+        "ner_entity": "ner_tableau_formulas",
+    },
+    {
+        "test_id": 3,
+        "modules": "datasets",
+        "domain": "queries",
+        "sub_domain": "tableau",
+        "dtype": "combined",
+        "filename": "gformulas_nor_combined.xlsx",
+        "sizefile": "bdsm",
+        "ner_entity": "ner_tableau",
+    },
     # Add more configurations for other tests
 ]
+
 
 def run_test(config):
     """
@@ -28,7 +56,8 @@ def run_test(config):
     # return results
 
     # Simulate a result
-    return {'test_id': config['test_id'], 'result': f"Result for {config['test_id']}"}
+    return {"test_id": config["test_id"], "result": f"Result for {config['test_id']}"}
+
 
 # Running all tests and collecting results
 results = []

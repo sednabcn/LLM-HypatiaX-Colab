@@ -1,5 +1,5 @@
 ┌──(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab/frontend]
-└─$ tree -L2                                                                                                      
+└─$ tree -L2
 .
 ├── assets
 │   ├── fonts
@@ -54,6 +54,7 @@ Show more
 Great question! Let me explain the role of each directory and help you organize your frontend properly.
 
 Directory Roles Explained
+
 1. templates/ - Flask/Jinja2 Templates (Backend-Rendered HTML)
 Purpose: Server-side rendered HTML templates using Jinja2 syntax (Flask's templating engine)
 
@@ -82,9 +83,11 @@ html
 ---
 
 ### **2. `public/` - React/Static Assets (Create React App convention)**
+
 **Purpose:** Root directory for React apps or static assets that are publicly accessible
 
 **Typical Structure:**
+
 ```
 public/
 ├── index.html       # Main HTML entry point
@@ -98,9 +101,11 @@ public/
 ---
 
 ### **3. `static/` - Flask Static Files (Backend convention)**
+
 **Purpose:** Static assets served by Flask's built-in static file handler
 
 **Typical Structure:**
+
 ```
 static/
 ├── css/
@@ -139,7 +144,9 @@ You have a **mixed architecture** with files from different setups:
 ## **Recommended Clean Structure**
 
 ### **Option A: Pure Frontend (No Backend Framework)**
+
 If you're serving static files directly:
+
 ```
 frontend/
 ├── index.html
@@ -163,6 +170,7 @@ frontend/
 ```
 
 **Delete:**
+
 - `templates/`
 - `public/`
 - `static/`
@@ -173,7 +181,9 @@ frontend/
 ---
 
 ### **Option B: Flask-Integrated Frontend**
+
 If you want Flask to serve your frontend:
+
 ```
 project/
 ├── app.py                    # Flask backend
@@ -214,7 +224,9 @@ def serve_static(path):
 ---
 
 ### **Option C: React Frontend (Complete Rewrite)**
+
 If you wanted to use React (requires rewriting everything):
+
 ```
 frontend/
 ├── public/
@@ -265,6 +277,7 @@ tree -L 2
 ### **Step 3: Verify Working Structure**
 
 After cleanup, you should have:
+
 ```
 frontend/
 ├── index.html
@@ -296,19 +309,19 @@ npx http-server -p 8000
 # Open in browser
 open http://localhost:8000
 Summary
-Directory	Purpose	Do You Need It?
-templates/	Flask Jinja2 templates	❌ No (using static HTML)
-public/	React static assets	❌ No (not using React)
-static/	Flask static files	❌ No (pure frontend)
-src/	React source code	❌ No (not using React)
-Root HTML files	Your actual pages	✅ YES
-css/	Your stylesheets	✅ YES
-js/	Your JavaScript	✅ YES
-assets/	Images/fonts	✅ YES
+Directory Purpose Do You Need It?
+templates/ Flask Jinja2 templates ❌ No (using static HTML)
+public/ React static assets ❌ No (not using React)
+static/ Flask static files ❌ No (pure frontend)
+src/ React source code ❌ No (not using React)
+Root HTML files Your actual pages ✅ YES
+css/ Your stylesheets ✅ YES
+js/ Your JavaScript ✅ YES
+assets/ Images/fonts ✅ YES
 Recommendation: Delete templates/, public/, static/, src/, and package.json to keep your project clean and focused on vanilla HTML/CSS/JS! 🎯
 
 ──(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab/backend]
-└─$ tree -L2                                                                                                      
+└─$ tree -L2
 .
 ├── api
 │   ├── __init__.py
@@ -370,6 +383,7 @@ tree api/
 ```
 
 **Expected structure:**
+
 ```
 api/
 ├── __init__.py
@@ -464,7 +478,7 @@ def create_app(config_class=Config):
     """Application factory"""
     app = Flask(__name__)
     app.config.from_object(config_class)
-    
+
     # Setup CORS
     CORS(app, resources={
         r"/api/*": {
@@ -473,7 +487,7 @@ def create_app(config_class=Config):
             "allow_headers": ["Content-Type"]
         }
     })
-    
+
     # Setup logging
     logging.basicConfig(
         level=logging.INFO,
@@ -483,22 +497,22 @@ def create_app(config_class=Config):
             logging.StreamHandler()
         ]
     )
-    
+
     # Register blueprints
     app.register_blueprint(health.bp)
     app.register_blueprint(hypatiax.bp, url_prefix='/api/hypatiax')
     app.register_blueprint(ner.bp, url_prefix='/api/ner')
     app.register_blueprint(defi.bp, url_prefix='/api/defi')
-    
+
     # Error handlers
     @app.errorhandler(404)
     def not_found(error):
         return jsonify({'error': 'Not found'}), 404
-    
+
     @app.errorhandler(500)
     def internal_error(error):
         return jsonify({'error': 'Internal server error'}), 500
-    
+
     return app
 
 if __name__ == '__main__':
@@ -519,21 +533,21 @@ from datetime import timedelta
 class Config:
     """Base configuration"""
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev-secret-key-change-in-production'
-    
+
     # API Settings
     API_VERSION = 'v1'
     API_TITLE = 'HypatiaX API'
-    
+
     # CORS Settings
     CORS_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000']
-    
+
     # Model Settings
     MODELS_PATH = os.path.join(os.path.dirname(__file__), 'models')
-    
+
     # Logging
     LOG_LEVEL = 'INFO'
     LOG_FILE = 'logs/app.log'
-    
+
     # Rate Limiting
     RATELIMIT_ENABLED = False
     RATELIMIT_DEFAULT = "100 per hour"
@@ -594,6 +608,7 @@ flake8==6.1.0
 ---
 
 ## **Complete Ideal Backend Structure**
+
 ```
 backend/
 ├── app.py                           # ✅ Main application entry
@@ -775,5 +790,3 @@ Next step: Show me the contents of api/routes/ to see if your endpoints are prop
 
 bash
 tree api/routes/
-
-

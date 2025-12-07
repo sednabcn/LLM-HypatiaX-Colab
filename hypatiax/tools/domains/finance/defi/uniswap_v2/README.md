@@ -251,21 +251,25 @@ quality_score = daily_fees / (abs(IL$) / days_elapsed)
 Each backtest generates a 4-panel visualization:
 
 ### Panel 1: Price Movement & Impermanent Loss
+
 - Blue line: ETH price over time
 - Red line: IL percentage progression
 - Shows correlation between volatility and IL
 
 ### Panel 2: Fees vs Impermanent Loss
+
 - Green line: Cumulative fees earned
 - Red line: IL in USD
 - Green shading: Profit zone (fees > IL)
 
 ### Panel 3: LP vs HODL Portfolio Value
+
 - Orange line: HODL portfolio value
 - Purple line: LP portfolio value
 - Shading shows which strategy wins daily
 
 ### Panel 4: Daily LP Advantage
+
 - Green bars: Days LP wins
 - Red bars: Days HODL wins
 - Shows daily performance differential
@@ -277,10 +281,12 @@ Each backtest generates a 4-panel visualization:
 ### For Small Capital ($20K-$100K)
 
 ❌ **Don't Expect High Returns**
+
 - Small LP positions earn minimal fees
 - Example: $20K in DAI/USDC = ~$100-400/year (0.5-2% APY)
 
 ✅ **Better Strategies**:
+
 1. Focus on **stablecoin pairs** (zero IL risk)
 2. Use **Uniswap V3 concentrated liquidity** (10-100x fee earnings)
 3. Consider **yield farming** with LP tokens
@@ -289,10 +295,12 @@ Each backtest generates a 4-panel visualization:
 ### For Medium Capital ($100K-$500K)
 
 ⚠️ **Moderate Returns Possible**
+
 - More capital = larger fee share
 - Still need high-quality pools
 
 ✅ **Recommended Approach**:
+
 1. **70% stablecoins** (USDC/USDT, DAI/USDC)
 2. **20% blue-chip pairs** (ETH/stETH, WBTC/ETH)
 3. **10% experimental** (high-fee exotic pairs)
@@ -301,10 +309,12 @@ Each backtest generates a 4-panel visualization:
 ### For Large Capital ($500K+)
 
 ✅ **Professional LP Strategy**
+
 - Potential APY: 5-30%
 - Requires active management
 
 **Key Components**:
+
 1. **Concentrated liquidity** (Uniswap V3)
 2. **Multiple pools** for diversification
 3. **Automated rebalancing** (custom bots)
@@ -313,6 +323,7 @@ Each backtest generates a 4-panel visualization:
 ### When to Provide Liquidity
 
 ✅ **PROVIDE** when:
+
 - Quality score > 1.0
 - Stablecoin pairs
 - Bull markets (trending upward)
@@ -320,6 +331,7 @@ Each backtest generates a 4-panel visualization:
 - Low short-term volatility
 
 ❌ **AVOID** when:
+
 - Quality score < 0.5
 - Highly volatile altcoins
 - Bear markets (trending downward)
@@ -333,6 +345,7 @@ Each backtest generates a 4-panel visualization:
 ### Core Classes
 
 #### `LPPosition`
+
 ```python
 @dataclass
 class LPPosition:
@@ -348,16 +361,18 @@ class LPPosition:
 ```
 
 #### `UNIv2Calculator`
+
 ```python
 class UNIv2Calculator:
     @staticmethod
     def calculate_il_percentage(current_price, initial_price) -> float
-    
+
     @staticmethod
     def calculate_il_with_fees(position: LPPosition) -> Dict
 ```
 
 #### `UniswapV2Pool`
+
 ```python
 class UniswapV2Pool:
     def __init__(self, reserve_x: float, reserve_y: float, fee: float = 0.003)
@@ -368,6 +383,7 @@ class UniswapV2Pool:
 ### Functions
 
 #### `run_complete_backtest()`
+
 ```python
 def run_complete_backtest(
     days: int = 90,
@@ -379,10 +395,12 @@ def run_complete_backtest(
 ```
 
 **Returns**:
+
 - DataFrame with daily results
 - Dictionary with analysis metrics
 
 #### `get_eth_historical_prices()`
+
 ```python
 def get_eth_historical_prices(days: int = 90) -> List[Dict]
 ```
@@ -492,16 +510,19 @@ if max_drawdown < -1000:
 ### Position Value Calculation
 
 **HODL Value**:
+
 ```
 hodl_value = (initial_eth × current_eth_price) + initial_usdc
 ```
 
 **LP Value** (without fees):
+
 ```
 lp_value = 2 × √(initial_eth × initial_usdc × current_price)
 ```
 
 **LP Value** (with fees):
+
 ```
 lp_value_with_fees = lp_value + cumulative_fees
 ```
@@ -511,21 +532,27 @@ lp_value_with_fees = lp_value + cumulative_fees
 ## 🎓 Key Learnings
 
 ### 1. Impermanent Loss is Always Negative
+
 IL represents opportunity cost vs holding. The formula ensures IL ≤ 0 always.
 
 ### 2. Fees Can Compensate for IL
+
 High trading volume generates fees that offset IL losses. Quality score measures this.
 
 ### 3. Stablecoins Are King
+
 Near-zero price movement = near-zero IL = pure fee earnings.
 
 ### 4. Volatility = Risk
+
 Larger price moves create exponentially larger IL. Bear markets devastate LP positions.
 
 ### 5. Small Capital = Small Returns
+
 Without significant liquidity ($500K+), LP returns are typically <2% APY on most pairs.
 
 ### 6. Active Management Required
+
 Passive LP positions in volatile pairs almost always underperform HODL. Rebalancing and range adjustment (v3) are critical.
 
 ---
@@ -565,12 +592,15 @@ export_results_to_csv(results, "my_analysis.csv")
 ## 🐛 Troubleshooting
 
 ### Issue: "Failed to fetch price data"
+
 **Solution**: Check internet connection and CoinGecko API rate limits (50 calls/min free tier)
 
 ### Issue: "Quality score = inf"
+
 **Solution**: This is correct for stablecoin pairs where IL ≈ 0. Means excellent profitability.
 
 ### Issue: "All IL values are negative"
+
 **Solution**: This is expected behavior. IL is always ≤ 0 by definition.
 
 ---

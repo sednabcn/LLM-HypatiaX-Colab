@@ -21,53 +21,53 @@ env:
 jobs:
   build-upload:
     runs-on: ubuntu-latest
-    
+
     outputs:
       wheel-url: ${{ steps.upload.outputs.wheel-url }}
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      
+
       - name: Build wheel
         run: |
           pip install build
           python -m build
-          
+
           # Get wheel filename
           WHEEL=$(ls dist/*.whl)
           echo "WHEEL_FILE=${WHEEL}" >> $GITHUB_ENV
-      
+
       - uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-      
+
       - name: Upload to GCS
         id: upload
         run: |
           VERSION=$(python setup.py --version)
-          
+
           # Upload wheel
           gsutil cp ${WHEEL_FILE} gs://${BUCKET}/wheels/${VERSION}/
           gsutil cp ${WHEEL_FILE} gs://${BUCKET}/wheels/latest/
-          
+
           # Make publicly readable (optional)
           gsutil acl ch -u AllUsers:R gs://${BUCKET}/wheels/${VERSION}/*.whl
-          
+
           # Output URL
           URL="https://storage.googleapis.com/${BUCKET}/wheels/${VERSION}/$(basename ${WHEEL_FILE})"
           echo "wheel-url=${URL}" >> $GITHUB_OUTPUT
           echo "### 📦 Wheel Published" >> $GITHUB_STEP_SUMMARY
           echo "URL: ${URL}" >> $GITHUB_STEP_SUMMARY
-  
+
   test-install:
     needs: build-upload
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Test wheel installation
         run: |

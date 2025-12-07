@@ -18,27 +18,27 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Fetch all history for comparison
-      
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: 'pip'
-      
+
       - name: Install dependencies
         run: |
           pip install --upgrade pip
           pip install -e .
           pip install pytest pytest-benchmark memory-profiler psutil
           python -m spacy download en_core_web_sm
-      
+
       - name: Setup environment
         run: |
           if [ -f setup_environment.sh ]; then
             chmod +x setup_environment.sh
             ./setup_environment.sh
           fi
-      
+
       - name: Run performance benchmarks
         run: |
           pytest tests/performance/ \
@@ -46,11 +46,11 @@ jobs:
             --benchmark-json=benchmark-results.json \
             --benchmark-compare \
             --benchmark-autosave
-      
+
       - name: Memory profiling
         run: |
           python -m memory_profiler tests/test_memory_usage.py > memory-report.txt || echo "No memory tests found"
-      
+
       - name: Store benchmark results
         uses: benchmark-action/github-action-benchmark@v1
         with:
@@ -61,7 +61,7 @@ jobs:
           alert-threshold: '150%'
           comment-on-alert: true
           fail-on-alert: false
-      
+
       - name: Upload performance reports
         uses: actions/upload-artifact@v4
         with:
@@ -76,25 +76,25 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      
+
       - name: Install dependencies
         run: |
           pip install --upgrade pip
           pip install -e .
           pip install locust faker
-      
+
       - name: Run load tests
         run: |
           # Start the application in background
           python -m hypatiax.api.app &
           APP_PID=$!
           sleep 10
-          
+
           # Run locust load tests
           locust -f tests/load/locustfile.py \
             --headless \
@@ -103,10 +103,10 @@ jobs:
             --run-time 5m \
             --html load-test-report.html \
             --csv load-test
-          
+
           # Cleanup
           kill $APP_PID || true
-      
+
       - name: Upload load test results
         uses: actions/upload-artifact@v4
         with:

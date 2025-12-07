@@ -36,27 +36,27 @@ Add this HTML structure in the `<body>`:
 <div class="container">
     <!-- API Status -->
     <div id="api-status" class="api-status">Checking connection...</div>
-    
+
     <!-- Demo Warning (shown in demo mode) -->
     <div id="demo-warning"></div>
-    
+
     <!-- Main Form -->
     <div class="card">
         <h1>HypatiaX Formula Mapper</h1>
         <p>Convert natural language to Tableau formulas</p>
-        
+
         <form id="formula-form">
             <div class="form-group">
                 <label for="description-input">Describe what you want to calculate:</label>
-                <input 
-                    type="text" 
-                    id="description-input" 
-                    name="description" 
+                <input
+                    type="text"
+                    id="description-input"
+                    name="description"
                     placeholder="e.g., Calculate the total of Sales"
                     required
                 />
             </div>
-            
+
             <div class="form-group">
                 <label for="method-select">Method:</label>
                 <select id="method-select" name="method">
@@ -64,13 +64,13 @@ Add this HTML structure in the `<body>`:
                     <option value="semantic">Semantic Analysis</option>
                 </select>
             </div>
-            
+
             <!-- Quick Suggestion -->
             <div id="quick-suggestion"></div>
-            
+
             <button type="submit" class="btn-primary">Generate Formula</button>
         </form>
-        
+
         <!-- Example Queries -->
         <div class="examples">
             <h3>Try these examples:</h3>
@@ -85,10 +85,10 @@ Add this HTML structure in the `<body>`:
             </button>
         </div>
     </div>
-    
+
     <!-- Results -->
     <div id="formula-result"></div>
-    
+
     <!-- Test Button -->
     <button id="test-hypatiax-btn" class="btn-secondary">Run Tests</button>
     <div id="test-results"></div>
@@ -112,9 +112,9 @@ Add this HTML structure:
 <div class="container">
     <!-- API Status -->
     <div id="api-status" class="api-status">Checking connection...</div>
-    
+
     <h1>DeFi Position Analyzer</h1>
-    
+
     <!-- Quick IL Calculator -->
     <div class="card">
         <h2>Quick IL Calculator</h2>
@@ -134,7 +134,7 @@ Add this HTML structure:
         </form>
         <div id="quick-il-result"></div>
     </div>
-    
+
     <!-- Full Position Analysis -->
     <div class="card">
         <h2>Complete Position Analysis</h2>
@@ -150,7 +150,7 @@ Add this HTML structure:
                     <input type="number" name="initial_token_b" step="0.01" required />
                 </div>
             </div>
-            
+
             <h3>Prices</h3>
             <div class="form-row">
                 <div class="form-group">
@@ -162,7 +162,7 @@ Add this HTML structure:
                     <input type="number" name="current_price" step="0.01" required />
                 </div>
             </div>
-            
+
             <h3>Pool Information</h3>
             <div class="form-row">
                 <div class="form-group">
@@ -174,7 +174,7 @@ Add this HTML structure:
                     <input type="number" name="pool_tvl_usd" step="1" required />
                 </div>
             </div>
-            
+
             <div class="form-row">
                 <div class="form-group">
                     <label>Days Elapsed:</label>
@@ -185,7 +185,7 @@ Add this HTML structure:
                     <input type="number" name="fee_rate" value="0.003" step="0.001" />
                 </div>
             </div>
-            
+
             <button type="submit" class="btn-primary">Analyze Position</button>
             <button type="button" class="btn-secondary" onclick="window.location.href='?example=true'">
                 Load Example
@@ -215,9 +215,9 @@ Add this HTML structure:
 <div class="container">
     <!-- API Status -->
     <div id="api-status" class="api-status">Checking connection...</div>
-    
+
     <h1>Formula Extraction & Analysis</h1>
-    
+
     <!-- Examples -->
     <div class="examples">
         <h3>Try these examples:</h3>
@@ -226,21 +226,21 @@ Add this HTML structure:
         <button class="example-btn" data-example="physics">Physics (E=mc²)</button>
         <button class="example-btn" data-example="calculus">Calculus (Derivative)</button>
     </div>
-    
+
     <!-- Tabs -->
     <div class="tabs">
         <button class="tab-btn active" data-tab="extraction">Formula Extraction</button>
         <button class="tab-btn" data-tab="entities">Entity Recognition</button>
         <button class="tab-btn" data-tab="latex">LaTeX Conversion</button>
     </div>
-    
+
     <!-- Extraction Tab -->
     <div id="extraction-tab" class="tab-content active">
         <div class="card">
             <form id="extract-formula-form">
                 <div class="form-group">
                     <label>Enter text containing a formula:</label>
-                    <textarea name="formula_text" rows="3" required 
+                    <textarea name="formula_text" rows="3" required
                               placeholder="e.g., IL = 2*sqrt(r)/(r+1) - 1"></textarea>
                 </div>
                 <div class="form-group">
@@ -258,7 +258,7 @@ Add this HTML structure:
             <div id="extraction-result"></div>
         </div>
     </div>
-    
+
     <!-- Entity Recognition Tab -->
     <div id="entities-tab" class="tab-content">
         <div class="card">
@@ -272,14 +272,14 @@ Add this HTML structure:
             <div id="entity-result"></div>
         </div>
     </div>
-    
+
     <!-- LaTeX Tab -->
     <div id="latex-tab" class="tab-content">
         <div class="card">
             <form id="latex-conversion-form">
                 <div class="form-group">
                     <label>Enter formula to convert:</label>
-                    <textarea name="latex_formula" rows="2" required 
+                    <textarea name="latex_formula" rows="2" required
                               placeholder="e.g., sqrt(x^2 + y^2)"></textarea>
                 </div>
                 <button type="submit" class="btn-primary">Convert to LaTeX</button>
@@ -287,7 +287,7 @@ Add this HTML structure:
             <div id="latex-result"></div>
         </div>
     </div>
-    
+
     <!-- Copy Notification -->
     <div id="copy-notification"></div>
 </div>
@@ -393,45 +393,58 @@ The server should start on `http://localhost:5000`
 ## ✅ Step 4: Test the Integration
 
 ### Test 1: Health Check
+
 Open browser console and run:
+
 ```javascript
 api.healthCheck().then(console.log);
 ```
 
 ### Test 2: HypatiaX
+
 Navigate to `index.html` and try:
+
 - "Calculate the total of Sales"
 - "Average of Profit"
 
 ### Test 3: DeFi Calculator
+
 Navigate to `dashboard.html` and enter:
+
 - Initial Price: 2000
 - Current Price: 3000
 - Click "Calculate IL"
 
 ### Test 4: NER Demo
+
 Navigate to `ner-demo.html` and try:
+
 - Click "DeFi (IL Formula)" example
 - Click "Extract Formula"
 
 ## 🐛 Troubleshooting
 
 ### CORS Errors
+
 If you see CORS errors, the backend already has CORS enabled:
+
 ```python
 from flask_cors import CORS
 CORS(app)
 ```
 
 ### Connection Refused
+
 1. Ensure backend is running: `python app.py`
 2. Check URL in `api-client.js` matches your backend
 3. Verify port 5000 is not in use
 
 ### API Not Responding
+
 1. Check browser console for errors
 2. Verify API status badge shows "Connected"
 3. Test endpoints with curl:
+
 ```bash
 curl http://localhost:5000/api/health
 ```
@@ -439,19 +452,22 @@ curl http://localhost:5000/api/health
 ## 📊 API Endpoints Reference
 
 ### HypatiaX
+
 - `POST /api/hypatiax/map` - Map description to formula
 - `GET /api/hypatiax/test` - Run test queries
 
 ### NER
+
 - `POST /api/ner/extract-formula` - Extract formula from text
 - `POST /api/ner/recognize-entities` - Recognize entities
 - `POST /api/ner/convert-to-latex` - Convert to LaTeX
 
 ### DeFi
+
 - `POST /api/defi/il-percentage` - Calculate IL percentage
 - `POST /api/defi/analyze-position` - Complete position analysis
 
-## 🎉 You're Done!
+## 🎉 You're Done
 
 Your frontend is now fully integrated with the backend. All features should work:
 

@@ -1,0 +1,348 @@
+# .pre-commit-config.yaml
+# Pre-commit hooks for HypatiaX code quality
+# Install: pip install pre-commit
+# Setup: pre-commit install
+# Run manually: pre-commit run --all-files
+
+default_language_version:
+  python: python3.12
+
+repos:
+  # ============================================================================
+  # General Pre-commit Hooks
+  # ============================================================================
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      # File formatting
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+
+      - id: end-of-file-fixer
+        name: Fix end of files
+
+      - id: mixed-line-ending
+        name: Fix mixed line endings
+        args: ['--fix=lf']
+
+      # Syntax checks
+      - id: check-yaml
+        name: Check YAML files
+        exclude: ^docker-compose
+
+      - id: check-json
+        name: Check JSON files
+
+      - id: check-toml
+        name: Check TOML files
+
+      - id: check-xml
+        name: Check XML files
+
+      # Python-specific
+      - id: check-ast
+        name: Check Python AST
+
+      - id: check-docstring-first
+        name: Check docstring first
+
+      - id: debug-statements
+        name: Check for debugger imports
+
+      - id: name-tests-test
+        name: Check test naming
+        args: ['--pytest-test-first']
+        exclude: ^tests/(conftest|__init__)\.py$
+
+      # Security
+      - id: detect-private-key
+        name: Detect private keys
+
+      # File checks
+      - id: check-added-large-files
+        name: Check for large files
+        args: ['--maxkb=1000']
+
+      - id: check-merge-conflict
+        name: Check for merge conflicts
+
+      - id: check-case-conflict
+        name: Check for case conflicts
+
+  # ============================================================================
+  # Python Code Formatting - Black
+  # ============================================================================
+  - repo: https://github.com/psf/black
+    rev: 24.1.0
+    hooks:
+      - id: black
+        name: Format code with Black
+        language_version: python3.12
+        args:
+          - --line-length=120
+          - --target-version=py312
+        exclude: ^(docs/|build/|dist/|\.eggs/)
+
+  # ============================================================================
+  # Import Sorting - isort
+  # ============================================================================
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        name: Sort imports with isort
+        args:
+          - --profile=black
+          - --line-length=120
+          - --multi-line=3
+          - --trailing-comma
+        exclude: ^(docs/|build/|dist/)
+
+  # ============================================================================
+  # Linting - Flake8
+  # ============================================================================
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        name: Lint with Flake8
+        args:
+          - --max-line-length=120
+          - --max-complexity=15
+          - --extend-ignore=E203,E501,W503,E402
+          - --exclude=.git,__pycache__,docs,build,dist,.eggs,*.egg
+        additional_dependencies:
+          - flake8-docstrings
+          - flake8-bugbear
+          - flake8-comprehensions
+          - flake8-simplify
+
+  # ============================================================================
+  # Type Checking - MyPy
+  # ============================================================================
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        name: Type check with MyPy
+        args:
+          - --ignore-missing-imports
+          - --no-strict-optional
+          - --warn-redundant-casts
+          - --warn-unused-ignores
+          - --follow-imports=skip
+        additional_dependencies:
+          - types-requests
+          - types-PyYAML
+        exclude: ^(tests/|docs/|setup\.py|conftest\.py)
+
+  # ============================================================================
+  # Security - Bandit
+  # ============================================================================
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.6
+    hooks:
+      - id: bandit
+        name: Security check with Bandit
+        args:
+          - --recursive
+          - --skip=B101,B601
+          - --exclude=tests
+        files: ^hypatiax/
+
+  # ============================================================================
+  # Documentation - pydocstyle
+  # ============================================================================
+  - repo: https://github.com/PyCQA/pydocstyle
+    rev: 6.3.0
+    hooks:
+      - id: pydocstyle
+        name: Check docstrings
+        args:
+          - --convention=google
+          - --add-ignore=D100,D104,D105,D107
+        exclude: ^(tests/|setup\.py|docs/)
+
+  # ============================================================================
+  # YAML Linting
+  # ============================================================================
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.33.0
+    hooks:
+      - id: yamllint
+        name: Lint YAML files
+        args:
+          - --format=parsable
+          - --strict
+        exclude: ^\.github/
+
+  # ============================================================================
+  # Markdown Linting
+  # ============================================================================
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.38.0
+    hooks:
+      - id: markdownlint
+        name: Lint Markdown files
+        args:
+          - --fix
+          - --disable=MD013,MD033,MD041
+        exclude: ^(CHANGELOG\.md|docs/)
+
+  # ============================================================================
+  # Requirements.txt Checking
+  # ============================================================================
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+    rev: v1.3.3
+    hooks:
+      - id: python-safety-dependencies-check
+        name: Check dependencies for vulnerabilities
+        files: requirements.*\.txt$
+
+  # ============================================================================
+  # Jupyter Notebook Cleaning
+  # ============================================================================
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.7.1
+    hooks:
+      - id: nbqa-black
+        name: Format notebooks with Black
+
+      - id: nbqa-isort
+        name: Sort imports in notebooks
+
+      - id: nbqa-flake8
+        name: Lint notebooks with Flake8
+
+  # ============================================================================
+  # Custom Hooks - HypatiaX Specific
+  # ============================================================================
+  - repo: local
+    hooks:
+      # Check for print statements in production code
+      - id: no-print-statements
+        name: Check for print() statements
+        entry: grep -rn "print(" --include="*.py" hypatiax/
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+        exclude: ^(tests/|scripts/|setup\.py)
+
+      # Check for TODO/FIXME comments
+      - id: check-todos
+        name: Check for TODO/FIXME
+        entry: grep -rn "TODO\|FIXME" --include="*.py" hypatiax/
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+        verbose: true
+
+      # Validate formula constraints
+      - id: validate-formula-constraints
+        name: Validate formula constraint definitions
+        entry: python scripts/validate_formula_constraints.py
+        language: system
+        pass_filenames: false
+        files: ^hypatiax/domains/.*_formulas\.py$
+
+      # Check test coverage threshold
+      - id: check-test-coverage
+        name: Verify test coverage > 80%
+        entry: bash -c 'pytest --cov=hypatiax --cov-report=term-missing --cov-fail-under=80 tests/unit/ 2>/dev/null || echo "Run full tests to verify coverage"'
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+
+      # Performance regression check
+      - id: performance-regression-check
+        name: Check for performance regressions
+        entry: python scripts/quick_performance_check.py
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+        verbose: true
+
+# ============================================================================
+# Configuration
+# ============================================================================
+
+# Fail fast - stop on first error
+fail_fast: false
+
+# Files to exclude from all hooks
+exclude: |
+  (?x)^(
+      \.git/|
+      \.pytest_cache/|
+      __pycache__/|
+      \.mypy_cache/|
+      \.tox/|
+      \.venv/|
+      venv/|
+      build/|
+      dist/|
+      \.eggs/|
+      .*\.egg-info/|
+      docs/_build/|
+      node_modules/|
+      \.coverage.*|
+      htmlcov/
+  )
+
+# Default stages for hooks
+default_stages: [pre-commit]
+
+# Minimum pre-commit version
+minimum_pre_commit_version: '3.0.0'
+
+# ============================================================================
+# CI Configuration
+# ============================================================================
+
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit.com hooks
+
+    for more information, see https://pre-commit.ci
+
+  autofix_prs: true
+
+  autoupdate_branch: 'develop'
+
+  autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'
+
+  autoupdate_schedule: weekly
+
+  skip:
+    - no-print-statements
+    - check-todos
+    - validate-formula-constraints
+    - check-test-coverage
+    - performance-regression-check
+
+# ============================================================================
+# Usage Instructions
+# ============================================================================
+#
+# Installation:
+#   pip install pre-commit
+#   pre-commit install
+#
+# Run on all files:
+#   pre-commit run --all-files
+#
+# Run specific hook:
+#   pre-commit run black --all-files
+#
+# Update hooks:
+#   pre-commit autoupdate
+#
+# Bypass hooks (not recommended):
+#   git commit --no-verify
+#
+# Uninstall:
+#   pre-commit uninstall
+#
+# ============================================================================

@@ -1,10 +1,11 @@
 #save_model,mv_files,delete_non_empty_directory,files_management
+import glob
+import logging
 import os
 import shutil
 import zipfile
-import glob
-import logging
-from google.colab import files, drive
+
+from google.colab import drive, files
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -21,11 +22,11 @@ def save_model(nlp, model_name, location):
         if location == 'remote':
             logging.info("Manual steps for saving model remotely provided.")
             return
-        
+
         if folder_path is None:
             logging.error("Invalid location provided. Use 'drive', 'colab', 'disk', or 'remote'.")
             return
-        
+
         if location == 'drive':
             drive.mount('/content/drive')
 
@@ -63,7 +64,7 @@ def files_management(option, filename):
         if option == 'update':
             # Add logic for update if specific
             logging.info(f"Update option selected for {filename}.")
-        
+
         # Upload or process files
         if not os.path.exists(file_path):
             files.upload()  # Upload if file doesn't exist
@@ -152,6 +153,7 @@ def assert_package_exists(package_name):
 
 def working_in_content(command,version):
     import subprocess
+
     # Construct the file path
     file_path = f'/content/hypatiax-{version}-py3-none-any.whl'
 
@@ -170,6 +172,7 @@ def working_in_content(command,version):
 
 def upload_check_files(task=True):
   import os
+
   from google.colab import files
   if task:
       files.upload()
