@@ -1,3 +1,10 @@
+"""
+Extrapolation testing module for symbolic regression.
+
+This module tests how well discovered formulas extrapolate beyond training data
+by evaluating performance on in-domain and out-of-domain regions.
+"""
+
 import json
 import os
 import sys
@@ -9,12 +16,12 @@ import numpy as np
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.symbolic_engine import DiscoveryConfig, SymbolicEngine
+from hypatiax.tools.symbolic.symbolic_engine import DiscoveryConfig, SymbolicEngine
 
 
 def test_extrapolation(formula_name, ground_truth_func, X_range, n_samples=100):
     """
-    Test how well discovered formula extrapolates beyond training data.
+    Test the discovered formula's extrapolation beyond training data.
 
     Args:
         formula_name: Name of the formula being tested
@@ -23,7 +30,16 @@ def test_extrapolation(formula_name, ground_truth_func, X_range, n_samples=100):
         n_samples: Number of training samples
 
     Returns:
-        Dictionary with extrapolation metrics
+        Dictionary with extrapolation metrics including:
+        - formula: Name of the formula
+        - discovered_expression: String representation of discovered formula
+        - r2_train: R² score on training data
+        - complexity: Complexity of discovered formula
+        - in_domain_error: Relative error within training range
+        - out_domain_error: Relative error beyond training range
+        - extrapolation_ratio: Ratio of out-domain to in-domain error
+        - training_range: Min/max of training data
+        - test_range: Min/max of test data including extrapolation
     """
     print(f"\nTesting: {formula_name}")
     print("-" * 60)
@@ -104,7 +120,7 @@ def test_extrapolation(formula_name, ground_truth_func, X_range, n_samples=100):
     plt.xlabel("X", fontsize=12)
     plt.ylabel("Y", fontsize=12)
     plt.title(
-        f"Extrapolation Test: {formula_name}\n" + f'Discovered: {result["expression"]} (R²={result["r2_score"]:.4f})',
+        f"Extrapolation Test: {formula_name}\n" f"Discovered: {result['expression']} (R²={result['r2_score']:.4f})",
         fontsize=11,
     )
     plt.legend(loc="best", fontsize=10)
@@ -133,7 +149,16 @@ def test_extrapolation(formula_name, ground_truth_func, X_range, n_samples=100):
 
 
 def run_all_extrapolation_tests():
-    """Run extrapolation tests on multiple formulas."""
+    """Run extrapolation tests on multiple formulas.
+
+    Tests include:
+    1. Impermanent Loss - DeFi-specific formula
+    2. Value at Risk (VaR) - Risk management metric
+    3. Quadratic - Control test for baseline performance
+
+    Returns:
+        list: List of dictionaries containing test results for each formula
+    """
     print("\n" + "=" * 80)
     print("EXTRAPOLATION TESTING")
     print("=" * 80)
@@ -144,6 +169,7 @@ def run_all_extrapolation_tests():
     print("\n[1/3] Impermanent Loss Formula")
 
     def il_func(x):
+        """Compute the impermanent loss: 2*sqrt(x)/(x+1) - 1."""
         return 2 * np.sqrt(x) / (x + 1) - 1
 
     result = test_extrapolation("impermanent_loss", il_func, (0.1, 5.0))
@@ -154,6 +180,7 @@ def run_all_extrapolation_tests():
     print("\n[2/3] Value at Risk (95% confidence)")
 
     def var_func(x):
+        """Value at Risk at 95% confidence level."""
         mu, sigma = 0, 0.2
         return mu - 1.645 * sigma * np.sqrt(x)
 
@@ -165,6 +192,7 @@ def run_all_extrapolation_tests():
     print("\n[3/3] Quadratic (Control)")
 
     def quad_func(x):
+        """Solve simple quadratic function for baseline testing."""
         return x**2 + 2 * x + 1
 
     result = test_extrapolation("quadratic", quad_func, (-5, 5))
@@ -191,7 +219,7 @@ def run_all_extrapolation_tests():
         )
 
     print("\n" + "=" * 80)
-    print(f"Results saved to {output_path}")
+    print("Results saved to {}".format(output_path))
     print("=" * 80 + "\n")
 
     # Calculate average metrics
@@ -203,7 +231,7 @@ def run_all_extrapolation_tests():
         print(f"  Mean R² (training): {avg_r2:.4f}")
         print(f"  Mean extrapolation ratio: {avg_ratio:.2f}x")
         print(f"  Interpretation: Discovered formulas have {avg_ratio:.1f}x higher error")
-        print(f"                  when extrapolating vs interpolating\n")
+        print("                  when extrapolating vs interpolating\n")
 
     return results
 
