@@ -1,0 +1,4 @@
+# file: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/tools/validation/validator_scaffold.py
+# hypothesis_version: 6.148.7
+
+[-1.0, 'cos', 'denominators', 'error', 'exception', 'exp', 'free_symbols', 'is_Pow', 'log', 'non_finite', 'numpy', 'pretty', 'sin', 'sqrt', 'success', 'symbol_order', 'value']

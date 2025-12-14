@@ -1,0 +1,4 @@
+days_in_position,expected_risk_score,il_percent,name,range_width,risk_category,volatility_30d
+90,35,-2.5,Conservative LP,0.5,Low,0.25
+45,58,-8.0,Moderate LP,0.3,Medium,0.45
+14,82,-15.0,Aggressive LP,0.15,High,0.75

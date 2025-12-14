@@ -1,0 +1,5 @@
+Timestamp,Expression,R² Score,Complexity,Validation Score,Valid,Interpretation,Provider,Domain
+2025-12-13T13:12:51.073301,-exp(((price_ratio**(-0.94054425) + price_ratio)**0.3575959/(-0.45760217) - 0.67230797)/price_ratio)**1.2200905 + ((price_ratio/1.0489614 - 0.41862807)/(-0.6271769) + 0.52612877)*(-0.05306615)/price_ratio,0.9955995888237843,30,70.3,False,,,defi
+2025-12-13T13:13:16.182804,amount_in_ratio*reserve_out_ratio*(amount_in_ratio*(-0.3184283)/reserve_in_ratio + 44.07946)/reserve_in_ratio,0.9999647888901596,13,74.2,False,,,defi
+2025-12-13T13:13:54.952777,borrowed/supplied,0.9960095145108544,3,94.6,True,"This expression calculates the utilization rate of a lending pool, representing the fraction of supp",anthropic,defi
+2025-12-13T13:14:34.855142,10012.511*sqrt(reserve0_ratio*reserve1_ratio),0.999995969376828,6,86.8,True,"This expression calculates a scaled geometric mean of two token reserve ratios, representing the geo",anthropic,defi

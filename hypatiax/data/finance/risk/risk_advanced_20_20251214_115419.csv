@@ -1,0 +1,21 @@
+Timestamp,Expression,R² Score,Complexity,Validation Score,Valid,Interpretation,Provider,Domain
+2025-12-14T11:43:31.484647,mu + (skewness*6.6539493 + exp(-kurtosis + sigma))*sigma*(-0.042901326) - sigma/0.6333034,0.9994502594887146,18,90.1,True,This expression calculates an adjusted expected return that incorporates higher-order moment correct,anthropic,risk
+2025-12-14T11:44:06.217845,mu + sigma*(-2.0625634),0.9999828923135184,5,100.0,True,This expression calculates a specific downside risk threshold at approximately 2.06 standard deviati,anthropic,risk
+2025-12-14T11:44:48.301473,mu + (exp(-df + df*0.29118276 + 0.6436312) - 1.5612512)*sigma*1.0362523,0.9999370461424258,16,90.7,True,This expression calculates a risk-adjusted return measure that modifies the standard mean-return for,anthropic,risk
+2025-12-14T11:45:36.033046,sqrt(sigma2*(sigma1 - 0.05039626))*log(sigma1 - sigma2**2.0073597 + w1*(-sigma1 + sigma2)),0.7341938929796049,19,86.8,True,This expression calculates a risk-adjusted measure that combines volatility scaling with logarithmic,anthropic,risk
+2025-12-14T11:46:19.931596,-0.102198504*(-correlation*(sigma2 + w2) + sigma2 + w2)*(0.16371384*correlation - 1.16371384*sigma1 - log(exp(sigma1 + w1)) + 0.069082074/w1),0.9846433385431625,29,86.2,True,This expression calculates a risk-adjusted portfolio metric that combines correlation-dependent vari,anthropic,risk
+2025-12-14T11:46:30.033397,DISCOVERY_FAILED,0.0,0,94.5,False,Discovery failed - no valid mathematical expression was found or generated during the symbolic regre,anthropic,risk
+2025-12-14T11:46:39.352708,DISCOVERY_FAILED,0.0,0,94.5,False,Discovery failed - no valid mathematical expression was found to analyze the relationship between po,anthropic,risk
+2025-12-14T11:46:50.839474,DISCOVERY_FAILED,0.0,0,94.5,False,"The discovery process failed to identify a valid symbolic expression relating CVaR and VaR, indicati",anthropic,risk
+2025-12-14T11:47:28.966328,DISCOVERY_FAILED,0.0,0,94.5,False,"The discovery process failed to identify a valid symbolic expression, resulting in no mathematical r",anthropic,risk
+2025-12-14T11:48:09.318123,0.630242156165636*sqrt(horizon*volatility**2*sqrt(0.68513423**sharpe)*(1/sharpe)**1.6142013),0.9999906590559585,17,79.1,False,,,risk
+2025-12-14T11:48:20.628225,DISCOVERY_FAILED,0.0,0,94.5,False,"The expression discovery failed, indicating no valid mathematical relationship could be identified b",anthropic,risk
+2025-12-14T11:49:02.789312,10.9366580482156*rate_shock*(duration - 1.7966001)/(log(convexity)/portfolio)**0.9303736,0.9622565639988567,14,79.4,False,,,risk
+2025-12-14T11:49:14.244934,DISCOVERY_FAILED,0.0,0,94.5,False,"The discovery process failed to identify a valid mathematical expression, resulting in no calculable",anthropic,risk
+2025-12-14T11:50:02.763071,3.35361755022038*spread*sqrt(portfolio_size**2.9921262/daily_volume),0.999997141476932,10,90.2,True,"This expression calculates market impact cost or price impact when liquidating a portfolio, represen",anthropic,risk
+2025-12-14T11:50:51.367508,4.4355054**stress_corr*vol_mult*(asset1**(1/4) + sqrt(asset2**0.4391376*exp(stress_corr)) - 37.872223)/normal_corr,0.9557747307748243,21,85.3,True,This formula calculates a crisis-adjusted risk metric that combines two asset exposures under stress,anthropic,risk
+2025-12-14T11:51:25.687922,liquidity*position*exp(0.47690168*exp(-0.16190763*volatility)*log(exp(volatility)))/leverage,0.9999935670033855,17,83.8,False,,,risk
+2025-12-14T11:52:02.925447,maint_ratio*position/leverage,0.9999967698753921,5,97.6,True,"This expression calculates the maintenance margin requirement for a leveraged position, representing",anthropic,risk
+2025-12-14T11:52:41.525295,entry_price - (-entry_price*maint_margin + entry_price/leverage),0.9999999999873638,9,91.0,True,"This expression calculates the liquidation price for a long position in leveraged trading, represent",anthropic,risk
+2025-12-14T11:53:44.474054,sqrt(exp(0.119000193853408*sqrt(exp(-(-stop_distance - 2.5763137)*(risk_tolerance*(-2.1026585*stop_distance - 1.0524496) + stop_distance)/risk_tolerance)**(-3.1569614)))),0.970840132615496,23,77.6,False,,,risk
+2025-12-14T11:54:19.648815,(capital + log((avg_loss + 1.0430893)/avg_loss))*(-4.61980399095627*avg_loss + sqrt(avg_win) + 0.16394761*win_rate),0.8227582871700904,19,79.1,False,,,risk

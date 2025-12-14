@@ -1,0 +1,722 @@
+[
+  {
+    "date": "2024-08-01",
+    "timestamp": 1722466800,
+    "price_usd": 1816.61,
+    "volume_24h": 1772186036.34,
+    "volatility_7d": 0.5436,
+    "volatility_30d": 0.4202
+  },
+  {
+    "date": "2024-08-02",
+    "timestamp": 1722553200,
+    "price_usd": 1810.44,
+    "volume_24h": 1649270277.38,
+    "volatility_7d": 0.4491,
+    "volatility_30d": 0.5074
+  },
+  {
+    "date": "2024-08-03",
+    "timestamp": 1722639600,
+    "price_usd": 1738.03,
+    "volume_24h": 814768530.29,
+    "volatility_7d": 0.4877,
+    "volatility_30d": 0.7065
+  },
+  {
+    "date": "2024-08-04",
+    "timestamp": 1722726000,
+    "price_usd": 1694.12,
+    "volume_24h": 1506686062.94,
+    "volatility_7d": 0.4375,
+    "volatility_30d": 0.6659
+  },
+  {
+    "date": "2024-08-05",
+    "timestamp": 1722812400,
+    "price_usd": 1814.04,
+    "volume_24h": 1339438645.33,
+    "volatility_7d": 0.6001,
+    "volatility_30d": 0.7
+  },
+  {
+    "date": "2024-08-06",
+    "timestamp": 1722898800,
+    "price_usd": 1790.72,
+    "volume_24h": 1914916728.11,
+    "volatility_7d": 0.5152,
+    "volatility_30d": 0.3036
+  },
+  {
+    "date": "2024-08-07",
+    "timestamp": 1722985200,
+    "price_usd": 1842.49,
+    "volume_24h": 1838364657.08,
+    "volatility_7d": 0.4032,
+    "volatility_30d": 0.5337
+  },
+  {
+    "date": "2024-08-08",
+    "timestamp": 1723071600,
+    "price_usd": 1906.98,
+    "volume_24h": 575684015.89,
+    "volatility_7d": 0.4026,
+    "volatility_30d": 0.6067
+  },
+  {
+    "date": "2024-08-09",
+    "timestamp": 1723158000,
+    "price_usd": 1943.74,
+    "volume_24h": 1836913841.88,
+    "volatility_7d": 0.2923,
+    "volatility_30d": 0.3275
+  },
+  {
+    "date": "2024-08-10",
+    "timestamp": 1723244400,
+    "price_usd": 1948.7,
+    "volume_24h": 998498143.45,
+    "volatility_7d": 0.5309,
+    "volatility_30d": 0.8694
+  },
+  {
+    "date": "2024-08-11",
+    "timestamp": 1723330800,
+    "price_usd": 1933.44,
+    "volume_24h": 1884175987.05,
+    "volatility_7d": 0.4676,
+    "volatility_30d": 0.292
+  },
+  {
+    "date": "2024-08-12",
+    "timestamp": 1723417200,
+    "price_usd": 2023.93,
+    "volume_24h": 1547899113.61,
+    "volatility_7d": 0.5559,
+    "volatility_30d": 0.6489
+  },
+  {
+    "date": "2024-08-13",
+    "timestamp": 1723503600,
+    "price_usd": 1925.13,
+    "volume_24h": 1205818812.16,
+    "volatility_7d": 0.529,
+    "volatility_30d": 0.5139
+  },
+  {
+    "date": "2024-08-14",
+    "timestamp": 1723590000,
+    "price_usd": 1913.58,
+    "volume_24h": 1045174018.21,
+    "volatility_7d": 0.5862,
+    "volatility_30d": 0.9579
+  },
+  {
+    "date": "2024-08-15",
+    "timestamp": 1723676400,
+    "price_usd": 1998.81,
+    "volume_24h": 987141632.88,
+    "volatility_7d": 0.395,
+    "volatility_30d": 0.5558
+  },
+  {
+    "date": "2024-08-16",
+    "timestamp": 1723762800,
+    "price_usd": 2064.7,
+    "volume_24h": 1768649393.74,
+    "volatility_7d": 0.422,
+    "volatility_30d": 0.7314
+  },
+  {
+    "date": "2024-08-17",
+    "timestamp": 1723849200,
+    "price_usd": 2013.54,
+    "volume_24h": 1108528973.36,
+    "volatility_7d": 0.4341,
+    "volatility_30d": 0.4572
+  },
+  {
+    "date": "2024-08-18",
+    "timestamp": 1723935600,
+    "price_usd": 2002.31,
+    "volume_24h": 953177189.82,
+    "volatility_7d": 0.2555,
+    "volatility_30d": 0.6149
+  },
+  {
+    "date": "2024-08-19",
+    "timestamp": 1724022000,
+    "price_usd": 2052.17,
+    "volume_24h": 738530434.38,
+    "volatility_7d": 0.3949,
+    "volatility_30d": 0.5582
+  },
+  {
+    "date": "2024-08-20",
+    "timestamp": 1724108400,
+    "price_usd": 2155.98,
+    "volume_24h": 1146722746.47,
+    "volatility_7d": 0.6426,
+    "volatility_30d": 0.5179
+  },
+  {
+    "date": "2024-08-21",
+    "timestamp": 1724194800,
+    "price_usd": 2225.43,
+    "volume_24h": 759628184.09,
+    "volatility_7d": 0.331,
+    "volatility_30d": 0.263
+  },
+  {
+    "date": "2024-08-22",
+    "timestamp": 1724281200,
+    "price_usd": 2096.35,
+    "volume_24h": 671484290.72,
+    "volatility_7d": 0.3404,
+    "volatility_30d": 0.4493
+  },
+  {
+    "date": "2024-08-23",
+    "timestamp": 1724367600,
+    "price_usd": 2158.46,
+    "volume_24h": 962053585.3,
+    "volatility_7d": 0.2819,
+    "volatility_30d": 0.7007
+  },
+  {
+    "date": "2024-08-24",
+    "timestamp": 1724454000,
+    "price_usd": 2071.15,
+    "volume_24h": 1729798593.14,
+    "volatility_7d": 0.3491,
+    "volatility_30d": 0.8045
+  },
+  {
+    "date": "2024-08-25",
+    "timestamp": 1724540400,
+    "price_usd": 2105.13,
+    "volume_24h": 708375106.24,
+    "volatility_7d": 0.2301,
+    "volatility_30d": 0.387
+  },
+  {
+    "date": "2024-08-26",
+    "timestamp": 1724626800,
+    "price_usd": 2023.52,
+    "volume_24h": 1491322090.65,
+    "volatility_7d": 0.3309,
+    "volatility_30d": 0.5983
+  },
+  {
+    "date": "2024-08-27",
+    "timestamp": 1724713200,
+    "price_usd": 1967.21,
+    "volume_24h": 808492522.85,
+    "volatility_7d": 0.5409,
+    "volatility_30d": 0.4325
+  },
+  {
+    "date": "2024-08-28",
+    "timestamp": 1724799600,
+    "price_usd": 1893.71,
+    "volume_24h": 1877752433.83,
+    "volatility_7d": 0.67,
+    "volatility_30d": 0.4267
+  },
+  {
+    "date": "2024-08-29",
+    "timestamp": 1724886000,
+    "price_usd": 1859.21,
+    "volume_24h": 1374090466.74,
+    "volatility_7d": 0.3129,
+    "volatility_30d": 0.3959
+  },
+  {
+    "date": "2024-08-30",
+    "timestamp": 1724972400,
+    "price_usd": 1794.64,
+    "volume_24h": 593615837.8,
+    "volatility_7d": 0.7698,
+    "volatility_30d": 0.2446
+  },
+  {
+    "date": "2024-08-31",
+    "timestamp": 1725058800,
+    "price_usd": 1821.59,
+    "volume_24h": 1968044344.63,
+    "volatility_7d": 0.5443,
+    "volatility_30d": 0.6536
+  },
+  {
+    "date": "2024-09-01",
+    "timestamp": 1725145200,
+    "price_usd": 1855.54,
+    "volume_24h": 1385245811.88,
+    "volatility_7d": 0.2829,
+    "volatility_30d": 0.3266
+  },
+  {
+    "date": "2024-09-02",
+    "timestamp": 1725231600,
+    "price_usd": 1875.9,
+    "volume_24h": 816824112.04,
+    "volatility_7d": 0.488,
+    "volatility_30d": 0.647
+  },
+  {
+    "date": "2024-09-03",
+    "timestamp": 1725318000,
+    "price_usd": 1808.73,
+    "volume_24h": 1040431832.97,
+    "volatility_7d": 0.3426,
+    "volatility_30d": 0.632
+  },
+  {
+    "date": "2024-09-04",
+    "timestamp": 1725404400,
+    "price_usd": 1798.72,
+    "volume_24h": 517404128.67,
+    "volatility_7d": 0.4002,
+    "volatility_30d": 0.4604
+  },
+  {
+    "date": "2024-09-05",
+    "timestamp": 1725490800,
+    "price_usd": 1769.76,
+    "volume_24h": 1962462540.61,
+    "volatility_7d": 0.5036,
+    "volatility_30d": 0.6319
+  },
+  {
+    "date": "2024-09-06",
+    "timestamp": 1725577200,
+    "price_usd": 1686.51,
+    "volume_24h": 1840373703.71,
+    "volatility_7d": 0.3335,
+    "volatility_30d": 0.1153
+  },
+  {
+    "date": "2024-09-07",
+    "timestamp": 1725663600,
+    "price_usd": 1637.66,
+    "volume_24h": 1136187026.86,
+    "volatility_7d": 0.513,
+    "volatility_30d": 0.3717
+  },
+  {
+    "date": "2024-09-08",
+    "timestamp": 1725750000,
+    "price_usd": 1694.62,
+    "volume_24h": 511144987.25,
+    "volatility_7d": 0.207,
+    "volatility_30d": 0.5538
+  },
+  {
+    "date": "2024-09-09",
+    "timestamp": 1725836400,
+    "price_usd": 1655.72,
+    "volume_24h": 1889846677.48,
+    "volatility_7d": 0.4153,
+    "volatility_30d": 0.5259
+  },
+  {
+    "date": "2024-09-10",
+    "timestamp": 1725922800,
+    "price_usd": 1690.97,
+    "volume_24h": 1052867898.12,
+    "volatility_7d": 0.1145,
+    "volatility_30d": 0.3031
+  },
+  {
+    "date": "2024-09-11",
+    "timestamp": 1726009200,
+    "price_usd": 1757.92,
+    "volume_24h": 1289612080.72,
+    "volatility_7d": 0.6086,
+    "volatility_30d": 0.2923
+  },
+  {
+    "date": "2024-09-12",
+    "timestamp": 1726095600,
+    "price_usd": 1820.07,
+    "volume_24h": 1285035191.74,
+    "volatility_7d": 0.3633,
+    "volatility_30d": 0.4543
+  },
+  {
+    "date": "2024-09-13",
+    "timestamp": 1726182000,
+    "price_usd": 1746.4,
+    "volume_24h": 1503075708.58,
+    "volatility_7d": 0.3748,
+    "volatility_30d": 0.3221
+  },
+  {
+    "date": "2024-09-14",
+    "timestamp": 1726268400,
+    "price_usd": 1694.15,
+    "volume_24h": 1855377908.91,
+    "volatility_7d": 0.4284,
+    "volatility_30d": 0.5436
+  },
+  {
+    "date": "2024-09-15",
+    "timestamp": 1726354800,
+    "price_usd": 1693.7,
+    "volume_24h": 1360947952.42,
+    "volatility_7d": 0.3814,
+    "volatility_30d": 0.7127
+  },
+  {
+    "date": "2024-09-16",
+    "timestamp": 1726441200,
+    "price_usd": 1705.19,
+    "volume_24h": 751262244.23,
+    "volatility_7d": 0.3815,
+    "volatility_30d": 0.2961
+  },
+  {
+    "date": "2024-09-17",
+    "timestamp": 1726527600,
+    "price_usd": 1783.2,
+    "volume_24h": 890664704.83,
+    "volatility_7d": 0.3145,
+    "volatility_30d": 0.3592
+  },
+  {
+    "date": "2024-09-18",
+    "timestamp": 1726614000,
+    "price_usd": 1728.84,
+    "volume_24h": 937629813.06,
+    "volatility_7d": 0.4472,
+    "volatility_30d": 0.5031
+  },
+  {
+    "date": "2024-09-19",
+    "timestamp": 1726700400,
+    "price_usd": 1725.91,
+    "volume_24h": 615293389.39,
+    "volatility_7d": 0.4741,
+    "volatility_30d": 0.401
+  },
+  {
+    "date": "2024-09-20",
+    "timestamp": 1726786800,
+    "price_usd": 1691.39,
+    "volume_24h": 885433580.89,
+    "volatility_7d": 0.439,
+    "volatility_30d": 0.2782
+  },
+  {
+    "date": "2024-09-21",
+    "timestamp": 1726873200,
+    "price_usd": 1673.69,
+    "volume_24h": 1488733460.53,
+    "volatility_7d": 0.3863,
+    "volatility_30d": 0.6407
+  },
+  {
+    "date": "2024-09-22",
+    "timestamp": 1726959600,
+    "price_usd": 1643.44,
+    "volume_24h": 771213786.3,
+    "volatility_7d": 0.4117,
+    "volatility_30d": 0.5411
+  },
+  {
+    "date": "2024-09-23",
+    "timestamp": 1727046000,
+    "price_usd": 1676.62,
+    "volume_24h": 1393316137.8,
+    "volatility_7d": 0.5746,
+    "volatility_30d": 0.2067
+  },
+  {
+    "date": "2024-09-24",
+    "timestamp": 1727132400,
+    "price_usd": 1628.37,
+    "volume_24h": 1074750489.42,
+    "volatility_7d": 0.3215,
+    "volatility_30d": 0.2776
+  },
+  {
+    "date": "2024-09-25",
+    "timestamp": 1727218800,
+    "price_usd": 1697.92,
+    "volume_24h": 1762749552.86,
+    "volatility_7d": 0.5608,
+    "volatility_30d": 0.6025
+  },
+  {
+    "date": "2024-09-26",
+    "timestamp": 1727305200,
+    "price_usd": 1688.51,
+    "volume_24h": 1196022392.05,
+    "volatility_7d": 0.2813,
+    "volatility_30d": 0.5838
+  },
+  {
+    "date": "2024-09-27",
+    "timestamp": 1727391600,
+    "price_usd": 1691.48,
+    "volume_24h": 850491967.57,
+    "volatility_7d": 0.3895,
+    "volatility_30d": 0.3682
+  },
+  {
+    "date": "2024-09-28",
+    "timestamp": 1727478000,
+    "price_usd": 1755.42,
+    "volume_24h": 1152101494.5,
+    "volatility_7d": 0.3853,
+    "volatility_30d": 0.8968
+  },
+  {
+    "date": "2024-09-29",
+    "timestamp": 1727564400,
+    "price_usd": 1778.63,
+    "volume_24h": 1295380134.32,
+    "volatility_7d": 0.5153,
+    "volatility_30d": 0.5252
+  },
+  {
+    "date": "2024-09-30",
+    "timestamp": 1727650800,
+    "price_usd": 1756.14,
+    "volume_24h": 1766358924.27,
+    "volatility_7d": 0.2825,
+    "volatility_30d": 0.3641
+  },
+  {
+    "date": "2024-10-01",
+    "timestamp": 1727737200,
+    "price_usd": 1799.09,
+    "volume_24h": 1703474541.36,
+    "volatility_7d": 0.4433,
+    "volatility_30d": 0.8148
+  },
+  {
+    "date": "2024-10-02",
+    "timestamp": 1727823600,
+    "price_usd": 1796.09,
+    "volume_24h": 862695452.58,
+    "volatility_7d": 0.3287,
+    "volatility_30d": 0.2474
+  },
+  {
+    "date": "2024-10-03",
+    "timestamp": 1727910000,
+    "price_usd": 1762.72,
+    "volume_24h": 1989822270.5,
+    "volatility_7d": 0.4415,
+    "volatility_30d": 0.5769
+  },
+  {
+    "date": "2024-10-04",
+    "timestamp": 1727996400,
+    "price_usd": 1773.91,
+    "volume_24h": 1116873149.92,
+    "volatility_7d": 0.2247,
+    "volatility_30d": 0.5019
+  },
+  {
+    "date": "2024-10-05",
+    "timestamp": 1728082800,
+    "price_usd": 1829.2,
+    "volume_24h": 877844160.72,
+    "volatility_7d": 0.6537,
+    "volatility_30d": 0.609
+  },
+  {
+    "date": "2024-10-06",
+    "timestamp": 1728169200,
+    "price_usd": 1881.65,
+    "volume_24h": 1840950446.23,
+    "volatility_7d": 0.492,
+    "volatility_30d": 0.8147
+  },
+  {
+    "date": "2024-10-07",
+    "timestamp": 1728255600,
+    "price_usd": 2017.95,
+    "volume_24h": 629579561.09,
+    "volatility_7d": 0.3347,
+    "volatility_30d": 0.4313
+  },
+  {
+    "date": "2024-10-08",
+    "timestamp": 1728342000,
+    "price_usd": 1937.38,
+    "volume_24h": 1704800098.77,
+    "volatility_7d": 0.479,
+    "volatility_30d": 0.6389
+  },
+  {
+    "date": "2024-10-09",
+    "timestamp": 1728428400,
+    "price_usd": 1992.22,
+    "volume_24h": 1490716769.58,
+    "volatility_7d": 0.5966,
+    "volatility_30d": 0.6507
+  },
+  {
+    "date": "2024-10-10",
+    "timestamp": 1728514800,
+    "price_usd": 2027.26,
+    "volume_24h": 1538332237.71,
+    "volatility_7d": 0.3227,
+    "volatility_30d": 0.252
+  },
+  {
+    "date": "2024-10-11",
+    "timestamp": 1728601200,
+    "price_usd": 2135.52,
+    "volume_24h": 915931222.33,
+    "volatility_7d": 0.5875,
+    "volatility_30d": 0.6258
+  },
+  {
+    "date": "2024-10-12",
+    "timestamp": 1728687600,
+    "price_usd": 2155.04,
+    "volume_24h": 1719201295.8,
+    "volatility_7d": 0.4749,
+    "volatility_30d": 0.6182
+  },
+  {
+    "date": "2024-10-13",
+    "timestamp": 1728774000,
+    "price_usd": 2168.07,
+    "volume_24h": 1088951667.9,
+    "volatility_7d": 0.4061,
+    "volatility_30d": 0.4741
+  },
+  {
+    "date": "2024-10-14",
+    "timestamp": 1728860400,
+    "price_usd": 2132.67,
+    "volume_24h": 1420949436.46,
+    "volatility_7d": 0.5772,
+    "volatility_30d": 0.6837
+  },
+  {
+    "date": "2024-10-15",
+    "timestamp": 1728946800,
+    "price_usd": 2153.63,
+    "volume_24h": 605618490.7,
+    "volatility_7d": 0.4134,
+    "volatility_30d": 0.2068
+  },
+  {
+    "date": "2024-10-16",
+    "timestamp": 1729033200,
+    "price_usd": 2191.95,
+    "volume_24h": 1479297999.0,
+    "volatility_7d": 0.4917,
+    "volatility_30d": 0.5503
+  },
+  {
+    "date": "2024-10-17",
+    "timestamp": 1729119600,
+    "price_usd": 2210.58,
+    "volume_24h": 994746303.98,
+    "volatility_7d": 0.44,
+    "volatility_30d": 0.5609
+  },
+  {
+    "date": "2024-10-18",
+    "timestamp": 1729206000,
+    "price_usd": 2095.16,
+    "volume_24h": 1217209139.12,
+    "volatility_7d": 0.2508,
+    "volatility_30d": 0.7332
+  },
+  {
+    "date": "2024-10-19",
+    "timestamp": 1729292400,
+    "price_usd": 2080.24,
+    "volume_24h": 838770262.93,
+    "volatility_7d": 0.2785,
+    "volatility_30d": 0.753
+  },
+  {
+    "date": "2024-10-20",
+    "timestamp": 1729378800,
+    "price_usd": 2055.21,
+    "volume_24h": 1302956114.73,
+    "volatility_7d": 0.5849,
+    "volatility_30d": 0.5405
+  },
+  {
+    "date": "2024-10-21",
+    "timestamp": 1729465200,
+    "price_usd": 2076.7,
+    "volume_24h": 1995523694.44,
+    "volatility_7d": 0.3638,
+    "volatility_30d": 0.3978
+  },
+  {
+    "date": "2024-10-22",
+    "timestamp": 1729551600,
+    "price_usd": 2047.06,
+    "volume_24h": 1761772380.69,
+    "volatility_7d": 0.4581,
+    "volatility_30d": 0.3848
+  },
+  {
+    "date": "2024-10-23",
+    "timestamp": 1729638000,
+    "price_usd": 2133.44,
+    "volume_24h": 1951269440.92,
+    "volatility_7d": 0.3828,
+    "volatility_30d": 0.4073
+  },
+  {
+    "date": "2024-10-24",
+    "timestamp": 1729724400,
+    "price_usd": 2149.26,
+    "volume_24h": 1533263873.6,
+    "volatility_7d": 0.139,
+    "volatility_30d": 0.5852
+  },
+  {
+    "date": "2024-10-25",
+    "timestamp": 1729810800,
+    "price_usd": 2156.55,
+    "volume_24h": 553547432.94,
+    "volatility_7d": 0.9466,
+    "volatility_30d": 0.6564
+  },
+  {
+    "date": "2024-10-26",
+    "timestamp": 1729897200,
+    "price_usd": 2226.44,
+    "volume_24h": 1689108757.76,
+    "volatility_7d": 0.3404,
+    "volatility_30d": 0.3655
+  },
+  {
+    "date": "2024-10-27",
+    "timestamp": 1729983600,
+    "price_usd": 2243.94,
+    "volume_24h": 1949861209.79,
+    "volatility_7d": 0.5858,
+    "volatility_30d": 0.5688
+  },
+  {
+    "date": "2024-10-28",
+    "timestamp": 1730073600,
+    "price_usd": 2321.29,
+    "volume_24h": 1108261784.0,
+    "volatility_7d": 0.5021,
+    "volatility_30d": 0.8329
+  },
+  {
+    "date": "2024-10-29",
+    "timestamp": 1730160000,
+    "price_usd": 2247.51,
+    "volume_24h": 1805300044.35,
+    "volatility_7d": 0.2099,
+    "volatility_30d": 0.4751
+  }
+]

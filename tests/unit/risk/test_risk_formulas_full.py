@@ -3,7 +3,8 @@ import math
 
 import numpy as np
 import pytest
-from risk_formulas_30_full import (
+
+from hypatiax.tools.domains.finance.risk.risk_formulas_30_full import (
     DAYS_PER_YEAR,
     EPSILON,
     ComprehensiveRiskAnalyzer,

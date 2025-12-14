@@ -1,0 +1,2 @@
+apr_7d,fees_24h,name,pool_address,price,reserves,timestamp,tvl_usd,volume_24h
+0.187,377034.7,ETH/USDC 0.3%,0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc,1953.45,"{'eth': 45678.234, 'usdc': 89234567.89}",2024-11-01T12:00:00Z,178469135.78,125678234.56

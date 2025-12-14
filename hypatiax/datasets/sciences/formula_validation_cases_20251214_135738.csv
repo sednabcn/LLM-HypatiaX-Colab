@@ -1,0 +1,7 @@
+domain,expected_output,expected_valid,formula_latex,notes,test_x,test_y,test_z
+defi,3.92,True,\frac{x \cdot y}{z + 1},"Basic division, safe denominator",100,200,50
+finance,5.0,True,\sqrt{x^2 + y^2},"Pythagorean theorem, always positive",3,4,0
+finance,0.667,True,\frac{r - r_f}{\sigma},Sharpe ratio variant,0.12,0.02,0.15
+defi,,False,\frac{1}{x - y},Division by zero risk when x = y,100,99.99,0
+risk,,False,e^{x \cdot y},Exponential overflow,10,10,0
+defi,,False,\sqrt{x - y},Sqrt of negative,100,101,0

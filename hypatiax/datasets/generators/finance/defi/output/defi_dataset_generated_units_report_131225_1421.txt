@@ -1,0 +1,381 @@
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/datasets/generators/finance/defi/defi_dataset_generator_units.py
+2025-12-13 14:13:17,131 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing HybridDiscoverySystem v3.0
+2025-12-13 14:13:17,131 - hypatiax.tools.symbolic.hybrid_system - INFO - Domain: defi | Primary LLM: anthropic | Fallback: True
+2025-12-13 14:13:17,132 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing symbolic engine...
+2025-12-13 14:13:17,132 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing ensemble validator (domain=defi)...
+2025-12-13 14:13:17,917 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing LLM providers...
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+2025-12-13 14:13:18,017 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Anthropic Claude provider initialized
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2025-12-13 14:13:18,641 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Google Gemini provider initialized
+2025-12-13 14:13:18,738 - hypatiax.tools.symbolic.hybrid_system - INFO - Rich output formatter enabled
+2025-12-13 14:13:18,738 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ HybridDiscoverySystem initialized successfully
+
+######################################################################
+# DeFi Formula Discovery Dataset Generation
+# Timestamp: 2025-12-13T14:13:18.739367
+# Samples per formula: 100
+# Random seed: 42
+######################################################################
+
+======================================================================
+Generating Formula 1: Impermanent Loss
+======================================================================
+Generated 100 samples
+Price ratio range: [0.15, 9.87]
+IL range: [-0.4361, 0.0241]
+
+======================================================================
+WORKFLOW: Impermanent Loss in AMM Pool
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: (0.010202996*price_ratio - 0.11549498*log(price_ratio))*(log(price_ratio) + 0.2782728)
+   R² Score: 0.9945
+   Complexity: 13
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 75.4/100
+   Layer Scores:
+     ⚠ Symbolic: 67.0
+     ✓ Dimensional: 93.0
+     ⚠ Domain: 58.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 13
+
+[3/3] ⊗ Interpretation skipped (score 75.4 < 85.0)
+   Top recommendations:
+     • 🟡 VERIFY: Check dimensional analysis warnings
+     • 🟡 IMPROVE: Simplify to: (0.010202996*price_ratio - 0.11549498*log(price_ratio))*(log(price_ratio) + 0.2782728)
+     • 🟡 REVIEW: Address defi domain warnings
+
+======================================================================
+✅ Workflow complete. Result stored (1/100)
+======================================================================
+
+
+======================================================================
+Generating Formula 2: AMM Swap Output (Uniswap V2)
+======================================================================
+Generated 100 samples
+Amount in range: [1.51, 99.46]
+Output range: [0.95, 583.91]
+
+======================================================================
+WORKFLOW: Uniswap V2 Swap Output with 0.3% Fee
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: (-amount_in*reserve_out/(1.1193049*reserve_in) + reserve_out)*amount_in*0.99516803/reserve_in
+   R² Score: 1.0000
+   Complexity: 15
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 67.0/100
+   Layer Scores:
+     ⚠ Symbolic: 69.0
+     ⚠ Dimensional: 52.0
+     ⚠ Domain: 69.0
+     ✓ Numerical: 100.0
+
+   ⚠ Errors: 3 detected
+     - Invalid unit for 'amount_in': 'tokens' - 'tokens' is not defined in the unit registry
+     - Invalid unit for 'reserve_in': 'tokens' - 'tokens' is not defined in the unit registry
+     ... and 1 more
+
+   ℹ Warnings: 10
+
+[3/3] ⊗ Interpretation skipped (score 67.0 < 85.0)
+   Top recommendations:
+     • 🔴 FIX CRITICAL: Resolve dimensional inconsistencies before deployment
+     •   → Invalid unit for 'amount_in': 'tokens' - 'tokens' is not defined in the unit registry
+     •   → Invalid unit for 'reserve_in': 'tokens' - 'tokens' is not defined in the unit registry
+
+======================================================================
+✅ Workflow complete. Result stored (2/100)
+======================================================================
+
+
+======================================================================
+Generating Formula 3: Lending Pool Utilization Rate
+======================================================================
+Generated 100 samples
+Borrowed range: [51.82, 989.96]
+Supplied range: [114.30, 2519.24]
+Utilization range: [0.2927, 0.8867]
+
+======================================================================
+WORKFLOW: Lending Pool Utilization Rate
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: borrowed/supplied
+   R² Score: 0.9960
+   Complexity: 3
+
+[2/3] ✓ Validating expression across 4 layers...
+✓ Overall Score: 94.6/100
+   Layer Scores:
+     ✓ Symbolic: 98.0
+     ✓ Dimensional: 97.0
+     ✓ Domain: 87.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 4
+
+[3/3] 🤖 Interpreting with real LLM API...
+2025-12-13 14:15:30,210 - hypatiax.tools.symbolic.hybrid_system - INFO - 🤖 Interpreting with ANTHROPIC...
+2025-12-13 14:15:42,973 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-13 14:15:43,020 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Interpretation completed via ANTHROPIC in 12.81s
+✅ Interpretation complete via ANTHROPIC
+   Summary: This calculates the utilization rate of a lending pool, representing the percentage of supplied capital that is currently borrowed by users.
+   Suggested name: Pool Utilization Rate
+
+======================================================================
+✅ Workflow complete. Result stored (3/100)
+======================================================================
+
+
+
+╭──────────────────────────────────────────────────────── Discovery Report ────────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  Lending Pool Utilization Rate                                                                                                   │
+│  Domain: DEFI                                                                                                                    │
+│  Timestamp: 2025-12-13T14:15:43.020893                                                                                           │
+│  Samples: 100 | Features: 2                                                                                                      │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭──────────────────────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  borrowed/supplied                                                                                                               │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+  R² Score     0.9960
+  Complexity   3
+
+
+
+╭────────────────────────────────────────────────────── ✓ Validation Results ──────────────────────────────────────────────────────╮
+│  ✓ Overall Score: 94.6/100                                                                                                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  98.0 │   ✓    │
+│ Dimensional │  97.0 │   ✓    │
+│ Domain      │  87.0 │   ⚠    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+ℹ Warnings:
+  1. Check AMM constant product invariant preservation
+  2. Division by 'supplied' detected - ensure supplied ≠ 0
+  3. Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0
+  4. Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero
+
+💡 Recommendations:
+  1. 🟡 VERIFY: Check dimensional analysis warnings
+  2. 🟡 REVIEW: Address defi domain warnings
+
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 AI Interpretation                                                                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🔍 Interpretation
+This calculates the utilization rate of a lending pool, representing the percentage of supplied capital that is currently borrowed
+by users.
+
+⚠ Limitations
+[
+    'Assumes supplied amount is never zero (division by zero risk)',
+    'Does not account for reserved funds that may be locked and unavailable for borrowing',
+    'Ignores temporal dynamics and rate of change in utilization',
+    'May not reflect true liquidity risk if large portion of supply is from whale depositors',
+    'Does not consider collateral quality or liquidation risks that affect effective borrowing capacity'
+]
+
+======================================================================
+Generating Formula 4: Liquidity Pool Value
+======================================================================
+Generated 100 samples
+Reserve0 range: [102.35, 9993.60]
+Reserve1 range: [111.09, 9963.72]
+Value range: [659.14, 18979.06]
+
+======================================================================
+WORKFLOW: Constant Product Pool Total Value
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: 2.00016866133259*sqrt(reserve0*reserve1)
+   R² Score: 1.0000
+   Complexity: 6
+
+[2/3] ✓ Validating expression across 4 layers...
+✓ Overall Score: 90.7/100
+   Layer Scores:
+     ✓ Symbolic: 98.0
+     ✓ Dimensional: 92.0
+     ✓ Domain: 79.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 7
+
+[3/3] 🤖 Interpreting with real LLM API...
+2025-12-13 14:16:07,699 - hypatiax.tools.symbolic.hybrid_system - INFO - 🤖 Interpreting with ANTHROPIC...
+2025-12-13 14:16:20,678 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-13 14:16:20,681 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Interpretation completed via ANTHROPIC in 12.98s
+✅ Interpretation complete via ANTHROPIC
+   Summary: This expression calculates a scaled version of the geometric mean of two token reserves, representing approximately twice the constant product invaria...
+   Suggested name: Scaled Geometric Liquidity Invariant
+
+======================================================================
+✅ Workflow complete. Result stored (4/100)
+======================================================================
+
+
+
+╭──────────────────────────────────────────────────────── Discovery Report ────────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  Constant Product Pool Total Value                                                                                               │
+│  Domain: DEFI                                                                                                                    │
+│  Timestamp: 2025-12-13T14:16:20.681904                                                                                           │
+│  Samples: 100 | Features: 2                                                                                                      │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭──────────────────────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  2.00016866133259*sqrt(reserve0*reserve1)                                                                                        │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+  R² Score     1.0000
+  Complexity   6
+
+
+
+╭────────────────────────────────────────────────────── ✓ Validation Results ──────────────────────────────────────────────────────╮
+│  ✓ Overall Score: 90.7/100                                                                                                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  98.0 │   ✓    │
+│ Dimensional │  92.0 │   ✓    │
+│ Domain      │  79.0 │   ⚠    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+ℹ Warnings:
+  1. Check AMM constant product invariant preservation
+  2. Multiplication of variables detected - verify dimensional consistency
+  3. Square root detected - ensure all arguments are non-negative
+  4. Variable 'reserve' should be positive - add validation
+  5. Variable 'reserve' must be strictly positive (> 0). Add validation: assert reserve > 0
+  ... and 2 more
+
+💡 Recommendations:
+  1. 🟡 VERIFY: Check dimensional analysis warnings
+  2. 🟡 REVIEW: Address defi domain warnings
+
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 AI Interpretation                                                                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🔍 Interpretation
+This expression calculates a scaled version of the geometric mean of two token reserves, representing approximately twice the
+constant product invariant used in automated market makers (AMMs).
+
+⚠ Limitations
+[
+    'Assumes both reserves are positive and non-zero, breaks down if either reserve approaches zero',
+    'Does not account for token price volatility or correlation between the paired assets',
+    'The scaling factor may be specific to particular market conditions or fee structures',
+    'Geometric mean can be sensitive to extreme ratios between reserve amounts',
+    'May not accurately reflect liquidity for highly imbalanced pools or during market stress'
+]
+2025-12-13 14:16:20,761 - hypatiax.tools.symbolic.hybrid_system - INFO - Exported 4 results to hypatiax/data/finance/defi/defi_formulas_20251213_141620.json
+✅ Exported 4 results to hypatiax/data/finance/defi/defi_formulas_20251213_141620.json
+2025-12-13 14:16:20,763 - hypatiax.tools.symbolic.hybrid_system - INFO - Exported 4 results to hypatiax/data/finance/defi/defi_summary_20251213_141620.csv
+✅ Exported 4 results to hypatiax/data/finance/defi/defi_summary_20251213_141620.csv
+
+======================================================================
+FINAL SUMMARY
+======================================================================
+
+Total formulas: 4
+Valid formulas: 2
+Invalid formulas: 2
+Success rate: 50.0%
+Average R² score: 0.9976
+Average validation score: 81.9/100
+
+Individual Results:
+----------------------------------------------------------------------
+
+1. Impermanent Loss in AMM Pool
+   Expression: (0.010202996*price_ratio - 0.11549498*log(price_ratio))*(log(price_ratio) + 0.2782728)
+   R² Score: 0.9945
+   Validation: ✗ 75.4/100
+
+2. Uniswap V2 Swap Output with 0.3% Fee
+   Expression: (-amount_in*reserve_out/(1.1193049*reserve_in) + reserve_out)*amount_in*0.99516803/reserve_in
+   R² Score: 1.0000
+   Validation: ✗ 67.0/100
+   Errors: 3
+     - Invalid unit for 'amount_in': 'tokens' - 'tokens' is not defined in the unit registry
+     - Invalid unit for 'reserve_in': 'tokens' - 'tokens' is not defined in the unit registry
+
+3. Lending Pool Utilization Rate
+   Expression: borrowed/supplied
+   R² Score: 0.9960
+   Validation: ✓ 94.6/100
+
+4. Constant Product Pool Total Value
+   Expression: 2.00016866133259*sqrt(reserve0*reserve1)
+   R² Score: 1.0000
+   Validation: ✓ 90.7/100
+
+======================================================================
+
+✓ Complete! Results saved to:
+  JSON: hypatiax/data/finance/defi/defi_formulas_20251213_141620.json
+  CSV:  hypatiax/data/finance/defi/defi_summary_20251213_141620.csv

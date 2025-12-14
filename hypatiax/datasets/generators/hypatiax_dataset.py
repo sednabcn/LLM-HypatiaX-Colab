@@ -397,27 +397,47 @@ class HypatiaXDatasetGenerator:
 
         return trades
 
-    def save_datasets(self, output_dir: str = "./datasets/"):
-        """Save all datasets to files"""
+    def save_datasets(self, output_dir: str = "hypatiax/data/datasets/"):
+        """Save all datasets to files - FIXED VERSION"""
         import os
+        from datetime import datetime
 
         os.makedirs(output_dir, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
         datasets = self.generate_all_datasets()
 
         for name, data in datasets.items():
             # Save as JSON
-            json_path = f"{output_dir}{name}.json"
-            with open(json_path, "w") as f:
+            json_path = f"{output_dir}{name}_{timestamp}.json"
+            with open(json_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
 
             # Save as CSV if list of dicts
             if isinstance(data, list) and len(data) > 0 and isinstance(data[0], dict):
-                csv_path = f"{output_dir}{name}.csv"
-                with open(csv_path, "w", newline="") as f:
-                    writer = csv.DictWriter(f, fieldnames=data[0].keys())
-                    writer.writeheader()
-                    writer.writerows(data)
+                try:
+                    csv_path = f"{output_dir}{name}_{timestamp}.csv"
+
+                    # CRITICAL FIX: Collect ALL unique keys from ALL dictionaries
+                    all_keys = set()
+                    for item in data:
+                        all_keys.update(item.keys())
+
+                    # Sort for consistent column order
+                    fieldnames = sorted(list(all_keys))
+
+                    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+                        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+                        writer.writeheader()
+
+                        # Write rows, filling missing fields with empty string
+                        for row in data:
+                            full_row = {key: row.get(key, "") for key in fieldnames}
+                            writer.writerow(full_row)
+
+                    print(f"  ✅ CSV: {csv_path}")
+                except Exception as e:
+                    print(f"  ⚠️ CSV failed for {name}: {e}")
 
         print(f"✅ Datasets saved to {output_dir}")
         print(f"   Generated: {', '.join(datasets.keys())}")

@@ -1,48 +1,53 @@
 #!/usr/bin/env python3
 """
 HypatiaX Complete Dataset Generator
-Generates comprehensive datasets for DeFi formula testing and validation
+====================================
+Generates comprehensive datasets for DeFi formula testing and validation:
+  - Historical price data
+  - Uniswap pool simulations
+  - Impermanent loss scenarios
+  - Formula validation cases
+  - Risk scoring examples
 """
 
 import csv
 import json
 import math
+import os
 import random
 from datetime import datetime, timedelta
 from typing import Any, Dict, List
 
 
 class HypatiaXDatasetGenerator:
-    """
-    Generates datasets for:
-    1. Formula validation testing
-    2. Uniswap pool simulations
-    3. Impermanent loss scenarios
-    4. Historical price data
-    5. Risk scoring test cases
-    """
+    """Generate datasets for DeFi formula testing and validation."""
 
-    def __init__(self, seed: int = 42):
+    def __init__(self, seed: int = 42, output_dir: str = "datasets"):
+        """
+        Initialize the dataset generator.
+
+        Args:
+            seed: Random seed for reproducibility
+            output_dir: Directory to save generated datasets
+        """
         random.seed(seed)
+        self.seed = seed
+        self.output_dir = output_dir
         self.start_date = datetime(2024, 8, 1)
-
-    def generate_all_datasets(self) -> Dict[str, Any]:
-        """Generate all datasets needed for the 7-day plan"""
-        return {
-            "historical_prices": self.generate_historical_prices(),
-            "uniswap_scenarios": self.generate_uniswap_scenarios(),
-            "il_test_cases": self.generate_il_test_cases(),
-            "formula_validation_cases": self.generate_formula_validation_cases(),
-            "risk_scoring_examples": self.generate_risk_scoring_examples(),
-            "ner_training_data": self.generate_ner_training_data(),
-            "real_pool_snapshots": self.generate_real_pool_snapshots(),
-        }
+        os.makedirs(output_dir, exist_ok=True)
 
     def generate_historical_prices(self, days: int = 90) -> List[Dict]:
         """
-        Generate realistic historical price data for ETH/USDC
-        Simulates actual market conditions with trends and volatility
+        Generate realistic historical price data for ETH/USDC.
+        Simulates actual market conditions with trends and volatility.
+
+        Args:
+            days: Number of days of historical data
         """
+        print("\n" + "=" * 70)
+        print(f"Generating Historical Prices ({days} days)")
+        print("=" * 70)
+
         prices = []
         current_price = 1800.0  # Starting ETH price
 
@@ -73,13 +78,18 @@ class HypatiaXDatasetGenerator:
                 }
             )
 
+        print(f"✅ Generated {len(prices)} historical price records")
         return prices
 
     def generate_uniswap_scenarios(self) -> List[Dict]:
         """
-        Generate test scenarios for Uniswap pool simulations
-        Covers various market conditions and edge cases
+        Generate test scenarios for Uniswap pool simulations.
+        Covers various market conditions and edge cases.
         """
+        print("\n" + "=" * 70)
+        print("Generating Uniswap Scenarios")
+        print("=" * 70)
+
         scenarios = []
 
         # Scenario 1: Stable market
@@ -87,13 +97,14 @@ class HypatiaXDatasetGenerator:
             {
                 "name": "Stable Market",
                 "description": "Price changes ±5% over 30 days",
-                "initial_reserves": {"eth": 100, "usdc": 180000},
+                "initial_eth": 100,
+                "initial_usdc": 180000,
                 "initial_price": 1800,
                 "final_price": 1890,
                 "fee_rate": 0.003,
                 "days": 30,
                 "expected_il_percent": -0.31,
-                "trades": self._generate_trades(30, 1800, 1890),
+                "trade_count": 150,
             }
         )
 
@@ -102,13 +113,14 @@ class HypatiaXDatasetGenerator:
             {
                 "name": "Bull Market",
                 "description": "ETH price increases 50%",
-                "initial_reserves": {"eth": 100, "usdc": 180000},
+                "initial_eth": 100,
+                "initial_usdc": 180000,
                 "initial_price": 1800,
                 "final_price": 2700,
                 "fee_rate": 0.003,
                 "days": 60,
                 "expected_il_percent": -5.72,
-                "trades": self._generate_trades(60, 1800, 2700),
+                "trade_count": 300,
             }
         )
 
@@ -117,13 +129,14 @@ class HypatiaXDatasetGenerator:
             {
                 "name": "Bear Market",
                 "description": "ETH price decreases 40%",
-                "initial_reserves": {"eth": 100, "usdc": 180000},
+                "initial_eth": 100,
+                "initial_usdc": 180000,
                 "initial_price": 1800,
                 "final_price": 1080,
                 "fee_rate": 0.003,
                 "days": 45,
                 "expected_il_percent": -5.72,
-                "trades": self._generate_trades(45, 1800, 1080),
+                "trade_count": 225,
             }
         )
 
@@ -132,13 +145,14 @@ class HypatiaXDatasetGenerator:
             {
                 "name": "High Volatility",
                 "description": "Price swings ±30% multiple times",
-                "initial_reserves": {"eth": 100, "usdc": 180000},
+                "initial_eth": 100,
+                "initial_usdc": 180000,
                 "initial_price": 1800,
                 "final_price": 1800,
                 "fee_rate": 0.003,
                 "days": 30,
                 "expected_il_percent": 0.0,
-                "trades": self._generate_volatile_trades(30, 1800),
+                "trade_count": 450,
             }
         )
 
@@ -147,21 +161,29 @@ class HypatiaXDatasetGenerator:
             {
                 "name": "Whale Trade",
                 "description": "Single large trade impacts pool significantly",
-                "initial_reserves": {"eth": 100, "usdc": 180000},
+                "initial_eth": 100,
+                "initial_usdc": 180000,
                 "initial_price": 1800,
-                "trade_size_usdc": 50000,
-                "expected_price_impact": 2.8,
-                "expected_slippage": 0.028,
+                "final_price": 1850,
+                "fee_rate": 0.003,
+                "days": 1,
+                "expected_il_percent": -0.08,
+                "trade_count": 1,
             }
         )
 
+        print(f"✅ Generated {len(scenarios)} Uniswap scenarios")
         return scenarios
 
     def generate_il_test_cases(self) -> List[Dict]:
         """
-        Generate comprehensive IL calculation test cases
-        For validation of formula implementations
+        Generate comprehensive IL calculation test cases.
+        For validation of formula implementations.
         """
+        print("\n" + "=" * 70)
+        print("Generating IL Test Cases")
+        print("=" * 70)
+
         test_cases = []
 
         # Test case template
@@ -180,20 +202,26 @@ class HypatiaXDatasetGenerator:
                         "initial_price": initial,
                         "final_price": final,
                         "price_ratio": ratio,
-                        "initial_reserves": {"eth": 100, "usdc": 100 * initial},
+                        "initial_eth": 100,
+                        "initial_usdc": 100 * initial,
                         "expected_il_percent": round(il_percent, 4),
                         "hodl_value_usd": 100 * final + 100 * initial,
-                        "lp_value_usd": 200 * math.sqrt(initial * final),
+                        "lp_value_usd": round(200 * math.sqrt(initial * final), 2),
                     }
                 )
 
+        print(f"✅ Generated {len(test_cases)} IL test cases")
         return test_cases
 
     def generate_formula_validation_cases(self) -> List[Dict]:
         """
-        Generate test cases for symbolic validation
+        Generate test cases for symbolic validation.
         Tests edge cases, numerical stability, etc.
         """
+        print("\n" + "=" * 70)
+        print("Generating Formula Validation Cases")
+        print("=" * 70)
+
         cases = []
 
         # Valid formulas
@@ -203,7 +231,9 @@ class HypatiaXDatasetGenerator:
                     "formula_latex": r"\frac{x \cdot y}{z + 1}",
                     "domain": "defi",
                     "expected_valid": True,
-                    "test_inputs": {"x": 100, "y": 200, "z": 50},
+                    "test_x": 100,
+                    "test_y": 200,
+                    "test_z": 50,
                     "expected_output": 3.92,
                     "notes": "Basic division, safe denominator",
                 },
@@ -211,7 +241,9 @@ class HypatiaXDatasetGenerator:
                     "formula_latex": r"\sqrt{x^2 + y^2}",
                     "domain": "finance",
                     "expected_valid": True,
-                    "test_inputs": {"x": 3, "y": 4},
+                    "test_x": 3,
+                    "test_y": 4,
+                    "test_z": 0,
                     "expected_output": 5.0,
                     "notes": "Pythagorean theorem, always positive",
                 },
@@ -219,7 +251,9 @@ class HypatiaXDatasetGenerator:
                     "formula_latex": r"\frac{r - r_f}{\sigma}",
                     "domain": "finance",
                     "expected_valid": True,
-                    "test_inputs": {"r": 0.12, "r_f": 0.02, "sigma": 0.15},
+                    "test_x": 0.12,
+                    "test_y": 0.02,
+                    "test_z": 0.15,
                     "expected_output": 0.667,
                     "notes": "Sharpe ratio variant",
                 },
@@ -233,35 +267,44 @@ class HypatiaXDatasetGenerator:
                     "formula_latex": r"\frac{1}{x - y}",
                     "domain": "defi",
                     "expected_valid": False,
-                    "warning": "Division by zero risk when x = y",
-                    "test_inputs": {"x": 100, "y": 99.99},
-                    "notes": "Dangerous denominator",
+                    "test_x": 100,
+                    "test_y": 99.99,
+                    "test_z": 0,
+                    "expected_output": None,
+                    "notes": "Division by zero risk when x = y",
                 },
                 {
                     "formula_latex": r"e^{x \cdot y}",
                     "domain": "risk",
                     "expected_valid": False,
-                    "warning": "Overflow risk for large inputs",
-                    "test_inputs": {"x": 10, "y": 10},
+                    "test_x": 10,
+                    "test_y": 10,
+                    "test_z": 0,
+                    "expected_output": None,
                     "notes": "Exponential overflow",
                 },
                 {
                     "formula_latex": r"\sqrt{x - y}",
                     "domain": "defi",
                     "expected_valid": False,
-                    "warning": "Negative input risk",
-                    "test_inputs": {"x": 100, "y": 101},
+                    "test_x": 100,
+                    "test_y": 101,
+                    "test_z": 0,
+                    "expected_output": None,
                     "notes": "Sqrt of negative",
                 },
             ]
         )
 
+        print(f"✅ Generated {len(cases)} formula validation cases")
         return cases
 
     def generate_risk_scoring_examples(self) -> List[Dict]:
-        """
-        Generate examples for risk scoring system testing
-        """
+        """Generate examples for risk scoring system testing."""
+        print("\n" + "=" * 70)
+        print("Generating Risk Scoring Examples")
+        print("=" * 70)
+
         examples = []
 
         risk_profiles = [
@@ -294,48 +337,19 @@ class HypatiaXDatasetGenerator:
             },
         ]
 
-        for profile in risk_profiles:
-            examples.append(profile)
-
+        examples.extend(risk_profiles)
+        print(f"✅ Generated {len(examples)} risk scoring examples")
         return examples
-
-    def generate_ner_training_data(self) -> List[Dict]:
-        """
-        Generate training data for NER (Named Entity Recognition)
-        For formula requirement extraction
-        """
-        training_examples = [
-            {
-                "text": "Calculate impermanent loss for ETH/USDC pool",
-                "entities": {"metric": ["impermanent loss"], "token_pair": ["ETH/USDC"], "pool_type": ["uniswap_v2"]},
-            },
-            {
-                "text": "What is the price impact of swapping 1000 USDC for ETH?",
-                "entities": {
-                    "metric": ["price impact"],
-                    "amount": ["1000"],
-                    "token_in": ["USDC"],
-                    "token_out": ["ETH"],
-                },
-            },
-            {
-                "text": "Risk score for volatile altcoin liquidity provision",
-                "entities": {
-                    "metric": ["risk score"],
-                    "characteristic": ["volatile"],
-                    "asset_type": ["altcoin"],
-                    "activity": ["liquidity provision"],
-                },
-            },
-        ]
-
-        return training_examples
 
     def generate_real_pool_snapshots(self) -> List[Dict]:
         """
-        Generate realistic pool snapshots for testing
-        Based on actual Uniswap v2 ETH/USDC data patterns
+        Generate realistic pool snapshots for testing.
+        Based on actual Uniswap v2 ETH/USDC data patterns.
         """
+        print("\n" + "=" * 70)
+        print("Generating Real Pool Snapshots")
+        print("=" * 70)
+
         snapshots = []
 
         # Popular pool states
@@ -344,7 +358,8 @@ class HypatiaXDatasetGenerator:
                 "pool_address": "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc",
                 "name": "ETH/USDC 0.3%",
                 "timestamp": "2024-11-01T12:00:00Z",
-                "reserves": {"eth": 45678.234, "usdc": 89234567.89},
+                "eth_reserves": 45678.234,
+                "usdc_reserves": 89234567.89,
                 "price": 1953.45,
                 "tvl_usd": 178469135.78,
                 "volume_24h": 125678234.56,
@@ -353,183 +368,118 @@ class HypatiaXDatasetGenerator:
             }
         )
 
+        print(f"✅ Generated {len(snapshots)} pool snapshots")
         return snapshots
 
-    def _generate_trades(self, days: int, start_price: float, end_price: float) -> List[Dict]:
-        """Generate realistic trade sequence"""
-        trades = []
-        price_path = [start_price + (end_price - start_price) * i / days for i in range(days + 1)]
+    def save_datasets(self):
+        """Save all datasets to files."""
+        print("\n" + "#" * 70)
+        print("# SAVING DATASETS")
+        print(f"# Output directory: {self.output_dir}")
+        print(f"# Timestamp: {datetime.now().isoformat()}")
+        print("#" * 70)
 
-        for day, price in enumerate(price_path):
-            # 5-10 trades per day
-            n_trades = random.randint(5, 10)
-            for _ in range(n_trades):
-                trades.append(
-                    {
-                        "day": day,
-                        "amount_usd": round(random.uniform(1000, 50000), 2),
-                        "price": round(price * random.uniform(0.99, 1.01), 2),
-                        "direction": random.choice(["buy_eth", "sell_eth"]),
-                    }
-                )
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        saved_files = {}
 
-        return trades
-
-    def _generate_volatile_trades(self, days: int, base_price: float) -> List[Dict]:
-        """Generate volatile trading pattern"""
-        trades = []
-
-        for day in range(days):
-            # Price swings ±20%
-            swing = random.uniform(-0.2, 0.2)
-            day_price = base_price * (1 + swing)
-
-            n_trades = random.randint(10, 20)
-            for _ in range(n_trades):
-                trades.append(
-                    {
-                        "day": day,
-                        "amount_usd": round(random.uniform(5000, 100000), 2),
-                        "price": round(day_price * random.uniform(0.95, 1.05), 2),
-                        "direction": random.choice(["buy_eth", "sell_eth"]),
-                    }
-                )
-
-        return trades
-
-    def save_datasets(self, output_dir: str = "./datasets/"):
-        """Save all datasets to files"""
-        import os
-
-        os.makedirs(output_dir, exist_ok=True)
-
-        datasets = self.generate_all_datasets()
+        # Generate all datasets
+        datasets = {
+            "historical_prices": self.generate_historical_prices(),
+            "uniswap_scenarios": self.generate_uniswap_scenarios(),
+            "il_test_cases": self.generate_il_test_cases(),
+            "formula_validation_cases": self.generate_formula_validation_cases(),
+            "risk_scoring_examples": self.generate_risk_scoring_examples(),
+            "real_pool_snapshots": self.generate_real_pool_snapshots(),
+        }
 
         for name, data in datasets.items():
             # Save as JSON
-            json_path = f"{output_dir}{name}.json"
-            with open(json_path, "w") as f:
+            json_path = os.path.join(self.output_dir, f"{name}_{timestamp}.json")
+            with open(json_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
 
-            # Save as CSV if list of dicts
+            saved_files[f"{name}_json"] = json_path
+
+            # Save as CSV if list of dicts with consistent keys
             if isinstance(data, list) and len(data) > 0 and isinstance(data[0], dict):
-                csv_path = f"{output_dir}{name}.csv"
-                with open(csv_path, "w", newline="") as f:
-                    writer = csv.DictWriter(f, fieldnames=data[0].keys())
-                    writer.writeheader()
-                    writer.writerows(data)
+                csv_path = os.path.join(self.output_dir, f"{name}_{timestamp}.csv")
+                try:
+                    # Get all unique keys from all records
+                    all_keys = set()
+                    for record in data:
+                        all_keys.update(record.keys())
 
-        print(f"✅ Datasets saved to {output_dir}")
-        print(f"   Generated: {', '.join(datasets.keys())}")
+                    fieldnames = sorted(all_keys)
+
+                    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+                        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+                        writer.writeheader()
+
+                        # Fill missing keys with empty strings
+                        for record in data:
+                            row = {key: record.get(key, "") for key in fieldnames}
+                            writer.writerow(row)
+
+                    saved_files[f"{name}_csv"] = csv_path
+                    print(f"✅ Saved CSV: {csv_path}")
+                except Exception as e:
+                    print(f"⚠️  Warning: Could not save {name} as CSV: {e}")
+
+        return saved_files
+
+    def print_summary(self):
+        """Print comprehensive summary."""
+        print("\n" + "=" * 70)
+        print("DATASET GENERATION SUMMARY")
+        print("=" * 70)
+
+        print(f"\nGenerated Datasets:")
+        print(f"  1. Historical Prices - 90 days of ETH/USDC data")
+        print(f"  2. Uniswap Scenarios - 5 market condition scenarios")
+        print(f"  3. IL Test Cases - 40 comprehensive test cases")
+        print(f"  4. Formula Validation - 6 validation cases")
+        print(f"  5. Risk Scoring - 3 risk profile examples")
+        print(f"  6. Pool Snapshots - Real pool data patterns")
+
+        print(f"\nOutput Format:")
+        print(f"  - JSON (programmatic use)")
+        print(f"  - CSV (Excel, visualization)")
+
+        print("=" * 70)
+
+    def run_all(self):
+        """Generate all datasets and save."""
+        print("\n" + "=" * 70)
+        print("HYPATIAX DATASET GENERATOR")
+        print("=" * 70)
+
+        # Save all datasets
+        saved_files = self.save_datasets()
+
+        # Print summary
+        self.print_summary()
+
+        return saved_files
 
 
-# Example usage
+def main():
+    """Main execution function."""
+    generator = HypatiaXDatasetGenerator(seed=42, output_dir="hypatiax/data/datasets")
+
+    # Generate and save all datasets
+    files = generator.run_all()
+
+    print(f"\n📁 Files saved:")
+    for name, path in files.items():
+        print(f"   {name}: {path}")
+
+
 if __name__ == "__main__":
-    generator = HypatiaXDatasetGenerator()
+    try:
+        main()
+        print("\n✅ Dataset generation completed successfully!\n")
+    except Exception as e:
+        print(f"\n❌ Error during dataset generation: {e}\n")
+        import traceback
 
-    # Generate and display sample
-    datasets = generator.generate_all_datasets()
-
-    print("=" * 80)
-    print("HYPATIAX DATASET GENERATOR")
-    print("=" * 80)
-
-    for name, data in datasets.items():
-        print(f"\n📊 {name.upper()}")
-        print(f"   Records: {len(data) if isinstance(data, list) else 'N/A'}")
-
-        if isinstance(data, list) and len(data) > 0:
-            print(f"   Sample: {json.dumps(data[0], indent=2)[:200]}...")
-
-    # Save to files
-    generator.save_datasets()
-
-    print("\n" + "=" * 80)
-    print("✅ COMPLETE - All datasets generated and saved")
-    print("=" * 80)
-
-
-"""
-I've created a comprehensive dataset generator for your HypatiaX DeFi implementation! Here's what it includes:
-📊 7 Complete Datasets
-1. Historical Prices (90 days)
-
-ETH/USDC price data with realistic trends and volatility
-Includes volume, 7-day and 30-day volatility metrics
-Perfect for backtesting your IL calculator
-
-2. Uniswap Scenarios (5 scenarios)
-
-Stable market (±5% price change)
-Bull market (+50%)
-Bear market (-40%)
-High volatility (price swings)
-Whale trade (large single transaction)
-Each includes expected IL, trades, and outcomes
-
-3. IL Test Cases (40 test cases)
-
-Systematic testing across price ranges (1000-3000 USD)
-Price ratios from 0.5x to 2.0x
-Expected IL percentages for validation
-HODL vs LP value comparisons
-
-4. Formula Validation Cases
-
-Valid formulas: Safe, numerically stable examples
-Problematic formulas: Division by zero, overflow risks, negative sqrt
-Tests your symbolic validator thoroughly
-
-5. Risk Scoring Examples
-
-Conservative, Moderate, and Aggressive LP profiles
-Expected risk scores (0-100)
-Real-world parameter combinations
-
-6. NER Training Data
-
-Natural language queries with entity annotations
-For training your custom NER system
-Extracts: metrics, tokens, amounts, activities
-
-7. Real Pool Snapshots
-
-Based on actual Uniswap V2 ETH/USDC pool patterns
-TVL, volume, fees, APR data
-For realistic testing scenarios
-
-🎯 How to Use This
-For Tuesday (Day 1):
-python# Test your LLM provider with real scenarios
-from hypatiax_dataset import HypatiaXDatasetGenerator
-gen = HypatiaXDatasetGenerator()
-scenarios = gen.generate_uniswap_scenarios()
-# Feed scenarios[0] to your LLM for formula generation
-For Wednesday (Day 2):
-python# Validate formulas against test cases
-validation_cases = gen.generate_formula_validation_cases()
-# Run each through your SymbolicValidator
-For Thursday-Friday:
-python# Use historical data for backtesting
-prices = gen.generate_historical_prices()
-# Test IL calculator against each price point
-💾 File Export
-The generator saves everything as:
-
-JSON (for programmatic use)
-CSV (for Excel, visualization)
-
-Both formats in ./datasets/ directory.
-🚀 Key Features
-✅ Realistic data - Simulates actual market conditions
-✅ Edge cases - Tests numerical stability issues
-✅ Ground truth - Expected outputs for validation
-✅ Comprehensive - Covers all 7-day plan needs
-✅ Production-ready - Use for demos and client presentations
-Would you like me to also create:
-
-An Excel template with these datasets pre-loaded?
-Visualization scripts to chart the data?
-Additional test scenarios for specific DeFi protocols?
-RetryClaude can make mistakes. Please double-check responses. Sonnet 4.5
-"""
+        traceback.print_exc()

@@ -1,0 +1,4 @@
+# file: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/__init__.py
+# hypothesis_version: 6.148.7
+
+['core', 'custom_entities', 'custom_ner', 'data_spacy', 'datasets', 'mappings', 'models', 'patterns', 'scripts_', 'utils']

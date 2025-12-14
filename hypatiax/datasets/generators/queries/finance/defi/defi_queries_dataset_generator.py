@@ -304,14 +304,14 @@ class DeFiQueriesDataset:
         """Convert to DataFrame."""
         return pd.DataFrame(self.queries)
 
-    def save_csv(self, filename="defi_queries_280.csv"):
+    def save_csv(self, filename="hypatiax/datasets/generators/queries/finance/defi/defi_queries_280.csv"):
         """Save to CSV."""
         df = self.to_dataframe()
         df.to_csv(filename, index=False)
         print(f"✓ Saved CSV: {filename}")
         return filename
 
-    def save_json(self, filename="defi_queries_280.json"):
+    def save_json(self, filename="hypatiax/datasets/generators/queries/finance/defi/defi_queries_280.json"):
         """Save to JSON."""
         df = self.to_dataframe()
         df.to_json(filename, orient="records", indent=2)

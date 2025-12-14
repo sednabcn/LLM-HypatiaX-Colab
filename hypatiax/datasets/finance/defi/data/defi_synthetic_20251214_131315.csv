@@ -1,0 +1,41 @@
+Timestamp,Expression,R² Score,Complexity,Validation Score,Valid,Interpretation,Provider,Domain
+2025-12-14T12:10:08.925821,x1*x2*sqrt(x3),0.9963602842583339,6,93.1,True,This expression calculates a scaled product metric where two factors are multiplied and then adjuste,anthropic,defi
+2025-12-14T12:10:34.562074,0.7267755*log(log((x1/x2 + 1.1970667)**1.2387862)),0.9875759209208083,11,84.7,False,,,defi
+2025-12-14T12:10:58.150991,-4.3642616*x1 + (3.729515*x1 + 15.194069)*sqrt(x2/x3 + 1.2678049) - 28.421688 - 120.72686/x3,0.9968853436658223,24,82.6,False,,,defi
+2025-12-14T12:11:36.526460,(x1 + x2 - (x1 + x2 - x2/x3)/x3)/x3,0.9974078392138166,15,93.1,True,This expression calculates a weighted adjustment factor that applies progressive scaling to combined,anthropic,defi
+2025-12-14T12:12:15.397498,x1*log(x2 + 1.080171),0.9984358374741928,6,88.9,True,This expression calculates a logarithmically scaled financial metric where a numerator term is weigh,anthropic,defi
+2025-12-14T12:12:54.399822,x1*x2*sqrt(x3),0.9956628016839838,6,93.1,True,This formula calculates a composite metric that combines two multiplicative factors with a square-ro,anthropic,defi
+2025-12-14T12:13:18.078325,-x1 - x2 + 2.16464 + sqrt(x2*x3)*(2.16464*x1 + x2)/x3 + 1.0651472*(-x1 - 29.943504)/x3,0.979182840946363,26,81.1,False,,,defi
+2025-12-14T12:13:54.977039,x1*log(x2 + 1.0346043),0.9998793035475148,6,88.9,True,"This expression calculates a logarithmic scaling factor applied to a numerator term, where the scali",anthropic,defi
+2025-12-14T12:14:31.184739,x1*x2*sqrt(x3),0.9990864991463054,6,93.1,True,This formula calculates a composite financial metric by multiplying two factors and taking the squar,anthropic,defi
+2025-12-14T12:14:57.612316,sqrt((2.7555652*x1*(x2/x3 + 1.446501) + 2.7555652*x2 + 2.7555652*x2/x3 - 0.336083997623208)/x3) - 0.91178465,0.9945106258299207,24,81.8,False,,,defi
+2025-12-14T12:15:28.718922,log(-0.086795800806774*x1/x2 + sqrt(x1/x2) + 0.085744733867412 + 0.262423964540733/x1),0.9837643811721377,19,72.8,False,,,defi
+2025-12-14T12:16:18.807181,(x1/x2 + 0.9992603)/((x3 + 1.0887486)/x2)**1.006424,0.9967317406992213,13,92.5,True,This formula calculates a risk-adjusted return ratio where a normalized factor ratio is divided by a,anthropic,defi
+2025-12-14T12:16:56.375873,0.028500209*x1 + 0.027675798*x2 - 3.349647 + (50.639053 - log(x3**(-18.835085)))/x3,0.9881711982925843,18,84.1,False,,,defi
+2025-12-14T12:17:41.180191,sqrt(((x + 0.930595)/x)**(-2.1042037)) - 0.0010186813,0.9976450286048254,10,92.19999999999999,True,This expression calculates a scaled probability or risk metric that exhibits power-law decay behavio,anthropic,defi
+2025-12-14T12:18:14.009764,x1*2.149026/(x1 + x2)**1.0173104 - 0.9939338,0.9949884817684751,11,63.400000000000006,False,,,defi
+2025-12-14T12:18:54.769408,(x1 - 4.7256937)*sqrt((x2*sqrt(sqrt((0.7914548**x3)**(1/4)/x3)/x3))**1.514879),0.9987825033282294,20,78.7,False,,,defi
+2025-12-14T12:19:21.804949,-0.070831514459277*sqrt(x2) + 1.5920203*sqrt(exp(-2.0012467*log(x2)*log(x1*x2)/x1)) - 0.329312758217833,0.9937740078990555,22,70.1,False,,,defi
+2025-12-14T12:20:04.208710,exp(1.5099124 - 1.578214*(x2 + x3 - 1*(-0.09462639))/x1) + 0.21733865,0.9333223597977987,14,86.8,True,This expression calculates a risk-adjusted yield or pricing metric that exponentially decays based o,anthropic,defi
+2025-12-14T12:20:46.595934,((x + 0.8831457)/x)**(-1.111689),0.9929743516785733,7,97.0,True,This expression calculates a power-law scaling factor that decreases as the input variable x increas,anthropic,defi
+2025-12-14T12:21:12.243757,2.14497785536355*sqrt(1/x) - 1.1494796/x,0.9885839149632871,8,76.7,False,,,defi
+2025-12-14T12:21:47.194758,x1*x2*sqrt(x3),0.9988320616877803,6,93.1,True,This expression calculates a product metric where two factors are amplified by the square root of a ,anthropic,defi
+2025-12-14T12:22:32.943822,exp(exp(1.3184104 - (x2 - (-x3 - 1.5732285))/x1))*0.24393746,0.9716971499937518,13,85.6,True,This formula calculates an exponentially amplified risk or volatility measure that compounds based o,anthropic,defi
+2025-12-14T12:23:19.957012,((x/0.16334145)**0.47595492 - 1.3990612)/x,0.9969326655360502,9,97.0,True,This expression calculates a normalized rate or efficiency metric that exhibits diminishing returns ,anthropic,defi
+2025-12-14T12:24:03.558377,(2.2427611 - 0.8132081/x3)*((x1/x3)**0.9311086*(x2/2.2316344 + 1.1125121) - 1*1.5564628),0.9991752404982014,19,94.0,True,"This expression calculates a composite DeFi metric that combines two scaled factors (x1, x2) relativ",anthropic,defi
+2025-12-14T12:24:30.490564,0.5267083*log(0.3135506*x1/x2 + 0.517227686807271*sqrt(1/x2) + (x1 + 0.11676509)/x2) - 0.16592986382394*sqrt(x1*x2)/x2,0.9883681819100247,28,69.19999999999999,False,,,defi
+2025-12-14T12:25:10.003439,0.99229115/x,0.9946348836302215,3,97.0,True,"This expression calculates an inverse relationship with a scaling factor of approximately 0.992, rep",anthropic,defi
+2025-12-14T12:25:55.615811,0.9966549/x,0.9989986248143589,3,97.0,True,"This expression calculates an inverse relationship with a near-unity coefficient (0.9966549), repres",anthropic,defi
+2025-12-14T12:26:28.487322,log(1.5618623*log(log((x1/x2)**1.3085796 + 1.1986554) + 1.1214409)),0.9875865366262863,14,82.9,False,,,defi
+2025-12-14T12:26:54.638337,x1*x2*(x3 - exp((exp(1.5052397/x1) - 1.724583)/x3))/(x3*x3),0.9978041107475919,19,82.6,False,,,defi
+2025-12-14T12:27:46.059645,1.0048828/x,0.9974969861035191,3,97.0,True,"This expression calculates an inverse scaling factor with a small premium, representing a conversion",anthropic,defi
+2025-12-14T12:28:26.820409,0.99061537/x,0.9978568836217319,3,97.0,True,"This expression calculates an inverse relationship with a scaling factor of approximately 0.991, sug",anthropic,defi
+2025-12-14T12:29:08.506469,x1*(x2 - 0.6219179*x2/x3)/x3,0.9956475417288634,11,94.0,True,This formula calculates a scaled factor relationship where Factor 1 is adjusted by a proportional re,anthropic,defi
+2025-12-14T12:29:34.844640,1.5685207*sqrt(sqrt(x1/x3)*(2.69600059096333*x2/x3 - (-x1 + x3**(-6.0904427))/x3)) - 0.603912561433522,0.9905290154212664,23,73.69999999999999,False,,,defi
+2025-12-14T12:30:01.151040,0.0146429732771975 + (x1 + x2 + 0.100376956 - (x1 - sqrt(x2)*log(x2/x3) + x2)/x3)/x3,0.9995316519346271,25,72.19999999999999,False,,,defi
+2025-12-14T12:30:35.359725,sqrt(x1*x2),0.9976632166597839,4,92.5,True,"This expression calculates the geometric mean of a numerator and denominator term, representing a ba",anthropic,defi
+2025-12-14T12:31:17.752891,log(x + 1.0272744),0.998157288743674,4,90.4,True,"This expression calculates a logarithmic transformation of returns or yield rates, suggesting it mod",anthropic,defi
+2025-12-14T12:31:45.177568,sqrt(0.539218189416995/(1.244226 - exp(-0.58834773*x2/x1))**0.7258389 - 0.45306277928823),0.998541402372786,17,49.39999999999999,False,,,defi
+2025-12-14T12:32:26.711095,x1*x2*sqrt(x3),0.9988825690116222,6,93.1,True,This formula calculates a risk-adjusted product metric where two multiplicative factors are scaled b,anthropic,defi
+2025-12-14T12:33:09.064125,log(x + 1.0626638),0.9978566262631323,4,90.4,True,"This expression calculates a logarithmic transformation of returns or rates, adding approximately 6.",anthropic,defi
+2025-12-14T12:33:47.207235,sqrt(x),0.9967394179565632,2,96.1,True,"This expression calculates the square root of an input variable, representing a concave transformati",anthropic,defi

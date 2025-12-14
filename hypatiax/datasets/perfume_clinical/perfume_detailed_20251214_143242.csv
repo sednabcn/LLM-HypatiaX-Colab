@@ -1,0 +1,41 @@
+Scenario,Solution
+Calculate alcohol and water percentages for EDP with 18% fragrance and 2% fixatives,"FORMULA: Alcohol-Water Ratio Calculation
+Given:
+- Fragrance concentration: 18%
+- Fixatives: 2%
+- Fragrance type: Eau de Parfum (EDP)
+
+Step 1: Calculate remaining percentage
+Remaining = 100% - 18% - 2% = 80%
+
+Step 2: Apply EDP alcohol ratio (82% of remaining)
+Alcohol = 80% × 0.82 = 65.6%
+Water = 80% - 65.6% = 14.4%
+
+Step 3: Verify total
+18% + 2% + 65.6% + 14.4% = 100% ✓
+
+RESULT:
+- Fragrance oil: 18%
+- Fixatives: 2%
+- Alcohol (96%): 65.6%
+- Distilled water: 14.4%
+Total: 100%"
+Calculate batch quantities for 500ml perfume with 15% fragrance oil,"FORMULA: Batch Quantity Calculation
+Given:
+- Target batch: 500 mL
+- Fragrance: 15%, Alcohol: 70%, Water: 13%, Fixatives: 2%
+
+Step 1: Calculate volumes
+- Fragrance: 500 × 0.15 = 75 mL
+- Alcohol: 500 × 0.70 = 350 mL
+- Water: 500 × 0.13 = 65 mL
+- Fixatives: 500 × 0.02 = 10 mL
+
+Step 2: Convert to masses
+- Fragrance: 75 × 0.90 = 67.5 g
+- Alcohol: 350 × 0.789 = 276.2 g
+- Water: 65 × 1.00 = 65.0 g
+- Glycerin: 10 × 1.26 = 12.6 g
+
+RESULT: Total 421.3g for 500mL batch"

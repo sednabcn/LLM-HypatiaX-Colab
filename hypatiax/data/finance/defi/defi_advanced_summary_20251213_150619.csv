@@ -1,0 +1,11 @@
+Timestamp,Expression,R² Score,Complexity,Validation Score,Valid,Interpretation,Provider,Domain
+2025-12-13T15:00:21.189635,amount_in*(-amount_in + reserve_in)/(reserve_in*reserve_in) + 0.0029897057,0.9998619402579019,11,89.5,True,"This expression calculates the marginal price impact or slippage rate for a swap transaction, repres",anthropic,defi
+2025-12-13T15:01:05.123758,fee_apy**volatility*capital*0.82806605*exp(fee_apy)*risk_tolerance/volatility,0.981833291543936,14,75.69999999999999,False,,,defi
+2025-12-13T15:01:37.904237,-0.07212311*log(days_held*volatility)*log((price_ratio - log(price_ratio))**0.5630204) - 0.0022671511,0.8873888748988115,16,70.0,False,,,defi
+2025-12-13T15:02:10.893827,entry_price + (entry_price*(-1*(-36.907948) - 322.11456/leverage) + entry_price - entry_price/maintenance_margin - 1*326.12994)/326.12994,0.9998191415103503,19,76.0,False,,,defi
+2025-12-13T15:02:37.315799,-entry_price*maintenance_margin + entry_price + entry_price/leverage,0.9999999572031381,9,77.5,False,,,defi
+2025-12-13T15:03:18.784238,loan_amount*(price_diff - 1*0.0010694494),0.9997915984829613,5,88.6,True,This formula calculates the net profit from a flash loan arbitrage opportunity by multiplying the lo,anthropic,defi
+2025-12-13T15:03:51.565286,1.95894728210365*current_price*sqrt(days)*volatility,0.9998314527090367,8,69.5,False,,,defi
+2025-12-13T15:04:49.342671,borrows/supply,0.999989574300726,3,93.1,True,"This expression calculates the utilization rate of a lending protocol, representing the percentage o",anthropic,defi
+2025-12-13T15:05:38.859751,base_rate + utilization**10.028666*0.75439495 - 1*(-0.020704336),0.9829393615822699,9,88.89999999999999,True,This calculates a dynamic interest rate for DeFi lending protocols that combines a base rate with an,anthropic,defi
+2025-12-13T15:06:19.374560,collateral*liq_threshold/borrowed,0.9999999919505472,5,93.1,True,This expression calculates the health factor or collateralization ratio adjusted for liquidation thr,anthropic,defi

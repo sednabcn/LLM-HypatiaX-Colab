@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 import numpy as np
+from dotenv import load_dotenv
 
 from hypatiax.tools.llm_providers.anthropic_provider import AnthropicProvider
 from hypatiax.tools.llm_providers.google_provider import GoogleProvider
@@ -28,6 +29,8 @@ from hypatiax.tools.symbolic.symbolic_engine import DiscoveryConfig, SymbolicEng
 from hypatiax.tools.validation.ensemble_validator import EnsembleValidator
 
 # Configure logging
+load_dotenv("/home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/.env")
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
@@ -863,7 +866,7 @@ Return only the JSON object, no other text."""
                             result.get("discovery", {}).get("complexity", 0),
                             result.get("validation", {}).get("total_score", 0),
                             result.get("validation", {}).get("valid", False),
-                            result.get("interpretation", {}).get("interpretation", "")[:100],
+                            (result.get("interpretation") or {}).get("interpretation", "")[:100],
                             result.get("metadata", {}).get("llm_provider", ""),
                             self.domain,
                         ]

@@ -1,0 +1,85 @@
+{"label":"ADV","pattern":"alphabetically"}
+{"label":"ADV","pattern":"THEN"}
+{"label":"ADV","pattern":"ELSE"}
+{"label":"ADV","pattern":"highest to lowest"}
+{"label":"ADV","pattern":"ASC"}
+{"label":"ADV","pattern":"DESC"}
+{"label":"ADV","pattern":"NULL"}
+{"label":"ADV","pattern":"LEFT"}
+{"label":"ADJ","pattern":"highest"}
+{"label":"ADJ","pattern":"lowest"}
+{"label":"ADJ","pattern":"Petal"}
+{"label":"NOUN","pattern":"month"}
+{"label":"NOUN","pattern":"TODAY"}
+{"label":"NOUN","pattern":"color"}
+{"label":"NOUN","pattern":"YEAR"}
+{"label":"NOUN","pattern":"versicolor"}
+{"label":"NOUN","pattern":"setosa"}
+{"label":"NOUN","pattern":"year"}
+{"label":"NOUN","pattern":"virginica"}
+{"label":"DET","pattern":"a"}
+{"label":"NUM","pattern":"3"}
+{"label":"NUM","pattern":"1"}
+{"label":"NUM","pattern":"4"}
+{"label":"NUM","pattern":"5"}
+{"label":"NUM","pattern":"'"}
+{"label":"NUM","pattern":"2"}
+{"label":"NUM","pattern":"0"}
+{"label":"NUM","pattern":"9"}
+{"label":"NUM","pattern":"1.5"}
+{"label":"NUM","pattern":"2.5"}
+{"label":"NUM","pattern":"4.5"}
+{"label":"NUM","pattern":"3.0"}
+{"label":"NUM","pattern":"3"}
+{"label":"NUM","pattern":"2.0"}
+{"label":"NUM","pattern":"5.0"}
+{"label":"ADP","pattern":"BETWEEN"}
+{"label":"ADP","pattern":"BY"}
+{"label":"ADP","pattern":"WITH"}
+{"label":"ADP","pattern":"FROM"}
+{"label":"ADP","pattern":"to"}
+{"label":"ADP","pattern":"AND"}
+{"label":"ADP","pattern":">="}
+{"label":"ADP","pattern":"<"}
+{"label":"ADP","pattern":"!="}
+{"label":"ADP","pattern":"<="}
+{"label":"ADP","pattern":"="}
+{"label":"ADP","pattern":">"}
+{"label":"ARG","pattern":"[Sepal Length]"}
+{"label":"ARG","pattern":"[Sepal Width]"}
+{"label":"ARG","pattern":"[Petal Length]"}
+{"label":"ARG","pattern":"[Petal Width]"}
+{"label":"ARG","pattern":"[Species]"}
+{"label":"ARGN","pattern":"Sepal Length"}
+{"label":"ARGN","pattern":"Sepal Width"}
+{"label":"ARGN","pattern":"Petal Length"}
+{"label":"ARGN","pattern":"Petal Width"}
+{"label":"ARGN","pattern":"Species"}
+{"label":"OPER","pattern":"STARTS WITH"}
+{"label":"OPER","pattern":"SUM"}
+{"label":"OPER","pattern":"AVG"}
+{"label":"OPER","pattern":"MEDIAN"}
+{"label":"OPER","pattern":"COUNT"}
+{"label":"OPER","pattern":"COUNT DISTINCT"}
+{"label":"OPER","pattern":"MIN"}
+{"label":"OPER","pattern":"MAX"}
+{"label":"OPER","pattern":"GROUP BY"}
+{"label":"OPER","pattern":"ORDER BY"}
+{"label":"OPER","pattern":"TOP"}
+{"label":"OPER","pattern":"STARTS"}
+{"label":"OPER","pattern":"COUNTD"}
+{"label":"OPER","pattern":"SORT"}
+{"label":"OPER","pattern":"ENDSWITH"}
+{"label":"OPER","pattern":"INDEX"}
+{"label":"OPER","pattern":"IF"}
+{"label":"OPER","pattern":"DATETRUNC"}
+{"label":"OPER","pattern":"[Date]"}
+{"label":"OPER","pattern":"RANK_PERCENTILE"}
+{"label":"OPER","pattern":"FIXED"}
+{"label":"OPER","pattern":"SORTED"}
+{"label":"OPER","pattern":"RANK"}
+{"label":"OPER","pattern":"LISTED FROM"}
+{"label":"OPER","pattern":"STARTSWITH"}
+{"label":"OPER","pattern":"TOP BY"}
+{"label":"OPER","pattern":"IF CONTAINS"}
+{"label":"OPER","pattern":"BY"}

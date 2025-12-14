@@ -1,0 +1,161 @@
+{
+  "statistics": {
+    "duration_seconds": 194.43441820144653,
+    "num_snapshots": 20,
+    "cpu_percent": {
+      "mean": 37.12,
+      "max": 129.8,
+      "min": 0.0
+    },
+    "memory_mb": {
+      "mean": 1049.6890625,
+      "max": 1102.2109375,
+      "min": 855.58984375
+    },
+    "memory_available_mb": {
+      "min": 1018.76953125
+    }
+  },
+  "snapshots": [
+    {
+      "timestamp": "2025-12-13T13:11:21.608117",
+      "cpu_percent": 0.0,
+      "memory_percent": 68.4,
+      "memory_mb": 855.58984375,
+      "available_memory_mb": 1219.203125
+    },
+    {
+      "timestamp": "2025-12-13T13:11:26.291086",
+      "cpu_percent": 86.4,
+      "memory_percent": 68.6,
+      "memory_mb": 880.421875,
+      "available_memory_mb": 1208.98828125
+    },
+    {
+      "timestamp": "2025-12-13T13:11:30.725537",
+      "cpu_percent": 129.8,
+      "memory_percent": 68.7,
+      "memory_mb": 904.87890625,
+      "available_memory_mb": 1205.6015625
+    },
+    {
+      "timestamp": "2025-12-13T13:11:44.340414",
+      "cpu_percent": 106.6,
+      "memory_percent": 68.7,
+      "memory_mb": 946.55859375,
+      "available_memory_mb": 1205.58984375
+    },
+    {
+      "timestamp": "2025-12-13T13:12:50.142411",
+      "cpu_percent": 99.1,
+      "memory_percent": 73.4,
+      "memory_mb": 1095.7890625,
+      "available_memory_mb": 1026.31640625
+    },
+    {
+      "timestamp": "2025-12-13T13:13:15.032548",
+      "cpu_percent": 103.0,
+      "memory_percent": 73.6,
+      "memory_mb": 1099.671875,
+      "available_memory_mb": 1018.76953125
+    },
+    {
+      "timestamp": "2025-12-13T13:13:41.915481",
+      "cpu_percent": 100.2,
+      "memory_percent": 73.6,
+      "memory_mb": 1101.046875,
+      "available_memory_mb": 1019.0625
+    },
+    {
+      "timestamp": "2025-12-13T13:13:44.052032",
+      "cpu_percent": 0.0,
+      "memory_percent": 73.6,
+      "memory_mb": 1102.2109375,
+      "available_memory_mb": 1019.3671875
+    },
+    {
+      "timestamp": "2025-12-13T13:13:46.153528",
+      "cpu_percent": 0.0,
+      "memory_percent": 73.6,
+      "memory_mb": 1102.2109375,
+      "available_memory_mb": 1019.15625
+    },
+    {
+      "timestamp": "2025-12-13T13:13:48.255074",
+      "cpu_percent": 0.0,
+      "memory_percent": 73.6,
+      "memory_mb": 1102.2109375,
+      "available_memory_mb": 1019.15625
+    },
+    {
+      "timestamp": "2025-12-13T13:13:50.356589",
+      "cpu_percent": 0.0,
+      "memory_percent": 73.4,
+      "memory_mb": 1102.2109375,
+      "available_memory_mb": 1024.328125
+    },
+    {
+      "timestamp": "2025-12-13T13:13:52.458507",
+      "cpu_percent": 0.0,
+      "memory_percent": 73.4,
+      "memory_mb": 1102.2109375,
+      "available_memory_mb": 1024.3359375
+    },
+    {
+      "timestamp": "2025-12-13T13:13:54.560164",
+      "cpu_percent": 0.0,
+      "memory_percent": 73.4,
+      "memory_mb": 1102.2109375,
+      "available_memory_mb": 1024.140625
+    },
+    {
+      "timestamp": "2025-12-13T13:14:21.217901",
+      "cpu_percent": 107.3,
+      "memory_percent": 69.6,
+      "memory_mb": 1070.72265625,
+      "available_memory_mb": 1170.08203125
+    },
+    {
+      "timestamp": "2025-12-13T13:14:23.361653",
+      "cpu_percent": 0.0,
+      "memory_percent": 70.0,
+      "memory_mb": 1070.97265625,
+      "available_memory_mb": 1154.91015625
+    },
+    {
+      "timestamp": "2025-12-13T13:14:25.463229",
+      "cpu_percent": 0.0,
+      "memory_percent": 70.0,
+      "memory_mb": 1070.97265625,
+      "available_memory_mb": 1154.875
+    },
+    {
+      "timestamp": "2025-12-13T13:14:27.564783",
+      "cpu_percent": 0.0,
+      "memory_percent": 70.1,
+      "memory_mb": 1070.97265625,
+      "available_memory_mb": 1154.43359375
+    },
+    {
+      "timestamp": "2025-12-13T13:14:29.666380",
+      "cpu_percent": 0.0,
+      "memory_percent": 70.1,
+      "memory_mb": 1070.97265625,
+      "available_memory_mb": 1154.14453125
+    },
+    {
+      "timestamp": "2025-12-13T13:14:31.767938",
+      "cpu_percent": 10.0,
+      "memory_percent": 70.1,
+      "memory_mb": 1070.97265625,
+      "available_memory_mb": 1154.16015625
+    },
+    {
+      "timestamp": "2025-12-13T13:14:33.869529",
+      "cpu_percent": 0.0,
+      "memory_percent": 70.1,
+      "memory_mb": 1070.97265625,
+      "available_memory_mb": 1154.16015625
+    }
+  ]
+}

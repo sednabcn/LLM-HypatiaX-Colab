@@ -1,0 +1,320 @@
+──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/datasets/generators/finance/defi/defi_dataset_gen_monitor.py
+
+██████████████████████████████████████████████████████████████████████
+█  DeFi Formula Discovery - MONITORED VERSION  █
+█  Features:                                    █
+█    ✓ Real-time resource monitoring           █
+█    ✓ Progress tracking with visual feedback  █
+█    ✓ Stage-by-stage timing                   █
+█    ✓ Comprehensive statistics                █
+██████████████████████████████████████████████████████████████████████
+🚀 Initializing DeFi Formula Generator...
+
+======================================================================
+SYSTEM RESOURCE CHECK
+======================================================================
+CPU Cores: 2
+Total RAM: 3.76 GB
+Available RAM: 1.19 GB
+RAM Usage: 68.4%
+======================================================================
+2025-12-13 13:11:20,018 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing HybridDiscoverySystem v3.0
+2025-12-13 13:11:20,018 - hypatiax.tools.symbolic.hybrid_system - INFO - Domain: defi | Primary LLM: anthropic | Fallback: True
+2025-12-13 13:11:20,018 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing symbolic engine...
+2025-12-13 13:11:20,018 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing ensemble validator (domain=defi)...
+2025-12-13 13:11:20,999 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing LLM providers...
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+2025-12-13 13:11:21,098 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Anthropic Claude provider initialized
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2025-12-13 13:11:21,504 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Google Gemini provider initialized
+2025-12-13 13:11:21,606 - hypatiax.tools.symbolic.hybrid_system - INFO - Rich output formatter enabled
+2025-12-13 13:11:21,606 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ HybridDiscoverySystem initialized successfully
+✅ Generator initialized
+
+🔍 Resource monitoring started (interval: 2.0s)
+
+######################################################################
+# DeFi Formula Discovery - MONITORED EXECUTION
+# Timestamp: 2025-12-13T13:11:21.709799
+# Total formulas: 4
+# Samples per formula: 100
+######################################################################
+
+======================================================================
+FORMULA 1/4: Impermanent Loss
+Progress: [█░░░] 1/4 (25.0%)
+======================================================================
+
+[Stage] Data Generation...
+   Samples: 100
+   Price ratio range: [0.15, 9.87]
+   IL range: [-0.4361, 0.0241]
+   Resources: CPU: 0.0% | RAM: 856MB (68.4%) | Available: 1219MB
+✅ Data Generation completed in 0.00s
+
+[Stage] Symbolic Discovery...
+
+======================================================================
+WORKFLOW: Impermanent Loss
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: -exp(((price_ratio**(-0.94054425) + price_ratio)**0.3575959/(-0.45760217) - 0.67230797)/price_ratio)**1.2200905 + ((price_ratio/1.0489614 - 0.41862807)/(-0.6271769) + 0.52612877)*(-0.05306615)/price_ratio
+   R² Score: 0.9956
+   Complexity: 30
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 70.3/100
+   Layer Scores:
+     ⚠ Symbolic: 61.0
+     ✓ Dimensional: 92.0
+     ✗ Domain: 48.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 18
+
+[3/3] ⊗ Interpretation skipped (score 70.3 < 85.0)
+   Top recommendations:
+     • 🟡 VERIFY: Check dimensional analysis warnings
+     • 🟡 IMPROVE: Simplify to: -exp(-2.18530432231123*(price_ratio**(-0.94054425) + price_ratio**1.0)**0.3575959/price_ratio - 0.67230797/price_ratio)**1.2200905 + 0.0806618203765804 - 0.0633402248043654/price_ratio
+     • 🟡 REVIEW: Address defi domain warnings
+
+======================================================================
+✅ Workflow complete. Result stored (1/100)
+======================================================================
+
+✅ Symbolic Discovery completed in 89.36s
+   Expression: -exp(((price_ratio**(-0.94054425) + price_ratio)**0.3575959/... | R²: 0.9956 | Validation: 70.3/100
+
+⏱  Total formula time: 89.36s
+
+======================================================================
+FORMULA 2/4: AMM Swap Output
+Progress: [██░░] 2/4 (50.0%)
+======================================================================
+
+[Stage] Data Generation...
+   Samples: 100
+   Amount in range: [1.51, 99.46]
+   Resources: CPU: 99.1% | RAM: 1096MB (73.4%) | Available: 1026MB
+✅ Data Generation completed in 0.00s
+
+[Stage] Symbolic Discovery...
+
+======================================================================
+WORKFLOW: AMM Swap Output
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: amount_in_ratio*reserve_out_ratio*(amount_in_ratio*(-0.3184283)/reserve_in_ratio + 44.07946)/reserve_in_ratio
+   R² Score: 1.0000
+   Complexity: 13
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 74.2/100
+   Layer Scores:
+     ⚠ Symbolic: 69.0
+     ✓ Dimensional: 89.0
+     ⚠ Domain: 56.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 14
+
+[3/3] ⊗ Interpretation skipped (score 74.2 < 85.0)
+   Top recommendations:
+     • 🟡 VERIFY: Check dimensional analysis warnings
+     • 🟡 IMPROVE: Simplify to: -amount_in_ratio*reserve_out_ratio*(0.3184283*amount_in_ratio - 44.07946*reserve_in_ratio)/reserve_in_ratio**2
+     • 🟡 REVIEW: Address defi domain warnings
+
+======================================================================
+✅ Workflow complete. Result stored (2/100)
+======================================================================
+
+✅ Symbolic Discovery completed in 25.11s
+   Expression: amount_in_ratio*reserve_out_ratio*(amount_in_ratio*(-0.31842... | R²: 1.0000 | Validation: 74.2/100
+
+⏱  Total formula time: 25.11s
+
+======================================================================
+FORMULA 3/4: Utilization Rate
+Progress: [███░] 3/4 (75.0%)
+======================================================================
+
+[Stage] Data Generation...
+   Samples: 100
+   Utilization range: [0.2927, 0.8867]
+   Resources: CPU: 103.0% | RAM: 1100MB (73.6%) | Available: 1019MB
+✅ Data Generation completed in 0.00s
+
+[Stage] Symbolic Discovery...
+
+======================================================================
+WORKFLOW: Utilization Rate
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: borrowed/supplied
+   R² Score: 0.9960
+   Complexity: 3
+
+[2/3] ✓ Validating expression across 4 layers...
+✓ Overall Score: 94.6/100
+   Layer Scores:
+     ✓ Symbolic: 98.0
+     ✓ Dimensional: 97.0
+     ✓ Domain: 87.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 4
+
+[3/3] 🤖 Interpreting with real LLM API...
+2025-12-13 13:13:42,663 - hypatiax.tools.symbolic.hybrid_system - INFO - 🤖 Interpreting with ANTHROPIC...
+2025-12-13 13:13:54,896 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-13 13:13:54,952 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Interpretation completed via ANTHROPIC in 12.29s
+✅ Interpretation complete via ANTHROPIC
+   Summary: This expression calculates the utilization rate of a lending pool, representing the fraction of supplied capital that has been borrowed by users.
+   Suggested name: Pool Utilization Rate
+
+======================================================================
+✅ Workflow complete. Result stored (3/100)
+======================================================================
+
+✅ Symbolic Discovery completed in 38.77s
+   Expression: borrowed/supplied... | R²: 0.9960 | Validation: 94.6/100
+
+⏱  Total formula time: 38.77s
+
+======================================================================
+FORMULA 4/4: Liquidity Value
+Progress: [████] 4/4 (100.0%)
+======================================================================
+
+[Stage] Data Generation...
+   Samples: 100
+   Value range: [659.14, 18979.06]
+   Resources: CPU: 0.0% | RAM: 1102MB (73.4%) | Available: 1024MB
+✅ Data Generation completed in 0.00s
+
+[Stage] Symbolic Discovery...
+
+======================================================================
+WORKFLOW: Liquidity Value
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 100 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: 10012.511*sqrt(reserve0_ratio*reserve1_ratio)
+   R² Score: 1.0000
+   Complexity: 6
+
+[2/3] ✓ Validating expression across 4 layers...
+✓ Overall Score: 86.8/100
+   Layer Scores:
+     ✓ Symbolic: 98.0
+     ✓ Dimensional: 92.0
+     ⚠ Domain: 66.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 9
+
+[3/3] 🤖 Interpreting with real LLM API...
+2025-12-13 13:14:22,122 - hypatiax.tools.symbolic.hybrid_system - INFO - 🤖 Interpreting with ANTHROPIC...
+2025-12-13 13:14:34,850 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-13 13:14:34,853 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Interpretation completed via ANTHROPIC in 12.73s
+✅ Interpretation complete via ANTHROPIC
+   Summary: This expression calculates a scaled geometric mean of two token reserve ratios, representing the geometric center of liquidity distribution in an auto...
+   Suggested name: Scaled Geometric Pool Balance Metric
+
+======================================================================
+✅ Workflow complete. Result stored (4/100)
+======================================================================
+
+✅ Symbolic Discovery completed in 39.90s
+   Expression: 10012.511*sqrt(reserve0_ratio*reserve1_ratio)... | R²: 1.0000 | Validation: 86.8/100
+
+⏱  Total formula time: 39.90s
+🔍 Resource monitoring stopped (duration: 194.4s)
+2025-12-13 13:14:36,040 - hypatiax.tools.symbolic.hybrid_system - INFO - Exported 4 results to hypatiax/data/finance/defi/defi_formulas_20251213_131435.json
+✅ Exported 4 results to hypatiax/data/finance/defi/defi_formulas_20251213_131435.json
+2025-12-13 13:14:36,041 - hypatiax.tools.symbolic.hybrid_system - INFO - Exported 4 results to hypatiax/data/finance/defi/defi_summary_20251213_131435.csv
+✅ Exported 4 results to hypatiax/data/finance/defi/defi_summary_20251213_131435.csv
+   Monitoring data: hypatiax/data/finance/defi/resource_monitoring_20251213_131435.json
+
+======================================================================
+GENERATION COMPLETE - FINAL SUMMARY
+======================================================================
+
+Formula Statistics:
+  Total formulas: 4
+  Valid: 2 | Invalid: 2
+  Success rate: 50.0%
+  Average R²: 0.9979
+  Average validation: 81.5/100
+
+======================================================================
+RESOURCE USAGE SUMMARY
+======================================================================
+Duration: 194.4s
+Snapshots: 20
+
+CPU Usage:
+  Average: 37.1%
+  Peak: 129.8%
+
+Memory Usage:
+  Average: 1050 MB
+  Peak: 1102 MB
+  Min Available: 1019 MB
+======================================================================
+
+======================================================================
+STAGE TIMING SUMMARY
+======================================================================
+
+Data Generation:
+  Count: 4
+  Average: 0.00s
+  Total: 0.00s
+  Min/Max: 0.00s / 0.00s
+
+Symbolic Discovery:
+  Count: 4
+  Average: 48.29s
+  Total: 193.14s
+  Min/Max: 25.11s / 89.36s
+======================================================================
+
+======================================================================
+
+✅ Complete! Results saved to:
+   JSON: hypatiax/data/finance/defi/defi_formulas_20251213_131435.json
+   CSV:  hypatiax/data/finance/defi/defi_summary_20251213_131435.csv
+
+======================================================================
+
+┌──(py312)(aga

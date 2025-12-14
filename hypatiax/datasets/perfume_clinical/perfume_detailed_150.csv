@@ -1,0 +1,5101 @@
+query,response
+"Formulate 50ml perfume with 8% fragrance oils, 89% alcohol, 3% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 50ml
+- Fragrance concentration: 8%
+- Alcohol: 89%
+- Water: 3%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   8% × 50ml = 4.0ml
+
+2. Ethanol (96%):
+   89% × 50ml = 44.5ml
+
+3. Distilled Water:
+   3% × 50ml = 1.5ml
+
+**Verification:**
+4.0 + 44.5 + 1.5 = 50ml ✓
+
+**Classification:**
+EDT
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $160.00
+- Alcohol ($0.50/ml): $22.25
+- Water ($0.01/ml): $0.01
+- Total: $182.26
+
+**Longevity:** 5+ hours"
+"Formulate 1500ml perfume with 18% fragrance oils, 77% alcohol, 5% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 1500ml
+- Fragrance concentration: 18%
+- Alcohol: 77%
+- Water: 5%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   18% × 1500ml = 270.0ml
+
+2. Ethanol (96%):
+   77% × 1500ml = 1155.0ml
+
+3. Distilled Water:
+   5% × 1500ml = 75.0ml
+
+**Verification:**
+270.0 + 1155.0 + 75.0 = 1500ml ✓
+
+**Classification:**
+EDP
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $10800.00
+- Alcohol ($0.50/ml): $577.50
+- Water ($0.01/ml): $0.75
+- Total: $11378.25
+
+**Longevity:** 8+ hours"
+"Formulate 100ml perfume with 10% fragrance oils, 87% alcohol, 3% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 100ml
+- Fragrance concentration: 10%
+- Alcohol: 87%
+- Water: 3%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   10% × 100ml = 10.0ml
+
+2. Ethanol (96%):
+   87% × 100ml = 87.0ml
+
+3. Distilled Water:
+   3% × 100ml = 3.0ml
+
+**Verification:**
+10.0 + 87.0 + 3.0 = 100ml ✓
+
+**Classification:**
+EDT
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $400.00
+- Alcohol ($0.50/ml): $43.50
+- Water ($0.01/ml): $0.03
+- Total: $443.53
+
+**Longevity:** 5+ hours"
+"Formulate 100ml perfume with 15% fragrance oils, 80% alcohol, 5% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 100ml
+- Fragrance concentration: 15%
+- Alcohol: 80%
+- Water: 5%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   15% × 100ml = 15.0ml
+
+2. Ethanol (96%):
+   80% × 100ml = 80.0ml
+
+3. Distilled Water:
+   5% × 100ml = 5.0ml
+
+**Verification:**
+15.0 + 80.0 + 5.0 = 100ml ✓
+
+**Classification:**
+EDP
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $600.00
+- Alcohol ($0.50/ml): $40.00
+- Water ($0.01/ml): $0.05
+- Total: $640.05
+
+**Longevity:** 8+ hours"
+"Formulate 1500ml perfume with 10% fragrance oils, 86% alcohol, 4% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 1500ml
+- Fragrance concentration: 10%
+- Alcohol: 86%
+- Water: 4%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   10% × 1500ml = 150.0ml
+
+2. Ethanol (96%):
+   86% × 1500ml = 1290.0ml
+
+3. Distilled Water:
+   4% × 1500ml = 60.0ml
+
+**Verification:**
+150.0 + 1290.0 + 60.0 = 1500ml ✓
+
+**Classification:**
+EDT
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $6000.00
+- Alcohol ($0.50/ml): $645.00
+- Water ($0.01/ml): $0.60
+- Total: $6645.60
+
+**Longevity:** 5+ hours"
+"Formulate 250ml perfume with 8% fragrance oils, 88% alcohol, 4% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 250ml
+- Fragrance concentration: 8%
+- Alcohol: 88%
+- Water: 4%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   8% × 250ml = 20.0ml
+
+2. Ethanol (96%):
+   88% × 250ml = 220.0ml
+
+3. Distilled Water:
+   4% × 250ml = 10.0ml
+
+**Verification:**
+20.0 + 220.0 + 10.0 = 250ml ✓
+
+**Classification:**
+EDT
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $800.00
+- Alcohol ($0.50/ml): $110.00
+- Water ($0.01/ml): $0.10
+- Total: $910.10
+
+**Longevity:** 5+ hours"
+"Formulate 500ml perfume with 5% fragrance oils, 90% alcohol, 5% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 500ml
+- Fragrance concentration: 5%
+- Alcohol: 90%
+- Water: 5%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   5% × 500ml = 25.0ml
+
+2. Ethanol (96%):
+   90% × 500ml = 450.0ml
+
+3. Distilled Water:
+   5% × 500ml = 25.0ml
+
+**Verification:**
+25.0 + 450.0 + 25.0 = 500ml ✓
+
+**Classification:**
+Cologne
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $1000.00
+- Alcohol ($0.50/ml): $225.00
+- Water ($0.01/ml): $0.25
+- Total: $1225.25
+
+**Longevity:** 3+ hours"
+"Formulate 250ml perfume with 8% fragrance oils, 89% alcohol, 3% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 250ml
+- Fragrance concentration: 8%
+- Alcohol: 89%
+- Water: 3%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   8% × 250ml = 20.0ml
+
+2. Ethanol (96%):
+   89% × 250ml = 222.5ml
+
+3. Distilled Water:
+   3% × 250ml = 7.5ml
+
+**Verification:**
+20.0 + 222.5 + 7.5 = 250ml ✓
+
+**Classification:**
+EDT
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $800.00
+- Alcohol ($0.50/ml): $111.25
+- Water ($0.01/ml): $0.07
+- Total: $911.33
+
+**Longevity:** 5+ hours"
+"Formulate 500ml perfume with 18% fragrance oils, 75% alcohol, 7% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 500ml
+- Fragrance concentration: 18%
+- Alcohol: 75%
+- Water: 7%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   18% × 500ml = 90.0ml
+
+2. Ethanol (96%):
+   75% × 500ml = 375.0ml
+
+3. Distilled Water:
+   7% × 500ml = 35.0ml
+
+**Verification:**
+90.0 + 375.0 + 35.0 = 500ml ✓
+
+**Classification:**
+EDP
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $3600.00
+- Alcohol ($0.50/ml): $187.50
+- Water ($0.01/ml): $0.35
+- Total: $3787.85
+
+**Longevity:** 8+ hours"
+"Formulate 1000ml perfume with 22% fragrance oils, 71% alcohol, 7% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 1000ml
+- Fragrance concentration: 22%
+- Alcohol: 71%
+- Water: 7%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   22% × 1000ml = 220.0ml
+
+2. Ethanol (96%):
+   71% × 1000ml = 710.0ml
+
+3. Distilled Water:
+   7% × 1000ml = 70.0ml
+
+**Verification:**
+220.0 + 710.0 + 70.0 = 1000ml ✓
+
+**Classification:**
+Perfume Extrait
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $8800.00
+- Alcohol ($0.50/ml): $355.00
+- Water ($0.01/ml): $0.70
+- Total: $9155.70
+
+**Longevity:** 12+ hours"
+"Formulate 500ml perfume with 25% fragrance oils, 67% alcohol, 8% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 500ml
+- Fragrance concentration: 25%
+- Alcohol: 67%
+- Water: 8%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   25% × 500ml = 125.0ml
+
+2. Ethanol (96%):
+   67% × 500ml = 335.0ml
+
+3. Distilled Water:
+   8% × 500ml = 40.0ml
+
+**Verification:**
+125.0 + 335.0 + 40.0 = 500ml ✓
+
+**Classification:**
+Perfume Extrait
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $5000.00
+- Alcohol ($0.50/ml): $167.50
+- Water ($0.01/ml): $0.40
+- Total: $5167.90
+
+**Longevity:** 12+ hours"
+"Formulate 1000ml perfume with 5% fragrance oils, 90% alcohol, 5% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 1000ml
+- Fragrance concentration: 5%
+- Alcohol: 90%
+- Water: 5%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   5% × 1000ml = 50.0ml
+
+2. Ethanol (96%):
+   90% × 1000ml = 900.0ml
+
+3. Distilled Water:
+   5% × 1000ml = 50.0ml
+
+**Verification:**
+50.0 + 900.0 + 50.0 = 1000ml ✓
+
+**Classification:**
+Cologne
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $2000.00
+- Alcohol ($0.50/ml): $450.00
+- Water ($0.01/ml): $0.50
+- Total: $2450.50
+
+**Longevity:** 3+ hours"
+"Formulate 750ml perfume with 22% fragrance oils, 74% alcohol, 4% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 750ml
+- Fragrance concentration: 22%
+- Alcohol: 74%
+- Water: 4%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   22% × 750ml = 165.0ml
+
+2. Ethanol (96%):
+   74% × 750ml = 555.0ml
+
+3. Distilled Water:
+   4% × 750ml = 30.0ml
+
+**Verification:**
+165.0 + 555.0 + 30.0 = 750ml ✓
+
+**Classification:**
+Perfume Extrait
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $6600.00
+- Alcohol ($0.50/ml): $277.50
+- Water ($0.01/ml): $0.30
+- Total: $6877.80
+
+**Longevity:** 12+ hours"
+"Formulate 300ml perfume with 25% fragrance oils, 67% alcohol, 8% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 300ml
+- Fragrance concentration: 25%
+- Alcohol: 67%
+- Water: 8%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   25% × 300ml = 75.0ml
+
+2. Ethanol (96%):
+   67% × 300ml = 201.0ml
+
+3. Distilled Water:
+   8% × 300ml = 24.0ml
+
+**Verification:**
+75.0 + 201.0 + 24.0 = 300ml ✓
+
+**Classification:**
+Perfume Extrait
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $3000.00
+- Alcohol ($0.50/ml): $100.50
+- Water ($0.01/ml): $0.24
+- Total: $3100.74
+
+**Longevity:** 12+ hours"
+"Formulate 1500ml perfume with 15% fragrance oils, 81% alcohol, 4% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 1500ml
+- Fragrance concentration: 15%
+- Alcohol: 81%
+- Water: 4%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   15% × 1500ml = 225.0ml
+
+2. Ethanol (96%):
+   81% × 1500ml = 1215.0ml
+
+3. Distilled Water:
+   4% × 1500ml = 60.0ml
+
+**Verification:**
+225.0 + 1215.0 + 60.0 = 1500ml ✓
+
+**Classification:**
+EDP
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $9000.00
+- Alcohol ($0.50/ml): $607.50
+- Water ($0.01/ml): $0.60
+- Total: $9608.10
+
+**Longevity:** 8+ hours"
+"Formulate 500ml perfume with 25% fragrance oils, 72% alcohol, 3% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 500ml
+- Fragrance concentration: 25%
+- Alcohol: 72%
+- Water: 3%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   25% × 500ml = 125.0ml
+
+2. Ethanol (96%):
+   72% × 500ml = 360.0ml
+
+3. Distilled Water:
+   3% × 500ml = 15.0ml
+
+**Verification:**
+125.0 + 360.0 + 15.0 = 500ml ✓
+
+**Classification:**
+Perfume Extrait
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $5000.00
+- Alcohol ($0.50/ml): $180.00
+- Water ($0.01/ml): $0.15
+- Total: $5180.15
+
+**Longevity:** 12+ hours"
+"Formulate 200ml perfume with 15% fragrance oils, 83% alcohol, 2% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 200ml
+- Fragrance concentration: 15%
+- Alcohol: 83%
+- Water: 2%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   15% × 200ml = 30.0ml
+
+2. Ethanol (96%):
+   83% × 200ml = 166.0ml
+
+3. Distilled Water:
+   2% × 200ml = 4.0ml
+
+**Verification:**
+30.0 + 166.0 + 4.0 = 200ml ✓
+
+**Classification:**
+EDP
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $1200.00
+- Alcohol ($0.50/ml): $83.00
+- Water ($0.01/ml): $0.04
+- Total: $1283.04
+
+**Longevity:** 8+ hours"
+"Formulate 50ml perfume with 12% fragrance oils, 83% alcohol, 5% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 50ml
+- Fragrance concentration: 12%
+- Alcohol: 83%
+- Water: 5%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   12% × 50ml = 6.0ml
+
+2. Ethanol (96%):
+   83% × 50ml = 41.5ml
+
+3. Distilled Water:
+   5% × 50ml = 2.5ml
+
+**Verification:**
+6.0 + 41.5 + 2.5 = 50ml ✓
+
+**Classification:**
+EDP
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $240.00
+- Alcohol ($0.50/ml): $20.75
+- Water ($0.01/ml): $0.03
+- Total: $260.77
+
+**Longevity:** 8+ hours"
+"Formulate 300ml perfume with 12% fragrance oils, 84% alcohol, 4% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 300ml
+- Fragrance concentration: 12%
+- Alcohol: 84%
+- Water: 4%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   12% × 300ml = 36.0ml
+
+2. Ethanol (96%):
+   84% × 300ml = 252.0ml
+
+3. Distilled Water:
+   4% × 300ml = 12.0ml
+
+**Verification:**
+36.0 + 252.0 + 12.0 = 300ml ✓
+
+**Classification:**
+EDP
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $1440.00
+- Alcohol ($0.50/ml): $126.00
+- Water ($0.01/ml): $0.12
+- Total: $1566.12
+
+**Longevity:** 8+ hours"
+"Formulate 250ml perfume with 15% fragrance oils, 81% alcohol, 4% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 250ml
+- Fragrance concentration: 15%
+- Alcohol: 81%
+- Water: 4%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   15% × 250ml = 37.5ml
+
+2. Ethanol (96%):
+   81% × 250ml = 202.5ml
+
+3. Distilled Water:
+   4% × 250ml = 10.0ml
+
+**Verification:**
+37.5 + 202.5 + 10.0 = 250ml ✓
+
+**Classification:**
+EDP
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $1500.00
+- Alcohol ($0.50/ml): $101.25
+- Water ($0.01/ml): $0.10
+- Total: $1601.35
+
+**Longevity:** 8+ hours"
+"Formulate 200ml perfume with 25% fragrance oils, 70% alcohol, 5% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 200ml
+- Fragrance concentration: 25%
+- Alcohol: 70%
+- Water: 5%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   25% × 200ml = 50.0ml
+
+2. Ethanol (96%):
+   70% × 200ml = 140.0ml
+
+3. Distilled Water:
+   5% × 200ml = 10.0ml
+
+**Verification:**
+50.0 + 140.0 + 10.0 = 200ml ✓
+
+**Classification:**
+Perfume Extrait
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $2000.00
+- Alcohol ($0.50/ml): $70.00
+- Water ($0.01/ml): $0.10
+- Total: $2070.10
+
+**Longevity:** 12+ hours"
+"Formulate 150ml perfume with 10% fragrance oils, 88% alcohol, 2% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 150ml
+- Fragrance concentration: 10%
+- Alcohol: 88%
+- Water: 2%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   10% × 150ml = 15.0ml
+
+2. Ethanol (96%):
+   88% × 150ml = 132.0ml
+
+3. Distilled Water:
+   2% × 150ml = 3.0ml
+
+**Verification:**
+15.0 + 132.0 + 3.0 = 150ml ✓
+
+**Classification:**
+EDT
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $600.00
+- Alcohol ($0.50/ml): $66.00
+- Water ($0.01/ml): $0.03
+- Total: $666.03
+
+**Longevity:** 5+ hours"
+"Formulate 750ml perfume with 18% fragrance oils, 77% alcohol, 5% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 750ml
+- Fragrance concentration: 18%
+- Alcohol: 77%
+- Water: 5%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   18% × 750ml = 135.0ml
+
+2. Ethanol (96%):
+   77% × 750ml = 577.5ml
+
+3. Distilled Water:
+   5% × 750ml = 37.5ml
+
+**Verification:**
+135.0 + 577.5 + 37.5 = 750ml ✓
+
+**Classification:**
+EDP
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $5400.00
+- Alcohol ($0.50/ml): $288.75
+- Water ($0.01/ml): $0.38
+- Total: $5689.12
+
+**Longevity:** 8+ hours"
+"Formulate 150ml perfume with 8% fragrance oils, 90% alcohol, 2% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 150ml
+- Fragrance concentration: 8%
+- Alcohol: 90%
+- Water: 2%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   8% × 150ml = 12.0ml
+
+2. Ethanol (96%):
+   90% × 150ml = 135.0ml
+
+3. Distilled Water:
+   2% × 150ml = 3.0ml
+
+**Verification:**
+12.0 + 135.0 + 3.0 = 150ml ✓
+
+**Classification:**
+EDT
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $480.00
+- Alcohol ($0.50/ml): $67.50
+- Water ($0.01/ml): $0.03
+- Total: $547.53
+
+**Longevity:** 5+ hours"
+"Formulate 50ml perfume with 8% fragrance oils, 88% alcohol, 4% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 50ml
+- Fragrance concentration: 8%
+- Alcohol: 88%
+- Water: 4%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   8% × 50ml = 4.0ml
+
+2. Ethanol (96%):
+   88% × 50ml = 44.0ml
+
+3. Distilled Water:
+   4% × 50ml = 2.0ml
+
+**Verification:**
+4.0 + 44.0 + 2.0 = 50ml ✓
+
+**Classification:**
+EDT
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $160.00
+- Alcohol ($0.50/ml): $22.00
+- Water ($0.01/ml): $0.02
+- Total: $182.02
+
+**Longevity:** 5+ hours"
+"Formulate 500ml perfume with 25% fragrance oils, 72% alcohol, 3% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 500ml
+- Fragrance concentration: 25%
+- Alcohol: 72%
+- Water: 3%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   25% × 500ml = 125.0ml
+
+2. Ethanol (96%):
+   72% × 500ml = 360.0ml
+
+3. Distilled Water:
+   3% × 500ml = 15.0ml
+
+**Verification:**
+125.0 + 360.0 + 15.0 = 500ml ✓
+
+**Classification:**
+Perfume Extrait
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $5000.00
+- Alcohol ($0.50/ml): $180.00
+- Water ($0.01/ml): $0.15
+- Total: $5180.15
+
+**Longevity:** 12+ hours"
+"Formulate 1000ml perfume with 20% fragrance oils, 73% alcohol, 7% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 1000ml
+- Fragrance concentration: 20%
+- Alcohol: 73%
+- Water: 7%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   20% × 1000ml = 200.0ml
+
+2. Ethanol (96%):
+   73% × 1000ml = 730.0ml
+
+3. Distilled Water:
+   7% × 1000ml = 70.0ml
+
+**Verification:**
+200.0 + 730.0 + 70.0 = 1000ml ✓
+
+**Classification:**
+Perfume Extrait
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $8000.00
+- Alcohol ($0.50/ml): $365.00
+- Water ($0.01/ml): $0.70
+- Total: $8365.70
+
+**Longevity:** 12+ hours"
+"Formulate 1000ml perfume with 25% fragrance oils, 70% alcohol, 5% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 1000ml
+- Fragrance concentration: 25%
+- Alcohol: 70%
+- Water: 5%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   25% × 1000ml = 250.0ml
+
+2. Ethanol (96%):
+   70% × 1000ml = 700.0ml
+
+3. Distilled Water:
+   5% × 1000ml = 50.0ml
+
+**Verification:**
+250.0 + 700.0 + 50.0 = 1000ml ✓
+
+**Classification:**
+Perfume Extrait
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $10000.00
+- Alcohol ($0.50/ml): $350.00
+- Water ($0.01/ml): $0.50
+- Total: $10350.50
+
+**Longevity:** 12+ hours"
+"Formulate 200ml perfume with 18% fragrance oils, 76% alcohol, 6% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 200ml
+- Fragrance concentration: 18%
+- Alcohol: 76%
+- Water: 6%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   18% × 200ml = 36.0ml
+
+2. Ethanol (96%):
+   76% × 200ml = 152.0ml
+
+3. Distilled Water:
+   6% × 200ml = 12.0ml
+
+**Verification:**
+36.0 + 152.0 + 12.0 = 200ml ✓
+
+**Classification:**
+EDP
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $1440.00
+- Alcohol ($0.50/ml): $76.00
+- Water ($0.01/ml): $0.12
+- Total: $1516.12
+
+**Longevity:** 8+ hours"
+"Formulate 250ml perfume with 22% fragrance oils, 76% alcohol, 2% water. Calculate all ingredients.","PERFUME FORMULATION CALCULATION:
+
+**Specifications:**
+- Total volume: 250ml
+- Fragrance concentration: 22%
+- Alcohol: 76%
+- Water: 2%
+
+**Step-by-Step Calculation:**
+
+1. Fragrance Oils:
+   22% × 250ml = 55.0ml
+
+2. Ethanol (96%):
+   76% × 250ml = 190.0ml
+
+3. Distilled Water:
+   2% × 250ml = 5.0ml
+
+**Verification:**
+55.0 + 190.0 + 5.0 = 250ml ✓
+
+**Classification:**
+Perfume Extrait
+
+**Cost Estimate (assuming $40/ml oils):**
+- Fragrance oils: $2200.00
+- Alcohol ($0.50/ml): $95.00
+- Water ($0.01/ml): $0.05
+- Total: $2295.05
+
+**Longevity:** 12+ hours"
+Dilute 100ml of 25% perfume concentrate to 8%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 25%
+- Starting volume: 100ml
+- Target concentration: 8%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+25% × 100ml = 8% × V₂
+2500 = 8 × V₂
+V₂ = 312.5ml
+
+**Diluent Required:**
+312.5ml - 100ml = 212.5ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 197.62ml
+- Distilled water: 14.88ml
+
+**Final Product:**
+- Volume: 312.5ml
+- Concentration: 8%
+- Classification: EDT
+
+**Yield:** 6 bottles (50ml each) + 12.5ml remainder"
+Dilute 150ml of 20% perfume concentrate to 15%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 20%
+- Starting volume: 150ml
+- Target concentration: 15%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+20% × 150ml = 15% × V₂
+3000 = 15 × V₂
+V₂ = 200.0ml
+
+**Diluent Required:**
+200.0ml - 150ml = 50.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 46.5ml
+- Distilled water: 3.5ml
+
+**Final Product:**
+- Volume: 200.0ml
+- Concentration: 15%
+- Classification: EDP
+
+**Yield:** 4 bottles (50ml each) + 0.0ml remainder"
+Dilute 150ml of 30% perfume concentrate to 8%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 30%
+- Starting volume: 150ml
+- Target concentration: 8%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+30% × 150ml = 8% × V₂
+4500 = 8 × V₂
+V₂ = 562.5ml
+
+**Diluent Required:**
+562.5ml - 150ml = 412.5ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 383.62ml
+- Distilled water: 28.88ml
+
+**Final Product:**
+- Volume: 562.5ml
+- Concentration: 8%
+- Classification: EDT
+
+**Yield:** 11 bottles (50ml each) + 12.5ml remainder"
+Dilute 50ml of 30% perfume concentrate to 15%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 30%
+- Starting volume: 50ml
+- Target concentration: 15%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+30% × 50ml = 15% × V₂
+1500 = 15 × V₂
+V₂ = 100.0ml
+
+**Diluent Required:**
+100.0ml - 50ml = 50.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 46.5ml
+- Distilled water: 3.5ml
+
+**Final Product:**
+- Volume: 100.0ml
+- Concentration: 15%
+- Classification: EDP
+
+**Yield:** 2 bottles (50ml each) + 0.0ml remainder"
+Dilute 100ml of 35% perfume concentrate to 5%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 35%
+- Starting volume: 100ml
+- Target concentration: 5%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+35% × 100ml = 5% × V₂
+3500 = 5 × V₂
+V₂ = 700.0ml
+
+**Diluent Required:**
+700.0ml - 100ml = 600.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 558.0ml
+- Distilled water: 42.0ml
+
+**Final Product:**
+- Volume: 700.0ml
+- Concentration: 5%
+- Classification: Cologne
+
+**Yield:** 14 bottles (50ml each) + 0.0ml remainder"
+Dilute 200ml of 20% perfume concentrate to 5%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 20%
+- Starting volume: 200ml
+- Target concentration: 5%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+20% × 200ml = 5% × V₂
+4000 = 5 × V₂
+V₂ = 800.0ml
+
+**Diluent Required:**
+800.0ml - 200ml = 600.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 558.0ml
+- Distilled water: 42.0ml
+
+**Final Product:**
+- Volume: 800.0ml
+- Concentration: 5%
+- Classification: Cologne
+
+**Yield:** 16 bottles (50ml each) + 0.0ml remainder"
+Dilute 150ml of 20% perfume concentrate to 5%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 20%
+- Starting volume: 150ml
+- Target concentration: 5%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+20% × 150ml = 5% × V₂
+3000 = 5 × V₂
+V₂ = 600.0ml
+
+**Diluent Required:**
+600.0ml - 150ml = 450.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 418.5ml
+- Distilled water: 31.5ml
+
+**Final Product:**
+- Volume: 600.0ml
+- Concentration: 5%
+- Classification: Cologne
+
+**Yield:** 12 bottles (50ml each) + 0.0ml remainder"
+Dilute 200ml of 40% perfume concentrate to 12%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 40%
+- Starting volume: 200ml
+- Target concentration: 12%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+40% × 200ml = 12% × V₂
+8000 = 12 × V₂
+V₂ = 666.67ml
+
+**Diluent Required:**
+666.67ml - 200ml = 466.66999999999996ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 434.0ml
+- Distilled water: 32.67ml
+
+**Final Product:**
+- Volume: 666.67ml
+- Concentration: 12%
+- Classification: EDP
+
+**Yield:** 13 bottles (50ml each) + 16.7ml remainder"
+Dilute 150ml of 20% perfume concentrate to 8%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 20%
+- Starting volume: 150ml
+- Target concentration: 8%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+20% × 150ml = 8% × V₂
+3000 = 8 × V₂
+V₂ = 375.0ml
+
+**Diluent Required:**
+375.0ml - 150ml = 225.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 209.25ml
+- Distilled water: 15.75ml
+
+**Final Product:**
+- Volume: 375.0ml
+- Concentration: 8%
+- Classification: EDT
+
+**Yield:** 7 bottles (50ml each) + 25.0ml remainder"
+Dilute 200ml of 35% perfume concentrate to 8%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 35%
+- Starting volume: 200ml
+- Target concentration: 8%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+35% × 200ml = 8% × V₂
+7000 = 8 × V₂
+V₂ = 875.0ml
+
+**Diluent Required:**
+875.0ml - 200ml = 675.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 627.75ml
+- Distilled water: 47.25ml
+
+**Final Product:**
+- Volume: 875.0ml
+- Concentration: 8%
+- Classification: EDT
+
+**Yield:** 17 bottles (50ml each) + 25.0ml remainder"
+Dilute 200ml of 20% perfume concentrate to 12%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 20%
+- Starting volume: 200ml
+- Target concentration: 12%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+20% × 200ml = 12% × V₂
+4000 = 12 × V₂
+V₂ = 333.33ml
+
+**Diluent Required:**
+333.33ml - 200ml = 133.32999999999998ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 124.0ml
+- Distilled water: 9.33ml
+
+**Final Product:**
+- Volume: 333.33ml
+- Concentration: 12%
+- Classification: EDP
+
+**Yield:** 6 bottles (50ml each) + 33.3ml remainder"
+Dilute 50ml of 40% perfume concentrate to 5%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 40%
+- Starting volume: 50ml
+- Target concentration: 5%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+40% × 50ml = 5% × V₂
+2000 = 5 × V₂
+V₂ = 400.0ml
+
+**Diluent Required:**
+400.0ml - 50ml = 350.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 325.5ml
+- Distilled water: 24.5ml
+
+**Final Product:**
+- Volume: 400.0ml
+- Concentration: 5%
+- Classification: Cologne
+
+**Yield:** 8 bottles (50ml each) + 0.0ml remainder"
+Dilute 100ml of 35% perfume concentrate to 10%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 35%
+- Starting volume: 100ml
+- Target concentration: 10%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+35% × 100ml = 10% × V₂
+3500 = 10 × V₂
+V₂ = 350.0ml
+
+**Diluent Required:**
+350.0ml - 100ml = 250.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 232.5ml
+- Distilled water: 17.5ml
+
+**Final Product:**
+- Volume: 350.0ml
+- Concentration: 10%
+- Classification: EDT
+
+**Yield:** 7 bottles (50ml each) + 0.0ml remainder"
+Dilute 100ml of 20% perfume concentrate to 8%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 20%
+- Starting volume: 100ml
+- Target concentration: 8%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+20% × 100ml = 8% × V₂
+2000 = 8 × V₂
+V₂ = 250.0ml
+
+**Diluent Required:**
+250.0ml - 100ml = 150.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 139.5ml
+- Distilled water: 10.5ml
+
+**Final Product:**
+- Volume: 250.0ml
+- Concentration: 8%
+- Classification: EDT
+
+**Yield:** 5 bottles (50ml each) + 0.0ml remainder"
+Dilute 200ml of 25% perfume concentrate to 12%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 25%
+- Starting volume: 200ml
+- Target concentration: 12%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+25% × 200ml = 12% × V₂
+5000 = 12 × V₂
+V₂ = 416.67ml
+
+**Diluent Required:**
+416.67ml - 200ml = 216.67000000000002ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 201.5ml
+- Distilled water: 15.17ml
+
+**Final Product:**
+- Volume: 416.67ml
+- Concentration: 12%
+- Classification: EDP
+
+**Yield:** 8 bottles (50ml each) + 16.7ml remainder"
+Dilute 150ml of 35% perfume concentrate to 5%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 35%
+- Starting volume: 150ml
+- Target concentration: 5%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+35% × 150ml = 5% × V₂
+5250 = 5 × V₂
+V₂ = 1050.0ml
+
+**Diluent Required:**
+1050.0ml - 150ml = 900.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 837.0ml
+- Distilled water: 63.0ml
+
+**Final Product:**
+- Volume: 1050.0ml
+- Concentration: 5%
+- Classification: Cologne
+
+**Yield:** 21 bottles (50ml each) + 0.0ml remainder"
+Dilute 150ml of 30% perfume concentrate to 15%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 30%
+- Starting volume: 150ml
+- Target concentration: 15%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+30% × 150ml = 15% × V₂
+4500 = 15 × V₂
+V₂ = 300.0ml
+
+**Diluent Required:**
+300.0ml - 150ml = 150.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 139.5ml
+- Distilled water: 10.5ml
+
+**Final Product:**
+- Volume: 300.0ml
+- Concentration: 15%
+- Classification: EDP
+
+**Yield:** 6 bottles (50ml each) + 0.0ml remainder"
+Dilute 150ml of 35% perfume concentrate to 15%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 35%
+- Starting volume: 150ml
+- Target concentration: 15%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+35% × 150ml = 15% × V₂
+5250 = 15 × V₂
+V₂ = 350.0ml
+
+**Diluent Required:**
+350.0ml - 150ml = 200.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 186.0ml
+- Distilled water: 14.0ml
+
+**Final Product:**
+- Volume: 350.0ml
+- Concentration: 15%
+- Classification: EDP
+
+**Yield:** 7 bottles (50ml each) + 0.0ml remainder"
+Dilute 200ml of 35% perfume concentrate to 8%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 35%
+- Starting volume: 200ml
+- Target concentration: 8%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+35% × 200ml = 8% × V₂
+7000 = 8 × V₂
+V₂ = 875.0ml
+
+**Diluent Required:**
+875.0ml - 200ml = 675.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 627.75ml
+- Distilled water: 47.25ml
+
+**Final Product:**
+- Volume: 875.0ml
+- Concentration: 8%
+- Classification: EDT
+
+**Yield:** 17 bottles (50ml each) + 25.0ml remainder"
+Dilute 200ml of 35% perfume concentrate to 8%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 35%
+- Starting volume: 200ml
+- Target concentration: 8%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+35% × 200ml = 8% × V₂
+7000 = 8 × V₂
+V₂ = 875.0ml
+
+**Diluent Required:**
+875.0ml - 200ml = 675.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 627.75ml
+- Distilled water: 47.25ml
+
+**Final Product:**
+- Volume: 875.0ml
+- Concentration: 8%
+- Classification: EDT
+
+**Yield:** 17 bottles (50ml each) + 25.0ml remainder"
+Dilute 100ml of 25% perfume concentrate to 10%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 25%
+- Starting volume: 100ml
+- Target concentration: 10%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+25% × 100ml = 10% × V₂
+2500 = 10 × V₂
+V₂ = 250.0ml
+
+**Diluent Required:**
+250.0ml - 100ml = 150.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 139.5ml
+- Distilled water: 10.5ml
+
+**Final Product:**
+- Volume: 250.0ml
+- Concentration: 10%
+- Classification: EDT
+
+**Yield:** 5 bottles (50ml each) + 0.0ml remainder"
+Dilute 200ml of 35% perfume concentrate to 8%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 35%
+- Starting volume: 200ml
+- Target concentration: 8%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+35% × 200ml = 8% × V₂
+7000 = 8 × V₂
+V₂ = 875.0ml
+
+**Diluent Required:**
+875.0ml - 200ml = 675.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 627.75ml
+- Distilled water: 47.25ml
+
+**Final Product:**
+- Volume: 875.0ml
+- Concentration: 8%
+- Classification: EDT
+
+**Yield:** 17 bottles (50ml each) + 25.0ml remainder"
+Dilute 100ml of 20% perfume concentrate to 8%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 20%
+- Starting volume: 100ml
+- Target concentration: 8%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+20% × 100ml = 8% × V₂
+2000 = 8 × V₂
+V₂ = 250.0ml
+
+**Diluent Required:**
+250.0ml - 100ml = 150.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 139.5ml
+- Distilled water: 10.5ml
+
+**Final Product:**
+- Volume: 250.0ml
+- Concentration: 8%
+- Classification: EDT
+
+**Yield:** 5 bottles (50ml each) + 0.0ml remainder"
+Dilute 100ml of 25% perfume concentrate to 12%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 25%
+- Starting volume: 100ml
+- Target concentration: 12%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+25% × 100ml = 12% × V₂
+2500 = 12 × V₂
+V₂ = 208.33ml
+
+**Diluent Required:**
+208.33ml - 100ml = 108.33000000000001ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 100.75ml
+- Distilled water: 7.58ml
+
+**Final Product:**
+- Volume: 208.33ml
+- Concentration: 12%
+- Classification: EDP
+
+**Yield:** 4 bottles (50ml each) + 8.3ml remainder"
+Dilute 200ml of 25% perfume concentrate to 8%. How much diluent needed?,"CONCENTRATION DILUTION CALCULATION:
+
+**Given:**
+- Starting concentration: 25%
+- Starting volume: 200ml
+- Target concentration: 8%
+
+**Formula:** C₁V₁ = C₂V₂
+
+**Calculation:**
+25% × 200ml = 8% × V₂
+5000 = 8 × V₂
+V₂ = 625.0ml
+
+**Diluent Required:**
+625.0ml - 200ml = 425.0ml
+
+**Diluent Composition (93/7 ratio):**
+- Ethanol 96%: 395.25ml
+- Distilled water: 29.75ml
+
+**Final Product:**
+- Volume: 625.0ml
+- Concentration: 8%
+- Classification: EDT
+
+**Yield:** 12 bottles (50ml each) + 25.0ml remainder"
+Create 1000ml with 12% fragrance in 34/47/19 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 1000ml
+- Total fragrance: 12%
+- Pyramid ratio: 34:47:19 (top:middle:base)
+
+**Total Fragrance Oils:**
+12% × 1000ml = 120.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (34%):
+   34% × 120.0ml = 40.8ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (47%):
+   47% × 120.0ml = 56.4ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (19%):
+   19% × 120.0ml = 22.8ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (88%):**
+- Remaining volume: 880.0ml
+- Ethanol (85%): 748.0ml
+- Water (15%): 132.0ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $1020.00
+- Middle notes ($40/ml): $2256.00
+- Base notes ($55/ml): $1254.00
+- Total oils: $4530.00
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 500ml with 16% fragrance in 54/30/16 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 500ml
+- Total fragrance: 16%
+- Pyramid ratio: 54:30:16 (top:middle:base)
+
+**Total Fragrance Oils:**
+16% × 500ml = 80.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (54%):
+   54% × 80.0ml = 43.2ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (30%):
+   30% × 80.0ml = 24.0ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (16%):
+   16% × 80.0ml = 12.8ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (84%):**
+- Remaining volume: 420.0ml
+- Ethanol (85%): 357.0ml
+- Water (15%): 63.0ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $1080.00
+- Middle notes ($40/ml): $960.00
+- Base notes ($55/ml): $704.00
+- Total oils: $2744.00
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 300ml with 13% fragrance in 32/47/21 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 300ml
+- Total fragrance: 13%
+- Pyramid ratio: 32:47:21 (top:middle:base)
+
+**Total Fragrance Oils:**
+13% × 300ml = 39.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (32%):
+   32% × 39.0ml = 12.48ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (47%):
+   47% × 39.0ml = 18.33ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (21%):
+   21% × 39.0ml = 8.19ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (87%):**
+- Remaining volume: 261.0ml
+- Ethanol (85%): 221.85ml
+- Water (15%): 39.15ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $312.00
+- Middle notes ($40/ml): $733.20
+- Base notes ($55/ml): $450.45
+- Total oils: $1495.65
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 500ml with 13% fragrance in 49/29/22 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 500ml
+- Total fragrance: 13%
+- Pyramid ratio: 49:29:22 (top:middle:base)
+
+**Total Fragrance Oils:**
+13% × 500ml = 65.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (49%):
+   49% × 65.0ml = 31.85ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (29%):
+   29% × 65.0ml = 18.85ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (22%):
+   22% × 65.0ml = 14.3ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (87%):**
+- Remaining volume: 435.0ml
+- Ethanol (85%): 369.75ml
+- Water (15%): 65.25ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $796.25
+- Middle notes ($40/ml): $754.00
+- Base notes ($55/ml): $786.50
+- Total oils: $2336.75
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 500ml with 14% fragrance in 54/30/16 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 500ml
+- Total fragrance: 14%
+- Pyramid ratio: 54:30:16 (top:middle:base)
+
+**Total Fragrance Oils:**
+14% × 500ml = 70.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (54%):
+   54% × 70.0ml = 37.8ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (30%):
+   30% × 70.0ml = 21.0ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (16%):
+   16% × 70.0ml = 11.2ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (86%):**
+- Remaining volume: 430.0ml
+- Ethanol (85%): 365.5ml
+- Water (15%): 64.5ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $945.00
+- Middle notes ($40/ml): $840.00
+- Base notes ($55/ml): $616.00
+- Total oils: $2401.00
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 200ml with 20% fragrance in 51/38/11 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 20%
+- Pyramid ratio: 51:38:11 (top:middle:base)
+
+**Total Fragrance Oils:**
+20% × 200ml = 40.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (51%):
+   51% × 40.0ml = 20.4ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (38%):
+   38% × 40.0ml = 15.2ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (11%):
+   11% × 40.0ml = 4.4ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (80%):**
+- Remaining volume: 160.0ml
+- Ethanol (85%): 136.0ml
+- Water (15%): 24.0ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $510.00
+- Middle notes ($40/ml): $608.00
+- Base notes ($55/ml): $242.00
+- Total oils: $1360.00
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 750ml with 15% fragrance in 57/25/18 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 750ml
+- Total fragrance: 15%
+- Pyramid ratio: 57:25:18 (top:middle:base)
+
+**Total Fragrance Oils:**
+15% × 750ml = 112.5ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (57%):
+   57% × 112.5ml = 64.12ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (25%):
+   25% × 112.5ml = 28.12ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (18%):
+   18% × 112.5ml = 20.25ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (85%):**
+- Remaining volume: 637.5ml
+- Ethanol (85%): 541.88ml
+- Water (15%): 95.62ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $1603.00
+- Middle notes ($40/ml): $1124.80
+- Base notes ($55/ml): $1113.75
+- Total oils: $3841.55
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 200ml with 15% fragrance in 30/59/11 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 15%
+- Pyramid ratio: 30:59:11 (top:middle:base)
+
+**Total Fragrance Oils:**
+15% × 200ml = 30.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (30%):
+   30% × 30.0ml = 9.0ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (59%):
+   59% × 30.0ml = 17.7ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (11%):
+   11% × 30.0ml = 3.3ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (85%):**
+- Remaining volume: 170.0ml
+- Ethanol (85%): 144.5ml
+- Water (15%): 25.5ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $225.00
+- Middle notes ($40/ml): $708.00
+- Base notes ($55/ml): $181.50
+- Total oils: $1114.50
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 200ml with 17% fragrance in 58/18/24 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 17%
+- Pyramid ratio: 58:18:24 (top:middle:base)
+
+**Total Fragrance Oils:**
+17% × 200ml = 34.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (58%):
+   58% × 34.0ml = 19.72ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (18%):
+   18% × 34.0ml = 6.12ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (24%):
+   24% × 34.0ml = 8.16ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (83%):**
+- Remaining volume: 166.0ml
+- Ethanol (85%): 141.1ml
+- Water (15%): 24.9ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $493.00
+- Middle notes ($40/ml): $244.80
+- Base notes ($55/ml): $448.80
+- Total oils: $1186.60
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 1000ml with 13% fragrance in 40/43/17 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 1000ml
+- Total fragrance: 13%
+- Pyramid ratio: 40:43:17 (top:middle:base)
+
+**Total Fragrance Oils:**
+13% × 1000ml = 130.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (40%):
+   40% × 130.0ml = 52.0ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (43%):
+   43% × 130.0ml = 55.9ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (17%):
+   17% × 130.0ml = 22.1ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (87%):**
+- Remaining volume: 870.0ml
+- Ethanol (85%): 739.5ml
+- Water (15%): 130.5ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $1300.00
+- Middle notes ($40/ml): $2236.00
+- Base notes ($55/ml): $1215.50
+- Total oils: $4751.50
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 750ml with 12% fragrance in 43/41/16 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 750ml
+- Total fragrance: 12%
+- Pyramid ratio: 43:41:16 (top:middle:base)
+
+**Total Fragrance Oils:**
+12% × 750ml = 90.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (43%):
+   43% × 90.0ml = 38.7ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (41%):
+   41% × 90.0ml = 36.9ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (16%):
+   16% × 90.0ml = 14.4ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (88%):**
+- Remaining volume: 660.0ml
+- Ethanol (85%): 561.0ml
+- Water (15%): 99.0ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $967.50
+- Middle notes ($40/ml): $1476.00
+- Base notes ($55/ml): $792.00
+- Total oils: $3235.50
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 500ml with 10% fragrance in 39/50/11 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 500ml
+- Total fragrance: 10%
+- Pyramid ratio: 39:50:11 (top:middle:base)
+
+**Total Fragrance Oils:**
+10% × 500ml = 50.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (39%):
+   39% × 50.0ml = 19.5ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (50%):
+   50% × 50.0ml = 25.0ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (11%):
+   11% × 50.0ml = 5.5ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (90%):**
+- Remaining volume: 450.0ml
+- Ethanol (85%): 382.5ml
+- Water (15%): 67.5ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $487.50
+- Middle notes ($40/ml): $1000.00
+- Base notes ($55/ml): $302.50
+- Total oils: $1790.00
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 750ml with 13% fragrance in 59/30/11 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 750ml
+- Total fragrance: 13%
+- Pyramid ratio: 59:30:11 (top:middle:base)
+
+**Total Fragrance Oils:**
+13% × 750ml = 97.5ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (59%):
+   59% × 97.5ml = 57.52ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (30%):
+   30% × 97.5ml = 29.25ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (11%):
+   11% × 97.5ml = 10.72ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (87%):**
+- Remaining volume: 652.5ml
+- Ethanol (85%): 554.62ml
+- Water (15%): 97.88ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $1438.00
+- Middle notes ($40/ml): $1170.00
+- Base notes ($55/ml): $589.60
+- Total oils: $3197.60
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 300ml with 14% fragrance in 50/31/19 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 300ml
+- Total fragrance: 14%
+- Pyramid ratio: 50:31:19 (top:middle:base)
+
+**Total Fragrance Oils:**
+14% × 300ml = 42.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (50%):
+   50% × 42.0ml = 21.0ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (31%):
+   31% × 42.0ml = 13.02ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (19%):
+   19% × 42.0ml = 7.98ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (86%):**
+- Remaining volume: 258.0ml
+- Ethanol (85%): 219.3ml
+- Water (15%): 38.7ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $525.00
+- Middle notes ($40/ml): $520.80
+- Base notes ($55/ml): $438.90
+- Total oils: $1484.70
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 500ml with 15% fragrance in 41/39/20 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 500ml
+- Total fragrance: 15%
+- Pyramid ratio: 41:39:20 (top:middle:base)
+
+**Total Fragrance Oils:**
+15% × 500ml = 75.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (41%):
+   41% × 75.0ml = 30.75ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (39%):
+   39% × 75.0ml = 29.25ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (20%):
+   20% × 75.0ml = 15.0ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (85%):**
+- Remaining volume: 425.0ml
+- Ethanol (85%): 361.25ml
+- Water (15%): 63.75ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $768.75
+- Middle notes ($40/ml): $1170.00
+- Base notes ($55/ml): $825.00
+- Total oils: $2763.75
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 750ml with 12% fragrance in 32/50/18 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 750ml
+- Total fragrance: 12%
+- Pyramid ratio: 32:50:18 (top:middle:base)
+
+**Total Fragrance Oils:**
+12% × 750ml = 90.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (32%):
+   32% × 90.0ml = 28.8ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (50%):
+   50% × 90.0ml = 45.0ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (18%):
+   18% × 90.0ml = 16.2ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (88%):**
+- Remaining volume: 660.0ml
+- Ethanol (85%): 561.0ml
+- Water (15%): 99.0ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $720.00
+- Middle notes ($40/ml): $1800.00
+- Base notes ($55/ml): $891.00
+- Total oils: $3411.00
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 300ml with 16% fragrance in 45/44/11 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 300ml
+- Total fragrance: 16%
+- Pyramid ratio: 45:44:11 (top:middle:base)
+
+**Total Fragrance Oils:**
+16% × 300ml = 48.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (45%):
+   45% × 48.0ml = 21.6ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (44%):
+   44% × 48.0ml = 21.12ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (11%):
+   11% × 48.0ml = 5.28ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (84%):**
+- Remaining volume: 252.0ml
+- Ethanol (85%): 214.2ml
+- Water (15%): 37.8ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $540.00
+- Middle notes ($40/ml): $844.80
+- Base notes ($55/ml): $290.40
+- Total oils: $1675.20
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 500ml with 16% fragrance in 50/32/18 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 500ml
+- Total fragrance: 16%
+- Pyramid ratio: 50:32:18 (top:middle:base)
+
+**Total Fragrance Oils:**
+16% × 500ml = 80.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (50%):
+   50% × 80.0ml = 40.0ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (32%):
+   32% × 80.0ml = 25.6ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (18%):
+   18% × 80.0ml = 14.4ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (84%):**
+- Remaining volume: 420.0ml
+- Ethanol (85%): 357.0ml
+- Water (15%): 63.0ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $1000.00
+- Middle notes ($40/ml): $1024.00
+- Base notes ($55/ml): $792.00
+- Total oils: $2816.00
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 300ml with 10% fragrance in 54/26/20 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 300ml
+- Total fragrance: 10%
+- Pyramid ratio: 54:26:20 (top:middle:base)
+
+**Total Fragrance Oils:**
+10% × 300ml = 30.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (54%):
+   54% × 30.0ml = 16.2ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (26%):
+   26% × 30.0ml = 7.8ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (20%):
+   20% × 30.0ml = 6.0ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (90%):**
+- Remaining volume: 270.0ml
+- Ethanol (85%): 229.5ml
+- Water (15%): 40.5ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $405.00
+- Middle notes ($40/ml): $312.00
+- Base notes ($55/ml): $330.00
+- Total oils: $1047.00
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 300ml with 12% fragrance in 47/30/23 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 300ml
+- Total fragrance: 12%
+- Pyramid ratio: 47:30:23 (top:middle:base)
+
+**Total Fragrance Oils:**
+12% × 300ml = 36.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (47%):
+   47% × 36.0ml = 16.92ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (30%):
+   30% × 36.0ml = 10.8ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (23%):
+   23% × 36.0ml = 8.28ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (88%):**
+- Remaining volume: 264.0ml
+- Ethanol (85%): 224.4ml
+- Water (15%): 39.6ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $423.00
+- Middle notes ($40/ml): $432.00
+- Base notes ($55/ml): $455.40
+- Total oils: $1310.40
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 1000ml with 12% fragrance in 45/42/13 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 1000ml
+- Total fragrance: 12%
+- Pyramid ratio: 45:42:13 (top:middle:base)
+
+**Total Fragrance Oils:**
+12% × 1000ml = 120.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (45%):
+   45% × 120.0ml = 54.0ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (42%):
+   42% × 120.0ml = 50.4ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (13%):
+   13% × 120.0ml = 15.6ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (88%):**
+- Remaining volume: 880.0ml
+- Ethanol (85%): 748.0ml
+- Water (15%): 132.0ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $1350.00
+- Middle notes ($40/ml): $2016.00
+- Base notes ($55/ml): $858.00
+- Total oils: $4224.00
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 200ml with 17% fragrance in 44/36/20 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 17%
+- Pyramid ratio: 44:36:20 (top:middle:base)
+
+**Total Fragrance Oils:**
+17% × 200ml = 34.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (44%):
+   44% × 34.0ml = 14.96ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (36%):
+   36% × 34.0ml = 12.24ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (20%):
+   20% × 34.0ml = 6.8ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (83%):**
+- Remaining volume: 166.0ml
+- Ethanol (85%): 141.1ml
+- Water (15%): 24.9ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $374.00
+- Middle notes ($40/ml): $489.60
+- Base notes ($55/ml): $374.00
+- Total oils: $1237.60
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 200ml with 19% fragrance in 57/31/12 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 19%
+- Pyramid ratio: 57:31:12 (top:middle:base)
+
+**Total Fragrance Oils:**
+19% × 200ml = 38.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (57%):
+   57% × 38.0ml = 21.66ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (31%):
+   31% × 38.0ml = 11.78ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (12%):
+   12% × 38.0ml = 4.56ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (81%):**
+- Remaining volume: 162.0ml
+- Ethanol (85%): 137.7ml
+- Water (15%): 24.3ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $541.50
+- Middle notes ($40/ml): $471.20
+- Base notes ($55/ml): $250.80
+- Total oils: $1263.50
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 1000ml with 12% fragrance in 44/35/21 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 1000ml
+- Total fragrance: 12%
+- Pyramid ratio: 44:35:21 (top:middle:base)
+
+**Total Fragrance Oils:**
+12% × 1000ml = 120.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (44%):
+   44% × 120.0ml = 52.8ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (35%):
+   35% × 120.0ml = 42.0ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (21%):
+   21% × 120.0ml = 25.2ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (88%):**
+- Remaining volume: 880.0ml
+- Ethanol (85%): 748.0ml
+- Water (15%): 132.0ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $1320.00
+- Middle notes ($40/ml): $1680.00
+- Base notes ($55/ml): $1386.00
+- Total oils: $4386.00
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Create 1000ml with 20% fragrance in 32/50/18 pyramid ratio (top/middle/base). Calculate all components.,"FRAGRANCE PYRAMID FORMULATION:
+
+**Specifications:**
+- Total volume: 1000ml
+- Total fragrance: 20%
+- Pyramid ratio: 32:50:18 (top:middle:base)
+
+**Total Fragrance Oils:**
+20% × 1000ml = 200.0ml
+
+**Pyramid Distribution:**
+
+1. Top Notes (32%):
+   32% × 200.0ml = 64.0ml
+   Examples: Bergamot, lemon, orange
+
+2. Middle Notes (50%):
+   50% × 200.0ml = 100.0ml
+   Examples: Rose, jasmine, lavender
+
+3. Base Notes (18%):
+   18% × 200.0ml = 36.0ml
+   Examples: Sandalwood, vanilla, musk
+
+**Carrier Base (80%):**
+- Remaining volume: 800.0ml
+- Ethanol (85%): 680.0ml
+- Water (15%): 120.0ml
+
+**Cost Analysis (sample prices):**
+- Top notes ($25/ml): $1600.00
+- Middle notes ($40/ml): $4000.00
+- Base notes ($55/ml): $1980.00
+- Total oils: $7580.00
+
+**Maceration:** 4-6 weeks recommended
+**Expected Profile:** Top notes fade 1-2hr, heart 3-6hr, base 8+hr"
+Compare cost of 250ml at 5% vs 25% if fragrance oil is $60/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 250ml
+**Fragrance Oil Cost:** $60/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 5% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 12.5ml
+- Cost: $750.00
+
+Alcohol Base:
+- Volume: 237.5ml
+- Cost: $118.75
+
+**Total Cost: $868.75**
+**Cost per ml: $3.48**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 25% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 62.5ml
+- Cost: $3750.00
+
+Alcohol Base:
+- Volume: 187.5ml
+- Cost: $93.75
+
+**Total Cost: $3843.75**
+**Cost per ml: $15.38**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $2975.00 more for 25%
+Percentage: 342.4% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is Perfume strength
+- Higher concentration = longer wear
+- Option 2 needs 5.0× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 500ml at 5% vs 15% if fragrance oil is $30/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 500ml
+**Fragrance Oil Cost:** $30/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 5% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 25.0ml
+- Cost: $750.00
+
+Alcohol Base:
+- Volume: 475.0ml
+- Cost: $237.50
+
+**Total Cost: $987.50**
+**Cost per ml: $1.98**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 15% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 75.0ml
+- Cost: $2250.00
+
+Alcohol Base:
+- Volume: 425.0ml
+- Cost: $212.50
+
+**Total Cost: $2462.50**
+**Cost per ml: $4.92**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $1475.00 more for 15%
+Percentage: 149.4% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is EDP strength
+- Higher concentration = longer wear
+- Option 2 needs 3.0× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 500ml at 10% vs 25% if fragrance oil is $40/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 500ml
+**Fragrance Oil Cost:** $40/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 10% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 50.0ml
+- Cost: $2000.00
+
+Alcohol Base:
+- Volume: 450.0ml
+- Cost: $225.00
+
+**Total Cost: $2225.00**
+**Cost per ml: $4.45**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 25% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 125.0ml
+- Cost: $5000.00
+
+Alcohol Base:
+- Volume: 375.0ml
+- Cost: $187.50
+
+**Total Cost: $5187.50**
+**Cost per ml: $10.38**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $2962.50 more for 25%
+Percentage: 133.1% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is Perfume strength
+- Higher concentration = longer wear
+- Option 2 needs 2.5× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 250ml at 8% vs 18% if fragrance oil is $80/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 250ml
+**Fragrance Oil Cost:** $80/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 8% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 20.0ml
+- Cost: $1600.00
+
+Alcohol Base:
+- Volume: 230.0ml
+- Cost: $115.00
+
+**Total Cost: $1715.00**
+**Cost per ml: $6.86**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 18% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 45.0ml
+- Cost: $3600.00
+
+Alcohol Base:
+- Volume: 205.0ml
+- Cost: $102.50
+
+**Total Cost: $3702.50**
+**Cost per ml: $14.81**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $1987.50 more for 18%
+Percentage: 115.9% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is EDP strength
+- Higher concentration = longer wear
+- Option 2 needs 2.2× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 100ml at 8% vs 25% if fragrance oil is $40/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 100ml
+**Fragrance Oil Cost:** $40/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 8% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 8.0ml
+- Cost: $320.00
+
+Alcohol Base:
+- Volume: 92.0ml
+- Cost: $46.00
+
+**Total Cost: $366.00**
+**Cost per ml: $3.66**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 25% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 25.0ml
+- Cost: $1000.00
+
+Alcohol Base:
+- Volume: 75.0ml
+- Cost: $37.50
+
+**Total Cost: $1037.50**
+**Cost per ml: $10.38**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $671.50 more for 25%
+Percentage: 183.5% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is Perfume strength
+- Higher concentration = longer wear
+- Option 2 needs 3.1× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 500ml at 5% vs 15% if fragrance oil is $30/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 500ml
+**Fragrance Oil Cost:** $30/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 5% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 25.0ml
+- Cost: $750.00
+
+Alcohol Base:
+- Volume: 475.0ml
+- Cost: $237.50
+
+**Total Cost: $987.50**
+**Cost per ml: $1.98**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 15% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 75.0ml
+- Cost: $2250.00
+
+Alcohol Base:
+- Volume: 425.0ml
+- Cost: $212.50
+
+**Total Cost: $2462.50**
+**Cost per ml: $4.92**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $1475.00 more for 15%
+Percentage: 149.4% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is EDP strength
+- Higher concentration = longer wear
+- Option 2 needs 3.0× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 500ml at 5% vs 15% if fragrance oil is $80/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 500ml
+**Fragrance Oil Cost:** $80/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 5% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 25.0ml
+- Cost: $2000.00
+
+Alcohol Base:
+- Volume: 475.0ml
+- Cost: $237.50
+
+**Total Cost: $2237.50**
+**Cost per ml: $4.47**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 15% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 75.0ml
+- Cost: $6000.00
+
+Alcohol Base:
+- Volume: 425.0ml
+- Cost: $212.50
+
+**Total Cost: $6212.50**
+**Cost per ml: $12.43**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $3975.00 more for 15%
+Percentage: 177.7% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is EDP strength
+- Higher concentration = longer wear
+- Option 2 needs 3.0× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 100ml at 5% vs 20% if fragrance oil is $80/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 100ml
+**Fragrance Oil Cost:** $80/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 5% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 5.0ml
+- Cost: $400.00
+
+Alcohol Base:
+- Volume: 95.0ml
+- Cost: $47.50
+
+**Total Cost: $447.50**
+**Cost per ml: $4.47**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 20% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 20.0ml
+- Cost: $1600.00
+
+Alcohol Base:
+- Volume: 80.0ml
+- Cost: $40.00
+
+**Total Cost: $1640.00**
+**Cost per ml: $16.40**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $1192.50 more for 20%
+Percentage: 266.5% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is Perfume strength
+- Higher concentration = longer wear
+- Option 2 needs 4.0× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 250ml at 5% vs 18% if fragrance oil is $80/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 250ml
+**Fragrance Oil Cost:** $80/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 5% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 12.5ml
+- Cost: $1000.00
+
+Alcohol Base:
+- Volume: 237.5ml
+- Cost: $118.75
+
+**Total Cost: $1118.75**
+**Cost per ml: $4.47**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 18% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 45.0ml
+- Cost: $3600.00
+
+Alcohol Base:
+- Volume: 205.0ml
+- Cost: $102.50
+
+**Total Cost: $3702.50**
+**Cost per ml: $14.81**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $2583.75 more for 18%
+Percentage: 230.9% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is EDP strength
+- Higher concentration = longer wear
+- Option 2 needs 3.6× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 100ml at 10% vs 25% if fragrance oil is $30/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 100ml
+**Fragrance Oil Cost:** $30/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 10% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 10.0ml
+- Cost: $300.00
+
+Alcohol Base:
+- Volume: 90.0ml
+- Cost: $45.00
+
+**Total Cost: $345.00**
+**Cost per ml: $3.45**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 25% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 25.0ml
+- Cost: $750.00
+
+Alcohol Base:
+- Volume: 75.0ml
+- Cost: $37.50
+
+**Total Cost: $787.50**
+**Cost per ml: $7.88**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $442.50 more for 25%
+Percentage: 128.3% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is Perfume strength
+- Higher concentration = longer wear
+- Option 2 needs 2.5× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 500ml at 5% vs 20% if fragrance oil is $30/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 500ml
+**Fragrance Oil Cost:** $30/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 5% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 25.0ml
+- Cost: $750.00
+
+Alcohol Base:
+- Volume: 475.0ml
+- Cost: $237.50
+
+**Total Cost: $987.50**
+**Cost per ml: $1.98**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 20% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 100.0ml
+- Cost: $3000.00
+
+Alcohol Base:
+- Volume: 400.0ml
+- Cost: $200.00
+
+**Total Cost: $3200.00**
+**Cost per ml: $6.40**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $2212.50 more for 20%
+Percentage: 224.1% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is Perfume strength
+- Higher concentration = longer wear
+- Option 2 needs 4.0× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 100ml at 10% vs 15% if fragrance oil is $80/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 100ml
+**Fragrance Oil Cost:** $80/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 10% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 10.0ml
+- Cost: $800.00
+
+Alcohol Base:
+- Volume: 90.0ml
+- Cost: $45.00
+
+**Total Cost: $845.00**
+**Cost per ml: $8.45**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 15% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 15.0ml
+- Cost: $1200.00
+
+Alcohol Base:
+- Volume: 85.0ml
+- Cost: $42.50
+
+**Total Cost: $1242.50**
+**Cost per ml: $12.43**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $397.50 more for 15%
+Percentage: 47.0% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is EDP strength
+- Higher concentration = longer wear
+- Option 2 needs 1.5× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 250ml at 5% vs 18% if fragrance oil is $30/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 250ml
+**Fragrance Oil Cost:** $30/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 5% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 12.5ml
+- Cost: $375.00
+
+Alcohol Base:
+- Volume: 237.5ml
+- Cost: $118.75
+
+**Total Cost: $493.75**
+**Cost per ml: $1.98**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 18% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 45.0ml
+- Cost: $1350.00
+
+Alcohol Base:
+- Volume: 205.0ml
+- Cost: $102.50
+
+**Total Cost: $1452.50**
+**Cost per ml: $5.81**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $958.75 more for 18%
+Percentage: 194.2% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is EDP strength
+- Higher concentration = longer wear
+- Option 2 needs 3.6× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 100ml at 8% vs 15% if fragrance oil is $50/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 100ml
+**Fragrance Oil Cost:** $50/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 8% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 8.0ml
+- Cost: $400.00
+
+Alcohol Base:
+- Volume: 92.0ml
+- Cost: $46.00
+
+**Total Cost: $446.00**
+**Cost per ml: $4.46**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 15% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 15.0ml
+- Cost: $750.00
+
+Alcohol Base:
+- Volume: 85.0ml
+- Cost: $42.50
+
+**Total Cost: $792.50**
+**Cost per ml: $7.92**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $346.50 more for 15%
+Percentage: 77.7% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is EDP strength
+- Higher concentration = longer wear
+- Option 2 needs 1.9× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 250ml at 5% vs 25% if fragrance oil is $80/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 250ml
+**Fragrance Oil Cost:** $80/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 5% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 12.5ml
+- Cost: $1000.00
+
+Alcohol Base:
+- Volume: 237.5ml
+- Cost: $118.75
+
+**Total Cost: $1118.75**
+**Cost per ml: $4.47**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 25% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 62.5ml
+- Cost: $5000.00
+
+Alcohol Base:
+- Volume: 187.5ml
+- Cost: $93.75
+
+**Total Cost: $5093.75**
+**Cost per ml: $20.38**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $3975.00 more for 25%
+Percentage: 355.3% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is Perfume strength
+- Higher concentration = longer wear
+- Option 2 needs 5.0× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 250ml at 10% vs 20% if fragrance oil is $80/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 250ml
+**Fragrance Oil Cost:** $80/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 10% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 25.0ml
+- Cost: $2000.00
+
+Alcohol Base:
+- Volume: 225.0ml
+- Cost: $112.50
+
+**Total Cost: $2112.50**
+**Cost per ml: $8.45**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 20% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 50.0ml
+- Cost: $4000.00
+
+Alcohol Base:
+- Volume: 200.0ml
+- Cost: $100.00
+
+**Total Cost: $4100.00**
+**Cost per ml: $16.40**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $1987.50 more for 20%
+Percentage: 94.1% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is Perfume strength
+- Higher concentration = longer wear
+- Option 2 needs 2.0× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 250ml at 8% vs 18% if fragrance oil is $50/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 250ml
+**Fragrance Oil Cost:** $50/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 8% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 20.0ml
+- Cost: $1000.00
+
+Alcohol Base:
+- Volume: 230.0ml
+- Cost: $115.00
+
+**Total Cost: $1115.00**
+**Cost per ml: $4.46**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 18% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 45.0ml
+- Cost: $2250.00
+
+Alcohol Base:
+- Volume: 205.0ml
+- Cost: $102.50
+
+**Total Cost: $2352.50**
+**Cost per ml: $9.41**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $1237.50 more for 18%
+Percentage: 111.0% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is EDP strength
+- Higher concentration = longer wear
+- Option 2 needs 2.2× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 100ml at 10% vs 15% if fragrance oil is $80/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 100ml
+**Fragrance Oil Cost:** $80/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 10% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 10.0ml
+- Cost: $800.00
+
+Alcohol Base:
+- Volume: 90.0ml
+- Cost: $45.00
+
+**Total Cost: $845.00**
+**Cost per ml: $8.45**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 15% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 15.0ml
+- Cost: $1200.00
+
+Alcohol Base:
+- Volume: 85.0ml
+- Cost: $42.50
+
+**Total Cost: $1242.50**
+**Cost per ml: $12.43**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $397.50 more for 15%
+Percentage: 47.0% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is EDP strength
+- Higher concentration = longer wear
+- Option 2 needs 1.5× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 250ml at 8% vs 25% if fragrance oil is $50/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 250ml
+**Fragrance Oil Cost:** $50/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 8% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 20.0ml
+- Cost: $1000.00
+
+Alcohol Base:
+- Volume: 230.0ml
+- Cost: $115.00
+
+**Total Cost: $1115.00**
+**Cost per ml: $4.46**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 25% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 62.5ml
+- Cost: $3125.00
+
+Alcohol Base:
+- Volume: 187.5ml
+- Cost: $93.75
+
+**Total Cost: $3218.75**
+**Cost per ml: $12.88**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $2103.75 more for 25%
+Percentage: 188.7% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is Perfume strength
+- Higher concentration = longer wear
+- Option 2 needs 3.1× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Compare cost of 500ml at 10% vs 15% if fragrance oil is $30/ml. Which is more economical?,"PERFUME CONCENTRATION COST COMPARISON:
+
+**Batch Size:** 500ml
+**Fragrance Oil Cost:** $30/ml
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 1: 10% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 50.0ml
+- Cost: $1500.00
+
+Alcohol Base:
+- Volume: 450.0ml
+- Cost: $225.00
+
+**Total Cost: $1725.00**
+**Cost per ml: $3.45**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**OPTION 2: 15% Concentration**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Fragrance Oil:
+- Volume: 75.0ml
+- Cost: $2250.00
+
+Alcohol Base:
+- Volume: 425.0ml
+- Cost: $212.50
+
+**Total Cost: $2462.50**
+**Cost per ml: $4.92**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+**COST DIFFERENCE:**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Absolute: $737.50 more for 15%
+Percentage: 42.8% increase
+
+**Economic Analysis:**
+- Option 1 is Cologne/EDT strength
+- Option 2 is EDP strength
+- Higher concentration = longer wear
+- Option 2 needs 1.5× less applications
+
+**Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"
+Scale a 250ml formula (12% oils) to 1250ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 250ml
+**Target Batch:** 1250ml
+**Scale Factor:** 5×
+
+**Original Composition (12% fragrance):**
+- Fragrance oils: 30.0ml
+- Ethanol: 212.5ml
+- Water: 7.5ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   30.0ml × 5 = 150.0ml
+
+2. Ethanol:
+   212.5ml × 5 = 1062.5ml
+
+3. Water:
+   7.5ml × 5 = 37.5ml
+
+**Verification:**
+150.0 + 1062.5 + 37.5 = 1250ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 1500ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 25 bottles (50ml each)
+- 12 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $1306.33
+- Scaled cost: $6531.62
+- Per ml: Same as original ($5.23)
+
+**Time Estimate:** 2.5 hours production time"
+Scale a 250ml formula (13% oils) to 10000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 250ml
+**Target Batch:** 10000ml
+**Scale Factor:** 40×
+
+**Original Composition (13% fragrance):**
+- Fragrance oils: 32.5ml
+- Ethanol: 212.5ml
+- Water: 5.0ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   32.5ml × 40 = 1300.0ml
+
+2. Ethanol:
+   212.5ml × 40 = 8500.0ml
+
+3. Water:
+   5.0ml × 40 = 200.0ml
+
+**Verification:**
+1300.0 + 8500.0 + 200.0 = 10000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 12000ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 200 bottles (50ml each)
+- 100 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $1406.30
+- Scaled cost: $56252.00
+- Per ml: Same as original ($5.63)
+
+**Time Estimate:** 6.0 hours production time"
+Scale a 100ml formula (17% oils) to 1000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 100ml
+**Target Batch:** 1000ml
+**Scale Factor:** 10×
+
+**Original Composition (17% fragrance):**
+- Fragrance oils: 17.0ml
+- Ethanol: 85.0ml
+- Water: -2.0ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   17.0ml × 10 = 170.0ml
+
+2. Ethanol:
+   85.0ml × 10 = 850.0ml
+
+3. Water:
+   -2.0ml × 10 = -20.0ml
+
+**Verification:**
+170.0 + 850.0 + -20.0 = 1000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 1200ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 20 bottles (50ml each)
+- 10 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $722.48
+- Scaled cost: $7224.80
+- Per ml: Same as original ($7.22)
+
+**Time Estimate:** 3.0 hours production time"
+Scale a 50ml formula (18% oils) to 250ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 50ml
+**Target Batch:** 250ml
+**Scale Factor:** 5×
+
+**Original Composition (18% fragrance):**
+- Fragrance oils: 9.0ml
+- Ethanol: 42.5ml
+- Water: -1.5ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   9.0ml × 5 = 45.0ml
+
+2. Ethanol:
+   42.5ml × 5 = 212.5ml
+
+3. Water:
+   -1.5ml × 5 = -7.5ml
+
+**Verification:**
+45.0 + 212.5 + -7.5 = 250ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 300ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 5 bottles (50ml each)
+- 2 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $381.24
+- Scaled cost: $1906.18
+- Per ml: Same as original ($7.62)
+
+**Time Estimate:** 2.5 hours production time"
+Scale a 250ml formula (12% oils) to 5000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 250ml
+**Target Batch:** 5000ml
+**Scale Factor:** 20×
+
+**Original Composition (12% fragrance):**
+- Fragrance oils: 30.0ml
+- Ethanol: 212.5ml
+- Water: 7.5ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   30.0ml × 20 = 600.0ml
+
+2. Ethanol:
+   212.5ml × 20 = 4250.0ml
+
+3. Water:
+   7.5ml × 20 = 150.0ml
+
+**Verification:**
+600.0 + 4250.0 + 150.0 = 5000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 6000ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 100 bottles (50ml each)
+- 50 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $1306.33
+- Scaled cost: $26126.50
+- Per ml: Same as original ($5.23)
+
+**Time Estimate:** 4.0 hours production time"
+Scale a 100ml formula (16% oils) to 2000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 100ml
+**Target Batch:** 2000ml
+**Scale Factor:** 20×
+
+**Original Composition (16% fragrance):**
+- Fragrance oils: 16.0ml
+- Ethanol: 85.0ml
+- Water: -1.0ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   16.0ml × 20 = 320.0ml
+
+2. Ethanol:
+   85.0ml × 20 = 1700.0ml
+
+3. Water:
+   -1.0ml × 20 = -20.0ml
+
+**Verification:**
+320.0 + 1700.0 + -20.0 = 2000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 2400ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 40 bottles (50ml each)
+- 20 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $682.49
+- Scaled cost: $13649.80
+- Per ml: Same as original ($6.82)
+
+**Time Estimate:** 4.0 hours production time"
+Scale a 100ml formula (15% oils) to 2000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 100ml
+**Target Batch:** 2000ml
+**Scale Factor:** 20×
+
+**Original Composition (15% fragrance):**
+- Fragrance oils: 15.0ml
+- Ethanol: 85.0ml
+- Water: 0.0ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   15.0ml × 20 = 300.0ml
+
+2. Ethanol:
+   85.0ml × 20 = 1700.0ml
+
+3. Water:
+   0.0ml × 20 = 0.0ml
+
+**Verification:**
+300.0 + 1700.0 + 0.0 = 2000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 2400ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 40 bottles (50ml each)
+- 20 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $642.50
+- Scaled cost: $12850.00
+- Per ml: Same as original ($6.42)
+
+**Time Estimate:** 4.0 hours production time"
+Scale a 250ml formula (12% oils) to 5000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 250ml
+**Target Batch:** 5000ml
+**Scale Factor:** 20×
+
+**Original Composition (12% fragrance):**
+- Fragrance oils: 30.0ml
+- Ethanol: 212.5ml
+- Water: 7.5ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   30.0ml × 20 = 600.0ml
+
+2. Ethanol:
+   212.5ml × 20 = 4250.0ml
+
+3. Water:
+   7.5ml × 20 = 150.0ml
+
+**Verification:**
+600.0 + 4250.0 + 150.0 = 5000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 6000ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 100 bottles (50ml each)
+- 50 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $1306.33
+- Scaled cost: $26126.50
+- Per ml: Same as original ($5.23)
+
+**Time Estimate:** 4.0 hours production time"
+Scale a 50ml formula (15% oils) to 2000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 50ml
+**Target Batch:** 2000ml
+**Scale Factor:** 40×
+
+**Original Composition (15% fragrance):**
+- Fragrance oils: 7.5ml
+- Ethanol: 42.5ml
+- Water: 0.0ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   7.5ml × 40 = 300.0ml
+
+2. Ethanol:
+   42.5ml × 40 = 1700.0ml
+
+3. Water:
+   0.0ml × 40 = 0.0ml
+
+**Verification:**
+300.0 + 1700.0 + 0.0 = 2000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 2400ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 40 bottles (50ml each)
+- 20 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $321.25
+- Scaled cost: $12850.00
+- Per ml: Same as original ($6.42)
+
+**Time Estimate:** 6.0 hours production time"
+Scale a 250ml formula (18% oils) to 10000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 250ml
+**Target Batch:** 10000ml
+**Scale Factor:** 40×
+
+**Original Composition (18% fragrance):**
+- Fragrance oils: 45.0ml
+- Ethanol: 212.5ml
+- Water: -7.5ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   45.0ml × 40 = 1800.0ml
+
+2. Ethanol:
+   212.5ml × 40 = 8500.0ml
+
+3. Water:
+   -7.5ml × 40 = -300.0ml
+
+**Verification:**
+1800.0 + 8500.0 + -300.0 = 10000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 12000ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 200 bottles (50ml each)
+- 100 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $1906.17
+- Scaled cost: $76247.00
+- Per ml: Same as original ($7.62)
+
+**Time Estimate:** 6.0 hours production time"
+Scale a 250ml formula (16% oils) to 10000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 250ml
+**Target Batch:** 10000ml
+**Scale Factor:** 40×
+
+**Original Composition (16% fragrance):**
+- Fragrance oils: 40.0ml
+- Ethanol: 212.5ml
+- Water: -2.5ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   40.0ml × 40 = 1600.0ml
+
+2. Ethanol:
+   212.5ml × 40 = 8500.0ml
+
+3. Water:
+   -2.5ml × 40 = -100.0ml
+
+**Verification:**
+1600.0 + 8500.0 + -100.0 = 10000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 12000ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 200 bottles (50ml each)
+- 100 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $1706.22
+- Scaled cost: $68249.00
+- Per ml: Same as original ($6.82)
+
+**Time Estimate:** 6.0 hours production time"
+Scale a 50ml formula (14% oils) to 2000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 50ml
+**Target Batch:** 2000ml
+**Scale Factor:** 40×
+
+**Original Composition (14% fragrance):**
+- Fragrance oils: 7.0ml
+- Ethanol: 42.5ml
+- Water: 0.5ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   7.0ml × 40 = 280.0ml
+
+2. Ethanol:
+   42.5ml × 40 = 1700.0ml
+
+3. Water:
+   0.5ml × 40 = 20.0ml
+
+**Verification:**
+280.0 + 1700.0 + 20.0 = 2000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 2400ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 40 bottles (50ml each)
+- 20 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $301.25
+- Scaled cost: $12050.20
+- Per ml: Same as original ($6.03)
+
+**Time Estimate:** 6.0 hours production time"
+Scale a 100ml formula (18% oils) to 500ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 100ml
+**Target Batch:** 500ml
+**Scale Factor:** 5×
+
+**Original Composition (18% fragrance):**
+- Fragrance oils: 18.0ml
+- Ethanol: 85.0ml
+- Water: -3.0ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   18.0ml × 5 = 90.0ml
+
+2. Ethanol:
+   85.0ml × 5 = 425.0ml
+
+3. Water:
+   -3.0ml × 5 = -15.0ml
+
+**Verification:**
+90.0 + 425.0 + -15.0 = 500ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 600ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 10 bottles (50ml each)
+- 5 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $762.47
+- Scaled cost: $3812.35
+- Per ml: Same as original ($7.62)
+
+**Time Estimate:** 2.5 hours production time"
+Scale a 100ml formula (13% oils) to 1000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 100ml
+**Target Batch:** 1000ml
+**Scale Factor:** 10×
+
+**Original Composition (13% fragrance):**
+- Fragrance oils: 13.0ml
+- Ethanol: 85.0ml
+- Water: 2.0ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   13.0ml × 10 = 130.0ml
+
+2. Ethanol:
+   85.0ml × 10 = 850.0ml
+
+3. Water:
+   2.0ml × 10 = 20.0ml
+
+**Verification:**
+130.0 + 850.0 + 20.0 = 1000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 1200ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 20 bottles (50ml each)
+- 10 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $562.52
+- Scaled cost: $5625.20
+- Per ml: Same as original ($5.63)
+
+**Time Estimate:** 3.0 hours production time"
+Scale a 100ml formula (16% oils) to 4000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 100ml
+**Target Batch:** 4000ml
+**Scale Factor:** 40×
+
+**Original Composition (16% fragrance):**
+- Fragrance oils: 16.0ml
+- Ethanol: 85.0ml
+- Water: -1.0ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   16.0ml × 40 = 640.0ml
+
+2. Ethanol:
+   85.0ml × 40 = 3400.0ml
+
+3. Water:
+   -1.0ml × 40 = -40.0ml
+
+**Verification:**
+640.0 + 3400.0 + -40.0 = 4000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 4800ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 80 bottles (50ml each)
+- 40 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $682.49
+- Scaled cost: $27299.60
+- Per ml: Same as original ($6.82)
+
+**Time Estimate:** 6.0 hours production time"
+Scale a 50ml formula (18% oils) to 2000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 50ml
+**Target Batch:** 2000ml
+**Scale Factor:** 40×
+
+**Original Composition (18% fragrance):**
+- Fragrance oils: 9.0ml
+- Ethanol: 42.5ml
+- Water: -1.5ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   9.0ml × 40 = 360.0ml
+
+2. Ethanol:
+   42.5ml × 40 = 1700.0ml
+
+3. Water:
+   -1.5ml × 40 = -60.0ml
+
+**Verification:**
+360.0 + 1700.0 + -60.0 = 2000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 2400ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 40 bottles (50ml each)
+- 20 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $381.24
+- Scaled cost: $15249.40
+- Per ml: Same as original ($7.62)
+
+**Time Estimate:** 6.0 hours production time"
+Scale a 100ml formula (12% oils) to 4000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 100ml
+**Target Batch:** 4000ml
+**Scale Factor:** 40×
+
+**Original Composition (12% fragrance):**
+- Fragrance oils: 12.0ml
+- Ethanol: 85.0ml
+- Water: 3.0ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   12.0ml × 40 = 480.0ml
+
+2. Ethanol:
+   85.0ml × 40 = 3400.0ml
+
+3. Water:
+   3.0ml × 40 = 120.0ml
+
+**Verification:**
+480.0 + 3400.0 + 120.0 = 4000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 4800ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 80 bottles (50ml each)
+- 40 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $522.53
+- Scaled cost: $20901.20
+- Per ml: Same as original ($5.23)
+
+**Time Estimate:** 6.0 hours production time"
+Scale a 100ml formula (16% oils) to 1000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 100ml
+**Target Batch:** 1000ml
+**Scale Factor:** 10×
+
+**Original Composition (16% fragrance):**
+- Fragrance oils: 16.0ml
+- Ethanol: 85.0ml
+- Water: -1.0ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   16.0ml × 10 = 160.0ml
+
+2. Ethanol:
+   85.0ml × 10 = 850.0ml
+
+3. Water:
+   -1.0ml × 10 = -10.0ml
+
+**Verification:**
+160.0 + 850.0 + -10.0 = 1000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 1200ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 20 bottles (50ml each)
+- 10 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $682.49
+- Scaled cost: $6824.90
+- Per ml: Same as original ($6.82)
+
+**Time Estimate:** 3.0 hours production time"
+Scale a 50ml formula (12% oils) to 1000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 50ml
+**Target Batch:** 1000ml
+**Scale Factor:** 20×
+
+**Original Composition (12% fragrance):**
+- Fragrance oils: 6.0ml
+- Ethanol: 42.5ml
+- Water: 1.5ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   6.0ml × 20 = 120.0ml
+
+2. Ethanol:
+   42.5ml × 20 = 850.0ml
+
+3. Water:
+   1.5ml × 20 = 30.0ml
+
+**Verification:**
+120.0 + 850.0 + 30.0 = 1000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 1200ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 20 bottles (50ml each)
+- 10 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $261.26
+- Scaled cost: $5225.30
+- Per ml: Same as original ($5.23)
+
+**Time Estimate:** 4.0 hours production time"
+Scale a 250ml formula (17% oils) to 10000ml. Calculate all scaled ingredients.,"FORMULA SCALING CALCULATION:
+
+**Original Formula:** 250ml
+**Target Batch:** 10000ml
+**Scale Factor:** 40×
+
+**Original Composition (17% fragrance):**
+- Fragrance oils: 42.5ml
+- Ethanol: 212.5ml
+- Water: -5.0ml
+
+**Scaled Quantities:**
+
+1. Fragrance Oils:
+   42.5ml × 40 = 1700.0ml
+
+2. Ethanol:
+   212.5ml × 40 = 8500.0ml
+
+3. Water:
+   -5.0ml × 40 = -200.0ml
+
+**Verification:**
+1700.0 + 8500.0 + -200.0 = 10000ml ✓
+
+**Production Requirements:**
+
+Equipment:
+- 12000ml mixing vessel
+- Large graduated cylinders
+- Industrial stirrer
+
+Bottling Options:
+- 200 bottles (50ml each)
+- 100 bottles (100ml each)
+
+**Cost Scaling (assuming $40/ml oils):**
+- Original cost: $1806.20
+- Scaled cost: $72248.00
+- Per ml: Same as original ($7.22)
+
+**Time Estimate:** 6.0 hours production time"
+"Create luxury 200ml perfume at 20%: 43% Rose absolute ($85/ml), 35% Iris concrete ($100/ml), 22% Rose absolute ($85/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 20% (luxury concentration)
+- Total fragrance volume: 40.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Rose absolute (43%):**
+   - Volume: 17.2ml
+   - Cost: 17.2ml × $85/ml = $1462.00
+
+2. **Iris concrete (35%):**
+   - Volume: 14.0ml
+   - Cost: 14.0ml × $100/ml = $1400.00
+
+3. **Rose absolute (22%):**
+   - Volume: 8.8ml
+   - Cost: 8.8ml × $85/ml = $748.00
+
+**Total Fragrance Cost: $3610.00**
+
+**Carrier Base (80%):**
+- Ethanol: 152.0ml ($76.0)
+- Water: 8.0ml ($0.08)
+
+**TOTAL PRODUCTION COST: $3690.00**
+
+**Per ml: $18.45**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $922.50
+- 50ml retail price: $5535.00
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 300ml perfume at 16%: 49% Sandalwood ($60/ml), 39% Rose absolute ($85/ml), 12% Sandalwood ($60/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 300ml
+- Total fragrance: 16% (luxury concentration)
+- Total fragrance volume: 48.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Sandalwood (49%):**
+   - Volume: 23.52ml
+   - Cost: 23.52ml × $60/ml = $1411.20
+
+2. **Rose absolute (39%):**
+   - Volume: 18.72ml
+   - Cost: 18.72ml × $85/ml = $1591.20
+
+3. **Sandalwood (12%):**
+   - Volume: 5.76ml
+   - Cost: 5.76ml × $60/ml = $345.60
+
+**Total Fragrance Cost: $3348.00**
+
+**Carrier Base (84%):**
+- Ethanol: 239.4ml ($119.7)
+- Water: 12.6ml ($0.13)
+
+**TOTAL PRODUCTION COST: $3474.00**
+
+**Per ml: $11.58**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $579.00
+- 50ml retail price: $3474.00
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 100ml perfume at 22%: 44% Sandalwood ($60/ml), 38% Rose absolute ($85/ml), 18% Rose absolute ($85/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 100ml
+- Total fragrance: 22% (luxury concentration)
+- Total fragrance volume: 22.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Sandalwood (44%):**
+   - Volume: 9.68ml
+   - Cost: 9.68ml × $60/ml = $580.80
+
+2. **Rose absolute (38%):**
+   - Volume: 8.36ml
+   - Cost: 8.36ml × $85/ml = $710.60
+
+3. **Rose absolute (18%):**
+   - Volume: 3.96ml
+   - Cost: 3.96ml × $85/ml = $336.60
+
+**Total Fragrance Cost: $1628.00**
+
+**Carrier Base (78%):**
+- Ethanol: 74.1ml ($37.05)
+- Water: 3.9ml ($0.04)
+
+**TOTAL PRODUCTION COST: $1667.00**
+
+**Per ml: $16.67**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $833.50
+- 50ml retail price: $5001.00
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 100ml perfume at 21%: 44% Jasmine absolute ($90/ml), 30% Oud/Agarwood ($120/ml), 26% Rose absolute ($85/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 100ml
+- Total fragrance: 21% (luxury concentration)
+- Total fragrance volume: 21.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Jasmine absolute (44%):**
+   - Volume: 9.24ml
+   - Cost: 9.24ml × $90/ml = $831.60
+
+2. **Oud/Agarwood (30%):**
+   - Volume: 6.3ml
+   - Cost: 6.3ml × $120/ml = $756.00
+
+3. **Rose absolute (26%):**
+   - Volume: 5.46ml
+   - Cost: 5.46ml × $85/ml = $464.10
+
+**Total Fragrance Cost: $2051.70**
+
+**Carrier Base (79%):**
+- Ethanol: 75.05ml ($37.52)
+- Water: 3.95ml ($0.04)
+
+**TOTAL PRODUCTION COST: $2091.20**
+
+**Per ml: $20.91**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $1045.60
+- 50ml retail price: $6273.60
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 200ml perfume at 19%: 43% Sandalwood ($60/ml), 35% Oud/Agarwood ($120/ml), 22% Oud/Agarwood ($120/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 19% (luxury concentration)
+- Total fragrance volume: 38.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Sandalwood (43%):**
+   - Volume: 16.34ml
+   - Cost: 16.34ml × $60/ml = $980.40
+
+2. **Oud/Agarwood (35%):**
+   - Volume: 13.3ml
+   - Cost: 13.3ml × $120/ml = $1596.00
+
+3. **Oud/Agarwood (22%):**
+   - Volume: 8.36ml
+   - Cost: 8.36ml × $120/ml = $1003.20
+
+**Total Fragrance Cost: $3579.60**
+
+**Carrier Base (81%):**
+- Ethanol: 153.9ml ($76.95)
+- Water: 8.1ml ($0.08)
+
+**TOTAL PRODUCTION COST: $3660.60**
+
+**Per ml: $18.30**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $915.15
+- 50ml retail price: $5490.90
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 300ml perfume at 19%: 36% Rose absolute ($85/ml), 38% Jasmine absolute ($90/ml), 26% Jasmine absolute ($90/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 300ml
+- Total fragrance: 19% (luxury concentration)
+- Total fragrance volume: 57.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Rose absolute (36%):**
+   - Volume: 20.52ml
+   - Cost: 20.52ml × $85/ml = $1744.20
+
+2. **Jasmine absolute (38%):**
+   - Volume: 21.66ml
+   - Cost: 21.66ml × $90/ml = $1949.40
+
+3. **Jasmine absolute (26%):**
+   - Volume: 14.82ml
+   - Cost: 14.82ml × $90/ml = $1333.80
+
+**Total Fragrance Cost: $5027.40**
+
+**Carrier Base (81%):**
+- Ethanol: 230.85ml ($115.42)
+- Water: 12.15ml ($0.12)
+
+**TOTAL PRODUCTION COST: $5148.90**
+
+**Per ml: $17.16**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $858.15
+- 50ml retail price: $5148.90
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 100ml perfume at 16%: 39% Oud/Agarwood ($120/ml), 39% Jasmine absolute ($90/ml), 22% Jasmine absolute ($90/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 100ml
+- Total fragrance: 16% (luxury concentration)
+- Total fragrance volume: 16.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Oud/Agarwood (39%):**
+   - Volume: 6.24ml
+   - Cost: 6.24ml × $120/ml = $748.80
+
+2. **Jasmine absolute (39%):**
+   - Volume: 6.24ml
+   - Cost: 6.24ml × $90/ml = $561.60
+
+3. **Jasmine absolute (22%):**
+   - Volume: 3.52ml
+   - Cost: 3.52ml × $90/ml = $316.80
+
+**Total Fragrance Cost: $1627.20**
+
+**Carrier Base (84%):**
+- Ethanol: 79.8ml ($39.9)
+- Water: 4.2ml ($0.04)
+
+**TOTAL PRODUCTION COST: $1669.20**
+
+**Per ml: $16.69**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $834.60
+- 50ml retail price: $5007.60
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 200ml perfume at 21%: 38% Iris concrete ($100/ml), 32% Oud/Agarwood ($120/ml), 30% Sandalwood ($60/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 21% (luxury concentration)
+- Total fragrance volume: 42.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Iris concrete (38%):**
+   - Volume: 15.96ml
+   - Cost: 15.96ml × $100/ml = $1596.00
+
+2. **Oud/Agarwood (32%):**
+   - Volume: 13.44ml
+   - Cost: 13.44ml × $120/ml = $1612.80
+
+3. **Sandalwood (30%):**
+   - Volume: 12.6ml
+   - Cost: 12.6ml × $60/ml = $756.00
+
+**Total Fragrance Cost: $3964.80**
+
+**Carrier Base (79%):**
+- Ethanol: 150.1ml ($75.05)
+- Water: 7.9ml ($0.08)
+
+**TOTAL PRODUCTION COST: $4043.80**
+
+**Per ml: $20.22**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $1010.95
+- 50ml retail price: $6065.70
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 200ml perfume at 18%: 39% Rose absolute ($85/ml), 32% Oud/Agarwood ($120/ml), 29% Rose absolute ($85/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 18% (luxury concentration)
+- Total fragrance volume: 36.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Rose absolute (39%):**
+   - Volume: 14.04ml
+   - Cost: 14.04ml × $85/ml = $1193.40
+
+2. **Oud/Agarwood (32%):**
+   - Volume: 11.52ml
+   - Cost: 11.52ml × $120/ml = $1382.40
+
+3. **Rose absolute (29%):**
+   - Volume: 10.44ml
+   - Cost: 10.44ml × $85/ml = $887.40
+
+**Total Fragrance Cost: $3463.20**
+
+**Carrier Base (82%):**
+- Ethanol: 155.8ml ($77.9)
+- Water: 8.2ml ($0.08)
+
+**TOTAL PRODUCTION COST: $3545.20**
+
+**Per ml: $17.73**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $886.30
+- 50ml retail price: $5317.80
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 200ml perfume at 19%: 50% Rose absolute ($85/ml), 35% Rose absolute ($85/ml), 15% Rose absolute ($85/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 19% (luxury concentration)
+- Total fragrance volume: 38.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Rose absolute (50%):**
+   - Volume: 19.0ml
+   - Cost: 19.0ml × $85/ml = $1615.00
+
+2. **Rose absolute (35%):**
+   - Volume: 13.3ml
+   - Cost: 13.3ml × $85/ml = $1130.50
+
+3. **Rose absolute (15%):**
+   - Volume: 5.7ml
+   - Cost: 5.7ml × $85/ml = $484.50
+
+**Total Fragrance Cost: $3230.00**
+
+**Carrier Base (81%):**
+- Ethanol: 153.9ml ($76.95)
+- Water: 8.1ml ($0.08)
+
+**TOTAL PRODUCTION COST: $3311.00**
+
+**Per ml: $16.55**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $827.75
+- 50ml retail price: $4966.50
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 200ml perfume at 19%: 47% Sandalwood ($60/ml), 25% Oud/Agarwood ($120/ml), 28% Jasmine absolute ($90/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 19% (luxury concentration)
+- Total fragrance volume: 38.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Sandalwood (47%):**
+   - Volume: 17.86ml
+   - Cost: 17.86ml × $60/ml = $1071.60
+
+2. **Oud/Agarwood (25%):**
+   - Volume: 9.5ml
+   - Cost: 9.5ml × $120/ml = $1140.00
+
+3. **Jasmine absolute (28%):**
+   - Volume: 10.64ml
+   - Cost: 10.64ml × $90/ml = $957.60
+
+**Total Fragrance Cost: $3169.20**
+
+**Carrier Base (81%):**
+- Ethanol: 153.9ml ($76.95)
+- Water: 8.1ml ($0.08)
+
+**TOTAL PRODUCTION COST: $3250.20**
+
+**Per ml: $16.25**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $812.55
+- 50ml retail price: $4875.30
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 200ml perfume at 18%: 41% Rose absolute ($85/ml), 30% Sandalwood ($60/ml), 29% Rose absolute ($85/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 18% (luxury concentration)
+- Total fragrance volume: 36.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Rose absolute (41%):**
+   - Volume: 14.76ml
+   - Cost: 14.76ml × $85/ml = $1254.60
+
+2. **Sandalwood (30%):**
+   - Volume: 10.8ml
+   - Cost: 10.8ml × $60/ml = $648.00
+
+3. **Rose absolute (29%):**
+   - Volume: 10.44ml
+   - Cost: 10.44ml × $85/ml = $887.40
+
+**Total Fragrance Cost: $2790.00**
+
+**Carrier Base (82%):**
+- Ethanol: 155.8ml ($77.9)
+- Water: 8.2ml ($0.08)
+
+**TOTAL PRODUCTION COST: $2872.00**
+
+**Per ml: $14.36**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $718.00
+- 50ml retail price: $4308.00
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 200ml perfume at 16%: 46% Jasmine absolute ($90/ml), 32% Jasmine absolute ($90/ml), 22% Rose absolute ($85/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 16% (luxury concentration)
+- Total fragrance volume: 32.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Jasmine absolute (46%):**
+   - Volume: 14.72ml
+   - Cost: 14.72ml × $90/ml = $1324.80
+
+2. **Jasmine absolute (32%):**
+   - Volume: 10.24ml
+   - Cost: 10.24ml × $90/ml = $921.60
+
+3. **Rose absolute (22%):**
+   - Volume: 7.04ml
+   - Cost: 7.04ml × $85/ml = $598.40
+
+**Total Fragrance Cost: $2844.80**
+
+**Carrier Base (84%):**
+- Ethanol: 159.6ml ($79.8)
+- Water: 8.4ml ($0.08)
+
+**TOTAL PRODUCTION COST: $2928.80**
+
+**Per ml: $14.64**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $732.20
+- 50ml retail price: $4393.20
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 100ml perfume at 22%: 46% Oud/Agarwood ($120/ml), 40% Sandalwood ($60/ml), 14% Jasmine absolute ($90/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 100ml
+- Total fragrance: 22% (luxury concentration)
+- Total fragrance volume: 22.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Oud/Agarwood (46%):**
+   - Volume: 10.12ml
+   - Cost: 10.12ml × $120/ml = $1214.40
+
+2. **Sandalwood (40%):**
+   - Volume: 8.8ml
+   - Cost: 8.8ml × $60/ml = $528.00
+
+3. **Jasmine absolute (14%):**
+   - Volume: 3.08ml
+   - Cost: 3.08ml × $90/ml = $277.20
+
+**Total Fragrance Cost: $2019.60**
+
+**Carrier Base (78%):**
+- Ethanol: 74.1ml ($37.05)
+- Water: 3.9ml ($0.04)
+
+**TOTAL PRODUCTION COST: $2058.60**
+
+**Per ml: $20.59**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $1029.30
+- 50ml retail price: $6175.80
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 300ml perfume at 17%: 41% Jasmine absolute ($90/ml), 33% Jasmine absolute ($90/ml), 26% Jasmine absolute ($90/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 300ml
+- Total fragrance: 17% (luxury concentration)
+- Total fragrance volume: 51.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Jasmine absolute (41%):**
+   - Volume: 20.91ml
+   - Cost: 20.91ml × $90/ml = $1881.90
+
+2. **Jasmine absolute (33%):**
+   - Volume: 16.83ml
+   - Cost: 16.83ml × $90/ml = $1514.70
+
+3. **Jasmine absolute (26%):**
+   - Volume: 13.26ml
+   - Cost: 13.26ml × $90/ml = $1193.40
+
+**Total Fragrance Cost: $4590.00**
+
+**Carrier Base (83%):**
+- Ethanol: 236.55ml ($118.27)
+- Water: 12.45ml ($0.12)
+
+**TOTAL PRODUCTION COST: $4714.50**
+
+**Per ml: $15.71**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $785.75
+- 50ml retail price: $4714.50
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 300ml perfume at 15%: 35% Rose absolute ($85/ml), 32% Rose absolute ($85/ml), 33% Oud/Agarwood ($120/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 300ml
+- Total fragrance: 15% (luxury concentration)
+- Total fragrance volume: 45.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Rose absolute (35%):**
+   - Volume: 15.75ml
+   - Cost: 15.75ml × $85/ml = $1338.75
+
+2. **Rose absolute (32%):**
+   - Volume: 14.4ml
+   - Cost: 14.4ml × $85/ml = $1224.00
+
+3. **Oud/Agarwood (33%):**
+   - Volume: 14.85ml
+   - Cost: 14.85ml × $120/ml = $1782.00
+
+**Total Fragrance Cost: $4344.75**
+
+**Carrier Base (85%):**
+- Ethanol: 242.25ml ($121.12)
+- Water: 12.75ml ($0.13)
+
+**TOTAL PRODUCTION COST: $4472.25**
+
+**Per ml: $14.91**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $745.38
+- 50ml retail price: $4472.25
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 200ml perfume at 16%: 48% Rose absolute ($85/ml), 28% Sandalwood ($60/ml), 24% Oud/Agarwood ($120/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 16% (luxury concentration)
+- Total fragrance volume: 32.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Rose absolute (48%):**
+   - Volume: 15.36ml
+   - Cost: 15.36ml × $85/ml = $1305.60
+
+2. **Sandalwood (28%):**
+   - Volume: 8.96ml
+   - Cost: 8.96ml × $60/ml = $537.60
+
+3. **Oud/Agarwood (24%):**
+   - Volume: 7.68ml
+   - Cost: 7.68ml × $120/ml = $921.60
+
+**Total Fragrance Cost: $2764.80**
+
+**Carrier Base (84%):**
+- Ethanol: 159.6ml ($79.8)
+- Water: 8.4ml ($0.08)
+
+**TOTAL PRODUCTION COST: $2848.80**
+
+**Per ml: $14.24**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $712.20
+- 50ml retail price: $4273.20
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 300ml perfume at 17%: 40% Jasmine absolute ($90/ml), 26% Iris concrete ($100/ml), 34% Sandalwood ($60/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 300ml
+- Total fragrance: 17% (luxury concentration)
+- Total fragrance volume: 51.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Jasmine absolute (40%):**
+   - Volume: 20.4ml
+   - Cost: 20.4ml × $90/ml = $1836.00
+
+2. **Iris concrete (26%):**
+   - Volume: 13.26ml
+   - Cost: 13.26ml × $100/ml = $1326.00
+
+3. **Sandalwood (34%):**
+   - Volume: 17.34ml
+   - Cost: 17.34ml × $60/ml = $1040.40
+
+**Total Fragrance Cost: $4202.40**
+
+**Carrier Base (83%):**
+- Ethanol: 236.55ml ($118.27)
+- Water: 12.45ml ($0.12)
+
+**TOTAL PRODUCTION COST: $4326.90**
+
+**Per ml: $14.42**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $721.15
+- 50ml retail price: $4326.90
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 200ml perfume at 19%: 35% Sandalwood ($60/ml), 31% Oud/Agarwood ($120/ml), 34% Iris concrete ($100/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 200ml
+- Total fragrance: 19% (luxury concentration)
+- Total fragrance volume: 38.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Sandalwood (35%):**
+   - Volume: 13.3ml
+   - Cost: 13.3ml × $60/ml = $798.00
+
+2. **Oud/Agarwood (31%):**
+   - Volume: 11.78ml
+   - Cost: 11.78ml × $120/ml = $1413.60
+
+3. **Iris concrete (34%):**
+   - Volume: 12.92ml
+   - Cost: 12.92ml × $100/ml = $1292.00
+
+**Total Fragrance Cost: $3503.60**
+
+**Carrier Base (81%):**
+- Ethanol: 153.9ml ($76.95)
+- Water: 8.1ml ($0.08)
+
+**TOTAL PRODUCTION COST: $3584.60**
+
+**Per ml: $17.92**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $896.15
+- 50ml retail price: $5376.90
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"
+"Create luxury 300ml perfume at 21%: 37% Iris concrete ($100/ml), 38% Iris concrete ($100/ml), 25% Oud/Agarwood ($120/ml). Calculate costs.","LUXURY PERFUME FORMULATION & COSTING:
+
+**Specifications:**
+- Total volume: 300ml
+- Total fragrance: 21% (luxury concentration)
+- Total fragrance volume: 63.0ml
+
+**Premium Ingredient Breakdown:**
+
+1. **Iris concrete (37%):**
+   - Volume: 23.31ml
+   - Cost: 23.31ml × $100/ml = $2331.00
+
+2. **Iris concrete (38%):**
+   - Volume: 23.94ml
+   - Cost: 23.94ml × $100/ml = $2394.00
+
+3. **Oud/Agarwood (25%):**
+   - Volume: 15.75ml
+   - Cost: 15.75ml × $120/ml = $1890.00
+
+**Total Fragrance Cost: $6615.00**
+
+**Carrier Base (79%):**
+- Ethanol: 225.15ml ($112.57)
+- Water: 11.85ml ($0.12)
+
+**TOTAL PRODUCTION COST: $6733.50**
+
+**Per ml: $22.45**
+
+**Luxury Retail Strategy (6× markup):**
+- 50ml bottle cost: $1122.25
+- 50ml retail price: $6733.50
+
+**Market Positioning:** Ultra-luxury, limited edition, niche market"

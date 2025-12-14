@@ -1,0 +1,21 @@
+Timestamp,Expression,R² Score,Complexity,Validation Score,Valid,Interpretation,Provider,Domain
+2025-12-13T13:54:38.200861,0.182823669989136 - 0.265206995990888*log(price_ratio + 0.96506942406048/price_ratio),0.9959056050864018,14,65.6,False,,,defi
+2025-12-13T13:55:03.235968,1.1370333*amount_in_ratio*reserve_out_ratio*(-1.0327471 + (amount_in_ratio*log(reserve_in_ratio) + 39.41611)/reserve_in_ratio),0.9999541761137325,16,73.0,False,,,defi
+2025-12-13T13:55:39.868176,borrowed/supplied,0.9960095145108544,3,94.6,True,"This formula calculates the utilization rate, which measures the percentage of supplied capital that",anthropic,defi
+2025-12-13T13:56:20.147623,10012.511*sqrt(reserve0_ratio*reserve1_ratio),0.999995969376828,6,86.8,True,"This formula calculates the geometric mean of two normalized reserve ratios, scaled by a constant fa",anthropic,defi
+2025-12-13T13:57:00.637398,base_rate + slope*utilization,0.9988603636118609,5,96.1,True,"This calculates a linear interest rate model commonly used in DeFi lending protocols, where the borr",anthropic,defi
+2025-12-13T13:57:35.905479,collateral/debt,0.9997385855196972,3,94.6,True,"This expression calculates the collateralization ratio, a fundamental risk metric that measures how ",anthropic,defi
+2025-12-13T13:58:13.906428,entry_price/liq_threshold,0.9999671559510557,3,85.6,True,This expression calculates the leverage multiplier or position size ratio by dividing the entry pric,anthropic,defi
+2025-12-13T13:58:52.942847,blocks_per_year*rewards_per_block/total_staked,0.999999999853983,5,90.1,True,This expression calculates the annual staking yield or APY (Annual Percentage Yield) for a proof-of-,anthropic,defi
+2025-12-13T13:59:30.828479,(amount_in*0.8153324/reserve)**0.95457935,0.9958396720372726,7,93.1,True,"This expression calculates a modified slippage or price impact function for DeFi trading, where the ",anthropic,defi
+2025-12-13T14:00:19.128398,deposit*total_shares/total_liquidity,0.9999914480977578,5,87.7,True,This formula calculates the number of LP (Liquidity Provider) shares that should be minted when a us,anthropic,defi
+2025-12-13T14:00:57.268411,collateral*liq_threshold/debt,0.9977681720365598,5,93.1,True,"This expression calculates the health factor or collateralization ratio in DeFi lending protocols, m",anthropic,defi
+2025-12-13T14:01:18.644733,-0.123592906*log(index_price/mark_price),0.9955367212961824,6,74.5,False,,,defi
+2025-12-13T14:01:53.629401,sqrt(trade_size/liquidity),0.9995193187942526,4,90.99999999999999,True,"This formula calculates the square root of the ratio between trade size and available liquidity, rep",anthropic,defi
+2025-12-13T14:02:31.521230,time_days*rate*staked*0.0027397345,0.999949762951556,7,85.0,True,"This formula calculates daily compounding staking rewards in DeFi protocols, converting an annual ra",anthropic,defi
+2025-12-13T14:03:09.683348,reserve_ratio*supply,0.999998888958938,3,86.8,True,"This expression calculates the total reserve backing for a token system, representing the aggregate ",anthropic,defi
+2025-12-13T14:03:46.316034,fee_rate*loan_amount,0.9999790826070429,3,93.1,True,This expression calculates the total fee charged for a flash loan by multiplying the borrowed amount,anthropic,defi
+2025-12-13T14:04:27.497995,0.00273955*elapsed*total,0.9999997960139307,5,98.5,True,"This calculates the daily accrual rate of approximately 0.274% of total tokens, representing a linea",anthropic,defi
+2025-12-13T14:05:03.081433,size*(-price_a + price_b),0.9999973488638243,5,90.1,True,"This expression calculates the profit or loss from an arbitrage trade between two exchanges, represe",anthropic,defi
+2025-12-13T14:05:42.525669,-1.0001625 + profit/gas_cost,0.9999998601543445,5,94.6,True,This expression calculates a normalized profitability metric that adjusts the profit-to-gas ratio by,anthropic,defi
+2025-12-13T14:06:21.928509,liquidity*0.08181901/sqrt_p_lower,0.9998945444668834,5,91.89999999999999,True,This expression calculates the token amount of the quote asset (typically token1) that can be withdr,anthropic,defi

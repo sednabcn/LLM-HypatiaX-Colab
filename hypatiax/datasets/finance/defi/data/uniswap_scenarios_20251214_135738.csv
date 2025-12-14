@@ -1,0 +1,6 @@
+days,description,expected_il_percent,fee_rate,final_price,initial_eth,initial_price,initial_usdc,name,trade_count
+30,Price changes ±5% over 30 days,-0.31,0.003,1890,100,1800,180000,Stable Market,150
+60,ETH price increases 50%,-5.72,0.003,2700,100,1800,180000,Bull Market,300
+45,ETH price decreases 40%,-5.72,0.003,1080,100,1800,180000,Bear Market,225
+30,Price swings ±30% multiple times,0.0,0.003,1800,100,1800,180000,High Volatility,450
+1,Single large trade impacts pool significantly,-0.08,0.003,1850,100,1800,180000,Whale Trade,1

@@ -1,0 +1,70 @@
+[
+  {
+    "formula_latex": "\\frac{x \\cdot y}{z + 1}",
+    "domain": "defi",
+    "expected_valid": true,
+    "test_inputs": {
+      "x": 100,
+      "y": 200,
+      "z": 50
+    },
+    "expected_output": 3.92,
+    "notes": "Basic division, safe denominator"
+  },
+  {
+    "formula_latex": "\\sqrt{x^2 + y^2}",
+    "domain": "finance",
+    "expected_valid": true,
+    "test_inputs": {
+      "x": 3,
+      "y": 4
+    },
+    "expected_output": 5.0,
+    "notes": "Pythagorean theorem, always positive"
+  },
+  {
+    "formula_latex": "\\frac{r - r_f}{\\sigma}",
+    "domain": "finance",
+    "expected_valid": true,
+    "test_inputs": {
+      "r": 0.12,
+      "r_f": 0.02,
+      "sigma": 0.15
+    },
+    "expected_output": 0.667,
+    "notes": "Sharpe ratio variant"
+  },
+  {
+    "formula_latex": "\\frac{1}{x - y}",
+    "domain": "defi",
+    "expected_valid": false,
+    "warning": "Division by zero risk when x = y",
+    "test_inputs": {
+      "x": 100,
+      "y": 99.99
+    },
+    "notes": "Dangerous denominator"
+  },
+  {
+    "formula_latex": "e^{x \\cdot y}",
+    "domain": "risk",
+    "expected_valid": false,
+    "warning": "Overflow risk for large inputs",
+    "test_inputs": {
+      "x": 10,
+      "y": 10
+    },
+    "notes": "Exponential overflow"
+  },
+  {
+    "formula_latex": "\\sqrt{x - y}",
+    "domain": "defi",
+    "expected_valid": false,
+    "warning": "Negative input risk",
+    "test_inputs": {
+      "x": 100,
+      "y": 101
+    },
+    "notes": "Sqrt of negative"
+  }
+]

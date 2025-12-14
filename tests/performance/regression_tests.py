@@ -115,13 +115,13 @@ class PerformanceRegressionChecker:
             }
 
         # Calculate current performance
-        current_p50 = np.percentile(measurements, 50)
-        current_p95 = np.percentile(measurements, 95)
-        current_p99 = np.percentile(measurements, 99)
+        current_p50 = float(np.percentile(measurements, 50))
+        current_p95 = float(np.percentile(measurements, 95))
+        current_p99 = float(np.percentile(measurements, 99))
 
-        baseline_p50 = baseline["p50"]
-        baseline_p95 = baseline["p95"]
-        baseline_p99 = baseline["p99"]
+        baseline_p50 = float(baseline["p50"])
+        baseline_p95 = float(baseline["p95"])
+        baseline_p99 = float(baseline["p99"])
         allowed_regression = baseline.get("allowed_regression", 0.2)
 
         # Calculate regression percentages
@@ -201,6 +201,11 @@ class PerformanceRegressionChecker:
 
     def print_summary(self):
         """Print summary of all regression checks."""
+        # Guard clause - check if there are any results
+        if not self.results:
+            print("\n⚠️  No regression test results to display")
+            return
+
         print("\n" + "=" * 80)
         print("Performance Regression Test Summary")
         print("=" * 80)
@@ -225,7 +230,13 @@ class PerformanceRegressionChecker:
         total = len(self.results)
 
         print("\n" + "-" * 80)
-        print(f"Results: {passed}/{total} passed ({(passed/total)*100:.1f}%)")
+
+        # Additional guard for division by zero
+        if total > 0:
+            print(f"Results: {passed}/{total} passed ({(passed/total)*100:.1f}%)")
+        else:
+            print("Results: No tests recorded")
+
         print("=" * 80 + "\n")
 
 

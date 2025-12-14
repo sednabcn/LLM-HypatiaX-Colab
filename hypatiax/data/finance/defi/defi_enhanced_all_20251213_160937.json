@@ -1,0 +1,2816 @@
+{
+  "metadata": {
+    "domain": "defi",
+    "primary_llm": "anthropic",
+    "export_timestamp": "2025-12-13T16:09:37.985774",
+    "total_results": 15
+  },
+  "statistics": {
+    "total_runs": 15,
+    "valid_count": 8,
+    "invalid_count": 7,
+    "success_rate": 0.5333333333333333,
+    "average_r2": 0.8476273490861701,
+    "average_validation_score": 84.22,
+    "domain": "defi",
+    "max_results_capacity": 100,
+    "discoveries": 15,
+    "validations": 15,
+    "interpretations": 8,
+    "llm_usage": {
+      "anthropic": {
+        "calls": 8,
+        "successes": 8,
+        "failures": 0,
+        "success_rate_percent": 100.0,
+        "available": true,
+        "provider_stats": {
+          "total_requests": 8,
+          "successful_requests": 0,
+          "failed_requests": 0,
+          "total_tokens_input": 4072,
+          "total_tokens_output": 3735,
+          "retry_count": 0,
+          "total_tokens": 7807,
+          "success_rate_percent": 0.0,
+          "avg_tokens_per_request": 975.875
+        }
+      },
+      "google": {
+        "calls": 0,
+        "successes": 0,
+        "failures": 0,
+        "success_rate_percent": 0.0,
+        "available": true,
+        "provider_stats": {
+          "total_requests": 0,
+          "successful_requests": 0,
+          "failed_requests": 0,
+          "blocked_by_safety": 0,
+          "token_limit_hits": 0,
+          "retry_count": 0,
+          "success_rate_percent": 0,
+          "model": "models/gemini-2.5-flash"
+        }
+      },
+      "total_interpretations": 8,
+      "fallback_count": 0,
+      "total_retries": 0,
+      "primary_provider": "anthropic",
+      "fallback_enabled": true
+    },
+    "validation_stats": {
+      "total_validations": 15,
+      "success_rate": 0.5333333333333333,
+      "average_total_score": 84.22,
+      "average_layer_scores": {
+        "symbolic": 81.6,
+        "dimensional": 92.13333333333334,
+        "domain": 77.0,
+        "numerical": 100.0
+      },
+      "valid_count": 8,
+      "invalid_count": 7,
+      "domain": "defi",
+      "threshold_used": 85.0
+    }
+  },
+  "results": [
+    {
+      "timestamp": "2025-12-13T16:00:12.193309",
+      "description": "Price impact percentage in constant product AMM (Uniswap V2 style)",
+      "domain": "defi",
+      "discovery": {
+        "expression": "0.0030454393 + 0.5468244*(sqrt(amount_in) - 1.07192841915726*amount_in**2/reserve_in + 1.7483634*amount_in)/reserve_in",
+        "sympy_expr": "0.0030454393 + 0.5468244*(sqrt(amount_in) - 1.07192841915726*amount_in**2/reserve_in + 1.7483634*amount_in)/reserve_in",
+        "r2_score": 0.9998160229770235,
+        "complexity": "22",
+        "variable_names": [
+          "amount_in",
+          "reserve_in",
+          "reserve_out"
+        ],
+        "predictions": "[0.00345149 0.00678257 0.0076909  0.00422971 0.0032045  0.0036733\n 0.00313521 0.00414982 0.00544134 0.00399133 0.00310733 0.00452893\n 0.00431845 0.00343716 0.00487474 0.00326471 0.00396407 0.00568525\n 0.01143774 0.0035301  0.00392462 0.00835265 0.00360493 0.00458667\n 0.00373609 0.00723011 0.00333271 0.00432859 0.00366405 0.00338124\n 0.00475425 0.00444189 0.0031184  0.00409655 0.00658082 0.00423332\n 0.0034134  0.00322352 0.00429602 0.00477883 0.00425409 0.00358639\n 0.00308654 0.00443553 0.00378844 0.00486452 0.00346846 0.00361324\n 0.00364857 0.0032819  0.00450634 0.01111339 0.00840964 0.00401416\n 0.00400394 0.04868543 0.00386569 0.00333901 0.00622878 0.00494367\n 0.00373737 0.00343261 0.00427759 0.00456123 0.00343476 0.00521518\n 0.00347304 0.00408961 0.00316319 0.00417392 0.00418485 0.00339197\n 0.00311967 0.00516921 0.00557538 0.00587093 0.00381852 0.00323684\n 0.00344135 0.00323056 0.0041006  0.0042461  0.00360786 0.00317817\n 0.0045573  0.0034885  0.00551618 0.0211447  0.00437653 0.00554435\n 0.0031742  0.00377519 0.00385605 0.00450509 0.03224101 0.00356703\n 0.00422624 0.00348029 0.00307453 0.00317382 0.00315849 0.00463517\n 0.00341    0.00458537 0.00800345 0.00348667 0.00347658 0.00409989\n 0.0034419  0.00379185 0.00350909 0.00320893 0.00911316 0.00455094\n 0.00375044 0.00418731 0.00416465 0.00330995 0.00541904 0.00480231\n 0.00401578 0.00412005 0.00340745 0.00316776 0.00348491 0.00387462\n 0.00404178 0.00432847 0.0030584  0.00367331 0.00350631 0.00368722\n 0.00336345 0.00627534 0.00462041 0.01002474 0.00412535 0.00429974\n 0.00426593 0.00463423 0.0260242  0.00835309 0.00363728 0.00385745\n 0.00512139 0.00312048 0.00381764 0.00524814 0.00313174 0.00596356]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [
+            "exponentiation_present",
+            "sqrt_present"
+          ],
+          "warnings": [
+            "Expression contains division - verify denominators are non-zero",
+            "Expression contains exponentiation - verify no overflow occurs",
+            "Expression contains sqrt - verify all arguments are non-negative"
+          ]
+        }
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 78.8,
+        "base_score": 83.8,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 5.0,
+          "total_deducted": 5.0
+        },
+        "layer_scores": {
+          "symbolic": 96,
+          "dimensional": 81.0,
+          "domain": 69.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [
+              "Can be simplified to: 0.5468244*sqrt(amount_in)/reserve_in - 0.586156614648617*amount_in**2/reserve_in**2 + 0.95604776718696*amount_in/reserve_in + 0.0030454393",
+              "Check AMM constant product invariant preservation"
+            ],
+            "sympy_expr": "0.0030454393 + (0.5468244*sqrt(amount_in) - 0.586156614648617*amount_in**2/reserve_in + 0.95604776718696*amount_in)/reserve_in",
+            "canonical_form": "0.5468244*sqrt(amount_in)/reserve_in - 0.586156614648617*amount_in**2/reserve_in**2 + 0.95604776718696*amount_in/reserve_in + 0.0030454393",
+            "score": 96
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 81.0,
+            "errors": [],
+            "warnings": [
+              "Large number 7192841915726 may cause overflow",
+              "Division by 'reserve_in' detected - ensure reserve_in ≠ 0",
+              "Division by 'reserve_in' detected - ensure reserve_in ≠ 0",
+              "Square root detected - ensure all arguments are non-negative"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "amount_in": "dimensionless",
+              "reserve_in": "dimensionless",
+              "reserve_out": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "unconstrained_division_reserve_in",
+                "unconstrained_division_reserve_in",
+                "sqrt_domain"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Division by 'reserve_in' detected - ensure reserve_in ≠ 0",
+                "Division by 'reserve_in' detected - ensure reserve_in ≠ 0",
+                "Square root detected - ensure all arguments are non-negative"
+              ],
+              "errors": [],
+              "penalty": 9
+            },
+            "overflow_risks": [
+              "Extremely large number 7192841915726 detected - overflow risk"
+            ]
+          },
+          "domain": {
+            "valid": true,
+            "score": 69.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'reserve' should be positive - add validation",
+              "Variable 'amount' should be positive - add validation",
+              "Variable 'reserve' must be strictly positive (> 0). Add validation: assert reserve > 0",
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+              "Verify constant product invariant (x*y=k) is maintained",
+              "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "reserve_positive",
+              "amount_positive",
+              "reserve_strictly_positive",
+              "r_strictly_positive",
+              "constant_product",
+              "r_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Can be simplified to: 0.5468244*sqrt(amount_in)/reserve_in - 0.586156614648617*amount_in**2/reserve_in**2 + 0.95604776718696*amount_in/reserve_in + 0.0030454393",
+          "Check AMM constant product invariant preservation",
+          "Large number 7192841915726 may cause overflow",
+          "Division by 'reserve_in' detected - ensure reserve_in ≠ 0",
+          "Division by 'reserve_in' detected - ensure reserve_in ≠ 0",
+          "Square root detected - ensure all arguments are non-negative",
+          "Variable 'reserve' should be positive - add validation",
+          "Variable 'amount' should be positive - add validation",
+          "Variable 'reserve' must be strictly positive (> 0). Add validation: assert reserve > 0",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+          "Verify constant product invariant (x*y=k) is maintained",
+          "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [
+          "WARNING: Extremely large number 7192841915726 detected - overflow risk"
+        ],
+        "acceptance_criteria": {
+          "minimum_score_met": false,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "0.0030454393 + 0.5468244*(sqrt(amount_in) - 1.07192841915726*amount_in**2/reserve_in + 1.7483634*amount_in)/reserve_in",
+        "canonical_form": "0.5468244*sqrt(amount_in)/reserve_in - 0.586156614648617*amount_in**2/reserve_in**2 + 0.95604776718696*amount_in/reserve_in + 0.0030454393",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 150,
+        "n_features": 3,
+        "variable_names": [
+          "amount_in",
+          "reserve_in",
+          "reserve_out"
+        ],
+        "llm_provider": null,
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:00:57.972827",
+      "description": "Optimal LP position size balancing fee income and IL risk",
+      "domain": "defi",
+      "discovery": {
+        "expression": "(capital*fee_apy**volatility*risk_tolerance*(fee_apy*0.30138233)**volatility + 650.72534)*7.463294",
+        "sympy_expr": "(capital*fee_apy**volatility*risk_tolerance*(fee_apy*0.30138233)**volatility + 650.72534)*7.463294",
+        "r2_score": 0.9872272761248287,
+        "complexity": "17",
+        "variable_names": [
+          "capital",
+          "fee_apy",
+          "volatility",
+          "risk_tolerance"
+        ],
+        "predictions": "[  4875.40315781  25532.91417656  51466.642288     4952.75390011\n 420756.88029052   4858.53608016   8331.93154475   4917.15462911\n   7495.20903795   7730.66561231   5039.07676822  10958.34785316\n   4934.32239172 225860.02818404   4891.42165186   5644.73745446\n  43222.6864349  309798.7066402    5694.52383919   5396.71792036\n   6657.37223725   6279.10491436   4906.45235878  32302.71380764\n  22820.80464131  23189.68710879  10539.28881235   4902.69381411\n   5434.13584142  58647.79134317  36494.98607068 196854.91015216\n 192685.80155905   5049.13711375 392212.1267263  141880.82026212\n  56247.1638209   12332.70165398   4978.90593874   4925.59540637\n   5523.48673434   5775.26465055  85852.53958305   4968.84005919\n  11859.79637257   5561.25809386   6463.44214618   5577.79243408\n   8195.28254919   5392.77123023   5093.68477615   4869.19391589\n   5265.92354612 185780.0961795    7057.94354433 329891.03445623\n   5150.80621256   7115.08333569   5600.22469667   7232.53092251\n   8548.25604529 108799.36861882   4980.04770119  85273.02718823\n  85762.72952386  37443.43208867   5109.87816722  18188.66709723\n 157943.4430058   12119.08706704   9206.74536191   5874.46628025\n   5074.56025952  11986.79669902   9970.47100411  14895.55008951\n   5646.58856035  17759.32086727  28556.23819166  40421.375616\n  14965.22138019  22668.91345961  18048.67989793  13369.67740232\n   8123.22564804  16469.18218017   6832.90399343   5316.63467811\n  13003.0347902    4958.31997896   5229.95861682 272629.00377277\n  74428.60400713   5544.68997355  10580.27757154 162444.98656275\n 102381.19395749 230383.50462036  44886.64521184  95956.50001462\n  28330.11113204  11975.04162011   7344.92639403  72344.60118492\n 128337.00717197  21272.85117214   5887.5409885   19028.23780404\n 168253.66313432  35213.68654694  10067.833806     4893.10826591\n   7891.05762292  11277.55729355  49329.98343317   4909.94209192\n 215934.37819518 148235.21708149  35391.01724279 158729.42855662\n   4860.74192769   4981.61961222  73575.11343822  10312.42519427\n   4862.79438831  14154.56285826  24036.5220082    5910.44397265\n   5593.07543507   6433.92665299  57521.31526001  14941.16290587\n   4866.33233105   9766.45687475   5020.48259984  65569.37101924\n  36402.66313679   9495.14002254  19910.00640277   5026.88941127\n  11693.99105578   4861.8753517   11532.49929347  27735.40155993\n  12001.85124925   6851.95599927   5287.72003674  18176.32174426\n   9929.966687     8965.33053771]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [
+            "exponentiation_present"
+          ],
+          "warnings": [
+            "Expression contains exponentiation - verify no overflow occurs"
+          ]
+        }
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 78.69999999999999,
+        "base_score": 78.69999999999999,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 67,
+          "dimensional": 85.0,
+          "domain": 77.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Check AMM constant product invariant preservation",
+              "Multiple multiplications (5 terms) - check for overflow. Consider: 7.46329400000000 * capital * risk_tolerance...",
+              "Power overflow risk: (fee_apy)^(volatility). Verify bounds on base and exponent",
+              "Power overflow risk: (0.30138233*fee_apy)^(volatility). Verify bounds on base and exponent"
+            ],
+            "sympy_expr": "7.463294*capital*fee_apy**volatility*risk_tolerance*(0.30138233*fee_apy)**volatility + 4856.55452566996",
+            "canonical_form": "7.463294*capital*fee_apy**volatility*risk_tolerance*(0.30138233*fee_apy)**volatility + 4856.55452566996",
+            "score": 67
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 85.0,
+            "errors": [],
+            "warnings": [
+              "Multiplication of variables detected - verify dimensional consistency",
+              "Variable exponent detected: fee_apy^volatility - verify bounds to prevent overflow",
+              "Variable exponent detected: fee_apy*0.30138233^volatility - verify bounds to prevent overflow"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "capital": "dimensionless",
+              "fee_apy": "dimensionless",
+              "volatility": "dimensionless",
+              "risk_tolerance": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "variable_exponent",
+                "variable_exponent"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Multiplication of variables detected - verify dimensional consistency",
+                "Variable exponent detected: fee_apy^volatility - verify bounds to prevent overflow",
+                "Variable exponent detected: fee_apy*0.30138233^volatility - verify bounds to prevent overflow"
+              ],
+              "errors": [],
+              "penalty": 15
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 77.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'y' should be positive - add validation",
+              "Variable 'k' should be positive - add validation",
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+              "Variable 'fee' should be in range [0, 1]"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "y_positive",
+              "k_positive",
+              "r_strictly_positive",
+              "fee_bounded",
+              "r_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Check AMM constant product invariant preservation",
+          "Multiple multiplications (5 terms) - check for overflow. Consider: 7.46329400000000 * capital * risk_tolerance...",
+          "Power overflow risk: (fee_apy)^(volatility). Verify bounds on base and exponent",
+          "Power overflow risk: (0.30138233*fee_apy)^(volatility). Verify bounds on base and exponent",
+          "Multiplication of variables detected - verify dimensional consistency",
+          "Variable exponent detected: fee_apy^volatility - verify bounds to prevent overflow",
+          "Variable exponent detected: fee_apy*0.30138233^volatility - verify bounds to prevent overflow",
+          "Variable 'y' should be positive - add validation",
+          "Variable 'k' should be positive - add validation",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+          "Variable 'fee' should be in range [0, 1]"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 IMPROVE: Simplify to: 7.463294*capital*fee_apy**volatility*risk_tolerance*(0.30138233*fee_apy)**volatility + 4856.55452566996",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": false,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "(capital*fee_apy**volatility*risk_tolerance*(fee_apy*0.30138233)**volatility + 650.72534)*7.463294",
+        "canonical_form": "7.463294*capital*fee_apy**volatility*risk_tolerance*(0.30138233*fee_apy)**volatility + 4856.55452566996",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 150,
+        "n_features": 4,
+        "variable_names": [
+          "capital",
+          "fee_apy",
+          "volatility",
+          "risk_tolerance"
+        ],
+        "llm_provider": null,
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:01:27.179411",
+      "description": "Time-weighted impermanent loss with volatility adjustment",
+      "domain": "defi",
+      "discovery": {
+        "expression": "0.048918407*(2.2765126 - 2*price_ratio)*log(price_ratio) - 0.0037863091610035 + 0.0543169641270688/days_held",
+        "sympy_expr": "0.048918407*(2.2765126 - 2*price_ratio)*log(price_ratio) - 0.0037863091610035 + 0.0543169641270688/days_held",
+        "r2_score": 0.8540130885891875,
+        "complexity": "16",
+        "variable_names": [
+          "days_held",
+          "price_ratio",
+          "volatility"
+        ],
+        "predictions": "[-0.00998036 -0.00563613 -0.02795956 -0.02679232 -0.04555788 -0.01166571\n -0.00377152 -0.00870362 -0.00319516 -0.02561782 -0.00700069 -0.03027652\n -0.0327746  -0.00765866 -0.0080987  -0.04336354 -0.01644237 -0.00655204\n -0.00376221 -0.00364416 -0.01547686 -0.06110967 -0.01731711 -0.00924875\n -0.02453109 -0.00457603 -0.0318566  -0.00954388 -0.05502638 -0.01326822\n -0.02019809 -0.01089869 -0.00788561 -0.02475983 -0.00403612 -0.02743948\n -0.002331   -0.01769765 -0.01483312 -0.05022713 -0.00786968 -0.00304953\n -0.0162609  -0.06060938 -0.0503256  -0.00770001 -0.03805168 -0.00661138\n -0.01232793 -0.02606072 -0.02729489 -0.01966351 -0.0359959  -0.03032327\n -0.02218125 -0.03722085 -0.00430937 -0.00118254 -0.00297438 -0.02619061\n -0.05180576 -0.00890974 -0.00425833 -0.00316025 -0.00409406 -0.01226552\n -0.006779   -0.04935038  0.00102452 -0.06018582 -0.02525417 -0.01015867\n -0.0510375  -0.02104196 -0.03502646 -0.00096686 -0.04328028 -0.04161532\n -0.03226926 -0.0313948  -0.00399032 -0.02732924 -0.00297655 -0.01373566\n -0.02064706 -0.00309012 -0.05801089 -0.01557685 -0.03530223 -0.01883812\n -0.03999389 -0.04920195 -0.00544261 -0.01207846 -0.02835555 -0.0135631\n -0.00498344 -0.0031563  -0.01669261 -0.00320617 -0.03007029 -0.03988482\n -0.01854685 -0.05302761 -0.00866404 -0.05653357 -0.00368173 -0.00415214\n -0.00634565 -0.00344364 -0.0227021  -0.01552844 -0.00937438 -0.01378447\n -0.01644393 -0.01610616 -0.03117803 -0.03036796 -0.00412294 -0.03230198\n -0.06103129 -0.03234295 -0.01941272 -0.05931846 -0.00762124 -0.01757306\n -0.01998884 -0.00441212 -0.02401127 -0.01995882 -0.03008567 -0.00101747\n -0.06145034 -0.03449087 -0.01333302 -0.0038762  -0.01393967 -0.0073374\n -0.00349865 -0.01931017 -0.0436041  -0.00414615 -0.01132389 -0.00301336\n -0.0033882  -0.03629548 -0.02490015 -0.02803569 -0.04257088 -0.00342039]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [
+            "logarithm_present"
+          ],
+          "warnings": [
+            "Expression contains division - verify denominators are non-zero",
+            "Expression contains logarithm - verify all arguments are positive"
+          ]
+        }
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 62.900000000000006,
+        "base_score": 67.9,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 5.0,
+          "total_deducted": 5.0
+        },
+        "layer_scores": {
+          "symbolic": 63,
+          "dimensional": 82.0,
+          "domain": 48.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Can be simplified to: (-days_held*((0.097836814*price_ratio - 0.111363369907428)*log(price_ratio) + 0.0037863091610035) + 0.0543169641270688)/days_held",
+              "Price variables ['price_ratio'] must be positive. Add validation: assert all(p > 0 for p in prices)",
+              "Verify price bounds and slippage limits",
+              "Check AMM constant product invariant preservation",
+              "Multiple multiplications (4 terms) - check for overflow. Consider: 0.0543169641270688 * 1/days_held * 0.111363369907428 - 0.097836814*price_ratio...",
+              "Logarithm of non-positive value risk: log(price_ratio). Ensure price_ratio > 0"
+            ],
+            "sympy_expr": "(0.111363369907428 - 0.097836814*price_ratio)*log(price_ratio) - 0.0037863091610035 + 0.0543169641270688/days_held",
+            "canonical_form": "(-days_held*((0.097836814*price_ratio - 0.111363369907428)*log(price_ratio) + 0.0037863091610035) + 0.0543169641270688)/days_held",
+            "score": 63
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 82.0,
+            "errors": [],
+            "warnings": [
+              "Large number 37863091610035 may cause overflow",
+              "Division by 'days_held' detected - ensure days_held ≠ 0",
+              "Logarithm detected - ensure all arguments are positive",
+              "Function log requires dimensionless arguments"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "days_held": "dimensionless",
+              "price_ratio": "dimensionless",
+              "volatility": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "unconstrained_division_days_held",
+                "logarithm_domain"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Division by 'days_held' detected - ensure days_held ≠ 0",
+                "Logarithm detected - ensure all arguments are positive"
+              ],
+              "errors": [],
+              "penalty": 6
+            },
+            "overflow_risks": [
+              "Extremely large number 37863091610035 detected - overflow risk"
+            ]
+          },
+          "domain": {
+            "valid": true,
+            "score": 48.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'price' should be positive - add validation",
+              "Variable 'y' should be positive - add validation",
+              "Variable 'price' must be strictly positive (> 0). Add validation: assert price > 0",
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+              "Variable 'ratio' must be strictly positive (> 0). Add validation: assert ratio > 0",
+              "Variable 'ratio' should be in range >= 0",
+              "Price variable 'price' must be positive. Add validation: assert price > 0",
+              "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "price_positive",
+              "y_positive",
+              "price_strictly_positive",
+              "r_strictly_positive",
+              "ratio_strictly_positive",
+              "ratio_bounded",
+              "r_positivity",
+              "ratio_positivity",
+              "price_ratio_positivity",
+              "price_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Can be simplified to: (-days_held*((0.097836814*price_ratio - 0.111363369907428)*log(price_ratio) + 0.0037863091610035) + 0.0543169641270688)/days_held",
+          "Price variables ['price_ratio'] must be positive. Add validation: assert all(p > 0 for p in prices)",
+          "Verify price bounds and slippage limits",
+          "Check AMM constant product invariant preservation",
+          "Multiple multiplications (4 terms) - check for overflow. Consider: 0.0543169641270688 * 1/days_held * 0.111363369907428 - 0.097836814*price_ratio...",
+          "Logarithm of non-positive value risk: log(price_ratio). Ensure price_ratio > 0",
+          "Large number 37863091610035 may cause overflow",
+          "Division by 'days_held' detected - ensure days_held ≠ 0",
+          "Logarithm detected - ensure all arguments are positive",
+          "Function log requires dimensionless arguments",
+          "Variable 'price' should be positive - add validation",
+          "Variable 'y' should be positive - add validation",
+          "Variable 'price' must be strictly positive (> 0). Add validation: assert price > 0",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+          "Variable 'ratio' must be strictly positive (> 0). Add validation: assert ratio > 0",
+          "Variable 'ratio' should be in range >= 0",
+          "Price variable 'price' must be positive. Add validation: assert price > 0",
+          "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 IMPROVE: Simplify to: (-days_held*((0.097836814*price_ratio - 0.111363369907428)*log(price_ratio) + 0.0037863091610035) + 0.0543169641270688)/days_held",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [
+          "WARNING: Extremely large number 37863091610035 detected - overflow risk"
+        ],
+        "acceptance_criteria": {
+          "minimum_score_met": false,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": false
+        },
+        "expression": "0.048918407*(2.2765126 - 2*price_ratio)*log(price_ratio) - 0.0037863091610035 + 0.0543169641270688/days_held",
+        "canonical_form": "(-days_held*((0.097836814*price_ratio - 0.111363369907428)*log(price_ratio) + 0.0037863091610035) + 0.0543169641270688)/days_held",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 150,
+        "n_features": 3,
+        "variable_names": [
+          "days_held",
+          "price_ratio",
+          "volatility"
+        ],
+        "llm_provider": null,
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:01:57.837555",
+      "description": "Liquidation price for leveraged long position",
+      "domain": "defi",
+      "discovery": {
+        "expression": "entry_price*maintenance_margin - (-entry_price + entry_price/leverage)",
+        "sympy_expr": "entry_price*maintenance_margin - (-entry_price + entry_price/leverage)",
+        "r2_score": 0.9999999547972642,
+        "complexity": "9",
+        "variable_names": [
+          "leverage",
+          "entry_price",
+          "maintenance_margin"
+        ],
+        "predictions": "[35820.78003129 29667.82006642  3327.61351195 42269.05845123\n 39400.44076308 16873.21166974 17145.51270422 46538.7782058\n 29566.48689071 25635.54901602 33452.24062346 14458.05402578\n 18956.02685983 12548.96185545 30240.62988337 28063.30534914\n 34357.60764439 12166.1821808  11024.76935728 24502.09493893\n 31550.2505943  26787.55733776  2592.92805401 42351.76517622\n  3978.00772606 42518.18079986  2210.76052961 34039.13115988\n  5106.16850343 39725.94538101 22509.87933048  7455.29267427\n 12629.99340837  8431.86410303  9663.39290719 47817.61302748\n 20730.72056869 38694.97104967 32118.36704151 35421.96614722\n  6082.6001724  12380.04745598 36503.72763086 48070.57949723\n 13468.96964022 11463.00585548 24705.02798325 45663.00488983\n 14265.54284761 21198.23802771 44176.70594754   993.44832373\n  2944.27387986 23379.00220592 30777.45842612 12464.30323101\n 20627.22125717 22717.59963491 24971.55506942 30702.84541127\n 22267.83566633 23230.50808089 19183.03302121 29457.61204459\n 28355.52386192 42855.16121215  3476.87657222 39697.6071002\n 37709.44933924 15047.37766225 24185.38478559 21570.32078932\n 10909.17749974 16767.02187019  2417.42818193 14670.1229671\n 40828.78064712 14732.56739431 41990.96013091 23282.66861293\n 44471.78181947 28574.64749894  2380.93358588 33665.47585491\n  3277.49142089 23174.30803947 43236.78602425  5909.43732968\n 20593.28676401 30303.17172457 42597.81854101 18830.85754748\n 13670.06670241 29705.93914607 15263.86684226 36627.26972367\n 34873.34399242 28606.05579136 40918.14743038  1077.94607329\n 32818.72437883 39352.58419102  2160.20707098 45208.67185294\n 13435.18216003 33668.95126682 39485.72908361 30835.28072594\n  5543.76960804 21902.29721543 28191.90033458 44829.34835084\n 21078.4051345   9399.44719731 32991.87432053 20868.68137208\n 30768.49086637 29942.94713059 43617.38546678 25190.90312014\n 24453.12453925  7893.12012186  6519.47710252  5617.95891546\n  9034.66132656 22514.19126215 36658.78511829 21504.14287887\n 41911.7179727  49553.7849742  40667.73013679 34463.28050958\n 26807.10552679 22564.33619613  5249.01790022 19799.16947978\n 45881.16223217 40474.85363291 11825.16142568 22267.31142045\n 37839.01662376  3556.66968789 15280.29011668 39608.98711156\n 15261.77446965  4665.90318122 25946.92708831 43554.92305423\n 23514.49859123 11298.48313785]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [],
+          "warnings": [
+            "Expression contains division - verify denominators are non-zero"
+          ]
+        }
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 76.0,
+        "base_score": 76.0,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 67,
+          "dimensional": 92.0,
+          "domain": 61.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Price variables ['entry_price'] must be positive. Add validation: assert all(p > 0 for p in prices)",
+              "Verify price bounds and slippage limits",
+              "Check AMM constant product invariant preservation",
+              "Multiple multiplications (5 terms) - check for overflow. Consider: entry_price * maintenance_margin * -1..."
+            ],
+            "sympy_expr": "entry_price*maintenance_margin + entry_price - entry_price/leverage",
+            "canonical_form": "entry_price*maintenance_margin + entry_price - entry_price/leverage",
+            "score": 67
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 92.0,
+            "errors": [],
+            "warnings": [
+              "Multiplication of variables detected - verify dimensional consistency",
+              "Division by 'leverage' detected - ensure leverage ≠ 0"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "leverage": "dimensionless",
+              "entry_price": "dimensionless",
+              "maintenance_margin": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "unconstrained_division_leverage"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Multiplication of variables detected - verify dimensional consistency",
+                "Division by 'leverage' detected - ensure leverage ≠ 0"
+              ],
+              "errors": [],
+              "penalty": 8
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 61.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'price' should be positive - add validation",
+              "Variable 'y' should be positive - add validation",
+              "Variable 'price' must be strictly positive (> 0). Add validation: assert price > 0",
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+              "Price variable 'price' must be positive. Add validation: assert price > 0",
+              "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "price_positive",
+              "y_positive",
+              "price_strictly_positive",
+              "r_strictly_positive",
+              "r_positivity",
+              "price_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Price variables ['entry_price'] must be positive. Add validation: assert all(p > 0 for p in prices)",
+          "Verify price bounds and slippage limits",
+          "Check AMM constant product invariant preservation",
+          "Multiple multiplications (5 terms) - check for overflow. Consider: entry_price * maintenance_margin * -1...",
+          "Multiplication of variables detected - verify dimensional consistency",
+          "Division by 'leverage' detected - ensure leverage ≠ 0",
+          "Variable 'price' should be positive - add validation",
+          "Variable 'y' should be positive - add validation",
+          "Variable 'price' must be strictly positive (> 0). Add validation: assert price > 0",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+          "Price variable 'price' must be positive. Add validation: assert price > 0",
+          "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 IMPROVE: Simplify to: entry_price*maintenance_margin + entry_price - entry_price/leverage",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": false,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "entry_price*maintenance_margin - (-entry_price + entry_price/leverage)",
+        "canonical_form": "entry_price*maintenance_margin + entry_price - entry_price/leverage",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 150,
+        "n_features": 3,
+        "variable_names": [
+          "leverage",
+          "entry_price",
+          "maintenance_margin"
+        ],
+        "llm_provider": null,
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:02:31.403376",
+      "description": "Liquidation price for leveraged short position",
+      "domain": "defi",
+      "discovery": {
+        "expression": "entry_price*(exp(-maintenance_margin/leverage + 0.32608792/leverage) - 0.7382282)/0.27805847 - 1*(-0.28737324)",
+        "sympy_expr": "entry_price*(exp(-maintenance_margin/leverage + 0.32608792/leverage) - 0.7382282)/0.27805847 - 1*(-0.28737324)",
+        "r2_score": 0.9993956562323622,
+        "complexity": "16",
+        "variable_names": [
+          "leverage",
+          "entry_price",
+          "maintenance_margin"
+        ],
+        "predictions": "[44653.04422995 47438.30898554 44622.21022426 22382.86193674\n 41510.72148967 26143.57594271 30733.03985881 12048.60935479\n 32461.09496579 10393.84479323 17379.62880195 44343.54501938\n 13836.12055852  4468.43683884  4356.5090478  47270.63010676\n 25579.22720177 21302.01335783 40572.30350966 51623.65758031\n 18352.73060259 37768.11895457 43981.46908133 38378.97489862\n  8501.15553901 43791.21432249 27950.41723369 17188.64470106\n 21836.80815506  2887.97109103  7672.24849447 38850.36145207\n  1094.80702722 22789.10952943 26346.30084448  3886.27169669\n 50130.33162838 12079.29395007 16114.18802976 19325.71044292\n 14265.62128509  1568.2606034  37124.50182255 49963.81983115\n 13806.60861868 33276.65203086 38645.87605432 45686.55929964\n 22437.65404697 15920.53216865 20569.7570635  38615.11676113\n 41087.9042965  10292.85026374 19550.35255758 46504.49651209\n 50667.77098358 56937.80587316 39677.29583961 22045.66930773\n 37662.51894676 33082.43827301  4812.46981479 27630.9333742\n 35504.55988864  9979.23713993 38923.35153871 33689.38188901\n 47170.74200375  3054.56933245 14088.72559287 29975.76402219\n 15858.02610403 38586.78821318 39949.87217107  6100.24038423\n 31338.87267916 26480.78999497 19016.53465981 52416.42573639\n 41798.56270977 34795.34107625 35485.82680447 23419.48832246\n 47527.05896354 34703.66105442 36659.50908374 50332.1929842\n 14849.17925257 40665.49483933 11458.38811514 18215.79647092\n 17536.11643739 56737.99355996 44077.7623057  35178.53241847\n 37445.25826059 41479.4517952  68080.72615751 26922.36110578\n 19551.44208822  9969.98046543 40333.26446262 40806.99061476\n 20949.00738385  2222.80392694 42159.25564336  1924.16057158\n 36452.89946651 62908.77335015 22967.60703352 12558.46018451\n 40797.59437883 44020.24560952 29271.93044918 47939.49406853\n  3482.11072618 32644.29759447 36254.91129643 46039.28857456\n 10275.04173693 40011.77953518 27838.35507523 20234.66714598\n  7624.47868187 45944.46754921  8651.80690516 17502.12684254\n 15417.06094728 46130.33339913 34220.90809563 44176.79804079\n 14706.77813302 31412.36824609 34790.25991603 42791.55689541\n 49161.98898437  2156.81500306 43558.91331298  4032.24615973\n 27782.3310484  16514.69070157 15929.12566888 18614.86316317\n 33003.01281779 17679.25973715 37484.1346184  20996.07678578\n  4639.66438955 41705.56871432]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [
+            "exponentiation_present"
+          ],
+          "warnings": [
+            "Expression contains division - verify denominators are non-zero",
+            "Expression contains exponentiation - verify no overflow occurs"
+          ]
+        }
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 73.89999999999999,
+        "base_score": 73.89999999999999,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 65,
+          "dimensional": 92.0,
+          "domain": 56.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Can be simplified to: 3.59636590102794*entry_price*(exp((0.32608792 - maintenance_margin)/leverage) - 0.7382282) + 0.28737324",
+              "Price variables ['entry_price'] must be positive. Add validation: assert all(p > 0 for p in prices)",
+              "Verify price bounds and slippage limits",
+              "Check AMM constant product invariant preservation",
+              "Exponential overflow risk: exp(-maintenance_margin/leverage + 0.32608792/leverage). Recommend capping argument or using safe_exp"
+            ],
+            "sympy_expr": "3.59636590102794*entry_price*(exp(-maintenance_margin/leverage + 0.32608792/leverage) - 0.7382282) + 0.28737324",
+            "canonical_form": "3.59636590102794*entry_price*(exp((0.32608792 - maintenance_margin)/leverage) - 0.7382282) + 0.28737324",
+            "score": 65
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 92.0,
+            "errors": [],
+            "warnings": [
+              "Division by 'leverage' detected - ensure leverage ≠ 0",
+              "Division by 'leverage' detected - ensure leverage ≠ 0",
+              "Function exp requires dimensionless arguments"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "leverage": "dimensionless",
+              "entry_price": "dimensionless",
+              "maintenance_margin": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "unconstrained_division_leverage",
+                "unconstrained_division_leverage"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Division by 'leverage' detected - ensure leverage ≠ 0",
+                "Division by 'leverage' detected - ensure leverage ≠ 0"
+              ],
+              "errors": [],
+              "penalty": 6
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 56.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'price' should be positive - add validation",
+              "Variable 'x' should be positive - add validation",
+              "Variable 'y' should be positive - add validation",
+              "Variable 'price' must be strictly positive (> 0). Add validation: assert price > 0",
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+              "Price variable 'price' must be positive. Add validation: assert price > 0",
+              "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "price_positive",
+              "x_positive",
+              "y_positive",
+              "price_strictly_positive",
+              "r_strictly_positive",
+              "r_positivity",
+              "price_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Can be simplified to: 3.59636590102794*entry_price*(exp((0.32608792 - maintenance_margin)/leverage) - 0.7382282) + 0.28737324",
+          "Price variables ['entry_price'] must be positive. Add validation: assert all(p > 0 for p in prices)",
+          "Verify price bounds and slippage limits",
+          "Check AMM constant product invariant preservation",
+          "Exponential overflow risk: exp(-maintenance_margin/leverage + 0.32608792/leverage). Recommend capping argument or using safe_exp",
+          "Division by 'leverage' detected - ensure leverage ≠ 0",
+          "Division by 'leverage' detected - ensure leverage ≠ 0",
+          "Function exp requires dimensionless arguments",
+          "Variable 'price' should be positive - add validation",
+          "Variable 'x' should be positive - add validation",
+          "Variable 'y' should be positive - add validation",
+          "Variable 'price' must be strictly positive (> 0). Add validation: assert price > 0",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+          "Price variable 'price' must be positive. Add validation: assert price > 0",
+          "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 IMPROVE: Simplify to: 3.59636590102794*entry_price*(exp((0.32608792 - maintenance_margin)/leverage) - 0.7382282) + 0.28737324",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": false,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "entry_price*(exp(-maintenance_margin/leverage + 0.32608792/leverage) - 0.7382282)/0.27805847 - 1*(-0.28737324)",
+        "canonical_form": "3.59636590102794*entry_price*(exp((0.32608792 - maintenance_margin)/leverage) - 0.7382282) + 0.28737324",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 150,
+        "n_features": 3,
+        "variable_names": [
+          "leverage",
+          "entry_price",
+          "maintenance_margin"
+        ],
+        "llm_provider": null,
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:03:15.715586",
+      "description": "Expected profit from flash loan arbitrage",
+      "domain": "defi",
+      "discovery": {
+        "expression": "loan_amount*(price_diff - 1*0.0010693953)",
+        "sympy_expr": "loan_amount*(price_diff - 1*0.0010693953)",
+        "r2_score": 0.9997915984725059,
+        "complexity": "5",
+        "variable_names": [
+          "loan_amount",
+          "price_diff",
+          "gas_cost"
+        ],
+        "predictions": "[3.54666605e+03 2.36281986e+04 3.73420962e+04 5.27749490e+03\n 7.09483351e+03 7.87635864e+03 1.90073588e+04 1.73581860e+04\n 4.30659348e+03 2.06861543e+04 1.73155135e+04 5.94479368e+03\n 7.40704461e+03 1.17775446e+04 1.03994366e+04 2.09580026e+04\n 3.27577720e+04 3.47490751e+03 1.43881792e+04 3.19572750e+04\n 9.52206416e+03 2.33348909e+03 1.52714655e+04 2.17651589e+03\n 3.34319596e+03 2.80202250e+03 1.76337712e+04 1.20904752e+04\n 4.74136984e+04 6.36253647e+03 4.29688318e+03 2.68033091e+02\n 1.20179385e+03 2.27016152e+03 1.44696315e+04 2.90257705e+03\n 3.94191371e+02 3.59700601e+04 1.47412921e+04 1.09394476e+04\n 1.26799884e+04 3.75078637e+04 3.59330264e+03 9.18674738e+03\n 1.97211121e+04 2.71764186e+03 2.13425810e+04 8.86382792e+03\n 4.92229329e+02 3.04465367e+04 2.81502401e+04 2.14168157e+04\n 7.32821168e+03 1.93650978e+04 3.45151736e+04 1.38343234e+04\n 1.22134210e+04 5.72562864e+01 1.32629020e+02 2.01779743e+04\n 1.24160290e+04 1.49766846e+04 6.27761596e+03 3.36298860e+04\n 1.22711268e+04 1.51058886e+04 3.82133718e+03 3.99054232e+02\n 2.39156029e+03 1.54838755e+04 8.30926676e+02 2.61518218e+02\n 1.95754997e+03 4.34114258e+03 8.68500321e+03 5.28861357e+03\n 2.37656476e+04 1.07957301e+01 2.39883110e+04 9.67664650e+03\n 1.30975342e+04 1.08493953e+04 2.64178554e+03 2.06554480e+04\n 4.16698702e+03 2.65745394e+04 8.77748379e+02 1.99162352e+04\n 1.16603968e+04 2.18382200e+04 1.70288653e+04 1.64462291e+04\n 2.48971340e+04 1.58726234e+04 1.70883417e+04 1.12437856e+04\n 2.12368818e+04 1.69611789e+04 2.21483737e+04 4.29018432e+04\n 1.84596731e+04 1.29369156e+04 5.32549356e+03 1.54202171e+04\n 6.94635067e+03 4.97137584e+03 2.21988367e+04 1.26124415e+04\n 2.82119736e+03 1.91230223e+04 2.74661274e+04 2.16030408e+03\n 1.01304638e+04 2.88324962e+04 1.00039171e+04 1.92790348e+04\n 9.27746884e+03 8.54955104e+02 2.08312718e+04 1.28431938e+04\n 1.56394074e+04 3.38571638e+03 8.03689366e+02 4.27369886e+02\n 4.56744188e+03 1.17084947e+04 1.32519490e+04 2.53237739e+04\n 2.77715882e+04 1.88579367e+04 2.43538332e+03 1.62263743e+04\n 6.65258562e+03 1.08055454e+04 1.75062827e+04 8.51949532e+02\n 1.06525244e+04 1.20049723e+03 2.77581225e+04 3.26129236e+04\n 2.26204338e+03 1.07872798e+04 3.52266625e+04 1.78839562e+04\n 6.24227455e+01 2.62134505e+04 2.06392994e+04 1.52363270e+04\n 3.63146127e+04 1.72092810e+04]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [],
+          "warnings": []
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 88.6,
+        "base_score": 88.6,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 96,
+          "dimensional": 100.0,
+          "domain": 66.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [
+              "Price variables ['price_diff'] must be positive. Add validation: assert all(p > 0 for p in prices)",
+              "Verify price bounds and slippage limits"
+            ],
+            "sympy_expr": "loan_amount*(price_diff - 0.0010693953)",
+            "canonical_form": "loan_amount*(price_diff - 0.0010693953)",
+            "score": 96
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "loan_amount": "dimensionless",
+              "price_diff": "dimensionless",
+              "gas_cost": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 66.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'price' should be positive - add validation",
+              "Variable 'amount' should be positive - add validation",
+              "Variable 'price' must be strictly positive (> 0). Add validation: assert price > 0",
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+              "Price variable 'price' must be positive. Add validation: assert price > 0"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "price_positive",
+              "amount_positive",
+              "price_strictly_positive",
+              "r_strictly_positive",
+              "r_positivity",
+              "price_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Price variables ['price_diff'] must be positive. Add validation: assert all(p > 0 for p in prices)",
+          "Verify price bounds and slippage limits",
+          "Variable 'price' should be positive - add validation",
+          "Variable 'amount' should be positive - add validation",
+          "Variable 'price' must be strictly positive (> 0). Add validation: assert price > 0",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+          "Price variable 'price' must be positive. Add validation: assert price > 0"
+        ],
+        "recommendations": [
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "loan_amount*(price_diff - 1*0.0010693953)",
+        "canonical_form": "loan_amount*(price_diff - 0.0010693953)",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This formula calculates the net profit from a flash loan arbitrage trade by multiplying the loan amount by the effective price spread after subtracting a fixed cost component of approximately 0.107 cents per unit.",
+        "relationships": [
+          "Linear scaling relationship: profit increases proportionally with both loan amount and price difference",
+          "Fixed cost deduction: the constant 0.0010693953 represents a per-unit cost that reduces effective spread",
+          "Break-even threshold: arbitrage becomes unprofitable when price_diff falls below 0.0010693953",
+          "Leverage amplification: larger loan amounts magnify both profits and the impact of the fixed cost"
+        ],
+        "domain_insights": [
+          "The fixed cost likely represents average gas fees, slippage, or protocol fees normalized per dollar of loan amount",
+          "Expression structure suggests MEV (Maximum Extractable Value) calculation for cross-DEX arbitrage opportunities",
+          "The high R² score indicates this model captures arbitrage profit dynamics across different market conditions",
+          "Cost component suggests this applies to Ethereum mainnet where gas costs significantly impact small arbitrage trades"
+        ],
+        "use_cases": [
+          "Flash loan arbitrage bots determining minimum profitable trade sizes across DEX pairs",
+          "MEV searchers calculating expected returns before submitting arbitrage transactions",
+          "DeFi protocol optimization for minimizing the impact of fixed costs on user trades",
+          "Risk management systems setting minimum spread thresholds for automated trading strategies"
+        ],
+        "limitations": [
+          "Assumes linear relationship between loan size and profit, ignoring slippage effects on large trades",
+          "Fixed cost component may vary with network congestion and gas price volatility",
+          "Does not account for liquidation risks or price movements during transaction execution",
+          "Model may break down during high volatility periods when price differences change rapidly",
+          "Assumes successful transaction execution without reverts or failed arbitrage attempts"
+        ],
+        "formula_name": "Flash Loan Arbitrage Net Profit Formula",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This formula calculates the net profit from a flash loan arbitrage trade by multiplying the loan amount by the effective price spread after subtracting a fixed cost component of approximately 0.107 cents per unit.\",\n    \"relationships\": [\n        \"Linear scaling relationship: profit increases proportionally with both loan amount and price difference\",\n        \"Fixed cost deduction: the constant 0.0010693953 represents a per-unit cost that reduces effective spread\",\n        \"Break-even threshold: arbitrage becomes unprofitable when price_diff falls below 0.0010693953\",\n        \"Leverage amplification: larger loan amounts magnify both profits and the impact of the fixed cost\"\n    ],\n    \"domain_insights\": [\n        \"The fixed cost likely represents average gas fees, slippage, or protocol fees normalized per dollar of loan amount\",\n        \"Expression structure suggests MEV (Maximum Extractable Value) calculation for cross-DEX arbitrage opportunities\",\n        \"The high R² score indicates this model captures arbitrage profit dynamics across different market conditions\",\n        \"Cost component suggests this applies to Ethereum mainnet where gas costs significantly impact small arbitrage trades\"\n    ],\n    \"use_cases\": [\n        \"Flash loan arbitrage bots determining minimum profitable trade sizes across DEX pairs\",\n        \"MEV searchers calculating expected returns before submitting arbitrage transactions\",\n        \"DeFi protocol optimization for minimizing the impact of fixed costs on user trades\",\n        \"Risk management systems setting minimum spread thresholds for automated trading strategies\"\n    ],\n    \"limitations\": [\n        \"Assumes linear relationship between loan size and profit, ignoring slippage effects on large trades\",\n        \"Fixed cost component may vary with network congestion and gas price volatility\",\n        \"Does not account for liquidation risks or price movements during transaction execution\",\n        \"Model may break down during high volatility periods when price differences change rapidly\",\n        \"Assumes successful transaction execution without reverts or failed arbitrage attempts\"\n    ],\n    \"formula_name\": \"Flash Loan Arbitrage Net Profit Formula\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 13.69,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 150,
+        "n_features": 3,
+        "variable_names": [
+          "loan_amount",
+          "price_diff",
+          "gas_cost"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:03:45.421263",
+      "description": "Optimal concentrated liquidity range width (95% confidence)",
+      "domain": "defi",
+      "discovery": {
+        "expression": "1.9589192951322*current_price*sqrt(days)*volatility",
+        "sympy_expr": "1.9589192951322*current_price*sqrt(days)*volatility",
+        "r2_score": 0.9998314495963924,
+        "complexity": "8",
+        "variable_names": [
+          "current_price",
+          "volatility",
+          "days"
+        ],
+        "predictions": "[ 145.11792042  606.26175574 1047.10513765 1905.46386653 1150.28850653\n  200.86287849  541.62271945 1700.83227566 1104.88921254  242.87468334\n  439.65994957 2806.38629885  565.39118074  514.92648318   82.63607786\n 1080.97143381 1961.59832867 3505.68015528  712.95878861  377.49113297\n  472.28346215  946.10816188  788.74885652 2438.31290414  445.21081562\n 1318.74910881  245.17267339  587.2902685   281.0545851   567.2918735\n 2015.78451636 1635.00273793 1887.03500995 3171.6986706  4481.33724804\n  405.39600741 1437.2131487   570.79440039  890.41227037 1008.65219795\n  632.53172225  687.2747021  1657.16352053  242.92475259 1043.47997147\n  888.54270131 2645.97528662 1795.8051535  1278.00344237 2531.13381572\n  580.19940636 1539.98390701 2577.34027177 1446.77219084  476.93127914\n  275.35942178  939.07494992 2148.39820219 1019.01833234 3911.97519444\n  872.13675422  646.09445726 3277.54517244  650.07468773  476.68407127\n 1427.3121847   584.13164023  664.41671701  371.39223456  137.25985595\n  973.4605193  2258.04266494  492.05471958 1621.66001399 1044.70221686\n   73.79644173 1962.7294381  1249.1095923   708.36456558  444.5701296\n 1654.9406131   946.70906789 1962.0069746  1817.03971739 1897.58071211\n  792.83169516 1403.99534055  946.92608599  400.2001039   903.77514838\n  398.26841727 1217.91502574 3000.17394425  224.52716303  386.72477639\n  242.35723988  822.82809337 1235.92372541  138.92549203 1378.49069829\n  863.986658   1978.96610916  716.1175945  1145.40589689 2660.15549774\n  208.57992477   97.44517612  607.41993318  458.05547326  650.05652023\n  330.76364639  722.8514724   623.51820353  572.82371635 2263.24078453\n 5075.26279722  270.19057987 1302.19783844 1233.70448545  233.25674166\n  557.16422917  535.60850748  529.02411936 1662.10196726  898.73550975\n 2257.86501679  104.05882329  840.04178876 1772.13794538  571.63301547\n 3124.56937805  752.38753216 2245.86715466 1668.95142583 1593.93343431\n  942.74799589  739.66484298  227.89925488  437.40932078  457.91867878\n 1145.53044317  790.87613397  557.04108389  695.89311342  400.88902308\n 2265.52989445 1354.59100501 1607.97259814 1468.77956374 1397.81118904]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [
+            "sqrt_present"
+          ],
+          "warnings": [
+            "Expression contains sqrt - verify all arguments are non-negative"
+          ]
+        }
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 69.5,
+        "base_score": 74.5,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 5.0,
+          "total_deducted": 5.0
+        },
+        "layer_scores": {
+          "symbolic": 67,
+          "dimensional": 82.0,
+          "domain": 66.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Price variables ['current_price'] must be positive. Add validation: assert all(p > 0 for p in prices)",
+              "Verify price bounds and slippage limits",
+              "Check AMM constant product invariant preservation",
+              "Multiple multiplications (4 terms) - check for overflow. Consider: 1.95891929513220 * current_price * volatility..."
+            ],
+            "sympy_expr": "1.9589192951322*current_price*sqrt(days)*volatility",
+            "canonical_form": "1.9589192951322*current_price*sqrt(days)*volatility",
+            "score": 67
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 82.0,
+            "errors": [],
+            "warnings": [
+              "Large number 9589192951322 may cause overflow",
+              "Multiplication of variables detected - verify dimensional consistency",
+              "Square root detected - ensure all arguments are non-negative"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "current_price": "dimensionless",
+              "volatility": "dimensionless",
+              "days": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "sqrt_domain"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Multiplication of variables detected - verify dimensional consistency",
+                "Square root detected - ensure all arguments are non-negative"
+              ],
+              "errors": [],
+              "penalty": 8
+            },
+            "overflow_risks": [
+              "Extremely large number 9589192951322 detected - overflow risk"
+            ]
+          },
+          "domain": {
+            "valid": true,
+            "score": 66.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'price' should be positive - add validation",
+              "Variable 'y' should be positive - add validation",
+              "Variable 'price' must be strictly positive (> 0). Add validation: assert price > 0",
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+              "Price variable 'price' must be positive. Add validation: assert price > 0"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "price_positive",
+              "y_positive",
+              "price_strictly_positive",
+              "r_strictly_positive",
+              "r_positivity",
+              "price_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Price variables ['current_price'] must be positive. Add validation: assert all(p > 0 for p in prices)",
+          "Verify price bounds and slippage limits",
+          "Check AMM constant product invariant preservation",
+          "Multiple multiplications (4 terms) - check for overflow. Consider: 1.95891929513220 * current_price * volatility...",
+          "Large number 9589192951322 may cause overflow",
+          "Multiplication of variables detected - verify dimensional consistency",
+          "Square root detected - ensure all arguments are non-negative",
+          "Variable 'price' should be positive - add validation",
+          "Variable 'y' should be positive - add validation",
+          "Variable 'price' must be strictly positive (> 0). Add validation: assert price > 0",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+          "Price variable 'price' must be positive. Add validation: assert price > 0"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 IMPROVE: Simplify to: 1.9589192951322*current_price*sqrt(days)*volatility",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [
+          "WARNING: Extremely large number 9589192951322 detected - overflow risk"
+        ],
+        "acceptance_criteria": {
+          "minimum_score_met": false,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "1.9589192951322*current_price*sqrt(days)*volatility",
+        "canonical_form": "1.9589192951322*current_price*sqrt(days)*volatility",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 150,
+        "n_features": 3,
+        "variable_names": [
+          "current_price",
+          "volatility",
+          "days"
+        ],
+        "llm_provider": null,
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:04:34.782491",
+      "description": "Lending protocol utilization rate",
+      "domain": "defi",
+      "discovery": {
+        "expression": "borrows/supply",
+        "sympy_expr": "borrows/supply",
+        "r2_score": 0.999989574300726,
+        "complexity": "3",
+        "variable_names": [
+          "borrows",
+          "supply"
+        ],
+        "predictions": "[0.95       0.03663967 0.35488865 0.79936979 0.23654364 0.79495879\n 0.09373585 0.95       0.05228073 0.60703779 0.11399875 0.35226859\n 0.15455699 0.63602486 0.79976736 0.18005981 0.95       0.56468178\n 0.49644009 0.92265633 0.0737112  0.38581452 0.34467905 0.44610747\n 0.53871131 0.95       0.95       0.15238862 0.85957368 0.12142853\n 0.95       0.95       0.66050488 0.27839091 0.95       0.35645721\n 0.49438541 0.95       0.95       0.55606019 0.91252811 0.95\n 0.29706358 0.36258596 0.75247356 0.15492968 0.1805971  0.08204898\n 0.40803969 0.35065083 0.28281039 0.06330141 0.8622164  0.94406256\n 0.14906622 0.52996601 0.753033   0.64633712 0.55073028 0.95\n 0.37062668 0.95       0.95       0.12454631 0.16623588 0.49061681\n 0.2767467  0.12713566 0.13046297 0.27652731 0.19700376 0.097951\n 0.41621083 0.04916556 0.39462994 0.38586966 0.47342618 0.89213974\n 0.34911586 0.37627717 0.32976617 0.89021478 0.82995055 0.57017438\n 0.40996957 0.11002553 0.15737642 0.03953175 0.81682814 0.49233353\n 0.40496342 0.25953115 0.51233211 0.1974084  0.01926455 0.75658462\n 0.66214395 0.25254897 0.65063309 0.10756899 0.30116048 0.43942164\n 0.27612652 0.54034611 0.52740723 0.95       0.91170497 0.75386201\n 0.31639335 0.67506849 0.37843045 0.59744812 0.10792194 0.95\n 0.61339857 0.14581771 0.51615401 0.95       0.59749663 0.56849293\n 0.68092507 0.64826351 0.57148613 0.20152677 0.27182401 0.90918915\n 0.95       0.50164874 0.95       0.95       0.58562562 0.04329987\n 0.37775264 0.11147302 0.89240905 0.56334154 0.95       0.16713831\n 0.53578801 0.95       0.33806341 0.95       0.15784594 0.95\n 0.95       0.33143057 0.80728445 0.118697   0.25816328 0.95      ]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [],
+          "warnings": [
+            "Expression contains division - verify denominators are non-zero"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 93.1,
+        "base_score": 93.1,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 98,
+          "dimensional": 97.0,
+          "domain": 82.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [
+              "Check AMM constant product invariant preservation"
+            ],
+            "sympy_expr": "borrows/supply",
+            "canonical_form": "borrows/supply",
+            "score": 98
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 97.0,
+            "errors": [],
+            "warnings": [
+              "Division by 'supply' detected - ensure supply ≠ 0"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "borrows": "dimensionless",
+              "supply": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "unconstrained_division_supply"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Division by 'supply' detected - ensure supply ≠ 0"
+              ],
+              "errors": [],
+              "penalty": 3
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 82.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'y' should be positive - add validation",
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+              "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "supply_positive",
+              "y_positive",
+              "r_strictly_positive",
+              "r_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Check AMM constant product invariant preservation",
+          "Division by 'supply' detected - ensure supply ≠ 0",
+          "Variable 'y' should be positive - add validation",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+          "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "borrows/supply",
+        "canonical_form": "borrows/supply",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This expression calculates the utilization rate, representing the percentage of available funds that are currently borrowed in a lending protocol.",
+        "relationships": [
+          "Direct proportional relationship: as borrows increase relative to supply, utilization rate increases linearly",
+          "Inverse relationship with available liquidity: higher utilization means less available funds for withdrawal",
+          "Critical threshold behavior: utilization approaching 1.0 (100%) indicates potential liquidity crisis",
+          "Rate sensitivity: small changes in numerator or denominator can significantly impact borrowing costs"
+        ],
+        "domain_insights": [
+          "Core metric for DeFi lending protocols like Aave, Compound, and Venus to determine interest rates",
+          "Triggers dynamic interest rate models where rates increase exponentially as utilization approaches maximum",
+          "Critical for liquidity risk assessment - high utilization reduces withdrawal capacity for lenders",
+          "Influences protocol token incentives and liquidity mining rewards distribution",
+          "Key factor in determining collateral requirements and liquidation thresholds"
+        ],
+        "use_cases": [
+          "Real-time interest rate calculation in automated market makers for lending",
+          "Risk management dashboards for protocol administrators and users",
+          "Liquidity provision strategy optimization for yield farmers",
+          "Automated rebalancing triggers for DeFi portfolio management",
+          "Protocol health monitoring and early warning systems for bank runs"
+        ],
+        "limitations": [
+          "Assumes supply represents total available liquidity (may exclude reserved funds)",
+          "Does not account for different asset types or risk profiles in multi-asset pools",
+          "Undefined when supply equals zero, causing division by zero errors",
+          "May not reflect true liquidity if large portions are locked or illiquid",
+          "Ignores temporal factors like loan duration and repayment schedules"
+        ],
+        "formula_name": "Utilization Rate",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This expression calculates the utilization rate, representing the percentage of available funds that are currently borrowed in a lending protocol.\",\n    \"relationships\": [\n        \"Direct proportional relationship: as borrows increase relative to supply, utilization rate increases linearly\",\n        \"Inverse relationship with available liquidity: higher utilization means less available funds for withdrawal\",\n        \"Critical threshold behavior: utilization approaching 1.0 (100%) indicates potential liquidity crisis\",\n        \"Rate sensitivity: small changes in numerator or denominator can significantly impact borrowing costs\"\n    ],\n    \"domain_insights\": [\n        \"Core metric for DeFi lending protocols like Aave, Compound, and Venus to determine interest rates\",\n        \"Triggers dynamic interest rate models where rates increase exponentially as utilization approaches maximum\",\n        \"Critical for liquidity risk assessment - high utilization reduces withdrawal capacity for lenders\",\n        \"Influences protocol token incentives and liquidity mining rewards distribution\",\n        \"Key factor in determining collateral requirements and liquidation thresholds\"\n    ],\n    \"use_cases\": [\n        \"Real-time interest rate calculation in automated market makers for lending\",\n        \"Risk management dashboards for protocol administrators and users\",\n        \"Liquidity provision strategy optimization for yield farmers\",\n        \"Automated rebalancing triggers for DeFi portfolio management\",\n        \"Protocol health monitoring and early warning systems for bank runs\"\n    ],\n    \"limitations\": [\n        \"Assumes supply represents total available liquidity (may exclude reserved funds)\",\n        \"Does not account for different asset types or risk profiles in multi-asset pools\",\n        \"Undefined when supply equals zero, causing division by zero errors\",\n        \"May not reflect true liquidity if large portions are locked or illiquid\",\n        \"Ignores temporal factors like loan duration and repayment schedules\"\n    ],\n    \"formula_name\": \"Utilization Rate\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 12.05,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 150,
+        "n_features": 2,
+        "variable_names": [
+          "borrows",
+          "supply"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:05:25.242710",
+      "description": "Dynamic borrow APY with kinked rate model",
+      "domain": "defi",
+      "discovery": {
+        "expression": "base_rate + log(utilization**11.255414 + 1.0236841)",
+        "sympy_expr": "base_rate + log(utilization**11.255414 + 1.0236841)",
+        "r2_score": 0.9842897821521284,
+        "complexity": "8",
+        "variable_names": [
+          "utilization",
+          "base_rate"
+        ],
+        "predictions": "[0.13961648 0.0698052  0.06209846 0.05690073 0.16151686 0.06798556\n 0.05183402 0.05241232 0.04911272 0.07469531 0.06364335 0.03675654\n 0.06793913 0.05263039 0.03620309 0.05539668 0.08861271 0.3967022\n 0.38092985 0.18769633 0.05950172 0.05192028 0.07228743 0.0599043\n 0.04534215 0.05268036 0.10220084 0.04560925 0.04112866 0.26168595\n 0.04532236 0.06514074 0.25096012 0.04690023 0.04161818 0.04671916\n 0.07103063 0.15231307 0.07487038 0.05371922 0.04057455 0.06905359\n 0.37254847 0.06185165 0.07668846 0.035415   0.05005557 0.30298188\n 0.04721876 0.04078006 0.03778086 0.07268054 0.06449629 0.1806685\n 0.05992894 0.23106908 0.05591241 0.03449227 0.064759   0.03382893\n 0.25487165 0.10477893 0.06235225 0.05483837 0.05248754 0.08288162\n 0.06933262 0.06916626 0.05167689 0.05801077 0.07050106 0.07227458\n 0.0537664  0.43636071 0.04455629 0.07176288 0.039121   0.09632138\n 0.04487285 0.04671484 0.04960673 0.0733597  0.03585286 0.12699491\n 0.18684917 0.03958882 0.05235311 0.25335906 0.04383243 0.12780946\n 0.03688669 0.29284563 0.1038777  0.33272338 0.05846971 0.05628367\n 0.32369415 0.03365963 0.06585483 0.0876579  0.07496806 0.27345318\n 0.0718383  0.1114429  0.06092938 0.04371326 0.05147727 0.06112961\n 0.06274394 0.45252353 0.05207144 0.07542009 0.41400042 0.04969088\n 0.09935677 0.0727023  0.19472583 0.0533415  0.33496043 0.04249917\n 0.05517626 0.09500112 0.05409734 0.07726874 0.05810179 0.07656738\n 0.06429508 0.04022648 0.04879706 0.04771523 0.05068038 0.06471307\n 0.05286965 0.06516856 0.05933809 0.19583345 0.06580719 0.04655279\n 0.05223894 0.05373131 0.06022155 0.03389087 0.06009239 0.05385174\n 0.06563074 0.08147357 0.05625595 0.06799173 0.40579675 0.05632371]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [
+            "exponentiation_present",
+            "logarithm_present"
+          ],
+          "warnings": [
+            "Expression contains exponentiation - verify no overflow occurs",
+            "Expression contains logarithm - verify all arguments are positive"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 87.39999999999999,
+        "base_score": 87.39999999999999,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 71,
+          "dimensional": 95.0,
+          "domain": 92.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Logarithm of non-positive value risk: log(utilization**11.255414 + 1.0236841). Ensure utilization**11.255414 + 1.0236841 > 0",
+              "Power overflow risk: (utilization)^(11.2554140000000). Verify bounds on base and exponent"
+            ],
+            "sympy_expr": "base_rate + log(utilization**11.255414 + 1.0236841)",
+            "canonical_form": "base_rate + log(utilization**11.255414 + 1.0236841)",
+            "score": 71
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 95.0,
+            "errors": [],
+            "warnings": [
+              "Logarithm detected - ensure all arguments are positive",
+              "Function log requires dimensionless arguments"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "utilization": "dimensionless",
+              "base_rate": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "logarithm_domain"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Logarithm detected - ensure all arguments are positive"
+              ],
+              "errors": [],
+              "penalty": 3
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 92.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "r_strictly_positive",
+              "utilization_bounded",
+              "r_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Logarithm of non-positive value risk: log(utilization**11.255414 + 1.0236841). Ensure utilization**11.255414 + 1.0236841 > 0",
+          "Power overflow risk: (utilization)^(11.2554140000000). Verify bounds on base and exponent",
+          "Logarithm detected - ensure all arguments are positive",
+          "Function log requires dimensionless arguments",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 IMPROVE: Simplify to: base_rate + log(utilization**11.255414 + 1.0236841)",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "base_rate + log(utilization**11.255414 + 1.0236841)",
+        "canonical_form": "base_rate + log(utilization**11.255414 + 1.0236841)",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This calculates a dynamic interest rate that starts from a base rate and increases exponentially with protocol utilization, creating a steep borrowing cost curve at high utilization levels.",
+        "relationships": [
+          "The logarithmic function creates a smooth, continuously increasing rate curve that prevents discontinuous jumps",
+          "The high exponent (11.255414) on utilization creates exponential growth in borrowing costs as utilization approaches 100%",
+          "The constant 1.0236841 ensures the logarithm remains positive and provides a minimum rate adjustment above the base rate",
+          "At low utilization, the rate stays close to base_rate, while high utilization triggers dramatic rate increases"
+        ],
+        "domain_insights": [
+          "This resembles a kinked interest rate model used by protocols like Aave and Compound to manage liquidity risk",
+          "The steep utilization curve incentivizes loan repayment and new deposits when liquidity becomes scarce",
+          "The exponential relationship helps prevent bank runs by making borrowing prohibitively expensive near 100% utilization",
+          "This model balances capital efficiency (allowing high utilization) with liquidity protection (penalizing extreme utilization)"
+        ],
+        "use_cases": [
+          "Setting dynamic borrowing rates in lending protocols based on real-time supply/demand",
+          "Calculating yield farming APY adjustments as pool utilization changes",
+          "Implementing liquidity mining reward curves that respond to protocol usage",
+          "Risk management for automated market makers to adjust fees based on utilization pressure"
+        ],
+        "limitations": [
+          "Assumes utilization rate is bounded between 0 and 1, undefined behavior outside this range",
+          "The model may create rate volatility during periods of rapidly changing utilization",
+          "Base rate parameter requires careful calibration to market conditions and competitor rates",
+          "Extreme sensitivity at high utilization could create feedback loops that destabilize the protocol",
+          "Does not account for external market factors like overall DeFi yield environment or token price volatility"
+        ],
+        "formula_name": "Exponential Utilization Rate Model",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This calculates a dynamic interest rate that starts from a base rate and increases exponentially with protocol utilization, creating a steep borrowing cost curve at high utilization levels.\",\n    \"relationships\": [\n        \"The logarithmic function creates a smooth, continuously increasing rate curve that prevents discontinuous jumps\",\n        \"The high exponent (11.255414) on utilization creates exponential growth in borrowing costs as utilization approaches 100%\",\n        \"The constant 1.0236841 ensures the logarithm remains positive and provides a minimum rate adjustment above the base rate\",\n        \"At low utilization, the rate stays close to base_rate, while high utilization triggers dramatic rate increases\"\n    ],\n    \"domain_insights\": [\n        \"This resembles a kinked interest rate model used by protocols like Aave and Compound to manage liquidity risk\",\n        \"The steep utilization curve incentivizes loan repayment and new deposits when liquidity becomes scarce\",\n        \"The exponential relationship helps prevent bank runs by making borrowing prohibitively expensive near 100% utilization\",\n        \"This model balances capital efficiency (allowing high utilization) with liquidity protection (penalizing extreme utilization)\"\n    ],\n    \"use_cases\": [\n        \"Setting dynamic borrowing rates in lending protocols based on real-time supply/demand\",\n        \"Calculating yield farming APY adjustments as pool utilization changes\",\n        \"Implementing liquidity mining reward curves that respond to protocol usage\",\n        \"Risk management for automated market makers to adjust fees based on utilization pressure\"\n    ],\n    \"limitations\": [\n        \"Assumes utilization rate is bounded between 0 and 1, undefined behavior outside this range\",\n        \"The model may create rate volatility during periods of rapidly changing utilization\",\n        \"Base rate parameter requires careful calibration to market conditions and competitor rates\",\n        \"Extreme sensitivity at high utilization could create feedback loops that destabilize the protocol\",\n        \"Does not account for external market factors like overall DeFi yield environment or token price volatility\"\n    ],\n    \"formula_name\": \"Exponential Utilization Rate Model\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 12.67,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 150,
+        "n_features": 2,
+        "variable_names": [
+          "utilization",
+          "base_rate"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:06:04.747670",
+      "description": "Health factor for lending positions (>1 = safe, <1 = liquidatable)",
+      "domain": "defi",
+      "discovery": {
+        "expression": "collateral*liq_threshold/borrowed",
+        "sympy_expr": "collateral*liq_threshold/borrowed",
+        "r2_score": 0.9999999919505472,
+        "complexity": "5",
+        "variable_names": [
+          "collateral",
+          "borrowed",
+          "liq_threshold"
+        ],
+        "predictions": "[ 1.05263158  1.89448591 10.60506619  3.40638133  1.71499751  1.26503662\n  1.05263158  3.45686887  4.96419927 18.93378973 29.40836962 10.40044185\n  7.58943334  1.05263158  1.07995479  8.9078847   1.11454631  3.36382112\n  6.78175365 85.074337    2.43056667  1.45834496  4.10377794  3.34797551\n  1.05263158  1.79709287  3.94891609  1.05263158  1.05263158  1.05263158\n  1.88131477  5.74400796 15.2085538   1.16459102 11.97764516  2.31224866\n  1.05263158  1.05263158  1.05263158  1.88377998  1.06786398  1.05263158\n  3.35618859 67.68834292  2.15147     2.36185255  1.05263158  1.29364362\n  1.05263158  2.70329594  1.96430812  6.80780327  1.05263158  1.05263158\n  1.05263158  1.0577125   6.50445907  5.35956243  1.05263158  1.47175159\n  3.13919008 19.12839449  1.05263158  2.00328204  1.05263158  2.06169274\n  3.01561571  4.34546795  1.76451598  1.99127818  1.05263158  1.12488889\n 18.06773262  1.29302356  1.8721666   5.63446251  1.22123673  1.81298838\n  3.37925167  4.53520102  2.66432623  2.01824042  1.05263158  1.05263158\n  1.05263158  3.09682418 14.18554227 19.35189874  6.73967285  1.05263158\n  1.25017639  1.34973314  3.54804463  2.28060838  2.52352034  6.34612902\n  1.05263158  1.05263158  1.05263158  1.62229694  1.05263158  7.96572561\n  1.88328853  1.05263158 22.00546954  1.05263158  1.05263158  1.05263158\n  3.04093643  1.49751219  1.05263158  1.05263158  4.07515447  1.05263158\n  8.03906537  1.29891962 15.54293464  1.7972351   2.45186289  2.5710716\n  3.68518646  1.33333587  1.05263158  1.54663674  1.26791895  1.05263158\n  1.49678534  1.05263158  1.05263158 53.46294836  1.05263158  1.35130357\n  1.05263158  1.78420053  1.05263158  3.71227863  1.29146301  1.05263158\n  4.90726861  1.05263158  1.05263158  1.13925752  1.25626926  4.17549276\n  1.92596852  1.4790276   2.43646195  1.05290502  1.06547116  1.26176094]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [],
+          "warnings": [
+            "Expression contains division - verify denominators are non-zero"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 93.1,
+        "base_score": 93.1,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 98,
+          "dimensional": 92.0,
+          "domain": 87.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [
+              "Check AMM constant product invariant preservation"
+            ],
+            "sympy_expr": "collateral*liq_threshold/borrowed",
+            "canonical_form": "collateral*liq_threshold/borrowed",
+            "score": 98
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 92.0,
+            "errors": [],
+            "warnings": [
+              "Multiplication of variables detected - verify dimensional consistency",
+              "Division by 'borrowed' detected - ensure borrowed ≠ 0"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "collateral": "dimensionless",
+              "borrowed": "dimensionless",
+              "liq_threshold": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "unconstrained_division_borrowed"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Multiplication of variables detected - verify dimensional consistency",
+                "Division by 'borrowed' detected - ensure borrowed ≠ 0"
+              ],
+              "errors": [],
+              "penalty": 8
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 87.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+              "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "r_strictly_positive",
+              "r_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Check AMM constant product invariant preservation",
+          "Multiplication of variables detected - verify dimensional consistency",
+          "Division by 'borrowed' detected - ensure borrowed ≠ 0",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+          "Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "collateral*liq_threshold/borrowed",
+        "canonical_form": "collateral*liq_threshold/borrowed",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This expression calculates the health factor or safety margin of a leveraged position by determining how much the collateral can decline before reaching the liquidation threshold.",
+        "relationships": [
+          "Direct proportionality with collateral value - higher collateral increases the safety ratio",
+          "Direct proportionality with liquidation threshold - higher thresholds provide more buffer before liquidation",
+          "Inverse relationship with borrowed amount - more debt reduces the safety margin",
+          "The ratio represents a multiple indicating how many times the position exceeds the minimum collateralization requirement"
+        ],
+        "domain_insights": [
+          "Values above 1.0 indicate a healthy position that won't be liquidated, while values below 1.0 signal imminent liquidation risk",
+          "This metric is fundamental to lending protocols like Aave, Compound, and MakerDAO for position monitoring",
+          "The liquidation threshold acts as a safety buffer below the loan-to-value ratio to account for price volatility",
+          "Automated liquidation bots monitor this ratio across protocols to identify profitable liquidation opportunities",
+          "Different collateral assets have varying liquidation thresholds based on their volatility and liquidity profiles"
+        ],
+        "use_cases": [
+          "Real-time position monitoring in lending protocols to warn users of liquidation risk",
+          "Automated risk management systems that adjust positions when health factors drop below safe levels",
+          "Portfolio dashboards displaying aggregated health across multiple DeFi positions",
+          "Liquidation bot algorithms to identify positions ready for liquidation",
+          "Risk assessment tools for DeFi users to optimize their borrowing strategies"
+        ],
+        "limitations": [
+          "Assumes accurate real-time price feeds for both collateral and borrowed assets",
+          "Does not account for oracle manipulation or price feed delays that could trigger unexpected liquidations",
+          "Liquidation threshold values must be current and properly configured for each asset",
+          "Calculation becomes undefined when borrowed amount is zero (no debt position)",
+          "Does not consider gas costs, slippage, or partial liquidation mechanics that affect actual liquidation outcomes"
+        ],
+        "formula_name": "Health Factor Ratio",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This expression calculates the health factor or safety margin of a leveraged position by determining how much the collateral can decline before reaching the liquidation threshold.\",\n    \"relationships\": [\n        \"Direct proportionality with collateral value - higher collateral increases the safety ratio\",\n        \"Direct proportionality with liquidation threshold - higher thresholds provide more buffer before liquidation\",\n        \"Inverse relationship with borrowed amount - more debt reduces the safety margin\",\n        \"The ratio represents a multiple indicating how many times the position exceeds the minimum collateralization requirement\"\n    ],\n    \"domain_insights\": [\n        \"Values above 1.0 indicate a healthy position that won't be liquidated, while values below 1.0 signal imminent liquidation risk\",\n        \"This metric is fundamental to lending protocols like Aave, Compound, and MakerDAO for position monitoring\",\n        \"The liquidation threshold acts as a safety buffer below the loan-to-value ratio to account for price volatility\",\n        \"Automated liquidation bots monitor this ratio across protocols to identify profitable liquidation opportunities\",\n        \"Different collateral assets have varying liquidation thresholds based on their volatility and liquidity profiles\"\n    ],\n    \"use_cases\": [\n        \"Real-time position monitoring in lending protocols to warn users of liquidation risk\",\n        \"Automated risk management systems that adjust positions when health factors drop below safe levels\",\n        \"Portfolio dashboards displaying aggregated health across multiple DeFi positions\",\n        \"Liquidation bot algorithms to identify positions ready for liquidation\",\n        \"Risk assessment tools for DeFi users to optimize their borrowing strategies\"\n    ],\n    \"limitations\": [\n        \"Assumes accurate real-time price feeds for both collateral and borrowed assets\",\n        \"Does not account for oracle manipulation or price feed delays that could trigger unexpected liquidations\",\n        \"Liquidation threshold values must be current and properly configured for each asset\",\n        \"Calculation becomes undefined when borrowed amount is zero (no debt position)\",\n        \"Does not consider gas costs, slippage, or partial liquidation mechanics that affect actual liquidation outcomes\"\n    ],\n    \"formula_name\": \"Health Factor Ratio\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 13.02,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 150,
+        "n_features": 3,
+        "variable_names": [
+          "collateral",
+          "borrowed",
+          "liq_threshold"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:06:44.000917",
+      "description": "Optimal fee for low volatility, competitive market",
+      "domain": "defi",
+      "discovery": {
+        "expression": "2.2239048*((volume_24h**1.5900395)**(-0.4565813) + 0.0002707394)*log(sqrt(liquidity)) - 0.004090244",
+        "sympy_expr": "2.2239048*((volume_24h**1.5900395)**(-0.4565813) + 0.0002707394)*log(sqrt(liquidity)) - 0.004090244",
+        "r2_score": 0.6920668023610321,
+        "complexity": "15",
+        "variable_names": [
+          "volume_24h",
+          "liquidity",
+          "volatility"
+        ],
+        "predictions": "[0.00126465 0.00160193 0.00117065 0.00131007 0.0013505  0.00123684\n 0.00115898 0.00131137 0.00093073 0.00165752 0.00132289 0.00132378\n 0.00151544 0.00060905 0.00184566 0.00136807 0.00138083 0.00102048\n 0.00134792 0.00129242 0.00107554 0.00133608 0.00146064 0.00102138\n 0.00132227 0.00163621 0.00152025 0.00174068 0.00072419 0.00153909\n 0.0014054  0.00128446 0.00145945 0.00035407 0.00122248 0.00059187\n 0.00162486 0.00154729 0.00142136 0.0012827  0.00123136 0.00141028\n 0.00130367 0.00064859 0.0018329  0.00106873 0.00122006 0.00120776\n 0.00131464 0.00149287 0.00090556 0.0012449  0.0020823  0.0014028\n 0.00146067 0.00157984 0.00340281 0.00108528 0.00060312 0.00138487\n 0.0014077  0.00142226 0.00169388 0.00179779 0.00123765 0.00082777\n 0.00099678 0.00119636 0.00137125 0.00123549 0.00197588 0.00123391\n 0.0012975  0.0008736  0.0011532  0.00221582 0.00138466 0.00148172\n 0.00108265 0.00145679 0.00123958 0.0011836  0.00171625 0.00131836\n 0.00145452 0.00097143 0.00141313 0.00090698 0.00145477 0.00109388\n 0.00118998 0.00121197 0.00151554 0.00097688 0.00124527 0.00136873\n 0.00132615 0.00094916 0.00116732 0.00129626 0.00213584 0.00136926\n 0.00140754 0.00143764 0.0013032  0.00070928 0.00104152 0.00131401\n 0.00098303 0.00155779 0.00149724 0.0011067  0.00127695 0.0014818\n 0.0014871  0.00142538 0.00145234 0.00157213 0.00124398 0.00127216]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [
+            "exponentiation_present",
+            "logarithm_present",
+            "sqrt_present"
+          ],
+          "warnings": [
+            "Expression contains exponentiation - verify no overflow occurs",
+            "Expression contains logarithm - verify all arguments are positive",
+            "Expression contains sqrt - verify all arguments are non-negative"
+          ]
+        }
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 82.3,
+        "base_score": 82.3,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 67,
+          "dimensional": 87.0,
+          "domain": 87.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Can be simplified to: 1.1119524*log(liquidity)/(volume_24h**1.5900395)**0.4565813 + 0.00030104932560456*log(liquidity) - 0.004090244",
+              "Ensure liquidity is always positive",
+              "Check AMM constant product invariant preservation",
+              "Logarithm of non-positive value risk: log(sqrt(liquidity)). Ensure sqrt(liquidity) > 0"
+            ],
+            "sympy_expr": "(2.2239048/(volume_24h**1.5900395)**0.4565813 + 0.00060209865120912)*log(sqrt(liquidity)) - 0.004090244",
+            "canonical_form": "1.1119524*log(liquidity)/(volume_24h**1.5900395)**0.4565813 + 0.00030104932560456*log(liquidity) - 0.004090244",
+            "score": 67
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 87.0,
+            "errors": [],
+            "warnings": [
+              "Nested exponentiation detected - verify numerical stability",
+              "Square root detected - ensure all arguments are non-negative",
+              "Logarithm detected - ensure all arguments are positive",
+              "Function log requires dimensionless arguments"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "volume_24h": "dimensionless",
+              "liquidity": "dimensionless",
+              "volatility": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "nested_exponentiation",
+                "sqrt_domain",
+                "logarithm_domain"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Nested exponentiation detected - verify numerical stability",
+                "Square root detected - ensure all arguments are non-negative",
+                "Logarithm detected - ensure all arguments are positive"
+              ],
+              "errors": [],
+              "penalty": 11
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 87.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'y' should be positive - add validation",
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "liquidity_positive",
+              "y_positive",
+              "liquidity_strictly_positive",
+              "r_strictly_positive",
+              "r_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Can be simplified to: 1.1119524*log(liquidity)/(volume_24h**1.5900395)**0.4565813 + 0.00030104932560456*log(liquidity) - 0.004090244",
+          "Ensure liquidity is always positive",
+          "Check AMM constant product invariant preservation",
+          "Logarithm of non-positive value risk: log(sqrt(liquidity)). Ensure sqrt(liquidity) > 0",
+          "Nested exponentiation detected - verify numerical stability",
+          "Square root detected - ensure all arguments are non-negative",
+          "Logarithm detected - ensure all arguments are positive",
+          "Function log requires dimensionless arguments",
+          "Variable 'y' should be positive - add validation",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 IMPROVE: Simplify to: 1.1119524*log(liquidity)/(volume_24h**1.5900395)**0.4565813 + 0.00030104932560456*log(liquidity) - 0.004090244",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": false,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "2.2239048*((volume_24h**1.5900395)**(-0.4565813) + 0.0002707394)*log(sqrt(liquidity)) - 0.004090244",
+        "canonical_form": "1.1119524*log(liquidity)/(volume_24h**1.5900395)**0.4565813 + 0.00030104932560456*log(liquidity) - 0.004090244",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 120,
+        "n_features": 3,
+        "variable_names": [
+          "volume_24h",
+          "liquidity",
+          "volatility"
+        ],
+        "llm_provider": null,
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:07:25.609504",
+      "description": "Optimal fee for high volatility market (IL compensation)",
+      "domain": "defi",
+      "discovery": {
+        "expression": "liquidity*2.9176367e-10 + (volatility + 0.0075895614)*0.011314256 + (volatility - volume_24h)*1.4934871e-9",
+        "sympy_expr": "liquidity*2.9176367e-10 + (volatility + 0.0075895614)*0.011314256 + (volatility - volume_24h)*1.4934871e-9",
+        "r2_score": 0.7609207442003565,
+        "complexity": "15",
+        "variable_names": [
+          "volume_24h",
+          "liquidity",
+          "volatility"
+        ],
+        "predictions": "[0.03436238 0.01367084 0.01261351 0.00485915 0.01989071 0.01349347\n 0.02415682 0.04381259 0.02737621 0.0175852  0.03063482 0.00991225\n 0.03056774 0.03599835 0.02732732 0.00867329 0.02015048 0.01369619\n 0.01991051 0.01025158 0.03043309 0.03190634 0.03734793 0.01404643\n 0.02578183 0.03559688 0.02906855 0.0106589  0.01427904 0.01413884\n 0.02756504 0.02776439 0.03624463 0.00586839 0.00740745 0.0244905\n 0.0169322  0.01209309 0.02808318 0.01220739 0.027081   0.01805456\n 0.00582344 0.0112184  0.02788347 0.00511222 0.02197742 0.00371782\n 0.02311428 0.0329998  0.0185637  0.02163592 0.0125228  0.0210737\n 0.02156841 0.01873025 0.01925982 0.03229229 0.01206215 0.01588742\n 0.009149   0.02301876 0.02323963 0.00886321 0.02078935 0.02335828\n 0.01175744 0.02799876 0.01810021 0.00606431 0.00549526 0.03424402\n 0.02782836 0.00146333 0.00619162 0.03284213 0.01479443 0.03005031\n 0.01717965 0.03024652 0.01875842 0.0303116  0.0325469  0.02227695\n 0.00162879 0.01661237 0.02204482 0.00301685 0.01299994 0.02483603\n 0.01220746 0.03555629 0.01782602 0.0318938  0.0388516  0.02893379\n 0.01504816 0.0295193  0.02356215 0.02640533 0.01336963 0.01315341\n 0.03690316 0.00429891 0.02263704 0.01939123 0.02022202 0.01168826\n 0.02821063 0.03722225 0.02095482 0.01153311 0.00242599 0.0178479\n 0.03089503 0.01898113 0.01324586 0.01930121 0.011302   0.00296148]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [],
+          "warnings": []
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 89.8,
+        "base_score": 89.8,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 71,
+          "dimensional": 100.0,
+          "domain": 95.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Ensure liquidity is always positive",
+              "Multiple multiplications (6 terms) - check for overflow. Consider: 0.0113142574934871 * volatility * 2.91763670000000e-10..."
+            ],
+            "sympy_expr": "2.9176367e-10*liquidity + 0.0113142574934871*volatility - 1.4934871e-9*volume_24h + 8.58702406073184e-5",
+            "canonical_form": "2.9176367e-10*liquidity + 0.0113142574934871*volatility - 1.4934871e-9*volume_24h + 8.58702406073184e-5",
+            "score": 71
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "volume_24h": "dimensionless",
+              "liquidity": "dimensionless",
+              "volatility": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 95.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'y' should be positive - add validation"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "liquidity_positive",
+              "y_positive",
+              "liquidity_strictly_positive",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Ensure liquidity is always positive",
+          "Multiple multiplications (6 terms) - check for overflow. Consider: 0.0113142574934871 * volatility * 2.91763670000000e-10...",
+          "Variable 'y' should be positive - add validation"
+        ],
+        "recommendations": [
+          "🟡 IMPROVE: Simplify to: 2.9176367e-10*liquidity + 0.0113142574934871*volatility - 1.4934871e-9*volume_24h + 8.58702406073184e-5",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "liquidity*2.9176367e-10 + (volatility + 0.0075895614)*0.011314256 + (volatility - volume_24h)*1.4934871e-9",
+        "canonical_form": "2.9176367e-10*liquidity + 0.0113142574934871*volatility - 1.4934871e-9*volume_24h + 8.58702406073184e-5",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This expression calculates a risk-adjusted yield or fee rate for DeFi liquidity pools, incorporating pool size effects, volatility premiums, and volume-volatility spread dynamics.",
+        "relationships": [
+          "Liquidity has a minimal positive linear impact (coefficient 2.9e-10), suggesting larger pools provide slightly higher base returns due to economies of scale",
+          "Volatility contributes positively with a base premium of 0.0075895614 and multiplier 0.011314256, representing volatility risk compensation",
+          "The volatility-volume spread (volatility - volume_24h) creates an additional risk adjustment, where high volatility relative to trading activity increases the metric"
+        ],
+        "domain_insights": [
+          "The volatility premium structure suggests this models impermanent loss compensation or dynamic fee adjustments in AMM pools",
+          "The minimal liquidity coefficient indicates diminishing returns to pool size, consistent with concentrated liquidity models like Uniswap V3",
+          "The volatility-volume spread term captures market efficiency - when volatility exceeds normalized volume, additional risk premiums are warranted",
+          "The constant offset (0.0075895614) represents a base risk-free rate or minimum protocol fee structure"
+        ],
+        "use_cases": [
+          "Dynamic fee calculation for automated market makers based on pool conditions and market volatility",
+          "Yield farming reward distribution algorithms that adjust for pool risk characteristics",
+          "Liquidity provider compensation models that account for impermanent loss risk",
+          "Protocol treasury management for setting optimal incentive rates across different pools"
+        ],
+        "limitations": [
+          "Assumes linear relationships between variables, which may not hold during extreme market conditions or liquidity crises",
+          "Requires volume_24h and volatility to be in comparable units for the spread calculation to be meaningful",
+          "The tiny liquidity coefficient suggests potential numerical precision issues with very large pool sizes",
+          "May not account for correlation effects between assets in multi-token pools or cross-pool arbitrage impacts"
+        ],
+        "formula_name": "DeFi Pool Risk-Adjusted Yield Calculator",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This expression calculates a risk-adjusted yield or fee rate for DeFi liquidity pools, incorporating pool size effects, volatility premiums, and volume-volatility spread dynamics.\",\n    \"relationships\": [\n        \"Liquidity has a minimal positive linear impact (coefficient 2.9e-10), suggesting larger pools provide slightly higher base returns due to economies of scale\",\n        \"Volatility contributes positively with a base premium of 0.0075895614 and multiplier 0.011314256, representing volatility risk compensation\",\n        \"The volatility-volume spread (volatility - volume_24h) creates an additional risk adjustment, where high volatility relative to trading activity increases the metric\"\n    ],\n    \"domain_insights\": [\n        \"The volatility premium structure suggests this models impermanent loss compensation or dynamic fee adjustments in AMM pools\",\n        \"The minimal liquidity coefficient indicates diminishing returns to pool size, consistent with concentrated liquidity models like Uniswap V3\",\n        \"The volatility-volume spread term captures market efficiency - when volatility exceeds normalized volume, additional risk premiums are warranted\",\n        \"The constant offset (0.0075895614) represents a base risk-free rate or minimum protocol fee structure\"\n    ],\n    \"use_cases\": [\n        \"Dynamic fee calculation for automated market makers based on pool conditions and market volatility\",\n        \"Yield farming reward distribution algorithms that adjust for pool risk characteristics\",\n        \"Liquidity provider compensation models that account for impermanent loss risk\",\n        \"Protocol treasury management for setting optimal incentive rates across different pools\"\n    ],\n    \"limitations\": [\n        \"Assumes linear relationships between variables, which may not hold during extreme market conditions or liquidity crises\",\n        \"Requires volume_24h and volatility to be in comparable units for the spread calculation to be meaningful\",\n        \"The tiny liquidity coefficient suggests potential numerical precision issues with very large pool sizes\",\n        \"May not account for correlation effects between assets in multi-token pools or cross-pool arbitrage impacts\"\n    ],\n    \"formula_name\": \"DeFi Pool Risk-Adjusted Yield Calculator\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 14.02,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 120,
+        "n_features": 3,
+        "variable_names": [
+          "volume_24h",
+          "liquidity",
+          "volatility"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:08:05.584264",
+      "description": "Dynamic fee for trending market (momentum-adjusted)",
+      "domain": "defi",
+      "discovery": {
+        "expression": "volatility**0.00046573224 - 1*0.9956323",
+        "sympy_expr": "volatility**0.00046573224 - 1*0.9956323",
+        "r2_score": 0.03546623849456654,
+        "complexity": "5",
+        "variable_names": [
+          "volume",
+          "momentum",
+          "liquidity",
+          "volatility"
+        ],
+        "predictions": "[0.00380951 0.00398983 0.00433961 0.00441637 0.00426433 0.00444353\n 0.00433201 0.00392808 0.00407243 0.00449276 0.00444078 0.00451559\n 0.00398655 0.0045529  0.0040904  0.00382856 0.00455559 0.00415789\n 0.00441278 0.00405599 0.00436596 0.00451935 0.00419098 0.00441391\n 0.00406808 0.00439031 0.00420408 0.00409222 0.00418523 0.00405834\n 0.00451849 0.00424997 0.0041254  0.00428544 0.00419127 0.00445001\n 0.00454571 0.00427847 0.00450166 0.00435783 0.00403427 0.00442411\n 0.0043269  0.00440386 0.00451352 0.00428009 0.00451819 0.00445293\n 0.0043115  0.00437868 0.00419537 0.0045504  0.00441244 0.00388235\n 0.00419621 0.00438953 0.00390172 0.0038496  0.00428652 0.00420109\n 0.00427865 0.00414149 0.00404275 0.00442337 0.00432759 0.00408092\n 0.0041905  0.00437241 0.00392527 0.00402295 0.00392674 0.00448077\n 0.00445374 0.00445416 0.00443666 0.00441347 0.00430412 0.00439953\n 0.00387358 0.00438854 0.00446542 0.00431885 0.00422051 0.00415469\n 0.0043998  0.00442518 0.00450581 0.00420873 0.00446174 0.00435525\n 0.00451071 0.00433559 0.00432945 0.00436464 0.0044523  0.00454321\n 0.0039272  0.0038973  0.00453268 0.00433682 0.00438502 0.00430759\n 0.00395524 0.00446097 0.00445132 0.004184   0.00417945 0.00449183\n 0.00392546 0.00451    0.00413598 0.00437306 0.00453207 0.00441787\n 0.00426222 0.00442357 0.00421002 0.00415454 0.00455532 0.00445298]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [
+            "exponentiation_present"
+          ],
+          "warnings": [
+            "Expression contains exponentiation - verify no overflow occurs"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 98.5,
+        "base_score": 98.5,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 100,
+          "dimensional": 100.0,
+          "domain": 95.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [],
+            "sympy_expr": "volatility**0.00046573224 - 0.9956323",
+            "canonical_form": "volatility**0.00046573224 - 0.9956323",
+            "score": 100
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "volume": "dimensionless",
+              "momentum": "dimensionless",
+              "liquidity": "dimensionless",
+              "volatility": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 95.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'y' should be positive - add validation"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "y_positive",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Variable 'y' should be positive - add validation"
+        ],
+        "recommendations": [
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "volatility**0.00046573224 - 1*0.9956323",
+        "canonical_form": "volatility**0.00046573224 - 0.9956323",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This expression calculates a volatility-adjusted risk offset metric that produces small negative values, representing a baseline risk adjustment factor for DeFi protocols.",
+        "relationships": [
+          "The volatility term is raised to an extremely small power (0.00046573224), creating a near-constant value close to 1 regardless of volatility magnitude",
+          "The dominant component is the constant offset (-0.9956323), which drives the expression to consistently negative values around -0.995",
+          "The volatility contribution becomes negligible except for extreme volatility scenarios, making this primarily a constant adjustment factor"
+        ],
+        "domain_insights": [
+          "Could represent a protocol fee adjustment mechanism where higher volatility provides minimal fee reductions",
+          "May function as a baseline risk premium that remains relatively stable across different market conditions",
+          "Suitable for DeFi applications requiring consistent negative adjustments with slight volatility-based modifications",
+          "The near-zero volatility exponent suggests this metric prioritizes stability over volatility sensitivity"
+        ],
+        "use_cases": [
+          "Automated market maker fee adjustments where volatility provides minor discounts",
+          "Risk management systems requiring stable baseline adjustments with minimal volatility impact",
+          "Lending protocol interest rate modifications where volatility creates small rate reductions",
+          "Liquidity mining reward calculations with volatility-based bonus factors"
+        ],
+        "limitations": [
+          "Very low R² score (0.0355) indicates poor explanatory power for the underlying data",
+          "The expression is dominated by the constant term, making volatility input potentially redundant",
+          "May not respond meaningfully to significant market volatility changes due to the minimal exponent",
+          "Requires volatility to be positive and non-zero to avoid mathematical errors",
+          "The consistent negative output may limit applicability in contexts requiring positive values"
+        ],
+        "formula_name": "Volatility-Dampened Risk Offset",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This expression calculates a volatility-adjusted risk offset metric that produces small negative values, representing a baseline risk adjustment factor for DeFi protocols.\",\n    \"relationships\": [\n        \"The volatility term is raised to an extremely small power (0.00046573224), creating a near-constant value close to 1 regardless of volatility magnitude\",\n        \"The dominant component is the constant offset (-0.9956323), which drives the expression to consistently negative values around -0.995\",\n        \"The volatility contribution becomes negligible except for extreme volatility scenarios, making this primarily a constant adjustment factor\"\n    ],\n    \"domain_insights\": [\n        \"Could represent a protocol fee adjustment mechanism where higher volatility provides minimal fee reductions\",\n        \"May function as a baseline risk premium that remains relatively stable across different market conditions\",\n        \"Suitable for DeFi applications requiring consistent negative adjustments with slight volatility-based modifications\",\n        \"The near-zero volatility exponent suggests this metric prioritizes stability over volatility sensitivity\"\n    ],\n    \"use_cases\": [\n        \"Automated market maker fee adjustments where volatility provides minor discounts\",\n        \"Risk management systems requiring stable baseline adjustments with minimal volatility impact\",\n        \"Lending protocol interest rate modifications where volatility creates small rate reductions\",\n        \"Liquidity mining reward calculations with volatility-based bonus factors\"\n    ],\n    \"limitations\": [\n        \"Very low R² score (0.0355) indicates poor explanatory power for the underlying data\",\n        \"The expression is dominated by the constant term, making volatility input potentially redundant\",\n        \"May not respond meaningfully to significant market volatility changes due to the minimal exponent\",\n        \"Requires volatility to be positive and non-zero to avoid mathematical errors\",\n        \"The consistent negative output may limit applicability in contexts requiring positive values\"\n    ],\n    \"formula_name\": \"Volatility-Dampened Risk Offset\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 13.75,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 120,
+        "n_features": 4,
+        "variable_names": [
+          "volume",
+          "momentum",
+          "liquidity",
+          "volatility"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:08:48.793316",
+      "description": "Optimal fee for ranging market (volume-maximizing)",
+      "domain": "defi",
+      "discovery": {
+        "expression": "competitor_fee*0.80953753",
+        "sympy_expr": "competitor_fee*0.80953753",
+        "r2_score": 0.9389114280631269,
+        "complexity": "3",
+        "variable_names": [
+          "volume",
+          "price_range",
+          "liquidity",
+          "competitor_fee"
+        ],
+        "predictions": "[0.00610346 0.00757611 0.00666957 0.00199796 0.0026252  0.00330031\n 0.00203546 0.00504735 0.00791651 0.0063574  0.00389426 0.00084236\n 0.00309202 0.00464742 0.00317198 0.00161852 0.00403545 0.0026547\n 0.00743406 0.0015509  0.00116766 0.00084826 0.0031998  0.00562101\n 0.00613121 0.00411193 0.00579545 0.00343181 0.00567507 0.00110531\n 0.0036565  0.00657154 0.00666011 0.00602728 0.00229759 0.00261063\n 0.00806688 0.00156273 0.00212582 0.00175689 0.00319678 0.00234084\n 0.00443561 0.00427775 0.00737776 0.00106265 0.00314013 0.00515669\n 0.00521603 0.00430766 0.00675234 0.00126652 0.00675105 0.00441424\n 0.0017841  0.00726262 0.00553971 0.0020011  0.0010547  0.00183764\n 0.00524514 0.00211586 0.00245441 0.0009927  0.00607669 0.00671372\n 0.00661524 0.00173898 0.00739084 0.00570765 0.00734879 0.00406748\n 0.00399312 0.00652554 0.00148929 0.00460454 0.0069033  0.00685819\n 0.00777577 0.00589704 0.00232332 0.0009573  0.00430248 0.0045523\n 0.00256005 0.00171806 0.00508056 0.00637778 0.0080455  0.00633441\n 0.00659181 0.00530097 0.00799281 0.00547216 0.0070772  0.00770037\n 0.00758434 0.00358847 0.00138266 0.00206178 0.00124103 0.00157744\n 0.00215488 0.0032947  0.00476968 0.00599474 0.00234632 0.00570943\n 0.00594065 0.00487957 0.00739315 0.00161823 0.00210002 0.00393272\n 0.00173275 0.00493548 0.00371222 0.00288306 0.00204806 0.00325276]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [],
+          "warnings": []
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 96.1,
+        "base_score": 96.1,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 100,
+          "dimensional": 100.0,
+          "domain": 87.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [],
+            "sympy_expr": "0.80953753*competitor_fee",
+            "canonical_form": "0.80953753*competitor_fee",
+            "score": 100
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "volume": "dimensionless",
+              "price_range": "dimensionless",
+              "liquidity": "dimensionless",
+              "competitor_fee": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 87.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+              "Variable 'fee' should be in range [0, 1]"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "r_strictly_positive",
+              "fee_bounded",
+              "r_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0",
+          "Variable 'fee' should be in range [0, 1]"
+        ],
+        "recommendations": [
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "competitor_fee*0.80953753",
+        "canonical_form": "0.80953753*competitor_fee",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This formula calculates a competitive fee rate by applying an approximately 19% discount to a competitor's fee structure, likely for dynamic fee optimization in DeFi protocols.",
+        "relationships": [
+          "Linear scaling relationship where output fee is always 80.95% of competitor fee",
+          "The constant 0.80953753 represents a fixed discount factor independent of market conditions",
+          "Direct proportional relationship ensures fee remains competitive while maintaining margin"
+        ],
+        "domain_insights": [
+          "Implements competitive pricing strategy common in DEX fee wars where protocols undercut competitors",
+          "The specific factor 0.80953753 suggests empirically derived optimal discount rate for market share capture",
+          "Fee structure ignores liquidity depth and volume, focusing purely on competitor positioning",
+          "Could be part of automated market maker fee adjustment mechanism for yield farming optimization"
+        ],
+        "use_cases": [
+          "Dynamic fee adjustment in DEX protocols to maintain competitive advantage",
+          "Automated yield farming strategy fee optimization across multiple pools",
+          "Cross-protocol arbitrage fee calculation for routing optimization",
+          "Liquidity mining incentive programs where fees need to beat market rates"
+        ],
+        "limitations": [
+          "Assumes competitor fee data is accurate and up-to-date",
+          "Does not account for liquidity depth differences that affect actual trading costs",
+          "Fixed discount may not be optimal across different market volatility conditions",
+          "Ignores gas costs and slippage which are significant factors in total trading costs",
+          "Could lead to unsustainable fee wars if all protocols use similar strategies"
+        ],
+        "formula_name": "Competitive Fee Discount Formula",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This formula calculates a competitive fee rate by applying an approximately 19% discount to a competitor's fee structure, likely for dynamic fee optimization in DeFi protocols.\",\n    \"relationships\": [\n        \"Linear scaling relationship where output fee is always 80.95% of competitor fee\",\n        \"The constant 0.80953753 represents a fixed discount factor independent of market conditions\",\n        \"Direct proportional relationship ensures fee remains competitive while maintaining margin\"\n    ],\n    \"domain_insights\": [\n        \"Implements competitive pricing strategy common in DEX fee wars where protocols undercut competitors\",\n        \"The specific factor 0.80953753 suggests empirically derived optimal discount rate for market share capture\",\n        \"Fee structure ignores liquidity depth and volume, focusing purely on competitor positioning\",\n        \"Could be part of automated market maker fee adjustment mechanism for yield farming optimization\"\n    ],\n    \"use_cases\": [\n        \"Dynamic fee adjustment in DEX protocols to maintain competitive advantage\",\n        \"Automated yield farming strategy fee optimization across multiple pools\",\n        \"Cross-protocol arbitrage fee calculation for routing optimization\",\n        \"Liquidity mining incentive programs where fees need to beat market rates\"\n    ],\n    \"limitations\": [\n        \"Assumes competitor fee data is accurate and up-to-date\",\n        \"Does not account for liquidity depth differences that affect actual trading costs\",\n        \"Fixed discount may not be optimal across different market volatility conditions\",\n        \"Ignores gas costs and slippage which are significant factors in total trading costs\",\n        \"Could lead to unsustainable fee wars if all protocols use similar strategies\"\n    ],\n    \"formula_name\": \"Competitive Fee Discount Formula\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 11.6,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 120,
+        "n_features": 4,
+        "variable_names": [
+          "volume",
+          "price_range",
+          "liquidity",
+          "competitor_fee"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-13T16:09:37.902585",
+      "description": "Optimal fee for volatile/choppy market (high IL protection)",
+      "domain": "defi",
+      "discovery": {
+        "expression": "0.0067794616*sqrt(volatility)",
+        "sympy_expr": "0.0067794616*sqrt(volatility)",
+        "r2_score": 0.46269062798050276,
+        "complexity": "4",
+        "variable_names": [
+          "volume",
+          "volatility",
+          "liquidity",
+          "trades"
+        ],
+        "predictions": "[0.01312316 0.01303505 0.00931029 0.00723593 0.01100906 0.00995629\n 0.01395303 0.01389617 0.01140098 0.0125485  0.01253199 0.0140723\n 0.01113981 0.00982855 0.00973069 0.01202236 0.0113373  0.01126387\n 0.00791936 0.01334438 0.00923338 0.00906476 0.01103832 0.00937213\n 0.01238144 0.0106889  0.01133539 0.01202982 0.00913126 0.00863685\n 0.01441602 0.01121155 0.01103278 0.00724625 0.01172652 0.01215903\n 0.0121943  0.01326442 0.00886511 0.0096089  0.01396457 0.01483554\n 0.00842328 0.01172396 0.00923776 0.00755018 0.01028606 0.00850748\n 0.01328451 0.01200348 0.00850907 0.00690363 0.01394763 0.00885175\n 0.01254634 0.0103876  0.01239352 0.01019766 0.00787048 0.00932466\n 0.00897411 0.01116468 0.01292219 0.00971907 0.00694119 0.01188969\n 0.01254299 0.0149325  0.01242304 0.01151449 0.01230357 0.01471565\n 0.01408026 0.01026348 0.00946462 0.00970798 0.01177693 0.01351852\n 0.01176755 0.00764363 0.01337862 0.0139332  0.0099591  0.01296368\n 0.01115292 0.01447138 0.01418982 0.0119398  0.01315639 0.01443468\n 0.0117088  0.01017598 0.01358375 0.00929618 0.01083468 0.01432202\n 0.0133844  0.01096355 0.00924341 0.0105548  0.00990919 0.00885066\n 0.01351365 0.00960743 0.01137793 0.01081199 0.01505027 0.01085639\n 0.0077888  0.00790412 0.01243253 0.01249603 0.01108817 0.01119612\n 0.00747505 0.0118712  0.01177942 0.00857058 0.00806544 0.00828729]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [
+            "sqrt_present"
+          ],
+          "warnings": [
+            "Expression contains sqrt - verify all arguments are non-negative"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 94.6,
+        "base_score": 94.6,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 98,
+          "dimensional": 97.0,
+          "domain": 87.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [
+              "Check AMM constant product invariant preservation"
+            ],
+            "sympy_expr": "0.0067794616*sqrt(volatility)",
+            "canonical_form": "0.0067794616*sqrt(volatility)",
+            "score": 98
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 97.0,
+            "errors": [],
+            "warnings": [
+              "Square root detected - ensure all arguments are non-negative"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "volume": "dimensionless",
+              "volatility": "dimensionless",
+              "liquidity": "dimensionless",
+              "trades": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "sqrt_domain"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Square root detected - ensure all arguments are non-negative"
+              ],
+              "errors": [],
+              "penalty": 3
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 87.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'y' should be positive - add validation",
+              "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0"
+            ],
+            "domain": "defi",
+            "constraints_checked": [
+              "y_positive",
+              "r_strictly_positive",
+              "r_positivity",
+              "division_protection"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Check AMM constant product invariant preservation",
+          "Square root detected - ensure all arguments are non-negative",
+          "Variable 'y' should be positive - add validation",
+          "Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 REVIEW: Address defi domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "0.0067794616*sqrt(volatility)",
+        "canonical_form": "0.0067794616*sqrt(volatility)",
+        "domain": "defi",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This expression calculates a volatility-adjusted risk premium or fee rate that scales proportionally with the square root of realized volatility, suggesting it follows volatility scaling principles similar to those used in options pricing.",
+        "relationships": [
+          "The square root relationship indicates diminishing marginal impact as volatility increases, consistent with diversification effects",
+          "The constant coefficient 0.0067794616 acts as a calibration parameter that converts volatility units into the target metric (likely a percentage or basis points)",
+          "The formula ignores volume, liquidity, and trades, focusing purely on volatility as the primary risk driver"
+        ],
+        "domain_insights": [
+          "Resembles automated market maker (AMM) impermanent loss calculations where volatility directly impacts LP returns",
+          "Could represent dynamic fee structures in DeFi protocols that adjust based on market volatility conditions",
+          "The square root scaling is consistent with portfolio theory and risk management frameworks used in traditional finance",
+          "May be used for calculating collateral requirements or liquidation thresholds in lending protocols"
+        ],
+        "use_cases": [
+          "Dynamic fee adjustment in AMM pools based on current market volatility",
+          "Risk premium calculation for liquidity providers in volatile trading pairs",
+          "Collateral ratio adjustments in DeFi lending protocols during high volatility periods",
+          "Automated rebalancing triggers for yield farming strategies",
+          "Insurance premium calculations for DeFi protection protocols"
+        ],
+        "limitations": [
+          "Assumes volatility is the only relevant risk factor, ignoring liquidity depth and trading activity",
+          "The constant coefficient may not be universally applicable across different token pairs or market conditions",
+          "Square root relationship may not hold during extreme market stress or black swan events",
+          "Requires accurate real-time volatility measurement which can be challenging in thin markets",
+          "Does not account for correlation effects in multi-asset DeFi strategies"
+        ],
+        "formula_name": "Volatility-Adjusted Risk Premium",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This expression calculates a volatility-adjusted risk premium or fee rate that scales proportionally with the square root of realized volatility, suggesting it follows volatility scaling principles similar to those used in options pricing.\",\n    \"relationships\": [\n        \"The square root relationship indicates diminishing marginal impact as volatility increases, consistent with diversification effects\",\n        \"The constant coefficient 0.0067794616 acts as a calibration parameter that converts volatility units into the target metric (likely a percentage or basis points)\",\n        \"The formula ignores volume, liquidity, and trades, focusing purely on volatility as the primary risk driver\"\n    ],\n    \"domain_insights\": [\n        \"Resembles automated market maker (AMM) impermanent loss calculations where volatility directly impacts LP returns\",\n        \"Could represent dynamic fee structures in DeFi protocols that adjust based on market volatility conditions\",\n        \"The square root scaling is consistent with portfolio theory and risk management frameworks used in traditional finance\",\n        \"May be used for calculating collateral requirements or liquidation thresholds in lending protocols\"\n    ],\n    \"use_cases\": [\n        \"Dynamic fee adjustment in AMM pools based on current market volatility\",\n        \"Risk premium calculation for liquidity providers in volatile trading pairs\",\n        \"Collateral ratio adjustments in DeFi lending protocols during high volatility periods\",\n        \"Automated rebalancing triggers for yield farming strategies\",\n        \"Insurance premium calculations for DeFi protection protocols\"\n    ],\n    \"limitations\": [\n        \"Assumes volatility is the only relevant risk factor, ignoring liquidity depth and trading activity\",\n        \"The constant coefficient may not be universally applicable across different token pairs or market conditions\",\n        \"Square root relationship may not hold during extreme market stress or black swan events\",\n        \"Requires accurate real-time volatility measurement which can be challenging in thin markets\",\n        \"Does not account for correlation effects in multi-asset DeFi strategies\"\n    ],\n    \"formula_name\": \"Volatility-Adjusted Risk Premium\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 12.86,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 120,
+        "n_features": 4,
+        "variable_names": [
+          "volume",
+          "volatility",
+          "liquidity",
+          "trades"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Conservative LP",
+    "il_percent": -2.5,
+    "volatility_30d": 0.25,
+    "range_width": 0.5,
+    "days_in_position": 90,
+    "expected_risk_score": 35,
+    "risk_category": "Low"
+  },
+  {
+    "name": "Moderate LP",
+    "il_percent": -8.0,
+    "volatility_30d": 0.45,
+    "range_width": 0.3,
+    "days_in_position": 45,
+    "expected_risk_score": 58,
+    "risk_category": "Medium"
+  },
+  {
+    "name": "Aggressive LP",
+    "il_percent": -15.0,
+    "volatility_30d": 0.75,
+    "range_width": 0.15,
+    "days_in_position": 14,
+    "expected_risk_score": 82,
+    "risk_category": "High"
+  }
+]

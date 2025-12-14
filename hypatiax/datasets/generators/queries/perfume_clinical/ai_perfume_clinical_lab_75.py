@@ -12,6 +12,7 @@ Run this script to generate all 4 CSV files.
 """
 
 import csv
+import os
 from pathlib import Path
 
 # Note: Due to length constraints, I'm showing the structure with 10 examples each.
@@ -275,34 +276,37 @@ CLINICAL_QUICK = [
 # ============================================================================
 # CSV EXPORT FUNCTION
 # ============================================================================
+# Create directory if it doesn't exist
+DIR = "hypatiax/datasets/generators/queries/perfume_clinical/"
+os.makedirs(DIR, exist_ok=True)
 
 
 def generate_csv_files():
     """Generate 4 separate CSV files"""
 
     # File 1: Perfume Detailed
-    with open("perfume_detailed.csv", "w", newline="", encoding="utf-8") as f:
+    with open(DIR + "perfume_detailed_75.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["query_description", "detailed_formula"])
         for query, formula in PERFUME_DETAILED:
             writer.writerow([query, formula])
 
     # File 2: Perfume Quick Reference
-    with open("perfume_quick_reference.csv", "w", newline="", encoding="utf-8") as f:
+    with open(DIR + "perfume_quick_reference_75.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["query_description", "formula"])
         for query, formula in PERFUME_QUICK:
             writer.writerow([query, formula])
 
     # File 3: Clinical Detailed
-    with open("clinical_detailed.csv", "w", newline="", encoding="utf-8") as f:
+    with open(DIR + "clinical_detailed_75.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["query_description", "detailed_formula"])
         for query, formula in CLINICAL_DETAILED:
             writer.writerow([query, formula])
 
     # File 4: Clinical Quick Reference
-    with open("clinical_quick_reference.csv", "w", newline="", encoding="utf-8") as f:
+    with open(DIR + "clinical_quick_reference_75.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["query_description", "formula"])
         for query, formula in CLINICAL_QUICK:

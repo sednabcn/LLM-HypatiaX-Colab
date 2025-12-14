@@ -1,0 +1,9 @@
+Timestamp,Expression,R² Score,Complexity,Validation Score,Valid,Interpretation,Provider,Domain
+2025-12-14T11:12:02.257061,mu - 1.960121*sigma*sqrt(t),0.9999917770951466,8,99.1,True,"This formula calculates the lower bound of a confidence interval for expected returns, representing ",anthropic,risk
+2025-12-14T11:12:43.545760,(-returns + risk_free)*(-1.0011196)/volatility,0.9998634664413251,7,98.5,True,"This expression calculates a modified Sharpe ratio with a coefficient very close to -1, essentially ",anthropic,risk
+2025-12-14T11:13:29.323367,mu - 1.1688594*sigma*sqrt(t),0.9999744000796736,8,99.1,True,This expression calculates a risk-adjusted expected return by subtracting a time-scaled volatility p,anthropic,risk
+2025-12-14T11:14:08.863385,cov_im/var_m,0.9999833956116185,3,97.0,True,"This expression calculates the beta coefficient, which measures an asset's systematic risk and sensi",anthropic,risk
+2025-12-14T11:14:49.599927,(returns - target)/downside_dev,0.9999244531551096,5,99.1,True,"This expression calculates the Sortino Ratio, a risk-adjusted performance measure that evaluates exc",anthropic,risk
+2025-12-14T11:15:45.801582,active_return/tracking_error,0.9999340421158929,3,99.1,True,"This expression calculates the Information Ratio, a fundamental risk-adjusted performance metric tha",anthropic,risk
+2025-12-14T11:16:27.257681,-1.0000459 + trough/peak,0.9999362052996792,5,99.1,True,"This expression calculates the maximum drawdown of a portfolio, measuring the largest peak-to-trough",anthropic,risk
+2025-12-14T11:16:38.779907,DISCOVERY_FAILED,0.0,0,94.5,False,The discovery process failed to identify a valid symbolic expression from the given portfolio return,anthropic,risk

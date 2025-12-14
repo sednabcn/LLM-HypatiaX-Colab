@@ -1,0 +1,21 @@
+query_description,formula
+Absolute neutrophil count,ANC = WBC × (% Neutrophils + % Bands) / 100
+Corrected calcium,Corrected Ca = Measured Ca + 0.8 × (4.0 - Albumin)
+Anion gap,AG = Na⁺ - (Cl⁻ + HCO₃⁻)
+Creatinine clearance,CrCl = [(140-Age) × Wt × (0.85♀)] / (72 × SCr)
+MCV calculation,MCV fL = (Hematocrit% × 10) / RBC millions/µL
+MCH calculation,MCH pg = (Hemoglobin g/dL × 10) / RBC millions/µL
+MCHC calculation,MCHC g/dL = (Hemoglobin × 100) / Hematocrit%
+LDL Friedewald,LDL = Total Chol - HDL - (TG/5) [if TG<400]
+Non-HDL cholesterol,Non-HDL = Total Cholesterol - HDL
+Body mass index,BMI = Weight kg / (Height m)²
+eGFR MDRD,eGFR = 175 × SCr^-1.154 × Age^-0.203 × (0.742♀) × (1.212 Black)
+BUN to creatinine ratio,BUN/Cr = BUN mg/dL / Creatinine mg/dL
+Osmolal gap,OsmGap = Measured - (2×Na + Glucose/18 + BUN/2.8)
+Reticulocyte index,RPI = (Retic% × PatientHct) / (NormalHct × MaturationFactor)
+Absolute reticulocyte,Absolute Retic = Reticulocyte% × RBC count / 100
+Plateletcrit,"PCT% = (Platelet Count × MPV) / 10,000"
+Free thyroxine index,FTI = Total T4 × T3 Uptake / 100
+INR calculation,INR = (Patient PT / Mean Normal PT)^ISI
+HOMA-IR,HOMA-IR = (Fasting Insulin × Fasting Glucose) / 405
+A-a gradient,A-aGrad = [FiO₂×(Patm-47) - PaCO₂/0.8] - PaO₂

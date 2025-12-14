@@ -1,0 +1,50 @@
+[
+  {
+    "text": "Calculate impermanent loss for ETH/USDC pool",
+    "entities": {
+      "metric": [
+        "impermanent loss"
+      ],
+      "token_pair": [
+        "ETH/USDC"
+      ],
+      "pool_type": [
+        "uniswap_v2"
+      ]
+    }
+  },
+  {
+    "text": "What is the price impact of swapping 1000 USDC for ETH?",
+    "entities": {
+      "metric": [
+        "price impact"
+      ],
+      "amount": [
+        "1000"
+      ],
+      "token_in": [
+        "USDC"
+      ],
+      "token_out": [
+        "ETH"
+      ]
+    }
+  },
+  {
+    "text": "Risk score for volatile altcoin liquidity provision",
+    "entities": {
+      "metric": [
+        "risk score"
+      ],
+      "characteristic": [
+        "volatile"
+      ],
+      "asset_type": [
+        "altcoin"
+      ],
+      "activity": [
+        "liquidity provision"
+      ]
+    }
+  }
+]

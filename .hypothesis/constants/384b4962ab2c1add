@@ -1,0 +1,4 @@
+# file: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/tools/database/defi_data_manager.py
+# hypothesis_version: 6.148.7
+
+[1e+18, 1000, 1000000, '\nTop 5 pools by TVL:', '\nYou can now:', '\n📈 Analysis Summary:', '  • Export to Excel', '-', '2.0', '=', 'Available sources:', 'CoinGecko', 'Infura/Alchemy', 'RPC', 'Unknown', '__main__', 'avg_price', 'coerce', 'coin_id', 'community_data', 'daily', 'data', 'data_points', 'date', 'days', 'defi_data.db', 'developer_data', 'eth_blockNumber', 'eth_call', 'eth_getBalance', 'ethereum', 'false', 'id', 'ids', 'include_24hr_change', 'include_market_cap', 'interval', 'jsonrpc', 'latest', 'localization', 'max_price', 'method', 'min_price', 'openpyxl', 'pair', 'pairs', 'params', 'pool_address', 'pools', 'price_usd', 'price_volatility', 'prices', 'query', 'reserveUSD', 'result', 'tickers', 'timestamp', 'to', 'tokens', 'transactions', 'true', 'tvl_usd', 'usd', 'vs_currencies', 'vs_currency', '❌ Pool not found']

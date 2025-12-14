@@ -6,7 +6,8 @@ Comprehensive tests for dimensional consistency, numerical stability, and bounds
 import math
 
 import pytest
-from dimensional_validator import DimensionalValidator
+
+from hypatiax.tools.validation.dimensional_validator import DimensionalValidator
 
 
 @pytest.fixture

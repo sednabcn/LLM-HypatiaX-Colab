@@ -5,7 +5,10 @@ Comprehensive tests for all validation features
 """
 import pytest
 import sympy as sp
-from enhanced_symbolic_validator import EnhancedSymbolicValidator
+
+from hypatiax.tools.symbolic.enhanced_symbolic_validator import EnhancedSymbolicValidator
+
+# from hypatiax.tools.symbolic.fixed_validator import EnhancedSymbolicValidator
 
 
 @pytest.fixture
@@ -269,9 +272,9 @@ class TestDomainSpecificRules:
 
     def test_risk_domain(self, validator):
         """Test risk management-specific rules"""
-        result = validator.validate(r"\sigma \cdot \sqrt{t}", domain="risk")
+        latex_expr = r"\sigma \cdot \sqrt{t}"
+        result = validator.validate(latex_expr, domain="risk")
         assert result["syntactically_valid"]
-        # Should have risk-specific warnings
         assert len(result["warnings"]) > 0
 
 

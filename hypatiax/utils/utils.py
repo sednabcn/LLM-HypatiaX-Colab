@@ -26,7 +26,7 @@ from spacy import displacy
 from spacy.language import Language
 from spacy.matcher import Matcher
 from spacy.pipeline import EntityRuler
-from spacy.tokens import DocBin
+from spacy.tokens import Doc, DocBin
 from spacy.training import Example
 
 from hypatiax.utils.tree_id_op import TreeDict, TreeNode, TreeOPDict
@@ -467,33 +467,68 @@ def evaluate_the_model(nlp, TEST_DATA):
 
 
 def save_spacy_training_data(output_dir, training_data, filename, model):
-    nlp = spacy.load(model)
+    """Save training data to .spacy format."""
+    try:
+        nlp = spacy.load(model)
+    except OSError:
+        # Fallback to blank model if specific model not available
+        print(f"⚠️  Model '{model}' not found, using blank 'en' model")
+        nlp = spacy.blank("en")
+
     os.makedirs(output_dir, exist_ok=True)
     doc_bin = DocBin()
+
     for text, annotations in training_data:
         doc = nlp.make_doc(text)
         example = Example.from_dict(doc, annotations)
         doc_bin.add(example.reference)
-    doc_bin.to_disk(os.path.join(output_dir, filename + ".spacy"))
+
+    output_path = os.path.join(output_dir, filename + ".spacy")
+    doc_bin.to_disk(output_path)
+    print(f"✓ Saved {len(training_data)} examples to {output_path}")
 
 
 def upload_spacy_training_data(input_dir, filename, nlp):
+    """Load training data from .spacy format."""
     file_path = os.path.join(input_dir, filename + ".spacy")
+
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"Training data not found: {file_path}")
+
     doc_bin = DocBin().from_disk(file_path)
     docs = list(doc_bin.get_docs(nlp.vocab))
-    return [(doc.text, {"entities": [(ent.start_char, ent.end_char, ent.label_) for ent in doc.ents]}) for doc in docs]
+
+    training_data = [
+        (doc.text, {"entities": [(ent.start_char, ent.end_char, ent.label_) for ent in doc.ents]}) for doc in docs
+    ]
+
+    print(f"✓ Loaded {len(training_data)} examples from {file_path}")
+    return training_data
 
 
 def save_spacy_training_data_to_json(output_dir, training_data, filename):
+    """Save training data to JSON format."""
+    os.makedirs(output_dir, exist_ok=True)
     file_path = os.path.join(output_dir, filename + ".json")
+
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(training_data, f, ensure_ascii=False, indent=4)
 
+    print(f"✓ Saved {len(training_data)} examples to {file_path}")
+
 
 def upload_spacy_training_data_from_json(input_dir, filename):
+    """Load training data from JSON format."""
     file_path = os.path.join(input_dir, filename + ".json")
+
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"Training data not found: {file_path}")
+
     with open(file_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        training_data = json.load(f)
+
+    print(f"✓ Loaded {len(training_data)} examples from {file_path}")
+    return training_data
 
 
 # Funtion to normalize data to allow get the token more easily

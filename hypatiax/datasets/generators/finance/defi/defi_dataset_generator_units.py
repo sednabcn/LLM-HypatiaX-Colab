@@ -246,7 +246,7 @@ class DeFiFormulaGenerator:
         except Exception as e:
             print(f"❌ Error in Liquidity Value: {str(e)}")
 
-    def save_results(self, output_dir: str = "data"):
+    def save_results(self, output_dir: str = "hypatiax/data/finance/defi"):
         """
         Save results to files.
 
@@ -313,7 +313,7 @@ def main():
     generator.run_all_formulas(n_samples=100)
 
     # Save results
-    json_path, csv_path = generator.save_results(output_dir="data")
+    json_path, csv_path = generator.save_results(output_dir="hypatiax/data/finance/defi")
 
     # Print summary
     generator.print_summary()

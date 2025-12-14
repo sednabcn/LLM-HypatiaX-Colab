@@ -9,6 +9,7 @@ Each with comprehensive step-by-step solutions.
 """
 
 import csv
+import os
 import random
 
 # ============================================================================
@@ -520,14 +521,18 @@ def main():
     print("Generating 150 detailed clinical scenarios...")
     clinical_data = generate_clinical_scenarios()
 
+    # Create directory if it doesn't exist
+    DIR = "hypatiax/datasets/generators/queries/perfume_clinical/"
+    os.makedirs(DIR, exist_ok=True)
+
     # Save perfume scenarios
-    with open("perfume_detailed_150.csv", "w", newline="", encoding="utf-8") as f:
+    with open(DIR + "perfume_detailed_150.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=["query", "response"])
         writer.writeheader()
         writer.writerows(perfume_data)
 
     # Save clinical scenarios
-    with open("clinical_detailed_150.csv", "w", newline="", encoding="utf-8") as f:
+    with open(DIR + "clinical_detailed_150.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=["query", "response"])
         writer.writeheader()
         writer.writerows(clinical_data)

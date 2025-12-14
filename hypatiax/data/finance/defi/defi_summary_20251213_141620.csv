@@ -1,0 +1,5 @@
+Timestamp,Expression,R² Score,Complexity,Validation Score,Valid,Interpretation,Provider,Domain
+2025-12-13T14:14:39.272514,(0.010202996*price_ratio - 0.11549498*log(price_ratio))*(log(price_ratio) + 0.2782728),0.994513334151937,13,75.4,False,,,defi
+2025-12-13T14:15:05.171517,(-amount_in*reserve_out/(1.1193049*reserve_in) + reserve_out)*amount_in*0.99516803/reserve_in,0.9999660049090382,15,67.0,False,,,defi
+2025-12-13T14:15:43.020893,borrowed/supplied,0.9960095145108544,3,94.6,True,"This calculates the utilization rate of a lending pool, representing the percentage of supplied capi",anthropic,defi
+2025-12-13T14:16:20.681904,2.00016866133259*sqrt(reserve0*reserve1),0.9999959690489351,6,90.7,True,"This expression calculates a scaled version of the geometric mean of two token reserves, representin",anthropic,defi

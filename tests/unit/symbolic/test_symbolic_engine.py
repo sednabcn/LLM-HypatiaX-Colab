@@ -12,7 +12,7 @@ sys.path.insert(0, str(project_root))
 
 print(f"Looking for modules in: {project_root}")
 
-from tools.symbolic.symbolic_engine import DeFiConstraints, DiscoveryConfig, PhysicsConstraints, SymbolicEngine
+from hypatiax.tools.symbolic.symbolic_engine import DeFiConstraints, DiscoveryConfig, PhysicsConstraints, SymbolicEngine
 
 
 class TestSymbolicEngine:

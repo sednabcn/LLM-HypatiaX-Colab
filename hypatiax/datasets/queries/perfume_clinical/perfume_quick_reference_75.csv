@@ -1,0 +1,21 @@
+query_description,formula
+Parfum concentration,Parfum = 20-40% fragrance in alcohol base
+EDP formula,EDP = 15-20% fragrance + 75-80% alcohol + 5% water
+EDT formula,EDT = 5-15% fragrance + 70-80% alcohol + 15-25% water
+Cologne formula,Cologne = 2-5% fragrance + 70-90% alcohol + water
+Batch total calculation,Total Weight = Σ(Volume × Density) for all components
+Cost per unit,Unit Cost = Total Ingredient Cost / Number of Units
+Dilution equation,C₁V₁ = C₂V₂
+Profit margin,Margin % = (Revenue - Cost) / Revenue × 100
+Scale factor,Scale Factor = Target Volume / Original Volume
+Note percentage,% = (Component Volume / Total Volume) × 100
+Alcohol volume,Alcohol mL = Total Volume × (Alcohol % / 100)
+Fragrance load,Fragrance Amount = Total Volume × Concentration %
+Density calculation,Density = Σ(Component% × ComponentDensity)
+IFRA check,Actual% = (% in compound / 100) × (compound% in product)
+Fixative range,Fixatives = 2-5% of formula
+Top notes range,Top Notes = 15-30% of fragrance compound
+Middle notes range,Middle Notes = 40-60% of fragrance compound
+Base notes range,Base Notes = 20-35% of fragrance compound
+Maturation time EDP,EDP Maturation = 21-30 days minimum
+Evaporation factor,Remaining = Initial × e^(-0.693 × time/half-life)

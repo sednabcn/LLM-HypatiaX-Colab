@@ -1,0 +1,1757 @@
+[
+  {
+    "description":"Calculate the constant product for a token pair in an AMM",
+    "analytical_formula":"k = x * y",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 0.2% fee",
+    "analytical_formula":"k = x * y * (1 - 0.0020)",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 0.3% fee",
+    "analytical_formula":"k = x * y * (1 - 0.0030)",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 0.4% fee",
+    "analytical_formula":"k = x * y * (1 - 0.0040)",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 0.5% fee",
+    "analytical_formula":"k = x * y * (1 - 0.0050)",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 0.6% fee",
+    "analytical_formula":"k = x * y * (1 - 0.0060)",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 0.7% fee",
+    "analytical_formula":"k = x * y * (1 - 0.0070)",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 0.8% fee",
+    "analytical_formula":"k = x * y * (1 - 0.0080)",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 0.9% fee",
+    "analytical_formula":"k = x * y * (1 - 0.0090)",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 1.0% fee",
+    "analytical_formula":"k = x * y * (1 - 0.0100)",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product in 10^4 reserve pool",
+    "analytical_formula":"k = x * y with pool_min=10000, pool_max=100000",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product in 10^5 reserve pool",
+    "analytical_formula":"k = x * y with pool_min=100000, pool_max=1000000",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product in 10^6 reserve pool",
+    "analytical_formula":"k = x * y with pool_min=1000000, pool_max=10000000",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product in 10^7 reserve pool",
+    "analytical_formula":"k = x * y with pool_min=10000000, pool_max=100000000",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product in 10^8 reserve pool",
+    "analytical_formula":"k = x * y with pool_min=100000000, pool_max=1000000000",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product in 10^9 reserve pool",
+    "analytical_formula":"k = x * y with pool_min=1000000000, pool_max=10000000000",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product in 10^10 reserve pool",
+    "analytical_formula":"k = x * y with pool_min=10000000000, pool_max=100000000000",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product in 10^11 reserve pool",
+    "analytical_formula":"k = x * y with pool_min=100000000000, pool_max=1000000000000",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product in 10^12 reserve pool",
+    "analytical_formula":"k = x * y with pool_min=1000000000000, pool_max=10000000000000",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 1% price slippage",
+    "analytical_formula":"k = x * y + \u03b5 * 1",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 2% price slippage",
+    "analytical_formula":"k = x * y + \u03b5 * 2",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 3% price slippage",
+    "analytical_formula":"k = x * y + \u03b5 * 3",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 4% price slippage",
+    "analytical_formula":"k = x * y + \u03b5 * 4",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 5% price slippage",
+    "analytical_formula":"k = x * y + \u03b5 * 5",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 6% price slippage",
+    "analytical_formula":"k = x * y + \u03b5 * 6",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 7% price slippage",
+    "analytical_formula":"k = x * y + \u03b5 * 7",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 8% price slippage",
+    "analytical_formula":"k = x * y + \u03b5 * 8",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 9% price slippage",
+    "analytical_formula":"k = x * y + \u03b5 * 9",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Constant product with 10% price slippage",
+    "analytical_formula":"k = x * y + \u03b5 * 10",
+    "category":"Constant Product"
+  },
+  {
+    "description":"Calculate constant sum invariant for stablecoin pairs",
+    "analytical_formula":"k = x + y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.26:0.74",
+    "analytical_formula":"k = 0.26*x + 0.74*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.32:0.68",
+    "analytical_formula":"k = 0.32*x + 0.68*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.38:0.62",
+    "analytical_formula":"k = 0.38*x + 0.62*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.44:0.56",
+    "analytical_formula":"k = 0.44*x + 0.56*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.50:0.50",
+    "analytical_formula":"k = 0.50*x + 0.50*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.56:0.44",
+    "analytical_formula":"k = 0.56*x + 0.44*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.62:0.38",
+    "analytical_formula":"k = 0.62*x + 0.38*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.68:0.32",
+    "analytical_formula":"k = 0.68*x + 0.32*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.74:0.26",
+    "analytical_formula":"k = 0.74*x + 0.26*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.80:0.20",
+    "analytical_formula":"k = 0.80*x + 0.20*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.86:0.14",
+    "analytical_formula":"k = 0.86*x + 0.14*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Weighted constant sum 0.92:0.08",
+    "analytical_formula":"k = 0.92*x + 0.08*y",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+03 pool",
+    "analytical_formula":"k = x + y, pool_value=1000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+04 pool",
+    "analytical_formula":"k = x + y, pool_value=10000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+05 pool",
+    "analytical_formula":"k = x + y, pool_value=100000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+06 pool",
+    "analytical_formula":"k = x + y, pool_value=1000000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+07 pool",
+    "analytical_formula":"k = x + y, pool_value=10000000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+08 pool",
+    "analytical_formula":"k = x + y, pool_value=100000000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+09 pool",
+    "analytical_formula":"k = x + y, pool_value=1000000000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+10 pool",
+    "analytical_formula":"k = x + y, pool_value=10000000000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+11 pool",
+    "analytical_formula":"k = x + y, pool_value=100000000000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+12 pool",
+    "analytical_formula":"k = x + y, pool_value=1000000000000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+13 pool",
+    "analytical_formula":"k = x + y, pool_value=10000000000000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Constant sum in $1e+14 pool",
+    "analytical_formula":"k = x + y, pool_value=100000000000000",
+    "category":"Constant Sum"
+  },
+  {
+    "description":"Calculate constant mean for multi-asset pool",
+    "analytical_formula":"(x * y * z)^(1\/3) = k",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Three-asset constant mean variant 1",
+    "analytical_formula":"(x * y * z)^(1\/3) = k, scaling=1",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Three-asset constant mean variant 2",
+    "analytical_formula":"(x * y * z)^(1\/3) = k, scaling=2",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Three-asset constant mean variant 3",
+    "analytical_formula":"(x * y * z)^(1\/3) = k, scaling=3",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Three-asset constant mean variant 4",
+    "analytical_formula":"(x * y * z)^(1\/3) = k, scaling=4",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Four-asset constant mean variant 1",
+    "analytical_formula":"(x * y * z * w)^(1\/4) = k, scaling=1",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Four-asset constant mean variant 2",
+    "analytical_formula":"(x * y * z * w)^(1\/4) = k, scaling=2",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Four-asset constant mean variant 3",
+    "analytical_formula":"(x * y * z * w)^(1\/4) = k, scaling=3",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Four-asset constant mean variant 4",
+    "analytical_formula":"(x * y * z * w)^(1\/4) = k, scaling=4",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Five-asset constant mean variant 1",
+    "analytical_formula":"(x * y * z * w * v)^(1\/5) = k, scaling=1",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Five-asset constant mean variant 2",
+    "analytical_formula":"(x * y * z * w * v)^(1\/5) = k, scaling=2",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Five-asset constant mean variant 3",
+    "analytical_formula":"(x * y * z * w * v)^(1\/5) = k, scaling=3",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Five-asset constant mean variant 4",
+    "analytical_formula":"(x * y * z * w * v)^(1\/5) = k, scaling=4",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Two-asset constant mean variant 1",
+    "analytical_formula":"(x * y)^(1\/2) = k, power=0.5",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Two-asset constant mean variant 2",
+    "analytical_formula":"(x * y)^(1\/2) = k, power=0.5",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Two-asset constant mean variant 3",
+    "analytical_formula":"(x * y)^(1\/2) = k, power=0.5",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Two-asset constant mean variant 4",
+    "analytical_formula":"(x * y)^(1\/2) = k, power=0.5",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Two-asset constant mean variant 5",
+    "analytical_formula":"(x * y)^(1\/2) = k, power=0.5",
+    "category":"Constant Mean"
+  },
+  {
+    "description":"Curve Finance StableSwap formula",
+    "analytical_formula":"A*(x+y) + xy = A*k^2",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=1 variant 1",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=1",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=1 variant 2",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=1",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=1 variant 3",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=1",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=50 variant 1",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=50",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=50 variant 2",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=50",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=50 variant 3",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=50",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=100 variant 1",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=100",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=100 variant 2",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=100",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=100 variant 3",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=100",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=200 variant 1",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=200",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=200 variant 2",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=200",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=200 variant 3",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=200",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=400 variant 1",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=400",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=400 variant 2",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=400",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=400 variant 3",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=400",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=600 variant 1",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=600",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=600 variant 2",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=600",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=600 variant 3",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=600",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=800 variant 1",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=800",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=800 variant 2",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=800",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=800 variant 3",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=800",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=1000 variant 1",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=1000",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=1000 variant 2",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=1000",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"StableSwap amplification A=1000 variant 3",
+    "analytical_formula":"A*(x+y) + xy = A*k^2, A=1000",
+    "category":"StableSwap Hybrid"
+  },
+  {
+    "description":"Calculate impermanent loss for 50\/50 pool",
+    "analytical_formula":"IL = 2*sqrt(p)\/(1+p) - 1",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 1.5x price move, volatility 0.1%",
+    "analytical_formula":"IL = 2*sqrt(1.5)\/(1+1.5) - 1 + N(0,0.001)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 1.5x price move, volatility 0.5%",
+    "analytical_formula":"IL = 2*sqrt(1.5)\/(1+1.5) - 1 + N(0,0.005)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 1.5x price move, volatility 1.0%",
+    "analytical_formula":"IL = 2*sqrt(1.5)\/(1+1.5) - 1 + N(0,0.01)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 2.0x price move, volatility 0.1%",
+    "analytical_formula":"IL = 2*sqrt(2.0)\/(1+2.0) - 1 + N(0,0.001)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 2.0x price move, volatility 0.5%",
+    "analytical_formula":"IL = 2*sqrt(2.0)\/(1+2.0) - 1 + N(0,0.005)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 2.0x price move, volatility 1.0%",
+    "analytical_formula":"IL = 2*sqrt(2.0)\/(1+2.0) - 1 + N(0,0.01)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 3.0x price move, volatility 0.1%",
+    "analytical_formula":"IL = 2*sqrt(3.0)\/(1+3.0) - 1 + N(0,0.001)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 3.0x price move, volatility 0.5%",
+    "analytical_formula":"IL = 2*sqrt(3.0)\/(1+3.0) - 1 + N(0,0.005)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 3.0x price move, volatility 1.0%",
+    "analytical_formula":"IL = 2*sqrt(3.0)\/(1+3.0) - 1 + N(0,0.01)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 5.0x price move, volatility 0.1%",
+    "analytical_formula":"IL = 2*sqrt(5.0)\/(1+5.0) - 1 + N(0,0.001)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 5.0x price move, volatility 0.5%",
+    "analytical_formula":"IL = 2*sqrt(5.0)\/(1+5.0) - 1 + N(0,0.005)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 5.0x price move, volatility 1.0%",
+    "analytical_formula":"IL = 2*sqrt(5.0)\/(1+5.0) - 1 + N(0,0.01)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 10.0x price move, volatility 0.1%",
+    "analytical_formula":"IL = 2*sqrt(10.0)\/(1+10.0) - 1 + N(0,0.001)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 10.0x price move, volatility 0.5%",
+    "analytical_formula":"IL = 2*sqrt(10.0)\/(1+10.0) - 1 + N(0,0.005)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL for 10.0x price move, volatility 1.0%",
+    "analytical_formula":"IL = 2*sqrt(10.0)\/(1+10.0) - 1 + N(0,0.01)",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL 50\/50 pool in bullish market",
+    "analytical_formula":"IL_50\/50(bullish) = 2*sqrt(p)\/(1+p) - 1",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL 50\/50 pool in bearish market",
+    "analytical_formula":"IL_50\/50(bearish) = 2*sqrt(p)\/(1+p) - 1",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL 50\/50 pool in sideways market",
+    "analytical_formula":"IL_50\/50(sideways) = 2*sqrt(p)\/(1+p) - 1",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL 80\/20 pool in bullish market",
+    "analytical_formula":"IL_80\/20(bullish) = 2*sqrt(p)\/(1+p) - 1",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL 80\/20 pool in bearish market",
+    "analytical_formula":"IL_80\/20(bearish) = 2*sqrt(p)\/(1+p) - 1",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL 80\/20 pool in sideways market",
+    "analytical_formula":"IL_80\/20(sideways) = 2*sqrt(p)\/(1+p) - 1",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL 60\/40 pool in bullish market",
+    "analytical_formula":"IL_60\/40(bullish) = 2*sqrt(p)\/(1+p) - 1",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL 60\/40 pool in bearish market",
+    "analytical_formula":"IL_60\/40(bearish) = 2*sqrt(p)\/(1+p) - 1",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"IL 60\/40 pool in sideways market",
+    "analytical_formula":"IL_60\/40(sideways) = 2*sqrt(p)\/(1+p) - 1",
+    "category":"Impermanent Loss"
+  },
+  {
+    "description":"Calculate LP position value",
+    "analytical_formula":"value = LP_share * pool_assets",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 14% ownership in $1e+03 pool",
+    "analytical_formula":"value = 0.14 * 1000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 14% ownership in $1e+04 pool",
+    "analytical_formula":"value = 0.14 * 10000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 14% ownership in $1e+05 pool",
+    "analytical_formula":"value = 0.14 * 100000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 14% ownership in $1e+06 pool",
+    "analytical_formula":"value = 0.14 * 1000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 14% ownership in $1e+07 pool",
+    "analytical_formula":"value = 0.14 * 10000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 28% ownership in $1e+03 pool",
+    "analytical_formula":"value = 0.28 * 1000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 28% ownership in $1e+04 pool",
+    "analytical_formula":"value = 0.28 * 10000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 28% ownership in $1e+05 pool",
+    "analytical_formula":"value = 0.28 * 100000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 28% ownership in $1e+06 pool",
+    "analytical_formula":"value = 0.28 * 1000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 28% ownership in $1e+07 pool",
+    "analytical_formula":"value = 0.28 * 10000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 42% ownership in $1e+03 pool",
+    "analytical_formula":"value = 0.42 * 1000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 42% ownership in $1e+04 pool",
+    "analytical_formula":"value = 0.42 * 10000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 42% ownership in $1e+05 pool",
+    "analytical_formula":"value = 0.42 * 100000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 42% ownership in $1e+06 pool",
+    "analytical_formula":"value = 0.42 * 1000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 42% ownership in $1e+07 pool",
+    "analytical_formula":"value = 0.42 * 10000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 56% ownership in $1e+03 pool",
+    "analytical_formula":"value = 0.56 * 1000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 56% ownership in $1e+04 pool",
+    "analytical_formula":"value = 0.56 * 10000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 56% ownership in $1e+05 pool",
+    "analytical_formula":"value = 0.56 * 100000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 56% ownership in $1e+06 pool",
+    "analytical_formula":"value = 0.56 * 1000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 56% ownership in $1e+07 pool",
+    "analytical_formula":"value = 0.56 * 10000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 70% ownership in $1e+03 pool",
+    "analytical_formula":"value = 0.70 * 1000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 70% ownership in $1e+04 pool",
+    "analytical_formula":"value = 0.70 * 10000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 70% ownership in $1e+05 pool",
+    "analytical_formula":"value = 0.70 * 100000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 70% ownership in $1e+06 pool",
+    "analytical_formula":"value = 0.70 * 1000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 70% ownership in $1e+07 pool",
+    "analytical_formula":"value = 0.70 * 10000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 84% ownership in $1e+03 pool",
+    "analytical_formula":"value = 0.84 * 1000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 84% ownership in $1e+04 pool",
+    "analytical_formula":"value = 0.84 * 10000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 84% ownership in $1e+05 pool",
+    "analytical_formula":"value = 0.84 * 100000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 84% ownership in $1e+06 pool",
+    "analytical_formula":"value = 0.84 * 1000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 84% ownership in $1e+07 pool",
+    "analytical_formula":"value = 0.84 * 10000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 98% ownership in $1e+03 pool",
+    "analytical_formula":"value = 0.98 * 1000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 98% ownership in $1e+04 pool",
+    "analytical_formula":"value = 0.98 * 10000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 98% ownership in $1e+05 pool",
+    "analytical_formula":"value = 0.98 * 100000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 98% ownership in $1e+06 pool",
+    "analytical_formula":"value = 0.98 * 1000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"LP position 98% ownership in $1e+07 pool",
+    "analytical_formula":"value = 0.98 * 10000000",
+    "category":"Position Value"
+  },
+  {
+    "description":"Uniswap V3 concentrated liquidity value",
+    "analytical_formula":"value = L * (sqrt(P_upper) - sqrt(P_lower)) * sqrt(P_current)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 1x concentration in 10^6 pool",
+    "analytical_formula":"value = 1 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 1x concentration in 10^7 pool",
+    "analytical_formula":"value = 1 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 1x concentration in 10^8 pool",
+    "analytical_formula":"value = 1 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 1x concentration in 10^9 pool",
+    "analytical_formula":"value = 1 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 1x concentration in 10^10 pool",
+    "analytical_formula":"value = 1 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 5x concentration in 10^6 pool",
+    "analytical_formula":"value = 5 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 5x concentration in 10^7 pool",
+    "analytical_formula":"value = 5 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 5x concentration in 10^8 pool",
+    "analytical_formula":"value = 5 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 5x concentration in 10^9 pool",
+    "analytical_formula":"value = 5 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 5x concentration in 10^10 pool",
+    "analytical_formula":"value = 5 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 10x concentration in 10^6 pool",
+    "analytical_formula":"value = 10 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 10x concentration in 10^7 pool",
+    "analytical_formula":"value = 10 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 10x concentration in 10^8 pool",
+    "analytical_formula":"value = 10 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 10x concentration in 10^9 pool",
+    "analytical_formula":"value = 10 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 10x concentration in 10^10 pool",
+    "analytical_formula":"value = 10 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 25x concentration in 10^6 pool",
+    "analytical_formula":"value = 25 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 25x concentration in 10^7 pool",
+    "analytical_formula":"value = 25 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 25x concentration in 10^8 pool",
+    "analytical_formula":"value = 25 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 25x concentration in 10^9 pool",
+    "analytical_formula":"value = 25 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 25x concentration in 10^10 pool",
+    "analytical_formula":"value = 25 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 50x concentration in 10^6 pool",
+    "analytical_formula":"value = 50 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 50x concentration in 10^7 pool",
+    "analytical_formula":"value = 50 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 50x concentration in 10^8 pool",
+    "analytical_formula":"value = 50 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 50x concentration in 10^9 pool",
+    "analytical_formula":"value = 50 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 50x concentration in 10^10 pool",
+    "analytical_formula":"value = 50 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 100x concentration in 10^6 pool",
+    "analytical_formula":"value = 100 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 100x concentration in 10^7 pool",
+    "analytical_formula":"value = 100 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 100x concentration in 10^8 pool",
+    "analytical_formula":"value = 100 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 100x concentration in 10^9 pool",
+    "analytical_formula":"value = 100 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Uniswap V3 100x concentration in 10^10 pool",
+    "analytical_formula":"value = 100 * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
+    "category":"Concentrated Liquidity"
+  },
+  {
+    "description":"Calculate LP fee earnings from daily volume",
+    "analytical_formula":"fees = fee_tier * volume * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.10% tier on $1e+05 volume",
+    "analytical_formula":"fees = 0.001 * 100000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.10% tier on $1e+06 volume",
+    "analytical_formula":"fees = 0.001 * 1000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.10% tier on $1e+07 volume",
+    "analytical_formula":"fees = 0.001 * 10000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.10% tier on $1e+08 volume",
+    "analytical_formula":"fees = 0.001 * 100000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.10% tier on $1e+09 volume",
+    "analytical_formula":"fees = 0.001 * 1000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.10% tier on $1e+10 volume",
+    "analytical_formula":"fees = 0.001 * 10000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.10% tier on $1e+11 volume",
+    "analytical_formula":"fees = 0.001 * 100000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.10% tier on $1e+12 volume",
+    "analytical_formula":"fees = 0.001 * 1000000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.50% tier on $1e+05 volume",
+    "analytical_formula":"fees = 0.005 * 100000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.50% tier on $1e+06 volume",
+    "analytical_formula":"fees = 0.005 * 1000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.50% tier on $1e+07 volume",
+    "analytical_formula":"fees = 0.005 * 10000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.50% tier on $1e+08 volume",
+    "analytical_formula":"fees = 0.005 * 100000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.50% tier on $1e+09 volume",
+    "analytical_formula":"fees = 0.005 * 1000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.50% tier on $1e+10 volume",
+    "analytical_formula":"fees = 0.005 * 10000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.50% tier on $1e+11 volume",
+    "analytical_formula":"fees = 0.005 * 100000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 0.50% tier on $1e+12 volume",
+    "analytical_formula":"fees = 0.005 * 1000000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 1.00% tier on $1e+05 volume",
+    "analytical_formula":"fees = 0.01 * 100000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 1.00% tier on $1e+06 volume",
+    "analytical_formula":"fees = 0.01 * 1000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 1.00% tier on $1e+07 volume",
+    "analytical_formula":"fees = 0.01 * 10000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 1.00% tier on $1e+08 volume",
+    "analytical_formula":"fees = 0.01 * 100000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 1.00% tier on $1e+09 volume",
+    "analytical_formula":"fees = 0.01 * 1000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 1.00% tier on $1e+10 volume",
+    "analytical_formula":"fees = 0.01 * 10000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 1.00% tier on $1e+11 volume",
+    "analytical_formula":"fees = 0.01 * 100000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 1.00% tier on $1e+12 volume",
+    "analytical_formula":"fees = 0.01 * 1000000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 3.00% tier on $1e+05 volume",
+    "analytical_formula":"fees = 0.03 * 100000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 3.00% tier on $1e+06 volume",
+    "analytical_formula":"fees = 0.03 * 1000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 3.00% tier on $1e+07 volume",
+    "analytical_formula":"fees = 0.03 * 10000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 3.00% tier on $1e+08 volume",
+    "analytical_formula":"fees = 0.03 * 100000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 3.00% tier on $1e+09 volume",
+    "analytical_formula":"fees = 0.03 * 1000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 3.00% tier on $1e+10 volume",
+    "analytical_formula":"fees = 0.03 * 10000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 3.00% tier on $1e+11 volume",
+    "analytical_formula":"fees = 0.03 * 100000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Fee earnings 3.00% tier on $1e+12 volume",
+    "analytical_formula":"fees = 0.03 * 1000000000000 * (L_user \/ L_total)",
+    "category":"Fee Earnings"
+  },
+  {
+    "description":"Calculate APY with compounding",
+    "analytical_formula":"APY = (1 + r\/n)^n - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 5% yield compounded 1x\/year",
+    "analytical_formula":"APY = (1 + 0.05\/1)^1 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 5% yield compounded 4x\/year",
+    "analytical_formula":"APY = (1 + 0.05\/4)^4 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 5% yield compounded 12x\/year",
+    "analytical_formula":"APY = (1 + 0.05\/12)^12 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 5% yield compounded 365x\/year",
+    "analytical_formula":"APY = (1 + 0.05\/365)^365 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 10% yield compounded 1x\/year",
+    "analytical_formula":"APY = (1 + 0.10\/1)^1 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 10% yield compounded 4x\/year",
+    "analytical_formula":"APY = (1 + 0.10\/4)^4 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 10% yield compounded 12x\/year",
+    "analytical_formula":"APY = (1 + 0.10\/12)^12 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 10% yield compounded 365x\/year",
+    "analytical_formula":"APY = (1 + 0.10\/365)^365 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 20% yield compounded 1x\/year",
+    "analytical_formula":"APY = (1 + 0.20\/1)^1 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 20% yield compounded 4x\/year",
+    "analytical_formula":"APY = (1 + 0.20\/4)^4 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 20% yield compounded 12x\/year",
+    "analytical_formula":"APY = (1 + 0.20\/12)^12 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 20% yield compounded 365x\/year",
+    "analytical_formula":"APY = (1 + 0.20\/365)^365 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 50% yield compounded 1x\/year",
+    "analytical_formula":"APY = (1 + 0.50\/1)^1 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 50% yield compounded 4x\/year",
+    "analytical_formula":"APY = (1 + 0.50\/4)^4 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 50% yield compounded 12x\/year",
+    "analytical_formula":"APY = (1 + 0.50\/12)^12 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"APY 50% yield compounded 365x\/year",
+    "analytical_formula":"APY = (1 + 0.50\/365)^365 - 1",
+    "category":"APY Calculation"
+  },
+  {
+    "description":"Calculate trading slippage percentage",
+    "analytical_formula":"slippage% = (expected - actual) \/ expected * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.1% trade in 10^5 pool",
+    "analytical_formula":"slip = (0.001 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.1% trade in 10^6 pool",
+    "analytical_formula":"slip = (0.001 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.1% trade in 10^7 pool",
+    "analytical_formula":"slip = (0.001 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.1% trade in 10^8 pool",
+    "analytical_formula":"slip = (0.001 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.1% trade in 10^9 pool",
+    "analytical_formula":"slip = (0.001 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.1% trade in 10^10 pool",
+    "analytical_formula":"slip = (0.001 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.1% trade in 10^11 pool",
+    "analytical_formula":"slip = (0.001 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.5% trade in 10^5 pool",
+    "analytical_formula":"slip = (0.005 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.5% trade in 10^6 pool",
+    "analytical_formula":"slip = (0.005 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.5% trade in 10^7 pool",
+    "analytical_formula":"slip = (0.005 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.5% trade in 10^8 pool",
+    "analytical_formula":"slip = (0.005 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.5% trade in 10^9 pool",
+    "analytical_formula":"slip = (0.005 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.5% trade in 10^10 pool",
+    "analytical_formula":"slip = (0.005 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 0.5% trade in 10^11 pool",
+    "analytical_formula":"slip = (0.005 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 1% trade in 10^5 pool",
+    "analytical_formula":"slip = (0.01 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 1% trade in 10^6 pool",
+    "analytical_formula":"slip = (0.01 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 1% trade in 10^7 pool",
+    "analytical_formula":"slip = (0.01 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 1% trade in 10^8 pool",
+    "analytical_formula":"slip = (0.01 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 1% trade in 10^9 pool",
+    "analytical_formula":"slip = (0.01 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 1% trade in 10^10 pool",
+    "analytical_formula":"slip = (0.01 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 1% trade in 10^11 pool",
+    "analytical_formula":"slip = (0.01 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 2% trade in 10^5 pool",
+    "analytical_formula":"slip = (0.02 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 2% trade in 10^6 pool",
+    "analytical_formula":"slip = (0.02 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 2% trade in 10^7 pool",
+    "analytical_formula":"slip = (0.02 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 2% trade in 10^8 pool",
+    "analytical_formula":"slip = (0.02 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 2% trade in 10^9 pool",
+    "analytical_formula":"slip = (0.02 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 2% trade in 10^10 pool",
+    "analytical_formula":"slip = (0.02 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 2% trade in 10^11 pool",
+    "analytical_formula":"slip = (0.02 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 5% trade in 10^5 pool",
+    "analytical_formula":"slip = (0.05 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 5% trade in 10^6 pool",
+    "analytical_formula":"slip = (0.05 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 5% trade in 10^7 pool",
+    "analytical_formula":"slip = (0.05 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 5% trade in 10^8 pool",
+    "analytical_formula":"slip = (0.05 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 5% trade in 10^9 pool",
+    "analytical_formula":"slip = (0.05 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 5% trade in 10^10 pool",
+    "analytical_formula":"slip = (0.05 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Slippage for 5% trade in 10^11 pool",
+    "analytical_formula":"slip = (0.05 \/ pool)^2 * 100",
+    "category":"Slippage"
+  },
+  {
+    "description":"Calculate price movement from trade",
+    "analytical_formula":"impact% = (trade \/ pool) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=0.5 in 10^6 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 0.5)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=0.5 in 10^7 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 0.5)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=0.5 in 10^8 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 0.5)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=0.5 in 10^9 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 0.5)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=0.5 in 10^10 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 0.5)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=0.5 in 10^11 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 0.5)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=0.5 in 10^12 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 0.5)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=1.0 in 10^6 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 1.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=1.0 in 10^7 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 1.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=1.0 in 10^8 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 1.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=1.0 in 10^9 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 1.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=1.0 in 10^10 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 1.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=1.0 in 10^11 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 1.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=1.0 in 10^12 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 1.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=2.0 in 10^6 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 2.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=2.0 in 10^7 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 2.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=2.0 in 10^8 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 2.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=2.0 in 10^9 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 2.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=2.0 in 10^10 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 2.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=2.0 in 10^11 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 2.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Price impact depth=2.0 in 10^12 pool",
+    "analytical_formula":"impact = (trade \/ (pool * 2.0)) * 100",
+    "category":"Price Impact"
+  },
+  {
+    "description":"Calculate lending pool utilization",
+    "analytical_formula":"util = borrowed \/ supplied",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^5 pool, target 30%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.30",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^5 pool, target 50%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.50",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^5 pool, target 70%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.70",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^5 pool, target 85%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.85",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^6 pool, target 30%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.30",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^6 pool, target 50%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.50",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^6 pool, target 70%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.70",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^6 pool, target 85%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.85",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^7 pool, target 30%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.30",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^7 pool, target 50%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.50",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^7 pool, target 70%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.70",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^7 pool, target 85%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.85",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^8 pool, target 30%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.30",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^8 pool, target 50%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.50",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^8 pool, target 70%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.70",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^8 pool, target 85%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.85",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^9 pool, target 30%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.30",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^9 pool, target 50%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.50",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^9 pool, target 70%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.70",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Utilization in 10^9 pool, target 85%",
+    "analytical_formula":"util = borrowed \/ supplied, target=0.85",
+    "category":"Utilization Rate"
+  },
+  {
+    "description":"Calculate swap output with fees",
+    "analytical_formula":"out = (in * (1-fee) * r_out) \/ (r_in + in*(1-fee))",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.1% fee in 10^3 reserve",
+    "analytical_formula":"out = (in * 0.9990 * r_out) \/ (r_in + in*0.9990)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.1% fee in 10^4 reserve",
+    "analytical_formula":"out = (in * 0.9990 * r_out) \/ (r_in + in*0.9990)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.1% fee in 10^5 reserve",
+    "analytical_formula":"out = (in * 0.9990 * r_out) \/ (r_in + in*0.9990)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.1% fee in 10^6 reserve",
+    "analytical_formula":"out = (in * 0.9990 * r_out) \/ (r_in + in*0.9990)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.1% fee in 10^7 reserve",
+    "analytical_formula":"out = (in * 0.9990 * r_out) \/ (r_in + in*0.9990)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.1% fee in 10^8 reserve",
+    "analytical_formula":"out = (in * 0.9990 * r_out) \/ (r_in + in*0.9990)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.1% fee in 10^9 reserve",
+    "analytical_formula":"out = (in * 0.9990 * r_out) \/ (r_in + in*0.9990)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.1% fee in 10^10 reserve",
+    "analytical_formula":"out = (in * 0.9990 * r_out) \/ (r_in + in*0.9990)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.3% fee in 10^3 reserve",
+    "analytical_formula":"out = (in * 0.9970 * r_out) \/ (r_in + in*0.9970)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.3% fee in 10^4 reserve",
+    "analytical_formula":"out = (in * 0.9970 * r_out) \/ (r_in + in*0.9970)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.3% fee in 10^5 reserve",
+    "analytical_formula":"out = (in * 0.9970 * r_out) \/ (r_in + in*0.9970)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.3% fee in 10^6 reserve",
+    "analytical_formula":"out = (in * 0.9970 * r_out) \/ (r_in + in*0.9970)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.3% fee in 10^7 reserve",
+    "analytical_formula":"out = (in * 0.9970 * r_out) \/ (r_in + in*0.9970)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.3% fee in 10^8 reserve",
+    "analytical_formula":"out = (in * 0.9970 * r_out) \/ (r_in + in*0.9970)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.3% fee in 10^9 reserve",
+    "analytical_formula":"out = (in * 0.9970 * r_out) \/ (r_in + in*0.9970)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.3% fee in 10^10 reserve",
+    "analytical_formula":"out = (in * 0.9970 * r_out) \/ (r_in + in*0.9970)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.5% fee in 10^3 reserve",
+    "analytical_formula":"out = (in * 0.9950 * r_out) \/ (r_in + in*0.9950)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.5% fee in 10^4 reserve",
+    "analytical_formula":"out = (in * 0.9950 * r_out) \/ (r_in + in*0.9950)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.5% fee in 10^5 reserve",
+    "analytical_formula":"out = (in * 0.9950 * r_out) \/ (r_in + in*0.9950)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.5% fee in 10^6 reserve",
+    "analytical_formula":"out = (in * 0.9950 * r_out) \/ (r_in + in*0.9950)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.5% fee in 10^7 reserve",
+    "analytical_formula":"out = (in * 0.9950 * r_out) \/ (r_in + in*0.9950)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.5% fee in 10^8 reserve",
+    "analytical_formula":"out = (in * 0.9950 * r_out) \/ (r_in + in*0.9950)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.5% fee in 10^9 reserve",
+    "analytical_formula":"out = (in * 0.9950 * r_out) \/ (r_in + in*0.9950)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 0.5% fee in 10^10 reserve",
+    "analytical_formula":"out = (in * 0.9950 * r_out) \/ (r_in + in*0.9950)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 1.0% fee in 10^3 reserve",
+    "analytical_formula":"out = (in * 0.9900 * r_out) \/ (r_in + in*0.9900)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 1.0% fee in 10^4 reserve",
+    "analytical_formula":"out = (in * 0.9900 * r_out) \/ (r_in + in*0.9900)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 1.0% fee in 10^5 reserve",
+    "analytical_formula":"out = (in * 0.9900 * r_out) \/ (r_in + in*0.9900)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 1.0% fee in 10^6 reserve",
+    "analytical_formula":"out = (in * 0.9900 * r_out) \/ (r_in + in*0.9900)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 1.0% fee in 10^7 reserve",
+    "analytical_formula":"out = (in * 0.9900 * r_out) \/ (r_in + in*0.9900)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 1.0% fee in 10^8 reserve",
+    "analytical_formula":"out = (in * 0.9900 * r_out) \/ (r_in + in*0.9900)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 1.0% fee in 10^9 reserve",
+    "analytical_formula":"out = (in * 0.9900 * r_out) \/ (r_in + in*0.9900)",
+    "category":"Swap Output"
+  },
+  {
+    "description":"Swap 1.0% fee in 10^10 reserve",
+    "analytical_formula":"out = (in * 0.9900 * r_out) \/ (r_in + in*0.9900)",
+    "category":"Swap Output"
+  }
+]

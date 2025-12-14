@@ -1,0 +1,872 @@
+[
+  {
+    "description":"Calculate Value at Risk at 95% confidence level",
+    "analytical_formula":"VaR_95 = \u03bc - 1.96 * \u03c3 * \u221at",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Calculate VaR at 90% confidence level",
+    "analytical_formula":"VaR_90 = \u03bc - 1.28 * \u03c3 * \u221at",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 90% for 1-day horizon",
+    "analytical_formula":"VaR_90(1d) = \u03bc - 1.28 * \u03c3 * \u221a1",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 90% for 10-day horizon",
+    "analytical_formula":"VaR_90(10d) = \u03bc - 1.28 * \u03c3 * \u221a10",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 90% for 30-day horizon",
+    "analytical_formula":"VaR_90(30d) = \u03bc - 1.28 * \u03c3 * \u221a30",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 90% for 252-day horizon",
+    "analytical_formula":"VaR_90(252d) = \u03bc - 1.28 * \u03c3 * \u221a252",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 90% for $100,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 1.28 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 90% for $1,000,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 1.28 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 90% for $10,000,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 1.28 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Calculate VaR at 95% confidence level",
+    "analytical_formula":"VaR_95 = \u03bc - 1.645 * \u03c3 * \u221at",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 95% for 1-day horizon",
+    "analytical_formula":"VaR_95(1d) = \u03bc - 1.645 * \u03c3 * \u221a1",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 95% for 10-day horizon",
+    "analytical_formula":"VaR_95(10d) = \u03bc - 1.645 * \u03c3 * \u221a10",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 95% for 30-day horizon",
+    "analytical_formula":"VaR_95(30d) = \u03bc - 1.645 * \u03c3 * \u221a30",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 95% for 252-day horizon",
+    "analytical_formula":"VaR_95(252d) = \u03bc - 1.645 * \u03c3 * \u221a252",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 95% for $100,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 1.645 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 95% for $1,000,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 1.645 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 95% for $10,000,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 1.645 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Calculate VaR at 99% confidence level",
+    "analytical_formula":"VaR_99 = \u03bc - 2.33 * \u03c3 * \u221at",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 99% for 1-day horizon",
+    "analytical_formula":"VaR_99(1d) = \u03bc - 2.33 * \u03c3 * \u221a1",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 99% for 10-day horizon",
+    "analytical_formula":"VaR_99(10d) = \u03bc - 2.33 * \u03c3 * \u221a10",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 99% for 30-day horizon",
+    "analytical_formula":"VaR_99(30d) = \u03bc - 2.33 * \u03c3 * \u221a30",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 99% for 252-day horizon",
+    "analytical_formula":"VaR_99(252d) = \u03bc - 2.33 * \u03c3 * \u221a252",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 99% for $100,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 2.33 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 99% for $1,000,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 2.33 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 99% for $10,000,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 2.33 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Calculate VaR at 99.9% confidence level",
+    "analytical_formula":"VaR_99.9 = \u03bc - 3.09 * \u03c3 * \u221at",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 99.9% for 1-day horizon",
+    "analytical_formula":"VaR_99.9(1d) = \u03bc - 3.09 * \u03c3 * \u221a1",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 99.9% for 10-day horizon",
+    "analytical_formula":"VaR_99.9(10d) = \u03bc - 3.09 * \u03c3 * \u221a10",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 99.9% for 30-day horizon",
+    "analytical_formula":"VaR_99.9(30d) = \u03bc - 3.09 * \u03c3 * \u221a30",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"VaR 99.9% for 252-day horizon",
+    "analytical_formula":"VaR_99.9(252d) = \u03bc - 3.09 * \u03c3 * \u221a252",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 99.9% for $100,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 3.09 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 99.9% for $1,000,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 3.09 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Dollar VaR at 99.9% for $10,000,000 portfolio",
+    "analytical_formula":"Dollar_VaR = Portfolio_Value * (\u03bc - 3.09 * \u03c3 * \u221at)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Historical VaR using percentile method",
+    "analytical_formula":"VaR_historical = percentile(returns, 5)",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Cornish-Fisher VaR adjusting for skewness and kurtosis",
+    "analytical_formula":"VaR_CF = \u03bc - (z + (z\u00b2-1)\/6 * skew + (z\u00b3-3z)\/24 * kurt) * \u03c3 * \u221at",
+    "category":"Value at Risk"
+  },
+  {
+    "description":"Calculate Conditional VaR (Expected Shortfall) at 95%",
+    "analytical_formula":"CVaR_95 = \u03bc - \u03c6(z_95)\/(1-0.95) * \u03c3 * \u221at",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"CVaR at 90% confidence level",
+    "analytical_formula":"CVaR_90 = \u03bc - 2.5 * \u03c3 * \u221at",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 90% for 1-day horizon",
+    "analytical_formula":"ES_90(1d) = \u03bc - 2.5 * \u03c3 * \u221a1",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 90% for 10-day horizon",
+    "analytical_formula":"ES_90(10d) = \u03bc - 2.5 * \u03c3 * \u221a10",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 90% for 30-day horizon",
+    "analytical_formula":"ES_90(30d) = \u03bc - 2.5 * \u03c3 * \u221a30",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 90% for 252-day horizon",
+    "analytical_formula":"ES_90(252d) = \u03bc - 2.5 * \u03c3 * \u221a252",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"CVaR at 95% confidence level",
+    "analytical_formula":"CVaR_95 = \u03bc - 2.063 * \u03c3 * \u221at",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 95% for 1-day horizon",
+    "analytical_formula":"ES_95(1d) = \u03bc - 2.063 * \u03c3 * \u221a1",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 95% for 10-day horizon",
+    "analytical_formula":"ES_95(10d) = \u03bc - 2.063 * \u03c3 * \u221a10",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 95% for 30-day horizon",
+    "analytical_formula":"ES_95(30d) = \u03bc - 2.063 * \u03c3 * \u221a30",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 95% for 252-day horizon",
+    "analytical_formula":"ES_95(252d) = \u03bc - 2.063 * \u03c3 * \u221a252",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"CVaR at 99% confidence level",
+    "analytical_formula":"CVaR_99 = \u03bc - 1.755 * \u03c3 * \u221at",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 99% for 1-day horizon",
+    "analytical_formula":"ES_99(1d) = \u03bc - 1.755 * \u03c3 * \u221a1",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 99% for 10-day horizon",
+    "analytical_formula":"ES_99(10d) = \u03bc - 1.755 * \u03c3 * \u221a10",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 99% for 30-day horizon",
+    "analytical_formula":"ES_99(30d) = \u03bc - 1.755 * \u03c3 * \u221a30",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 99% for 252-day horizon",
+    "analytical_formula":"ES_99(252d) = \u03bc - 1.755 * \u03c3 * \u221a252",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"CVaR at 99.9% confidence level",
+    "analytical_formula":"CVaR_99.9 = \u03bc - 1.505 * \u03c3 * \u221at",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 99.9% for 1-day horizon",
+    "analytical_formula":"ES_99.9(1d) = \u03bc - 1.505 * \u03c3 * \u221a1",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 99.9% for 10-day horizon",
+    "analytical_formula":"ES_99.9(10d) = \u03bc - 1.505 * \u03c3 * \u221a10",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 99.9% for 30-day horizon",
+    "analytical_formula":"ES_99.9(30d) = \u03bc - 1.505 * \u03c3 * \u221a30",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Expected Shortfall at 99.9% for 252-day horizon",
+    "analytical_formula":"ES_99.9(252d) = \u03bc - 1.505 * \u03c3 * \u221a252",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Historical CVaR as average of tail losses",
+    "analytical_formula":"CVaR_historical = mean(returns[returns <= VaR_historical])",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Stressed CVaR using historical stress scenarios",
+    "analytical_formula":"Stressed_CVaR = mean(losses during stress periods)",
+    "category":"Conditional VaR"
+  },
+  {
+    "description":"Calculate Sharpe Ratio for portfolio performance",
+    "analytical_formula":"Sharpe = (R_p - R_f) \/ \u03c3_p",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Sharpe Ratio with 1.0% risk-free rate",
+    "analytical_formula":"Sharpe = (R_p - 0.01) \/ \u03c3_p",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (daily data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (monthly data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (annual data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Sharpe Ratio with 2.0% risk-free rate",
+    "analytical_formula":"Sharpe = (R_p - 0.02) \/ \u03c3_p",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (daily data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (monthly data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (annual data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Sharpe Ratio with 3.0% risk-free rate",
+    "analytical_formula":"Sharpe = (R_p - 0.03) \/ \u03c3_p",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (daily data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (monthly data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (annual data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Sharpe Ratio with 5.0% risk-free rate",
+    "analytical_formula":"Sharpe = (R_p - 0.05) \/ \u03c3_p",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (daily data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (monthly data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (annual data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Sharpe Ratio with 10.0% risk-free rate",
+    "analytical_formula":"Sharpe = (R_p - 0.1) \/ \u03c3_p",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (daily data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (monthly data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Annualized Sharpe Ratio (annual data)",
+    "analytical_formula":"Sharpe_annual = Sharpe * \u221a(periods_per_year)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Risk-adjusted Sharpe Ratio with transaction costs",
+    "analytical_formula":"Sharpe_adj = (R_p - TC - R_f) \/ \u03c3_p",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Excess Sharpe Ratio relative to benchmark",
+    "analytical_formula":"Sharpe_excess = (R_p - R_bench) \/ \u03c3(R_p - R_bench)",
+    "category":"Sharpe Ratio"
+  },
+  {
+    "description":"Calculate Sortino Ratio focusing on downside risk",
+    "analytical_formula":"Sortino = (R_p - R_target) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Sortino Ratio with 0.0% target return",
+    "analytical_formula":"Sortino = (R_p - 0.0) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (daily data, 0.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.0) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (monthly data, 0.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.0) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (annual data, 0.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.0) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Sortino Ratio with 2.0% target return",
+    "analytical_formula":"Sortino = (R_p - 0.02) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (daily data, 2.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.02) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (monthly data, 2.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.02) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (annual data, 2.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.02) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Sortino Ratio with 5.0% target return",
+    "analytical_formula":"Sortino = (R_p - 0.05) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (daily data, 5.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.05) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (monthly data, 5.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.05) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (annual data, 5.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.05) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Sortino Ratio with 10.0% target return",
+    "analytical_formula":"Sortino = (R_p - 0.1) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (daily data, 10.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.1) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (monthly data, 10.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.1) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Annualized Sortino Ratio (annual data, 10.0% target)",
+    "analytical_formula":"Sortino_annual = (R_p - 0.1) * \u221a(periods\/year) \/ \u03c3_downside",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Downside deviation calculation",
+    "analytical_formula":"\u03c3_downside = \u221a[\u03a3(min(R_i - R_target, 0))\u00b2 \/ n]",
+    "category":"Sortino Ratio"
+  },
+  {
+    "description":"Calculate Beta - systematic risk relative to market",
+    "analytical_formula":"\u03b2 = Cov(R_asset, R_market) \/ Var(R_market)",
+    "category":"Beta"
+  },
+  {
+    "description":"Beta estimation using 1-year historical data",
+    "analytical_formula":"\u03b2_1-year = Cov(R_asset, R_market) \/ Var(R_market)",
+    "category":"Beta"
+  },
+  {
+    "description":"Beta estimation using 3-year historical data",
+    "analytical_formula":"\u03b2_3-year = Cov(R_asset, R_market) \/ Var(R_market)",
+    "category":"Beta"
+  },
+  {
+    "description":"Beta estimation using 5-year historical data",
+    "analytical_formula":"\u03b2_5-year = Cov(R_asset, R_market) \/ Var(R_market)",
+    "category":"Beta"
+  },
+  {
+    "description":"Unlevered (asset) Beta",
+    "analytical_formula":"\u03b2_unlevered = \u03b2_levered \/ (1 + (1-Tc) * D\/E)",
+    "category":"Beta"
+  },
+  {
+    "description":"Levered (equity) Beta with debt",
+    "analytical_formula":"\u03b2_levered = \u03b2_unlevered * (1 + (1-Tc) * D\/E)",
+    "category":"Beta"
+  },
+  {
+    "description":"Multi-factor Beta including market premium",
+    "analytical_formula":"\u03b2_multi = \u03b1 + \u03b2_market*F_market + \u03b2_market*F_market",
+    "category":"Beta"
+  },
+  {
+    "description":"Multi-factor Beta including size premium",
+    "analytical_formula":"\u03b2_multi = \u03b1 + \u03b2_market*F_market + \u03b2_size*F_size",
+    "category":"Beta"
+  },
+  {
+    "description":"Multi-factor Beta including value premium",
+    "analytical_formula":"\u03b2_multi = \u03b1 + \u03b2_market*F_market + \u03b2_value*F_value",
+    "category":"Beta"
+  },
+  {
+    "description":"Multi-factor Beta including momentum premium",
+    "analytical_formula":"\u03b2_multi = \u03b1 + \u03b2_market*F_market + \u03b2_momentum*F_momentum",
+    "category":"Beta"
+  },
+  {
+    "description":"Rolling Beta estimation",
+    "analytical_formula":"\u03b2_rolling(t) = Cov(R_asset[t-252:t], R_market[t-252:t]) \/ Var(R_market[t-252:t])",
+    "category":"Beta"
+  },
+  {
+    "description":"Calculate Maximum Drawdown as peak-to-trough decline",
+    "analytical_formula":"MDD = (Trough - Peak) \/ Peak",
+    "category":"Maximum Drawdown"
+  },
+  {
+    "description":"Maximum Drawdown over 10-day period",
+    "analytical_formula":"MDD_10d = min(Portfolio_Value[t:t+10]) \/ max(Portfolio_Value[t:t+10])",
+    "category":"Maximum Drawdown"
+  },
+  {
+    "description":"Maximum Drawdown over 20-day period",
+    "analytical_formula":"MDD_20d = min(Portfolio_Value[t:t+20]) \/ max(Portfolio_Value[t:t+20])",
+    "category":"Maximum Drawdown"
+  },
+  {
+    "description":"Maximum Drawdown over 60-day period",
+    "analytical_formula":"MDD_60d = min(Portfolio_Value[t:t+60]) \/ max(Portfolio_Value[t:t+60])",
+    "category":"Maximum Drawdown"
+  },
+  {
+    "description":"Maximum Drawdown over 252-day period",
+    "analytical_formula":"MDD_252d = min(Portfolio_Value[t:t+252]) \/ max(Portfolio_Value[t:t+252])",
+    "category":"Maximum Drawdown"
+  },
+  {
+    "description":"Calmar Ratio - return per unit of drawdown",
+    "analytical_formula":"Calmar = Annual_Return \/ Max_Drawdown",
+    "category":"Maximum Drawdown"
+  },
+  {
+    "description":"Return over Maximum Drawdown (RoMaD)",
+    "analytical_formula":"RoMaD = Cumulative_Return \/ Max_Drawdown",
+    "category":"Maximum Drawdown"
+  },
+  {
+    "description":"Time to recover 50% of drawdown",
+    "analytical_formula":"Recovery_Time_50 = First_Date(Portfolio_Value >= Peak * 0.5)",
+    "category":"Maximum Drawdown"
+  },
+  {
+    "description":"Time to recover 75% of drawdown",
+    "analytical_formula":"Recovery_Time_75 = First_Date(Portfolio_Value >= Peak * 0.75)",
+    "category":"Maximum Drawdown"
+  },
+  {
+    "description":"Time to recover 100% of drawdown",
+    "analytical_formula":"Recovery_Time_100 = First_Date(Portfolio_Value >= Peak * 1.0)",
+    "category":"Maximum Drawdown"
+  },
+  {
+    "description":"Average Drawdown over period",
+    "analytical_formula":"Avg_DD = mean(|Drawdown_i|) for all i in period",
+    "category":"Maximum Drawdown"
+  },
+  {
+    "description":"Calculate Information Ratio for active management",
+    "analytical_formula":"IR = (R_p - R_bench) \/ TE",
+    "category":"Information Ratio"
+  },
+  {
+    "description":"Information Ratio vs S&P500 benchmark",
+    "analytical_formula":"IR_S&P500 = (R_p - R_S&P500) \/ \u03c3(R_p - R_S&P500)",
+    "category":"Information Ratio"
+  },
+  {
+    "description":"Information Ratio vs Russell2000 benchmark",
+    "analytical_formula":"IR_Russell2000 = (R_p - R_Russell2000) \/ \u03c3(R_p - R_Russell2000)",
+    "category":"Information Ratio"
+  },
+  {
+    "description":"Information Ratio vs MSCI_World benchmark",
+    "analytical_formula":"IR_MSCI_World = (R_p - R_MSCI_World) \/ \u03c3(R_p - R_MSCI_World)",
+    "category":"Information Ratio"
+  },
+  {
+    "description":"Information Ratio vs Custom benchmark",
+    "analytical_formula":"IR_Custom = (R_p - R_Custom) \/ \u03c3(R_p - R_Custom)",
+    "category":"Information Ratio"
+  },
+  {
+    "description":"Tracking Error - standard deviation of active returns",
+    "analytical_formula":"TE = \u03c3(R_p - R_bench)",
+    "category":"Information Ratio"
+  },
+  {
+    "description":"Ex-ante Information Ratio using factor model",
+    "analytical_formula":"IR_ex_ante = \u03b1 \/ Residual_Volatility",
+    "category":"Information Ratio"
+  },
+  {
+    "description":"Annualized Information Ratio",
+    "analytical_formula":"IR_annual = IR_monthly * \u221a12",
+    "category":"Information Ratio"
+  },
+  {
+    "description":"Calculate Treynor Ratio - return per unit of systematic risk",
+    "analytical_formula":"Treynor = (R_p - R_f) \/ \u03b2",
+    "category":"Treynor Ratio"
+  },
+  {
+    "description":"Treynor Ratio with 1.0% RF rate, Low (\u03b2<1)",
+    "analytical_formula":"Treynor = (R_p - 0.01) \/ \u03b2",
+    "category":"Treynor Ratio"
+  },
+  {
+    "description":"Treynor Ratio with 1.0% RF rate, Mid (1<\u03b2<1.5)",
+    "analytical_formula":"Treynor = (R_p - 0.01) \/ \u03b2",
+    "category":"Treynor Ratio"
+  },
+  {
+    "description":"Treynor Ratio with 1.0% RF rate, High (\u03b2>1.5)",
+    "analytical_formula":"Treynor = (R_p - 0.01) \/ \u03b2",
+    "category":"Treynor Ratio"
+  },
+  {
+    "description":"Treynor Ratio with 2.0% RF rate, Low (\u03b2<1)",
+    "analytical_formula":"Treynor = (R_p - 0.02) \/ \u03b2",
+    "category":"Treynor Ratio"
+  },
+  {
+    "description":"Treynor Ratio with 2.0% RF rate, Mid (1<\u03b2<1.5)",
+    "analytical_formula":"Treynor = (R_p - 0.02) \/ \u03b2",
+    "category":"Treynor Ratio"
+  },
+  {
+    "description":"Treynor Ratio with 2.0% RF rate, High (\u03b2>1.5)",
+    "analytical_formula":"Treynor = (R_p - 0.02) \/ \u03b2",
+    "category":"Treynor Ratio"
+  },
+  {
+    "description":"Treynor Ratio with 5.0% RF rate, Low (\u03b2<1)",
+    "analytical_formula":"Treynor = (R_p - 0.05) \/ \u03b2",
+    "category":"Treynor Ratio"
+  },
+  {
+    "description":"Treynor Ratio with 5.0% RF rate, Mid (1<\u03b2<1.5)",
+    "analytical_formula":"Treynor = (R_p - 0.05) \/ \u03b2",
+    "category":"Treynor Ratio"
+  },
+  {
+    "description":"Treynor Ratio with 5.0% RF rate, High (\u03b2>1.5)",
+    "analytical_formula":"Treynor = (R_p - 0.05) \/ \u03b2",
+    "category":"Treynor Ratio"
+  },
+  {
+    "description":"Jensen's Alpha - excess return above CAPM prediction",
+    "analytical_formula":"\u03b1 = R_p - [R_f + \u03b2(R_m - R_f)]",
+    "category":"Treynor Ratio"
+  },
+  {
+    "description":"Capital Asset Pricing Model",
+    "analytical_formula":"E(R_i) = R_f + \u03b2_i(E(R_m) - R_f)",
+    "category":"CAPM"
+  },
+  {
+    "description":"CAPM with 4.0% market risk premium",
+    "analytical_formula":"E(R_i) = R_f + \u03b2_i * 0.04",
+    "category":"CAPM"
+  },
+  {
+    "description":"CAPM with 5.0% market risk premium",
+    "analytical_formula":"E(R_i) = R_f + \u03b2_i * 0.05",
+    "category":"CAPM"
+  },
+  {
+    "description":"CAPM with 6.0% market risk premium",
+    "analytical_formula":"E(R_i) = R_f + \u03b2_i * 0.06",
+    "category":"CAPM"
+  },
+  {
+    "description":"CAPM with 8.0% market risk premium",
+    "analytical_formula":"E(R_i) = R_f + \u03b2_i * 0.08",
+    "category":"CAPM"
+  },
+  {
+    "description":"Build-up method for required return (Private Companies)",
+    "analytical_formula":"E(R) = R_f + \u03b2 * MRP + Size_Premium + Industry_Premium",
+    "category":"CAPM"
+  },
+  {
+    "description":"Three-Factor Fama-French Model",
+    "analytical_formula":"R_i - R_f = \u03b1 + \u03b2_market(R_m - R_f) + \u03b2_size*SMB + \u03b2_value*HML + \u03b5",
+    "category":"CAPM"
+  },
+  {
+    "description":"Five-Factor Fama-French Model",
+    "analytical_formula":"R_i - R_f = \u03b1 + \u03b2_mkt*MKT + \u03b2_smb*SMB + \u03b2_hml*HML + \u03b2_rmw*RMW + \u03b2_cma*CMA",
+    "category":"CAPM"
+  },
+  {
+    "description":"Incremental VaR - VaR contribution of adding position",
+    "analytical_formula":"IVaR = VaR(Portfolio+Position) - VaR(Portfolio)",
+    "category":"Advanced VaR"
+  },
+  {
+    "description":"Marginal VaR - sensitivity of portfolio VaR to position change",
+    "analytical_formula":"MVaR = \u2202VaR\/\u2202Position_i",
+    "category":"Advanced VaR"
+  },
+  {
+    "description":"Component VaR - allocation of total VaR to positions",
+    "analytical_formula":"CVaR_i = MVaR_i * Position_Value_i",
+    "category":"Advanced VaR"
+  },
+  {
+    "description":"Stand-alone VaR for individual position",
+    "analytical_formula":"SA_VaR_i = \u03bc_i - z_\u03b1 * \u03c3_i * \u221at",
+    "category":"Advanced VaR"
+  },
+  {
+    "description":"Concentrated VaR - accounts for correlation breakdowns",
+    "analytical_formula":"Conc_VaR = VaR * Concentration_Factor",
+    "category":"Advanced VaR"
+  },
+  {
+    "description":"Liquidity-adjusted VaR with market depth",
+    "analytical_formula":"LVaR = VaR + Liquidity_Adjustment * \u03c3",
+    "category":"Advanced VaR"
+  },
+  {
+    "description":"Stressed VaR using stressed market parameters",
+    "analytical_formula":"Stressed_VaR = \u03bc_stressed - z * \u03c3_stressed * \u221at",
+    "category":"Advanced VaR"
+  },
+  {
+    "description":"Incremental CVaR",
+    "analytical_formula":"I_CVaR = CVaR(Portfolio+Position) - CVaR(Portfolio)",
+    "category":"Advanced VaR"
+  },
+  {
+    "description":"Scenario loss - portfolio value change under stress scenario",
+    "analytical_formula":"Scenario_Loss = Portfolio_Value_0 - Portfolio_Value_stress",
+    "category":"Stress Testing"
+  },
+  {
+    "description":"Parallel shift stress test - all rates shift equally",
+    "analytical_formula":"Stress_Parallel = \u03a3(Duration_i * Shift * Value_i)",
+    "category":"Stress Testing"
+  },
+  {
+    "description":"Yield curve twist stress test",
+    "analytical_formula":"Stress_Twist = \u03a3(Duration_Slope_i * Twist * Value_i)",
+    "category":"Stress Testing"
+  },
+  {
+    "description":"Butterfly shift in yield curve",
+    "analytical_formula":"Stress_Butterfly = \u03a3(Butterfly_Sensitivity_i * Shift * Value_i)",
+    "category":"Stress Testing"
+  },
+  {
+    "description":"Correlation breakdown scenario",
+    "analytical_formula":"Stress_Correlation = Portfolio_Loss(\u03c1=correlation_stress)",
+    "category":"Stress Testing"
+  },
+  {
+    "description":"Omega Ratio - probability-weighted returns vs threshold",
+    "analytical_formula":"Omega(R_t) = E[max(R - R_t, 0)] \/ E[max(R_t - R, 0)]",
+    "category":"Advanced Metrics"
+  },
+  {
+    "description":"Kappa Ratio - excess return to below-target semi-deviation",
+    "analytical_formula":"Kappa_3 = (R - R_t) \/ (E[(max(R_t - R, 0))\u00b3])^(1\/3)",
+    "category":"Advanced Metrics"
+  },
+  {
+    "description":"Ulcer Index - average depth and duration of drawdowns",
+    "analytical_formula":"UI = \u221a(\u03a3(D_i\u00b2)\/n) where D_i = percentage drawdowns",
+    "category":"Advanced Metrics"
+  },
+  {
+    "description":"Martin Ratio - return to Ulcer Index",
+    "analytical_formula":"Martin = Annual_Return \/ Ulcer_Index",
+    "category":"Advanced Metrics"
+  },
+  {
+    "description":"Tail ratio - size of gains vs losses in tail",
+    "analytical_formula":"Tail_Ratio = E[R | R > percentile_95] \/ |E[R | R < percentile_5]|",
+    "category":"Advanced Metrics"
+  },
+  {
+    "description":"Skewness - asymmetry of return distribution",
+    "analytical_formula":"Skewness = E[(R - \u03bc)\u00b3] \/ \u03c3\u00b3",
+    "category":"Advanced Metrics"
+  },
+  {
+    "description":"Kurtosis - tail heaviness of return distribution",
+    "analytical_formula":"Kurtosis = E[(R - \u03bc)\u2074] \/ \u03c3\u2074 - 3",
+    "category":"Advanced Metrics"
+  },
+  {
+    "description":"Value at Risk for portfolio with options (delta-gamma approximation)",
+    "analytical_formula":"VaR_approx = \u0394S + 0.5*\u0393*(\u0394S)\u00b2",
+    "category":"Advanced Metrics"
+  },
+  {
+    "description":"Correlation coefficient between two assets",
+    "analytical_formula":"\u03c1_xy = Cov(x,y) \/ (\u03c3_x * \u03c3_y)",
+    "category":"Correlation"
+  },
+  {
+    "description":"Covariance matrix for portfolio",
+    "analytical_formula":"Cov(R_p) = w^T * \u03a3 * w",
+    "category":"Correlation"
+  },
+  {
+    "description":"Portfolio volatility with correlations",
+    "analytical_formula":"\u03c3_p = \u221a(\u03a3 \u03a3 w_i*w_j*\u03c3_i*\u03c3_j*\u03c1_ij)",
+    "category":"Correlation"
+  },
+  {
+    "description":"Rolling correlation - time-varying correlation",
+    "analytical_formula":"\u03c1_rolling(t) = Cov(R_x[t-n:t], R_y[t-n:t]) \/ (\u03c3_x * \u03c3_y)",
+    "category":"Correlation"
+  },
+  {
+    "description":"Exponentially weighted moving average correlation",
+    "analytical_formula":"\u03c1_EWMA(t) = \u03bb*\u03c1_EWMA(t-1) + (1-\u03bb)*r_x(t)*r_y(t)",
+    "category":"Correlation"
+  }
+]

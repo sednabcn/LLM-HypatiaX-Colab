@@ -389,6 +389,75 @@ class MassiveDeFiFormulaGenerator:
 
         return self.successful_formulas
 
+    def save_results(self, output_dir: str = "hypatiax/data/finance/defi"):
+        """
+        Save results to files.
+
+        Args:
+        output_dir: Directory to save results
+        """
+        os.makedirs(output_dir, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Save all results in one file
+        json_path = os.path.join(output_dir, f"defi_enhanced_all_{timestamp}.json")
+        csv_path = os.path.join(output_dir, f"defi_enhanced_all_{timestamp}.csv")
+
+        self.system.export_results(json_path, format="json")
+
+        try:
+            self.system.export_results(csv_path, format="csv")
+        except Exception as e:
+            print(f"   Warning: Using fallback CSV export... ({e})")
+            self._export_csv_safe(csv_path)
+
+        return json_path, csv_path
+
+    def _export_csv_safe(self, filepath: str):
+        """Safely export to CSV with None handling."""
+        import csv
+
+        results_list = list(self.system.results)
+
+        with open(filepath, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+
+            writer.writerow(
+                [
+                    "Timestamp",
+                    "Expression",
+                    "R2_Score",
+                    "Complexity",
+                    "Validation_Score",
+                    "Valid",
+                    "Interpretation",
+                    "Provider",
+                    "Domain",
+                ]
+            )
+
+            for result in results_list:
+                discovery = result.get("discovery", {})
+                validation = result.get("validation", {})
+                interpretation = result.get("interpretation") or {}
+                metadata = result.get("metadata", {})
+
+                writer.writerow(
+                    [
+                        result.get("timestamp", ""),
+                        discovery.get("expression", ""),
+                        discovery.get("r2_score", 0),
+                        discovery.get("complexity", 0),
+                        validation.get("total_score", 0),
+                        validation.get("valid", False),
+                        interpretation.get("interpretation", "")[:100] if interpretation else "",
+                        metadata.get("llm_provider", ""),
+                        self.system.domain,
+                    ]
+                )
+
+        print(f"   CSV exported safely: {filepath}")
+
     def print_summary(self):
         """Print comprehensive summary."""
         print("\n" + "=" * 70)
@@ -412,6 +481,13 @@ def main():
 
     generator = MassiveDeFiFormulaGenerator(domain="defi", seed=42)
     successful = generator.run_all_variants(n_samples=20)
+
+    # Save results
+    json_path, csv_path = generator.save_results()
+    print(f"\n📁 Results saved:")
+    print(f"   JSON: {json_path}")
+    print(f"   CSV: {csv_path}")
+
     generator.print_summary()
 
     print(f"\n✓ Complete! Generated {successful} formulas with 5,600+ data points")

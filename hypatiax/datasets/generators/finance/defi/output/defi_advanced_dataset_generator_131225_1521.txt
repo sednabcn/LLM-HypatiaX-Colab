@@ -1,0 +1,857 @@
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/datasets/generators/finance/defi/defi_advanced_dataset_generator.py
+
+██████████████████████████████████████████████████████████████████████
+█  DeFi Advanced Formula Discovery - 10 Formulas           █
+█  Features:                                                █
+█    • Realistic market dynamics                            █
+█    • Advanced DeFi concepts (V3, flash loans, etc.)       █
+█    • Leveraged positions and liquidations                 █
+█    • Lending protocol mechanics                           █
+██████████████████████████████████████████████████████████████████████
+2025-12-13 14:58:39,459 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing HybridDiscoverySystem v3.0
+2025-12-13 14:58:39,460 - hypatiax.tools.symbolic.hybrid_system - INFO - Domain: defi | Primary LLM: anthropic | Fallback: True
+2025-12-13 14:58:39,461 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing symbolic engine...
+2025-12-13 14:58:39,461 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing ensemble validator (domain=defi)...
+2025-12-13 14:58:40,237 - hypatiax.tools.symbolic.hybrid_system - INFO - Initializing LLM providers...
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+2025-12-13 14:58:40,363 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Anthropic Claude provider initialized
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2025-12-13 14:58:40,959 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Google Gemini provider initialized
+2025-12-13 14:58:41,098 - hypatiax.tools.symbolic.hybrid_system - INFO - Rich output formatter enabled
+2025-12-13 14:58:41,098 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ HybridDiscoverySystem initialized successfully
+
+######################################################################
+# DeFi Advanced Formula Discovery - 10 Formulas
+# Timestamp: 2025-12-13T14:58:41.098730
+# Samples per formula: 150
+# Noise level: 0.01
+######################################################################
+
+======================================================================
+Processing Formula 1/10
+======================================================================
+
+1. Price Impact (Constant Product AMM)
+
+======================================================================
+WORKFLOW: Price impact percentage in constant product AMM (Uniswap V2 style)
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 150 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+^[[B✅ Found: amount_in*(-amount_in + reserve_in)/(reserve_in*reserve_in) + 0.0029897057
+   R² Score: 0.9999
+   Complexity: 11
+
+[2/3] ✓ Validating expression across 4 layers...
+✓ Overall Score: 89.5/100
+   Layer Scores:
+     ✓ Symbolic: 96.0
+     ✓ Dimensional: 100.0
+     ⚠ Domain: 69.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 8
+
+[3/3] 🤖 Interpreting with real LLM API...
+2025-12-13 15:00:05,565 - hypatiax.tools.symbolic.hybrid_system - INFO - 🤖 Interpreting with ANTHROPIC...
+2025-12-13 15:00:21,139 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-13 15:00:21,189 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Interpretation completed via ANTHROPIC in 15.62s
+✅ Interpretation complete via ANTHROPIC
+   Summary: This expression calculates the marginal price impact or slippage rate for a swap transaction, representing how much the effective exchange rate deteri...
+   Suggested name: AMM Marginal Slippage Rate Formula
+
+======================================================================
+✅ Workflow complete. Result stored (1/100)
+======================================================================
+
+
+
+╭──────────────────────────────────────────────────────── Discovery Report ────────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  Price impact percentage in constant product AMM (Uniswap V2 style)                                                              │
+│  Domain: DEFI                                                                                                                    │
+│  Timestamp: 2025-12-13T15:00:21.189635                                                                                           │
+│  Samples: 150 | Features: 3                                                                                                      │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭──────────────────────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  amount_in*(-amount_in + reserve_in)/(reserve_in*reserve_in) + 0.0029897057                                                      │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+  R² Score     0.9999
+  Complexity   11
+
+
+
+╭────────────────────────────────────────────────────── ✓ Validation Results ──────────────────────────────────────────────────────╮
+│  ✓ Overall Score: 89.5/100                                                                                                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  96.0 │   ✓    │
+│ Dimensional │ 100.0 │   ✓    │
+│ Domain      │  69.0 │   ✗    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+ℹ Warnings:
+  1. Can be simplified to: -amount_in**2/reserve_in**2 + amount_in/reserve_in + 0.0029897057
+  2. Check AMM constant product invariant preservation
+  3. Variable 'reserve' should be positive - add validation
+  4. Variable 'amount' should be positive - add validation
+  5. Variable 'reserve' must be strictly positive (> 0). Add validation: assert reserve > 0
+  ... and 3 more
+
+💡 Recommendations:
+  1. 🟡 REVIEW: Address defi domain warnings
+
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 AI Interpretation                                                                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🔍 Interpretation
+This expression calculates the marginal price impact or slippage rate for a swap transaction, representing how much the effective
+exchange rate deteriorates per unit of input token relative to the spot rate.
+
+⚠ Limitations
+[
+    'Assumes constant product AMM model (x*y=k) and may not apply to other AMM variants like stable swaps or concentrated
+liquidity',
+    'Does not account for multi-hop routing through multiple pools which could reduce overall slippage',
+    'Ignores dynamic factors like MEV bot competition, flash loan arbitrage, or rapid reserve changes',
+    'The constant term may be dataset-specific and not generalizable across different protocols or fee tiers',
+    'Breaks down when amount_in approaches reserve_in (would drain the pool), requiring additional constraints'
+]
+✅ Formula 1 completed
+
+======================================================================
+Processing Formula 2/10
+======================================================================
+
+2. Optimal LP Position Sizing
+
+======================================================================
+WORKFLOW: Optimal LP position size balancing fee income and IL risk
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 150 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: fee_apy**volatility*capital*0.82806605*exp(fee_apy)*risk_tolerance/volatility
+   R² Score: 0.9818
+   Complexity: 14
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 75.7/100
+   Layer Scores:
+     ⚠ Symbolic: 67.0
+     ✓ Dimensional: 85.0
+     ⚠ Domain: 67.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 14
+
+[3/3] ⊗ Interpretation skipped (score 75.7 < 85.0)
+   Top recommendations:
+     • 🟡 VERIFY: Check dimensional analysis warnings
+     • 🟡 IMPROVE: Simplify to: 0.82806605*capital*fee_apy**volatility*risk_tolerance*exp(fee_apy)/volatility
+     • 🟡 REVIEW: Address defi domain warnings
+
+======================================================================
+✅ Workflow complete. Result stored (2/100)
+======================================================================
+
+✅ Formula 2 completed
+
+======================================================================
+Processing Formula 3/10
+======================================================================
+
+3. Time-Weighted Impermanent Loss
+
+======================================================================
+WORKFLOW: Time-weighted impermanent loss with volatility adjustment
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 150 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: -0.07212311*log(days_held*volatility)*log((price_ratio - log(price_ratio))**0.5630204) - 0.0022671511
+   R² Score: 0.8874
+   Complexity: 16
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 70.0/100
+   Layer Scores:
+     ⚠ Symbolic: 61.0
+     ✓ Dimensional: 86.0
+     ⚠ Domain: 53.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 19
+
+[3/3] ⊗ Interpretation skipped (score 70.0 < 85.0)
+   Top recommendations:
+     • 🟡 VERIFY: Check dimensional analysis warnings
+     • 🟡 IMPROVE: Simplify to: -0.040606782241444*log(days_held*volatility)*log(price_ratio - log(price_ratio)) - 0.0022671511
+     • 🟡 REVIEW: Address defi domain warnings
+
+======================================================================
+✅ Workflow complete. Result stored (3/100)
+======================================================================
+
+✅ Formula 3 completed
+
+======================================================================
+Processing Formula 4/10
+======================================================================
+
+4. Liquidation Price - Long Position
+
+======================================================================
+WORKFLOW: Liquidation price for leveraged long position
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 150 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: entry_price + (entry_price*(-1*(-36.907948) - 322.11456/leverage) + entry_price - entry_price/maintenance_margin - 1*326.12994)/326.12994
+   R² Score: 0.9998
+   Complexity: 19
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 76.0/100
+   Layer Scores:
+     ⚠ Symbolic: 65.0
+     ✓ Dimensional: 94.0
+     ⚠ Domain: 61.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 13
+
+[3/3] ⊗ Interpretation skipped (score 76.0 < 85.0)
+   Top recommendations:
+     • 🟡 VERIFY: Check dimensional analysis warnings
+     • 🟡 IMPROVE: Simplify to: 1.11623571880582*entry_price - 0.00306626248421105*entry_price/maintenance_margin - 0.987687790946149*entry_price/leverage - 1.0
+     • 🟡 REVIEW: Address defi domain warnings
+
+======================================================================
+✅ Workflow complete. Result stored (4/100)
+======================================================================
+
+✅ Formula 4 completed
+
+======================================================================
+Processing Formula 5/10
+======================================================================
+
+5. Liquidation Price - Short Position
+
+======================================================================
+WORKFLOW: Liquidation price for leveraged short position
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 150 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: -entry_price*maintenance_margin + entry_price + entry_price/leverage
+   R² Score: 1.0000
+   Complexity: 9
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 77.5/100
+   Layer Scores:
+     ⚠ Symbolic: 67.0
+     ✓ Dimensional: 97.0
+     ⚠ Domain: 61.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 11
+
+[3/3] ⊗ Interpretation skipped (score 77.5 < 85.0)
+   Top recommendations:
+     • 🟡 VERIFY: Check dimensional analysis warnings
+     • 🟡 IMPROVE: Simplify to: -entry_price*maintenance_margin + entry_price + entry_price/leverage
+     • 🟡 REVIEW: Address defi domain warnings
+
+======================================================================
+✅ Workflow complete. Result stored (5/100)
+======================================================================
+
+✅ Formula 5 completed
+
+======================================================================
+Processing Formula 6/10
+======================================================================
+
+6. Flash Loan Arbitrage Profit
+
+======================================================================
+WORKFLOW: Expected profit from flash loan arbitrage
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 150 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: loan_amount*(price_diff - 1*0.0010694494)
+   R² Score: 0.9998
+   Complexity: 5
+
+[2/3] ✓ Validating expression across 4 layers...
+✓ Overall Score: 88.6/100
+   Layer Scores:
+     ✓ Symbolic: 96.0
+     ✓ Dimensional: 100.0
+     ⚠ Domain: 66.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 7
+
+[3/3] 🤖 Interpreting with real LLM API...
+2025-12-13 15:03:06,872 - hypatiax.tools.symbolic.hybrid_system - INFO - 🤖 Interpreting with ANTHROPIC...
+2025-12-13 15:03:18,780 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-13 15:03:18,783 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Interpretation completed via ANTHROPIC in 11.91s
+✅ Interpretation complete via ANTHROPIC
+   Summary: This formula calculates the net profit from a flash loan arbitrage opportunity by multiplying the loan amount by the effective price difference after ...
+   Suggested name: Flash Loan Arbitrage Net Profit Model
+
+======================================================================
+✅ Workflow complete. Result stored (6/100)
+======================================================================
+
+
+
+╭──────────────────────────────────────────────────────── Discovery Report ────────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  Expected profit from flash loan arbitrage                                                                                       │
+│  Domain: DEFI                                                                                                                    │
+│  Timestamp: 2025-12-13T15:03:18.784238                                                                                           │
+│  Samples: 150 | Features: 3                                                                                                      │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭──────────────────────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  loan_amount*(price_diff - 1*0.0010694494)                                                                                       │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+  R² Score     0.9998
+  Complexity   5
+
+
+
+╭────────────────────────────────────────────────────── ✓ Validation Results ──────────────────────────────────────────────────────╮
+│  ✓ Overall Score: 88.6/100                                                                                                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  96.0 │   ✓    │
+│ Dimensional │ 100.0 │   ✓    │
+│ Domain      │  66.0 │   ✗    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+ℹ Warnings:
+  1. Price variables ['price_diff'] must be positive. Add validation: assert all(p > 0 for p in prices)
+  2. Verify price bounds and slippage limits
+  3. Variable 'price' should be positive - add validation
+  4. Variable 'amount' should be positive - add validation
+  5. Variable 'price' must be strictly positive (> 0). Add validation: assert price > 0
+  ... and 2 more
+
+💡 Recommendations:
+  1. 🟡 REVIEW: Address defi domain warnings
+
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 AI Interpretation                                                                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🔍 Interpretation
+This formula calculates the net profit from a flash loan arbitrage opportunity by multiplying the loan amount by the effective price
+difference after accounting for a fixed cost component of approximately 0.107 basis points.
+
+⚠ Limitations
+[
+    'Assumes linear relationship ignores slippage effects at larger trade sizes',
+    'Fixed cost component may vary with market conditions and gas prices',
+    'Does not account for front-running or sandwich attack risks',
+    'Price differences must exceed 0.107 basis points for profitability',
+    'Assumes flash loan is always available and executable at desired size'
+]
+✅ Formula 6 completed
+
+======================================================================
+Processing Formula 7/10
+======================================================================
+
+7. Concentrated Liquidity Range (Uniswap V3)
+
+======================================================================
+WORKFLOW: Optimal concentrated liquidity range width (95% confidence)
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 150 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: 1.95894728210365*current_price*sqrt(days)*volatility
+   R² Score: 0.9998
+   Complexity: 8
+
+[2/3] ✓ Validating expression across 4 layers...
+✗ Overall Score: 69.5/100
+   Layer Scores:
+     ⚠ Symbolic: 67.0
+     ✓ Dimensional: 82.0
+     ⚠ Domain: 66.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 12
+
+[3/3] ⊗ Interpretation skipped (score 69.5 < 85.0)
+   Top recommendations:
+     • 🟡 VERIFY: Check dimensional analysis warnings
+     • 🟡 IMPROVE: Simplify to: 1.95894728210365*current_price*sqrt(days)*volatility
+     • 🟡 REVIEW: Address defi domain warnings
+
+======================================================================
+✅ Workflow complete. Result stored (7/100)
+======================================================================
+
+✅ Formula 7 completed
+
+======================================================================
+Processing Formula 8/10
+======================================================================
+
+8. Lending Protocol Utilization Rate
+
+======================================================================
+WORKFLOW: Lending protocol utilization rate
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 150 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: borrows/supply
+   R² Score: 1.0000
+   Complexity: 3
+
+[2/3] ✓ Validating expression across 4 layers...
+✓ Overall Score: 93.1/100
+   Layer Scores:
+     ✓ Symbolic: 98.0
+     ✓ Dimensional: 97.0
+     ✓ Domain: 82.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 5
+
+[3/3] 🤖 Interpreting with real LLM API...
+2025-12-13 15:04:37,970 - hypatiax.tools.symbolic.hybrid_system - INFO - 🤖 Interpreting with ANTHROPIC...
+2025-12-13 15:04:49,339 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-13 15:04:49,342 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Interpretation completed via ANTHROPIC in 11.37s
+✅ Interpretation complete via ANTHROPIC
+   Summary: This expression calculates the utilization rate of a lending protocol, representing the percentage of supplied assets that are currently borrowed.
+   Suggested name: Utilization Rate
+
+======================================================================
+✅ Workflow complete. Result stored (8/100)
+======================================================================
+
+
+
+╭──────────────────────────────────────────────────────── Discovery Report ────────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  Lending protocol utilization rate                                                                                               │
+│  Domain: DEFI                                                                                                                    │
+│  Timestamp: 2025-12-13T15:04:49.342671                                                                                           │
+│  Samples: 150 | Features: 2                                                                                                      │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭──────────────────────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  borrows/supply                                                                                                                  │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+  R² Score     1.0000
+  Complexity   3
+
+
+
+╭────────────────────────────────────────────────────── ✓ Validation Results ──────────────────────────────────────────────────────╮
+│  ✓ Overall Score: 93.1/100                                                                                                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  98.0 │   ✓    │
+│ Dimensional │  97.0 │   ✓    │
+│ Domain      │  82.0 │   ⚠    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+ℹ Warnings:
+  1. Check AMM constant product invariant preservation
+  2. Division by 'supply' detected - ensure supply ≠ 0
+  3. Variable 'y' should be positive - add validation
+  4. Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0
+  5. Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero
+
+💡 Recommendations:
+  1. 🟡 VERIFY: Check dimensional analysis warnings
+  2. 🟡 REVIEW: Address defi domain warnings
+
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 AI Interpretation                                                                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🔍 Interpretation
+This expression calculates the utilization rate of a lending protocol, representing the percentage of supplied assets that are
+currently borrowed.
+
+⚠ Limitations
+[
+    'Assumes supply value is always greater than zero to avoid division by zero errors',
+    'Does not account for reserved or locked supply that may not be available for borrowing',
+    'Ignores temporal dynamics and only provides a snapshot view of utilization',
+    'May not reflect true liquidity risk if large portions of supply are from whale depositors who could withdraw suddenly'
+]
+✅ Formula 8 completed
+
+======================================================================
+Processing Formula 9/10
+======================================================================
+
+9. Dynamic Borrow Interest Rate
+
+======================================================================
+WORKFLOW: Dynamic borrow APY with kinked rate model
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 150 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: base_rate + utilization**10.028666*0.75439495 - 1*(-0.020704336)
+   R² Score: 0.9829
+   Complexity: 9
+
+[2/3] ✓ Validating expression across 4 layers...
+✓ Overall Score: 88.9/100
+   Layer Scores:
+     ✓ Symbolic: 71.0
+     ✓ Dimensional: 100.0
+     ✓ Domain: 92.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 3
+
+[3/3] 🤖 Interpreting with real LLM API...
+2025-12-13 15:05:26,077 - hypatiax.tools.symbolic.hybrid_system - INFO - 🤖 Interpreting with ANTHROPIC...
+2025-12-13 15:05:38,855 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-13 15:05:38,859 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Interpretation completed via ANTHROPIC in 12.78s
+✅ Interpretation complete via ANTHROPIC
+   Summary: This calculates a dynamic interest rate for DeFi lending protocols that combines a base rate with an exponentially aggressive utilization penalty and ...
+   Suggested name: Exponential Utilization Penalty Rate Model
+
+======================================================================
+✅ Workflow complete. Result stored (9/100)
+======================================================================
+
+
+
+╭──────────────────────────────────────────────────────── Discovery Report ────────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  Dynamic borrow APY with kinked rate model                                                                                       │
+│  Domain: DEFI                                                                                                                    │
+│  Timestamp: 2025-12-13T15:05:38.859751                                                                                           │
+│  Samples: 150 | Features: 2                                                                                                      │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭──────────────────────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  base_rate + utilization**10.028666*0.75439495 - 1*(-0.020704336)                                                                │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+  R² Score     0.9829
+  Complexity   9
+
+
+
+╭────────────────────────────────────────────────────── ✓ Validation Results ──────────────────────────────────────────────────────╮
+│  ✓ Overall Score: 88.9/100                                                                                                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  71.0 │   ⚠    │
+│ Dimensional │ 100.0 │   ✓    │
+│ Domain      │  92.0 │   ✓    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+ℹ Warnings:
+  1. Check AMM constant product invariant preservation
+  2. Power overflow risk: (utilization)^(10.0286660000000). Verify bounds on base and exponent
+  3. Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0
+
+💡 Recommendations:
+  1. 🟡 IMPROVE: Simplify to: base_rate + 0.75439495*utilization**10.028666 + 0.020704336
+  2. 🟡 REVIEW: Address defi domain warnings
+
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 AI Interpretation                                                                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🔍 Interpretation
+This calculates a dynamic interest rate for DeFi lending protocols that combines a base rate with an exponentially aggressive
+utilization penalty and a small constant adjustment factor.
+
+⚠ Limitations
+[
+    'Extremely high sensitivity to utilization changes above 80-90% could cause rate volatility',
+    'May create cliff effects where small utilization increases cause dramatic rate jumps',
+    'Assumes borrowers are rational actors who will respond to exponential rate increases',
+    'The model may break down during market stress when utilization naturally spikes regardless of rates',
+    'Requires careful calibration of base_rate to prevent negative rates at zero utilization'
+]
+✅ Formula 9 completed
+
+======================================================================
+Processing Formula 10/10
+======================================================================
+
+10. Lending Protocol Health Factor
+
+======================================================================
+WORKFLOW: Health factor for lending positions (>1 = safe, <1 = liquidatable)
+Domain: DEFI | Primary LLM: ANTHROPIC
+Fallback: Enabled
+======================================================================
+
+[1/3] 🔍 Discovering symbolic expression from 150 samples...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:2858: UserWarning: The `multithreading: bool` parameter has been deprecated in favor of `parallelism: Literal['multithreading', 'serial', 'multiprocessing']`.
+Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
+  warnings.warn(
+✅ Found: collateral*liq_threshold/borrowed
+   R² Score: 1.0000
+   Complexity: 5
+
+[2/3] ✓ Validating expression across 4 layers...
+✓ Overall Score: 93.1/100
+   Layer Scores:
+     ✓ Symbolic: 98.0
+     ✓ Dimensional: 92.0
+     ✓ Domain: 87.0
+     ✓ Numerical: 100.0
+
+   ℹ Warnings: 5
+
+[3/3] 🤖 Interpreting with real LLM API...
+2025-12-13 15:06:07,285 - hypatiax.tools.symbolic.hybrid_system - INFO - 🤖 Interpreting with ANTHROPIC...
+2025-12-13 15:06:19,370 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-13 15:06:19,373 - hypatiax.tools.symbolic.hybrid_system - INFO - ✅ Interpretation completed via ANTHROPIC in 12.09s
+✅ Interpretation complete via ANTHROPIC
+   Summary: This expression calculates the health factor or collateralization ratio adjusted for liquidation threshold, measuring how well-collateralized a lendin...
+   Suggested name: Collateral Health Factor
+
+======================================================================
+✅ Workflow complete. Result stored (10/100)
+======================================================================
+
+
+
+╭──────────────────────────────────────────────────────── Discovery Report ────────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  Health factor for lending positions (>1 = safe, <1 = liquidatable)                                                              │
+│  Domain: DEFI                                                                                                                    │
+│  Timestamp: 2025-12-13T15:06:19.374560                                                                                           │
+│  Samples: 150 | Features: 3                                                                                                      │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+╭──────────────────────────────────────────────────── 🔍 Discovered Expression ────────────────────────────────────────────────────╮
+│                                                                                                                                  │
+│  collateral*liq_threshold/borrowed                                                                                               │
+│                                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+  R² Score     1.0000
+  Complexity   5
+
+
+
+╭────────────────────────────────────────────────────── ✓ Validation Results ──────────────────────────────────────────────────────╮
+│  ✓ Overall Score: 93.1/100                                                                                                       │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Layer Scores:
+╭─────────────┬───────┬────────╮
+│ Layer       │ Score │ Status │
+├─────────────┼───────┼────────┤
+│ Symbolic    │  98.0 │   ✓    │
+│ Dimensional │  92.0 │   ✓    │
+│ Domain      │  87.0 │   ⚠    │
+│ Numerical   │ 100.0 │   ✓    │
+╰─────────────┴───────┴────────╯
+
+ℹ Warnings:
+  1. Check AMM constant product invariant preservation
+  2. Multiplication of variables detected - verify dimensional consistency
+  3. Division by 'borrowed' detected - ensure borrowed ≠ 0
+  4. Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0
+  5. Division detected without epsilon protection. Consider adding: (denominator + ε) to prevent division by zero
+
+💡 Recommendations:
+  1. 🟡 VERIFY: Check dimensional analysis warnings
+  2. 🟡 REVIEW: Address defi domain warnings
+
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🤖 AI Interpretation                                                                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+🔍 Interpretation
+This expression calculates the health factor or collateralization ratio adjusted for liquidation threshold, measuring how
+well-collateralized a lending position is relative to its liquidation risk.
+
+⚠ Limitations
+[
+    'Assumes accurate real-time price feeds for collateral valuation, vulnerable to oracle manipulation',
+    'Does not account for slippage costs during liquidation events in illiquid markets',
+    'Liquidation thresholds are static parameters that may not reflect rapidly changing market conditions',
+    'Fails when borrowed amount approaches zero, creating undefined or misleading ratios',
+    'Does not consider gas costs or network congestion that could delay liquidation execution'
+]
+✅ Formula 10 completed
+2025-12-13 15:06:19,566 - hypatiax.tools.symbolic.hybrid_system - INFO - Exported 10 results to hypatiax/data/finance/defi/defi_advanced_20251213_150619.json
+✅ Exported 10 results to hypatiax/data/finance/defi/defi_advanced_20251213_150619.json
+2025-12-13 15:06:19,567 - hypatiax.tools.symbolic.hybrid_system - INFO - Exported 10 results to hypatiax/data/finance/defi/defi_advanced_summary_20251213_150619.csv
+✅ Exported 10 results to hypatiax/data/finance/defi/defi_advanced_summary_20251213_150619.csv
+
+======================================================================
+FINAL SUMMARY - ADVANCED DEFI FORMULAS
+======================================================================
+
+Total formulas: 10
+Valid formulas: 5
+Invalid formulas: 5
+Success rate: 50.0%
+Average R² score: 0.9851
+Average validation score: 82.2/100
+
+----------------------------------------------------------------------
+Individual Formula Results:
+----------------------------------------------------------------------
+
+1. Price impact percentage in constant product AMM (Uniswap V2 style)
+   ✅ R²: 0.9999 | Validation: 89.5/100
+   Expression: amount_in*(-amount_in + reserve_in)/(reserve_in*reserve_in) ...
+
+2. Optimal LP position size balancing fee income and IL risk
+   ❌ R²: 0.9818 | Validation: 75.7/100
+   Expression: fee_apy**volatility*capital*0.82806605*exp(fee_apy)*risk_tol...
+
+3. Time-weighted impermanent loss with volatility adjustment
+   ❌ R²: 0.8874 | Validation: 70.0/100
+   Expression: -0.07212311*log(days_held*volatility)*log((price_ratio - log...
+
+4. Liquidation price for leveraged long position
+   ❌ R²: 0.9998 | Validation: 76.0/100
+   Expression: entry_price + (entry_price*(-1*(-36.907948) - 322.11456/leve...
+
+5. Liquidation price for leveraged short position
+   ❌ R²: 1.0000 | Validation: 77.5/100
+   Expression: -entry_price*maintenance_margin + entry_price + entry_price/...
+
+6. Expected profit from flash loan arbitrage
+   ✅ R²: 0.9998 | Validation: 88.6/100
+   Expression: loan_amount*(price_diff - 1*0.0010694494)...
+
+7. Optimal concentrated liquidity range width (95% confidence)
+   ❌ R²: 0.9998 | Validation: 69.5/100
+   Expression: 1.95894728210365*current_price*sqrt(days)*volatility...
+
+8. Lending protocol utilization rate
+   ✅ R²: 1.0000 | Validation: 93.1/100
+   Expression: borrows/supply...
+
+9. Dynamic borrow APY with kinked rate model
+   ✅ R²: 0.9829 | Validation: 88.9/100
+   Expression: base_rate + utilization**10.028666*0.75439495 - 1*(-0.020704...
+
+10. Health factor for lending positions (>1 = safe, <1 = liquidatable)
+   ✅ R²: 1.0000 | Validation: 93.1/100
+   Expression: collateral*liq_threshold/borrowed...
+
+======================================================================
+
+✅ Results saved to:
+  JSON: hypatiax/data/finance/defi/defi_advanced_20251213_150619.json
+  CSV:  hypatiax/data/finance/defi/defi_advanced_summary_20251213_150619.csv
+
+======================================================================
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$

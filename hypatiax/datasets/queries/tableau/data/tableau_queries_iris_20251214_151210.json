@@ -1,0 +1,597 @@
+[
+  {
+    "description":"Calculate average sepal length across all iris samples",
+    "analytical_formula":"AVG([sepal_length])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Calculate average sepal width across all iris samples",
+    "analytical_formula":"AVG([sepal_width])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Calculate average petal length across all iris samples",
+    "analytical_formula":"AVG([petal_length])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Calculate average petal width across all iris samples",
+    "analytical_formula":"AVG([petal_width])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Calculate total sum of sepal length measurements",
+    "analytical_formula":"SUM([sepal_length])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Calculate total sum of sepal width measurements",
+    "analytical_formula":"SUM([sepal_width])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Calculate total sum of petal length measurements",
+    "analytical_formula":"SUM([petal_length])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Calculate total sum of petal width measurements",
+    "analytical_formula":"SUM([petal_width])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Count total number of iris samples",
+    "analytical_formula":"COUNT([species])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Count distinct iris species",
+    "analytical_formula":"COUNTD([species])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Find maximum sepal length measurement",
+    "analytical_formula":"MAX([sepal_length])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Find minimum sepal length measurement",
+    "analytical_formula":"MIN([sepal_length])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Find maximum petal length measurement",
+    "analytical_formula":"MAX([petal_length])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Find minimum petal length measurement",
+    "analytical_formula":"MIN([petal_length])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Calculate median sepal width",
+    "analytical_formula":"MEDIAN([sepal_width])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Calculate median petal width",
+    "analytical_formula":"MEDIAN([petal_width])",
+    "category":"Basic Aggregations"
+  },
+  {
+    "description":"Average sepal length by species",
+    "analytical_formula":"{FIXED [species]: AVG([sepal_length])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Average sepal width by species",
+    "analytical_formula":"{FIXED [species]: AVG([sepal_width])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Average petal length by species",
+    "analytical_formula":"{FIXED [species]: AVG([petal_length])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Average petal width by species",
+    "analytical_formula":"{FIXED [species]: AVG([petal_width])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Count samples per species",
+    "analytical_formula":"{FIXED [species]: COUNT()}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Total sepal length per species",
+    "analytical_formula":"{FIXED [species]: SUM([sepal_length])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Total petal length per species",
+    "analytical_formula":"{FIXED [species]: SUM([petal_length])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Maximum sepal width per species",
+    "analytical_formula":"{FIXED [species]: MAX([sepal_width])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Minimum sepal width per species",
+    "analytical_formula":"{FIXED [species]: MIN([sepal_width])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Maximum petal width per species",
+    "analytical_formula":"{FIXED [species]: MAX([petal_width])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Minimum petal width per species",
+    "analytical_formula":"{FIXED [species]: MIN([petal_width])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Standard deviation of sepal length by species",
+    "analytical_formula":"{FIXED [species]: STDEV([sepal_length])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Standard deviation of petal length by species",
+    "analytical_formula":"{FIXED [species]: STDEV([petal_length])}",
+    "category":"Species Grouping"
+  },
+  {
+    "description":"Calculate sepal length to width ratio",
+    "analytical_formula":"[sepal_length] \/ [sepal_width]",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Calculate petal length to width ratio",
+    "analytical_formula":"[petal_length] \/ [petal_width]",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Calculate sepal to petal length ratio",
+    "analytical_formula":"[sepal_length] \/ [petal_length]",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Calculate sepal to petal width ratio",
+    "analytical_formula":"[sepal_width] \/ [petal_width]",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Estimate sepal area (length \u00d7 width)",
+    "analytical_formula":"[sepal_length] * [sepal_width]",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Estimate petal area (length \u00d7 width)",
+    "analytical_formula":"[petal_length] * [petal_width]",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Calculate total flower area estimate",
+    "analytical_formula":"([sepal_length] * [sepal_width]) + ([petal_length] * [petal_width])",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Estimate sepal perimeter",
+    "analytical_formula":"2 * ([sepal_length] + [sepal_width])",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Estimate petal perimeter",
+    "analytical_formula":"2 * ([petal_length] + [petal_width])",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Calculate total sepal dimensions",
+    "analytical_formula":"[sepal_length] + [sepal_width]",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Calculate total petal dimensions",
+    "analytical_formula":"[petal_length] + [petal_width]",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Calculate total flower measurements",
+    "analytical_formula":"[sepal_length] + [sepal_width] + [petal_length] + [petal_width]",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Calculate sepal length-width difference",
+    "analytical_formula":"[sepal_length] - [sepal_width]",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Calculate petal length-width difference",
+    "analytical_formula":"[petal_length] - [petal_width]",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Calculate sepal length squared",
+    "analytical_formula":"SQUARE([sepal_length])",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Calculate petal length squared",
+    "analytical_formula":"SQUARE([petal_length])",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Normalize sepal width by maximum",
+    "analytical_formula":"[sepal_width] \/ {FIXED : MAX([sepal_width])}",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Normalize petal width by maximum",
+    "analytical_formula":"[petal_width] \/ {FIXED : MAX([petal_width])}",
+    "category":"Calculated Fields"
+  },
+  {
+    "description":"Classify as Setosa or Other",
+    "analytical_formula":"IF [species] = 'setosa' THEN 'Setosa' ELSE 'Other' END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Classify as Versicolor or Not",
+    "analytical_formula":"IF [species] = 'versicolor' THEN 'Versicolor' ELSE 'Not Versicolor' END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Classify as Virginica or Not",
+    "analytical_formula":"IF [species] = 'virginica' THEN 'Virginica' ELSE 'Not Virginica' END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Classify sepal length as Large or Small (threshold 5.8)",
+    "analytical_formula":"IF [sepal_length] > 5.8 THEN 'Large' ELSE 'Small' END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Classify petal length as Large or Small (threshold 4.0)",
+    "analytical_formula":"IF [petal_length] > 4.0 THEN 'Large' ELSE 'Small' END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Classify sepal width as Wide or Narrow (threshold 3.0)",
+    "analytical_formula":"IF [sepal_width] > 3.0 THEN 'Wide' ELSE 'Narrow' END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Classify petal width as Wide or Narrow (threshold 1.3)",
+    "analytical_formula":"IF [petal_width] > 1.3 THEN 'Wide' ELSE 'Narrow' END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Classify sepal length into Small\/Medium\/Large categories",
+    "analytical_formula":"IF [sepal_length] < 5.5 THEN 'Small' ELSEIF [sepal_length] < 6.5 THEN 'Medium' ELSE 'Large' END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Classify petal length into Small\/Medium\/Large categories",
+    "analytical_formula":"IF [petal_length] < 3.0 THEN 'Small' ELSEIF [petal_length] < 5.0 THEN 'Medium' ELSE 'Large' END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Classify as elongated sepal (length\/width > 2.5)",
+    "analytical_formula":"IF [sepal_length] \/ [sepal_width] > 2.5 THEN 'Elongated' ELSE 'Rounded' END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Classify as elongated petal (length\/width > 3.0)",
+    "analytical_formula":"IF [petal_length] \/ [petal_width] > 3.0 THEN 'Elongated' ELSE 'Rounded' END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Map species to numeric code (Setosa=1, Versicolor=2, Virginica=3)",
+    "analytical_formula":"CASE [species] WHEN 'setosa' THEN 1 WHEN 'versicolor' THEN 2 WHEN 'virginica' THEN 3 END",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Flag if sepal length is above average",
+    "analytical_formula":"[sepal_length] > {FIXED : AVG([sepal_length])}",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Flag if sepal width is above average",
+    "analytical_formula":"[sepal_width] > {FIXED : AVG([sepal_width])}",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Flag if petal length is above average",
+    "analytical_formula":"[petal_length] > {FIXED : AVG([petal_length])}",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Flag if petal width is above average",
+    "analytical_formula":"[petal_width] > {FIXED : AVG([petal_width])}",
+    "category":"Conditional Logic"
+  },
+  {
+    "description":"Calculate standard deviation of sepal length",
+    "analytical_formula":"STDEV([sepal_length])",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate standard deviation of sepal width",
+    "analytical_formula":"STDEV([sepal_width])",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate standard deviation of petal length",
+    "analytical_formula":"STDEV([petal_length])",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate standard deviation of petal width",
+    "analytical_formula":"STDEV([petal_width])",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate variance of sepal length",
+    "analytical_formula":"VAR([sepal_length])",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate variance of sepal width",
+    "analytical_formula":"VAR([sepal_width])",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate variance of petal length",
+    "analytical_formula":"VAR([petal_length])",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate variance of petal width",
+    "analytical_formula":"VAR([petal_width])",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate coefficient of variation for sepal length",
+    "analytical_formula":"STDEV([sepal_length]) \/ AVG([sepal_length])",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate coefficient of variation for petal length",
+    "analytical_formula":"STDEV([petal_length]) \/ AVG([petal_length])",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate z-score for sepal width",
+    "analytical_formula":"([sepal_width] - {FIXED : AVG([sepal_width])}) \/ {FIXED : STDEV([sepal_width])}",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate z-score for petal width",
+    "analytical_formula":"([petal_width] - {FIXED : AVG([petal_width])}) \/ {FIXED : STDEV([petal_width])}",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate 75th percentile of sepal length",
+    "analytical_formula":"PERCENTILE([sepal_length], 0.75)",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate 25th percentile of sepal length",
+    "analytical_formula":"PERCENTILE([sepal_length], 0.25)",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate 75th percentile of petal length",
+    "analytical_formula":"PERCENTILE([petal_length], 0.75)",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate 25th percentile of petal length",
+    "analytical_formula":"PERCENTILE([petal_length], 0.25)",
+    "category":"Statistical Measures"
+  },
+  {
+    "description":"Calculate running sum of sepal length",
+    "analytical_formula":"RUNNING_SUM(SUM([sepal_length]))",
+    "category":"Window Functions"
+  },
+  {
+    "description":"Calculate running sum of petal length",
+    "analytical_formula":"RUNNING_SUM(SUM([petal_length]))",
+    "category":"Window Functions"
+  },
+  {
+    "description":"Calculate running average of sepal width",
+    "analytical_formula":"RUNNING_AVG(AVG([sepal_width]))",
+    "category":"Window Functions"
+  },
+  {
+    "description":"Calculate running average of petal width",
+    "analytical_formula":"RUNNING_AVG(AVG([petal_width]))",
+    "category":"Window Functions"
+  },
+  {
+    "description":"Rank samples by sepal length",
+    "analytical_formula":"RANK(SUM([sepal_length]))",
+    "category":"Window Functions"
+  },
+  {
+    "description":"Rank samples by petal length",
+    "analytical_formula":"RANK(SUM([petal_length]))",
+    "category":"Window Functions"
+  },
+  {
+    "description":"Dense rank by sepal width",
+    "analytical_formula":"RANK_DENSE(SUM([sepal_width]))",
+    "category":"Window Functions"
+  },
+  {
+    "description":"Dense rank by petal width",
+    "analytical_formula":"RANK_DENSE(SUM([petal_width]))",
+    "category":"Window Functions"
+  },
+  {
+    "description":"Calculate sum of sepal length within species",
+    "analytical_formula":"WINDOW_SUM(SUM([sepal_length]))",
+    "category":"Window Functions"
+  },
+  {
+    "description":"Calculate average petal length within species",
+    "analytical_formula":"WINDOW_AVG(AVG([petal_length]))",
+    "category":"Window Functions"
+  },
+  {
+    "description":"Assign row number within each species",
+    "analytical_formula":"INDEX()",
+    "category":"Window Functions"
+  },
+  {
+    "description":"Calculate deviation from mean sepal length",
+    "analytical_formula":"[sepal_length] - {FIXED : AVG([sepal_length])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate deviation from mean sepal width",
+    "analytical_formula":"[sepal_width] - {FIXED : AVG([sepal_width])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate deviation from mean petal length",
+    "analytical_formula":"[petal_length] - {FIXED : AVG([petal_length])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate deviation from mean petal width",
+    "analytical_formula":"[petal_width] - {FIXED : AVG([petal_width])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate sepal length as percentage of maximum",
+    "analytical_formula":"[sepal_length] \/ {FIXED : MAX([sepal_length])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate sepal width as percentage of maximum",
+    "analytical_formula":"[sepal_width] \/ {FIXED : MAX([sepal_width])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate petal length as percentage of maximum",
+    "analytical_formula":"[petal_length] \/ {FIXED : MAX([petal_length])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate petal width as percentage of maximum",
+    "analytical_formula":"[petal_width] \/ {FIXED : MAX([petal_width])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate difference from species average sepal length",
+    "analytical_formula":"[sepal_length] - {FIXED [species]: AVG([sepal_length])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate difference from species average petal length",
+    "analytical_formula":"[petal_length] - {FIXED [species]: AVG([petal_length])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate percentage above average sepal width",
+    "analytical_formula":"([sepal_width] - {FIXED : AVG([sepal_width])}) \/ {FIXED : AVG([sepal_width])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate percentage above average petal width",
+    "analytical_formula":"([petal_width] - {FIXED : AVG([petal_width])}) \/ {FIXED : AVG([petal_width])}",
+    "category":"Comparisons"
+  },
+  {
+    "description":"Calculate sepal length * sepal width product for correlation",
+    "analytical_formula":"[sepal_length] * [sepal_width]",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate petal length * petal width product for correlation",
+    "analytical_formula":"[petal_length] * [petal_width]",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate Euclidean distance in sepal dimensions from origin",
+    "analytical_formula":"SQRT(SQUARE([sepal_length]) + SQUARE([sepal_width]))",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate Euclidean distance in petal dimensions from origin",
+    "analytical_formula":"SQRT(SQUARE([petal_length]) + SQUARE([petal_width]))",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate Manhattan distance in all dimensions from origin",
+    "analytical_formula":"ABS([sepal_length]) + ABS([sepal_width]) + ABS([petal_length]) + ABS([petal_width])",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate weighted average (sepal 60%, petal 40%) of lengths",
+    "analytical_formula":"0.6 * [sepal_length] + 0.4 * [petal_length]",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate weighted average (sepal 60%, petal 40%) of widths",
+    "analytical_formula":"0.6 * [sepal_width] + 0.4 * [petal_width]",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate interquartile range for sepal length",
+    "analytical_formula":"PERCENTILE([sepal_length], 0.75) - PERCENTILE([sepal_length], 0.25)",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate interquartile range for petal length",
+    "analytical_formula":"PERCENTILE([petal_length], 0.75) - PERCENTILE([petal_length], 0.25)",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Flag potential outliers in sepal length (IQR method)",
+    "analytical_formula":"[sepal_length] > {FIXED : PERCENTILE([sepal_length], 0.75)} + 1.5 * ({FIXED : PERCENTILE([sepal_length], 0.75)} - {FIXED : PERCENTILE([sepal_length], 0.25)})",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Flag potential outliers in petal length (IQR method)",
+    "analytical_formula":"[petal_length] > {FIXED : PERCENTILE([petal_length], 0.75)} + 1.5 * ({FIXED : PERCENTILE([petal_length], 0.75)} - {FIXED : PERCENTILE([petal_length], 0.25)})",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate sepal length contribution to total measurements",
+    "analytical_formula":"[sepal_length] \/ ([sepal_length] + [sepal_width] + [petal_length] + [petal_width])",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate petal length contribution to total measurements",
+    "analytical_formula":"[petal_length] \/ ([sepal_length] + [sepal_width] + [petal_length] + [petal_width])",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate percent difference from previous sepal length",
+    "analytical_formula":"([sepal_length] - LOOKUP(SUM([sepal_length]), -1)) \/ LOOKUP(SUM([sepal_length]), -1)",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate percent difference from previous petal length",
+    "analytical_formula":"([petal_length] - LOOKUP(SUM([petal_length]), -1)) \/ LOOKUP(SUM([petal_length]), -1)",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate 3-point moving average for sepal width",
+    "analytical_formula":"WINDOW_AVG(SUM([sepal_width]), -1, 1)",
+    "category":"Advanced Analytics"
+  },
+  {
+    "description":"Calculate 3-point moving average for petal width",
+    "analytical_formula":"WINDOW_AVG(SUM([petal_width]), -1, 1)",
+    "category":"Advanced Analytics"
+  }
+]

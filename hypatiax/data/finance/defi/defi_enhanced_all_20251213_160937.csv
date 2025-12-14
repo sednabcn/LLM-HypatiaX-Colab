@@ -1,0 +1,16 @@
+Timestamp,Expression,R² Score,Complexity,Validation Score,Valid,Interpretation,Provider,Domain
+2025-12-13T16:00:12.193309,0.0030454393 + 0.5468244*(sqrt(amount_in) - 1.07192841915726*amount_in**2/reserve_in + 1.7483634*amount_in)/reserve_in,0.9998160229770235,22,78.8,False,,,defi
+2025-12-13T16:00:57.972827,(capital*fee_apy**volatility*risk_tolerance*(fee_apy*0.30138233)**volatility + 650.72534)*7.463294,0.9872272761248287,17,78.69999999999999,False,,,defi
+2025-12-13T16:01:27.179411,0.048918407*(2.2765126 - 2*price_ratio)*log(price_ratio) - 0.0037863091610035 + 0.0543169641270688/days_held,0.8540130885891875,16,62.900000000000006,False,,,defi
+2025-12-13T16:01:57.837555,entry_price*maintenance_margin - (-entry_price + entry_price/leverage),0.9999999547972642,9,76.0,False,,,defi
+2025-12-13T16:02:31.403376,entry_price*(exp(-maintenance_margin/leverage + 0.32608792/leverage) - 0.7382282)/0.27805847 - 1*(-0.28737324),0.9993956562323622,16,73.89999999999999,False,,,defi
+2025-12-13T16:03:15.715586,loan_amount*(price_diff - 1*0.0010693953),0.9997915984725059,5,88.6,True,This formula calculates the net profit from a flash loan arbitrage trade by multiplying the loan amo,anthropic,defi
+2025-12-13T16:03:45.421263,1.9589192951322*current_price*sqrt(days)*volatility,0.9998314495963924,8,69.5,False,,,defi
+2025-12-13T16:04:34.782491,borrows/supply,0.999989574300726,3,93.1,True,"This expression calculates the utilization rate, representing the percentage of available funds that",anthropic,defi
+2025-12-13T16:05:25.242710,base_rate + log(utilization**11.255414 + 1.0236841),0.9842897821521284,8,87.39999999999999,True,This calculates a dynamic interest rate that starts from a base rate and increases exponentially wit,anthropic,defi
+2025-12-13T16:06:04.747670,collateral*liq_threshold/borrowed,0.9999999919505472,5,93.1,True,This expression calculates the health factor or safety margin of a leveraged position by determining,anthropic,defi
+2025-12-13T16:06:44.000917,2.2239048*((volume_24h**1.5900395)**(-0.4565813) + 0.0002707394)*log(sqrt(liquidity)) - 0.004090244,0.6920668023610321,15,82.3,False,,,defi
+2025-12-13T16:07:25.609504,liquidity*2.9176367e-10 + (volatility + 0.0075895614)*0.011314256 + (volatility - volume_24h)*1.4934871e-9,0.7609207442003565,15,89.8,True,"This expression calculates a risk-adjusted yield or fee rate for DeFi liquidity pools, incorporating",anthropic,defi
+2025-12-13T16:08:05.584264,volatility**0.00046573224 - 1*0.9956323,0.03546623849456654,5,98.5,True,This expression calculates a volatility-adjusted risk offset metric that produces small negative val,anthropic,defi
+2025-12-13T16:08:48.793316,competitor_fee*0.80953753,0.9389114280631269,3,96.1,True,This formula calculates a competitive fee rate by applying an approximately 19% discount to a compet,anthropic,defi
+2025-12-13T16:09:37.902585,0.0067794616*sqrt(volatility),0.46269062798050276,4,94.6,True,This expression calculates a volatility-adjusted risk premium or fee rate that scales proportionally,anthropic,defi

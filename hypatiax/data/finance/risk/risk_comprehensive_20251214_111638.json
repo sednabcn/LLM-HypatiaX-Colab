@@ -1,0 +1,1500 @@
+{
+  "metadata": {
+    "domain": "risk",
+    "primary_llm": "anthropic",
+    "export_timestamp": "2025-12-14T11:16:38.890262",
+    "total_results": 8
+  },
+  "statistics": {
+    "total_runs": 8,
+    "valid_count": 7,
+    "invalid_count": 1,
+    "success_rate": 0.875,
+    "average_r2": 0.8749509674748057,
+    "average_validation_score": 98.1875,
+    "domain": "risk",
+    "max_results_capacity": 100,
+    "discoveries": 8,
+    "validations": 8,
+    "interpretations": 8,
+    "llm_usage": {
+      "anthropic": {
+        "calls": 8,
+        "successes": 8,
+        "failures": 0,
+        "success_rate_percent": 100.0,
+        "available": true,
+        "provider_stats": {
+          "total_requests": 8,
+          "successful_requests": 0,
+          "failed_requests": 0,
+          "total_tokens_input": 3962,
+          "total_tokens_output": 3813,
+          "retry_count": 0,
+          "total_tokens": 7775,
+          "success_rate_percent": 0.0,
+          "avg_tokens_per_request": 971.875
+        }
+      },
+      "google": {
+        "calls": 0,
+        "successes": 0,
+        "failures": 0,
+        "success_rate_percent": 0.0,
+        "available": true,
+        "provider_stats": {
+          "total_requests": 0,
+          "successful_requests": 0,
+          "failed_requests": 0,
+          "blocked_by_safety": 0,
+          "token_limit_hits": 0,
+          "retry_count": 0,
+          "success_rate_percent": 0,
+          "model": "models/gemini-2.5-flash"
+        }
+      },
+      "total_interpretations": 8,
+      "fallback_count": 0,
+      "total_retries": 0,
+      "primary_provider": "anthropic",
+      "fallback_enabled": true
+    },
+    "validation_stats": {
+      "total_validations": 8,
+      "success_rate": 0.875,
+      "average_total_score": 98.1875,
+      "average_layer_scores": {
+        "symbolic": 97.625,
+        "dimensional": 97.375,
+        "domain": 99.375,
+        "numerical": 98.75
+      },
+      "valid_count": 7,
+      "invalid_count": 1,
+      "domain": "risk",
+      "threshold_used": 85.0
+    }
+  },
+  "results": [
+    {
+      "timestamp": "2025-12-14T11:12:02.257061",
+      "description": "Value at Risk at 95% confidence level",
+      "domain": "risk",
+      "discovery": {
+        "expression": "mu - 1.960121*sigma*sqrt(t)",
+        "sympy_expr": "mu - 1.960121*sigma*sqrt(t)",
+        "r2_score": 0.9999917770951466,
+        "complexity": "8",
+        "variable_names": [
+          "mu",
+          "sigma",
+          "t"
+        ],
+        "predictions": "[ -3.45081888  -2.46019763  -2.63682393 -12.80806286  -5.76885836\n  -1.65552036  -1.94824792  -1.20130664  -1.49784504  -1.09585716\n  -5.33780041 -10.81816163 -10.31042543  -3.60828121  -9.22841837\n  -3.3285832   -3.34937003  -6.88092913  -8.73592028 -11.69847759\n  -9.52868045  -8.52320742  -0.90989797  -4.73232079  -1.29056257\n  -3.59558742 -10.1621787   -6.62492711  -8.30319255  -3.69721921\n  -4.80151392  -7.56138206  -7.66769487  -2.59752776  -1.12922871\n  -9.67817292  -1.54096716  -1.79541706  -8.83914151  -1.16653027\n  -4.44904609 -14.78952535  -8.90922846  -3.98909252  -1.63379069\n -14.10113604  -7.52055148 -13.07714097  -9.22443264  -4.03880043\n  -4.86658393  -5.10635512  -8.66437383  -5.58333518  -1.28133896\n  -6.44700501  -1.89034114  -7.80541882  -2.42592764  -1.03866318\n  -3.53992162 -12.46888269  -2.93287787  -6.752003   -13.6074519\n  -7.29167447  -6.14308328 -10.51992849  -3.2186419   -5.41524335\n  -1.54102539 -12.75450133  -3.06663152 -13.43940989  -6.26587293\n  -8.4657601   -3.45144536  -8.02502578 -11.21984719  -9.27197961\n -11.01819177  -5.19403247  -4.62270221  -2.36174668  -7.41144468\n  -1.97378923  -1.70938528  -4.81735524  -5.30694911  -9.25801385\n  -1.41175271  -1.56066465  -6.83098575  -2.84637569  -2.18339217\n  -5.26730537  -9.40808881  -1.29913706 -10.23936323  -2.80491942\n  -1.99839851  -6.53888434  -5.12102904  -9.43230666  -9.5822892\n  -6.23759428  -8.38377749  -5.42574549 -12.41161154  -4.64012105\n  -6.06764869  -1.78104464  -1.71321431 -13.89419378  -2.87739649\n  -1.84702592  -4.3817484   -3.64031023  -3.59930318  -1.94938582\n  -7.03472862  -7.03441152 -10.6574513   -5.09904407 -13.71452779\n  -8.15014658  -5.91364297  -5.20486878  -1.92032552  -4.64613516\n  -5.89504301 -12.21005786  -1.82442584  -2.39012191  -1.79458761\n  -2.08597832 -12.4499273   -5.63233476  -5.52326096  -0.92248407\n  -8.10349482  -6.41821618  -1.8919675   -6.2847344   -5.64585649\n  -6.20422044  -3.52269229  -1.77089168  -5.00195569  -9.10432534\n  -6.08737851 -12.55155309  -8.08439039  -2.85602424  -2.23611349\n  -6.76118751  -0.64639644  -1.67242758 -12.84122806  -7.4988534\n  -5.87907386  -4.85226395  -2.92244642  -1.21528097  -8.83608768\n  -5.24584409  -9.45219785  -9.49112058  -4.17685089  -1.44907108\n  -2.06166407  -1.69985344  -1.78989417  -8.82407213  -2.30988659\n  -5.92521403  -5.11951073  -1.81487172  -8.97607803  -2.87769549\n  -2.19513967 -11.27021995  -7.15668528  -7.84950561  -9.47605836\n  -6.24995473  -1.44813914  -1.43099773  -4.34318656  -5.10423932\n  -5.89432328  -5.75290352  -2.78556805  -7.27554047  -6.00895952\n -10.07817595 -11.02117733  -3.04486348  -5.21478247  -2.46698193]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [
+            "sqrt_present"
+          ],
+          "warnings": [
+            "Expression contains sqrt - verify all arguments are non-negative"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 99.1,
+        "base_score": 99.1,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 100,
+          "dimensional": 97.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [],
+            "sympy_expr": "mu - 1.960121*sigma*sqrt(t)",
+            "canonical_form": "mu - 1.960121*sigma*sqrt(t)",
+            "score": 100
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 97.0,
+            "errors": [],
+            "warnings": [
+              "Square root detected - ensure all arguments are non-negative"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "mu": "dimensionless",
+              "sigma": "dimensionless",
+              "t": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "sqrt_domain"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Square root detected - ensure all arguments are non-negative"
+              ],
+              "errors": [],
+              "penalty": 3
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "risk",
+            "constraints_checked": [
+              "sigma_positive"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Square root detected - ensure all arguments are non-negative"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "mu - 1.960121*sigma*sqrt(t)",
+        "canonical_form": "mu - 1.960121*sigma*sqrt(t)",
+        "domain": "risk",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This formula calculates the lower bound of a confidence interval for expected returns, representing the worst-case expected return at approximately 97.5% confidence level over a given time horizon.",
+        "relationships": [
+          "The expression subtracts a risk adjustment (1.960121*sigma*sqrt(t)) from the expected return (mu)",
+          "The coefficient 1.960121 approximates the 97.5% quantile of the standard normal distribution (1.96)",
+          "Volatility impact scales with the square root of time, consistent with diffusion processes and random walk theory",
+          "Higher volatility (sigma) creates a larger downward adjustment from the expected return",
+          "Longer time horizons (t) amplify the volatility adjustment, reflecting increased uncertainty over time"
+        ],
+        "domain_insights": [
+          "Represents Value-at-Risk (VaR) calculation for portfolio returns at 97.5% confidence level",
+          "Follows geometric Brownian motion assumptions commonly used in Black-Scholes framework",
+          "The square root of time scaling reflects volatility clustering and mean reversion properties in financial markets",
+          "Can be used as a conservative estimate for portfolio planning and risk budgeting",
+          "Provides a statistical lower bound for return expectations in stress testing scenarios"
+        ],
+        "use_cases": [
+          "Portfolio risk assessment and capital allocation decisions",
+          "Regulatory capital requirements calculation for financial institutions",
+          "Investment horizon planning and worst-case scenario analysis",
+          "Benchmark setting for risk-adjusted performance evaluation",
+          "Stress testing and scenario analysis for asset management",
+          "Setting conservative return targets for pension funds and insurance companies"
+        ],
+        "limitations": [
+          "Assumes normally distributed returns, which may not hold during market stress or for skewed assets",
+          "Requires constant volatility assumption, ignoring volatility clustering and regime changes",
+          "Time variable (t) must be expressed in consistent units with the annualized volatility",
+          "Does not account for fat tails, extreme events, or correlation breakdowns during crises",
+          "May underestimate risk for assets with significant skewness or kurtosis",
+          "Assumes continuous trading and liquidity, which may not apply to all asset classes"
+        ],
+        "formula_name": "Confidence-Adjusted Return Lower Bound",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This formula calculates the lower bound of a confidence interval for expected returns, representing the worst-case expected return at approximately 97.5% confidence level over a given time horizon.\",\n    \"relationships\": [\n        \"The expression subtracts a risk adjustment (1.960121*sigma*sqrt(t)) from the expected return (mu)\",\n        \"The coefficient 1.960121 approximates the 97.5% quantile of the standard normal distribution (1.96)\",\n        \"Volatility impact scales with the square root of time, consistent with diffusion processes and random walk theory\",\n        \"Higher volatility (sigma) creates a larger downward adjustment from the expected return\",\n        \"Longer time horizons (t) amplify the volatility adjustment, reflecting increased uncertainty over time\"\n    ],\n    \"domain_insights\": [\n        \"Represents Value-at-Risk (VaR) calculation for portfolio returns at 97.5% confidence level\",\n        \"Follows geometric Brownian motion assumptions commonly used in Black-Scholes framework\",\n        \"The square root of time scaling reflects volatility clustering and mean reversion properties in financial markets\",\n        \"Can be used as a conservative estimate for portfolio planning and risk budgeting\",\n        \"Provides a statistical lower bound for return expectations in stress testing scenarios\"\n    ],\n    \"use_cases\": [\n        \"Portfolio risk assessment and capital allocation decisions\",\n        \"Regulatory capital requirements calculation for financial institutions\",\n        \"Investment horizon planning and worst-case scenario analysis\",\n        \"Benchmark setting for risk-adjusted performance evaluation\",\n        \"Stress testing and scenario analysis for asset management\",\n        \"Setting conservative return targets for pension funds and insurance companies\"\n    ],\n    \"limitations\": [\n        \"Assumes normally distributed returns, which may not hold during market stress or for skewed assets\",\n        \"Requires constant volatility assumption, ignoring volatility clustering and regime changes\",\n        \"Time variable (t) must be expressed in consistent units with the annualized volatility\",\n        \"Does not account for fat tails, extreme events, or correlation breakdowns during crises\",\n        \"May underestimate risk for assets with significant skewness or kurtosis\",\n        \"Assumes continuous trading and liquidity, which may not apply to all asset classes\"\n    ],\n    \"formula_name\": \"Confidence-Adjusted Return Lower Bound\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 13.4,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 3,
+        "variable_names": [
+          "mu",
+          "sigma",
+          "t"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-14T11:12:43.545760",
+      "description": "Sharpe ratio - risk-adjusted return measure",
+      "domain": "risk",
+      "discovery": {
+        "expression": "(-returns + risk_free)*(-1.0011196)/volatility",
+        "sympy_expr": "(-returns + risk_free)*(-1.0011196)/volatility",
+        "r2_score": 0.9998634664413251,
+        "complexity": "7",
+        "variable_names": [
+          "returns",
+          "risk_free",
+          "volatility"
+        ],
+        "predictions": "[ 7.07657485e-01 -1.96985158e-01 -1.02127064e-01  1.45083235e-01\n  2.51049525e-01  9.02596514e-01  8.65822693e-01  1.33697873e-01\n  6.88201580e-01  7.28033274e-01  3.53345579e-01  2.47623165e+00\n  4.97504217e-01 -1.18875372e-01  8.34863665e-01  5.38323525e-01\n  3.38502477e-01  7.90176375e-01  4.09149448e-01  7.58871895e-01\n -4.63564900e-01  1.72243177e-02 -3.98232541e-01  7.34490383e-01\n -1.24275039e-01  7.83101395e-01  3.23666732e-01  7.53364902e-01\n  1.18033332e+00  2.56456456e+00  2.92451032e+00  2.50460485e-01\n  1.32828301e+00 -2.36881138e-01 -4.09026793e-01  5.03558752e-01\n  3.64112639e-01 -3.38939983e-02  1.37804436e+00  1.13896501e+00\n  2.70488091e-01  2.10623709e+00  8.18968240e-01  1.93423666e+00\n  7.49866948e-01  6.92147656e-01  2.41585924e+00  1.17889174e+00\n -2.17368075e-01  6.17537123e-01  8.33977244e-02 -3.94764986e-01\n  1.36168684e+00  5.56462850e-01  1.02815597e+00 -3.41022160e-01\n  1.08294450e+00  9.89642401e-01  5.31168214e-01  8.51050409e-01\n  5.78831840e-01  1.91337864e-02  8.88344565e-01 -3.94223797e-03\n -5.34246644e-01  1.04948140e+00 -9.22944068e-03  8.06482928e-01\n -4.07973295e-03  3.32698093e+00 -4.45477667e-01  1.65652924e+00\n  8.26961379e-01 -4.20862183e-01  5.39407736e-01  1.47414642e+00\n  3.78038664e-01 -3.80898873e-01  2.78729974e-01  2.78087171e-01\n  6.55384093e-01  1.00755644e+00  8.35151935e-01 -5.60462805e-01\n  2.64843086e+00  1.75417521e-01 -7.18983811e-01  1.32596634e+00\n  7.54999327e-01  1.75831309e+00  1.43762129e+00  6.33657505e-01\n  1.26518385e+00  5.25648350e-01 -4.07904312e-01  2.74119612e-01\n  2.31947640e-01  9.33010316e-01 -3.70212219e-01 -3.61631139e-01\n -1.68051943e-01 -5.46720251e-02  1.00321593e+00 -8.68654958e-02\n  7.28431569e-01  3.97175900e-01  1.43344486e+00  1.48615434e+00\n  1.18183792e-01  9.57771902e-01  9.49701765e-02 -3.23355097e-02\n  8.56002855e-01 -5.91040839e-01 -5.30475300e-01  1.13578970e+00\n -5.52395227e-01  7.28551825e-01  5.95744085e-01  9.59918408e-01\n  9.81406271e-01  6.18330730e-01  1.26019443e+00  3.16638850e-01\n  1.45305311e+00 -5.12085087e-01  1.17349543e+00 -1.07491554e-01\n  1.42158392e+00 -5.15875747e-01  1.11851044e+00  1.11608147e+00\n  1.25970103e+00 -8.87267976e-01  4.96860209e-01  5.00484487e-01\n  1.37529578e-01  1.77180067e-03  4.51446757e-01  8.38164334e-01\n  4.93746297e-01  2.41484176e-01 -7.90598027e-01 -1.01092848e+00\n -5.07741026e-01  1.61006853e+00 -8.31349774e-01 -4.42867404e-01\n -8.40975710e-02  2.00788974e+00  1.52794539e+00  9.56372635e-01\n  4.89222659e-01  6.61423404e-01 -6.49182226e-01  1.87066379e+00\n  7.97857373e-01  9.40148864e-01  8.78202571e-01  6.91515468e-01\n  6.40671243e-01  1.70913028e+00  8.75252140e-01  5.85738478e-01\n  8.83166641e-01 -2.11229433e+00  4.61919913e-01 -1.55445653e+00\n  1.05302081e+00  4.07522469e+00  3.88097999e-01  6.60797449e-01\n  1.04203546e-01 -1.33937727e+00  1.89959561e+00 -1.74599539e-01\n -4.19911938e-01  1.49647563e-01  1.02390182e+00  6.75475248e-01\n -2.18204893e+00  4.16159064e-01  2.95261300e-01  6.92926372e-01\n  1.06753893e+00  3.35426675e-02  7.84113465e-01  2.60859393e-01\n  2.64803272e+00  9.57999973e-01  5.54281629e-01  1.05625568e-01\n  4.83342152e-01  2.24813126e+00  1.04882849e+00  6.38922728e-01\n  1.87758001e+00  7.08200331e-01  2.06574807e-01  1.83637170e+00]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [],
+          "warnings": [
+            "Expression contains division - verify denominators are non-zero"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 98.5,
+        "base_score": 98.5,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 98,
+          "dimensional": 97.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [
+              "Can be simplified to: 1.0011196*(returns - risk_free)/volatility"
+            ],
+            "sympy_expr": "(1.0011196*returns - 1.0011196*risk_free)/volatility",
+            "canonical_form": "1.0011196*(returns - risk_free)/volatility",
+            "score": 98
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 97.0,
+            "errors": [],
+            "warnings": [
+              "Division by 'volatility' detected - ensure volatility ≠ 0"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "returns": "dimensionless",
+              "risk_free": "dimensionless",
+              "volatility": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "unconstrained_division_volatility"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Division by 'volatility' detected - ensure volatility ≠ 0"
+              ],
+              "errors": [],
+              "penalty": 3
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "risk",
+            "constraints_checked": [
+              "volatility_positive"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Can be simplified to: 1.0011196*(returns - risk_free)/volatility",
+          "Division by 'volatility' detected - ensure volatility ≠ 0"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "(-returns + risk_free)*(-1.0011196)/volatility",
+        "canonical_form": "1.0011196*(returns - risk_free)/volatility",
+        "domain": "risk",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This expression calculates a modified Sharpe ratio with a coefficient very close to -1, essentially computing the negative excess return per unit of volatility.",
+        "relationships": [
+          "Excess return (returns - risk_free) forms the numerator, measuring portfolio performance above the risk-free benchmark",
+          "Volatility in the denominator normalizes risk-adjusted performance, creating a per-unit-risk metric",
+          "The coefficient -1.0011196 inverts the traditional Sharpe ratio and applies a slight adjustment factor",
+          "Linear relationship between excess returns and the output, with inverse relationship to volatility"
+        ],
+        "domain_insights": [
+          "Represents a risk-adjusted performance metric that penalizes portfolios with returns below the risk-free rate",
+          "The negative formulation suggests this may be used for loss functions or penalty calculations in portfolio optimization",
+          "Values increase (become less negative) as portfolio performance improves relative to risk-free rate",
+          "The slight deviation from -1.0 in the coefficient may capture market friction, transaction costs, or empirical adjustments",
+          "Dimensionless output allows comparison across different asset classes and time periods"
+        ],
+        "use_cases": [
+          "Portfolio ranking and selection where lower (more negative) values indicate worse risk-adjusted performance",
+          "Optimization objective function for minimizing risk-adjusted underperformance",
+          "Risk management dashboards showing standardized performance penalties",
+          "Backtesting framework for comparing strategy performance on a risk-adjusted basis",
+          "Regulatory reporting of risk-adjusted returns with standardized methodology"
+        ],
+        "limitations": [
+          "Assumes returns and volatility are normally distributed, which may not hold during market stress",
+          "Undefined when volatility approaches zero, creating numerical instability",
+          "Static risk-free rate assumption may not reflect changing market conditions",
+          "Linear penalty structure may not capture tail risks or extreme market events",
+          "The 0.11% coefficient adjustment lacks clear theoretical justification and may be data-dependent"
+        ],
+        "formula_name": "Modified Negative Sharpe Ratio",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This expression calculates a modified Sharpe ratio with a coefficient very close to -1, essentially computing the negative excess return per unit of volatility.\",\n    \"relationships\": [\n        \"Excess return (returns - risk_free) forms the numerator, measuring portfolio performance above the risk-free benchmark\",\n        \"Volatility in the denominator normalizes risk-adjusted performance, creating a per-unit-risk metric\",\n        \"The coefficient -1.0011196 inverts the traditional Sharpe ratio and applies a slight adjustment factor\",\n        \"Linear relationship between excess returns and the output, with inverse relationship to volatility\"\n    ],\n    \"domain_insights\": [\n        \"Represents a risk-adjusted performance metric that penalizes portfolios with returns below the risk-free rate\",\n        \"The negative formulation suggests this may be used for loss functions or penalty calculations in portfolio optimization\",\n        \"Values increase (become less negative) as portfolio performance improves relative to risk-free rate\",\n        \"The slight deviation from -1.0 in the coefficient may capture market friction, transaction costs, or empirical adjustments\",\n        \"Dimensionless output allows comparison across different asset classes and time periods\"\n    ],\n    \"use_cases\": [\n        \"Portfolio ranking and selection where lower (more negative) values indicate worse risk-adjusted performance\",\n        \"Optimization objective function for minimizing risk-adjusted underperformance\",\n        \"Risk management dashboards showing standardized performance penalties\",\n        \"Backtesting framework for comparing strategy performance on a risk-adjusted basis\",\n        \"Regulatory reporting of risk-adjusted returns with standardized methodology\"\n    ],\n    \"limitations\": [\n        \"Assumes returns and volatility are normally distributed, which may not hold during market stress\",\n        \"Undefined when volatility approaches zero, creating numerical instability\",\n        \"Static risk-free rate assumption may not reflect changing market conditions\",\n        \"Linear penalty structure may not capture tail risks or extreme market events\",\n        \"The 0.11% coefficient adjustment lacks clear theoretical justification and may be data-dependent\"\n    ],\n    \"formula_name\": \"Modified Negative Sharpe Ratio\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 12.74,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 3,
+        "variable_names": [
+          "returns",
+          "risk_free",
+          "volatility"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-14T11:13:29.323367",
+      "description": "Conditional VaR (Expected Shortfall) at 95% confidence",
+      "domain": "risk",
+      "discovery": {
+        "expression": "mu - 1.1688594*sigma*sqrt(t)",
+        "sympy_expr": "mu - 1.1688594*sigma*sqrt(t)",
+        "r2_score": 0.9999744000796736,
+        "complexity": "8",
+        "variable_names": [
+          "mu",
+          "sigma",
+          "t"
+        ],
+        "predictions": "[-3.26498013 -0.20136991 -2.40184632 -6.29220313 -5.60715998 -1.60355076\n -4.17809854 -3.46122492 -1.97044298 -3.00349165 -6.36257304 -4.71424424\n -2.05818013 -3.34034047 -4.6788248  -5.17385942 -0.70232924 -2.94656493\n -0.99424451 -6.36555787 -1.55356645 -8.20791971 -3.85441413 -1.87972064\n -2.09049601 -1.38292065 -3.82057973 -3.90844087 -3.77087201 -3.86978068\n -2.59435281 -5.62520429 -4.54392775 -1.09270928 -4.14920863 -6.10579155\n -0.74949854 -6.02465285 -2.5998771  -7.42603012 -1.47858511 -4.62975727\n -1.88478131 -5.80604682 -0.90939055 -2.37138024 -0.66598025 -4.17136517\n -4.33436161 -5.64914911 -7.09743376 -0.90423348 -6.74167481 -2.22961414\n -1.45244566 -1.17576741 -2.65578703 -6.21785262 -3.94694227 -5.1641485\n -4.73766435 -3.22210898 -1.33104005 -2.49383535 -4.20986488 -0.93542665\n -1.2116312  -5.09869501 -6.46818198 -2.84645933 -4.19670289 -2.25953299\n -2.60976894 -4.2700403  -6.44684586 -1.53400628 -3.32110894 -4.80586433\n -3.77027747 -3.98615851 -5.79328564 -1.88332411 -1.40456191 -3.06858876\n -0.6577725  -0.92192595 -2.0355547  -1.23095763 -4.72268798 -1.54530844\n -8.05909891 -1.57076595 -3.61494584 -6.88658071 -5.59823505 -1.46780911\n -3.41860163 -0.8993072  -2.68785294 -1.58744091 -1.42701558 -6.48192852\n -4.38943896 -4.14817069 -5.69986221 -3.81780152 -2.06351305 -4.90947782\n -1.47295841 -2.52662224 -4.37730941 -5.98396006 -1.48043148 -1.12205868\n -2.12893959 -2.93763656 -0.92625773 -5.54856313 -0.67051991 -2.76574548\n -6.87203774 -2.42543315 -6.92395938 -0.85684972 -4.84695991 -0.98488603\n -1.2112253  -1.29117334 -2.14610333 -4.66338578 -2.27598404 -3.5137578\n -4.40907758 -0.98108609 -2.20917103 -7.58101877 -4.19809957 -2.71489942\n -0.58139944 -0.5043168  -2.09466658 -3.9658004  -6.92297288 -1.58175243\n -3.54242215 -2.08228958 -1.23651244 -4.51777931 -8.26490632 -4.81227041\n -2.90217313 -1.844687   -0.96668933 -0.67543808 -1.53271978 -7.16868829\n -1.09350927 -4.04044084 -1.82852304 -7.36855357 -5.07710794 -0.45704538\n -6.28802717 -4.11436242 -0.4926916  -1.51274676 -4.64169022 -1.77778166\n -7.92735896 -7.39594167 -4.96981281 -3.36166435 -2.85671374 -3.48716287\n -3.54113512 -1.18019191 -3.98107107 -7.29502693 -3.14269843 -0.91608159\n -5.82610372 -2.09891814 -2.64874357 -1.19638987 -2.56117249 -2.27455154\n -3.32144332 -1.81989855 -6.56561908 -7.98250089 -6.32554474 -2.47352966\n -3.32033026 -7.321909   -1.97303097 -0.51350156 -0.7703516  -3.24867767\n -1.80396961 -2.11489555]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [
+            "sqrt_present"
+          ],
+          "warnings": [
+            "Expression contains sqrt - verify all arguments are non-negative"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 99.1,
+        "base_score": 99.1,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 100,
+          "dimensional": 97.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [],
+            "sympy_expr": "mu - 1.1688594*sigma*sqrt(t)",
+            "canonical_form": "mu - 1.1688594*sigma*sqrt(t)",
+            "score": 100
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 97.0,
+            "errors": [],
+            "warnings": [
+              "Square root detected - ensure all arguments are non-negative"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "mu": "dimensionless",
+              "sigma": "dimensionless",
+              "t": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "sqrt_domain"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Square root detected - ensure all arguments are non-negative"
+              ],
+              "errors": [],
+              "penalty": 3
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "risk",
+            "constraints_checked": [
+              "sigma_positive"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Square root detected - ensure all arguments are non-negative"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "mu - 1.1688594*sigma*sqrt(t)",
+        "canonical_form": "mu - 1.1688594*sigma*sqrt(t)",
+        "domain": "risk",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This expression calculates a risk-adjusted expected return by subtracting a time-scaled volatility penalty from the expected return, representing a conservative estimate or lower confidence bound.",
+        "relationships": [
+          "Linear negative relationship between volatility and the final metric - higher volatility reduces the risk-adjusted return",
+          "Square root relationship with time horizon - risk adjustment scales with the square root of days, consistent with volatility scaling in financial models",
+          "The coefficient 1.1688594 represents approximately 1.17 standard deviations, suggesting a confidence interval approach",
+          "Expected return acts as a baseline that gets penalized by the volatility-time component"
+        ],
+        "domain_insights": [
+          "The coefficient 1.1688594 is close to the 88th percentile of a normal distribution, indicating this may calculate a lower confidence bound for returns",
+          "Square root time scaling follows the fundamental principle that volatility scales with the square root of time in geometric Brownian motion",
+          "This resembles a Value-at-Risk (VaR) calculation or a conservative return estimate used in risk management",
+          "The formula provides a single risk-adjusted metric that combines return expectations with volatility-based downside protection"
+        ],
+        "use_cases": [
+          "Portfolio optimization where conservative return estimates are needed for risk-averse strategies",
+          "Risk budgeting and capital allocation decisions requiring downside-adjusted expected returns",
+          "Stress testing scenarios to evaluate performance under volatility-adjusted expectations",
+          "Investment mandate compliance where returns must meet minimum thresholds with high confidence",
+          "Performance benchmarking against risk-adjusted return targets"
+        ],
+        "limitations": [
+          "Assumes returns follow a normal distribution, which may not hold for fat-tailed financial return distributions",
+          "Time horizon input is in days but volatility is annualized, requiring careful unit conversion (likely t/365.25)",
+          "Static volatility assumption may not capture time-varying or regime-switching volatility patterns",
+          "The specific confidence level (88th percentile) may not be appropriate for all risk tolerance levels",
+          "Does not account for skewness, kurtosis, or other higher-order moments of return distributions"
+        ],
+        "formula_name": "Risk-Adjusted Expected Return (Conservative Estimate)",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This expression calculates a risk-adjusted expected return by subtracting a time-scaled volatility penalty from the expected return, representing a conservative estimate or lower confidence bound.\",\n    \"relationships\": [\n        \"Linear negative relationship between volatility and the final metric - higher volatility reduces the risk-adjusted return\",\n        \"Square root relationship with time horizon - risk adjustment scales with the square root of days, consistent with volatility scaling in financial models\",\n        \"The coefficient 1.1688594 represents approximately 1.17 standard deviations, suggesting a confidence interval approach\",\n        \"Expected return acts as a baseline that gets penalized by the volatility-time component\"\n    ],\n    \"domain_insights\": [\n        \"The coefficient 1.1688594 is close to the 88th percentile of a normal distribution, indicating this may calculate a lower confidence bound for returns\",\n        \"Square root time scaling follows the fundamental principle that volatility scales with the square root of time in geometric Brownian motion\",\n        \"This resembles a Value-at-Risk (VaR) calculation or a conservative return estimate used in risk management\",\n        \"The formula provides a single risk-adjusted metric that combines return expectations with volatility-based downside protection\"\n    ],\n    \"use_cases\": [\n        \"Portfolio optimization where conservative return estimates are needed for risk-averse strategies\",\n        \"Risk budgeting and capital allocation decisions requiring downside-adjusted expected returns\",\n        \"Stress testing scenarios to evaluate performance under volatility-adjusted expectations\",\n        \"Investment mandate compliance where returns must meet minimum thresholds with high confidence\",\n        \"Performance benchmarking against risk-adjusted return targets\"\n    ],\n    \"limitations\": [\n        \"Assumes returns follow a normal distribution, which may not hold for fat-tailed financial return distributions\",\n        \"Time horizon input is in days but volatility is annualized, requiring careful unit conversion (likely t/365.25)\",\n        \"Static volatility assumption may not capture time-varying or regime-switching volatility patterns\",\n        \"The specific confidence level (88th percentile) may not be appropriate for all risk tolerance levels\",\n        \"Does not account for skewness, kurtosis, or other higher-order moments of return distributions\"\n    ],\n    \"formula_name\": \"Risk-Adjusted Expected Return (Conservative Estimate)\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 13.51,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 3,
+        "variable_names": [
+          "mu",
+          "sigma",
+          "t"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-14T11:14:08.863385",
+      "description": "Beta - measure of systematic risk relative to market",
+      "domain": "risk",
+      "discovery": {
+        "expression": "cov_im/var_m",
+        "sympy_expr": "cov_im/var_m",
+        "r2_score": 0.9999833956116185,
+        "complexity": "3",
+        "variable_names": [
+          "cov_im",
+          "var_m"
+        ],
+        "predictions": "[ 1.15665982e+00  7.98276214e-01  9.42619503e-01 -1.31675541e+00\n -4.03553055e-01  2.20314896e+00  8.02525570e+00 -3.88570959e-01\n  1.67823519e+00 -1.66341461e-02  8.73810975e-01 -7.79966666e-01\n  9.96603467e+00  1.87409229e+00 -2.30909263e-01  1.58699579e+00\n  7.82844709e-01  8.93533063e-02 -2.02594790e-01  5.05358443e-02\n -4.89093348e-01  8.62454654e-01  2.07976619e+00  2.70212861e+00\n -1.26531026e-01 -7.42345271e-01 -8.12434758e-02  6.54966808e-01\n  1.12896886e+00 -1.80000897e-01  5.21558451e+00  1.23977782e+00\n  7.40452258e-01  2.70650646e+00  9.01142377e-01  5.04521664e+00\n  8.43969809e-01  8.14687020e-01 -7.03421430e-02  1.11358142e-01\n  1.46300101e-01  2.42707610e+00 -5.35153134e-01  1.44418165e+00\n  4.33203216e+00  1.19597344e+00 -2.92974204e+00  1.99113650e+01\n  1.36952618e+00  1.26548928e+00  1.11271155e-01  4.27383173e-01\n -6.92223575e-01 -1.27632244e-01  1.10047819e+00  2.19796397e+00\n  7.97403256e-01  1.64634945e+00  1.93478418e+00  1.60456837e+00\n  3.72414914e-01  1.74293756e+00 -3.47727288e-01  1.75622200e+00\n  1.33739210e+00 -3.85512723e-01  7.46729206e-01  1.55067436e+00\n  1.57696922e+00  2.28833692e+00  1.70158541e+00  3.67738359e+00\n  3.11403949e-01  6.26795290e+00  1.57766214e+00 -3.27628312e-01\n -1.42691054e+00  2.21947168e+00  3.14438191e+00  1.32068378e+00\n  1.68918017e+01 -2.44692586e-01  4.31516982e-02  1.26291653e+00\n -1.40408395e-01  1.09394661e-01 -4.48344378e-01  1.67933733e+00\n  2.12333670e+00  2.78561452e-01  5.56648514e+00  7.33348354e+00\n  3.17471516e+00 -9.31402524e-01  7.75647444e-01  2.72194549e-01\n  2.95352425e+00  7.59364994e-01 -6.25067752e-01  8.99334449e-01\n  1.14820087e+00 -5.59416303e-01  1.24830507e+00 -1.68043839e+00\n  7.12574502e-01  4.33920614e-01  3.51458777e+00  2.52813976e-01\n  6.49752395e+00  1.38158541e+00  3.01702749e+00  2.37593213e+00\n  1.37485468e+00 -7.31635473e-01  6.34623412e-01  3.78203679e+00\n -2.93214937e-01  5.22009505e+00  3.16003224e+00 -4.35412655e-01\n  1.01268889e+00  1.01256365e+00  8.49536110e-01 -3.95812768e-01\n -4.62842318e-01  1.46970211e+00  4.69468143e+00  3.63716925e+00\n  1.77574435e+00 -4.88943683e-01  1.07933736e+01 -2.47955251e-02\n  3.33758014e+00  3.56006942e+00  1.03754193e+00  2.86999051e+00\n -3.11585981e+00  1.16398118e+00  1.68472513e+00  1.77216495e+00\n  4.24731660e-02  2.46696338e+00  1.50596407e+00 -7.71818023e-01\n  6.02484605e-01  1.10016511e+01  1.25899497e+00  3.69253677e-02\n -1.43023724e-01 -4.16188667e-01  2.18619751e+00  1.06515084e+00\n -3.20724158e+00  6.72881387e-01  3.19506503e-01 -5.67581375e-01\n  1.52430598e+00  2.75565603e+00  3.94339182e-01  1.10067037e+00\n -5.38469828e-01  3.38448147e+00  1.86110241e+00  8.53780908e-01\n  1.25419057e+00  1.34060088e+00  1.63206451e+00  1.35287437e+00\n  6.59011274e-01  1.40187476e+00  2.45471947e+00  2.67286164e-01\n -5.07486237e-01 -5.27791747e-01  1.29947346e+00  2.11331290e+00\n  5.29844914e+00  9.12475801e-01  7.90313568e-01 -1.98086766e+00\n  2.04852160e+00  1.49729164e+00  1.93231163e+00 -3.11360271e-01\n  1.83747477e+00  1.48032170e+00  2.58405686e+00  9.62249161e-01\n  2.07544262e+00 -2.28739638e-01  9.99481171e-01  1.13668036e+00\n  7.44994327e+00  2.05190744e+00  1.64576049e-01  7.25724997e-02\n  6.85438433e+00  5.69450536e-01  2.75591192e+00 -8.56590924e-01]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [],
+          "warnings": [
+            "Expression contains division - verify denominators are non-zero"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 97.0,
+        "base_score": 97.0,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 98,
+          "dimensional": 97.0,
+          "domain": 95.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [
+              "VaR should be positive and bounded"
+            ],
+            "sympy_expr": "cov_im/var_m",
+            "canonical_form": "cov_im/var_m",
+            "score": 98
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 97.0,
+            "errors": [],
+            "warnings": [
+              "Division by 'var_m' detected - ensure var_m ≠ 0"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "cov_im": "dimensionless",
+              "var_m": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "unconstrained_division_var_m"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Division by 'var_m' detected - ensure var_m ≠ 0"
+              ],
+              "errors": [],
+              "penalty": 3
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 95.0,
+            "errors": [],
+            "warnings": [
+              "Variable 'var' should be positive - add validation",
+              "VaR should be positive"
+            ],
+            "domain": "risk",
+            "constraints_checked": [
+              "var_positive",
+              "var_positive"
+            ]
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "VaR should be positive and bounded",
+          "Division by 'var_m' detected - ensure var_m ≠ 0",
+          "Variable 'var' should be positive - add validation",
+          "VaR should be positive"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings",
+          "🟡 REVIEW: Address risk domain warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "cov_im/var_m",
+        "canonical_form": "cov_im/var_m",
+        "domain": "risk",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This expression calculates the beta coefficient, which measures an asset's systematic risk and sensitivity to market movements relative to the overall market variance.",
+        "relationships": [
+          "The covariance between asset and market (numerator) captures the degree to which the asset moves in sync with the market",
+          "Market variance (denominator) normalizes this relationship by the market's own volatility",
+          "The ratio creates a dimensionless measure of relative systematic risk",
+          "Higher covariance with positive market variance indicates greater market sensitivity"
+        ],
+        "domain_insights": [
+          "Beta = 1 indicates the asset moves exactly with the market, beta > 1 indicates higher volatility than market",
+          "This is a core component of the Capital Asset Pricing Model (CAPM) for expected return calculations",
+          "Measures only systematic (non-diversifiable) risk, not total asset risk",
+          "Essential for portfolio construction and risk-adjusted performance evaluation",
+          "Used in calculating cost of equity capital for corporate finance decisions"
+        ],
+        "use_cases": [
+          "Portfolio risk management and asset allocation decisions",
+          "Calculating required returns for investment valuation using CAPM",
+          "Risk-adjusted performance measurement and benchmarking",
+          "Determining appropriate discount rates for capital budgeting",
+          "Hedge ratio calculation for market-neutral strategies",
+          "Regulatory capital requirements based on systematic risk exposure"
+        ],
+        "limitations": [
+          "Assumes linear relationship between asset and market returns",
+          "Requires market variance to be positive and non-zero",
+          "Historical beta may not predict future systematic risk",
+          "Market proxy selection significantly impacts beta estimation",
+          "Assumes constant beta over the measurement period",
+          "Does not capture downside risk or tail risk characteristics"
+        ],
+        "formula_name": "Beta Coefficient",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This expression calculates the beta coefficient, which measures an asset's systematic risk and sensitivity to market movements relative to the overall market variance.\",\n    \"relationships\": [\n        \"The covariance between asset and market (numerator) captures the degree to which the asset moves in sync with the market\",\n        \"Market variance (denominator) normalizes this relationship by the market's own volatility\",\n        \"The ratio creates a dimensionless measure of relative systematic risk\",\n        \"Higher covariance with positive market variance indicates greater market sensitivity\"\n    ],\n    \"domain_insights\": [\n        \"Beta = 1 indicates the asset moves exactly with the market, beta > 1 indicates higher volatility than market\",\n        \"This is a core component of the Capital Asset Pricing Model (CAPM) for expected return calculations\",\n        \"Measures only systematic (non-diversifiable) risk, not total asset risk\",\n        \"Essential for portfolio construction and risk-adjusted performance evaluation\",\n        \"Used in calculating cost of equity capital for corporate finance decisions\"\n    ],\n    \"use_cases\": [\n        \"Portfolio risk management and asset allocation decisions\",\n        \"Calculating required returns for investment valuation using CAPM\",\n        \"Risk-adjusted performance measurement and benchmarking\",\n        \"Determining appropriate discount rates for capital budgeting\",\n        \"Hedge ratio calculation for market-neutral strategies\",\n        \"Regulatory capital requirements based on systematic risk exposure\"\n    ],\n    \"limitations\": [\n        \"Assumes linear relationship between asset and market returns\",\n        \"Requires market variance to be positive and non-zero\",\n        \"Historical beta may not predict future systematic risk\",\n        \"Market proxy selection significantly impacts beta estimation\",\n        \"Assumes constant beta over the measurement period\",\n        \"Does not capture downside risk or tail risk characteristics\"\n    ],\n    \"formula_name\": \"Beta Coefficient\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 10.49,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 2,
+        "variable_names": [
+          "cov_im",
+          "var_m"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-14T11:14:49.599927",
+      "description": "Sortino ratio - downside risk-adjusted return",
+      "domain": "risk",
+      "discovery": {
+        "expression": "(returns - target)/downside_dev",
+        "sympy_expr": "(returns - target)/downside_dev",
+        "r2_score": 0.9999244531551096,
+        "complexity": "5",
+        "variable_names": [
+          "returns",
+          "target",
+          "downside_dev"
+        ],
+        "predictions": "[-3.06928791e-01 -6.02309079e-01  8.40857159e-01  2.26100780e+00\n  3.67134097e-01 -7.08197980e-01 -1.11802340e+00 -4.19436359e-01\n -7.56067694e-01  2.19549020e+00 -6.29455495e-01  4.67480949e-02\n -4.84768710e-01 -2.30257443e-01  3.93107073e-01  1.16362951e+00\n -2.80207966e-01 -8.23508262e-01  3.06060712e-01 -1.75106015e-01\n -1.00885811e-01  4.38018512e+00  9.24453520e-01  8.33743991e-01\n  5.04098278e-01  1.95064365e-01  7.36560126e-01  8.98998136e-01\n  6.52116168e-01 -7.88616972e-01  4.05718223e-01  2.13447508e-01\n  1.29029470e+00  5.99812911e-01  4.42706888e-01 -6.75922941e-01\n  5.02892061e-01 -8.53020464e-01 -2.17532067e-01 -5.63662110e-01\n  1.28564122e+00 -3.42129043e-01  1.26495329e-01  9.72931461e-01\n -2.10815873e-01  6.34332404e-01  5.98043034e-01 -2.15357167e+00\n  1.29896310e+00 -7.82054198e-01  3.07310934e-01  1.10649874e+00\n  1.99115479e+00  1.19425587e+00  3.60744082e-03 -2.25228879e+00\n  8.15169675e-01  1.09626930e+00  1.12160642e+00  1.77398444e+00\n  2.23478424e+00  5.33870166e-01  4.29245944e-02  1.53037601e+00\n  3.63885401e-01 -7.35758982e-01  1.11529799e+00  2.12512232e+00\n  3.09277481e-01 -6.08999539e-01  1.58522539e-01  1.71667868e+00\n  4.09789617e+00 -7.38934600e-01 -3.59558938e-01  1.42369747e+00\n  5.71245709e-02  7.48914228e-01  2.13645606e+00 -1.49829597e+00\n  4.79480386e-01 -6.24613313e-01  1.70532110e-01  1.79103589e+00\n  3.42805633e-01  1.39332760e+00  6.49826957e-01  1.22772671e-01\n -2.37327064e-01  3.99905102e-02  1.73991526e-03 -9.07785947e-01\n  5.13555161e-02  3.40276928e-01  3.31043821e+00  8.24703542e-01\n  7.04521026e-01 -7.87812940e-01 -2.24014252e-01  1.04804916e+00\n  7.57159608e-01 -1.78079136e+00  1.57510609e+00  1.94290918e+00\n  9.09182629e-01 -4.46581919e-01  8.14763539e-01  1.47379827e+00\n  1.64181931e+00  8.20168020e-01  2.76687471e+00  1.01119428e+00\n -1.11749370e+00  8.66503436e-01  1.67640933e+00  6.44403822e-01\n -3.47059603e-01 -2.46029308e-01  2.46183696e+00  1.34200998e+00\n  1.37331121e+00  9.27508900e-01  5.23786012e-01  9.57401585e-01\n  1.06173928e+00  4.26601322e-01  7.22956686e-01 -8.92352511e-01\n  9.01897959e-01  1.93332935e+00  2.32081447e-02 -3.27626982e-01\n  7.97796433e-02 -1.39126264e-01 -2.36674879e-01  2.72102566e-01\n  2.07580735e+00  4.12028807e-01 -3.07071982e-01 -1.13945774e+00\n  1.89562968e+00  2.42589259e-01  1.65171149e+00  6.51395590e-01\n  2.74639496e+00 -1.64178069e-01  1.11391348e+00 -1.42259526e-01\n  1.70099056e+00  1.07556246e+00  6.44347341e-03 -1.86854566e-01\n -7.53873029e-01  1.83786765e+00 -1.77028257e-01  4.82553424e-01\n -3.04326335e-01  5.86546332e-01  9.98721498e-01  8.15183162e-01\n  9.08429764e-01 -3.02353334e-01 -5.60775487e-01  6.74646917e-01\n  1.78438583e-01  2.68960249e-01 -2.02465613e+00 -1.81873183e-01\n -5.08428359e-01  3.31865785e+00 -1.53235751e-01  5.93940434e-01\n -1.23008049e+00  6.37583485e-01 -1.97562572e-01  3.94650244e+00\n  1.34261474e+00  5.81738690e-03  4.17611275e+00  1.46484340e+00\n  1.39765563e+00  2.97673730e+00 -2.24900525e-01  5.96581072e-01\n -7.33574582e-01 -3.81113764e-01  1.35811079e+00  6.77853080e-02\n  1.84764421e+00  8.75297184e-01  1.48204434e+00  2.38290362e+00\n -8.28328173e-01 -2.18578572e+00  1.90621840e-01 -3.89288959e-01\n -1.15164822e+00  2.47931998e-02  1.94016719e+00  7.37776281e-01]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [],
+          "warnings": [
+            "Expression contains division - verify denominators are non-zero"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 99.1,
+        "base_score": 99.1,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 100,
+          "dimensional": 97.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [],
+            "sympy_expr": "(returns - target)/downside_dev",
+            "canonical_form": "(returns - target)/downside_dev",
+            "score": 100
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 97.0,
+            "errors": [],
+            "warnings": [
+              "Division by 'downside_dev' detected - ensure downside_dev ≠ 0"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "returns": "dimensionless",
+              "target": "dimensionless",
+              "downside_dev": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "unconstrained_division_downside_dev"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Division by 'downside_dev' detected - ensure downside_dev ≠ 0"
+              ],
+              "errors": [],
+              "penalty": 3
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "risk",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Division by 'downside_dev' detected - ensure downside_dev ≠ 0"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "(returns - target)/downside_dev",
+        "canonical_form": "(returns - target)/downside_dev",
+        "domain": "risk",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This expression calculates the Sortino Ratio, a risk-adjusted performance measure that evaluates excess returns relative to downside volatility only, providing a more refined assessment than the Sharpe ratio by focusing solely on negative deviations.",
+        "relationships": [
+          "Returns minus target creates excess return above the minimum acceptable threshold",
+          "Division by downside deviation normalizes performance by downside risk only, ignoring upside volatility",
+          "Higher positive values indicate better risk-adjusted performance with minimal downside exposure",
+          "The ratio increases when returns exceed target and decreases when downside volatility increases"
+        ],
+        "domain_insights": [
+          "Distinguishes between good volatility (upside) and bad volatility (downside), aligning with investor preferences",
+          "Particularly valuable for asymmetric return distributions where standard deviation overstates risk",
+          "More appropriate than Sharpe ratio for strategies with positive skewness or tail risk management",
+          "Captures downside risk tolerance better for risk-averse investors who don't view upside volatility as risk"
+        ],
+        "use_cases": [
+          "Performance evaluation of hedge funds and alternative investment strategies",
+          "Comparing mutual funds or ETFs where downside protection is prioritized",
+          "Portfolio optimization when minimizing downside risk is the primary objective",
+          "Manager selection and due diligence for institutional investors",
+          "Risk budgeting and allocation decisions in multi-asset portfolios"
+        ],
+        "limitations": [
+          "Requires sufficient historical data to calculate meaningful downside deviation",
+          "Undefined when downside deviation is zero (no negative excess returns)",
+          "Target return selection significantly impacts the ratio and must be carefully chosen",
+          "Less meaningful for very short time periods or highly volatile markets",
+          "May not capture tail risks or extreme market events adequately"
+        ],
+        "formula_name": "Sortino Ratio",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This expression calculates the Sortino Ratio, a risk-adjusted performance measure that evaluates excess returns relative to downside volatility only, providing a more refined assessment than the Sharpe ratio by focusing solely on negative deviations.\",\n    \"relationships\": [\n        \"Returns minus target creates excess return above the minimum acceptable threshold\",\n        \"Division by downside deviation normalizes performance by downside risk only, ignoring upside volatility\",\n        \"Higher positive values indicate better risk-adjusted performance with minimal downside exposure\",\n        \"The ratio increases when returns exceed target and decreases when downside volatility increases\"\n    ],\n    \"domain_insights\": [\n        \"Distinguishes between good volatility (upside) and bad volatility (downside), aligning with investor preferences\",\n        \"Particularly valuable for asymmetric return distributions where standard deviation overstates risk\",\n        \"More appropriate than Sharpe ratio for strategies with positive skewness or tail risk management\",\n        \"Captures downside risk tolerance better for risk-averse investors who don't view upside volatility as risk\"\n    ],\n    \"use_cases\": [\n        \"Performance evaluation of hedge funds and alternative investment strategies\",\n        \"Comparing mutual funds or ETFs where downside protection is prioritized\",\n        \"Portfolio optimization when minimizing downside risk is the primary objective\",\n        \"Manager selection and due diligence for institutional investors\",\n        \"Risk budgeting and allocation decisions in multi-asset portfolios\"\n    ],\n    \"limitations\": [\n        \"Requires sufficient historical data to calculate meaningful downside deviation\",\n        \"Undefined when downside deviation is zero (no negative excess returns)\",\n        \"Target return selection significantly impacts the ratio and must be carefully chosen\",\n        \"Less meaningful for very short time periods or highly volatile markets\",\n        \"May not capture tail risks or extreme market events adequately\"\n    ],\n    \"formula_name\": \"Sortino Ratio\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 11.32,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 3,
+        "variable_names": [
+          "returns",
+          "target",
+          "downside_dev"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-14T11:15:45.801582",
+      "description": "Information ratio - active management skill measure",
+      "domain": "risk",
+      "discovery": {
+        "expression": "active_return/tracking_error",
+        "sympy_expr": "active_return/tracking_error",
+        "r2_score": 0.9999340421158929,
+        "complexity": "3",
+        "variable_names": [
+          "active_return",
+          "tracking_error"
+        ],
+        "predictions": "[ 0.52256823 -0.47564759  0.10566924 -0.39578014  1.9306905  -0.19992316\n -0.52252394  2.79944515  3.19286991  1.90620041 -0.55411218 -1.44326401\n  0.19283281 -0.36348477 -1.12625434  0.39704194  5.55533495  0.14676456\n  0.74236036  1.67810802  0.00848627  1.19043275 -0.22955017 -0.72842836\n  1.70160073 -0.46758172  1.68040858 -0.1230188   0.70913059  0.82151965\n -0.58347946 -0.33098345  0.80516079  0.8366512   1.73354785  0.46602345\n  1.1977247   1.37542453  1.16971362  0.56865485  1.66338332  1.82285028\n  0.2406905   0.79966777  1.02441302 -0.28076793 -0.99311386  0.20840959\n  0.95703922  0.79486628 -0.39305819  1.54470584  1.24553    -0.15989912\n  1.48473204  1.97865302  0.63819784  5.00622863  1.09185029  1.80500902\n  0.09476344  1.17118385  1.13123819  0.49578764  0.03354152  2.04704456\n -0.35931653  2.05260884  0.1526405  -1.05665799  1.09486846 -1.13645028\n  1.94869604  1.63763701  0.99724793 -0.17808667 -0.19242671  2.47145192\n  1.74339498  0.91748144  0.91564913  0.15974996  4.46566334  1.63309\n  0.05402797  0.12105664  1.64620803 -2.15921156  0.27884904  0.45899749\n -0.49168294 -0.4269549   5.17107325  1.56820653  5.04652165  1.02535247\n  0.47647507  0.91867375  0.47167114  0.64617379  1.63116792 -0.07076976\n  0.27622815  2.1296408  -0.5804575  -0.29006705  2.24086417  1.48718142\n  0.44167197 -0.24762703 -0.25614787  0.95106328  0.77496168  0.30957339\n  0.55453202  0.65196069  2.04695793  1.32616359  0.78098912  0.59566872\n  0.49598646  1.82436547  2.39708681 -0.18730248  0.53278557  0.01062771\n  0.80678294  0.39878444  1.89354288 -0.50038866  1.09805257  1.07190019\n  1.31505882  0.08114181  0.3272685   0.88472621 -0.02949634 -0.04418961\n  1.44771773  1.97634723  0.05876887  0.08379767  0.21331986  0.74159146\n  2.52384635  2.03759678  1.35083971  1.06533264 -1.34763768 -0.6404782\n  0.07637807  1.85026018  0.52096906  0.04569776  1.30342686  0.46945612\n  3.1746253  -0.13178468  1.58944699  0.40599251 -0.65474418  1.53698238\n -0.83434923  4.94041389  1.48898026  1.91624814  1.07975916  0.50453302\n  2.18998135  0.46000959  1.25594685  1.32689353  1.39230725  0.89939494\n  0.17036484  1.31057677  0.52150802  1.18443018  1.01837697  0.11224067\n  0.20665597  0.60338213  4.87205301  0.30000759  0.52605118  0.34493899\n  0.98306566  0.63393376 -0.39450679 -0.58223012 -0.86730151  0.34520982\n -0.21170775 -0.25928535  1.73295387  1.1546797   0.40248542  1.56701367\n -1.80416204  0.71184043]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [],
+          "warnings": [
+            "Expression contains division - verify denominators are non-zero"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 99.1,
+        "base_score": 99.1,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 100,
+          "dimensional": 97.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [],
+            "sympy_expr": "active_return/tracking_error",
+            "canonical_form": "active_return/tracking_error",
+            "score": 100
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 97.0,
+            "errors": [],
+            "warnings": [
+              "Division by 'tracking_error' detected - ensure tracking_error ≠ 0"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "active_return": "dimensionless",
+              "tracking_error": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "unconstrained_division_tracking_error"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Division by 'tracking_error' detected - ensure tracking_error ≠ 0"
+              ],
+              "errors": [],
+              "penalty": 3
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "risk",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Division by 'tracking_error' detected - ensure tracking_error ≠ 0"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "active_return/tracking_error",
+        "canonical_form": "active_return/tracking_error",
+        "domain": "risk",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This expression calculates the Information Ratio, a fundamental risk-adjusted performance metric that measures how much excess return a portfolio generates per unit of tracking risk relative to its benchmark.",
+        "relationships": [
+          "Active return in the numerator represents the portfolio manager's skill in generating excess returns above the benchmark",
+          "Tracking error in the denominator normalizes for the risk taken to achieve those excess returns",
+          "The ratio creates a risk-adjusted measure where higher values indicate more efficient active management",
+          "Linear relationship between active return and Information Ratio when tracking error is constant",
+          "Inverse relationship between tracking error and Information Ratio when active return is constant"
+        ],
+        "domain_insights": [
+          "Information Ratio is considered the active management equivalent of the Sharpe Ratio for risk-adjusted performance",
+          "Values above 0.5 are generally considered good, above 1.0 are excellent in active portfolio management",
+          "Directly measures the consistency of a manager's ability to outperform their benchmark",
+          "Critical metric for institutional investors evaluating active fund managers and strategies",
+          "Incorporates both return generation and risk control aspects of active portfolio management"
+        ],
+        "use_cases": [
+          "Fund manager performance evaluation and ranking across different investment strategies",
+          "Portfolio optimization to maximize information ratio through active weight allocation",
+          "Risk budgeting and capital allocation decisions in multi-manager portfolios",
+          "Fee justification analysis for active management strategies versus passive alternatives",
+          "Performance attribution analysis to identify sources of risk-adjusted alpha generation"
+        ],
+        "limitations": [
+          "Assumes active returns are normally distributed, which may not hold during market stress periods",
+          "Tracking error of zero creates division by zero, indicating perfect benchmark replication",
+          "Historical measure that may not predict future risk-adjusted performance",
+          "Sensitive to the time period chosen and may be unstable with small sample sizes",
+          "Does not account for higher-order risk moments like skewness and kurtosis of active returns"
+        ],
+        "formula_name": "Information Ratio",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This expression calculates the Information Ratio, a fundamental risk-adjusted performance metric that measures how much excess return a portfolio generates per unit of tracking risk relative to its benchmark.\",\n    \"relationships\": [\n        \"Active return in the numerator represents the portfolio manager's skill in generating excess returns above the benchmark\",\n        \"Tracking error in the denominator normalizes for the risk taken to achieve those excess returns\",\n        \"The ratio creates a risk-adjusted measure where higher values indicate more efficient active management\",\n        \"Linear relationship between active return and Information Ratio when tracking error is constant\",\n        \"Inverse relationship between tracking error and Information Ratio when active return is constant\"\n    ],\n    \"domain_insights\": [\n        \"Information Ratio is considered the active management equivalent of the Sharpe Ratio for risk-adjusted performance\",\n        \"Values above 0.5 are generally considered good, above 1.0 are excellent in active portfolio management\",\n        \"Directly measures the consistency of a manager's ability to outperform their benchmark\",\n        \"Critical metric for institutional investors evaluating active fund managers and strategies\",\n        \"Incorporates both return generation and risk control aspects of active portfolio management\"\n    ],\n    \"use_cases\": [\n        \"Fund manager performance evaluation and ranking across different investment strategies\",\n        \"Portfolio optimization to maximize information ratio through active weight allocation\",\n        \"Risk budgeting and capital allocation decisions in multi-manager portfolios\",\n        \"Fee justification analysis for active management strategies versus passive alternatives\",\n        \"Performance attribution analysis to identify sources of risk-adjusted alpha generation\"\n    ],\n    \"limitations\": [\n        \"Assumes active returns are normally distributed, which may not hold during market stress periods\",\n        \"Tracking error of zero creates division by zero, indicating perfect benchmark replication\",\n        \"Historical measure that may not predict future risk-adjusted performance\",\n        \"Sensitive to the time period chosen and may be unstable with small sample sizes\",\n        \"Does not account for higher-order risk moments like skewness and kurtosis of active returns\"\n    ],\n    \"formula_name\": \"Information Ratio\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 11.16,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 2,
+        "variable_names": [
+          "active_return",
+          "tracking_error"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-14T11:16:27.257681",
+      "description": "Maximum Drawdown - largest peak-to-trough decline",
+      "domain": "risk",
+      "discovery": {
+        "expression": "-1.0000459 + trough/peak",
+        "sympy_expr": "-1.0000459 + trough/peak",
+        "r2_score": 0.9999362052996792,
+        "complexity": "5",
+        "variable_names": [
+          "peak",
+          "trough"
+        ],
+        "predictions": "[-0.38436769 -0.29077955 -0.39790556 -0.16528857 -0.08640229 -0.30934935\n -0.34608623 -0.06734807 -0.29986231 -0.27997412 -0.34180346 -0.09074909\n -0.24401593 -0.15706734 -0.13473288 -0.34621383 -0.30488345 -0.1182336\n -0.33658099 -0.14277509 -0.07659935 -0.21960123 -0.16631362 -0.13775211\n -0.11977806 -0.3222719  -0.47697734 -0.31920158 -0.1968556  -0.29738823\n -0.16301248 -0.33940381 -0.21441104 -0.41615699 -0.16282965 -0.25448271\n -0.40821693 -0.36868587 -0.16317198 -0.28287534 -0.40283175 -0.06477386\n -0.17823964 -0.06933523 -0.30784863 -0.28625075 -0.09596605 -0.2637737\n -0.18177039 -0.38656811 -0.29901899 -0.44449346 -0.40735488 -0.49962136\n -0.48237663 -0.06026818 -0.39098674 -0.20155608 -0.12245104 -0.25224869\n -0.43113087 -0.1723935  -0.22993277 -0.17098313 -0.15365992 -0.06111123\n -0.24194242 -0.3463074  -0.20823685 -0.46924758 -0.09621711 -0.44632444\n -0.35251662 -0.13296048 -0.23125533 -0.32290992 -0.28699985 -0.11549957\n -0.34704393 -0.10870354 -0.46038541 -0.1504866  -0.11864947 -0.41822796\n -0.30638996 -0.425571   -0.18207404 -0.2591394  -0.21415039 -0.41162676\n -0.40476026 -0.4813721  -0.35511551 -0.2481608  -0.11397519 -0.19992855\n -0.30411755 -0.07114185 -0.17638556 -0.08147156 -0.26263131 -0.38353898\n -0.47627389 -0.17330772 -0.44545955 -0.36379709 -0.26043399 -0.24605844\n -0.22978346 -0.425231   -0.32916407 -0.2223085  -0.06362741 -0.17261189\n -0.08487421 -0.15705047 -0.23377326 -0.41363538 -0.20003736 -0.2195251\n -0.22893477 -0.27964226 -0.26215043 -0.34954676 -0.26635519 -0.41114574\n -0.13771742 -0.41644627 -0.46181107 -0.30373519 -0.20380755 -0.30307333\n -0.37550654 -0.24886887 -0.34389485 -0.08025544 -0.08485559 -0.27397858\n -0.3524981  -0.16833631 -0.48352508 -0.28639985 -0.34870037 -0.08580475\n -0.49464454 -0.25127921 -0.16674729 -0.28178781 -0.46161454 -0.06243827\n -0.26694121 -0.22366209 -0.3935715  -0.28247176 -0.30692863 -0.46634277\n -0.45227374 -0.12318327 -0.39212692 -0.41231468 -0.27283575 -0.15410969\n -0.47216997 -0.24048234 -0.4464012  -0.48363843 -0.47631112 -0.12467205\n -0.44695828 -0.47972779 -0.30299095 -0.12024884 -0.38196213 -0.31027522\n -0.48208076 -0.29796057 -0.24012001 -0.24313773 -0.35045389 -0.35805597\n -0.45206527 -0.33498666 -0.4552733  -0.15507772 -0.06522247 -0.06351239\n -0.11076391 -0.22968943 -0.18465634 -0.37170329 -0.21619921 -0.2950036\n -0.2831381  -0.15904645 -0.37318264 -0.35692807 -0.08395709 -0.47474497\n -0.28151047 -0.08928554]",
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": [],
+          "warnings": [
+            "Expression contains division - verify denominators are non-zero"
+          ]
+        }
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 99.1,
+        "base_score": 99.1,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 100,
+          "dimensional": 97.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [],
+            "sympy_expr": "-1.0000459 + trough/peak",
+            "canonical_form": "-1.0000459 + trough/peak",
+            "score": 100
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 97.0,
+            "errors": [],
+            "warnings": [
+              "Division by 'peak' detected - ensure peak ≠ 0"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "peak": "dimensionless",
+              "trough": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [
+                "unconstrained_division_peak"
+              ],
+              "overflow_risks": [],
+              "warnings": [
+                "Division by 'peak' detected - ensure peak ≠ 0"
+              ],
+              "errors": [],
+              "penalty": 3
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "risk",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Division by 'peak' detected - ensure peak ≠ 0"
+        ],
+        "recommendations": [
+          "🟡 VERIFY: Check dimensional analysis warnings"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "-1.0000459 + trough/peak",
+        "canonical_form": "-1.0000459 + trough/peak",
+        "domain": "risk",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "This expression calculates the maximum drawdown of a portfolio, measuring the largest peak-to-trough decline as a percentage of the peak value.",
+        "relationships": [
+          "The ratio trough/peak represents the fraction of peak value retained at the lowest point",
+          "Subtracting from 1.0000459 (approximately 1) converts the retained fraction to the loss fraction",
+          "The small constant adjustment (0.0000459) likely accounts for numerical precision or a slight bias correction",
+          "As trough approaches peak (no drawdown), the expression approaches zero",
+          "As trough approaches zero (total loss), the expression approaches 1 or 100% drawdown"
+        ],
+        "domain_insights": [
+          "Maximum drawdown is a critical risk metric measuring the worst-case loss from any peak",
+          "Unlike volatility, drawdown captures the actual loss experience of investors entering at peaks",
+          "This metric is essential for risk-adjusted performance evaluation and capital allocation decisions",
+          "Drawdown measures help assess the psychological and financial stress investors might experience",
+          "The formula provides a standardized way to compare risk across different assets and strategies"
+        ],
+        "use_cases": [
+          "Portfolio risk assessment and performance evaluation",
+          "Setting stop-loss levels and risk management thresholds",
+          "Comparing risk profiles of different investment strategies",
+          "Stress testing portfolios under adverse market conditions",
+          "Regulatory capital adequacy calculations and risk reporting",
+          "Investor communication about worst-case scenario losses"
+        ],
+        "limitations": [
+          "Requires clearly defined peak and trough values over a specific time period",
+          "Does not account for the duration or frequency of drawdowns",
+          "May not reflect current risk if based on historical data only",
+          "Assumes trough value is always less than or equal to peak value",
+          "The small constant suggests potential model-specific calibration that may not generalize",
+          "Single drawdown metric may not capture full risk profile complexity"
+        ],
+        "formula_name": "Maximum Drawdown Ratio",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"This expression calculates the maximum drawdown of a portfolio, measuring the largest peak-to-trough decline as a percentage of the peak value.\",\n    \"relationships\": [\n        \"The ratio trough/peak represents the fraction of peak value retained at the lowest point\",\n        \"Subtracting from 1.0000459 (approximately 1) converts the retained fraction to the loss fraction\",\n        \"The small constant adjustment (0.0000459) likely accounts for numerical precision or a slight bias correction\",\n        \"As trough approaches peak (no drawdown), the expression approaches zero\",\n        \"As trough approaches zero (total loss), the expression approaches 1 or 100% drawdown\"\n    ],\n    \"domain_insights\": [\n        \"Maximum drawdown is a critical risk metric measuring the worst-case loss from any peak\",\n        \"Unlike volatility, drawdown captures the actual loss experience of investors entering at peaks\",\n        \"This metric is essential for risk-adjusted performance evaluation and capital allocation decisions\",\n        \"Drawdown measures help assess the psychological and financial stress investors might experience\",\n        \"The formula provides a standardized way to compare risk across different assets and strategies\"\n    ],\n    \"use_cases\": [\n        \"Portfolio risk assessment and performance evaluation\",\n        \"Setting stop-loss levels and risk management thresholds\",\n        \"Comparing risk profiles of different investment strategies\",\n        \"Stress testing portfolios under adverse market conditions\",\n        \"Regulatory capital adequacy calculations and risk reporting\",\n        \"Investor communication about worst-case scenario losses\"\n    ],\n    \"limitations\": [\n        \"Requires clearly defined peak and trough values over a specific time period\",\n        \"Does not account for the duration or frequency of drawdowns\",\n        \"May not reflect current risk if based on historical data only\",\n        \"Assumes trough value is always less than or equal to peak value\",\n        \"The small constant suggests potential model-specific calibration that may not generalize\",\n        \"Single drawdown metric may not capture full risk profile complexity\"\n    ],\n    \"formula_name\": \"Maximum Drawdown Ratio\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 12.54,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 2,
+        "variable_names": [
+          "peak",
+          "trough"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    },
+    {
+      "timestamp": "2025-12-14T11:16:38.779907",
+      "description": "Treynor ratio - return per unit of systematic risk",
+      "domain": "risk",
+      "discovery": {
+        "expression": "DISCOVERY_FAILED",
+        "sympy_expr": null,
+        "r2_score": 0.0,
+        "complexity": 0,
+        "variable_names": [
+          "returns",
+          "risk_free",
+          "beta"
+        ],
+        "predictions": null,
+        "validation": {
+          "valid": false,
+          "errors": [
+            "Discovery error: Variable name beta is already a function name."
+          ],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": []
+        }
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 94.5,
+        "base_score": 94.5,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 85,
+          "dimensional": 100.0,
+          "domain": 100.0,
+          "numerical": 90.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": false,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [
+              "Undefined variables: ['DISCOVERY_FAILED']"
+            ],
+            "warnings": [],
+            "sympy_expr": "DISCOVERY_FAILED",
+            "canonical_form": "DISCOVERY_FAILED",
+            "score": 85
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "returns": "dimensionless",
+              "risk_free": "dimensionless",
+              "beta": "dimensionless"
+            },
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": []
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "risk",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 90.0,
+            "errors": [],
+            "warnings": [
+              "Missing test data for variables: ['DISCOVERY_FAILED']"
+            ]
+          }
+        },
+        "errors": [
+          "Undefined variables: ['DISCOVERY_FAILED']"
+        ],
+        "warnings": [
+          "Missing test data for variables: ['DISCOVERY_FAILED']"
+        ],
+        "recommendations": [
+          "🔴 FIX CRITICAL: Resolve mathematical/symbolic errors",
+          "  → Undefined variables: ['DISCOVERY_FAILED']",
+          "🟡 OPTIMIZE: Improve numerical stability"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": false,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "threshold_used": 85.0,
+          "all_layers_above_critical": true
+        },
+        "expression": "DISCOVERY_FAILED",
+        "canonical_form": "DISCOVERY_FAILED",
+        "domain": "risk",
+        "strict_mode": false
+      },
+      "interpretation": {
+        "interpretation": "The discovery process failed to identify a valid symbolic expression from the given portfolio returns, risk-free rate, and beta variables.",
+        "relationships": [
+          "No mathematical relationships can be analyzed as no expression was successfully discovered",
+          "The input variables (returns, risk_free, beta) suggest an attempt to model systematic risk relationships",
+          "Without a valid expression, the interaction between portfolio performance and market risk factors remains undefined"
+        ],
+        "domain_insights": [
+          "The variable combination suggests an attempt to capture CAPM-related risk-return dynamics",
+          "Beta as systematic risk measure indicates focus on market-relative risk assessment",
+          "Risk-free rate inclusion points toward risk premium calculations or Sharpe-type ratios",
+          "The discovery failure may indicate complex non-linear relationships that standard symbolic regression couldn't capture"
+        ],
+        "use_cases": [
+          "Cannot provide specific use cases due to failed expression discovery",
+          "Potential applications would likely involve portfolio risk assessment if expression were valid",
+          "Risk-adjusted performance measurement appears to be the intended domain based on variable selection"
+        ],
+        "limitations": [
+          "Complete discovery failure renders the expression unusable for any practical application",
+          "R² score of 0.0000 indicates no meaningful pattern was captured from the data",
+          "Despite high validation scores in some areas, the fundamental symbolic discovery failure invalidates all results",
+          "The moderate fit quality assessment contradicts the zero R² score, suggesting evaluation inconsistencies",
+          "One detected error likely relates to the core discovery failure"
+        ],
+        "formula_name": "Failed Risk Expression Discovery",
+        "provider": "anthropic",
+        "raw_response": "{\n    \"interpretation\": \"The discovery process failed to identify a valid symbolic expression from the given portfolio returns, risk-free rate, and beta variables.\",\n    \"relationships\": [\n        \"No mathematical relationships can be analyzed as no expression was successfully discovered\",\n        \"The input variables (returns, risk_free, beta) suggest an attempt to model systematic risk relationships\",\n        \"Without a valid expression, the interaction between portfolio performance and market risk factors remains undefined\"\n    ],\n    \"domain_insights\": [\n        \"The variable combination suggests an attempt to capture CAPM-related risk-return dynamics\",\n        \"Beta as systematic risk measure indicates focus on market-relative risk assessment\",\n        \"Risk-free rate inclusion points toward risk premium calculations or Sharpe-type ratios\",\n        \"The discovery failure may indicate complex non-linear relationships that standard symbolic regression couldn't capture\"\n    ],\n    \"use_cases\": [\n        \"Cannot provide specific use cases due to failed expression discovery\",\n        \"Potential applications would likely involve portfolio risk assessment if expression were valid\",\n        \"Risk-adjusted performance measurement appears to be the intended domain based on variable selection\"\n    ],\n    \"limitations\": [\n        \"Complete discovery failure renders the expression unusable for any practical application\",\n        \"R² score of 0.0000 indicates no meaningful pattern was captured from the data\",\n        \"Despite high validation scores in some areas, the fundamental symbolic discovery failure invalidates all results\",\n        \"The moderate fit quality assessment contradicts the zero R² score, suggesting evaluation inconsistencies\",\n        \"One detected error likely relates to the core discovery failure\"\n    ],\n    \"formula_name\": \"Failed Risk Expression Discovery\"\n}",
+        "parse_success": true,
+        "metadata": {
+          "provider": "anthropic",
+          "generation_time_seconds": 11.47,
+          "attempt": 1,
+          "fallback_used": false
+        }
+      },
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 3,
+        "variable_names": [
+          "returns",
+          "risk_free",
+          "beta"
+        ],
+        "llm_provider": "anthropic",
+        "primary_llm": "anthropic",
+        "fallback_enabled": true
+      }
+    }
+  ]
+}

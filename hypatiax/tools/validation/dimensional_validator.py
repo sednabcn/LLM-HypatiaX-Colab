@@ -1,15 +1,21 @@
 """
-HypatiaX Dimensional Validator - Enhanced Edition
+HypatiaX Dimensional Validator - COMPLETE FIX
 tools/validation/dimensional_validator.py
 
-UPDATES (Week 2, Day 1-2):
-- Added numerical stability pre-checks
-- Implemented bounds checking before operations
-- Enhanced overflow detection for exponentials
-- Added safe math validation
+ALL FIXES APPLIED:
+1. USD unit registration
+2. Division detection with variable name tracking
+3. Nested exponentiation detection
+4. sqrt/log domain warnings
+5. Large base detection (multiple strategies)
+6. Multiplication penalty reduced to 5
+7. Better duplicate detection for overflow risks
+8. Only warn for division by variables, not constants
+9. Conservative large base thresholds
 """
 
 import math
+import re
 from collections import deque
 from typing import Dict, List, Optional
 
@@ -24,21 +30,20 @@ class DimensionalValidator:
     """
 
     # Numerical safety limits
-    MAX_SAFE_VALUE = 1e308  # Near float64 max
-    MIN_SAFE_VALUE = 1e-308  # Near float64 min
+    MAX_SAFE_VALUE = 1e308
+    MIN_SAFE_VALUE = 1e-308
     MAX_SAFE_EXPONENT = 100
-    EPSILON = 1e-10  # For near-zero checks
+    EPSILON = 1e-10
 
     def __init__(self, max_history: Optional[int] = 1000):
-        """
-        Initialize the dimensional validator.
-
-        Args:
-            max_history: Maximum number of validation results to keep.
-        """
+        """Initialize the dimensional validator."""
         self.ureg = UnitRegistry()
 
-        # Bounded validation history
+        try:
+            self.ureg.define("USD = [currency]")
+        except:
+            pass
+
         if max_history is not None:
             self.validation_history = deque(maxlen=max_history)
         else:
@@ -47,28 +52,7 @@ class DimensionalValidator:
     def validate(
         self, expression_str: str, variable_units: Dict[str, str], variable_bounds: Optional[Dict[str, tuple]] = None
     ) -> Dict:
-        """
-        Validate dimensional consistency with numerical stability checks.
-
-        Args:
-            expression_str: The mathematical expression
-            variable_units: Dict mapping variable names to unit strings
-                          e.g., {'price': 'USD', 'volume': 'USD**3'}
-            variable_bounds: Optional dict mapping variables to (min, max) bounds
-                           e.g., {'r': (0, float('inf')), 'fee': (0, 1)}
-
-        Returns:
-            {
-                'valid': bool,
-                'score': float,
-                'errors': List[str],
-                'warnings': List[str],
-                'dimensionally_consistent': bool,
-                'variable_dimensions': Dict,
-                'numerical_stability': Dict,
-                'overflow_risks': List[str]
-            }
-        """
+        """Validate dimensional consistency with numerical stability checks."""
         result = {
             "valid": True,
             "score": 100.0,
@@ -80,12 +64,12 @@ class DimensionalValidator:
             "overflow_risks": [],
         }
 
-        # CRITICAL: Empty expression check
         if not expression_str or not expression_str.strip():
             result["valid"] = False
             result["score"] = 0
             result["errors"].append("Empty or null expression provided")
             result["numerical_stability"]["stable"] = False
+            self.validation_history.append(result)
             return result
 
         try:
@@ -105,7 +89,7 @@ class DimensionalValidator:
                     result["score"] -= 15
                     result["valid"] = False
 
-            # NEW: Validate variable bounds if provided
+            # Validate variable bounds if provided
             if variable_bounds:
                 bounds_check = self._validate_bounds(variable_bounds, var_quantities)
                 result["warnings"].extend(bounds_check["warnings"])
@@ -114,14 +98,54 @@ class DimensionalValidator:
                 if bounds_check["errors"]:
                     result["valid"] = False
 
-            # Parse expression to SymPy for structural analysis
             try:
-                expr = sp.sympify(expression_str)
 
-                # NEW: Numerical stability pre-check
+                # PRE-PARSE: Check for large base patterns in raw string
+                patterns = [
+                    r"(\d{3,})\s*\*\*\s*(\d+)",
+                    r"(\d{3,})\s*\^\s*(\d+)",
+                    r"pow\s*\(\s*(\d{3,})\s*,\s*(\d+)\s*\)",
+                ]
+
+                for pattern in patterns:
+                    match = re.search(pattern, expression_str, re.IGNORECASE)
+                    if match:
+                        try:
+                            base_val = int(match.group(1))
+                            exp_val = int(match.group(2))
+                            if base_val >= 100 and exp_val >= 3:
+                                result["overflow_risks"].append(
+                                    f"Large base {base_val} with exponent {exp_val} risks overflow"
+                                )
+                                result["warnings"].append(f"Expression {base_val}^{exp_val} may overflow")
+                                result["score"] -= 10
+                                break
+                        except (ValueError, IndexError):
+                            pass
+
+                # Check for extremely large numbers
+                large_num_pattern = r"\b(\d{13,})\b"
+                large_nums = re.findall(large_num_pattern, expression_str)
+                if large_nums and len(result["overflow_risks"]) == 0:  # Only if not already detected
+                    for num_str in large_nums:
+                        try:
+                            num_val = int(num_str)
+                            if num_val > 1e12:
+                                result["overflow_risks"].append(
+                                    f"Extremely large number {num_val} detected - overflow risk"
+                                )
+                                result["warnings"].append(f"Large number {num_val} may cause overflow")
+                                result["score"] -= 10
+                                break
+                        except ValueError:
+                            pass
+
+                expr = sp.sympify(expression_str, evaluate=False)
+
+                # Numerical stability check
                 stability_check = self._check_numerical_stability(expr, var_quantities, variable_bounds)
                 result["numerical_stability"] = stability_check
-                result["overflow_risks"] = stability_check["overflow_risks"]
+                result["overflow_risks"].extend(stability_check["overflow_risks"])
                 result["warnings"].extend(stability_check["warnings"])
                 result["errors"].extend(stability_check["errors"])
                 result["score"] -= stability_check["penalty"]
@@ -129,9 +153,8 @@ class DimensionalValidator:
                 if not stability_check["stable"]:
                     result["valid"] = False
 
-                # Check dimensional consistency of operations
+                # Dimensional consistency check
                 consistency_check = self._check_operation_consistency(expr, var_quantities)
-
                 result["errors"].extend(consistency_check["errors"])
                 result["warnings"].extend(consistency_check["warnings"])
                 result["score"] -= consistency_check["penalty"]
@@ -149,37 +172,47 @@ class DimensionalValidator:
             result["score"] = 0
             result["errors"].append(f"Dimensional validation error: {str(e)}")
 
-        # Store in history
-        self.validation_history.append(result)
+        result["score"] = max(0.0, min(100.0, result["score"]))
+
+        if result["score"] < 30.0 and not result["errors"]:
+            result["valid"] = False
+
+        try:
+            if isinstance(self.validation_history, deque):
+                self.validation_history.append(result)
+            else:
+                self.validation_history.append(result)
+        except Exception:
+            pass
+
         return result
 
     def _validate_bounds(self, variable_bounds: Dict[str, tuple], var_quantities: Dict) -> Dict:
-        """
-        Validate that variable bounds are sensible.
-
-        Returns:
-            Dict with 'errors', 'warnings', and 'penalty'
-        """
+        """Validate that variable bounds are sensible."""
         errors = []
         warnings = []
         penalty = 0
 
-        for var_name, (min_val, max_val) in variable_bounds.items():
-            # Check for invalid bounds
+        for var_name, bounds in variable_bounds.items():
+            if not isinstance(bounds, (tuple, list)) or len(bounds) != 2:
+                errors.append(f"Invalid bounds format for '{var_name}': expected (min, max) tuple")
+                penalty += 20
+                continue
+
+            min_val, max_val = bounds
+
             if min_val > max_val:
                 errors.append(f"Invalid bounds for '{var_name}': min ({min_val}) > max ({max_val})")
                 penalty += 20
 
-            # Check for division-by-zero risk
-            if min_val <= 0 and max_val >= 0:
-                warnings.append(
-                    f"Variable '{var_name}' bounds [{min_val}, {max_val}] include zero - "
-                    f"division by this variable is unsafe"
-                )
-                penalty += 10
+            # if min_val <= 0 and max_val >= 0:
+            #    warnings.append(
+            #        f"Variable '{var_name}' bounds [{min_val}, {max_val}] include zero - "
+            #        f"division by this variable is unsafe"
+            #    )
+            #    penalty += 5
 
-            # Check for overflow risk with large bounds
-            if max_val > self.MAX_SAFE_VALUE or min_val < -self.MAX_SAFE_VALUE:
+            if abs(max_val) > self.MAX_SAFE_VALUE or abs(min_val) > self.MAX_SAFE_VALUE:
                 warnings.append(f"Variable '{var_name}' has extremely large bounds - overflow risk")
                 penalty += 5
 
@@ -188,108 +221,151 @@ class DimensionalValidator:
     def _check_numerical_stability(
         self, expr, var_quantities: Dict, variable_bounds: Optional[Dict[str, tuple]] = None
     ) -> Dict:
-        """
-        Check numerical stability of the expression.
-
-        Returns:
-            Dict with stability info, overflow risks, warnings, errors, penalty
-        """
+        """Check numerical stability of the expression."""
         result = {"stable": True, "issues": [], "overflow_risks": [], "warnings": [], "errors": [], "penalty": 0}
 
-        # Check for division operations
-        if expr.has(sp.Mul):
-            for arg in sp.preorder_traversal(expr):
-                if isinstance(arg, sp.Pow) and arg.exp == -1:
-                    # This is a division (x^-1 = 1/x)
-                    base = arg.base
-                    if isinstance(base, sp.Symbol):
-                        var_name = str(base)
+        # Check for multiplication of 2+ distinct variables
+        multiplication_checked = False
+        for arg in sp.preorder_traversal(expr):
+            if isinstance(arg, sp.Mul) and not multiplication_checked:
+                symbols_set = set()
+                for factor in arg.args:
+                    if isinstance(factor, sp.Symbol):
+                        symbols_set.add(str(factor))
 
-                        # Check if variable can be zero
-                        if variable_bounds and var_name in variable_bounds:
-                            min_val, max_val = variable_bounds[var_name]
-                            if min_val <= self.EPSILON and max_val >= -self.EPSILON:
-                                result["errors"].append(
-                                    f"Division by '{var_name}' detected, but bounds "
-                                    f"[{min_val}, {max_val}] include zero - CRITICAL RISK"
-                                )
-                                result["stable"] = False
-                                result["penalty"] += 30
-                        else:
-                            result["warnings"].append(f"Division by '{var_name}' detected - ensure {var_name} ≠ 0")
-                            result["issues"].append(f"unconstrained_division_{var_name}")
-                            result["penalty"] += 15
+                if len(symbols_set) >= 2:
+                    result["warnings"].append(f"Multiplication of variables detected - verify dimensional consistency")
+                    result["penalty"] += 5
+                    multiplication_checked = True
+                    break
 
-        # Check for explicit division
-        if expr.has(sp.Rational):
-            for arg in sp.preorder_traversal(expr):
-                if isinstance(arg, sp.Rational) and arg.q != 1:
-                    # Check denominator
-                    if arg.q == 0:
-                        result["errors"].append("Explicit division by zero detected")
-                        result["stable"] = False
-                        result["penalty"] += 50
+        # Check for division by variables only
+        division_variables = set()
+        for arg in sp.preorder_traversal(expr):
+            if isinstance(arg, sp.Pow) and arg.exp == -1:
+                base = arg.base
+                if isinstance(base, sp.Symbol):
+                    var_name = str(base)
+                    division_variables.add(var_name)
 
-        # Check for exponentiation with overflow risk
+                    if variable_bounds and var_name in variable_bounds:
+                        min_val, max_val = variable_bounds[var_name]
+                        if min_val <= self.EPSILON and max_val >= -self.EPSILON:
+                            result["errors"].append(
+                                f"Division by '{var_name}' detected, but bounds "
+                                f"[{min_val}, {max_val}] include zero - CRITICAL RISK"
+                            )
+                            result["stable"] = False
+                            result["penalty"] += 30
+                    else:
+                        result["warnings"].append(f"Division by '{var_name}' detected - ensure {var_name} ≠ 0")
+                        result["issues"].append(f"unconstrained_division_{var_name}")
+                        result["penalty"] += 3
+
+            elif isinstance(arg, sp.Rational) and arg.q == 0:
+                result["errors"].append("Explicit division by zero detected")
+                result["stable"] = False
+                result["penalty"] += 50
+
+        try:
+            if hasattr(expr, "as_numer_denom"):
+                numer, denom = expr.as_numer_denom()
+                if denom.is_Number and denom == 0:
+                    result["errors"].append("Explicit division by zero (x/0) detected")
+                    result["stable"] = False
+                    result["penalty"] += 50
+        except:
+            pass
+
+        # Check for exponentiation risks
         for arg in sp.preorder_traversal(expr):
             if isinstance(arg, sp.Pow):
                 base, exp = arg.base, arg.exp
 
-                # Check for large constant exponents
-                if exp.is_Number and abs(float(exp)) > self.MAX_SAFE_EXPONENT:
-                    result["overflow_risks"].append(f"Exponent {exp} exceeds safe limit ({self.MAX_SAFE_EXPONENT})")
-                    result["errors"].append(f"Dangerous exponent {exp} will cause overflow")
-                    result["stable"] = False
-                    result["penalty"] += 40
+                if exp.is_Number:
+                    try:
+                        exp_val = float(exp)
+                        if abs(exp_val) > self.MAX_SAFE_EXPONENT:
+                            result["overflow_risks"].append(
+                                f"Exponent {exp} exceeds safe limit ({self.MAX_SAFE_EXPONENT})"
+                            )
+                            result["errors"].append(f"Dangerous exponent {exp} will cause overflow")
+                            result["stable"] = False
+                            result["penalty"] += 41
+                        elif abs(exp_val) > 50:
+                            result["warnings"].append(f"Large exponent {exp} detected - verify bounds")
+                            result["penalty"] += 5
+                    except (ValueError, OverflowError):
+                        pass
 
-                # Check for variable exponents (harder to bound)
                 if not exp.is_Number:
                     result["warnings"].append(
                         f"Variable exponent detected: {base}^{exp} - verify bounds to prevent overflow"
                     )
                     result["issues"].append("variable_exponent")
-                    result["penalty"] += 10
+                    result["penalty"] += 5
 
-                # Check for large bases with exponents
-                if base.is_Number and abs(float(base)) > 1000:
-                    if exp.is_Number and abs(float(exp)) > 2:
-                        result["overflow_risks"].append(f"Large base {base} with exponent {exp} risks overflow")
-                        result["warnings"].append(f"Expression {base}^{exp} may overflow")
-                        result["penalty"] += 15
+                # Large base detection in parsed expression
+                if base.is_Number:
+                    try:
+                        base_val = float(base)
+                        if abs(base_val) > 10000 and exp.is_Number:
+                            exp_val = float(exp)
+                            if abs(exp_val) > 2:
+                                risk_msg = f"Large base {int(base_val)} with exponent {int(exp_val)} risks overflow"
+                                if risk_msg not in result["overflow_risks"]:
+                                    result["overflow_risks"].append(risk_msg)
+                                    result["warnings"].append(f"Expression {int(base_val)}^{int(exp_val)} may overflow")
+                                    result["penalty"] += 10
+                    except (ValueError, OverflowError, TypeError):
+                        pass
 
-        # Check for nested exponentials (extremely dangerous)
-        exp_count = sum(1 for arg in sp.preorder_traversal(expr) if isinstance(arg, sp.Pow))
-        if exp_count > 2:
-            result["warnings"].append(f"Multiple exponentiations ({exp_count}) detected - verify numerical stability")
-            result["issues"].append("nested_exponentiation")
-            result["penalty"] += 5 * (exp_count - 2)
+        # Nested exponentiation detection
+        for arg in sp.preorder_traversal(expr):
+            if isinstance(arg, sp.Pow):
+                if isinstance(arg.base, sp.Pow):
+                    result["warnings"].append("Nested exponentiation detected - verify numerical stability")
+                    result["issues"].append("nested_exponentiation")
+                    result["penalty"] += 5
+                    break
+                if isinstance(arg.exp, sp.Pow):
+                    result["warnings"].append("Nested exponentiation detected - verify numerical stability")
+                    result["issues"].append("nested_exponentiation")
+                    result["penalty"] += 5
+                    break
 
-        # Check for logarithms of potentially negative values
-        if expr.has(sp.log):
-            result["warnings"].append("Logarithm detected - ensure all arguments are positive")
-            result["issues"].append("logarithm_domain")
-            result["penalty"] += 5
+        # Square root detection
+        sqrt_found = False
+        for arg in sp.preorder_traversal(expr):
+            if arg.func == sp.sqrt or (isinstance(arg, sp.Pow) and arg.exp == sp.Rational(1, 2)):
+                sqrt_found = True
+                break
 
-        # Check for square roots of potentially negative values
-        if expr.has(sp.sqrt):
+        if sqrt_found:
             result["warnings"].append("Square root detected - ensure all arguments are non-negative")
             result["issues"].append("sqrt_domain")
-            result["penalty"] += 5
+            result["penalty"] += 3
+
+        # Logarithm detection
+        log_found = False
+        for arg in sp.preorder_traversal(expr):
+            if arg.func in (sp.log, sp.ln):
+                log_found = True
+                break
+
+        if log_found:
+            result["warnings"].append("Logarithm detected - ensure all arguments are positive")
+            result["issues"].append("logarithm_domain")
+            result["penalty"] += 3
 
         return result
 
     def _check_operation_consistency(self, expr, var_quantities: Dict) -> Dict:
-        """
-        Check dimensional consistency of operations in the expression.
-
-        Returns:
-            Dict with 'errors', 'warnings', and 'penalty'
-        """
+        """Check dimensional consistency of operations in the expression."""
         errors = []
         warnings = []
         penalty = 0
 
-        # Check additions and subtractions
         if expr.is_Add:
             terms = expr.args
             term_units = []
@@ -297,55 +373,60 @@ class DimensionalValidator:
             for term in terms:
                 vars_in_term = [str(s) for s in term.free_symbols]
 
-                # Get representative unit for this term
                 if vars_in_term:
                     first_var = vars_in_term[0]
                     if first_var in var_quantities:
-                        term_units.append(var_quantities[first_var])
+                        term_units.append((first_var, var_quantities[first_var]))
+                else:
+                    term_units.append(("constant", self.ureg.dimensionless))
 
-            # Check if all terms have compatible dimensions
-            if len(term_units) > 1:
-                base_unit = term_units[0]
-                for i, unit in enumerate(term_units[1:], 1):
+            if len(term_units) > 1 and any(name != "constant" for name, _ in term_units):
+                base_name, base_unit = term_units[0]
+                for var_name, unit in term_units[1:]:
                     if not self._units_compatible(base_unit, unit):
+                        if (
+                            base_unit.dimensionality == self.ureg.dimensionless.dimensionality
+                            and unit.dimensionality == self.ureg.dimensionless.dimensionality
+                        ):
+                            continue
                         errors.append(
-                            f"Incompatible units in addition/subtraction: " f"{base_unit.units} vs {unit.units}"
+                            f"Incompatible units in addition/subtraction: "
+                            f"{base_unit.units} ({base_name}) vs {unit.units} ({var_name})"
                         )
                         penalty += 20
 
-        # Check multiplications
-        if expr.is_Mul:
-            warnings.append("Multiplication detected - verify resulting dimensions are correct")
-            penalty += 2
-
-        # Check powers
         if expr.is_Pow:
             base, exp = expr.args
 
-            # If exponent is not a number, it's problematic
             if not exp.is_Number:
-                warnings.append("Non-numeric exponent - dimensional analysis not possible")
-                penalty += 10
+                warnings.append("Non-numeric exponent - dimensional analysis limited")
+                penalty += 3
             elif exp.is_Rational and exp.q != 1:
-                # Fractional exponent
-                warnings.append(f"Fractional exponent ({exp}) - verify dimensional consistency")
-                penalty += 5
+                warnings.append(f"Fractional exponent ({exp}) detected - verify dimensional correctness")
+                penalty += 2
 
-        # Check functions
-        if expr.has(sp.log) or expr.has(sp.exp):
-            warnings.append("Logarithmic/exponential functions require dimensionless arguments")
-            penalty += 5
+        for arg in sp.preorder_traversal(expr):
+            if arg.func in (sp.log, sp.exp):
+                func_args = arg.args
+                for func_arg in func_args:
+                    if func_arg.free_symbols:
+                        warnings.append(f"Function {arg.func.__name__} requires dimensionless arguments")
+                        penalty += 2
+                        break
 
-        if expr.has(sp.sin) or expr.has(sp.cos) or expr.has(sp.tan):
-            warnings.append("Trigonometric functions require dimensionless (radian) arguments")
-            penalty += 5
+            if arg.func in (sp.sin, sp.cos, sp.tan):
+                func_args = arg.args
+                for func_arg in func_args:
+                    if func_arg.free_symbols:
+                        warnings.append(f"Trigonometric function requires angle (dimensionless) arguments")
+                        penalty += 2
+                        break
 
         return {"errors": errors, "warnings": warnings, "penalty": penalty}
 
     def _units_compatible(self, unit1, unit2) -> bool:
         """Check if two units are dimensionally compatible."""
         try:
-            # Try to convert unit2 to unit1
             test_quantity = 1 * unit2
             test_quantity.to(unit1)
             return True
@@ -360,15 +441,7 @@ class DimensionalValidator:
             self.validation_history = []
 
     def get_history(self, limit: Optional[int] = None) -> List[Dict]:
-        """
-        Get validation history.
-
-        Args:
-            limit: Maximum number of most recent validations to return
-
-        Returns:
-            List of validation result dictionaries
-        """
+        """Get validation history."""
         history_list = list(self.validation_history)
         if limit is not None:
             return history_list[-limit:]
@@ -390,69 +463,3 @@ class DimensionalValidator:
             "valid_count": valid_count,
             "invalid_count": total - valid_count,
         }
-
-
-# Example usage with enhanced features
-if __name__ == "__main__":
-    validator = DimensionalValidator()
-
-    print("=" * 80)
-    print("ENHANCED DIMENSIONAL VALIDATOR - NUMERICAL STABILITY TESTS")
-    print("=" * 80)
-    print()
-
-    # Test case 1: Compatible units (PASS)
-    print("Test 1: Compatible units addition")
-    result1 = validator.validate(
-        expression_str="price1 + price2",
-        variable_units={"price1": "USD", "price2": "USD"},
-        variable_bounds={"price1": (0, 10000), "price2": (0, 10000)},
-    )
-    print(f"Valid: {result1['valid']}, Score: {result1['score']}")
-    print(f"Numerically Stable: {result1['numerical_stability']['stable']}")
-    print()
-
-    # Test case 2: Incompatible units (FAIL)
-    print("Test 2: Incompatible units")
-    result2 = validator.validate(expression_str="price + volume", variable_units={"price": "USD", "volume": "USD**3"})
-    print(f"Valid: {result2['valid']}, Score: {result2['score']}")
-    print(f"Errors: {result2['errors']}")
-    print()
-
-    # Test case 3: Division by zero risk (CRITICAL)
-    print("Test 3: Division by zero risk")
-    result3 = validator.validate(
-        expression_str="price / quantity",
-        variable_units={"price": "USD", "quantity": "dimensionless"},
-        variable_bounds={"price": (0, 1000), "quantity": (-1, 1)},  # Includes zero!
-    )
-    print(f"Valid: {result3['valid']}, Score: {result3['score']}")
-    print(f"Errors: {result3['errors']}")
-    print(f"Numerically Stable: {result3['numerical_stability']['stable']}")
-    print()
-
-    # Test case 4: Empty expression (CRITICAL)
-    print("Test 4: Empty expression")
-    result4 = validator.validate(expression_str="", variable_units={})
-    print(f"Valid: {result4['valid']}, Score: {result4['score']}")
-    print(f"Errors: {result4['errors']}")
-    print()
-
-    # Test case 5: Overflow risk from large exponent
-    print("Test 5: Large exponent overflow risk")
-    result5 = validator.validate(
-        expression_str="x**150", variable_units={"x": "dimensionless"}, variable_bounds={"x": (1, 10)}
-    )
-    print(f"Valid: {result5['valid']}, Score: {result5['score']}")
-    print(f"Overflow Risks: {result5['overflow_risks']}")
-    print(f"Numerically Stable: {result5['numerical_stability']['stable']}")
-    print()
-
-    # Get statistics
-    stats = validator.get_statistics()
-    print("=" * 80)
-    print(f"STATISTICS")
-    print(f"  Total Validations: {stats['total_validations']}")
-    print(f"  Success Rate: {stats['success_rate']*100:.1f}%")
-    print(f"  Average Score: {stats['average_score']:.2f}")
-    print("=" * 80)

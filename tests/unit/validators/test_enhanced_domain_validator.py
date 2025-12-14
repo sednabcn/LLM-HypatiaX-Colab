@@ -20,7 +20,7 @@ import pytest
 import sympy as sp
 
 sys.path.append("tools/validation")
-from enhanced_domain_validator import ConstraintType, EnhancedDomainValidator
+from hypatiax.tools.validation.enhanced_domain_validator import ConstraintType, EnhancedDomainValidator
 
 
 class TestBasicValidation:

@@ -1,0 +1,21 @@
+Timestamp,Expression,R² Score,Complexity,Validation Score,Valid,Interpretation,Provider,Domain
+2025-12-14T11:23:04.104268,mu - 1.9601188*sigma*sqrt(t),0.9999917770902835,8,99.1,True,This expression calculates a risk-adjusted return threshold or lower confidence bound by subtracting,anthropic,risk
+2025-12-14T11:23:45.735611,(returns - risk_free)/volatility,0.99986166375539,5,99.1,True,"This expression calculates the Sharpe ratio, a fundamental risk-adjusted return metric that measures",anthropic,risk
+2025-12-14T11:24:37.768731,mu - 1.1688371*sigma*sqrt(t),0.9999743987261509,8,99.1,True,This expression calculates a risk-adjusted return measure that penalizes expected returns based on v,anthropic,risk
+2025-12-14T11:25:29.745738,cov_im/var_m,0.9999833956116185,3,97.0,True,"This expression calculates the beta coefficient, which measures an asset's systematic risk or sensit",anthropic,risk
+2025-12-14T11:26:09.578757,(returns - target)/downside_dev,0.9999244531551096,5,99.1,True,"This expression calculates the Sortino ratio, a risk-adjusted performance metric that measures exces",anthropic,risk
+2025-12-14T11:26:52.916374,active_return/tracking_error,0.9999340421158929,3,99.1,True,"This expression calculates the Information Ratio, a fundamental risk-adjusted performance metric tha",anthropic,risk
+2025-12-14T11:27:44.071952,-1.0000459 + trough/peak,0.9999362052996792,5,99.1,True,"This expression calculates the maximum drawdown of a portfolio, representing the largest peak-to-tro",anthropic,risk
+2025-12-14T11:27:54.244913,DISCOVERY_FAILED,0.0,0,94.5,False,"Discovery failed - no valid mathematical expression was found to analyze, indicating the symbolic re",anthropic,risk
+2025-12-14T11:28:33.515454,annual_return/max_drawdown,0.9998709709656178,3,99.1,True,This expression calculates a risk-adjusted return metric that measures how much annualized return is,anthropic,risk
+2025-12-14T11:29:24.021379,(gains + 0.011044353)*exp(exp((losses*0.116393164*losses)**losses*1.5305438)),0.9993130494615531,15,86.5,True,This expression calculates an adjusted risk metric that exponentially amplifies the impact of losses,anthropic,risk
+2025-12-14T11:30:03.409415,mu - 3.37321066809667*sigma + 1.705984117523*log(5.302317/t)*log(t**sigma),0.9978595473785776,23,77.6,False,,,risk
+2025-12-14T11:30:49.376877,(returns - risk_free)*(-0.16818751*skewness/volatility + 1.0081632/volatility),0.999843841173675,13,97.6,True,This expression calculates a skewness-adjusted risk premium that modifies the traditional Sharpe rat,anthropic,risk
+2025-12-14T11:31:47.830253,sqrt(dd_squared_sum/periods),0.9987451473847336,4,97.6,True,"This expression calculates the Root Mean Square (RMS) of drawdowns, providing a standardized measure",anthropic,risk
+2025-12-14T11:32:37.110407,returns/ulcer_index,0.9999116553136793,3,99.1,True,This expression calculates a risk-adjusted return metric that measures portfolio returns per unit of,anthropic,risk
+2025-12-14T11:33:19.204197,returns/lpm3**0.332772,0.9992205847826923,7,98.5,True,This expression calculates a risk-adjusted return measure that normalizes portfolio returns by a fra,anthropic,risk
+2025-12-14T11:34:03.559573,avg_gain/avg_loss,0.9999332547942714,3,97.6,True,"This expression calculates the Profit Factor (or Win/Loss Ratio), a fundamental risk metric that mea",anthropic,risk
+2025-12-14T11:35:02.292182,upside_potential/downside_risk,0.9999535709363672,3,99.1,True,"This expression calculates the Upside Potential Ratio, a risk-adjusted performance metric that measu",anthropic,risk
+2025-12-14T11:35:42.006096,(annual_return - 1*0.10009705)/avg_drawdown,0.9997974767010345,5,99.1,True,This expression calculates a risk-adjusted return metric that measures excess return above a 10% thr,anthropic,risk
+2025-12-14T11:36:19.934640,excess_return/sqrt_sum_dd,0.999466675088984,3,99.1,True,This expression calculates a risk-adjusted return metric that normalizes excess returns by the magni,anthropic,risk
+2025-12-14T11:37:06.689354,returns/pain_index,0.9999679947934206,3,99.1,True,This expression calculates a risk-adjusted return metric that measures portfolio performance per uni,anthropic,risk

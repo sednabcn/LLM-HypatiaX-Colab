@@ -19,10 +19,11 @@ from hypatiax.utils.utils import save_spacy_training_data, save_spacy_training_d
 
 # Import path configuration
 try:
-    from hypatiax.config import config
+    from hypatiax.config.config_path import PathConfig, get_config
+
+    config = get_config()
 except ImportError:
     # Fallback: use basic PathConfig
-    import os
     from pathlib import Path
 
     class SimpleConfig:
@@ -35,6 +36,9 @@ except ImportError:
             path = self.outputs.joinpath(*parts)
             path.parent.mkdir(parents=True, exist_ok=True)
             return path
+
+        def print_config_path(self):
+            print(f"\nOutput Directory: {self.outputs}\n")
 
     config = SimpleConfig()
 
@@ -59,8 +63,8 @@ def main():
     print("=" * 70)
 
     # Show configuration
-    if hasattr(config, "print_paths"):
-        config.print_paths()
+    if hasattr(config, "print_config_path"):
+        config.print_config_path()
     else:
         print(f"\nOutput Directory: {config.outputs}\n")
 

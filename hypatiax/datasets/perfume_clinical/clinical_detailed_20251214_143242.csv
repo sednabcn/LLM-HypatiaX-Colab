@@ -1,0 +1,40 @@
+Scenario,Solution
+Calculate IV drip rate for 1000ml over 8 hours,"FORMULA: IV Drip Rate Calculation
+Given:
+- Volume: 1000 mL
+- Time: 8 hours
+- Drop factor: 15 drops/mL
+
+Step 1: Calculate mL per hour
+Rate = 1000 mL ÷ 8 hours = 125 mL/hour
+
+Step 2: Calculate drops per minute
+Drops/min = (125 mL/hour × 15 drops/mL) ÷ 60 min
+Drops/min = 1875 ÷ 60 = 31.25 ≈ 31 drops/min
+
+Step 3: Verify
+31 drops/min × 60 min × 8 hours ÷ 15 = 992 mL ≈ 1000 mL ✓
+
+RESULT:
+- Rate: 125 mL/hour
+- Drops: 31 drops/minute"
+"Determine pediatric dose: Adult dose 500mg, child 25kg, BSA method","FORMULA: Pediatric Dosing by BSA
+Given:
+- Adult dose: 500 mg
+- Child weight: 25 kg
+- Height: 120 cm (assume)
+
+Step 1: Calculate BSA (Mosteller formula)
+BSA = √[(height × weight) / 3600]
+BSA = √[(120 × 25) / 3600]
+BSA = √[3000 / 3600] = √0.833 = 0.91 m²
+
+Step 2: Calculate child dose
+Adult BSA ≈ 1.73 m²
+Child dose = (0.91 / 1.73) × 500 mg
+Child dose = 0.526 × 500 = 263 mg
+
+Step 3: Round to practical dose
+Practical dose: 250 mg
+
+RESULT: Child dose = 250 mg"

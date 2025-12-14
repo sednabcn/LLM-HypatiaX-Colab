@@ -49,16 +49,23 @@ class TestEmptyExpressionValidation:
         """Should handle None input gracefully"""
         expression = None
         validator = SymbolicValidator()
-        with pytest.raises((TypeError, ValueError)):
-            validator.validate(expression=expression, variable_definitions={}, domain="defi")
+        result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+        # Should be invalid with errors
+        assert result["valid"] == False
+        assert len(result.get("errors", [])) > 0
+        # Check for common error keywords (None, empty, invalid, etc.)
+        error_text = " ".join(str(e).lower() for e in result.get("errors", []))
+        assert any(keyword in error_text for keyword in ["none", "null", "empty", "invalid", "type"])
 
     def test_null_list_input(self):
         """Should reject empty list/dict inputs"""
         test_cases = [[], {}]
         validator = SymbolicValidator()
         for expression in test_cases:
-            with pytest.raises((TypeError, ValueError)):
-                validator.validate(expression=expression, variable_definitions={}, domain="defi")
+            result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+            # Should be invalid with errors
+            assert result["valid"] == False
+            assert len(result.get("errors", [])) > 0
 
 
 class TestDivisionByZeroDetection:

@@ -1,0 +1,7 @@
+domain,expected_output,expected_valid,formula_latex,notes,test_inputs,warning
+defi,3.92,True,\frac{x \cdot y}{z + 1},"Basic division, safe denominator","{'x': 100, 'y': 200, 'z': 50}",
+finance,5.0,True,\sqrt{x^2 + y^2},"Pythagorean theorem, always positive","{'x': 3, 'y': 4}",
+finance,0.667,True,\frac{r - r_f}{\sigma},Sharpe ratio variant,"{'r': 0.12, 'r_f': 0.02, 'sigma': 0.15}",
+defi,,False,\frac{1}{x - y},Dangerous denominator,"{'x': 100, 'y': 99.99}",Division by zero risk when x = y
+risk,,False,e^{x \cdot y},Exponential overflow,"{'x': 10, 'y': 10}",Overflow risk for large inputs
+defi,,False,\sqrt{x - y},Sqrt of negative,"{'x': 100, 'y': 101}",Negative input risk

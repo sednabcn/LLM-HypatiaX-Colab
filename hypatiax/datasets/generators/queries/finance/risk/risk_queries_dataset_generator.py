@@ -473,14 +473,14 @@ class RiskQueriesDataset:
         """Convert to DataFrame."""
         return pd.DataFrame(self.queries)
 
-    def save_csv(self, filename="risk_queries_comprehensive.csv"):
+    def save_csv(self, filename="hypatiax/datasets/generators/queries/finance/risk/risk_queries_comprehensive.csv"):
         """Save to CSV."""
         df = self.to_dataframe()
         df.to_csv(filename, index=False)
         print(f"✓ Saved CSV: {filename}")
         return filename
 
-    def save_json(self, filename="risk_queries_comprehensive.json"):
+    def save_json(self, filename="hypatiax/datasets/generators/queries/finance/risk/risk_queries_comprehensive.json"):
         """Save to JSON."""
         df = self.to_dataframe()
         df.to_json(filename, orient="records", indent=2)
