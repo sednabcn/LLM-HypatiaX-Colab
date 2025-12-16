@@ -1,0 +1,143 @@
+name: Security Scanning
+
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+
+jobs:
+  # =============================================================================
+  # DEPENDENCY & CODE SECURITY SCANNING
+  # =============================================================================
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Free Disk Space
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: false
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install security tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install --no-cache-dir pip-audit safety bandit flake8
+
+    - name: Install minimal dependencies for scanning
+      run: |
+        pip install --no-cache-dir \
+          pydantic \
+          pyyaml \
+          requests \
+          flask \
+          flask-cors==4.0.0
+
+    - name: Run pip-audit (Dependency Vulnerabilities)
+      continue-on-error: true
+      run: |
+        echo "::group::pip-audit results"
+        pip-audit --skip-editable --desc --format json > audit-results.json || true
+        pip-audit --skip-editable --desc || true
+        echo "::endgroup::"
+
+    - name: Run safety check (Known Vulnerabilities)
+      continue-on-error: true
+      run: |
+        echo "::group::Safety check results"
+        safety check --json > safety-results.json || true
+        safety check || true
+        echo "::endgroup::"
+
+    - name: Run bandit (Code Security Issues)
+      continue-on-error: true
+      run: |
+        echo "::group::Bandit results"
+        if [ -d "hypatiax" ]; then
+          bandit -r hypatiax/ -f json -o bandit-results.json || true
+          bandit -r hypatiax/ || true
+        else
+          echo "hypatiax directory not found"
+        fi
+        echo "::endgroup::"
+
+    - name: Check Python syntax errors
+      continue-on-error: true
+      run: |
+        echo "::group::Syntax check"
+        python -m compileall -q . || echo "Some files have syntax errors"
+        echo "::endgroup::"
+
+    - name: Lint with flake8 (Critical errors only)
+      continue-on-error: true
+      run: |
+        echo "::group::Flake8 critical errors"
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics || true
+        echo "::endgroup::"
+
+    - name: Upload scan results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: security-scan-results
+        path: |
+          audit-results.json
+          safety-results.json
+          bandit-results.json
+        retention-days: 90
+        if-no-files-found: ignore
+
+    - name: Show disk usage
+      if: always()
+      run: df -h
+
+  # =============================================================================
+  # DOCKER IMAGE SCANNING (Optional - only on push)
+  # =============================================================================
+  scan-docker:
+    name: Scan Docker Images
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Free Disk Space
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: false
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: false
+        swap-storage: true
+
+    - name: Build Docker image
+      run: |
+        docker build --target development -t hypatiax:scan . || echo "Build failed"
+
+    - name: Run Trivy security scan
+      uses: aquasecurity/trivy-action@master
+      continue-on-error: true
+      with:
+        image-ref: 'hypatiax:scan'
+        format: 'table'
+        severity: 'CRITICAL,HIGH'
