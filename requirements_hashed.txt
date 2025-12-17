@@ -1566,7 +1566,7 @@ fastjsonschema==2.21.2 \
     # via
     #   -r requirements.txt
     #   nbformat
-filelock==3.20.0 \
+filelock==3.20.1 \
     --hash=sha256:339b4732ffda5cd79b13f4e2711a31b0365ce445d95d243bb996273d072546a2 \
     --hash=sha256:711e943b4ec6be42e1d4e6690b48dc175c822967466bb31c0c293f34334c13f4
     # via
