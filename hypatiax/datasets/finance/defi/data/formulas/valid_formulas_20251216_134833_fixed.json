@@ -1,0 +1,1457 @@
+[
+  {
+    "description": "Lending Pool Utilization Rate",
+    "discovered_equation": "borrowed/supplied",
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 98.8,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090322",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression represents the utilization ratio or borrow-to-supply ratio in a DeFi lending pool. The numerator 'borrowed' captures the total amount of assets currently lent out to borrowers, while the denominator 'supplied' represents the total liquidity provided by lenders. The ratio quantifies what fraction of available liquidity is actively being utilized, ranging from 0 (no borrowing activity) to approaching 1 (near-complete utilization of supplied funds).",
+      "analogies": "This mirrors the loan-to-deposit ratio in traditional banking, which measures bank lending efficiency and risk exposure. It is analogous to capacity utilization in manufacturing economics, where it represents the percentage of total productive capacity being used. In finance literature, this resembles the utilization rate in credit facilities and revolving credit lines. The expression also parallels occupancy rates in real estate or resource allocation ratios in operations research.",
+      "novelty": "While the basic ratio concept exists in traditional finance, its application to autonomous, algorithmic lending protocols represents a novel context. The high R\u00b2 score of 0.9960 suggests this simple ratio captures complex DeFi market dynamics with remarkable precision, which is unexpected given the volatile and speculative nature of crypto markets. The real-time, transparent, and permissionless nature of this metric in DeFi contrasts with traditional banking where such ratios are reported periodically and may involve regulatory adjustments.",
+      "predictions": "This expression enables prediction of interest rate adjustments in algorithmic money markets, as most DeFi protocols use utilization ratios to determine borrowing costs. It can forecast liquidity crunches when the ratio approaches critical thresholds, predict yield farming opportunity windows for liquidity providers, and estimate protocol revenue streams. The metric can also indicate market stress conditions and help predict when borrowing costs will spike due to supply constraints.",
+      "limitations": "The expression may fail during extreme market volatility when rapid liquidations occur, as borrowed amounts can change instantaneously while supplied amounts lag. It assumes rational market behavior and may not account for governance token incentives that can artificially inflate supply or demand. The metric breaks down when external yield farming rewards distort natural supply/demand dynamics. Flash loan activities and MEV extraction can create temporary spikes that don't reflect true utilization. Protocol-specific mechanics like reserve factors and different asset types may require additional normalization factors.",
+      "expression": "borrowed/supplied",
+      "domain": "defi",
+      "r2_score": 0.9960095145108544
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 19",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 97.0,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.089975",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a power-law scaling factor that decreases as the input variable x increases, representing a diminishing returns relationship commonly found in financial risk or utility functions.",
+      "relationships": [
+        "Inverse power-law relationship where output decreases as x increases with exponent -1.111689",
+        "The constant 0.8831457 acts as a shift parameter that prevents division by zero and modifies the scaling behavior",
+        "The negative exponent creates a convex decreasing function, typical of risk-averse utility or diminishing marginal returns",
+        "As x approaches infinity, the expression approaches x^(-1.111689), showing asymptotic power-law behavior"
+      ],
+      "domain_insights": [
+        "Could represent impermanent loss calculations in AMM pools where loss increases non-linearly with price deviation",
+        "May model slippage functions in DEX trading where price impact follows power-law scaling with trade size",
+        "Resembles yield farming reward decay mechanisms where returns diminish as pool size or time increases",
+        "Fits capital efficiency curves in lending protocols where utilization rates affect borrowing costs non-linearly"
+      ],
+      "use_cases": [
+        "Dynamic fee calculation in automated market makers based on liquidity depth or volatility",
+        "Risk-adjusted return calculations for DeFi portfolio optimization and rebalancing strategies",
+        "Liquidation penalty computation in lending protocols where penalties scale with position size",
+        "Token bonding curve pricing for continuous token offerings with diminishing price appreciation"
+      ],
+      "limitations": [
+        "Requires x > 0 to avoid undefined behavior, limiting applicability to positive financial metrics only",
+        "The specific constants may be fitted to historical data and could become less accurate during market regime changes",
+        "Power-law relationships can exhibit extreme sensitivity to parameter estimation errors",
+        "May not capture sudden market shocks or discontinuous events common in crypto markets",
+        "The 3 detected warnings suggest potential numerical instability in certain input ranges"
+      ],
+      "formula_name": "Power-Law Scaling Factor",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a power-law scaling factor that decreases as the input variable x increases, representing a diminishing returns relationship commonly found in financial risk or utility functions.\",\n    \"relationships\": [\n        \"Inverse power-law relationship where output decreases as x increases with exponent -1.111689\",\n        \"The constant 0.8831457 acts as a shift parameter that prevents division by zero and modifies the scaling behavior\",\n        \"The negative exponent creates a convex decreasing function, typical of risk-averse utility or diminishing marginal returns\",\n        \"As x approaches infinity, the expression approaches x^(-1.111689), showing asymptotic power-law behavior\"\n    ],\n    \"domain_insights\": [\n        \"Could represent impermanent loss calculations in AMM pools where loss increases non-linearly with price deviation\",\n        \"May model slippage functions in DEX trading where price impact follows power-law scaling with trade size\",\n        \"Resembles yield farming reward decay mechanisms where returns diminish as pool size or time increases\",\n        \"Fits capital efficiency curves in lending protocols where utilization rates affect borrowing costs non-linearly\"\n    ],\n    \"use_cases\": [\n        \"Dynamic fee calculation in automated market makers based on liquidity depth or volatility\",\n        \"Risk-adjusted return calculations for DeFi portfolio optimization and rebalancing strategies\",\n        \"Liquidation penalty computation in lending protocols where penalties scale with position size\",\n        \"Token bonding curve pricing for continuous token offerings with diminishing price appreciation\"\n    ],\n    \"limitations\": [\n        \"Requires x > 0 to avoid undefined behavior, limiting applicability to positive financial metrics only\",\n        \"The specific constants may be fitted to historical data and could become less accurate during market regime changes\",\n        \"Power-law relationships can exhibit extreme sensitivity to parameter estimation errors\",\n        \"May not capture sudden market shocks or discontinuous events common in crypto markets\",\n        \"The 3 detected warnings suggest potential numerical instability in certain input ranges\"\n    ],\n    \"formula_name\": \"Power-Law Scaling Factor\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 14.2,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 23",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 97.0,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090025",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a normalized rate or efficiency metric that exhibits diminishing returns behavior, where the output decreases as the input variable x increases, commonly seen in DeFi yield or utilization rate functions.",
+      "relationships": [
+        "Power law relationship with exponent 0.47595492 creates sublinear scaling, indicating diminishing returns as x increases",
+        "The constant 1.3990612 acts as a vertical offset that shifts the baseline of the power function",
+        "Division by x at the end creates an inverse relationship that amplifies the diminishing returns effect",
+        "The base scaling factor 0.16334145 determines the inflection point and overall magnitude of the response"
+      ],
+      "domain_insights": [
+        "Resembles a utilization-based interest rate model where borrowing costs increase non-linearly with pool utilization",
+        "Could represent yield farming reward decay as total value locked (TVL) increases, preventing excessive inflation",
+        "Similar to bonding curve mechanics in automated market makers where price impact grows with trade size",
+        "May model liquidity mining incentives that decrease as participation increases to maintain sustainable tokenomics"
+      ],
+      "use_cases": [
+        "Dynamic interest rate calculation in lending protocols based on utilization ratios",
+        "Yield farming reward distribution that scales inversely with pool size to prevent dilution",
+        "Slippage calculation in AMM pools for large trades relative to liquidity depth",
+        "Staking reward adjustment mechanism that maintains equilibrium as more participants join",
+        "Fee structure optimization for DEX protocols based on trading volume or liquidity levels"
+      ],
+      "limitations": [
+        "Undefined behavior when x approaches zero due to division by x",
+        "May produce negative values for small x inputs due to the negative constant offset",
+        "Power function assumes continuous scaling which may not reflect discrete market behaviors",
+        "Constants are empirically fitted and may not generalize across different market conditions or protocols",
+        "Does not account for external market factors like volatility or liquidity shocks"
+      ],
+      "formula_name": "Diminishing Utilization Rate Function",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a normalized rate or efficiency metric that exhibits diminishing returns behavior, where the output decreases as the input variable x increases, commonly seen in DeFi yield or utilization rate functions.\",\n    \"relationships\": [\n        \"Power law relationship with exponent 0.47595492 creates sublinear scaling, indicating diminishing returns as x increases\",\n        \"The constant 1.3990612 acts as a vertical offset that shifts the baseline of the power function\",\n        \"Division by x at the end creates an inverse relationship that amplifies the diminishing returns effect\",\n        \"The base scaling factor 0.16334145 determines the inflection point and overall magnitude of the response\"\n    ],\n    \"domain_insights\": [\n        \"Resembles a utilization-based interest rate model where borrowing costs increase non-linearly with pool utilization\",\n        \"Could represent yield farming reward decay as total value locked (TVL) increases, preventing excessive inflation\",\n        \"Similar to bonding curve mechanics in automated market makers where price impact grows with trade size\",\n        \"May model liquidity mining incentives that decrease as participation increases to maintain sustainable tokenomics\"\n    ],\n    \"use_cases\": [\n        \"Dynamic interest rate calculation in lending protocols based on utilization ratios\",\n        \"Yield farming reward distribution that scales inversely with pool size to prevent dilution\",\n        \"Slippage calculation in AMM pools for large trades relative to liquidity depth\",\n        \"Staking reward adjustment mechanism that maintains equilibrium as more participants join\",\n        \"Fee structure optimization for DEX protocols based on trading volume or liquidity levels\"\n    ],\n    \"limitations\": [\n        \"Undefined behavior when x approaches zero due to division by x\",\n        \"May produce negative values for small x inputs due to the negative constant offset\",\n        \"Power function assumes continuous scaling which may not reflect discrete market behaviors\",\n        \"Constants are empirically fitted and may not generalize across different market conditions or protocols\",\n        \"Does not account for external market factors like volatility or liquidity shocks\"\n    ],\n    \"formula_name\": \"Diminishing Utilization Rate Function\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 14.42,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 26",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 97.0,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090102",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates an inverse relationship with a scaling factor of approximately 0.992, representing a near-unity conversion rate that decreases as the input variable increases.",
+      "relationships": [
+        "Perfect inverse relationship between input x and output, creating a hyperbolic decay curve",
+        "The coefficient 0.99229115 suggests a slight discount or fee structure built into the conversion",
+        "As x approaches zero, the output approaches infinity, indicating potential for extreme values at low inputs",
+        "The relationship exhibits diminishing returns - large increases in x produce smaller decreases in output"
+      ],
+      "domain_insights": [
+        "The ~0.992 coefficient likely represents a fee structure where ~0.8% is retained by the protocol",
+        "Could model price impact in AMM pools where larger trades receive proportionally worse exchange rates",
+        "May represent slippage calculations where trading efficiency decreases with position size",
+        "The inverse relationship suggests capital efficiency metrics where utilization affects returns",
+        "Pattern consistent with bonding curve mechanics in token issuance or redemption"
+      ],
+      "use_cases": [
+        "AMM slippage calculation for determining output tokens based on input size",
+        "Liquidation penalty computation where larger positions face higher penalty rates",
+        "Yield farming reward distribution where early participants receive higher rates",
+        "Protocol fee calculation for variable fee structures based on transaction size",
+        "Collateral ratio optimization in lending protocols"
+      ],
+      "limitations": [
+        "Undefined behavior when x equals zero, creating division by zero errors",
+        "Assumes continuous liquidity availability which may not hold in real markets",
+        "No upper bound constraints could lead to unrealistic calculations for very small x values",
+        "Static coefficient doesn't account for dynamic market conditions or volatility",
+        "May not capture non-linear market impacts during high volatility periods"
+      ],
+      "formula_name": "Inverse Fee-Adjusted Rate Formula",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates an inverse relationship with a scaling factor of approximately 0.992, representing a near-unity conversion rate that decreases as the input variable increases.\",\n    \"relationships\": [\n        \"Perfect inverse relationship between input x and output, creating a hyperbolic decay curve\",\n        \"The coefficient 0.99229115 suggests a slight discount or fee structure built into the conversion\",\n        \"As x approaches zero, the output approaches infinity, indicating potential for extreme values at low inputs\",\n        \"The relationship exhibits diminishing returns - large increases in x produce smaller decreases in output\"\n    ],\n    \"domain_insights\": [\n        \"The ~0.992 coefficient likely represents a fee structure where ~0.8% is retained by the protocol\",\n        \"Could model price impact in AMM pools where larger trades receive proportionally worse exchange rates\",\n        \"May represent slippage calculations where trading efficiency decreases with position size\",\n        \"The inverse relationship suggests capital efficiency metrics where utilization affects returns\",\n        \"Pattern consistent with bonding curve mechanics in token issuance or redemption\"\n    ],\n    \"use_cases\": [\n        \"AMM slippage calculation for determining output tokens based on input size\",\n        \"Liquidation penalty computation where larger positions face higher penalty rates\",\n        \"Yield farming reward distribution where early participants receive higher rates\",\n        \"Protocol fee calculation for variable fee structures based on transaction size\",\n        \"Collateral ratio optimization in lending protocols\"\n    ],\n    \"limitations\": [\n        \"Undefined behavior when x equals zero, creating division by zero errors\",\n        \"Assumes continuous liquidity availability which may not hold in real markets\",\n        \"No upper bound constraints could lead to unrealistic calculations for very small x values\",\n        \"Static coefficient doesn't account for dynamic market conditions or volatility\",\n        \"May not capture non-linear market impacts during high volatility periods\"\n    ],\n    \"formula_name\": \"Inverse Fee-Adjusted Rate Formula\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 13.1,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 27",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 97.0,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090119",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates an inverse relationship with a near-unity coefficient (0.9966549), representing approximately 99.67% efficiency or conversion factor divided by an input variable.",
+      "relationships": [
+        "Perfect inverse relationship where output decreases proportionally as input x increases",
+        "The coefficient 0.9966549 suggests a small discount or fee of approximately 0.33% from perfect unity",
+        "Non-linear scaling where doubling x halves the output, creating exponential-like behavior in reciprocal space"
+      ],
+      "domain_insights": [
+        "The coefficient suggests a swap fee or slippage factor in automated market makers (AMMs), where 0.33% represents transaction costs",
+        "Could represent price impact calculation where larger trade sizes (x) result in proportionally worse execution prices",
+        "May model liquidity utilization efficiency, where higher utilization rates reduce available liquidity multiplicatively",
+        "Resembles constant product formula components used in Uniswap-style AMMs for price discovery"
+      ],
+      "use_cases": [
+        "Calculating effective exchange rates in DEX swaps accounting for fees and slippage",
+        "Determining optimal trade sizing to minimize price impact in liquidity pools",
+        "Risk assessment for leveraged positions where exposure scales inversely with safety margins",
+        "Yield farming reward distribution where rewards decrease as pool participation increases",
+        "Liquidation threshold calculations where collateral requirements scale with position size"
+      ],
+      "limitations": [
+        "Undefined behavior when x approaches zero, creating infinite output values",
+        "Assumes constant fee/efficiency rate regardless of market conditions or liquidity depth",
+        "Does not account for discrete liquidity chunks or step-function behaviors in real AMMs",
+        "May not capture dynamic fee structures that adjust based on volatility or volume",
+        "Requires x to be positive to maintain economic meaning in defi contexts"
+      ],
+      "formula_name": "Inverse Efficiency Ratio",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates an inverse relationship with a near-unity coefficient (0.9966549), representing approximately 99.67% efficiency or conversion factor divided by an input variable.\",\n    \"relationships\": [\n        \"Perfect inverse relationship where output decreases proportionally as input x increases\",\n        \"The coefficient 0.9966549 suggests a small discount or fee of approximately 0.33% from perfect unity\",\n        \"Non-linear scaling where doubling x halves the output, creating exponential-like behavior in reciprocal space\"\n    ],\n    \"domain_insights\": [\n        \"The coefficient suggests a swap fee or slippage factor in automated market makers (AMMs), where 0.33% represents transaction costs\",\n        \"Could represent price impact calculation where larger trade sizes (x) result in proportionally worse execution prices\",\n        \"May model liquidity utilization efficiency, where higher utilization rates reduce available liquidity multiplicatively\",\n        \"Resembles constant product formula components used in Uniswap-style AMMs for price discovery\"\n    ],\n    \"use_cases\": [\n        \"Calculating effective exchange rates in DEX swaps accounting for fees and slippage\",\n        \"Determining optimal trade sizing to minimize price impact in liquidity pools\",\n        \"Risk assessment for leveraged positions where exposure scales inversely with safety margins\",\n        \"Yield farming reward distribution where rewards decrease as pool participation increases\",\n        \"Liquidation threshold calculations where collateral requirements scale with position size\"\n    ],\n    \"limitations\": [\n        \"Undefined behavior when x approaches zero, creating infinite output values\",\n        \"Assumes constant fee/efficiency rate regardless of market conditions or liquidity depth\",\n        \"Does not account for discrete liquidity chunks or step-function behaviors in real AMMs\",\n        \"May not capture dynamic fee structures that adjust based on volatility or volume\",\n        \"Requires x to be positive to maintain economic meaning in defi contexts\"\n    ],\n    \"formula_name\": \"Inverse Efficiency Ratio\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 13.16,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 30",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 97.0,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090136",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates an inverse scaling factor with a small premium, representing a conversion rate that decreases as the input variable increases while maintaining a base multiplier of approximately 1.0049.",
+      "relationships": [
+        "Inverse relationship between x and output - as x increases, the result decreases hyperbolically",
+        "The constant 1.0048828 represents a base rate or premium of approximately 0.49%",
+        "The function approaches zero as x approaches infinity, creating a natural floor effect",
+        "Small changes in x when x is small create large changes in output, while large changes in x when x is large create small output changes"
+      ],
+      "domain_insights": [
+        "The 0.49% premium suggests this could be related to lending/borrowing rates or protocol fees in DeFi",
+        "Inverse relationship is common in automated market makers (AMMs) for price impact calculations",
+        "Could represent slippage factors where higher trade sizes (x) result in lower execution efficiency",
+        "Pattern matches liquidity utilization models where available liquidity decreases impact per unit",
+        "May be used in yield farming calculations where rewards per token decrease as total staked amount increases"
+      ],
+      "use_cases": [
+        "Calculating borrowing rates in lending protocols where rates decrease with higher collateral amounts",
+        "Determining reward multipliers in staking protocols with diminishing returns",
+        "Computing price impact factors in DEX trading where larger trades have proportionally less favorable rates",
+        "Setting dynamic fees that decrease as transaction volume or liquidity increases",
+        "Modeling token emission rates that decrease as total supply or participants increase"
+      ],
+      "limitations": [
+        "Undefined when x equals zero, requiring minimum threshold values",
+        "Assumes linear relationship in the numerator constant may not hold across all market conditions",
+        "Does not account for volatility or time-dependent factors common in DeFi",
+        "May not be suitable for negative values of x depending on context",
+        "The constant 1.0048828 may need periodic recalibration based on market conditions"
+      ],
+      "formula_name": "Inverse Premium Scaling Factor",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates an inverse scaling factor with a small premium, representing a conversion rate that decreases as the input variable increases while maintaining a base multiplier of approximately 1.0049.\",\n    \"relationships\": [\n        \"Inverse relationship between x and output - as x increases, the result decreases hyperbolically\",\n        \"The constant 1.0048828 represents a base rate or premium of approximately 0.49%\",\n        \"The function approaches zero as x approaches infinity, creating a natural floor effect\",\n        \"Small changes in x when x is small create large changes in output, while large changes in x when x is large create small output changes\"\n    ],\n    \"domain_insights\": [\n        \"The 0.49% premium suggests this could be related to lending/borrowing rates or protocol fees in DeFi\",\n        \"Inverse relationship is common in automated market makers (AMMs) for price impact calculations\",\n        \"Could represent slippage factors where higher trade sizes (x) result in lower execution efficiency\",\n        \"Pattern matches liquidity utilization models where available liquidity decreases impact per unit\",\n        \"May be used in yield farming calculations where rewards per token decrease as total staked amount increases\"\n    ],\n    \"use_cases\": [\n        \"Calculating borrowing rates in lending protocols where rates decrease with higher collateral amounts\",\n        \"Determining reward multipliers in staking protocols with diminishing returns\",\n        \"Computing price impact factors in DEX trading where larger trades have proportionally less favorable rates\",\n        \"Setting dynamic fees that decrease as transaction volume or liquidity increases\",\n        \"Modeling token emission rates that decrease as total supply or participants increase\"\n    ],\n    \"limitations\": [\n        \"Undefined when x equals zero, requiring minimum threshold values\",\n        \"Assumes linear relationship in the numerator constant may not hold across all market conditions\",\n        \"Does not account for volatility or time-dependent factors common in DeFi\",\n        \"May not be suitable for negative values of x depending on context\",\n        \"The constant 1.0048828 may need periodic recalibration based on market conditions\"\n    ],\n    \"formula_name\": \"Inverse Premium Scaling Factor\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 13.39,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 31",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 97.0,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090153",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates an inverse relationship with a scaling factor of approximately 0.991, suggesting a near-unity conversion rate that decreases as the input variable increases.",
+      "relationships": [
+        "Perfect inverse relationship between output and input variable x",
+        "The constant 0.99061537 represents approximately 99.06% efficiency or conversion rate",
+        "As x approaches zero, the output approaches infinity, indicating potential leverage or amplification effects",
+        "The slight discount from 1.0 (0.99061537) suggests transaction costs, slippage, or protocol fees"
+      ],
+      "domain_insights": [
+        "The ~1% reduction from unity (0.99061537 vs 1.0) likely represents DEX trading fees or slippage in automated market makers",
+        "Could model impermanent loss calculations where returns diminish inversely with liquidity pool ratios",
+        "May represent yield farming efficiency that decreases as total value locked (TVL) increases due to dilution effects",
+        "Resembles bonding curve mechanics in token issuance where price increases inversely with available supply"
+      ],
+      "use_cases": [
+        "Calculating optimal swap amounts in constant product AMMs accounting for fees",
+        "Determining yield rates in liquidity mining programs where rewards are inversely proportional to participation",
+        "Pricing mechanisms for dynamic NFT or token bonding curves",
+        "Risk assessment for leveraged DeFi positions where risk increases inversely with collateral ratios"
+      ],
+      "limitations": [
+        "Formula becomes undefined when x approaches zero, creating potential division by zero errors",
+        "Assumes constant fee/efficiency rate that may not hold across different market conditions",
+        "Does not account for time-dependent factors like volatility or changing protocol parameters",
+        "May not capture non-linear effects present in complex DeFi protocols with multiple fee tiers",
+        "The 3 detected warnings suggest potential edge cases or validation concerns in specific scenarios"
+      ],
+      "formula_name": "Inverse Efficiency Rate Formula",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates an inverse relationship with a scaling factor of approximately 0.991, suggesting a near-unity conversion rate that decreases as the input variable increases.\",\n    \"relationships\": [\n        \"Perfect inverse relationship between output and input variable x\",\n        \"The constant 0.99061537 represents approximately 99.06% efficiency or conversion rate\",\n        \"As x approaches zero, the output approaches infinity, indicating potential leverage or amplification effects\",\n        \"The slight discount from 1.0 (0.99061537) suggests transaction costs, slippage, or protocol fees\"\n    ],\n    \"domain_insights\": [\n        \"The ~1% reduction from unity (0.99061537 vs 1.0) likely represents DEX trading fees or slippage in automated market makers\",\n        \"Could model impermanent loss calculations where returns diminish inversely with liquidity pool ratios\",\n        \"May represent yield farming efficiency that decreases as total value locked (TVL) increases due to dilution effects\",\n        \"Resembles bonding curve mechanics in token issuance where price increases inversely with available supply\"\n    ],\n    \"use_cases\": [\n        \"Calculating optimal swap amounts in constant product AMMs accounting for fees\",\n        \"Determining yield rates in liquidity mining programs where rewards are inversely proportional to participation\",\n        \"Pricing mechanisms for dynamic NFT or token bonding curves\",\n        \"Risk assessment for leveraged DeFi positions where risk increases inversely with collateral ratios\"\n    ],\n    \"limitations\": [\n        \"Formula becomes undefined when x approaches zero, creating potential division by zero errors\",\n        \"Assumes constant fee/efficiency rate that may not hold across different market conditions\",\n        \"Does not account for time-dependent factors like volatility or changing protocol parameters\",\n        \"May not capture non-linear effects present in complex DeFi protocols with multiple fee tiers\",\n        \"The 3 detected warnings suggest potential edge cases or validation concerns in specific scenarios\"\n    ],\n    \"formula_name\": \"Inverse Efficiency Rate Formula\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 14.43,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 40",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 96.1,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090249",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates the square root of an input variable, representing a concave transformation that exhibits diminishing marginal effects - a fundamental relationship in risk management and utility functions.",
+      "relationships": [
+        "Square root function creates a concave relationship where marginal effects decrease as x increases",
+        "The derivative 1/(2\u221ax) shows diminishing marginal returns, critical for risk-adjusted calculations",
+        "Output grows at a decreasing rate relative to input, creating natural scaling properties",
+        "Function is only defined for non-negative inputs, establishing clear domain constraints"
+      ],
+      "domain_insights": [
+        "Commonly used in portfolio volatility calculations where risk scales with square root of time",
+        "Essential component in Black-Scholes option pricing models for volatility adjustments",
+        "Applied in liquidity pool pricing mechanisms where slippage increases non-linearly",
+        "Used in staking reward calculations to prevent excessive concentration of rewards",
+        "Core to Value-at-Risk calculations and other risk metrics in DeFi protocols"
+      ],
+      "use_cases": [
+        "Calculating portfolio standard deviation from variance in yield farming strategies",
+        "Implementing bonding curves in AMMs where price impact follows square root relationships",
+        "Designing token distribution mechanisms with diminishing marginal utility",
+        "Computing time-adjusted volatility for options protocols and derivatives",
+        "Creating fair reward distribution systems in staking and governance tokens"
+      ],
+      "limitations": [
+        "Input variable x must be non-negative, limiting applicability to scenarios with potential negative values",
+        "Function approaches infinity as x approaches zero from the right, creating numerical instability",
+        "Assumes the underlying relationship truly follows square root dynamics rather than other power laws",
+        "May not capture extreme tail risks or black swan events in financial markets",
+        "Continuous differentiability breaks down at x=0, requiring special handling in optimization"
+      ],
+      "formula_name": "Square Root Scaling Function",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates the square root of an input variable, representing a concave transformation that exhibits diminishing marginal effects - a fundamental relationship in risk management and utility functions.\",\n    \"relationships\": [\n        \"Square root function creates a concave relationship where marginal effects decrease as x increases\",\n        \"The derivative 1/(2\u221ax) shows diminishing marginal returns, critical for risk-adjusted calculations\",\n        \"Output grows at a decreasing rate relative to input, creating natural scaling properties\",\n        \"Function is only defined for non-negative inputs, establishing clear domain constraints\"\n    ],\n    \"domain_insights\": [\n        \"Commonly used in portfolio volatility calculations where risk scales with square root of time\",\n        \"Essential component in Black-Scholes option pricing models for volatility adjustments\",\n        \"Applied in liquidity pool pricing mechanisms where slippage increases non-linearly\",\n        \"Used in staking reward calculations to prevent excessive concentration of rewards\",\n        \"Core to Value-at-Risk calculations and other risk metrics in DeFi protocols\"\n    ],\n    \"use_cases\": [\n        \"Calculating portfolio standard deviation from variance in yield farming strategies\",\n        \"Implementing bonding curves in AMMs where price impact follows square root relationships\",\n        \"Designing token distribution mechanisms with diminishing marginal utility\",\n        \"Computing time-adjusted volatility for options protocols and derivatives\",\n        \"Creating fair reward distribution systems in staking and governance tokens\"\n    ],\n    \"limitations\": [\n        \"Input variable x must be non-negative, limiting applicability to scenarios with potential negative values\",\n        \"Function approaches infinity as x approaches zero from the right, creating numerical instability\",\n        \"Assumes the underlying relationship truly follows square root dynamics rather than other power laws\",\n        \"May not capture extreme tail risks or black swan events in financial markets\",\n        \"Continuous differentiability breaks down at x=0, requiring special handling in optimization\"\n    ],\n    \"formula_name\": \"Square Root Scaling Function\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 13.09,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "Constant Product Pool Total Value",
+    "discovered_equation": "10012.5205*sqrt(reserve0_ratio*reserve1_ratio)",
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 95.8,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090395",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression represents a geometric mean relationship between normalized token reserves, scaled by a large constant factor (10012.5205). The square root of the product (reserve0_ratio * reserve1_ratio) captures the balanced interaction between two token reserves in a liquidity pool. The geometric mean formulation suggests this measures pool equilibrium or a derived metric like total value locked (TVL) where both reserves contribute equally to the outcome.",
+      "analogies": "This closely resembles the constant product formula from Automated Market Makers (AMMs) like Uniswap, where k = x * y is maintained constant. The square root transformation is similar to calculating pool token supply in AMMs, where LP tokens are proportional to sqrt(reserve0 * reserve1). Also analogous to geometric mean pricing models and the Black-Scholes geometric Brownian motion where volatility involves square root terms.",
+      "novelty": "The specific scaling factor 10012.5205 is unusual and suggests this expression captures a particular pool or protocol with specific parameters. The perfect R\u00b2 score of 1.0000 indicates this may be reverse-engineering an exact mathematical relationship rather than discovering an approximation. The normalization of reserves combined with this precise scaling suggests a standardized metric across different pool sizes.",
+      "predictions": "This expression enables prediction of pool-derived metrics (likely TVL, LP token value, or pool health indicators) given reserve ratios. It can forecast how changes in reserve balance affect the target variable. The geometric mean nature means it's most sensitive when reserves are balanced and approaches zero when either reserve approaches zero, making it useful for detecting pool imbalances or potential impermanent loss scenarios.",
+      "limitations": "May fail during extreme market conditions when reserve ratios become highly imbalanced or approach zero. The constant scaling factor suggests it's calibrated for specific conditions and may not generalize across different protocols, fee structures, or market regimes. Could break down during flash loan attacks, large arbitrage events, or when pools are newly created with minimal liquidity. The perfect fit suggests potential overfitting to historical data.",
+      "expression": "10012.5205*sqrt(reserve0_ratio*reserve1_ratio)",
+      "domain": "defi",
+      "r2_score": 0.9999959693807825
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 24",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 94.0,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090046",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a composite DeFi metric that combines two scaled factors (x1, x2) relative to a divisor (x3), likely representing a risk-adjusted yield or liquidity efficiency measure with non-linear scaling.",
+      "relationships": [
+        "x1 and x3 have a power-law relationship (exponent 0.9311086), indicating diminishing returns as the ratio increases",
+        "x2 has a linear relationship with additive scaling (offset 1.1125121, divisor 2.2316344), suggesting a baseline adjustment",
+        "The outer multiplication by (2.2427611 - 0.8132081/x3) creates inverse scaling that decreases impact as x3 grows",
+        "The subtraction of constant 1.5564628 acts as a baseline correction or risk-free rate adjustment"
+      ],
+      "domain_insights": [
+        "The power-law scaling suggests this could model impermanent loss or slippage effects in AMM pools",
+        "The inverse relationship with x3 indicates x3 might represent pool size or liquidity depth, where larger pools have diminishing marginal effects",
+        "The linear component for x2 could represent fee rates, trading volume, or utilization ratios",
+        "The baseline subtraction suggests comparison against a reference yield or risk-free rate"
+      ],
+      "use_cases": [
+        "Calculating risk-adjusted returns for liquidity provision across different pool sizes",
+        "Optimizing yield farming strategies by comparing efficiency across protocols",
+        "Determining optimal capital allocation in multi-asset DeFi portfolios",
+        "Pricing or valuing LP tokens based on underlying pool characteristics",
+        "Automated rebalancing triggers for yield optimization protocols"
+      ],
+      "limitations": [
+        "Assumes x3 > 0 to avoid division by zero in the coefficient term",
+        "The model may break down for extreme values where the power-law assumptions fail",
+        "Static coefficients may not adapt to changing market conditions or protocol updates",
+        "Does not account for temporal dynamics or volatility clustering effects",
+        "May require recalibration during market regime changes or protocol governance updates"
+      ],
+      "formula_name": "DeFi Risk-Adjusted Efficiency Score (DRAES)",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a composite DeFi metric that combines two scaled factors (x1, x2) relative to a divisor (x3), likely representing a risk-adjusted yield or liquidity efficiency measure with non-linear scaling.\",\n    \"relationships\": [\n        \"x1 and x3 have a power-law relationship (exponent 0.9311086), indicating diminishing returns as the ratio increases\",\n        \"x2 has a linear relationship with additive scaling (offset 1.1125121, divisor 2.2316344), suggesting a baseline adjustment\",\n        \"The outer multiplication by (2.2427611 - 0.8132081/x3) creates inverse scaling that decreases impact as x3 grows\",\n        \"The subtraction of constant 1.5564628 acts as a baseline correction or risk-free rate adjustment\"\n    ],\n    \"domain_insights\": [\n        \"The power-law scaling suggests this could model impermanent loss or slippage effects in AMM pools\",\n        \"The inverse relationship with x3 indicates x3 might represent pool size or liquidity depth, where larger pools have diminishing marginal effects\",\n        \"The linear component for x2 could represent fee rates, trading volume, or utilization ratios\",\n        \"The baseline subtraction suggests comparison against a reference yield or risk-free rate\"\n    ],\n    \"use_cases\": [\n        \"Calculating risk-adjusted returns for liquidity provision across different pool sizes\",\n        \"Optimizing yield farming strategies by comparing efficiency across protocols\",\n        \"Determining optimal capital allocation in multi-asset DeFi portfolios\",\n        \"Pricing or valuing LP tokens based on underlying pool characteristics\",\n        \"Automated rebalancing triggers for yield optimization protocols\"\n    ],\n    \"limitations\": [\n        \"Assumes x3 > 0 to avoid division by zero in the coefficient term\",\n        \"The model may break down for extreme values where the power-law assumptions fail\",\n        \"Static coefficients may not adapt to changing market conditions or protocol updates\",\n        \"Does not account for temporal dynamics or volatility clustering effects\",\n        \"May require recalibration during market regime changes or protocol governance updates\"\n    ],\n    \"formula_name\": \"DeFi Risk-Adjusted Efficiency Score (DRAES)\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 12.48,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 32",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 94.0,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090168",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This formula calculates a scaled factor relationship where Factor 1 is adjusted by a proportional reduction of Factor 2 relative to a Divisor, then normalized by the Divisor again.",
+      "relationships": [
+        "Factor 1 (x1) acts as a base multiplier that scales the entire expression",
+        "Factor 2 (x2) undergoes a proportional reduction of approximately 62.19% when divided by the Divisor (x3)",
+        "The Divisor (x3) appears twice, creating a quadratic inverse relationship that amplifies sensitivity to small divisor values",
+        "The constant 0.6219179 represents a critical threshold or discount factor that modulates the relationship between Factor 2 and the Divisor"
+      ],
+      "domain_insights": [
+        "The 62.19% reduction factor suggests this could model impermanent loss calculations in automated market makers where liquidity providers face systematic losses",
+        "The double division by x3 pattern is characteristic of price impact formulas in constant product AMMs where slippage increases quadratically",
+        "This structure resembles yield farming reward calculations where base rewards (x1) are adjusted by pool depth ratios and utilization rates",
+        "The formula could represent a risk-adjusted return metric where returns are discounted based on liquidity or volatility measures"
+      ],
+      "use_cases": [
+        "Calculating adjusted liquidity mining rewards based on pool composition and total value locked",
+        "Determining optimal swap amounts in AMM protocols to minimize price impact and slippage",
+        "Risk assessment for lending protocols where collateral factors are adjusted by utilization ratios",
+        "Portfolio rebalancing strategies in DeFi where position sizes are scaled by market depth and volatility"
+      ],
+      "limitations": [
+        "Division by zero risk when x3 approaches zero, requiring minimum threshold checks",
+        "Assumes the 0.6219179 discount factor remains constant across different market conditions",
+        "Quadratic sensitivity to x3 may cause extreme values during high volatility periods",
+        "Formula breaks down if x1 or x2 become negative, suggesting it applies only to positive financial metrics",
+        "The specific constant suggests calibration to historical data that may not hold in future market regimes"
+      ],
+      "formula_name": "Proportional Discount Scaling Formula",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This formula calculates a scaled factor relationship where Factor 1 is adjusted by a proportional reduction of Factor 2 relative to a Divisor, then normalized by the Divisor again.\",\n    \"relationships\": [\n        \"Factor 1 (x1) acts as a base multiplier that scales the entire expression\",\n        \"Factor 2 (x2) undergoes a proportional reduction of approximately 62.19% when divided by the Divisor (x3)\",\n        \"The Divisor (x3) appears twice, creating a quadratic inverse relationship that amplifies sensitivity to small divisor values\",\n        \"The constant 0.6219179 represents a critical threshold or discount factor that modulates the relationship between Factor 2 and the Divisor\"\n    ],\n    \"domain_insights\": [\n        \"The 62.19% reduction factor suggests this could model impermanent loss calculations in automated market makers where liquidity providers face systematic losses\",\n        \"The double division by x3 pattern is characteristic of price impact formulas in constant product AMMs where slippage increases quadratically\",\n        \"This structure resembles yield farming reward calculations where base rewards (x1) are adjusted by pool depth ratios and utilization rates\",\n        \"The formula could represent a risk-adjusted return metric where returns are discounted based on liquidity or volatility measures\"\n    ],\n    \"use_cases\": [\n        \"Calculating adjusted liquidity mining rewards based on pool composition and total value locked\",\n        \"Determining optimal swap amounts in AMM protocols to minimize price impact and slippage\",\n        \"Risk assessment for lending protocols where collateral factors are adjusted by utilization ratios\",\n        \"Portfolio rebalancing strategies in DeFi where position sizes are scaled by market depth and volatility\"\n    ],\n    \"limitations\": [\n        \"Division by zero risk when x3 approaches zero, requiring minimum threshold checks\",\n        \"Assumes the 0.6219179 discount factor remains constant across different market conditions\",\n        \"Quadratic sensitivity to x3 may cause extreme values during high volatility periods\",\n        \"Formula breaks down if x1 or x2 become negative, suggesting it applies only to positive financial metrics\",\n        \"The specific constant suggests calibration to historical data that may not hold in future market regimes\"\n    ],\n    \"formula_name\": \"Proportional Discount Scaling Formula\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 14.6,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 1",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 93.1,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.089706",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a scaled product metric where two factors are multiplied and then adjusted by the square root of a divisor, typically representing a risk-adjusted or volatility-normalized financial measure.",
+      "relationships": [
+        "Linear relationship between x1 and x2 creates multiplicative scaling effect",
+        "Square root of x3 provides dampening normalization that reduces extreme values",
+        "Overall expression exhibits sublinear growth with respect to the divisor x3",
+        "The formula amplifies when both factors are large but moderates based on the divisor"
+      ],
+      "domain_insights": [
+        "Could represent liquidity-adjusted trading volume where x1 and x2 are volume components and x3 is a volatility or slippage factor",
+        "May calculate risk-weighted returns where factors represent return components and divisor represents variance or standard deviation",
+        "Resembles impermanent loss calculations in AMM pools where factors are token amounts and divisor relates to price ratios",
+        "Structure similar to geometric mean calculations used in constant product market makers"
+      ],
+      "use_cases": [
+        "AMM pool efficiency scoring combining liquidity depth factors normalized by price volatility",
+        "Yield farming reward calculations balancing multiple token incentives against risk metrics",
+        "Portfolio rebalancing algorithms weighing asset allocation factors against market uncertainty",
+        "Lending protocol utilization rates incorporating supply/demand factors with volatility adjustment",
+        "Cross-chain bridge fee optimization using transfer amounts and security risk factors"
+      ],
+      "limitations": [
+        "Requires x3 > 0 to avoid undefined square root of negative numbers",
+        "Assumes x1 and x2 have compatible units and meaningful multiplicative relationship",
+        "Square root normalization may not be appropriate for all risk or volatility measures",
+        "Does not account for time-dependent or dynamic relationships between variables",
+        "May become unstable when x3 approaches zero, leading to extreme amplification"
+      ],
+      "formula_name": "Volatility-Adjusted Product Metric",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a scaled product metric where two factors are multiplied and then adjusted by the square root of a divisor, typically representing a risk-adjusted or volatility-normalized financial measure.\",\n    \"relationships\": [\n        \"Linear relationship between x1 and x2 creates multiplicative scaling effect\",\n        \"Square root of x3 provides dampening normalization that reduces extreme values\",\n        \"Overall expression exhibits sublinear growth with respect to the divisor x3\",\n        \"The formula amplifies when both factors are large but moderates based on the divisor\"\n    ],\n    \"domain_insights\": [\n        \"Could represent liquidity-adjusted trading volume where x1 and x2 are volume components and x3 is a volatility or slippage factor\",\n        \"May calculate risk-weighted returns where factors represent return components and divisor represents variance or standard deviation\",\n        \"Resembles impermanent loss calculations in AMM pools where factors are token amounts and divisor relates to price ratios\",\n        \"Structure similar to geometric mean calculations used in constant product market makers\"\n    ],\n    \"use_cases\": [\n        \"AMM pool efficiency scoring combining liquidity depth factors normalized by price volatility\",\n        \"Yield farming reward calculations balancing multiple token incentives against risk metrics\",\n        \"Portfolio rebalancing algorithms weighing asset allocation factors against market uncertainty\",\n        \"Lending protocol utilization rates incorporating supply/demand factors with volatility adjustment\",\n        \"Cross-chain bridge fee optimization using transfer amounts and security risk factors\"\n    ],\n    \"limitations\": [\n        \"Requires x3 > 0 to avoid undefined square root of negative numbers\",\n        \"Assumes x1 and x2 have compatible units and meaningful multiplicative relationship\",\n        \"Square root normalization may not be appropriate for all risk or volatility measures\",\n        \"Does not account for time-dependent or dynamic relationships between variables\",\n        \"May become unstable when x3 approaches zero, leading to extreme amplification\"\n    ],\n    \"formula_name\": \"Volatility-Adjusted Product Metric\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 13.91,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 4",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 93.1,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.089762",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a weighted adjustment factor that applies progressive scaling to combined inputs, commonly used for dynamic fee structures or liquidity pool rebalancing mechanisms in DeFi protocols.",
+      "relationships": [
+        "The sum (x1 + x2) represents combined inputs that undergo two-stage division by x3, creating a dampening effect",
+        "The inner term (x1 + x2 - x2/x3)/x3 acts as an intermediate adjustment that reduces the impact of x2 relative to x1",
+        "The outer division by x3 creates a quadratic relationship with the divisor, making the formula highly sensitive to x3 values",
+        "When x3 approaches 1, the expression simplifies to approximately x1/x3, effectively filtering out x2's contribution"
+      ],
+      "domain_insights": [
+        "Structure resembles automated market maker (AMM) pricing formulas where x1 and x2 could represent token reserves and x3 represents a scaling factor",
+        "The progressive reduction pattern aligns with impermanent loss calculations or slippage adjustments in liquidity pools",
+        "Could model dynamic fee structures where fees decrease non-linearly as trading volume (x3) increases",
+        "The dampening effect suggests use in risk management systems where position sizes need progressive scaling"
+      ],
+      "use_cases": [
+        "Calculating adjusted liquidity provision rewards based on pool composition and utilization rates",
+        "Determining dynamic trading fees that decrease with market depth or trading frequency",
+        "Computing rebalancing ratios for multi-asset yield farming strategies",
+        "Modeling slippage-adjusted token swap rates in decentralized exchanges",
+        "Calculating risk-adjusted staking rewards based on validator performance metrics"
+      ],
+      "limitations": [
+        "Requires x3 \u2260 0 to avoid division by zero, making it unsuitable for scenarios where the divisor could approach zero",
+        "High sensitivity to x3 values near zero could cause extreme volatility in DeFi applications",
+        "The quadratic relationship with x3 may create unexpected behavior during market stress or low liquidity conditions",
+        "Assumes positive relationships between variables, which may not hold during market inversions or negative yield scenarios",
+        "The 7 detected warnings suggest potential numerical instability in edge cases that could affect smart contract reliability"
+      ],
+      "formula_name": "Progressive Liquidity Adjustment Factor",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a weighted adjustment factor that applies progressive scaling to combined inputs, commonly used for dynamic fee structures or liquidity pool rebalancing mechanisms in DeFi protocols.\",\n    \"relationships\": [\n        \"The sum (x1 + x2) represents combined inputs that undergo two-stage division by x3, creating a dampening effect\",\n        \"The inner term (x1 + x2 - x2/x3)/x3 acts as an intermediate adjustment that reduces the impact of x2 relative to x1\",\n        \"The outer division by x3 creates a quadratic relationship with the divisor, making the formula highly sensitive to x3 values\",\n        \"When x3 approaches 1, the expression simplifies to approximately x1/x3, effectively filtering out x2's contribution\"\n    ],\n    \"domain_insights\": [\n        \"Structure resembles automated market maker (AMM) pricing formulas where x1 and x2 could represent token reserves and x3 represents a scaling factor\",\n        \"The progressive reduction pattern aligns with impermanent loss calculations or slippage adjustments in liquidity pools\",\n        \"Could model dynamic fee structures where fees decrease non-linearly as trading volume (x3) increases\",\n        \"The dampening effect suggests use in risk management systems where position sizes need progressive scaling\"\n    ],\n    \"use_cases\": [\n        \"Calculating adjusted liquidity provision rewards based on pool composition and utilization rates\",\n        \"Determining dynamic trading fees that decrease with market depth or trading frequency\",\n        \"Computing rebalancing ratios for multi-asset yield farming strategies\",\n        \"Modeling slippage-adjusted token swap rates in decentralized exchanges\",\n        \"Calculating risk-adjusted staking rewards based on validator performance metrics\"\n    ],\n    \"limitations\": [\n        \"Requires x3 \u2260 0 to avoid division by zero, making it unsuitable for scenarios where the divisor could approach zero\",\n        \"High sensitivity to x3 values near zero could cause extreme volatility in DeFi applications\",\n        \"The quadratic relationship with x3 may create unexpected behavior during market stress or low liquidity conditions\",\n        \"Assumes positive relationships between variables, which may not hold during market inversions or negative yield scenarios\",\n        \"The 7 detected warnings suggest potential numerical instability in edge cases that could affect smart contract reliability\"\n    ],\n    \"formula_name\": \"Progressive Liquidity Adjustment Factor\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 14.8,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 6",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 93.1,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.089795",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This formula calculates a composite metric that combines two multiplicative factors with a square-root adjusted divisor, typically representing a risk-adjusted return or efficiency measure in DeFi protocols.",
+      "relationships": [
+        "The two factors (x1, x2) have a direct multiplicative relationship, suggesting they represent complementary metrics that amplify each other's effect",
+        "The square root of the divisor (x3) creates a dampening effect that grows more slowly than the numerator factors, indicating diminishing marginal impact",
+        "The overall structure suggests a balance between growth factors and risk/cost normalization"
+      ],
+      "domain_insights": [
+        "Could represent a liquidity efficiency ratio where factors are pool reserves and divisor is impermanent loss or slippage",
+        "May calculate yield farming returns adjusted for gas costs, where factors are reward rates and divisor represents transaction costs",
+        "Potentially measures AMM performance combining trading volume and fees while adjusting for volatility risk",
+        "Structure resembles Sharpe ratio variants common in portfolio optimization for DeFi strategies"
+      ],
+      "use_cases": [
+        "Ranking liquidity pools by risk-adjusted returns for optimal capital allocation",
+        "Comparing yield farming strategies across different protocols and token pairs",
+        "Optimizing automated market maker parameters to maximize fee generation per unit of risk",
+        "Portfolio rebalancing decisions in multi-protocol DeFi investments",
+        "Performance benchmarking for DeFi fund managers and DAOs"
+      ],
+      "limitations": [
+        "Requires x3 to be positive for real-valued results, which may not hold during extreme market conditions",
+        "Square root transformation assumes specific risk scaling properties that may not apply to all DeFi metrics",
+        "Does not account for time-varying correlations between factors common in volatile crypto markets",
+        "May break down during liquidity crises when normal relationships between variables become unstable",
+        "Assumes factors are independent, which rarely holds in interconnected DeFi ecosystems"
+      ],
+      "formula_name": "DeFi Risk-Adjusted Efficiency Ratio",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This formula calculates a composite metric that combines two multiplicative factors with a square-root adjusted divisor, typically representing a risk-adjusted return or efficiency measure in DeFi protocols.\",\n    \"relationships\": [\n        \"The two factors (x1, x2) have a direct multiplicative relationship, suggesting they represent complementary metrics that amplify each other's effect\",\n        \"The square root of the divisor (x3) creates a dampening effect that grows more slowly than the numerator factors, indicating diminishing marginal impact\",\n        \"The overall structure suggests a balance between growth factors and risk/cost normalization\"\n    ],\n    \"domain_insights\": [\n        \"Could represent a liquidity efficiency ratio where factors are pool reserves and divisor is impermanent loss or slippage\",\n        \"May calculate yield farming returns adjusted for gas costs, where factors are reward rates and divisor represents transaction costs\",\n        \"Potentially measures AMM performance combining trading volume and fees while adjusting for volatility risk\",\n        \"Structure resembles Sharpe ratio variants common in portfolio optimization for DeFi strategies\"\n    ],\n    \"use_cases\": [\n        \"Ranking liquidity pools by risk-adjusted returns for optimal capital allocation\",\n        \"Comparing yield farming strategies across different protocols and token pairs\",\n        \"Optimizing automated market maker parameters to maximize fee generation per unit of risk\",\n        \"Portfolio rebalancing decisions in multi-protocol DeFi investments\",\n        \"Performance benchmarking for DeFi fund managers and DAOs\"\n    ],\n    \"limitations\": [\n        \"Requires x3 to be positive for real-valued results, which may not hold during extreme market conditions\",\n        \"Square root transformation assumes specific risk scaling properties that may not apply to all DeFi metrics\",\n        \"Does not account for time-varying correlations between factors common in volatile crypto markets\",\n        \"May break down during liquidity crises when normal relationships between variables become unstable\",\n        \"Assumes factors are independent, which rarely holds in interconnected DeFi ecosystems\"\n    ],\n    \"formula_name\": \"DeFi Risk-Adjusted Efficiency Ratio\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 13.26,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 9",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 93.1,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.089836",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This formula calculates a composite financial metric by multiplying two factors and taking the square root of a divisor, likely representing a risk-adjusted return or liquidity measure in DeFi protocols.",
+      "relationships": [
+        "Linear multiplicative relationship between Factor 1 and Factor 2, suggesting they represent complementary components that amplify each other",
+        "Square root relationship with the divisor creates a dampening effect, indicating it likely represents a risk or volatility measure",
+        "The overall structure suggests a ratio-based metric where the numerator grows linearly while the denominator effect is moderated"
+      ],
+      "domain_insights": [
+        "Could represent a liquidity pool efficiency metric where factors are token reserves and divisor is impermanent loss or slippage",
+        "May calculate risk-adjusted yields in lending protocols, with factors being interest rates and divisor representing default risk",
+        "Structure resembles automated market maker (AMM) pricing formulas with square root terms common in constant product mechanisms",
+        "The high R\u00b2 suggests this captures fundamental DeFi relationships like token pair correlations or pool dynamics"
+      ],
+      "use_cases": [
+        "Optimizing liquidity provision strategies by comparing pool efficiency across different AMMs",
+        "Risk assessment for yield farming positions by incorporating multiple risk factors",
+        "Portfolio rebalancing algorithms that account for both returns and volatility in DeFi protocols",
+        "Automated trading strategies that use composite metrics for entry/exit decisions"
+      ],
+      "limitations": [
+        "Assumes positive values for all variables, which may not hold during market stress or negative yields",
+        "Square root operation requires x3 > 0, creating undefined behavior when divisor approaches zero",
+        "Linear factor relationship may not capture non-linear DeFi dynamics like liquidation cascades",
+        "Model may break down during extreme market conditions or protocol exploits",
+        "Does not account for gas costs or transaction fees that significantly impact DeFi profitability"
+      ],
+      "formula_name": "DeFi Risk-Adjusted Composite Metric",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This formula calculates a composite financial metric by multiplying two factors and taking the square root of a divisor, likely representing a risk-adjusted return or liquidity measure in DeFi protocols.\",\n    \"relationships\": [\n        \"Linear multiplicative relationship between Factor 1 and Factor 2, suggesting they represent complementary components that amplify each other\",\n        \"Square root relationship with the divisor creates a dampening effect, indicating it likely represents a risk or volatility measure\",\n        \"The overall structure suggests a ratio-based metric where the numerator grows linearly while the denominator effect is moderated\"\n    ],\n    \"domain_insights\": [\n        \"Could represent a liquidity pool efficiency metric where factors are token reserves and divisor is impermanent loss or slippage\",\n        \"May calculate risk-adjusted yields in lending protocols, with factors being interest rates and divisor representing default risk\",\n        \"Structure resembles automated market maker (AMM) pricing formulas with square root terms common in constant product mechanisms\",\n        \"The high R\u00b2 suggests this captures fundamental DeFi relationships like token pair correlations or pool dynamics\"\n    ],\n    \"use_cases\": [\n        \"Optimizing liquidity provision strategies by comparing pool efficiency across different AMMs\",\n        \"Risk assessment for yield farming positions by incorporating multiple risk factors\",\n        \"Portfolio rebalancing algorithms that account for both returns and volatility in DeFi protocols\",\n        \"Automated trading strategies that use composite metrics for entry/exit decisions\"\n    ],\n    \"limitations\": [\n        \"Assumes positive values for all variables, which may not hold during market stress or negative yields\",\n        \"Square root operation requires x3 > 0, creating undefined behavior when divisor approaches zero\",\n        \"Linear factor relationship may not capture non-linear DeFi dynamics like liquidation cascades\",\n        \"Model may break down during extreme market conditions or protocol exploits\",\n        \"Does not account for gas costs or transaction fees that significantly impact DeFi profitability\"\n    ],\n    \"formula_name\": \"DeFi Risk-Adjusted Composite Metric\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 12.46,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 21",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 93.1,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.089993",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a product metric where two factors are amplified by the square root of a divisor, suggesting a risk-adjusted or volatility-scaled calculation common in DeFi pricing models.",
+      "relationships": [
+        "Linear relationship between x1 and x2 creates multiplicative scaling effect",
+        "Square root of x3 provides dampening effect that grows slower than linear scale",
+        "The combination suggests x3 acts as a normalizing or risk-adjustment factor",
+        "Non-linear scaling via sqrt(x3) indicates diminishing returns or volatility adjustment"
+      ],
+      "domain_insights": [
+        "Could represent liquidity pool pricing where x1 and x2 are token reserves and x3 is total liquidity for price impact calculation",
+        "May calculate impermanent loss where factors represent price ratios and divisor represents time or volatility",
+        "Resembles yield farming reward calculations with two token weights scaled by pool depth",
+        "Similar to automated market maker (AMM) formulas that balance linear growth with volatility dampening"
+      ],
+      "use_cases": [
+        "Dynamic fee calculation in DEX protocols based on trading volume and liquidity depth",
+        "Staking reward distribution considering multiple factors and risk adjustment",
+        "Cross-chain bridge fee estimation incorporating asset values and network congestion",
+        "Lending protocol interest rate models balancing utilization ratios with volatility measures",
+        "LP token valuation in multi-asset pools with volatility normalization"
+      ],
+      "limitations": [
+        "Requires x3 > 0 to avoid undefined square root calculations",
+        "Assumes positive values for meaningful financial interpretation",
+        "May not account for extreme market conditions or flash crashes",
+        "Linear relationship between x1 and x2 may oversimplify complex token interactions",
+        "Square root scaling may not capture tail risks in volatile crypto markets"
+      ],
+      "formula_name": "Volatility-Adjusted Product Metric",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a product metric where two factors are amplified by the square root of a divisor, suggesting a risk-adjusted or volatility-scaled calculation common in DeFi pricing models.\",\n    \"relationships\": [\n        \"Linear relationship between x1 and x2 creates multiplicative scaling effect\",\n        \"Square root of x3 provides dampening effect that grows slower than linear scale\",\n        \"The combination suggests x3 acts as a normalizing or risk-adjustment factor\",\n        \"Non-linear scaling via sqrt(x3) indicates diminishing returns or volatility adjustment\"\n    ],\n    \"domain_insights\": [\n        \"Could represent liquidity pool pricing where x1 and x2 are token reserves and x3 is total liquidity for price impact calculation\",\n        \"May calculate impermanent loss where factors represent price ratios and divisor represents time or volatility\",\n        \"Resembles yield farming reward calculations with two token weights scaled by pool depth\",\n        \"Similar to automated market maker (AMM) formulas that balance linear growth with volatility dampening\"\n    ],\n    \"use_cases\": [\n        \"Dynamic fee calculation in DEX protocols based on trading volume and liquidity depth\",\n        \"Staking reward distribution considering multiple factors and risk adjustment\",\n        \"Cross-chain bridge fee estimation incorporating asset values and network congestion\",\n        \"Lending protocol interest rate models balancing utilization ratios with volatility measures\",\n        \"LP token valuation in multi-asset pools with volatility normalization\"\n    ],\n    \"limitations\": [\n        \"Requires x3 > 0 to avoid undefined square root calculations\",\n        \"Assumes positive values for meaningful financial interpretation\",\n        \"May not account for extreme market conditions or flash crashes\",\n        \"Linear relationship between x1 and x2 may oversimplify complex token interactions\",\n        \"Square root scaling may not capture tail risks in volatile crypto markets\"\n    ],\n    \"formula_name\": \"Volatility-Adjusted Product Metric\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 12.77,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 38",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 93.1,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090218",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This formula calculates a risk-adjusted product metric where two multiplicative factors are scaled by the square root of a divisor, commonly used for volatility-adjusted returns or liquidity-scaled yields in DeFi protocols.",
+      "relationships": [
+        "Linear multiplication of Factor 1 and Factor 2 creates direct proportional scaling between primary variables",
+        "Square root transformation of the divisor provides dampened scaling effect, reducing sensitivity to extreme values",
+        "The combined structure balances aggressive multiplication with conservative square root adjustment",
+        "As x3 increases, the overall result decreases at a decreasing rate due to the square root function"
+      ],
+      "domain_insights": [
+        "Structure resembles Sharpe ratio variants where returns are adjusted by volatility measures",
+        "Common in automated market maker (AMM) fee calculations where liquidity depth affects pricing",
+        "Applicable to yield farming strategies where rewards are scaled by risk-adjusted pool characteristics",
+        "Mirrors impermanent loss calculations where price ratios interact with liquidity positions",
+        "Used in governance token distributions where multiple factors determine allocation weights"
+      ],
+      "use_cases": [
+        "Calculating risk-adjusted yields for liquidity provision in AMM pools",
+        "Determining optimal position sizing in leveraged DeFi protocols",
+        "Computing governance token rewards based on stake duration and pool volatility",
+        "Pricing synthetic assets where multiple underlying factors affect valuation",
+        "Optimizing arbitrage opportunities across different liquidity pools"
+      ],
+      "limitations": [
+        "Requires x3 to be positive for real-valued results due to square root operation",
+        "Assumes linear relationship between x1 and x2 which may not hold during market stress",
+        "Square root scaling may underestimate risk during extreme market conditions",
+        "Does not account for correlation effects between the multiplicative factors",
+        "May produce misleading results when x3 approaches zero, creating division-like behavior"
+      ],
+      "formula_name": "Risk-Adjusted Product Scaling Formula",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This formula calculates a risk-adjusted product metric where two multiplicative factors are scaled by the square root of a divisor, commonly used for volatility-adjusted returns or liquidity-scaled yields in DeFi protocols.\",\n    \"relationships\": [\n        \"Linear multiplication of Factor 1 and Factor 2 creates direct proportional scaling between primary variables\",\n        \"Square root transformation of the divisor provides dampened scaling effect, reducing sensitivity to extreme values\",\n        \"The combined structure balances aggressive multiplication with conservative square root adjustment\",\n        \"As x3 increases, the overall result decreases at a decreasing rate due to the square root function\"\n    ],\n    \"domain_insights\": [\n        \"Structure resembles Sharpe ratio variants where returns are adjusted by volatility measures\",\n        \"Common in automated market maker (AMM) fee calculations where liquidity depth affects pricing\",\n        \"Applicable to yield farming strategies where rewards are scaled by risk-adjusted pool characteristics\",\n        \"Mirrors impermanent loss calculations where price ratios interact with liquidity positions\",\n        \"Used in governance token distributions where multiple factors determine allocation weights\"\n    ],\n    \"use_cases\": [\n        \"Calculating risk-adjusted yields for liquidity provision in AMM pools\",\n        \"Determining optimal position sizing in leveraged DeFi protocols\",\n        \"Computing governance token rewards based on stake duration and pool volatility\",\n        \"Pricing synthetic assets where multiple underlying factors affect valuation\",\n        \"Optimizing arbitrage opportunities across different liquidity pools\"\n    ],\n    \"limitations\": [\n        \"Requires x3 to be positive for real-valued results due to square root operation\",\n        \"Assumes linear relationship between x1 and x2 which may not hold during market stress\",\n        \"Square root scaling may underestimate risk during extreme market conditions\",\n        \"Does not account for correlation effects between the multiplicative factors\",\n        \"May produce misleading results when x3 approaches zero, creating division-like behavior\"\n    ],\n    \"formula_name\": \"Risk-Adjusted Product Scaling Formula\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 13.21,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 12",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 92.5,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.089854",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This formula calculates a risk-adjusted return ratio where a normalized factor ratio is divided by a leverage-adjusted scaling term, commonly used in DeFi yield optimization and liquidity pool performance analysis.",
+      "relationships": [
+        "The numerator (x1/x2 + 0.9992603) represents a base factor ratio with a near-unity adjustment, suggesting price or yield normalization around equilibrium",
+        "The denominator ((x3 + 1.0887486)/x2)^1.006424 creates a compound scaling effect where x3 acts as an additive risk premium before ratio calculation",
+        "The exponent 1.006424 introduces slight non-linearity, amplifying the scaling effect for higher values while maintaining near-proportional behavior",
+        "x2 appears in both numerator and denominator, creating a complex dependency that could represent a common baseline like total value locked (TVL)"
+      ],
+      "domain_insights": [
+        "The constant 0.9992603 (~1-0.0007397) suggests a small fee or slippage adjustment typical in automated market makers (AMMs)",
+        "The additive constant 1.0887486 in the denominator indicates a fixed risk premium or minimum collateralization requirement",
+        "The near-unity exponent suggests this models systems with mild non-linear effects, common in concentrated liquidity positions or yield farming rewards",
+        "The ratio structure is characteristic of impermanent loss calculations or liquidity provider return metrics"
+      ],
+      "use_cases": [
+        "Optimizing yield farming strategies by comparing risk-adjusted returns across different liquidity pools",
+        "Calculating fair value adjustments for LP tokens in automated market makers with dynamic fees",
+        "Assessing collateralization efficiency in lending protocols with variable risk parameters",
+        "Pricing derivatives or structured products based on underlying DeFi primitive performance"
+      ],
+      "limitations": [
+        "Assumes x2 \u2260 0 and (x3 + 1.0887486)/x2 > 0 to avoid division by zero and complex number results",
+        "The model may break down during extreme market volatility when the near-linear assumptions no longer hold",
+        "Constants appear fitted to specific market conditions and may require recalibration for different DeFi protocols or time periods",
+        "Does not account for gas costs, MEV extraction, or other transaction-level inefficiencies common in DeFi",
+        "May not be suitable for cross-chain or multi-asset scenarios without additional normalization factors"
+      ],
+      "formula_name": "DeFi Risk-Adjusted Yield Ratio",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This formula calculates a risk-adjusted return ratio where a normalized factor ratio is divided by a leverage-adjusted scaling term, commonly used in DeFi yield optimization and liquidity pool performance analysis.\",\n    \"relationships\": [\n        \"The numerator (x1/x2 + 0.9992603) represents a base factor ratio with a near-unity adjustment, suggesting price or yield normalization around equilibrium\",\n        \"The denominator ((x3 + 1.0887486)/x2)^1.006424 creates a compound scaling effect where x3 acts as an additive risk premium before ratio calculation\",\n        \"The exponent 1.006424 introduces slight non-linearity, amplifying the scaling effect for higher values while maintaining near-proportional behavior\",\n        \"x2 appears in both numerator and denominator, creating a complex dependency that could represent a common baseline like total value locked (TVL)\"\n    ],\n    \"domain_insights\": [\n        \"The constant 0.9992603 (~1-0.0007397) suggests a small fee or slippage adjustment typical in automated market makers (AMMs)\",\n        \"The additive constant 1.0887486 in the denominator indicates a fixed risk premium or minimum collateralization requirement\",\n        \"The near-unity exponent suggests this models systems with mild non-linear effects, common in concentrated liquidity positions or yield farming rewards\",\n        \"The ratio structure is characteristic of impermanent loss calculations or liquidity provider return metrics\"\n    ],\n    \"use_cases\": [\n        \"Optimizing yield farming strategies by comparing risk-adjusted returns across different liquidity pools\",\n        \"Calculating fair value adjustments for LP tokens in automated market makers with dynamic fees\",\n        \"Assessing collateralization efficiency in lending protocols with variable risk parameters\",\n        \"Pricing derivatives or structured products based on underlying DeFi primitive performance\"\n    ],\n    \"limitations\": [\n        \"Assumes x2 \u2260 0 and (x3 + 1.0887486)/x2 > 0 to avoid division by zero and complex number results\",\n        \"The model may break down during extreme market volatility when the near-linear assumptions no longer hold\",\n        \"Constants appear fitted to specific market conditions and may require recalibration for different DeFi protocols or time periods\",\n        \"Does not account for gas costs, MEV extraction, or other transaction-level inefficiencies common in DeFi\",\n        \"May not be suitable for cross-chain or multi-asset scenarios without additional normalization factors\"\n    ],\n    \"formula_name\": \"DeFi Risk-Adjusted Yield Ratio\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 16.49,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 35",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 92.5,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090186",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates the geometric mean of a numerator and denominator term, representing a balanced average that maintains proportional relationships between two quantities.",
+      "relationships": [
+        "Creates a multiplicative relationship where both x1 and x2 contribute equally to the result",
+        "The square root operation ensures the output has units that are the geometric mean of the input units",
+        "Result is always positive when both inputs are positive, making it suitable for financial calculations",
+        "Changes in either variable have a dampened effect compared to arithmetic averages, providing stability"
+      ],
+      "domain_insights": [
+        "Commonly used in AMM (Automated Market Maker) protocols like Uniswap for calculating constant product invariants",
+        "Represents the balanced price or exchange rate in liquidity pools where k = x1 * x2 remains constant",
+        "Useful for calculating impermanent loss metrics by comparing geometric means of token reserves",
+        "Applied in yield farming strategies to balance risk-return profiles across different asset pairs",
+        "Serves as a stability measure for dual-token liquidity provision scenarios"
+      ],
+      "use_cases": [
+        "Calculating optimal swap prices in constant product market makers",
+        "Determining fair value for LP token pricing based on underlying asset reserves",
+        "Risk assessment for liquidity providers by measuring pool balance stability",
+        "Portfolio rebalancing algorithms for maintaining target asset allocations",
+        "Calculating time-weighted average prices (TWAP) for oracle implementations"
+      ],
+      "limitations": [
+        "Requires both x1 and x2 to be positive values, undefined for zero or negative inputs",
+        "Does not account for external market volatility or correlation between assets",
+        "Assumes equal weighting of both terms, which may not reflect actual market conditions",
+        "Sensitive to extreme values due to multiplicative nature before square root",
+        "May not capture short-term price movements effectively in high-frequency trading scenarios"
+      ],
+      "formula_name": "Geometric Mean Balance Formula",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates the geometric mean of a numerator and denominator term, representing a balanced average that maintains proportional relationships between two quantities.\",\n    \"relationships\": [\n        \"Creates a multiplicative relationship where both x1 and x2 contribute equally to the result\",\n        \"The square root operation ensures the output has units that are the geometric mean of the input units\",\n        \"Result is always positive when both inputs are positive, making it suitable for financial calculations\",\n        \"Changes in either variable have a dampened effect compared to arithmetic averages, providing stability\"\n    ],\n    \"domain_insights\": [\n        \"Commonly used in AMM (Automated Market Maker) protocols like Uniswap for calculating constant product invariants\",\n        \"Represents the balanced price or exchange rate in liquidity pools where k = x1 * x2 remains constant\",\n        \"Useful for calculating impermanent loss metrics by comparing geometric means of token reserves\",\n        \"Applied in yield farming strategies to balance risk-return profiles across different asset pairs\",\n        \"Serves as a stability measure for dual-token liquidity provision scenarios\"\n    ],\n    \"use_cases\": [\n        \"Calculating optimal swap prices in constant product market makers\",\n        \"Determining fair value for LP token pricing based on underlying asset reserves\",\n        \"Risk assessment for liquidity providers by measuring pool balance stability\",\n        \"Portfolio rebalancing algorithms for maintaining target asset allocations\",\n        \"Calculating time-weighted average prices (TWAP) for oracle implementations\"\n    ],\n    \"limitations\": [\n        \"Requires both x1 and x2 to be positive values, undefined for zero or negative inputs\",\n        \"Does not account for external market volatility or correlation between assets\",\n        \"Assumes equal weighting of both terms, which may not reflect actual market conditions\",\n        \"Sensitive to extreme values due to multiplicative nature before square root\",\n        \"May not capture short-term price movements effectively in high-frequency trading scenarios\"\n    ],\n    \"formula_name\": \"Geometric Mean Balance Formula\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 12.0,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 14",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 92.19999999999999,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.089870",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a scaled probability or risk metric that exhibits power-law decay behavior as x increases, with a small baseline adjustment, likely representing default probability or loss rates in DeFi protocols.",
+      "relationships": [
+        "The term (x + 0.930595)/x creates a ratio that approaches 1 as x increases, representing a scaling factor that diminishes the impact of the constant term for larger values",
+        "The negative exponent -2.1042037 creates an inverse power-law relationship, causing rapid decay as x increases beyond the critical threshold",
+        "The square root operation moderates the power-law behavior, creating a smoother transition between high and low risk regimes",
+        "The constant offset -0.0010186813 shifts the entire function downward, potentially representing a baseline risk adjustment or minimum threshold"
+      ],
+      "domain_insights": [
+        "The power-law decay pattern is characteristic of fat-tail risk distributions commonly observed in cryptocurrency markets and DeFi protocols",
+        "The scaling behavior suggests this could model collateralization ratios, where x represents collateral value and the output represents liquidation risk",
+        "The baseline adjustment indicates this may account for protocol-specific risk floors or insurance fund contributions",
+        "The smooth decay function is suitable for continuous risk assessment in automated market makers or lending protocols"
+      ],
+      "use_cases": [
+        "Dynamic interest rate calculation in lending protocols based on utilization ratios or collateral health",
+        "Liquidation probability estimation for leveraged positions in DeFi margin trading platforms",
+        "Risk-adjusted pricing for insurance premiums in DeFi protection protocols",
+        "Impermanent loss estimation in liquidity provision scenarios based on price ratio deviations",
+        "Slippage calculation for large trades in automated market makers"
+      ],
+      "limitations": [
+        "Assumes x > 0 for mathematical validity, requiring positive input values (e.g., positive collateral ratios)",
+        "The negative constant may produce negative outputs for certain x ranges, potentially requiring bounds checking",
+        "Power-law assumptions may break down during extreme market conditions or black swan events",
+        "The specific constants suggest calibration to historical data that may not hold during regime changes",
+        "May require recalibration as DeFi market structure and volatility patterns evolve"
+      ],
+      "formula_name": "DeFi Power-Law Risk Decay Function",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a scaled probability or risk metric that exhibits power-law decay behavior as x increases, with a small baseline adjustment, likely representing default probability or loss rates in DeFi protocols.\",\n    \"relationships\": [\n        \"The term (x + 0.930595)/x creates a ratio that approaches 1 as x increases, representing a scaling factor that diminishes the impact of the constant term for larger values\",\n        \"The negative exponent -2.1042037 creates an inverse power-law relationship, causing rapid decay as x increases beyond the critical threshold\",\n        \"The square root operation moderates the power-law behavior, creating a smoother transition between high and low risk regimes\",\n        \"The constant offset -0.0010186813 shifts the entire function downward, potentially representing a baseline risk adjustment or minimum threshold\"\n    ],\n    \"domain_insights\": [\n        \"The power-law decay pattern is characteristic of fat-tail risk distributions commonly observed in cryptocurrency markets and DeFi protocols\",\n        \"The scaling behavior suggests this could model collateralization ratios, where x represents collateral value and the output represents liquidation risk\",\n        \"The baseline adjustment indicates this may account for protocol-specific risk floors or insurance fund contributions\",\n        \"The smooth decay function is suitable for continuous risk assessment in automated market makers or lending protocols\"\n    ],\n    \"use_cases\": [\n        \"Dynamic interest rate calculation in lending protocols based on utilization ratios or collateral health\",\n        \"Liquidation probability estimation for leveraged positions in DeFi margin trading platforms\",\n        \"Risk-adjusted pricing for insurance premiums in DeFi protection protocols\",\n        \"Impermanent loss estimation in liquidity provision scenarios based on price ratio deviations\",\n        \"Slippage calculation for large trades in automated market makers\"\n    ],\n    \"limitations\": [\n        \"Assumes x > 0 for mathematical validity, requiring positive input values (e.g., positive collateral ratios)\",\n        \"The negative constant may produce negative outputs for certain x ranges, potentially requiring bounds checking\",\n        \"Power-law assumptions may break down during extreme market conditions or black swan events\",\n        \"The specific constants suggest calibration to historical data that may not hold during regime changes\",\n        \"May require recalibration as DeFi market structure and volatility patterns evolve\"\n    ],\n    \"formula_name\": \"DeFi Power-Law Risk Decay Function\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 16.14,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 36",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 90.4,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090202",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a logarithmic transformation of returns or yield rates, suggesting it models continuous compounding with a small positive offset to handle zero or negative input values.",
+      "relationships": [
+        "The constant 1.0272744 acts as a shift parameter, approximately equal to e^0.0269 \u2248 2.7% annual rate when interpreted as continuous compounding",
+        "The logarithmic function creates a concave relationship that exhibits diminishing marginal effects as x increases",
+        "The offset ensures the expression remains defined for negative values of x down to approximately -102.7%",
+        "The relationship transforms multiplicative effects into additive ones, typical for financial return calculations"
+      ],
+      "domain_insights": [
+        "The offset value suggests this models yield farming or liquidity mining returns where base APY is around 2.7%",
+        "Logarithmic scaling is common in DeFi for calculating impermanent loss, where losses accelerate non-linearly with price divergence",
+        "Could represent a utility function for automated market maker (AMM) pricing curves or bonding curve mechanisms",
+        "The mathematical form resembles continuous compound interest calculations used in yield optimization protocols",
+        "May model risk-adjusted returns where the logarithm dampens extreme positive outcomes while the offset protects against extreme negative scenarios"
+      ],
+      "use_cases": [
+        "Calculating risk-adjusted APY for yield farming strategies across different DeFi protocols",
+        "Pricing impermanent loss protection products or insurance mechanisms",
+        "Optimizing portfolio allocation in multi-asset liquidity pools",
+        "Designing bonding curves for decentralized exchanges or token sales",
+        "Evaluating performance metrics for DeFi investment strategies with downside protection"
+      ],
+      "limitations": [
+        "Assumes x > -1.0272744 to maintain mathematical validity; extreme losses beyond this threshold are undefined",
+        "The specific offset constant may be calibrated to historical data and might not generalize to different market conditions",
+        "Logarithmic scaling may underestimate tail risks during extreme market volatility",
+        "Model assumes continuous rather than discrete compounding, which may not reflect actual DeFi protocol mechanics",
+        "Does not account for transaction costs, slippage, or gas fees that significantly impact DeFi returns"
+      ],
+      "formula_name": "DeFi Risk-Adjusted Yield Calculator",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a logarithmic transformation of returns or yield rates, suggesting it models continuous compounding with a small positive offset to handle zero or negative input values.\",\n    \"relationships\": [\n        \"The constant 1.0272744 acts as a shift parameter, approximately equal to e^0.0269 \u2248 2.7% annual rate when interpreted as continuous compounding\",\n        \"The logarithmic function creates a concave relationship that exhibits diminishing marginal effects as x increases\",\n        \"The offset ensures the expression remains defined for negative values of x down to approximately -102.7%\",\n        \"The relationship transforms multiplicative effects into additive ones, typical for financial return calculations\"\n    ],\n    \"domain_insights\": [\n        \"The offset value suggests this models yield farming or liquidity mining returns where base APY is around 2.7%\",\n        \"Logarithmic scaling is common in DeFi for calculating impermanent loss, where losses accelerate non-linearly with price divergence\",\n        \"Could represent a utility function for automated market maker (AMM) pricing curves or bonding curve mechanisms\",\n        \"The mathematical form resembles continuous compound interest calculations used in yield optimization protocols\",\n        \"May model risk-adjusted returns where the logarithm dampens extreme positive outcomes while the offset protects against extreme negative scenarios\"\n    ],\n    \"use_cases\": [\n        \"Calculating risk-adjusted APY for yield farming strategies across different DeFi protocols\",\n        \"Pricing impermanent loss protection products or insurance mechanisms\",\n        \"Optimizing portfolio allocation in multi-asset liquidity pools\",\n        \"Designing bonding curves for decentralized exchanges or token sales\",\n        \"Evaluating performance metrics for DeFi investment strategies with downside protection\"\n    ],\n    \"limitations\": [\n        \"Assumes x > -1.0272744 to maintain mathematical validity; extreme losses beyond this threshold are undefined\",\n        \"The specific offset constant may be calibrated to historical data and might not generalize to different market conditions\",\n        \"Logarithmic scaling may underestimate tail risks during extreme market volatility\",\n        \"Model assumes continuous rather than discrete compounding, which may not reflect actual DeFi protocol mechanics\",\n        \"Does not account for transaction costs, slippage, or gas fees that significantly impact DeFi returns\"\n    ],\n    \"formula_name\": \"DeFi Risk-Adjusted Yield Calculator\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 16.59,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 39",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 90.4,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090234",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a logarithmic transformation of returns or rates, adding approximately 6.27% to the input before taking the natural log, suggesting it models continuous compounding with a risk-free rate adjustment.",
+      "relationships": [
+        "The constant 1.0626638 represents approximately 6.27% baseline rate, likely a risk-free rate or minimum expected return",
+        "The logarithmic function creates a concave relationship that exhibits diminishing marginal returns",
+        "The expression ensures positive inputs to the log function when x > -1.0626638, preventing mathematical undefined results",
+        "The transformation converts multiplicative relationships into additive ones, typical in continuous finance modeling"
+      ],
+      "domain_insights": [
+        "The 6.27% constant aligns with typical DeFi yield farming base rates or stablecoin lending rates",
+        "Logarithmic utility functions are fundamental in portfolio optimization and risk-adjusted return calculations",
+        "This form is common in liquidity mining reward calculations where diminishing returns prevent exploitation",
+        "The expression resembles continuous compounding formulas used in automated market makers and yield protocols",
+        "Could represent utility-based pricing in DeFi options or derivatives where risk aversion increases with position size"
+      ],
+      "use_cases": [
+        "Calculating risk-adjusted returns for DeFi yield farming strategies",
+        "Pricing liquidity provider rewards with diminishing marginal incentives",
+        "Modeling user utility in governance token distribution mechanisms",
+        "Computing continuous compounding yields for lending protocols",
+        "Determining optimal position sizing in leveraged DeFi strategies",
+        "Calculating impermanent loss adjusted returns for AMM positions"
+      ],
+      "limitations": [
+        "Input x must be greater than -1.0626638 to avoid undefined logarithm results",
+        "Assumes continuous compounding which may not reflect discrete DeFi transaction reality",
+        "The fixed constant may not adapt to changing market conditions or protocol parameters",
+        "Logarithmic model assumes risk aversion, which may not apply to all DeFi participants",
+        "Does not account for gas costs, slippage, or other transaction friction common in DeFi",
+        "May break down during extreme market volatility or liquidity crises"
+      ],
+      "formula_name": "Risk-Adjusted Logarithmic Return Model",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a logarithmic transformation of returns or rates, adding approximately 6.27% to the input before taking the natural log, suggesting it models continuous compounding with a risk-free rate adjustment.\",\n    \"relationships\": [\n        \"The constant 1.0626638 represents approximately 6.27% baseline rate, likely a risk-free rate or minimum expected return\",\n        \"The logarithmic function creates a concave relationship that exhibits diminishing marginal returns\",\n        \"The expression ensures positive inputs to the log function when x > -1.0626638, preventing mathematical undefined results\",\n        \"The transformation converts multiplicative relationships into additive ones, typical in continuous finance modeling\"\n    ],\n    \"domain_insights\": [\n        \"The 6.27% constant aligns with typical DeFi yield farming base rates or stablecoin lending rates\",\n        \"Logarithmic utility functions are fundamental in portfolio optimization and risk-adjusted return calculations\",\n        \"This form is common in liquidity mining reward calculations where diminishing returns prevent exploitation\",\n        \"The expression resembles continuous compounding formulas used in automated market makers and yield protocols\",\n        \"Could represent utility-based pricing in DeFi options or derivatives where risk aversion increases with position size\"\n    ],\n    \"use_cases\": [\n        \"Calculating risk-adjusted returns for DeFi yield farming strategies\",\n        \"Pricing liquidity provider rewards with diminishing marginal incentives\",\n        \"Modeling user utility in governance token distribution mechanisms\",\n        \"Computing continuous compounding yields for lending protocols\",\n        \"Determining optimal position sizing in leveraged DeFi strategies\",\n        \"Calculating impermanent loss adjusted returns for AMM positions\"\n    ],\n    \"limitations\": [\n        \"Input x must be greater than -1.0626638 to avoid undefined logarithm results\",\n        \"Assumes continuous compounding which may not reflect discrete DeFi transaction reality\",\n        \"The fixed constant may not adapt to changing market conditions or protocol parameters\",\n        \"Logarithmic model assumes risk aversion, which may not apply to all DeFi participants\",\n        \"Does not account for gas costs, slippage, or other transaction friction common in DeFi\",\n        \"May break down during extreme market volatility or liquidity crises\"\n    ],\n    \"formula_name\": \"Risk-Adjusted Logarithmic Return Model\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 14.0,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 5",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 88.9,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.089780",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a logarithmically scaled financial metric where a numerator term is weighted by the natural log of a denominator term plus a constant offset of approximately 1.08.",
+      "relationships": [
+        "The logarithmic transformation of (x2 + 1.080171) creates a diminishing marginal effect as x2 increases",
+        "The constant 1.080171 acts as a risk-free rate or baseline adjustment, preventing log(0) issues when x2 approaches zero",
+        "Linear scaling by x1 suggests it represents a principal amount, liquidity measure, or position size",
+        "The multiplicative relationship creates compound effects between position size and the transformed ratio"
+      ],
+      "domain_insights": [
+        "The constant 1.080171 closely matches typical annual risk-free rates (8.02%), suggesting yield or interest rate calculations",
+        "Logarithmic scaling is common in DeFi for calculating rewards that diminish with pool size to prevent whale dominance",
+        "Could represent impermanent loss calculations where x2 is a price ratio and x1 is the initial liquidity position",
+        "May model automated market maker (AMM) fee structures where returns scale logarithmically with volume ratios",
+        "Structure resembles yield farming reward calculations that account for both position size and pool dynamics"
+      ],
+      "use_cases": [
+        "Calculating liquidity provider rewards in AMM protocols with anti-whale mechanisms",
+        "Determining optimal position sizes in yield farming strategies",
+        "Pricing synthetic assets or derivatives based on underlying asset ratios",
+        "Computing risk-adjusted returns for DeFi lending protocols",
+        "Modeling governance token distribution based on participation metrics"
+      ],
+      "limitations": [
+        "Assumes x2 > -1.080171 to maintain real-valued logarithm results",
+        "Logarithmic scaling may not accurately model extreme market conditions or flash crashes",
+        "The fixed constant may not adapt to changing market conditions or protocol parameters",
+        "Linear relationship with x1 assumes no position size limits or diminishing returns on scale",
+        "Model may break down during high volatility periods when traditional relationships fail"
+      ],
+      "formula_name": "Logarithmic Position Scaling Formula",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a logarithmically scaled financial metric where a numerator term is weighted by the natural log of a denominator term plus a constant offset of approximately 1.08.\",\n    \"relationships\": [\n        \"The logarithmic transformation of (x2 + 1.080171) creates a diminishing marginal effect as x2 increases\",\n        \"The constant 1.080171 acts as a risk-free rate or baseline adjustment, preventing log(0) issues when x2 approaches zero\",\n        \"Linear scaling by x1 suggests it represents a principal amount, liquidity measure, or position size\",\n        \"The multiplicative relationship creates compound effects between position size and the transformed ratio\"\n    ],\n    \"domain_insights\": [\n        \"The constant 1.080171 closely matches typical annual risk-free rates (8.02%), suggesting yield or interest rate calculations\",\n        \"Logarithmic scaling is common in DeFi for calculating rewards that diminish with pool size to prevent whale dominance\",\n        \"Could represent impermanent loss calculations where x2 is a price ratio and x1 is the initial liquidity position\",\n        \"May model automated market maker (AMM) fee structures where returns scale logarithmically with volume ratios\",\n        \"Structure resembles yield farming reward calculations that account for both position size and pool dynamics\"\n    ],\n    \"use_cases\": [\n        \"Calculating liquidity provider rewards in AMM protocols with anti-whale mechanisms\",\n        \"Determining optimal position sizes in yield farming strategies\",\n        \"Pricing synthetic assets or derivatives based on underlying asset ratios\",\n        \"Computing risk-adjusted returns for DeFi lending protocols\",\n        \"Modeling governance token distribution based on participation metrics\"\n    ],\n    \"limitations\": [\n        \"Assumes x2 > -1.080171 to maintain real-valued logarithm results\",\n        \"Logarithmic scaling may not accurately model extreme market conditions or flash crashes\",\n        \"The fixed constant may not adapt to changing market conditions or protocol parameters\",\n        \"Linear relationship with x1 assumes no position size limits or diminishing returns on scale\",\n        \"Model may break down during high volatility periods when traditional relationships fail\"\n    ],\n    \"formula_name\": \"Logarithmic Position Scaling Formula\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 14.93,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 8",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 88.9,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.089811",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a logarithmic scaling factor applied to a numerator term, where the scaling is based on a shifted denominator term plus a constant offset of approximately 1.035.",
+      "relationships": [
+        "Linear scaling relationship where x1 acts as a multiplier for the logarithmic component",
+        "Logarithmic transformation of x2 creates diminishing returns effect as denominator increases",
+        "The constant 1.0346043 prevents undefined behavior when x2 approaches zero and may represent a base rate or minimum threshold",
+        "The log function creates a concave relationship, meaning increases in x2 have decreasing marginal impact"
+      ],
+      "domain_insights": [
+        "The constant ~1.035 suggests an annual interest rate or growth factor commonly seen in DeFi protocols",
+        "Logarithmic scaling is typical in liquidity pool calculations where slippage increases non-linearly",
+        "Structure resembles automated market maker (AMM) pricing functions that prevent infinite slippage",
+        "Could represent yield farming rewards where returns diminish as pool size increases",
+        "The numerator-denominator relationship suggests a ratio-based metric common in DeFi analytics"
+      ],
+      "use_cases": [
+        "Liquidity pool token pricing with slippage protection mechanisms",
+        "Dynamic fee calculation based on pool utilization ratios",
+        "Yield farming reward distribution with diminishing returns",
+        "Collateralization ratio adjustments in lending protocols",
+        "Impermanent loss calculations for liquidity providers"
+      ],
+      "limitations": [
+        "Requires x2 > -1.0346043 to avoid undefined logarithm values",
+        "Assumes x1 represents a positive scaling factor for meaningful financial interpretation",
+        "The specific constant may be protocol-dependent and not universally applicable",
+        "Logarithmic relationship may not capture extreme market conditions or flash crashes",
+        "Model warnings suggest potential edge cases or data quality issues not addressed"
+      ],
+      "formula_name": "Logarithmic Liquidity Scaling Function",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a logarithmic scaling factor applied to a numerator term, where the scaling is based on a shifted denominator term plus a constant offset of approximately 1.035.\",\n    \"relationships\": [\n        \"Linear scaling relationship where x1 acts as a multiplier for the logarithmic component\",\n        \"Logarithmic transformation of x2 creates diminishing returns effect as denominator increases\",\n        \"The constant 1.0346043 prevents undefined behavior when x2 approaches zero and may represent a base rate or minimum threshold\",\n        \"The log function creates a concave relationship, meaning increases in x2 have decreasing marginal impact\"\n    ],\n    \"domain_insights\": [\n        \"The constant ~1.035 suggests an annual interest rate or growth factor commonly seen in DeFi protocols\",\n        \"Logarithmic scaling is typical in liquidity pool calculations where slippage increases non-linearly\",\n        \"Structure resembles automated market maker (AMM) pricing functions that prevent infinite slippage\",\n        \"Could represent yield farming rewards where returns diminish as pool size increases\",\n        \"The numerator-denominator relationship suggests a ratio-based metric common in DeFi analytics\"\n    ],\n    \"use_cases\": [\n        \"Liquidity pool token pricing with slippage protection mechanisms\",\n        \"Dynamic fee calculation based on pool utilization ratios\",\n        \"Yield farming reward distribution with diminishing returns\",\n        \"Collateralization ratio adjustments in lending protocols\",\n        \"Impermanent loss calculations for liquidity providers\"\n    ],\n    \"limitations\": [\n        \"Requires x2 > -1.0346043 to avoid undefined logarithm values\",\n        \"Assumes x1 represents a positive scaling factor for meaningful financial interpretation\",\n        \"The specific constant may be protocol-dependent and not universally applicable\",\n        \"Logarithmic relationship may not capture extreme market conditions or flash crashes\",\n        \"Model warnings suggest potential edge cases or data quality issues not addressed\"\n    ],\n    \"formula_name\": \"Logarithmic Liquidity Scaling Function\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 12.99,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 18",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 86.8,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.089946",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression calculates a risk-adjusted yield or pricing metric that exponentially decays based on a normalized factor ratio, with applications in DeFi protocol valuation or liquidity pool optimization.",
+      "relationships": [
+        "The expression has an exponential decay structure where increasing (x2 + x3) relative to x1 reduces the overall output",
+        "The offset term 0.09462639 acts as a baseline adjustment, potentially representing a risk-free rate or minimum threshold",
+        "Factor 1 (x1) serves as a denominator scaling factor, creating inverse sensitivity to its magnitude",
+        "The additive constant 0.21733865 provides a floor value, ensuring the output never falls below this minimum"
+      ],
+      "domain_insights": [
+        "The exponential structure suggests this models impermanent loss or slippage in automated market makers (AMMs)",
+        "The ratio (x2 + x3)/x1 could represent token balance ratios in liquidity pools or collateralization ratios",
+        "The baseline offset resembles risk-free rates used in yield farming calculations or lending protocol interest models",
+        "The floor value may represent minimum liquidity provider fees or protocol insurance mechanisms"
+      ],
+      "use_cases": [
+        "Calculating optimal liquidity provision ratios in AMM pools to maximize returns",
+        "Pricing synthetic assets or derivatives based on underlying collateral ratios",
+        "Determining lending rates or borrowing costs in overcollateralized protocols",
+        "Evaluating impermanent loss exposure for liquidity providers across different pool compositions"
+      ],
+      "limitations": [
+        "Assumes x1 is never zero to avoid division by zero errors",
+        "The exponential nature can lead to extreme sensitivity for large ratio values",
+        "Model may break down during extreme market volatility or flash crash scenarios",
+        "The 6 validation warnings suggest potential instability in certain parameter ranges",
+        "Static coefficients may not adapt to changing market conditions or protocol parameters"
+      ],
+      "formula_name": "DeFi Risk-Adjusted Yield Calculator",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This expression calculates a risk-adjusted yield or pricing metric that exponentially decays based on a normalized factor ratio, with applications in DeFi protocol valuation or liquidity pool optimization.\",\n    \"relationships\": [\n        \"The expression has an exponential decay structure where increasing (x2 + x3) relative to x1 reduces the overall output\",\n        \"The offset term 0.09462639 acts as a baseline adjustment, potentially representing a risk-free rate or minimum threshold\",\n        \"Factor 1 (x1) serves as a denominator scaling factor, creating inverse sensitivity to its magnitude\",\n        \"The additive constant 0.21733865 provides a floor value, ensuring the output never falls below this minimum\"\n    ],\n    \"domain_insights\": [\n        \"The exponential structure suggests this models impermanent loss or slippage in automated market makers (AMMs)\",\n        \"The ratio (x2 + x3)/x1 could represent token balance ratios in liquidity pools or collateralization ratios\",\n        \"The baseline offset resembles risk-free rates used in yield farming calculations or lending protocol interest models\",\n        \"The floor value may represent minimum liquidity provider fees or protocol insurance mechanisms\"\n    ],\n    \"use_cases\": [\n        \"Calculating optimal liquidity provision ratios in AMM pools to maximize returns\",\n        \"Pricing synthetic assets or derivatives based on underlying collateral ratios\",\n        \"Determining lending rates or borrowing costs in overcollateralized protocols\",\n        \"Evaluating impermanent loss exposure for liquidity providers across different pool compositions\"\n    ],\n    \"limitations\": [\n        \"Assumes x1 is never zero to avoid division by zero errors\",\n        \"The exponential nature can lead to extreme sensitivity for large ratio values\",\n        \"Model may break down during extreme market volatility or flash crash scenarios\",\n        \"The 6 validation warnings suggest potential instability in certain parameter ranges\",\n        \"Static coefficients may not adapt to changing market conditions or protocol parameters\"\n    ],\n    \"formula_name\": \"DeFi Risk-Adjusted Yield Calculator\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 13.24,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "DeFi synthetic formula 22",
+    "discovered_equation": null,
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 85.6,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090009",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This formula calculates an exponentially amplified risk or volatility measure that compounds based on the normalized difference between two factors relative to a divisor, commonly used for pricing derivatives or assessing liquidation risks in DeFi protocols.",
+      "relationships": [
+        "Double exponential structure creates extreme sensitivity to input changes, suggesting high-risk scenario modeling",
+        "The term (x2 - (-x3 - 1.5732285))/x1 represents a normalized spread or ratio, where x3 acts as a negative offset",
+        "The constant 1.5732285 appears to be a calibration parameter, possibly related to historical volatility or risk-free rates",
+        "Factor x1 serves as a scaling denominator, moderating the impact of the factor difference",
+        "The final multiplier 0.24393746 suggests probability scaling or risk adjustment coefficient"
+      ],
+      "domain_insights": [
+        "Double exponential structure is characteristic of extreme value theory used in tail risk assessment for DeFi lending protocols",
+        "The formula structure resembles option pricing models adapted for automated market makers or impermanent loss calculations",
+        "Could represent liquidation probability or collateral ratio adjustments in over-collateralized lending platforms",
+        "The normalization by x1 suggests this might model slippage or price impact in concentrated liquidity pools",
+        "Constants suggest calibration to specific market conditions or historical DeFi market stress events"
+      ],
+      "use_cases": [
+        "Dynamic liquidation threshold calculation in lending protocols like Aave or Compound",
+        "Impermanent loss estimation for liquidity providers in concentrated liquidity AMMs",
+        "Risk parameter adjustment for synthetic asset protocols or derivatives platforms",
+        "Volatility surface modeling for DeFi options pricing",
+        "Stress testing collateral requirements during market volatility events"
+      ],
+      "limitations": [
+        "Double exponential creates extreme sensitivity - small input errors can cause massive output variations",
+        "Requires x1 \u2260 0 to avoid division by zero, limiting applicability when scaling factors approach zero",
+        "May produce unrealistically large values during extreme market conditions due to exponential amplification",
+        "Constants appear fitted to specific market conditions and may require recalibration over time",
+        "High computational cost due to nested exponentials may limit real-time applications",
+        "Model assumes continuous differentiability which may not hold during flash crashes or oracle failures"
+      ],
+      "formula_name": "DeFi Exponential Risk Amplification Model",
+      "provider": "anthropic",
+      "raw_response": "{\n    \"interpretation\": \"This formula calculates an exponentially amplified risk or volatility measure that compounds based on the normalized difference between two factors relative to a divisor, commonly used for pricing derivatives or assessing liquidation risks in DeFi protocols.\",\n    \"relationships\": [\n        \"Double exponential structure creates extreme sensitivity to input changes, suggesting high-risk scenario modeling\",\n        \"The term (x2 - (-x3 - 1.5732285))/x1 represents a normalized spread or ratio, where x3 acts as a negative offset\",\n        \"The constant 1.5732285 appears to be a calibration parameter, possibly related to historical volatility or risk-free rates\",\n        \"Factor x1 serves as a scaling denominator, moderating the impact of the factor difference\",\n        \"The final multiplier 0.24393746 suggests probability scaling or risk adjustment coefficient\"\n    ],\n    \"domain_insights\": [\n        \"Double exponential structure is characteristic of extreme value theory used in tail risk assessment for DeFi lending protocols\",\n        \"The formula structure resembles option pricing models adapted for automated market makers or impermanent loss calculations\",\n        \"Could represent liquidation probability or collateral ratio adjustments in over-collateralized lending platforms\",\n        \"The normalization by x1 suggests this might model slippage or price impact in concentrated liquidity pools\",\n        \"Constants suggest calibration to specific market conditions or historical DeFi market stress events\"\n    ],\n    \"use_cases\": [\n        \"Dynamic liquidation threshold calculation in lending protocols like Aave or Compound\",\n        \"Impermanent loss estimation for liquidity providers in concentrated liquidity AMMs\",\n        \"Risk parameter adjustment for synthetic asset protocols or derivatives platforms\",\n        \"Volatility surface modeling for DeFi options pricing\",\n        \"Stress testing collateral requirements during market volatility events\"\n    ],\n    \"limitations\": [\n        \"Double exponential creates extreme sensitivity - small input errors can cause massive output variations\",\n        \"Requires x1 \u2260 0 to avoid division by zero, limiting applicability when scaling factors approach zero\",\n        \"May produce unrealistically large values during extreme market conditions due to exponential amplification\",\n        \"Constants appear fitted to specific market conditions and may require recalibration over time\",\n        \"High computational cost due to nested exponentials may limit real-time applications\",\n        \"Model assumes continuous differentiability which may not hold during flash crashes or oracle failures\"\n    ],\n    \"formula_name\": \"DeFi Exponential Risk Amplification Model\"\n}",
+      "parse_success": true,
+      "metadata": {
+        "provider": "anthropic",
+        "generation_time_seconds": 14.47,
+        "attempt": 1,
+        "fallback_used": false
+      }
+    }
+  },
+  {
+    "description": "Impermanent Loss in AMM Pool",
+    "discovered_equation": "(price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694",
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 85.45,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090442",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression models a DeFi metric as a function of price ratio with three key components: (1) A power-law decay term price_ratio/(price_ratio + 1.4091635)^2.3158338 that approaches zero as price_ratio increases, suggesting diminishing returns or saturation effects; (2) A baseline offset of -0.12823491 that shifts the entire function downward, possibly representing fixed costs or minimum thresholds; (3) A scaling factor of 4.3896694 that amplifies the net effect. The critical price ratio of 1.4091635 appears to be an inflection point where behavior transitions.",
+      "analogies": "The functional form resembles Hill equations in biochemistry for cooperative binding, Michaelis-Menten kinetics with inhibition, and dose-response curves in pharmacology. In finance, it parallels utility functions with diminishing marginal returns, option pricing models with price-dependent sensitivity, and risk-adjusted return metrics. The power-law exponent 2.3158338 is reminiscent of scaling laws in complex systems and critical phenomena.",
+      "novelty": "The specific combination of parameters suggests a DeFi-native phenomenon not captured by traditional finance models. The critical ratio of ~1.41 may represent a unique equilibrium point in automated market makers or liquidity pools. The negative baseline indicates the metric can go negative, unusual for many financial ratios but consistent with DeFi concepts like impermanent loss or slippage costs.",
+      "predictions": "The model predicts maximum values occur at low price ratios (near 1), rapid decay as prices increase beyond the critical point, and asymptotic approach to the baseline offset at high price ratios. It suggests optimal DeFi strategies should focus on price ratios below 1.41, and provides quantitative thresholds for risk management and position sizing in volatile DeFi environments.",
+      "limitations": "May fail during extreme market conditions, flash crashes, or when price_ratio approaches zero. The model assumes continuous price movements and may not capture discrete jumps or oracle failures common in DeFi. Limited to the price range observed in training data, and may not generalize across different DeFi protocols, token pairs, or market regimes with different volatility characteristics.",
+      "expression": "(price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694",
+      "domain": "defi",
+      "r2_score": 0.9918951531229985
+    }
+  },
+  {
+    "description": "Impermanent Loss in AMM Pool",
+    "discovered_equation": "-0.53534603*log(sqrt(0.49525717/price_ratio**0.9820758 + 0.49525717*price_ratio))",
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 83.7,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090271",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression models a symmetric logarithmic relationship around price equilibrium. The inner term sqrt(0.49525717/price_ratio^0.9820758 + 0.49525717*price_ratio) creates a U-shaped function that reaches minimum near price_ratio=1 (no price change). The coefficients ~0.495 suggest near-equal weighting of upward and downward price movements. The exponent 0.9820758 \u2248 1 indicates almost linear price sensitivity. The negative scaling factor -0.535 inverts the relationship, suggesting this models a cost, loss, or negative utility function in DeFi operations.",
+      "analogies": "The structure resembles the hyperbolic cosine function cosh(x) = (e^x + e^-x)/2, commonly found in physics for catenary curves and in finance for volatility modeling. It also parallels the geometric mean of reciprocal terms, similar to harmonic oscillator potentials in physics. In finance, this mirrors symmetric loss functions used in portfolio optimization and risk management, particularly resembling quadratic utility functions expanded around equilibrium points.",
+      "novelty": "The near-unity exponent (0.9820758) suggests a subtle deviation from perfect price linearity that may capture market microstructure effects or liquidity dynamics specific to DeFi. The precise coefficient values (0.49525717) indicate an almost perfectly balanced but slightly asymmetric response to price movements. This asymmetry could reflect gas costs, slippage, or other DeFi-specific frictions that create small deviations from theoretical symmetry.",
+      "predictions": "This expression enables prediction of symmetric costs or losses around price equilibrium in DeFi protocols. It suggests minimal impact when price_ratio \u2248 1, with costs rising symmetrically for both price increases and decreases. The model predicts that extreme price movements (very high or low ratios) will result in logarithmically bounded costs rather than exponential growth, implying some form of natural hedging or capping mechanism in the underlying DeFi system.",
+      "limitations": "The model assumes continuous price movements and may fail during flash crashes or extreme volatility events common in DeFi. The near-symmetric structure may not capture directional market biases or trending behavior. The logarithmic nature implies the expression becomes undefined for price_ratio \u2264 0, limiting applicability to scenarios where prices can approach zero. High R\u00b2 suggests overfitting risk, and the model may not generalize across different DeFi protocols or market conditions outside the training data range.",
+      "expression": "-0.53534603*log(sqrt(0.49525717/price_ratio**0.9820758 + 0.49525717*price_ratio))",
+      "domain": "defi",
+      "r2_score": 0.9958377386246736
+    }
+  },
+  {
+    "description": "Uniswap V2 Swap Output with 0.3% Fee",
+    "discovered_equation": "1.0981569*amount_in_ratio*reserve_out_ratio*(amount_in_ratio*log(reserve_in_ratio)/reserve_in_ratio + 37.3832927518718/reserve_in_ratio)**1.0172031",
+    "domain": "defi",
+    "validation": {
+      "valid": true,
+      "total_score": 82.9,
+      "r2_score": 0.0,
+      "symbolic_score": 0,
+      "physical_score": 0
+    },
+    "metadata": {
+      "extracted_at": "2025-12-16T13:48:33.090298",
+      "source": "dataset_extraction"
+    },
+    "interpretation": {
+      "interpretation": "This expression models DeFi token swap output with high precision (R\u00b2=0.9999). The core structure shows output proportional to amount_in_ratio and reserve_out_ratio, consistent with AMM mechanics. The complex term (amount_in_ratio*log(reserve_in_ratio)/reserve_in_ratio + 37.3832927518718/reserve_in_ratio)^1.0172031 represents a sophisticated slippage function that combines logarithmic price impact with inverse reserve dependency. The coefficient 1.0981569 acts as a system-wide scaling factor, while the exponent 1.0172031 introduces slight non-linearity in slippage behavior.",
+      "analogies": "The logarithmic component resembles the natural log term in Uniswap V2's constant product formula, but here it's embedded within a more complex slippage model. The inverse reserve relationship (1/reserve_in_ratio) mirrors traditional market microstructure models where liquidity depth affects price impact. The power law structure with exponent ~1.017 is reminiscent of scaling laws in financial markets, similar to those found in order book impact models and market efficiency studies.",
+      "novelty": "The hybrid logarithmic-inverse structure within the power term is unprecedented in standard AMM formulations. The specific constant 37.3832927518718 suggests a discovered empirical parameter that may represent a liquidity threshold or market efficiency factor. The near-unity exponent (1.0172031) indicates subtle non-linear effects that aren't captured in traditional constant product models. This formulation appears to bridge continuous liquidity models with discrete market impact effects.",
+      "predictions": "This expression enables precise prediction of swap outputs across varying liquidity conditions and trade sizes. It can forecast slippage behavior for large trades, optimize routing strategies across multiple pools, and estimate arbitrage opportunities. The model should predict increased accuracy in volatile market conditions where traditional AMM formulas show larger deviations. It may also enable better liquidity provider reward calculations and impermanent loss estimation.",
+      "limitations": "The model may fail during extreme market stress when reserve ratios approach zero or infinity. The specific constant 37.3832927518718 might be dataset-dependent and not generalize across different token pairs or protocols. The expression assumes continuous liquidity and may break down with discrete large trades or flash loan attacks. It likely doesn't account for external factors like gas fees, MEV, or cross-chain bridge effects that can significantly impact actual swap outcomes.",
+      "expression": "1.0981569*amount_in_ratio*reserve_out_ratio*(amount_in_ratio*log(reserve_in_ratio)/reserve_in_ratio + 37.3832927518718/reserve_in_ratio)**1.0172031",
+      "domain": "defi",
+      "r2_score": 0.9999380941689904
+    }
+  }
+]

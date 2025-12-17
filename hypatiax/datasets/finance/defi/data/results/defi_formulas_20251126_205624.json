@@ -1,0 +1,820 @@
+[
+  {
+    "timestamp": "2025-11-26T20:55:37.723606",
+    "description": "Impermanent Loss in AMM Pool",
+    "domain": "defi",
+    "discovery": {
+      "expression": "(price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694",
+      "sympy_expr": "(price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694",
+      "r2_score": 0.9918951531229985,
+      "complexity": "11",
+      "variable_names": [
+        "price_ratio"
+      ],
+      "predictions": [
+        -0.1984286361133298,
+        -0.3983799976562156,
+        -0.3509195049193308,
+        -0.309015432670896,
+        -0.01878859418968391,
+        -0.01876906704878669,
+        -0.02197142074547555,
+        -0.3824280643143775,
+        -0.3099112532031892,
+        -0.3443032294628154,
+        -0.17947855723179046,
+        -0.4016651148066048,
+        -0.37529995622356493,
+        -0.0688050229671104,
+        -0.0409944124866684,
+        -0.0424127226801069,
+        -0.14793479057970196,
+        -0.2793684267201903,
+        -0.2332280023951639,
+        -0.13757062430130715,
+        -0.313765439492139,
+        -0.006277384091302671,
+        -0.13831013664558195,
+        -0.1930200719054947,
+        -0.2463273840205989,
+        -0.36446190723177074,
+        -0.05720149119100793,
+        -0.27468109564371584,
+        -0.30671435792977964,
+        -0.051138850343648665,
+        -0.3122310668218786,
+        -0.031003582579217412,
+        -0.00999814173129685,
+        -0.3980609760893984,
+        -0.4009429047032409,
+        -0.36991726550107096,
+        -0.1482260102235387,
+        0.010769858978784437,
+        -0.3373515609112042,
+        -0.23777950350366994,
+        0.0042343957468107575,
+        -0.2658611209686041,
+        -0.09752465332776808,
+        -0.39088758520105554,
+        -0.1103869513967092,
+        -0.33068700136845586,
+        -0.15373903559481872,
+        -0.27729543324698275,
+        -0.28875326034012105,
+        -0.04371832035643061,
+        -0.4016104043676458,
+        -0.36201987628460136,
+        -0.39640652953807326,
+        -0.3881235788863301,
+        -0.3087377529911684,
+        -0.39322128180249516,
+        0.00937841945291753,
+        -0.053826438585003224,
+        -0.05500348401106595,
+        -0.1640506944114904,
+        -0.2075032763379247,
+        -0.12113482235895917,
+        -0.3744874793678951,
+        -0.18651331411979366,
+        -0.12914865373415857,
+        -0.2870759724763202,
+        -0.007279975459860504,
+        -0.368486055031558,
+        0.001185819353146528,
+        -0.4044770402368223,
+        -0.36130807454245945,
+        -0.056324741455585574,
+        -0.3218502245281956,
+        -0.37152590538054125,
+        -0.34395772875749325,
+        -0.3501122006891896,
+        -0.3610669379603264,
+        0.0007193729200333601,
+        -0.18768511180798206,
+        0.006981748242603889,
+        -0.3817982291977667,
+        -0.31776598837802106,
+        -0.16816513315246356,
+        -0.012268592554592185,
+        -0.1531773536089831,
+        -0.1639412642385575,
+        -0.350274529668046,
+        -0.3226008067297471,
+        -0.3866404619118926,
+        -0.2546360882398587,
+        0.005394841163950384,
+        -0.34576338739964574,
+        -0.35844057401556184,
+        -0.2947000483738562,
+        -0.3609918135831261,
+        -0.2652047414339152,
+        -0.27847673251936544,
+        -0.23074418497580762,
+        -0.1465088762775661,
+        0.009538917434708917
+      ]
+    },
+    "validation": {
+      "valid": true,
+      "total_score": 85.45,
+      "layer_scores": {
+        "symbolic": 67,
+        "dimensional": 100.0,
+        "domain": 90.0,
+        "numerical": 100.0
+      },
+      "layer_results": {
+        "symbolic": {
+          "valid": true,
+          "syntactically_valid": true,
+          "dimensionally_consistent": true,
+          "domain_valid": true,
+          "numerically_stable": false,
+          "errors": [],
+          "warnings": [
+            "Verify price bounds and slippage limits",
+            "Check AMM constant product invariant preservation",
+            "Division by zero risk: price_ratio + 1.4091635",
+            "Division by zero risk: price_ratio + 1.4091635"
+          ],
+          "sympy_expr": "4.3896694*price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.562908860438754",
+          "canonical_form": "4.3896694*price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.562908860438754",
+          "score": 67
+        },
+        "dimensional": {
+          "valid": true,
+          "score": 100.0,
+          "errors": [],
+          "warnings": [],
+          "dimensionally_consistent": true,
+          "variable_dimensions": {
+            "price_ratio": "dimensionless"
+          }
+        },
+        "domain": {
+          "valid": true,
+          "score": 90.0,
+          "errors": [],
+          "warnings": [
+            "Variable 'price' should be positive - add validation",
+            "Variable 'ratio' should be in range \u2265 0"
+          ],
+          "domain": "defi",
+          "constraints_checked": [
+            "price_positive",
+            "ratio_bounded"
+          ]
+        },
+        "numerical": {
+          "score": 100.0,
+          "errors": [],
+          "warnings": []
+        }
+      },
+      "errors": [],
+      "warnings": [
+        "Verify price bounds and slippage limits",
+        "Check AMM constant product invariant preservation",
+        "Division by zero risk: price_ratio + 1.4091635",
+        "Division by zero risk: price_ratio + 1.4091635",
+        "Variable 'price' should be positive - add validation",
+        "Variable 'ratio' should be in range \u2265 0"
+      ],
+      "recommendations": [
+        "IMPROVE: Simplify expression to: 4.3896694*price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.562908860438754",
+        "REVIEW: Address domain-specific warnings for defi"
+      ],
+      "expression": "(price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694",
+      "canonical_form": "4.3896694*price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.562908860438754",
+      "domain": "defi",
+      "r2_score": 0.0
+    },
+    "interpretation": {
+      "interpretation": "This expression models a DeFi metric as a function of price ratio with three key components: (1) A power-law decay term price_ratio/(price_ratio + 1.4091635)^2.3158338 that approaches zero as price_ratio increases, suggesting diminishing returns or saturation effects; (2) A baseline offset of -0.12823491 that shifts the entire function downward, possibly representing fixed costs or minimum thresholds; (3) A scaling factor of 4.3896694 that amplifies the net effect. The critical price ratio of 1.4091635 appears to be an inflection point where behavior transitions.",
+      "analogies": "The functional form resembles Hill equations in biochemistry for cooperative binding, Michaelis-Menten kinetics with inhibition, and dose-response curves in pharmacology. In finance, it parallels utility functions with diminishing marginal returns, option pricing models with price-dependent sensitivity, and risk-adjusted return metrics. The power-law exponent 2.3158338 is reminiscent of scaling laws in complex systems and critical phenomena.",
+      "novelty": "The specific combination of parameters suggests a DeFi-native phenomenon not captured by traditional finance models. The critical ratio of ~1.41 may represent a unique equilibrium point in automated market makers or liquidity pools. The negative baseline indicates the metric can go negative, unusual for many financial ratios but consistent with DeFi concepts like impermanent loss or slippage costs.",
+      "predictions": "The model predicts maximum values occur at low price ratios (near 1), rapid decay as prices increase beyond the critical point, and asymptotic approach to the baseline offset at high price ratios. It suggests optimal DeFi strategies should focus on price ratios below 1.41, and provides quantitative thresholds for risk management and position sizing in volatile DeFi environments.",
+      "limitations": "May fail during extreme market conditions, flash crashes, or when price_ratio approaches zero. The model assumes continuous price movements and may not capture discrete jumps or oracle failures common in DeFi. Limited to the price range observed in training data, and may not generalize across different DeFi protocols, token pairs, or market regimes with different volatility characteristics.",
+      "expression": "(price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694",
+      "domain": "defi",
+      "r2_score": 0.9918951531229985
+    },
+    "metadata": {
+      "n_samples": 100,
+      "n_features": 1,
+      "variable_names": [
+        "price_ratio"
+      ]
+    },
+    "discovered_equation": "(price_ratio/(price_ratio + 1.4091635)**2.3158338 - 0.12823491)*4.3896694"
+  },
+  {
+    "timestamp": "2025-11-26T20:55:54.771093",
+    "description": "Uniswap V2 Swap Output with 0.3% Fee",
+    "domain": "defi",
+    "discovery": {
+      "expression": "amount_in*(-0.61682767 - (-0.56763846)*(amount_in - 2.963231)/reserve_in)*(0.0053935577 + reserve_out*(-1.6136296)/reserve_in) - 1*(-0.13659051)",
+      "sympy_expr": "amount_in*(-0.61682767 - (-0.56763846)*(amount_in - 2.963231)/reserve_in)*(0.0053935577 + reserve_out*(-1.6136296)/reserve_in) - 1*(-0.13659051)",
+      "r2_score": 0.9999669626202404,
+      "complexity": "21",
+      "variable_names": [
+        "amount_in",
+        "reserve_in",
+        "reserve_out"
+      ],
+      "predictions": [
+        103.85733666979574,
+        257.34587089355676,
+        142.27476908377236,
+        386.04182047609714,
+        61.3807560113485,
+        39.148878709608276,
+        26.51389143150149,
+        261.4464337715955,
+        10.731222406897574,
+        69.70206326117737,
+        17.6338219296729,
+        42.999983579664324,
+        146.5732963140249,
+        96.25097761390339,
+        194.91158366245205,
+        32.20248248134476,
+        38.818115902049456,
+        70.0453233114611,
+        583.6953851750189,
+        4.88409984698286,
+        24.77835104781854,
+        24.857432231891387,
+        12.429245444102857,
+        29.418898850666494,
+        19.45019072317746,
+        13.741510715816867,
+        43.90668236899015,
+        83.37864013587685,
+        7.518182774478461,
+        24.052732406223498,
+        90.62201059334566,
+        127.86472011916477,
+        22.357326378769546,
+        11.261864988081802,
+        22.67343624700764,
+        52.863784222010516,
+        3.7606397447896445,
+        139.3427515906347,
+        77.7076716643755,
+        84.02067730288434,
+        93.67040349021741,
+        114.83976474966198,
+        36.06496885039196,
+        3.22066355749143,
+        2.1664062546377854,
+        128.7568685808964,
+        9.298580141060109,
+        14.351139672027596,
+        19.913592934052566,
+        2.8548166646103366,
+        35.48995687567163,
+        3.4046830604459526,
+        60.92606659429111,
+        230.9312364108975,
+        62.05765453944705,
+        26.15879003707566,
+        25.37070084042553,
+        191.85886123789368,
+        20.40725838245174,
+        62.20080467682755,
+        6.664849855089502,
+        9.13471072050397,
+        23.85266720100008,
+        58.59746501659751,
+        16.9118842255569,
+        41.13488399108601,
+        29.748826298905602,
+        56.412773516466466,
+        19.95907117780201,
+        132.27436111725626,
+        5.959925047137286,
+        24.99411583047993,
+        59.32716826949819,
+        20.89356622995512,
+        13.209975939662487,
+        106.4543944526807,
+        77.70065207422336,
+        5.075886656887107,
+        22.105316660935628,
+        64.34529241433097,
+        71.09128092215961,
+        6.359231615851041,
+        31.86315185462265,
+        9.929941256577226,
+        60.014168725153674,
+        171.2960442724721,
+        8.491117397841016,
+        79.8509680823774,
+        148.93976930868152,
+        11.39201003358213,
+        9.975334581934288,
+        42.441406980177064,
+        83.08076787229412,
+        39.732512305546,
+        8.114776330137653,
+        55.920515114201876,
+        12.614197159327116,
+        13.595187685137924,
+        1.4175060042523453,
+        41.942329028428226
+      ]
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 74.9,
+      "layer_scores": {
+        "symbolic": 69,
+        "dimensional": 55.0,
+        "domain": 90.0,
+        "numerical": 100.0
+      },
+      "layer_results": {
+        "symbolic": {
+          "valid": true,
+          "syntactically_valid": true,
+          "dimensionally_consistent": true,
+          "domain_valid": true,
+          "numerically_stable": false,
+          "errors": [],
+          "warnings": [
+            "Can be simplified to: (-amount_in*(0.0053935577*reserve_in - 1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 0.13659051*reserve_in**2)/reserve_in**2",
+            "Check AMM constant product invariant preservation",
+            "Multiple subtractions may cause precision loss"
+          ],
+          "sympy_expr": "amount_in*(-0.61682767 - (1.68204388146426 - 0.56763846*amount_in)/reserve_in)*(0.0053935577 - 1.6136296*reserve_out/reserve_in) + 0.13659051",
+          "canonical_form": "(-amount_in*(0.0053935577*reserve_in - 1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 0.13659051*reserve_in**2)/reserve_in**2",
+          "score": 69
+        },
+        "dimensional": {
+          "valid": false,
+          "score": 55.0,
+          "errors": [
+            "Invalid unit for 'amount_in': 'tokens' - 'tokens' is not defined in the unit registry",
+            "Invalid unit for 'reserve_in': 'tokens' - 'tokens' is not defined in the unit registry",
+            "Invalid unit for 'reserve_out': 'tokens' - 'tokens' is not defined in the unit registry"
+          ],
+          "warnings": [],
+          "dimensionally_consistent": true,
+          "variable_dimensions": {}
+        },
+        "domain": {
+          "valid": true,
+          "score": 90.0,
+          "errors": [],
+          "warnings": [
+            "Variable 'reserve' should be positive - add validation",
+            "Variable 'amount' should be positive - add validation",
+            "Verify constant product invariant (x*y=k) is maintained"
+          ],
+          "domain": "defi",
+          "constraints_checked": [
+            "reserve_positive",
+            "amount_positive",
+            "constant_product"
+          ]
+        },
+        "numerical": {
+          "score": 100.0,
+          "errors": [],
+          "warnings": []
+        }
+      },
+      "errors": [
+        "Invalid unit for 'amount_in': 'tokens' - 'tokens' is not defined in the unit registry",
+        "Invalid unit for 'reserve_in': 'tokens' - 'tokens' is not defined in the unit registry",
+        "Invalid unit for 'reserve_out': 'tokens' - 'tokens' is not defined in the unit registry"
+      ],
+      "warnings": [
+        "Can be simplified to: (-amount_in*(0.0053935577*reserve_in - 1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 0.13659051*reserve_in**2)/reserve_in**2",
+        "Check AMM constant product invariant preservation",
+        "Multiple subtractions may cause precision loss",
+        "Variable 'reserve' should be positive - add validation",
+        "Variable 'amount' should be positive - add validation",
+        "Verify constant product invariant (x*y=k) is maintained"
+      ],
+      "recommendations": [
+        "IMPROVE: Simplify expression to: (-amount_in*(0.0053935577*reserve_in - 1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 0.13659051*reserve_in**2)/reserve_in**2",
+        "FIX CRITICAL: Resolve dimensional inconsistencies",
+        "REVIEW: Address domain-specific warnings for defi"
+      ],
+      "expression": "amount_in*(-0.61682767 - (-0.56763846)*(amount_in - 2.963231)/reserve_in)*(0.0053935577 + reserve_out*(-1.6136296)/reserve_in) - 1*(-0.13659051)",
+      "canonical_form": "(-amount_in*(0.0053935577*reserve_in - 1.6136296*reserve_out)*(-0.56763846*amount_in + 0.61682767*reserve_in + 1.68204388146426) + 0.13659051*reserve_in**2)/reserve_in**2",
+      "domain": "defi",
+      "r2_score": 0.0
+    },
+    "interpretation": null,
+    "metadata": {
+      "n_samples": 100,
+      "n_features": 3,
+      "variable_names": [
+        "amount_in",
+        "reserve_in",
+        "reserve_out"
+      ]
+    },
+    "discovered_equation": "amount_in*(-0.61682767 - (-0.56763846)*(amount_in - 2.963231)/reserve_in)*(0.0053935577 + reserve_out*(-1.6136296)/reserve_in) - 1*(-0.13659051)"
+  },
+  {
+    "timestamp": "2025-11-26T20:56:09.809273",
+    "description": "Lending Pool Utilization Rate",
+    "domain": "defi",
+    "discovery": {
+      "expression": "borrowed/supplied",
+      "sympy_expr": "borrowed/supplied",
+      "r2_score": 0.9960095145108544,
+      "complexity": "3",
+      "variable_names": [
+        "borrowed",
+        "supplied"
+      ],
+      "predictions": [
+        0.6261317166683932,
+        0.8438832665787281,
+        0.6745427975483953,
+        0.37013882442501844,
+        0.8638992741680851,
+        0.6766248318428507,
+        0.5009433687942517,
+        0.3835632435980323,
+        0.7764151135621776,
+        0.6720436535571082,
+        0.620076655185793,
+        0.8363355498305748,
+        0.7731583267347185,
+        0.3910049278396507,
+        0.48703324067732895,
+        0.4490934838886794,
+        0.7463677755436062,
+        0.32011946084146764,
+        0.6419338109227899,
+        0.7574752114444142,
+        0.8260593820570497,
+        0.5052490492295445,
+        0.7927543828032078,
+        0.36637904217312434,
+        0.807871375040711,
+        0.37649319739918946,
+        0.5383723743362203,
+        0.7783772194677324,
+        0.3899504564092643,
+        0.4375508371395848,
+        0.7333515410358398,
+        0.7320219219276447,
+        0.6846885797311784,
+        0.71636906668026,
+        0.6256346660085577,
+        0.45107943534417166,
+        0.5074175961023517,
+        0.40895863008085537,
+        0.8450703368001771,
+        0.6500350768596723,
+        0.5405108500581839,
+        0.5772034821864797,
+        0.8683700037670892,
+        0.39201084186964813,
+        0.6517378992100784,
+        0.6035332073306796,
+        0.6668725412607888,
+        0.31086611029250427,
+        0.823274345366491,
+        0.8592709694901675,
+        0.6390799101535254,
+        0.7179904943261355,
+        0.8534996287063774,
+        0.7243431805880391,
+        0.3915234257485568,
+        0.6457730161000879,
+        0.6640290278297136,
+        0.5544784027814316,
+        0.7418665413748338,
+        0.8606202088614089,
+        0.8553411077440658,
+        0.5705036228424794,
+        0.3679428275044532,
+        0.8909047193774009,
+        0.8033388518675606,
+        0.3747976087219601,
+        0.8525051295704236,
+        0.8219378172372771,
+        0.6113028342756432,
+        0.6547652614469576,
+        0.5394016223220781,
+        0.3328569832932188,
+        0.5011183449875406,
+        0.7817120691588069,
+        0.3027792138027617,
+        0.5000995030146865,
+        0.538901216154566,
+        0.6224373617627538,
+        0.8519133698476564,
+        0.5078075966195768,
+        0.5081719211377367,
+        0.742500748865849,
+        0.5713307645338843,
+        0.4347628937639892,
+        0.571463709679616,
+        0.3845142122278799,
+        0.405832191903734,
+        0.5990206636436879,
+        0.5513552697027287,
+        0.8489075406408602,
+        0.5174363394699799,
+        0.6483530101668261,
+        0.6793585727517183,
+        0.30785667395300015,
+        0.6981224232100264,
+        0.4068215801218509,
+        0.8766421904816732,
+        0.3891976366518678,
+        0.5487744742362143,
+        0.3512098008471863
+      ]
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 91.3,
+      "layer_scores": {
+        "symbolic": 98,
+        "dimensional": 68.0,
+        "domain": 100.0,
+        "numerical": 100.0
+      },
+      "layer_results": {
+        "symbolic": {
+          "valid": true,
+          "syntactically_valid": true,
+          "dimensionally_consistent": true,
+          "domain_valid": true,
+          "numerically_stable": true,
+          "errors": [],
+          "warnings": [
+            "Check AMM constant product invariant preservation"
+          ],
+          "sympy_expr": "borrowed/supplied",
+          "canonical_form": "borrowed/supplied",
+          "score": 98
+        },
+        "dimensional": {
+          "valid": false,
+          "score": 68.0,
+          "errors": [
+            "Invalid unit for 'borrowed': 'USD' - 'USD' is not defined in the unit registry",
+            "Invalid unit for 'supplied': 'USD' - 'USD' is not defined in the unit registry"
+          ],
+          "warnings": [
+            "Multiplication detected - verify resulting dimensions are correct"
+          ],
+          "dimensionally_consistent": true,
+          "variable_dimensions": {}
+        },
+        "domain": {
+          "valid": true,
+          "score": 100.0,
+          "errors": [],
+          "warnings": [],
+          "domain": "defi",
+          "constraints_checked": []
+        },
+        "numerical": {
+          "score": 100.0,
+          "errors": [],
+          "warnings": []
+        }
+      },
+      "errors": [
+        "Invalid unit for 'borrowed': 'USD' - 'USD' is not defined in the unit registry",
+        "Invalid unit for 'supplied': 'USD' - 'USD' is not defined in the unit registry"
+      ],
+      "warnings": [
+        "Check AMM constant product invariant preservation",
+        "Multiplication detected - verify resulting dimensions are correct"
+      ],
+      "recommendations": [
+        "FIX CRITICAL: Resolve dimensional inconsistencies"
+      ],
+      "expression": "borrowed/supplied",
+      "canonical_form": "borrowed/supplied",
+      "domain": "defi",
+      "r2_score": 0.0
+    },
+    "interpretation": null,
+    "metadata": {
+      "n_samples": 100,
+      "n_features": 2,
+      "variable_names": [
+        "borrowed",
+        "supplied"
+      ]
+    },
+    "discovered_equation": "borrowed/supplied"
+  },
+  {
+    "timestamp": "2025-11-26T20:56:24.297730",
+    "description": "Constant Product Pool Total Value",
+    "domain": "defi",
+    "discovery": {
+      "expression": "2.00019239074645*sqrt(reserve0*reserve1)",
+      "sympy_expr": "2.00019239074645*sqrt(reserve0*reserve1)",
+      "r2_score": 0.9999959693484328,
+      "complexity": "6",
+      "variable_names": [
+        "reserve0",
+        "reserve1"
+      ],
+      "predictions": [
+        10662.763437452879,
+        11745.080953759103,
+        11261.273635688813,
+        10064.863385209543,
+        16006.617409556087,
+        15439.805909380733,
+        11781.042334006295,
+        1591.573407140457,
+        3766.1603831777365,
+        2033.7769334193424,
+        9606.014438011392,
+        2249.8896562189407,
+        2406.1635034554206,
+        2695.0106097011057,
+        11241.204392332978,
+        4225.32845196855,
+        17421.263427725822,
+        15158.066304287886,
+        12998.529648618476,
+        4928.417681931597,
+        9271.880548026169,
+        12618.059610192631,
+        12432.963547665588,
+        12703.969571294623,
+        8821.980181190023,
+        11547.67704068829,
+        13954.57313812182,
+        18986.55318526048,
+        15287.7819859446,
+        11426.71927754579,
+        3913.3921465430603,
+        14216.545475457115,
+        978.1728696684362,
+        14572.016309697461,
+        18559.523623239525,
+        10185.583432950474,
+        8720.45466758159,
+        5987.121903528925,
+        4993.248385106392,
+        3978.889520709673,
+        8278.691501308207,
+        1496.0413277825774,
+        7578.40363260752,
+        17245.604592466632,
+        14855.853034524423,
+        2725.349659638427,
+        6923.395295979048,
+        1780.5830002011187,
+        13460.34869632544,
+        3904.5235180997015,
+        8930.732292242994,
+        14751.07249397739,
+        4798.777555948707,
+        17818.301648143926,
+        14567.769456485841,
+        3559.348815978722,
+        12048.750794887983,
+        10963.086372862812,
+        17105.40603811618,
+        11182.559991397919,
+        13306.574272448921,
+        12745.386967954159,
+        13485.22985605526,
+        11290.069739549423,
+        13592.725497206744,
+        12135.045707406236,
+        6875.386963552261,
+        8104.659369489747,
+        831.3809155801744,
+        5137.017107194611,
+        6200.235866176105,
+        18642.31127982067,
+        1908.595759039028,
+        2333.6513670991635,
+        2215.198249225422,
+        5873.0256886549305,
+        4262.444687796054,
+        9557.857392156871,
+        14352.964615870014,
+        1297.9224122322,
+        11529.095745260342,
+        3086.9643033077296,
+        11172.535636741984,
+        1530.8545055831364,
+        12839.102334009369,
+        2010.707209777453,
+        7093.4832961444645,
+        4947.0656110817135,
+        5645.684859688514,
+        9785.583154168502,
+        11572.119864944869,
+        3767.171468312917,
+        11815.332008089801,
+        644.2180296745595,
+        6233.5478469593245,
+        4671.7281040156295,
+        3934.530814806604,
+        3288.159371264461,
+        11839.024201883167,
+        9471.460011857092
+      ]
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 89.8,
+      "layer_scores": {
+        "symbolic": 98,
+        "dimensional": 68.0,
+        "domain": 95.0,
+        "numerical": 100.0
+      },
+      "layer_results": {
+        "symbolic": {
+          "valid": true,
+          "syntactically_valid": true,
+          "dimensionally_consistent": true,
+          "domain_valid": true,
+          "numerically_stable": true,
+          "errors": [],
+          "warnings": [
+            "Check AMM constant product invariant preservation"
+          ],
+          "sympy_expr": "2.00019239074645*sqrt(reserve0*reserve1)",
+          "canonical_form": "2.00019239074645*sqrt(reserve0*reserve1)",
+          "score": 98
+        },
+        "dimensional": {
+          "valid": false,
+          "score": 68.0,
+          "errors": [
+            "Invalid unit for 'reserve0': 'USD' - 'USD' is not defined in the unit registry",
+            "Invalid unit for 'reserve1': 'USD' - 'USD' is not defined in the unit registry"
+          ],
+          "warnings": [
+            "Multiplication detected - verify resulting dimensions are correct"
+          ],
+          "dimensionally_consistent": true,
+          "variable_dimensions": {}
+        },
+        "domain": {
+          "valid": true,
+          "score": 95.0,
+          "errors": [],
+          "warnings": [
+            "Variable 'reserve' should be positive - add validation",
+            "Verify constant product invariant (x*y=k) is maintained"
+          ],
+          "domain": "defi",
+          "constraints_checked": [
+            "reserve_positive",
+            "constant_product"
+          ]
+        },
+        "numerical": {
+          "score": 100.0,
+          "errors": [],
+          "warnings": []
+        }
+      },
+      "errors": [
+        "Invalid unit for 'reserve0': 'USD' - 'USD' is not defined in the unit registry",
+        "Invalid unit for 'reserve1': 'USD' - 'USD' is not defined in the unit registry"
+      ],
+      "warnings": [
+        "Check AMM constant product invariant preservation",
+        "Multiplication detected - verify resulting dimensions are correct",
+        "Variable 'reserve' should be positive - add validation",
+        "Verify constant product invariant (x*y=k) is maintained"
+      ],
+      "recommendations": [
+        "FIX CRITICAL: Resolve dimensional inconsistencies",
+        "REVIEW: Address domain-specific warnings for defi"
+      ],
+      "expression": "2.00019239074645*sqrt(reserve0*reserve1)",
+      "canonical_form": "2.00019239074645*sqrt(reserve0*reserve1)",
+      "domain": "defi",
+      "r2_score": 0.0
+    },
+    "interpretation": null,
+    "metadata": {
+      "n_samples": 100,
+      "n_features": 2,
+      "variable_names": [
+        "reserve0",
+        "reserve1"
+      ]
+    },
+    "discovered_equation": "2.00019239074645*sqrt(reserve0*reserve1)"
+  }
+]

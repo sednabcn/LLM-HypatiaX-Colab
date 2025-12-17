@@ -1,0 +1,102 @@
+──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/datasets/finance/defi]
+└─$ tree                                                                                                                     
+.
+├── data
+│   ├── archive
+│   │   └── README.md
+│   ├── csv_data
+│   │   ├── defi_summary_20251126_205624.csv
+│   │   ├── defi_summary_fixed_20251126_211441.csv
+│   │   ├── defi_synthetic_20251214_131315.csv
+│   │   ├── il_test_cases_20251214_135738.csv
+│   │   ├── il_test_cases_20251214_142645.csv
+│   │   ├── real_pool_snapshots_20251214_135738.csv
+│   │   ├── real_pool_snapshots_20251214_142645.csv
+│   │   ├── uniswap_scenarios_20251214_135738.csv
+│   │   ├── uniswap_scenarios_20251214_142645.csv
+│   │   └── uniswap_scenarios.csv
+│   ├── defi_formulas_20251126_205624.json
+│   ├── defi_formulas_20251126_205624.json.backup
+│   ├── defi_formulas_at_market.txt~
+│   ├── defi_formulas_fixed_20251126_211441.json
+│   ├── defi_formulas_fixed_20251126_211441.json.backup
+│   ├── defi_summary_20251126_205624.csv
+│   ├── defi_summary_fixed_20251126_211441.csv
+│   ├── defi_synthetic_20251214_131315.csv
+│   ├── defi_synthetic_20251214_131315.json
+│   ├── defi_synthetic_20251214_131315.json.backup
+│   ├── formulas
+│   │   ├── defi_formulas_20251126_205624_fixed.json
+│   │   ├── defi_formulas_20251126_205624.json
+│   │   ├── defi_formulas_fixed_20251126_211441_fixed.json
+│   │   ├── defi_formulas_fixed_20251126_211441.json
+│   │   ├── defi_synthetic_20251214_131315_fixed.json
+│   │   ├── defi_synthetic_20251214_131315.json
+│   │   ├── il_test_cases_20251214_135738_fixed.json
+│   │   ├── il_test_cases_20251214_135738.json
+│   │   ├── il_test_cases_20251214_142645_fixed.json
+│   │   ├── il_test_cases_20251214_142645.json
+│   │   ├── real_pool_snapshots_20251214_135738_fixed.json
+│   │   ├── real_pool_snapshots_20251214_135738.json
+│   │   ├── real_pool_snapshots_20251214_142645_fixed.json
+│   │   ├── real_pool_snapshots_20251214_142645.json
+│   │   ├── uniswap_scenarios_20251214_135738_fixed.json
+│   │   ├── uniswap_scenarios_20251214_135738.json
+│   │   ├── uniswap_scenarios_20251214_142645_fixed.json
+│   │   ├── uniswap_scenarios_20251214_142645.json
+│   │   ├── uniswap_scenarios_fixed.json
+│   │   ├── uniswap_scenarios.json
+│   │   ├── valid_formulas_20251216_134833_fixed.json
+│   │   └── valid_formulas_20251216_134833.json
+│   ├── il_test_cases_20251214_135738.csv
+│   ├── il_test_cases_20251214_135738.json
+│   ├── il_test_cases_20251214_135738.json.backup
+│   ├── il_test_cases_20251214_142645.csv
+│   ├── il_test_cases_20251214_142645.json
+│   ├── il_test_cases_20251214_142645.json.backup
+│   ├── __init__.py
+│   ├── processed
+│   │   └── unified_valid_formulas_20251216_155347.json
+│   ├── real_pool_snapshots_20251214_135738.csv
+│   ├── real_pool_snapshots_20251214_135738.json
+│   ├── real_pool_snapshots_20251214_135738.json.backup
+│   ├── real_pool_snapshots_20251214_142645.csv
+│   ├── real_pool_snapshots_20251214_142645.json
+│   ├── real_pool_snapshots_20251214_142645.json.backup
+│   ├── results
+│   │   ├── defi_formulas_20251126_205624.json
+│   │   ├── defi_formulas_fixed_20251126_211441.json
+│   │   ├── defi_synthetic_20251214_131315.json
+│   │   ├── discovered_20251216_134950.json
+│   │   ├── README.md
+│   │   └── valid_formulas_20251216_134833.json
+│   ├── test_data
+│   │   ├── il_test_cases_20251214_135738.json
+│   │   ├── il_test_cases_20251214_135738.json.backup
+│   │   ├── il_test_cases_20251214_142645.json
+│   │   ├── il_test_cases_20251214_142645.json.backup
+│   │   ├── README.md
+│   │   ├── real_pool_snapshots_20251214_135738.json
+│   │   ├── real_pool_snapshots_20251214_135738.json.backup
+│   │   ├── real_pool_snapshots_20251214_142645.json
+│   │   ├── real_pool_snapshots_20251214_142645.json.backup
+│   │   ├── uniswap_scenarios_20251214_135738.json
+│   │   ├── uniswap_scenarios_20251214_135738.json.backup
+│   │   ├── uniswap_scenarios_20251214_142645.json
+│   │   ├── uniswap_scenarios_20251214_142645.json.backup
+│   │   ├── uniswap_scenarios.json
+│   │   └── uniswap_scenarios.json.backup
+│   ├── uniswap_scenarios_20251214_135738.csv
+│   ├── uniswap_scenarios_20251214_135738.json
+│   ├── uniswap_scenarios_20251214_135738.json.backup
+│   ├── uniswap_scenarios_20251214_142645.csv
+│   ├── uniswap_scenarios_20251214_142645.json
+│   ├── uniswap_scenarios_20251214_142645.json.backup
+│   ├── uniswap_scenarios.csv
+│   ├── uniswap_scenarios.json
+│   ├── uniswap_scenarios.json.backup
+│   └── valid_formulas_20251216_134833.json
+└── __init__.py
+
+8 directories, 89 files
+

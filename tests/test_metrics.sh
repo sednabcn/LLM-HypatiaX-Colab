@@ -8,7 +8,7 @@ echo ""
 
 # Option 1: Run tests directly with pytest (recommended first)
 echo "Running pytest directly..."
-pytest tests/unit/validators/test_ensemble_validator.py -v --tb=short --cov=hypatiax.tools.validation.ensemble_validator --cov-report=term-missing --cov-report=json
+pytest tests/unit/validators/test_edge_cases.py -v --tb=short --cov=hypatiax.tools.validation.symbolic_validator --cov-report=term-missing --cov-report=json
 
 echo ""
 echo "=========================================="
@@ -23,4 +23,4 @@ fi
 
 echo ""
 echo "To track metrics over time, run:"
-echo "python test_metrics_tracker_test.py -p tests/unit/validators/test_ensemble_validator.py --report ensemble_validator_report.md"
+echo "python test_metrics_tracker_test.py -p tests/unit/validators/test_edge_cases.py --report edge_case_fixes_report.md"

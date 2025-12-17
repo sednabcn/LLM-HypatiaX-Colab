@@ -30,6 +30,27 @@ class EnhancedSymbolicValidator:
     LARGE_EXPONENT_THRESHOLD = 100
     MAX_SAFE_FACTORIAL = 170
 
+    # Default sample values used for numeric probing
+    DEFAULT_SAMPLE_VALUES = {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0,
+        "a": 1.0,
+        "b": 1.0,
+        "c": 1.0,
+        "d": 1.0,
+        "S": 100.0,
+        "K": 100.0,
+        "r": 0.05,
+        "T": 1.0,
+        "sigma": 0.2,
+        "R_p": 0.1,
+        "R_f": 0.01,
+        "alpha": 0.05,
+        "sigma_p": 0.2,
+    }
+
+
     def __init__(self):
         self.domain_rules = {
             "defi": self._defi_rules,
@@ -38,6 +59,9 @@ class EnhancedSymbolicValidator:
             "risk": self._risk_rules,
         }
 
+    # -----------------------------
+    # Public API
+    # -----------------------------
     def validate(self, formula_latex: str, domain: str = "defi", strict_mode: bool = False) -> Dict[str, Any]:
         """Comprehensive validation with enhanced error detection"""
         results = {

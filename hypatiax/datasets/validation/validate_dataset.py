@@ -311,7 +311,17 @@ def validate_dataset(
 
     if not all_files:
         print(f"Error: No files found matching {search_pattern}")
-        return {}
+        print(f"\nTroubleshooting:")
+        print(f"  1. Check if directory exists: {data_dir}")
+        print(f"  2. Check if there are any JSON files in the directory")
+        print(f"  3. Try using absolute path instead of relative path")
+        print(f"  4. Current working directory: {os.getcwd()}")
+        return {
+            "success_rate": 0.0,
+            "total_formulas": 0,
+            "valid_formulas": 0,
+            "error": "No files found",
+        }
 
     if verbose:
         print(f"\nFound {len(all_files)} dataset file(s):")
@@ -329,7 +339,12 @@ def validate_dataset(
 
     if not all_results:
         print("Error: No valid results found in dataset files")
-        return {}
+        return {
+            "success_rate": 0.0,
+            "total_formulas": 0,
+            "valid_formulas": 0,
+            "error": "No valid results",
+        }
 
     # Calculate statistics
     total_formulas = len(all_results)
@@ -352,16 +367,16 @@ def validate_dataset(
         "total_formulas": total_formulas,
         "valid_formulas": valid_formulas,
         "success_rate": valid_formulas / total_formulas if total_formulas > 0 else 0,
-        "avg_score": np.mean(all_scores) if all_scores else 0,
-        "median_score": np.median(all_scores) if all_scores else 0,
-        "min_score": np.min(all_scores) if all_scores else 0,
-        "max_score": np.max(all_scores) if all_scores else 0,
+        "avg_score": float(np.mean(all_scores)) if all_scores else 0,
+        "median_score": float(np.median(all_scores)) if all_scores else 0,
+        "min_score": float(np.min(all_scores)) if all_scores else 0,
+        "max_score": float(np.max(all_scores)) if all_scores else 0,
         "domains": {
             domain: {
                 "count": stats["count"],
                 "valid": stats["valid"],
                 "success_rate": stats["valid"] / stats["count"] if stats["count"] > 0 else 0,
-                "avg_score": np.mean(stats["scores"]) if stats["scores"] else 0,
+                "avg_score": float(np.mean(stats["scores"])) if stats["scores"] else 0,
             }
             for domain, stats in domain_stats.items()
         },
@@ -392,10 +407,17 @@ if __name__ == "__main__":
 
     stats = validate_dataset(data_dir=args.dir, pattern=args.pattern, export=not args.no_export, verbose=not args.quiet)
 
+    # Check if we got valid stats
+    if "error" in stats:
+        print(f"\n✗ Validation failed: {stats['error']}")
+        exit(2)
+
     # Exit with error code if success rate is below threshold
-    if stats.get("success_rate", 0) < 0.8:
-        print(f"\n⚠ Warning: Success rate {stats['success_rate']*100:.1f}% " f"is below 80% threshold")
+    success_rate = stats.get("success_rate", 0)
+    
+    if success_rate < 0.8:
+        print(f"\n⚠ Warning: Success rate {success_rate*100:.1f}% is below 80% threshold")
         exit(1)
     else:
-        print(f"\n✓ Success rate {stats['success_rate']*100:.1f}% meets quality threshold")
+        print(f"\n✓ Success rate {success_rate*100:.1f}% meets quality threshold")
         exit(0)

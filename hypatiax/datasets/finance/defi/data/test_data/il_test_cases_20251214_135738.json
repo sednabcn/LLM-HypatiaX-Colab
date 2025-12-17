@@ -1,0 +1,842 @@
+[
+  {
+    "description": "IL Test Case 1: Price ratio 0.5",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1000,
+      "final_price": 500.0,
+      "price_ratio": 0.5,
+      "initial_eth": 100,
+      "initial_usdc": 100000,
+      "expected_il_percent": -5.7191,
+      "hodl_value_usd": 150000.0,
+      "lp_value_usd": 141421.36
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 2: Price ratio 0.75",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1000,
+      "final_price": 750.0,
+      "price_ratio": 0.75,
+      "initial_eth": 100,
+      "initial_usdc": 100000,
+      "expected_il_percent": -1.0257,
+      "hodl_value_usd": 175000.0,
+      "lp_value_usd": 173205.08
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 3: Price ratio 0.9",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1000,
+      "final_price": 900.0,
+      "price_ratio": 0.9,
+      "initial_eth": 100,
+      "initial_usdc": 100000,
+      "expected_il_percent": -0.1386,
+      "hodl_value_usd": 190000.0,
+      "lp_value_usd": 189736.66
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 4: Price ratio 1.0",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1000,
+      "final_price": 1000.0,
+      "price_ratio": 1.0,
+      "initial_eth": 100,
+      "initial_usdc": 100000,
+      "expected_il_percent": 0.0,
+      "hodl_value_usd": 200000.0,
+      "lp_value_usd": 200000.0
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 5: Price ratio 1.1",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1000,
+      "final_price": 1100.0,
+      "price_ratio": 1.1,
+      "initial_eth": 100,
+      "initial_usdc": 100000,
+      "expected_il_percent": -0.1134,
+      "hodl_value_usd": 210000.0,
+      "lp_value_usd": 209761.77
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 6: Price ratio 1.25",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1000,
+      "final_price": 1250.0,
+      "price_ratio": 1.25,
+      "initial_eth": 100,
+      "initial_usdc": 100000,
+      "expected_il_percent": -0.6192,
+      "hodl_value_usd": 225000.0,
+      "lp_value_usd": 223606.8
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 7: Price ratio 1.5",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1000,
+      "final_price": 1500.0,
+      "price_ratio": 1.5,
+      "initial_eth": 100,
+      "initial_usdc": 100000,
+      "expected_il_percent": -2.0204,
+      "hodl_value_usd": 250000.0,
+      "lp_value_usd": 244948.97
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 8: Price ratio 2.0",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1000,
+      "final_price": 2000.0,
+      "price_ratio": 2.0,
+      "initial_eth": 100,
+      "initial_usdc": 100000,
+      "expected_il_percent": -5.7191,
+      "hodl_value_usd": 300000.0,
+      "lp_value_usd": 282842.71
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 9: Price ratio 0.5",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1500,
+      "final_price": 750.0,
+      "price_ratio": 0.5,
+      "initial_eth": 100,
+      "initial_usdc": 150000,
+      "expected_il_percent": -5.7191,
+      "hodl_value_usd": 225000.0,
+      "lp_value_usd": 212132.03
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 10: Price ratio 0.75",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1500,
+      "final_price": 1125.0,
+      "price_ratio": 0.75,
+      "initial_eth": 100,
+      "initial_usdc": 150000,
+      "expected_il_percent": -1.0257,
+      "hodl_value_usd": 262500.0,
+      "lp_value_usd": 259807.62
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 11: Price ratio 0.9",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1500,
+      "final_price": 1350.0,
+      "price_ratio": 0.9,
+      "initial_eth": 100,
+      "initial_usdc": 150000,
+      "expected_il_percent": -0.1386,
+      "hodl_value_usd": 285000.0,
+      "lp_value_usd": 284604.99
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 12: Price ratio 1.0",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1500,
+      "final_price": 1500.0,
+      "price_ratio": 1.0,
+      "initial_eth": 100,
+      "initial_usdc": 150000,
+      "expected_il_percent": 0.0,
+      "hodl_value_usd": 300000.0,
+      "lp_value_usd": 300000.0
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 13: Price ratio 1.1",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1500,
+      "final_price": 1650.0000000000002,
+      "price_ratio": 1.1,
+      "initial_eth": 100,
+      "initial_usdc": 150000,
+      "expected_il_percent": -0.1134,
+      "hodl_value_usd": 315000.0,
+      "lp_value_usd": 314642.65
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 14: Price ratio 1.25",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1500,
+      "final_price": 1875.0,
+      "price_ratio": 1.25,
+      "initial_eth": 100,
+      "initial_usdc": 150000,
+      "expected_il_percent": -0.6192,
+      "hodl_value_usd": 337500.0,
+      "lp_value_usd": 335410.2
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 15: Price ratio 1.5",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1500,
+      "final_price": 2250.0,
+      "price_ratio": 1.5,
+      "initial_eth": 100,
+      "initial_usdc": 150000,
+      "expected_il_percent": -2.0204,
+      "hodl_value_usd": 375000.0,
+      "lp_value_usd": 367423.46
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 16: Price ratio 2.0",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 1500,
+      "final_price": 3000.0,
+      "price_ratio": 2.0,
+      "initial_eth": 100,
+      "initial_usdc": 150000,
+      "expected_il_percent": -5.7191,
+      "hodl_value_usd": 450000.0,
+      "lp_value_usd": 424264.07
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 17: Price ratio 0.5",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2000,
+      "final_price": 1000.0,
+      "price_ratio": 0.5,
+      "initial_eth": 100,
+      "initial_usdc": 200000,
+      "expected_il_percent": -5.7191,
+      "hodl_value_usd": 300000.0,
+      "lp_value_usd": 282842.71
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 18: Price ratio 0.75",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2000,
+      "final_price": 1500.0,
+      "price_ratio": 0.75,
+      "initial_eth": 100,
+      "initial_usdc": 200000,
+      "expected_il_percent": -1.0257,
+      "hodl_value_usd": 350000.0,
+      "lp_value_usd": 346410.16
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 19: Price ratio 0.9",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2000,
+      "final_price": 1800.0,
+      "price_ratio": 0.9,
+      "initial_eth": 100,
+      "initial_usdc": 200000,
+      "expected_il_percent": -0.1386,
+      "hodl_value_usd": 380000.0,
+      "lp_value_usd": 379473.32
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 20: Price ratio 1.0",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2000,
+      "final_price": 2000.0,
+      "price_ratio": 1.0,
+      "initial_eth": 100,
+      "initial_usdc": 200000,
+      "expected_il_percent": 0.0,
+      "hodl_value_usd": 400000.0,
+      "lp_value_usd": 400000.0
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 21: Price ratio 1.1",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2000,
+      "final_price": 2200.0,
+      "price_ratio": 1.1,
+      "initial_eth": 100,
+      "initial_usdc": 200000,
+      "expected_il_percent": -0.1134,
+      "hodl_value_usd": 420000.0,
+      "lp_value_usd": 419523.54
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 22: Price ratio 1.25",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2000,
+      "final_price": 2500.0,
+      "price_ratio": 1.25,
+      "initial_eth": 100,
+      "initial_usdc": 200000,
+      "expected_il_percent": -0.6192,
+      "hodl_value_usd": 450000.0,
+      "lp_value_usd": 447213.6
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 23: Price ratio 1.5",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2000,
+      "final_price": 3000.0,
+      "price_ratio": 1.5,
+      "initial_eth": 100,
+      "initial_usdc": 200000,
+      "expected_il_percent": -2.0204,
+      "hodl_value_usd": 500000.0,
+      "lp_value_usd": 489897.95
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 24: Price ratio 2.0",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2000,
+      "final_price": 4000.0,
+      "price_ratio": 2.0,
+      "initial_eth": 100,
+      "initial_usdc": 200000,
+      "expected_il_percent": -5.7191,
+      "hodl_value_usd": 600000.0,
+      "lp_value_usd": 565685.42
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 25: Price ratio 0.5",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2500,
+      "final_price": 1250.0,
+      "price_ratio": 0.5,
+      "initial_eth": 100,
+      "initial_usdc": 250000,
+      "expected_il_percent": -5.7191,
+      "hodl_value_usd": 375000.0,
+      "lp_value_usd": 353553.39
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 26: Price ratio 0.75",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2500,
+      "final_price": 1875.0,
+      "price_ratio": 0.75,
+      "initial_eth": 100,
+      "initial_usdc": 250000,
+      "expected_il_percent": -1.0257,
+      "hodl_value_usd": 437500.0,
+      "lp_value_usd": 433012.7
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 27: Price ratio 0.9",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2500,
+      "final_price": 2250.0,
+      "price_ratio": 0.9,
+      "initial_eth": 100,
+      "initial_usdc": 250000,
+      "expected_il_percent": -0.1386,
+      "hodl_value_usd": 475000.0,
+      "lp_value_usd": 474341.65
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 28: Price ratio 1.0",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2500,
+      "final_price": 2500.0,
+      "price_ratio": 1.0,
+      "initial_eth": 100,
+      "initial_usdc": 250000,
+      "expected_il_percent": 0.0,
+      "hodl_value_usd": 500000.0,
+      "lp_value_usd": 500000.0
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 29: Price ratio 1.1",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2500,
+      "final_price": 2750.0,
+      "price_ratio": 1.1,
+      "initial_eth": 100,
+      "initial_usdc": 250000,
+      "expected_il_percent": -0.1134,
+      "hodl_value_usd": 525000.0,
+      "lp_value_usd": 524404.42
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 30: Price ratio 1.25",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2500,
+      "final_price": 3125.0,
+      "price_ratio": 1.25,
+      "initial_eth": 100,
+      "initial_usdc": 250000,
+      "expected_il_percent": -0.6192,
+      "hodl_value_usd": 562500.0,
+      "lp_value_usd": 559016.99
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 31: Price ratio 1.5",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2500,
+      "final_price": 3750.0,
+      "price_ratio": 1.5,
+      "initial_eth": 100,
+      "initial_usdc": 250000,
+      "expected_il_percent": -2.0204,
+      "hodl_value_usd": 625000.0,
+      "lp_value_usd": 612372.44
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 32: Price ratio 2.0",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 2500,
+      "final_price": 5000.0,
+      "price_ratio": 2.0,
+      "initial_eth": 100,
+      "initial_usdc": 250000,
+      "expected_il_percent": -5.7191,
+      "hodl_value_usd": 750000.0,
+      "lp_value_usd": 707106.78
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 33: Price ratio 0.5",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 3000,
+      "final_price": 1500.0,
+      "price_ratio": 0.5,
+      "initial_eth": 100,
+      "initial_usdc": 300000,
+      "expected_il_percent": -5.7191,
+      "hodl_value_usd": 450000.0,
+      "lp_value_usd": 424264.07
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 34: Price ratio 0.75",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 3000,
+      "final_price": 2250.0,
+      "price_ratio": 0.75,
+      "initial_eth": 100,
+      "initial_usdc": 300000,
+      "expected_il_percent": -1.0257,
+      "hodl_value_usd": 525000.0,
+      "lp_value_usd": 519615.24
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 35: Price ratio 0.9",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 3000,
+      "final_price": 2700.0,
+      "price_ratio": 0.9,
+      "initial_eth": 100,
+      "initial_usdc": 300000,
+      "expected_il_percent": -0.1386,
+      "hodl_value_usd": 570000.0,
+      "lp_value_usd": 569209.98
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 36: Price ratio 1.0",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 3000,
+      "final_price": 3000.0,
+      "price_ratio": 1.0,
+      "initial_eth": 100,
+      "initial_usdc": 300000,
+      "expected_il_percent": 0.0,
+      "hodl_value_usd": 600000.0,
+      "lp_value_usd": 600000.0
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 37: Price ratio 1.1",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 3000,
+      "final_price": 3300.0000000000005,
+      "price_ratio": 1.1,
+      "initial_eth": 100,
+      "initial_usdc": 300000,
+      "expected_il_percent": -0.1134,
+      "hodl_value_usd": 630000.0,
+      "lp_value_usd": 629285.31
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 38: Price ratio 1.25",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 3000,
+      "final_price": 3750.0,
+      "price_ratio": 1.25,
+      "initial_eth": 100,
+      "initial_usdc": 300000,
+      "expected_il_percent": -0.6192,
+      "hodl_value_usd": 675000.0,
+      "lp_value_usd": 670820.39
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 39: Price ratio 1.5",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 3000,
+      "final_price": 4500.0,
+      "price_ratio": 1.5,
+      "initial_eth": 100,
+      "initial_usdc": 300000,
+      "expected_il_percent": -2.0204,
+      "hodl_value_usd": 750000.0,
+      "lp_value_usd": 734846.92
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  },
+  {
+    "description": "IL Test Case 40: Price ratio 2.0",
+    "discovered_equation": null,
+    "domain": "defi",
+    "test_data": {
+      "initial_price": 3000,
+      "final_price": 6000.0,
+      "price_ratio": 2.0,
+      "initial_eth": 100,
+      "initial_usdc": 300000,
+      "expected_il_percent": -5.7191,
+      "hodl_value_usd": 900000.0,
+      "lp_value_usd": 848528.14
+    },
+    "validation": {
+      "valid": false,
+      "total_score": 0,
+      "r2_score": 0.0,
+      "note": "Awaiting formula discovery"
+    }
+  }
+]

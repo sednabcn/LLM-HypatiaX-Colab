@@ -1,0 +1,47 @@
+{
+  "total_formulas": 348,
+  "valid_formulas": 208,
+  "success_rate": 0.5977011494252874,
+  "avg_score": 51.5298076923077,
+  "median_score": 85.525,
+  "min_score": 0.0,
+  "max_score": 98.8,
+  "domains": {
+    "defi": {
+      "count": 348,
+      "valid": 208,
+      "success_rate": 0.5977011494252874,
+      "avg_score": 51.5298076923077
+    }
+  },
+  "files": {
+    "hypatiax/datasets/finance/defi/data/formulas/real_pool_snapshots_20251214_135738_fixed.json": 1,
+    "hypatiax/datasets/finance/defi/data/formulas/uniswap_scenarios_fixed.json": 5,
+    "hypatiax/datasets/finance/defi/data/formulas/real_pool_snapshots_20251214_142645_fixed.json": 1,
+    "hypatiax/datasets/finance/defi/data/formulas/il_test_cases_20251214_142645_fixed.json": 40,
+    "hypatiax/datasets/finance/defi/data/formulas/il_test_cases_20251214_135738.json": 40,
+    "hypatiax/datasets/finance/defi/data/formulas/uniswap_scenarios_20251214_135738_fixed.json": 5,
+    "hypatiax/datasets/finance/defi/data/formulas/defi_formulas_20251126_205624_fixed.json": 4,
+    "hypatiax/datasets/finance/defi/data/formulas/real_pool_snapshots_20251214_142645.json": 1,
+    "hypatiax/datasets/finance/defi/data/formulas/valid_formulas_20251216_134833.json": 29,
+    "hypatiax/datasets/finance/defi/data/formulas/defi_synthetic_20251214_131315.json": 40,
+    "hypatiax/datasets/finance/defi/data/formulas/uniswap_scenarios_20251214_142645_fixed.json": 5,
+    "hypatiax/datasets/finance/defi/data/formulas/real_pool_snapshots_20251214_135738.json": 1,
+    "hypatiax/datasets/finance/defi/data/formulas/uniswap_scenarios_20251214_142645.json": 5,
+    "hypatiax/datasets/finance/defi/data/formulas/defi_formulas_fixed_20251126_211441.json": 4,
+    "hypatiax/datasets/finance/defi/data/formulas/uniswap_scenarios_20251214_135738.json": 5,
+    "hypatiax/datasets/finance/defi/data/formulas/il_test_cases_20251214_142645.json": 40,
+    "hypatiax/datasets/finance/defi/data/formulas/uniswap_scenarios.json": 5,
+    "hypatiax/datasets/finance/defi/data/formulas/il_test_cases_20251214_135738_fixed.json": 40,
+    "hypatiax/datasets/finance/defi/data/formulas/defi_synthetic_20251214_131315_fixed.json": 40,
+    "hypatiax/datasets/finance/defi/data/formulas/valid_formulas_20251216_134833_fixed.json": 29,
+    "hypatiax/datasets/finance/defi/data/formulas/defi_formulas_20251126_205624.json": 4,
+    "hypatiax/datasets/finance/defi/data/formulas/defi_formulas_fixed_20251126_211441_fixed.json": 4
+  },
+  "issues_count": 578,
+  "issue_types": {
+    "INVALID_FORMULA": 140,
+    "MISSING_EQUATION": 230,
+    "LOW_R2": 208
+  }
+}

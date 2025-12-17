@@ -1,0 +1,13 @@
+{
+  "total_files": 7,
+  "file_types": {
+    "risk_comprehensive": "list",
+    "historical_prices_20251214_135738": "list",
+    "risk_scoring_examples_20251214_142645": "list",
+    "historical_prices": "list",
+    "historical_prices_20251214_142645": "list",
+    "risk_synthetic_20251214_131315": "dict",
+    "risk_scoring_examples_20251214_135738": "list"
+  },
+  "created_at": "20251216_200546"
+}
