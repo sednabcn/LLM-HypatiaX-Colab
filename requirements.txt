@@ -20,7 +20,7 @@ bitarray==3.8.0
 black==25.9.0
 bleach==6.3.0
 blinker==1.9.0
-blis==1.3.3
+blis==1.3.0
 boolean.py==5.0
 build==1.3.0
 CacheControl==0.14.3
@@ -111,7 +111,7 @@ idna==3.11
 iniconfig==2.3.0
 intel_extension_for_pytorch==2.8.0
 ipykernel==7.1.0
-ipython==8.37.0
+ipython==9.6.0
 ipython_pygments_lexers==1.1.1
 isoduration==20.11.0
 itsdangerous==2.2.0
@@ -162,7 +162,7 @@ nltk==3.9.2
 nodeenv==1.9.1
 notebook==7.4.7
 notebook_shim==0.2.4
-numpy==1.26.4
+numpy==2.3.5
 nvidia-cublas-cu12==12.8.4.1
 nvidia-cuda-cupti-cu12==12.8.90
 nvidia-cuda-nvrtc-cu12==12.8.93
@@ -198,7 +198,7 @@ Pint==0.25.2
 pip-api==0.0.34
 pip-requirements-parser==32.0.1
 pip-review==1.3.0
-pip-tools==7.5.2
+pip-tools==7.5.1
 pip_audit==2.9.0
 pipdeptree==2.29.0
 platformdirs==4.5.0
@@ -266,7 +266,7 @@ smart_open==7.5.0
 sniffio==1.3.1
 sortedcontainers==2.4.0
 soupsieve==2.8
-spacy==3.8.11
+spacy==3.8.8
 spacy-legacy==3.0.12
 spacy-loggers==1.0.5
 spacy-lookups-data==1.0.5
@@ -277,7 +277,7 @@ starlette==0.50.0
 sympy==1.14.0
 tenacity==9.1.2
 terminado==0.18.1
-thinc==8.3.10
+thinc==8.3.8
 threadpoolctl==3.6.0
 tinycss2==1.4.0
 tokenizers==0.21.4
