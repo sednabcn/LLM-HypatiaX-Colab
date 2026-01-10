@@ -6,7 +6,6 @@ from hypatiax.custom_ner.custom_ruler import CustomNerComponent
 
 
 def get_ner_component(domain, sub_domain, type, python_version):
-
     component = CustomNerComponent(doamin, sub_domain, type, python_version)
     output = component.get_entity_ruler()
     return output

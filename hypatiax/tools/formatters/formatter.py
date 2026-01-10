@@ -21,36 +21,36 @@ class InterpretationFormatter:
 
 ## Expression
 ```
-{result['expression']}
+{result["expression"]}
 ```
 
-**Domain:** {result['domain']}
-**R² Score:** {result['r2_score']:.4f}
+**Domain:** {result["domain"]}
+**R² Score:** {result["r2_score"]:.4f}
 
 ---
 
 ## Interpretation
-{result.get('interpretation', 'N/A')}
+{result.get("interpretation", "N/A")}
 
 ---
 
 ## Known Analogies
-{result.get('analogies', 'N/A')}
+{result.get("analogies", "N/A")}
 
 ---
 
 ## Novel Aspects
-{result.get('novelty', 'N/A')}
+{result.get("novelty", "N/A")}
 
 ---
 
 ## Predictions & Use Cases
-{result.get('predictions', 'N/A')}
+{result.get("predictions", "N/A")}
 
 ---
 
 ## Limitations
-{result.get('limitations', 'N/A')}
+{result.get("limitations", "N/A")}
 """
         return md
 
@@ -157,42 +157,42 @@ class InterpretationFormatter:
     <div class="container">
         <h1>Expression Interpretation</h1>
 
-        <div class="expression">{result['expression']}</div>
+        <div class="expression">{result["expression"]}</div>
 
         <div class="metadata">
             <div class="metadata-item">
                 <span class="metadata-label">Domain</span>
-                <span class="metadata-value">{result['domain'].upper()}</span>
+                <span class="metadata-value">{result["domain"].upper()}</span>
             </div>
             <div class="metadata-item">
                 <span class="metadata-label">R² Score</span>
-                <span class="metadata-value">{result['r2_score']:.4f}</span>
+                <span class="metadata-value">{result["r2_score"]:.4f}</span>
             </div>
         </div>
 
         <div class="section interpretation">
             <div class="section-title">🔍 Interpretation</div>
-            <div class="section-content">{result.get('interpretation', 'N/A')}</div>
+            <div class="section-content">{result.get("interpretation", "N/A")}</div>
         </div>
 
         <div class="section analogies">
             <div class="section-title">🔗 Known Analogies</div>
-            <div class="section-content">{result.get('analogies', 'N/A')}</div>
+            <div class="section-content">{result.get("analogies", "N/A")}</div>
         </div>
 
         <div class="section novelty">
             <div class="section-title">✨ Novel Aspects</div>
-            <div class="section-content">{result.get('novelty', 'N/A')}</div>
+            <div class="section-content">{result.get("novelty", "N/A")}</div>
         </div>
 
         <div class="section predictions">
             <div class="section-title">🎯 Predictions & Use Cases</div>
-            <div class="section-content">{result.get('predictions', 'N/A')}</div>
+            <div class="section-content">{result.get("predictions", "N/A")}</div>
         </div>
 
         <div class="section limitations">
             <div class="section-title">⚠️ Limitations</div>
-            <div class="section-content">{result.get('limitations', 'N/A')}</div>
+            <div class="section-content">{result.get("limitations", "N/A")}</div>
         </div>
     </div>
 </body>
@@ -229,44 +229,44 @@ class InterpretationFormatter:
     def to_report(self, result: Dict) -> str:
         """Generate a formatted text report."""
         report = f"""
-{'='*80}
+{"=" * 80}
 EXPRESSION INTERPRETATION REPORT
-{'='*80}
+{"=" * 80}
 
 EXPRESSION:
-  {result['expression']}
+  {result["expression"]}
 
 METADATA:
-  Domain      : {result['domain'].upper()}
-  R² Score    : {result['r2_score']:.4f}
-  Status      : {'Parsed' if result.get('status') != 'unparsed' else 'Unparsed'}
+  Domain      : {result["domain"].upper()}
+  R² Score    : {result["r2_score"]:.4f}
+  Status      : {"Parsed" if result.get("status") != "unparsed" else "Unparsed"}
 
-{'─'*80}
+{"─" * 80}
 INTERPRETATION
-{'─'*80}
-{result.get('interpretation', 'N/A')}
+{"─" * 80}
+{result.get("interpretation", "N/A")}
 
-{'─'*80}
+{"─" * 80}
 KNOWN ANALOGIES
-{'─'*80}
-{result.get('analogies', 'N/A')}
+{"─" * 80}
+{result.get("analogies", "N/A")}
 
-{'─'*80}
+{"─" * 80}
 NOVEL ASPECTS
-{'─'*80}
-{result.get('novelty', 'N/A')}
+{"─" * 80}
+{result.get("novelty", "N/A")}
 
-{'─'*80}
+{"─" * 80}
 PREDICTIONS & USE CASES
-{'─'*80}
-{result.get('predictions', 'N/A')}
+{"─" * 80}
+{result.get("predictions", "N/A")}
 
-{'─'*80}
+{"─" * 80}
 LIMITATIONS
-{'─'*80}
-{result.get('limitations', 'N/A')}
+{"─" * 80}
+{result.get("limitations", "N/A")}
 
-{'='*80}
+{"=" * 80}
 """
         return report
 

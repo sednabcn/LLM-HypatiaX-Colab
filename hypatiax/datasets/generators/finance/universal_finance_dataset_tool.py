@@ -6,6 +6,7 @@ Generation → Validation → Normalization → Export
 Handles: DeFi, Finance, Risk, ESG domains
 Scalable & Robust with comprehensive error handling
 """
+
 import argparse
 import glob
 import json
@@ -91,16 +92,16 @@ class UniversalDatasetPipeline:
 
         Pipeline: Generate → Validate → Normalize
         """
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"GENERATING {n_formulas} SYNTHETIC FORMULAS - {formula_type.upper()}")
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         datasets = []
         domain = self.domain if self.domain != "auto" else formula_type
 
         for i in range(n_formulas):
             try:
-                print(f"📊 Formula {i+1}/{n_formulas}")
+                print(f"📊 Formula {i + 1}/{n_formulas}")
 
                 # Step 1: Generate data
                 X, y, metadata = self._generate_pattern_data(domain, n_samples)
@@ -452,7 +453,7 @@ class UniversalDatasetPipeline:
 
         # Normalize each input variable
         for i in range(X.shape[1]):
-            var_name = f"x{i+1}"
+            var_name = f"x{i + 1}"
             var_data = X[:, i]
 
             normalized["inputs"][var_name] = var_data.tolist()
@@ -469,9 +470,9 @@ class UniversalDatasetPipeline:
 
     def generate_defi_scenarios(self, n_scenarios: int = 10) -> List[Dict]:
         """Generate realistic DeFi scenarios with validation"""
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"GENERATING {n_scenarios} DEFI SCENARIOS")
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         scenarios = []
         scenario_types = ["stable", "bull", "bear", "volatile", "whale"]
@@ -507,7 +508,7 @@ class UniversalDatasetPipeline:
                 expected_il = -0.1
 
             scenario = {
-                "name": f"{scenario_type.capitalize()} Market Scenario {i+1}",
+                "name": f"{scenario_type.capitalize()} Market Scenario {i + 1}",
                 "description": f"{scenario_type} market conditions",
                 "initial_reserves": {"eth": 100, "usdc": 100 * initial_price},
                 "initial_price": round(initial_price, 2),
@@ -540,9 +541,9 @@ class UniversalDatasetPipeline:
         - validate: Validate existing files
         - fix: Fix and normalize existing files
         """
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"RUNNING COMPLETE PIPELINE - {mode.upper()} MODE")
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         results = {}
 
@@ -583,9 +584,9 @@ class UniversalDatasetPipeline:
 
     def _print_pipeline_summary(self):
         """Print comprehensive pipeline summary"""
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("PIPELINE SUMMARY")
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         print(f"Generation:")
         print(f"  Datasets generated:      {self.stats['generated_datasets']}")
@@ -600,7 +601,7 @@ class UniversalDatasetPipeline:
             f"  Success rate:            {((self.stats['generated_datasets'] / max(1, self.stats['generated_datasets'] + self.stats['errors'])) * 100):.1f}%"
         )
 
-        print(f"\n{'='*70}\n")
+        print(f"\n{'=' * 70}\n")
 
 
 def main():

@@ -176,8 +176,8 @@ class PerformanceRegressionChecker:
         else:
             worst = max(p50_regression, p95_regression, p99_regression)
             message = (
-                f"❌ REGRESSION: {operation} is {worst*100:.1f}% slower "
-                f"(allowed: {threshold*100:.1f}%)"
+                f"❌ REGRESSION: {operation} is {worst * 100:.1f}% slower "
+                f"(allowed: {threshold * 100:.1f}%)"
             )
 
         result = RegressionResult(
@@ -259,15 +259,15 @@ class PerformanceRegressionChecker:
             print(f"  Operation: {result.operation}")
             print(
                 f"  P50: {result.current_p50:7.2f}ms (baseline: {result.baseline_p50:7.2f}ms, "
-                f"Δ {result.p50_regression*100:+.1f}%)"
+                f"Δ {result.p50_regression * 100:+.1f}%)"
             )
             print(
                 f"  P95: {result.current_p95:7.2f}ms (baseline: {result.baseline_p95:7.2f}ms, "
-                f"Δ {result.p95_regression*100:+.1f}%)"
+                f"Δ {result.p95_regression * 100:+.1f}%)"
             )
             print(
                 f"  P99: {result.current_p99:7.2f}ms (baseline: {result.baseline_p99:7.2f}ms, "
-                f"Δ {result.p99_regression*100:+.1f}%)"
+                f"Δ {result.p99_regression * 100:+.1f}%)"
             )
 
         passed = sum(1 for r in self.results if r.passes)
@@ -277,7 +277,7 @@ class PerformanceRegressionChecker:
 
         # Additional guard for division by zero
         if total > 0:
-            print(f"Results: {passed}/{total} passed ({(passed/total)*100:.1f}%)")
+            print(f"Results: {passed}/{total} passed ({(passed / total) * 100:.1f}%)")
         else:
             print("Results: No tests recorded")
 

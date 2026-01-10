@@ -1009,14 +1009,14 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
         rate = calc.aave_variable_rate(u)
         scenarios.append(
             {
-                "scenario": f"Utilization {u*100:.0f}%",
+                "scenario": f"Utilization {u * 100:.0f}%",
                 "formula": "Aave Variable Rate",
                 "utilization": u,
                 "rate": rate,
                 "rate_pct": rate * 100,
             }
         )
-    print(f"Utilization {u*100:>3.0f}%: Rate = {rate*100:>6.2f}% APR")
+    print(f"Utilization {u * 100:>3.0f}%: Rate = {rate * 100:>6.2f}% APR")
 
     # ========================================================================
     # SCENARIO 5: Compound with COMP Rewards
@@ -1060,7 +1060,7 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
             {"scenario": comp["desc"], "formula": "Compound APY with Rewards", **result}
         )
     print(
-        f"{comp['desc']}: Borrow {result['borrow_apr']*100:.2f}% - Rewards {result['reward_apy']*100:.2f}% = Net {result['net_apy']*100:.2f}%"
+        f"{comp['desc']}: Borrow {result['borrow_apr'] * 100:.2f}% - Rewards {result['reward_apy'] * 100:.2f}% = Net {result['net_apy'] * 100:.2f}%"
     )
 
     # ========================================================================
@@ -1076,13 +1076,13 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
         leverage = calc.leverage_ratio(ltv)
         scenarios.append(
             {
-                "scenario": f"LTV {ltv*100:.0f}%",
+                "scenario": f"LTV {ltv * 100:.0f}%",
                 "formula": "Leverage Ratio",
                 "ltv": ltv,
                 "max_leverage": leverage,
             }
         )
-    print(f"LTV {ltv*100:>3.0f}%: Max Leverage = {leverage:.2f}x")
+    print(f"LTV {ltv * 100:>3.0f}%: Max Leverage = {leverage:.2f}x")
 
     # ========================================================================
     # SCENARIO 7: Protocol Revenue Comparison
@@ -1113,7 +1113,7 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
             }
         )
     print(
-        f"{protocol['name']:<15}: ${protocol['volume']:>12,} vol × {protocol['fee']*100:.2f}% × {protocol['cut']*100:.1f}% = ${revenue:>10,.2f}/day"
+        f"{protocol['name']:<15}: ${protocol['volume']:>12,} vol × {protocol['fee'] * 100:.2f}% × {protocol['cut'] * 100:.1f}% = ${revenue:>10,.2f}/day"
     )
 
     # ========================================================================
@@ -1244,7 +1244,7 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
             }
         )
     print(
-        f"{route['desc']}: {' + '.join([f'{i*100:.2f}%' for i in route['impacts']])} = {total_impact*100:.2f}% total"
+        f"{route['desc']}: {' + '.join([f'{i * 100:.2f}%' for i in route['impacts']])} = {total_impact * 100:.2f}% total"
     )
 
     # ========================================================================
@@ -1835,7 +1835,7 @@ if __name__ == "__main__":
     print(
         f"Total Exposure: ${lev_result['total_exposure']:,.0f} ({lev_result['leverage_ratio']:.2f}x)"
     )
-    print(f"Net APY: {lev_result['net_apy']*100:.2f}%")
+    print(f"Net APY: {lev_result['net_apy'] * 100:.2f}%")
     print(f"Net Profit: ${lev_result['net_profit']:,.2f}")
 
     print("\n" + "=" * 80)

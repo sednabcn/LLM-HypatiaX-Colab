@@ -360,9 +360,9 @@ class DatasetValidator:
             return {"error": "No files found", "directory": directory}
 
         if self.verbose:
-            print(f"\n{'='*70}")
+            print(f"\n{'=' * 70}")
             print(f"{'UNIVERSAL DATASET VALIDATION':^70}")
-            print(f"{'='*70}\n")
+            print(f"{'=' * 70}\n")
             print(f"Found {len(all_files)} file(s):")
             for f in all_files:
                 print(f"  • {f}")
@@ -399,18 +399,18 @@ class DatasetValidator:
 
     def print_summary_report(self, summary: Dict[str, Any]):
         """Print comprehensive validation report."""
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"{'VALIDATION SUMMARY':^70}")
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         print(f"Files Processed:     {summary['files_processed']}")
         print(f"Total Records:       {summary['total_records']:,}")
         print(f"Valid Records:       {summary['valid_records']:,}")
-        print(f"Success Rate:        {summary['success_rate']*100:.1f}%")
+        print(f"Success Rate:        {summary['success_rate'] * 100:.1f}%")
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"{'FILE DETAILS':^70}")
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         for filepath, result in summary["file_results"].items():
             filename = os.path.basename(filepath)
@@ -443,7 +443,7 @@ class DatasetValidator:
 
             print()
 
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
     def export_report(self, summary: Dict[str, Any], output_file: str):
         """Export validation report to JSON."""
@@ -523,10 +523,12 @@ Examples:
     # Exit with appropriate code
     success_rate = summary.get("success_rate", 0)
     if success_rate < 0.8:
-        print(f"\n⚠️  Warning: Success rate {success_rate*100:.1f}% below 80% threshold")
+        print(
+            f"\n⚠️  Warning: Success rate {success_rate * 100:.1f}% below 80% threshold"
+        )
         exit(1)
     else:
-        print(f"\n✓ Success rate {success_rate*100:.1f}% meets quality threshold")
+        print(f"\n✓ Success rate {success_rate * 100:.1f}% meets quality threshold")
         exit(0)
 
 

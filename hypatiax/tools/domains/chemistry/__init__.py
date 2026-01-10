@@ -227,7 +227,7 @@ def get_constant(name: str) -> float:
 
     if name_lower not in constants:
         raise ValueError(
-            f"Unknown constant: {name}. " f"Available: {', '.join(constants.keys())}"
+            f"Unknown constant: {name}. Available: {', '.join(constants.keys())}"
         )
 
     return constants[name_lower]

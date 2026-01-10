@@ -558,9 +558,9 @@ def main():
 
     args = parser.parse_args()
 
-    print(f"\n{'='*80}")
+    print(f"\n{'=' * 80}")
     print(f"NER MODEL TESTING - {args.mode.upper()} MODE")
-    print(f"{'='*80}")
+    print(f"{'=' * 80}")
 
     # Run tests concurrently and collect results
     start_time = time.time()

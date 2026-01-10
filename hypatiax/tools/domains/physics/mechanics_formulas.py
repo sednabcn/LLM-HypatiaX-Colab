@@ -994,7 +994,9 @@ if __name__ == "__main__":
     print("\n4. UNIVERSAL GRAVITATION")
     print("-" * 60)
     gravity = dynamics.gravitational_force(
-        mass1=5.972e24, mass2=7.342e22, distance=3.844e8  # kg (Earth)  # kg (Moon)  # m
+        mass1=5.972e24,
+        mass2=7.342e22,
+        distance=3.844e8,  # kg (Earth)  # kg (Moon)  # m
     )
     print(f"Gravitational force: {gravity['gravitational_force']:.2e} N")
 
@@ -1040,7 +1042,10 @@ if __name__ == "__main__":
     print("-" * 60)
     momentum_calc = MomentumCalculator()
     collision = momentum_calc.elastic_collision_1d(
-        m1=2.0, v1_initial=5.0, m2=3.0, v2_initial=-2.0  # kg  # m/s  # kg  # m/s
+        m1=2.0,
+        v1_initial=5.0,
+        m2=3.0,
+        v2_initial=-2.0,  # kg  # m/s  # kg  # m/s
     )
     print(
         f"Object 1 - Initial: {collision['v1_initial']:.2f} m/s → Final: {collision['v1_final']:.2f} m/s"

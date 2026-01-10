@@ -135,7 +135,6 @@ class TreeOPDict(TreeDict):
 
     def average_tree_metrics(self, node, num_batches):
         for key in node.metrics:
-
             node.metrics[key] /= num_batches
 
         for child in node.children:

@@ -142,7 +142,7 @@ def main():
     try:
         # Construct model path based on config
         model_base_path = resources.files(
-            f'hypatiax.models.{config_training["domain"]}.{config_training["sub_domain"]}'
+            f"hypatiax.models.{config_training['domain']}.{config_training['sub_domain']}"
         )
         model_path = model_base_path.joinpath(config_training["output_model"])
         model_path_str = str(model_path)

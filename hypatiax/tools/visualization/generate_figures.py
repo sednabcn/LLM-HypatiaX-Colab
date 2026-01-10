@@ -318,9 +318,9 @@ def create_figure5_method_comparison(df):
         if v < 60:
             label = f"{v}s"
         elif v < 3600:
-            label = f"{v/60:.0f}m"
+            label = f"{v / 60:.0f}m"
         else:
-            label = f"{v/3600:.1f}h"
+            label = f"{v / 3600:.1f}h"
         ax2.text(
             bar.get_x() + bar.get_width() / 2.0,
             height * 1.5,

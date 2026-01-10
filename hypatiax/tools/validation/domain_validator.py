@@ -460,7 +460,6 @@ class DomainValidator:
                     or f"(1 + {var})" in expr_str
                     or f"1+{var}" in expr_str.replace(" ", "")
                 ):
-
                     result["errors"].append(
                         f"CRITICAL: Ratio variable '{var}' appears in (1+{var}) denominator. "
                         f"Must enforce {var} > 0 to prevent division by zero. "

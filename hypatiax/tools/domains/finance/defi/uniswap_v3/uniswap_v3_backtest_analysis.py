@@ -617,7 +617,7 @@ def run_v3_backtest(
     print(
         f"Parameters: {days} days, {initial_coin} {coin_symbol.upper()}, ${initial_usdc} USDC"
     )
-    print(f"Range: ±{price_range_pct}%, Fee Tier: {fee_tier*100}%")
+    print(f"Range: ±{price_range_pct}%, Fee Tier: {fee_tier * 100}%")
     print("-" * 80)
 
     # Fetch data
@@ -664,13 +664,13 @@ def run_v3_backtest(
 
     # Visualize
     print("\n4️⃣ Creating visualizations...")
-    png_path = f'v3_backtest_{coin_symbol.upper()}_range{price_range_pct}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.png'
+    png_path = f"v3_backtest_{coin_symbol.upper()}_range{price_range_pct}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
     create_v3_visualizations(results_df, coin_symbol, png_path)
 
     # Export
     if export_excel:
         print("\n5️⃣ Exporting to Excel...")
-        excel_path = f'v3_backtest_{coin_symbol.upper()}_range{price_range_pct}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
+        excel_path = f"v3_backtest_{coin_symbol.upper()}_range{price_range_pct}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
 
         with pd.ExcelWriter(excel_path, engine="openpyxl") as writer:
             results_df.to_excel(writer, sheet_name="Daily Results", index=False)
@@ -693,7 +693,6 @@ def run_v3_backtest(
 
 # ===== RUN ANALYSIS =====
 if __name__ == "__main__":
-
     # Test different range strategies
     strategies = [
         {"range": 5, "name": "Tight"},  # ±5% - aggressive
@@ -708,9 +707,9 @@ if __name__ == "__main__":
     print("=" * 80)
 
     for strategy in strategies:
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print(f"🎯 Testing {strategy['name']} Strategy (±{strategy['range']}%)")
-        print(f"{'='*80}")
+        print(f"{'=' * 80}")
 
         results, analysis = run_v3_backtest(
             days=90,

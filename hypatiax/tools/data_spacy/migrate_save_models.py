@@ -168,7 +168,7 @@ def migrate_all_tableau_models(
             continue
 
         try:
-            print(f"\n{'='*70}")
+            print(f"\n{'=' * 70}")
             print(f"MIGRATING: {model_name}")
             print("=" * 70)
 
@@ -194,7 +194,7 @@ def migrate_all_tableau_models(
             continue
 
     # Print summary
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print("MIGRATION SUMMARY")
     print("=" * 70)
 
@@ -212,7 +212,7 @@ def migrate_all_tableau_models(
     success_count = sum(1 for s in results.values() if s == "success")
 
     if success_count > 0:
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("NEXT STEPS")
         print("=" * 70)
 

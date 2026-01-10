@@ -508,14 +508,14 @@ def run_complete_risk_analysis(
 
     # Visualize
     print("\n5️⃣  Creating visualizations...")
-    png_path = f'risk_analysis_{symbol}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.png'
+    png_path = f"risk_analysis_{symbol}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
     create_risk_dashboard(results_df, symbol, png_path)
 
     # Export to Excel
     if export_excel:
         print("\n6️⃣  Exporting to Excel...")
         excel_path = (
-            f'risk_analysis_{symbol}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
+            f"risk_analysis_{symbol}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
         )
 
         with pd.ExcelWriter(excel_path, engine="openpyxl") as writer:
@@ -538,7 +538,6 @@ def run_complete_risk_analysis(
 
 # ===== RUN THE ANALYSIS =====
 if __name__ == "__main__":
-
     # Analyze different assets
     assets = ["BTC", "ETH", "SPY"]
 

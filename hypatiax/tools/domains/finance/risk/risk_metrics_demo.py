@@ -172,7 +172,7 @@ def demo_risk_metrics():
     print("\n[Downside Risk]")
     downside = rm.downside_deviation(mar=0.0)
     print(f"  Downside Deviation: {downside['downside_deviation_pct']:.2f}%")
-    print(f"  Downside Frequency: {downside['downside_frequency']*100:.1f}%")
+    print(f"  Downside Frequency: {downside['downside_frequency'] * 100:.1f}%")
     print(
         f"  Negative return days: {downside['downside_periods']}/{downside['total_periods']}"
     )
@@ -202,8 +202,8 @@ def demo_risk_metrics():
     print("\n[Calmar Ratio]")
     calmar = rm.calmar_ratio()
     print(f"  Calmar Ratio: {calmar['calmar']:.3f}")
-    print(f"  Annual Return: {calmar['annual_return']*100:.2f}%")
-    print(f"  Max Drawdown: {calmar['max_drawdown']*100:.2f}%")
+    print(f"  Annual Return: {calmar['annual_return'] * 100:.2f}%")
+    print(f"  Max Drawdown: {calmar['max_drawdown'] * 100:.2f}%")
 
     # ========================================================================
     # 4. Drawdown Analysis
@@ -215,9 +215,9 @@ def demo_risk_metrics():
     print(f"  Max DD Duration: {dd['max_drawdown_length']} days")
     print(f"  Longest Drawdown Period: {dd['longest_drawdown_length']} days")
     print(f"  Number of Drawdown Periods: {dd['num_drawdown_periods']}")
-    print(f"  Average Drawdown Depth: {dd['avg_drawdown_depth']*100:.2f}%")
+    print(f"  Average Drawdown Depth: {dd['avg_drawdown_depth'] * 100:.2f}%")
     print(f"  Average Drawdown Length: {dd['avg_drawdown_length']:.1f} days")
-    print(f"  Current Drawdown: {dd['current_drawdown']*100:.2f}%")
+    print(f"  Current Drawdown: {dd['current_drawdown'] * 100:.2f}%")
     print(f"  Time Underwater: {dd['time_underwater_pct']:.1f}%")
 
     # ========================================================================
@@ -247,7 +247,7 @@ def demo_risk_metrics():
     for i, sym in enumerate(symbols):
         print(f"  {sym:>5}", end="")
         for j in range(len(symbols)):
-            print(f"{matrix[i,j]:>8.3f}", end="")
+            print(f"{matrix[i, j]:>8.3f}", end="")
         print()
 
     # Diversification ratio
@@ -394,9 +394,9 @@ def demo_risk_metrics():
     }
 
     print("\n[Defined Risk Limits]")
-    print(f"  Max Drawdown: {limits['max_drawdown']*100:.0f}%")
+    print(f"  Max Drawdown: {limits['max_drawdown'] * 100:.0f}%")
     print(f"  Min Sharpe Ratio: {limits['min_sharpe']:.1f}")
-    print(f"  Max VaR (95%): {limits['max_var_95']*100:.0f}%")
+    print(f"  Max VaR (95%): {limits['max_var_95'] * 100:.0f}%")
 
     compliance = rm.risk_limits_check(limits)
 

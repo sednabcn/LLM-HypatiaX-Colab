@@ -234,7 +234,7 @@ class LLMTrainer:
         results = []
 
         for i, query in enumerate(queries):
-            print(f"Processing {i+1}/{len(queries)}: {query}")
+            print(f"Processing {i + 1}/{len(queries)}: {query}")
 
             formula = self.generate_formula(query)
 
@@ -264,7 +264,7 @@ def evaluate_llm(trainer: LLMTrainer, test_data: List[Dict]) -> Dict:
     predictions = []
 
     for i, example in enumerate(test_data):
-        print(f"Evaluating {i+1}/{total}...")
+        print(f"Evaluating {i + 1}/{total}...")
 
         query = example["description"]
         true_formula = example["formula"]

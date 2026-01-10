@@ -495,7 +495,7 @@ class HybridSystemTestSuite:
                 variable_names=[f"var_{j}" for j in range(2)],
                 variable_descriptions={f"var_{j}": f"Variable {j}" for j in range(2)},
                 variable_units={f"var_{j}": "USD" for j in range(2)},
-                description=f"Run {i+1}",
+                description=f"Run {i + 1}",
             )
 
         stored = len(system.results)
@@ -588,7 +588,7 @@ class HybridSystemTestSuite:
                 variable_names=["reserve0", "reserve1"],
                 variable_descriptions={"reserve0": "R0", "reserve1": "R1"},
                 variable_units={"reserve0": "USD", "reserve1": "USD"},
-                description=f"Export test {i+1}",
+                description=f"Export test {i + 1}",
             )
 
         print("\n--- Test: JSON Export ---")

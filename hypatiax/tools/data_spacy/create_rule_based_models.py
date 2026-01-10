@@ -64,7 +64,7 @@ def create_all_tableau_models():
     created = {}
 
     for model_name, component_func in models.items():
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print(f"Creating: {model_name}")
         print("=" * 60)
 
@@ -96,7 +96,7 @@ if __name__ == "__main__":
 
     models = create_all_tableau_models()
 
-    print(f"\n{'='*80}")
+    print(f"\n{'=' * 80}")
     print("SUMMARY")
     print("=" * 80)
     print(f"✓ Created {len(models)} models")

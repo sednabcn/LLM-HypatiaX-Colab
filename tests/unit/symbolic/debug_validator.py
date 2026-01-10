@@ -2,15 +2,16 @@
 """
 Debug script to understand parsing behavior and create working fixes
 """
+
 import sympy as sp
 from sympy.parsing.latex import parse_latex
 
 
 def debug_parse(latex_str):
     """Debug what SymPy actually parses"""
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print(f"Testing: {latex_str}")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
 
     try:
         expr = parse_latex(latex_str)

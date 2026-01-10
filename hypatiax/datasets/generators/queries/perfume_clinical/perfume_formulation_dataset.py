@@ -495,6 +495,6 @@ def create_perfume_csv():
 
 if __name__ == "__main__":
     count = create_perfume_csv()
-    print(f"\n{'='*50}")
+    print(f"\n{'=' * 50}")
     print(f"PERFUME DATASET: {count} entries (VERIFIED)")
-    print(f"{'='*50}")
+    print(f"{'=' * 50}")

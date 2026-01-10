@@ -767,7 +767,7 @@ if __name__ == "__main__":
         temperature=None,  # Calculate this
     )
     print(
-        f"Standard Temperature: {gas['temperature']:.2f} K ({gas['temperature']-273.15:.2f} °C)"
+        f"Standard Temperature: {gas['temperature']:.2f} K ({gas['temperature'] - 273.15:.2f} °C)"
     )
     print(f"Number of molecules: {gas['n_molecules']:.2e}")
 
@@ -780,8 +780,8 @@ if __name__ == "__main__":
         volume_final=0.02,
         n_moles=1.0,  # Pa  # m³  # m³ (doubled)
     )
-    print(f"Initial Pressure: {isothermal['pressure_initial']/1000:.1f} kPa")
-    print(f"Final Pressure: {isothermal['pressure_final']/1000:.1f} kPa")
+    print(f"Initial Pressure: {isothermal['pressure_initial'] / 1000:.1f} kPa")
+    print(f"Final Pressure: {isothermal['pressure_final'] / 1000:.1f} kPa")
     print(f"Work Done: {isothermal['work_done']:.2f} J")
     print(f"Temperature: {isothermal['temperature']:.2f} K")
 
@@ -796,7 +796,7 @@ if __name__ == "__main__":
         thickness=0.1,  # m (10 cm)
         time=3600,  # 1 hour
     )
-    print(f"Heat Transfer: {conduction['heat_transfer']/1e6:.2f} MJ")
+    print(f"Heat Transfer: {conduction['heat_transfer'] / 1e6:.2f} MJ")
     print(f"Power: {conduction['power']:.2f} W")
 
     # Heat Engine

@@ -396,9 +396,9 @@ class UnifiedRiskGenerator:
             if not meta:
                 raise ValueError(f"Unknown formula ID: {formula_id}")
 
-            print(f"\n{'='*70}")
+            print(f"\n{'=' * 70}")
             print(f"Formula {formula_id}: {meta.name} ({meta.tier.upper()})")
-            print(f"{'='*70}")
+            print(f"{'=' * 70}")
 
             # Generate data based on formula ID
             X, y, var_names, var_desc, var_units = self._generate_data(
@@ -719,10 +719,10 @@ class UnifiedRiskGenerator:
             fid for fid, meta in self.formula_metadata.items() if meta.tier == tier
         ]
 
-        print(f"\n{'#'*70}")
+        print(f"\n{'#' * 70}")
         print(f"# TIER: {tier.upper()} ({len(formula_ids)} formulas)")
         print(f"# Samples per formula: {n_samples}")
-        print(f"{'#'*70}")
+        print(f"{'#' * 70}")
 
         successful = 0
         failed = 0
@@ -743,11 +743,11 @@ class UnifiedRiskGenerator:
         n_samples_advanced: int = 150,
     ) -> None:
         """Run all tiers sequentially."""
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("UNIFIED RISK DATASET GENERATOR")
         print(f"Timestamp: {datetime.now().isoformat()}")
         print(f"Total formulas: {len(self.formula_metadata)}")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         # Run each tier
         stats_basic = self.run_tier("basic", n_samples_basic)
@@ -755,9 +755,9 @@ class UnifiedRiskGenerator:
         stats_advanced = self.run_tier("advanced", n_samples_advanced)
 
         # Summary
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("EXECUTION SUMMARY")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
         print(
             f"Basic tier: {stats_basic['successful']}/{stats_basic['total']} successful"
         )
@@ -867,9 +867,9 @@ class UnifiedRiskGenerator:
 
     def print_detailed_summary(self) -> None:
         """Print comprehensive summary with statistics."""
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("DETAILED SUMMARY")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         # Overall stats
         total = len(self.results)
@@ -880,7 +880,7 @@ class UnifiedRiskGenerator:
         print(f"  Total formulas attempted: {total + failed}")
         print(f"  Successful: {successful}")
         print(f"  Failed: {failed}")
-        print(f"  Success rate: {successful/(total+failed)*100:.1f}%")
+        print(f"  Success rate: {successful / (total + failed) * 100:.1f}%")
 
         # Validation stats
         val_passed = sum(1 for v in self.validation_results if v["result"].passed)
@@ -936,7 +936,7 @@ class UnifiedRiskGenerator:
                 print(f"     R²: {discovery.get('r2_score', 0):.4f}")
                 print(f"     Expression: {discovery.get('expression', 'N/A')[:60]}")
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
 
 
 def main():
@@ -965,9 +965,9 @@ def main():
     # Export results
     paths = generator.export_results()
 
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print("📁 EXPORT SUMMARY")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     for format_name, path in paths.items():
         print(f"  {format_name}: {path}")
 
@@ -975,9 +975,9 @@ def main():
     generator.print_detailed_summary()
 
     # Optional: Generate report
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print("✅ Generation Complete!")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     print(f"Generated {len(generator.results)} formulas successfully")
     print(f"Failed: {len(generator.failed_formulas)} formulas")
 

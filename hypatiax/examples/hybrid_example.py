@@ -19,7 +19,7 @@ def main():
         llm = OpenAIProvider(api_key=api_key)
         llm_mapper = LLMMapper(llm_provider=llm)
     else:
-        print("⚠️  OPENAI_API_KEY not set, LLM mapping will be skipped")
+        print("OPENAI_API_KEY not set, LLM mapping will be skipped")
 
     # Initialize hybrid mapper
     hybrid = HybridMapper(llm_mapper=llm_mapper)
@@ -27,8 +27,7 @@ def main():
     # Example query
     query = "Find the derivative of sin(x) * cos(x)"
 
-    print(f"Query: {query}
-")
+    print(f"Query: {query}")
 
     # Map using all available methods
     result = hybrid.map(
@@ -43,12 +42,11 @@ def main():
     for method, output in result['methods'].items():
         print(f"  {method.upper()}:")
         if 'error' in output:
-            print(f"    Error: {output['error']}")
+            print(f"Error: {output['error']}")
         else:
-            print(f"    Expression: {output.get('expression', 'N/A')}")
+            print(f"Expression: {output.get('expression', 'N/A')}")
 
-    print(f"
-Best Expression: {result['best_expression']}")
+    print(f"Best Expression: {result['best_expression']}")
 
 if __name__ == "__main__":
     main()

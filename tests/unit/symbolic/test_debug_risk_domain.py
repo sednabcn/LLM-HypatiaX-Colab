@@ -2,6 +2,7 @@
 """
 Debug script to isolate the risk domain parsing issue
 """
+
 import re
 
 import sympy as sp

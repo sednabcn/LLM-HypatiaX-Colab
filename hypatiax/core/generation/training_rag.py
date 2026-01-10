@@ -313,7 +313,7 @@ Generate a hypothetical perfect answer (just the formula, no explanation)."""
         # Build context from retrieved documents
         context = "\n\n".join(
             [
-                f"Example {i+1}:\nDescription: {doc['description']}\nFormula: {doc['formula']}"
+                f"Example {i + 1}:\nDescription: {doc['description']}\nFormula: {doc['formula']}"
                 for i, (doc, score) in enumerate(retrieved_docs)
             ]
         )
@@ -474,7 +474,7 @@ def main():
 
     for query in test_queries:
         result = rag.query(query)
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print(f"Query: {query}")
         print(f"Answer: {result['answer']}")
         print(f"\nTop sources:")

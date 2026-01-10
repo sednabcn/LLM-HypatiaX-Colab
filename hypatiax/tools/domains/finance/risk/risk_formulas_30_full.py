@@ -347,7 +347,9 @@ class RiskCalculator:
         ratio = (
             (avg_win / (avg_loss + EPSILON))
             if avg_loss > 0
-            else float("inf") if avg_win > 0 else 0.0
+            else float("inf")
+            if avg_win > 0
+            else 0.0
         )
         return {"gain_loss_ratio": ratio, "avg_win": avg_win, "avg_loss": avg_loss}
 

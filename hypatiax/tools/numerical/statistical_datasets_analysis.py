@@ -190,7 +190,7 @@ def create_visualizations(df):
         df["total_score"].mean(),
         color="red",
         linestyle="--",
-        label=f'Mean: {df["total_score"].mean():.1f}',
+        label=f"Mean: {df['total_score'].mean():.1f}",
     )
     axes[0, 0].set_xlabel("Total Validation Score")
     axes[0, 0].set_ylabel("Frequency")
@@ -206,7 +206,7 @@ def create_visualizations(df):
         df["r2_score"].mean(),
         color="red",
         linestyle="--",
-        label=f'Mean: {df["r2_score"].mean():.3f}',
+        label=f"Mean: {df['r2_score'].mean():.3f}",
     )
     axes[0, 1].set_xlabel("R² Score")
     axes[0, 1].set_ylabel("Frequency")
@@ -307,7 +307,7 @@ def analyze_dataset():
     print(f"\nTotal formulas: {stats_dict['overall']['total_formulas']}")
     print(
         f"Valid formulas: {stats_dict['overall']['valid_formulas']} "
-        f"({stats_dict['overall']['success_rate']*100:.1f}%)"
+        f"({stats_dict['overall']['success_rate'] * 100:.1f}%)"
     )
 
     print(f"\nValidation Scores:")

@@ -101,17 +101,17 @@ def print_detailed_report(
         total_formulas: Total number of formulas
         valid_formulas: Number of valid formulas
     """
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"{'DATASET VALIDATION REPORT':^70}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     # Overall Statistics
     print(f"{'OVERALL STATISTICS':^70}")
-    print(f"{'-'*70}")
+    print(f"{'-' * 70}")
     print(f"  Total formulas:        {total_formulas:>6}")
     print(f"  Valid formulas:        {valid_formulas:>6}")
     print(f"  Invalid formulas:      {total_formulas - valid_formulas:>6}")
-    print(f"  Success rate:          {valid_formulas/total_formulas*100:>5.1f}%")
+    print(f"  Success rate:          {valid_formulas / total_formulas * 100:>5.1f}%")
 
     # Collect all scores for overall stats
     all_scores = []
@@ -136,17 +136,17 @@ def print_detailed_report(
         print(f"    Max R²:              {np.max(all_r2_scores):>5.3f}")
 
     # Domain-by-Domain Breakdown
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"{'DOMAIN BREAKDOWN':^70}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     for domain, stats in sorted(domain_stats.items()):
         print(f"Domain: {domain.upper()}")
-        print(f"{'-'*70}")
+        print(f"{'-' * 70}")
         print(f"  Total:           {stats['count']:>4}")
         print(
             f"  Valid:           {stats['valid']:>4}/{stats['count']} "
-            f"({stats['valid']/stats['count']*100:.1f}%)"
+            f"({stats['valid'] / stats['count'] * 100:.1f}%)"
         )
 
         if stats["scores"]:
@@ -180,9 +180,9 @@ def print_detailed_report(
         print()
 
     # Score Distribution
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     print(f"{'SCORE DISTRIBUTION':^70}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     if all_scores:
         bins = [0, 50, 70, 85, 95, 100]
@@ -202,7 +202,7 @@ def print_detailed_report(
             bar = "█" * int(pct / 2)
             print(f"  {labels[i]:20} {count:>4} ({pct:>5.1f}%) {bar}")
 
-    print(f"\n{'='*70}\n")
+    print(f"\n{'=' * 70}\n")
 
 
 def identify_issues(results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -269,9 +269,9 @@ def print_issues_report(issues: List[Dict[str, Any]]):
         print(f"{'✓ NO ISSUES FOUND':^70}")
         return
 
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     print(f"{'ISSUES DETECTED':^70}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     issue_counts = defaultdict(int)
     for issue in issues:
@@ -458,9 +458,9 @@ if __name__ == "__main__":
 
     if success_rate < 0.8:
         print(
-            f"\n⚠ Warning: Success rate {success_rate*100:.1f}% is below 80% threshold"
+            f"\n⚠ Warning: Success rate {success_rate * 100:.1f}% is below 80% threshold"
         )
         exit(1)
     else:
-        print(f"\n✓ Success rate {success_rate*100:.1f}% meets quality threshold")
+        print(f"\n✓ Success rate {success_rate * 100:.1f}% meets quality threshold")
         exit(0)

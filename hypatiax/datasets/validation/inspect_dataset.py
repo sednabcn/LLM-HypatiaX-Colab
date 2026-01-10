@@ -3,6 +3,7 @@
 Dataset Inspector & Fixer
 Diagnoses and fixes common dataset structure issues
 """
+
 import json
 import os
 from pathlib import Path
@@ -127,9 +128,9 @@ def inspect_json_file(filepath: str) -> Dict[str, Any]:
 
 def print_inspection_report(report: Dict[str, Any]):
     """Print a formatted inspection report"""
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"File: {report['filepath']}")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
 
     if not report.get("valid", False):
         print("❌ INVALID FILE")
@@ -179,9 +180,9 @@ def print_inspection_report(report: Dict[str, Any]):
 
 def suggest_fixes(reports: List[Dict[str, Any]]):
     """Analyze all reports and suggest fixes"""
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"{'RECOMMENDED FIXES':^70}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     all_issues = []
     for report in reports:

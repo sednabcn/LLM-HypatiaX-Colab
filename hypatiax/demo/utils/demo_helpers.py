@@ -165,7 +165,7 @@ def print_demo_summary(results: List[Dict[str, Any]]) -> None:
     print(f"Failed: {failed}")
 
     if total > 0:
-        print(f"Success Rate: {successful/total:.1%}")
+        print(f"Success Rate: {successful / total:.1%}")
 
     # Intent distribution
     intents = {}

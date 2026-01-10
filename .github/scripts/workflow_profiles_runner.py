@@ -210,10 +210,10 @@ class WorkflowRunner:
             "error": None,
         }
 
-        self.log(f"\n{'='*80}")
+        self.log(f"\n{'=' * 80}")
         self.log(f"Executing: {result['file']}")
         self.log(f"Type: {file_type}")
-        self.log(f"{'='*80}")
+        self.log(f"{'=' * 80}")
 
         # GitHub Actions grouping
         if self.is_github_actions:
@@ -270,9 +270,9 @@ class WorkflowRunner:
 
     def process_module(self, module_name: str) -> Dict:
         """Process all tests and scripts in a module"""
-        self.log(f"\n{'#'*80}")
+        self.log(f"\n{'#' * 80}")
         self.log(f"# MODULE: {module_name.upper()}")
-        self.log(f"{'#'*80}")
+        self.log(f"{'#' * 80}")
 
         if self.is_github_actions:
             print(f"::group::Module: {module_name}")
@@ -563,7 +563,7 @@ class WorkflowRunner:
             f.write(f"Total Timeouts: {overall['timeouts']}\n")
             if overall["total_files"] > 0:
                 f.write(
-                    f"Success Rate: {(overall['successful']/overall['total_files']*100):.1f}%\n"
+                    f"Success Rate: {(overall['successful'] / overall['total_files'] * 100):.1f}%\n"
                 )
 
         self.log(f"\n✓ Master reports saved:")

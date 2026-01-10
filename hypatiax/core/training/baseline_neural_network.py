@@ -161,7 +161,7 @@ def run_nn_baseline(domains=None, save_dir="hypatiax/data/results"):
     for domain, stats in report["by_domain"].items():
         r2_str = f"R²={stats['mean_r2']:.3f}" if stats["mean_r2"] else "N/A"
         print(
-            f"   {domain:12s}: {stats['successful']}/{stats['total']} ({100*stats['success_rate']:5.1f}%)  {r2_str}"
+            f"   {domain:12s}: {stats['successful']}/{stats['total']} ({100 * stats['success_rate']:5.1f}%)  {r2_str}"
         )
 
     print(f"\n💾 Results saved to:")

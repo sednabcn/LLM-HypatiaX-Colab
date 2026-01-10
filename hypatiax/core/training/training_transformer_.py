@@ -84,7 +84,7 @@ class ModernFormulaTrainer:
             # Modern instruction format
             instruction = f"""Convert the following description to a mathematical formula.
 
-Description: {item['description']}
+Description: {item["description"]}
 
 Provide only the formula without explanation."""
 

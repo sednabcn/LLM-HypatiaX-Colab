@@ -61,9 +61,9 @@ class BenchmarkRunner:
 
         test_file = self.components[component]
 
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print(f"🔍 Running {component.upper()} Benchmarks")
-        print(f"{'='*80}")
+        print(f"{'=' * 80}")
 
         # Build pytest arguments
         args = [
@@ -101,14 +101,14 @@ class BenchmarkRunner:
 
         components = components or list(self.components.keys())
 
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print(f"🚀 HypatiaX Benchmark Suite")
-        print(f"{'='*80}")
+        print(f"{'=' * 80}")
         print(f"📅 Timestamp: {self.timestamp}")
         print(f"📦 Components: {', '.join(components)}")
         print(f"💾 Output: {self.results_file}")
         print(f"⏱️  Include slow: {include_slow}")
-        print(f"{'='*80}\n")
+        print(f"{'=' * 80}\n")
 
         results = {
             "timestamp": self.timestamp,
@@ -152,7 +152,7 @@ class BenchmarkRunner:
             "total_components": total_components,
             "passed_components": passed_components,
             "failed_components": total_components - passed_components,
-            "pass_rate": f"{(passed_components/total_components)*100:.1f}%",
+            "pass_rate": f"{(passed_components / total_components) * 100:.1f}%",
             "total_time_seconds": total_time,
             "success": passed_components == total_components,
         }
@@ -173,9 +173,9 @@ class BenchmarkRunner:
 
     def print_summary(self, results: Dict):
         """Print benchmark summary."""
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print(f"📊 Benchmark Summary")
-        print(f"{'='*80}\n")
+        print(f"{'=' * 80}\n")
 
         for component, result in results["components"].items():
             status = "✅ PASS" if result.get("passed") else "❌ FAIL"
@@ -183,12 +183,12 @@ class BenchmarkRunner:
             print(f"{status} {component:20s} {elapsed:6.2f}s")
 
         summary = results["summary"]
-        print(f"\n{'-'*80}")
+        print(f"\n{'-' * 80}")
         print(f"📦 Total: {summary['total_components']} components")
         print(f"✅ Passed: {summary['passed_components']} ({summary['pass_rate']})")
         print(f"❌ Failed: {summary['failed_components']}")
         print(f"⏱️  Time: {summary['total_time_seconds']:.2f}s")
-        print(f"{'='*80}\n")
+        print(f"{'=' * 80}\n")
 
         print(f"💾 Results saved to: {self.results_file}")
 
@@ -627,7 +627,7 @@ class BenchmarkVisualizer:
                         <div class="metric-label">Execution Time</div>
                     </div>
                     <div class="metric">
-                        <div class="metric-value">{'PASS' if result.get('passed') else 'FAIL'}</div>
+                        <div class="metric-value">{"PASS" if result.get("passed") else "FAIL"}</div>
                         <div class="metric-label">Status</div>
                     </div>
                 </div>
@@ -815,23 +815,23 @@ class BenchmarkVisualizer:
 
         <div class="summary-grid">
             <div class="summary-card">
-                <div class="summary-value">{summary.get('total_components', 0)}</div>
+                <div class="summary-value">{summary.get("total_components", 0)}</div>
                 <div class="summary-label">Total Components</div>
             </div>
             <div class="summary-card">
-                <div class="summary-value">{summary.get('passed_components', 0)}</div>
+                <div class="summary-value">{summary.get("passed_components", 0)}</div>
                 <div class="summary-label">Passed</div>
             </div>
             <div class="summary-card">
-                <div class="summary-value">{summary.get('failed_components', 0)}</div>
+                <div class="summary-value">{summary.get("failed_components", 0)}</div>
                 <div class="summary-label">Failed</div>
             </div>
             <div class="summary-card">
-                <div class="summary-value">{summary.get('pass_rate', 'N/A')}</div>
+                <div class="summary-value">{summary.get("pass_rate", "N/A")}</div>
                 <div class="summary-label">Pass Rate</div>
             </div>
             <div class="summary-card">
-                <div class="summary-value">{summary.get('total_time_seconds', 0):.1f}s</div>
+                <div class="summary-value">{summary.get("total_time_seconds", 0):.1f}s</div>
                 <div class="summary-label">Total Time</div>
             </div>
         </div>
@@ -1024,7 +1024,9 @@ class BenchmarkComparator:
                         "severity": (
                             "critical"
                             if change_percent > 50
-                            else "high" if change_percent > 25 else "medium"
+                            else "high"
+                            if change_percent > 25
+                            else "medium"
                         ),
                     }
                 )
@@ -1046,12 +1048,12 @@ class BenchmarkComparator:
 
     def print_comparison(self, comparison: Dict):
         """Print detailed comparison results with color-coded output."""
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print(f"📊 Benchmark Comparison Report")
-        print(f"{'='*80}")
+        print(f"{'=' * 80}")
         print(f"📅 Current:  {comparison['current_timestamp']}")
         print(f"📅 Baseline: {comparison['baseline_timestamp']}")
-        print(f"{'='*80}\n")
+        print(f"{'=' * 80}\n")
 
         # Print component-by-component comparison
         print("🔍 Component Analysis:")
@@ -1081,13 +1083,13 @@ class BenchmarkComparator:
             )
 
         # Overall summary
-        print(f"\n{'-'*80}")
+        print(f"\n{'-' * 80}")
         overall = comparison["overall_change"]
         overall_status = (
             "improved" if overall < -5 else "regressed" if overall > 10 else "stable"
         )
         print(f"📈 Overall Change: {overall:+.1f}% ({overall_status})")
-        print(f"{'-'*80}\n")
+        print(f"{'-' * 80}\n")
 
         # Print regressions with severity
         if comparison["regressions"]:
@@ -1100,7 +1102,9 @@ class BenchmarkComparator:
                 severity_icon = (
                     "🔴"
                     if reg["severity"] == "critical"
-                    else "🟠" if reg["severity"] == "high" else "🟡"
+                    else "🟠"
+                    if reg["severity"] == "high"
+                    else "🟡"
                 )
                 print(
                     f"   {severity_icon} {reg['component']:<20} {reg['change_percent']:+6.1f}% "
@@ -1124,7 +1128,7 @@ class BenchmarkComparator:
         if not comparison["regressions"] and not comparison["improvements"]:
             print("➡️  All components stable (no significant changes)\n")
 
-        print(f"{'='*80}\n")
+        print(f"{'=' * 80}\n")
 
     def generate_comparison_report(
         self, current_file: Path, baseline_file: Path, output_file: Path = None
@@ -1212,7 +1216,9 @@ class BenchmarkComparator:
                 "trend": (
                     "improving"
                     if values[-1] < values[0]
-                    else "degrading" if values[-1] > values[0] else "stable"
+                    else "degrading"
+                    if values[-1] > values[0]
+                    else "stable"
                 ),
             }
 

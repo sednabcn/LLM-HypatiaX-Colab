@@ -230,7 +230,7 @@ class MassiveDeFiFormulaGenerator:
 
             name = f"Fee_Earnings_v{variation}"
             description = (
-                f"Fees: tier {fee_tier*100:.1f}%, market condition {market_condition}"
+                f"Fees: tier {fee_tier * 100:.1f}%, market condition {market_condition}"
             )
 
             self._process_formula(name, description, X_data, fees, n_samples)
@@ -253,7 +253,9 @@ class MassiveDeFiFormulaGenerator:
             apy += np.random.normal(0, apy.mean() * 0.02, n_samples)
 
             name = f"APY_v{variation}"
-            description = f"APY: yield {yield_level*100:.0f}%, compounding {freq}x/year"
+            description = (
+                f"APY: yield {yield_level * 100:.0f}%, compounding {freq}x/year"
+            )
 
             self._process_formula(name, description, X_data, apy, n_samples)
 
@@ -330,7 +332,7 @@ class MassiveDeFiFormulaGenerator:
 
             name = f"Utilization_v{variation}"
             description = (
-                f"Utilization: pool ${pool_size:.0e}, target {target_util*100:.0f}%"
+                f"Utilization: pool ${pool_size:.0e}, target {target_util * 100:.0f}%"
             )
 
             self._process_formula(name, description, X_data, util_rate, n_samples)
@@ -423,9 +425,9 @@ class MassiveDeFiFormulaGenerator:
         ]
 
         for category_name, gen_func in generators:
-            print(f"\n{'='*70}")
+            print(f"\n{'=' * 70}")
             print(f"Generating: {category_name}")
-            print(f"{'='*70}")
+            print(f"{'=' * 70}")
             gen_func(n_samples)
 
         return self.successful_formulas
@@ -512,7 +514,9 @@ class MassiveDeFiFormulaGenerator:
         print(f"\nTotal formulas generated: {self.formula_id}")
         print(f"Successful: {self.successful_formulas}")
         print(f"Failed: {self.failed_formulas}")
-        print(f"Success rate: {(self.successful_formulas/self.formula_id)*100:.1f}%")
+        print(
+            f"Success rate: {(self.successful_formulas / self.formula_id) * 100:.1f}%"
+        )
         print(f"Total data points: {self.successful_formulas * 20:,}")
         print("\n" + "=" * 70)
 

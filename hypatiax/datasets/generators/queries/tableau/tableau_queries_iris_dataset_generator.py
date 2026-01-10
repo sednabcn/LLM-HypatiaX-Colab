@@ -640,7 +640,7 @@ class TableauIrisQueriesDataset:
         print("-" * 70)
 
         for idx, row in df.head(5).iterrows():
-            print(f"\n[{idx+1}] {row['category']}")
+            print(f"\n[{idx + 1}] {row['category']}")
             print(f"    Description: {row['description'][:70]}...")
             print(f"    Formula:     {row['analytical_formula'][:70]}...")
 

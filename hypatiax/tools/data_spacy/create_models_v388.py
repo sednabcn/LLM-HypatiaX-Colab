@@ -54,7 +54,7 @@ def create_basic_ner_model(labels):
 
 def create_rule_based_model(component_func, model_name):
     """Create a model using custom rule-based components."""
-    print(f"\n{'='*80}")
+    print(f"\n{'=' * 80}")
     print(f"Creating: {model_name}")
     print("=" * 80)
 
@@ -170,7 +170,7 @@ def main():
             "ner_tableau_formulas_basic",
             "ner_tableau_desc_basic",
         ]:
-            print(f"\n{'='*80}")
+            print(f"\n{'=' * 80}")
             print(f"Creating basic model: {model_name}")
             print("=" * 80)
 
@@ -226,7 +226,7 @@ import spacy
 from pathlib import Path
 
 # Load model
-model_path = Path("{base_path / 'ner_tableau_v388'}")
+model_path = Path("{base_path / "ner_tableau_v388"}")
 nlp = spacy.load(str(model_path))
 
 print(f"Loaded model: {{nlp.meta.get('name', 'unknown')}}")

@@ -225,7 +225,7 @@ class HybridFormatter:
         status = "✓ VALID" if valid else "✗ INVALID"
         status_color = "green" if valid else "red"
 
-        summary = f"""[bold cyan]{result.get('description', 'Discovery')}[/bold cyan]
+        summary = f"""[bold cyan]{result.get("description", "Discovery")}[/bold cyan]
 Expression: [yellow]{expr}[/yellow]
 R²: {r2:.4f} | Validation: {val_score:.1f}/100 | [{status_color}]{status}[/{status_color}]"""
 
@@ -296,29 +296,29 @@ R²: {r2:.4f} | Validation: {val_score:.1f}/100 | [{status_color}]{status}[/{sta
         validation = result.get("validation", {})
         interpretation = result.get("interpretation", {})
 
-        md = f"""# {result.get('description', 'Discovery Report')}
+        md = f"""# {result.get("description", "Discovery Report")}
 
-**Domain:** {result.get('domain', 'N/A').upper()}
-**Timestamp:** {result.get('timestamp', 'N/A')}
+**Domain:** {result.get("domain", "N/A").upper()}
+**Timestamp:** {result.get("timestamp", "N/A")}
 
 ---
 
 ## 🔍 Discovered Expression
 
 ```
-{discovery.get('expression', 'N/A')}
+{discovery.get("expression", "N/A")}
 ```
 
 ### Metrics
-- **R² Score:** {discovery.get('r2_score', 0):.4f}
-- **Complexity:** {discovery.get('complexity', 'N/A')}
+- **R² Score:** {discovery.get("r2_score", 0):.4f}
+- **Complexity:** {discovery.get("complexity", "N/A")}
 
 ---
 
 ## ✓ Validation Results
 
-**Overall Score:** {validation.get('total_score', 0):.1f}/100
-**Status:** {"✓ VALID" if validation.get('valid') else "✗ INVALID"}
+**Overall Score:** {validation.get("total_score", 0):.1f}/100
+**Status:** {"✓ VALID" if validation.get("valid") else "✗ INVALID"}
 
 ### Layer Scores
 """
@@ -371,7 +371,7 @@ R²: {r2:.4f} | Validation: {val_score:.1f}/100 | [{status_color}]{status}[/{sta
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{result.get('description', 'Discovery Report')}</title>
+    <title>{result.get("description", "Discovery Report")}</title>
     <style>
         body {{
             font-family: 'Segoe UI', system-ui, sans-serif;
@@ -507,33 +507,33 @@ R²: {r2:.4f} | Validation: {val_score:.1f}/100 | [{status_color}]{status}[/{sta
 </head>
 <body>
     <div class="container">
-        <h1>{result.get('description', 'Discovery Report')}</h1>
+        <h1>{result.get("description", "Discovery Report")}</h1>
 
         <div class="metadata">
             <div class="metadata-item">
                 <span class="metadata-label">Domain</span>
-                <span class="metadata-value">{result.get('domain', 'N/A').upper()}</span>
+                <span class="metadata-value">{result.get("domain", "N/A").upper()}</span>
             </div>
             <div class="metadata-item">
                 <span class="metadata-label">Timestamp</span>
-                <span class="metadata-value">{result.get('timestamp', 'N/A')[:10]}</span>
+                <span class="metadata-value">{result.get("timestamp", "N/A")[:10]}</span>
             </div>
             <div class="metadata-item">
                 <span class="metadata-label">Samples</span>
-                <span class="metadata-value">{result.get('metadata', {}).get('n_samples', 'N/A')}</span>
+                <span class="metadata-value">{result.get("metadata", {}).get("n_samples", "N/A")}</span>
             </div>
         </div>
 
         <div class="section">
             <div class="section-title"><span class="emoji">🔍</span> Discovered Expression</div>
-            <div class="expression">{discovery.get('expression', 'N/A')}</div>
+            <div class="expression">{discovery.get("expression", "N/A")}</div>
             <div class="scores">
                 <div class="score-card">
-                    <div class="score">{discovery.get('r2_score', 0):.4f}</div>
+                    <div class="score">{discovery.get("r2_score", 0):.4f}</div>
                     <div class="label">R² Score</div>
                 </div>
                 <div class="score-card">
-                    <div class="score">{discovery.get('complexity', 'N/A')}</div>
+                    <div class="score">{discovery.get("complexity", "N/A")}</div>
                     <div class="label">Complexity</div>
                 </div>
             </div>

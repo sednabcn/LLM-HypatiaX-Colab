@@ -1861,7 +1861,7 @@ def demo_risk_metrics():
     print("\nPortfolio created with 5 assets:")
     for asset in rm.assets:
         print(
-            f"  {asset.symbol}: {asset.weight*100:.0f}% weight, ${asset.market_value:,}, "
+            f"  {asset.symbol}: {asset.weight * 100:.0f}% weight, ${asset.market_value:,}, "
             f"sector={asset.sector}, β={asset.beta}"
         )
 
@@ -1900,7 +1900,7 @@ def demo_risk_metrics():
     downside = rm.downside_deviation()
     print(f"\nDownside Risk:")
     print(f"  Downside Deviation: {downside['downside_deviation_pct']:.2f}%")
-    print(f"  Downside Frequency: {downside['downside_frequency']*100:.1f}%")
+    print(f"  Downside Frequency: {downside['downside_frequency'] * 100:.1f}%")
 
     # ========================================================================
     # Risk-Adjusted Performance
@@ -1917,8 +1917,8 @@ def demo_risk_metrics():
 
     calmar = rm.calmar_ratio()
     print(f"Calmar Ratio: {calmar['calmar']:.3f}")
-    print(f"  Annual Return: {calmar['annual_return']*100:.2f}%")
-    print(f"  Max Drawdown: {calmar['max_drawdown']*100:.2f}%")
+    print(f"  Annual Return: {calmar['annual_return'] * 100:.2f}%")
+    print(f"  Max Drawdown: {calmar['max_drawdown'] * 100:.2f}%")
 
     # ========================================================================
     # Drawdown Analysis
@@ -1932,8 +1932,8 @@ def demo_risk_metrics():
     print(f"Max DD Duration: {dd['max_drawdown_length']} days")
     print(f"Longest Drawdown: {dd['longest_drawdown_length']} days")
     print(f"Number of DD Periods: {dd['num_drawdown_periods']}")
-    print(f"Average DD Depth: {dd['avg_drawdown_depth']*100:.2f}%")
-    print(f"Current Drawdown: {dd['current_drawdown']*100:.2f}%")
+    print(f"Average DD Depth: {dd['avg_drawdown_depth'] * 100:.2f}%")
+    print(f"Current Drawdown: {dd['current_drawdown'] * 100:.2f}%")
     print(f"Time Underwater: {dd['time_underwater_pct']:.1f}%")
 
     # ========================================================================
@@ -1962,7 +1962,7 @@ def demo_risk_metrics():
     for i, sym in enumerate(symbols):
         print(f"{sym:>5}", end="")
         for j in range(len(symbols)):
-            print(f"{matrix[i,j]:>7.3f}", end="")
+            print(f"{matrix[i, j]:>7.3f}", end="")
         print()
 
     div = rm.diversification_ratio()

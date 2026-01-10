@@ -127,9 +127,9 @@ def run_test(config):
         dict: Results containing test_id, status, and metrics
     """
     test_id = config["test_id"]
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"RUNNING TEST {test_id}")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     print(
         f"Config: dtype={config['data_prep']['dtype']}, "
         f"sizefile={config['data_prep']['sizefile']}, "
@@ -284,10 +284,10 @@ def main():
     # Generate timestamp
     timestamp = time.strftime("%Y%m%d_%H%M%S")
 
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     print(f"BUNDLED NER MODEL TESTING")
     print(f"Timestamp: {timestamp}")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
 
     # Get test configurations
     test_configurations = create_test_configurations()
@@ -297,9 +297,9 @@ def main():
     # Run all tests and collect results
     results = []
     for idx, config in enumerate(test_configurations, 1):
-        print(f"\n\n{'#'*70}")
+        print(f"\n\n{'#' * 70}")
         print(f"# Test {idx}/{len(test_configurations)}: ID={config['test_id']}")
-        print(f"{'#'*70}")
+        print(f"{'#' * 70}")
 
         try:
             result = run_test(config)
@@ -311,9 +311,9 @@ def main():
             )
 
     # Convert results to DataFrame
-    print(f"\n\n{'='*70}")
+    print(f"\n\n{'=' * 70}")
     print("GENERATING FINAL REPORT")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
 
     results_df = pd.DataFrame(results)
 
@@ -342,18 +342,18 @@ def main():
         if not completed_tests.empty and completed_tests["test_f1"].notna().any():
             best_idx = completed_tests["test_f1"].idxmax()
             best_test = completed_tests.loc[best_idx]
-            print(f"\n{'='*70}")
+            print(f"\n{'=' * 70}")
             print(f"BEST PERFORMING MODEL")
-            print(f"{'='*70}")
+            print(f"{'=' * 70}")
             print(f"Test ID: {best_test['test_id']}")
             print(f"Model: {best_test.get('model_name', 'N/A')}")
             print(f"Test F1: {best_test['test_f1']:.4f}")
             if "model_path" in best_test and pd.notna(best_test["model_path"]):
                 print(f"Path: {best_test['model_path']}")
 
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print("ALL TESTS COMPLETED!")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
 
     return results_df
 

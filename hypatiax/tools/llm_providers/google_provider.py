@@ -11,6 +11,7 @@ UPDATES:
 - Response validation and fallback strategies
 - Usage tracking and optimization
 """
+
 import json
 import os
 import re
@@ -602,8 +603,8 @@ JSON only."""
 
         prompt = f"""Improve this formula based on feedback.
 
-Original: {formula.get('formula_latex', 'N/A')}
-Code: {formula.get('formula_python', 'N/A')}
+Original: {formula.get("formula_latex", "N/A")}
+Code: {formula.get("formula_python", "N/A")}
 
 Feedback: {feedback}
 

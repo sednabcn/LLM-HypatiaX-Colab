@@ -11,6 +11,7 @@ Usage:
   python manage_dataset.py --dir data --organize       # Option C
   python manage_dataset.py --dir data --all            # All three!
 """
+
 import glob
 import json
 import os
@@ -30,9 +31,9 @@ def extract_valid_formulas(data_dir: str, output_file: str = None) -> Dict[str, 
     """
     Extract only valid, high-quality formulas into a clean dataset
     """
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"{'OPTION A: EXTRACTING VALID FORMULAS':^70}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     files = glob.glob(os.path.join(data_dir, "*.json"))
     files = [f for f in files if not f.endswith(".backup")]
@@ -89,7 +90,7 @@ def extract_valid_formulas(data_dir: str, output_file: str = None) -> Dict[str, 
     print(f"📊 Extraction Results:")
     print(f"   Total formulas found: {len(all_formulas)}")
     print(f"   Valid formulas: {len(valid_formulas)}")
-    print(f"   Extraction rate: {len(valid_formulas)/len(all_formulas)*100:.1f}%")
+    print(f"   Extraction rate: {len(valid_formulas) / len(all_formulas) * 100:.1f}%")
 
     if valid_formulas:
         scores = [f["validation"]["total_score"] for f in valid_formulas]
@@ -137,9 +138,9 @@ def run_formula_discovery(data_dir: str, test_data_dir: str = None) -> Dict[str,
 
     This is a framework - you'll need to integrate with your actual SR engine
     """
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"{'OPTION B: FORMULA DISCOVERY PIPELINE':^70}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     if test_data_dir is None:
         test_data_dir = os.path.join(data_dir, "test_data")
@@ -209,9 +210,9 @@ def run_formula_discovery(data_dir: str, test_data_dir: str = None) -> Dict[str,
         print(f"\n✅ Saved {len(discovered)} discovered formulas to: {output_file}")
 
     # Summary
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"{'DISCOVERY SUMMARY':^70}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
     print(f"  Total test files: {len(test_files)}")
     print(f"  Formulas discovered: {len(discovered)}")
     print(f"  Failed cases: {len(failed)}")
@@ -364,9 +365,9 @@ def organize_dataset(data_dir: str) -> Dict[str, Any]:
     - test_data/ : Test cases awaiting discovery
     - archive/ : Original backups
     """
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"{'OPTION C: ORGANIZING DIRECTORIES':^70}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     # Create directories
     results_dir = os.path.join(data_dir, "results")
@@ -434,9 +435,9 @@ def organize_dataset(data_dir: str) -> Dict[str, Any]:
         except Exception as e:
             print(f"   ⚠️  {filename}: {e}")
 
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"{'ORGANIZATION SUMMARY':^70}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
     print(f"  Results files: {results_count}")
     print(f"  Test data files: {test_count}")
     print(f"  Archived backups: {archive_count}")
@@ -563,9 +564,9 @@ Examples:
             "Must specify at least one option: --extract, --discover, --organize, or --all"
         )
 
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"{'DATASET MANAGEMENT SUITE':^70}")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     print(f"\nDirectory: {args.dir}")
     print(f"Options: ", end="")
     if args.extract:
@@ -591,9 +592,9 @@ Examples:
         results["discover"] = run_formula_discovery(args.dir)
 
     # Final summary
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"{'COMPLETE':^70}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     if "extract" in results:
         print(f"✅ Extracted {results['extract']['valid']} valid formulas")

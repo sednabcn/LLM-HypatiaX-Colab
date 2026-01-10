@@ -173,9 +173,9 @@ class WorkflowRunner:
                 for d in (self.base_path / "model_implementations").iterdir()
                 if d.is_dir()
             ]
-            arch_info["notes"][
-                "model_implementations"
-            ] = f"Implementations: {', '.join(subdirs)}"
+            arch_info["notes"]["model_implementations"] = (
+                f"Implementations: {', '.join(subdirs)}"
+            )
 
         if (self.base_path / "tests").exists():
             arch_info["has_tests_dir"] = True
@@ -344,10 +344,10 @@ class WorkflowRunner:
             "error": None,
         }
 
-        self.log(f"\n{'='*80}")
+        self.log(f"\n{'=' * 80}")
         self.log(f"Executing: {result['file']}")
         self.log(f"Type: {file_type}")
-        self.log(f"{'='*80}")
+        self.log(f"{'=' * 80}")
 
         # GitHub Actions grouping
         if self.is_github_actions:
@@ -404,9 +404,9 @@ class WorkflowRunner:
 
     def process_module(self, module_name: str) -> Dict:
         """Process all tests and scripts in a module"""
-        self.log(f"\n{'#'*80}")
+        self.log(f"\n{'#' * 80}")
         self.log(f"# MODULE: {module_name.upper()}")
-        self.log(f"{'#'*80}")
+        self.log(f"{'#' * 80}")
 
         if self.is_github_actions:
             print(f"::group::Module: {module_name}")

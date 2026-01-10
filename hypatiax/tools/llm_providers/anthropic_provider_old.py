@@ -3,6 +3,7 @@
 Anthropic Claude API Provider for Formula Generation
 Part of HypatiaX tools/llm_providers/anthropic_provider.py
 """
+
 import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -156,8 +157,8 @@ Be creative but ensure mathematical validity!"""
             Refined formula dict
         """
         prompt = f"""
-Original formula: {formula['formula_latex']}
-Original implementation: {formula['formula_python']}
+Original formula: {formula["formula_latex"]}
+Original implementation: {formula["formula_python"]}
 
 User feedback: {feedback}
 

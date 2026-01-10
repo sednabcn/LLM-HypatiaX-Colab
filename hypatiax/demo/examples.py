@@ -347,7 +347,7 @@ class ExampleManager:
 
             variations.append(
                 Example(
-                    id=f"{example.id}_var_{i+1}",
+                    id=f"{example.id}_var_{i + 1}",
                     description=new_desc,
                     expected_formula=example.expected_formula,
                     category=example.category,

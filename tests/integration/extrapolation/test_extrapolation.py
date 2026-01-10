@@ -101,9 +101,11 @@ def test_extrapolation(formula_name, ground_truth_func, X_range, n_samples=100):
 
     extrapolation_ratio = out_domain_relative / (in_domain_relative + 1e-10)
 
-    print(f"In-domain error: {in_domain_relative:.4f} ({in_domain_relative*100:.2f}%)")
     print(
-        f"Out-of-domain error: {out_domain_relative:.4f} ({out_domain_relative*100:.2f}%)"
+        f"In-domain error: {in_domain_relative:.4f} ({in_domain_relative * 100:.2f}%)"
+    )
+    print(
+        f"Out-of-domain error: {out_domain_relative:.4f} ({out_domain_relative * 100:.2f}%)"
     )
     print(f"Extrapolation ratio: {extrapolation_ratio:.2f}x")
 

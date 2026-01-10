@@ -37,7 +37,6 @@ def process_ner_data(
     size_data_spacy_file,
 ):
     try:
-
         # Resolving the file paths for input data based on datasets
         dataset_path = resources.files(
             f"hypatiax.datasets.{domain}.{sub_domain}.{dataset_file_dir}"
@@ -106,7 +105,6 @@ def process_ner_data(
 
 def main(domain, sub_domain):
     try:
-
         # Process data for different types and files
         process_ner_data(
             domain,

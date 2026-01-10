@@ -10,6 +10,7 @@ UPDATES:
 - Token usage tracking and optimization
 - Response validation and fallback handling
 """
+
 import json
 import os
 import time
@@ -320,7 +321,7 @@ class AnthropicProvider:
 
 <task>
 User Requirements: {requirements}
-Domain: {domain} - {context['description']}
+Domain: {domain} - {context["description"]}
 Variant: {variant + 1} (generate a unique approach)
 </task>
 
@@ -329,7 +330,7 @@ Variant: {variant + 1} (generate a unique approach)
 2. Numerical Stability: Avoid division by near-zero, overflow, underflow
 3. Computational Efficiency: Suitable for real-time calculation
 4. Novelty: Build on established principles but introduce new insights
-5. Domain Constraints: {context['constraints']}
+5. Domain Constraints: {context["constraints"]}
 6. Edge Cases: Explicitly handle boundary conditions
 </requirements>
 
@@ -366,7 +367,7 @@ Return ONLY valid JSON (no markdown, no explanation outside JSON):
 </output_format>
 
 <domain_examples>
-Similar {domain} concepts: {context['examples']}
+Similar {domain} concepts: {context["examples"]}
 </domain_examples>
 
 Generate a formula that is:
@@ -546,9 +547,9 @@ JSON only, no other text."""
         prompt = f"""Improve this mathematical formula based on user feedback.
 
 <original_formula>
-LaTeX: {formula.get('formula_latex', 'N/A')}
-Python: {formula.get('formula_python', 'N/A')}
-Explanation: {formula.get('explanation', 'N/A')}
+LaTeX: {formula.get("formula_latex", "N/A")}
+Python: {formula.get("formula_python", "N/A")}
+Explanation: {formula.get("explanation", "N/A")}
 </original_formula>
 
 <user_feedback>

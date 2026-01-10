@@ -2,6 +2,7 @@
 """
 Quick debug script to test LaTeX parsing
 """
+
 import re
 
 import sympy as sp
@@ -10,9 +11,9 @@ from sympy.parsing.latex import parse_latex
 
 def test_parse(latex_str):
     """Test parsing with debug output"""
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print(f"Testing: {repr(latex_str)}")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
 
     # Try parse_latex directly
     try:

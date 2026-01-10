@@ -4,6 +4,7 @@ Universal Dataset Tool
 Inspect, fix, organize, and validate datasets for any domain
 All-in-one solution for dataset management
 """
+
 import argparse
 import glob
 import json
@@ -391,7 +392,7 @@ class UniversalDatasetTool:
             description = (
                 " - ".join(desc_parts)
                 if desc_parts
-                else f"Test Case {i+1} from {filename}"
+                else f"Test Case {i + 1} from {filename}"
             )
 
             result = {
@@ -507,9 +508,9 @@ class UniversalDatasetTool:
 
     def organize_files(self, create_backup: bool = True):
         """Organize files by type into subdirectories"""
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("ORGANIZING FILES".center(70))
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         # Create subdirectories
         dirs = {
@@ -576,9 +577,9 @@ class UniversalDatasetTool:
             print(f"❌ No files found matching: {pattern}")
             return
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"UNIVERSAL DATASET TOOL - {self.base_dir.name}".center(70))
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
         print(f"Domain: {self.domain}")
         print(f"Files found: {len(files)}")
         print(f"Pattern: {pattern}\n")
@@ -592,9 +593,9 @@ class UniversalDatasetTool:
             files = list(self.base_dir.glob(f"**/{pattern}"))
 
         # Inspect all files
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
         print("INSPECTION RESULTS".center(70))
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         reports = []
         for filepath in sorted(files):
@@ -608,9 +609,9 @@ class UniversalDatasetTool:
 
         # Fix files if requested
         if fix:
-            print(f"\n{'='*70}")
+            print(f"\n{'=' * 70}")
             print("FIXING FILES".center(70))
-            print(f"{'='*70}\n")
+            print(f"{'=' * 70}\n")
 
             for filepath in sorted(files):
                 result = self.fix_file(filepath)
@@ -654,9 +655,9 @@ class UniversalDatasetTool:
 
     def _print_summary(self, reports: List[Dict]):
         """Print processing summary"""
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("SUMMARY".center(70))
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         print(f"Total files processed:   {self.stats['total_files']}")
         print(f"CSV files:               {self.stats['csv_files']}")
@@ -682,7 +683,7 @@ class UniversalDatasetTool:
             for issue, count in sorted(issue_counts.items(), key=lambda x: -x[1]):
                 print(f"   {issue}: {count}")
 
-        print(f"\n{'='*70}\n")
+        print(f"\n{'=' * 70}\n")
 
     # ==================== VALIDATION ====================
 
@@ -1046,9 +1047,9 @@ class UniversalDatasetTool:
             print(f"❌ No files found matching: {pattern}")
             return
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("DATASET VALIDATION".center(70))
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
         print(f"Files to validate: {len(files)}")
         print(f"Strict mode: {strict}\n")
 
@@ -1074,9 +1075,9 @@ class UniversalDatasetTool:
 
         # Summary
         valid_count = sum(1 for r in all_results if r["valid"])
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
         print(f"Validation Summary: {valid_count}/{len(files)} files valid")
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         if save_report:
             report_path = self.base_dir / "validation_report.json"
@@ -1180,9 +1181,9 @@ Examples:
             print("❌ Invalid JSON for --vars")
             return
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("GENERATING DATASET".center(70))
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
         print(f"Formula: {args.formula}")
         print(f"Variables: {var_ranges}")
         print(f"Samples: {args.samples}\n")

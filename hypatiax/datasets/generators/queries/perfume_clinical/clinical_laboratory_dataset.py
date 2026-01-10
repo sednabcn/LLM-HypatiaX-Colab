@@ -802,6 +802,6 @@ def create_clinical_csv():
 
 if __name__ == "__main__":
     count = create_clinical_csv()
-    print(f"\n{'='*50}")
+    print(f"\n{'=' * 50}")
     print(f"CLINICAL DATASET: {count} entries (VERIFIED)")
-    print(f"{'='*50}")
+    print(f"{'=' * 50}")

@@ -593,9 +593,9 @@ class AutoConfigurationEngine:
 
                 # ✅ FIX #1: Override SMART structure when equation hint is known
                 if equation_hint == "bernoulli_equation":
-                    print(f"\n{'⚠️ '*20}")
+                    print(f"\n{'⚠️ ' * 20}")
                     print("   [HINT OVERRIDE] Forcing Bernoulli physical structure")
-                    print(f"{'⚠️ '*20}")
+                    print(f"{'⚠️ ' * 20}")
 
                     structure.is_additive = True
                     structure.is_multiplicative = False

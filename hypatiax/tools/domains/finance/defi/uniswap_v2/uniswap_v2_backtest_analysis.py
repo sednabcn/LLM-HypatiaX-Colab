@@ -305,7 +305,7 @@ def print_analysis_report(coin_symbol, analysis):
     print("-" * 60)
     p = analysis["performance"]
     print(f"Days LP Won: {p['days_lp_wins']} ({p['win_rate_pct']:.1f}%)")
-    print(f"Days HODL Won: {p['days_hodl_wins']} ({100-p['win_rate_pct']:.1f}%)")
+    print(f"Days HODL Won: {p['days_hodl_wins']} ({100 - p['win_rate_pct']:.1f}%)")
     print(f"Avg Daily Advantage: ${p['avg_daily_advantage']:+.2f}")
     print(f"Best Day: ${p['max_advantage']:+.2f}")
     print(f"Worst Day: ${p['min_advantage']:+.2f}")
@@ -468,13 +468,13 @@ def run_complete_backtest(
 
     # Visualize
     print("\n4️⃣ Creating visualizations...")
-    png_path = f'backtest_analysis_{coin_symbol.upper()}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.png'
+    png_path = f"backtest_analysis_{coin_symbol.upper()}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
     create_visualizations(results_df, coin_symbol, png_path)
 
     # Export to Excel
     if export_excel:
         print("\n5️⃣ Exporting to Excel...")
-        excel_path = f'lp_backtest_{coin_symbol.upper()}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
+        excel_path = f"lp_backtest_{coin_symbol.upper()}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
 
         with pd.ExcelWriter(excel_path, engine="openpyxl") as writer:
             results_df.to_excel(writer, sheet_name="Daily Results", index=False)
@@ -496,7 +496,6 @@ def run_complete_backtest(
 
 # ===== RUN THE ANALYSIS =====
 if __name__ == "__main__":
-
     data_source = [
         (10, 20_000, 50_000_000, "ETH"),
         (10_000, 10_000, 100_000_000, "USDT"),

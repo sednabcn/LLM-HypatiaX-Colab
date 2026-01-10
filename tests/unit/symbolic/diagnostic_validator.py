@@ -2,6 +2,7 @@
 """
 Diagnostic script to understand what's happening with parsing
 """
+
 import sympy as sp
 from sympy.parsing.latex import parse_latex
 

@@ -360,9 +360,9 @@ def performance_tracker():
         def assert_below_threshold(self, threshold_ms):
             """Assert all measurements are below threshold."""
             stats = self.get_stats()
-            assert (
-                stats["max"] < threshold_ms
-            ), f"Max time {stats['max']:.2f}ms exceeds threshold {threshold_ms}ms"
+            assert stats["max"] < threshold_ms, (
+                f"Max time {stats['max']:.2f}ms exceeds threshold {threshold_ms}ms"
+            )
 
     return PerformanceTracker()
 
@@ -388,9 +388,9 @@ def memory_tracker():
         def assert_no_leak(self, threshold_mb=50):
             """Assert memory hasn't increased by more than threshold."""
             delta = self.usage_delta()
-            assert (
-                delta < threshold_mb
-            ), f"Memory increased by {delta:.2f}MB (threshold: {threshold_mb}MB)"
+            assert delta < threshold_mb, (
+                f"Memory increased by {delta:.2f}MB (threshold: {threshold_mb}MB)"
+            )
 
     return MemoryTracker()
 

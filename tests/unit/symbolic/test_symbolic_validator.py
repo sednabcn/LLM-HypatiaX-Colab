@@ -209,7 +209,7 @@ class DeFiValidator(SymbolicValidator):
         if risky_divisions:
             return {
                 "passed": False,
-                "message": f'Potential division by zero: {"; ".join(risky_divisions)}',
+                "message": f"Potential division by zero: {'; '.join(risky_divisions)}",
                 "severity": "error",
                 "penalty": 20,
             }
@@ -240,7 +240,7 @@ class DeFiValidator(SymbolicValidator):
         if risky_operations:
             return {
                 "passed": False,
-                "message": f'Overflow risk: {"; ".join(risky_operations)}',
+                "message": f"Overflow risk: {'; '.join(risky_operations)}",
                 "severity": "warning",
                 "penalty": 10,
             }
@@ -317,7 +317,7 @@ class DeFiValidator(SymbolicValidator):
         if issues:
             return {
                 "passed": False,
-                "message": f'Range constraint issues: {"; ".join(issues)}',
+                "message": f"Range constraint issues: {'; '.join(issues)}",
                 "severity": "warning",
                 "penalty": 8,
             }
@@ -462,7 +462,7 @@ class TestSuite:
         print("=" * 70)
         print(f"✅ Passed: {passed}/{len(self.test_formulas)}")
         print(f"❌ Failed: {failed}/{len(self.test_formulas)}")
-        print(f"📊 Success Rate: {passed/len(self.test_formulas)*100:.1f}%")
+        print(f"📊 Success Rate: {passed / len(self.test_formulas) * 100:.1f}%")
         print()
 
         # Save results

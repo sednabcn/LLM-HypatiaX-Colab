@@ -912,14 +912,18 @@ if __name__ == "__main__":
 
     print("Zero-order reaction:")
     zero_int = integrated_calc.zero_order_integrated(
-        initial_concentration=2.0, rate_constant=0.1, time=5.0  # M  # M/s  # s
+        initial_concentration=2.0,
+        rate_constant=0.1,
+        time=5.0,  # M  # M/s  # s
     )
     print(f"  [A]₀ = {zero_int['initial_concentration']:.2f} M")
     print(f"  After {zero_int['time']}s: [A] = {zero_int['final_concentration']:.2f} M")
 
     print("\nFirst-order reaction:")
     first_int = integrated_calc.first_order_integrated(
-        initial_concentration=1.0, rate_constant=0.1, time=10.0  # M  # s⁻¹  # s
+        initial_concentration=1.0,
+        rate_constant=0.1,
+        time=10.0,  # M  # s⁻¹  # s
     )
     print(f"  [A]₀ = {first_int['initial_concentration']:.2f} M")
     print(
@@ -928,7 +932,9 @@ if __name__ == "__main__":
 
     print("\nSecond-order reaction:")
     second_int = integrated_calc.second_order_integrated(
-        initial_concentration=1.0, rate_constant=0.5, time=2.0  # M  # M⁻¹s⁻¹  # s
+        initial_concentration=1.0,
+        rate_constant=0.5,
+        time=2.0,  # M  # M⁻¹s⁻¹  # s
     )
     print(f"  [A]₀ = {second_int['initial_concentration']:.2f} M")
     print(
@@ -1058,10 +1064,10 @@ if __name__ == "__main__":
         molecular_mass=0.032,  # K  # m (3 Å)  # kg/mol (O₂)
     )
     print(f"Temperature: {collision['temperature']:.0f} K")
-    print(f"Molecular diameter: {collision['molecular_diameter']*1e10:.1f} Å")
+    print(f"Molecular diameter: {collision['molecular_diameter'] * 1e10:.1f} Å")
     print(f"Collision frequency: {collision['collision_frequency']:.3e} M⁻¹s⁻¹")
     print(f"Average molecular velocity: {collision['average_velocity']:.1f} m/s")
-    print(f"Cross-section: {collision['cross_section']*1e20:.2f} Å²")
+    print(f"Cross-section: {collision['cross_section'] * 1e20:.2f} Å²")
 
     # 7. Complete reaction example
     print("\n7. COMPLETE REACTION ANALYSIS")
@@ -1076,7 +1082,9 @@ if __name__ == "__main__":
     # Calculate half-life
     t_half = kinetics_calc.half_life.first_order_half_life(k_rxn)
     print(f"\nRate constant: {k_rxn:.4f} s⁻¹")
-    print(f"Half-life: {t_half['half_life']:.1f} s ({t_half['half_life']/60:.1f} min)")
+    print(
+        f"Half-life: {t_half['half_life']:.1f} s ({t_half['half_life'] / 60:.1f} min)"
+    )
 
     # Calculate concentration after 1 hour
     time_1hr = 3600  # seconds
@@ -1085,7 +1093,9 @@ if __name__ == "__main__":
     )
     print(f"\nAfter 1 hour:")
     print(f"  [N₂O₅] = {final_conc['final_concentration']:.4f} M")
-    print(f"  ({(final_conc['final_concentration']/initial_conc)*100:.1f}% remaining)")
+    print(
+        f"  ({(final_conc['final_concentration'] / initial_conc) * 100:.1f}% remaining)"
+    )
 
     # How many half-lives?
     n_half_lives = kinetics_calc.half_life.number_of_half_lives(

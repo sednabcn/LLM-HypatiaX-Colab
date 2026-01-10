@@ -73,13 +73,13 @@ trainer.plot_history(history)
 # Determine the appropriate entity path based on the dtype
 if config_data_preparation["dtype"] == "both":
     entity_path = resources.files(
-        f'hypatiax.data_spacy.{config_data_preparation["domain"]}.{config_data_preparation["sub_domain"]}'
-    ).joinpath(f'ner_{config_data_preparation["sub_domain"]}')
+        f"hypatiax.data_spacy.{config_data_preparation['domain']}.{config_data_preparation['sub_domain']}"
+    ).joinpath(f"ner_{config_data_preparation['sub_domain']}")
 else:
     entity_path = resources.files(
-        f'hypatiax.data_spacy.{config_data_preparation["domain"]}.{config_data_preparation["sub_domain"]}'
+        f"hypatiax.data_spacy.{config_data_preparation['domain']}.{config_data_preparation['sub_domain']}"
     ).joinpath(
-        f'ner_{config_data_preparation["sub_domain"]}_{config_data_preparation["dtype"]}'
+        f"ner_{config_data_preparation['sub_domain']}_{config_data_preparation['dtype']}"
     )
 
 # Validate the Model

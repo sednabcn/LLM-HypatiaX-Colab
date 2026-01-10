@@ -300,9 +300,9 @@ class HybridDiscoverySystem:
 
                     # Update provider stats
                     provider.stats["total_tokens_input"] += response.usage.input_tokens
-                    provider.stats[
-                        "total_tokens_output"
-                    ] += response.usage.output_tokens
+                    provider.stats["total_tokens_output"] += (
+                        response.usage.output_tokens
+                    )
 
                 else:  # google
                     response = provider._call_with_retry(
@@ -378,10 +378,10 @@ class HybridDiscoverySystem:
         if validation_result:
             validation_summary = f"""
 VALIDATION RESULTS:
-- Overall Score: {validation_result.get('total_score', 0):.1f}/100
-- Valid: {'Yes' if validation_result.get('valid') else 'No'}
+- Overall Score: {validation_result.get("total_score", 0):.1f}/100
+- Valid: {"Yes" if validation_result.get("valid") else "No"}
 - Layer Scores:
-{chr(10).join(f"  - {k.capitalize()}: {v:.1f}" for k, v in validation_result.get('layer_scores', {}).items())}
+{chr(10).join(f"  - {k.capitalize()}: {v:.1f}" for k, v in validation_result.get("layer_scores", {}).items())}
 """
             if validation_result.get("errors"):
                 validation_summary += (
@@ -401,7 +401,7 @@ VARIABLES:
 {chr(10).join(f"- {var}: {desc}" for var, desc in variables.items())}
 
 MODEL FIT QUALITY:
-- R² Score: {r2:.4f} {'(excellent fit)' if r2 > 0.95 else '(good fit)' if r2 > 0.85 else '(moderate fit)'}
+- R² Score: {r2:.4f} {"(excellent fit)" if r2 > 0.95 else "(good fit)" if r2 > 0.85 else "(moderate fit)"}
 {validation_summary}
 
 YOUR TASK:
@@ -560,13 +560,13 @@ Return only the JSON object, no other text."""
         Returns:
             Complete result dictionary with discovery, validation, and interpretation
         """
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"WORKFLOW: {description or 'Unnamed Discovery'}")
         print(
             f"Domain: {self.domain.upper()} | Primary LLM: {self.primary_llm.upper()}"
         )
         print(f"Fallback: {'Enabled' if self.enable_fallback else 'Disabled'}")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         # STAGE 1: DISCOVER
         print(f"\n[1/3] 🔍 Discovering symbolic expression from {len(X)} samples...")
@@ -711,11 +711,11 @@ Return only the JSON object, no other text."""
         # Store result
         self.results.append(complete_result)
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(
             f"✅ Workflow complete. Result stored ({len(self.results)}/{self.max_results or '∞'})"
         )
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         # Display formatted output if requested
         if show_formatted and self.formatter and interpretation:
@@ -763,9 +763,9 @@ Return only the JSON object, no other text."""
 
         # Add provider-specific statistics if available
         if self.anthropic_provider:
-            stats["anthropic"][
-                "provider_stats"
-            ] = self.anthropic_provider.get_statistics()
+            stats["anthropic"]["provider_stats"] = (
+                self.anthropic_provider.get_statistics()
+            )
 
         if self.google_provider:
             stats["google"]["provider_stats"] = self.google_provider.get_statistics()
@@ -800,7 +800,7 @@ Return only the JSON object, no other text."""
             self.formatter.compare_results(list(self.results), top_n)
         else:
             print(f"\nStored Results ({len(self.results)}):")
-            print(f"{'='*70}")
+            print(f"{'=' * 70}")
             for i, result in enumerate(list(self.results)[-top_n:], 1):
                 expr = result.get("discovery", {}).get("expression", "N/A")
                 r2 = result.get("discovery", {}).get("r2_score", 0)
@@ -965,9 +965,9 @@ Return only the JSON object, no other text."""
         """Print a formatted summary of system statistics."""
         stats = self.get_statistics()
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("SYSTEM STATISTICS SUMMARY")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         print(f"\n📊 Discovery Performance:")
         print(f"   Total runs: {stats['total_runs']}")
@@ -1005,7 +1005,7 @@ Return only the JSON object, no other text."""
         print(f"   Average score: {val_stats['average_total_score']:.1f}")
         print(f"   Weakest layer: {val_stats.get('weakest_layer', 'N/A')}")
 
-        print(f"\n{'='*70}\n")
+        print(f"\n{'=' * 70}\n")
 
 
 # Example usage and testing

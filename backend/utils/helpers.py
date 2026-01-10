@@ -871,7 +871,7 @@ def batch_process(items: List, func, batch_size: int = 100) -> List:
     chunks = chunk_list(items, batch_size)
 
     for i, chunk in enumerate(chunks):
-        print(f"Processing batch {i+1}/{len(chunks)}...")
+        print(f"Processing batch {i + 1}/{len(chunks)}...")
         batch_result = func(chunk)
         results.extend(batch_result)
 
@@ -963,8 +963,8 @@ if __name__ == "__main__":
     result2 = expensive_operation(5)  # Should be cached
     time2 = time.time() - start
 
-    print(f"First call: {time1*1000:.2f}ms")
-    print(f"Cached call: {time2*1000:.2f}ms (should be much faster)")
+    print(f"First call: {time1 * 1000:.2f}ms")
+    print(f"Cached call: {time2 * 1000:.2f}ms (should be much faster)")
 
     # Test math helpers
     print("\nTesting math helpers...")

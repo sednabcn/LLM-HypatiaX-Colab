@@ -88,9 +88,9 @@ class TestSymbolicEngine:
         print(f"Complexity: {result['complexity']}")
         print("=" * 60)
 
-        assert (
-            result["r2_score"] > 0.65
-        ), f"R² too low: {result['r2_score']}"  # Relaxed for sqrt formula
+        assert result["r2_score"] > 0.65, (
+            f"R² too low: {result['r2_score']}"
+        )  # Relaxed for sqrt formula
         assert "exp" in result["expression"].lower(), "exp function not found"
 
     def test_multivariate_discovery(self, fast_config):
@@ -164,12 +164,12 @@ class TestSymbolicEngine:
         }
         assert set(result.keys()) == expected_keys, "Missing or extra keys in result"
         assert isinstance(result["expression"], str), "Expression should be string"
-        assert isinstance(
-            result["r2_score"], (float, np.floating)
-        ), "R² should be float"
-        assert isinstance(
-            result["complexity"], (int, np.integer)
-        ), "Complexity should be int"
+        assert isinstance(result["r2_score"], (float, np.floating)), (
+            "R² should be float"
+        )
+        assert isinstance(result["complexity"], (int, np.integer)), (
+            "Complexity should be int"
+        )
 
     def test_default_variable_names(self, fast_config):
         """Test automatic variable naming when not provided"""
@@ -289,14 +289,14 @@ class TestSymbolicEngine:
         print(f"R² score: {result['r2_score']:.4f}")
         print("=" * 60)
 
-        assert (
-            result["r2_score"] > 0.30
-        ), f"R² too low: {result['r2_score']}"  # Relaxed for complex formula
+        assert result["r2_score"] > 0.30, (
+            f"R² too low: {result['r2_score']}"
+        )  # Relaxed for complex formula
         # Should involve both variables
         expr_lower = result["expression"].lower()
-        assert (
-            "returns" in expr_lower or "x0" in expr_lower
-        ), "Returns variable not in expression"
+        assert "returns" in expr_lower or "x0" in expr_lower, (
+            "Returns variable not in expression"
+        )
 
     def test_defi_impermanent_loss(self):
         """Test DeFi discovery: Impermanent Loss formula"""

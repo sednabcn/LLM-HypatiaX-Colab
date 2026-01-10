@@ -24,7 +24,6 @@ class FilesManager:
         self.actions = actions
 
     def load(self, filename="default", style=None):
-
         migrate(
             filename,
             style,

@@ -178,9 +178,9 @@ class GlobalVersionManager:
         snapshot_dir = self.versions_root / f"snapshot_{snapshot_id}_{timestamp}"
         snapshot_dir.mkdir(exist_ok=True)
 
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print(f"📸 Creating Snapshot #{snapshot_id}: {name}")
-        print(f"{'='*80}\n")
+        print(f"{'=' * 80}\n")
 
         snapshot_data = {
             "snapshot_id": snapshot_id,
@@ -252,9 +252,9 @@ class GlobalVersionManager:
             print("ℹ️  No snapshots found")
             return
 
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print("📸 SYSTEM SNAPSHOTS")
-        print(f"{'='*80}\n")
+        print(f"{'=' * 80}\n")
 
         for snapshot in reversed(self.metadata["snapshots"]):
             print(f"Snapshot #{snapshot['snapshot_id']}: {snapshot['name']}")
@@ -304,9 +304,9 @@ class GlobalVersionManager:
             print(f"❌ Snapshot directory not found: {snapshot_dir}")
             return False
 
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print(f"🔄 Restoring Snapshot #{snapshot_id}: {snapshot['name']}")
-        print(f"{'='*80}\n")
+        print(f"{'=' * 80}\n")
 
         # Determine which data types to restore
         if data_types:
@@ -364,9 +364,9 @@ class GlobalVersionManager:
         Returns:
             Dictionary mapping data types to new version numbers
         """
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print("🔄 AUTO-VERSIONING ALL DATA TYPES")
-        print(f"{'='*80}\n")
+        print(f"{'=' * 80}\n")
 
         versioned = {}
         all_files = self.find_all_versionable_files()
@@ -561,9 +561,9 @@ def main():
 
     elif args.command == "scan":
         all_files = manager.find_all_versionable_files()
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print("🔍 VERSIONABLE FILES SCAN")
-        print(f"{'='*80}\n")
+        print(f"{'=' * 80}\n")
 
         for data_type, files in all_files.items():
             print(f"📂 {data_type}: {len(files)} file(s)")

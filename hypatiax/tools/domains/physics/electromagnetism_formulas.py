@@ -757,8 +757,10 @@ if __name__ == "__main__":
     force = calc.electrostatics.coulombs_law(
         charge1=1e-6, charge2=-2e-6, distance=0.1
     )  # 1 μC  # -2 μC  # 10 cm
-    print(f"Charges: {force['charge1']*1e6:.1f} μC and {force['charge2']*1e6:.1f} μC")
-    print(f"Distance: {force['distance']*100:.0f} cm")
+    print(
+        f"Charges: {force['charge1'] * 1e6:.1f} μC and {force['charge2'] * 1e6:.1f} μC"
+    )
+    print(f"Distance: {force['distance'] * 100:.0f} cm")
     print(f"Force: {force['force_magnitude']:.6f} N")
     print(f"Interaction: {force['interaction_type']}")
 
@@ -768,8 +770,8 @@ if __name__ == "__main__":
     field = calc.electrostatics.electric_field_point_charge(
         charge=5e-9, distance=0.05
     )  # 5 nC  # 5 cm
-    print(f"Charge: {field['charge']*1e9:.1f} nC")
-    print(f"Distance: {field['distance']*100:.0f} cm")
+    print(f"Charge: {field['charge'] * 1e9:.1f} nC")
+    print(f"Distance: {field['distance'] * 100:.0f} cm")
     print(f"Electric field: {field['field_magnitude']:.2f} N/C")
     print(f"Direction: {field['field_direction']}")
 
@@ -781,7 +783,7 @@ if __name__ == "__main__":
     )  # 100 μF  # 12 V
     print(f"Capacitance: {cap['capacitance_uF']:.0f} μF")
     print(f"Voltage: {cap['voltage']:.0f} V")
-    print(f"Charge stored: {cap['charge']*1e3:.2f} mC")
+    print(f"Charge stored: {cap['charge'] * 1e3:.2f} mC")
     print(f"Energy stored: {cap['energy_stored_mJ']:.2f} mJ")
 
     # Example 4: Magnetic Force
@@ -793,7 +795,7 @@ if __name__ == "__main__":
         magnetic_field=0.5,
         angle_degrees=90,  # Electron charge  # 1 million m/s  # 0.5 Tesla
     )
-    print(f"Charge: {mag_force['charge']/e:.2f}e")
+    print(f"Charge: {mag_force['charge'] / e:.2f}e")
     print(f"Velocity: {mag_force['velocity']:.0e} m/s")
     print(f"B-field: {mag_force['magnetic_field']:.2f} T")
     print(f"Force: {mag_force['force']:.2e} N")
@@ -839,7 +841,7 @@ if __name__ == "__main__":
     wave = calc.electromagnetic_wave_properties(frequency=100e6)  # 100 MHz (FM radio)
     print(f"Frequency: {wave['frequency_MHz']:.1f} MHz")
     print(f"Wavelength: {wave['wavelength']:.2f} m")
-    print(f"Period: {wave['period']*1e9:.2f} ns")
+    print(f"Period: {wave['period'] * 1e9:.2f} ns")
     print(f"Photon energy: {wave['photon_energy_eV']:.2e} eV")
 
     print("\n" + "=" * 80)

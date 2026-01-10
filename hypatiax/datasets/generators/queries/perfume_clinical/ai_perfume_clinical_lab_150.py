@@ -60,7 +60,7 @@ def generate_perfume_scenarios():
 {oil_vol} + {alc_vol} + {water_vol} = {vol}ml ✓
 
 **Classification:**
-{'Cologne' if conc <= 5 else 'EDT' if conc <= 10 else 'EDP' if conc <= 18 else 'Perfume Extrait'}
+{"Cologne" if conc <= 5 else "EDT" if conc <= 10 else "EDP" if conc <= 18 else "Perfume Extrait"}
 
 **Cost Estimate (assuming $40/ml oils):**
 - Fragrance oils: ${oil_vol * 40:.2f}
@@ -108,7 +108,7 @@ V₂ = {final_vol}ml
 **Final Product:**
 - Volume: {final_vol}ml
 - Concentration: {target_conc}%
-- Classification: {'Cologne' if target_conc <= 5 else 'EDT' if target_conc <= 10 else 'EDP'}
+- Classification: {"Cologne" if target_conc <= 5 else "EDT" if target_conc <= 10 else "EDP"}
 
 **Yield:** {int(final_vol // 50)} bottles (50ml each) + {round(final_vol % 50, 1)}ml remainder"""
 
@@ -234,10 +234,10 @@ Absolute: ${diff:.2f} more for {conc2}%
 Percentage: {pct_increase:.1f}% increase
 
 **Economic Analysis:**
-- Option 1 is {'Cologne/EDT' if conc1 <= 10 else 'EDP'} strength
-- Option 2 is {'EDP' if conc2 <= 18 else 'Perfume'} strength
+- Option 1 is {"Cologne/EDT" if conc1 <= 10 else "EDP"} strength
+- Option 2 is {"EDP" if conc2 <= 18 else "Perfume"} strength
 - Higher concentration = longer wear
-- Option 2 needs {conc2/conc1:.1f}× less applications
+- Option 2 needs {conc2 / conc1:.1f}× less applications
 
 **Recommendation:** Option 2 for luxury positioning, Option 1 for mass market"""
 
@@ -416,30 +416,46 @@ def generate_clinical_scenarios():
 - Serum Creatinine: {scr} mg/dL
 
 **Formula (Cockcroft-Gault):**
-CrCl = [(140 - Age) × Weight × {'0.85 (female)' if gender == 'female' else '1.0 (male)'}] / (72 × SCr)
+CrCl = [(140 - Age) × Weight × {
+            "0.85 (female)" if gender == "female" else "1.0 (male)"
+        }] / (72 × SCr)
 
 **Calculation:**
-CrCl = [(140 - {age}) × {weight} × {0.85 if gender == 'female' else 1.0}] / (72 × {scr})
-CrCl = [{140 - age} × {weight} × {0.85 if gender == 'female' else 1.0}] / {72 * scr}
-CrCl = {(140 - age) * weight * (0.85 if gender == 'female' else 1.0)} / {72 * scr}
+CrCl = [(140 - {age}) × {weight} × {0.85 if gender == "female" else 1.0}] / (72 × {scr})
+CrCl = [{140 - age} × {weight} × {0.85 if gender == "female" else 1.0}] / {72 * scr}
+CrCl = {(140 - age) * weight * (0.85 if gender == "female" else 1.0)} / {72 * scr}
 CrCl = **{crcl} mL/min**
 
 **Interpretation:**
-{'Normal kidney function (>90 mL/min)' if crcl > 90 else
- 'Mild reduction (60-89 mL/min) - Stage 2 CKD' if crcl >= 60 else
- 'Moderate reduction (30-59 mL/min) - Stage 3 CKD' if crcl >= 30 else
- 'Severe reduction (15-29 mL/min) - Stage 4 CKD' if crcl >= 15 else
- 'Kidney failure (<15 mL/min) - Stage 5 CKD'}
+{
+            "Normal kidney function (>90 mL/min)"
+            if crcl > 90
+            else "Mild reduction (60-89 mL/min) - Stage 2 CKD"
+            if crcl >= 60
+            else "Moderate reduction (30-59 mL/min) - Stage 3 CKD"
+            if crcl >= 30
+            else "Severe reduction (15-29 mL/min) - Stage 4 CKD"
+            if crcl >= 15
+            else "Kidney failure (<15 mL/min) - Stage 5 CKD"
+        }
 
 **Clinical Significance:**
-{'Patient requires medication dose adjustments for renally eliminated drugs.' if crcl < 60 else
- 'Monitor kidney function regularly.' if crcl < 90 else
- 'Normal kidney function for age.'}
+{
+            "Patient requires medication dose adjustments for renally eliminated drugs."
+            if crcl < 60
+            else "Monitor kidney function regularly."
+            if crcl < 90
+            else "Normal kidney function for age."
+        }
 
 **Recommendation:**
-{' Nephrology referral recommended.' if crcl < 30 else
- 'Adjust drug dosing per renal function.' if crcl < 60 else
- 'Continue routine monitoring.'}"""
+{
+            " Nephrology referral recommended."
+            if crcl < 30
+            else "Adjust drug dosing per renal function."
+            if crcl < 60
+            else "Continue routine monitoring."
+        }"""
 
         scenarios.append({"query": query, "response": response})
 
@@ -471,24 +487,36 @@ AG = **{ag} mEq/L**
 **Reference Range:** 8-16 mEq/L (may vary by lab)
 
 **Interpretation:**
-{f'NORMAL anion gap ({ag} mEq/L)' if 8 <= ag <= 16 else
- f'LOW anion gap ({ag} mEq/L) - consider hypoalbuminemia, lab error, or multiple myeloma' if ag < 8 else
- f'HIGH anion gap ({ag} mEq/L) - METABOLIC ACIDOSIS present'}
+{
+            f"NORMAL anion gap ({ag} mEq/L)"
+            if 8 <= ag <= 16
+            else f"LOW anion gap ({ag} mEq/L) - consider hypoalbuminemia, lab error, or multiple myeloma"
+            if ag < 8
+            else f"HIGH anion gap ({ag} mEq/L) - METABOLIC ACIDOSIS present"
+        }
 
-{'**DIFFERENTIAL DIAGNOSIS (MUDPILES):**' if ag > 16 else ''}
-{'''- Methanol/Metformin
+{"**DIFFERENTIAL DIAGNOSIS (MUDPILES):**" if ag > 16 else ""}
+{
+            '''- Methanol/Metformin
 - Uremia (kidney failure)
 - Diabetic ketoacidosis
 - Propylene glycol/Paraldehyde
 - Iron/Isoniazid
 - Lactic acidosis
 - Ethylene glycol
-- Salicylates''' if ag > 16 else ''}
+- Salicylates'''
+            if ag > 16
+            else ""
+        }
 
 **Clinical Action:**
-{f'Check ABG, lactate, ketones, toxic screen if symptomatic' if ag > 16 else
- f'Check albumin level, repeat electrolytes' if ag < 8 else
- f'No immediate action needed, correlate clinically'}"""
+{
+            f"Check ABG, lactate, ketones, toxic screen if symptomatic"
+            if ag > 16
+            else f"Check albumin level, repeat electrolytes"
+            if ag < 8
+            else f"No immediate action needed, correlate clinically"
+        }"""
 
         scenarios.append({"query": query, "response": response})
 

@@ -317,7 +317,7 @@ class BatchProcessor:
         self.logger.info(f"Successful: {success_count}")
         self.logger.info(f"Failed: {len(results) - success_count}")
         self.logger.info(f"Duration: {duration:.2f} seconds")
-        self.logger.info(f"Throughput: {len(results)/duration:.2f} items/second")
+        self.logger.info(f"Throughput: {len(results) / duration:.2f} items/second")
 
 
 # Add to the END of deployment_batch.py

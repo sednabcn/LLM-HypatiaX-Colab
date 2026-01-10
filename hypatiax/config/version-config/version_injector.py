@@ -272,9 +272,9 @@ if __name__ == "__main__":
                 elif data_type in ["training_data", "models", "vocab"]:
                     if data_type not in self.config["version_mappings"]:
                         self.config["version_mappings"][data_type] = {}
-                    self.config["version_mappings"][data_type][
-                        "latest"
-                    ] = current_version
+                    self.config["version_mappings"][data_type]["latest"] = (
+                        current_version
+                    )
 
         self._save_config()
         print("✅ Sync complete")
@@ -282,9 +282,9 @@ if __name__ == "__main__":
 
     def display_current_versions(self):
         """Display all current version mappings."""
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print("📋 CURRENT VERSION MAPPINGS")
-        print(f"{'='*80}\n")
+        print(f"{'=' * 80}\n")
 
         for data_type, components in self.config["version_mappings"].items():
             if not components:

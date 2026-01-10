@@ -210,7 +210,7 @@ def get_constant(name: str) -> float:
     except AttributeError:
         available = [k for k in dir(PhysicsConstants) if not k.startswith("_")]
         raise ValueError(
-            f"Unknown constant: {name}. " f"Available constants: {', '.join(available)}"
+            f"Unknown constant: {name}. Available constants: {', '.join(available)}"
         )
 
 

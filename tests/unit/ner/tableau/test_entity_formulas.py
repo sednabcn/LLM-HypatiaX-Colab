@@ -107,7 +107,7 @@ def main():
     if Train_formulas_data:
         print("\nSample Training Data:")
         for i, item in enumerate(Train_formulas_data[:3]):  # Show first 3
-            print(f"  {i+1}. {item}")
+            print(f"  {i + 1}. {item}")
         if len(Train_formulas_data) > 3:
             print(f"  ... and {len(Train_formulas_data) - 3} more")
 
@@ -129,7 +129,7 @@ def main():
     if Test_formulas_data:
         print("\nSample Testing Data:")
         for i, item in enumerate(Test_formulas_data[:3]):  # Show first 3
-            print(f"  {i+1}. {item}")
+            print(f"  {i + 1}. {item}")
         if len(Test_formulas_data) > 3:
             print(f"  ... and {len(Test_formulas_data) - 3} more")
 

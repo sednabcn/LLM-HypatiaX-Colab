@@ -507,9 +507,9 @@ if __name__ == "__main__":
     print(f"  Token1 (USDC): ${position.token1_amount:,.2f}")
 
     # Analyze at current price
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print("CURRENT PERFORMANCE (90 days)")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
 
     analysis = pool.analyze_position_performance(
         position=position,
@@ -542,9 +542,9 @@ if __name__ == "__main__":
     print(f"  Breakeven Days: {analysis['net_performance']['breakeven_days']:.1f}")
 
     # Test price scenarios
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print("PRICE SCENARIO ANALYSIS")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
 
     scenarios = simulate_price_scenarios(
         pool=pool,
@@ -577,9 +577,9 @@ if __name__ == "__main__":
             f"{price_change:+6.0f}%        ${new_price:>7,.0f}    {in_range_str:<10} {il_pct:>6.2f}%    ${fees:>9,.0f}  ${net:>10,.0f}  {qs_str:<10}"
         )
 
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print("RECOMMENDATION")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
 
     current_qs = analysis["quality_metrics"]["score"]
     if current_qs > 2.0:

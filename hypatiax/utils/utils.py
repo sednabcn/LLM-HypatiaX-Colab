@@ -552,7 +552,6 @@ def upload_spacy_training_data_from_json(input_dir, filename):
 
 # Funtion to normalize data to allow get the token more easily
 def normalize_formula(text):
-
     # Add space after function names if missing
     text = re.sub(r"(\w)\(", r"\1 (", text)
     # Ensure there's a space before and after parentheses
@@ -617,7 +616,6 @@ def get_pos_(data, col_name, nlp):
     gg = []
 
     for tok in data[col_name]:
-
         for ent in nlp(str(list(str(tok).split()))):
             # checking text between punct
             dd.append({ent.text: ent.pos_})

@@ -58,9 +58,9 @@ def run_test(test_id, config):
     Returns:
         dict: Results containing test_id, validation and test scores
     """
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"RUNNING TEST {test_id}")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     print(
         f"Data Config: dtype={config[0]['dtype']}, sizefile={config[0]['sizefile']}, "
         f"task_type={config[0]['task_type']}"
@@ -102,7 +102,7 @@ def run_test(test_id, config):
 
         # Determine the model path for evaluation
         model_base_path = resources.files(
-            f'hypatiax.models.{config[1]["domain"]}.{config[1]["sub_domain"]}'
+            f"hypatiax.models.{config[1]['domain']}.{config[1]['sub_domain']}"
         )
         model_full_path = str(model_base_path.joinpath(config[1]["output_model_name"]))
 
@@ -170,10 +170,10 @@ def main():
     (year, month, day, hr, minutes, sec, _, _, _) = time.localtime()
     time_proc = f"{year}_{month}_{day}_{hr}_{minutes}_{sec}"  # Fixed syntax
 
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
     print(f"SEQUENTIAL NER MODEL TESTING")
     print(f"Timestamp: {time_proc}")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
 
     # Example configurations for each test
     test_configurations = {
@@ -536,9 +536,9 @@ def main():
     total_tests = len(test_configurations)
 
     for idx, (test_id, config) in enumerate(test_configurations.items(), 1):
-        print(f"\n\n{'#'*70}")
+        print(f"\n\n{'#' * 70}")
         print(f"# Test {idx}/{total_tests}: ID={test_id}")
-        print(f"{'#'*70}")
+        print(f"{'#' * 70}")
 
         try:
             result = run_test(test_id, config)
@@ -552,9 +552,9 @@ def main():
             results.append({"test_id": test_id, "status": "crashed", "error": str(e)})
 
     # Save results to CSV
-    print(f"\n\n{'='*70}")
+    print(f"\n\n{'=' * 70}")
     print("GENERATING FINAL REPORT")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
 
     results_df = pd.DataFrame(results)
     results_filename = f"results_val_test_{time_proc}.csv"

@@ -42,7 +42,6 @@ class Generation_custom_tableau_patterns:
         self.rules_tableau_formulas = self.get_rules_tableau_formulas()
 
     def gen_patterns_tableau_desc(self):
-
         p_d = get_patterns(self.out_d, "vocab", nlp)
 
         patterns_tableau_desc = []
@@ -85,7 +84,6 @@ class Generation_custom_tableau_patterns:
         return patterns_tableau_desc
 
     def gen_patterns_tableau_formulas(self):
-
         p_t = get_patterns(self.out_f, "vocab", nlp)
         self.patterns_tableau_formulas = []
 

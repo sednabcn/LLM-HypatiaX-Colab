@@ -2,6 +2,7 @@
 """
 Comprehensive debug to trace the exact failure point
 """
+
 import re
 
 import sympy as sp

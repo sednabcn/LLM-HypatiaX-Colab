@@ -43,7 +43,7 @@ class DeFiQueriesDataset:
         for i in range(1, 10):
             fee = 0.001 + i * 0.001  # 0.1% to 0.9%
             self.add_query(
-                f"Constant product with {fee*100:.1f}% fee",
+                f"Constant product with {fee * 100:.1f}% fee",
                 f"k = x * y * (1 - {fee:.4f})",
                 "Constant Product",
             )
@@ -51,8 +51,8 @@ class DeFiQueriesDataset:
         # Variants with different reserve scales
         for scale in range(1, 10):
             self.add_query(
-                f"Constant product in 10^{3+scale} reserve pool",
-                f"k = x * y with pool_min={10**(3+scale)}, pool_max={10**(4+scale)}",
+                f"Constant product in 10^{3 + scale} reserve pool",
+                f"k = x * y with pool_min={10 ** (3 + scale)}, pool_max={10 ** (4 + scale)}",
                 "Constant Product",
             )
 
@@ -168,7 +168,7 @@ class DeFiQueriesDataset:
         for price_move in [1.5, 2.0, 3.0, 5.0, 10.0]:
             for volatility in [0.001, 0.005, 0.01]:
                 self.add_query(
-                    f"IL for {price_move}x price move, volatility {volatility*100:.1f}%",
+                    f"IL for {price_move}x price move, volatility {volatility * 100:.1f}%",
                     f"IL = 2*sqrt({price_move})/(1+{price_move}) - 1 + N(0,{volatility})",
                     "Impermanent Loss",
                 )
@@ -199,7 +199,7 @@ class DeFiQueriesDataset:
                 pool_size = 10 ** (2 + capital)
                 self.add_query(
                     f"LP position {pct}% ownership in ${pool_size:.0e} pool",
-                    f"value = {pct/100:.2f} * {pool_size}",
+                    f"value = {pct / 100:.2f} * {pool_size}",
                     "Position Value",
                 )
 
@@ -217,7 +217,7 @@ class DeFiQueriesDataset:
         for concentration in [1, 5, 10, 25, 50, 100]:
             for pool_scale in range(0, 5):
                 self.add_query(
-                    f"Uniswap V3 {concentration}x concentration in 10^{pool_scale+6} pool",
+                    f"Uniswap V3 {concentration}x concentration in 10^{pool_scale + 6} pool",
                     f"value = {concentration} * L * (sqrt(P_u) - sqrt(P_l)) * sqrt(P_c)",
                     "Concentrated Liquidity",
                 )
@@ -237,7 +237,7 @@ class DeFiQueriesDataset:
             for volume_scale in range(0, 8):
                 volume = 10 ** (5 + volume_scale)
                 self.add_query(
-                    f"Fee earnings {fee_tier*100:.2f}% tier on ${volume:.0e} volume",
+                    f"Fee earnings {fee_tier * 100:.2f}% tier on ${volume:.0e} volume",
                     f"fees = {fee_tier} * {volume} * (L_user / L_total)",
                     "Fee Earnings",
                 )
@@ -255,7 +255,7 @@ class DeFiQueriesDataset:
             for freq in [1, 4, 12, 365]:
                 self.add_query(
                     f"APY {yield_pct}% yield compounded {freq}x/year",
-                    f"APY = (1 + {yield_pct/100:.2f}/{freq})^{freq} - 1",
+                    f"APY = (1 + {yield_pct / 100:.2f}/{freq})^{freq} - 1",
                     "APY Calculation",
                 )
 
@@ -274,8 +274,8 @@ class DeFiQueriesDataset:
             for pool_scale in range(0, 7):
                 pool_size = 10 ** (5 + pool_scale)
                 self.add_query(
-                    f"Slippage for {trade_pct}% trade in 10^{pool_scale+5} pool",
-                    f"slip = ({trade_pct/100} / pool)^2 * 100",
+                    f"Slippage for {trade_pct}% trade in 10^{pool_scale + 5} pool",
+                    f"slip = ({trade_pct / 100} / pool)^2 * 100",
                     "Slippage",
                 )
 
@@ -293,7 +293,7 @@ class DeFiQueriesDataset:
         for depth_factor in [0.5, 1.0, 2.0]:
             for pool_scale in range(0, 7):
                 self.add_query(
-                    f"Price impact depth={depth_factor} in 10^{pool_scale+6} pool",
+                    f"Price impact depth={depth_factor} in 10^{pool_scale + 6} pool",
                     f"impact = (trade / (pool * {depth_factor})) * 100",
                     "Price Impact",
                 )
@@ -312,8 +312,8 @@ class DeFiQueriesDataset:
         for pool_scale in range(0, 5):
             for target_util in [30, 50, 70, 85]:
                 self.add_query(
-                    f"Utilization in 10^{pool_scale+5} pool, target {target_util}%",
-                    f"util = borrowed / supplied, target={target_util/100:.2f}",
+                    f"Utilization in 10^{pool_scale + 5} pool, target {target_util}%",
+                    f"util = borrowed / supplied, target={target_util / 100:.2f}",
                     "Utilization Rate",
                 )
 
@@ -333,7 +333,7 @@ class DeFiQueriesDataset:
                 reserve = 10 ** (3 + reserve_scale)
                 fee_mult = 1 - (fee_pct / 100)
                 self.add_query(
-                    f"Swap {fee_pct}% fee in 10^{reserve_scale+3} reserve",
+                    f"Swap {fee_pct}% fee in 10^{reserve_scale + 3} reserve",
                     f"out = (in * {fee_mult:.4f} * r_out) / (r_in + in*{fee_mult:.4f})",
                     "Swap Output",
                 )
@@ -411,7 +411,7 @@ class DeFiQueriesDataset:
         print("-" * 80)
 
         for idx, row in df.head(15).iterrows():
-            print(f"\n[{idx+1}] {row['category']}")
+            print(f"\n[{idx + 1}] {row['category']}")
             print(f"    Description: {row['description']}")
             print(f"    Formula:     {row['analytical_formula']}")
 

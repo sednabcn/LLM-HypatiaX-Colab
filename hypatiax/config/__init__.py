@@ -174,8 +174,7 @@ class _SecretsProxy:
             return repr(_secrets_instance)
         else:
             return (
-                "<SecretsProxy: not yet initialized - "
-                "will be created on first access>"
+                "<SecretsProxy: not yet initialized - will be created on first access>"
             )
 
     def __bool__(self):
@@ -220,7 +219,7 @@ def get_secrets(custom_root=None, force_reinit=False):
 
     if not _has_secrets_class:
         raise ImportError(
-            "SecretsConfig not available. " "Ensure hypatiax/config/config.py exists."
+            "SecretsConfig not available. Ensure hypatiax/config/config.py exists."
         )
 
     # Reinitialize if requested or if custom_root provided

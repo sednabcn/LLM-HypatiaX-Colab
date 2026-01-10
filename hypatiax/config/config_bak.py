@@ -432,11 +432,7 @@ class SecretsConfig:
         print("=" * 70)
 
     def __repr__(self) -> str:
-        return (
-            f"SecretsConfig("
-            f"environment={self.environment}, "
-            f"source={self._source})"
-        )
+        return f"SecretsConfig(environment={self.environment}, source={self._source})"
 
 
 # ============================================================

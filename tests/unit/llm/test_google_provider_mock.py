@@ -526,7 +526,7 @@ def main():
 
         for price_ratio, description in test_cases:
             il = calculate_impermanent_loss(price_ratio)
-            print(f"  {description}: IL = {il:.4f} ({il*100:.2f}%)")
+            print(f"  {description}: IL = {il:.4f} ({il * 100:.2f}%)")
 
         print()
 

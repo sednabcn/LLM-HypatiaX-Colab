@@ -237,7 +237,6 @@ class TestMultiProviderScenarios:
             patch.object(system, "_call_anthropic") as mock_claude,
             patch.object(system, "_call_gemini") as mock_gemini,
         ):
-
             # Claude fails, Gemini succeeds
             mock_claude.side_effect = Exception("Claude unavailable")
             mock_gemini.return_value = json.dumps(
@@ -267,7 +266,6 @@ class TestMultiProviderScenarios:
             patch.object(system, "_call_gemini") as mock_gemini,
             patch.object(system, "_call_anthropic") as mock_claude,
         ):
-
             # Gemini fails, Claude succeeds
             mock_gemini.side_effect = Exception("Gemini quota exceeded")
             mock_claude.return_value = json.dumps(
@@ -426,8 +424,8 @@ class TestDataExport:
         for i in range(5):
             system.results.append(
                 {
-                    "timestamp": f"2025-01-{i+1:02d}",
-                    "description": f"Test {i+1}",
+                    "timestamp": f"2025-01-{i + 1:02d}",
+                    "description": f"Test {i + 1}",
                     "domain": "defi",
                     "discovery": {
                         "expression": f"x{i} + y{i}",
@@ -436,7 +434,7 @@ class TestDataExport:
                     },
                     "validation": {"valid": True, "total_score": 80.0 + i * 2},
                     "interpretation": {
-                        "interpretation": f"Test interpretation {i+1}",
+                        "interpretation": f"Test interpretation {i + 1}",
                         "provider": "claude",
                     },
                 }
@@ -508,7 +506,7 @@ class TestStressTests:
                     )
                     success_count += 1
                 except Exception as e:
-                    pytest.fail(f"Workflow {i+1} failed: {str(e)}")
+                    pytest.fail(f"Workflow {i + 1} failed: {str(e)}")
 
             assert success_count == 20
             assert len(system.results) == 20

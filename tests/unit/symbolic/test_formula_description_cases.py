@@ -104,9 +104,9 @@ def test_enhanced_symbolic_validator(formula, desc, expected):
     result = validator.validate(formula)
 
     # Assert syntactic validity
-    assert result["syntactically_valid"] == expected.get(
-        "syntactically_valid", True
-    ), f"Failed {desc}"
+    assert result["syntactically_valid"] == expected.get("syntactically_valid", True), (
+        f"Failed {desc}"
+    )
 
     # Assert errors exist if expected
     if expected.get("errors"):

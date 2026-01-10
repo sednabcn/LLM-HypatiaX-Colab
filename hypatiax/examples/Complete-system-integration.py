@@ -18,7 +18,7 @@ class AnalyticalExpressionGenerator:
 
         # Generate multiple candidates
         for i in range(n_candidates):
-            print(f"Generating candidate {i+1}/{n_candidates}...")
+            print(f"Generating candidate {i + 1}/{n_candidates}...")
 
             formula = self.generator.generate_novel_formula(requirements, domain)
 
@@ -65,7 +65,7 @@ class AnalyticalExpressionGenerator:
         Iteratively improve based on user feedback
         """
         refinement_prompt = f"""
-Original formula: {formula['formula_latex']}
+Original formula: {formula["formula_latex"]}
 User feedback: {feedback}
 
 Generate an improved version addressing the feedback.

@@ -258,7 +258,6 @@ class TestFallbackMechanism:
             patch.object(system, "_call_anthropic") as mock_claude,
             patch.object(system, "_call_gemini") as mock_gemini,
         ):
-
             mock_claude.side_effect = LLMProviderError("Claude failed")
             mock_gemini.return_value = "Gemini fallback response"
 
@@ -281,7 +280,6 @@ class TestFallbackMechanism:
             patch.object(system, "_call_gemini") as mock_gemini,
             patch.object(system, "_call_anthropic") as mock_claude,
         ):
-
             mock_gemini.side_effect = LLMProviderError("Gemini failed")
             mock_claude.return_value = "Claude fallback response"
 
@@ -303,7 +301,6 @@ class TestFallbackMechanism:
             patch.object(system, "_call_anthropic") as mock_claude,
             patch.object(system, "_call_gemini") as mock_gemini,
         ):
-
             mock_claude.side_effect = LLMProviderError("Claude failed")
 
             with pytest.raises(LLMProviderError):
@@ -323,7 +320,6 @@ class TestFallbackMechanism:
             patch.object(system, "_call_anthropic") as mock_claude,
             patch.object(system, "_call_gemini") as mock_gemini,
         ):
-
             mock_claude.side_effect = LLMProviderError("Claude failed")
             mock_gemini.side_effect = LLMProviderError("Gemini failed")
 

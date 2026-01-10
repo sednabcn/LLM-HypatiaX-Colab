@@ -282,10 +282,10 @@ def main():
 
     # Test values
     il_value = calculate_il(2.0)  # Price doubled
-    print(f"  Price doubled (2x): IL = {il_value:.4f} ({il_value*100:.2f}%)")
+    print(f"  Price doubled (2x): IL = {il_value:.4f} ({il_value * 100:.2f}%)")
 
     il_value = calculate_il(0.5)  # Price halved
-    print(f"  Price halved (0.5x): IL = {il_value:.4f} ({il_value*100:.2f}%)")
+    print(f"  Price halved (0.5x): IL = {il_value:.4f} ({il_value * 100:.2f}%)")
     print()
 
     # Summary

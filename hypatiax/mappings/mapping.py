@@ -19,7 +19,6 @@ class map_description_to_formula:
         pass
 
     def map_sentence_to_sentence(self):
-
         # Normalize the description
         normalized_description = description.lower()
 
@@ -42,7 +41,6 @@ class map_description_to_formula:
         print(map_description_to_formula(description))
 
     def map_vocab_to_vocab_regex(self):
-
         import re  # Regular expressions for pattern matching
 
         # def generate_tableau_formula(description):

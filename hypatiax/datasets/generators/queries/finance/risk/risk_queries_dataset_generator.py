@@ -142,7 +142,7 @@ class RiskQueriesDataset:
         # Different risk-free rates
         for rf_rate in [0.01, 0.02, 0.03, 0.05, 0.10]:
             self.add_query(
-                f"Sharpe Ratio with {rf_rate*100:.1f}% risk-free rate",
+                f"Sharpe Ratio with {rf_rate * 100:.1f}% risk-free rate",
                 f"Sharpe = (R_p - {rf_rate}) / σ_p",
                 "Sharpe Ratio",
             )
@@ -180,14 +180,14 @@ class RiskQueriesDataset:
         # Different target returns
         for target in [0.00, 0.02, 0.05, 0.10]:
             self.add_query(
-                f"Sortino Ratio with {target*100:.1f}% target return",
+                f"Sortino Ratio with {target * 100:.1f}% target return",
                 f"Sortino = (R_p - {target}) / σ_downside",
                 "Sortino Ratio",
             )
 
             for period in ["daily", "monthly", "annual"]:
                 self.add_query(
-                    f"Annualized Sortino Ratio ({period} data, {target*100:.1f}% target)",
+                    f"Annualized Sortino Ratio ({period} data, {target * 100:.1f}% target)",
                     f"Sortino_annual = (R_p - {target}) * √(periods/year) / σ_downside",
                     "Sortino Ratio",
                 )
@@ -277,7 +277,7 @@ class RiskQueriesDataset:
         for recovery_target in [50, 75, 100]:
             self.add_query(
                 f"Time to recover {recovery_target}% of drawdown",
-                f"Recovery_Time_{recovery_target} = First_Date(Portfolio_Value >= Peak * {recovery_target/100})",
+                f"Recovery_Time_{recovery_target} = First_Date(Portfolio_Value >= Peak * {recovery_target / 100})",
                 "Maximum Drawdown",
             )
 
@@ -336,7 +336,7 @@ class RiskQueriesDataset:
         for rf in [0.01, 0.02, 0.05]:
             for beta_range in ["Low (β<1)", "Mid (1<β<1.5)", "High (β>1.5)"]:
                 self.add_query(
-                    f"Treynor Ratio with {rf*100:.1f}% RF rate, {beta_range}",
+                    f"Treynor Ratio with {rf * 100:.1f}% RF rate, {beta_range}",
                     f"Treynor = (R_p - {rf}) / β",
                     "Treynor Ratio",
                 )
@@ -358,7 +358,7 @@ class RiskQueriesDataset:
         # Market risk premium variations
         for mrp in [0.04, 0.05, 0.06, 0.08]:
             self.add_query(
-                f"CAPM with {mrp*100:.1f}% market risk premium",
+                f"CAPM with {mrp * 100:.1f}% market risk premium",
                 f"E(R_i) = R_f + β_i * {mrp}",
                 "CAPM",
             )
@@ -624,7 +624,7 @@ class RiskQueriesDataset:
         print("-" * 80)
 
         for idx, row in df.head(20).iterrows():
-            print(f"\n[{idx+1}] {row['category']}")
+            print(f"\n[{idx + 1}] {row['category']}")
             print(f"    Description: {row['description']}")
             print(f"    Formula:     {row['analytical_formula']}")
 

@@ -292,7 +292,7 @@ class ResourceAdvisor:
         print(f"\n💾 Memory:")
         print(f"   Total: {info['total_memory_gb']:.2f} GB")
         print(
-            f"   Available: {info['available_memory_gb']:.2f} GB ({100-info['memory_percent']:.1f}% free)"
+            f"   Available: {info['available_memory_gb']:.2f} GB ({100 - info['memory_percent']:.1f}% free)"
         )
         print(f"   In use: {info['memory_percent']:.1f}%")
 
@@ -312,7 +312,7 @@ class ResourceAdvisor:
         print(f"\n💽 Disk (/):")
         print(f"   Total: {info['total_disk_gb']:.1f} GB")
         print(
-            f"   Free: {info['free_disk_gb']:.1f} GB ({100-info['disk_percent']:.1f}% free)"
+            f"   Free: {info['free_disk_gb']:.1f} GB ({100 - info['disk_percent']:.1f}% free)"
         )
 
         print("=" * 70)
@@ -612,10 +612,10 @@ def print_execution_summary(profile: ExecutionProfile, advisor: ResourceAdvisor)
 
     print(f"   Memory:")
     print(
-        f"     Average: {profile.avg_memory_mb:.1f} MB ({profile.avg_memory_mb/1024:.2f} GB)"
+        f"     Average: {profile.avg_memory_mb:.1f} MB ({profile.avg_memory_mb / 1024:.2f} GB)"
     )
     print(
-        f"     Peak: {profile.peak_memory_mb:.1f} MB ({profile.peak_memory_mb/1024:.2f} GB)"
+        f"     Peak: {profile.peak_memory_mb:.1f} MB ({profile.peak_memory_mb / 1024:.2f} GB)"
     )
 
     if profile.swap_used_mb > 10:  # More than 10MB swap used
@@ -627,12 +627,14 @@ def print_execution_summary(profile: ExecutionProfile, advisor: ResourceAdvisor)
 
     print(f"\n📈 Statistics:")
     print(f"   Snapshots collected: {len(profile.snapshots)}")
-    print(f"   Sampling rate: {len(profile.snapshots)/profile.duration_seconds:.2f} Hz")
+    print(
+        f"   Sampling rate: {len(profile.snapshots) / profile.duration_seconds:.2f} Hz"
+    )
 
     # Cloud recommendations if peak memory is significant
     if profile.peak_memory_mb > 1024:  # More than 1GB
         print(f"\n☁️  Cloud Instance Recommendations:")
-        print(f"   (Based on peak memory: {profile.peak_memory_mb/1024:.2f} GB)")
+        print(f"   (Based on peak memory: {profile.peak_memory_mb / 1024:.2f} GB)")
 
         recommendations = advisor.recommend_cloud_instance(
             profile.peak_memory_mb / 1024, profile.avg_cpu_percent

@@ -182,7 +182,7 @@ class ComparisonResult:
         if self.new_result:
             print(f"   New Confidence: {self.new_result.get('confidence', 0):.1%}")
             delta = self.new_result.get("confidence", 0) - self.old_result["confidence"]
-            print(f"   Improvement: {delta*100:.1f}%")
+            print(f"   Improvement: {delta * 100:.1f}%")
         else:
             print("   Unable to compute improvement (missing new result).")
 

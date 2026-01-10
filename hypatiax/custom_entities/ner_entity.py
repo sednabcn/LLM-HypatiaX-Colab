@@ -12,7 +12,6 @@ from hypatiax.utils.utils import set_entity
 
 
 class Custom_ner_entities:
-
     def __init__(self, data, path_ner_entity, column_name):
         self.data = data
         self.path_ner_entity = path_ner_entity

@@ -53,9 +53,9 @@ class TestLatencyBenchmarks:
             p99_latency = statistics.quantiles(latencies, n=100)[98]  # 99th percentile
 
             print(f"\nAnthropic API Latency:")
-            print(f"  Average: {avg_latency*1000:.1f}ms")
-            print(f"  P95: {p95_latency*1000:.1f}ms")
-            print(f"  P99: {p99_latency*1000:.1f}ms")
+            print(f"  Average: {avg_latency * 1000:.1f}ms")
+            print(f"  P95: {p95_latency * 1000:.1f}ms")
+            print(f"  P99: {p99_latency * 1000:.1f}ms")
 
             # Assert performance targets
             assert avg_latency < 0.5  # < 500ms average
@@ -84,8 +84,8 @@ class TestLatencyBenchmarks:
             p95_latency = statistics.quantiles(latencies, n=20)[18]
 
             print(f"\nGemini API Latency:")
-            print(f"  Average: {avg_latency*1000:.1f}ms")
-            print(f"  P95: {p95_latency*1000:.1f}ms")
+            print(f"  Average: {avg_latency * 1000:.1f}ms")
+            print(f"  P95: {p95_latency * 1000:.1f}ms")
 
             assert avg_latency < 0.4
             assert p95_latency < 0.7
@@ -240,11 +240,11 @@ class TestLoadTests:
 
             print(f"\n1,000 Operation Load Test:")
             print(f"  Total time: {elapsed:.2f}s")
-            print(f"  Throughput: {1000/elapsed:.1f} ops/sec")
+            print(f"  Throughput: {1000 / elapsed:.1f} ops/sec")
             print(f"  Success: {success_count}")
             print(f"  Errors: {error_count}")
-            print(f"  Error rate: {error_count/1000:.1%}")
-            print(f"  Avg latency: {statistics.mean(latencies)*1000:.1f}ms")
+            print(f"  Error rate: {error_count / 1000:.1%}")
+            print(f"  Avg latency: {statistics.mean(latencies) * 1000:.1f}ms")
 
             # Assertions
             assert success_count >= 950  # 95%+ success rate
@@ -528,13 +528,15 @@ class TestBenchmarkSuite:
         print("=" * 60)
         print(f"\nAPI Latency:")
         print(f"  Anthropic Claude:")
-        print(f"    Mean: {statistics.mean(results['anthropic_latency'])*1000:.1f}ms")
+        print(f"    Mean: {statistics.mean(results['anthropic_latency']) * 1000:.1f}ms")
         print(
-            f"    Median: {statistics.median(results['anthropic_latency'])*1000:.1f}ms"
+            f"    Median: {statistics.median(results['anthropic_latency']) * 1000:.1f}ms"
         )
         print(f"  Google Gemini:")
-        print(f"    Mean: {statistics.mean(results['gemini_latency'])*1000:.1f}ms")
-        print(f"    Median: {statistics.median(results['gemini_latency'])*1000:.1f}ms")
+        print(f"    Mean: {statistics.mean(results['gemini_latency']) * 1000:.1f}ms")
+        print(
+            f"    Median: {statistics.median(results['gemini_latency']) * 1000:.1f}ms"
+        )
         print(f"\nThroughput: {results['throughput']:.1f} ops/sec")
         print("=" * 60)
 

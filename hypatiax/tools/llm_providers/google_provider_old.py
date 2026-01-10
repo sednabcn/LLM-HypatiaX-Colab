@@ -3,6 +3,7 @@
 Google Gemini API Provider for Formula Generation
 Part of HypatiaX tools/llm_providers/google_provider.py
 """
+
 import json
 import os
 import time
@@ -472,8 +473,8 @@ Keep all text responses brief. Return valid JSON only."""
         """
         prompt = f"""Improve this mathematical formula based on feedback.
 
-Original formula: {formula['formula_latex']}
-Implementation: {formula['formula_python']}
+Original formula: {formula["formula_latex"]}
+Implementation: {formula["formula_python"]}
 
 Feedback: {feedback}
 

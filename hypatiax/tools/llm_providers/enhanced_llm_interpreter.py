@@ -222,7 +222,7 @@ Format as JSON with keys: interpretation, components, patterns, applications, li
         """
         expr_list = "\n".join(
             [
-                f"{i+1}. {expr} (R²={r2:.4f})"
+                f"{i + 1}. {expr} (R²={r2:.4f})"
                 for i, (expr, r2) in enumerate(zip(expressions, r2_scores))
             ]
         )

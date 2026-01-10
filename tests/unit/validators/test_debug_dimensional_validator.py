@@ -3,6 +3,7 @@
 Pytest test suite for DimensionalValidator (Enhanced Edition)
 Comprehensive tests for dimensional consistency, numerical stability, and bounds checking
 """
+
 import math
 
 import pytest

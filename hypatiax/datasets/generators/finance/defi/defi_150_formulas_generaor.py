@@ -251,7 +251,7 @@ class DeFi150FormulaGenerator:
                     k,
                     ["reserve_x", "reserve_y"],
                     {"reserve_x": "Token X reserves", "reserve_y": "Token Y reserves"},
-                    f"Constant Product AMM (variant {i+1}, scale {reserve_scale:.0e})",
+                    f"Constant Product AMM (variant {i + 1}, scale {reserve_scale:.0e})",
                 )
 
             elif i < 20:  # Swap Output with fees
@@ -279,7 +279,7 @@ class DeFi150FormulaGenerator:
                         "reserve_in": "Input reserve",
                         "reserve_out": "Output reserve",
                     },
-                    f"AMM Swap Output (fee {fee_tier*100:.2f}%, scale {reserve_scale:.0e})",
+                    f"AMM Swap Output (fee {fee_tier * 100:.2f}%, scale {reserve_scale:.0e})",
                 )
 
             else:  # Price Impact
@@ -358,7 +358,7 @@ class DeFi150FormulaGenerator:
                         "price_ratio": "Price ratio",
                         "volatility": "Volatility",
                     },
-                    f"Time-Weighted IL (variant {i-9})",
+                    f"Time-Weighted IL (variant {i - 9})",
                 )
 
             else:  # IL with fees offset
@@ -382,7 +382,7 @@ class DeFi150FormulaGenerator:
                         "fee_apy": "Fee APY",
                         "days": "Days held",
                     },
-                    f"Net IL with Fee Offset (variant {i-19})",
+                    f"Net IL with Fee Offset (variant {i - 19})",
                 )
 
     # ==================== CATEGORY 3: LENDING PROTOCOLS (25 formulas) ====================
@@ -433,7 +433,7 @@ class DeFi150FormulaGenerator:
                     rate,
                     ["utilization", "base_rate"],
                     {"utilization": "Utilization rate", "base_rate": "Base rate"},
-                    f"Interest Rate (optimal {optimal*100:.0f}%)",
+                    f"Interest Rate (optimal {optimal * 100:.0f}%)",
                 )
 
             else:  # Health Factor
@@ -482,11 +482,11 @@ class DeFi150FormulaGenerator:
             if i < 10:  # Long liquidation
                 liq_price = entry_price * (1 - 1 / leverage + margin)
                 liq_price += np.random.normal(0, liq_price.mean() * 0.01, n_samples)
-                desc = f"Long Liquidation Price (variant {i+1})"
+                desc = f"Long Liquidation Price (variant {i + 1})"
             else:  # Short liquidation
                 liq_price = entry_price * (1 + 1 / leverage - margin)
                 liq_price += np.random.normal(0, liq_price.mean() * 0.01, n_samples)
-                desc = f"Short Liquidation Price (variant {i-9})"
+                desc = f"Short Liquidation Price (variant {i - 9})"
 
             self._process_formula(
                 formula_num,
@@ -535,7 +535,7 @@ class DeFi150FormulaGenerator:
                     "volatility": "Daily volatility",
                     "days": "Time horizon",
                 },
-                f"Concentrated Liquidity Range ({(1-z_score/1.96)*100:.0f}% conf, variant {i+1})",
+                f"Concentrated Liquidity Range ({(1 - z_score / 1.96) * 100:.0f}% conf, variant {i + 1})",
             )
 
     # ==================== CATEGORY 6: YIELD & REWARDS (30 formulas) ====================
@@ -611,7 +611,7 @@ class DeFi150FormulaGenerator:
                         "base_apy": "Base APY",
                         "multiplier": "Reward multiplier",
                     },
-                    f"Yield Farming Daily Return (variant {i-19})",
+                    f"Yield Farming Daily Return (variant {i - 19})",
                 )
 
     def run_all_formulas(self, n_samples=100):
@@ -694,7 +694,7 @@ class DeFi150FormulaGenerator:
         print(f"\nTotal formulas attempted: 150")
         print(f"Successful: {self.successful}")
         print(f"Failed: {self.failed}")
-        print(f"Success rate: {(self.successful/150)*100:.1f}%")
+        print(f"Success rate: {(self.successful / 150) * 100:.1f}%")
         print(f"Average R² score: {stats['average_r2']:.4f}")
         print(f"Average validation: {stats['average_validation_score']:.1f}/100")
 

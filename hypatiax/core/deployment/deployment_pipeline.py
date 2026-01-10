@@ -387,13 +387,13 @@ class DeploymentAPI:
             print("❌ Flask not available. Cannot start API.")
             return
 
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"🚀 Starting Formula Mapping API")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
         print(f"Host: {self.config.api_host}")
         print(f"Port: {self.config.api_port}")
         print(f"Models loaded: {len(self.registry.list_models())}")
-        print(f"{'='*70}\n")
+        print(f"{'=' * 70}\n")
 
         self.app.run(host=self.config.api_host, port=self.config.api_port, debug=False)
 

@@ -3,6 +3,7 @@
 Test suite specifically for the 12 previously failing tests
 #!/usr/bin/env python
 """
+
 import time
 
 import pytest
@@ -27,15 +28,15 @@ class TestPreviouslyFailingTests:
         print(f"  Warnings: {result['warnings']}")
 
         assert result["syntactically_valid"], "Should parse"
-        assert (
-            len(result["warnings"]) > 0
-        ), f"Should have warnings, got {len(result['warnings'])}"
+        assert len(result["warnings"]) > 0, (
+            f"Should have warnings, got {len(result['warnings'])}"
+        )
 
         # Check for negative exponent warning
         has_neg_exp = any("negative exponent" in w.lower() for w in result["warnings"])
-        assert (
-            has_neg_exp
-        ), f"Should warn about negative exponent. Warnings: {result['warnings']}"
+        assert has_neg_exp, (
+            f"Should warn about negative exponent. Warnings: {result['warnings']}"
+        )
 
     def test_large_exponential_FIXED(self, validator):
         """Test large exponential detection"""
@@ -56,9 +57,9 @@ class TestPreviouslyFailingTests:
             "overflow" in issue.lower() or "exponential" in issue.lower()
             for issue in all_issues
         )
-        assert (
-            has_overflow
-        ), f"Should mention overflow/exponential. Issues: {all_issues}"
+        assert has_overflow, (
+            f"Should mention overflow/exponential. Issues: {all_issues}"
+        )
 
     def test_large_exponent_FIXED(self, validator):
         """Test large exponent detection"""
@@ -73,9 +74,9 @@ class TestPreviouslyFailingTests:
             "exponent" in e.lower() and "overflow" in e.lower()
             for e in result["errors"]
         )
-        assert (
-            has_exp_error
-        ), f"Should error on large exponent. Errors: {result['errors']}"
+        assert has_exp_error, (
+            f"Should error on large exponent. Errors: {result['errors']}"
+        )
 
     def test_factorial_overflow_FIXED(self, validator):
         """Test factorial overflow detection"""
@@ -118,9 +119,9 @@ class TestPreviouslyFailingTests:
         assert len(result["warnings"]) > 0, "Should have warnings"
 
         has_underflow = any("underflow" in w.lower() for w in result["warnings"])
-        assert (
-            has_underflow
-        ), f"Should warn about underflow. Warnings: {result['warnings']}"
+        assert has_underflow, (
+            f"Should warn about underflow. Warnings: {result['warnings']}"
+        )
 
     def test_esg_domain_FIXED(self, validator):
         """Test ESG domain rules"""
@@ -139,9 +140,9 @@ class TestPreviouslyFailingTests:
             for w in result["warnings"]
             if "esg" in w.lower() or "score" in w.lower() or "weight" in w.lower()
         ]
-        assert (
-            len(esg_related) > 0
-        ), f"Should have ESG-specific warnings. Got: {result['warnings']}"
+        assert len(esg_related) > 0, (
+            f"Should have ESG-specific warnings. Got: {result['warnings']}"
+        )
 
     def test_score_penalty_for_errors_FIXED(self, validator):
         """Test error penalties"""
@@ -158,9 +159,9 @@ class TestPreviouslyFailingTests:
 
         # If one has errors and other doesn't, error one should score lower
         if len(result_errors["errors"]) > 0 and len(result_warnings["errors"]) == 0:
-            assert (
-                result_errors["score"] <= result_warnings["score"]
-            ), f"Errors should penalize more: {result_errors['score']} vs {result_warnings['score']}"
+            assert result_errors["score"] <= result_warnings["score"], (
+                f"Errors should penalize more: {result_errors['score']} vs {result_warnings['score']}"
+            )
 
     def test_black_scholes_FIXED(self, validator):
         """Test Black-Scholes parsing"""
@@ -187,9 +188,9 @@ class TestPreviouslyFailingTests:
 
         assert result["syntactically_valid"], "Should parse"
         # Should have multiple warnings (sqrt, division, subtraction, exponential)
-        assert (
-            len(result["warnings"]) >= 2
-        ), f"Should have multiple warnings, got {len(result['warnings'])}"
+        assert len(result["warnings"]) >= 2, (
+            f"Should have multiple warnings, got {len(result['warnings'])}"
+        )
 
     def test_mixed_operations_FIXED_(self, validator):
         """Test mixed operations"""
@@ -202,9 +203,9 @@ class TestPreviouslyFailingTests:
 
         assert result["syntactically_valid"], "Should parse"
         # Should have multiple warnings (sqrt, division, subtraction, exponential)
-        assert (
-            len(result["warnings"]) >= 2
-        ), f"Should have multiple warnings, got {len(result['warnings'])}"
+        assert len(result["warnings"]) >= 2, (
+            f"Should have multiple warnings, got {len(result['warnings'])}"
+        )
 
     def test_full_workflow_risky_formula_FIXED(self, validator):
         """Test workflow with risky formula"""
@@ -218,9 +219,9 @@ class TestPreviouslyFailingTests:
         assert len(result["warnings"]) > 0, "Should have warnings for risky formula"
 
         summary = validator.get_validation_summary(result)
-        assert (
-            "WARNING" in summary.upper() or "WARN" in summary.upper()
-        ), "Summary should mention warnings"
+        assert "WARNING" in summary.upper() or "WARN" in summary.upper(), (
+            "Summary should mention warnings"
+        )
 
     def test_validates_quickly_FIXED(self, validator):
         """Test validation speed"""
@@ -265,7 +266,9 @@ class TestAllFixesIntegration:
             domain = (
                 "esg"
                 if desc == "esg"
-                else "finance" if desc == "black-scholes" else "defi"
+                else "finance"
+                if desc == "black-scholes"
+                else "defi"
             )
             result = validator.validate(formula, domain=domain)
 
@@ -296,15 +299,15 @@ class TestAllFixesIntegration:
             )
 
         # Summary
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print("INTEGRATION TEST SUMMARY")
-        print(f"{'='*60}")
+        print(f"{'=' * 60}")
         for r in results:
             status = "✓" if r["success"] else "✗"
             print(
                 f"{status} {r['desc']:20s} | Valid: {r['valid']} | Issues: {r['issues']}"
             )
-        print(f"{'='*60}\n")
+        print(f"{'=' * 60}\n")
 
         # All should succeed
         failures = [r for r in results if not r["success"]]

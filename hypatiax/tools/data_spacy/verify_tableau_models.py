@@ -16,7 +16,7 @@ def verify_model(model_path: str, test_texts: list[str] = None):
         model_path: Path to the spaCy model
         test_texts: Optional list of test texts
     """
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"VERIFYING: {model_path}")
     print("=" * 70)
 
@@ -86,7 +86,7 @@ def verify_model(model_path: str, test_texts: list[str] = None):
 
     # Test with sample texts if provided
     if test_texts:
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print("TESTING ENTITY RECOGNITION")
         print("=" * 70)
 
@@ -150,7 +150,7 @@ def verify_all_tableau_models(base_path: str = "hypatiax/data_spacy/queries/tabl
 
         verify_model(str(model_path), test_texts)
 
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print("VERIFICATION COMPLETE")
     print("=" * 70)
 

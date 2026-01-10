@@ -2,6 +2,7 @@
 """
 Test the actual validator with the risk domain formula
 """
+
 import sys
 
 sys.path.insert(0, "/home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab")

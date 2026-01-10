@@ -162,9 +162,9 @@ class HypatiaXDemo:
 
     def run_examples(self, examples: List[str]):
         """Run multiple examples"""
-        print(f"\n{'='*70}")
+        print(f"\n{'=' * 70}")
         print(f"Running {len(examples)} examples...")
-        print(f"{'='*70}")
+        print(f"{'=' * 70}")
 
         results = []
         for i, example in enumerate(examples, 1):
@@ -269,7 +269,7 @@ def run_comparison_demo():
     print("\nComparing all model types...\n")
 
     for model_type in ["desc", "formulas", "both"]:
-        print(f"\n{'─'*70}")
+        print(f"\n{'─' * 70}")
         print(f"Model: {model_type}")
         print("─" * 70)
 

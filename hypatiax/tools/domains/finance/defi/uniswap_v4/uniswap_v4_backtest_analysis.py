@@ -555,7 +555,7 @@ def run_v4_backtest(
     print(
         f"Parameters: {days} days, {initial_coin} {coin_symbol.upper()}, ${initial_usdc} USDC"
     )
-    print(f"Range: ±{price_range_pct}%, Base Fee: {base_fee*100}%")
+    print(f"Range: ±{price_range_pct}%, Base Fee: {base_fee * 100}%")
     print(f"Hooks Enabled: {enable_hooks}")
     print("-" * 80)
 
@@ -601,13 +601,13 @@ def run_v4_backtest(
 
     # Visualize
     print("\n4️⃣ Creating visualizations...")
-    png_path = f'v4_backtest_{coin_symbol.upper()}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.png'
+    png_path = f"v4_backtest_{coin_symbol.upper()}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
     create_v4_visualizations(results_df, coin_symbol, png_path)
 
     # Export
     if export_excel:
         print("\n5️⃣ Exporting to Excel...")
-        excel_path = f'v4_backtest_{coin_symbol.upper()}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
+        excel_path = f"v4_backtest_{coin_symbol.upper()}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
 
         with pd.ExcelWriter(excel_path, engine="openpyxl") as writer:
             results_df.to_excel(writer, sheet_name="Daily Results", index=False)

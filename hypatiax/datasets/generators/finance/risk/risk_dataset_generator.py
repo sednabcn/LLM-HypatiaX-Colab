@@ -271,9 +271,9 @@ class RiskFormulaGenerator:
 
         for i in range(1, 9):
             try:
-                print(f"\n{'='*70}")
+                print(f"\n{'=' * 70}")
                 print(f"Processing Formula {i}/8")
-                print(f"{'='*70}")
+                print(f"{'=' * 70}")
                 self.generate_formula(i, n_samples)
                 print(f"✅ Formula {i} completed")
             except Exception as e:

@@ -208,7 +208,7 @@ def migrate_all_tableau_models(base_path="hypatiax/data_spacy/queries/tableau"):
             continue
 
         try:
-            print(f"\n{'='*60}")
+            print(f"\n{'=' * 60}")
             migrate = Migrate_v_7_8(old_path, new_path, backup=True)
             nlp = migrate.migrate_model()
             results[model_name] = "success"
@@ -216,7 +216,7 @@ def migrate_all_tableau_models(base_path="hypatiax/data_spacy/queries/tableau"):
             print(f"❌ Failed to migrate {model_name}: {e}")
             results[model_name] = "failed"
 
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print("Migration Summary:")
     print("=" * 60)
     for model, status in results.items():
