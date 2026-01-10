@@ -1,0 +1,262 @@
+[
+  {
+    "method": "neural_network",
+    "description": "Hall-Petch relationship: yield strength as function of grain size",
+    "domain": "materials",
+    "evaluation": {
+      "r2": 0.9913617694572392,
+      "rmse": 0.23133914104866288,
+      "mae": 0.07748212955636795,
+      "mse": 0.053517798181133135,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:48.437235"
+  },
+  {
+    "method": "neural_network",
+    "description": "Gibson-Ashby: Young's modulus as function of porosity",
+    "domain": "materials",
+    "evaluation": {
+      "r2": 0.9999887798376905,
+      "rmse": 0.14516917399939142,
+      "mae": 0.10599888200775176,
+      "mse": 0.021074089079665577,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:49.377231"
+  },
+  {
+    "method": "neural_network",
+    "description": "Linear thermal expansion of materials",
+    "domain": "materials",
+    "evaluation": {
+      "r2": 0.9999862538072735,
+      "rmse": 0.002657897072642338,
+      "mae": 0.0022432142683726395,
+      "mse": 7.064416848760711e-06,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:50.545903"
+  },
+  {
+    "method": "neural_network",
+    "description": "Power law creep: strain rate as function of applied stress",
+    "domain": "materials",
+    "evaluation": {
+      "r2": 0.9998267930487111,
+      "rmse": 3.695981110452191e-07,
+      "mae": 2.5631467622054384e-07,
+      "mse": 1.3660276368819413e-13,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:51.488276"
+  },
+  {
+    "method": "neural_network",
+    "description": "Darcy-Weisbach equation: pressure head loss in pipe flow",
+    "domain": "fluids",
+    "evaluation": {
+      "r2": 0.8731653978625558,
+      "rmse": 5.61565201299013,
+      "mae": 2.039359816242066,
+      "mse": 31.535547531000095,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:52.515588"
+  },
+  {
+    "method": "neural_network",
+    "description": "Reynolds number for characterizing flow regime",
+    "domain": "fluids",
+    "evaluation": {
+      "r2": 0.9852621112358401,
+      "rmse": 73739.71350456803,
+      "mae": 42326.72365842205,
+      "mse": 5437545347.735774,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:53.460484"
+  },
+  {
+    "method": "neural_network",
+    "description": "Bernoulli equation: total mechanical energy in fluid flow",
+    "domain": "fluids",
+    "evaluation": {
+      "r2": 0.9992654670112956,
+      "rmse": 1065.4160981826822,
+      "mae": 869.9557035899227,
+      "mse": 1135111.4622668105,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:54.417063"
+  },
+  {
+    "method": "neural_network",
+    "description": "Hagen-Poiseuille law: volumetric flow rate in laminar pipe flow",
+    "domain": "fluids",
+    "evaluation": {
+      "r2": 0.9780114650349159,
+      "rmse": 0.007302417632517325,
+      "mae": 0.0023850806788745203,
+      "mse": 5.332530327969994e-05,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:55.399456"
+  },
+  {
+    "method": "neural_network",
+    "description": "Newton's law of cooling: convective heat transfer rate",
+    "domain": "thermodynamics",
+    "evaluation": {
+      "r2": 0.998496275395459,
+      "rmse": 314.52306934539394,
+      "mae": 225.50988649448976,
+      "mse": 98924.76115044748,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:56.344882"
+  },
+  {
+    "method": "neural_network",
+    "description": "Ideal gas law: number of moles from PVT data",
+    "domain": "thermodynamics",
+    "evaluation": {
+      "r2": 0.9967155386389611,
+      "rmse": 2.3685925837396176,
+      "mae": 1.6368204021841823,
+      "mse": 5.610230827746316,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:57.308935"
+  },
+  {
+    "method": "neural_network",
+    "description": "Carnot efficiency: maximum theoretical efficiency of heat engine",
+    "domain": "thermodynamics",
+    "evaluation": {
+      "r2": 0.999678409273809,
+      "rmse": 0.0018443322932889083,
+      "mae": 0.0011510675440207715,
+      "mse": 3.401561608068324e-06,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:58.254452"
+  },
+  {
+    "method": "neural_network",
+    "description": "Stefan-Boltzmann law: radiative heat transfer from black body",
+    "domain": "thermodynamics",
+    "evaluation": {
+      "r2": 0.9894688132632286,
+      "rmse": 7625.839311376114,
+      "mae": 4098.491794285789,
+      "mse": 58153425.20292932,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:54:59.198623"
+  },
+  {
+    "method": "neural_network",
+    "description": "Euler buckling load: critical load for column buckling",
+    "domain": "mechanics",
+    "evaluation": {
+      "r2": 0.9854931935877054,
+      "rmse": 85370.60184842558,
+      "mae": 28736.110352665324,
+      "mse": 7288139659.962405,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:55:00.159020"
+  },
+  {
+    "method": "neural_network",
+    "description": "Hooke's law: linear elastic stress-strain relationship",
+    "domain": "mechanics",
+    "evaluation": {
+      "r2": 0.9999958368367071,
+      "rmse": 1097033.6035274197,
+      "mae": 1011227.5843749642,
+      "mse": 1203482727268.356,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:55:01.077082"
+  },
+  {
+    "method": "neural_network",
+    "description": "Torsional shear stress in circular shaft",
+    "domain": "mechanics",
+    "evaluation": {
+      "r2": 0.9811636279672639,
+      "rmse": 40243509.189051315,
+      "mae": 15707575.755140435,
+      "mse": 1619540031849257.5,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:55:02.162937"
+  },
+  {
+    "method": "neural_network",
+    "description": "Bending stress in beam under flexure",
+    "domain": "mechanics",
+    "evaluation": {
+      "r2": 0.9790146082223236,
+      "rmse": 242600994.46882352,
+      "mae": 104543792.39630046,
+      "mse": 5.885524251726214e+16,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:55:03.088112"
+  },
+  {
+    "method": "neural_network",
+    "description": "Arrhenius equation: temperature dependence of reaction rate",
+    "domain": "chemistry",
+    "evaluation": {
+      "r2": 0.999915875888114,
+      "rmse": 2.221877201254222,
+      "mae": 1.6046197133474067,
+      "mse": 4.936738297453294,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:55:04.021476"
+  },
+  {
+    "method": "neural_network",
+    "description": "Henderson-Hasselbalch equation: pH of buffer solution",
+    "domain": "chemistry",
+    "evaluation": {
+      "r2": 0.9966067696244006,
+      "rmse": 0.03446375903699809,
+      "mae": 0.021040126468484945,
+      "mse": 0.0011877506869602673,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:55:04.972907"
+  },
+  {
+    "method": "neural_network",
+    "description": "Beer-Lambert law: light absorption in solution",
+    "domain": "chemistry",
+    "evaluation": {
+      "r2": 0.9995116721143674,
+      "rmse": 4.853863899281427,
+      "mae": 3.310707370869703,
+      "mse": 23.559994752747492,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:55:05.922673"
+  },
+  {
+    "method": "neural_network",
+    "description": "Nernst equation: electrode potential as function of concentration",
+    "domain": "chemistry",
+    "evaluation": {
+      "r2": 0.9999680446479623,
+      "rmse": 4.577243467495633e-05,
+      "mae": 3.986906128847778e-05,
+      "mse": 2.0951157760731444e-09,
+      "success": true
+    },
+    "timestamp": "2025-12-25T21:55:06.850761"
+  }
+]

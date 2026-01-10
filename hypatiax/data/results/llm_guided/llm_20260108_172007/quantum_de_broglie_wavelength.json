@@ -1,0 +1,96 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "y = h / (m * v)",
+    "confidence": 0.95,
+    "reasoning": "This is the de Broglie wavelength formula \u03bb = h/(mv), where h is Planck's constant, m is mass, and v is velocity. The negative correlations with m and v match the inverse relationship, and the y-range values are consistent with wavelengths at quantum scales.",
+    "source": "llm",
+    "fitted_equation": null,
+    "coefficients": null,
+    "r2_score": 0.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": null
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = h / (m * v)",
+      "confidence": 0.95,
+      "reasoning": "This is the de Broglie wavelength formula \u03bb = h/(mv), where h is Planck's constant, m is mass, and v is velocity. The negative correlations with m and v match the inverse relationship, and the y-range values are consistent with wavelengths at quantum scales.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = 6.626e-34 / (m * v)",
+      "confidence": 0.9,
+      "reasoning": "Same as above but with Planck's constant explicitly included as a coefficient. The de Broglie wavelength is fundamental in quantum mechanics, relating particle momentum to wave properties. The small y-scale values align with typical quantum wavelengths.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = h / (2 * 3.14159 * m * v)",
+      "confidence": 0.75,
+      "reasoning": "Alternative form using reduced Planck constant (h-bar = h/2\u03c0). Sometimes the de Broglie relation is expressed with the reduced constant, though the standard form uses h directly. The inverse relationship with mass and velocity still holds.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": false,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "h": -8.572736342690175e-18,
+      "m": -0.12234527494723589,
+      "v": -0.14374533694311017
+    },
+    "polynomial_degree": null,
+    "power_exponents": {},
+    "y_range": [
+      7.021431349847451e-13,
+      8.301053818601426e-09
+    ],
+    "y_scale": "small",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "complex"
+  },
+  "timing": {
+    "total": 7.824261903762817,
+    "phase1_analysis": 0.07611250877380371,
+    "phase2_llm": 7.744953393936157,
+    "phase3_verify": 0.0016634464263916016
+  },
+  "r2_score": 0.0,
+  "validation_score": 0.0,
+  "expression": "y = h / (m * v)",
+  "test_name": "quantum_de_broglie_wavelength",
+  "timestamp": "2026-01-08T17:23:23.605416",
+  "ground_truth": "h/(m*v)",
+  "domain": "quantum",
+  "_metadata": {
+    "session_id": "llm_20260108_172007",
+    "timestamp": "2026-01-08T17:23:23.605506",
+    "passed": false,
+    "test_name": "quantum_de_broglie_wavelength",
+    "method": "llm_guided"
+  }
+}

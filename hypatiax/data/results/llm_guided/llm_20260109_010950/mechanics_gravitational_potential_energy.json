@@ -1,0 +1,120 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "y = m * g * h",
+    "confidence": 0.95,
+    "reasoning": "This is the standard gravitational potential energy formula U = mgh, which directly matches the problem description and involves all three variables multiplicatively",
+    "source": "llm",
+    "fitted_equation": null,
+    "coefficients": null,
+    "r2_score": 0.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": null
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = m * g * h",
+      "confidence": 0.95,
+      "reasoning": "This is the standard gravitational potential energy formula U = mgh, which directly matches the problem description and involves all three variables multiplicatively",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = m * g * h + 0.1 * m * h**2",
+      "confidence": 0.75,
+      "reasoning": "Classical potential energy with a small quadratic height correction term to account for the polynomial degree 3 pattern and medium complexity",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = m * g * h * (1 + 0.01 * h)",
+      "confidence": 0.7,
+      "reasoning": "Standard mgh formula with a linear height-dependent correction factor that could explain the polynomial behavior while maintaining physical reasonableness",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = 0.98 * m * g * h + 0.02 * m * h**3",
+      "confidence": 0.65,
+      "reasoning": "Combination of standard potential energy with a cubic height term to match the detected polynomial degree 3, with small coefficient to maintain physical validity",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = m * (g + 0.1 * h) * h",
+      "confidence": 0.6,
+      "reasoning": "Modified potential energy where gravitational acceleration has a height-dependent component, creating polynomial behavior while keeping the fundamental mgh structure",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "m": 0.6583003788991689,
+      "g": -0.028189900931615275,
+      "h": 0.6392418558049628
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      0.5228884809196155,
+      94249.42527120479
+    ],
+    "y_scale": "large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 8.734927892684937,
+    "phase1_analysis": 0.0661160945892334,
+    "phase2_llm": 8.667216062545776,
+    "phase3_verify": 0.0011782646179199219
+  },
+  "r2_score": 0.0,
+  "validation_score": 0.0,
+  "expression": "y = m * g * h",
+  "test_name": "mechanics_gravitational_potential_energy",
+  "timestamp": "2026-01-09T01:10:24.348600",
+  "ground_truth": "m*g*h",
+  "domain": "mechanics",
+  "_metadata": {
+    "session_id": "llm_20260109_010950",
+    "timestamp": "2026-01-09T01:10:24.348695",
+    "passed": false,
+    "test_name": "mechanics_gravitational_potential_energy",
+    "method": "llm_guided"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "session_id": "llm_20260109_000551",
+  "timestamp": "2026-01-09T00:09:09.306814",
+  "completed": [],
+  "failed": [
+    "mechanics_kinetic_energy",
+    "optics_snells_law",
+    "quantum_compton_shift",
+    "mechanics_hookes_law",
+    "electromagnetism_coulomb_law",
+    "thermodynamics_heat_capacity",
+    "electromagnetism_lorentz_force",
+    "thermodynamics_carnot_efficiency",
+    "optics_single_slit_diffraction",
+    "mechanics_gravitational_potential_energy",
+    "thermodynamics_ideal_gas_law",
+    "fluid_dynamics_reynolds_number",
+    "electromagnetism_ohms_law",
+    "optics_thin_lens_equation",
+    "fluid_dynamics_hagen_poiseuille",
+    "quantum_de_broglie_wavelength",
+    "fluid_dynamics_bernoulli_equation",
+    "quantum_photon_energy"
+  ]
+}

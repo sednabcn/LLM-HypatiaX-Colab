@@ -1,0 +1,435 @@
+#!/usr/bin/env python3
+"""
+HypatiaX Master Analysis Orchestrator
+======================================
+One-command comprehensive analysis that orchestrates all visualization and
+analysis scripts in your codebase.
+
+Features:
+- Automatic result detection
+- Parallel execution of analysis scripts
+- Unified reporting
+- Progress tracking
+- Error handling
+
+Author: HypatiaX Team
+Version: 1.0
+"""
+
+import argparse
+import json
+import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional
+import multiprocessing as mp
+
+
+class MasterAnalyzer:
+    """Orchestrates all HypatiaX analysis and visualization scripts."""
+    
+    def __init__(self, results_dir: str = "hypatiax/data/results"):
+        self.results_dir = Path(results_dir)
+        self.output_dir = Path("hypatiax/analysis")
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Define all available analysis modules
+        self.modules = {
+            "tables": {
+                "script": "generate_tables.py",
+                "name": "Publication Tables",
+                "outputs": ["CSV", "Markdown", "LaTeX"],
+                "priority": 1
+            },
+            "figures": {
+                "script": "generate_figures.py",
+                "name": "Publication Figures",
+                "outputs": ["PNG (6 figures)"],
+                "priority": 2
+            },
+            "hybrid_viz": {
+                "script": "hypatiax_hybrid_system_visualization.py",
+                "name": "Hybrid System Comparison",
+                "outputs": ["Statistical plots", "JSON reports"],
+                "priority": 3
+            },
+            "analysis": {
+                "script": "analyze_hybrid_results.py",
+                "name": "Comprehensive Analysis",
+                "outputs": ["Plots", "Tables", "Summary"],
+                "priority": 4
+            },
+            "defi_viz": {
+                "script": "hypatiax_visualizer.py",
+                "name": "DeFi Visualizations",
+                "outputs": ["DeFi-specific plots"],
+                "priority": 5
+            }
+        }
+        
+        print(f"📊 Master Analyzer initialized")
+        print(f"   Results dir: {self.results_dir}")
+        print(f"   Output dir:  {self.output_dir}")
+    
+    def detect_latest_results(self, pattern: str = "*.json") -> Dict[str, Path]:
+        """Detect latest result files by type."""
+        if not self.results_dir.exists():
+            print(f"⚠️  Results directory not found: {self.results_dir}")
+            return {}
+        
+        result_files = {
+            "hybrid": None,
+            "llm": None,
+            "nn": None,
+            "comparison": None
+        }
+        
+        # Find latest files for each type
+        for file_type in result_files.keys():
+            pattern_str = f"*{file_type}*.json"
+            files = sorted(self.results_dir.glob(pattern_str))
+            if files:
+                result_files[file_type] = files[-1]  # Most recent
+        
+        print(f"\n🔍 Detected result files:")
+        for ftype, fpath in result_files.items():
+            if fpath:
+                print(f"   ✅ {ftype}: {fpath.name}")
+            else:
+                print(f"   ⊘ {ftype}: Not found")
+        
+        return result_files
+    
+    def run_module(self, module_name: str, input_file: Optional[Path] = None,
+                   verbose: bool = False) -> Dict:
+        """Run a single analysis module."""
+        module = self.modules.get(module_name)
+        if not module:
+            return {"success": False, "error": f"Unknown module: {module_name}"}
+        
+        script_path = Path("hypatiax/scripts") / module["script"]
+        
+        if not script_path.exists():
+            # Try alternative paths
+            alt_paths = [
+                Path(module["script"]),
+                Path("scripts") / module["script"],
+                Path(".") / module["script"]
+            ]
+            script_path = next((p for p in alt_paths if p.exists()), None)
+            
+            if not script_path:
+                return {
+                    "success": False,
+                    "error": f"Script not found: {module['script']}"
+                }
+        
+        print(f"\n▶️  Running: {module['name']}")
+        print(f"   Script: {script_path}")
+        
+        # Build command
+        cmd = [sys.executable, str(script_path)]
+        
+        # Add module-specific arguments
+        if module_name == "tables":
+            # generate_tables.py - no args needed
+            pass
+        
+        elif module_name == "figures":
+            # generate_figures.py - no args needed
+            pass
+        
+        elif module_name == "hybrid_viz":
+            if input_file:
+                cmd.extend(["--input", str(input_file)])
+            cmd.extend([
+                "--output-dir", str(self.output_dir / "hybrid_viz"),
+                "--all"
+            ])
+        
+        elif module_name == "analysis":
+            if input_file:
+                cmd.extend(["--input", str(input_file)])
+            else:
+                cmd.append("--auto")
+            cmd.extend(["--output", str(self.output_dir / "analysis")])
+        
+        elif module_name == "defi_viz":
+            # hypatiax_visualizer.py - standalone, generates from data/
+            pass
+        
+        if verbose:
+            cmd.append("--verbose")
+        
+        # Execute
+        try:
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=300  # 5 min timeout
+            )
+            
+            if result.returncode == 0:
+                print(f"   ✅ Success")
+                return {
+                    "success": True,
+                    "stdout": result.stdout[-500:] if len(result.stdout) > 500 else result.stdout,
+                    "outputs": module["outputs"]
+                }
+            else:
+                print(f"   ❌ Failed (exit code {result.returncode})")
+                if verbose:
+                    print(f"   Error: {result.stderr[-500:]}")
+                return {
+                    "success": False,
+                    "error": result.stderr[-500:],
+                    "exit_code": result.returncode
+                }
+        
+        except subprocess.TimeoutExpired:
+            print(f"   ⏱️  Timeout (>5 min)")
+            return {"success": False, "error": "Timeout"}
+        
+        except Exception as e:
+            print(f"   ❌ Exception: {str(e)}")
+            return {"success": False, "error": str(e)}
+    
+    def run_parallel(self, module_names: List[str], input_files: Dict[str, Path],
+                     verbose: bool = False, max_workers: int = 3) -> Dict:
+        """Run multiple modules in parallel."""
+        print(f"\n⚡ Running {len(module_names)} modules in parallel...")
+        
+        # Sort by priority
+        sorted_modules = sorted(
+            module_names,
+            key=lambda m: self.modules[m]["priority"]
+        )
+        
+        results = {}
+        
+        # For now, run sequentially (parallel can cause issues with matplotlib)
+        for module_name in sorted_modules:
+            input_file = input_files.get(module_name)
+            results[module_name] = self.run_module(
+                module_name, input_file, verbose
+            )
+        
+        return results
+    
+    def generate_master_report(self, results: Dict) -> Dict:
+        """Generate comprehensive master report."""
+        report = {
+            "timestamp": datetime.now().isoformat(),
+            "modules_executed": len(results),
+            "modules_successful": sum(1 for r in results.values() if r["success"]),
+            "modules_failed": sum(1 for r in results.values() if not r["success"]),
+            "details": {}
+        }
+        
+        for module_name, result in results.items():
+            module_info = self.modules[module_name]
+            report["details"][module_name] = {
+                "name": module_info["name"],
+                "success": result["success"],
+                "outputs": module_info["outputs"] if result["success"] else [],
+                "error": result.get("error") if not result["success"] else None
+            }
+        
+        return report
+    
+    def save_report(self, report: Dict):
+        """Save master report."""
+        report_path = self.output_dir / "master_report.json"
+        with open(report_path, "w") as f:
+            json.dump(report, f, indent=2)
+        
+        print(f"\n📄 Master report saved: {report_path}")
+    
+    def print_summary(self, report: Dict):
+        """Print execution summary."""
+        print("\n" + "="*80)
+        print("MASTER ANALYSIS SUMMARY".center(80))
+        print("="*80)
+        
+        print(f"\n📊 Modules:")
+        print(f"   Executed:   {report['modules_executed']}")
+        print(f"   Successful: {report['modules_successful']}")
+        print(f"   Failed:     {report['modules_failed']}")
+        
+        print(f"\n📋 Results by Module:")
+        for module_name, details in report["details"].items():
+            status = "✅" if details["success"] else "❌"
+            print(f"   {status} {details['name']}")
+            if details["success"]:
+                for output in details["outputs"]:
+                    print(f"      • {output}")
+            else:
+                print(f"      Error: {details['error'][:100]}")
+        
+        print(f"\n📁 Output directory: {self.output_dir}")
+        print("="*80)
+    
+    def run_full_analysis(self, modules: Optional[List[str]] = None,
+                          verbose: bool = False):
+        """Run complete analysis pipeline."""
+        print("="*80)
+        print("HYPATIAX MASTER ANALYSIS ORCHESTRATOR".center(80))
+        print("="*80)
+        
+        # Detect available results
+        result_files = self.detect_latest_results()
+        
+        # Determine which modules to run
+        if modules is None:
+            modules = list(self.modules.keys())
+        
+        print(f"\n📋 Modules to execute: {', '.join(modules)}")
+        
+        # Map input files to modules
+        input_mapping = {
+            "hybrid_viz": result_files.get("comparison"),
+            "analysis": result_files.get("comparison") or result_files.get("hybrid"),
+        }
+        
+        # Execute modules
+        results = self.run_parallel(modules, input_mapping, verbose)
+        
+        # Generate report
+        report = self.generate_master_report(results)
+        self.save_report(report)
+        
+        # Print summary
+        self.print_summary(report)
+        
+        return report
+
+
+# ============================================================================
+# CLI INTERFACE
+# ============================================================================
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="HypatiaX Master Analysis Orchestrator",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Run all analysis modules
+  python master_analyzer.py --all
+  
+  # Run specific modules
+  python master_analyzer.py --modules tables figures
+  
+  # Verbose output
+  python master_analyzer.py --all --verbose
+  
+  # Custom results directory
+  python master_analyzer.py --all --results-dir custom/results
+  
+Available modules:
+  tables      - Publication tables (CSV, Markdown, LaTeX)
+  figures     - Publication figures (6 PNG plots)
+  hybrid_viz  - Hybrid system comparison plots + statistics
+  analysis    - Comprehensive analysis (plots + tables + summary)
+  defi_viz    - DeFi-specific visualizations
+        """
+    )
+    
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Run all analysis modules"
+    )
+    parser.add_argument(
+        "--modules",
+        nargs="+",
+        choices=["tables", "figures", "hybrid_viz", "analysis", "defi_viz"],
+        help="Specific modules to run"
+    )
+    parser.add_argument(
+        "--results-dir",
+        type=str,
+        default="hypatiax/data/results",
+        help="Directory containing result files"
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        default="hypatiax/analysis",
+        help="Output directory for analysis results"
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="Verbose output"
+    )
+    parser.add_argument(
+        "--list",
+        action="store_true",
+        help="List available modules and exit"
+    )
+    
+    args = parser.parse_args()
+    
+    # List modules
+    if args.list:
+        print("\n📋 Available Analysis Modules:")
+        print("="*60)
+        analyzer = MasterAnalyzer()
+        for name, module in sorted(
+            analyzer.modules.items(),
+            key=lambda x: x[1]["priority"]
+        ):
+            print(f"\n{name}:")
+            print(f"   Name:    {module['name']}")
+            print(f"   Script:  {module['script']}")
+            print(f"   Outputs: {', '.join(module['outputs'])}")
+        print("="*60)
+        return
+    
+    # Validate arguments
+    if not args.all and not args.modules:
+        parser.error("Must specify --all or --modules")
+    
+    # Initialize analyzer
+    analyzer = MasterAnalyzer(results_dir=args.results_dir)
+    analyzer.output_dir = Path(args.output_dir)
+    
+    # Determine modules to run
+    modules = None if args.all else args.modules
+    
+    # Run analysis
+    try:
+        report = analyzer.run_full_analysis(modules, verbose=args.verbose)
+        
+        # Exit code based on success
+        sys.exit(0 if report["modules_failed"] == 0 else 1)
+    
+    except KeyboardInterrupt:
+        print("\n\n⚠️  Interrupted by user")
+        sys.exit(130)
+    except Exception as e:
+        print(f"\n❌ Fatal error: {str(e)}")
+        if args.verbose:
+            import traceback
+            traceback.print_exc()
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
+
+
+"""
+# Usage
+# Run everything
+python master_analyzer.py --all
+
+# Run specific modules
+python master_analyzer.py --modules tables figures
+
+# See available modules
+python master_analyzer.py --list
+"""

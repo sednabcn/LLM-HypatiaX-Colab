@@ -1,0 +1,96 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "F = q * v * B",
+    "confidence": 0.95,
+    "reasoning": "This is the fundamental Lorentz force equation for a charged particle moving perpendicular to a magnetic field. The force is directly proportional to charge, velocity, and magnetic field strength.",
+    "source": "llm",
+    "fitted_equation": null,
+    "coefficients": null,
+    "r2_score": 0.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": null
+  },
+  "all_hypotheses": [
+    {
+      "equation": "F = q * v * B",
+      "confidence": 0.95,
+      "reasoning": "This is the fundamental Lorentz force equation for a charged particle moving perpendicular to a magnetic field. The force is directly proportional to charge, velocity, and magnetic field strength.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "F = q * v * B * sin(theta)",
+      "confidence": 0.85,
+      "reasoning": "This is the complete Lorentz force equation accounting for the angle between velocity and magnetic field vectors. If theta is constant across measurements, this reduces to the simpler form with an effective coefficient.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "F = q * (v * B + 0.1 * (q * v * B)**2)",
+      "confidence": 0.65,
+      "reasoning": "This includes a nonlinear correction term that could account for the polynomial degree 3 pattern detected. The quadratic interaction term might represent relativistic or field-dependent effects at higher values.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "q": 0.5100580262893359,
+      "v": 0.5003609766220373,
+      "B": 0.49284903529110846
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      1.1492135118447179e-07,
+      0.0007847282470211259
+    ],
+    "y_scale": "small",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 6.453856468200684,
+    "phase1_analysis": 0.06317400932312012,
+    "phase2_llm": 6.389648199081421,
+    "phase3_verify": 0.000629425048828125
+  },
+  "r2_score": 0.0,
+  "validation_score": 0.0,
+  "expression": "F = q * v * B",
+  "test_name": "electromagnetism_lorentz_force",
+  "timestamp": "2026-01-08T17:22:18.752686",
+  "ground_truth": "q*v*B",
+  "domain": "electromagnetism",
+  "_metadata": {
+    "session_id": "llm_20260108_172007",
+    "timestamp": "2026-01-08T17:22:18.752764",
+    "passed": false,
+    "test_name": "electromagnetism_lorentz_force",
+    "method": "llm_guided"
+  }
+}

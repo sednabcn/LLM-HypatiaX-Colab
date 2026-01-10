@@ -1,0 +1,59 @@
+[
+  {
+    "formula": "min(expected_fee_apy/(2*il_risk**2), 1.0)",
+    "latex": "$$f^* = \\min\\left(\\frac{\\mu}{2\\sigma^2}, 1\\right)$$\n\nwhere $\\mu$ is the expected fee APY and $\\sigma$ is the impermanent loss risk.",
+    "python": "def formula(expected_fee_apy, il_risk):\n    risk_aversion = 2.0\n    position = expected_fee_apy / (risk_aversion * il_risk**2)\n    return np.minimum(position, 1.0)",
+    "raw_response": "FORMULA:\nmin(expected_fee_apy/(2*il_risk**2), 1.0)\n\nLATEX:\n$$f^* = \\min\\left(\\frac{\\mu}{2\\sigma^2}, 1\\right)$$\n\nwhere $\\mu$ is the expected fee APY and $\\sigma$ is the impermanent loss risk.\n\nPYTHON:\ndef formula(expected_fee_apy, il_risk):\n    risk_aversion = 2.0\n    position = expected_fee_apy / (risk_aversion * il_risk**2)\n    return np.minimum(position, 1.0)\n\nVARIABLES:\n- expected_fee_apy (\u03bc): Expected annual percentage yield from LP fees, expressed as a decimal\n- il_risk (\u03c3): Standard deviation of impermanent loss, representing volatility risk\n- risk_aversion (\u03bb): Risk aversion coefficient set to 2.0 for moderate risk tolerance\n- f*: Optimal fraction of capital to allocate to LP position (0 to 1)\n\nASSUMPTIONS:\n- Risk aversion parameter \u03bb = 2.0 (moderate risk aversion)\n- Returns follow a normal distribution\n- Impermanent loss risk can be approximated by historical volatility\n- Fee APY and impermanent loss are the primary risk-return factors\n- Maximum position size is 100% of available capital\n- No borrowing allowed (no leverage)\n\nEXPLANATION:\nThis formula applies the Kelly criterion to DeFi liquidity provision by maximizing expected log utility. The numerator represents expected returns from fees, while the denominator accounts for risk through impermanent loss volatility scaled by risk aversion. The min() function ensures we never allocate more than 100% of capital, providing a practical constraint for real-world implementation.",
+    "evaluation": {
+      "success": true,
+      "r2": 1.0,
+      "rmse": 0.0,
+      "mae": 0.0,
+      "quality": "EXCELLENT",
+      "passed": true
+    },
+    "test_case": {
+      "name": "Kelly Criterion",
+      "case_id": "kelly",
+      "ground_truth": "min(expected_fee_apy / (2 * il_risk**2), 1.0)"
+    }
+  },
+  {
+    "formula": "price_upper / (price_upper - price_lower)",
+    "latex": "$$\\text{Capital Efficiency Ratio} = \\frac{P_{upper}}{P_{upper} - P_{lower}}$$",
+    "python": "def formula(price_lower, price_upper, price_current):\n    return price_upper / (price_upper - price_lower)",
+    "raw_response": "FORMULA:\nprice_upper / (price_upper - price_lower)\n\nLATEX:\n$$\\text{Capital Efficiency Ratio} = \\frac{P_{upper}}{P_{upper} - P_{lower}}$$\n\nPYTHON:\n```python\ndef formula(price_lower, price_upper, price_current):\n    return price_upper / (price_upper - price_lower)\n```\n\nVARIABLES:\n- price_lower: Lower bound of the concentrated liquidity price range\n- price_upper: Upper bound of the concentrated liquidity price range  \n- price_current: Current market price (not used in this calculation)\n\nASSUMPTIONS:\n- This is a simple ratio of range bounds measuring concentration efficiency\n- The formula compares the upper bound to the range width\n- Higher ratios indicate more concentrated (efficient) ranges\n- price_upper > price_lower (valid price range)\n\nEXPLANATION:\nThis measures capital efficiency by comparing the upper price bound to the range width. A smaller range width (price_upper - price_lower) relative to the upper bound results in a higher efficiency ratio. For example, a narrow range like [1900, 2000] gives efficiency of 2000/100 = 20, while a wide range like [1000, 2000] gives 2000/1000 = 2. The higher the ratio, the more concentrated and theoretically efficient the liquidity provision becomes compared to uniform distribution across all possible prices.",
+    "evaluation": {
+      "success": true,
+      "r2": 1.0,
+      "rmse": 0.0,
+      "mae": 0.0,
+      "quality": "EXCELLENT",
+      "passed": true
+    },
+    "test_case": {
+      "name": "Capital Efficiency",
+      "case_id": "capital_efficiency",
+      "ground_truth": "price_upper / (price_upper - price_lower)"
+    }
+  },
+  {
+    "formula": "position1_es + position2_es + correlation * sqrt(position1_es * position2_es)",
+    "latex": "ES_{portfolio} = ES_1 + ES_2 + \\rho\\sqrt{ES_1 \\times ES_2}",
+    "python": "def formula(position1_es, position2_es, correlation):\n    corr_term = correlation * np.sqrt(position1_es * position2_es)\n    return position1_es + position2_es + corr_term",
+    "raw_response": "FORMULA:\nposition1_es + position2_es + correlation * sqrt(position1_es * position2_es)\n\nLATEX:\nES_{portfolio} = ES_1 + ES_2 + \\rho\\sqrt{ES_1 \\times ES_2}\n\nPYTHON:\ndef formula(position1_es, position2_es, correlation):\n    corr_term = correlation * np.sqrt(position1_es * position2_es)\n    return position1_es + position2_es + corr_term\n\nVARIABLES:\n- position1_es: Expected Shortfall of position 1 (tail risk measure)\n- position2_es: Expected Shortfall of position 2 (tail risk measure)\n- correlation: Correlation coefficient \u03c1 between the two positions (-1 \u2264 \u03c1 \u2264 1)\n\nASSUMPTIONS:\nExpected Shortfall uses linear aggregation with correlation coefficient \u03c1 (not 2\u03c1 as in VaR quadratic aggregation)\n\nEXPLANATION:\nExpected Shortfall is a coherent risk measure that satisfies subadditivity, unlike VaR. The linear aggregation formula with coefficient \u03c1 (not 2\u03c1) reflects ES's superior mathematical properties for portfolio risk aggregation. This differs from VaR's quadratic aggregation which uses 2\u03c1 in the cross-term. The linear structure ensures that diversification benefits are properly captured without the mathematical inconsistencies present in VaR calculations.",
+    "evaluation": {
+      "success": true,
+      "r2": 1.0,
+      "rmse": 0.0,
+      "mae": 0.0,
+      "quality": "EXCELLENT",
+      "passed": true
+    },
+    "test_case": {
+      "name": "Portfolio ES",
+      "case_id": "portfolio_es",
+      "ground_truth": "position1_es + position2_es + correlation * sqrt(position1_es * position2_es)"
+    }
+  }
+]

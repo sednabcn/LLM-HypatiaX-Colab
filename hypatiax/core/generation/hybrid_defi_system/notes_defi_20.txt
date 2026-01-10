@@ -1,0 +1,2683 @@
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$                                                                                                                                
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$                                                                                                                                
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/hybrid_defi_system/suite_defi_hybrid_system.py --batch --iterations 50                         
+
+⚙  Custom iterations: 50
+
+📄 Loading DeFi Protocol v3.0...
+
+================================================================================
+                                    SUMMARY                                     
+================================================================================
+Total tests: 20
+Extrapolation tests: 6
+Domains: 6
+Difficulty breakdown:
+  Easy: 7
+  Medium: 8
+  Hard: 5
+================================================================================
+
+📥 Converting DeFi Protocol to test cases...
+   Domains: amm, risk_var, liquidity, expected_shortfall, liquidation, staking
+✅ Converted 23 test cases
+
+🚀 Extrapolation tests (6):
+   - amm_impermanent_loss
+   - risk_var_var_95
+   - liquidity_kelly_criterion
+   - expected_shortfall_es_95
+   - liquidation_liquidation_long
+   - staking_compound_staking
+
+================================================================================
+                         DEFI HYBRID SYSTEM WITH RESUME                         
+================================================================================
+
+📊 Session Status:
+   Session ID: 20260107_221142
+   Total tests: 23
+   ✅ Completed: 0
+   ⏳ Pending: 23
+   Results dir: hypatiax/data/results/defi/20260107_221142
+
+🔧 Configuration:
+   Mode: CUSTOM (iter=50)
+   Samples per test: 1000
+   Tests to run: 23/23
+   Iterations: 50
+   Populations: 8
+   Estimated time: ~69 min
+
+================================================================================
+TEST 1/23: amm_impermanent_loss
+================================================================================
+
+================================================================================
+                           Running: Impermanent Loss                            
+================================================================================
+Domain: amm
+Description: Impermanent loss in constant product AMM (Uniswap V2)
+Variables: price_ratio
+Difficulty: hard
+Ground Truth: 2*sqrt(r)/(1+r) - 1
+🚀 EXTRAPOLATION TEST
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:11:42,906 - INFO - ======================================================================
+2026-01-07 22:11:42,907 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:11:42,907 - INFO - ======================================================================
+2026-01-07 22:11:42,907 - INFO - Domain: amm
+2026-01-07 22:11:42,907 - INFO - Discovery mode: strict
+2026-01-07 22:11:42,907 - INFO - Primary LLM: anthropic
+2026-01-07 22:11:42,908 - INFO - Auto-config: True
+2026-01-07 22:11:42,908 - INFO - Max retries: 5
+2026-01-07 22:11:42,908 - INFO - PhysicsAware fallback: False
+2026-01-07 22:11:42,908 - INFO - Complexity threshold: 20
+2026-01-07 22:11:42,908 - INFO - ======================================================================
+2026-01-07 22:11:42,908 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:12:26,788 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Impermanent Loss
+Domain: AMM
+Samples: 1000
+Variables: ['price_ratio']
+Equation hint: impermanent_loss
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:12:26,789 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'price_ratio': 'cubic'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.63
+[PATTERNS] interactions
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: price_ratio*(-1.1094118) + price_ratio + 0.21775118 - 0.10971444/price_ratio
+   R² = 0.9985
+2026-01-07 22:15:28,012 - INFO -    Result: price_ratio*(-1.1094118) + price_ratio + 0.21775118 - 0.10971444/price_ratio
+2026-01-07 22:15:28,012 - INFO -    R2 = 0.9985
+2026-01-07 22:15:28,013 - WARNING -    [WARNING] Possible overfit
+2026-01-07 22:15:28,013 - WARNING -       High complexity (76) but R2=0.9985
+2026-01-07 22:15:28,014 - INFO -    [BEST] New best!
+2026-01-07 22:15:28,014 - INFO - 
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'price_ratio': 'cubic'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.63
+[PATTERNS] interactions
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: -(-(-1.1094092)*price_ratio - (price_ratio - 0.6741649) - 3.8557975 + 3.7568018) + 0.7929134 - 0.109710835/price_ratio
+   R² = 0.9985
+2026-01-07 22:16:25,559 - INFO -    Result: -(-(-1.1094092)*price_ratio - (price_ratio - 0.6741649) - 3.8557975 + 3.7568018) + 0.7929134 - 0.109710835/price_ratio
+2026-01-07 22:16:25,560 - INFO -    R2 = 0.9985
+2026-01-07 22:16:25,560 - WARNING -    [WARNING] Possible overfit
+2026-01-07 22:16:25,560 - WARNING -       High complexity (118) but R2=0.9985
+2026-01-07 22:16:25,560 - WARNING -       Many constants detected (6)
+2026-01-07 22:16:25,561 - INFO -    [BEST] New best!
+2026-01-07 22:16:25,561 - INFO - 
+[SYMBOLIC] Attempt 3/5 (seed=44)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'price_ratio': 'cubic'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.63
+[PATTERNS] interactions
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: price_ratio*(-0.10940986) + 0.217746 - 0.10971169/price_ratio
+   R² = 0.9985
+2026-01-07 22:17:31,729 - INFO -    Result: price_ratio*(-0.10940986) + 0.217746 - 0.10971169/price_ratio
+2026-01-07 22:17:31,729 - INFO -    R2 = 0.9985
+2026-01-07 22:17:31,729 - WARNING -    [WARNING] Possible overfit
+2026-01-07 22:17:31,730 - WARNING -       High complexity (61) but R2=0.9985
+2026-01-07 22:17:31,730 - INFO -    [BEST] New best!
+2026-01-07 22:17:31,730 - INFO - 
+[SYMBOLIC] Attempt 4/5 (seed=45)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'price_ratio': 'cubic'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.63
+[PATTERNS] interactions
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: -0.069613725/price_ratio**1.3358182 + price_ratio - (-price_ratio + price_ratio) + (price_ratio - 0.5768689)*(-1.0965793) - 0.46832132
+   R² = 0.9986
+2026-01-07 22:18:27,645 - INFO -    Result: -0.069613725/price_ratio**1.3358182 + price_ratio - (-price_ratio + price_ratio) + (price_ratio - 0.5768689)*(-1.0965793) - 0.46832132
+2026-01-07 22:18:27,645 - INFO -    R2 = 0.9986
+2026-01-07 22:18:27,646 - WARNING -    [WARNING] Possible overfit
+2026-01-07 22:18:27,646 - WARNING -       High complexity (134) but R2=0.9986
+2026-01-07 22:18:27,646 - INFO -    [BEST] New best!
+2026-01-07 22:18:27,646 - INFO - 
+[SYMBOLIC] Attempt 5/5 (seed=46)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'price_ratio': 'cubic'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.63
+[PATTERNS] interactions
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: -0.12795344 + 0.12731452/(price_ratio**(price_ratio - 1.1155667))
+   R² = 0.9941
+2026-01-07 22:19:22,219 - INFO -    Result: -0.12795344 + 0.12731452/(price_ratio**(price_ratio - 1.1155667))
+2026-01-07 22:19:22,219 - INFO -    R2 = 0.9941
+2026-01-07 22:19:22,220 - WARNING -    [WARNING] Possible overfit
+2026-01-07 22:19:22,220 - WARNING -       High complexity (65) but R2=0.9941
+2026-01-07 22:19:22,220 - INFO - 
+[SUCCESS] SymbolicEngine succeeded (R2=0.9986)
+
+[OK] Discovery complete
+   Expression: -0.069613725/price_ratio**1.3358182 + price_ratio - (-price_ratio + price_ratio) + (price_ratio - 0.5768689)*(-1.0965793) - 0.46832132
+   R2 Score: 0.9986
+   Engine: symbolic
+   Attempt: 4/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: amm_impermanent_loss.json
+
+📊 Quick Results:
+   Expression: -0.069613725/price_ratio**1.3358182 + price_ratio - (-price_ratio + price_ratio) + (price_ratio - 0.5768689)*(-1.0965793) - 0.46832132
+   R²: 0.9986
+   Validation: 91.3/100
+   Status: ✅ PASS
+   Time: 460.2s
+
+================================================================================
+TEST 2/23: amm_il_percentage
+================================================================================
+
+================================================================================
+                             Running: Il Percentage                             
+================================================================================
+Domain: amm
+Description: Impermanent loss percentage in AMM
+Variables: price_ratio
+Difficulty: medium
+Ground Truth: (2*sqrt(r)/(1+r) - 1) * 100
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:19:23,220 - INFO - ======================================================================
+2026-01-07 22:19:23,221 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:19:23,221 - INFO - ======================================================================
+2026-01-07 22:19:23,221 - INFO - Domain: amm
+2026-01-07 22:19:23,222 - INFO - Discovery mode: strict
+2026-01-07 22:19:23,222 - INFO - Primary LLM: anthropic
+2026-01-07 22:19:23,223 - INFO - Auto-config: True
+2026-01-07 22:19:23,223 - INFO - Max retries: 5
+2026-01-07 22:19:23,223 - INFO - PhysicsAware fallback: False
+2026-01-07 22:19:23,223 - INFO - Complexity threshold: 20
+2026-01-07 22:19:23,224 - INFO - ======================================================================
+2026-01-07 22:19:23,224 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:19:24,241 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Il Percentage
+Domain: AMM
+Samples: 1000
+Variables: ['price_ratio']
+Equation hint: il_percentage
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:19:24,242 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'price_ratio': 'cubic'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.63
+[PATTERNS] interactions
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: price_ratio*(-11.562348) + 23.076326 - 11.561018/price_ratio
+   R² = 0.9995
+2026-01-07 22:20:30,506 - INFO -    Result: price_ratio*(-11.562348) + 23.076326 - 11.561018/price_ratio
+2026-01-07 22:20:30,506 - INFO -    R2 = 0.9995
+2026-01-07 22:20:30,506 - INFO -    [BEST] New best!
+2026-01-07 22:20:30,507 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: price_ratio*(-11.562348) + 23.076326 - 11.561018/price_ratio
+   R2 Score: 0.9995
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 90.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: amm_il_percentage.json
+
+📊 Quick Results:
+   Expression: price_ratio*(-11.562348) + 23.076326 - 11.561018/price_ratio
+   R²: 0.9995
+   Validation: 90.4/100
+   Status: ✅ PASS
+   Time: 67.5s
+
+================================================================================
+TEST 3/23: amm_constant_product
+================================================================================
+
+================================================================================
+                           Running: Constant Product                            
+================================================================================
+Domain: amm
+Description: Constant product formula: reserve Y given reserve X and invariant k
+Variables: reserve_x, invariant_k
+Difficulty: easy
+Ground Truth: k / x
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:20:30,769 - INFO - ======================================================================
+2026-01-07 22:20:30,769 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:20:30,770 - INFO - ======================================================================
+2026-01-07 22:20:30,770 - INFO - Domain: amm
+2026-01-07 22:20:30,771 - INFO - Discovery mode: strict
+2026-01-07 22:20:30,771 - INFO - Primary LLM: anthropic
+2026-01-07 22:20:30,772 - INFO - Auto-config: True
+2026-01-07 22:20:30,772 - INFO - Max retries: 5
+2026-01-07 22:20:30,773 - INFO - PhysicsAware fallback: False
+2026-01-07 22:20:30,773 - INFO - Complexity threshold: 20
+2026-01-07 22:20:30,773 - INFO - ======================================================================
+2026-01-07 22:20:30,774 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:20:31,727 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Constant Product
+Domain: AMM
+Samples: 1000
+Variables: ['reserve_x', 'invariant_k']
+Equation hint: constant_product
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:20:31,728 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'reserve_x': 'log', 'invariant_k': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=7.70802e-17): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Interactions detected: 2
+   [SMART] Confidence: 0.87
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: invariant_k/reserve_x
+   R² = 1.0000
+2026-01-07 22:22:02,490 - INFO -    Result: invariant_k/reserve_x
+2026-01-07 22:22:02,491 - INFO -    R2 = 1.0000
+2026-01-07 22:22:02,491 - INFO -    [BEST] New best!
+2026-01-07 22:22:02,491 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: invariant_k/reserve_x
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: amm_constant_product.json
+
+📊 Quick Results:
+   Expression: invariant_k/reserve_x
+   R²: 1.0000
+   Validation: 99.1/100
+   Status: ✅ PASS
+   Time: 91.8s
+
+================================================================================
+TEST 4/23: amm_price_impact
+================================================================================
+
+================================================================================
+                             Running: Price Impact                              
+================================================================================
+Domain: amm
+Description: Price impact of swap in constant product AMM
+Variables: reserve_x, swap_amount
+Difficulty: easy
+Ground Truth: dx / (x + dx)
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:22:02,553 - INFO - ======================================================================
+2026-01-07 22:22:02,553 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:22:02,553 - INFO - ======================================================================
+2026-01-07 22:22:02,553 - INFO - Domain: amm
+2026-01-07 22:22:02,554 - INFO - Discovery mode: strict
+2026-01-07 22:22:02,554 - INFO - Primary LLM: anthropic
+2026-01-07 22:22:02,554 - INFO - Auto-config: True
+2026-01-07 22:22:02,554 - INFO - Max retries: 5
+2026-01-07 22:22:02,555 - INFO - PhysicsAware fallback: False
+2026-01-07 22:22:02,555 - INFO - Complexity threshold: 20
+2026-01-07 22:22:02,555 - INFO - ======================================================================
+2026-01-07 22:22:02,555 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:22:03,505 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Price Impact
+Domain: AMM
+Samples: 1000
+Variables: ['reserve_x', 'swap_amount']
+Equation hint: price_impact
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:22:03,506 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'reserve_x': 'cubic', 'swap_amount': 'sqrt'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.45473e-23): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=4.08496e-27): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.83
+[PATTERNS] multiplicative, interactions
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['sqrt']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['sqrt']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 0.813586/((reserve_x/swap_amount)**0.94903105)
+   R² = 0.9999
+2026-01-07 22:22:55,531 - INFO -    Result: 0.813586/((reserve_x/swap_amount)**0.94903105)
+2026-01-07 22:22:55,531 - INFO -    R2 = 0.9999
+2026-01-07 22:22:55,532 - INFO -    [BEST] New best!
+2026-01-07 22:22:55,532 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: 0.813586/((reserve_x/swap_amount)**0.94903105)
+   R2 Score: 0.9999
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 98.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: amm_price_impact.json
+
+📊 Quick Results:
+   Expression: 0.813586/((reserve_x/swap_amount)**0.94903105)
+   R²: 0.9999
+   Validation: 98.5/100
+   Status: ✅ PASS
+   Time: 53.1s
+
+================================================================================
+TEST 5/23: risk_var_var_95
+================================================================================
+
+================================================================================
+                                Running: Var 95                                 
+================================================================================
+Domain: risk_var
+Description: Parametric Value at Risk at 95% confidence (1-day)
+Variables: portfolio_value, daily_volatility
+Difficulty: medium
+Ground Truth: portfolio_value * volatility * 1.645
+🚀 EXTRAPOLATION TEST
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:22:55,658 - INFO - ======================================================================
+2026-01-07 22:22:55,658 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:22:55,659 - INFO - ======================================================================
+2026-01-07 22:22:55,659 - INFO - Domain: risk_var
+2026-01-07 22:22:55,659 - INFO - Discovery mode: strict
+2026-01-07 22:22:55,659 - INFO - Primary LLM: anthropic
+2026-01-07 22:22:55,659 - INFO - Auto-config: True
+2026-01-07 22:22:55,660 - INFO - Max retries: 5
+2026-01-07 22:22:55,660 - INFO - PhysicsAware fallback: False
+2026-01-07 22:22:55,660 - INFO - Complexity threshold: 20
+2026-01-07 22:22:55,660 - INFO - ======================================================================
+2026-01-07 22:22:55,660 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:22:56,657 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Var 95
+Domain: RISK_VAR
+Samples: 1000
+Variables: ['portfolio_value', 'daily_volatility']
+Equation hint: var_95
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:22:56,657 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: True
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'portfolio_value': 'linear', 'daily_volatility': 'quadratic'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 1.00
+[PATTERNS] additive, multiplicative, interactions, polynomial
+   [SMART] Configuring based on structure...
+   [SMART] → Additive structure detected
+   [SMART] → Additive + polynomial terms: enabling power operator
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: portfolio_value*1.645*daily_volatility
+   R² = 1.0000
+2026-01-07 22:24:09,329 - INFO -    Result: portfolio_value*1.645*daily_volatility
+2026-01-07 22:24:09,330 - INFO -    R2 = 1.0000
+2026-01-07 22:24:09,330 - INFO -    [BEST] New best!
+2026-01-07 22:24:09,330 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: portfolio_value*1.645*daily_volatility
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: risk_var_var_95.json
+
+📊 Quick Results:
+   Expression: portfolio_value*1.645*daily_volatility
+   R²: 1.0000
+   Validation: 100.0/100
+   Status: ✅ PASS
+   Time: 73.7s
+
+================================================================================
+TEST 6/23: risk_var_var_99
+================================================================================
+
+================================================================================
+                                Running: Var 99                                 
+================================================================================
+Domain: risk_var
+Description: Parametric Value at Risk at 99% confidence (1-day)
+Variables: portfolio_value, daily_volatility
+Difficulty: medium
+Ground Truth: portfolio_value * volatility * 2.326
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:24:09,423 - INFO - ======================================================================
+2026-01-07 22:24:09,423 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:24:09,423 - INFO - ======================================================================
+2026-01-07 22:24:09,423 - INFO - Domain: risk_var
+2026-01-07 22:24:09,424 - INFO - Discovery mode: strict
+2026-01-07 22:24:09,424 - INFO - Primary LLM: anthropic
+2026-01-07 22:24:09,424 - INFO - Auto-config: True
+2026-01-07 22:24:09,424 - INFO - Max retries: 5
+2026-01-07 22:24:09,425 - INFO - PhysicsAware fallback: False
+2026-01-07 22:24:09,425 - INFO - Complexity threshold: 20
+2026-01-07 22:24:09,425 - INFO - ======================================================================
+2026-01-07 22:24:09,426 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:24:10,647 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Var 99
+Domain: RISK_VAR
+Samples: 1000
+Variables: ['portfolio_value', 'daily_volatility']
+Equation hint: var_99
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:24:10,647 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'portfolio_value': 'quadratic', 'daily_volatility': 'quadratic'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.1256e-27): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.14312e-22): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.80
+[PATTERNS] multiplicative, polynomial
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: daily_volatility*2.0291436*portfolio_value/0.8723778
+   R² = 1.0000
+2026-01-07 22:25:40,292 - INFO -    Result: daily_volatility*2.0291436*portfolio_value/0.8723778
+2026-01-07 22:25:40,292 - INFO -    R2 = 1.0000
+2026-01-07 22:25:40,292 - INFO -    [BEST] New best!
+2026-01-07 22:25:40,293 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: daily_volatility*2.0291436*portfolio_value/0.8723778
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: risk_var_var_99.json
+
+📊 Quick Results:
+   Expression: daily_volatility*2.0291436*portfolio_value/0.8723778
+   R²: 1.0000
+   Validation: 100.0/100
+   Status: ✅ PASS
+   Time: 90.9s
+
+================================================================================
+TEST 7/23: risk_var_var_multiday
+================================================================================
+
+================================================================================
+                             Running: Var Multiday                              
+================================================================================
+Domain: risk_var
+Description: Multi-day Value at Risk using square root of time rule
+Variables: var_1day, time_horizon_days
+Difficulty: easy
+Ground Truth: var_1day * sqrt(days)
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:25:40,374 - INFO - ======================================================================
+2026-01-07 22:25:40,374 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:25:40,375 - INFO - ======================================================================
+2026-01-07 22:25:40,375 - INFO - Domain: risk_var
+2026-01-07 22:25:40,375 - INFO - Discovery mode: strict
+2026-01-07 22:25:40,375 - INFO - Primary LLM: anthropic
+2026-01-07 22:25:40,375 - INFO - Auto-config: True
+2026-01-07 22:25:40,376 - INFO - Max retries: 5
+2026-01-07 22:25:40,376 - INFO - PhysicsAware fallback: False
+2026-01-07 22:25:40,376 - INFO - Complexity threshold: 20
+2026-01-07 22:25:40,376 - INFO - ======================================================================
+2026-01-07 22:25:40,376 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:25:41,383 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Var Multiday
+Domain: RISK_VAR
+Samples: 1000
+Variables: ['var_1day', 'time_horizon_days']
+Equation hint: var_multiday
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:25:41,386 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: True
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'var_1day': 'linear', 'time_horizon_days': 'sqrt'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 1.00
+[PATTERNS] additive, multiplicative, interactions
+   [SMART] Configuring based on structure...
+   [SMART] → Additive structure detected
+   [SMART] → Pure additive structure: no power operator needed
+   [SMART] → Unary operators: ['sqrt']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/']
+   Unary: ['sqrt']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: sqrt(time_horizon_days)*var_1day
+   R² = 1.0000
+2026-01-07 22:26:06,678 - INFO -    Result: sqrt(time_horizon_days)*var_1day
+2026-01-07 22:26:06,678 - INFO -    R2 = 1.0000
+2026-01-07 22:26:06,679 - INFO -    [BEST] New best!
+2026-01-07 22:26:06,679 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: sqrt(time_horizon_days)*var_1day
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: risk_var_var_multiday.json
+
+📊 Quick Results:
+   Expression: sqrt(time_horizon_days)*var_1day
+   R²: 1.0000
+   Validation: 99.4/100
+   Status: ✅ PASS
+   Time: 26.4s
+
+================================================================================
+TEST 8/23: risk_var_portfolio_var
+================================================================================
+
+================================================================================
+                             Running: Portfolio Var                             
+================================================================================
+Domain: risk_var
+Description: Portfolio VaR for two correlated assets
+Variables: var_asset1, var_asset2, correlation
+Difficulty: hard
+Ground Truth: sqrt(var1^2 + var2^2 + 2*rho*var1*var2)
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:26:06,746 - INFO - ======================================================================
+2026-01-07 22:26:06,746 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:26:06,747 - INFO - ======================================================================
+2026-01-07 22:26:06,747 - INFO - Domain: risk_var
+2026-01-07 22:26:06,747 - INFO - Discovery mode: strict
+2026-01-07 22:26:06,747 - INFO - Primary LLM: anthropic
+2026-01-07 22:26:06,747 - INFO - Auto-config: True
+2026-01-07 22:26:06,748 - INFO - Max retries: 5
+2026-01-07 22:26:06,748 - INFO - PhysicsAware fallback: False
+2026-01-07 22:26:06,748 - INFO - Complexity threshold: 20
+2026-01-07 22:26:06,748 - INFO - ======================================================================
+2026-01-07 22:26:06,749 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:26:07,684 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Portfolio Var
+Domain: RISK_VAR
+Samples: 1000
+Variables: ['var_asset1', 'var_asset2', 'correlation']
+Equation hint: portfolio_var
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:26:07,685 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'var_asset1': 'linear', 'var_asset2': 'linear', 'correlation': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=4.41859e-22): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.50
+[PATTERNS] 
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: -correlation*(-0.40750065*var_asset1 - 7129.5474) + var_asset1 + 3602.8127
+   R² = 1.0000
+2026-01-07 22:26:56,742 - INFO -    Result: -correlation*(-0.40750065*var_asset1 - 7129.5474) + var_asset1 + 3602.8127
+2026-01-07 22:26:56,742 - INFO -    R2 = 1.0000
+2026-01-07 22:26:56,742 - INFO -    [BEST] New best!
+2026-01-07 22:26:56,742 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: -correlation*(-0.40750065*var_asset1 - 7129.5474) + var_asset1 + 3602.8127
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: risk_var_portfolio_var.json
+
+📊 Quick Results:
+   Expression: -correlation*(-0.40750065*var_asset1 - 7129.5474) + var_asset1 + 3602.8127
+   R²: 1.0000
+   Validation: 99.4/100
+   Status: ✅ PASS
+   Time: 50.2s
+
+================================================================================
+TEST 9/23: liquidity_kelly_criterion
+================================================================================
+
+================================================================================
+                            Running: Kelly Criterion                            
+================================================================================
+Domain: liquidity
+Description: Optimal LP position size using risk-adjusted Kelly criterion
+Variables: expected_fee_apy, il_risk
+Difficulty: hard
+Ground Truth: min(μ / (2 * σ²), 1.0)
+🚀 EXTRAPOLATION TEST
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:26:56,974 - INFO - ======================================================================
+2026-01-07 22:26:56,974 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:26:56,974 - INFO - ======================================================================
+2026-01-07 22:26:56,974 - INFO - Domain: liquidity
+2026-01-07 22:26:56,975 - INFO - Discovery mode: strict
+2026-01-07 22:26:56,975 - INFO - Primary LLM: anthropic
+2026-01-07 22:26:56,975 - INFO - Auto-config: True
+2026-01-07 22:26:56,975 - INFO - Max retries: 5
+2026-01-07 22:26:56,975 - INFO - PhysicsAware fallback: False
+2026-01-07 22:26:56,976 - INFO - Complexity threshold: 20
+2026-01-07 22:26:56,976 - INFO - ======================================================================
+2026-01-07 22:26:56,976 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:26:57,981 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Kelly Criterion
+Domain: LIQUIDITY
+Samples: 1000
+Variables: ['expected_fee_apy', 'il_risk']
+Equation hint: kelly_criterion
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:26:57,981 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'expected_fee_apy': 'log', 'il_risk': 'cubic'}
+   [SMART] Interactions detected: 2
+   [SMART] Confidence: 0.67
+[PATTERNS] interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: ((il_risk/expected_fee_apy)**il_risk)**((1.4835051*expected_fee_apy - il_risk)*(log(il_risk) + 0.6885268/expected_fee_apy))
+   R² = 0.8791
+2026-01-07 22:28:25,236 - INFO -    Result: ((il_risk/expected_fee_apy)**il_risk)**((1.4835051*expected_fee_apy - il_risk)*(log(il_risk) + 0.6885268/expected_fee_apy))
+2026-01-07 22:28:25,236 - INFO -    R2 = 0.8791
+2026-01-07 22:28:25,236 - WARNING -    [WARNING] Possible overfit
+2026-01-07 22:28:25,236 - WARNING -       High complexity (123) but R2=0.8791
+2026-01-07 22:28:25,237 - INFO -    [BEST] New best!
+2026-01-07 22:28:25,237 - INFO - 
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'expected_fee_apy': 'log', 'il_risk': 'cubic'}
+   [SMART] Interactions detected: 2
+   [SMART] Confidence: 0.67
+[PATTERNS] interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: ((il_risk/expected_fee_apy)**(il_risk + il_risk))**(il_risk - il_risk*il_risk/expected_fee_apy)
+   R² = 0.8651
+2026-01-07 22:29:44,121 - INFO -    Result: ((il_risk/expected_fee_apy)**(il_risk + il_risk))**(il_risk - il_risk*il_risk/expected_fee_apy)
+2026-01-07 22:29:44,121 - INFO -    R2 = 0.8651
+2026-01-07 22:29:44,121 - WARNING -    [WARNING] Possible overfit
+2026-01-07 22:29:44,121 - WARNING -       High complexity (95) but R2=0.8651
+2026-01-07 22:29:44,122 - INFO - 
+[SYMBOLIC] Attempt 3/5 (seed=44)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'expected_fee_apy': 'log', 'il_risk': 'cubic'}
+   [SMART] Interactions detected: 2
+   [SMART] Confidence: 0.67
+[PATTERNS] interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: ((il_risk**il_risk)**((il_risk/expected_fee_apy)**3.1097236))**((il_risk/3.9016452 - 0.03773657)*1.0770221)
+   R² = 0.9293
+2026-01-07 22:31:19,938 - INFO -    Result: ((il_risk**il_risk)**((il_risk/expected_fee_apy)**3.1097236))**((il_risk/3.9016452 - 0.03773657)*1.0770221)
+2026-01-07 22:31:19,938 - INFO -    R2 = 0.9293
+2026-01-07 22:31:19,939 - WARNING -    [WARNING] Possible overfit
+2026-01-07 22:31:19,939 - WARNING -       High complexity (107) but R2=0.9293
+2026-01-07 22:31:19,939 - INFO -    [BEST] New best!
+2026-01-07 22:31:19,939 - INFO - 
+[SYMBOLIC] Attempt 4/5 (seed=45)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'expected_fee_apy': 'log', 'il_risk': 'cubic'}
+   [SMART] Interactions detected: 2
+   [SMART] Confidence: 0.67
+[PATTERNS] interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: ((il_risk/expected_fee_apy)**(il_risk*(-expected_fee_apy + il_risk)))**(il_risk*(expected_fee_apy - il_risk)/(expected_fee_apy*expected_fee_apy))
+   R² = 0.9400
+2026-01-07 22:32:42,218 - INFO -    Result: ((il_risk/expected_fee_apy)**(il_risk*(-expected_fee_apy + il_risk)))**(il_risk*(expected_fee_apy - il_risk)/(expected_fee_apy*expected_fee_apy))
+2026-01-07 22:32:42,218 - INFO -    R2 = 0.9400
+2026-01-07 22:32:42,218 - WARNING -    [WARNING] Possible overfit
+2026-01-07 22:32:42,218 - WARNING -       High complexity (145) but R2=0.9400
+2026-01-07 22:32:42,218 - INFO -    [BEST] New best!
+2026-01-07 22:32:42,219 - INFO - 
+[SYMBOLIC] Attempt 5/5 (seed=46)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'expected_fee_apy': 'log', 'il_risk': 'cubic'}
+   [SMART] Interactions detected: 2
+   [SMART] Confidence: 0.67
+[PATTERNS] interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 0.43534946**((il_risk/((expected_fee_apy/il_risk)))**(0.028252812 + 0.76179266/il_risk))
+   R² = 0.9376
+2026-01-07 22:34:13,798 - INFO -    Result: 0.43534946**((il_risk/((expected_fee_apy/il_risk)))**(0.028252812 + 0.76179266/il_risk))
+2026-01-07 22:34:13,798 - INFO -    R2 = 0.9376
+2026-01-07 22:34:13,798 - WARNING -    [WARNING] Possible overfit
+2026-01-07 22:34:13,799 - WARNING -       High complexity (88) but R2=0.9376
+2026-01-07 22:34:13,799 - INFO - 
+[SUCCESS] SymbolicEngine succeeded (R2=0.9400)
+
+[OK] Discovery complete
+   Expression: ((il_risk/expected_fee_apy)**(il_risk*(-expected_fee_apy + il_risk)))**(il_risk*(expected_fee_apy - il_risk)/(expected_fee_apy*expected_fee_apy))
+   R2 Score: 0.9400
+   Engine: symbolic
+   Attempt: 4/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 90.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: liquidity_kelly_criterion.json
+
+📊 Quick Results:
+   Expression: ((il_risk/expected_fee_apy)**(il_risk*(-expected_fee_apy + il_risk)))**(il_risk*(expected_fee_apy - il_risk)/(expected_fee_apy*expected_fee_apy))
+   R²: 0.9400
+   Validation: 90.1/100
+   Status: ✅ PASS
+   Time: 437.2s
+
+================================================================================
+TEST 10/23: liquidity_lp_fee_share
+================================================================================
+
+================================================================================
+                             Running: Lp Fee Share                              
+================================================================================
+Domain: liquidity
+Description: LP fee earnings based on liquidity share
+Variables: liquidity_provided, pool_liquidity, total_fees
+Difficulty: easy
+Ground Truth: (liq_provided / pool_liq) * total_fees
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:34:14,159 - INFO - ======================================================================
+2026-01-07 22:34:14,159 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:34:14,159 - INFO - ======================================================================
+2026-01-07 22:34:14,159 - INFO - Domain: liquidity
+2026-01-07 22:34:14,160 - INFO - Discovery mode: strict
+2026-01-07 22:34:14,160 - INFO - Primary LLM: anthropic
+2026-01-07 22:34:14,160 - INFO - Auto-config: True
+2026-01-07 22:34:14,160 - INFO - Max retries: 5
+2026-01-07 22:34:14,161 - INFO - PhysicsAware fallback: False
+2026-01-07 22:34:14,161 - INFO - Complexity threshold: 20
+2026-01-07 22:34:14,161 - INFO - ======================================================================
+2026-01-07 22:34:14,161 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:34:15,061 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Lp Fee Share
+Domain: LIQUIDITY
+Samples: 1000
+Variables: ['liquidity_provided', 'pool_liquidity', 'total_fees']
+Equation hint: lp_fee_share
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:34:15,062 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'liquidity_provided': 'cubic', 'pool_liquidity': 'sqrt', 'total_fees': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.4698e-27): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=4.57633e-35): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.6956e-36): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.06829e-19): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Interactions detected: 2
+   [SMART] Confidence: 0.87
+[PATTERNS] multiplicative, interactions
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['sqrt']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['sqrt']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: liquidity_provided*total_fees/pool_liquidity
+   R² = 1.0000
+2026-01-07 22:35:03,954 - INFO -    Result: liquidity_provided*total_fees/pool_liquidity
+2026-01-07 22:35:03,955 - INFO -    R2 = 1.0000
+2026-01-07 22:35:03,955 - INFO -    [BEST] New best!
+2026-01-07 22:35:03,955 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: liquidity_provided*total_fees/pool_liquidity
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: liquidity_lp_fee_share.json
+
+📊 Quick Results:
+   Expression: liquidity_provided*total_fees/pool_liquidity
+   R²: 1.0000
+   Validation: 99.1/100
+   Status: ✅ PASS
+   Time: 49.9s
+
+================================================================================
+TEST 11/23: liquidity_capital_efficiency
+================================================================================
+
+================================================================================
+                          Running: Capital Efficiency                           
+================================================================================
+Domain: liquidity
+Description: Capital efficiency multiplier for concentrated liquidity position
+Variables: price_lower, price_upper, price_current
+Difficulty: medium
+Ground Truth: P_upper / (P_upper - P_lower)
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:35:04,025 - INFO - ======================================================================
+2026-01-07 22:35:04,025 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:35:04,025 - INFO - ======================================================================
+2026-01-07 22:35:04,025 - INFO - Domain: liquidity
+2026-01-07 22:35:04,025 - INFO - Discovery mode: strict
+2026-01-07 22:35:04,026 - INFO - Primary LLM: anthropic
+2026-01-07 22:35:04,026 - INFO - Auto-config: True
+2026-01-07 22:35:04,026 - INFO - Max retries: 5
+2026-01-07 22:35:04,026 - INFO - PhysicsAware fallback: False
+2026-01-07 22:35:04,026 - INFO - Complexity threshold: 20
+2026-01-07 22:35:04,026 - INFO - ======================================================================
+2026-01-07 22:35:04,027 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:35:04,959 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Capital Efficiency
+Domain: LIQUIDITY
+Samples: 1000
+Variables: ['price_lower', 'price_upper', 'price_current']
+Equation hint: capital_efficiency
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:35:04,960 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'price_lower': 'linear', 'price_upper': 'linear', 'price_current': 'linear'}
+   [SMART] Confidence: 0.70
+[PATTERNS] multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: price_upper*0.0025
+   R² = 1.0000
+2026-01-07 22:36:22,290 - INFO -    Result: price_upper*0.0025
+2026-01-07 22:36:22,291 - INFO -    R2 = 1.0000
+2026-01-07 22:36:22,291 - INFO -    [BEST] New best!
+2026-01-07 22:36:22,291 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: price_upper*0.0025
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: liquidity_capital_efficiency.json
+
+📊 Quick Results:
+   Expression: price_upper*0.0025
+   R²: 1.0000
+   Validation: 100.0/100
+   Status: ✅ PASS
+   Time: 78.3s
+
+================================================================================
+TEST 12/23: liquidity_apy_from_apr
+================================================================================
+
+================================================================================
+                             Running: Apy From Apr                              
+================================================================================
+Domain: liquidity
+Description: APY calculation from APR with daily compounding
+Variables: apr
+Difficulty: medium
+Ground Truth: (1 + apr/365)^365 - 1
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:36:22,363 - INFO - ======================================================================
+2026-01-07 22:36:22,363 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:36:22,363 - INFO - ======================================================================
+2026-01-07 22:36:22,364 - INFO - Domain: liquidity
+2026-01-07 22:36:22,364 - INFO - Discovery mode: strict
+2026-01-07 22:36:22,364 - INFO - Primary LLM: anthropic
+2026-01-07 22:36:22,364 - INFO - Auto-config: True
+2026-01-07 22:36:22,365 - INFO - Max retries: 5
+2026-01-07 22:36:22,365 - INFO - PhysicsAware fallback: False
+2026-01-07 22:36:22,365 - INFO - Complexity threshold: 20
+2026-01-07 22:36:22,366 - INFO - ======================================================================
+2026-01-07 22:36:22,366 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:36:23,354 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Apy From Apr
+Domain: LIQUIDITY
+Samples: 1000
+Variables: ['apr']
+Equation hint: apy_from_apr
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:36:23,355 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'apr': 'exp'}
+   [SMART] Confidence: 0.80
+[PATTERNS] multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['exp']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['exp']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: apr*exp(apr**1.0280974*0.52873605)
+   R² = 1.0000
+2026-01-07 22:37:42,223 - INFO -    Result: apr*exp(apr**1.0280974*0.52873605)
+2026-01-07 22:37:42,223 - INFO -    R2 = 1.0000
+2026-01-07 22:37:42,225 - INFO -    [BEST] New best!
+2026-01-07 22:37:42,225 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: apr*exp(apr**1.0280974*0.52873605)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: liquidity_apy_from_apr.json
+
+📊 Quick Results:
+   Expression: apr*exp(apr**1.0280974*0.52873605)
+   R²: 1.0000
+   Validation: 91.0/100
+   Status: ✅ PASS
+   Time: 80.0s
+
+================================================================================
+TEST 13/23: expected_shortfall_es_95
+================================================================================
+
+================================================================================
+                                 Running: Es 95                                 
+================================================================================
+Domain: expected_shortfall
+Description: Expected Shortfall (CVaR) at 95% confidence for normal returns
+Variables: portfolio_value, daily_volatility
+Difficulty: medium
+Ground Truth: portfolio * volatility * 2.063
+🚀 EXTRAPOLATION TEST
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:37:42,396 - INFO - ======================================================================
+2026-01-07 22:37:42,396 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:37:42,397 - INFO - ======================================================================
+2026-01-07 22:37:42,397 - INFO - Domain: expected_shortfall
+2026-01-07 22:37:42,397 - INFO - Discovery mode: strict
+2026-01-07 22:37:42,397 - INFO - Primary LLM: anthropic
+2026-01-07 22:37:42,398 - INFO - Auto-config: True
+2026-01-07 22:37:42,398 - INFO - Max retries: 5
+2026-01-07 22:37:42,398 - INFO - PhysicsAware fallback: False
+2026-01-07 22:37:42,398 - INFO - Complexity threshold: 20
+2026-01-07 22:37:42,398 - INFO - ======================================================================
+2026-01-07 22:37:42,399 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:37:43,453 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Es 95
+Domain: EXPECTED_SHORTFALL
+Samples: 1000
+Variables: ['portfolio_value', 'daily_volatility']
+Equation hint: es_95
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:37:43,454 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: True
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'portfolio_value': 'linear', 'daily_volatility': 'exp'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 1.00
+[PATTERNS] additive, multiplicative, interactions
+   [SMART] Configuring based on structure...
+   [SMART] → Additive structure detected
+   [SMART] → Pure additive structure: no power operator needed
+   [SMART] → Unary operators: ['exp']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/']
+   Unary: ['exp']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: portfolio_value*2.063*daily_volatility
+   R² = 1.0000
+2026-01-07 22:38:09,861 - INFO -    Result: portfolio_value*2.063*daily_volatility
+2026-01-07 22:38:09,862 - INFO -    R2 = 1.0000
+2026-01-07 22:38:09,862 - INFO -    [BEST] New best!
+2026-01-07 22:38:09,862 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: portfolio_value*2.063*daily_volatility
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: expected_shortfall_es_95.json
+
+📊 Quick Results:
+   Expression: portfolio_value*2.063*daily_volatility
+   R²: 1.0000
+   Validation: 100.0/100
+   Status: ✅ PASS
+   Time: 27.5s
+
+================================================================================
+TEST 14/23: expected_shortfall_es_99
+================================================================================
+
+================================================================================
+                                 Running: Es 99                                 
+================================================================================
+Domain: expected_shortfall
+Description: Expected Shortfall (CVaR) at 99% confidence for normal returns
+Variables: portfolio_value, daily_volatility
+Difficulty: medium
+Ground Truth: portfolio * volatility * 2.665
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:38:09,940 - INFO - ======================================================================
+2026-01-07 22:38:09,940 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:38:09,941 - INFO - ======================================================================
+2026-01-07 22:38:09,941 - INFO - Domain: expected_shortfall
+2026-01-07 22:38:09,941 - INFO - Discovery mode: strict
+2026-01-07 22:38:09,941 - INFO - Primary LLM: anthropic
+2026-01-07 22:38:09,942 - INFO - Auto-config: True
+2026-01-07 22:38:09,942 - INFO - Max retries: 5
+2026-01-07 22:38:09,942 - INFO - PhysicsAware fallback: False
+2026-01-07 22:38:09,942 - INFO - Complexity threshold: 20
+2026-01-07 22:38:09,943 - INFO - ======================================================================
+2026-01-07 22:38:09,943 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:38:11,249 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Es 99
+Domain: EXPECTED_SHORTFALL
+Samples: 1000
+Variables: ['portfolio_value', 'daily_volatility']
+Equation hint: es_99
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:38:11,249 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'portfolio_value': 'quadratic', 'daily_volatility': 'quadratic'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.1256e-27): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.14312e-22): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.80
+[PATTERNS] multiplicative, polynomial
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: portfolio_value*daily_volatility*2.665
+   R² = 1.0000
+2026-01-07 22:39:45,305 - INFO -    Result: portfolio_value*daily_volatility*2.665
+2026-01-07 22:39:45,305 - INFO -    R2 = 1.0000
+2026-01-07 22:39:45,306 - INFO -    [BEST] New best!
+2026-01-07 22:39:45,306 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: portfolio_value*daily_volatility*2.665
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: expected_shortfall_es_99.json
+
+📊 Quick Results:
+   Expression: portfolio_value*daily_volatility*2.665
+   R²: 1.0000
+   Validation: 100.0/100
+   Status: ✅ PASS
+   Time: 95.4s
+
+================================================================================
+TEST 15/23: expected_shortfall_es_from_var
+================================================================================
+
+================================================================================
+                              Running: Es From Var                              
+================================================================================
+Domain: expected_shortfall
+Description: Expected Shortfall from VaR using tail risk multiplier
+Variables: var_95
+Difficulty: easy
+Ground Truth: var_95 * 1.254
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:39:45,400 - INFO - ======================================================================
+2026-01-07 22:39:45,400 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:39:45,400 - INFO - ======================================================================
+2026-01-07 22:39:45,401 - INFO - Domain: expected_shortfall
+2026-01-07 22:39:45,401 - INFO - Discovery mode: strict
+2026-01-07 22:39:45,401 - INFO - Primary LLM: anthropic
+2026-01-07 22:39:45,401 - INFO - Auto-config: True
+2026-01-07 22:39:45,401 - INFO - Max retries: 5
+2026-01-07 22:39:45,402 - INFO - PhysicsAware fallback: False
+2026-01-07 22:39:45,402 - INFO - Complexity threshold: 20
+2026-01-07 22:39:45,402 - INFO - ======================================================================
+2026-01-07 22:39:45,402 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:39:46,334 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Es From Var
+Domain: EXPECTED_SHORTFALL
+Samples: 1000
+Variables: ['var_95']
+Equation hint: es_from_var
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:39:46,335 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'var_95': 'linear'}
+   [SMART] Confidence: 0.70
+[PATTERNS] multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: var_95**(0.9998825**(0.8290035/var_95))*1.254
+   R² = 1.0000
+2026-01-07 22:41:02,191 - INFO -    Result: var_95**(0.9998825**(0.8290035/var_95))*1.254
+2026-01-07 22:41:02,191 - INFO -    R2 = 1.0000
+2026-01-07 22:41:02,191 - INFO -    [BEST] New best!
+2026-01-07 22:41:02,191 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: var_95**(0.9998825**(0.8290035/var_95))*1.254
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 38.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: expected_shortfall_es_from_var.json
+
+📊 Quick Results:
+   Expression: var_95**(0.9998825**(0.8290035/var_95))*1.254
+   R²: 1.0000
+   Validation: 38.0/100
+   Status: ✅ PASS
+   Time: 76.8s
+
+================================================================================
+TEST 16/23: expected_shortfall_portfolio_es
+================================================================================
+
+================================================================================
+                             Running: Portfolio Es                              
+================================================================================
+Domain: expected_shortfall
+Description: Portfolio Expected Shortfall for correlated positions
+Variables: position1_es, position2_es, correlation
+Difficulty: hard
+Ground Truth: ES1 + ES2 + ρ*sqrt(ES1*ES2)
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:41:02,252 - INFO - ======================================================================
+2026-01-07 22:41:02,252 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:41:02,252 - INFO - ======================================================================
+2026-01-07 22:41:02,252 - INFO - Domain: expected_shortfall
+2026-01-07 22:41:02,253 - INFO - Discovery mode: strict
+2026-01-07 22:41:02,253 - INFO - Primary LLM: anthropic
+2026-01-07 22:41:02,253 - INFO - Auto-config: True
+2026-01-07 22:41:02,253 - INFO - Max retries: 5
+2026-01-07 22:41:02,254 - INFO - PhysicsAware fallback: False
+2026-01-07 22:41:02,254 - INFO - Complexity threshold: 20
+2026-01-07 22:41:02,254 - INFO - ======================================================================
+2026-01-07 22:41:02,254 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:41:03,206 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Portfolio Es
+Domain: EXPECTED_SHORTFALL
+Samples: 1000
+Variables: ['position1_es', 'position2_es', 'correlation']
+Equation hint: portfolio_es
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:41:03,206 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'position1_es': 'linear', 'position2_es': 'linear', 'correlation': 'exp'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.8986e-23): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.60
+[PATTERNS] 
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['exp']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['exp']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: correlation*position2_es + correlation*(position2_es*(-0.58578646) + position2_es) + position2_es + position2_es - (-position2_es - 0.00012112083)
+   R² = 1.0000
+2026-01-07 22:41:43,367 - INFO -    Result: correlation*position2_es + correlation*(position2_es*(-0.58578646) + position2_es) + position2_es + position2_es - (-position2_es - 0.00012112083)
+2026-01-07 22:41:43,367 - INFO -    R2 = 1.0000
+2026-01-07 22:41:43,368 - INFO -    [BEST] New best!
+2026-01-07 22:41:43,368 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: correlation*position2_es + correlation*(position2_es*(-0.58578646) + position2_es) + position2_es + position2_es - (-position2_es - 0.00012112083)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: expected_shortfall_portfolio_es.json
+
+📊 Quick Results:
+   Expression: correlation*position2_es + correlation*(position2_es*(-0.58578646) + position2_es) + position2_es + position2_es - (-position2_es - 0.00012112083)
+   R²: 1.0000
+   Validation: 91.3/100
+   Status: ✅ PASS
+   Time: 41.3s
+
+================================================================================
+TEST 17/23: liquidation_liquidation_long
+================================================================================
+
+================================================================================
+                           Running: Liquidation Long                            
+================================================================================
+Domain: liquidation
+Description: Liquidation price for leveraged long position
+Variables: entry_price, leverage
+Difficulty: hard
+Ground Truth: entry_price * (1 - 1/(leverage * 0.8))
+🚀 EXTRAPOLATION TEST
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:41:43,548 - INFO - ======================================================================
+2026-01-07 22:41:43,548 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:41:43,548 - INFO - ======================================================================
+2026-01-07 22:41:43,548 - INFO - Domain: liquidation
+2026-01-07 22:41:43,549 - INFO - Discovery mode: strict
+2026-01-07 22:41:43,549 - INFO - Primary LLM: anthropic
+2026-01-07 22:41:43,549 - INFO - Auto-config: True
+2026-01-07 22:41:43,549 - INFO - Max retries: 5
+2026-01-07 22:41:43,549 - INFO - PhysicsAware fallback: False
+2026-01-07 22:41:43,550 - INFO - Complexity threshold: 20
+2026-01-07 22:41:43,550 - INFO - ======================================================================
+2026-01-07 22:41:43,550 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:41:44,507 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Liquidation Long
+Domain: LIQUIDATION
+Samples: 1000
+Variables: ['entry_price', 'leverage']
+Equation hint: liquidation_long
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:41:44,508 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: True
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'entry_price': 'quadratic', 'leverage': 'log'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.25327e-17): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=5.32006e-19): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 1.00
+[PATTERNS] additive, multiplicative, interactions, polynomial, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Additive structure detected
+   [SMART] → Additive + polynomial terms: enabling power operator
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: entry_price - (leverage - 0.62879866) - (entry_price/(0.80000603*leverage) - (-(0.6708232 - leverage) + 0.4142077/leverage))
+   R² = 1.0000
+2026-01-07 22:42:27,848 - INFO -    Result: entry_price - (leverage - 0.62879866) - (entry_price/(0.80000603*leverage) - (-(0.6708232 - leverage) + 0.4142077/leverage))
+2026-01-07 22:42:27,849 - INFO -    R2 = 1.0000
+2026-01-07 22:42:27,849 - INFO -    [BEST] New best!
+2026-01-07 22:42:27,849 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: entry_price - (leverage - 0.62879866) - (entry_price/(0.80000603*leverage) - (-(0.6708232 - leverage) + 0.4142077/leverage))
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 90.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: liquidation_liquidation_long.json
+
+📊 Quick Results:
+   Expression: entry_price - (leverage - 0.62879866) - (entry_price/(0.80000603*leverage) - (-(0.6708232 - leverage) + 0.4142077/leverage))
+   R²: 1.0000
+   Validation: 90.4/100
+   Status: ✅ PASS
+   Time: 44.6s
+
+================================================================================
+TEST 18/23: liquidation_liquidation_short
+================================================================================
+
+================================================================================
+                           Running: Liquidation Short                           
+================================================================================
+Domain: liquidation
+Description: Liquidation price for leveraged short position
+Variables: entry_price, leverage
+Difficulty: hard
+Ground Truth: entry_price * (1 + 1/(leverage * 0.8))
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:42:28,135 - INFO - ======================================================================
+2026-01-07 22:42:28,136 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:42:28,136 - INFO - ======================================================================
+2026-01-07 22:42:28,136 - INFO - Domain: liquidation
+2026-01-07 22:42:28,136 - INFO - Discovery mode: strict
+2026-01-07 22:42:28,137 - INFO - Primary LLM: anthropic
+2026-01-07 22:42:28,137 - INFO - Auto-config: True
+2026-01-07 22:42:28,137 - INFO - Max retries: 5
+2026-01-07 22:42:28,137 - INFO - PhysicsAware fallback: False
+2026-01-07 22:42:28,137 - INFO - Complexity threshold: 20
+2026-01-07 22:42:28,138 - INFO - ======================================================================
+2026-01-07 22:42:28,138 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:42:29,085 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Liquidation Short
+Domain: LIQUIDATION
+Samples: 1000
+Variables: ['entry_price', 'leverage']
+Equation hint: liquidation_short
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:42:29,086 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'entry_price': 'cubic', 'leverage': 'cubic'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.24668e-31): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=8.78297e-38): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: entry_price*entry_price*(entry_price**(-0.0559074))**((leverage/entry_price)**(leverage*0.10932678))/(entry_price*(entry_price**(-1.6005129))**(0.06766151/leverage))
+   R² = 0.9999
+2026-01-07 22:46:48,339 - INFO -    Result: entry_price*entry_price*(entry_price**(-0.0559074))**((leverage/entry_price)**(leverage*0.10932678))/(entry_price*(entry_price**(-1.6005129))**(0.06766151/leverage))
+2026-01-07 22:46:48,339 - INFO -    R2 = 0.9999
+2026-01-07 22:46:48,339 - INFO -    [BEST] New best!
+2026-01-07 22:46:48,339 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: entry_price*entry_price*(entry_price**(-0.0559074))**((leverage/entry_price)**(leverage*0.10932678))/(entry_price*(entry_price**(-1.6005129))**(0.06766151/leverage))
+   R2 Score: 0.9999
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 89.2/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: liquidation_liquidation_short.json
+
+📊 Quick Results:
+   Expression: entry_price*entry_price*(entry_price**(-0.0559074))**((leverage/entry_price)**(leverage*0.10932678))/(entry_price*(entry_price**(-1.6005129))**(0.06766151/leverage))
+   R²: 0.9999
+   Validation: 89.2/100
+   Status: ✅ PASS
+   Time: 260.5s
+
+================================================================================
+TEST 19/23: liquidation_max_leverage
+================================================================================
+
+================================================================================
+                             Running: Max Leverage                              
+================================================================================
+Domain: liquidation
+Description: Maximum safe leverage for given acceptable loss tolerance
+Variables: entry_price, acceptable_loss_pct
+Difficulty: medium
+Ground Truth: 1 / (loss_pct * 0.8)
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:46:48,646 - INFO - ======================================================================
+2026-01-07 22:46:48,646 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:46:48,647 - INFO - ======================================================================
+2026-01-07 22:46:48,647 - INFO - Domain: liquidation
+2026-01-07 22:46:48,647 - INFO - Discovery mode: strict
+2026-01-07 22:46:48,647 - INFO - Primary LLM: anthropic
+2026-01-07 22:46:48,647 - INFO - Auto-config: True
+2026-01-07 22:46:48,648 - INFO - Max retries: 5
+2026-01-07 22:46:48,648 - INFO - PhysicsAware fallback: False
+2026-01-07 22:46:48,648 - INFO - Complexity threshold: 20
+2026-01-07 22:46:48,648 - INFO - ======================================================================
+2026-01-07 22:46:48,649 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:46:49,599 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Max Leverage
+Domain: LIQUIDATION
+Samples: 1000
+Variables: ['entry_price', 'acceptable_loss_pct']
+Equation hint: max_leverage
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:46:49,600 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'entry_price': 'log', 'acceptable_loss_pct': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 1.25/acceptable_loss_pct
+   R² = 1.0000
+2026-01-07 22:49:04,927 - INFO -    Result: 1.25/acceptable_loss_pct
+2026-01-07 22:49:04,928 - INFO -    R2 = 1.0000
+2026-01-07 22:49:04,928 - INFO -    [BEST] New best!
+2026-01-07 22:49:04,928 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: 1.25/acceptable_loss_pct
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: liquidation_max_leverage.json
+
+📊 Quick Results:
+   Expression: 1.25/acceptable_loss_pct
+   R²: 1.0000
+   Validation: 99.1/100
+   Status: ✅ PASS
+   Time: 136.4s
+
+================================================================================
+TEST 20/23: liquidation_required_collateral
+================================================================================
+
+================================================================================
+                          Running: Required Collateral                          
+================================================================================
+Domain: liquidation
+Description: Required collateral for leveraged position
+Variables: position_size, leverage
+Difficulty: easy
+Ground Truth: position_size / leverage
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:49:05,060 - INFO - ======================================================================
+2026-01-07 22:49:05,060 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:49:05,061 - INFO - ======================================================================
+2026-01-07 22:49:05,061 - INFO - Domain: liquidation
+2026-01-07 22:49:05,061 - INFO - Discovery mode: strict
+2026-01-07 22:49:05,061 - INFO - Primary LLM: anthropic
+2026-01-07 22:49:05,062 - INFO - Auto-config: True
+2026-01-07 22:49:05,062 - INFO - Max retries: 5
+2026-01-07 22:49:05,062 - INFO - PhysicsAware fallback: False
+2026-01-07 22:49:05,062 - INFO - Complexity threshold: 20
+2026-01-07 22:49:05,063 - INFO - ======================================================================
+2026-01-07 22:49:05,063 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:49:05,986 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Required Collateral
+Domain: LIQUIDATION
+Samples: 1000
+Variables: ['position_size', 'leverage']
+Equation hint: required_collateral
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:49:05,986 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'position_size': 'log', 'leverage': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: position_size/leverage
+   R² = 1.0000
+2026-01-07 22:51:31,495 - INFO -    Result: position_size/leverage
+2026-01-07 22:51:31,495 - INFO -    R2 = 1.0000
+2026-01-07 22:51:31,495 - INFO -    [BEST] New best!
+2026-01-07 22:51:31,496 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: position_size/leverage
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: liquidation_required_collateral.json
+
+📊 Quick Results:
+   Expression: position_size/leverage
+   R²: 1.0000
+   Validation: 99.1/100
+   Status: ✅ PASS
+   Time: 146.5s
+
+================================================================================
+TEST 21/23: staking_staking_rewards
+================================================================================
+
+================================================================================
+                            Running: Staking Rewards                            
+================================================================================
+Domain: staking
+Description: Simple staking rewards calculation
+Variables: stake_amount, apr, time_days
+Difficulty: easy
+Ground Truth: stake * apr * (days/365)
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:51:31,555 - INFO - ======================================================================
+2026-01-07 22:51:31,555 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:51:31,555 - INFO - ======================================================================
+2026-01-07 22:51:31,555 - INFO - Domain: staking
+2026-01-07 22:51:31,555 - INFO - Discovery mode: strict
+2026-01-07 22:51:31,556 - INFO - Primary LLM: anthropic
+2026-01-07 22:51:31,556 - INFO - Auto-config: True
+2026-01-07 22:51:31,556 - INFO - Max retries: 5
+2026-01-07 22:51:31,556 - INFO - PhysicsAware fallback: False
+2026-01-07 22:51:31,556 - INFO - Complexity threshold: 20
+2026-01-07 22:51:31,556 - INFO - ======================================================================
+2026-01-07 22:51:31,557 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:51:32,494 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Staking Rewards
+Domain: STAKING
+Samples: 1000
+Variables: ['stake_amount', 'apr', 'time_days']
+Equation hint: staking_rewards
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:51:32,495 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'stake_amount': 'quadratic', 'apr': 'cubic', 'time_days': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.12559e-23): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.23325e-18): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.74152e-28): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Interactions detected: 2
+   [SMART] Confidence: 0.87
+[PATTERNS] multiplicative, interactions, polynomial
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: stake_amount*time_days*(-150.20872)/(-54826.184/apr)
+   R² = 1.0000
+2026-01-07 22:52:57,820 - INFO -    Result: stake_amount*time_days*(-150.20872)/(-54826.184/apr)
+2026-01-07 22:52:57,820 - INFO -    R2 = 1.0000
+2026-01-07 22:52:57,820 - INFO -    [BEST] New best!
+2026-01-07 22:52:57,821 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: stake_amount*time_days*(-150.20872)/(-54826.184/apr)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.9/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: staking_staking_rewards.json
+
+📊 Quick Results:
+   Expression: stake_amount*time_days*(-150.20872)/(-54826.184/apr)
+   R²: 1.0000
+   Validation: 91.9/100
+   Status: ✅ PASS
+   Time: 86.3s
+
+================================================================================
+TEST 22/23: staking_staking_dilution
+================================================================================
+
+================================================================================
+                           Running: Staking Dilution                            
+================================================================================
+Domain: staking
+Description: Staker's share after token emissions dilution
+Variables: user_stake, total_staked, new_emissions
+Difficulty: medium
+Ground Truth: user_stake / (total_staked + new_emissions)
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:52:57,915 - INFO - ======================================================================
+2026-01-07 22:52:57,915 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:52:57,915 - INFO - ======================================================================
+2026-01-07 22:52:57,916 - INFO - Domain: staking
+2026-01-07 22:52:57,916 - INFO - Discovery mode: strict
+2026-01-07 22:52:57,916 - INFO - Primary LLM: anthropic
+2026-01-07 22:52:57,916 - INFO - Auto-config: True
+2026-01-07 22:52:57,917 - INFO - Max retries: 5
+2026-01-07 22:52:57,917 - INFO - PhysicsAware fallback: False
+2026-01-07 22:52:57,917 - INFO - Complexity threshold: 20
+2026-01-07 22:52:57,917 - INFO - ======================================================================
+2026-01-07 22:52:57,917 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:52:59,169 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Staking Dilution
+Domain: STAKING
+Samples: 1000
+Variables: ['user_stake', 'total_staked', 'new_emissions']
+Equation hint: staking_dilution
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:52:59,170 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'user_stake': 'cubic', 'total_staked': 'log', 'new_emissions': 'cubic'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=5.31358e-21): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.85267e-23): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.259e-44): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.95904e-20): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=9.98033e-18): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.83
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: user_stake/(total_staked*(0.09931931**(0.27798057*new_emissions*(-1.457903)/total_staked)))
+   R² = 1.0000
+2026-01-07 22:53:46,787 - INFO -    Result: user_stake/(total_staked*(0.09931931**(0.27798057*new_emissions*(-1.457903)/total_staked)))
+2026-01-07 22:53:46,788 - INFO -    R2 = 1.0000
+2026-01-07 22:53:46,788 - INFO -    [BEST] New best!
+2026-01-07 22:53:46,788 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: user_stake/(total_staked*(0.09931931**(0.27798057*new_emissions*(-1.457903)/total_staked)))
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 89.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: staking_staking_dilution.json
+
+📊 Quick Results:
+   Expression: user_stake/(total_staked*(0.09931931**(0.27798057*new_emissions*(-1.457903)/total_staked)))
+   R²: 1.0000
+   Validation: 89.5/100
+   Status: ✅ PASS
+   Time: 49.0s
+
+================================================================================
+TEST 23/23: staking_compound_staking
+================================================================================
+
+================================================================================
+                           Running: Compound Staking                            
+================================================================================
+Domain: staking
+Description: Compound staking rewards with auto-restaking
+Variables: principal, apr, periods_per_year, time_years
+Difficulty: hard
+Ground Truth: P * (1 + r/n)^(n*t)
+🚀 EXTRAPOLATION TEST
+Mode: CUSTOM (iter=50) (iter=50)
+2026-01-07 22:53:46,954 - INFO - ======================================================================
+2026-01-07 22:53:46,954 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 22:53:46,955 - INFO - ======================================================================
+2026-01-07 22:53:46,955 - INFO - Domain: staking
+2026-01-07 22:53:46,955 - INFO - Discovery mode: strict
+2026-01-07 22:53:46,955 - INFO - Primary LLM: anthropic
+2026-01-07 22:53:46,955 - INFO - Auto-config: True
+2026-01-07 22:53:46,956 - INFO - Max retries: 5
+2026-01-07 22:53:46,956 - INFO - PhysicsAware fallback: False
+2026-01-07 22:53:46,956 - INFO - Complexity threshold: 20
+2026-01-07 22:53:46,956 - INFO - ======================================================================
+2026-01-07 22:53:46,956 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 22:53:47,920 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Compound Staking
+Domain: STAKING
+Samples: 1000
+Variables: ['principal', 'apr', 'periods_per_year', 'time_years']
+Equation hint: compound_staking
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 22:53:47,921 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'principal': 'linear', 'apr': 'cubic', 'periods_per_year': 'cubic', 'time_years': 'quadratic'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=7.78424e-28): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.19164e-18): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=6.43477e-19): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.80
+[PATTERNS] multiplicative, polynomial
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 2.4020681**(1.1438664*apr*time_years)*principal
+   R² = 1.0000
+2026-01-07 22:55:49,910 - INFO -    Result: 2.4020681**(1.1438664*apr*time_years)*principal
+2026-01-07 22:55:49,911 - INFO -    R2 = 1.0000
+2026-01-07 22:55:49,911 - INFO -    [BEST] New best!
+2026-01-07 22:55:49,911 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: 2.4020681**(1.1438664*apr*time_years)*principal
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: staking_compound_staking.json
+
+📊 Quick Results:
+   Expression: 2.4020681**(1.1438664*apr*time_years)*principal
+   R²: 1.0000
+   Validation: 91.3/100
+   Status: ✅ PASS
+   Time: 123.0s
+
+📊 Summary saved: hypatiax/data/results/defi/20260107_221142/summary.json
+📦 Complete results: hypatiax/data/results/defi/20260107_221142/complete_results.json
+   Size: 1690.5 KB
+
+================================================================================
+                            DEFI TEST SUITE SUMMARY                             
+================================================================================
+
+✅ Passed: 23/23 (100.0%)
+❌ Failed: 0/23
+⏱  Total time: 44.1 min
+📊 Configuration: CUSTOM (iter=50)
+   Iterations: 50
+   Populations: 8
+
+📦 By Domain:
+  risk_var            :  4/ 4 (100.0%) (1 extrap)
+  expected_shortfall  :  4/ 4 (100.0%) (1 extrap)
+  liquidity           :  4/ 4 (100.0%) (1 extrap)
+  liquidation         :  4/ 4 (100.0%) (1 extrap)
+  amm                 :  4/ 4 (100.0%) (1 extrap)
+  staking             :  3/ 3 (100.0%) (1 extrap)
+
+🎯 By Difficulty:
+  hard      :  7/ 7 (100.0%)
+  easy      :  7/ 7 (100.0%)
+  medium    :  9/ 9 (100.0%)
+
+🚀 Extrapolation Tests (6):
+  ✅ expected_shortfall_es_95            R²=1.0000
+  ✅ liquidation_liquidation_long        R²=1.0000
+  ✅ risk_var_var_95                     R²=1.0000
+  ✅ staking_compound_staking            R²=1.0000
+  ✅ liquidity_kelly_criterion           R²=0.9400
+  ✅ amm_impermanent_loss                R²=0.9986
+
+========================================================================================================================
+                                                 DETAILED TEST RESULTS                                                  
+========================================================================================================================
+Test Case                                |     R² |   Val |   Time | Status | Observations                            
+------------------------------------------------------------------------------------------------------------------------
+amm_constant_product                     | 1.0000 |  99.1 |  91.8s | ✅ PASS | Excellent fit, Strong val               
+amm_il_percentage                        | 0.9995 |  90.4 |  67.5s | ✅ PASS | Excellent fit, Strong val               
+amm_impermanent_loss                     | 0.9986 |  91.3 | 460.2s | ✅ PASS | Extrap, Excellent fit, Strong val       
+amm_price_impact                         | 0.9999 |  98.5 |  53.1s | ✅ PASS | Excellent fit, Strong val               
+expected_shortfall_es_95                 | 1.0000 | 100.0 |  27.5s | ✅ PASS | Extrap, Excellent fit, Strong val       
+expected_shortfall_es_99                 | 1.0000 | 100.0 |  95.4s | ✅ PASS | Excellent fit, Strong val               
+expected_shortfall_es_from_var           | 1.0000 |  38.0 |  76.8s | ✅ PASS | Excellent fit, Failed val               
+expected_shortfall_portfolio_es          | 1.0000 |  91.3 |  41.3s | ✅ PASS | Excellent fit, Strong val               
+liquidation_liquidation_long             | 1.0000 |  90.4 |  44.6s | ✅ PASS | Extrap, Excellent fit, Strong val       
+liquidation_liquidation_short            | 0.9999 |  89.2 | 260.5s | ✅ PASS | Excellent fit, Strong val               
+liquidation_max_leverage                 | 1.0000 |  99.1 | 136.4s | ✅ PASS | Excellent fit, Strong val               
+liquidation_required_collateral          | 1.0000 |  99.1 | 146.5s | ✅ PASS | Excellent fit, Strong val               
+liquidity_apy_from_apr                   | 1.0000 |  91.0 |  80.0s | ✅ PASS | Excellent fit, Strong val               
+liquidity_capital_efficiency             | 1.0000 | 100.0 |  78.3s | ✅ PASS | Excellent fit, Strong val               
+liquidity_kelly_criterion                | 0.9400 |  90.1 | 437.2s | ✅ PASS | Extrap, Acceptable, Strong val          
+liquidity_lp_fee_share                   | 1.0000 |  99.1 |  49.9s | ✅ PASS | Excellent fit, Strong val               
+risk_var_portfolio_var                   | 1.0000 |  99.4 |  50.2s | ✅ PASS | Excellent fit, Strong val               
+risk_var_var_95                          | 1.0000 | 100.0 |  73.7s | ✅ PASS | Extrap, Excellent fit, Strong val       
+risk_var_var_99                          | 1.0000 | 100.0 |  90.9s | ✅ PASS | Excellent fit, Strong val               
+risk_var_var_multiday                    | 1.0000 |  99.4 |  26.4s | ✅ PASS | Excellent fit, Strong val               
+staking_compound_staking                 | 1.0000 |  91.3 | 123.0s | ✅ PASS | Extrap, Excellent fit, Strong val       
+staking_staking_dilution                 | 1.0000 |  89.5 |  49.0s | ✅ PASS | Excellent fit, Strong val               
+staking_staking_rewards                  | 1.0000 |  91.9 |  86.3s | ✅ PASS | Excellent fit, Strong val               
+========================================================================================================================
+
+📈 R² Statistics:
+   Mean: 0.9973
+   Median: 1.0000
+   Std Dev: 0.0122
+   Min: 0.9400
+   Max: 1.0000
+
+📊 Validation Statistics:
+   Mean: 93.0/100
+   Median: 98.5/100
+   Std Dev: 12.5
+   Min: 38.0/100
+   Max: 100.0/100
+

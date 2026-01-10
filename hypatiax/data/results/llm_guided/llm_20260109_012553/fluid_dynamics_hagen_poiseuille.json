@@ -1,0 +1,121 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "Q = dP * r**4 / (mu * L)",
+    "confidence": 0.9,
+    "reasoning": "Simplified Hagen-Poiseuille without the \u03c0/8 constant factor. Still captures the essential physics: flow rate proportional to pressure gradient and r^4, inversely proportional to viscosity and length.",
+    "source": "llm",
+    "fitted_equation": "dP * r**4 / (mu * L)",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 97.6,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "Q = dP * r**4 / (mu * L)",
+      "confidence": 0.9,
+      "reasoning": "Simplified Hagen-Poiseuille without the \u03c0/8 constant factor. Still captures the essential physics: flow rate proportional to pressure gradient and r^4, inversely proportional to viscosity and length.",
+      "source": "llm",
+      "fitted_equation": "dP * r**4 / (mu * L)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = 3.14159 * dP * r**4 / (8 * mu * L)",
+      "confidence": 0.95,
+      "reasoning": "This is the classic Hagen-Poiseuille equation for volumetric flow rate through a cylindrical pipe, with \u03c0 approximated as 3.14159. The r^4 dependence and inverse relationships with viscosity and length are fundamental to laminar flow.",
+      "source": "llm",
+      "fitted_equation": "3.14159 * dP * r**4 / (8 * mu * L)",
+      "coefficients": {},
+      "r2_score": 0.6087825768694048,
+      "validation_score": 89.5,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = 0.39269 * dP * r**4 / (mu * L)",
+      "confidence": 0.88,
+      "reasoning": "Hagen-Poiseuille with the exact coefficient \u03c0/8 \u2248 0.39269. This accounts for the geometric factor in circular pipe flow and maintains all the correct physical dependencies.",
+      "source": "llm",
+      "fitted_equation": "0.39269 * dP * r**4 / (mu * L)",
+      "coefficients": {},
+      "r2_score": 0.6087713034623017,
+      "validation_score": 89.5,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = dP * r**3 / (mu * L**2)",
+      "confidence": 0.45,
+      "reasoning": "Modified power law with r^3 and L^2 dependencies. Less physically justified but could represent some complex flow regime or account for additional geometric factors.",
+      "source": "llm",
+      "fitted_equation": "dP * r**3 / (mu * L**2)",
+      "coefficients": {},
+      "r2_score": -6332.321254921869,
+      "validation_score": 98.5,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = dP * r**2 / (mu * L)",
+      "confidence": 0.6,
+      "reasoning": "Alternative flow relationship with r^2 dependence instead of r^4. While less accurate than Hagen-Poiseuille, it still captures the basic inverse relationships with viscosity and length.",
+      "source": "llm",
+      "fitted_equation": "dP * r**2 / (mu * L)",
+      "coefficients": {},
+      "r2_score": -22683.29146160648,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": false,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "dP": 0.14159011769535348,
+      "r": 0.29097553429969875,
+      "mu": 2.0161972448071496e-17,
+      "L": -0.27059198430248177
+    },
+    "polynomial_degree": null,
+    "power_exponents": {},
+    "y_range": [
+      5.568394754898292e-07,
+      2957.9031312965444
+    ],
+    "y_scale": "large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "complex"
+  },
+  "timing": {
+    "total": 10.605161666870117,
+    "phase1_analysis": 0.07868313789367676,
+    "phase2_llm": 10.161685466766357,
+    "phase3_verify": 0.36438822746276855
+  },
+  "r2_score": 1.0,
+  "validation_score": 97.6,
+  "expression": "dP * r**4 / (mu * L)",
+  "test_name": "fluid_dynamics_hagen_poiseuille",
+  "timestamp": "2026-01-09T01:27:57.573366",
+  "ground_truth": "dP*r**4/(mu*L)",
+  "domain": "fluid_dynamics",
+  "_metadata": {
+    "session_id": "llm_20260109_012553",
+    "timestamp": "2026-01-09T01:27:57.573458",
+    "passed": true,
+    "test_name": "fluid_dynamics_hagen_poiseuille",
+    "method": "llm_guided"
+  }
+}

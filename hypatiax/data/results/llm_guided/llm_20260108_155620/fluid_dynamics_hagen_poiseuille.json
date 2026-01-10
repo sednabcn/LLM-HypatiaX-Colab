@@ -1,0 +1,13 @@
+{
+  "error": "Object of type bool is not JSON serializable",
+  "test_name": "fluid_dynamics_hagen_poiseuille",
+  "execution_time": 1.2963190078735352,
+  "timestamp": "2026-01-08T15:56:44.881483",
+  "_metadata": {
+    "session_id": "llm_20260108_155620",
+    "timestamp": "2026-01-08T15:56:44.881571",
+    "passed": false,
+    "test_name": "fluid_dynamics_hagen_poiseuille",
+    "method": "llm_guided"
+  }
+}

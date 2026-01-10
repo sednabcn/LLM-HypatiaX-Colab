@@ -1,0 +1,119 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "y = -k * x**2",
+    "confidence": 0.92,
+    "reasoning": "Classic Hooke's law for large deformations with quadratic restoring force, negative sign indicates restoring nature, fits polynomial degree 2 pattern",
+    "source": "llm",
+    "fitted_equation": null,
+    "coefficients": null,
+    "r2_score": 0.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": null
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = -k * x**2",
+      "confidence": 0.92,
+      "reasoning": "Classic Hooke's law for large deformations with quadratic restoring force, negative sign indicates restoring nature, fits polynomial degree 2 pattern",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = k * x**2",
+      "confidence": 0.88,
+      "reasoning": "Quadratic spring force relationship, matches polynomial degree 2 and interaction between k and x variables",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = -k * x**2 + k * x",
+      "confidence": 0.75,
+      "reasoning": "Modified Hooke's law with both linear and quadratic terms, accounts for asymmetric behavior and medium complexity",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = k * (x**2 - x)",
+      "confidence": 0.72,
+      "reasoning": "Factored form of quadratic spring equation, explains interaction between variables and medium y-range",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = -0.5 * k * x**2",
+      "confidence": 0.68,
+      "reasoning": "Potential energy-like form in mechanics with factor of 0.5, consistent with quadratic relationship and restoring force",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "k": 0.0018674011356634669,
+      "x": 0.8676508216066791
+    },
+    "polynomial_degree": 2,
+    "power_exponents": {},
+    "y_range": [
+      -185.85733291963777,
+      194.32266996443403
+    ],
+    "y_scale": "medium",
+    "symmetry": "symmetric",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 7.101037979125977,
+    "phase1_analysis": 0.04373311996459961,
+    "phase2_llm": 7.0557637214660645,
+    "phase3_verify": 0.0011591911315917969
+  },
+  "r2_score": 0.0,
+  "validation_score": 0.0,
+  "expression": "y = -k * x**2",
+  "test_name": "mechanics_hookes_law",
+  "timestamp": "2026-01-09T01:26:25.540127",
+  "ground_truth": "k*x",
+  "domain": "mechanics",
+  "_metadata": {
+    "session_id": "llm_20260109_012553",
+    "timestamp": "2026-01-09T01:26:25.540216",
+    "passed": false,
+    "test_name": "mechanics_hookes_law",
+    "method": "llm_guided"
+  }
+}

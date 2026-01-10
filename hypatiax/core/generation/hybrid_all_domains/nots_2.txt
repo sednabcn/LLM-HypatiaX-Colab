@@ -1,0 +1,49 @@
+026-01-06 21:27:25,165 - WARNING -    [WARNING] Possible overfit
+2026-01-06 21:27:25,165 - WARNING -       High complexity (53) but R2=0.9563
+2026-01-06 21:27:25,165 - INFO - 
+[SUCCESS] SymbolicEngine succeeded (R2=0.9651)
+
+[OK] Discovery complete
+   Expression: P + rho*(h + v - 1.4327277)/0.12738843
+   R2 Score: 0.9651
+   Engine: symbolic
+   Attempt: 4/5
+   Auto-config: Bernoulli: additive energy conservation (no transcendental functions)
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 47.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: engineering_bernoulli_equation.json
+
+📊 R²: 0.9651 | Val: 47.4 | ❌ FAIL
+
+  Expression: P + g*h*rho + rho*v*v/1.9616911 - rho
+   R2 Score: 0.9998
+   Engine: symbolic
+   Attempt: 4/5
+   Auto-config: Bernoulli: additive energy conservation (no transcendental functions)
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 65.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: bernoulli_equation.json
+
+📊 Quick Results:
+   Expression: P + g*h*rho + rho*v*v/1.9616911 - rho
+   R²: 0.9998
+   Validation: 65.3/100
+   Status: ✅ PASS (validator override: Perfect R²=0.9998, correct structure (v², additive))
+   Time: 2147.9s
+
+✅ Test completed
+📂 Results saved in: hypatiax/data/results/20260106_213124

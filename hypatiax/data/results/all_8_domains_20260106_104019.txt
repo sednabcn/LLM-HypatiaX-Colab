@@ -1,0 +1,827 @@
+──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python experiments/generation/tests/10_new_all.py --all --iterations 50                                                        
+
+================================================================================                                                   
+RUNNING ALL DOMAIN TESTS (WITH RESUME)                                                                                             
+================================================================================                                                   
+                                                                                                                                   
+📊 Session Status:                                                                                                                 
+   Session ID: 20260106_104019                                                                                                     
+   Total tests: 8                                                                                                                  
+   ✅ Completed: 0                                                                                                                 
+   ⏳ Pending: 8                                                                                                                   
+   Results dir: hypatiax/data/results/20260106_104019
+
+🔧 Configuration:
+   Samples per test: 1000
+   Tests to run: 8/8
+
+================================================================================
+TEST 1/8: kinetic_energy
+Progress: 0/8 total completed
+================================================================================
+
+================================================================================
+Running: Kinetic Energy
+================================================================================
+Domain: physics
+2026-01-06 10:40:19,389 - INFO - ======================================================================
+2026-01-06 10:40:19,389 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-06 10:40:19,390 - INFO - ======================================================================
+2026-01-06 10:40:19,390 - INFO - Domain: physics
+2026-01-06 10:40:19,390 - INFO - Discovery mode: strict
+2026-01-06 10:40:19,390 - INFO - Primary LLM: anthropic
+2026-01-06 10:40:19,391 - INFO - Auto-config: True
+2026-01-06 10:40:19,391 - INFO - Max retries: 5
+2026-01-06 10:40:19,391 - INFO - PhysicsAware fallback: False
+2026-01-06 10:40:19,391 - INFO - Complexity threshold: 20
+2026-01-06 10:40:19,392 - INFO - ======================================================================
+2026-01-06 10:40:19,392 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-06 10:41:24,271 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Kinetic Energy
+Domain: PHYSICS
+Samples: 1000
+Variables: ['m', 'v']
+Equation hint: kinetic_energy
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-06 10:41:24,272 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'m': 'linear', 'v': 'quadratic'}
+   [SMART] Interactions detected: 1
+   [SMART] Physical constants: {'half': 0.5}
+   [SMART] Confidence: 0.83
+[PATTERNS] multiplicative, interactions, polynomial
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+ [OK] Discovered: v*v*m*0.5
+   R² = 1.0000
+2026-01-06 10:51:56,925 - INFO -    Result: v*v*m*0.5
+2026-01-06 10:51:56,925 - INFO -    R2 = 1.0000
+2026-01-06 10:51:56,926 - INFO -    [BEST] New best!
+2026-01-06 10:51:56,926 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: v*v*m*0.5
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: kinetic_energy.json
+
+📊 Quick Results:
+   Expression: v*v*m*0.5
+   R²: 1.0000
+   Validation: 100.0/100
+   Status: ✅ PASS (validator override: High R²=1.0000, Val=100.0 (dimensional check issue))
+   Time: 698.5s
+
+================================================================================
+TEST 2/8: ohms_law
+Progress: 1/8 total completed
+================================================================================
+
+================================================================================
+Running: Ohm's Law
+================================================================================
+Domain: physics
+2026-01-06 10:51:57,963 - INFO - ======================================================================
+2026-01-06 10:51:57,963 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-06 10:51:57,963 - INFO - ======================================================================
+2026-01-06 10:51:57,964 - INFO - Domain: physics
+2026-01-06 10:51:57,964 - INFO - Discovery mode: strict
+2026-01-06 10:51:57,964 - INFO - Primary LLM: anthropic
+2026-01-06 10:51:57,964 - INFO - Auto-config: True
+2026-01-06 10:51:57,964 - INFO - Max retries: 5
+2026-01-06 10:51:57,964 - INFO - PhysicsAware fallback: False
+2026-01-06 10:51:57,964 - INFO - Complexity threshold: 20
+2026-01-06 10:51:57,965 - INFO - ======================================================================
+2026-01-06 10:51:57,965 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-06 10:51:58,921 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Ohm's Law
+Domain: PHYSICS
+Samples: 1000
+Variables: ['I', 'R']
+Equation hint: ohms_law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-06 10:51:58,922 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+   [SANITIZE] I -> I_var (reserved name)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: True
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'I_var': 'linear', 'R': 'linear'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.93
+[PATTERNS] additive, multiplicative, interactions
+   [SMART] Configuring based on structure...
+   [SMART] → Additive structure: enabling sum operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: I*R
+   R² = 1.0000
+2026-01-06 10:54:05,464 - INFO -    Result: I*R
+2026-01-06 10:54:05,465 - INFO -    R2 = 1.0000
+2026-01-06 10:54:05,465 - INFO -    [BEST] New best!
+2026-01-06 10:54:05,465 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: I*R
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: ohms_law.json
+
+📊 Quick Results:
+   Expression: I*R
+   R²: 1.0000
+   Validation: 100.0/100
+   Status: ✅ PASS (validator override: High R²=1.0000, Val=100.0 (dimensional check issue))
+   Time: 127.5s
+
+================================================================================
+TEST 3/8: henderson_hasselbalch
+Progress: 2/8 total completed
+================================================================================
+
+================================================================================
+Running: Henderson-Hasselbalch Equation
+================================================================================
+Domain: chemistry
+2026-01-06 10:54:05,541 - INFO - ======================================================================
+2026-01-06 10:54:05,541 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-06 10:54:05,541 - INFO - ======================================================================
+2026-01-06 10:54:05,541 - INFO - Domain: chemistry
+2026-01-06 10:54:05,542 - INFO - Discovery mode: strict
+2026-01-06 10:54:05,542 - INFO - Primary LLM: anthropic
+2026-01-06 10:54:05,542 - INFO - Auto-config: True
+2026-01-06 10:54:05,542 - INFO - Max retries: 5
+2026-01-06 10:54:05,542 - INFO - PhysicsAware fallback: False
+2026-01-06 10:54:05,543 - INFO - Complexity threshold: 20
+2026-01-06 10:54:05,543 - INFO - ======================================================================
+2026-01-06 10:54:05,543 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-06 10:54:06,476 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Henderson-Hasselbalch Equation
+Domain: CHEMISTRY
+Samples: 1000
+Variables: ['pKa', 'A_minus', 'HA']
+Equation hint: henderson_hasselbalch
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-06 10:54:06,476 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'pKa': 'linear', 'A_minus': 'log', 'HA': 'log'}
+   [SMART] Interactions detected: 4
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [HINT] Using config for 'henderson_hasselbalch'
+   [CHEMISTRY LOG MODE] Simplified additive config
+[CONFIG] Chemistry logarithmic: henderson_hasselbalch
+   Operators: ['+', '-', '*', '/', '^']
+   Unary: ['log']
+   Iterations: 75
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: pKa + 0.4342945*log(A_minus) - 0.4342945*log(HA)
+   R² = 1.0000
+2026-01-06 11:00:09,317 - INFO -    Result: pKa + 0.4342945*log(A_minus) - 0.4342945*log(HA)
+2026-01-06 11:00:09,317 - INFO -    R2 = 1.0000
+2026-01-06 11:00:09,317 - INFO -    [BEST] New best!
+2026-01-06 11:00:09,318 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: pKa + 0.4342945*log(A_minus) - 0.4342945*log(HA)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Chemistry logarithmic: henderson_hasselbalch
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 82.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: henderson_hasselbalch.json
+
+📊 Quick Results:
+   Expression: pKa + 0.4342945*log(A_minus) - 0.4342945*log(HA)
+   R²: 1.0000
+   Validation: 82.0/100
+   Status: ✅ PASS (validator override: High R²=1.0000, Val=82.0 (dimensional check issue))
+   Time: 364.0s
+
+================================================================================
+TEST 4/8: nernst_equation
+Progress: 3/8 total completed
+================================================================================
+
+================================================================================
+Running: Nernst Equation
+================================================================================
+Domain: chemistry
+2026-01-06 11:00:09,546 - INFO - ======================================================================
+2026-01-06 11:00:09,546 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-06 11:00:09,547 - INFO - ======================================================================
+2026-01-06 11:00:09,547 - INFO - Domain: chemistry
+2026-01-06 11:00:09,547 - INFO - Discovery mode: strict
+2026-01-06 11:00:09,547 - INFO - Primary LLM: anthropic
+2026-01-06 11:00:09,548 - INFO - Auto-config: True
+2026-01-06 11:00:09,548 - INFO - Max retries: 5
+2026-01-06 11:00:09,548 - INFO - PhysicsAware fallback: False
+2026-01-06 11:00:09,548 - INFO - Complexity threshold: 20
+2026-01-06 11:00:09,548 - INFO - ======================================================================
+2026-01-06 11:00:09,549 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-06 11:00:10,487 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Nernst Equation
+Domain: CHEMISTRY
+Samples: 1000
+Variables: ['E0', 'R', 'T', 'n', 'F', 'Q']
+Equation hint: nernst_equation
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-06 11:00:10,488 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+   [SANITIZE] Q -> Q_var (reserved name)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'E0': 'linear', 'R': 'linear', 'T': 'log', 'n': 'linear', 'F': 'cubic', 'Q_var': 'log'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=7.77638e-34): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.57397e-32): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=4.9608e-34): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.25975e-34): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.60
+[PATTERNS] logarithmic
+   [HINT] Using config for 'nernst_equation'
+   [CHEMISTRY LOG MODE] Simplified additive config
+[CONFIG] Chemistry logarithmic: nernst_equation
+   Operators: ['+', '-', '*', '/', '^']
+   Unary: ['log']
+   Iterations: 75
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: E0 + (0.013789931*n - 0.041592393)*log(Q)
+   R² = 0.9997
+2026-01-06 11:05:19,657 - INFO -    Result: E0 + (0.013789931*n - 0.041592393)*log(Q)
+2026-01-06 11:05:19,658 - INFO -    R2 = 0.9997
+2026-01-06 11:05:19,658 - INFO -    [BEST] New best!
+2026-01-06 11:05:19,658 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: E0 + (0.013789931*n - 0.041592393)*log(Q)
+   R2 Score: 0.9997
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Chemistry logarithmic: nernst_equation
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: nernst_equation.json
+
+📊 Quick Results:
+   Expression: E0 + (0.013789931*n - 0.041592393)*log(Q)
+   R²: 0.9997
+   Validation: 91.3/100
+   Status: ✅ PASS (perfect R²)
+   Time: 310.3s
+
+================================================================================
+TEST 5/8: logistic_growth
+Progress: 4/8 total completed
+================================================================================
+
+================================================================================
+Running: Logistic Growth
+================================================================================
+Domain: biology
+2026-01-06 11:05:19,908 - INFO - ======================================================================
+2026-01-06 11:05:19,908 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-06 11:05:19,908 - INFO - ======================================================================
+2026-01-06 11:05:19,908 - INFO - Domain: biology
+2026-01-06 11:05:19,908 - INFO - Discovery mode: strict
+2026-01-06 11:05:19,908 - INFO - Primary LLM: anthropic
+2026-01-06 11:05:19,909 - INFO - Auto-config: True
+2026-01-06 11:05:19,909 - INFO - Max retries: 5
+2026-01-06 11:05:19,909 - INFO - PhysicsAware fallback: False
+2026-01-06 11:05:19,909 - INFO - Complexity threshold: 20
+2026-01-06 11:05:19,909 - INFO - ======================================================================
+2026-01-06 11:05:19,910 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-06 11:05:20,831 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Logistic Growth
+Domain: BIOLOGY
+Samples: 1000
+Variables: ['r', 'N', 'K']
+Equation hint: logistic_growth
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-06 11:05:20,831 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+   [SANITIZE] N -> N_var (reserved name)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'r': 'exp', 'N_var': 'sqrt', 'K': 'linear'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['exp', 'sqrt']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['exp', 'sqrt']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+ [OK] Discovered: r*N*0.8974823*0.12755185**((N/K)**1.7930655)
+   R² = 0.9993
+2026-01-06 11:23:57,012 - INFO -    Result: r*N*0.8974823*0.12755185**((N/K)**1.7930655)
+2026-01-06 11:23:57,012 - INFO -    R2 = 0.9993
+2026-01-06 11:23:57,013 - INFO -    [BEST] New best!
+2026-01-06 11:23:57,013 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: r*N*0.8974823*0.12755185**((N/K)**1.7930655)
+   R2 Score: 0.9993
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 90.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: logistic_growth.json
+
+📊 Quick Results:
+   Expression: r*N*0.8974823*0.12755185**((N/K)**1.7930655)
+   R²: 0.9993
+   Validation: 90.1/100
+   Status: ✅ PASS (validator override: High R²=0.9993, Val=90.1 (dimensional check issue))
+   Time: 1117.3s
+
+================================================================================
+TEST 6/8: bernoulli_equation
+Progress: 5/8 total completed
+================================================================================
+
+================================================================================
+Running: Bernoulli's Equation
+================================================================================
+Domain: engineering
+🚀 Using ENHANCED configuration
+2026-01-06 11:23:57,205 - INFO - ======================================================================
+2026-01-06 11:23:57,206 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-06 11:23:57,206 - INFO - ======================================================================
+2026-01-06 11:23:57,206 - INFO - Domain: engineering
+2026-01-06 11:23:57,206 - INFO - Discovery mode: strict
+2026-01-06 11:23:57,207 - INFO - Primary LLM: anthropic
+2026-01-06 11:23:57,207 - INFO - Auto-config: True
+2026-01-06 11:23:57,208 - INFO - Max retries: 5
+2026-01-06 11:23:57,208 - INFO - PhysicsAware fallback: False
+2026-01-06 11:23:57,208 - INFO - Complexity threshold: 20
+2026-01-06 11:23:57,208 - INFO - ======================================================================
+2026-01-06 11:23:57,209 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-06 11:23:58,447 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Bernoulli's Equation
+Domain: ENGINEERING
+Samples: 1000
+Variables: ['P', 'rho', 'v', 'g', 'h']
+Equation hint: bernoulli_equation
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-06 11:23:58,448 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'P': 'linear', 'rho': 'linear', 'v': 'quadratic', 'g': 'log', 'h': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=6.5715e-18): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=7.3145e-17): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.60
+[PATTERNS] polynomial, logarithmic
+   [HINT] Using config for 'bernoulli_equation'
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: -(-1.0062742)*P + g*h*rho + rho*(-1.3845017*v + v**1.80165)
+   R² = 0.9999
+2026-01-06 11:30:24,793 - INFO -    Result: -(-1.0062742)*P + g*h*rho + rho*(-1.3845017*v + v**1.80165)
+2026-01-06 11:30:24,793 - INFO -    R2 = 0.9999
+2026-01-06 11:30:24,793 - INFO -    [BEST] New best!
+2026-01-06 11:30:24,794 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: -(-1.0062742)*P + g*h*rho + rho*(-1.3845017*v + v**1.80165)
+   R2 Score: 0.9999
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 39.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: bernoulli_equation.json
+
+📊 Quick Results:
+   Expression: -(-1.0062742)*P + g*h*rho + rho*(-1.3845017*v + v**1.80165)
+   R²: 0.9999
+   Validation: 39.3/100
+   Status: ✅ PASS (validator override: High R²=0.9999, Val=39.3 (dimensional check issue))
+   Time: 388.0s
+
+================================================================================
+TEST 7/8: elasticity_demand
+Progress: 6/8 total completed
+================================================================================
+
+================================================================================
+Running: Price Elasticity
+================================================================================
+Domain: economics
+2026-01-06 11:30:25,218 - INFO - ======================================================================
+2026-01-06 11:30:25,218 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-06 11:30:25,219 - INFO - ======================================================================
+2026-01-06 11:30:25,219 - INFO - Domain: economics
+2026-01-06 11:30:25,219 - INFO - Discovery mode: strict
+2026-01-06 11:30:25,219 - INFO - Primary LLM: anthropic
+2026-01-06 11:30:25,220 - INFO - Auto-config: True
+2026-01-06 11:30:25,220 - INFO - Max retries: 5
+2026-01-06 11:30:25,220 - INFO - PhysicsAware fallback: False
+2026-01-06 11:30:25,220 - INFO - Complexity threshold: 20
+2026-01-06 11:30:25,221 - INFO - ======================================================================
+2026-01-06 11:30:25,221 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-06 11:30:26,277 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Price Elasticity
+Domain: ECONOMICS
+Samples: 1000
+Variables: ['Q', 'delta_Q', 'P', 'delta_P']
+Equation hint: elasticity_demand
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-06 11:30:26,277 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+   [SANITIZE] Q -> Q_var (reserved name)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'Q_var': 'log', 'delta_Q': 'linear', 'P': 'cubic', 'delta_P': 'quadratic'}
+   [SMART] Confidence: 0.60
+[PATTERNS] polynomial, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: P*delta_Q/(Q*delta_P)
+   R² = 1.0000
+2026-01-06 11:34:06,849 - INFO -    Result: P*delta_Q/(Q*delta_P)
+2026-01-06 11:34:06,849 - INFO -    R2 = 1.0000
+2026-01-06 11:34:06,849 - INFO -    [BEST] New best!
+2026-01-06 11:34:06,850 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: P*delta_Q/(Q*delta_P)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 97.6/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: elasticity_demand.json
+
+📊 Quick Results:
+   Expression: P*delta_Q/(Q*delta_P)
+   R²: 1.0000
+   Validation: 97.6/100
+   Status: ✅ PASS (validator override: High R²=1.0000, Val=97.6 (dimensional check issue))
+   Time: 221.9s
+
+================================================================================
+TEST 8/8: cobb_douglas
+Progress: 7/8 total completed
+================================================================================
+
+================================================================================
+Running: Cobb-Douglas Function
+================================================================================
+Domain: economics
+2026-01-06 11:34:07,183 - INFO - ======================================================================
+2026-01-06 11:34:07,183 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-06 11:34:07,183 - INFO - ======================================================================
+2026-01-06 11:34:07,184 - INFO - Domain: economics
+2026-01-06 11:34:07,184 - INFO - Discovery mode: strict
+2026-01-06 11:34:07,184 - INFO - Primary LLM: anthropic
+2026-01-06 11:34:07,185 - INFO - Auto-config: True
+2026-01-06 11:34:07,185 - INFO - Max retries: 5
+2026-01-06 11:34:07,185 - INFO - PhysicsAware fallback: False
+2026-01-06 11:34:07,185 - INFO - Complexity threshold: 20
+2026-01-06 11:34:07,185 - INFO - ======================================================================
+2026-01-06 11:34:07,186 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-06 11:34:08,277 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Cobb-Douglas Function
+Domain: ECONOMICS
+Samples: 1000
+Variables: ['A', 'K', 'L', 'alpha', 'beta']
+Equation hint: cobb_douglas
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-06 11:34:08,279 - INFO - 
+[SYMBOLIC] Attempt 1/5 (seed=42)
+   [SANITIZE] alpha -> alpha_var (reserved name)
+   [SANITIZE] beta -> beta_var (reserved name)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'A': 'linear', 'K': 'linear', 'L': 'sqrt', 'alpha_var': 'linear', 'beta_var': 'linear'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.83
+[PATTERNS] multiplicative, interactions
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['sqrt']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['sqrt']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: A*K**alpha*L**beta
+   R² = 1.0000
+2026-01-06 11:45:13,749 - INFO -    Result: A*K**alpha*L**beta
+2026-01-06 11:45:13,749 - INFO -    R2 = 1.0000
+2026-01-06 11:45:13,750 - INFO -    [BEST] New best!
+2026-01-06 11:45:13,750 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: A*K**alpha*L**beta
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: cobb_douglas.json
+
+📊 Quick Results:
+   Expression: A*K**alpha*L**beta
+   R²: 1.0000
+   Validation: 91.3/100
+   Status: ✅ PASS (validator override: High R²=1.0000, Val=91.3 (dimensional check issue))
+   Time: 666.6s
+
+================================================================================
+SESSION COMPLETE
+================================================================================
+
+📊 Final Statistics:
+   Total tests: 8
+   Completed: 8
+   Failed: 0
+   Time: 3894.5s
+
+📂 Results directory: hypatiax/data/results/20260106_104019
+
+📊 Summary saved: hypatiax/data/results/20260106_104019/summary.json
+
+================================================================================
+📊 FINAL SUMMARY
+================================================================================
+
+✅ Passed: 8/8
+
+Detailed Results:
+  ✅ bernoulli_equation        R²=0.9999
+  ✅ elasticity_demand         R²=1.0000
+  ✅ cobb_douglas              R²=1.0000
+  ✅ kinetic_energy            R²=1.0000
+  ✅ nernst_equation           R²=0.9997
+  ✅ henderson_hasselbalch     R²=1.0000
+  ✅ ohms_law                  R²=1.0000
+  ✅ logistic_growth           R²=0.9993
+
+================================================================================
+

@@ -1,0 +1,8 @@
+[
+  {
+    "method": "neural_network",
+    "description": "Impermanent Loss",
+    "r2_test": 0.9870100310042847,
+    "extrapolation_error": 0.10289717033143893
+  }
+]

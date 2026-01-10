@@ -1,0 +1,181 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = wavelength / a",
+    "confidence": 0.95,
+    "reasoning": "This is the fundamental single slit diffraction formula for the angular position of the first minimum, where sin(\u03b8) \u2248 \u03b8 = \u03bb/a. The positive correlation with wavelength and strong negative correlation with slit width a matches perfectly.",
+    "source": "llm",
+    "fitted_equation": "wavelength / a",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 99.1,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = wavelength / a",
+      "confidence": 0.95,
+      "reasoning": "This is the fundamental single slit diffraction formula for the angular position of the first minimum, where sin(\u03b8) \u2248 \u03b8 = \u03bb/a. The positive correlation with wavelength and strong negative correlation with slit width a matches perfectly.",
+      "source": "llm",
+      "fitted_equation": "wavelength / a",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 0.785 * wavelength / a",
+      "confidence": 0.55,
+      "reasoning": "Coefficient 0.785 \u2248 \u03c0/4, which might appear in quarter-wave or geometric optics approximations to diffraction.",
+      "source": "llm",
+      "fitted_equation": "0.785 * wavelength / a",
+      "coefficients": {},
+      "r2_score": 0.9381743323151743,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 1.22 * wavelength / a",
+      "confidence": 0.9,
+      "reasoning": "This includes the factor 1.22 which appears in diffraction formulas, particularly for circular apertures, but could apply to single slit diffraction with a geometric correction factor.",
+      "source": "llm",
+      "fitted_equation": "1.22 * wavelength / a",
+      "coefficients": {},
+      "r2_score": 0.9352652825106422,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 0.637 * wavelength / a",
+      "confidence": 0.7,
+      "reasoning": "The coefficient 0.637 \u2248 2/\u03c0, which could arise from intensity calculations or Fourier transform relationships in diffraction theory.",
+      "source": "llm",
+      "fitted_equation": "0.637 * wavelength / a",
+      "coefficients": {},
+      "r2_score": 0.8237597316352234,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 0.5 * wavelength / a",
+      "confidence": 0.85,
+      "reasoning": "A variant of the basic diffraction formula with a coefficient of 0.5, which could arise from specific measurement conditions or half-angle considerations.",
+      "source": "llm",
+      "fitted_equation": "0.5 * wavelength / a",
+      "coefficients": {},
+      "r2_score": 0.665626459249185,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 1.5 * wavelength / a",
+      "confidence": 0.6,
+      "reasoning": "Factor of 1.5 could arise from specific diffraction conditions or represent the position of a secondary diffraction feature.",
+      "source": "llm",
+      "fitted_equation": "1.5 * wavelength / a",
+      "coefficients": {},
+      "r2_score": 0.665626459249185,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = wavelength**1.1 / a**1.01",
+      "confidence": 0.65,
+      "reasoning": "Accounts for the slight deviation from perfect -1 power law (a^-1.01) detected in the data, suggesting small nonlinear effects.",
+      "source": "llm",
+      "fitted_equation": "wavelength**1.1 / a**1.01",
+      "coefficients": {},
+      "r2_score": 0.28738781610551034,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 2 * wavelength / a",
+      "confidence": 0.8,
+      "reasoning": "This could represent the angular width of the central maximum in single slit diffraction, which is twice the position of the first minimum.",
+      "source": "llm",
+      "fitted_equation": "2 * wavelength / a",
+      "coefficients": {},
+      "r2_score": -0.3374941630032602,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 2.44 * wavelength / a",
+      "confidence": 0.5,
+      "reasoning": "Factor of 2.44 = 2 \u00d7 1.22, possibly relating to the full width of diffraction patterns or second-order diffraction effects.",
+      "source": "llm",
+      "fitted_equation": "2.44 * wavelength / a",
+      "coefficients": {},
+      "r2_score": -1.7734278964035606,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 3.14159 * wavelength / a",
+      "confidence": 0.75,
+      "reasoning": "Includes \u03c0 factor which often appears in wave optics formulas, possibly related to phase differences or path length calculations.",
+      "source": "llm",
+      "fitted_equation": "3.14159 * wavelength / a",
+      "coefficients": {},
+      "r2_score": -5.134293565486793,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": false,
+    "is_power_law": true,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "wavelength": 0.16389255478871112,
+      "a": -0.5687097398148785
+    },
+    "polynomial_degree": null,
+    "power_exponents": {
+      "a": -1.012570724112799
+    },
+    "y_range": [
+      0.004200223218501525,
+      0.36768258430758466
+    ],
+    "y_scale": "small",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 15.121371984481812,
+    "phase1_analysis": 0.05585312843322754,
+    "phase2_llm": 14.485143184661865,
+    "phase3_verify": 0.5796339511871338
+  },
+  "r2_score": 1.0,
+  "validation_score": 99.1,
+  "expression": "wavelength / a",
+  "test_name": "optics_single_slit_diffraction",
+  "timestamp": "2026-01-09T01:47:51.707744",
+  "ground_truth": "wavelength/a",
+  "domain": "optics",
+  "_metadata": {
+    "session_id": "llm_20260109_014413",
+    "timestamp": "2026-01-09T01:47:51.707834",
+    "passed": true,
+    "test_name": "optics_single_slit_diffraction",
+    "method": "llm_guided"
+  }
+}

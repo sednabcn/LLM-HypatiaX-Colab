@@ -1,0 +1,120 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "F = q * v * B",
+    "confidence": 0.95,
+    "reasoning": "This is the fundamental Lorentz force equation for a charged particle moving perpendicular to a magnetic field, which directly matches the problem description and involves all three variables multiplicatively",
+    "source": "llm",
+    "fitted_equation": "q * v * B",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "F = q * v * B",
+      "confidence": 0.95,
+      "reasoning": "This is the fundamental Lorentz force equation for a charged particle moving perpendicular to a magnetic field, which directly matches the problem description and involves all three variables multiplicatively",
+      "source": "llm",
+      "fitted_equation": "q * v * B",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "F = q * v * B * sin(theta)",
+      "confidence": 0.85,
+      "reasoning": "The general Lorentz force equation accounting for the angle between velocity and magnetic field, where sin(theta) could be absorbed as a constant coefficient in the data",
+      "source": "llm",
+      "fitted_equation": "q * v * B * sin(theta)",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "F = q * (v * B + v**2 * B / c)",
+      "confidence": 0.7,
+      "reasoning": "A relativistic correction to the Lorentz force that includes higher-order velocity terms, which could explain the polynomial degree 3 pattern detected",
+      "source": "llm",
+      "fitted_equation": "q * (v * B + v**2 * B / c)",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "F = q * v * B * (1 + alpha * v * B)",
+      "confidence": 0.65,
+      "reasoning": "A nonlinear extension of the basic Lorentz force with interaction terms between v and B, which matches the detected polynomial structure and interaction patterns",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "F = q * B * v * (1 - beta * q * v)",
+      "confidence": 0.6,
+      "reasoning": "A modified Lorentz force with charge-dependent corrections that could arise from field saturation effects or quantum corrections, explaining the cubic polynomial behavior",
+      "source": "llm",
+      "fitted_equation": "q * B * v * (1 - beta * q * v)",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "q": 0.5100580262893359,
+      "v": 0.5003609766220373,
+      "B": 0.49284903529110846
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      1.1492135118447179e-07,
+      0.0007847282470211259
+    ],
+    "y_scale": "small",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 8.517899513244629,
+    "phase1_analysis": 0.06983065605163574,
+    "phase2_llm": 8.443974256515503,
+    "phase3_verify": 0.003318309783935547
+  },
+  "r2_score": 1.0,
+  "validation_score": 0.0,
+  "expression": "q * v * B",
+  "test_name": "electromagnetism_lorentz_force",
+  "timestamp": "2026-01-09T00:07:33.886463",
+  "ground_truth": "q*v*B",
+  "domain": "electromagnetism",
+  "_metadata": {
+    "session_id": "llm_20260109_000551",
+    "timestamp": "2026-01-09T00:07:33.886546",
+    "passed": false,
+    "test_name": "electromagnetism_lorentz_force",
+    "method": "llm_guided"
+  }
+}

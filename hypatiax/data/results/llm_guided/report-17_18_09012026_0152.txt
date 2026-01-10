@@ -1,0 +1,998 @@
+﻿──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/hybrid_llm_guide_validation/llm_guided_symbolic_discovery.py --protocol A --batch --niterations 10
+✅ Loaded Protocol A from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/protocols/experiment_protocol_all_18_a.py
+✅ Converted 18 test cases from protocol
+
+================================================================================
+LLM-GUIDED DISCOVERY - Protocol A
+================================================================================
+Tests: 18
+Running: 18/18 tests
+
+================================================================================
+TEST 1/18: mechanics_kinetic_energy
+================================================================================
+
+================================================================================
+Running: Kinetic Energy | Domain: mechanics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: mechanics
+Variables: m, v
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: medium
+   ⏱  Time: 0.36s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 12.24s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 100.0/100 | y = 0.5 * m * v**2
+   ✅ R²=1.0000 | Val: 99.4/100 | y = m * v**2 / 2
+   ⚠ Eval failed: name 'c' is not defined
+   ⚠ R²=0.0000 | Val: 95.5/100 | y = 0.5 * m * v**2 + c
+   ⚠ Eval failed: name 'a' is not defined
+   ⚠ R²=0.0000 | Val: 95.5/100 | y = a * m * v**2
+   ⚠ Eval failed: name 'b' is not defined
+   ⚠ R²=0.0000 | Val: 86.8/100 | y = 0.5 * m * v**2 + b * m * v
+   ⚠ R²=-3095.9568 | Val: 99.4/100 | y = m * (v**2 + v**3) / 2
+   ✅ R²=1.0000 | Val: 100.0/100 | y = 0.5 * m**2 * v**2 / m
+   ⚠ R²=-4126.1473 | Val: 65.3/100 | y = (m + v) * m * v**2 / 2
+   ⚠ Eval failed: name 'c' is not defined
+   ⚠ R²=0.0000 | Val: 94.0/100 | y = m * v**2 * (1 + v/c)
+   ✅ R²=0.9972 | Val: 65.3/100 | y = 0.5 * m * v**2 + 0.1 * m**2 * v
+   ⏱  Time: 1.45s
+
+================================================================================
+✅ SUCCESS
+   Equation: 0.5 * m * v**2
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 14.06s
+   💾 Saved: mechanics_kinetic_energy.json
+
+================================================================================
+TEST 2/18: mechanics_gravitational_potential_energy
+================================================================================
+
+================================================================================
+Running: Gravitational Potential Energy | Domain: mechanics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: mechanics
+Variables: m, g, h
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: medium
+   ⏱  Time: 0.07s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 10.91s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 100.0/100 | y = m * g * h
+   ⚠ Eval failed: name 'c' is not defined
+   ⚠ R²=0.0000 | Val: 95.5/100 | y = m * g * h + c
+   ⚠ Eval failed: name 'k' is not defined
+   ⚠ R²=0.0000 | Val: 86.8/100 | y = k * m * g * h
+   ⚠ R²=-13099.9907 | Val: 99.4/100 | y = m * g * h**2
+   ⚠ R²=-13659.0174 | Val: 100.0/100 | y = m**2 * g * h
+   ⚠ R²=-95109722.1603 | Val: 99.4/100 | y = m * g * h**3
+   ⚠ R²=-102119510.6087 | Val: 100.0/100 | y = m**3 * g * h
+   ⚠ R²=-176.4493 | Val: 99.4/100 | y = m * g**2 * h
+   ⚠ R²=-7943077310.8333 | Val: 100.0/100 | y = (m * g * h)**2
+   ⚠ Eval failed: name 'k' is not defined
+   ⚠ R²=0.0000 | Val: 60.8/100 | y = m * g * h + k * m * h**2
+   ⏱  Time: 0.51s
+
+================================================================================
+✅ SUCCESS
+   Equation: m * g * h
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 11.49s
+   💾 Saved: mechanics_gravitational_potential_energy.json
+
+================================================================================
+TEST 3/18: mechanics_hookes_law
+================================================================================
+
+================================================================================
+Running: Hookes Law | Domain: mechanics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: mechanics
+Variables: k, x
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: medium
+   ⏱  Time: 0.04s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 10.94s
+
+[PHASE 3] Verifying hypotheses...
+   ⚠ R²=-3.0010 | Val: 91.3/100 | y = -k * x
+   ✅ R²=1.0000 | Val: 100.0/100 | y = k * x
+   ⚠ Eval failed: name 'c' is not defined
+   ⚠ R²=0.0000 | Val: 94.9/100 | y = -k * x + c
+   ⚠ R²=-2.4208 | Val: 91.3/100 | y = -k * x**2
+   ⚠ R²=-2.4044 | Val: 100.0/100 | y = k * x**2
+   ⚠ Eval failed: name 'a' is not defined
+   ⚠ R²=0.0000 | Val: 60.8/100 | y = -k * x - a * x**2
+   ⚠ Eval failed: name 'b' is not defined
+   ⚠ R²=0.0000 | Val: 60.8/100 | y = k * x + b * x**2
+   ⚠ Eval failed: name 'a' is not defined
+   ⚠ R²=0.0000 | Val: 86.8/100 | y = -k * x * (1 + a * x)
+   ⚠ R²=-5.3969 | Val: 99.4/100 | y = k * (x**2 - x)
+   ⚠ Eval failed: name 'b' is not defined
+   ⚠ R²=0.0000 | Val: 86.8/100 | y = -k * x + b * k * x**2
+   ⏱  Time: 1.19s
+
+================================================================================
+✅ SUCCESS
+   Equation: k * x
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 12.19s
+   💾 Saved: mechanics_hookes_law.json
+
+================================================================================
+TEST 4/18: thermodynamics_ideal_gas_law
+================================================================================
+
+================================================================================
+Running: Ideal Gas Law | Domain: thermodynamics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: thermodynamics
+Variables: n, R, T, V
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: complex
+   ⏱  Time: 0.09s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 12.13s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 91.0/100 | P = n * R * T / V
+   ✅ R²=1.0000 | Val: 91.0/100 | P = R * n * T / V
+   ✅ R²=1.0000 | Val: 91.0/100 | P = 8.314 * n * T / V
+   ✅ R²=1.0000 | Val: 91.0/100 | P = n * T * R / V
+   ✅ R²=1.0000 | Val: 91.0/100 | P = (n * R * T) / V
+   ✅ R²=1.0000 | Val: 91.0/100 | P = n * R * T * V**(-1)
+   ⚠ R²=-0.2060 | Val: 91.0/100 | P = 0.08206 * n * T / V
+   ✅ R²=1.0000 | Val: 91.0/100 | P = n * T / (V / R)
+   ✅ R²=1.0000 | Val: 91.0/100 | P = R * (n * T) / V
+   ⚠ R²=0.3932 | Val: 72.5/100 | P = (n + R) * T / V
+   ⏱  Time: 0.49s
+
+================================================================================
+✅ SUCCESS
+   Equation: n * R * T / V
+   R² Score: 1.0000
+   Validation: 91.0/100
+   Total time: 12.71s
+   💾 Saved: thermodynamics_ideal_gas_law.json
+
+================================================================================
+TEST 5/18: thermodynamics_heat_capacity
+================================================================================
+
+================================================================================
+Running: Heat Capacity | Domain: thermodynamics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: thermodynamics
+Variables: m, c, dT
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: medium
+   ⏱  Time: 0.07s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 14.13s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 100.0/100 | Q = m * c * dT
+   ⚠ R²=-106.6812 | Val: 91.3/100 | Q = m * c * dT + 0.1 * m * c * dT**2
+   ⚠ R²=-0.0768 | Val: 91.3/100 | Q = m * c * dT * (1 + 0.01 * dT)
+   ⚠ R²=0.7428 | Val: 91.3/100 | Q = m * c * dT + 0.05 * m**2 * c * dT
+   ⚠ R²=-24.1273 | Val: 91.3/100 | Q = m * c * dT + 0.001 * m * c**2 * dT
+   ⚠ R²=-30822.5515 | Val: 91.3/100 | Q = m * c * dT + 0.02 * m * c * dT**3
+   ⚠ R²=0.9260 | Val: 65.3/100 | Q = 1.2 * m * c * dT + 0.1 * m * dT**2
+   ⚠ R²=0.3965 | Val: 91.3/100 | Q = m * c * dT * (1 + 0.001 * m * dT)
+   ⚠ R²=0.8703 | Val: 65.3/100 | Q = m**1.1 * c * dT + 0.05 * m * c * dT
+   ⚠ R²=-247.9323 | Val: 65.3/100 | Q = m * c**1.2 * dT + 0.1 * m * c * dT**2
+   ⏱  Time: 1.68s
+
+================================================================================
+✅ SUCCESS
+   Equation: m * c * dT
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 15.88s
+   💾 Saved: thermodynamics_heat_capacity.json
+
+================================================================================
+TEST 6/18: thermodynamics_carnot_efficiency
+================================================================================
+
+================================================================================
+Running: Carnot Efficiency | Domain: thermodynamics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: thermodynamics
+Variables: Tc, Th
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: simple
+   ⏱  Time: 0.06s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 10.97s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 98.5/100 | efficiency = 1 - Tc/Th
+   ✅ R²=1.0000 | Val: 98.5/100 | efficiency = (Th - Tc)/Th
+   ⚠ R²=0.9021 | Val: 98.5/100 | efficiency = 1 - 0.95 * Tc/Th
+   ✅ R²=0.9854 | Val: 98.5/100 | efficiency = 0.98 * (1 - Tc/Th)
+   ⚠ R²=0.6979 | Val: 91.0/100 | efficiency = (Th - Tc)/(Th + 50)
+   ✅ R²=0.9592 | Val: 99.1/100 | efficiency = 1 - (Tc/Th)**1.05
+   ✅ R²=0.9596 | Val: 98.5/100 | efficiency = 0.8 * (Th - Tc)/Th + 0.1
+   ⚠ R²=0.8786 | Val: 91.0/100 | efficiency = 1 - Tc/(Th - 25)
+   ⚠ R²=-0.4386 | Val: 91.0/100 | efficiency = (Th**2 - Tc**2)/(Th**2 + Tc**2)
+   ⚠ Eval failed: only length-1 arrays can be converted to Python scalars
+   ⚠ R²=0.0000 | Val: 85.9/100 | efficiency = 1 - exp(-0.01 * (Th - Tc))
+   ⏱  Time: 1.42s
+
+================================================================================
+✅ SUCCESS
+   Equation: 1 - Tc/Th
+   R² Score: 1.0000
+   Validation: 98.5/100
+   Total time: 12.45s
+   💾 Saved: thermodynamics_carnot_efficiency.json
+
+================================================================================
+TEST 7/18: electromagnetism_coulomb_law
+================================================================================
+
+================================================================================
+Running: Coulomb Law | Domain: electromagnetism
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: electromagnetism
+Variables: k, q1, q2, r
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+   ✓ Complexity: complex
+   ⏱  Time: 0.08s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 12.76s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 91.3/100 | F = k * q1 * q2 / r**2
+   ⚠ R²=0.0089 | Val: 91.0/100 | U = k * q1 * q2 / r
+   ⚠ R²=-2420060951543.9624 | Val: 99.4/100 | E = k * q1 / r**2
+   ⚠ R²=-14792178373547.9316 | Val: 99.4/100 | F = k * (q1 + q2) / r**2
+   ⚠ R²=-0.0196 | Val: 91.0/100 | F = k * q1 * q2 / (r**2 + 1)
+   ⚠ Eval failed: only length-1 arrays can be converted to Python scalars
+   ⚠ R²=0.0000 | Val: 85.6/100 | F = k * q1 * q2 * exp(-r) / r**2
+   ⚠ R²=-1.8470 | Val: 99.4/100 | F = k * (q1**2 + q2**2) / r**2
+   ⚠ R²=-6174.9486 | Val: 91.3/100 | F = k * q1 * q2 / r**3
+   ⚠ R²=0.0139 | Val: 91.3/100 | F = k * q1 * q2 / (r + 0.1)**2
+   ⚠ Eval failed: only length-1 arrays can be converted to Python scalars
+   ⚠ R²=0.0000 | Val: 99.4/100 | F = k * sqrt(q1 * q2) / r**2
+   ⏱  Time: 0.88s
+
+================================================================================
+✅ SUCCESS
+   Equation: k * q1 * q2 / r**2
+   R² Score: 1.0000
+   Validation: 91.3/100
+   Total time: 13.72s
+   💾 Saved: electromagnetism_coulomb_law.json
+
+================================================================================
+TEST 8/18: electromagnetism_ohms_law
+================================================================================
+
+================================================================================
+Running: Ohms Law | Domain: electromagnetism
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: electromagnetism
+Variables: I, R
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: medium
+   ⏱  Time: 0.06s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 11.71s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 100.0/100 | y = I * R
+   ⚠ R²=-101.3890 | Val: 99.4/100 | y = I**2 * R
+   ⚠ Eval failed: name 'a' is not defined
+   ⚠ R²=0.0000 | Val: 94.9/100 | y = a * I**2 * R + b
+   ⚠ Eval failed: name 'a' is not defined
+   ⚠ R²=0.0000 | Val: 60.8/100 | y = a * I * R + b * I**2
+   ⚠ Eval failed: name 'a' is not defined
+   ⚠ R²=0.0000 | Val: 60.8/100 | y = a * I * R + b * R**2
+   ⚠ R²=-78017795.2841 | Val: 100.0/100 | y = (I * R)**2
+   ⚠ Eval failed: name 'a' is not defined
+   ⚠ R²=0.0000 | Val: 60.8/100 | y = a * I**2 + b * R**2
+   ⚠ Eval failed: name 'a' is not defined
+   ⚠ R²=0.0000 | Val: 86.8/100 | y = a * I * R**2 + b * I
+   ⚠ Eval failed: name 'a' is not defined
+   ⚠ R²=0.0000 | Val: 68.9/100 | y = a * (I + R)**2 + b
+   ⚠ Eval failed: name 'a' is not defined
+   ⚠ R²=0.0000 | Val: 86.8/100 | y = a * I**2 * R**2 + b * I * R
+   ⏱  Time: 0.85s
+
+================================================================================
+✅ SUCCESS
+   Equation: I * R
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 12.62s
+   💾 Saved: electromagnetism_ohms_law.json
+
+================================================================================
+TEST 9/18: electromagnetism_lorentz_force
+================================================================================
+
+================================================================================
+Running: Lorentz Force | Domain: electromagnetism
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: electromagnetism
+Variables: q, v, B
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: medium
+   ⏱  Time: 0.06s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 11.18s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 100.0/100 | F = q * v * B
+   ⚠ Eval failed: name 'theta' is not defined
+   ⚠ R²=0.0000 | Val: 86.8/100 | F = q * v * B * sin(theta)
+   ⚠ R²=-0.7124 | Val: 100.0/100 | F = 1.602e-19 * q * v * B
+   ⚠ Eval failed: name 'E' is not defined
+   ⚠ R²=0.0000 | Val: 99.4/100 | F = q * (v * B + E)
+   ⚠ R²=-10260.8988 | Val: 100.0/100 | F = q * v**2 * B
+   ⚠ R²=-74.4579 | Val: 99.4/100 | F = q * v * B**2
+   ⚠ R²=-0.7124 | Val: 99.4/100 | F = q**2 * v * B
+   ⚠ Eval failed: name 'c' is not defined
+   ⚠ R²=0.0000 | Val: 82.3/100 | F = (q * v * B) / (1 + v**2/c**2)
+   ⚠ R²=-104.2025 | Val: 91.3/100 | F = q * v * B * (1 + 0.1 * v)
+   ⚠ R²=-75.1928 | Val: 91.3/100 | F = q * v * B + 0.001 * q * v**3 * B
+   ⏱  Time: 0.75s
+
+================================================================================
+✅ SUCCESS
+   Equation: q * v * B
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 12.00s
+   💾 Saved: electromagnetism_lorentz_force.json
+
+================================================================================
+TEST 10/18: fluid_dynamics_bernoulli_equation
+================================================================================
+
+================================================================================
+Running: Bernoulli Equation | Domain: fluid_dynamics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: fluid_dynamics
+Variables: P, rho, v
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: simple
+   ⏱  Time: 0.07s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 14.42s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 100.0/100 | P + 0.5 * rho * v**2
+   ⚠ R²=0.5213 | Val: 100.0/100 | P + rho * v**2
+   ✅ R²=1.0000 | Val: 99.4/100 | P * (1 + 0.5 * rho * v**2 / P)
+   ⚠ R²=0.9114 | Val: 65.3/100 | P + rho * v**2 / 2 + rho * 9.81
+   ✅ R²=1.0000 | Val: 99.4/100 | P * (1 + v**2 / (2 * P / rho))
+   ⚠ R²=0.5371 | Val: 73.4/100 | P + rho * v**3 / 1000
+   ⚠ Eval failed: only length-1 arrays can be converted to Python scalars
+   ⚠ R²=0.0000 | Val: 85.0/100 | P * exp(rho * v**2 / (2 * P))
+   ⚠ R²=-2.4562 | Val: 73.4/100 | P + rho * v**2 * (1 + 0.1 * v)
+   ⚠ R²=0.8389 | Val: 99.4/100 | P * (1 + rho * v**2 / 200000)
+   ⚠ Pruned (unit violation): P + 1000 * log(1 + rho * v**2 / 1000)
+   ⚠ R²=0.0000 | Val: 0.0/100 | P + 1000 * log(1 + rho * v**2 / 1000)
+   ⏱  Time: 1.35s
+
+================================================================================
+✅ SUCCESS
+   Equation: P + 0.5 * rho * v**2
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 15.84s
+   💾 Saved: fluid_dynamics_bernoulli_equation.json
+
+================================================================================
+TEST 11/18: fluid_dynamics_reynolds_number
+================================================================================
+
+================================================================================
+Running: Reynolds Number | Domain: fluid_dynamics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: fluid_dynamics
+Variables: rho, v, L, mu
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: complex
+   ⏱  Time: 0.09s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 12.82s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 91.0/100 | y = rho * v * L / mu
+   ✅ R²=1.0000 | Val: 91.0/100 | y = (rho * v * L) / mu
+   ⚠ R²=-1122289.3835 | Val: 91.0/100 | y = 1000 * rho * v * L / mu
+   ✅ R²=1.0000 | Val: 91.0/100 | y = (rho * v**2 * L) / (mu * v)
+   ✅ R²=1.0000 | Val: 91.0/100 | y = rho * v * L / (mu + 1e-6)
+   ✅ R²=1.0000 | Val: 91.0/100 | y = (rho * v * L / mu)**1.0
+   ⚠ R²=-0.1121 | Val: 91.3/100 | y = rho**0.5 * v**1.5 * L**0.5 / mu**0.5
+   ✅ R²=1.0000 | Val: 90.4/100 | y = (rho + 1) * v * L / mu
+   ✅ R²=1.0000 | Val: 91.0/100 | y = rho * v * L * mu**(-1)
+   ✅ R²=0.9943 | Val: 90.4/100 | y = (rho * v * L) / (mu * (1 + 0.01 * v))
+   ⏱  Time: 0.65s
+
+================================================================================
+✅ SUCCESS
+   Equation: rho * v * L / mu
+   R² Score: 1.0000
+   Validation: 91.0/100
+   Total time: 13.55s
+   💾 Saved: fluid_dynamics_reynolds_number.json
+
+================================================================================
+TEST 12/18: fluid_dynamics_hagen_poiseuille
+================================================================================
+
+================================================================================
+Running: Hagen Poiseuille | Domain: fluid_dynamics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: fluid_dynamics
+Variables: dP, r, mu, L
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: complex
+   ⏱  Time: 0.08s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 14.03s
+
+[PHASE 3] Verifying hypotheses...
+   ⚠ R²=0.6088 | Val: 89.5/100 | Q = 3.14159 * dP * r**4 / (8 * mu * L)
+   ⚠ R²=0.6088 | Val: 89.5/100 | Q = 0.39270 * dP * r**4 / (mu * L)
+   ⚠ R²=0.1879 | Val: 97.6/100 | Q = dP * r**4 / (8 * mu * L)
+   ⚠ R²=0.1879 | Val: 89.5/100 | Q = 0.125 * dP * r**4 / (mu * L)
+   ⚠ R²=-1361.9378 | Val: 97.6/100 | v = dP * r**2 / (4 * mu * L)
+   ⚠ R²=0.6088 | Val: 89.5/100 | Q = 1.5708 * dP * r**4 / (4 * mu * L)
+   ⚠ R²=0.0045 | Val: 97.6/100 | Q = dP * r**4 / (32 * mu * L)
+   ⚠ Eval failed: name 'Q' is not defined
+   ⚠ R²=0.0000 | Val: 70.0/100 | tau = 4 * mu * Q / (3.14159 * r**3)
+   ⚠ R²=0.6088 | Val: 89.5/100 | Q = 0.78540 * dP * r**4 / (2 * mu * L)
+   ⚠ R²=-148841533.7497 | Val: 98.5/100 | Re = dP * r**3 / (mu**2 * L)
+   ⏱  Time: 0.77s
+
+================================================================================
+⚠  No hypothesis met thresholds
+   Total time: 14.88s
+   💾 Saved: fluid_dynamics_hagen_poiseuille.json
+
+================================================================================
+TEST 13/18: optics_thin_lens_equation
+================================================================================
+
+================================================================================
+Running: Thin Lens Equation | Domain: optics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: optics
+Variables: do, di
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: complex
+   ⏱  Time: 0.06s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 12.64s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 89.5/100 | 1/f = 1/do + 1/di
+   ✅ R²=1.0000 | Val: 89.5/100 | y = 1/do + 1/di
+   ✅ R²=1.0000 | Val: 97.6/100 | y = (do + di)/(do * di)
+   ⚠ R²=-3.6772 | Val: 91.0/100 | y = 1/(1/do + 1/di)
+   ⚠ R²=-3.6772 | Val: 91.0/100 | y = do * di / (do + di)
+   ⚠ Eval failed: name 'k' is not defined
+   ⚠ R²=0.0000 | Val: 93.1/100 | y = k * (1/do + 1/di)
+   ⚠ R²=-3.6772 | Val: 91.0/100 | y = 1/(do**-1 + di**-1)
+   ⚠ R²=-3.6772 | Val: 91.0/100 | y = (do**-1 + di**-1)**-1
+   ⚠ R²=-15.8797 | Val: 91.0/100 | y = 2/(1/do + 1/di)
+   ⚠ R²=-1.5497 | Val: 89.5/100 | y = 1/do - 1/di
+   ⏱  Time: 0.75s
+
+================================================================================
+✅ SUCCESS
+   Equation: (do + di)/(do * di)
+   R² Score: 1.0000
+   Validation: 97.6/100
+   Total time: 13.44s
+   💾 Saved: optics_thin_lens_equation.json
+
+================================================================================
+TEST 14/18: optics_snells_law
+================================================================================
+
+================================================================================
+Running: Snells Law | Domain: optics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: optics
+Variables: n1, sin_theta1
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: medium
+   ⏱  Time: 0.06s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 12.81s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 100.0/100 | y = n1 * sin_theta1
+   ⚠ R²=-0.1045 | Val: 100.0/100 | y = 1.5 * n1 * sin_theta1
+   ⚠ R²=0.8160 | Val: 99.4/100 | y = n1 * sin_theta1 + 0.2
+   ⚠ R²=0.5189 | Val: 100.0/100 | y = 1.33 * n1 * sin_theta1
+   ⚠ R²=-3.7275 | Val: 99.4/100 | y = n1**2 * sin_theta1
+   ⚠ R²=0.3840 | Val: 100.0/100 | y = n1 * sin_theta1**2
+   ⚠ R²=-0.6027 | Val: 91.3/100 | y = 2.0 * n1 * sin_theta1 - 0.5
+   ⚠ R²=-7.7489 | Val: 99.4/100 | y = n1 * (1 + 0.5 * sin_theta1)
+   ⚠ R²=-12.0263 | Val: 91.3/100 | y = 1.2 * n1 + 0.8 * sin_theta1
+   ⚠ R²=0.8241 | Val: 99.4/100 | y = n1 * sin_theta1 * (1 + 0.1 * n1)
+   ⏱  Time: 0.78s
+
+================================================================================
+✅ SUCCESS
+   Equation: n1 * sin_theta1
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 13.65s
+   💾 Saved: optics_snells_law.json
+
+================================================================================
+TEST 15/18: optics_single_slit_diffraction
+================================================================================
+
+================================================================================
+Running: Single Slit Diffraction | Domain: optics
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: optics
+Variables: wavelength, a
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: medium
+   ⏱  Time: 0.06s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 14.49s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 99.1/100 | y = wavelength / a
+   ⚠ R²=0.9353 | Val: 99.1/100 | y = 1.22 * wavelength / a
+   ⚠ R²=0.6656 | Val: 99.1/100 | y = 0.5 * wavelength / a
+   ⚠ R²=-0.3375 | Val: 99.1/100 | y = 2 * wavelength / a
+   ⚠ R²=-5.1343 | Val: 99.1/100 | y = 3.14159 * wavelength / a
+   ⚠ R²=0.8238 | Val: 99.1/100 | y = 0.637 * wavelength / a
+   ⚠ R²=0.2874 | Val: 99.4/100 | y = wavelength**1.1 / a**1.01
+   ⚠ R²=0.6656 | Val: 99.1/100 | y = 1.5 * wavelength / a
+   ⚠ R²=0.9382 | Val: 99.1/100 | y = 0.785 * wavelength / a
+   ⚠ R²=-1.7734 | Val: 99.1/100 | y = 2.44 * wavelength / a
+   ⏱  Time: 0.58s
+
+================================================================================
+✅ SUCCESS
+   Equation: wavelength / a
+   R² Score: 1.0000
+   Validation: 99.1/100
+   Total time: 15.12s
+   💾 Saved: optics_single_slit_diffraction.json
+
+================================================================================
+TEST 16/18: quantum_photon_energy
+================================================================================
+
+================================================================================
+Running: Photon Energy | Domain: quantum
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: quantum
+Variables: h, f
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: simple
+   ⏱  Time: 0.06s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 12.75s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 100.0/100 | y = h * f
+   ✅ R²=1.0000 | Val: 100.0/100 | y = 6.626e-34 * f
+   ✅ R²=1.0000 | Val: 100.0/100 | y = h * f + 0
+   ✅ R²=1.0000 | Val: 100.0/100 | y = f * h
+   ✅ R²=1.0000 | Val: 100.0/100 | y = h * f**1
+   ✅ R²=1.0000 | Val: 100.0/100 | y = (h) * (f)
+   ✅ R²=1.0000 | Val: 100.0/100 | y = h * f * 1
+   ✅ R²=1.0000 | Val: 100.0/100 | y = 1 * h * f
+   ✅ R²=1.0000 | Val: 100.0/100 | y = h * f + h * 0
+   ✅ R²=1.0000 | Val: 100.0/100 | y = f * 6.626e-34
+   ⏱  Time: 0.28s
+
+================================================================================
+✅ SUCCESS
+   Equation: h * f
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 13.09s
+   💾 Saved: quantum_photon_energy.json
+
+================================================================================
+TEST 17/18: quantum_de_broglie_wavelength
+================================================================================
+
+================================================================================
+Running: De Broglie Wavelength | Domain: quantum
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: quantum
+Variables: h, m, v
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+   ✓ Complexity: complex
+   ⏱  Time: 0.07s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 12.72s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 97.6/100 | y = h / (m * v)
+   ✅ R²=1.0000 | Val: 100.0/100 | y = 6.626e-34 / (m * v)
+   ✅ R²=1.0000 | Val: 97.6/100 | y = h / (m * v + 1e-50)
+   ✅ R²=1.0000 | Val: 97.6/100 | y = h * (m * v)**(-1)
+   ✅ R²=1.0000 | Val: 99.4/100 | y = h / ((m**2 * v**2)**0.5)
+   ⚠ R²=0.2849 | Val: 97.6/100 | y = h / (2 * 3.14159 * m * v)
+   ✅ R²=1.0000 | Val: 97.6/100 | y = h**2 / (m * v * h)
+   ✅ R²=1.0000 | Val: 97.6/100 | y = (h / m) / v
+   ✅ R²=1.0000 | Val: 97.6/100 | y = h / (m * v * (1 + v**2/9e16))
+   ✅ R²=1.0000 | Val: 97.6/100 | y = h * m**(-1) * v**(-1)
+   ⏱  Time: 0.58s
+
+================================================================================
+✅ SUCCESS
+   Equation: 6.626e-34 / (m * v)
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 13.37s
+   💾 Saved: quantum_de_broglie_wavelength.json
+
+================================================================================
+TEST 18/18: quantum_compton_shift
+================================================================================
+
+================================================================================
+Running: Compton Shift | Domain: quantum
+================================================================================
+   ✓ Anthropic client initialized (claude-sonnet-4-20250514)
+   ✓ API key loaded from: CLI argument
+   ✓ Generating 10 hypothesis candidates per test
+   ✓ EnsembleValidator loaded
+
+================================================================================
+LLM-GUIDED DISCOVERY
+================================================================================
+Domain: quantum
+Variables: h, me, c, cos_theta
+Samples: 1000
+Hypothesis candidates: 10
+Validation: ENABLED
+
+[PHASE 1] Analyzing data patterns...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+   ✓ Complexity: simple
+   ⏱  Time: 0.07s
+
+[PHASE 2] Generating 10 hypotheses with LLM...
+   ✓ Generated 10 hypotheses
+   ⏱  Time: 14.73s
+
+[PHASE 3] Verifying hypotheses...
+   ✅ R²=1.0000 | Val: 97.6/100 | y = (h / (me * c)) * (1 - cos_theta)
+   ✅ R²=1.0000 | Val: 100.0/100 | y = 2.426e-12 * (1 - cos_theta)
+   ✅ R²=1.0000 | Val: 97.6/100 | y = (h / (me * c)) * (1 - cos_theta) + 0
+   ✅ R²=1.0000 | Val: 95.5/100 | y = (6.626e-34 / (9.109e-31 * 2.998e8)) * (1 - cos_theta)
+   ✅ R²=1.0000 | Val: 97.6/100 | y = (h * (1 - cos_theta)) / (me * c)
+   ✅ R²=1.0000 | Val: 100.0/100 | y = 2.426e-12 * (1 - cos_theta)**1
+   ✅ R²=1.0000 | Val: 89.5/100 | y = (h / (me * c)) * 2 * (0.5 - 0.5 * cos_theta)
+   ✅ R²=1.0000 | Val: 89.5/100 | y = (h / (me * c)) - (h / (me * c)) * cos_theta
+   ✅ R²=1.0000 | Val: 100.0/100 | y = 2.426e-12 + 2.426e-12 * (-cos_theta)
+   ✅ R²=1.0000 | Val: 97.6/100 | y = (h / (me * c)) * (1 - cos_theta) * 1.0
+   ⏱  Time: 0.71s
+
+================================================================================
+✅ SUCCESS
+   Equation: 2.426e-12 * (1 - cos_theta)
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 15.52s
+   💾 Saved: quantum_compton_shift.json
+
+========================================================================================================================
+                                              LLM-GUIDED DISCOVERY RESULTS                                              
+========================================================================================================================
+Test Name                                 R²    Val   Time  Status  Observation                                  
+----------------------------------- -------- ------ ------ -------- ---------------------------------------------
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ELECTROMAGNETISM
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+electromagnetism_coulomb_law          1.0000   91.3   13.7s  ✅ PASS  LLM hypothesis successful                    
+electromagnetism_lorentz_force        1.0000  100.0   12.0s  ✅ PASS  LLM hypothesis successful                    
+electromagnetism_ohms_law             1.0000  100.0   12.6s  ✅ PASS  LLM hypothesis successful                    
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+FLUID_DYNAMICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+fluid_dynamics_bernoulli_equation     1.0000  100.0   15.8s  ✅ PASS  LLM hypothesis successful                    
+fluid_dynamics_hagen_poiseuille       0.6088   89.5   14.9s  ❌ FAIL  Below threshold                              
+fluid_dynamics_reynolds_number        1.0000   91.0   13.6s  ✅ PASS  LLM hypothesis successful                    
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+MECHANICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+mechanics_gravitational_potential_energy   1.0000  100.0   11.5s  ✅ PASS  LLM hypothesis successful                    
+mechanics_hookes_law                  1.0000  100.0   12.2s  ✅ PASS  LLM hypothesis successful                    
+mechanics_kinetic_energy              1.0000  100.0   14.1s  ✅ PASS  LLM hypothesis successful                    
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+OPTICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+optics_single_slit_diffraction        1.0000   99.1   15.1s  ✅ PASS  LLM hypothesis successful                    
+optics_snells_law                     1.0000  100.0   13.7s  ✅ PASS  LLM hypothesis successful                    
+optics_thin_lens_equation             1.0000   97.6   13.4s  ✅ PASS  LLM hypothesis successful                    
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+QUANTUM
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+quantum_compton_shift                 1.0000  100.0   15.5s  ✅ PASS  LLM hypothesis successful                    
+quantum_de_broglie_wavelength         1.0000  100.0   13.4s  ✅ PASS  LLM hypothesis successful                    
+quantum_photon_energy                 1.0000  100.0   13.1s  ✅ PASS  LLM hypothesis successful                    
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+THERMODYNAMICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+thermodynamics_carnot_efficiency      1.0000   98.5   12.4s  ✅ PASS  LLM hypothesis successful                    
+thermodynamics_heat_capacity          1.0000  100.0   15.9s  ✅ PASS  LLM hypothesis successful                    
+thermodynamics_ideal_gas_law          1.0000   91.0   12.7s  ✅ PASS  LLM hypothesis successful                    
+========================================================================================================================
+
+SUMMARY: 17/18 passed (94.4%) | 
+Avg R²: 0.9783 | Avg Val: 97.7 | Avg Time: 13.6s
+========================================================================================================================
+
+

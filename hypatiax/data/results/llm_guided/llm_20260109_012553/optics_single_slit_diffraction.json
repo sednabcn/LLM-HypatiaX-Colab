@@ -1,0 +1,121 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = wavelength / a",
+    "confidence": 0.95,
+    "reasoning": "This is the fundamental single slit diffraction formula for angular position of minima, where the ratio of wavelength to slit width determines the diffraction pattern scale. Matches the power law with a^-1 and positive wavelength correlation.",
+    "source": "llm",
+    "fitted_equation": "wavelength / a",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 99.1,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = wavelength / a",
+      "confidence": 0.95,
+      "reasoning": "This is the fundamental single slit diffraction formula for angular position of minima, where the ratio of wavelength to slit width determines the diffraction pattern scale. Matches the power law with a^-1 and positive wavelength correlation.",
+      "source": "llm",
+      "fitted_equation": "wavelength / a",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 1.22 * wavelength / a",
+      "confidence": 0.9,
+      "reasoning": "This is the Rayleigh criterion for angular resolution in single slit diffraction, commonly used for the first minimum. The factor 1.22 accounts for the specific geometry and matches observed y-range scale.",
+      "source": "llm",
+      "fitted_equation": "1.22 * wavelength / a",
+      "coefficients": {},
+      "r2_score": 0.9352652825106422,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 0.5 * wavelength / a",
+      "confidence": 0.85,
+      "reasoning": "A scaled version of the basic diffraction formula, where the 0.5 factor could represent half-angle measurements or a specific diffraction order. Maintains the correct wavelength/a dependence.",
+      "source": "llm",
+      "fitted_equation": "0.5 * wavelength / a",
+      "coefficients": {},
+      "r2_score": 0.665626459249185,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 2 * wavelength / a",
+      "confidence": 0.8,
+      "reasoning": "Another scaled diffraction formula where the factor of 2 might correspond to full-width measurements or second-order effects. Still preserves the fundamental inverse relationship with slit width.",
+      "source": "llm",
+      "fitted_equation": "2 * wavelength / a",
+      "coefficients": {},
+      "r2_score": -0.3374941630032602,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 3.14159 * wavelength / a",
+      "confidence": 0.75,
+      "reasoning": "Uses \u03c0 as the scaling factor, which often appears in wave optics formulations. The \u03c0 factor could arise from circular aperture approximations or specific angular measurements in the diffraction pattern.",
+      "source": "llm",
+      "fitted_equation": "3.14159 * wavelength / a",
+      "coefficients": {},
+      "r2_score": -5.134293565486793,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": false,
+    "is_power_law": true,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "wavelength": 0.16389255478871112,
+      "a": -0.5687097398148785
+    },
+    "polynomial_degree": null,
+    "power_exponents": {
+      "a": -1.012570724112799
+    },
+    "y_range": [
+      0.004200223218501525,
+      0.36768258430758466
+    ],
+    "y_scale": "small",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 10.32662296295166,
+    "phase1_analysis": 0.0572965145111084,
+    "phase2_llm": 10.008116245269775,
+    "phase3_verify": 0.26041460037231445
+  },
+  "r2_score": 1.0,
+  "validation_score": 99.1,
+  "expression": "wavelength / a",
+  "test_name": "optics_single_slit_diffraction",
+  "timestamp": "2026-01-09T01:28:29.815312",
+  "ground_truth": "wavelength/a",
+  "domain": "optics",
+  "_metadata": {
+    "session_id": "llm_20260109_012553",
+    "timestamp": "2026-01-09T01:28:29.815405",
+    "passed": true,
+    "test_name": "optics_single_slit_diffraction",
+    "method": "llm_guided"
+  }
+}

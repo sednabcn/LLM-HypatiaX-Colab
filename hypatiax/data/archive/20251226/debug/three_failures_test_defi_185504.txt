@@ -1,0 +1,452 @@
+──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/test_three_failures_defi.py 
+================================================================================
+                         TESTING 3 PROBLEMATIC FORMULAS                         
+================================================================================
+Model: claude-sonnet-4-20250514
+================================================================================
+
+================================================================================
+[1/3] Optimal LP position size using risk-adjusted Kelly criterion
+================================================================================
+  Domain: liquidity
+  Variables: expected_fee_apy, il_risk
+  Ground truth: min(expected_fee_apy / (2 * il_risk**2), 1.0)
+
+============================================================
+DEBUG - Raw Claude Response:
+============================================================
+# Risk-Adjusted Kelly Criterion for LP Position Sizing
+
+## Formula Overview
+The optimal position size for liquidity provision using the risk-adjusted Kelly criterion:
+
+**Position Size = min(μ/(λσ²), 1)**
+
+Where:
+- μ = expected_fee_apy (expected return)
+- σ = il_risk (impermanent loss risk/volatility) 
+- λ = risk_aversion = 2.0
+
+## Mathematical Formulation
+
+### Standard Form:
+```
+position_size = min(expected_fee_apy/(2×il_risk²), 1)
+```
+
+### LaTeX Notation:
+```latex
+f^* = \min\left(\frac{\mu}{2\sigma^2}, 1\right)
+```
+
+## Implementation
+
+### Python Function:
+```python
+import numpy as np
+
+def optimal_lp_position_size(expected_fee_apy, il_risk):
+    """
+    Calculate optimal LP position size using risk-adjusted Kelly criterion
+    
+    Args:
+        expected_fee_apy: Expected annual fee return (decimal, e.g., 0.15 for 15%)
+        il_risk: Impermanent loss risk/volatility (decimal, e.g., 0.3 for 30%)
+    
+    Returns:
+        position_size: Optimal fraction of capital to allocate (0 to 1)
+    """
+    risk_aversion = 2.0
+    kelly_position = expected_fee_apy / (risk_aversion * il_risk**2)
+    return np.minimum(kelly_position, 1.0)
+```
+
+## Key Parameters
+
+| Variable | Description | Type | Range |
+|----------|-------------|------|-------|
+| **expected_fee_apy** | Expected annual fee yield | Decimal | > 0 |
+| **il_risk** | Impermanent loss volatility | Decimal | > 0 |
+| **risk_aversion (λ)** | Risk aversion coefficient | Fixed | 2.0 |
+
+## Critical Reminders
+
+### ✅ CORRECT Formula:
+```
+μ / (λσ²) where λ = 2.0
+```
+
+### ❌ COMMON MISTAKE to AVOID:
+```
+(μ - σ) / (2σ²)  # This is WRONG!
+```
+
+## Economic Interpretation
+
+- **Higher expected fees** → Larger position size
+- **Higher IL risk** → Smaller position size (quadratic penalty)
+- **Position capped at 100%** to prevent over-leveraging
+- **Risk aversion = 2.0** represents moderate risk tolerance
+
+## Example Usage
+
+```python
+# Example: 15% expected fee APY, 30% IL risk
+fee_apy = 0.15
+il_risk = 0.30
+
+optimal_size = optimal_lp_position_size(fee_apy, il_risk)
+print(f"Optimal position size: {optimal_size:.2%}")
+# Output: Optimal position size: 83.33%
+```
+
+This formula balances the trade-off between expected returns and risk, providing an optimal capital allocation for liquidity provision strategies.
+============================================================
+
+
+============================================================
+DEBUG - Parsed Sections:
+============================================================
+formula: ```
+μ / (λσ²) where λ = 2.0
+```
+
+### ❌ COMMON MISTAKE to AVOID:
+```
+(μ - σ) / (2σ²)  # This is WRONG...
+latex: N/A...
+python: def optimal_lp_position_size(expected_fee_apy, il_risk):
+    """
+    Calculate optimal LP position s...
+variables: N/A...
+assumptions: N/A...
+explanation: N/A...
+============================================================
+
+
+  ⏱  Generated in 12.98s
+  ✅ Successfully parsed Python code
+  📝 Formula: ```
+μ / (λσ²) where λ = 2.0
+```
+
+### ❌ COMMON MISTAKE to AVOID:
+```
+(μ - σ) / (2...
+
+  Python Code:
+  def optimal_lp_position_size(expected_fee_apy, il_risk):
+      """
+      Calculate optimal LP position size using risk-adjusted Kelly criterion
+      
+      Args:
+          expected_fee_apy: Expected annual fee return (decimal, e.g., 0.15 for 15%)
+          il_risk: Impermanent loss risk/volatility (decimal, e.g., 0.3 for 30%)
+      
+      Returns:
+          position_size: Optimal fraction of capital to allocate (0 to 1)
+      """
+      risk_aversion = 2.0
+      kelly_position = expected_fee_apy / (risk_aversion * il_risk**2)
+      return np.minimum(kelly_position, 1.0)
+
+  🔍 Matching test data...
+  🔗 Matched dataset: Optimal LP position size using risk-adjusted Kelly criterion
+
+  📊 Testing against 100 samples...
+
+  DEBUG - Python code extracted:
+def optimal_lp_position_size(expected_fee_apy, il_risk):
+    """
+    Calculate optimal LP position size using risk-adjusted Kelly criterion
+    
+    Args:
+        expected_fee_apy: Expected annual fee return (decimal, e.g., 0.15 for 15%)
+        il_risk: Impermanent loss risk/volatility (decimal, e.g., 0.3 for 30%)
+    
+    Returns:
+        position_size: Optimal fraction of capital to allocate (0 to 1)
+    """
+    risk_aversion = 2.0
+    kelly_position = expected_fee_apy / (risk_aversion * il_risk**2)
+    return np.minimum(kelly_position, 1.0)
+
+  DEBUG - Found function: optimal_lp_position_size
+
+  ✅ R² Score: 0.000000
+  ✅ RMSE: 0.000000
+  ✅ MAE: 0.000000
+  ⚠  Formula mismatch: Error comparing formulas: Sympify of expression 'could not parse '```μ / (λσ²) where λ = 2.0```### ❌ COMMON MISTAKE to AVOID:```(μ - σ) / (2σ²)  # This is WRONG!```## Economic Interpretation- **Higher expected fees** → Larger position size- **Higher IL risk** → Smaller position size (quadratic penalty)- **Position capped at 100%** to prevent over-leveraging- **Risk aversion = 2.0** represents moderate risk tolerance## Example Usage```python# Example: 15% expected fee APY, 30% IL riskfee_apy = 0.15il_risk = 0.30optimal_size = optimal_lp_position_size(fee_apy, il_risk)print(f"Optimal position size: {optimal_size:.2%}")# Output: Optimal position size: 83.33%```This formula balances the trade-off between expected returns and risk, providing an optimal capital allocation for liquidity provision strategies.'' failed, because of exception being raised:
+SyntaxError: invalid syntax (<string>, line 1)
+  ⚠  Moderate fit (R² = 0.0000)
+
+================================================================================
+[2/3] Capital efficiency multiplier for concentrated liquidity position
+================================================================================
+  Domain: liquidity
+  Variables: price_lower, price_upper, price_current
+  Ground truth: price_upper / (price_upper - price_lower)
+
+============================================================
+DEBUG - Raw Claude Response:
+============================================================
+# Capital Efficiency Multiplier for Concentrated Liquidity
+
+## Formula
+The capital efficiency multiplier for a concentrated liquidity position is calculated as:
+
+```
+efficiency = price_upper / (price_upper - price_lower)
+```
+
+## LaTeX Representation
+```latex
+\text{efficiency} = \frac{P_{upper}}{P_{upper} - P_{lower}}
+```
+
+## Python Implementation
+```python
+def formula(price_lower, price_upper, price_current):
+    return price_upper / (price_upper - price_lower)
+```
+
+## Key Points
+
+### ✅ What This Formula Does:
+- Calculates how much more capital efficient a concentrated position is compared to full-range liquidity
+- Returns a multiplier (e.g., 5x means 5 times more efficient)
+- **Simple ratio calculation only**
+
+### ❌ Common Mistakes to Avoid:
+- ❌ Using square root functions
+- ❌ Incorporating current price in the calculation
+- ❌ Complex mathematical operations
+
+### ✅ Correct Approach:
+- Only uses price bounds (upper and lower)
+- Simple division operation
+- Current price is irrelevant for efficiency calculation
+
+## Variables
+- **price_lower**: Lower bound of the liquidity range
+- **price_upper**: Upper bound of the liquidity range  
+- **price_current**: Current market price (NOT used in this formula)
+
+## Key Insight
+**Narrower ranges = Higher efficiency multipliers**
+
+The smaller the difference between `price_upper` and `price_lower`, the higher the capital efficiency multiplier becomes.
+============================================================
+
+
+============================================================
+DEBUG - Parsed Sections:
+============================================================
+formula: N/A...
+latex: N/A...
+python: def formula(price_lower, price_upper, price_current):
+    return price_upper / (price_upper - price_...
+variables: N/A...
+assumptions: N/A...
+explanation: N/A...
+============================================================
+
+
+  ⏱  Generated in 8.10s
+  ✅ Successfully parsed Python code
+  📝 Formula: N/A...
+
+  Python Code:
+  def formula(price_lower, price_upper, price_current):
+      return price_upper / (price_upper - price_lower)
+
+  🔍 Matching test data...
+  🔗 Matched dataset: Capital efficiency multiplier for concentrated liquidity position
+
+  📊 Testing against 100 samples...
+
+  DEBUG - Python code extracted:
+def formula(price_lower, price_upper, price_current):
+    return price_upper / (price_upper - price_lower)
+
+  DEBUG - Found function: formula
+
+  ✅ R² Score: 1.000000
+  ✅ RMSE: 0.000000
+  ✅ MAE: 0.000000
+  ⚠  Formula mismatch: Error comparing formulas: unsupported operand type(s) for /: 'function' and 'Symbol'
+  🎯 EXCELLENT FIT!
+
+================================================================================
+[3/3] Portfolio Expected Shortfall for correlated positions
+================================================================================
+  Domain: expected_shortfall
+  Variables: position1_es, position2_es, correlation
+  Ground truth: position1_es + position2_es + correlation * sqrt(position1_es * position2_es)
+
+============================================================
+DEBUG - Raw Claude Response:
+============================================================
+# Portfolio Expected Shortfall for Correlated Positions
+
+## Overview
+As a risk management expert, I'll explain the calculation of Expected Shortfall (ES) for a two-position portfolio with correlation. This is a **critical distinction** from VaR calculations.
+
+## 🚨 CRITICAL WARNING: ES ≠ VaR Formula
+
+**Expected Shortfall uses LINEAR aggregation:**
+```
+ES_portfolio = ES₁ + ES₂ + ρ√(ES₁ × ES₂)
+```
+
+**Do NOT use the quadratic VaR formula:**
+```
+❌ VaR_portfolio = √(VaR₁² + VaR₂² + 2ρVaR₁VaR₂)  ← WRONG for ES!
+```
+
+## Formula Components
+
+### Mathematical Formula
+```latex
+ES_p = ES_1 + ES_2 + \rho\sqrt{ES_1 \cdot ES_2}
+```
+
+### Python Implementation
+```python
+import numpy as np
+
+def portfolio_expected_shortfall(position1_es, position2_es, correlation):
+    """
+    Calculate portfolio Expected Shortfall for two correlated positions
+    
+    Parameters:
+    - position1_es: Expected Shortfall of position 1
+    - position2_es: Expected Shortfall of position 2  
+    - correlation: Correlation coefficient between positions (-1 to +1)
+    
+    Returns: Portfolio Expected Shortfall
+    """
+    corr_term = correlation * np.sqrt(position1_es * position2_es)
+    return position1_es + position2_es + corr_term
+```
+
+## Variables
+
+| Variable | Description | Range/Units |
+|----------|-------------|-------------|
+| `position1_es` | Individual ES of first position | Positive (currency units) |
+| `position2_es` | Individual ES of second position | Positive (currency units) |
+| `correlation` | Correlation coefficient | [-1, +1] |
+
+## Key Insights
+
+### 1. **Linear Aggregation**
+- ES is a coherent risk measure
+- Uses linear combination with correlation adjustment
+- More intuitive than quadratic VaR aggregation
+
+### 2. **Correlation Impact**
+- **ρ = +1**: Maximum diversification benefit lost
+- **ρ = 0**: No correlation, partial diversification
+- **ρ = -1**: Maximum diversification benefit
+
+### 3. **Subadditivity Property**
+ES satisfies: `ES(X + Y) ≤ ES(X) + ES(Y)`
+
+## Example Calculation
+
+```python
+# Example: Two trading positions
+position1_es = 100000  # $100k ES
+position2_es = 150000  # $150k ES  
+correlation = 0.6      # 60% correlation
+
+portfolio_es = portfolio_expected_shortfall(position1_es, position2_es, correlation)
+print(f"Portfolio ES: ${portfolio_es:,.0f}")
+
+# Output: Portfolio ES: $322,474
+```
+
+## Risk Management Applications
+
+1. **Portfolio Construction**: Optimize position sizes considering ES correlation
+2. **Capital Allocation**: More accurate than VaR for tail risk
+3. **Stress Testing**: Better captures extreme loss scenarios
+4. **Regulatory Compliance**: Preferred by Basel III framework
+
+This linear aggregation makes ES superior to VaR for portfolio risk management!
+============================================================
+
+
+============================================================
+DEBUG - Parsed Sections:
+============================================================
+formula: N/A...
+latex: N/A...
+python: def portfolio_expected_shortfall(position1_es, position2_es, correlation):
+    """
+    Calculate por...
+variables: N/A...
+assumptions: N/A...
+explanation: N/A...
+============================================================
+
+
+  ⏱  Generated in 13.95s
+  ✅ Successfully parsed Python code
+  📝 Formula: N/A...
+
+  Python Code:
+  def portfolio_expected_shortfall(position1_es, position2_es, correlation):
+      """
+      Calculate portfolio Expected Shortfall for two correlated positions
+      
+      Parameters:
+      - position1_es: Expected Shortfall of position 1
+      - position2_es: Expected Shortfall of position 2  
+      - correlation: Correlation coefficient between positions (-1 to +1)
+      
+      Returns: Portfolio Expected Shortfall
+      """
+      corr_term = correlation * np.sqrt(position1_es * position2_es)
+      return position1_es + position2_es + corr_term
+
+  🔍 Matching test data...
+  🔗 Matched dataset: Portfolio Expected Shortfall for correlated positions
+
+  📊 Testing against 100 samples...
+
+  DEBUG - Python code extracted:
+def portfolio_expected_shortfall(position1_es, position2_es, correlation):
+    """
+    Calculate portfolio Expected Shortfall for two correlated positions
+    
+    Parameters:
+    - position1_es: Expected Shortfall of position 1
+    - position2_es: Expected Shortfall of position 2  
+    - correlation: Correlation coefficient between positions (-1 to +1)
+    
+    Returns: Portfolio Expected Shortfall
+    """
+    corr_term = correlation * np.sqrt(position1_es * position2_es)
+    return position1_es + position2_es + corr_term
+
+  DEBUG - Found function: portfolio_expected_shortfall
+
+  ✅ R² Score: 1.000000
+  ✅ RMSE: 0.000000
+  ✅ MAE: 0.000000
+  ⚠  Formula mismatch: Error comparing formulas: unsupported operand type(s) for /: 'function' and 'Symbol'
+  🎯 EXCELLENT FIT!
+
+================================================================================
+                                    SUMMARY                                     
+================================================================================
+
+✅ Successfully generated: 3/3
+❌ Failed: 0/3
+
+💾 Results saved to: hypatiax/data/results/test_three_failures_20251220_185504.json
+
+================================================================================

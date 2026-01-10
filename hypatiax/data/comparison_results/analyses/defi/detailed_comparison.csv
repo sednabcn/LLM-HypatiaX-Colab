@@ -1,0 +1,21 @@
+Description,Domain,Formula Type,LLM R²,NN R²,LLM RMSE,NN RMSE,Extrapolation,Winner,R² Difference
+Impermanent loss in constant product AMM (Uniswap ,amm,algebraic_with_sqrt,1.0,0.9696395985541473,0.0,0.0030187008219525195,True,LLM,0.030360401445852725
+Impermanent loss percentage in AMM,amm,algebraic_with_sqrt,1.0,0.9611744654779693,0.0,0.3852201457916006,False,LLM,0.03882553452203075
+Constant product formula: reserve Y given reserve ,amm,algebraic,1.0,-0.13436589179178693,0.0,39960.007888417094,False,LLM,1.134365891791787
+Price impact of swap in constant product AMM,amm,algebraic,0.5532338534689113,0.9760893818395742,0.04034742825714653,0.009032697058132422,False,NN,-0.42285552837066287
+Parametric Value at Risk at 95% confidence (1-day),risk_var,linear,1.0,0.9915372890514637,2.592383987005246e-12,1415.3929321724497,True,LLM,0.008462710948536345
+Parametric Value at Risk at 99% confidence (1-day),risk_var,linear,1.0,0.9950957293388438,3.930343234302545e-12,1754.5756018917518,False,LLM,0.004904270661156174
+Multi-day Value at Risk using square root of time ,risk_var,power_law,1.0,0.9866445751007316,0.0,7508.404085419568,False,LLM,0.013355424899268442
+Portfolio VaR for two correlated assets,risk_var,algebraic_with_sqrt,1.0,0.9854672321731155,0.0,2012.2259542478243,False,LLM,0.014532767826884507
+Optimal LP position size using risk-adjusted Kelly,liquidity,algebraic,1.0,0.0,0.0,0.09948392138890225,True,LLM,1.0
+LP fee earnings based on liquidity share,liquidity,algebraic,1.0,0.6790374057561239,0.0,1011.9802178302658,False,LLM,0.3209625942438761
+Capital efficiency multiplier for concentrated liq,liquidity,algebraic,1.0,0.9104910038710331,0.0,0.400764462645745,False,LLM,0.0895089961289669
+APY calculation from APR with daily compounding,liquidity,exponential,1.0,0.991296138907373,0.0,0.0158339199563302,False,LLM,0.008703861092626997
+Expected Shortfall (CVaR) at 95% confidence for no,expected_shortfall,linear,1.0,0.9885587159183631,0.0,2063.9205684207814,True,LLM,0.011441284081636915
+Expected Shortfall (CVaR) at 99% confidence for no,expected_shortfall,linear,1.0,0.9939116356552458,0.0,2239.869369484059,False,LLM,0.006088364344754238
+Expected Shortfall from VaR using tail risk multip,expected_shortfall,linear,1.0,0.9968747875609896,0.0,1890.8243692514818,False,LLM,0.0031252124390104274
+Portfolio Expected Shortfall for correlated positi,expected_shortfall,algebraic_with_sqrt,1.0,0.9795969540341766,0.0,3396.0903184906283,False,LLM,0.02040304596582343
+Liquidation price for leveraged long position,liquidation,algebraic,1.0,0.9687235162910349,0.0,1742.815183501658,True,LLM,0.031276483708965075
+Liquidation price for leveraged short position,liquidation,algebraic,1.0,0.9926012847633855,0.0,1446.0465934828271,False,LLM,0.007398715236614506
+Maximum safe leverage for given acceptable loss to,liquidation,algebraic,1.0,0.9836876797016301,0.0,0.5967033285147307,False,LLM,0.01631232029836993
+Required collateral for leveraged position,liquidation,algebraic,1.0,0.9695342037370348,0.0,747.1710823728612,False,LLM,0.030465796262965195

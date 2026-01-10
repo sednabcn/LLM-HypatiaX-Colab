@@ -1,0 +1,119 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = 0.5 * m * v**2",
+    "confidence": 0.95,
+    "reasoning": "This is the classical kinetic energy formula from mechanics. The polynomial nature with degree 3 and strong correlation with v (0.727) suggests v^2 dependence, while linear dependence on m matches the correlation (0.517).",
+    "source": "llm",
+    "fitted_equation": "0.5 * m * v**2",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = 0.5 * m * v**2",
+      "confidence": 0.95,
+      "reasoning": "This is the classical kinetic energy formula from mechanics. The polynomial nature with degree 3 and strong correlation with v (0.727) suggests v^2 dependence, while linear dependence on m matches the correlation (0.517).",
+      "source": "llm",
+      "fitted_equation": "0.5 * m * v**2",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m**2 * v**2 / (m + v)",
+      "confidence": 0.45,
+      "reasoning": "More complex interaction term that could produce polynomial-like behavior. The has_interactions flag and medium complexity suggest possible nonlinear coupling between m and v.",
+      "source": "llm",
+      "fitted_equation": "m**2 * v**2 / (m + v)",
+      "coefficients": {},
+      "r2_score": 0.1622587792605481,
+      "validation_score": 65.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 0.5 * m * v**2 + c",
+      "confidence": 0.75,
+      "reasoning": "Kinetic energy with a constant offset term. The polynomial degree 3 detection might include a constant term, and the large y-range suggests possible baseline energy.",
+      "source": "llm",
+      "fitted_equation": "0.5 * m * v**2 + c",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 95.5,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a * m * v**2 + b * m * v",
+      "confidence": 0.65,
+      "reasoning": "Combination of kinetic energy terms with both v^2 and v dependencies. The polynomial degree 3 and interaction terms could arise from this mixed formulation.",
+      "source": "llm",
+      "fitted_equation": "a * m * v**2 + b * m * v",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 86.8,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m * v**2",
+      "confidence": 0.85,
+      "reasoning": "Alternative form of kinetic energy without the 1/2 factor, which might be absorbed into units or represent a different energy formulation. Still captures the fundamental m*v^2 relationship.",
+      "source": "llm",
+      "fitted_equation": "m * v**2",
+      "coefficients": {},
+      "r2_score": -0.7420072362746273,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "m": 0.516905651460334,
+      "v": 0.7272334644121585
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      0.0236261458681664,
+      12017.809653804448
+    ],
+    "y_scale": "large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 11.34969425201416,
+    "phase1_analysis": 0.3556704521179199,
+    "phase2_llm": 10.006199359893799,
+    "phase3_verify": 0.9870607852935791
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "0.5 * m * v**2",
+  "test_name": "mechanics_kinetic_energy",
+  "timestamp": "2026-01-09T01:43:36.870039",
+  "ground_truth": "(1/2)*m*v**2",
+  "domain": "mechanics",
+  "_metadata": {
+    "session_id": "llm_20260109_014322",
+    "timestamp": "2026-01-09T01:43:36.870136",
+    "passed": true,
+    "test_name": "mechanics_kinetic_energy",
+    "method": "llm_guided"
+  }
+}

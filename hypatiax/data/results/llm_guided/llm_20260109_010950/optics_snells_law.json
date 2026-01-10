@@ -1,0 +1,119 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = n1 * sin_theta1",
+    "confidence": 0.95,
+    "reasoning": "This is the fundamental form of Snell's Law: n1*sin(\u03b81) = n2*sin(\u03b82), where the product n1*sin_theta1 represents the optical invariant across the interface",
+    "source": "llm",
+    "fitted_equation": "n1 * sin_theta1",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = n1 * sin_theta1",
+      "confidence": 0.95,
+      "reasoning": "This is the fundamental form of Snell's Law: n1*sin(\u03b81) = n2*sin(\u03b82), where the product n1*sin_theta1 represents the optical invariant across the interface",
+      "source": "llm",
+      "fitted_equation": "n1 * sin_theta1",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 1.33 * n1 * sin_theta1",
+      "confidence": 0.85,
+      "reasoning": "Snell's Law with a specific refractive index (1.33 for water) as the second medium, giving n1*sin(\u03b81) = 1.33*sin(\u03b82)",
+      "source": "llm",
+      "fitted_equation": "1.33 * n1 * sin_theta1",
+      "coefficients": {},
+      "r2_score": 0.5188930608395543,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = exp(0.5 * n1) * sin_theta1",
+      "confidence": 0.5,
+      "reasoning": "Exponential relationship detected in data patterns; could represent Beer's Law type absorption effects combined with angular dependence in complex optical systems",
+      "source": "llm",
+      "fitted_equation": "exp(0.5 * n1) * sin_theta1",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 91.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 1.5 * n1 * sin_theta1 + 0.2",
+      "confidence": 0.65,
+      "reasoning": "Linear combination of the Snell's Law product with an offset, accounting for potential experimental systematic errors or additional optical effects",
+      "source": "llm",
+      "fitted_equation": "1.5 * n1 * sin_theta1 + 0.2",
+      "coefficients": {},
+      "r2_score": -1.081544258362162,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = n1**2 * sin_theta1",
+      "confidence": 0.7,
+      "reasoning": "Polynomial relationship with degree 2 detected in the data patterns, possibly related to intensity or power calculations in optics involving refractive index squared",
+      "source": "llm",
+      "fitted_equation": "n1**2 * sin_theta1",
+      "coefficients": {},
+      "r2_score": -3.7274732907492654,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": true,
+    "is_logarithmic": true,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "n1": 0.45203384592566825,
+      "sin_theta1": 0.8606700631874693
+    },
+    "polynomial_degree": 2,
+    "power_exponents": {},
+    "y_range": [
+      0.11398615042836259,
+      2.2042633053394636
+    ],
+    "y_scale": "medium",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 9.846977472305298,
+    "phase1_analysis": 0.05815267562866211,
+    "phase2_llm": 9.450909614562988,
+    "phase3_verify": 0.3375244140625
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "n1 * sin_theta1",
+  "test_name": "optics_snells_law",
+  "timestamp": "2026-01-09T01:12:29.661315",
+  "ground_truth": "n1*sin_theta1",
+  "domain": "optics",
+  "_metadata": {
+    "session_id": "llm_20260109_010950",
+    "timestamp": "2026-01-09T01:12:29.661405",
+    "passed": true,
+    "test_name": "optics_snells_law",
+    "method": "llm_guided"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = m * g * h",
+    "confidence": 0.95,
+    "reasoning": "This is the standard gravitational potential energy formula U = mgh, which is fundamental in mechanics and matches the domain description exactly",
+    "source": "llm",
+    "fitted_equation": "m * g * h",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = m * g * h",
+      "confidence": 0.95,
+      "reasoning": "This is the standard gravitational potential energy formula U = mgh, which is fundamental in mechanics and matches the domain description exactly",
+      "source": "llm",
+      "fitted_equation": "m * g * h",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m * g * h + 0.1 * m**2 * g * h / 1000",
+      "confidence": 0.5,
+      "reasoning": "Standard potential energy with a mass-squared correction term to explain the strong m correlation (0.658) and polynomial complexity",
+      "source": "llm",
+      "fitted_equation": "m * g * h + 0.1 * m**2 * g * h / 1000",
+      "coefficients": {},
+      "r2_score": 0.9998599553989862,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m * g * h + m * g * h**2 * 0.001",
+      "confidence": 0.75,
+      "reasoning": "Classical potential energy with a small quadratic correction term to account for the polynomial degree 3 pattern and medium complexity",
+      "source": "llm",
+      "fitted_equation": "m * g * h + m * g * h**2 * 0.001",
+      "coefficients": {},
+      "r2_score": 0.9865620709591992,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m * g * h + 0.001 * m * h**3",
+      "confidence": 0.65,
+      "reasoning": "Potential energy with cubic height term to match the polynomial degree 3 pattern, where higher-order effects become significant at large heights",
+      "source": "llm",
+      "fitted_equation": "m * g * h + 0.001 * m * h**3",
+      "coefficients": {},
+      "r2_score": 0.00795116200389745,
+      "validation_score": 65.3,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m * g * h * (1 + 0.01 * h)",
+      "confidence": 0.7,
+      "reasoning": "Modified potential energy with height-dependent correction factor, explaining the polynomial nature while maintaining physical relevance",
+      "source": "llm",
+      "fitted_equation": "m * g * h * (1 + 0.01 * h)",
+      "coefficients": {},
+      "r2_score": -0.343792904080078,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "m": 0.6583003788991689,
+      "g": -0.028189900931615275,
+      "h": 0.6392418558049628
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      0.5228884809196155,
+      94249.42527120479
+    ],
+    "y_scale": "large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 9.410709142684937,
+    "phase1_analysis": 0.24539756774902344,
+    "phase2_llm": 8.39844036102295,
+    "phase3_verify": 0.7661688327789307
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "m * g * h",
+  "test_name": "mechanics_gravitational_potential_energy",
+  "timestamp": "2026-01-09T01:43:47.502422",
+  "ground_truth": "m*g*h",
+  "domain": "mechanics",
+  "_metadata": {
+    "session_id": "llm_20260109_014322",
+    "timestamp": "2026-01-09T01:43:47.502514",
+    "passed": true,
+    "test_name": "mechanics_gravitational_potential_energy",
+    "method": "llm_guided"
+  }
+}

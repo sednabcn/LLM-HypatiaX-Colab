@@ -1,0 +1,13 @@
+{
+  "error": "Object of type bool is not JSON serializable",
+  "test_name": "thermodynamics_heat_capacity",
+  "execution_time": 0.902909517288208,
+  "timestamp": "2026-01-08T17:11:53.427457",
+  "_metadata": {
+    "session_id": "llm_20260108_171146",
+    "timestamp": "2026-01-08T17:11:53.427594",
+    "passed": false,
+    "test_name": "thermodynamics_heat_capacity",
+    "method": "llm_guided"
+  }
+}

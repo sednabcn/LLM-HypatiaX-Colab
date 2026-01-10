@@ -1,0 +1,119 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = I * R",
+    "confidence": 0.95,
+    "reasoning": "This is Ohm's Law (V = I*R), the fundamental relationship in electromagnetism between voltage, current, and resistance. The polynomial degree 2 pattern could arise from measurement noise or experimental setup.",
+    "source": "llm",
+    "fitted_equation": "I * R",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = I * R",
+      "confidence": 0.95,
+      "reasoning": "This is Ohm's Law (V = I*R), the fundamental relationship in electromagnetism between voltage, current, and resistance. The polynomial degree 2 pattern could arise from measurement noise or experimental setup.",
+      "source": "llm",
+      "fitted_equation": "I * R",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a * I**2 * R + b * I * R",
+      "confidence": 0.7,
+      "reasoning": "Mixed power and voltage terms that could arise in complex electromagnetic systems where both linear and quadratic effects are present.",
+      "source": "llm",
+      "fitted_equation": "a * I**2 * R + b * I * R",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 86.8,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a * I * R**2 + b * R",
+      "confidence": 0.6,
+      "reasoning": "A relationship involving resistance-squared terms, which might occur in circuits with impedance matching or transmission line effects, though less common in basic electromagnetics.",
+      "source": "llm",
+      "fitted_equation": "a * I * R**2 + b * R",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 86.8,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a * I * R + b * I**2",
+      "confidence": 0.75,
+      "reasoning": "A combination of Ohm's Law and current-squared terms, which could represent a circuit with both resistive voltage drop and power loss components.",
+      "source": "llm",
+      "fitted_equation": "a * I * R + b * I**2",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 60.8,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = I**2 * R",
+      "confidence": 0.9,
+      "reasoning": "This represents electrical power dissipation (P = I\u00b2R), a fundamental electromagnetic relationship. The quadratic nature matches the detected polynomial degree 2 pattern perfectly.",
+      "source": "llm",
+      "fitted_equation": "I**2 * R",
+      "coefficients": {},
+      "r2_score": -101.38897077577789,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "I": 0.6383681881263266,
+      "R": 0.6349275188886386
+    },
+    "polynomial_degree": 2,
+    "power_exponents": {},
+    "y_range": [
+      1.1667918088220157,
+      9452.589786148825
+    ],
+    "y_scale": "large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 9.36736273765564,
+    "phase1_analysis": 0.07879114151000977,
+    "phase2_llm": 8.899662733078003,
+    "phase3_verify": 0.3884258270263672
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "I * R",
+  "test_name": "electromagnetism_ohms_law",
+  "timestamp": "2026-01-09T01:27:17.212086",
+  "ground_truth": "I*R",
+  "domain": "electromagnetism",
+  "_metadata": {
+    "session_id": "llm_20260109_012553",
+    "timestamp": "2026-01-09T01:27:17.212178",
+    "passed": true,
+    "test_name": "electromagnetism_ohms_law",
+    "method": "llm_guided"
+  }
+}

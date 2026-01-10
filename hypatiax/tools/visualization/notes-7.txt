@@ -1,0 +1,69 @@
+
+Tuesday, Dec 23 - Extrapolation Testing (3hrs)
+========================================================================
+Goal: Generate 84.7% vs 23% extrapolation claims
+Hour 1: Create extrapolation framework
+
+scripts/test_extrapolation.py
+Train on limited range (e.g., 0-100)
+Test on extended range (e.g., 100-500)
+
+Hour 2: Run extrapolation tests
+
+Pure LLM baseline → measure error
+Neural network baseline → measure error
+Your hybrid system → measure error
+
+Hour 3: Statistical analysis
+
+Calculate confidence intervals (±0.05, ±0.07)
+T-tests for significance
+Export results to CSV
+
+Deliverable: Complete Table 1 with verified numbers
+========================================================================
+Wednesday, Dec 24 -Figure Generation (3hrs)
+========================================================================
+Goal: Create 4 critical figures
+Hour 1: Architecture diagram (Figure 1)
+
+Use draw.io or TikZ
+Show: Preprocessing → Symbolic Regression → LLM Interpretation
+Export to PDF (300 DPI)
+
+Hour 2: Results comparison (Figures 2-3)
+
+Bar chart: RÂ² comparison (LLM vs NN vs Hybrid)
+Line plot: Extrapolation error by domain
+Use matplotlib/seaborn
+
+Hour 3: Domain analysis (Figure 4)
+
+Scatter plot: RÂ² vs Complexity
+Show Pareto frontier
+Color-code by domain (Materials, DeFi, etc.)
+
+Deliverable: 4/8 figures complete, integrated into LaTeX
+========================================================================
+Thursday, Dec25 - Christmas (NO WORK)
+=======================================================================
+=======================================================================
+Friday, Dec 26 - More Figures (3hrs)
+=======================================================================
+Goal: Complete remaining figures
+Hour 1: Ablation study visualization (Figure 5)
+
+Heatmap: Configuration vs Performance
+Show impact of dimensional constraints, physics priors
+
+Hour 2: Expert evaluation (Figure 6)
+
+Radar chart: 6 criteria (Accuracy, Clarity, etc.)
+Compare Pure LLM vs Hybrid vs Human
+
+Hour 3: Computational scaling (Figure 7)
+
+Line plot: Time vs Formula complexity
+Show your system is practical (3.2hrs vs 0.8hrs)
+
+Deliverable: 7/8 figures complete

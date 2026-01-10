@@ -1,0 +1,121 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = wavelength / a",
+    "confidence": 0.95,
+    "reasoning": "This is the fundamental single slit diffraction formula for the angular position of minima, showing direct proportionality to wavelength and inverse proportionality to slit width, matching the detected power law with a^-1 exponent",
+    "source": "llm",
+    "fitted_equation": "wavelength / a",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 99.1,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = wavelength / a",
+      "confidence": 0.95,
+      "reasoning": "This is the fundamental single slit diffraction formula for the angular position of minima, showing direct proportionality to wavelength and inverse proportionality to slit width, matching the detected power law with a^-1 exponent",
+      "source": "llm",
+      "fitted_equation": "wavelength / a",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 1.22 * wavelength / a",
+      "confidence": 0.9,
+      "reasoning": "This includes the standard diffraction coefficient (1.22) for the first minimum in single slit diffraction, which is commonly used in optics calculations",
+      "source": "llm",
+      "fitted_equation": "1.22 * wavelength / a",
+      "coefficients": {},
+      "r2_score": 0.9352652825106422,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 0.5 * wavelength / a",
+      "confidence": 0.75,
+      "reasoning": "A simpler variant with a fractional coefficient that could represent a specific diffraction condition or approximation",
+      "source": "llm",
+      "fitted_equation": "0.5 * wavelength / a",
+      "coefficients": {},
+      "r2_score": 0.665626459249185,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 2.0 * wavelength / a",
+      "confidence": 0.7,
+      "reasoning": "Another coefficient variant that might correspond to a specific diffraction order or measurement condition in the experimental setup",
+      "source": "llm",
+      "fitted_equation": "2.0 * wavelength / a",
+      "coefficients": {},
+      "r2_score": -0.3374941630032602,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 3.14159 * wavelength / a",
+      "confidence": 0.85,
+      "reasoning": "Uses \u03c0 as the coefficient, which appears in many diffraction formulas when dealing with phase differences and path length calculations",
+      "source": "llm",
+      "fitted_equation": "3.14159 * wavelength / a",
+      "coefficients": {},
+      "r2_score": -5.134293565486793,
+      "validation_score": 99.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": false,
+    "is_power_law": true,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "wavelength": 0.16389255478871112,
+      "a": -0.5687097398148785
+    },
+    "polynomial_degree": null,
+    "power_exponents": {
+      "a": -1.012570724112799
+    },
+    "y_range": [
+      0.004200223218501525,
+      0.36768258430758466
+    ],
+    "y_scale": "small",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 8.887418270111084,
+    "phase1_analysis": 0.05811619758605957,
+    "phase2_llm": 8.56198525428772,
+    "phase3_verify": 0.26654791831970215
+  },
+  "r2_score": 1.0,
+  "validation_score": 99.1,
+  "expression": "wavelength / a",
+  "test_name": "optics_single_slit_diffraction",
+  "timestamp": "2026-01-09T01:12:39.392167",
+  "ground_truth": "wavelength/a",
+  "domain": "optics",
+  "_metadata": {
+    "session_id": "llm_20260109_010950",
+    "timestamp": "2026-01-09T01:12:39.392257",
+    "passed": true,
+    "test_name": "optics_single_slit_diffraction",
+    "method": "llm_guided"
+  }
+}

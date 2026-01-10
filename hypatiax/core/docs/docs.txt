@@ -1,0 +1,20 @@
+In machine learning and data science projects, especially when developing models like Named Entity Recognition (NER) models, datasets are often divided into three key subsets: training, development (or validation), and evaluation (or test) sets. Here's a breakdown of what each subset typically contains and its purpose:
+
+1. Training Set
+Purpose: The training set is used to fit or train the model. This is the data that the model learns from. By adjusting its parameters, the model tries to generalize from this set of data.
+Content: The training set contains examples (data points) including both the inputs and the expected outputs. For a NER system, this would typically include sentences or documents annotated with named entity labels indicating the locations and categories of entities such as people, locations, organizations, etc.
+2. Development (Validation) Set
+Purpose: The development set, also known as the validation set, is used primarily to tune the hyperparameters of a model and to provide an unbiased evaluation of a model fit on the training dataset while tuning the model's architecture. This helps in preventing overfitting.
+Content: The development set similarly contains annotated examples, but these are not seen by the model during the training phase. For NER, it would again be text data annotated with entities. The annotations should ideally be done in the same way as the training set to ensure consistency.
+3. Evaluation (Test) Set
+Purpose: The evaluation set is used to provide an unbiased final assessment of the fully trained model. It is only used after the model's parameters and architecture have been finalized using the training and development sets.
+Content: Like the training and development sets, the evaluation set consists of annotated examples that have not been used during the training or development phases. The idea is to test how well the model generalizes to new, unseen data. This set should reflect the true nature of the task and the data the model will encounter in real-world usage as closely as possible.
+Workflow Summary:
+Training Phase: The model learns from the training data, adjusting its parameters to best fit the data.
+Validation Phase: The model is then run against the validation set to check for overfitting, to validate the generalization of the model, and to fine-tune the parameters or make decisions about which model variations or settings perform best.
+Testing Phase: Finally, the model is evaluated using the test set to simulate how it will perform in the real world, providing an estimate of the model's performance on new, unseen data.
+Best Practices:
+Separation: It's crucial that there is no overlap between these datasets to ensure that the evaluation of the model is fair and robust.
+Consistent Annotation: The method of annotating entities should be consistent across all datasets to prevent any bias or skew in how the model learns and is evaluated.
+Representativeness: Each dataset should ideally be representative of the full range of data the model is expected to handle in actual deployment.
+Organizing your data in this way helps in systematically developing, tuning, and validating the performance of machine learning models.

@@ -1,0 +1,185 @@
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/formula_diagnostic_tool.py hypatiax/data/results/baseline_pure_llm_defi_20251220_155651.json 
+🔬 Formula Discovery Diagnostic Tool
+================================================================================
+Loading: hypatiax/data/results/baseline_pure_llm_defi_20251220_155651.json
+
+
+================================================================================
+                      FORMULA DISCOVERY DIAGNOSTIC REPORT                       
+================================================================================
+
+📈 Overall Success Rate: 15/20 (75.0%)
+
+================================================================================
+                            FAILURE ANALYSIS SUMMARY                            
+================================================================================
+
+Total failures (R² < 0.95): 5/20
+
+📊 Failures by Domain:
+
+  UNKNOWN: 5 failures
+    • Optimal LP position size using risk-adjusted Kelly... (R²: 0.0000)
+    • Capital efficiency multiplier for concentrated liq... (R²: -8.0596)
+    • Portfolio Expected Shortfall for correlated positi... (R²: 0.3635)
+    • Liquidation price for leveraged long position... (R²: -277.7713)
+    • Maximum safe leverage for given acceptable loss to... (R²: 0.7304)
+
+📊 Failures by Difficulty:
+  medium: 4 failures
+  hard: 1 failures
+
+================================================================================
+                      DETAILED DIAGNOSIS OF WORST FAILURES                      
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+WORST FAILURE #1
+================================================================================
+DIAGNOSIS: Liquidation price for leveraged long position
+================================================================================
+
+📊 Metrics:
+  R²: -277.771346
+  RMSE: 167993.2598811321
+  MAE: 146476.77740261893
+  Success: True
+
+📝 Generated Formula:
+  Math: liquidation_price = entry_price × (1 - 1/(leverage × maintenance_margin_ratio))
+  LaTeX: P_{liq} = P_{entry} \times \left(1 - \frac{1}{\text{leverage} \times MMR}\right)
+
+💻 Python Code:
+  def liquidation_price_long(entry_price, leverage):
+      maintenance_margin_ratio = 0.05
+      return entry_price * (1 - 1 / (leverage * maintenance_margin_ratio))
+
+🎯 Ground Truth:
+  Formula: P_liq = P_e × (1 - 1/(L×m))
+  Difficulty: hard
+  Type: algebraic
+
+⚠  Likely Issues:
+  • CATASTROPHIC FAILURE: R² << 0
+    → Formula is much worse than predicting the mean
+    → Likely wrong formula structure or missing constants
+
+================================================================================
+
+🔍 Formula Comparison:
+
+  Ground Truth:  P_liq = P_e × (1 - 1/(L×m))
+  Generated:     liquidation_price = entry_price × (1 - 1/(leverage × maintenance_margin_ratio))
+
+  Expected pattern for LONG: P_e × (1 - 1/(L×m))
+  Key: maintenance_margin (m) should be around 0.8
+
+────────────────────────────────────────────────────────────────────────────────
+WORST FAILURE #2
+================================================================================
+DIAGNOSIS: Capital efficiency multiplier for concentrated liquidity position
+================================================================================
+
+📊 Metrics:
+  R²: -8.059566
+  RMSE: 3.469978096611885
+  MAE: 3.272036636347583
+  Success: True
+
+📝 Generated Formula:
+  Math: efficiency = √(price_upper/price_lower) / (√(price_current/price_lower) + √(price_upper/price_curren
+  LaTeX: efficiency = \frac{\sqrt{\frac{P_{upper}}{P_{lower}}}}{\sqrt{\frac{P_{current}}{P_{lower}}} + \sqrt{
+
+💻 Python Code:
+  def formula(price_lower, price_upper, price_current):
+      numerator = np.sqrt(price_upper / price_lower)
+      denominator = np.sqrt(price_current / price_lower) + np.sqrt(price_upper / price_current) - 1
+      return numerator / denominator
+
+🎯 Ground Truth:
+  Formula: efficiency = P_u/(P_u - P_l)
+  Difficulty: medium
+  Type: algebraic
+
+⚠  Likely Issues:
+  • Poor fit: R² < 0
+    → Formula worse than mean baseline
+
+================================================================================
+
+🔍 Formula Comparison:
+
+  Ground Truth:  efficiency = P_u/(P_u - P_l)
+  Generated:     efficiency = √(price_upper/price_lower) / (√(price_current/price_lower) + √(price_upper/price_curren
+
+────────────────────────────────────────────────────────────────────────────────
+WORST FAILURE #3
+================================================================================
+DIAGNOSIS: Optimal LP position size using risk-adjusted Kelly criterion
+================================================================================
+
+📊 Metrics:
+  R²: 0.000000
+  RMSE: 38.28347484044602
+  MAE: 18.849671977271626
+  Success: True
+
+📝 Generated Formula:
+  Math: position_size = (expected_fee_apy - il_risk) / (2 * il_risk²)
+  LaTeX: position\_size = \frac{expected\_fee\_apy - il\_risk}{2 \cdot il\_risk^2}
+
+💻 Python Code:
+  def optimal_lp_position_size(expected_fee_apy, il_risk):
+      return np.maximum(0, (expected_fee_apy - il_risk) / (2 * il_risk**2))
+
+🎯 Ground Truth:
+  Formula: f* = min(μ/(λσ²), 1)
+  Difficulty: medium
+  Type: algebraic
+
+⚠  Likely Issues:
+  • Weak correlation: R² < 0.5
+    → Formula partially correct but missing key components
+  • Missing constant: risk_aversion coefficient
+
+================================================================================
+
+🔍 Formula Comparison:
+
+  Ground Truth:  f* = min(μ/(λσ²), 1)
+  Generated:     position_size = (expected_fee_apy - il_risk) / (2 * il_risk²)
+
+================================================================================
+            SPECIAL INVESTIGATION: Liquidation Price (Long Position)            
+================================================================================
+
+🔬 Deep Dive Analysis:
+
+Generated Python Function:
+────────────────────────────────────────
+def liquidation_price_long(entry_price, leverage):
+    maintenance_margin_ratio = 0.05
+    return entry_price * (1 - 1 / (leverage * maintenance_margin_ratio))
+────────────────────────────────────────
+
+✅ Expected Formula:
+  P_liq = entry_price × (1 - 1/(leverage × maintenance_margin))
+  where maintenance_margin = 0.8
+
+📋 Expected Constants:
+  {'liquidation_threshold': 0.8}
+
+🔍 Issue Analysis:
+  ⚠  maintenance_margin value might be incorrect
+  ✓ Formula structure looks correct (1 - ...)
+
+💡 Recommendation:
+  The LLM might be:
+  1. Using wrong maintenance_margin value
+  2. Misunderstanding the formula structure
+  3. Not incorporating the constant correctly
+
+================================================================================
+                              DIAGNOSTIC COMPLETE                               
+================================================================================

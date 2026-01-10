@@ -1,0 +1,83 @@
+──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/final_corrected_stricter_test_defi.py                                       
+================================================================================
+                       FINAL TEST WITH CORRECTED PROMPTS                        
+================================================================================
+Model: claude-sonnet-4-20250514
+Passing threshold: R² ≥ 0.95
+================================================================================
+
+================================================================================
+TEST 1/3: Kelly Criterion
+================================================================================
+Ground Truth: min(expected_fee_apy / (2 * il_risk**2), 1.0)
+
+🤖 Generating with CORRECTED prompt...
+⏱  Generated in 8.51s
+✅ Python code extracted
+📝 Formula: min(expected_fee_apy/(2*il_risk**2), 1.0)...
+
+💻 Extracted Python code:
+   def formula(expected_fee_apy, il_risk):
+       risk_aversion = 2.0
+       position = expected_fee_apy / (risk_aversion * il_risk**2)
+       return np.minimum(position, 1.0)
+
+✅ EXCELLENT
+   R²: 1.00000000
+   RMSE: 0.000000
+   MAE: 0.000000
+
+================================================================================
+TEST 2/3: Capital Efficiency
+================================================================================
+Ground Truth: price_upper / (price_upper - price_lower)
+
+🤖 Generating with CORRECTED prompt...
+⏱  Generated in 6.69s
+✅ Python code extracted
+📝 Formula: price_upper / (price_upper - price_lower)...
+
+💻 Extracted Python code:
+   def formula(price_lower, price_upper, price_current):
+       return price_upper / (price_upper - price_lower)
+
+✅ EXCELLENT
+   R²: 1.00000000
+   RMSE: 0.000000
+   MAE: 0.000000
+
+================================================================================
+TEST 3/3: Portfolio ES
+================================================================================
+Ground Truth: position1_es + position2_es + correlation * sqrt(position1_es * position2_es)
+
+🤖 Generating with CORRECTED prompt...
+⏱  Generated in 6.90s
+✅ Python code extracted
+📝 Formula: position1_es + position2_es + correlation * sqrt(position1_es * position2_es)...
+
+💻 Extracted Python code:
+   def formula(position1_es, position2_es, correlation):
+       corr_term = correlation * np.sqrt(position1_es * position2_es)
+       return position1_es + position2_es + corr_term
+
+✅ EXCELLENT
+   R²: 1.00000000
+   RMSE: 0.000000
+   MAE: 0.000000
+
+================================================================================
+                                 FINAL RESULTS                                  
+================================================================================
+
+✅ PASSED: 3/3
+❌ FAILED: 0/3
+  ✅ Kelly Criterion           R²: 1.00000000 [EXCELLENT]
+  ✅ Capital Efficiency        R²: 1.00000000 [EXCELLENT]
+  ✅ Portfolio ES              R²: 1.00000000 [EXCELLENT]
+
+💾 Results saved to: results/final_corrected_test_20251220_191338.json
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$                                                                            

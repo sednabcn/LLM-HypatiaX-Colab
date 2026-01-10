@@ -1,0 +1,13 @@
+{
+  "error": "Object of type bool is not JSON serializable",
+  "test_name": "mechanics_kinetic_energy",
+  "execution_time": 2.7988736629486084,
+  "timestamp": "2026-01-08T17:11:49.754386",
+  "_metadata": {
+    "session_id": "llm_20260108_171146",
+    "timestamp": "2026-01-08T17:11:49.754464",
+    "passed": false,
+    "test_name": "mechanics_kinetic_energy",
+    "method": "llm_guided"
+  }
+}

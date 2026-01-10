@@ -1,0 +1,97 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "E = h * f",
+    "confidence": 0.98,
+    "reasoning": "This is Planck's fundamental equation for photon energy, where h is Planck's constant and f is frequency. The perfect correlation with f (1.000) and zero correlation with h (as a constant) matches exactly.",
+    "source": "llm",
+    "fitted_equation": null,
+    "coefficients": null,
+    "r2_score": 0.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": null
+  },
+  "all_hypotheses": [
+    {
+      "equation": "E = h * f",
+      "confidence": 0.98,
+      "reasoning": "This is Planck's fundamental equation for photon energy, where h is Planck's constant and f is frequency. The perfect correlation with f (1.000) and zero correlation with h (as a constant) matches exactly.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "E = 6.626e-34 * f",
+      "confidence": 0.95,
+      "reasoning": "Direct implementation of Planck's equation with the numerical value of Planck's constant (6.626\u00d710\u207b\u00b3\u2074 J\u00b7s). The linear relationship and energy scale (10\u207b\u00b2\u2070 to 10\u207b\u00b9\u2079 J) are consistent with photon energies.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "E = h * f + 0",
+      "confidence": 0.9,
+      "reasoning": "Alternative form of Planck's equation explicitly showing no offset term. The linear structure and perfect f correlation support this, though the added zero term is redundant but mathematically equivalent.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    }
+  ],
+  "patterns": {
+    "is_linear": true,
+    "is_polynomial": true,
+    "is_power_law": true,
+    "is_exponential": true,
+    "is_logarithmic": true,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "h": 1.8802933873925837e-16,
+      "f": 1.0
+    },
+    "polynomial_degree": 2,
+    "power_exponents": {
+      "f": 1.0000000000000002
+    },
+    "y_range": [
+      6.902226059856487e-20,
+      6.624316372874511e-19
+    ],
+    "y_scale": "very_small",
+    "symmetry": "symmetric",
+    "estimated_complexity": "simple"
+  },
+  "timing": {
+    "total": 7.142477989196777,
+    "phase1_analysis": 0.06403303146362305,
+    "phase2_llm": 7.075049877166748,
+    "phase3_verify": 0.0024280548095703125
+  },
+  "r2_score": 0.0,
+  "validation_score": 0.0,
+  "expression": "E = h * f",
+  "test_name": "quantum_photon_energy",
+  "timestamp": "2026-01-08T17:23:14.653564",
+  "ground_truth": "h*f",
+  "domain": "quantum",
+  "_metadata": {
+    "session_id": "llm_20260108_172007",
+    "timestamp": "2026-01-08T17:23:14.653664",
+    "passed": false,
+    "test_name": "quantum_photon_energy",
+    "method": "llm_guided"
+  }
+}

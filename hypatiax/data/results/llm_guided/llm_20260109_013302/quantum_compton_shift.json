@@ -1,0 +1,121 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = 2.426e-12 * (1 - cos_theta)",
+    "confidence": 0.9,
+    "reasoning": "This uses the Compton wavelength constant (h/me*c \u2248 2.426e-12 m) directly. The perfect negative correlation with cos_theta and y-range match this form.",
+    "source": "llm",
+    "fitted_equation": "2.426e-12 * (1 - cos_theta)",
+    "coefficients": {},
+    "r2_score": 0.9999988170316609,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = 2.426e-12 * (1 - cos_theta)",
+      "confidence": 0.9,
+      "reasoning": "This uses the Compton wavelength constant (h/me*c \u2248 2.426e-12 m) directly. The perfect negative correlation with cos_theta and y-range match this form.",
+      "source": "llm",
+      "fitted_equation": "2.426e-12 * (1 - cos_theta)",
+      "coefficients": {},
+      "r2_score": 0.9999988170316609,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (h / (me * c)) * (1 - cos_theta)",
+      "confidence": 0.95,
+      "reasoning": "This is the exact Compton scattering formula for wavelength shift. The strong negative correlation with cos_theta and the quantum domain strongly suggest this relationship.",
+      "source": "llm",
+      "fitted_equation": "(h / (me * c)) * (1 - cos_theta)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h * (1 - cos_theta) / (me * c)",
+      "confidence": 0.95,
+      "reasoning": "Mathematically equivalent to the first equation but written in different order. This is the fundamental Compton wavelength shift formula.",
+      "source": "llm",
+      "fitted_equation": "h * (1 - cos_theta) / (me * c)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (h / (me * c)) + (h / (me * c)) * (-cos_theta)",
+      "confidence": 0.2,
+      "reasoning": "Linear combination form that could produce the observed correlations, but more complex than the standard Compton formula.",
+      "source": "llm",
+      "fitted_equation": "(h / (me * c)) + (h / (me * c)) * (-cos_theta)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 89.5,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (h / (me * c)) * (1 - cos_theta**2)",
+      "confidence": 0.25,
+      "reasoning": "Alternative form with cos_theta squared, accounting for the polynomial degree 2 pattern, but less physically motivated for Compton scattering.",
+      "source": "llm",
+      "fitted_equation": "(h / (me * c)) * (1 - cos_theta**2)",
+      "coefficients": {},
+      "r2_score": -0.6730770770038814,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": true,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "h": -1.3379735812458067e-17,
+      "me": -1.3379735812458067e-17,
+      "c": 0.0,
+      "cos_theta": -0.9999999999999997
+    },
+    "polynomial_degree": 2,
+    "power_exponents": {},
+    "y_range": [
+      2.144881079221268e-15,
+      4.846247764347078e-12
+    ],
+    "y_scale": "very_small",
+    "symmetry": "symmetric",
+    "estimated_complexity": "simple"
+  },
+  "timing": {
+    "total": 9.210021018981934,
+    "phase1_analysis": 0.07493829727172852,
+    "phase2_llm": 8.67092776298523,
+    "phase3_verify": 0.4633669853210449
+  },
+  "r2_score": 0.9999988170316609,
+  "validation_score": 100.0,
+  "expression": "2.426e-12 * (1 - cos_theta)",
+  "test_name": "quantum_compton_shift",
+  "timestamp": "2026-01-09T01:36:15.900302",
+  "ground_truth": "(h/(me*c))*(1 - cos_theta)",
+  "domain": "quantum",
+  "_metadata": {
+    "session_id": "llm_20260109_013302",
+    "timestamp": "2026-01-09T01:36:15.900393",
+    "passed": true,
+    "test_name": "quantum_compton_shift",
+    "method": "llm_guided"
+  }
+}

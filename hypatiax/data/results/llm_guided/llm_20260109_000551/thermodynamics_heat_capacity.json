@@ -1,0 +1,120 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "Q = m * c * dT",
+    "confidence": 0.95,
+    "reasoning": "This is the fundamental heat capacity equation in thermodynamics, where Q is heat energy, m is mass, c is specific heat capacity, and dT is temperature change. The moderate correlations and polynomial nature could arise from measurement uncertainties or non-linear effects.",
+    "source": "llm",
+    "fitted_equation": "m * c * dT",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "Q = m * c * dT",
+      "confidence": 0.95,
+      "reasoning": "This is the fundamental heat capacity equation in thermodynamics, where Q is heat energy, m is mass, c is specific heat capacity, and dT is temperature change. The moderate correlations and polynomial nature could arise from measurement uncertainties or non-linear effects.",
+      "source": "llm",
+      "fitted_equation": "m * c * dT",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = m * c * dT + 0.2 * m**2 * c * dT",
+      "confidence": 0.7,
+      "reasoning": "Heat capacity equation with a mass-interaction term. The has_interactions flag suggests coupling between variables, and this could represent heat transfer effects that scale with mass squared.",
+      "source": "llm",
+      "fitted_equation": "m * c * dT + 0.2 * m**2 * c * dT",
+      "coefficients": {},
+      "r2_score": -3.115862190405129,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = m * c * dT + 0.1 * m * c * dT**2",
+      "confidence": 0.85,
+      "reasoning": "Modified heat capacity equation with a quadratic temperature dependence term to account for the polynomial degree 3 pattern. The coefficient 0.1 represents a small non-linear correction that's common in real thermodynamic systems.",
+      "source": "llm",
+      "fitted_equation": "m * c * dT + 0.1 * m * c * dT**2",
+      "coefficients": {},
+      "r2_score": -106.68123929591944,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = m * c * dT * (1 + 0.05 * dT + 0.001 * dT**2)",
+      "confidence": 0.8,
+      "reasoning": "Heat capacity with temperature-dependent corrections expressed as a polynomial expansion. This accounts for the fact that specific heat capacity often varies with temperature in real materials.",
+      "source": "llm",
+      "fitted_equation": "m * c * dT * (1 + 0.05 * dT + 0.001 * dT**2)",
+      "coefficients": {},
+      "r2_score": -192.71573293009953,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = m * c * dT + 0.15 * m * c**2 * dT",
+      "confidence": 0.65,
+      "reasoning": "Modified heat capacity with a specific heat interaction term. This could account for materials where the effective heat capacity depends on the square of the specific heat coefficient, creating the observed polynomial behavior.",
+      "source": "llm",
+      "fitted_equation": "m * c * dT + 0.15 * m * c**2 * dT",
+      "coefficients": {},
+      "r2_score": -565362.6594307773,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "m": 0.5020542451240794,
+      "c": 0.4409052197967809,
+      "dT": 0.5146688051154419
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      714.0557909917817,
+      3947461.485082278
+    ],
+    "y_scale": "very_large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 9.856390953063965,
+    "phase1_analysis": 0.06752276420593262,
+    "phase2_llm": 9.777012825012207,
+    "phase3_verify": 0.010737419128417969
+  },
+  "r2_score": 1.0,
+  "validation_score": 0.0,
+  "expression": "m * c * dT",
+  "test_name": "thermodynamics_heat_capacity",
+  "timestamp": "2026-01-09T00:06:55.679889",
+  "ground_truth": "m*c*dT",
+  "domain": "thermodynamics",
+  "_metadata": {
+    "session_id": "llm_20260109_000551",
+    "timestamp": "2026-01-09T00:06:55.679973",
+    "passed": false,
+    "test_name": "thermodynamics_heat_capacity",
+    "method": "llm_guided"
+  }
+}

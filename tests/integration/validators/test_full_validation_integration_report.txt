@@ -1,0 +1,197 @@
+──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python tests/integration/validators/test_full_validation_integration.py                                              
+
+================================================================================
+                    HYPATIAX VALIDATION SYSTEM
+               Comprehensive Integration Test Suite
+================================================================================
+
+================================================================================
+TEST: Kelly Criterion LP Position Sizing
+================================================================================
+✅ PASS | Score: 89.50/100 | Valid: True
+
+Layer Performance:
+  ✅ Symbolic    :  98.00/100
+  ✅ Dimensional : 100.00/100
+  ❌ Domain      :  67.00/100
+  ✅ Numerical   : 100.00/100
+
+⚠  Warnings (7):
+  • Check AMM constant product invariant preservation
+  • Variable 'x' should be positive - add validation
+  • Variable 'y' should be positive - add validation
+  ... and 4 more
+
+💡 Top Recommendations:
+  • 🟡 REVIEW: Address defi domain warnings
+================================================================================
+
+================================================================================
+TEST: AMM Constant Product Formula
+================================================================================
+✅ PASS | Score: 90.10/100 | Valid: True
+
+Layer Performance:
+  ✅ Symbolic    :  98.00/100
+  ✅ Dimensional :  90.00/100
+  ⚠  Domain      :  79.00/100
+  ✅ Numerical   : 100.00/100
+
+⚠  Warnings (8):
+  • Check AMM constant product invariant preservation
+  • Multiplication of variables detected - verify dimensional consistency
+  • Square root detected - ensure all arguments are non-negative
+  ... and 5 more
+
+💡 Top Recommendations:
+  • 🟡 VERIFY: Check dimensional analysis warnings
+  • 🟡 REVIEW: Address defi domain warnings
+================================================================================
+
+================================================================================
+TEST: Impermanent Loss Formula
+================================================================================
+❌ FAIL | Score: 55.90/100 | Valid: False
+
+Layer Performance:
+  ❌ Symbolic    :  41.00/100
+  ✅ Dimensional :  97.00/100
+  ❌ Domain      :  65.00/100
+  ✅ Numerical   : 100.00/100
+
+Penalties Applied: -15.00
+  • critical: -15.00
+
+❌ Errors (3):
+  • CRITICAL: Unprotected division by zero risk: r + 1. Add epsilon guard: (denominator + ε)
+  • CRITICAL: Unprotected division by zero risk: r + 1. Add epsilon guard: (denominator + ε)
+  • CRITICAL: Ratio variable 'r' appears in (1+r) denominator. Must enforce r > 0 to prevent division by zero. Add constraint: if r <= 0, reject input or use abs(r)
+
+⚠  Warnings (4):
+  • Can be simplified to: (2*sqrt(r) - r - 1)/(r + 1)
+  • Check AMM constant product invariant preservation
+  • Square root detected - ensure all arguments are non-negative
+  ... and 1 more
+
+💡 Top Recommendations:
+  • 🔴 FIX CRITICAL: Resolve 1 critical edge case(s) immediately
+  •   → CRITICAL: Division by zero detected
+  • 🟡 VERIFY: Check dimensional analysis warnings
+================================================================================
+
+================================================================================
+TEST: AMM Swap Output with Fee
+================================================================================
+❌ FAIL | Score: 59.80/100 | Valid: False
+
+Layer Performance:
+  ❌ Symbolic    :  52.00/100
+  ✅ Dimensional :  95.00/100
+  ❌ Domain      :  69.00/100
+  ✅ Numerical   : 100.00/100
+
+Penalties Applied: -15.00
+  • critical: -15.00
+
+❌ Errors (1):
+  • CRITICAL: Unprotected division by zero risk: amount_in*(1 - fee) + reserve_in. Add epsilon guard: (denominator + ε)
+
+⚠  Warnings (11):
+  • Can be simplified to: amount_in*reserve_out*(fee - 1)/(amount_in*(fee - 1) - reserve_in)
+  • Fee variable must satisfy 0 ≤ fee < 1. Add validation: assert 0 <= fee < 1
+  • Check AMM constant product invariant preservation
+  ... and 8 more
+
+💡 Top Recommendations:
+  • 🔴 FIX CRITICAL: Resolve 1 critical edge case(s) immediately
+  •   → CRITICAL: Division by zero detected
+  • 🟡 VERIFY: Check dimensional analysis warnings
+================================================================================
+
+================================================================================
+TEST: Sharpe Ratio (Finance Domain)
+================================================================================
+✅ PASS | Score: 94.60/100 | Valid: True
+
+Layer Performance:
+  ✅ Symbolic    :  98.00/100
+  ✅ Dimensional :  97.00/100
+  ⚠  Domain      :  87.00/100
+  ✅ Numerical   : 100.00/100
+
+⚠  Warnings (4):
+  • Check AMM constant product invariant preservation
+  • Division by 'sigma' detected - ensure sigma ≠ 0
+  • Variable 'r' must be strictly positive (> 0). Add validation: assert r > 0
+  ... and 1 more
+
+💡 Top Recommendations:
+  • 🟡 VERIFY: Check dimensional analysis warnings
+  • 🟡 REVIEW: Address defi domain warnings
+================================================================================
+
+================================================================================
+TEST: Division by Zero Test (Should Fail)
+================================================================================
+✅ PASS | Score: 90.90/100 | Valid: True
+
+Layer Performance:
+  ✅ Symbolic    :  94.00/100
+  ✅ Dimensional :  97.00/100
+  ⚠  Domain      :  82.00/100
+  ✅ Numerical   :  90.00/100
+
+❌ Errors (1):
+  • Evaluation error at sample 0: Cannot convert complex to float
+
+⚠  Warnings (7):
+  • Price variables ['price'] must be positive. Add validation: assert all(p > 0 for p in prices)
+  • Verify price bounds and slippage limits
+  • Check AMM constant product invariant preservation
+  ... and 4 more
+
+💡 Top Recommendations:
+  • 🟡 VERIFY: Check dimensional analysis warnings
+  • 🟡 REVIEW: Address defi domain warnings
+  • 🔴 FIX: Resolve numerical stability issues
+================================================================================
+
+================================================================================
+                         VALIDATION STATISTICS
+================================================================================
+Total Tests:          6
+Passed:               4
+Failed:               2
+Success Rate:         66.7%
+Average Score:        80.13/100
+Threshold:            85.0
+
+Average Layer Scores:
+  Symbolic    : 80.17
+  Dimensional : 96.00
+  Domain      : 74.83
+  Numerical   : 98.33
+
+Weakest Layer:        domain
+================================================================================
+
+================================================================================
+                         SYSTEM INSIGHTS
+================================================================================
+
+✅ Validation System Status: OPERATIONAL
+
+Key Observations:
+  ⚠  Domain layer averaging 74.8 - consider tuning
+
+Validation Thresholds:
+  • Minimum Total Score:   85.0
+  • Critical Failure:      50.0
+  • Edge Case Penalty:     15.0
+  • Dimensional Penalty:   20.0
+
+================================================================================
+                    Integration Test Complete ✅
+================================================================================
+

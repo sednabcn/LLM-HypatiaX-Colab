@@ -1,0 +1,13 @@
+[
+  {
+    "formula": "min(expected_fee_apy/(2*il_risk**2), 1.0)",
+    "latex": "$$f^* = \\min\\left(\\frac{\\mu}{2\\sigma^2}, 1.0\\right)$$",
+    "python": "def formula(expected_fee_apy, il_risk):\n    risk_aversion = 2.0\n    position = expected_fee_apy / (risk_aversion * il_risk**2)\n    return np.minimum(position, 1.0)",
+    "raw_response": "FORMULA:\nmin(expected_fee_apy/(2*il_risk**2), 1.0)\n\nLATEX:\n$$f^* = \\min\\left(\\frac{\\mu}{2\\sigma^2}, 1.0\\right)$$\n\nwhere:\n- $f^*$ = optimal LP position size (fraction of capital)\n- $\\mu$ = expected fee APY\n- $\\sigma$ = impermanent loss risk/volatility\n\nPYTHON:\n```python\ndef formula(expected_fee_apy, il_risk):\n    risk_aversion = 2.0\n    position = expected_fee_apy / (risk_aversion * il_risk**2)\n    return np.minimum(position, 1.0)\n```\n\nVARIABLES:\n- expected_fee_apy (\u03bc): Expected annual percentage yield from LP fees, expressed as a decimal (e.g., 0.15 for 15%)\n- il_risk (\u03c3): Impermanent loss risk measured as volatility/standard deviation of returns, expressed as a decimal\n- risk_aversion (\u03bb): Risk aversion parameter set to 2.0 for moderate risk tolerance\n\nASSUMPTIONS:\n- Risk aversion parameter \u03bb = 2.0 (moderate risk tolerance)\n- Returns follow a normal distribution\n- Impermanent loss risk can be approximated by volatility\n- Maximum position size is capped at 100% of available capital\n- Fee APY and impermanent loss are the primary risk-return drivers\n- No transaction costs or slippage considered\n\nEXPLANATION:\nThe formula applies the Kelly criterion to DeFi liquidity provision by balancing expected fee income against impermanent loss risk. The optimal position size increases with higher expected fees and decreases with higher volatility risk. The 1.0 cap ensures we never allocate more than 100% of available capital, making it practically implementable for portfolio management.",
+    "evaluation": {
+      "success": true,
+      "r2": 1.0,
+      "rmse": 0.0,
+      "mae": 0.0,
+      "quality": "EXCELLENT",
+      "passed": 

@@ -1,0 +1,727 @@
+[
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Impermanent loss in constant product AMM (Uniswap V2)",
+    "domain": "amm",
+    "evaluation": {
+      "r2": 0.9696395985541473,
+      "rmse": 0.0030187008219525195,
+      "mae": 0.00187016605025922,
+      "mse": 9.112554652456817e-06,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 95,
+      "final_train_loss": 0.09887855499982834,
+      "final_val_loss": 0.08148892223834991,
+      "best_val_loss": 0.0735296830534935,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "formula_type": "algebraic_with_sqrt",
+      "ground_truth": "IL = 2\u221ar/(1+r) - 1",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "price_ratio": "dimensionless",
+        "IL": "fraction"
+      },
+      "extrapolation_test": true,
+      "description": "Price ratio r = P_final/P_initial"
+    },
+    "timestamp": "2025-12-21T10:30:52.246146",
+    "extrapolation_stats": {
+      "mean_prediction": -0.01941145956516266,
+      "std_prediction": 0.014777523465454578,
+      "mean_error": 0.0013281186077558228,
+      "extrapolation_quality": "good"
+    }
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Impermanent loss percentage in AMM",
+    "domain": "amm",
+    "evaluation": {
+      "r2": 0.9611744654779693,
+      "rmse": 0.3852201457916006,
+      "mae": 0.24993409420537974,
+      "mse": 0.148394560723702,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 95,
+      "final_train_loss": 0.11784014850854874,
+      "final_val_loss": 0.01797497272491455,
+      "best_val_loss": 0.008129718713462353,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "formula_type": "algebraic_with_sqrt",
+      "ground_truth": "IL% = (2\u221ar/(1+r) - 1) \u00d7 100",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "price_ratio": "dimensionless",
+        "IL": "percent"
+      }
+    },
+    "timestamp": "2025-12-21T10:30:53.654113"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Constant product formula: reserve Y given reserve X and invariant k",
+    "domain": "amm",
+    "evaluation": {
+      "r2": -0.13436589179178693,
+      "rmse": 39960.007888417094,
+      "mae": 20217.24766527559,
+      "mse": 1596802230.4423566,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 131,
+      "final_train_loss": 0.4012264311313629,
+      "final_val_loss": 0.5547913908958435,
+      "best_val_loss": 0.49436503648757935,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "y = k/x",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "reserve_x": "tokens",
+        "invariant_k": "tokens\u00b2",
+        "reserve_y": "tokens"
+      }
+    },
+    "timestamp": "2025-12-21T10:30:55.474865"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Price impact of swap in constant product AMM",
+    "domain": "amm",
+    "evaluation": {
+      "r2": 0.9760893818395742,
+      "rmse": 0.009032697058132422,
+      "mae": 0.0073417349268255425,
+      "mse": 8.158961614399411e-05,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 80,
+      "final_train_loss": 0.14043043553829193,
+      "final_val_loss": 0.029379308223724365,
+      "best_val_loss": 0.024767519906163216,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "price_impact = \u0394x/(x + \u0394x)",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "reserve_x": "tokens",
+        "swap_amount": "tokens",
+        "price_impact": "fraction"
+      }
+    },
+    "timestamp": "2025-12-21T10:30:56.604276"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Parametric Value at Risk at 95% confidence (1-day)",
+    "domain": "risk_var",
+    "evaluation": {
+      "r2": 0.9915372890514637,
+      "rmse": 1415.3929321724497,
+      "mae": 1225.8833478782085,
+      "mse": 2003337.1524437252,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 98,
+      "final_train_loss": 0.06625273078680038,
+      "final_val_loss": 0.010496800765395164,
+      "best_val_loss": 0.00596947455778718,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "linear",
+      "ground_truth": "VaR = V \u00d7 \u03c3 \u00d7 z",
+      "domain_specific": true,
+      "constants": {
+        "z_score": 1.645
+      },
+      "units": {
+        "portfolio_value": "USD",
+        "daily_volatility": "fraction",
+        "VaR": "USD"
+      },
+      "extrapolation_test": true,
+      "description": "z = 1.645 for 95% confidence"
+    },
+    "timestamp": "2025-12-21T10:30:57.980827",
+    "extrapolation_stats": {
+      "mean_prediction": 22566.265625,
+      "std_prediction": 16390.626953125,
+      "mean_error": -639.4037659639763,
+      "extrapolation_quality": "good"
+    }
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Parametric Value at Risk at 99% confidence (1-day)",
+    "domain": "risk_var",
+    "evaluation": {
+      "r2": 0.9950957293388438,
+      "rmse": 1754.5756018917518,
+      "mae": 1534.7757316333543,
+      "mse": 3078535.5427538035,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 95,
+      "final_train_loss": 0.07155831158161163,
+      "final_val_loss": 0.020275916904211044,
+      "best_val_loss": 0.014002236537635326,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "linear",
+      "ground_truth": "VaR = V \u00d7 \u03c3 \u00d7 z",
+      "domain_specific": true,
+      "constants": {
+        "z_score": 2.326
+      },
+      "units": {
+        "portfolio_value": "USD",
+        "daily_volatility": "fraction",
+        "VaR": "USD"
+      },
+      "description": "z = 2.326 for 99% confidence"
+    },
+    "timestamp": "2025-12-21T10:30:59.296435"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Multi-day Value at Risk using square root of time rule",
+    "domain": "risk_var",
+    "evaluation": {
+      "r2": 0.9866445751007316,
+      "rmse": 7508.404085419568,
+      "mae": 6344.182285968918,
+      "mse": 56376131.909945264,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 113,
+      "final_train_loss": 0.09018683433532715,
+      "final_val_loss": 0.01312206219881773,
+      "best_val_loss": 0.005583767779171467,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "power_law",
+      "ground_truth": "VaR_T = VaR_1 \u00d7 \u221aT",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "var_1day": "USD",
+        "time_horizon_days": "days",
+        "VaR": "USD"
+      }
+    },
+    "timestamp": "2025-12-21T10:31:00.945340"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Portfolio VaR for two correlated assets",
+    "domain": "risk_var",
+    "evaluation": {
+      "r2": 0.9854672321731155,
+      "rmse": 2012.2259542478243,
+      "mae": 1628.4219252098394,
+      "mse": 4049053.290948567,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 95,
+      "final_train_loss": 0.07179901003837585,
+      "final_val_loss": 0.01664477400481701,
+      "best_val_loss": 0.015592770650982857,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "algebraic_with_sqrt",
+      "ground_truth": "VaR_p = \u221a(VaR\u2081\u00b2 + VaR\u2082\u00b2 + 2\u03c1VaR\u2081VaR\u2082)",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "var_asset1": "USD",
+        "var_asset2": "USD",
+        "correlation": "dimensionless",
+        "VaR_portfolio": "USD"
+      }
+    },
+    "timestamp": "2025-12-21T10:31:02.280050"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Optimal LP position size using risk-adjusted Kelly criterion",
+    "domain": "liquidity",
+    "evaluation": {
+      "r2": 0.0,
+      "rmse": 0.09948392138890225,
+      "mae": 0.08206331133842468,
+      "mse": 0.009897050614913283,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 31,
+      "final_train_loss": 0.06444645673036575,
+      "final_val_loss": 0.003363399300724268,
+      "best_val_loss": 0.0007271713111549616,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "algebraic",
+      "ground_truth": "f* = min(\u03bc/(\u03bb\u03c3\u00b2), 1)",
+      "domain_specific": true,
+      "constants": {
+        "risk_aversion": 2.0
+      },
+      "units": {
+        "expected_fee_apy": "fraction",
+        "il_risk": "fraction",
+        "position_size": "fraction"
+      },
+      "extrapolation_test": true,
+      "description": "\u03bb = 2.0 (risk aversion), capped at 1.0"
+    },
+    "timestamp": "2025-12-21T10:31:02.782045",
+    "extrapolation_stats": {
+      "mean_prediction": 0.9559441208839417,
+      "std_prediction": 0.06667333841323853,
+      "mean_error": -0.044055810570716857,
+      "extrapolation_quality": "poor"
+    }
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "LP fee earnings based on liquidity share",
+    "domain": "liquidity",
+    "evaluation": {
+      "r2": 0.6790374057561239,
+      "rmse": 1011.9802178302658,
+      "mae": 460.94679466937475,
+      "mse": 1024103.9612797924,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 54,
+      "final_train_loss": 0.11482448875904083,
+      "final_val_loss": 0.9155043363571167,
+      "best_val_loss": 0.29718953371047974,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "fees = (L_user/L_total) \u00d7 F",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "liquidity_provided": "USD",
+        "pool_liquidity": "USD",
+        "total_fees": "USD",
+        "user_fees": "USD"
+      }
+    },
+    "timestamp": "2025-12-21T10:31:03.585694"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Capital efficiency multiplier for concentrated liquidity position",
+    "domain": "liquidity",
+    "evaluation": {
+      "r2": 0.9104910038710331,
+      "rmse": 0.400764462645745,
+      "mae": 0.18141448710049815,
+      "mse": 0.16061215451973274,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 112,
+      "final_train_loss": 0.08456595242023468,
+      "final_val_loss": 0.009930401109158993,
+      "best_val_loss": 0.007017331663519144,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "algebraic",
+      "ground_truth": "efficiency = P_u/(P_u - P_l)",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "price_lower": "USD",
+        "price_upper": "USD",
+        "price_current": "USD",
+        "efficiency": "multiplier"
+      }
+    },
+    "timestamp": "2025-12-21T10:31:05.189342"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "APY calculation from APR with daily compounding",
+    "domain": "liquidity",
+    "evaluation": {
+      "r2": 0.991296138907373,
+      "rmse": 0.0158339199563302,
+      "mae": 0.010791621567346399,
+      "mse": 0.0002507130211834718,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 107,
+      "final_train_loss": 0.036177344620227814,
+      "final_val_loss": 0.00318480608984828,
+      "best_val_loss": 0.0009994565043598413,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "exponential",
+      "ground_truth": "APY = (1 + APR/n)\u207f - 1",
+      "domain_specific": false,
+      "constants": {
+        "compounds_per_year": 365
+      },
+      "units": {
+        "apr": "fraction",
+        "apy": "fraction"
+      },
+      "description": "n = 365 for daily compounding"
+    },
+    "timestamp": "2025-12-21T10:31:06.674446"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Expected Shortfall (CVaR) at 95% confidence for normal returns",
+    "domain": "expected_shortfall",
+    "evaluation": {
+      "r2": 0.9885587159183631,
+      "rmse": 2063.9205684207814,
+      "mae": 1853.0218344114478,
+      "mse": 4259768.112750362,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 93,
+      "final_train_loss": 0.05093521252274513,
+      "final_val_loss": 0.008944808505475521,
+      "best_val_loss": 0.005478285253047943,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "linear",
+      "ground_truth": "ES = V \u00d7 \u03c3 \u00d7 m",
+      "domain_specific": true,
+      "constants": {
+        "multiplier": 2.063
+      },
+      "units": {
+        "portfolio_value": "USD",
+        "daily_volatility": "fraction",
+        "ES": "USD"
+      },
+      "extrapolation_test": true,
+      "description": "m = 2.063 for 95% confidence (normal)"
+    },
+    "timestamp": "2025-12-21T10:31:08.430013",
+    "extrapolation_stats": {
+      "mean_prediction": 29555.96484375,
+      "std_prediction": 20723.5859375,
+      "mean_error": 453.65924981947296,
+      "extrapolation_quality": "good"
+    }
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Expected Shortfall (CVaR) at 99% confidence for normal returns",
+    "domain": "expected_shortfall",
+    "evaluation": {
+      "r2": 0.9939116356552458,
+      "rmse": 2239.869369484059,
+      "mae": 1963.7555398847585,
+      "mse": 5017014.792352917,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 100,
+      "final_train_loss": 0.05846183001995087,
+      "final_val_loss": 0.017312895506620407,
+      "best_val_loss": 0.01429995708167553,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "linear",
+      "ground_truth": "ES = V \u00d7 \u03c3 \u00d7 m",
+      "domain_specific": true,
+      "constants": {
+        "multiplier": 2.665
+      },
+      "units": {
+        "portfolio_value": "USD",
+        "daily_volatility": "fraction",
+        "ES": "USD"
+      },
+      "description": "m = 2.665 for 99% confidence (normal)"
+    },
+    "timestamp": "2025-12-21T10:31:10.098282"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Expected Shortfall from VaR using tail risk multiplier",
+    "domain": "expected_shortfall",
+    "evaluation": {
+      "r2": 0.9968747875609896,
+      "rmse": 1890.8243692514818,
+      "mae": 1282.8585608264266,
+      "mse": 3575216.795355264,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 167,
+      "final_train_loss": 0.0354994498193264,
+      "final_val_loss": 0.00567654799669981,
+      "best_val_loss": 0.004535282962024212,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "linear",
+      "ground_truth": "ES = VaR \u00d7 r",
+      "domain_specific": true,
+      "constants": {
+        "ratio": 1.25
+      },
+      "units": {
+        "var_95": "USD",
+        "ES": "USD"
+      },
+      "description": "r = 1.25 for normal distribution at 95%"
+    },
+    "timestamp": "2025-12-21T10:31:12.784429"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Portfolio Expected Shortfall for correlated positions",
+    "domain": "expected_shortfall",
+    "evaluation": {
+      "r2": 0.9795969540341766,
+      "rmse": 3396.0903184906283,
+      "mae": 2376.4137321585245,
+      "mse": 11533429.451345777,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 101,
+      "final_train_loss": 0.06348574906587601,
+      "final_val_loss": 0.008618839085102081,
+      "best_val_loss": 0.007053823675960302,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "algebraic_with_sqrt",
+      "ground_truth": "ES_p = ES\u2081 + ES\u2082 + \u03c1\u221a(ES\u2081ES\u2082)",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "position1_es": "USD",
+        "position2_es": "USD",
+        "correlation": "dimensionless",
+        "ES_portfolio": "USD"
+      }
+    },
+    "timestamp": "2025-12-21T10:31:14.202438"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Liquidation price for leveraged long position",
+    "domain": "liquidation",
+    "evaluation": {
+      "r2": 0.9687235162910349,
+      "rmse": 1742.815183501658,
+      "mae": 1221.2834421726375,
+      "mse": 3037404.763843918,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 122,
+      "final_train_loss": 0.05293196812272072,
+      "final_val_loss": 0.01783011108636856,
+      "best_val_loss": 0.01141542848199606,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "formula_type": "algebraic",
+      "ground_truth": "P_liq = P_e \u00d7 (1 - 1/(L\u00d7m))",
+      "domain_specific": true,
+      "constants": {
+        "liquidation_threshold": 0.8
+      },
+      "units": {
+        "entry_price": "USD",
+        "leverage": "multiplier",
+        "liquidation_price": "USD"
+      },
+      "extrapolation_test": true,
+      "description": "m = 0.8 (80% maintenance margin)"
+    },
+    "timestamp": "2025-12-21T10:31:15.922200",
+    "extrapolation_stats": {
+      "mean_prediction": 29392.73828125,
+      "std_prediction": 9266.19921875,
+      "mean_error": 350.6253697076816,
+      "extrapolation_quality": "good"
+    }
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Liquidation price for leveraged short position",
+    "domain": "liquidation",
+    "evaluation": {
+      "r2": 0.9926012847633855,
+      "rmse": 1446.0465934828271,
+      "mae": 1140.847092322001,
+      "mse": 2091050.750523289,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 120,
+      "final_train_loss": 0.048566997051239014,
+      "final_val_loss": 0.004822409711778164,
+      "best_val_loss": 0.0030385705176740885,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "formula_type": "algebraic",
+      "ground_truth": "P_liq = P_e \u00d7 (1 + 1/(L\u00d7m))",
+      "domain_specific": true,
+      "constants": {
+        "liquidation_threshold": 0.8
+      },
+      "units": {
+        "entry_price": "USD",
+        "leverage": "multiplier",
+        "liquidation_price": "USD"
+      },
+      "description": "m = 0.8 (80% maintenance margin)"
+    },
+    "timestamp": "2025-12-21T10:31:17.594650"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Maximum safe leverage for given acceptable loss tolerance",
+    "domain": "liquidation",
+    "evaluation": {
+      "r2": 0.9836876797016301,
+      "rmse": 0.5967033285147307,
+      "mae": 0.45929601705995626,
+      "mse": 0.35605486226055866,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 91,
+      "final_train_loss": 0.0736309215426445,
+      "final_val_loss": 0.015278840437531471,
+      "best_val_loss": 0.012177164666354656,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "algebraic",
+      "ground_truth": "L_max = 1/(loss\u00d7m)",
+      "domain_specific": true,
+      "constants": {
+        "liquidation_threshold": 0.8
+      },
+      "units": {
+        "entry_price": "USD",
+        "acceptable_loss_pct": "fraction",
+        "max_leverage": "multiplier"
+      }
+    },
+    "timestamp": "2025-12-21T10:31:18.896381"
+  },
+  {
+    "method": "neural_network",
+    "architecture": "3-layer MLP [128, 64, 32] with BatchNorm and Dropout",
+    "description": "Required collateral for leveraged position",
+    "domain": "liquidation",
+    "evaluation": {
+      "r2": 0.9695342037370348,
+      "rmse": 747.1710823728612,
+      "mae": 595.5169075993124,
+      "mse": 558264.6263342329,
+      "success": true
+    },
+    "training_info": {
+      "epochs_trained": 66,
+      "final_train_loss": 0.09571292996406555,
+      "final_val_loss": 0.036312080919742584,
+      "best_val_loss": 0.02879398502409458,
+      "early_stopped": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "collateral = position_size/leverage",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "position_size": "USD",
+        "leverage": "multiplier",
+        "collateral": "USD"
+      }
+    },
+    "timestamp": "2025-12-21T10:31:19.856142"
+  }
+]

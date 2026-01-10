@@ -1,0 +1,158 @@
+[
+  {
+    "formula": "f* = max(0, min(1, (\u03bc - r) / (\u03b3 \u00d7 \u03c3\u00b2)))",
+    "latex": "f^* = \\max\\left(0, \\min\\left(1, \\frac{\\mu - r}{\\gamma \\times \\sigma^2}\\right)\\right)\n\nwhere $\\mu$ is the expected fee APY, $\\sigma^2 = \\text{il\\_risk}^2$, $r$ is the risk-free rate, and $\\gamma$ is the risk aversion parameter.",
+    "python": "def formula(expected_fee_apy, il_risk):\n    import numpy as np\n    \n    # Risk aversion coefficient (typical value for moderate risk aversion)\n    gamma = 2.0\n    \n    # Risk-free rate (assumed zero for simplicity)\n    risk_free_rate = 0.0\n    \n    # Calculate optimal position size using risk-adjusted Kelly criterion\n    excess_return = expected_fee_apy - risk_free_rate\n    variance = np.power(il_risk, 2)\n    \n    # Optimal fraction calculation\n    optimal_fraction = excess_return / (gamma * variance)\n    \n    # Cap position size between 0 and 1 (0% to 100%)\n    result = np.maximum(0, np.minimum(1, optimal_fraction))\n    \n    return result",
+    "variables": "- expected_fee_apy: Expected annual percentage yield from liquidity provision fees\n- il_risk: Impermanent loss risk (standard deviation of potential losses)\n- \u03b3 (gamma): Risk aversion coefficient, typically 2 for moderate risk aversion\n- r: Risk-free rate, assumed to be 0 for simplicity\n- f*: Optimal fraction of portfolio to allocate to LP position (0 to 1)",
+    "assumptions": "- Risk aversion coefficient \u03b3 = 2 (moderate risk aversion)\n- Risk-free rate r = 0 (simplified assumption)\n- Returns are normally distributed\n- Impermanent loss risk is measured as standard deviation\n- Maximum position size is capped at 100% of portfolio\n- Minimum position size is 0% (no negative positions)\n- Single-period optimization",
+    "explanation": "This formula applies the mean-variance optimization framework (derived from Kelly criterion for continuous outcomes) to LP position sizing. It balances the excess return from fees against the squared risk (variance) of impermanent loss, scaled by risk aversion. The position size increases with higher expected fees and decreases with higher IL risk or risk aversion. The min/max bounds ensure practical position limits between 0% and 100% of the portfolio.",
+    "raw_response": "FORMULA:\nf* = max(0, min(1, (\u03bc - r) / (\u03b3 \u00d7 \u03c3\u00b2)))\n\nwhere:\n- \u03bc = expected_fee_apy\n- \u03c3\u00b2 = il_risk\u00b2\n- r = risk-free rate (assumed 0 for simplicity)\n- \u03b3 = risk aversion coefficient (typically 2)\n\nLATEX:\nf^* = \\max\\left(0, \\min\\left(1, \\frac{\\mu - r}{\\gamma \\times \\sigma^2}\\right)\\right)\n\nwhere $\\mu$ is the expected fee APY, $\\sigma^2 = \\text{il\\_risk}^2$, $r$ is the risk-free rate, and $\\gamma$ is the risk aversion parameter.\n\nPYTHON:\ndef formula(expected_fee_apy, il_risk):\n    import numpy as np\n    \n    # Risk aversion coefficient (typical value for moderate risk aversion)\n    gamma = 2.0\n    \n    # Risk-free rate (assumed zero for simplicity)\n    risk_free_rate = 0.0\n    \n    # Calculate optimal position size using risk-adjusted Kelly criterion\n    excess_return = expected_fee_apy - risk_free_rate\n    variance = np.power(il_risk, 2)\n    \n    # Optimal fraction calculation\n    optimal_fraction = excess_return / (gamma * variance)\n    \n    # Cap position size between 0 and 1 (0% to 100%)\n    result = np.maximum(0, np.minimum(1, optimal_fraction))\n    \n    return result\n\nVARIABLES:\n- expected_fee_apy: Expected annual percentage yield from liquidity provision fees\n- il_risk: Impermanent loss risk (standard deviation of potential losses)\n- \u03b3 (gamma): Risk aversion coefficient, typically 2 for moderate risk aversion\n- r: Risk-free rate, assumed to be 0 for simplicity\n- f*: Optimal fraction of portfolio to allocate to LP position (0 to 1)\n\nASSUMPTIONS:\n- Risk aversion coefficient \u03b3 = 2 (moderate risk aversion)\n- Risk-free rate r = 0 (simplified assumption)\n- Returns are normally distributed\n- Impermanent loss risk is measured as standard deviation\n- Maximum position size is capped at 100% of portfolio\n- Minimum position size is 0% (no negative positions)\n- Single-period optimization\n\nEXPLANATION:\nThis formula applies the mean-variance optimization framework (derived from Kelly criterion for continuous outcomes) to LP position sizing. It balances the excess return from fees against the squared risk (variance) of impermanent loss, scaled by risk aversion. The position size increases with higher expected fees and decreases with higher IL risk or risk aversion. The min/max bounds ensure practical position limits between 0% and 100% of the portfolio.",
+    "evaluation": {
+      "success": true,
+      "r2": 1.0,
+      "rmse": 0.0,
+      "mae": 0.0,
+      "max_error": 0.0,
+      "mean_relative_error": 0.0,
+      "max_relative_error": 0.0,
+      "quality": "EXCELLENT",
+      "passed": true,
+      "sample_predictions": {
+        "true": [
+          1.0,
+          0.13939174536721097,
+          0.3901704031475487,
+          0.14046038980268985,
+          0.018058261367421037
+        ],
+        "pred": [
+          1.0,
+          0.13939174536721097,
+          0.3901704031475487,
+          0.14046038980268985,
+          0.018058261367421037
+        ],
+        "errors": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "test_case": {
+      "name": "Kelly Criterion",
+      "case_id": "kelly",
+      "domain": "liquidity",
+      "description": "Optimal LP position size using risk-adjusted Kelly criterion",
+      "ground_truth": "min(expected_fee_apy / (2 * il_risk**2), 1.0)",
+      "dangerous_r2_threshold": 0.7
+    },
+    "generation_time": 12.904117107391357
+  },
+  {
+    "formula": "Capital Efficiency = 1 / (2 * (\u221a(price_upper) - \u221a(price_lower)) / (\u221a(price_upper) + \u221a(price_lower)))",
+    "latex": "\\text{Capital Efficiency} = \\frac{1}{2 \\cdot \\frac{\\sqrt{P_u} - \\sqrt{P_l}}{\\sqrt{P_u} + \\sqrt{P_l}}}",
+    "python": "def formula(price_lower, price_upper, price_current):\n    import numpy as np\n    \n    sqrt_lower = np.sqrt(price_lower)\n    sqrt_upper = np.sqrt(price_upper)\n    \n    # Capital efficiency multiplier\n    numerator = sqrt_upper + sqrt_lower\n    denominator = 2 * (sqrt_upper - sqrt_lower)\n    \n    capital_efficiency = numerator / denominator\n    \n    return capital_efficiency",
+    "variables": "- price_lower: Lower boundary price of the concentrated liquidity position\n- price_upper: Upper boundary price of the concentrated liquidity position\n- price_current: Current market price (not used in core formula but may be needed for position evaluation)",
+    "assumptions": "- price_upper > price_lower > 0 (valid price range)\n- Prices are expressed in the same units\n- The formula assumes geometric mean-based calculation typical in AMM protocols\n- Comparison baseline is uniform liquidity distribution across the full price range",
+    "explanation": "The capital efficiency multiplier measures how much more effective a concentrated liquidity position is compared to uniform distribution. It's derived from the ratio of the arithmetic mean to the geometric range of square roots of prices. The formula uses square roots because in constant product AMMs, liquidity is proportional to the geometric mean of reserve ratios. A narrower price range (smaller difference between \u221aprice_upper and \u221aprice_lower) results in higher capital efficiency, while wider ranges approach the efficiency of uniform distribution (multiplier approaches 1).",
+    "raw_response": "FORMULA:\nCapital Efficiency = 1 / (2 * (\u221a(price_upper) - \u221a(price_lower)) / (\u221a(price_upper) + \u221a(price_lower)))\n\nLATEX:\n\\text{Capital Efficiency} = \\frac{1}{2 \\cdot \\frac{\\sqrt{P_u} - \\sqrt{P_l}}{\\sqrt{P_u} + \\sqrt{P_l}}}\n\nPYTHON:\n```python\ndef formula(price_lower, price_upper, price_current):\n    import numpy as np\n    \n    sqrt_lower = np.sqrt(price_lower)\n    sqrt_upper = np.sqrt(price_upper)\n    \n    # Capital efficiency multiplier\n    numerator = sqrt_upper + sqrt_lower\n    denominator = 2 * (sqrt_upper - sqrt_lower)\n    \n    capital_efficiency = numerator / denominator\n    \n    return capital_efficiency\n```\n\nVARIABLES:\n- price_lower: Lower boundary price of the concentrated liquidity position\n- price_upper: Upper boundary price of the concentrated liquidity position\n- price_current: Current market price (not used in core formula but may be needed for position evaluation)\n\nASSUMPTIONS:\n- price_upper > price_lower > 0 (valid price range)\n- Prices are expressed in the same units\n- The formula assumes geometric mean-based calculation typical in AMM protocols\n- Comparison baseline is uniform liquidity distribution across the full price range\n\nEXPLANATION:\nThe capital efficiency multiplier measures how much more effective a concentrated liquidity position is compared to uniform distribution. It's derived from the ratio of the arithmetic mean to the geometric range of square roots of prices. The formula uses square roots because in constant product AMMs, liquidity is proportional to the geometric mean of reserve ratios. A narrower price range (smaller difference between \u221aprice_upper and \u221aprice_lower) results in higher capital efficiency, while wider ranges approach the efficiency of uniform distribution (multiplier approaches 1).",
+    "evaluation": {
+      "success": true,
+      "r2": -16.871795871720995,
+      "rmse": 1.7080742233230026,
+      "mae": 1.656960527406507,
+      "max_error": 2.533586959486361,
+      "mean_relative_error": 0.6009368784963907,
+      "max_relative_error": 0.708791573556407,
+      "quality": "REJECTED",
+      "passed": false,
+      "sample_predictions": {
+        "true": [
+          3.3021843397483215,
+          2.8031627555651606,
+          3.0785799137720464,
+          2.7225964281400192,
+          2.1302456139339605
+        ],
+        "pred": [
+          5.559399796315098,
+          4.551397324871155,
+          5.1082190919373165,
+          4.388222176597214,
+          3.181922372073656
+        ],
+        "errors": [
+          2.257215456566777,
+          1.748234569305994,
+          2.02963917816527,
+          1.6656257484571948,
+          1.0516767581396955
+        ]
+      }
+    },
+    "test_case": {
+      "name": "Capital Efficiency",
+      "case_id": "capital_efficiency",
+      "domain": "liquidity",
+      "description": "Capital efficiency multiplier for concentrated liquidity position",
+      "ground_truth": "price_upper / (price_upper - price_lower)",
+      "dangerous_r2_threshold": 0.0
+    },
+    "generation_time": 9.918418407440186
+  },
+  {
+    "formula": "ES_portfolio = ES\u2081 + ES\u2082 + 2\u03c1\u221a(ES\u2081 \u00b7 ES\u2082)",
+    "latex": "ES_{portfolio} = ES_1 + ES_2 + 2\\rho\\sqrt{ES_1 \\cdot ES_2}",
+    "python": "def formula(position1_es, position2_es, correlation):\n    # Calculate portfolio Expected Shortfall with correlation adjustment\n    import numpy as np\n    \n    # Ensure inputs are numpy arrays for vectorized operations\n    es1 = np.asarray(position1_es)\n    es2 = np.asarray(position2_es)\n    rho = np.asarray(correlation)\n    \n    # Portfolio ES formula with correlation term\n    portfolio_es = es1 + es2 + 2 * rho * np.sqrt(es1 * es2)\n    \n    return portfolio_es",
+    "variables": "- position1_es (ES\u2081): Expected Shortfall of the first position (positive value representing expected loss)\n- position2_es (ES\u2082): Expected Shortfall of the second position (positive value representing expected loss)  \n- correlation (\u03c1): Linear correlation coefficient between the two positions (-1 \u2264 \u03c1 \u2264 1)\n- ES_portfolio: Expected Shortfall of the combined portfolio",
+    "assumptions": "- Both positions have normally distributed or elliptically distributed returns\n- Expected Shortfall values are expressed as positive numbers (losses)\n- Correlation coefficient is constant and linear\n- Same confidence level and time horizon for both ES measurements\n- Positions are measured in compatible units (same currency/scale)",
+    "explanation": "The portfolio Expected Shortfall formula uses linear aggregation with a correlation adjustment term. Unlike VaR which uses quadratic aggregation, ES maintains linearity in the base terms (ES\u2081 + ES\u2082) but includes a bilinear correlation adjustment (2\u03c1\u221a(ES\u2081 \u00b7 ES\u2082)). When \u03c1 = 1 (perfect correlation), the portfolio ES equals the sum of individual ES values. When \u03c1 = -1 (perfect negative correlation), the correlation term provides maximum diversification benefit. When \u03c1 = 0 (no correlation), the formula reduces to the sum of individual ES values, reflecting ES's coherent risk measure properties.",
+    "raw_response": "FORMULA:\nES_portfolio = ES\u2081 + ES\u2082 + 2\u03c1\u221a(ES\u2081 \u00b7 ES\u2082)\n\nLATEX:\nES_{portfolio} = ES_1 + ES_2 + 2\\rho\\sqrt{ES_1 \\cdot ES_2}\n\nPYTHON:\ndef formula(position1_es, position2_es, correlation):\n    # Calculate portfolio Expected Shortfall with correlation adjustment\n    import numpy as np\n    \n    # Ensure inputs are numpy arrays for vectorized operations\n    es1 = np.asarray(position1_es)\n    es2 = np.asarray(position2_es)\n    rho = np.asarray(correlation)\n    \n    # Portfolio ES formula with correlation term\n    portfolio_es = es1 + es2 + 2 * rho * np.sqrt(es1 * es2)\n    \n    return portfolio_es\n\nVARIABLES:\n- position1_es (ES\u2081): Expected Shortfall of the first position (positive value representing expected loss)\n- position2_es (ES\u2082): Expected Shortfall of the second position (positive value representing expected loss)  \n- correlation (\u03c1): Linear correlation coefficient between the two positions (-1 \u2264 \u03c1 \u2264 1)\n- ES_portfolio: Expected Shortfall of the combined portfolio\n\nASSUMPTIONS:\n- Both positions have normally distributed or elliptically distributed returns\n- Expected Shortfall values are expressed as positive numbers (losses)\n- Correlation coefficient is constant and linear\n- Same confidence level and time horizon for both ES measurements\n- Positions are measured in compatible units (same currency/scale)\n\nEXPLANATION:\nThe portfolio Expected Shortfall formula uses linear aggregation with a correlation adjustment term. Unlike VaR which uses quadratic aggregation, ES maintains linearity in the base terms (ES\u2081 + ES\u2082) but includes a bilinear correlation adjustment (2\u03c1\u221a(ES\u2081 \u00b7 ES\u2082)). When \u03c1 = 1 (perfect correlation), the portfolio ES equals the sum of individual ES values. When \u03c1 = -1 (perfect negative correlation), the correlation term provides maximum diversification benefit. When \u03c1 = 0 (no correlation), the formula reduces to the sum of individual ES values, reflecting ES's coherent risk measure properties.",
+    "evaluation": {
+      "success": true,
+      "r2": 0.5342901606181591,
+      "rmse": 0.02980583950705662,
+      "mae": 0.024863556489936954,
+      "max_error": 0.07592500282081704,
+      "mean_relative_error": 0.26437238571193156,
+      "max_relative_error": 0.9430601316756115,
+      "quality": "REJECTED",
+      "passed": false,
+      "sample_predictions": {
+        "true": [
+          0.06326373051582403,
+          0.09615162651134695,
+          0.07769275209627148,
+          0.16722827168818952,
+          0.12571603645986065
+        ],
+        "pred": [
+          0.06999022362357933,
+          0.029462028432061194,
+          0.041214011132647096,
+          0.21480591759382248,
+          0.13570941262655362
+        ],
+        "errors": [
+          0.006726493107755305,
+          -0.06668959807928576,
+          -0.036478740963624384,
+          0.04757764590563296,
+          0.009993376166692963
+        ]
+      }
+    },
+    "test_case": {
+      "name": "Portfolio ES",
+      "case_id": "portfolio_es",
+      "domain": "expected_shortfall",
+      "description": "Portfolio Expected Shortfall for correlated positions",
+      "ground_truth": "position1_es + position2_es + correlation * sqrt(position1_es * position2_es)",
+      "dangerous_r2_threshold": 0.54
+    },
+    "generation_time": 11.086610794067383
+  }
+]

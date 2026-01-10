@@ -1,0 +1,880 @@
+[
+  {
+    "method": "hybrid",
+    "description": "Hall-Petch relationship: yield strength as function of grain size",
+    "domain": "materials",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "\u03c3_y = \u03c3_0 + k/\u221ad",
+      "python_code": "def formula(grain_size):\n    # Define constants\n    sigma_0 = 50  # Base yield strength (MPa)\n    k = 15        # Hall-Petch constant (MPa\u00b7\u221a\u03bcm)\n    \n    import numpy as np\n    \n    # Calculate yield strength using Hall-Petch relationship\n    yield_strength = sigma_0 + k / np.sqrt(grain_size)\n    \n    return yield_strength",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9834697907014838,
+        "rmse": 0.32001910012113083,
+        "mae": 0.19569881208847484
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "power_law",
+      "ground_truth": "\u03c3_y = \u03c3_0 + k/\u221ad",
+      "domain_specific": true,
+      "constants": {
+        "sigma_0": 50,
+        "k": 15
+      },
+      "units": {
+        "grain_size": "\u03bcm",
+        "yield_strength": "MPa"
+      },
+      "extrapolation_test": true
+    },
+    "timestamp": "2025-12-23T12:47:10.850559"
+  },
+  {
+    "method": "hybrid",
+    "description": "Gibson-Ashby: Young's modulus as function of porosity",
+    "domain": "materials",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "E = E\u2080(1-\u03c6)\u00b2",
+      "python_code": "def formula(porosity):\n    # Define constants\n    E_0 = 200\n    \n    return E_0 * (1 - porosity)**2",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9987038625317561,
+        "rmse": 1.5602721930781585,
+        "mae": 1.3537913867785007
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "power_law",
+      "ground_truth": "E = E_0(1-\u03c6)\u00b2",
+      "domain_specific": true,
+      "constants": {
+        "E_0": 200
+      },
+      "units": {
+        "porosity": "fraction",
+        "modulus": "GPa"
+      }
+    },
+    "timestamp": "2025-12-23T12:47:17.080560"
+  },
+  {
+    "method": "hybrid",
+    "description": "Linear thermal expansion of materials",
+    "domain": "materials",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "L = L\u2080(1 + \u03b1\u00b7\u0394T)",
+      "python_code": "def formula(temperature_change):\n    # Define constants here\n    L_0 = 1000\n    alpha = 1.2e-05\n    return L_0 * (1 + alpha * temperature_change)",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9986859273717346,
+        "rmse": 0.02598702888344557,
+        "mae": 0.020925941333308627
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "linear",
+      "ground_truth": "L = L_0(1 + \u03b1\u00b7\u0394T)",
+      "domain_specific": false,
+      "constants": {
+        "L_0": 1000,
+        "alpha": 1.2e-05
+      },
+      "units": {
+        "temp": "\u00b0C",
+        "length": "mm"
+      }
+    },
+    "timestamp": "2025-12-23T12:47:22.051823"
+  },
+  {
+    "method": "hybrid",
+    "description": "Power law creep: strain rate as function of applied stress",
+    "domain": "materials",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "\u03b5\u0307 = A\u00b7\u03c3\u207f",
+      "python_code": "def formula(stress):\n    # Define constants\n    A = 1e-10\n    n = 3\n    \n    strain_rate = A * (stress ** n)\n    return strain_rate",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9990559584902032,
+        "rmse": 8.62864555600306e-07,
+        "mae": 4.441644143118419e-07
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "power_law",
+      "ground_truth": "\u03b5\u0307 = A\u00b7\u03c3\u207f",
+      "domain_specific": true,
+      "constants": {
+        "A": 1e-10,
+        "n": 3
+      },
+      "units": {
+        "stress": "MPa",
+        "strain_rate": "1/s"
+      }
+    },
+    "timestamp": "2025-12-23T12:47:28.202320"
+  },
+  {
+    "method": "hybrid",
+    "description": "Darcy-Weisbach equation: pressure head loss in pipe flow",
+    "domain": "fluids",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "h_f = f\u00b7(L/D)\u00b7(v\u00b2/2g)",
+      "python_code": "def formula(friction_factor, pipe_length, flow_velocity, pipe_diameter):\n    # Define constants\n    g = 9.81\n    \n    return friction_factor * (pipe_length / pipe_diameter) * (flow_velocity**2 / (2 * g))",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 1.0486090612149046e-15,
+        "mae": 3.821075400534113e-16,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.8415561927431078,
+        "rmse": 6.276520435914195,
+        "mae": 2.208395011417699
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 1.0486090612149046e-15,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "formula_type": "algebraic",
+      "ground_truth": "h_f = f\u00b7(L/D)\u00b7(v\u00b2/2g)",
+      "domain_specific": true,
+      "constants": {
+        "g": 9.81
+      },
+      "units": {
+        "length": "m",
+        "velocity": "m/s",
+        "diameter": "m",
+        "head_loss": "m"
+      },
+      "extrapolation_test": true
+    },
+    "timestamp": "2025-12-23T12:47:34.541198"
+  },
+  {
+    "method": "hybrid",
+    "description": "Reynolds number for characterizing flow regime",
+    "domain": "fluids",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "Re = vL/\u03bd",
+      "python_code": "def formula(velocity, characteristic_length, kinematic_viscosity):\n    # Reynolds number calculation\n    Re = velocity * characteristic_length / kinematic_viscosity\n    return Re",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9796499632593478,
+        "rmse": 86649.56915187305,
+        "mae": 49856.818295611374
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "Re = vL/\u03bd",
+      "domain_specific": true,
+      "units": {
+        "velocity": "m/s",
+        "length": "m",
+        "viscosity": "m\u00b2/s"
+      }
+    },
+    "timestamp": "2025-12-23T12:47:39.680965"
+  },
+  {
+    "method": "hybrid",
+    "description": "Bernoulli equation: total mechanical energy in fluid flow",
+    "domain": "fluids",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "P + \u00bd\u03c1v\u00b2 + \u03c1gh = constant",
+      "python_code": "def formula(pressure, velocity, height):\n    rho = 1000\n    g = 9.81\n    return pressure + 0.5 * rho * velocity**2 + rho * g * height",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9957205395137484,
+        "rmse": 2571.6278022936476,
+        "mae": 2160.434830818791
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "algebraic",
+      "ground_truth": "P + \u00bd\u03c1v\u00b2 + \u03c1gh = const",
+      "domain_specific": false,
+      "constants": {
+        "rho": 1000,
+        "g": 9.81
+      },
+      "units": {
+        "pressure": "Pa",
+        "velocity": "m/s",
+        "height": "m"
+      }
+    },
+    "timestamp": "2025-12-23T12:47:45.176639"
+  },
+  {
+    "method": "hybrid",
+    "description": "Hagen-Poiseuille law: volumetric flow rate in laminar pipe flow",
+    "domain": "fluids",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "Q = \u03c0r\u2074\u0394P/(8\u03bcL)",
+      "python_code": "def formula(pressure_drop, pipe_radius, pipe_length):\n    # Define constants here\n    viscosity = 0.001\n    pi = 3.141592653589793\n    \n    return (pi * pipe_radius**4 * pressure_drop) / (8 * viscosity * pipe_length)",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9192017458786707,
+        "rmse": 0.013998113422795123,
+        "mae": 0.0040277545139096775
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "power_law",
+      "ground_truth": "Q = \u03c0r\u2074\u0394P/(8\u03bcL)",
+      "domain_specific": true,
+      "constants": {
+        "viscosity": 0.001,
+        "pi": 3.141592653589793
+      },
+      "units": {
+        "pressure": "Pa",
+        "radius": "m",
+        "length": "m",
+        "flow": "m\u00b3/s"
+      }
+    },
+    "timestamp": "2025-12-23T12:47:51.634037"
+  },
+  {
+    "method": "hybrid",
+    "description": "Newton's law of cooling: convective heat transfer rate",
+    "domain": "thermodynamics",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "Q = hA\u0394T",
+      "python_code": "def formula(heat_transfer_coefficient, surface_area, temperature_difference):\n    # Newton's law of cooling for convective heat transfer\n    heat_transfer_rate = heat_transfer_coefficient * surface_area * temperature_difference\n    return heat_transfer_rate",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9901531213782077,
+        "rmse": 804.8549966014995,
+        "mae": 597.8862941999066
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "Q = hA\u0394T",
+      "domain_specific": true,
+      "units": {
+        "h": "W/(m\u00b2\u00b7K)",
+        "A": "m\u00b2",
+        "T": "K",
+        "Q": "W"
+      }
+    },
+    "timestamp": "2025-12-23T12:47:56.739502"
+  },
+  {
+    "method": "hybrid",
+    "description": "Ideal gas law: number of moles from PVT data",
+    "domain": "thermodynamics",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "n = PV/(RT)",
+      "python_code": "def formula(P, V, T):\n    # Gas constant in J/(mol\u00b7K)\n    R = 8.314\n    return (P * V) / (R * T)",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9928195107296098,
+        "rmse": 3.5021545321776255,
+        "mae": 2.5214018515754564
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "n = PV/(RT)",
+      "domain_specific": false,
+      "constants": {
+        "R": 8.314
+      },
+      "units": {
+        "P": "Pa",
+        "V": "m\u00b3",
+        "T": "K",
+        "n": "mol"
+      }
+    },
+    "timestamp": "2025-12-23T12:48:02.228146"
+  },
+  {
+    "method": "hybrid",
+    "description": "Carnot efficiency: maximum theoretical efficiency of heat engine",
+    "domain": "thermodynamics",
+    "decision": "nn",
+    "decision_reason": "NN primary (LLM struggled)",
+    "llm_result": {
+      "formula": "\u03b7 = 1 - T_c/T_h",
+      "python_code": "def formula(cold_reservoir_temp, hot_reservoir_temp):\n    # Carnot efficiency formula\n    efficiency = 1 - cold_reservoir_temp / hot_reservoir_temp\n    return efficiency",
+      "metrics": {
+        "r2": -175.65188729388444,
+        "rmse": 1.3406814880977578,
+        "mae": 1.2661180309023559,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9929972592822068,
+        "rmse": 0.008606398191360855,
+        "mae": 0.007368478866768174
+      }
+    },
+    "evaluation": {
+      "r2": 0.9929972592822068,
+      "rmse": 0.008606398191360855,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "\u03b7 = 1 - T_c/T_h",
+      "domain_specific": true,
+      "units": {
+        "T": "K",
+        "efficiency": "fraction"
+      }
+    },
+    "timestamp": "2025-12-23T12:48:08.317760"
+  },
+  {
+    "method": "hybrid",
+    "description": "Stefan-Boltzmann law: radiative heat transfer from black body",
+    "domain": "thermodynamics",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "P = \u03b5\u03c3AT\u2074",
+      "python_code": "def formula(emissivity, surface_area, temperature):\n    # Stefan-Boltzmann constant (W\u22c5m\u207b\u00b2\u22c5K\u207b\u2074)\n    sigma = 5.67e-08\n    \n    return emissivity * sigma * surface_area * temperature**4",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9906053433913858,
+        "rmse": 7202.602512393065,
+        "mae": 4666.530026254584
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "power_law",
+      "ground_truth": "P = \u03b5\u03c3AT\u2074",
+      "domain_specific": true,
+      "constants": {
+        "sigma": 5.67e-08
+      },
+      "units": {
+        "T": "K",
+        "A": "m\u00b2",
+        "P": "W"
+      }
+    },
+    "timestamp": "2025-12-23T12:48:14.071469"
+  },
+  {
+    "method": "hybrid",
+    "description": "Euler buckling load: critical load for column buckling",
+    "domain": "mechanics",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "P_cr = \u03c0\u00b2EI/L\u00b2",
+      "python_code": "def formula(moment_of_inertia, column_length):\n    E = 200000000000.0\n    pi = 3.141592653589793\n    return (pi**2 * E * moment_of_inertia) / (column_length**2)",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9774417531042011,
+        "rmse": 106457.21686998954,
+        "mae": 52377.71705227995
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "power_law",
+      "ground_truth": "P_cr = \u03c0\u00b2EI/L\u00b2",
+      "domain_specific": true,
+      "constants": {
+        "E": 200000000000.0,
+        "pi": 3.141592653589793
+      },
+      "units": {
+        "I": "m\u2074",
+        "L": "m",
+        "P": "N"
+      }
+    },
+    "timestamp": "2025-12-23T12:48:20.173830"
+  },
+  {
+    "method": "hybrid",
+    "description": "Hooke's law: linear elastic stress-strain relationship",
+    "domain": "mechanics",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "\u03c3 = E\u03b5",
+      "python_code": "def formula(strain):\n    # Define constants here\n    E = 200000000000.0  # Young's modulus in Pa\n    return E * strain",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9987212824235443,
+        "rmse": 19226291.620276045,
+        "mae": 16406636.019383665
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "linear",
+      "ground_truth": "\u03c3 = E\u03b5",
+      "domain_specific": false,
+      "constants": {
+        "E": 200000000000.0
+      },
+      "units": {
+        "strain": "fraction",
+        "stress": "Pa"
+      }
+    },
+    "timestamp": "2025-12-23T12:48:25.484942"
+  },
+  {
+    "method": "hybrid",
+    "description": "Torsional shear stress in circular shaft",
+    "domain": "mechanics",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "\u03c4 = Tr/J = Tr/(\u03c0r\u2074/2) = 2T/(\u03c0r\u00b3)",
+      "python_code": "def formula(applied_torque, shaft_radius):\n    # Define constants here\n    pi = 3.141592653589793\n    \n    # Calculate polar moment of inertia for solid circular shaft\n    J = pi * shaft_radius**4 / 2\n    \n    # Calculate torsional shear stress at outer surface\n    tau = (applied_torque * shaft_radius) / J\n    \n    return tau",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9671756808370076,
+        "rmse": 53124527.1279979,
+        "mae": 18135931.58358764
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "power_law",
+      "ground_truth": "\u03c4 = Tr/J",
+      "domain_specific": true,
+      "constants": {
+        "pi": 3.141592653589793
+      },
+      "units": {
+        "T": "N\u00b7m",
+        "r": "m",
+        "stress": "Pa"
+      }
+    },
+    "timestamp": "2025-12-23T12:48:32.485257"
+  },
+  {
+    "method": "hybrid",
+    "description": "Bending stress in beam under flexure",
+    "domain": "mechanics",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "\u03c3 = My/I",
+      "python_code": "def formula(bending_moment, distance_from_neutral_axis, moment_of_inertia):\n    return (bending_moment * distance_from_neutral_axis) / moment_of_inertia",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9752530349014824,
+        "rmse": 263448062.5041292,
+        "mae": 140230365.38191795
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "\u03c3 = My/I",
+      "domain_specific": true,
+      "units": {
+        "M": "N\u00b7m",
+        "y": "m",
+        "I": "m\u2074",
+        "stress": "Pa"
+      }
+    },
+    "timestamp": "2025-12-23T12:48:38.786803"
+  },
+  {
+    "method": "hybrid",
+    "description": "Arrhenius equation: temperature dependence of reaction rate",
+    "domain": "chemistry",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "k = A\u00b7exp(-E_a/RT)",
+      "python_code": "def formula(T):\n    import numpy as np\n    A = 10000000000.0\n    E_a = 50000\n    R = 8.314\n    return A * np.exp(-E_a / (R * T))",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9949847213876901,
+        "rmse": 17.155656368436645,
+        "mae": 11.009288850307334
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "exponential",
+      "ground_truth": "k = A\u00b7exp(-E_a/RT)",
+      "domain_specific": true,
+      "constants": {
+        "A": 10000000000.0,
+        "E_a": 50000,
+        "R": 8.314
+      },
+      "units": {
+        "T": "K",
+        "k": "1/s"
+      }
+    },
+    "timestamp": "2025-12-23T12:48:44.166105"
+  },
+  {
+    "method": "hybrid",
+    "description": "Henderson-Hasselbalch equation: pH of buffer solution",
+    "domain": "chemistry",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "pH = pKa + log([A\u207b]/[HA])",
+      "python_code": "def formula(acid_concentration, conjugate_base_concentration):\n    # Define constants here\n    pKa = 4.75\n    return pKa + np.log10(conjugate_base_concentration / acid_concentration)",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9916040871145699,
+        "rmse": 0.05421131399205918,
+        "mae": 0.035487950606479066
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "logarithmic",
+      "ground_truth": "pH = pKa + log([A\u207b]/[HA])",
+      "domain_specific": true,
+      "constants": {
+        "pKa": 4.75
+      },
+      "units": {
+        "concentration": "M",
+        "pH": "unitless"
+      }
+    },
+    "timestamp": "2025-12-23T12:48:51.052098"
+  },
+  {
+    "method": "hybrid",
+    "description": "Beer-Lambert law: light absorption in solution",
+    "domain": "chemistry",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "A = \u03b5cl",
+      "python_code": "def formula(concentration, path_length):\n    # Define constants here\n    epsilon = 1000\n    return epsilon * concentration * path_length",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.997146356806773,
+        "rmse": 11.73361048675104,
+        "mae": 9.75463994499102
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "A = \u03b5cl",
+      "domain_specific": true,
+      "constants": {
+        "epsilon": 1000
+      },
+      "units": {
+        "c": "M",
+        "l": "cm",
+        "A": "absorbance"
+      }
+    },
+    "timestamp": "2025-12-23T12:48:56.485061"
+  },
+  {
+    "method": "hybrid",
+    "description": "Nernst equation: electrode potential as function of concentration",
+    "domain": "chemistry",
+    "decision": "llm",
+    "decision_reason": "LLM excellent (R\u00b2 > 0.95)",
+    "llm_result": {
+      "formula": "E = E\u00b0 - (RT/nF)ln(1/[C])",
+      "python_code": "def formula(ion_concentration):\n    # Define constants\n    E_0 = 0.76\n    n = 2\n    R = 8.314\n    T = 298\n    F = 96485\n    \n    # Calculate electrode potential using Nernst equation\n    import numpy as np\n    E = E_0 - (R * T / (n * F)) * np.log(1 / ion_concentration)\n    return E",
+      "metrics": {
+        "r2": 1.0,
+        "rmse": 0.0,
+        "mae": 0.0,
+        "success": true
+      }
+    },
+    "nn_result": {
+      "metrics": {
+        "r2": 0.9924942187523224,
+        "rmse": 0.0007015040163380579,
+        "mae": 0.0005625695736215186
+      }
+    },
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.0,
+      "success": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "formula_type": "logarithmic",
+      "ground_truth": "E = E\u00b0 - (RT/nF)ln(1/[C])",
+      "domain_specific": true,
+      "constants": {
+        "E_0": 0.76,
+        "n": 2,
+        "R": 8.314,
+        "T": 298,
+        "F": 96485
+      },
+      "units": {
+        "concentration": "M",
+        "potential": "V"
+      }
+    },
+    "timestamp": "2025-12-23T12:49:02.482316"
+  }
+]

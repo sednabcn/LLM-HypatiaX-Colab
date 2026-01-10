@@ -1,0 +1,119 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = (do + di)/(do * di)",
+    "confidence": 0.85,
+    "reasoning": "Algebraically equivalent to 1/do + 1/di, this form makes the reciprocal nature explicit. The product in denominator creates the observed complex relationship pattern.",
+    "source": "llm",
+    "fitted_equation": "(do + di)/(do * di)",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 97.6,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = (do + di)/(do * di)",
+      "confidence": 0.85,
+      "reasoning": "Algebraically equivalent to 1/do + 1/di, this form makes the reciprocal nature explicit. The product in denominator creates the observed complex relationship pattern.",
+      "source": "llm",
+      "fitted_equation": "(do + di)/(do * di)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "1/f = 1/do + 1/di",
+      "confidence": 0.95,
+      "reasoning": "This is the classic thin lens equation where f is focal length. The negative correlations and reciprocal relationship are characteristic of lens optics where object and image distances are inversely related through the focal length.",
+      "source": "llm",
+      "fitted_equation": "1/do + 1/di",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 89.5,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 1/do + 1/di",
+      "confidence": 0.9,
+      "reasoning": "Direct form of thin lens equation assuming y represents 1/f (reciprocal of focal length). The sum of reciprocals explains the complex non-linear relationship and negative correlations observed.",
+      "source": "llm",
+      "fitted_equation": "1/do + 1/di",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 89.5,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = k * (1/do + 1/di)",
+      "confidence": 0.75,
+      "reasoning": "Modified thin lens equation with scaling factor k to account for units or measurement system. Maintains the fundamental optical relationship while allowing for experimental constants.",
+      "source": "llm",
+      "fitted_equation": "k * (1/do + 1/di)",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 93.1,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a/do + b/di",
+      "confidence": 0.65,
+      "reasoning": "Generalized form allowing different coefficients for object and image distance terms. Could account for asymmetric lens systems or measurement errors while preserving reciprocal relationships.",
+      "source": "llm",
+      "fitted_equation": "a/do + b/di",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 85.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": false,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "do": -0.43459552601610607,
+      "di": -0.4361259938678101
+    },
+    "polynomial_degree": null,
+    "power_exponents": {},
+    "y_range": [
+      0.20394869300476962,
+      9.346116227020476
+    ],
+    "y_scale": "medium",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "complex"
+  },
+  "timing": {
+    "total": 10.112961292266846,
+    "phase1_analysis": 0.05741286277770996,
+    "phase2_llm": 9.328408479690552,
+    "phase3_verify": 0.7262754440307617
+  },
+  "r2_score": 1.0,
+  "validation_score": 97.6,
+  "expression": "(do + di)/(do * di)",
+  "test_name": "optics_thin_lens_equation",
+  "timestamp": "2026-01-09T01:28:08.524287",
+  "ground_truth": "1/do + 1/di",
+  "domain": "optics",
+  "_metadata": {
+    "session_id": "llm_20260109_012553",
+    "timestamp": "2026-01-09T01:28:08.524376",
+    "passed": true,
+    "test_name": "optics_thin_lens_equation",
+    "method": "llm_guided"
+  }
+}

@@ -1,0 +1,262 @@
+[
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Hall-Petch relationship: yield strength as function of grain size",
+    "domain": "materials",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9944,
+      "rmse": 0.185614
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.183677"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Gibson-Ashby: Young's modulus as function of porosity",
+    "domain": "materials",
+    "formula": null,
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.185368
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.183791"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Linear thermal expansion of materials",
+    "domain": "materials",
+    "formula": null,
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 0.003541
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.183881"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Power law creep: strain rate as function of applied stress",
+    "domain": "materials",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9997,
+      "rmse": 0.0
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.183932"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Darcy-Weisbach equation: pressure head loss in pipe flow",
+    "domain": "fluids",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.8934,
+      "rmse": 5.147516
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184007"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Reynolds number for characterizing flow regime",
+    "domain": "fluids",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9846,
+      "rmse": 75411.841837
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184059"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Bernoulli equation: total mechanical energy in fluid flow",
+    "domain": "fluids",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9997,
+      "rmse": 697.247693
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184108"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Hagen-Poiseuille law: volumetric flow rate in laminar pipe flow",
+    "domain": "fluids",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9788,
+      "rmse": 0.007175
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184159"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Newton's law of cooling: convective heat transfer rate",
+    "domain": "thermodynamics",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9988,
+      "rmse": 285.972465
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184228"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Ideal gas law: number of moles from PVT data",
+    "domain": "thermodynamics",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9969,
+      "rmse": 2.294428
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184281"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Carnot efficiency: maximum theoretical efficiency of heat engine",
+    "domain": "thermodynamics",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9996,
+      "rmse": 0.002031
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184342"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Stefan-Boltzmann law: radiative heat transfer from black body",
+    "domain": "thermodynamics",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9934,
+      "rmse": 6059.725042
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184392"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Euler buckling load: critical load for column buckling",
+    "domain": "mechanics",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.989,
+      "rmse": 74429.610475
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184461"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Hooke's law: linear elastic stress-strain relationship",
+    "domain": "mechanics",
+    "formula": null,
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 1842881.70426
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184512"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Torsional shear stress in circular shaft",
+    "domain": "mechanics",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9775,
+      "rmse": 44012145.070827
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184573"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Bending stress in beam under flexure",
+    "domain": "mechanics",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9812,
+      "rmse": 229650252.214071
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184623"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Arrhenius equation: temperature dependence of reaction rate",
+    "domain": "chemistry",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9999,
+      "rmse": 1.797375
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184695"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Henderson-Hasselbalch equation: pH of buffer solution",
+    "domain": "chemistry",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9969,
+      "rmse": 0.033125
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184747"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Beer-Lambert law: light absorption in solution",
+    "domain": "chemistry",
+    "formula": null,
+    "evaluation": {
+      "r2": 0.9993,
+      "rmse": 6.000721
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184795"
+  },
+  {
+    "method": "neural_network",
+    "model": "3-layer MLP",
+    "description": "Nernst equation: electrode potential as function of concentration",
+    "domain": "chemistry",
+    "formula": null,
+    "evaluation": {
+      "r2": 1.0,
+      "rmse": 2.6e-05
+    },
+    "metadata": {},
+    "timestamp": "2025-12-22T20:54:59.184867"
+  }
+]

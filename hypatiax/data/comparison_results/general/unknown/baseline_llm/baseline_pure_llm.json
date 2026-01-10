@@ -1,0 +1,90 @@
+[
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Impermanent loss in constant product AMM",
+    "domain": "defi",
+    "formula": "IL = 2\u221ar/(1 + r) - 1",
+    "latex": "IL = \\frac{2\\sqrt{r}}{1 + r} - 1",
+    "python_code": "def impermanent_loss(price_ratio):\n    return 2 * np.sqrt(price_ratio) / (1 + price_ratio) - 1",
+    "variables": "- price_ratio (r): The ratio of the final price to the initial price of one asset relative to the other (dimensionless)\n- IL: Impermanent loss as a fraction (negative values indicate loss, dimensionless)",
+    "assumptions": "- Constant product AMM (x * y = k) invariant is maintained\n- No trading fees are considered\n- The liquidity provider maintains their position throughout the entire price change\n- Assets are deposited in equal value proportions initially\n- Price changes occur externally and arbitrageurs rebalance the pool",
+    "explanation": "This formula calculates the impermanent loss experienced by liquidity providers in a constant product AMM when the price ratio between two assets changes. The loss represents the difference between holding tokens in the AMM versus holding them in a wallet. When price_ratio = 1 (no price change), impermanent loss is 0. The loss is always negative or zero, with maximum loss approaching -25% for extreme price movements in either direction.",
+    "raw_response": "FORMULA:\nIL = 2\u221ar/(1 + r) - 1\n\nLATEX:\nIL = \\frac{2\\sqrt{r}}{1 + r} - 1\n\nPYTHON:\ndef impermanent_loss(price_ratio):\n    return 2 * np.sqrt(price_ratio) / (1 + price_ratio) - 1\n\nVARIABLES:\n- price_ratio (r): The ratio of the final price to the initial price of one asset relative to the other (dimensionless)\n- IL: Impermanent loss as a fraction (negative values indicate loss, dimensionless)\n\nASSUMPTIONS:\n- Constant product AMM (x * y = k) invariant is maintained\n- No trading fees are considered\n- The liquidity provider maintains their position throughout the entire price change\n- Assets are deposited in equal value proportions initially\n- Price changes occur externally and arbitrageurs rebalance the pool\n\nEXPLANATION:\nThis formula calculates the impermanent loss experienced by liquidity providers in a constant product AMM when the price ratio between two assets changes. The loss represents the difference between holding tokens in the AMM versus holding them in a wallet. When price_ratio = 1 (no price change), impermanent loss is 0. The loss is always negative or zero, with maximum loss approaching -25% for extreme price movements in either direction.",
+    "timestamp": "2025-12-20T11:45:31.760970",
+    "generation_time": 8.704874038696289,
+    "evaluation": {
+      "mse": 0.0,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "r2": 1.0,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Liquidation price for leveraged long position",
+    "domain": "defi",
+    "formula": "liquidation_price = entry_price \u00d7 (1 - (1 - maintenance_margin) / leverage)",
+    "latex": "P_{liquidation} = P_{entry} \\times \\left(1 - \\frac{1 - M}{L}\\right)",
+    "python_code": "def liquidation_price(leverage, entry_price, maintenance_margin):\n    return entry_price * (1 - (1 - maintenance_margin) / leverage)",
+    "variables": "- leverage: The leverage multiplier for the position (dimensionless, e.g., 10 for 10x leverage)\n- entry_price: The price at which the leveraged long position was opened (currency units)\n- maintenance_margin: The minimum margin ratio required to keep position open (decimal, e.g., 0.05 for 5%)",
+    "assumptions": "- No trading fees or funding costs are considered\n- Maintenance margin is expressed as a decimal (5% = 0.05)\n- The position uses isolated margin (not cross margin)\n- No additional margin is added after position opening\n- Price movements are the only factor affecting margin ratio",
+    "explanation": "This formula calculates the price at which a leveraged long position will be automatically liquidated. When the asset price falls to this level, the remaining margin equals the maintenance margin requirement. The formula accounts for the amplified losses from leverage - higher leverage results in a liquidation price closer to the entry price, while lower leverage provides more downside protection before liquidation occurs.",
+    "raw_response": "FORMULA:\nliquidation_price = entry_price \u00d7 (1 - (1 - maintenance_margin) / leverage)\n\nLATEX:\nP_{liquidation} = P_{entry} \\times \\left(1 - \\frac{1 - M}{L}\\right)\n\nPYTHON:\ndef liquidation_price(leverage, entry_price, maintenance_margin):\n    return entry_price * (1 - (1 - maintenance_margin) / leverage)\n\nVARIABLES:\n- leverage: The leverage multiplier for the position (dimensionless, e.g., 10 for 10x leverage)\n- entry_price: The price at which the leveraged long position was opened (currency units)\n- maintenance_margin: The minimum margin ratio required to keep position open (decimal, e.g., 0.05 for 5%)\n\nASSUMPTIONS:\n- No trading fees or funding costs are considered\n- Maintenance margin is expressed as a decimal (5% = 0.05)\n- The position uses isolated margin (not cross margin)\n- No additional margin is added after position opening\n- Price movements are the only factor affecting margin ratio\n\nEXPLANATION:\nThis formula calculates the price at which a leveraged long position will be automatically liquidated. When the asset price falls to this level, the remaining margin equals the maintenance margin requirement. The formula accounts for the amplified losses from leverage - higher leverage results in a liquidation price closer to the entry price, while lower leverage provides more downside protection before liquidation occurs.",
+    "timestamp": "2025-12-20T11:45:40.866539",
+    "generation_time": 8.104072332382202,
+    "evaluation": {
+      "mse": 38709.728707000635,
+      "mae": 171.64416904263584,
+      "rmse": 196.747881073725,
+      "r2": 0.970496390574453,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Value at Risk at 95% confidence",
+    "domain": "risk",
+    "formula": "VaR\u2089\u2085% = \u03bc - 1.645\u03c3",
+    "latex": "VaR_{95\\%} = \\mu - 1.645\\sigma",
+    "python_code": "def formula(mu, sigma):\n    return mu - 1.645 * sigma",
+    "variables": "- mu: Expected return or mean of the portfolio/asset returns (typically annualized percentage)\n- sigma: Standard deviation of returns (volatility, same units as mu)",
+    "assumptions": "- Returns follow a normal distribution\n- Historical volatility is representative of future volatility\n- Portfolio composition remains constant over the risk horizon\n- No extreme market events or structural breaks\n- Linear relationship between risk factors and portfolio value",
+    "explanation": "Value at Risk (VaR) at 95% confidence level represents the maximum expected loss that will not be exceeded with 95% probability over a given time horizon. The formula uses the 95th percentile of the standard normal distribution (z-score = 1.645) to calculate the loss threshold. A negative VaR value indicates a potential loss, while a positive value suggests the worst-case scenario is still a gain. This metric is widely used in risk management for regulatory capital requirements and portfolio risk assessment.",
+    "raw_response": "FORMULA:\nVaR\u2089\u2085% = \u03bc - 1.645\u03c3\n\nLATEX:\nVaR_{95\\%} = \\mu - 1.645\\sigma\n\nPYTHON:\ndef formula(mu, sigma):\n    return mu - 1.645 * sigma\n\nVARIABLES:\n- mu: Expected return or mean of the portfolio/asset returns (typically annualized percentage)\n- sigma: Standard deviation of returns (volatility, same units as mu)\n\nASSUMPTIONS:\n- Returns follow a normal distribution\n- Historical volatility is representative of future volatility\n- Portfolio composition remains constant over the risk horizon\n- No extreme market events or structural breaks\n- Linear relationship between risk factors and portfolio value\n\nEXPLANATION:\nValue at Risk (VaR) at 95% confidence level represents the maximum expected loss that will not be exceeded with 95% probability over a given time horizon. The formula uses the 95th percentile of the standard normal distribution (z-score = 1.645) to calculate the loss threshold. A negative VaR value indicates a potential loss, while a positive value suggests the worst-case scenario is still a gain. This metric is widely used in risk management for regulatory capital requirements and portfolio risk assessment.",
+    "timestamp": "2025-12-20T11:45:49.199839",
+    "generation_time": 7.330976247787476,
+    "evaluation": {
+      "mse": 0.01160311142108787,
+      "mae": 0.10008453640935286,
+      "rmse": 0.10771773958400664,
+      "r2": 0.8103908357005897,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Sharpe ratio for risk-adjusted returns",
+    "domain": "risk",
+    "formula": "S = (R - Rf) / \u03c3",
+    "latex": "S = \\frac{R - R_f}{\\sigma}",
+    "python_code": "def formula(returns, risk_free_rate, volatility):\n    return (returns - risk_free_rate) / volatility",
+    "variables": "- returns: Expected return or average return of the investment (expressed as decimal, e.g., 0.10 for 10%)\n- risk_free_rate: Risk-free rate of return, typically government bond yield (expressed as decimal, e.g., 0.03 for 3%)\n- volatility: Standard deviation of returns, measuring investment risk (expressed as decimal, e.g., 0.15 for 15% volatility)",
+    "assumptions": "- Returns are normally distributed\n- Risk is adequately measured by standard deviation (volatility)\n- The risk-free rate is constant and known\n- All rates are expressed in the same time period (e.g., annual)\n- No transaction costs or taxes are considered",
+    "explanation": "The Sharpe ratio measures risk-adjusted return by calculating the excess return per unit of risk. It represents how much additional return an investor receives for the extra volatility endured. Higher Sharpe ratios indicate better risk-adjusted performance. Use this formula to compare investments with different risk profiles or to evaluate portfolio performance relative to risk taken.",
+    "raw_response": "FORMULA:\nS = (R - Rf) / \u03c3\n\nLATEX:\nS = \\frac{R - R_f}{\\sigma}\n\nPYTHON:\ndef formula(returns, risk_free_rate, volatility):\n    return (returns - risk_free_rate) / volatility\n\nVARIABLES:\n- returns: Expected return or average return of the investment (expressed as decimal, e.g., 0.10 for 10%)\n- risk_free_rate: Risk-free rate of return, typically government bond yield (expressed as decimal, e.g., 0.03 for 3%)\n- volatility: Standard deviation of returns, measuring investment risk (expressed as decimal, e.g., 0.15 for 15% volatility)\n\nASSUMPTIONS:\n- Returns are normally distributed\n- Risk is adequately measured by standard deviation (volatility)\n- The risk-free rate is constant and known\n- All rates are expressed in the same time period (e.g., annual)\n- No transaction costs or taxes are considered\n\nEXPLANATION:\nThe Sharpe ratio measures risk-adjusted return by calculating the excess return per unit of risk. It represents how much additional return an investor receives for the extra volatility endured. Higher Sharpe ratios indicate better risk-adjusted performance. Use this formula to compare investments with different risk profiles or to evaluate portfolio performance relative to risk taken.",
+    "timestamp": "2025-12-20T11:45:57.217659",
+    "generation_time": 7.016199827194214,
+    "evaluation": {
+      "mse": 0.0,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "r2": 1.0,
+      "success": true
+    }
+  }
+]
