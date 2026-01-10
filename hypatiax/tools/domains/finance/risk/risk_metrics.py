@@ -146,7 +146,9 @@ class RiskMetrics:
     # Core Risk Metrics
     # ========================================================================
 
-    def volatility(self, returns: Optional[np.ndarray] = None, annualized: bool = True) -> Dict[str, float]:
+    def volatility(
+        self, returns: Optional[np.ndarray] = None, annualized: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate volatility (standard deviation)
 
@@ -170,9 +172,16 @@ class RiskMetrics:
             vol *= math.sqrt(DAYS_PER_YEAR)
             var *= DAYS_PER_YEAR
 
-        return {"volatility": vol, "volatility_pct": vol * 100, "variance": var, "annualized": annualized}
+        return {
+            "volatility": vol,
+            "volatility_pct": vol * 100,
+            "variance": var,
+            "annualized": annualized,
+        }
 
-    def downside_deviation(self, returns: Optional[np.ndarray] = None, mar: float = 0.0) -> Dict[str, float]:
+    def downside_deviation(
+        self, returns: Optional[np.ndarray] = None, mar: float = 0.0
+    ) -> Dict[str, float]:
         """
         Calculate downside deviation (semi-deviation)
 
@@ -198,11 +207,16 @@ class RiskMetrics:
             "downside_deviation_pct": downside_dev * 100,
             "downside_periods": len(downside),
             "total_periods": len(returns),
-            "downside_frequency": len(downside) / len(returns) if len(returns) > 0 else 0,
+            "downside_frequency": (
+                len(downside) / len(returns) if len(returns) > 0 else 0
+            ),
         }
 
     def value_at_risk(
-        self, returns: Optional[np.ndarray] = None, confidence: float = 0.95, method: str = "historical"
+        self,
+        returns: Optional[np.ndarray] = None,
+        confidence: float = 0.95,
+        method: str = "historical",
     ) -> Dict[str, float]:
         """
         Calculate Value at Risk (VaR)
@@ -248,9 +262,16 @@ class RiskMetrics:
         else:
             raise ValueError(f"Unknown VaR method: {method}")
 
-        return {"var": var, "var_pct": var * 100, "confidence": confidence, "method": method}
+        return {
+            "var": var,
+            "var_pct": var * 100,
+            "confidence": confidence,
+            "method": method,
+        }
 
-    def conditional_var(self, returns: Optional[np.ndarray] = None, confidence: float = 0.95) -> Dict[str, float]:
+    def conditional_var(
+        self, returns: Optional[np.ndarray] = None, confidence: float = 0.95
+    ) -> Dict[str, float]:
         """
         Calculate Conditional Value at Risk (CVaR/Expected Shortfall)
 
@@ -287,7 +308,9 @@ class RiskMetrics:
     # Risk-Adjusted Performance
     # ========================================================================
 
-    def sharpe_ratio(self, returns: Optional[np.ndarray] = None, annualized: bool = True) -> Dict[str, float]:
+    def sharpe_ratio(
+        self, returns: Optional[np.ndarray] = None, annualized: bool = True
+    ) -> Dict[str, float]:
         """Calculate Sharpe ratio"""
         if returns is None:
             returns = self.get_portfolio_returns()
@@ -308,10 +331,18 @@ class RiskMetrics:
             if annualized:
                 sharpe *= math.sqrt(DAYS_PER_YEAR)
 
-        return {"sharpe": sharpe, "mean_excess_return": mean_excess, "volatility": sigma, "annualized": annualized}
+        return {
+            "sharpe": sharpe,
+            "mean_excess_return": mean_excess,
+            "volatility": sigma,
+            "annualized": annualized,
+        }
 
     def sortino_ratio(
-        self, returns: Optional[np.ndarray] = None, mar: float = 0.0, annualized: bool = True
+        self,
+        returns: Optional[np.ndarray] = None,
+        mar: float = 0.0,
+        annualized: bool = True,
     ) -> Dict[str, float]:
         """Calculate Sortino ratio"""
         if returns is None:
@@ -360,7 +391,11 @@ class RiskMetrics:
         else:
             calmar = annual_return / max_dd
 
-        return {"calmar": calmar, "annual_return": annual_return, "max_drawdown": max_dd}
+        return {
+            "calmar": calmar,
+            "annual_return": annual_return,
+            "max_drawdown": max_dd,
+        }
 
     # ========================================================================
     # Drawdown Analysis
@@ -402,7 +437,14 @@ class RiskMetrics:
                 while i < len(in_drawdown) and in_drawdown[i]:
                     max_dd = max(max_dd, drawdown[i])
                     i += 1
-                periods.append({"start_idx": start, "end_idx": i - 1, "length": i - start, "depth": max_dd})
+                periods.append(
+                    {
+                        "start_idx": start,
+                        "end_idx": i - 1,
+                        "length": i - start,
+                        "depth": max_dd,
+                    }
+                )
             else:
                 i += 1
 
@@ -458,8 +500,12 @@ class RiskMetrics:
             "correlation_matrix": corr_matrix,
             "symbols": symbols,
             "average_correlation": float(avg_corr),
-            "max_correlation": float(np.max(corr_matrix[corr_matrix < 1.0])) if n > 1 else 0.0,
-            "min_correlation": float(np.min(corr_matrix[corr_matrix < 1.0])) if n > 1 else 0.0,
+            "max_correlation": (
+                float(np.max(corr_matrix[corr_matrix < 1.0])) if n > 1 else 0.0
+            ),
+            "min_correlation": (
+                float(np.min(corr_matrix[corr_matrix < 1.0])) if n > 1 else 0.0
+            ),
         }
 
     def diversification_ratio(self) -> Dict[str, float]:
@@ -501,7 +547,9 @@ class RiskMetrics:
     # Risk Attribution & Budgeting
     # ========================================================================
 
-    def marginal_var(self, asset_index: int, confidence: float = 0.95) -> Dict[str, float]:
+    def marginal_var(
+        self, asset_index: int, confidence: float = 0.95
+    ) -> Dict[str, float]:
         """
         Calculate marginal VaR for a specific asset
 
@@ -558,7 +606,9 @@ class RiskMetrics:
 
         return contributions
 
-    def risk_budget_analysis(self, target_budgets: Dict[str, float]) -> List[RiskBudget]:
+    def risk_budget_analysis(
+        self, target_budgets: Dict[str, float]
+    ) -> List[RiskBudget]:
         """
         Analyze risk budget utilization
 
@@ -575,7 +625,9 @@ class RiskMetrics:
         budgets = []
         for comp in components:
             symbol = comp["asset"]
-            actual_risk = abs(comp["component_var"]) / total_var * 100 if total_var > 0 else 0
+            actual_risk = (
+                abs(comp["component_var"]) / total_var * 100 if total_var > 0 else 0
+            )
             allocated_risk = target_budgets.get(symbol, 0.0)
             utilization = actual_risk / allocated_risk if allocated_risk > 0 else 0.0
 
@@ -656,7 +708,9 @@ class RiskMetrics:
         # Calculate stressed VaR
         if scenario.shock_type in ["absolute", "relative"]:
             stressed_var = self.value_at_risk(
-                port_stressed if scenario.shock_type == "absolute" else self.get_portfolio_returns()
+                port_stressed
+                if scenario.shock_type == "absolute"
+                else self.get_portfolio_returns()
             )
             results["stressed_var"] = stressed_var["var"]
             results["stressed_var_pct"] = stressed_var["var_pct"]
@@ -664,7 +718,10 @@ class RiskMetrics:
         return results
 
     def monte_carlo_var(
-        self, num_simulations: int = 10000, time_horizon: int = 1, confidence: float = 0.95
+        self,
+        num_simulations: int = 10000,
+        time_horizon: int = 1,
+        confidence: float = 0.95,
     ) -> Dict[str, Any]:
         """
         Monte Carlo VaR simulation
@@ -686,7 +743,9 @@ class RiskMetrics:
         sigma = float(np.std(returns, ddof=1))
 
         # Generate random scenarios
-        simulated_returns = np.random.normal(mu * time_horizon, sigma * math.sqrt(time_horizon), num_simulations)
+        simulated_returns = np.random.normal(
+            mu * time_horizon, sigma * math.sqrt(time_horizon), num_simulations
+        )
 
         # Calculate VaR
         mc_var = float(np.percentile(simulated_returns, (1 - confidence) * 100))
@@ -855,7 +914,12 @@ class RiskMetrics:
         z = stats.norm.ppf(1 - confidence)
         var = mu + z * sigma
 
-        return {"var": var, "var_pct": var * 100, "confidence": confidence, "method": "parametric"}
+        return {
+            "var": var,
+            "var_pct": var * 100,
+            "confidence": confidence,
+            "method": "parametric",
+        }
 
     @staticmethod
     def cvar_historical(returns: np.ndarray, confidence: float = 0.95) -> dict:
@@ -922,10 +986,17 @@ class RiskMetrics:
         # Calculate correlation
         corr = float(np.corrcoef(returns, benchmark_returns)[0, 1])
 
-        return {"beta": beta, "correlation": corr, "covariance": covar, "benchmark_variance": bench_var}
+        return {
+            "beta": beta,
+            "correlation": corr,
+            "covariance": covar,
+            "benchmark_variance": bench_var,
+        }
 
     @staticmethod
-    def treynor_ratio(returns: np.ndarray, benchmark_returns: np.ndarray, risk_free_rate: float = 0.01) -> dict:
+    def treynor_ratio(
+        returns: np.ndarray, benchmark_returns: np.ndarray, risk_free_rate: float = 0.01
+    ) -> dict:
         """
         Calculate Treynor ratio (excess return per unit of systematic risk)
 
@@ -1033,7 +1104,10 @@ class RiskMetrics:
         # Cornish-Fisher adjustment
         z = stats.norm.ppf(0.95)
         z_cf = (
-            z + (1 / 6) * (z**2 - 1) * skew + (1 / 24) * (z**3 - 3 * z) * kurt - (1 / 36) * (2 * z**3 - 5 * z) * skew**2
+            z
+            + (1 / 6) * (z**2 - 1) * skew
+            + (1 / 24) * (z**3 - 3 * z) * kurt
+            - (1 / 36) * (2 * z**3 - 5 * z) * skew**2
         )
 
         sigma = float(np.std(returns, ddof=1))
@@ -1045,7 +1119,12 @@ class RiskMetrics:
             modified_sharpe = mean_excess / abs(modified_var)
             modified_sharpe *= math.sqrt(DAYS_PER_YEAR)
 
-        return {"modified_sharpe": modified_sharpe, "skew": skew, "kurtosis": kurt, "modified_var": modified_var}
+        return {
+            "modified_sharpe": modified_sharpe,
+            "skew": skew,
+            "kurtosis": kurt,
+            "modified_var": modified_var,
+        }
 
     @staticmethod
     def ulcer_index(returns: np.ndarray) -> dict:
@@ -1146,7 +1225,9 @@ class RiskMetrics:
         }
 
     @staticmethod
-    def kappa_3(returns: np.ndarray, risk_free_rate: float = 0.01, mar: float = 0.0) -> dict:
+    def kappa_3(
+        returns: np.ndarray, risk_free_rate: float = 0.01, mar: float = 0.0
+    ) -> dict:
         """
         Calculate Kappa 3 ratio (generalized Sortino with cubic moment)
 
@@ -1249,7 +1330,11 @@ class RiskMetrics:
         else:
             upr = upside_potential / downside_risk
 
-        return {"upr": upr, "upside_potential": upside_potential, "downside_risk": downside_risk}
+        return {
+            "upr": upr,
+            "upside_potential": upside_potential,
+            "downside_risk": downside_risk,
+        }
 
     @staticmethod
     def sterling_ratio(returns: np.ndarray, risk_free_rate: float = 0.01) -> dict:
@@ -1275,14 +1360,22 @@ class RiskMetrics:
         wealth = np.cumprod(1.0 + returns)
         running_max = np.maximum.accumulate(wealth)
         drawdown = (running_max - wealth) / (running_max + EPSILON)
-        avg_dd = float(np.mean(drawdown[drawdown > 0.001])) if np.any(drawdown > 0.001) else 0.01
+        avg_dd = (
+            float(np.mean(drawdown[drawdown > 0.001]))
+            if np.any(drawdown > 0.001)
+            else 0.01
+        )
 
         if avg_dd < EPSILON:
             sterling = 0.0
         else:
             sterling = excess_return / avg_dd
 
-        return {"sterling": sterling, "excess_return": excess_return, "avg_drawdown": avg_dd}
+        return {
+            "sterling": sterling,
+            "excess_return": excess_return,
+            "avg_drawdown": avg_dd,
+        }
 
     @staticmethod
     def pain_ratio(returns: np.ndarray, risk_free_rate: float = 0.01) -> dict:
@@ -1316,7 +1409,11 @@ class RiskMetrics:
         else:
             pain_ratio = excess_return / pain_index
 
-        return {"pain_ratio": pain_ratio, "pain_index": pain_index, "excess_return": excess_return}
+        return {
+            "pain_ratio": pain_ratio,
+            "pain_index": pain_index,
+            "excess_return": excess_return,
+        }
 
     @staticmethod
     def cdar(returns: np.ndarray, confidence: float = 0.95) -> dict:
@@ -1347,7 +1444,13 @@ class RiskMetrics:
         tail = drawdowns[drawdowns >= dar]
         cdar = float(np.mean(tail)) if len(tail) > 0 else dar
 
-        return {"cdar": cdar, "dar": dar, "confidence": confidence, "cdar_pct": cdar * 100, "dar_pct": dar * 100}
+        return {
+            "cdar": cdar,
+            "dar": dar,
+            "confidence": confidence,
+            "cdar_pct": cdar * 100,
+            "dar_pct": dar * 100,
+        }
 
     @staticmethod
     def tail_ratio(returns: np.ndarray, percentile: float = 95.0) -> dict:
@@ -1374,10 +1477,17 @@ class RiskMetrics:
         else:
             tail_ratio = abs(right_tail / left_tail)
 
-        return {"tail_ratio": tail_ratio, "right_tail": right_tail, "left_tail": left_tail, "percentile": percentile}
+        return {
+            "tail_ratio": tail_ratio,
+            "right_tail": right_tail,
+            "left_tail": left_tail,
+            "percentile": percentile,
+        }
 
     @staticmethod
-    def m_squared(returns: np.ndarray, risk_free_rate: float = 0.01, benchmark_vol: float = 10.0) -> dict:
+    def m_squared(
+        returns: np.ndarray, risk_free_rate: float = 0.01, benchmark_vol: float = 10.0
+    ) -> dict:
         """
         Calculate M-squared (Modigliani-Modigliani measure)
 
@@ -1410,10 +1520,17 @@ class RiskMetrics:
         benchmark_vol_decimal = benchmark_vol / 100
         m2 = risk_free_rate + sharpe * benchmark_vol_decimal
 
-        return {"m2": m2, "m2_pct": m2 * 100, "sharpe": sharpe, "benchmark_vol": benchmark_vol}
+        return {
+            "m2": m2,
+            "m2_pct": m2 * 100,
+            "sharpe": sharpe,
+            "benchmark_vol": benchmark_vol,
+        }
 
     @staticmethod
-    def prospect_ratio(returns: np.ndarray, mar: float = 0.0, lambda_param: float = 2.25) -> dict:
+    def prospect_ratio(
+        returns: np.ndarray, mar: float = 0.0, lambda_param: float = 2.25
+    ) -> dict:
         """
         Calculate Prospect Ratio (behavioral finance measure)
 
@@ -1442,10 +1559,17 @@ class RiskMetrics:
         # Normalize by number of periods
         prospect_ratio = prospect_value / len(returns) if len(returns) > 0 else 0.0
 
-        return {"prospect": prospect_ratio, "gain_value": gain_value, "loss_value": loss_value, "lambda": lambda_param}
+        return {
+            "prospect": prospect_ratio,
+            "gain_value": gain_value,
+            "loss_value": loss_value,
+            "lambda": lambda_param,
+        }
 
     @staticmethod
-    def rachev_ratio(returns: np.ndarray, alpha: float = 0.95, beta: float = 0.95) -> dict:
+    def rachev_ratio(
+        returns: np.ndarray, alpha: float = 0.95, beta: float = 0.95
+    ) -> dict:
         """
         Calculate Rachev ratio (Expected tail gain / Expected tail loss)
 
@@ -1509,7 +1633,11 @@ class RiskMetrics:
 
         d_ratio = sum_negative / sum_positive if sum_positive > 0 else 0.0
 
-        return {"d_ratio": d_ratio, "sum_gains": sum_positive, "sum_losses": sum_negative}
+        return {
+            "d_ratio": d_ratio,
+            "sum_gains": sum_positive,
+            "sum_losses": sum_negative,
+        }
 
     @staticmethod
     def romad(returns: np.ndarray, risk_free_rate: float = 0.01) -> dict:
@@ -1571,7 +1699,11 @@ class RiskMetrics:
         else:
             serenity = excess_return / ulcer
 
-        return {"serenity": serenity, "excess_return": excess_return, "ulcer_index": ulcer}
+        return {
+            "serenity": serenity,
+            "excess_return": excess_return,
+            "ulcer_index": ulcer,
+        }
 
     @staticmethod
     def stability_index(returns: np.ndarray, window: int = 20) -> dict:
@@ -1608,7 +1740,11 @@ class RiskMetrics:
         else:
             stability = 1.0 - (vol_of_vol / mean_vol)
 
-        return {"stability": max(0.0, stability), "vol_of_vol": vol_of_vol, "mean_vol": mean_vol}
+        return {
+            "stability": max(0.0, stability),
+            "vol_of_vol": vol_of_vol,
+            "mean_vol": mean_vol,
+        }
 
     @staticmethod
     def recovery_factor(returns: np.ndarray, initial_capital: float = 100000.0) -> dict:
@@ -1643,7 +1779,9 @@ class RiskMetrics:
             recovery_factor = total_return / max_dd
 
         return {
-            "recovery_factor": recovery_factor if math.isfinite(recovery_factor) else 0.0,
+            "recovery_factor": (
+                recovery_factor if math.isfinite(recovery_factor) else 0.0
+            ),
             "total_return": total_return,
             "total_return_pct": total_return * 100,
             "max_drawdown": max_dd,
@@ -1669,11 +1807,56 @@ def demo_risk_metrics():
     rm = RiskMetrics(risk_free_rate=0.03)
 
     # Add assets
-    rm.add_asset(Asset("AAPL", np.random.normal(0.001, 0.02, 252), 0.30, 30000, beta=1.2, sector="Technology"))
-    rm.add_asset(Asset("JPM", np.random.normal(0.0005, 0.020, 252), 0.20, 20000, beta=1.1, sector="Financials"))
-    rm.add_asset(Asset("PG", np.random.normal(0.0004, 0.015, 252), 0.20, 20000, beta=0.8, sector="Consumer"))
-    rm.add_asset(Asset("JNJ", np.random.normal(0.0005, 0.018, 252), 0.20, 20000, beta=0.9, sector="Healthcare"))
-    rm.add_asset(Asset("AGG", np.random.normal(0.0002, 0.008, 252), 0.10, 10000, beta=0.3, sector="Fixed Income"))
+    rm.add_asset(
+        Asset(
+            "AAPL",
+            np.random.normal(0.001, 0.02, 252),
+            0.30,
+            30000,
+            beta=1.2,
+            sector="Technology",
+        )
+    )
+    rm.add_asset(
+        Asset(
+            "JPM",
+            np.random.normal(0.0005, 0.020, 252),
+            0.20,
+            20000,
+            beta=1.1,
+            sector="Financials",
+        )
+    )
+    rm.add_asset(
+        Asset(
+            "PG",
+            np.random.normal(0.0004, 0.015, 252),
+            0.20,
+            20000,
+            beta=0.8,
+            sector="Consumer",
+        )
+    )
+    rm.add_asset(
+        Asset(
+            "JNJ",
+            np.random.normal(0.0005, 0.018, 252),
+            0.20,
+            20000,
+            beta=0.9,
+            sector="Healthcare",
+        )
+    )
+    rm.add_asset(
+        Asset(
+            "AGG",
+            np.random.normal(0.0002, 0.008, 252),
+            0.10,
+            10000,
+            beta=0.3,
+            sector="Fixed Income",
+        )
+    )
 
     print("\nPortfolio created with 5 assets:")
     for asset in rm.assets:
@@ -1830,7 +2013,10 @@ def demo_risk_metrics():
 
     # Market crash scenario
     crash = StressScenario(
-        name="Market Crash", shock_type="absolute", parameters={"shock": -0.20}, description="20% market decline"
+        name="Market Crash",
+        shock_type="absolute",
+        parameters={"shock": -0.20},
+        description="20% market decline",
     )
 
     crash_result = rm.stress_test(crash)
@@ -1865,7 +2051,9 @@ def demo_risk_metrics():
     print(f"  VaR (95%): {dashboard['var_95']['var_pct']:.2f}%")
     print(f"  Sharpe Ratio: {dashboard['sharpe_ratio']['sharpe']:.3f}")
     print(f"  Max Drawdown: {dashboard['drawdown']['max_drawdown_pct']:.2f}%")
-    print(f"  Diversification Ratio: {dashboard['diversification']['diversification_ratio']:.3f}")
+    print(
+        f"  Diversification Ratio: {dashboard['diversification']['diversification_ratio']:.3f}"
+    )
 
     if dashboard["warnings"]:
         print("\n⚠️  WARNINGS:")
@@ -1884,14 +2072,18 @@ def demo_risk_metrics():
     limits = {"max_drawdown": 0.25, "min_sharpe": 0.5, "max_var_95": 0.05}
 
     compliance = rm.risk_limits_check(limits)
-    print(f"\nCompliance Status: {'✓ COMPLIANT' if compliance['compliant'] else '✗ BREACHES'}")
+    print(
+        f"\nCompliance Status: {'✓ COMPLIANT' if compliance['compliant'] else '✗ BREACHES'}"
+    )
     print(f"Number of Breaches: {compliance['num_breaches']}")
 
     if compliance["breaches"]:
         print("\nBreach Details:")
         for breach in compliance["breaches"]:
             print(f"  Limit: {breach['limit']}")
-            print(f"  Threshold: {breach['threshold']:.4f}, Actual: {breach['actual']:.4f}")
+            print(
+                f"  Threshold: {breach['threshold']:.4f}, Actual: {breach['actual']:.4f}"
+            )
             print(f"  Breach Amount: {breach['breach_amount']:.4f}")
 
     print("\n" + "=" * 80)

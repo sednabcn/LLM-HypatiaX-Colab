@@ -22,7 +22,15 @@ class EntityLabels:
     TABLEAU_DESC = ["FUNCTION", "FIELD", "OPERATOR", "VALUE", "AGGREGATION"]
 
     # Tableau Formula Labels
-    TABLEAU_FORMULAS = ["FUNCTION", "FIELD", "OPERATOR", "BRACKET", "NUMBER", "STRING", "LOGICAL"]
+    TABLEAU_FORMULAS = [
+        "FUNCTION",
+        "FIELD",
+        "OPERATOR",
+        "BRACKET",
+        "NUMBER",
+        "STRING",
+        "LOGICAL",
+    ]
 
     # Combined Labels (union of both)
     TABLEAU_COMBINED = list(set(TABLEAU_DESC + TABLEAU_FORMULAS))
@@ -268,5 +276,11 @@ LOGGING_CONFIG = {
             "mode": "a",
         },
     },
-    "loggers": {"hypatiax": {"level": "INFO", "handlers": ["console", "file"], "propagate": False}},
+    "loggers": {
+        "hypatiax": {
+            "level": "INFO",
+            "handlers": ["console", "file"],
+            "propagate": False,
+        }
+    },
 }

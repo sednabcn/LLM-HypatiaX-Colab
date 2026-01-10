@@ -46,8 +46,12 @@ def extract_metrics(all_results):
                     "domain": result.get("domain", "unknown"),
                     "valid": validation.get("valid", False),
                     "total_score": validation.get("total_score", 0),
-                    "symbolic_score": validation.get("layer_scores", {}).get("symbolic", 0),
-                    "dimensional_score": validation.get("layer_scores", {}).get("dimensional", 0),
+                    "symbolic_score": validation.get("layer_scores", {}).get(
+                        "symbolic", 0
+                    ),
+                    "dimensional_score": validation.get("layer_scores", {}).get(
+                        "dimensional", 0
+                    ),
                     "domain_score": validation.get("layer_scores", {}).get("domain", 0),
                     "r2_score": discovery.get("r2_score", 0),
                     "complexity": discovery.get("complexity", 0),
@@ -99,12 +103,18 @@ def compute_statistics(df):
             "q25": float(df["total_score"].quantile(0.25)),
             "q75": float(df["total_score"].quantile(0.75)),
         },
-        "symbolic_score": {"mean": float(df["symbolic_score"].mean()), "median": float(df["symbolic_score"].median())},
+        "symbolic_score": {
+            "mean": float(df["symbolic_score"].mean()),
+            "median": float(df["symbolic_score"].median()),
+        },
         "dimensional_score": {
             "mean": float(df["dimensional_score"].mean()),
             "median": float(df["dimensional_score"].median()),
         },
-        "domain_score": {"mean": float(df["domain_score"].mean()), "median": float(df["domain_score"].median())},
+        "domain_score": {
+            "mean": float(df["domain_score"].mean()),
+            "median": float(df["domain_score"].median()),
+        },
     }
 
     return stats_dict
@@ -177,7 +187,10 @@ def create_visualizations(df):
     # Total score histogram
     axes[0, 0].hist(df["total_score"], bins=20, edgecolor="black", alpha=0.7)
     axes[0, 0].axvline(
-        df["total_score"].mean(), color="red", linestyle="--", label=f'Mean: {df["total_score"].mean():.1f}'
+        df["total_score"].mean(),
+        color="red",
+        linestyle="--",
+        label=f'Mean: {df["total_score"].mean():.1f}',
     )
     axes[0, 0].set_xlabel("Total Validation Score")
     axes[0, 0].set_ylabel("Frequency")
@@ -186,8 +199,15 @@ def create_visualizations(df):
     axes[0, 0].grid(True, alpha=0.3)
 
     # R² score histogram
-    axes[0, 1].hist(df["r2_score"], bins=20, edgecolor="black", alpha=0.7, color="green")
-    axes[0, 1].axvline(df["r2_score"].mean(), color="red", linestyle="--", label=f'Mean: {df["r2_score"].mean():.3f}')
+    axes[0, 1].hist(
+        df["r2_score"], bins=20, edgecolor="black", alpha=0.7, color="green"
+    )
+    axes[0, 1].axvline(
+        df["r2_score"].mean(),
+        color="red",
+        linestyle="--",
+        label=f'Mean: {df["r2_score"].mean():.3f}',
+    )
     axes[0, 1].set_xlabel("R² Score")
     axes[0, 1].set_ylabel("Frequency")
     axes[0, 1].set_title("Distribution of R² Scores")
@@ -215,10 +235,20 @@ def create_visualizations(df):
 
     # 2. Layer scores breakdown
     fig, ax = plt.subplots(figsize=(10, 6))
-    layer_means = [df["symbolic_score"].mean(), df["dimensional_score"].mean(), df["domain_score"].mean()]
+    layer_means = [
+        df["symbolic_score"].mean(),
+        df["dimensional_score"].mean(),
+        df["domain_score"].mean(),
+    ]
     layers = ["Symbolic", "Dimensional", "Domain"]
 
-    bars = ax.bar(layers, layer_means, color=["skyblue", "lightcoral", "lightgreen"], edgecolor="black", alpha=0.7)
+    bars = ax.bar(
+        layers,
+        layer_means,
+        color=["skyblue", "lightcoral", "lightgreen"],
+        edgecolor="black",
+        alpha=0.7,
+    )
     ax.set_ylabel("Average Score")
     ax.set_title("Average Scores by Validation Layer")
     ax.set_ylim([0, 100])
@@ -289,7 +319,9 @@ def analyze_dataset():
 
     print(f"\nBy Domain:")
     domain_df = (
-        df.groupby("domain").agg({"valid": ["count", "sum"], "total_score": "mean", "r2_score": "mean"}).round(2)
+        df.groupby("domain")
+        .agg({"valid": ["count", "sum"], "total_score": "mean", "r2_score": "mean"})
+        .round(2)
     )
     print(domain_df)
 
@@ -307,7 +339,9 @@ def analyze_dataset():
         print(f"  Risk mean: {dc['risk_mean']:.1f} (±{dc['risk_std']:.1f})")
         print(f"  t-statistic: {dc['t_statistic']:.3f}")
         print(f"  p-value: {dc['p_value']:.4f}")
-        print(f"  Significant at α=0.05: {'Yes' if dc['significant_at_0.05'] else 'No'}")
+        print(
+            f"  Significant at α=0.05: {'Yes' if dc['significant_at_0.05'] else 'No'}"
+        )
         print(f"  Effect size (Cohen's d): {dc['effect_size_cohen_d']:.3f}")
 
     if "r2_validation_correlation" in tests:

@@ -33,7 +33,10 @@ class TestBasicDimensionalConsistency:
 
     def test_compatible_units_addition(self, validator):
         """Test that adding compatible units passes"""
-        result = validator.validate(expression_str="price1 + price2", variable_units={"price1": "USD", "price2": "USD"})
+        result = validator.validate(
+            expression_str="price1 + price2",
+            variable_units={"price1": "USD", "price2": "USD"},
+        )
         assert result["valid"]
         assert result["dimensionally_consistent"]
         assert result["score"] == 100.0
@@ -42,7 +45,8 @@ class TestBasicDimensionalConsistency:
     def test_incompatible_units_addition(self, validator):
         """Test that adding incompatible units fails"""
         result = validator.validate(
-            expression_str="price + volume", variable_units={"price": "USD", "volume": "USD**3"}
+            expression_str="price + volume",
+            variable_units={"price": "USD", "volume": "USD**3"},
         )
         assert not result["valid"]
         assert not result["dimensionally_consistent"]
@@ -52,7 +56,10 @@ class TestBasicDimensionalConsistency:
 
     def test_dimensionless_addition(self, validator):
         """Test adding dimensionless quantities"""
-        result = validator.validate(expression_str="a + b", variable_units={"a": "dimensionless", "b": "dimensionless"})
+        result = validator.validate(
+            expression_str="a + b",
+            variable_units={"a": "dimensionless", "b": "dimensionless"},
+        )
         assert result["valid"]
         assert result["dimensionally_consistent"]
         assert result["variable_dimensions"]["a"] == "dimensionless"
@@ -61,7 +68,8 @@ class TestBasicDimensionalConsistency:
     def test_multiplication_units(self, validator):
         """Test multiplication creates correct dimensional warnings"""
         result = validator.validate(
-            expression_str="price * quantity", variable_units={"price": "USD", "quantity": "dimensionless"}
+            expression_str="price * quantity",
+            variable_units={"price": "USD", "quantity": "dimensionless"},
         )
         assert result["valid"]  # Valid, but may have warnings
         assert len(result["warnings"]) > 0
@@ -69,14 +77,18 @@ class TestBasicDimensionalConsistency:
 
     def test_power_operations(self, validator):
         """Test power operations with dimensional analysis"""
-        result = validator.validate(expression_str="x**2", variable_units={"x": "meter"})
+        result = validator.validate(
+            expression_str="x**2", variable_units={"x": "meter"}
+        )
         assert result["valid"]
         # Should have warnings about verifying dimensional consistency
         assert len(result["warnings"]) >= 0
 
     def test_fractional_exponent(self, validator):
         """Test fractional exponents trigger warnings"""
-        result = validator.validate(expression_str="x**(1/2)", variable_units={"x": "meter**2"})
+        result = validator.validate(
+            expression_str="x**(1/2)", variable_units={"x": "meter**2"}
+        )
         assert result["valid"]
         # Should warn about fractional exponent
         warnings_text = " ".join(result["warnings"]).lower()
@@ -115,7 +127,9 @@ class TestNumericalStabilityChecks:
 
     def test_division_without_bounds(self, validator):
         """Test division operation without bounds specified"""
-        result = validator.validate(expression_str="a / b", variable_units={"a": "USD", "b": "dimensionless"})
+        result = validator.validate(
+            expression_str="a / b", variable_units={"a": "USD", "b": "dimensionless"}
+        )
         assert result["valid"]  # Valid but with warnings
         assert len(result["warnings"]) > 0
         assert any("division" in warn.lower() for warn in result["warnings"])
@@ -131,7 +145,10 @@ class TestNumericalStabilityChecks:
         assert not result["valid"]
         assert not result["numerical_stability"]["stable"]
         assert len(result["errors"]) > 0
-        assert any("division" in err.lower() and "zero" in err.lower() for err in result["errors"])
+        assert any(
+            "division" in err.lower() and "zero" in err.lower()
+            for err in result["errors"]
+        )
         assert result["score"] < 70  # Significant penalty
 
     def test_safe_division_bounds(self, validator):
@@ -160,7 +177,9 @@ class TestOverflowRiskDetection:
     def test_large_exponent_overflow(self, validator):
         """Test detection of dangerously large exponents"""
         result = validator.validate(
-            expression_str="x**150", variable_units={"x": "dimensionless"}, variable_bounds={"x": (1, 10)}
+            expression_str="x**150",
+            variable_units={"x": "dimensionless"},
+            variable_bounds={"x": (1, 10)},
         )
         assert not result["valid"]
         assert not result["numerical_stability"]["stable"]
@@ -171,7 +190,9 @@ class TestOverflowRiskDetection:
     def test_safe_small_exponent(self, validator):
         """Test that small exponents don't trigger overflow warnings"""
         result = validator.validate(
-            expression_str="x**2", variable_units={"x": "dimensionless"}, variable_bounds={"x": (1, 100)}
+            expression_str="x**2",
+            variable_units={"x": "dimensionless"},
+            variable_bounds={"x": (1, 100)},
         )
         assert result["valid"]
         # Should not have overflow errors
@@ -180,7 +201,10 @@ class TestOverflowRiskDetection:
 
     def test_variable_exponent_warning(self, validator):
         """Test that variable exponents trigger warnings"""
-        result = validator.validate(expression_str="x**y", variable_units={"x": "dimensionless", "y": "dimensionless"})
+        result = validator.validate(
+            expression_str="x**y",
+            variable_units={"x": "dimensionless", "y": "dimensionless"},
+        )
         assert result["valid"]
         assert len(result["warnings"]) > 0
         assert "variable_exponent" in result["numerical_stability"]["issues"]
@@ -193,7 +217,9 @@ class TestOverflowRiskDetection:
 
     def test_nested_exponentiation(self, validator):
         """Test multiple exponentiations trigger warnings"""
-        result = validator.validate(expression_str="(x**2)**3", variable_units={"x": "dimensionless"})
+        result = validator.validate(
+            expression_str="(x**2)**3", variable_units={"x": "dimensionless"}
+        )
         assert result["valid"]
         assert "nested_exponentiation" in result["numerical_stability"]["issues"]
         assert len(result["warnings"]) > 0
@@ -216,7 +242,9 @@ class TestBoundsValidation:
     def test_bounds_including_zero_warning(self, validator):
         """Test warning when bounds include zero (division risk)"""
         result = validator.validate(
-            expression_str="x", variable_units={"x": "dimensionless"}, variable_bounds={"x": (-5, 5)}
+            expression_str="x",
+            variable_units={"x": "dimensionless"},
+            variable_bounds={"x": (-5, 5)},
         )
         assert result["valid"]
         assert len(result["warnings"]) > 0
@@ -231,7 +259,10 @@ class TestBoundsValidation:
         )
         assert result["valid"]
         assert len(result["warnings"]) > 0
-        assert any("large bounds" in warn.lower() or "overflow" in warn.lower() for warn in result["warnings"])
+        assert any(
+            "large bounds" in warn.lower() or "overflow" in warn.lower()
+            for warn in result["warnings"]
+        )
 
     def test_valid_bounds(self, validator):
         """Test that valid bounds don't cause issues"""
@@ -251,24 +282,35 @@ class TestFunctionDomainValidation:
 
     def test_logarithm_domain_warning(self, validator):
         """Test that logarithm triggers domain warning"""
-        result = validator.validate(expression_str="log(x)", variable_units={"x": "dimensionless"})
+        result = validator.validate(
+            expression_str="log(x)", variable_units={"x": "dimensionless"}
+        )
         assert result["valid"]
         assert len(result["warnings"]) > 0
-        assert any("logarithm" in warn.lower() and "positive" in warn.lower() for warn in result["warnings"])
+        assert any(
+            "logarithm" in warn.lower() and "positive" in warn.lower()
+            for warn in result["warnings"]
+        )
         assert "logarithm_domain" in result["numerical_stability"]["issues"]
 
     def test_square_root_domain_warning(self, validator):
         """Test that square root triggers domain warning"""
-        result = validator.validate(expression_str="sqrt(x)", variable_units={"x": "dimensionless"})
+        result = validator.validate(
+            expression_str="sqrt(x)", variable_units={"x": "dimensionless"}
+        )
         assert result["valid"]
         assert len(result["warnings"]) > 0
-        assert any("square root" in warn.lower() or "non-negative" in warn.lower() for warn in result["warnings"])
+        assert any(
+            "square root" in warn.lower() or "non-negative" in warn.lower()
+            for warn in result["warnings"]
+        )
         assert "sqrt_domain" in result["numerical_stability"]["issues"]
 
     def test_trigonometric_functions(self, validator):
         """Test trigonometric function domain requirements"""
         result = validator.validate(
-            expression_str="sin(x) + cos(y)", variable_units={"x": "dimensionless", "y": "dimensionless"}
+            expression_str="sin(x) + cos(y)",
+            variable_units={"x": "dimensionless", "y": "dimensionless"},
         )
         assert result["valid"]
         # Should warn about dimensionless/radian requirements
@@ -277,7 +319,9 @@ class TestFunctionDomainValidation:
 
     def test_exponential_function(self, validator):
         """Test exponential function requirements"""
-        result = validator.validate(expression_str="exp(x)", variable_units={"x": "dimensionless"})
+        result = validator.validate(
+            expression_str="exp(x)", variable_units={"x": "dimensionless"}
+        )
         assert result["valid"]
         # Should warn about dimensionless requirement
         assert len(result["warnings"]) > 0
@@ -288,7 +332,9 @@ class TestInvalidUnits:
 
     def test_invalid_unit_string(self, validator):
         """Test error handling for invalid unit strings"""
-        result = validator.validate(expression_str="x + y", variable_units={"x": "USD", "y": "INVALID_UNIT_XYZ"})
+        result = validator.validate(
+            expression_str="x + y", variable_units={"x": "USD", "y": "INVALID_UNIT_XYZ"}
+        )
         assert not result["valid"]
         assert len(result["errors"]) > 0
         assert any("invalid unit" in err.lower() for err in result["errors"])
@@ -414,14 +460,25 @@ class TestComplexExpressions:
         )
         assert result["valid"]
         # Should have sqrt domain warning
-        assert any("sqrt" in warn.lower() or "square root" in warn.lower() for warn in result["warnings"])
+        assert any(
+            "sqrt" in warn.lower() or "square root" in warn.lower()
+            for warn in result["warnings"]
+        )
 
     def test_sharpe_ratio(self, validator):
         """Test Sharpe ratio formula"""
         result = validator.validate(
             expression_str="(r_p - r_f) / sigma",
-            variable_units={"r_p": "dimensionless", "r_f": "dimensionless", "sigma": "dimensionless"},
-            variable_bounds={"r_p": (-1, 1), "r_f": (0, 0.1), "sigma": (0.01, 1)},  # Positive, not including zero
+            variable_units={
+                "r_p": "dimensionless",
+                "r_f": "dimensionless",
+                "sigma": "dimensionless",
+            },
+            variable_bounds={
+                "r_p": (-1, 1),
+                "r_f": (0, 0.1),
+                "sigma": (0.01, 1),
+            },  # Positive, not including zero
         )
         assert result["valid"]
         assert result["numerical_stability"]["stable"]
@@ -441,8 +498,20 @@ class TestComplexExpressions:
         """Test Black-Scholes-like formula"""
         result = validator.validate(
             expression_str="S * N - K * exp(-r * t) * N",
-            variable_units={"S": "USD", "N": "dimensionless", "K": "USD", "r": "dimensionless", "t": "dimensionless"},
-            variable_bounds={"S": (1, 1000), "N": (0, 1), "K": (1, 1000), "r": (0, 0.1), "t": (0, 5)},
+            variable_units={
+                "S": "USD",
+                "N": "dimensionless",
+                "K": "USD",
+                "r": "dimensionless",
+                "t": "dimensionless",
+            },
+            variable_bounds={
+                "S": (1, 1000),
+                "N": (0, 1),
+                "K": (1, 1000),
+                "r": (0, 0.1),
+                "t": (0, 5),
+            },
         )
         assert result["valid"]
 
@@ -461,7 +530,9 @@ class TestEdgeCases:
 
     def test_deeply_nested_expression(self, validator):
         """Test deeply nested expressions"""
-        result = validator.validate(expression_str="sqrt(log(exp(x)))", variable_units={"x": "dimensionless"})
+        result = validator.validate(
+            expression_str="sqrt(log(exp(x)))", variable_units={"x": "dimensionless"}
+        )
         assert result["valid"]
         # Should have multiple warnings for different functions
         assert len(result["warnings"]) >= 2
@@ -500,13 +571,17 @@ class TestScoringSystem:
 
     def test_score_penalty_for_errors(self, validator):
         """Test that errors reduce score significantly"""
-        result = validator.validate(expression_str="x + y", variable_units={"x": "USD", "y": "meter"})  # Incompatible
+        result = validator.validate(
+            expression_str="x + y", variable_units={"x": "USD", "y": "meter"}
+        )  # Incompatible
         assert result["score"] < 100
         assert result["score"] >= 0
 
     def test_score_penalty_for_warnings(self, validator):
         """Test that warnings reduce score less than errors"""
-        result = validator.validate(expression_str="x * y", variable_units={"x": "USD", "y": "meter"})
+        result = validator.validate(
+            expression_str="x * y", variable_units={"x": "USD", "y": "meter"}
+        )
         # Should have warnings but may still be valid
         if result["warnings"] and not result["errors"]:
             assert result["score"] < 100
@@ -594,10 +669,18 @@ class TestIntegration:
         )
 
         # Invalid expression (incompatible units)
-        results.append(validator.validate("price + volume", {"price": "USD", "volume": "USD**3"}))
+        results.append(
+            validator.validate("price + volume", {"price": "USD", "volume": "USD**3"})
+        )
 
         # Risky expression (division by zero potential)
-        results.append(validator.validate("x / y", {"x": "USD", "y": "dimensionless"}, {"x": (0, 100), "y": (-1, 1)}))
+        results.append(
+            validator.validate(
+                "x / y",
+                {"x": "USD", "y": "dimensionless"},
+                {"x": (0, 100), "y": (-1, 1)},
+            )
+        )
 
         # Check that all validations completed
         assert len(results) == 3

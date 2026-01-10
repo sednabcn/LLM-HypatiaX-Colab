@@ -14,4 +14,9 @@ class TransformerMapper:
     def map(self, query: str) -> Dict[str, Any]:
         """Map query to expression using transformer"""
         # TODO: Implement transformer-based mapping
-        return {"query": query, "expression": None, "method": "transformer", "confidence": 0.0}
+        return {
+            "query": query,
+            "expression": None,
+            "method": "transformer",
+            "confidence": 0.0,
+        }

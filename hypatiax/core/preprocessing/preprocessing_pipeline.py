@@ -88,7 +88,9 @@ class FormatConverter:
     """Convert between different data formats"""
 
     @staticmethod
-    def to_spacy_format(data: pd.DataFrame, text_col: str, entity_col: Optional[str] = None) -> List[Tuple]:
+    def to_spacy_format(
+        data: pd.DataFrame, text_col: str, entity_col: Optional[str] = None
+    ) -> List[Tuple]:
         """Convert to spaCy training format"""
         spacy_data = []
 
@@ -112,7 +114,9 @@ class FormatConverter:
         entities = []
         try:
             # Assuming entity_data is JSON string: [{"text": "sum", "label": "OPER", "start": 0, "end": 3}]
-            entity_list = json.loads(entity_data) if isinstance(entity_data, str) else entity_data
+            entity_list = (
+                json.loads(entity_data) if isinstance(entity_data, str) else entity_data
+            )
             for ent in entity_list:
                 entities.append((ent["start"], ent["end"], ent["label"]))
         except:
@@ -148,7 +152,9 @@ class FormatConverter:
         return entities
 
     @staticmethod
-    def to_mapping_format(data: pd.DataFrame, desc_col: str, formula_col: str) -> List[Tuple[str, str]]:
+    def to_mapping_format(
+        data: pd.DataFrame, desc_col: str, formula_col: str
+    ) -> List[Tuple[str, str]]:
         """Convert to mapping training format"""
         mapping_data = []
 
@@ -156,15 +162,22 @@ class FormatConverter:
             desc = str(row[desc_col]).strip()
             formula = str(row[formula_col]).strip()
 
-            if DataValidator.validate_description(desc) and DataValidator.validate_formula(formula):
+            if DataValidator.validate_description(
+                desc
+            ) and DataValidator.validate_formula(formula):
                 mapping_data.append((desc, formula))
 
         return mapping_data
 
     @staticmethod
-    def to_transformer_format(data: pd.DataFrame, desc_col: str, formula_col: str) -> Dict[str, List]:
+    def to_transformer_format(
+        data: pd.DataFrame, desc_col: str, formula_col: str
+    ) -> Dict[str, List]:
         """Convert to Hugging Face format"""
-        return {"input_text": data[desc_col].tolist(), "target_text": data[formula_col].tolist()}
+        return {
+            "input_text": data[desc_col].tolist(),
+            "target_text": data[formula_col].tolist(),
+        }
 
 
 class DataSplitter:
@@ -197,7 +210,10 @@ class DataSplitter:
 
     @staticmethod
     def stratified_split(
-        data: pd.DataFrame, stratify_col: str, train_ratio: float = 0.7, val_ratio: float = 0.15
+        data: pd.DataFrame,
+        stratify_col: str,
+        train_ratio: float = 0.7,
+        val_ratio: float = 0.15,
     ) -> Tuple:
         """Split maintaining class distribution"""
         from sklearn.model_selection import train_test_split
@@ -208,7 +224,10 @@ class DataSplitter:
 
         val_size = val_ratio / (1 - train_ratio)
         val_data, test_data = train_test_split(
-            temp_data, train_size=val_size, stratify=temp_data[stratify_col], random_state=42
+            temp_data,
+            train_size=val_size,
+            stratify=temp_data[stratify_col],
+            random_state=42,
         )
 
         return train_data, val_data, test_data
@@ -235,7 +254,9 @@ class PreprocessingPipeline:
         else:
             raise ValueError(f"Unsupported format: {file_format}")
 
-    def clean_data(self, data: pd.DataFrame, desc_col: str, formula_col: str) -> pd.DataFrame:
+    def clean_data(
+        self, data: pd.DataFrame, desc_col: str, formula_col: str
+    ) -> pd.DataFrame:
         """Clean and validate data"""
 
         # Remove invalid entries
@@ -254,7 +275,11 @@ class PreprocessingPipeline:
         return data
 
     def augment_data(
-        self, data: pd.DataFrame, desc_col: str, formula_col: str, augment_factor: int = 2
+        self,
+        data: pd.DataFrame,
+        desc_col: str,
+        formula_col: str,
+        augment_factor: int = 2,
     ) -> pd.DataFrame:
         """Augment training data"""
 
@@ -297,7 +322,9 @@ class PreprocessingPipeline:
 
         return train_data, val_data, test_data
 
-    def prepare_for_mapping(self, data: pd.DataFrame, desc_col: str, formula_col: str, output_path: str):
+    def prepare_for_mapping(
+        self, data: pd.DataFrame, desc_col: str, formula_col: str, output_path: str
+    ):
         """Prepare data for ensemble mapping training"""
 
         mapping_data = self.converter.to_mapping_format(data, desc_col, formula_col)
@@ -320,16 +347,22 @@ class PreprocessingPipeline:
 
         return train_data, val_data, test_data
 
-    def prepare_for_transformer(self, data: pd.DataFrame, desc_col: str, formula_col: str, output_path: str):
+    def prepare_for_transformer(
+        self, data: pd.DataFrame, desc_col: str, formula_col: str, output_path: str
+    ):
         """Prepare data for transformer models"""
 
-        transformer_data = self.converter.to_transformer_format(data, desc_col, formula_col)
+        transformer_data = self.converter.to_transformer_format(
+            data, desc_col, formula_col
+        )
 
         # Create DataFrame for splitting
         df = pd.DataFrame(transformer_data)
 
         # Split
-        train_df, val_df, test_df = self.splitter.stratified_split(df, stratify_col="target_text")
+        train_df, val_df, test_df = self.splitter.stratified_split(
+            df, stratify_col="target_text"
+        )
 
         # Save
         output_dir = Path(output_path)
@@ -384,11 +417,15 @@ class PreprocessingPipeline:
 
             # Mapping format
             print("   - Ensemble mapping format...")
-            self.prepare_for_mapping(data, desc_col, formula_col, output_path / "mapping")
+            self.prepare_for_mapping(
+                data, desc_col, formula_col, output_path / "mapping"
+            )
 
             # Transformer format
             print("   - Transformer format...")
-            self.prepare_for_transformer(data, desc_col, formula_col, output_path / "transformer")
+            self.prepare_for_transformer(
+                data, desc_col, formula_col, output_path / "transformer"
+            )
 
         print("\n✅ Preprocessing complete!")
         print(f"   Output saved to: {output_path}")
@@ -423,5 +460,8 @@ if __name__ == "__main__":
     # Run pipeline
     pipeline = PreprocessingPipeline()
     pipeline.run_full_pipeline(
-        input_file="sample_input.csv", output_dir="./preprocessed_data", augment=True, prepare_all_formats=True
+        input_file="sample_input.csv",
+        output_dir="./preprocessed_data",
+        augment=True,
+        prepare_all_formats=True,
     )

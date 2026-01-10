@@ -97,9 +97,21 @@ class PerfumeFormulator:
         water = remaining - alcohol
 
         # Check note balance
-        top = sum(i.concentration_percent for i in ingredients if i.note_type == NoteCategory.TOP)
-        middle = sum(i.concentration_percent for i in ingredients if i.note_type == NoteCategory.MIDDLE)
-        base = sum(i.concentration_percent for i in ingredients if i.note_type == NoteCategory.BASE)
+        top = sum(
+            i.concentration_percent
+            for i in ingredients
+            if i.note_type == NoteCategory.TOP
+        )
+        middle = sum(
+            i.concentration_percent
+            for i in ingredients
+            if i.note_type == NoteCategory.MIDDLE
+        )
+        base = sum(
+            i.concentration_percent
+            for i in ingredients
+            if i.note_type == NoteCategory.BASE
+        )
 
         balanced = 15 <= top <= 30 and 40 <= middle <= 60 and 20 <= base <= 35
 
@@ -113,12 +125,19 @@ class PerfumeFormulator:
                 fixatives_percent=fixatives,
             ),
             "fragrance_concentration": target_conc,
-            "note_balance": {"top": top, "middle": middle, "base": base, "is_balanced": balanced},
+            "note_balance": {
+                "top": top,
+                "middle": middle,
+                "base": base,
+                "is_balanced": balanced,
+            },
             "ready_for_production": balanced,
         }
 
     @staticmethod
-    def calculate_production_batch(formula: FragranceFormula, batch_size_ml: float) -> Dict[str, any]:
+    def calculate_production_batch(
+        formula: FragranceFormula, batch_size_ml: float
+    ) -> Dict[str, any]:
         """Calculate exact quantities needed for production."""
 
         alcohol_ml = (formula.alcohol_percent / 100) * batch_size_ml
@@ -139,7 +158,10 @@ class PerfumeFormulator:
         for ing in formula.ingredients:
             fraction = ing.concentration_percent / total_frag
             ing_g = fragrance_g * fraction
-            ingredients[ing.name] = {"grams": round(ing_g, 3), "note": ing.note_type.value}
+            ingredients[ing.name] = {
+                "grams": round(ing_g, 3),
+                "note": ing.note_type.value,
+            }
 
         return {
             "batch_size_ml": batch_size_ml,
@@ -148,7 +170,10 @@ class PerfumeFormulator:
                 "alcohol_96%": {"ml": round(alcohol_ml, 1), "g": round(alcohol_g, 1)},
                 "distilled_water": {"ml": round(water_ml, 1), "g": round(water_g, 1)},
                 "glycerin": {"ml": round(fixatives_ml, 1), "g": round(fixatives_g, 1)},
-                "fragrance_oil": {"ml": round(fragrance_ml, 1), "g": round(fragrance_g, 1)},
+                "fragrance_oil": {
+                    "ml": round(fragrance_ml, 1),
+                    "g": round(fragrance_g, 1),
+                },
             },
             "fragrance_ingredients": ingredients,
             "total_mass_g": round(alcohol_g + water_g + fixatives_g + fragrance_g, 1),
@@ -172,7 +197,9 @@ class PerfumeFormulator:
 
     @staticmethod
     def calculate_costs(
-        formula: FragranceFormula, bottle_size_ml: float = 100.0, bottle_cost: float = 2.50
+        formula: FragranceFormula,
+        bottle_size_ml: float = 100.0,
+        bottle_cost: float = 2.50,
     ) -> Dict[str, any]:
         """Complete cost analysis."""
 
@@ -180,7 +207,11 @@ class PerfumeFormulator:
         alcohol_ml = (formula.alcohol_percent / 100) * bottle_size_ml
         water_ml = (formula.water_percent / 100) * bottle_size_ml
         fixatives_ml = (formula.fixatives_percent / 100) * bottle_size_ml
-        fragrance_g = (formula.total_fragrance_percent() / 100) * bottle_size_ml * FRAGRANCE_OIL_DENSITY
+        fragrance_g = (
+            (formula.total_fragrance_percent() / 100)
+            * bottle_size_ml
+            * FRAGRANCE_OIL_DENSITY
+        )
 
         # Costs
         alcohol_cost = (alcohol_ml / 1000) * 15.0  # $15/L
@@ -239,12 +270,19 @@ class PerfumeFormulator:
                         "ingredient": ing.name,
                         "actual": round(actual_in_product, 3),
                         "max_allowed": ing.ifra_max_limit,
-                        "reduction_needed": round(actual_in_product - ing.ifra_max_limit, 3),
+                        "reduction_needed": round(
+                            actual_in_product - ing.ifra_max_limit, 3
+                        ),
                     }
                 )
 
             if ing.allergen:
-                allergens.append({"name": ing.name, "percent_in_product": round(actual_in_product, 3)})
+                allergens.append(
+                    {
+                        "name": ing.name,
+                        "percent_in_product": round(actual_in_product, 3),
+                    }
+                )
 
         total_allergen = sum(a["percent_in_product"] for a in allergens)
 
@@ -254,11 +292,17 @@ class PerfumeFormulator:
             "allergens_detected": allergens,
             "total_allergen_percent": round(total_allergen, 2),
             "labeling_required": total_allergen > 1.0,
-            "label_text": f"Contains: {', '.join(a['name'] for a in allergens)}" if allergens else "No allergens",
+            "label_text": (
+                f"Contains: {', '.join(a['name'] for a in allergens)}"
+                if allergens
+                else "No allergens"
+            ),
         }
 
     @staticmethod
-    def calculate_maturation_time(fragrance_type: FragranceType, natural_percent: float = 50.0) -> Dict[str, any]:
+    def calculate_maturation_time(
+        fragrance_type: FragranceType, natural_percent: float = 50.0
+    ) -> Dict[str, any]:
         """Calculate recommended maturation period."""
 
         base_days = {
@@ -307,7 +351,9 @@ if __name__ == "__main__":
         FragranceIngredient("Lemon Oil", 8.0, NoteCategory.TOP, 0.12, allergen=True),
         FragranceIngredient("Lavender", 4.0, NoteCategory.TOP, 0.08),
         # Middle Notes (50%)
-        FragranceIngredient("Rose Absolute", 15.0, NoteCategory.MIDDLE, 2.50, allergen=True),
+        FragranceIngredient(
+            "Rose Absolute", 15.0, NoteCategory.MIDDLE, 2.50, allergen=True
+        ),
         FragranceIngredient("Jasmine", 12.0, NoteCategory.MIDDLE, 3.20),
         FragranceIngredient("Ylang Ylang", 10.0, NoteCategory.MIDDLE, 0.45),
         FragranceIngredient("Geranium", 8.0, NoteCategory.MIDDLE, 0.25),
@@ -316,7 +362,9 @@ if __name__ == "__main__":
         FragranceIngredient("Sandalwood", 12.0, NoteCategory.BASE, 1.20),
         FragranceIngredient("Vanilla", 8.0, NoteCategory.BASE, 0.80),
         FragranceIngredient("Patchouli", 5.0, NoteCategory.BASE, 0.18),
-        FragranceIngredient("Musk Ketone", 3.0, NoteCategory.BASE, 0.95, 1.4, False, False),
+        FragranceIngredient(
+            "Musk Ketone", 3.0, NoteCategory.BASE, 0.95, 1.4, False, False
+        ),
     ]
 
     formulator = PerfumeFormulator()
@@ -324,7 +372,9 @@ if __name__ == "__main__":
     # 1. Create Formula
     print("\n1. CREATING EAU DE PARFUM")
     print("-" * 70)
-    result = formulator.create_balanced_formula("Rose Garden EDP", FragranceType.EAU_DE_PARFUM, ingredients)
+    result = formulator.create_balanced_formula(
+        "Rose Garden EDP", FragranceType.EAU_DE_PARFUM, ingredients
+    )
 
     formula = result["formula"]
     balance = result["note_balance"]
@@ -336,7 +386,9 @@ if __name__ == "__main__":
     print(f"Water: {formula.water_percent:.1f}%")
     print(f"Fixatives: {formula.fixatives_percent:.1f}%")
     print(f"\nNote Balance:")
-    print(f"  Top: {balance['top']:.0f}% | Middle: {balance['middle']:.0f}% | Base: {balance['base']:.0f}%")
+    print(
+        f"  Top: {balance['top']:.0f}% | Middle: {balance['middle']:.0f}% | Base: {balance['base']:.0f}%"
+    )
     print(f"  Balanced: {'✓ Yes' if balance['is_balanced'] else '✗ No'}")
 
     # 2. Production Batch
@@ -350,7 +402,11 @@ if __name__ == "__main__":
         print(f"  {name}: {qty['ml']} mL ({qty['g']} g)")
 
     print(f"\nTop 5 Fragrance Ingredients:")
-    sorted_ings = sorted(batch["fragrance_ingredients"].items(), key=lambda x: x[1]["grams"], reverse=True)[:5]
+    sorted_ings = sorted(
+        batch["fragrance_ingredients"].items(),
+        key=lambda x: x[1]["grams"],
+        reverse=True,
+    )[:5]
     for name, data in sorted_ings:
         print(f"  {name}: {data['grams']} g ({data['note']})")
 
@@ -367,7 +423,9 @@ if __name__ == "__main__":
     print(f"\nPricing:")
     print(f"  Production Cost: ${costs['pricing']['production_cost']:.2f}")
     print(f"  Retail Price: ${costs['pricing']['suggested_retail']:.2f}")
-    print(f"  Profit: ${costs['pricing']['profit_per_unit']:.2f} ({costs['pricing']['profit_margin_percent']}%)")
+    print(
+        f"  Profit: ${costs['pricing']['profit_per_unit']:.2f} ({costs['pricing']['profit_margin_percent']}%)"
+    )
 
     # 4. Safety Check
     print("\n4. SAFETY & COMPLIANCE")

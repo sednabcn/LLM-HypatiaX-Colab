@@ -20,7 +20,9 @@ class WorkflowVersionIntegration:
         # Import version manager
         try:
             sys.path.insert(0, str(base_path))
-            from hypatiax.custom_ner.queries.tableau.rules.version_manager import RulesVersionManager
+            from hypatiax.custom_ner.queries.tableau.rules.version_manager import (
+                RulesVersionManager,
+            )
 
             self.RulesVersionManager = RulesVersionManager
 
@@ -62,7 +64,9 @@ class WorkflowVersionIntegration:
                 current_file = rules_dir / f"{rule_type}.jsonl"
                 if current_file.exists():
                     rule_count = manager._count_rules(current_file)
-                    current_version = manager.metadata["current_version"].get(rule_type, "unknown")
+                    current_version = manager.metadata["current_version"].get(
+                        rule_type, "unknown"
+                    )
                     print(f"  • {rule_type}: v{current_version} ({rule_count} rules)")
 
     def post_module_hook(self, module_name: str, module_results: Dict):

@@ -27,7 +27,7 @@ class PathConfig:
         output_file = paths.get_output_path('models', 'my_model')
     """
 
-    def __init__(self, project_name: str = "LLM-HypatiaX-OLD"):
+    def __init__(self, project_name: str = "LLM-HypatiaX-Colab"):
         self.project_name = project_name
         self.environment = self._detect_environment()
 
@@ -44,6 +44,14 @@ class PathConfig:
         self.data_spacy = self.hypatiax / "data_spacy"
         self.custom_ner = self.hypatiax / "custom_ner"
         self.outputs = self.root / "outputs"
+
+        # Results & figures (for analysis / visualization)
+        self.data = self.hypatiax / "data"
+        self.results = self.data / "results"
+        self.figures = self.data / "figures"
+
+        self.results.mkdir(parents=True, exist_ok=True)
+        self.figures.mkdir(parents=True, exist_ok=True)
 
         # Subdirectories within datasets
         self.datasets_queries = self.datasets / "queries"
@@ -145,7 +153,10 @@ class PathConfig:
         return base_path
 
     def get_model_path(
-        self, domain: str = "queries", sub_domain: str = "tableau", model_name: Optional[str] = None
+        self,
+        domain: str = "queries",
+        sub_domain: str = "tableau",
+        model_name: Optional[str] = None,
     ) -> Path:
         """
         Get model path within data_spacy directory.
@@ -165,7 +176,10 @@ class PathConfig:
         return base_path
 
     def get_rules_path(
-        self, domain: str = "queries", sub_domain: str = "tableau", filename: Optional[str] = None
+        self,
+        domain: str = "queries",
+        sub_domain: str = "tableau",
+        filename: Optional[str] = None,
     ) -> Path:
         """Get path to custom rules files"""
         base_path = self.custom_ner / domain / sub_domain / "rules"

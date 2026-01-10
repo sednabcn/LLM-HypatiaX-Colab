@@ -82,7 +82,9 @@ class TestRiskFormulaGeneration:
         formula = formula_generator.generate(description, domain=domain)
 
         formula_str = str(formula).lower()
-        assert any(term in formula_str for term in ["return", "risk", "volatility", "sigma"])
+        assert any(
+            term in formula_str for term in ["return", "risk", "volatility", "sigma"]
+        )
 
     def test_generate_var_formula(self, formula_generator):
         """Test generating Value at Risk formula."""
@@ -271,7 +273,11 @@ class TestBatchGeneration:
 
     def test_generate_multiple_formulas(self, formula_generator):
         """Test generating multiple related formulas."""
-        descriptions = ["Calculate mean", "Calculate variance", "Calculate standard deviation"]
+        descriptions = [
+            "Calculate mean",
+            "Calculate variance",
+            "Calculate standard deviation",
+        ]
 
         formulas = formula_generator.generate_batch(descriptions)
 
@@ -374,7 +380,12 @@ class TestContextualGeneration:
 
     def test_generate_with_prior_formulas(self, formula_generator):
         """Test generation considering prior formulas."""
-        context = {"previous_formulas": ["mean = sum(x) / n", "variance = sum((x - mean)^2) / n"]}
+        context = {
+            "previous_formulas": [
+                "mean = sum(x) / n",
+                "variance = sum((x - mean)^2) / n",
+            ]
+        }
 
         description = "Now calculate standard deviation"
 
@@ -385,7 +396,13 @@ class TestContextualGeneration:
 
     def test_generate_with_variable_definitions(self, formula_generator):
         """Test generation with predefined variables."""
-        context = {"variables": {"R": "portfolio return", "Rf": "risk-free rate", "sigma": "volatility"}}
+        context = {
+            "variables": {
+                "R": "portfolio return",
+                "Rf": "risk-free rate",
+                "sigma": "volatility",
+            }
+        }
 
         description = "Calculate risk-adjusted return"
 
@@ -396,7 +413,11 @@ class TestContextualGeneration:
 
     def test_generate_with_domain_context(self, formula_generator):
         """Test generation with domain-specific context."""
-        context = {"domain": "defi", "protocol": "uniswap_v2", "context_formulas": ["x * y = k"]}
+        context = {
+            "domain": "defi",
+            "protocol": "uniswap_v2",
+            "context_formulas": ["x * y = k"],
+        }
 
         description = "Calculate price of token x"
 
@@ -436,7 +457,9 @@ class TestErrorHandling:
         """Test handling generation timeout."""
         description = "Generate extremely complex formula"
 
-        with patch.object(formula_generator.provider, "generate", side_effect=TimeoutError):
+        with patch.object(
+            formula_generator.provider, "generate", side_effect=TimeoutError
+        ):
             with pytest.raises(TimeoutError):
                 formula_generator.generate(description, timeout=1)
 
@@ -466,7 +489,9 @@ class TestFormulaDocumentation:
         """Test generating usage examples."""
         description = "Calculate compound interest"
 
-        result = formula_generator.generate_with_docs(description, include_examples=True)
+        result = formula_generator.generate_with_docs(
+            description, include_examples=True
+        )
 
         assert "examples" in result
 
@@ -474,7 +499,9 @@ class TestFormulaDocumentation:
         """Test generating academic references."""
         description = "Black-Scholes formula"
 
-        result = formula_generator.generate_with_docs(description, include_references=True)
+        result = formula_generator.generate_with_docs(
+            description, include_references=True
+        )
 
         assert "references" in result or "sources" in result
 
@@ -509,15 +536,23 @@ def formula_generator():
 
     # Mock methods
     generator.generate = MagicMock(return_value="x + y")
-    generator.get_supported_domains = MagicMock(return_value=["risk", "defi", "statistics"])
+    generator.get_supported_domains = MagicMock(
+        return_value=["risk", "defi", "statistics"]
+    )
     generator.validate_syntax = MagicMock(return_value=True)
     generator.extract_variables = MagicMock(return_value=["x", "y"])
     generator.check_dimensional_consistency = MagicMock(return_value=True)
     generator.validate_mathematics = MagicMock(return_value=True)
     generator.validate_domain_rules = MagicMock(return_value=True)
-    generator.generate_batch = MagicMock(return_value=["formula1", "formula2", "formula3"])
-    generator.generate_family = MagicMock(return_value=["sharpe", "sortino", "information"])
-    generator.generate_variations = MagicMock(return_value=["x + y", "y + x", "sum(x, y)"])
+    generator.generate_batch = MagicMock(
+        return_value=["formula1", "formula2", "formula3"]
+    )
+    generator.generate_family = MagicMock(
+        return_value=["sharpe", "sortino", "information"]
+    )
+    generator.generate_variations = MagicMock(
+        return_value=["x + y", "y + x", "sum(x, y)"]
+    )
     generator.simplify = MagicMock(return_value="3*x")
     generator.optimize_for_computation = MagicMock(return_value="optimized")
     generator.remove_redundancy = MagicMock(return_value="x")
@@ -534,7 +569,10 @@ def formula_generator():
         }
     )
     generator.generate_versions = MagicMock(
-        return_value=[{"formula": "v1", "properties": {}}, {"formula": "v2", "properties": {}}]
+        return_value=[
+            {"formula": "v1", "properties": {}},
+            {"formula": "v2", "properties": {}},
+        ]
     )
     generator.compare_formulas = MagicMock(return_value={"equivalent": True})
 

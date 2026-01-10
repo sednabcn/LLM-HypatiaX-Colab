@@ -22,7 +22,11 @@ class MockHybridDiscoverySystem:
         self.results = []
 
     def discover_validate_interpret(self, **kwargs):
-        result = {"status": "success", "validation": {"valid": True}, "discovery": {"r2_score": 0.95}}
+        result = {
+            "status": "success",
+            "validation": {"valid": True},
+            "discovery": {"r2_score": 0.95},
+        }
         self.results.append(result)
         return result
 
@@ -37,7 +41,9 @@ class TestGenerateAdvancedDeFiFunction(unittest.TestCase):
         """Test function has correct signature"""
         import inspect
 
-        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import generate_advanced_defi
+        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import (
+            generate_advanced_defi,
+        )
 
         sig = inspect.signature(generate_advanced_defi)
         params = list(sig.parameters.keys())
@@ -49,7 +55,9 @@ class TestGenerateAdvancedDeFiFunction(unittest.TestCase):
         """Test default parameter values"""
         import inspect
 
-        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import generate_advanced_defi
+        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import (
+            generate_advanced_defi,
+        )
 
         sig = inspect.signature(generate_advanced_defi)
 
@@ -62,7 +70,9 @@ class TestGenerateAdvancedDeFiFunction(unittest.TestCase):
         """Test that function returns a system object"""
         mock_system.return_value = MockHybridDiscoverySystem()
 
-        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import generate_advanced_defi
+        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import (
+            generate_advanced_defi,
+        )
 
         result = generate_advanced_defi(n_samples=10, noise_level=0.01)
 
@@ -75,7 +85,9 @@ class TestGenerateAdvancedDeFiFunction(unittest.TestCase):
         """Test that function creates data directory"""
         mock_system.return_value = MockHybridDiscoverySystem()
 
-        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import generate_advanced_defi
+        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import (
+            generate_advanced_defi,
+        )
 
         generate_advanced_defi(n_samples=10, noise_level=0.01)
 
@@ -88,7 +100,9 @@ class TestGenerateAdvancedDeFiFunction(unittest.TestCase):
         mock_instance = MockHybridDiscoverySystem()
         mock_system.return_value = mock_instance
 
-        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import generate_advanced_defi
+        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import (
+            generate_advanced_defi,
+        )
 
         generate_advanced_defi(n_samples=10, noise_level=0.01)
 
@@ -110,7 +124,9 @@ class TestFormula01PriceImpactAMM(unittest.TestCase):
         # With 0.3% fee
         fee = 0.003
         amount_in_with_fee = amount_in * (1 - fee)
-        amount_out = reserve_out * amount_in_with_fee / (reserve_in + amount_in_with_fee)
+        amount_out = (
+            reserve_out * amount_in_with_fee / (reserve_in + amount_in_with_fee)
+        )
 
         reserve_in_after = reserve_in + amount_in_with_fee
         reserve_out_after = reserve_out - amount_out
@@ -127,7 +143,9 @@ class TestFormula01PriceImpactAMM(unittest.TestCase):
         fee = 0.003
 
         amount_in_with_fee = amount_in * (1 - fee)
-        amount_out = reserve_out * amount_in_with_fee / (reserve_in + amount_in_with_fee)
+        amount_out = (
+            reserve_out * amount_in_with_fee / (reserve_in + amount_in_with_fee)
+        )
 
         expected_price = reserve_out / reserve_in
         actual_price = amount_out / amount_in
@@ -148,12 +166,16 @@ class TestFormula01PriceImpactAMM(unittest.TestCase):
         # Small trade impact
         small_with_fee = small_trade * (1 - fee)
         small_out = reserve_out * small_with_fee / (reserve_in + small_with_fee)
-        small_impact = (reserve_out / reserve_in - small_out / small_trade) / (reserve_out / reserve_in)
+        small_impact = (reserve_out / reserve_in - small_out / small_trade) / (
+            reserve_out / reserve_in
+        )
 
         # Large trade impact
         large_with_fee = large_trade * (1 - fee)
         large_out = reserve_out * large_with_fee / (reserve_in + large_with_fee)
-        large_impact = (reserve_out / reserve_in - large_out / large_trade) / (reserve_out / reserve_in)
+        large_impact = (reserve_out / reserve_in - large_out / large_trade) / (
+            reserve_out / reserve_in
+        )
 
         # Large trade should have significantly higher impact
         self.assertGreater(large_impact, small_impact * 10)
@@ -500,7 +522,9 @@ class TestFormula06FlashLoanArbitrage(unittest.TestCase):
         # price_diff = fee + gas/loan
         breakeven_price_diff = flash_loan_fee + gas_cost / loan_amount
 
-        profit = loan_amount * breakeven_price_diff - loan_amount * flash_loan_fee - gas_cost
+        profit = (
+            loan_amount * breakeven_price_diff - loan_amount * flash_loan_fee - gas_cost
+        )
 
         self.assertAlmostEqual(profit, 0, places=2)
 
@@ -647,7 +671,11 @@ class TestFormula09DynamicBorrowAPY(unittest.TestCase):
         slope1 = 0.05
         slope2 = 0.50
 
-        borrow_apy = base_rate + slope1 + slope2 * ((utilization_rate - optimal_util) / (1 - optimal_util))
+        borrow_apy = (
+            base_rate
+            + slope1
+            + slope2 * ((utilization_rate - optimal_util) / (1 - optimal_util))
+        )
 
         # Should be significantly higher above optimal
         self.assertGreater(borrow_apy, base_rate + slope1)
@@ -665,7 +693,11 @@ class TestFormula09DynamicBorrowAPY(unittest.TestCase):
 
         # Just above optimal
         util_above = 0.801
-        rate_above = base_rate + slope1 + slope2 * ((util_above - optimal_util) / (1 - optimal_util))
+        rate_above = (
+            base_rate
+            + slope1
+            + slope2 * ((util_above - optimal_util) / (1 - optimal_util))
+        )
 
         # At optimal
         rate_at_optimal = base_rate + slope1
@@ -684,8 +716,16 @@ class TestFormula09DynamicBorrowAPY(unittest.TestCase):
         util_90 = 0.90
         util_95 = 0.95
 
-        rate_90 = base_rate + slope1 + slope2 * ((util_90 - optimal_util) / (1 - optimal_util))
-        rate_95 = base_rate + slope1 + slope2 * ((util_95 - optimal_util) / (1 - optimal_util))
+        rate_90 = (
+            base_rate
+            + slope1
+            + slope2 * ((util_90 - optimal_util) / (1 - optimal_util))
+        )
+        rate_95 = (
+            base_rate
+            + slope1
+            + slope2 * ((util_95 - optimal_util) / (1 - optimal_util))
+        )
 
         # Rate increase should be substantial
         self.assertGreater(rate_95 - rate_90, 0.1)
@@ -1001,7 +1041,13 @@ class TestFormula13GasCostAmortization(unittest.TestCase):
         individual_gas = (base_gas + per_item_gas) * gas_price * 1e-9 * 2000
 
         batch_size = 5
-        batch_gas_per_tx = (base_gas + per_item_gas * batch_size) / batch_size * gas_price * 1e-9 * 2000
+        batch_gas_per_tx = (
+            (base_gas + per_item_gas * batch_size)
+            / batch_size
+            * gas_price
+            * 1e-9
+            * 2000
+        )
         batch_delay_cost = delay_cost_per_tx * batch_size / batch_size
 
         total_batch_cost = batch_gas_per_tx + batch_delay_cost
@@ -1210,8 +1256,16 @@ class TestFormula15CrossChainBridgeFeeOptimization(unittest.TestCase):
         # Time value: opportunity cost
         hourly_opportunity_cost = 0.0001  # 0.01% per hour
 
-        fast_cost = amount * fast_fee + fast_gas + amount * hourly_opportunity_cost * fast_time_hours
-        slow_cost = amount * slow_fee + slow_gas + amount * hourly_opportunity_cost * slow_time_hours
+        fast_cost = (
+            amount * fast_fee
+            + fast_gas
+            + amount * hourly_opportunity_cost * fast_time_hours
+        )
+        slow_cost = (
+            amount * slow_fee
+            + slow_gas
+            + amount * hourly_opportunity_cost * slow_time_hours
+        )
 
         # Despite lower fees, slow bridge has higher total cost due to time
         self.assertLess(fast_cost, slow_cost)
@@ -1227,7 +1281,9 @@ class TestDatasetGeneration(unittest.TestCase):
         mock_instance = MockHybridDiscoverySystem()
         mock_system.return_value = mock_instance
 
-        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import generate_advanced_defi
+        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import (
+            generate_advanced_defi,
+        )
 
         result = generate_advanced_defi(n_samples=10, noise_level=0.01)
 
@@ -1240,7 +1296,9 @@ class TestDatasetGeneration(unittest.TestCase):
         """Test that noise_level parameter is used"""
         mock_system.return_value = MockHybridDiscoverySystem()
 
-        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import generate_advanced_defi
+        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import (
+            generate_advanced_defi,
+        )
 
         # Should not raise error with different noise levels
         generate_advanced_defi(n_samples=10, noise_level=0.0)
@@ -1252,7 +1310,9 @@ class TestDatasetGeneration(unittest.TestCase):
         """Test generation with different sample sizes"""
         mock_system.return_value = MockHybridDiscoverySystem()
 
-        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import generate_advanced_defi
+        from generators.finance.defi.enhanced_defi_advanced_dataset_generator import (
+            generate_advanced_defi,
+        )
 
         # Should handle various sample sizes
         result_small = generate_advanced_defi(n_samples=50, noise_level=0.01)

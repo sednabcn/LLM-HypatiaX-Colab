@@ -17,7 +17,13 @@ class DeFiDatasetGenerator:
 
     def validate_formula(self, formula_dict):
         """Validate a single formula structure"""
-        required_keys = ["formula_name", "formula", "description", "variables", "category"]
+        required_keys = [
+            "formula_name",
+            "formula",
+            "description",
+            "variables",
+            "category",
+        ]
         return all(key in formula_dict for key in required_keys)
 
     def validate_category(self, category):

@@ -42,7 +42,9 @@ for ent in doc.ents:
 print("=============================================")
 
 # Test
-text = "Entries with Petal Length between 1.5 and 2.5 : Petal Length BETWEEN 1.5 AND 2.5"
+text = (
+    "Entries with Petal Length between 1.5 and 2.5 : Petal Length BETWEEN 1.5 AND 2.5"
+)
 print(text)
 doc = nlp(text)
 for ent in doc.ents:

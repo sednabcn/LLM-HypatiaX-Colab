@@ -76,7 +76,12 @@ class UniswapV3Pool:
     # ==================== LIQUIDITY CALCULATIONS ====================
 
     def calculate_liquidity(
-        self, amount0: float, amount1: float, price_lower: float, price_upper: float, current_price: float
+        self,
+        amount0: float,
+        amount1: float,
+        price_lower: float,
+        price_upper: float,
+        current_price: float,
     ) -> float:
         """
         Calculate liquidity L for a position
@@ -88,20 +93,34 @@ class UniswapV3Pool:
 
         if current_price < price_lower:
             # Position is entirely in token0
-            liquidity = amount0 * sqrt_price_lower * sqrt_price_upper / (sqrt_price_upper - sqrt_price_lower)
+            liquidity = (
+                amount0
+                * sqrt_price_lower
+                * sqrt_price_upper
+                / (sqrt_price_upper - sqrt_price_lower)
+            )
         elif current_price > price_upper:
             # Position is entirely in token1
             liquidity = amount1 / (sqrt_price_upper - sqrt_price_lower)
         else:
             # Position spans current price
-            liquidity0 = amount0 * sqrt_price_current * sqrt_price_upper / (sqrt_price_upper - sqrt_price_current)
+            liquidity0 = (
+                amount0
+                * sqrt_price_current
+                * sqrt_price_upper
+                / (sqrt_price_upper - sqrt_price_current)
+            )
             liquidity1 = amount1 / (sqrt_price_current - sqrt_price_lower)
             liquidity = min(liquidity0, liquidity1)
 
         return liquidity
 
     def get_amounts_for_liquidity(
-        self, liquidity: float, price_lower: float, price_upper: float, current_price: float
+        self,
+        liquidity: float,
+        price_lower: float,
+        price_upper: float,
+        current_price: float,
     ) -> Tuple[float, float]:
         """
         Calculate token amounts needed for given liquidity
@@ -113,7 +132,11 @@ class UniswapV3Pool:
 
         if current_price < price_lower:
             # All token0
-            amount0 = liquidity * (sqrt_price_upper - sqrt_price_lower) / (sqrt_price_lower * sqrt_price_upper)
+            amount0 = (
+                liquidity
+                * (sqrt_price_upper - sqrt_price_lower)
+                / (sqrt_price_lower * sqrt_price_upper)
+            )
             amount1 = 0.0
         elif current_price > price_upper:
             # All token1
@@ -121,7 +144,11 @@ class UniswapV3Pool:
             amount1 = liquidity * (sqrt_price_upper - sqrt_price_lower)
         else:
             # Both tokens
-            amount0 = liquidity * (sqrt_price_upper - sqrt_price_current) / (sqrt_price_current * sqrt_price_upper)
+            amount0 = (
+                liquidity
+                * (sqrt_price_upper - sqrt_price_current)
+                / (sqrt_price_current * sqrt_price_upper)
+            )
             amount1 = liquidity * (sqrt_price_current - sqrt_price_lower)
 
         return (amount0, amount1)
@@ -144,7 +171,9 @@ class UniswapV3Pool:
             current_price = self.current_price
 
         # Calculate liquidity for this position
-        liquidity = self.calculate_liquidity(token0_amount, token1_amount, price_lower, price_upper, current_price)
+        liquidity = self.calculate_liquidity(
+            token0_amount, token1_amount, price_lower, price_upper, current_price
+        )
 
         position = PositionInfo(
             lower_price=price_lower,
@@ -158,7 +187,9 @@ class UniswapV3Pool:
         self.positions[position_id] = position
         return position
 
-    def is_position_in_range(self, position: PositionInfo, current_price: Optional[float] = None) -> bool:
+    def is_position_in_range(
+        self, position: PositionInfo, current_price: Optional[float] = None
+    ) -> bool:
         """Check if position is actively earning fees"""
         if current_price is None:
             current_price = self.current_price
@@ -167,7 +198,10 @@ class UniswapV3Pool:
     # ==================== IMPERMANENT LOSS ====================
 
     def calculate_il_v3(
-        self, position: PositionInfo, current_price: float, initial_price: Optional[float] = None
+        self,
+        position: PositionInfo,
+        current_price: float,
+        initial_price: Optional[float] = None,
     ) -> Dict[str, float]:
         """
         Calculate impermanent loss for V3 concentrated position
@@ -178,12 +212,18 @@ class UniswapV3Pool:
 
         # Get initial amounts
         initial_amount0, initial_amount1 = self.get_amounts_for_liquidity(
-            position.liquidity, position.lower_price, position.upper_price, initial_price
+            position.liquidity,
+            position.lower_price,
+            position.upper_price,
+            initial_price,
         )
 
         # Get current amounts
         current_amount0, current_amount1 = self.get_amounts_for_liquidity(
-            position.liquidity, position.lower_price, position.upper_price, current_price
+            position.liquidity,
+            position.lower_price,
+            position.upper_price,
+            current_price,
         )
 
         # Calculate values
@@ -251,7 +291,9 @@ class UniswapV3Pool:
         daily_fees_token1 = daily_fees_usd * 0.5
 
         # Annualized return
-        fee_apr = (daily_fees_usd * 365 / position_value * 100) if position_value > 0 else 0
+        fee_apr = (
+            (daily_fees_usd * 365 / position_value * 100) if position_value > 0 else 0
+        )
 
         return {
             "daily_fees_usd": daily_fees_usd,
@@ -285,7 +327,9 @@ class UniswapV3Pool:
         daily_il_rate = il_absolute / days_elapsed if days_elapsed > 0 else 0
 
         # Calculate fees
-        fee_data = self.estimate_daily_fees(position, daily_volume_usd, pool_tvl_usd, current_price)
+        fee_data = self.estimate_daily_fees(
+            position, daily_volume_usd, pool_tvl_usd, current_price
+        )
         daily_fees = fee_data["daily_fees_usd"]
 
         # Quality score
@@ -334,11 +378,15 @@ class UniswapV3Pool:
         il_data = self.calculate_il_v3(position, current_price)
 
         # Fee Analysis
-        fee_data = self.estimate_daily_fees(position, daily_volume_usd, pool_tvl_usd, current_price)
+        fee_data = self.estimate_daily_fees(
+            position, daily_volume_usd, pool_tvl_usd, current_price
+        )
         total_fees = fee_data["daily_fees_usd"] * days_elapsed
 
         # Quality Score
-        qs_data = self.calculate_quality_score(position, current_price, daily_volume_usd, pool_tvl_usd, days_elapsed)
+        qs_data = self.calculate_quality_score(
+            position, current_price, daily_volume_usd, pool_tvl_usd, days_elapsed
+        )
 
         # Net result
         net_result = total_fees + il_data["il_absolute"] - gas_costs_usd
@@ -366,8 +414,15 @@ class UniswapV3Pool:
                 "absolute_usd": il_data["il_absolute"],
                 "formula_percent": il_data["il_formula_percent"],
             },
-            "fees": {"daily_usd": fee_data["daily_fees_usd"], "total_usd": total_fees, "apr": fee_data["fee_apr"]},
-            "quality_metrics": {"score": qs_data["quality_score"], "interpretation": qs_data["interpretation"]},
+            "fees": {
+                "daily_usd": fee_data["daily_fees_usd"],
+                "total_usd": total_fees,
+                "apr": fee_data["fee_apr"],
+            },
+            "quality_metrics": {
+                "score": qs_data["quality_score"],
+                "interpretation": qs_data["interpretation"],
+            },
             "net_performance": {
                 "total_return_usd": net_result,
                 "roi_percent": roi_percent,
@@ -411,7 +466,9 @@ def simulate_price_scenarios(
             gas_costs_usd=100.0,  # Typical V3 gas cost
         )
 
-        results.append({"price_change_pct": price_change_pct, "new_price": new_price, **analysis})
+        results.append(
+            {"price_change_pct": price_change_pct, "new_price": new_price, **analysis}
+        )
 
     return results
 
@@ -426,7 +483,10 @@ if __name__ == "__main__":
 
     # Initialize pool
     pool = UniswapV3Pool(
-        token0_symbol="ETH", token1_symbol="USDC", fee_tier=0.0005, initial_price=3000.0  # 0.05% fee tier
+        token0_symbol="ETH",
+        token1_symbol="USDC",
+        fee_tier=0.0005,
+        initial_price=3000.0,  # 0.05% fee tier
     )
 
     # Create narrow range position

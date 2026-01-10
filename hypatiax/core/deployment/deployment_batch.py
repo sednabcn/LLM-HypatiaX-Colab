@@ -41,7 +41,9 @@ class BatchProcessor:
         self.results = []
 
         # Setup logging
-        logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+        logging.basicConfig(
+            level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+        )
         self.logger = logging.getLogger(__name__)
 
         # Load model
@@ -144,27 +146,46 @@ class BatchProcessor:
                 import torch
 
                 input_text = f"translate description to formula: {description}"
-                inputs = self.tokenizer(input_text, return_tensors="pt", max_length=128, truncation=True).to(
-                    self.device
-                )
+                inputs = self.tokenizer(
+                    input_text, return_tensors="pt", max_length=128, truncation=True
+                ).to(self.device)
 
                 with torch.no_grad():
-                    outputs = self.model.generate(inputs.input_ids, max_length=128, num_beams=4, early_stopping=True)
+                    outputs = self.model.generate(
+                        inputs.input_ids,
+                        max_length=128,
+                        num_beams=4,
+                        early_stopping=True,
+                    )
 
                 formula = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-                return {"description": description, "formula": formula, "confidence": 0.85, "status": "success"}
+                return {
+                    "description": description,
+                    "formula": formula,
+                    "confidence": 0.85,
+                    "status": "success",
+                }
 
             elif self.config.model_type == "rag":
                 formula = self.model.generate_formula(description)
 
-                return {"description": description, "formula": formula, "confidence": 0.80, "status": "success"}
+                return {
+                    "description": description,
+                    "formula": formula,
+                    "confidence": 0.80,
+                    "status": "success",
+                }
 
             elif self.config.model_type == "spacy":
                 doc = self.model(description)
                 entities = [{"text": ent.text, "label": ent.label_} for ent in doc.ents]
 
-                return {"description": description, "entities": entities, "status": "success"}
+                return {
+                    "description": description,
+                    "entities": entities,
+                    "status": "success",
+                }
 
         except Exception as e:
             return {"description": description, "error": str(e), "status": "failed"}
@@ -184,12 +205,21 @@ class BatchProcessor:
         results = []
 
         # Split into batches
-        batches = [data[i : i + self.config.batch_size] for i in range(0, len(data), self.config.batch_size)]
+        batches = [
+            data[i : i + self.config.batch_size]
+            for i in range(0, len(data), self.config.batch_size)
+        ]
 
-        self.logger.info(f"Processing {len(batches)} batches with {self.config.num_workers} workers")
+        self.logger.info(
+            f"Processing {len(batches)} batches with {self.config.num_workers} workers"
+        )
 
         # Choose executor
-        Executor = ProcessPoolExecutor if self.config.use_multiprocessing else ThreadPoolExecutor
+        Executor = (
+            ProcessPoolExecutor
+            if self.config.use_multiprocessing
+            else ThreadPoolExecutor
+        )
 
         with Executor(max_workers=self.config.num_workers) as executor:
             futures = [executor.submit(self.process_batch, batch) for batch in batches]
@@ -200,7 +230,10 @@ class BatchProcessor:
                 results.extend(batch_results)
 
                 # Save intermediate results
-                if self.config.save_intermediate and (i + 1) % self.config.intermediate_interval == 0:
+                if (
+                    self.config.save_intermediate
+                    and (i + 1) % self.config.intermediate_interval == 0
+                ):
                     self._save_intermediate(results, i + 1)
 
         return results
@@ -216,7 +249,10 @@ class BatchProcessor:
             results.append(result)
 
             # Save intermediate results
-            if self.config.save_intermediate and len(results) % self.config.intermediate_interval == 0:
+            if (
+                self.config.save_intermediate
+                and len(results) % self.config.intermediate_interval == 0
+            ):
                 self._save_intermediate(results, len(results))
 
         return results
@@ -224,10 +260,15 @@ class BatchProcessor:
     def _save_intermediate(self, results: List[Dict], count: int):
         """Save intermediate results"""
         output_path = Path(self.config.output_file)
-        intermediate_path = output_path.parent / f"{output_path.stem}_intermediate_{count}{output_path.suffix}"
+        intermediate_path = (
+            output_path.parent
+            / f"{output_path.stem}_intermediate_{count}{output_path.suffix}"
+        )
 
         self._save_results(results, str(intermediate_path))
-        self.logger.info(f"Saved intermediate results ({count} items) to {intermediate_path}")
+        self.logger.info(
+            f"Saved intermediate results ({count} items) to {intermediate_path}"
+        )
 
     def _save_results(self, results: List[Dict], output_path: str):
         """Save results to file"""
@@ -333,7 +374,9 @@ Examples:
         """,
     )
 
-    parser.add_argument("-i", "--input", type=str, help="Input file (JSON, CSV, or TXT)")
+    parser.add_argument(
+        "-i", "--input", type=str, help="Input file (JSON, CSV, or TXT)"
+    )
 
     parser.add_argument("-o", "--output", type=str, help="Output file (JSON or CSV)")
 
@@ -346,21 +389,53 @@ Examples:
         help="Model type to use (default: ensemble)",
     )
 
-    parser.add_argument("-p", "--model-path", type=str, help="Path to model (if not using default location)")
-
-    parser.add_argument("-b", "--batch-size", type=int, default=32, help="Batch size for processing (default: 32)")
-
-    parser.add_argument("-w", "--workers", type=int, default=4, help="Number of parallel workers (default: 4)")
-
-    parser.add_argument("--multiprocessing", action="store_true", help="Use multiprocessing instead of threading")
-
-    parser.add_argument("--no-intermediate", action="store_true", help="Disable intermediate result saving")
-
     parser.add_argument(
-        "--intermediate-interval", type=int, default=100, help="Save intermediate results every N items (default: 100)"
+        "-p",
+        "--model-path",
+        type=str,
+        help="Path to model (if not using default location)",
     )
 
-    parser.add_argument("--create-sample", action="store_true", help="Create sample input file for testing")
+    parser.add_argument(
+        "-b",
+        "--batch-size",
+        type=int,
+        default=32,
+        help="Batch size for processing (default: 32)",
+    )
+
+    parser.add_argument(
+        "-w",
+        "--workers",
+        type=int,
+        default=4,
+        help="Number of parallel workers (default: 4)",
+    )
+
+    parser.add_argument(
+        "--multiprocessing",
+        action="store_true",
+        help="Use multiprocessing instead of threading",
+    )
+
+    parser.add_argument(
+        "--no-intermediate",
+        action="store_true",
+        help="Disable intermediate result saving",
+    )
+
+    parser.add_argument(
+        "--intermediate-interval",
+        type=int,
+        default=100,
+        help="Save intermediate results every N items (default: 100)",
+    )
+
+    parser.add_argument(
+        "--create-sample",
+        action="store_true",
+        help="Create sample input file for testing",
+    )
 
     args = parser.parse_args()
 
@@ -368,7 +443,9 @@ Examples:
     if args.create_sample:
         sample_file = create_sample_input()
         print(f"\nTo process the sample file, run:")
-        print(f"python deployment_batch.py -i {sample_file} -o ./results/sample_output.json")
+        print(
+            f"python deployment_batch.py -i {sample_file} -o ./results/sample_output.json"
+        )
         return
 
     # Validate required arguments

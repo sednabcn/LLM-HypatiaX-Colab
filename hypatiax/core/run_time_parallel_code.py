@@ -12,7 +12,9 @@ Logging: Use Python's built-in logging module to log detailed information about 
 Scalability: Utilize Python's concurrent.futures module for simple asynchronous execution if the tests are independent and could benefit from parallel processing.
 """
 # Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 
 # Example configurations for each test
@@ -65,7 +67,10 @@ def run_test(config):
         # return {'test_id': config['test_id'], 'result': results}
 
         # Simulate a result
-        simulated_result = {"test_id": config["test_id"], "result": f"Result for {config['test_id']}"}
+        simulated_result = {
+            "test_id": config["test_id"],
+            "result": f"Result for {config['test_id']}",
+        }
         logging.info(f"Completed test {config['test_id']} successfully.")
         return simulated_result
 
@@ -80,7 +85,9 @@ def run_all_tests_concurrently():
     """
     results = []
     with ThreadPoolExecutor(max_workers=3) as executor:
-        future_to_test = {executor.submit(run_test, config): config for config in test_configurations}
+        future_to_test = {
+            executor.submit(run_test, config): config for config in test_configurations
+        }
         for future in as_completed(future_to_test):
             results.append(future.result())
 

@@ -23,7 +23,13 @@ class RiskQueriesDataset:
 
     def add_query(self, description: str, formula: str, category: str):
         """Add a single query."""
-        self.queries.append({"description": description, "analytical_formula": formula, "category": category})
+        self.queries.append(
+            {
+                "description": description,
+                "analytical_formula": formula,
+                "category": category,
+            }
+        )
         self.formula_count += 1
 
     def generate_var_formulas(self):
@@ -31,15 +37,26 @@ class RiskQueriesDataset:
         print("Generating VaR formulas (35 variants)...")
 
         # Base VaR formulas
-        self.add_query("Calculate Value at Risk at 95% confidence level", "VaR_95 = μ - 1.96 * σ * √t", "Value at Risk")
+        self.add_query(
+            "Calculate Value at Risk at 95% confidence level",
+            "VaR_95 = μ - 1.96 * σ * √t",
+            "Value at Risk",
+        )
 
         # Different confidence levels
-        confidence_levels = [(90, 1.28, "90%"), (95, 1.645, "95%"), (99, 2.33, "99%"), (99.9, 3.09, "99.9%")]
+        confidence_levels = [
+            (90, 1.28, "90%"),
+            (95, 1.645, "95%"),
+            (99, 2.33, "99%"),
+            (99.9, 3.09, "99.9%"),
+        ]
 
         for conf, z_score, conf_str in confidence_levels:
             # Basic VaR
             self.add_query(
-                f"Calculate VaR at {conf_str} confidence level", f"VaR_{conf} = μ - {z_score} * σ * √t", "Value at Risk"
+                f"Calculate VaR at {conf_str} confidence level",
+                f"VaR_{conf} = μ - {z_score} * σ * √t",
+                "Value at Risk",
             )
 
             # VaR with time horizons
@@ -60,7 +77,9 @@ class RiskQueriesDataset:
 
         # VaR parametric vs historical
         self.add_query(
-            "Historical VaR using percentile method", "VaR_historical = percentile(returns, 5)", "Value at Risk"
+            "Historical VaR using percentile method",
+            "VaR_historical = percentile(returns, 5)",
+            "Value at Risk",
         )
 
         self.add_query(
@@ -79,9 +98,16 @@ class RiskQueriesDataset:
             "Conditional VaR",
         )
 
-        for conf, z_score, phi_value in [(90, 1.28, 2.50), (95, 1.645, 2.063), (99, 2.33, 1.755), (99.9, 3.09, 1.505)]:
+        for conf, z_score, phi_value in [
+            (90, 1.28, 2.50),
+            (95, 1.645, 2.063),
+            (99, 2.33, 1.755),
+            (99.9, 3.09, 1.505),
+        ]:
             self.add_query(
-                f"CVaR at {conf}% confidence level", f"CVaR_{conf} = μ - {phi_value} * σ * √t", "Conditional VaR"
+                f"CVaR at {conf}% confidence level",
+                f"CVaR_{conf} = μ - {phi_value} * σ * √t",
+                "Conditional VaR",
             )
 
             for horizon in [1, 10, 30, 252]:
@@ -107,7 +133,11 @@ class RiskQueriesDataset:
         """Generate 25 Sharpe Ratio variants."""
         print("Generating Sharpe Ratio formulas (25 variants)...")
 
-        self.add_query("Calculate Sharpe Ratio for portfolio performance", "Sharpe = (R_p - R_f) / σ_p", "Sharpe Ratio")
+        self.add_query(
+            "Calculate Sharpe Ratio for portfolio performance",
+            "Sharpe = (R_p - R_f) / σ_p",
+            "Sharpe Ratio",
+        )
 
         # Different risk-free rates
         for rf_rate in [0.01, 0.02, 0.03, 0.05, 0.10]:
@@ -126,7 +156,9 @@ class RiskQueriesDataset:
                 )
 
         self.add_query(
-            "Risk-adjusted Sharpe Ratio with transaction costs", "Sharpe_adj = (R_p - TC - R_f) / σ_p", "Sharpe Ratio"
+            "Risk-adjusted Sharpe Ratio with transaction costs",
+            "Sharpe_adj = (R_p - TC - R_f) / σ_p",
+            "Sharpe Ratio",
         )
 
         self.add_query(
@@ -161,7 +193,9 @@ class RiskQueriesDataset:
                 )
 
         self.add_query(
-            "Downside deviation calculation", "σ_downside = √[Σ(min(R_i - R_target, 0))² / n]", "Sortino Ratio"
+            "Downside deviation calculation",
+            "σ_downside = √[Σ(min(R_i - R_target, 0))² / n]",
+            "Sortino Ratio",
         )
 
     def generate_beta_formulas(self):
@@ -169,7 +203,9 @@ class RiskQueriesDataset:
         print("Generating Beta formulas (28 variants)...")
 
         self.add_query(
-            "Calculate Beta - systematic risk relative to market", "β = Cov(R_asset, R_market) / Var(R_market)", "Beta"
+            "Calculate Beta - systematic risk relative to market",
+            "β = Cov(R_asset, R_market) / Var(R_market)",
+            "Beta",
         )
 
         # Different estimation periods
@@ -181,9 +217,17 @@ class RiskQueriesDataset:
             )
 
         # Levered and unlevered beta
-        self.add_query("Unlevered (asset) Beta", "β_unlevered = β_levered / (1 + (1-Tc) * D/E)", "Beta")
+        self.add_query(
+            "Unlevered (asset) Beta",
+            "β_unlevered = β_levered / (1 + (1-Tc) * D/E)",
+            "Beta",
+        )
 
-        self.add_query("Levered (equity) Beta with debt", "β_levered = β_unlevered * (1 + (1-Tc) * D/E)", "Beta")
+        self.add_query(
+            "Levered (equity) Beta with debt",
+            "β_levered = β_unlevered * (1 + (1-Tc) * D/E)",
+            "Beta",
+        )
 
         # Beta adjustments
         for factor in ["market", "size", "value", "momentum"]:
@@ -204,7 +248,9 @@ class RiskQueriesDataset:
         print("Generating Maximum Drawdown formulas (30 variants)...")
 
         self.add_query(
-            "Calculate Maximum Drawdown as peak-to-trough decline", "MDD = (Trough - Peak) / Peak", "Maximum Drawdown"
+            "Calculate Maximum Drawdown as peak-to-trough decline",
+            "MDD = (Trough - Peak) / Peak",
+            "Maximum Drawdown",
         )
 
         # Variations by holding period
@@ -216,11 +262,15 @@ class RiskQueriesDataset:
             )
 
         self.add_query(
-            "Calmar Ratio - return per unit of drawdown", "Calmar = Annual_Return / Max_Drawdown", "Maximum Drawdown"
+            "Calmar Ratio - return per unit of drawdown",
+            "Calmar = Annual_Return / Max_Drawdown",
+            "Maximum Drawdown",
         )
 
         self.add_query(
-            "Return over Maximum Drawdown (RoMaD)", "RoMaD = Cumulative_Return / Max_Drawdown", "Maximum Drawdown"
+            "Return over Maximum Drawdown (RoMaD)",
+            "RoMaD = Cumulative_Return / Max_Drawdown",
+            "Maximum Drawdown",
         )
 
         # Recovery time metrics
@@ -232,7 +282,9 @@ class RiskQueriesDataset:
             )
 
         self.add_query(
-            "Average Drawdown over period", "Avg_DD = mean(|Drawdown_i|) for all i in period", "Maximum Drawdown"
+            "Average Drawdown over period",
+            "Avg_DD = mean(|Drawdown_i|) for all i in period",
+            "Maximum Drawdown",
         )
 
     def generate_information_ratio_formulas(self):
@@ -240,7 +292,9 @@ class RiskQueriesDataset:
         print("Generating Information Ratio formulas (24 variants)...")
 
         self.add_query(
-            "Calculate Information Ratio for active management", "IR = (R_p - R_bench) / TE", "Information Ratio"
+            "Calculate Information Ratio for active management",
+            "IR = (R_p - R_bench) / TE",
+            "Information Ratio",
         )
 
         # Different benchmark types
@@ -252,21 +306,31 @@ class RiskQueriesDataset:
             )
 
         self.add_query(
-            "Tracking Error - standard deviation of active returns", "TE = σ(R_p - R_bench)", "Information Ratio"
+            "Tracking Error - standard deviation of active returns",
+            "TE = σ(R_p - R_bench)",
+            "Information Ratio",
         )
 
         self.add_query(
-            "Ex-ante Information Ratio using factor model", "IR_ex_ante = α / Residual_Volatility", "Information Ratio"
+            "Ex-ante Information Ratio using factor model",
+            "IR_ex_ante = α / Residual_Volatility",
+            "Information Ratio",
         )
 
-        self.add_query("Annualized Information Ratio", "IR_annual = IR_monthly * √12", "Information Ratio")
+        self.add_query(
+            "Annualized Information Ratio",
+            "IR_annual = IR_monthly * √12",
+            "Information Ratio",
+        )
 
     def generate_treynor_ratio_formulas(self):
         """Generate 20 Treynor Ratio variants."""
         print("Generating Treynor Ratio formulas (20 variants)...")
 
         self.add_query(
-            "Calculate Treynor Ratio - return per unit of systematic risk", "Treynor = (R_p - R_f) / β", "Treynor Ratio"
+            "Calculate Treynor Ratio - return per unit of systematic risk",
+            "Treynor = (R_p - R_f) / β",
+            "Treynor Ratio",
         )
 
         for rf in [0.01, 0.02, 0.05]:
@@ -278,18 +342,26 @@ class RiskQueriesDataset:
                 )
 
         self.add_query(
-            "Jensen's Alpha - excess return above CAPM prediction", "α = R_p - [R_f + β(R_m - R_f)]", "Treynor Ratio"
+            "Jensen's Alpha - excess return above CAPM prediction",
+            "α = R_p - [R_f + β(R_m - R_f)]",
+            "Treynor Ratio",
         )
 
     def generate_capm_formulas(self):
         """Generate 28 CAPM and related variants."""
         print("Generating CAPM formulas (28 variants)...")
 
-        self.add_query("Capital Asset Pricing Model", "E(R_i) = R_f + β_i(E(R_m) - R_f)", "CAPM")
+        self.add_query(
+            "Capital Asset Pricing Model", "E(R_i) = R_f + β_i(E(R_m) - R_f)", "CAPM"
+        )
 
         # Market risk premium variations
         for mrp in [0.04, 0.05, 0.06, 0.08]:
-            self.add_query(f"CAPM with {mrp*100:.1f}% market risk premium", f"E(R_i) = R_f + β_i * {mrp}", "CAPM")
+            self.add_query(
+                f"CAPM with {mrp*100:.1f}% market risk premium",
+                f"E(R_i) = R_f + β_i * {mrp}",
+                "CAPM",
+            )
 
         self.add_query(
             "Build-up method for required return (Private Companies)",
@@ -320,14 +392,22 @@ class RiskQueriesDataset:
         )
 
         self.add_query(
-            "Marginal VaR - sensitivity of portfolio VaR to position change", "MVaR = ∂VaR/∂Position_i", "Advanced VaR"
+            "Marginal VaR - sensitivity of portfolio VaR to position change",
+            "MVaR = ∂VaR/∂Position_i",
+            "Advanced VaR",
         )
 
         self.add_query(
-            "Component VaR - allocation of total VaR to positions", "CVaR_i = MVaR_i * Position_Value_i", "Advanced VaR"
+            "Component VaR - allocation of total VaR to positions",
+            "CVaR_i = MVaR_i * Position_Value_i",
+            "Advanced VaR",
         )
 
-        self.add_query("Stand-alone VaR for individual position", "SA_VaR_i = μ_i - z_α * σ_i * √t", "Advanced VaR")
+        self.add_query(
+            "Stand-alone VaR for individual position",
+            "SA_VaR_i = μ_i - z_α * σ_i * √t",
+            "Advanced VaR",
+        )
 
         self.add_query(
             "Concentrated VaR - accounts for correlation breakdowns",
@@ -336,7 +416,9 @@ class RiskQueriesDataset:
         )
 
         self.add_query(
-            "Liquidity-adjusted VaR with market depth", "LVaR = VaR + Liquidity_Adjustment * σ", "Advanced VaR"
+            "Liquidity-adjusted VaR with market depth",
+            "LVaR = VaR + Liquidity_Adjustment * σ",
+            "Advanced VaR",
         )
 
         self.add_query(
@@ -345,7 +427,11 @@ class RiskQueriesDataset:
             "Advanced VaR",
         )
 
-        self.add_query("Incremental CVaR", "I_CVaR = CVaR(Portfolio+Position) - CVaR(Portfolio)", "Advanced VaR")
+        self.add_query(
+            "Incremental CVaR",
+            "I_CVaR = CVaR(Portfolio+Position) - CVaR(Portfolio)",
+            "Advanced VaR",
+        )
 
     def generate_stress_testing_formulas(self):
         """Generate 25 Stress Testing formulas."""
@@ -364,7 +450,9 @@ class RiskQueriesDataset:
         )
 
         self.add_query(
-            "Yield curve twist stress test", "Stress_Twist = Σ(Duration_Slope_i * Twist * Value_i)", "Stress Testing"
+            "Yield curve twist stress test",
+            "Stress_Twist = Σ(Duration_Slope_i * Twist * Value_i)",
+            "Stress Testing",
         )
 
         self.add_query(
@@ -402,7 +490,9 @@ class RiskQueriesDataset:
         )
 
         self.add_query(
-            "Martin Ratio - return to Ulcer Index", "Martin = Annual_Return / Ulcer_Index", "Advanced Metrics"
+            "Martin Ratio - return to Ulcer Index",
+            "Martin = Annual_Return / Ulcer_Index",
+            "Advanced Metrics",
         )
 
         self.add_query(
@@ -411,10 +501,16 @@ class RiskQueriesDataset:
             "Advanced Metrics",
         )
 
-        self.add_query("Skewness - asymmetry of return distribution", "Skewness = E[(R - μ)³] / σ³", "Advanced Metrics")
+        self.add_query(
+            "Skewness - asymmetry of return distribution",
+            "Skewness = E[(R - μ)³] / σ³",
+            "Advanced Metrics",
+        )
 
         self.add_query(
-            "Kurtosis - tail heaviness of return distribution", "Kurtosis = E[(R - μ)⁴] / σ⁴ - 3", "Advanced Metrics"
+            "Kurtosis - tail heaviness of return distribution",
+            "Kurtosis = E[(R - μ)⁴] / σ⁴ - 3",
+            "Advanced Metrics",
         )
 
         self.add_query(
@@ -427,11 +523,21 @@ class RiskQueriesDataset:
         """Generate 22 Correlation and Covariance formulas."""
         print("Generating Correlation and Covariance formulas (22 variants)...")
 
-        self.add_query("Correlation coefficient between two assets", "ρ_xy = Cov(x,y) / (σ_x * σ_y)", "Correlation")
+        self.add_query(
+            "Correlation coefficient between two assets",
+            "ρ_xy = Cov(x,y) / (σ_x * σ_y)",
+            "Correlation",
+        )
 
-        self.add_query("Covariance matrix for portfolio", "Cov(R_p) = w^T * Σ * w", "Correlation")
+        self.add_query(
+            "Covariance matrix for portfolio", "Cov(R_p) = w^T * Σ * w", "Correlation"
+        )
 
-        self.add_query("Portfolio volatility with correlations", "σ_p = √(Σ Σ w_i*w_j*σ_i*σ_j*ρ_ij)", "Correlation")
+        self.add_query(
+            "Portfolio volatility with correlations",
+            "σ_p = √(Σ Σ w_i*w_j*σ_i*σ_j*ρ_ij)",
+            "Correlation",
+        )
 
         self.add_query(
             "Rolling correlation - time-varying correlation",
@@ -473,14 +579,20 @@ class RiskQueriesDataset:
         """Convert to DataFrame."""
         return pd.DataFrame(self.queries)
 
-    def save_csv(self, filename="hypatiax/datasets/generators/queries/finance/risk/risk_queries_comprehensive.csv"):
+    def save_csv(
+        self,
+        filename="hypatiax/datasets/generators/queries/finance/risk/risk_queries_comprehensive.csv",
+    ):
         """Save to CSV."""
         df = self.to_dataframe()
         df.to_csv(filename, index=False)
         print(f"✓ Saved CSV: {filename}")
         return filename
 
-    def save_json(self, filename="hypatiax/datasets/generators/queries/finance/risk/risk_queries_comprehensive.json"):
+    def save_json(
+        self,
+        filename="hypatiax/datasets/generators/queries/finance/risk/risk_queries_comprehensive.json",
+    ):
         """Save to JSON."""
         df = self.to_dataframe()
         df.to_json(filename, orient="records", indent=2)

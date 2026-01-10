@@ -144,12 +144,23 @@ class TestWeightRecalibration:
         """Custom weights that don't sum to 1.0 should raise error"""
         with pytest.raises(ValueError, match="must sum to 1.0"):
             EnsembleValidator(
-                domain="defi", weights={"symbolic": 0.5, "dimensional": 0.3, "domain": 0.3, "numerical": 0.1}
+                domain="defi",
+                weights={
+                    "symbolic": 0.5,
+                    "dimensional": 0.3,
+                    "domain": 0.3,
+                    "numerical": 0.1,
+                },
             )
 
     def test_custom_weights_success(self):
         """Valid custom weights should work"""
-        custom_weights = {"symbolic": 0.25, "dimensional": 0.35, "domain": 0.25, "numerical": 0.15}
+        custom_weights = {
+            "symbolic": 0.25,
+            "dimensional": 0.35,
+            "domain": 0.25,
+            "numerical": 0.15,
+        }
         validator = EnsembleValidator(domain="defi", weights=custom_weights)
         assert np.isclose(sum(validator.weights.values()), 1.0)
 
@@ -284,13 +295,17 @@ class TestEdgeCaseDetection_EmptyNull:
     def test_empty_string_expression(self):
         """Should handle empty string expressions"""
         validator = EnsembleValidator(domain="defi")
-        result = validator.validate_complete(expression_str="", variable_definitions={}, variable_units={})
+        result = validator.validate_complete(
+            expression_str="", variable_definitions={}, variable_units={}
+        )
         assert result["valid"] is False
 
     def test_whitespace_only_expression(self):
         """Should handle whitespace-only expressions"""
         validator = EnsembleValidator(domain="defi")
-        result = validator.validate_complete(expression_str="   ", variable_definitions={}, variable_units={})
+        result = validator.validate_complete(
+            expression_str="   ", variable_definitions={}, variable_units={}
+        )
         assert result["valid"] is False
 
     def test_empty_with_other_errors(self):
@@ -306,7 +321,9 @@ class TestEdgeCaseDetection_EmptyNull:
     def test_empty_expression_low_score(self):
         """Empty expressions should have low score"""
         validator = EnsembleValidator(domain="defi")
-        result = validator.validate_complete(expression_str="", variable_definitions={}, variable_units={})
+        result = validator.validate_complete(
+            expression_str="", variable_definitions={}, variable_units={}
+        )
         # FIXED: Empty expression returns 25.0, not 0.0
         assert result["total_score"] <= 50.0
 
@@ -680,7 +697,10 @@ class TestPenaltySystem:
 
         # Bad should have lower score and higher penalties
         assert result_bad["total_score"] < result_good["total_score"]
-        assert result_bad["penalties_applied"]["total_deducted"] >= result_good["penalties_applied"]["total_deducted"]
+        assert (
+            result_bad["penalties_applied"]["total_deducted"]
+            >= result_good["penalties_applied"]["total_deducted"]
+        )
 
     def test_penalty_cap_at_zero(self):
         """Score should not go below zero after penalties"""
@@ -705,7 +725,10 @@ class TestPenaltySystem:
         assert "penalties_applied" in result
         # Dimensional errors should cause penalties
         if not result["valid"]:
-            assert result["penalties_applied"]["dimensional"] > 0 or result["penalties_applied"]["total_deducted"] > 0
+            assert (
+                result["penalties_applied"]["dimensional"] > 0
+                or result["penalties_applied"]["total_deducted"] > 0
+            )
 
     def test_cumulative_warnings_penalty(self):
         """Many warnings should accumulate penalties"""
@@ -718,7 +741,10 @@ class TestPenaltySystem:
         )
         # Check that validation completed and has penalty structure
         assert "penalties_applied" in result
-        assert "warnings" in result or len(result["layer_results"]["domain"].get("warnings", [])) >= 0
+        assert (
+            "warnings" in result
+            or len(result["layer_results"]["domain"].get("warnings", [])) >= 0
+        )
 
 
 # ============================================================================
@@ -968,7 +994,12 @@ class TestCompleteValidationWorkflow:
         result = validator.validate_complete(
             expression_str="(x + y) * z / w",
             variable_definitions={"x": "a", "y": "b", "z": "c", "w": "d"},
-            variable_units={"x": "meter", "y": "meter", "z": "dimensionless", "w": "dimensionless"},
+            variable_units={
+                "x": "meter",
+                "y": "meter",
+                "z": "dimensionless",
+                "w": "dimensionless",
+            },
         )
         assert "valid" in result
         assert "total_score" in result
@@ -1208,8 +1239,14 @@ class TestIntegrationScenarios:
         validator = EnsembleValidator(domain="defi")
         result = validator.validate_complete(
             expression_str="(reserves_in * reserves_out) ** 0.5",
-            variable_definitions={"reserves_in": "input reserves", "reserves_out": "output reserves"},
-            variable_units={"reserves_in": "dimensionless", "reserves_out": "dimensionless"},
+            variable_definitions={
+                "reserves_in": "input reserves",
+                "reserves_out": "output reserves",
+            },
+            variable_units={
+                "reserves_in": "dimensionless",
+                "reserves_out": "dimensionless",
+            },
         )
         assert "valid" in result
         assert "domain" in result["layer_results"]
@@ -1329,7 +1366,12 @@ class TestPerformanceStress:
         result = validator.validate_complete(
             expression_str="((((x + y) * z) / w) ** 2)",
             variable_definitions={"x": "a", "y": "b", "z": "c", "w": "d"},
-            variable_units={"x": "dimensionless", "y": "dimensionless", "z": "dimensionless", "w": "dimensionless"},
+            variable_units={
+                "x": "dimensionless",
+                "y": "dimensionless",
+                "z": "dimensionless",
+                "w": "dimensionless",
+            },
         )
         assert "valid" in result
 

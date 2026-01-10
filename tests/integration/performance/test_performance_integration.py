@@ -23,7 +23,10 @@ class TestLatencyBenchmarks:
     @pytest.fixture
     def system(self):
         return HybridDiscoverySystem(
-            domain="defi", primary_llm="anthropic", enable_fallback=True, use_rich_output=False
+            domain="defi",
+            primary_llm="anthropic",
+            enable_fallback=True,
+            use_rich_output=False,
         )
 
     def test_anthropic_api_latency(self, system):
@@ -137,7 +140,11 @@ class TestThroughputBenchmarks:
 
             # Process 100 interpretations sequentially
             for i in range(100):
-                system._interpret_with_llm(expression=f"x{i} + y{i}", variables={"x": "input", "y": "output"}, r2=0.9)
+                system._interpret_with_llm(
+                    expression=f"x{i} + y{i}",
+                    variables={"x": "input", "y": "output"},
+                    r2=0.9,
+                )
 
             elapsed = time.time() - start
             throughput = 100 / elapsed
@@ -155,7 +162,9 @@ class TestThroughputBenchmarks:
 
         def process_interpretation(i):
             """Process a single interpretation"""
-            return system._interpret_with_llm(expression=f"x{i} * y{i}", variables={"x": "a", "y": "b"}, r2=0.9)
+            return system._interpret_with_llm(
+                expression=f"x{i} * y{i}", variables={"x": "a", "y": "b"}, r2=0.9
+            )
 
         with patch.object(system, "_call_anthropic") as mock_claude:
             mock_claude.return_value = "Response"
@@ -164,7 +173,9 @@ class TestThroughputBenchmarks:
 
             # Process 100 interpretations with 10 workers
             with ThreadPoolExecutor(max_workers=10) as executor:
-                futures = [executor.submit(process_interpretation, i) for i in range(100)]
+                futures = [
+                    executor.submit(process_interpretation, i) for i in range(100)
+                ]
                 results = [f.result() for f in as_completed(futures)]
 
             elapsed = time.time() - start
@@ -185,7 +196,9 @@ class TestLoadTests:
 
     def test_1000_operation_load_test(self):
         """Test system with 1,000+ operations (Week 2-3 requirement)"""
-        system = HybridDiscoverySystem(domain="defi", max_results=1000, use_rich_output=False)
+        system = HybridDiscoverySystem(
+            domain="defi", max_results=1000, use_rich_output=False
+        )
 
         success_count = 0
         error_count = 0
@@ -214,7 +227,9 @@ class TestLoadTests:
                 op_start = time.time()
                 try:
                     system._interpret_with_llm(
-                        expression=f"x{i % 10} + y{i % 10}", variables={"x": "input", "y": "output"}, r2=0.9
+                        expression=f"x{i % 10} + y{i % 10}",
+                        variables={"x": "input", "y": "output"},
+                        r2=0.9,
                     )
                     success_count += 1
                     latencies.append(time.time() - op_start)
@@ -249,7 +264,9 @@ class TestLoadTests:
 
             # Run operations for target duration
             while time.time() - start < target_duration:
-                system._interpret_with_llm(expression=f"x + y", variables={"x": "a", "y": "b"}, r2=0.9)
+                system._interpret_with_llm(
+                    expression=f"x + y", variables={"x": "a", "y": "b"}, r2=0.9
+                )
                 operation_count += 1
 
             elapsed = time.time() - start
@@ -269,7 +286,9 @@ class TestMemoryPerformance:
         """Test memory usage with bounded results storage"""
         import gc
 
-        system = HybridDiscoverySystem(domain="defi", max_results=100, use_rich_output=False)
+        system = HybridDiscoverySystem(
+            domain="defi", max_results=100, use_rich_output=False
+        )
 
         gc.collect()
         process = psutil.Process(os.getpid())
@@ -278,7 +297,10 @@ class TestMemoryPerformance:
         np.random.seed(222)
 
         with patch.object(system, "_interpret_with_llm") as mock_llm:
-            mock_llm.return_value = {"provider": "claude", "interpretation": "Test" * 100}
+            mock_llm.return_value = {
+                "provider": "claude",
+                "interpretation": "Test" * 100,
+            }
 
             # Run 500 workflows (5x max_results)
             for i in range(500):
@@ -312,7 +334,9 @@ class TestMemoryPerformance:
 
     def test_memory_leak_check(self):
         """Test for memory leaks with repeated operations"""
-        system = HybridDiscoverySystem(domain="defi", max_results=10, use_rich_output=False)
+        system = HybridDiscoverySystem(
+            domain="defi", max_results=10, use_rich_output=False
+        )
 
         memory_samples = []
         process = psutil.Process(os.getpid())
@@ -323,7 +347,9 @@ class TestMemoryPerformance:
             # Run 10 batches of 50 operations
             for batch in range(10):
                 for i in range(50):
-                    system._interpret_with_llm(expression="x + y", variables={"x": "a", "y": "b"}, r2=0.9)
+                    system._interpret_with_llm(
+                        expression="x + y", variables={"x": "a", "y": "b"}, r2=0.9
+                    )
 
                 # Sample memory after each batch
                 import gc
@@ -430,7 +456,9 @@ class TestCachePerformance:
             start = time.time()
             # Interpret same expression 100 times
             for _ in range(100):
-                system._interpret_with_llm(expression="x + y", variables={"x": "input", "y": "output"}, r2=0.9)
+                system._interpret_with_llm(
+                    expression="x + y", variables={"x": "input", "y": "output"}, r2=0.9
+                )
             no_cache_time = time.time() - start
             call_count = mock_claude.call_count
 
@@ -457,7 +485,10 @@ class TestBenchmarkSuite:
         }
 
         system = HybridDiscoverySystem(
-            domain="defi", primary_llm="anthropic", enable_fallback=True, use_rich_output=False
+            domain="defi",
+            primary_llm="anthropic",
+            enable_fallback=True,
+            use_rich_output=False,
         )
 
         # Benchmark 1: API Latencies
@@ -469,7 +500,9 @@ class TestBenchmarkSuite:
                 system._call_anthropic("test")
                 results["anthropic_latency"].append(time.time() - start)
 
-        with patch.object(system.gemini_client.models, "generate_content") as mock_gemini:
+        with patch.object(
+            system.gemini_client.models, "generate_content"
+        ) as mock_gemini:
             mock_gemini.return_value = Mock(text="Response")
 
             for _ in range(20):
@@ -483,7 +516,9 @@ class TestBenchmarkSuite:
 
             start = time.time()
             for i in range(100):
-                system._interpret_with_llm(expression=f"x{i} + y{i}", variables={"x": "a", "y": "b"}, r2=0.9)
+                system._interpret_with_llm(
+                    expression=f"x{i} + y{i}", variables={"x": "a", "y": "b"}, r2=0.9
+                )
             elapsed = time.time() - start
             results["throughput"] = 100 / elapsed
 
@@ -494,7 +529,9 @@ class TestBenchmarkSuite:
         print(f"\nAPI Latency:")
         print(f"  Anthropic Claude:")
         print(f"    Mean: {statistics.mean(results['anthropic_latency'])*1000:.1f}ms")
-        print(f"    Median: {statistics.median(results['anthropic_latency'])*1000:.1f}ms")
+        print(
+            f"    Median: {statistics.median(results['anthropic_latency'])*1000:.1f}ms"
+        )
         print(f"  Google Gemini:")
         print(f"    Mean: {statistics.mean(results['gemini_latency'])*1000:.1f}ms")
         print(f"    Median: {statistics.median(results['gemini_latency'])*1000:.1f}ms")

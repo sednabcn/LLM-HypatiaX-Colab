@@ -95,7 +95,9 @@ class DemoRunner:
         print(f"\n  💬 Output: {result['output']}")
         print("=" * 60)
 
-    def run_batch(self, inputs: List[str], verbose: bool = False) -> List[Dict[str, Any]]:
+    def run_batch(
+        self, inputs: List[str], verbose: bool = False
+    ) -> List[Dict[str, Any]]:
         """
         Run multiple demos in batch
 
@@ -136,7 +138,11 @@ def main():
 
     # Batch demo
     print("\n")
-    test_inputs = ["what is 2 + 2", "find the square root of 16", "convert 100 celsius to fahrenheit"]
+    test_inputs = [
+        "what is 2 + 2",
+        "find the square root of 16",
+        "convert 100 celsius to fahrenheit",
+    ]
     runner.run_batch(test_inputs, verbose=True)
 
 

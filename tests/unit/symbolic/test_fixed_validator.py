@@ -27,11 +27,15 @@ class TestPreviouslyFailingTests:
         print(f"  Warnings: {result['warnings']}")
 
         assert result["syntactically_valid"], "Should parse"
-        assert len(result["warnings"]) > 0, f"Should have warnings, got {len(result['warnings'])}"
+        assert (
+            len(result["warnings"]) > 0
+        ), f"Should have warnings, got {len(result['warnings'])}"
 
         # Check for negative exponent warning
         has_neg_exp = any("negative exponent" in w.lower() for w in result["warnings"])
-        assert has_neg_exp, f"Should warn about negative exponent. Warnings: {result['warnings']}"
+        assert (
+            has_neg_exp
+        ), f"Should warn about negative exponent. Warnings: {result['warnings']}"
 
     def test_large_exponential_FIXED(self, validator):
         """Test large exponential detection"""
@@ -48,8 +52,13 @@ class TestPreviouslyFailingTests:
 
         # Check for overflow mention
         all_issues = result["errors"] + result["warnings"]
-        has_overflow = any("overflow" in issue.lower() or "exponential" in issue.lower() for issue in all_issues)
-        assert has_overflow, f"Should mention overflow/exponential. Issues: {all_issues}"
+        has_overflow = any(
+            "overflow" in issue.lower() or "exponential" in issue.lower()
+            for issue in all_issues
+        )
+        assert (
+            has_overflow
+        ), f"Should mention overflow/exponential. Issues: {all_issues}"
 
     def test_large_exponent_FIXED(self, validator):
         """Test large exponent detection"""
@@ -60,8 +69,13 @@ class TestPreviouslyFailingTests:
         assert result["syntactically_valid"], "Should parse"
         assert len(result["errors"]) > 0, f"Should have errors for large exponent"
 
-        has_exp_error = any("exponent" in e.lower() and "overflow" in e.lower() for e in result["errors"])
-        assert has_exp_error, f"Should error on large exponent. Errors: {result['errors']}"
+        has_exp_error = any(
+            "exponent" in e.lower() and "overflow" in e.lower()
+            for e in result["errors"]
+        )
+        assert (
+            has_exp_error
+        ), f"Should error on large exponent. Errors: {result['errors']}"
 
     def test_factorial_overflow_FIXED(self, validator):
         """Test factorial overflow detection"""
@@ -74,7 +88,9 @@ class TestPreviouslyFailingTests:
 
         # Should have error about factorial overflow
         all_issues = result["errors"] + result["warnings"]
-        has_factorial = any("factorial" in i.lower() and "overflow" in i.lower() for i in all_issues)
+        has_factorial = any(
+            "factorial" in i.lower() and "overflow" in i.lower() for i in all_issues
+        )
         assert has_factorial, f"Should flag factorial overflow. Issues: {all_issues}"
 
     def test_nested_exponential_FIXED(self, validator):
@@ -87,7 +103,9 @@ class TestPreviouslyFailingTests:
 
         # Should have critical error about nested exponential
         all_issues = result["errors"] + result["warnings"]
-        has_nested = any("nested" in i.lower() and "exponential" in i.lower() for i in all_issues)
+        has_nested = any(
+            "nested" in i.lower() and "exponential" in i.lower() for i in all_issues
+        )
         assert has_nested, f"Should flag nested exponential. Issues: {all_issues}"
 
     def test_negative_exponential_underflow_FIXED(self, validator):
@@ -100,11 +118,15 @@ class TestPreviouslyFailingTests:
         assert len(result["warnings"]) > 0, "Should have warnings"
 
         has_underflow = any("underflow" in w.lower() for w in result["warnings"])
-        assert has_underflow, f"Should warn about underflow. Warnings: {result['warnings']}"
+        assert (
+            has_underflow
+        ), f"Should warn about underflow. Warnings: {result['warnings']}"
 
     def test_esg_domain_FIXED(self, validator):
         """Test ESG domain rules"""
-        result = validator.validate(r"w_1 \cdot E + w_2 \cdot S + w_3 \cdot G", domain="esg")
+        result = validator.validate(
+            r"w_1 \cdot E + w_2 \cdot S + w_3 \cdot G", domain="esg"
+        )
         print(f"\nESG result:")
         print(f"  Warnings: {result['warnings']}")
 
@@ -113,9 +135,13 @@ class TestPreviouslyFailingTests:
 
         # Check for ESG-specific content
         esg_related = [
-            w for w in result["warnings"] if "esg" in w.lower() or "score" in w.lower() or "weight" in w.lower()
+            w
+            for w in result["warnings"]
+            if "esg" in w.lower() or "score" in w.lower() or "weight" in w.lower()
         ]
-        assert len(esg_related) > 0, f"Should have ESG-specific warnings. Got: {result['warnings']}"
+        assert (
+            len(esg_related) > 0
+        ), f"Should have ESG-specific warnings. Got: {result['warnings']}"
 
     def test_score_penalty_for_errors_FIXED(self, validator):
         """Test error penalties"""
@@ -123,8 +149,12 @@ class TestPreviouslyFailingTests:
         result_warnings = validator.validate(r"\sqrt{x}")
 
         print(f"\nScore comparison:")
-        print(f"  With errors: score={result_errors['score']}, errors={len(result_errors['errors'])}")
-        print(f"  With warnings: score={result_warnings['score']}, warnings={len(result_warnings['warnings'])}")
+        print(
+            f"  With errors: score={result_errors['score']}, errors={len(result_errors['errors'])}"
+        )
+        print(
+            f"  With warnings: score={result_warnings['score']}, warnings={len(result_warnings['warnings'])}"
+        )
 
         # If one has errors and other doesn't, error one should score lower
         if len(result_errors["errors"]) > 0 and len(result_warnings["errors"]) == 0:
@@ -157,7 +187,9 @@ class TestPreviouslyFailingTests:
 
         assert result["syntactically_valid"], "Should parse"
         # Should have multiple warnings (sqrt, division, subtraction, exponential)
-        assert len(result["warnings"]) >= 2, f"Should have multiple warnings, got {len(result['warnings'])}"
+        assert (
+            len(result["warnings"]) >= 2
+        ), f"Should have multiple warnings, got {len(result['warnings'])}"
 
     def test_mixed_operations_FIXED_(self, validator):
         """Test mixed operations"""
@@ -170,7 +202,9 @@ class TestPreviouslyFailingTests:
 
         assert result["syntactically_valid"], "Should parse"
         # Should have multiple warnings (sqrt, division, subtraction, exponential)
-        assert len(result["warnings"]) >= 2, f"Should have multiple warnings, got {len(result['warnings'])}"
+        assert (
+            len(result["warnings"]) >= 2
+        ), f"Should have multiple warnings, got {len(result['warnings'])}"
 
     def test_full_workflow_risky_formula_FIXED(self, validator):
         """Test workflow with risky formula"""
@@ -184,7 +218,9 @@ class TestPreviouslyFailingTests:
         assert len(result["warnings"]) > 0, "Should have warnings for risky formula"
 
         summary = validator.get_validation_summary(result)
-        assert "WARNING" in summary.upper() or "WARN" in summary.upper(), "Summary should mention warnings"
+        assert (
+            "WARNING" in summary.upper() or "WARN" in summary.upper()
+        ), "Summary should mention warnings"
 
     def test_validates_quickly_FIXED(self, validator):
         """Test validation speed"""
@@ -216,13 +252,21 @@ class TestAllFixesIntegration:
             (r"e^{-200}", "underflow", True),
             (r"w_1 \cdot E + w_2 \cdot S + w_3 \cdot G", "esg", True),
             (r"\frac{1}{0}", "division by zero", True),
-            (r"S \cdot N(d_1) - K \cdot e^{-r \cdot t} \cdot N(d_2)", "black-scholes", False),
+            (
+                r"S \cdot N(d_1) - K \cdot e^{-r \cdot t} \cdot N(d_2)",
+                "black-scholes",
+                False,
+            ),
             (r"\frac{\sqrt{a + b}}{c - d} \cdot e^{-x}", "mixed ops", True),
         ]
 
         results = []
         for formula, desc, expect_issues in test_cases:
-            domain = "esg" if desc == "esg" else "finance" if desc == "black-scholes" else "defi"
+            domain = (
+                "esg"
+                if desc == "esg"
+                else "finance" if desc == "black-scholes" else "defi"
+            )
             result = validator.validate(formula, domain=domain)
 
             total_issues = len(result["errors"]) + len(result["warnings"])
@@ -236,10 +280,19 @@ class TestAllFixesIntegration:
                 success = False
                 print(f"✗ {desc}: Expected to parse but failed")
             else:
-                print(f"✓ {desc}: {total_issues} issues detected" if expect_issues else f"✓ {desc}: Parses correctly")
+                print(
+                    f"✓ {desc}: {total_issues} issues detected"
+                    if expect_issues
+                    else f"✓ {desc}: Parses correctly"
+                )
 
             results.append(
-                {"desc": desc, "success": success, "valid": result["syntactically_valid"], "issues": total_issues}
+                {
+                    "desc": desc,
+                    "success": success,
+                    "valid": result["syntactically_valid"],
+                    "issues": total_issues,
+                }
             )
 
         # Summary
@@ -248,7 +301,9 @@ class TestAllFixesIntegration:
         print(f"{'='*60}")
         for r in results:
             status = "✓" if r["success"] else "✗"
-            print(f"{status} {r['desc']:20s} | Valid: {r['valid']} | Issues: {r['issues']}")
+            print(
+                f"{status} {r['desc']:20s} | Valid: {r['valid']} | Issues: {r['issues']}"
+            )
         print(f"{'='*60}\n")
 
         # All should succeed
@@ -264,7 +319,9 @@ class TestEdgeCases:
         result = validator.validate(r"x^{-1} + y^{-2}")
         assert result["syntactically_valid"]
         # Should have at least one warning about negative exponents
-        neg_warnings = [w for w in result["warnings"] if "negative exponent" in w.lower()]
+        neg_warnings = [
+            w for w in result["warnings"] if "negative exponent" in w.lower()
+        ]
         assert len(neg_warnings) >= 1
 
     def test_safe_operations(self, validator):

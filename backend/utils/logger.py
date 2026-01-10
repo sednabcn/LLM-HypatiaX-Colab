@@ -31,7 +31,9 @@ class ColoredFormatter(logging.Formatter):
             # Add color to levelname
             levelname = record.levelname
             if levelname in self.COLORS:
-                record.levelname = f"{self.COLORS[levelname]}{levelname}{self.COLORS['RESET']}"
+                record.levelname = (
+                    f"{self.COLORS[levelname]}{levelname}{self.COLORS['RESET']}"
+                )
 
         return super().format(record)
 
@@ -70,11 +72,13 @@ def setup_logger(
 
     if use_colors:
         console_format = ColoredFormatter(
-            "%(asctime)s - %(name)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S",
         )
     else:
         console_format = logging.Formatter(
-            "%(asctime)s - %(name)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S",
         )
 
     console_handler.setFormatter(console_format)
@@ -87,7 +91,9 @@ def setup_logger(
         log_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Rotating file handler
-        file_handler = RotatingFileHandler(log_file, maxBytes=max_bytes, backupCount=backup_count)
+        file_handler = RotatingFileHandler(
+            log_file, maxBytes=max_bytes, backupCount=backup_count
+        )
         file_handler.setLevel(logging.DEBUG)
 
         file_format = logging.Formatter(
@@ -119,11 +125,15 @@ def get_request_logger(logger: logging.Logger):
             try:
                 result = func(*args, **kwargs)
                 duration = (datetime.now() - start_time).total_seconds()
-                logger.info(f"Request completed: {func.__name__} (duration={duration:.2f}s)")
+                logger.info(
+                    f"Request completed: {func.__name__} (duration={duration:.2f}s)"
+                )
                 return result
             except Exception as e:
                 duration = (datetime.now() - start_time).total_seconds()
-                logger.error(f"Request failed: {func.__name__} (duration={duration:.2f}s) - {str(e)}")
+                logger.error(
+                    f"Request failed: {func.__name__} (duration={duration:.2f}s) - {str(e)}"
+                )
                 raise
 
         return wrapper
@@ -150,7 +160,9 @@ class RequestLogger:
         if exc_type is None:
             self.logger.info(f"Completed: {self.operation} (duration={duration:.2f}s)")
         else:
-            self.logger.error(f"Failed: {self.operation} (duration={duration:.2f}s) - {exc_val}")
+            self.logger.error(
+                f"Failed: {self.operation} (duration={duration:.2f}s) - {exc_val}"
+            )
 
         return False  # Don't suppress exceptions
 
@@ -175,7 +187,11 @@ def log_function_call(logger: logging.Logger):
 
 
 def create_timed_rotating_logger(
-    name: str, log_file: str, when: str = "midnight", interval: int = 1, backup_count: int = 30
+    name: str,
+    log_file: str,
+    when: str = "midnight",
+    interval: int = 1,
+    backup_count: int = 30,
 ) -> logging.Logger:
     """
     Create logger with time-based rotation
@@ -198,9 +214,13 @@ def create_timed_rotating_logger(
     log_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Timed rotating file handler
-    handler = TimedRotatingFileHandler(log_file, when=when, interval=interval, backupCount=backup_count)
+    handler = TimedRotatingFileHandler(
+        log_file, when=when, interval=interval, backupCount=backup_count
+    )
 
-    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
@@ -210,7 +230,11 @@ def create_timed_rotating_logger(
 # Pre-configured loggers for common use cases
 def get_api_logger() -> logging.Logger:
     """Get logger for API requests"""
-    return setup_logger(name="hypatiax.api", log_level=os.getenv("LOG_LEVEL", "INFO"), log_file="logs/api.log")
+    return setup_logger(
+        name="hypatiax.api",
+        log_level=os.getenv("LOG_LEVEL", "INFO"),
+        log_file="logs/api.log",
+    )
 
 
 def get_service_logger(service_name: str) -> logging.Logger:
@@ -224,13 +248,17 @@ def get_service_logger(service_name: str) -> logging.Logger:
 
 def get_error_logger() -> logging.Logger:
     """Get logger for errors only"""
-    return setup_logger(name="hypatiax.errors", log_level="ERROR", log_file="logs/errors.log")
+    return setup_logger(
+        name="hypatiax.errors", log_level="ERROR", log_file="logs/errors.log"
+    )
 
 
 # Example usage
 if __name__ == "__main__":
     # Setup logger
-    logger = setup_logger(name="test_logger", log_level="DEBUG", log_file="logs/test.log")
+    logger = setup_logger(
+        name="test_logger", log_level="DEBUG", log_file="logs/test.log"
+    )
 
     # Test different log levels
     logger.debug("This is a debug message")

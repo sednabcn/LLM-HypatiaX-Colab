@@ -19,7 +19,12 @@ All formulas include:
 - Comprehensive documentation
 """
 
-from .mechanics_formulas import DynamicsCalculator, EnergyCalculator, KinematicsCalculator, MechanicsCalculator
+from .mechanics_formulas import (
+    DynamicsCalculator,
+    EnergyCalculator,
+    KinematicsCalculator,
+    MechanicsCalculator,
+)
 from .thermodynamics_formulas import (
     EntropyCalculator,
     HeatTransferCalculator,
@@ -74,7 +79,11 @@ class PhysicsConstants:
     @classmethod
     def list_constants(cls) -> dict:
         """Return all constants as a dictionary."""
-        return {name: value for name, value in vars(cls).items() if not name.startswith("_") and not callable(value)}
+        return {
+            name: value
+            for name, value in vars(cls).items()
+            if not name.startswith("_") and not callable(value)
+        }
 
 
 # Unit Conversion Utilities
@@ -200,7 +209,9 @@ def get_constant(name: str) -> float:
         return getattr(PhysicsConstants, name.upper())
     except AttributeError:
         available = [k for k in dir(PhysicsConstants) if not k.startswith("_")]
-        raise ValueError(f"Unknown constant: {name}. " f"Available constants: {', '.join(available)}")
+        raise ValueError(
+            f"Unknown constant: {name}. " f"Available constants: {', '.join(available)}"
+        )
 
 
 def convert_temperature(value: float, from_unit: str, to_unit: str) -> float:

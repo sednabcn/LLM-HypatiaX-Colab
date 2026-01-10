@@ -15,13 +15,18 @@ nlp = spacy.load("en_core_web_sm")
 
 @Language.component("custom_tableau_desc_ruler")
 def custom_tableau_desc_ruler_component(
-    doc, nlp=nlp, name="custom_tableau_desc_ruler", sub_domain="tableau", type="desc", path_to_file=None
+    doc,
+    nlp=nlp,
+    name="custom_tableau_desc_ruler",
+    sub_domain="tableau",
+    type="desc",
+    path_to_file=None,
 ):
     if path_to_file is None:
         # Dynamically construct the path based on provided parameters
-        path_to_file = resources.files("hypatiax.custom_ner.queries.tableau.rules").joinpath(
-            f"ruler_{sub_domain}_{type}.jsonl"
-        )
+        path_to_file = resources.files(
+            "hypatiax.custom_ner.queries.tableau.rules"
+        ).joinpath(f"ruler_{sub_domain}_{type}.jsonl")
 
     try:
         rules = load(path=path_to_file, style="rules")
@@ -34,7 +39,9 @@ def custom_tableau_desc_ruler_component(
 def setup_nlp_pipeline():
     nlp = spacy.load("en_core_web_sm")
     nlp.add_pipe("custom_tableau_desc_ruler", before="ner")
-    ner_path = resources.files("hypatiax.data_spacy.queries.tableau").joinpath("ner_tableau_desc")
+    ner_path = resources.files("hypatiax.data_spacy.queries.tableau").joinpath(
+        "ner_tableau_desc"
+    )
     nlp.to_disk(ner_path)
     return nlp
 

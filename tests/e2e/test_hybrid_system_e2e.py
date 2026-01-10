@@ -22,7 +22,10 @@ class TestDeFiWorkflows:
     @pytest.fixture
     def system(self):
         return HybridDiscoverySystem(
-            domain="defi", primary_llm="anthropic", enable_fallback=True, use_rich_output=False
+            domain="defi",
+            primary_llm="anthropic",
+            enable_fallback=True,
+            use_rich_output=False,
         )
 
     @pytest.fixture
@@ -72,7 +75,10 @@ class TestDeFiWorkflows:
                 X=X,
                 y=y,
                 variable_names=["reserve0", "reserve1"],
-                variable_descriptions={"reserve0": "Token 0 reserve amount", "reserve1": "Token 1 reserve amount"},
+                variable_descriptions={
+                    "reserve0": "Token 0 reserve amount",
+                    "reserve1": "Token 1 reserve amount",
+                },
                 variable_units={"reserve0": "tokens", "reserve1": "tokens"},
                 description="AMM Constant Product Discovery",
                 show_formatted=False,
@@ -109,7 +115,9 @@ class TestDeFiWorkflows:
                 X=X,
                 y=y,
                 variable_names=["price_ratio"],
-                variable_descriptions={"price_ratio": "Ratio of current to initial price"},
+                variable_descriptions={
+                    "price_ratio": "Ratio of current to initial price"
+                },
                 variable_units={"price_ratio": "dimensionless"},
                 description="Impermanent Loss Discovery",
                 show_formatted=False,
@@ -123,7 +131,9 @@ class TestDeFiWorkflows:
             assert result["validation"]["valid"]
 
             # Verify interpretation
-            assert "impermanent loss" in result["interpretation"]["interpretation"].lower()
+            assert (
+                "impermanent loss" in result["interpretation"]["interpretation"].lower()
+            )
 
 
 class TestValidationIntegration:
@@ -136,7 +146,12 @@ class TestValidationIntegration:
             primary_llm="anthropic",
             enable_fallback=True,
             use_rich_output=False,
-            validation_weights={"symbolic": 0.30, "dimensional": 0.30, "domain": 0.25, "consistency": 0.15},
+            validation_weights={
+                "symbolic": 0.30,
+                "dimensional": 0.30,
+                "domain": 0.25,
+                "consistency": 0.15,
+            },
         )
 
     def test_validation_gates_interpretation(self, system):
@@ -150,7 +165,12 @@ class TestValidationIntegration:
             mock_validate.return_value = {
                 "valid": False,
                 "total_score": 35.0,
-                "layer_scores": {"symbolic": 40.0, "dimensional": 30.0, "domain": 35.0, "consistency": 35.0},
+                "layer_scores": {
+                    "symbolic": 40.0,
+                    "dimensional": 30.0,
+                    "domain": 35.0,
+                    "consistency": 35.0,
+                },
                 "errors": ["Dimensional mismatch", "Domain violation"],
                 "warnings": ["Low quality"],
                 "recommendations": ["Check units", "Improve data"],
@@ -209,7 +229,9 @@ class TestMultiProviderScenarios:
 
     def test_anthropic_primary_gemini_fallback(self):
         """Test Anthropic primary with Gemini fallback"""
-        system = HybridDiscoverySystem(domain="defi", primary_llm="anthropic", enable_fallback=True)
+        system = HybridDiscoverySystem(
+            domain="defi", primary_llm="anthropic", enable_fallback=True
+        )
 
         with (
             patch.object(system, "_call_anthropic") as mock_claude,
@@ -219,11 +241,16 @@ class TestMultiProviderScenarios:
             # Claude fails, Gemini succeeds
             mock_claude.side_effect = Exception("Claude unavailable")
             mock_gemini.return_value = json.dumps(
-                {"interpretation": "Fallback interpretation", "insights": ["From Gemini"]}
+                {
+                    "interpretation": "Fallback interpretation",
+                    "insights": ["From Gemini"],
+                }
             )
 
             result = system._interpret_with_llm(
-                expression="a * b", variables={"a": "Factor A", "b": "Factor B"}, r2=0.92
+                expression="a * b",
+                variables={"a": "Factor A", "b": "Factor B"},
+                r2=0.92,
             )
 
             assert result["provider"] == "gemini"
@@ -232,7 +259,9 @@ class TestMultiProviderScenarios:
 
     def test_gemini_primary_anthropic_fallback(self):
         """Test Gemini primary with Anthropic fallback"""
-        system = HybridDiscoverySystem(domain="defi", primary_llm="google", enable_fallback=True)
+        system = HybridDiscoverySystem(
+            domain="defi", primary_llm="google", enable_fallback=True
+        )
 
         with (
             patch.object(system, "_call_gemini") as mock_gemini,
@@ -245,7 +274,9 @@ class TestMultiProviderScenarios:
                 {"interpretation": "Fallback from Claude", "insights": ["From Claude"]}
             )
 
-            result = system._interpret_with_llm(expression="sqrt(x)", variables={"x": "Input value"}, r2=0.88)
+            result = system._interpret_with_llm(
+                expression="sqrt(x)", variables={"x": "Input value"}, r2=0.88
+            )
 
             assert result["provider"] == "claude"
             assert system.stats["fallback_count"] == 1
@@ -253,7 +284,9 @@ class TestMultiProviderScenarios:
 
     def test_provider_selection_consistency(self):
         """Test that provider selection is consistent"""
-        system = HybridDiscoverySystem(domain="defi", primary_llm="anthropic", enable_fallback=False)
+        system = HybridDiscoverySystem(
+            domain="defi", primary_llm="anthropic", enable_fallback=False
+        )
 
         with patch.object(system, "_call_anthropic") as mock_claude:
             mock_claude.return_value = "Response"
@@ -261,7 +294,9 @@ class TestMultiProviderScenarios:
             # Multiple calls should use same provider
             for _ in range(5):
                 try:
-                    system._interpret_with_llm(expression="x + y", variables={"x": "a", "y": "b"}, r2=0.9)
+                    system._interpret_with_llm(
+                        expression="x + y", variables={"x": "a", "y": "b"}, r2=0.9
+                    )
                 except:
                     pass
 
@@ -293,7 +328,9 @@ class TestErrorRecovery:
 
     def test_graceful_degradation_no_llm(self):
         """Test graceful degradation when no LLM available"""
-        system = HybridDiscoverySystem(domain="defi", primary_llm="anthropic", enable_fallback=False)
+        system = HybridDiscoverySystem(
+            domain="defi", primary_llm="anthropic", enable_fallback=False
+        )
 
         # Disable both providers
         system.anthropic_client = None
@@ -392,9 +429,16 @@ class TestDataExport:
                     "timestamp": f"2025-01-{i+1:02d}",
                     "description": f"Test {i+1}",
                     "domain": "defi",
-                    "discovery": {"expression": f"x{i} + y{i}", "r2_score": 0.9 + i * 0.01, "complexity": 10 + i},
+                    "discovery": {
+                        "expression": f"x{i} + y{i}",
+                        "r2_score": 0.9 + i * 0.01,
+                        "complexity": 10 + i,
+                    },
                     "validation": {"valid": True, "total_score": 80.0 + i * 2},
-                    "interpretation": {"interpretation": f"Test interpretation {i+1}", "provider": "claude"},
+                    "interpretation": {
+                        "interpretation": f"Test interpretation {i+1}",
+                        "provider": "claude",
+                    },
                 }
             )
 
@@ -439,7 +483,9 @@ class TestStressTests:
 
     def test_many_sequential_workflows(self):
         """Test many sequential workflow executions"""
-        system = HybridDiscoverySystem(domain="defi", max_results=100, use_rich_output=False)
+        system = HybridDiscoverySystem(
+            domain="defi", max_results=100, use_rich_output=False
+        )
 
         np.random.seed(505)
 
@@ -469,7 +515,9 @@ class TestStressTests:
 
     def test_memory_management(self):
         """Test memory management with bounded results"""
-        system = HybridDiscoverySystem(domain="defi", max_results=10, use_rich_output=False)  # Small limit
+        system = HybridDiscoverySystem(
+            domain="defi", max_results=10, use_rich_output=False
+        )  # Small limit
 
         np.random.seed(606)
 

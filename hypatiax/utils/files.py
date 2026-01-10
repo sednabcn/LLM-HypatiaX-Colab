@@ -7,7 +7,10 @@ import pandas as pd
 import spacy
 
 from hypatiax.auto_migrate import migrate
-from hypatiax.utils.utils import upload_spacy_training_data, upload_spacy_training_data_from_json
+from hypatiax.utils.utils import (
+    upload_spacy_training_data,
+    upload_spacy_training_data_from_json,
+)
 
 
 class FilesManager:
@@ -49,7 +52,9 @@ class FilesManager:
         elif style == "models":
             return self._load_models(filename)
         else:
-            raise ValueError(f"Unsupported file type or operation for filename: {filename}")
+            raise ValueError(
+                f"Unsupported file type or operation for filename: {filename}"
+            )
 
     def _load_csv(self, filename):
         with resources.open_text(self.path_dir, filename) as file:

@@ -12,7 +12,12 @@ sys.path.insert(0, str(project_root))
 
 print(f"Looking for modules in: {project_root}")
 
-from hypatiax.tools.symbolic.symbolic_engine import DeFiConstraints, DiscoveryConfig, PhysicsConstraints, SymbolicEngine
+from hypatiax.tools.symbolic.symbolic_engine import (
+    DeFiConstraints,
+    DiscoveryConfig,
+    PhysicsConstraints,
+    SymbolicEngine,
+)
 
 
 class TestSymbolicEngine:
@@ -83,7 +88,9 @@ class TestSymbolicEngine:
         print(f"Complexity: {result['complexity']}")
         print("=" * 60)
 
-        assert result["r2_score"] > 0.65, f"R² too low: {result['r2_score']}"  # Relaxed for sqrt formula
+        assert (
+            result["r2_score"] > 0.65
+        ), f"R² too low: {result['r2_score']}"  # Relaxed for sqrt formula
         assert "exp" in result["expression"].lower(), "exp function not found"
 
     def test_multivariate_discovery(self, fast_config):
@@ -147,11 +154,22 @@ class TestSymbolicEngine:
         print(f"Keys: {list(result.keys())}")
         print("=" * 60)
 
-        expected_keys = {"expression", "sympy_expr", "r2_score", "complexity", "variable_names", "predictions"}
+        expected_keys = {
+            "expression",
+            "sympy_expr",
+            "r2_score",
+            "complexity",
+            "variable_names",
+            "predictions",
+        }
         assert set(result.keys()) == expected_keys, "Missing or extra keys in result"
         assert isinstance(result["expression"], str), "Expression should be string"
-        assert isinstance(result["r2_score"], (float, np.floating)), "R² should be float"
-        assert isinstance(result["complexity"], (int, np.integer)), "Complexity should be int"
+        assert isinstance(
+            result["r2_score"], (float, np.floating)
+        ), "R² should be float"
+        assert isinstance(
+            result["complexity"], (int, np.integer)
+        ), "Complexity should be int"
 
     def test_default_variable_names(self, fast_config):
         """Test automatic variable naming when not provided"""
@@ -196,7 +214,9 @@ class TestSymbolicEngine:
         h0, g = 100, 9.81
         h = h0 - 0.5 * g * t[:, 0] ** 2 + np.random.normal(0, 1, 100)
 
-        config = DiscoveryConfig(niterations=30, physics_constraints=PhysicsConstraints())
+        config = DiscoveryConfig(
+            niterations=30, physics_constraints=PhysicsConstraints()
+        )
 
         engine = SymbolicEngine(config)
         result = engine.discover(t, h, variable_names=["t"])
@@ -234,7 +254,9 @@ class TestSymbolicEngine:
         assert "L" in result["expression"], "Liquidity variable not in expression"
         # Should contain division for inverse relationship
         assert (
-            "/" in result["expression"] or "**-1" in result["expression"] or "^-1" in result["expression"]
+            "/" in result["expression"]
+            or "**-1" in result["expression"]
+            or "^-1" in result["expression"]
         ), "Expected inverse relationship not found"
 
     def test_defi_volatility_discovery(self):
@@ -245,13 +267,17 @@ class TestSymbolicEngine:
         volume = np.random.uniform(1000, 100000, (100, 1))
 
         # Volatility increases with return magnitude, decreases with volume
-        volatility = np.abs(returns[:, 0]) * 100 / np.log(volume[:, 0] + 1) + np.random.normal(0, 0.5, 100)
+        volatility = np.abs(returns[:, 0]) * 100 / np.log(
+            volume[:, 0] + 1
+        ) + np.random.normal(0, 0.5, 100)
 
         X = np.column_stack([returns, volume])
 
         config = DiscoveryConfig(
             niterations=50,  # INCREASED for better discovery
-            defi_constraints=DeFiConstraints(risk_metrics=["volatility", "sharpe_ratio"]),
+            defi_constraints=DeFiConstraints(
+                risk_metrics=["volatility", "sharpe_ratio"]
+            ),
         )
 
         engine = SymbolicEngine(config)
@@ -263,10 +289,14 @@ class TestSymbolicEngine:
         print(f"R² score: {result['r2_score']:.4f}")
         print("=" * 60)
 
-        assert result["r2_score"] > 0.30, f"R² too low: {result['r2_score']}"  # Relaxed for complex formula
+        assert (
+            result["r2_score"] > 0.30
+        ), f"R² too low: {result['r2_score']}"  # Relaxed for complex formula
         # Should involve both variables
         expr_lower = result["expression"].lower()
-        assert "returns" in expr_lower or "x0" in expr_lower, "Returns variable not in expression"
+        assert (
+            "returns" in expr_lower or "x0" in expr_lower
+        ), "Returns variable not in expression"
 
     def test_defi_impermanent_loss(self):
         """Test DeFi discovery: Impermanent Loss formula"""
@@ -279,7 +309,8 @@ class TestSymbolicEngine:
         il += np.random.normal(0, 0.01, 100)  # Add small noise
 
         config = DiscoveryConfig(
-            niterations=100, defi_constraints=DeFiConstraints()  # INCREASED for complex sqrt/division formula
+            niterations=100,
+            defi_constraints=DeFiConstraints(),  # INCREASED for complex sqrt/division formula
         )
 
         engine = SymbolicEngine(config)

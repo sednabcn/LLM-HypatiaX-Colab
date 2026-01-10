@@ -61,12 +61,20 @@ class FormulaMappingDataset(Dataset):
 
         # Tokenize input
         input_encoding = self.tokenizer(
-            input_text, max_length=self.max_length, padding="max_length", truncation=True, return_tensors="pt"
+            input_text,
+            max_length=self.max_length,
+            padding="max_length",
+            truncation=True,
+            return_tensors="pt",
         )
 
         # Tokenize target
         target_encoding = self.tokenizer(
-            item["target_text"], max_length=self.max_length, padding="max_length", truncation=True, return_tensors="pt"
+            item["target_text"],
+            max_length=self.max_length,
+            padding="max_length",
+            truncation=True,
+            return_tensors="pt",
         )
 
         return {
@@ -109,8 +117,12 @@ class TransformerTrainer:
         """Train the model"""
 
         # Create datasets
-        train_dataset = FormulaMappingDataset(train_data, self.tokenizer, self.config.max_length)
-        val_dataset = FormulaMappingDataset(val_data, self.tokenizer, self.config.max_length)
+        train_dataset = FormulaMappingDataset(
+            train_data, self.tokenizer, self.config.max_length
+        )
+        val_dataset = FormulaMappingDataset(
+            val_data, self.tokenizer, self.config.max_length
+        )
 
         # Training arguments
         training_args = TrainingArguments(
@@ -134,7 +146,9 @@ class TransformerTrainer:
         )
 
         # Data collator
-        data_collator = DataCollatorForSeq2Seq(self.tokenizer, model=self.model, padding=True)
+        data_collator = DataCollatorForSeq2Seq(
+            self.tokenizer, model=self.model, padding=True
+        )
 
         # Trainer
         self.trainer = Trainer(
@@ -143,7 +157,11 @@ class TransformerTrainer:
             train_dataset=train_dataset,
             eval_dataset=val_dataset,
             data_collator=data_collator,
-            callbacks=[EarlyStoppingCallback(early_stopping_patience=self.config.early_stopping_patience)],
+            callbacks=[
+                EarlyStoppingCallback(
+                    early_stopping_patience=self.config.early_stopping_patience
+                )
+            ],
         )
 
         # Train
@@ -194,11 +212,19 @@ class TransformerTrainer:
 
         for desc in descriptions:
             input_text = f"translate description to formula: {desc}"
-            inputs = self.tokenizer(input_text, return_tensors="pt", max_length=self.config.max_length, truncation=True)
+            inputs = self.tokenizer(
+                input_text,
+                return_tensors="pt",
+                max_length=self.config.max_length,
+                truncation=True,
+            )
 
             with torch.no_grad():
                 outputs = self.model.generate(
-                    inputs.input_ids, max_length=self.config.max_length, num_beams=4, early_stopping=True
+                    inputs.input_ids,
+                    max_length=self.config.max_length,
+                    num_beams=4,
+                    early_stopping=True,
                 )
 
             formula = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
@@ -215,7 +241,10 @@ def main():
 
     # Configuration
     config = TransformerConfig(
-        model_name="t5-small", num_epochs=5, batch_size=8, output_dir="./models/transformer_formula_mapper"
+        model_name="t5-small",
+        num_epochs=5,
+        batch_size=8,
+        output_dir="./models/transformer_formula_mapper",
     )
 
     # Initialize trainer
@@ -224,7 +253,8 @@ def main():
 
     # Load data
     train_data, val_data = trainer.load_data(
-        "./preprocessed_data/transformer/train_transformer.json", "./preprocessed_data/transformer/val_transformer.json"
+        "./preprocessed_data/transformer/train_transformer.json",
+        "./preprocessed_data/transformer/val_transformer.json",
     )
 
     print(f"\nTraining samples: {len(train_data)}")
@@ -237,7 +267,11 @@ def main():
     trainer.plot_history("./models/transformer_formula_mapper/training_plot.png")
 
     # Test predictions
-    test_descriptions = ["average of Sales", "sum of Revenue by Region", "count unique customers"]
+    test_descriptions = [
+        "average of Sales",
+        "sum of Revenue by Region",
+        "count unique customers",
+    ]
 
     print("\n" + "=" * 70)
     print("TEST PREDICTIONS")

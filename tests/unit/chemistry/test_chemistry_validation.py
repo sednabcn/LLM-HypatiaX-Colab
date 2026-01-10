@@ -74,13 +74,17 @@ class TestRateEquationValidation:
         """Test that mismatched concentrations and orders raises error."""
         calc = RateEquationCalculator()
         with pytest.raises(ValueError, match="must match number of orders"):
-            calc.general_rate_law(rate_constant=0.1, concentrations=[1.0, 2.0], orders=[1, 2, 1])  # Length mismatch
+            calc.general_rate_law(
+                rate_constant=0.1, concentrations=[1.0, 2.0], orders=[1, 2, 1]
+            )  # Length mismatch
 
     def test_general_rate_law_negative_order_raises_error(self):
         """Test that negative reaction order raises ValueError."""
         calc = RateEquationCalculator()
         with pytest.raises(ValueError, match="Orders cannot be negative"):
-            calc.general_rate_law(rate_constant=0.1, concentrations=[1.0, 2.0], orders=[-1, 2])  # Negative order
+            calc.general_rate_law(
+                rate_constant=0.1, concentrations=[1.0, 2.0], orders=[-1, 2]
+            )  # Negative order
 
     def test_zero_order_rate_constant_equals_rate(self):
         """Test that zero-order rate equals rate constant."""
@@ -102,31 +106,41 @@ class TestIntegratedRateLawValidation:
         """Test that negative time raises ValueError."""
         calc = IntegratedRateLawCalculator()
         with pytest.raises(ValueError, match="Time cannot be negative"):
-            calc.zero_order_integrated(initial_concentration=2.0, rate_constant=0.1, time=-5.0)
+            calc.zero_order_integrated(
+                initial_concentration=2.0, rate_constant=0.1, time=-5.0
+            )
 
     def test_zero_order_final_exceeds_initial_raises_error(self):
         """Test that final > initial concentration raises error."""
         calc = IntegratedRateLawCalculator()
         with pytest.raises(ValueError, match="cannot exceed initial"):
-            calc.zero_order_integrated(initial_concentration=1.0, rate_constant=0.1, final_concentration=2.0)
+            calc.zero_order_integrated(
+                initial_concentration=1.0, rate_constant=0.1, final_concentration=2.0
+            )
 
     def test_first_order_zero_initial_raises_error(self):
         """Test that zero initial concentration raises ValueError."""
         calc = IntegratedRateLawCalculator()
         with pytest.raises(ValueError, match="must be positive"):
-            calc.first_order_integrated(initial_concentration=0.0, rate_constant=0.1, time=10.0)
+            calc.first_order_integrated(
+                initial_concentration=0.0, rate_constant=0.1, time=10.0
+            )
 
     def test_first_order_final_exceeds_initial_raises_error(self):
         """Test that final > initial concentration raises error."""
         calc = IntegratedRateLawCalculator()
         with pytest.raises(ValueError, match="cannot exceed initial"):
-            calc.first_order_integrated(initial_concentration=1.0, rate_constant=0.1, final_concentration=1.5)
+            calc.first_order_integrated(
+                initial_concentration=1.0, rate_constant=0.1, final_concentration=1.5
+            )
 
     def test_second_order_negative_concentration_raises_error(self):
         """Test that negative concentration raises ValueError."""
         calc = IntegratedRateLawCalculator()
         with pytest.raises(ValueError, match="must be positive"):
-            calc.second_order_integrated(initial_concentration=-1.0, rate_constant=0.5, time=2.0)
+            calc.second_order_integrated(
+                initial_concentration=-1.0, rate_constant=0.5, time=2.0
+            )
 
     def test_first_order_exponential_decay(self):
         """Test that first-order follows exponential decay."""
@@ -134,7 +148,9 @@ class TestIntegratedRateLawValidation:
 
         # After one half-life, should be 50% remaining
         k = 0.693  # Such that t_1/2 = 1.0 s
-        result = calc.first_order_integrated(initial_concentration=1.0, rate_constant=k, time=1.0)  # One half-life
+        result = calc.first_order_integrated(
+            initial_concentration=1.0, rate_constant=k, time=1.0
+        )  # One half-life
         assert abs(result["final_concentration"] - 0.5) < 0.01
 
 
@@ -145,26 +161,39 @@ class TestArrheniusValidation:
         """Test that negative activation energy raises ValueError."""
         calc = ArrheniusCalculator()
         with pytest.raises(ValueError, match="Activation energy cannot be negative"):
-            calc.arrhenius_equation(activation_energy=-50000, temperature=298.15, pre_exponential_factor=1e10)
+            calc.arrhenius_equation(
+                activation_energy=-50000,
+                temperature=298.15,
+                pre_exponential_factor=1e10,
+            )
 
     def test_arrhenius_zero_temperature_raises_error(self):
         """Test that zero Kelvin raises ValueError."""
         calc = ArrheniusCalculator()
         with pytest.raises(ValueError, match="Temperature must be positive"):
-            calc.arrhenius_equation(activation_energy=50000, temperature=0.0, pre_exponential_factor=1e10)
+            calc.arrhenius_equation(
+                activation_energy=50000, temperature=0.0, pre_exponential_factor=1e10
+            )
 
     def test_arrhenius_negative_pre_exponential_raises_error(self):
         """Test that negative pre-exponential factor raises error."""
         calc = ArrheniusCalculator()
         with pytest.raises(ValueError, match="Pre-exponential factor must be positive"):
-            calc.arrhenius_equation(activation_energy=50000, temperature=298.15, pre_exponential_factor=-1e10)
+            calc.arrhenius_equation(
+                activation_energy=50000,
+                temperature=298.15,
+                pre_exponential_factor=-1e10,
+            )
 
     def test_activation_energy_same_temperatures_raises_error(self):
         """Test that identical temperatures raises ValueError."""
         calc = ArrheniusCalculator()
         with pytest.raises(ValueError, match="Temperatures must be different"):
             calc.activation_energy_from_two_temperatures(
-                rate_constant_1=0.01, temperature_1=298.0, rate_constant_2=0.05, temperature_2=298.0  # Same temperature
+                rate_constant_1=0.01,
+                temperature_1=298.0,
+                rate_constant_2=0.05,
+                temperature_2=298.0,  # Same temperature
             )
 
     def test_activation_energy_negative_rate_constant_raises_error(self):
@@ -172,17 +201,24 @@ class TestArrheniusValidation:
         calc = ArrheniusCalculator()
         with pytest.raises(ValueError, match="Rate constants must be positive"):
             calc.activation_energy_from_two_temperatures(
-                rate_constant_1=-0.01, temperature_1=298.0, rate_constant_2=0.05, temperature_2=318.0
+                rate_constant_1=-0.01,
+                temperature_1=298.0,
+                rate_constant_2=0.05,
+                temperature_2=318.0,
             )
 
     def test_higher_temperature_increases_rate_constant(self):
         """Test that increasing temperature increases rate constant."""
         calc = ArrheniusCalculator()
 
-        k_298 = calc.arrhenius_equation(activation_energy=50000, temperature=298.15, pre_exponential_factor=1e10)
+        k_298 = calc.arrhenius_equation(
+            activation_energy=50000, temperature=298.15, pre_exponential_factor=1e10
+        )
 
         k_308 = calc.arrhenius_equation(
-            activation_energy=50000, temperature=308.15, pre_exponential_factor=1e10  # 10 K higher
+            activation_energy=50000,
+            temperature=308.15,
+            pre_exponential_factor=1e10,  # 10 K higher
         )
 
         assert k_308["rate_constant"] > k_298["rate_constant"]
@@ -191,7 +227,9 @@ class TestArrheniusValidation:
         """Test that negative temperature raises ValueError."""
         calc = ArrheniusCalculator()
         with pytest.raises(ValueError, match="Temperature must be positive"):
-            calc.collision_frequency_factor(temperature=-298.0, molecular_diameter=3e-10, molecular_mass=0.032)
+            calc.collision_frequency_factor(
+                temperature=-298.0, molecular_diameter=3e-10, molecular_mass=0.032
+            )
 
 
 class TestHalfLifeValidation:
@@ -219,13 +257,17 @@ class TestHalfLifeValidation:
         """Test that final > initial raises ValueError."""
         calc = HalfLifeCalculator()
         with pytest.raises(ValueError, match="cannot exceed initial"):
-            calc.number_of_half_lives(initial_concentration=100.0, final_concentration=150.0)
+            calc.number_of_half_lives(
+                initial_concentration=100.0, final_concentration=150.0
+            )
 
     def test_concentration_after_half_lives_negative_n_raises_error(self):
         """Test that negative n raises ValueError."""
         calc = HalfLifeCalculator()
         with pytest.raises(ValueError, match="cannot be negative"):
-            calc.concentration_after_n_half_lives(initial_concentration=80.0, n_half_lives=-2.0)
+            calc.concentration_after_n_half_lives(
+                initial_concentration=80.0, n_half_lives=-2.0
+            )
 
     def test_first_order_half_life_concentration_independent(self):
         """Test that first-order half-life is concentration independent."""
@@ -243,9 +285,13 @@ class TestHalfLifeValidation:
         calc = HalfLifeCalculator()
 
         # Higher concentration = longer half-life for zero-order
-        result1 = calc.zero_order_half_life(initial_concentration=2.0, rate_constant=0.1)
+        result1 = calc.zero_order_half_life(
+            initial_concentration=2.0, rate_constant=0.1
+        )
 
-        result2 = calc.zero_order_half_life(initial_concentration=4.0, rate_constant=0.1)
+        result2 = calc.zero_order_half_life(
+            initial_concentration=4.0, rate_constant=0.1
+        )
 
         assert result2["half_life"] > result1["half_life"]
         assert result1["concentration_dependent"] == True
@@ -253,7 +299,9 @@ class TestHalfLifeValidation:
     def test_second_order_half_life_increases_with_time(self):
         """Test that second-order half-life increases with each half-life."""
         calc = HalfLifeCalculator()
-        result = calc.second_order_half_life(initial_concentration=1.0, rate_constant=0.1)
+        result = calc.second_order_half_life(
+            initial_concentration=1.0, rate_constant=0.1
+        )
 
         # Second half-life should be 2× first half-life
         assert result["half_life_ratio"] == 2.0
@@ -261,7 +309,9 @@ class TestHalfLifeValidation:
     def test_concentration_after_3_half_lives(self):
         """Test that concentration after 3 half-lives is 12.5%."""
         calc = HalfLifeCalculator()
-        result = calc.concentration_after_n_half_lives(initial_concentration=100.0, n_half_lives=3.0)
+        result = calc.concentration_after_n_half_lives(
+            initial_concentration=100.0, n_half_lives=3.0
+        )
 
         # After 3 half-lives: 100% → 50% → 25% → 12.5%
         assert abs(result["final_concentration"] - 12.5) < 0.01
@@ -319,7 +369,9 @@ class TestEquilibriumConstantValidation:
         """Test that negative K raises ValueError."""
         calc = EquilibriumConstantCalculator()
         with pytest.raises(ValueError, match="must be positive"):
-            calc.gibbs_free_energy_from_k(equilibrium_constant=-100.0, temperature=298.15)
+            calc.gibbs_free_energy_from_k(
+                equilibrium_constant=-100.0, temperature=298.15
+            )
 
     def test_reaction_quotient_predicts_direction(self):
         """Test that Q correctly predicts reaction direction."""
@@ -388,7 +440,9 @@ class TestAcidBaseEquilibriumValidation:
     def test_henderson_hasselbalch_equal_concentrations(self):
         """Test that equal concentrations give pH = pKa."""
         calc = AcidBaseEquilibriumCalculator()
-        result = calc.henderson_hasselbalch(pka=4.76, acid_concentration=0.1, base_concentration=0.1)
+        result = calc.henderson_hasselbalch(
+            pka=4.76, acid_concentration=0.1, base_concentration=0.1
+        )
         assert abs(result["pH"] - 4.76) < 1e-10
 
     def test_buffer_capacity_negative_concentration_raises_error(self):
@@ -413,33 +467,45 @@ class TestSolubilityValidation:
         """Test that negative solubility raises ValueError."""
         calc = SolubilityCalculator()
         with pytest.raises(ValueError, match="cannot be negative"):
-            calc.ksp_from_solubility(solubility=-1e-5, cation_coefficient=1, anion_coefficient=1)
+            calc.ksp_from_solubility(
+                solubility=-1e-5, cation_coefficient=1, anion_coefficient=1
+            )
 
     def test_ksp_from_solubility_zero_coefficient_raises_error(self):
         """Test that zero coefficient raises ValueError."""
         calc = SolubilityCalculator()
         with pytest.raises(ValueError, match="must be positive"):
-            calc.ksp_from_solubility(solubility=1e-5, cation_coefficient=0, anion_coefficient=1)
+            calc.ksp_from_solubility(
+                solubility=1e-5, cation_coefficient=0, anion_coefficient=1
+            )
 
     def test_solubility_from_ksp_negative_ksp_raises_error(self):
         """Test that negative Ksp raises ValueError."""
         calc = SolubilityCalculator()
         with pytest.raises(ValueError, match="cannot be negative"):
-            calc.solubility_from_ksp(ksp=-1.8e-10, cation_coefficient=1, anion_coefficient=1)
+            calc.solubility_from_ksp(
+                ksp=-1.8e-10, cation_coefficient=1, anion_coefficient=1
+            )
 
     def test_common_ion_negative_concentration_raises_error(self):
         """Test that negative common ion concentration raises error."""
         calc = SolubilityCalculator()
         with pytest.raises(ValueError, match="cannot be negative"):
             calc.common_ion_effect(
-                ksp=1.8e-10, common_ion_concentration=-0.1, ion_coefficient=1, other_ion_coefficient=1
+                ksp=1.8e-10,
+                common_ion_concentration=-0.1,
+                ion_coefficient=1,
+                other_ion_coefficient=1,
             )
 
     def test_common_ion_reduces_solubility(self):
         """Test that common ion effect reduces solubility."""
         calc = SolubilityCalculator()
         result = calc.common_ion_effect(
-            ksp=1.8e-10, common_ion_concentration=0.1, ion_coefficient=1, other_ion_coefficient=1
+            ksp=1.8e-10,
+            common_ion_concentration=0.1,
+            ion_coefficient=1,
+            other_ion_coefficient=1,
         )
 
         # Solubility with common ion should be less than pure water
@@ -454,10 +520,14 @@ class TestSolubilityValidation:
         ksp_original = 1.8e-10
 
         # Convert to solubility
-        result1 = calc.solubility_from_ksp(ksp=ksp_original, cation_coefficient=1, anion_coefficient=1)
+        result1 = calc.solubility_from_ksp(
+            ksp=ksp_original, cation_coefficient=1, anion_coefficient=1
+        )
 
         # Convert back to Ksp
-        result2 = calc.ksp_from_solubility(solubility=result1["solubility"], cation_coefficient=1, anion_coefficient=1)
+        result2 = calc.ksp_from_solubility(
+            solubility=result1["solubility"], cation_coefficient=1, anion_coefficient=1
+        )
 
         assert abs(result2["Ksp"] - ksp_original) < 1e-15
 
@@ -493,14 +563,18 @@ class TestChemistryEdgeCases:
     def test_first_order_at_time_zero(self):
         """Test that concentration at t=0 equals initial."""
         calc = IntegratedRateLawCalculator()
-        result = calc.first_order_integrated(initial_concentration=2.0, rate_constant=0.1, time=0.0)
+        result = calc.first_order_integrated(
+            initial_concentration=2.0, rate_constant=0.1, time=0.0
+        )
         assert abs(result["final_concentration"] - 2.0) < 1e-10
 
     def test_extremely_high_activation_energy(self):
         """Test that very high Ea gives very small rate constant."""
         calc = ArrheniusCalculator()
         result = calc.arrhenius_equation(
-            activation_energy=500000, temperature=298.15, pre_exponential_factor=1e10  # Very high
+            activation_energy=500000,
+            temperature=298.15,
+            pre_exponential_factor=1e10,  # Very high
         )
         # Should be extremely small
         assert result["rate_constant"] < 1e-50
@@ -510,7 +584,9 @@ class TestChemistryEdgeCases:
         calc = ArrheniusCalculator()
         A = 1e10
         result = calc.arrhenius_equation(
-            activation_energy=0.0, temperature=298.15, pre_exponential_factor=A  # No barrier
+            activation_energy=0.0,
+            temperature=298.15,
+            pre_exponential_factor=A,  # No barrier
         )
         assert abs(result["rate_constant"] - A) < 1e-5
 
@@ -528,13 +604,17 @@ class TestKineticsOrderDetermination:
         """Test that mismatched lists raise error."""
         calc = KineticsCalculator()
         with pytest.raises(ValueError, match="must have same length"):
-            calc.determine_reaction_order(concentrations=[1.0, 0.9, 0.8], times=[0, 10])  # Length mismatch
+            calc.determine_reaction_order(
+                concentrations=[1.0, 0.9, 0.8], times=[0, 10]
+            )  # Length mismatch
 
     def test_order_determination_negative_time_raises_error(self):
         """Test that negative time raises error."""
         calc = KineticsCalculator()
         with pytest.raises(ValueError, match="cannot be negative"):
-            calc.determine_reaction_order(concentrations=[1.0, 0.9, 0.8], times=[0, -10, 20])
+            calc.determine_reaction_order(
+                concentrations=[1.0, 0.9, 0.8], times=[0, -10, 20]
+            )
 
     def test_first_order_data_detected(self):
         """Test that first-order data is correctly identified."""
@@ -545,7 +625,9 @@ class TestKineticsOrderDetermination:
         times = [0, 10, 20, 30, 40]
         concentrations = [1.0 * math.exp(-k * t) for t in times]
 
-        result = calc.determine_reaction_order(concentrations=concentrations, times=times)
+        result = calc.determine_reaction_order(
+            concentrations=concentrations, times=times
+        )
 
         # First-order should have highest correlation
         assert result["likely_order"] == 1

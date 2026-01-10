@@ -28,16 +28,31 @@ def anthropic_mock_response():
 @pytest.fixture
 def anthropic_error_response():
     """Anthropic API error response"""
-    return {"type": "error", "error": {"type": "rate_limit_error", "message": "Rate limit exceeded"}}
+    return {
+        "type": "error",
+        "error": {"type": "rate_limit_error", "message": "Rate limit exceeded"},
+    }
 
 
 @pytest.fixture
 def anthropic_streaming_response():
     """Anthropic streaming response chunks"""
     return [
-        {"type": "content_block_start", "index": 0, "content_block": {"type": "text", "text": ""}},
-        {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "Hello "}},
-        {"type": "content_block_delta", "index": 0, "delta": {"type": "text_delta", "text": "world"}},
+        {
+            "type": "content_block_start",
+            "index": 0,
+            "content_block": {"type": "text", "text": ""},
+        },
+        {
+            "type": "content_block_delta",
+            "index": 0,
+            "delta": {"type": "text_delta", "text": "Hello "},
+        },
+        {
+            "type": "content_block_delta",
+            "index": 0,
+            "delta": {"type": "text_delta", "text": "world"},
+        },
         {"type": "content_block_stop", "index": 0},
     ]
 

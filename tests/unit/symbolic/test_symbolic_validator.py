@@ -94,16 +94,26 @@ class DeFiValidator(SymbolicValidator):
                 # Convert to our scoring format
                 if not parent_result.get("syntactically_valid", True):
                     result["score"] -= 30
-                    result["errors"].append({"rule": "syntax", "message": "LaTeX syntax error"})
+                    result["errors"].append(
+                        {"rule": "syntax", "message": "LaTeX syntax error"}
+                    )
 
                 if not parent_result.get("dimensionally_consistent", True):
                     result["score"] -= 20
-                    result["errors"].append({"rule": "dimensions", "message": "Dimensional inconsistency detected"})
+                    result["errors"].append(
+                        {
+                            "rule": "dimensions",
+                            "message": "Dimensional inconsistency detected",
+                        }
+                    )
 
                 if not parent_result.get("numerically_stable", True):
                     result["score"] -= 15
                     result["warnings"].append(
-                        {"rule": "numerical_stability", "message": "Potential numerical instability"}
+                        {
+                            "rule": "numerical_stability",
+                            "message": "Potential numerical instability",
+                        }
                     )
 
                 # Add original validator errors
@@ -111,7 +121,9 @@ class DeFiValidator(SymbolicValidator):
                     result["errors"].append({"rule": "validator", "message": error})
 
             except Exception as e:
-                result["warnings"].append({"rule": "validator", "message": f"Validator error: {str(e)}"})
+                result["warnings"].append(
+                    {"rule": "validator", "message": f"Validator error: {str(e)}"}
+                )
 
         # Run all DeFi validation rules
         if domain == "defi":
@@ -123,11 +135,17 @@ class DeFiValidator(SymbolicValidator):
                     if not rule_result["passed"]:
                         result["score"] -= rule_result.get("penalty", 10)
                         if rule_result.get("severity") == "error":
-                            result["errors"].append({"rule": rule_name, "message": rule_result["message"]})
+                            result["errors"].append(
+                                {"rule": rule_name, "message": rule_result["message"]}
+                            )
                         else:
-                            result["warnings"].append({"rule": rule_name, "message": rule_result["message"]})
+                            result["warnings"].append(
+                                {"rule": rule_name, "message": rule_result["message"]}
+                            )
                 except Exception as e:
-                    result["errors"].append({"rule": rule_name, "message": f"Validation error: {str(e)}"})
+                    result["errors"].append(
+                        {"rule": rule_name, "message": f"Validation error: {str(e)}"}
+                    )
                     result["score"] -= 5
 
         # Ensure score doesn't go negative
@@ -139,7 +157,9 @@ class DeFiValidator(SymbolicValidator):
         """Check x·y = k invariant for AMM formulas"""
         # Look for constant product patterns
         has_xy_product = "x" in formula.lower() and "y" in formula.lower()
-        has_multiplication = "\\cdot" in formula or "\\times" in formula or "xy" in formula
+        has_multiplication = (
+            "\\cdot" in formula or "\\times" in formula or "xy" in formula
+        )
 
         # Check if formula maintains invariant
         maintains_invariant = has_xy_product and has_multiplication
@@ -170,7 +190,11 @@ class DeFiValidator(SymbolicValidator):
         has_division = "\\frac" in formula or "/" in formula
 
         if not has_division:
-            return {"passed": True, "message": "No division operations detected", "severity": "info"}
+            return {
+                "passed": True,
+                "message": "No division operations detected",
+                "severity": "info",
+            }
 
         # Check for epsilon protection
         has_epsilon_protection = "\\epsilon" in formula or "epsilon" in formula
@@ -190,7 +214,11 @@ class DeFiValidator(SymbolicValidator):
                 "penalty": 20,
             }
 
-        return {"passed": True, "message": "Division operations appear safe", "severity": "info"}
+        return {
+            "passed": True,
+            "message": "Division operations appear safe",
+            "severity": "info",
+        }
 
     def _check_overflow_risk(self, formula: str) -> Dict[str, Any]:
         """Check for potential numerical overflow"""
@@ -201,9 +229,13 @@ class DeFiValidator(SymbolicValidator):
             risky_operations.append("Exponentiation may cause overflow")
 
         # Check for products without sqrt normalization
-        if ("\\cdot" in formula or "\\times" in formula) and "sqrt" not in formula.lower():
+        if (
+            "\\cdot" in formula or "\\times" in formula
+        ) and "sqrt" not in formula.lower():
             if formula.count("\\cdot") > 2 or formula.count("\\times") > 2:
-                risky_operations.append("Multiple multiplications without normalization")
+                risky_operations.append(
+                    "Multiple multiplications without normalization"
+                )
 
         if risky_operations:
             return {
@@ -213,21 +245,33 @@ class DeFiValidator(SymbolicValidator):
                 "penalty": 10,
             }
 
-        return {"passed": True, "message": "No obvious overflow risks detected", "severity": "info"}
+        return {
+            "passed": True,
+            "message": "No obvious overflow risks detected",
+            "severity": "info",
+        }
 
     def _check_sqrt_domain(self, formula: str) -> Dict[str, Any]:
         """Validate square root domain (no negative inputs)"""
         has_sqrt = "\\sqrt" in formula or "sqrt" in formula.lower()
 
         if not has_sqrt:
-            return {"passed": True, "message": "No square root operations", "severity": "info"}
+            return {
+                "passed": True,
+                "message": "No square root operations",
+                "severity": "info",
+            }
 
         # Check for protections
         has_abs = "\\abs" in formula or "|" in formula or "abs(" in formula.lower()
         has_positive_constraint = any(char in formula for char in [">", "+", "max"])
 
         if has_abs or has_positive_constraint:
-            return {"passed": True, "message": "Square root domain appears protected", "severity": "info"}
+            return {
+                "passed": True,
+                "message": "Square root domain appears protected",
+                "severity": "info",
+            }
 
         # Check if sqrt argument is clearly positive
         import re
@@ -246,7 +290,11 @@ class DeFiValidator(SymbolicValidator):
                     "penalty": 15,
                 }
 
-        return {"passed": True, "message": "Square root operations appear safe", "severity": "info"}
+        return {
+            "passed": True,
+            "message": "Square root operations appear safe",
+            "severity": "info",
+        }
 
     def _check_range_constraints(self, formula: str) -> Dict[str, Any]:
         """Check if formula respects DeFi range constraints"""
@@ -274,7 +322,11 @@ class DeFiValidator(SymbolicValidator):
                 "penalty": 8,
             }
 
-        return {"passed": True, "message": "Range constraints appear adequate", "severity": "info"}
+        return {
+            "passed": True,
+            "message": "Range constraints appear adequate",
+            "severity": "info",
+        }
 
 
 class TestSuite:
@@ -320,7 +372,11 @@ class TestSuite:
                 "expected_score_min": 0,
                 "expected_errors": True,
             },
-            {"name": "Safe Sqrt with Abs", "formula_latex": r"S = \sqrt{|P_t - P_0|}", "expected_score_min": 95},
+            {
+                "name": "Safe Sqrt with Abs",
+                "formula_latex": r"S = \sqrt{|P_t - P_0|}",
+                "expected_score_min": 95,
+            },
             {
                 "name": "LP ROI with Range Constraints",
                 "formula_latex": r"ROI = \frac{F_t}{L_0} + IL_t \quad \text{where} \quad F_t > 0",
@@ -352,17 +408,23 @@ class TestSuite:
             print(f"Test {idx}/{len(self.test_formulas)}: {test['name']}")
             print("-" * 70)
 
-            result = self.validator.validate(formula_latex=test["formula_latex"], domain="defi")
+            result = self.validator.validate(
+                formula_latex=test["formula_latex"], domain="defi"
+            )
 
             # Check expectations
             score_ok = result["score"] >= test["expected_score_min"]
-            errors_ok = (len(result["errors"]) > 0) == test.get("expected_errors", False)
+            errors_ok = (len(result["errors"]) > 0) == test.get(
+                "expected_errors", False
+            )
 
             test_passed = score_ok and errors_ok
 
             # Print results
             print(f"📐 Formula: {test['formula_latex'][:60]}...")
-            print(f"⭐ Score: {result['score']}/100 (expected ≥ {test['expected_score_min']})")
+            print(
+                f"⭐ Score: {result['score']}/100 (expected ≥ {test['expected_score_min']})"
+            )
 
             if result["errors"]:
                 print(f"❌ Errors ({len(result['errors'])}):")
@@ -390,7 +452,9 @@ class TestSuite:
             print()
 
             # Store result
-            self.results.append({"test_name": test["name"], "passed": test_passed, "result": result})
+            self.results.append(
+                {"test_name": test["name"], "passed": test_passed, "result": result}
+            )
 
         # Summary
         print("=" * 70)
@@ -447,7 +511,11 @@ def test_full_pipeline():
             "description": "Price impact with protection",
             "novelty_score": 6,
         },
-        {"formula_latex": r"ROI = \frac{F}{L} - |IL|", "description": "LP ROI with absolute IL", "novelty_score": 8},
+        {
+            "formula_latex": r"ROI = \frac{F}{L} - |IL|",
+            "description": "LP ROI with absolute IL",
+            "novelty_score": 8,
+        },
     ]
 
     selected_formulas = []
@@ -466,12 +534,16 @@ def test_full_pipeline():
         # Selection criteria
         if validation["score"] > 70:
             print("✅ Formula passed validation!")
-            selected_formulas.append({**formula, "validation_score": validation["score"]})
+            selected_formulas.append(
+                {**formula, "validation_score": validation["score"]}
+            )
         else:
             print("❌ Needs improvement")
 
     print("\n" + "=" * 70)
-    print(f"PIPELINE RESULTS: {len(selected_formulas)}/{len(generated_formulas)} formulas selected")
+    print(
+        f"PIPELINE RESULTS: {len(selected_formulas)}/{len(generated_formulas)} formulas selected"
+    )
     print("=" * 70)
 
     # Save selected formulas

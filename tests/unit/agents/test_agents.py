@@ -82,7 +82,11 @@ class TestAgentCommunication:
         agent = Mock()
         agent.message_queue = []
 
-        messages = [{"id": 1, "priority": "high"}, {"id": 2, "priority": "low"}, {"id": 3, "priority": "medium"}]
+        messages = [
+            {"id": 1, "priority": "high"},
+            {"id": 2, "priority": "low"},
+            {"id": 3, "priority": "medium"},
+        ]
 
         for msg in messages:
             agent.message_queue.append(msg)
@@ -120,7 +124,9 @@ class TestAgentDecisionMaking:
     def test_decision_with_uncertainty(self):
         """Test agent handles uncertain decisions."""
         agent = Mock()
-        agent.decide_with_confidence = Mock(return_value={"decision": "proceed", "confidence": 0.75})
+        agent.decide_with_confidence = Mock(
+            return_value={"decision": "proceed", "confidence": 0.75}
+        )
 
         result = agent.decide_with_confidence({"data": "ambiguous"})
 
@@ -174,7 +180,9 @@ class TestAgentCoordination:
         agents = [Mock() for _ in range(4)]
         tasks = ["task1", "task2", "task3", "task4"]
 
-        coordinator.distribute_tasks = Mock(return_value={f"agent_{i}": task for i, task in enumerate(tasks)})
+        coordinator.distribute_tasks = Mock(
+            return_value={f"agent_{i}": task for i, task in enumerate(tasks)}
+        )
 
         distribution = coordinator.distribute_tasks(tasks, agents)
 

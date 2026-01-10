@@ -55,7 +55,9 @@ class KinematicsCalculator:
     """Calculator for kinematics (motion) problems."""
 
     @staticmethod
-    def velocity_from_displacement(displacement: float, time: float, validate: bool = True) -> Dict[str, float]:
+    def velocity_from_displacement(
+        displacement: float, time: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate average velocity from displacement and time.
 
@@ -78,7 +80,12 @@ class KinematicsCalculator:
 
         velocity = displacement / time
 
-        return {"velocity": velocity, "displacement": displacement, "time": time, "formula": "v = Δx/Δt"}
+        return {
+            "velocity": velocity,
+            "displacement": displacement,
+            "time": time,
+            "formula": "v = Δx/Δt",
+        }
 
     @staticmethod
     def final_velocity_constant_acceleration(
@@ -155,7 +162,10 @@ class KinematicsCalculator:
 
     @staticmethod
     def velocity_squared_formula(
-        initial_velocity: float, acceleration: float, displacement: float, validate: bool = True
+        initial_velocity: float,
+        acceleration: float,
+        displacement: float,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate final velocity using velocity-squared formula.
@@ -220,13 +230,19 @@ class KinematicsCalculator:
         """
         if validate:
             if initial_velocity <= 0:
-                raise ValueError(f"Initial velocity must be positive, got {initial_velocity}")
+                raise ValueError(
+                    f"Initial velocity must be positive, got {initial_velocity}"
+                )
             if gravity <= 0:
                 raise ValueError(f"Gravity must be positive, got {gravity}")
             if not -90 <= angle_degrees <= 90:
-                raise ValueError(f"Angle must be between -90° and 90°, got {angle_degrees}")
+                raise ValueError(
+                    f"Angle must be between -90° and 90°, got {angle_degrees}"
+                )
             if initial_height < 0:
-                raise ValueError(f"Initial height cannot be negative, got {initial_height}")
+                raise ValueError(
+                    f"Initial height cannot be negative, got {initial_height}"
+                )
 
         # Convert angle to radians
         angle_rad = math.radians(angle_degrees)
@@ -304,9 +320,17 @@ class KinematicsCalculator:
             if radius <= 0:
                 raise ValueError(f"Radius must be positive, got {radius}")
 
-            provided = sum([period is not None, frequency is not None, angular_velocity is not None])
+            provided = sum(
+                [
+                    period is not None,
+                    frequency is not None,
+                    angular_velocity is not None,
+                ]
+            )
             if provided != 1:
-                raise ValueError("Must provide exactly one of: period, frequency, or angular_velocity")
+                raise ValueError(
+                    "Must provide exactly one of: period, frequency, or angular_velocity"
+                )
 
         # Calculate angular velocity from provided parameter
         if period is not None:
@@ -319,7 +343,9 @@ class KinematicsCalculator:
             omega = 2 * math.pi * frequency
         else:  # angular_velocity provided
             if validate and angular_velocity <= 0:
-                raise ValueError(f"Angular velocity must be positive, got {angular_velocity}")
+                raise ValueError(
+                    f"Angular velocity must be positive, got {angular_velocity}"
+                )
             omega = angular_velocity
 
         # Calculate all parameters
@@ -344,7 +370,10 @@ class DynamicsCalculator:
 
     @staticmethod
     def newtons_second_law(
-        mass: float, acceleration: Optional[float] = None, force: Optional[float] = None, validate: bool = True
+        mass: float,
+        acceleration: Optional[float] = None,
+        force: Optional[float] = None,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate force or acceleration using Newton's Second Law.
@@ -375,13 +404,25 @@ class DynamicsCalculator:
 
         if acceleration is not None:
             calculated_force = mass * acceleration
-            return {"force": calculated_force, "mass": mass, "acceleration": acceleration, "formula": "F = ma"}
+            return {
+                "force": calculated_force,
+                "mass": mass,
+                "acceleration": acceleration,
+                "formula": "F = ma",
+            }
         else:  # force provided
             calculated_acceleration = force / mass
-            return {"force": force, "mass": mass, "acceleration": calculated_acceleration, "formula": "F = ma"}
+            return {
+                "force": force,
+                "mass": mass,
+                "acceleration": calculated_acceleration,
+                "formula": "F = ma",
+            }
 
     @staticmethod
-    def gravitational_force(mass1: float, mass2: float, distance: float, validate: bool = True) -> Dict[str, float]:
+    def gravitational_force(
+        mass1: float, mass2: float, distance: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate gravitational force between two masses.
 
@@ -419,7 +460,9 @@ class DynamicsCalculator:
         }
 
     @staticmethod
-    def friction_force(normal_force: float, coefficient: float, validate: bool = True) -> Dict[str, float]:
+    def friction_force(
+        normal_force: float, coefficient: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate friction force.
 
@@ -440,7 +483,9 @@ class DynamicsCalculator:
             if normal_force < 0:
                 raise ValueError(f"Normal force cannot be negative, got {normal_force}")
             if coefficient < 0:
-                raise ValueError(f"Coefficient of friction cannot be negative, got {coefficient}")
+                raise ValueError(
+                    f"Coefficient of friction cannot be negative, got {coefficient}"
+                )
             if coefficient > 2.0:
                 # Warning: unusually high coefficient
                 pass
@@ -455,7 +500,9 @@ class DynamicsCalculator:
         }
 
     @staticmethod
-    def spring_force(spring_constant: float, displacement: float, validate: bool = True) -> Dict[str, float]:
+    def spring_force(
+        spring_constant: float, displacement: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate spring force using Hooke's Law.
 
@@ -474,7 +521,9 @@ class DynamicsCalculator:
         """
         if validate:
             if spring_constant <= 0:
-                raise ValueError(f"Spring constant must be positive, got {spring_constant}")
+                raise ValueError(
+                    f"Spring constant must be positive, got {spring_constant}"
+                )
 
         force_magnitude = spring_constant * abs(displacement)
         elastic_potential_energy = 0.5 * spring_constant * displacement**2
@@ -492,7 +541,9 @@ class EnergyCalculator:
     """Calculator for energy and work problems."""
 
     @staticmethod
-    def kinetic_energy(mass: float, velocity: float, validate: bool = True) -> Dict[str, float]:
+    def kinetic_energy(
+        mass: float, velocity: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate kinetic energy.
 
@@ -516,11 +567,20 @@ class EnergyCalculator:
         ke = 0.5 * mass * velocity**2
         momentum = mass * velocity
 
-        return {"kinetic_energy": ke, "mass": mass, "velocity": velocity, "momentum": momentum, "formula": "KE = ½mv²"}
+        return {
+            "kinetic_energy": ke,
+            "mass": mass,
+            "velocity": velocity,
+            "momentum": momentum,
+            "formula": "KE = ½mv²",
+        }
 
     @staticmethod
     def gravitational_potential_energy(
-        mass: float, height: float, gravity: float = STANDARD_GRAVITY, validate: bool = True
+        mass: float,
+        height: float,
+        gravity: float = STANDARD_GRAVITY,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate gravitational potential energy.
@@ -547,11 +607,20 @@ class EnergyCalculator:
 
         pe = mass * gravity * height
 
-        return {"potential_energy": pe, "mass": mass, "height": height, "gravity": gravity, "formula": "PE = mgh"}
+        return {
+            "potential_energy": pe,
+            "mass": mass,
+            "height": height,
+            "gravity": gravity,
+            "formula": "PE = mgh",
+        }
 
     @staticmethod
     def work_done(
-        force: float, displacement: float, angle_degrees: float = 0.0, validate: bool = True
+        force: float,
+        displacement: float,
+        angle_degrees: float = 0.0,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate work done by a force.
@@ -571,7 +640,9 @@ class EnergyCalculator:
             if force < 0:
                 raise ValueError(f"Force magnitude cannot be negative, got {force}")
             if displacement < 0:
-                raise ValueError(f"Displacement magnitude cannot be negative, got {displacement}")
+                raise ValueError(
+                    f"Displacement magnitude cannot be negative, got {displacement}"
+                )
 
         angle_rad = math.radians(angle_degrees)
         work = force * displacement * math.cos(angle_rad)
@@ -618,16 +689,25 @@ class EnergyCalculator:
             has_force_velocity = force is not None and velocity is not None
 
             if not (has_work_time or has_force_velocity):
-                raise ValueError("Must provide either (work, time) or (force, velocity)")
+                raise ValueError(
+                    "Must provide either (work, time) or (force, velocity)"
+                )
             if has_work_time and has_force_velocity:
-                raise ValueError("Provide only one pair: (work, time) or (force, velocity)")
+                raise ValueError(
+                    "Provide only one pair: (work, time) or (force, velocity)"
+                )
 
         if work is not None and time is not None:
             if validate and time <= 0:
                 raise ValueError(f"Time must be positive, got {time}")
 
             power_val = work / time
-            return {"power": power_val, "work": work, "time": time, "formula": "P = W/t"}
+            return {
+                "power": power_val,
+                "work": work,
+                "time": time,
+                "formula": "P = W/t",
+            }
         else:  # force and velocity provided
             if validate:
                 if force < 0:
@@ -636,10 +716,17 @@ class EnergyCalculator:
                     raise ValueError(f"Velocity cannot be negative, got {velocity}")
 
             power_val = force * velocity
-            return {"power": power_val, "force": force, "velocity": velocity, "formula": "P = F·v"}
+            return {
+                "power": power_val,
+                "force": force,
+                "velocity": velocity,
+                "formula": "P = F·v",
+            }
 
     @staticmethod
-    def mechanical_efficiency(work_output: float, work_input: float, validate: bool = True) -> Dict[str, float]:
+    def mechanical_efficiency(
+        work_output: float, work_input: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate mechanical efficiency.
 
@@ -662,7 +749,9 @@ class EnergyCalculator:
             if work_output < 0:
                 raise ValueError(f"Work output cannot be negative, got {work_output}")
             if work_output > work_input:
-                raise ValueError(f"Work output ({work_output}) cannot exceed input ({work_input})")
+                raise ValueError(
+                    f"Work output ({work_output}) cannot exceed input ({work_input})"
+                )
 
         efficiency = (work_output / work_input) * 100
         work_lost = work_input - work_output
@@ -680,7 +769,9 @@ class MomentumCalculator:
     """Calculator for momentum and collision problems."""
 
     @staticmethod
-    def linear_momentum(mass: float, velocity: float, validate: bool = True) -> Dict[str, float]:
+    def linear_momentum(
+        mass: float, velocity: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate linear momentum.
 
@@ -730,11 +821,20 @@ class MomentumCalculator:
 
         impulse_val = force * time
 
-        return {"impulse": impulse_val, "force": force, "time": time, "formula": "J = FΔt"}
+        return {
+            "impulse": impulse_val,
+            "force": force,
+            "time": time,
+            "formula": "J = FΔt",
+        }
 
     @staticmethod
     def elastic_collision_1d(
-        m1: float, v1_initial: float, m2: float, v2_initial: float, validate: bool = True
+        m1: float,
+        v1_initial: float,
+        m2: float,
+        v2_initial: float,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate velocities after 1D elastic collision.
@@ -864,7 +964,9 @@ if __name__ == "__main__":
     print("\n1. KINEMATICS - Projectile Motion")
     print("-" * 60)
     calc = KinematicsCalculator()
-    projectile = calc.projectile_motion(initial_velocity=50, angle_degrees=45, initial_height=2.0)  # m/s  # m
+    projectile = calc.projectile_motion(
+        initial_velocity=50, angle_degrees=45, initial_height=2.0
+    )  # m/s  # m
     print(f"Launch angle: {projectile['launch_angle_degrees']:.1f}°")
     print(f"Time to peak: {projectile['time_to_peak']:.2f} s")
     print(f"Maximum height: {projectile['max_height']:.2f} m")
@@ -899,7 +1001,9 @@ if __name__ == "__main__":
     # Friction
     print("\n5. FRICTION FORCE")
     print("-" * 60)
-    friction = dynamics.friction_force(normal_force=100.0, coefficient=0.3)  # N  # kinetic friction
+    friction = dynamics.friction_force(
+        normal_force=100.0, coefficient=0.3
+    )  # N  # kinetic friction
     print(f"Friction force: {friction['friction_force']:.2f} N")
 
     # Energy - Kinetic and Potential
@@ -916,14 +1020,18 @@ if __name__ == "__main__":
     # Work and Power
     print("\n7. WORK AND POWER")
     print("-" * 60)
-    work = energy_calc.work_done(force=50.0, displacement=10.0, angle_degrees=30.0)  # N  # m  # degrees
+    work = energy_calc.work_done(
+        force=50.0, displacement=10.0, angle_degrees=30.0
+    )  # N  # m  # degrees
     print(f"Work done: {work['work']:.2f} J")
 
     power = energy_calc.power(work=500.0, time=5.0)  # J  # s
     print(f"Power: {power['power']:.2f} W")
 
     # Mechanical Efficiency
-    efficiency = energy_calc.mechanical_efficiency(work_output=750.0, work_input=1000.0)  # J  # J
+    efficiency = energy_calc.mechanical_efficiency(
+        work_output=750.0, work_input=1000.0
+    )  # J  # J
     print(f"Efficiency: {efficiency['efficiency_percent']:.1f}%")
     print(f"Work lost: {efficiency['work_lost']:.2f} J")
 
@@ -934,8 +1042,12 @@ if __name__ == "__main__":
     collision = momentum_calc.elastic_collision_1d(
         m1=2.0, v1_initial=5.0, m2=3.0, v2_initial=-2.0  # kg  # m/s  # kg  # m/s
     )
-    print(f"Object 1 - Initial: {collision['v1_initial']:.2f} m/s → Final: {collision['v1_final']:.2f} m/s")
-    print(f"Object 2 - Initial: {collision['v2_initial']:.2f} m/s → Final: {collision['v2_final']:.2f} m/s")
+    print(
+        f"Object 1 - Initial: {collision['v1_initial']:.2f} m/s → Final: {collision['v1_final']:.2f} m/s"
+    )
+    print(
+        f"Object 2 - Initial: {collision['v2_initial']:.2f} m/s → Final: {collision['v2_final']:.2f} m/s"
+    )
     print(f"Momentum conserved: {collision['momentum_conserved']}")
     print(f"Energy conserved: {collision['energy_conserved']}")
 
@@ -943,7 +1055,9 @@ if __name__ == "__main__":
     print("\n9. FREE FALL ANALYSIS")
     print("-" * 60)
     mech_calc = MechanicsCalculator()
-    free_fall = mech_calc.free_fall(initial_height=100.0, initial_velocity=0.0)  # m  # m/s (dropped)
+    free_fall = mech_calc.free_fall(
+        initial_height=100.0, initial_velocity=0.0
+    )  # m  # m/s (dropped)
     print(f"Time to ground: {free_fall['time_to_ground']:.2f} s")
     print(f"Impact speed: {free_fall['impact_speed']:.2f} m/s")
 

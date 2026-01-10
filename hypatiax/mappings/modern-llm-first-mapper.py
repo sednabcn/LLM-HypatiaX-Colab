@@ -60,7 +60,12 @@ descriptions into precise formulas using:
 Return ONLY the formula, nothing else."""
 
         # Few-shot examples
-        examples_text = "\n".join([f"Description: {desc}\nFormula: {formula}" for desc, formula in self.examples])
+        examples_text = "\n".join(
+            [
+                f"Description: {desc}\nFormula: {formula}"
+                for desc, formula in self.examples
+            ]
+        )
 
         return f"""{system_prompt}
 
@@ -97,7 +102,12 @@ Formula:"""
                 )
                 formula = response.choices[0].message.content.strip()
 
-            return {"formula": formula, "method": "llm_api", "confidence": 0.95, "model": self.config.primary_model}
+            return {
+                "formula": formula,
+                "method": "llm_api",
+                "confidence": 0.95,
+                "model": self.config.primary_model,
+            }
 
         except Exception as e:
             print(f"LLM API failed: {e}")
@@ -141,9 +151,19 @@ Formula:"""
 
         if operation:
             formula = f"{operation}([{column}])"
-            return {"formula": formula, "method": "rule_based_fallback", "confidence": 0.6, "model": "pattern_matching"}
+            return {
+                "formula": formula,
+                "method": "rule_based_fallback",
+                "confidence": 0.6,
+                "model": "pattern_matching",
+            }
 
-        return {"formula": "Error: Could not parse", "method": "failed", "confidence": 0.0, "model": "none"}
+        return {
+            "formula": "Error: Could not parse",
+            "method": "failed",
+            "confidence": 0.0,
+            "model": "none",
+        }
 
     def map(self, description: str) -> str:
         """Main entry point - uses LLM-first approach"""
@@ -226,7 +246,11 @@ def main():
         mapper = ModernFormulaMapper(config)
 
         # Demo with fallback
-        test_cases = ["average of Sales", "sum of Revenue by Region", "count unique customers"]
+        test_cases = [
+            "average of Sales",
+            "sum of Revenue by Region",
+            "count unique customers",
+        ]
 
         print("\n" + "=" * 70)
         print("DEMO MODE (Rule-based fallback)")
@@ -241,7 +265,9 @@ def main():
         return
 
     # Real API calls
-    config = ModernMapperConfig(primary_provider="anthropic", primary_model="claude-sonnet-4-20250514")
+    config = ModernMapperConfig(
+        primary_provider="anthropic", primary_model="claude-sonnet-4-20250514"
+    )
 
     mapper = ModernFormulaMapper(config)
 

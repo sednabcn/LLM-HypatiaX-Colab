@@ -39,7 +39,11 @@ class VersionInjector:
         return {
             "auto_inject": True,
             "version_mappings": {
-                "rules": {"ruler_tableau_desc": None, "ruler_tableau_formulas": None, "ruler_tableau": None},
+                "rules": {
+                    "ruler_tableau_desc": None,
+                    "ruler_tableau_formulas": None,
+                    "ruler_tableau": None,
+                },
                 "training_data": {},
                 "models": {},
                 "vocab": {},
@@ -268,7 +272,9 @@ if __name__ == "__main__":
                 elif data_type in ["training_data", "models", "vocab"]:
                     if data_type not in self.config["version_mappings"]:
                         self.config["version_mappings"][data_type] = {}
-                    self.config["version_mappings"][data_type]["latest"] = current_version
+                    self.config["version_mappings"][data_type][
+                        "latest"
+                    ] = current_version
 
         self._save_config()
         print("✅ Sync complete")
@@ -297,7 +303,9 @@ def main():
     """CLI interface for version injector."""
     import argparse
 
-    parser = argparse.ArgumentParser(description="Inject and manage version numbers across HypatiaX system")
+    parser = argparse.ArgumentParser(
+        description="Inject and manage version numbers across HypatiaX system"
+    )
 
     parser.add_argument("base_path", type=Path, help="Base path to hypatiax directory")
 

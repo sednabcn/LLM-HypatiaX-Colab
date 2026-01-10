@@ -37,7 +37,9 @@ class TestMassiveDeFiFormulaGeneratorInit(unittest.TestCase):
     @patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem")
     def test_init_with_default_params(self, mock_system):
         """Test initialization with default parameters"""
-        from generators.finance.defi.defi_dataset_master_generator import MassiveDeFiFormulaGenerator
+        from generators.finance.defi.defi_dataset_master_generator import (
+            MassiveDeFiFormulaGenerator,
+        )
 
         generator = MassiveDeFiFormulaGenerator()
 
@@ -51,7 +53,9 @@ class TestMassiveDeFiFormulaGeneratorInit(unittest.TestCase):
     @patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem")
     def test_init_with_custom_params(self, mock_system):
         """Test initialization with custom parameters"""
-        from generators.finance.defi.defi_dataset_master_generator import MassiveDeFiFormulaGenerator
+        from generators.finance.defi.defi_dataset_master_generator import (
+            MassiveDeFiFormulaGenerator,
+        )
 
         generator = MassiveDeFiFormulaGenerator(domain="custom", seed=123)
 
@@ -60,7 +64,9 @@ class TestMassiveDeFiFormulaGeneratorInit(unittest.TestCase):
     @patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem")
     def test_init_sets_random_seed(self, mock_system):
         """Test that initialization sets numpy random seed"""
-        from generators.finance.defi.defi_dataset_master_generator import MassiveDeFiFormulaGenerator
+        from generators.finance.defi.defi_dataset_master_generator import (
+            MassiveDeFiFormulaGenerator,
+        )
 
         with patch("numpy.random.seed") as mock_seed:
             generator = MassiveDeFiFormulaGenerator(seed=99)
@@ -73,7 +79,9 @@ class TestConstantProductVariants(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures"""
         with patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem"):
-            from generators.finance.defi.defi_dataset_master_generator import MassiveDeFiFormulaGenerator
+            from generators.finance.defi.defi_dataset_master_generator import (
+                MassiveDeFiFormulaGenerator,
+            )
 
             self.generator = MassiveDeFiFormulaGenerator(seed=42)
             self.generator._process_formula = Mock()
@@ -128,7 +136,9 @@ class TestConstantSumVariants(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures"""
         with patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem"):
-            from generators.finance.defi.defi_dataset_master_generator import MassiveDeFiFormulaGenerator
+            from generators.finance.defi.defi_dataset_master_generator import (
+                MassiveDeFiFormulaGenerator,
+            )
 
             self.generator = MassiveDeFiFormulaGenerator(seed=42)
             self.generator._process_formula = Mock()
@@ -166,7 +176,9 @@ class TestImpermanentLossVariants(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures"""
         with patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem"):
-            from generators.finance.defi.defi_dataset_master_generator import MassiveDeFiFormulaGenerator
+            from generators.finance.defi.defi_dataset_master_generator import (
+                MassiveDeFiFormulaGenerator,
+            )
 
             self.generator = MassiveDeFiFormulaGenerator(seed=42)
             self.generator._process_formula = Mock()
@@ -210,7 +222,9 @@ class TestFeeEarningVariants(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures"""
         with patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem"):
-            from generators.finance.defi.defi_dataset_master_generator import MassiveDeFiFormulaGenerator
+            from generators.finance.defi.defi_dataset_master_generator import (
+                MassiveDeFiFormulaGenerator,
+            )
 
             self.generator = MassiveDeFiFormulaGenerator(seed=42)
             self.generator._process_formula = Mock()
@@ -241,10 +255,14 @@ class TestProcessFormula(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures"""
         with patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem"):
-            from generators.finance.defi.defi_dataset_master_generator import MassiveDeFiFormulaGenerator
+            from generators.finance.defi.defi_dataset_master_generator import (
+                MassiveDeFiFormulaGenerator,
+            )
 
             self.generator = MassiveDeFiFormulaGenerator(seed=42)
-            self.generator.system.discover_validate_interpret = Mock(return_value={"status": "ok"})
+            self.generator.system.discover_validate_interpret = Mock(
+                return_value={"status": "ok"}
+            )
 
     def test_process_formula_success(self):
         """Test successful formula processing"""
@@ -261,7 +279,9 @@ class TestProcessFormula(unittest.TestCase):
 
     def test_process_formula_exception_handling(self):
         """Test formula processing with exception"""
-        self.generator.system.discover_validate_interpret = Mock(side_effect=Exception("Test error"))
+        self.generator.system.discover_validate_interpret = Mock(
+            side_effect=Exception("Test error")
+        )
 
         name = "Test_Formula"
         description = "Test description"
@@ -292,7 +312,9 @@ class TestRunAllVariants(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures"""
         with patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem"):
-            from generators.finance.defi.defi_dataset_master_generator import MassiveDeFiFormulaGenerator
+            from generators.finance.defi.defi_dataset_master_generator import (
+                MassiveDeFiFormulaGenerator,
+            )
 
             self.generator = MassiveDeFiFormulaGenerator(seed=42)
 
@@ -322,7 +344,9 @@ class TestRunAllVariants(unittest.TestCase):
         self.generator.generate_stableswap_variants.assert_called_once_with(10)
         self.generator.generate_impermanent_loss_variants.assert_called_once_with(10)
         self.generator.generate_position_value_variants.assert_called_once_with(10)
-        self.generator.generate_concentrated_liquidity_variants.assert_called_once_with(10)
+        self.generator.generate_concentrated_liquidity_variants.assert_called_once_with(
+            10
+        )
         self.generator.generate_fee_earning_variants.assert_called_once_with(10)
         self.generator.generate_apy_variants.assert_called_once_with(10)
         self.generator.generate_slippage_variants.assert_called_once_with(10)
@@ -334,7 +358,10 @@ class TestRunAllVariants(unittest.TestCase):
         """Test that method returns successful formula count"""
         # Mock all methods to do nothing
         for method_name in dir(self.generator):
-            if method_name.startswith("generate_") and method_name != "generate_formula":
+            if (
+                method_name.startswith("generate_")
+                and method_name != "generate_formula"
+            ):
                 setattr(self.generator, method_name, Mock())
 
         self.generator.successful_formulas = 250
@@ -349,7 +376,9 @@ class TestPrintSummary(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures"""
         with patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem"):
-            from generators.finance.defi.defi_dataset_master_generator import MassiveDeFiFormulaGenerator
+            from generators.finance.defi.defi_dataset_master_generator import (
+                MassiveDeFiFormulaGenerator,
+            )
 
             self.generator = MassiveDeFiFormulaGenerator(seed=42)
 
@@ -375,7 +404,9 @@ class TestPrintSummary(unittest.TestCase):
         self.generator.formula_id = 100
         self.generator.successful_formulas = 95
 
-        success_rate = (self.generator.successful_formulas / self.generator.formula_id) * 100
+        success_rate = (
+            self.generator.successful_formulas / self.generator.formula_id
+        ) * 100
 
         self.assertAlmostEqual(success_rate, 95.0)
 
@@ -398,7 +429,9 @@ class TestDataValidation(unittest.TestCase):
     def test_formula_id_increments(self):
         """Test that formula_id increments correctly"""
         with patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem"):
-            from generators.finance.defi.defi_dataset_master_generator import MassiveDeFiFormulaGenerator
+            from generators.finance.defi.defi_dataset_master_generator import (
+                MassiveDeFiFormulaGenerator,
+            )
 
             generator = MassiveDeFiFormulaGenerator(seed=42)
 

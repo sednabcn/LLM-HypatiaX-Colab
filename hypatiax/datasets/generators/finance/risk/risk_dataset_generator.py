@@ -61,7 +61,11 @@ class RiskFormulaGenerator:
                     "sigma": "Volatility (annualized)",
                     "t": "Time horizon in days",
                 },
-                variable_units={"mu": "dimensionless", "sigma": "dimensionless", "t": "dimensionless"},
+                variable_units={
+                    "mu": "dimensionless",
+                    "sigma": "dimensionless",
+                    "t": "dimensionless",
+                },
                 description="Value at Risk at 95% confidence level",
                 validate_first=False,
             )
@@ -117,7 +121,11 @@ class RiskFormulaGenerator:
                     "sigma": "Volatility (annualized)",
                     "t": "Time horizon in days",
                 },
-                variable_units={"mu": "dimensionless", "sigma": "dimensionless", "t": "dimensionless"},
+                variable_units={
+                    "mu": "dimensionless",
+                    "sigma": "dimensionless",
+                    "t": "dimensionless",
+                },
                 description="Conditional VaR (Expected Shortfall) at 95% confidence",
                 validate_first=False,
             )
@@ -136,7 +144,10 @@ class RiskFormulaGenerator:
                 X=X,
                 y=beta,
                 variable_names=["cov_im", "var_m"],
-                variable_descriptions={"cov_im": "Covariance between asset and market", "var_m": "Market variance"},
+                variable_descriptions={
+                    "cov_im": "Covariance between asset and market",
+                    "var_m": "Market variance",
+                },
                 variable_units={"cov_im": "dimensionless", "var_m": "dimensionless"},
                 description="Beta - measure of systematic risk relative to market",
                 validate_first=False,
@@ -162,7 +173,11 @@ class RiskFormulaGenerator:
                     "target": "Target or required return",
                     "downside_dev": "Downside deviation",
                 },
-                variable_units={"returns": "dimensionless", "target": "dimensionless", "downside_dev": "dimensionless"},
+                variable_units={
+                    "returns": "dimensionless",
+                    "target": "dimensionless",
+                    "downside_dev": "dimensionless",
+                },
                 description="Sortino ratio - downside risk-adjusted return",
                 validate_first=False,
             )
@@ -185,7 +200,10 @@ class RiskFormulaGenerator:
                     "active_return": "Portfolio return minus benchmark return",
                     "tracking_error": "Standard deviation of active returns",
                 },
-                variable_units={"active_return": "dimensionless", "tracking_error": "dimensionless"},
+                variable_units={
+                    "active_return": "dimensionless",
+                    "tracking_error": "dimensionless",
+                },
                 description="Information ratio - active management skill measure",
                 validate_first=False,
             )
@@ -204,7 +222,10 @@ class RiskFormulaGenerator:
                 X=X,
                 y=max_dd,
                 variable_names=["peak", "trough"],
-                variable_descriptions={"peak": "Peak portfolio value", "trough": "Trough portfolio value"},
+                variable_descriptions={
+                    "peak": "Peak portfolio value",
+                    "trough": "Trough portfolio value",
+                },
                 variable_units={"peak": "dimensionless", "trough": "dimensionless"},
                 description="Maximum Drawdown - largest peak-to-trough decline",
                 validate_first=False,
@@ -230,7 +251,11 @@ class RiskFormulaGenerator:
                     "risk_free": "Risk-free rate (annualized)",
                     "beta": "Systematic risk (beta)",
                 },
-                variable_units={"returns": "dimensionless", "risk_free": "dimensionless", "beta": "dimensionless"},
+                variable_units={
+                    "returns": "dimensionless",
+                    "risk_free": "dimensionless",
+                    "beta": "dimensionless",
+                },
                 description="Treynor ratio - return per unit of systematic risk",
                 validate_first=False,
             )
@@ -317,7 +342,11 @@ class RiskFormulaGenerator:
                         discovery.get("complexity", 0),
                         validation.get("total_score", 0),
                         validation.get("valid", False),
-                        interpretation.get("interpretation", "")[:100] if interpretation else "",
+                        (
+                            interpretation.get("interpretation", "")[:100]
+                            if interpretation
+                            else ""
+                        ),
                         metadata.get("llm_provider", ""),
                         self.system.domain,
                     ]
@@ -338,7 +367,9 @@ class RiskFormulaGenerator:
         print(f"  Invalid formulas: {stats['invalid_count']}")
         print(f"  Success rate: {stats['success_rate']:.1%}")
         print(f"  Average R2 score: {stats['average_r2']:.4f}")
-        print(f"  Average validation score: {stats['average_validation_score']:.1f}/100")
+        print(
+            f"  Average validation score: {stats['average_validation_score']:.1f}/100"
+        )
 
         # Individual results
         print("\n" + "-" * 70)

@@ -78,15 +78,23 @@ class LPPosition:
 
         # Validate amounts
         if self.initial_token_a_amount <= 0:
-            errors.append(f"initial_token_a_amount must be > 0, got {self.initial_token_a_amount}")
+            errors.append(
+                f"initial_token_a_amount must be > 0, got {self.initial_token_a_amount}"
+            )
         if self.initial_token_b_amount <= 0:
-            errors.append(f"initial_token_b_amount must be > 0, got {self.initial_token_b_amount}")
+            errors.append(
+                f"initial_token_b_amount must be > 0, got {self.initial_token_b_amount}"
+            )
 
         # Validate prices (P0, Pt > 0)
         if self.initial_price_b_in_a <= 0:
-            errors.append(f"initial_price_b_in_a must be > 0, got {self.initial_price_b_in_a}")
+            errors.append(
+                f"initial_price_b_in_a must be > 0, got {self.initial_price_b_in_a}"
+            )
         if self.current_price_b_in_a <= 0:
-            errors.append(f"current_price_b_in_a must be > 0, got {self.current_price_b_in_a}")
+            errors.append(
+                f"current_price_b_in_a must be > 0, got {self.current_price_b_in_a}"
+            )
 
         # Validate fee rate (φ ∈ [0, 1))
         if not (0 <= self.fee_rate < 1):
@@ -167,7 +175,9 @@ class UNIv2Calculator:
     """Advanced Uniswap V2 calculations with enhanced safety"""
 
     @staticmethod
-    def calculate_il_percentage(current_price: float, initial_price: float, safe_mode: bool = True) -> float:
+    def calculate_il_percentage(
+        current_price: float, initial_price: float, safe_mode: bool = True
+    ) -> float:
         """
         Calculate impermanent loss as a percentage with safety checks
 
@@ -223,12 +233,18 @@ class UNIv2Calculator:
         Returns:
             Dictionary with detailed breakdown and validation status
         """
-        result = {"position_name": position.name, "validation_errors": [], "validation_warnings": []}
+        result = {
+            "position_name": position.name,
+            "validation_errors": [],
+            "validation_warnings": [],
+        }
 
         try:
             # Calculate price ratio (r = Pt / P0)
             # CONSTRAINT: r > 0 (enforced by LPPosition validation)
-            ratio = position.current_price_b_in_a / max(position.initial_price_b_in_a, EPSILON)
+            ratio = position.current_price_b_in_a / max(
+                position.initial_price_b_in_a, EPSILON
+            )
             ratio = max(ratio, EPSILON)  # Ensure r > 0
 
             if ratio > MAX_PRICE_RATIO:
@@ -248,7 +264,8 @@ class UNIv2Calculator:
             # Calculate IL in dollars
             # CONSTRAINT: prices > 0, amounts > 0 (enforced by LPPosition)
             current_value = (
-                position.initial_token_a_amount * position.current_price_b_in_a + position.initial_token_b_amount
+                position.initial_token_a_amount * position.current_price_b_in_a
+                + position.initial_token_b_amount
             )
             il_dollar = current_value * (il_percent / 100)
             result["il_dollar"] = round(il_dollar, 2)
@@ -279,7 +296,11 @@ class UNIv2Calculator:
             else:
                 breakeven_days = float("inf")
 
-            result["breakeven_days"] = round(breakeven_days, 2) if breakeven_days != float("inf") else float("inf")
+            result["breakeven_days"] = (
+                round(breakeven_days, 2)
+                if breakeven_days != float("inf")
+                else float("inf")
+            )
             result["profitable"] = "Yes" if net_result > 0 else "No"
             result["days_elapsed"] = position.days_elapsed
             result["daily_volume_usd"] = position.daily_volume_usd
@@ -444,7 +465,9 @@ def generate_test_positions() -> List[LPPosition]:
     return positions
 
 
-def export_results_to_csv(results: List[Dict], filename: str = "uniswap_v2_results_validated.csv"):
+def export_results_to_csv(
+    results: List[Dict], filename: str = "uniswap_v2_results_validated.csv"
+):
     """Export analysis results to CSV with validation info"""
     if not results:
         return

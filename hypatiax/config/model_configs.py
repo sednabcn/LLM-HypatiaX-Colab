@@ -105,17 +105,27 @@ class DataConfig:
     @classmethod
     def for_descriptions(cls) -> "DataConfig":
         """Config for description data"""
-        return cls(filename="formulas_nor.xlsx", dtype="desc", ner_entity="ner_tableau_desc")
+        return cls(
+            filename="formulas_nor.xlsx", dtype="desc", ner_entity="ner_tableau_desc"
+        )
 
     @classmethod
     def for_formulas(cls) -> "DataConfig":
         """Config for formula data"""
-        return cls(filename="formulas_nor.xlsx", dtype="formulas", ner_entity="ner_tableau_formulas")
+        return cls(
+            filename="formulas_nor.xlsx",
+            dtype="formulas",
+            ner_entity="ner_tableau_formulas",
+        )
 
     @classmethod
     def for_combined(cls) -> "DataConfig":
         """Config for combined data"""
-        return cls(filename="formulas_nor.xlsx", dtype="combined", ner_entity="ner_tableau_combined")
+        return cls(
+            filename="formulas_nor.xlsx",
+            dtype="combined",
+            ner_entity="ner_tableau_combined",
+        )
 
 
 @dataclass
@@ -137,7 +147,9 @@ class ModelConfig:
         return {"training": self.training.to_dict(), "data": self.data.to_dict()}
 
     @classmethod
-    def training_desc(cls, niter: int = 100, batchsize: int = 8, sizefile: str = "sm") -> "ModelConfig":
+    def training_desc(
+        cls, niter: int = 100, batchsize: int = 8, sizefile: str = "sm"
+    ) -> "ModelConfig":
         """
         Config for training description NER model.
 
@@ -150,30 +162,46 @@ class ModelConfig:
             Complete model configuration
         """
         return cls(
-            training=TrainingConfig(niter=niter, batchsize=batchsize, output_model_name="ner_tableau_desc"),
+            training=TrainingConfig(
+                niter=niter, batchsize=batchsize, output_model_name="ner_tableau_desc"
+            ),
             data=DataConfig.for_descriptions().update(sizefile=sizefile),
         )
 
     @classmethod
-    def training_formulas(cls, niter: int = 100, batchsize: int = 8, sizefile: str = "sm") -> "ModelConfig":
+    def training_formulas(
+        cls, niter: int = 100, batchsize: int = 8, sizefile: str = "sm"
+    ) -> "ModelConfig":
         """Config for training formula NER model"""
         return cls(
-            training=TrainingConfig(niter=niter, batchsize=batchsize, output_model_name="ner_tableau_formulas"),
+            training=TrainingConfig(
+                niter=niter,
+                batchsize=batchsize,
+                output_model_name="ner_tableau_formulas",
+            ),
             data=DataConfig.for_formulas().update(sizefile=sizefile),
         )
 
     @classmethod
-    def training_combined(cls, niter: int = 150, batchsize: int = 8, sizefile: str = "md") -> "ModelConfig":
+    def training_combined(
+        cls, niter: int = 150, batchsize: int = 8, sizefile: str = "md"
+    ) -> "ModelConfig":
         """Config for training combined model"""
         return cls(
-            training=TrainingConfig(niter=niter, batchsize=batchsize, output_model_name="ner_tableau_combined"),
+            training=TrainingConfig(
+                niter=niter,
+                batchsize=batchsize,
+                output_model_name="ner_tableau_combined",
+            ),
             data=DataConfig.for_combined().update(sizefile=sizefile),
         )
 
     @classmethod
     def quick_test(cls) -> "ModelConfig":
         """Quick config for testing (fast training)"""
-        return cls(training=TrainingConfig.quick_train(), data=DataConfig.for_descriptions())
+        return cls(
+            training=TrainingConfig.quick_train(), data=DataConfig.for_descriptions()
+        )
 
 
 @dataclass
@@ -181,7 +209,9 @@ class EvaluationConfig:
     """Configuration for model evaluation"""
 
     batch_size: int = 27
-    metrics: List[str] = field(default_factory=lambda: ["ents_f", "ents_p", "ents_r", "ents_per_type"])
+    metrics: List[str] = field(
+        default_factory=lambda: ["ents_f", "ents_p", "ents_r", "ents_per_type"]
+    )
     save_results: bool = True
     output_format: str = "json"  # 'json', 'csv', 'txt'
 

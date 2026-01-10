@@ -28,7 +28,12 @@ class MockHybridDiscoverySystem:
         return True
 
     def get_statistics(self):
-        return {"total_runs": 20, "valid_count": 18, "success_rate": 0.9, "average_r2": 0.95}
+        return {
+            "total_runs": 20,
+            "valid_count": 18,
+            "success_rate": 0.9,
+            "average_r2": 0.95,
+        }
 
 
 class TestDeFiFormulaGeneratorInit(unittest.TestCase):
@@ -37,7 +42,9 @@ class TestDeFiFormulaGeneratorInit(unittest.TestCase):
     @patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem")
     def test_init_with_defaults(self, mock_system):
         """Test initialization with default parameters"""
-        from generators.finance.defi.defi_dataset_20_generator import DeFiFormulaGenerator
+        from generators.finance.defi.defi_dataset_20_generator import (
+            DeFiFormulaGenerator,
+        )
 
         generator = DeFiFormulaGenerator()
 
@@ -47,7 +54,9 @@ class TestDeFiFormulaGeneratorInit(unittest.TestCase):
     @patch("hypatiax.tools.symbolic.hybrid_system.HybridDiscoverySystem")
     def test_init_with_custom_seed(self, mock_system):
         """Test initialization with custom seed"""
-        from generators.finance.defi.defi_dataset_20_generator import DeFiFormulaGenerator
+        from generators.finance.defi.defi_dataset_20_generator import (
+            DeFiFormulaGenerator,
+        )
 
         generator = DeFiFormulaGenerator(seed=123)
 
@@ -57,7 +66,9 @@ class TestDeFiFormulaGeneratorInit(unittest.TestCase):
     @patch("numpy.random.seed")
     def test_init_sets_random_seed(self, mock_np_seed, mock_system):
         """Test that numpy random seed is set"""
-        from generators.finance.defi.defi_dataset_20_generator import DeFiFormulaGenerator
+        from generators.finance.defi.defi_dataset_20_generator import (
+            DeFiFormulaGenerator,
+        )
 
         generator = DeFiFormulaGenerator(seed=99)
 
@@ -116,7 +127,9 @@ class TestFormula02AMMSwapOutput(unittest.TestCase):
         reserve_out = 10000
 
         # With fee
-        output_with_fee = (amount_in * 0.997 * reserve_out) / (reserve_in + amount_in * 0.997)
+        output_with_fee = (amount_in * 0.997 * reserve_out) / (
+            reserve_in + amount_in * 0.997
+        )
 
         # Without fee (theoretical)
         output_no_fee = (amount_in * reserve_out) / (reserve_in + amount_in)
@@ -556,7 +569,11 @@ class TestFormula20ConcentratedLiquidityPosition(unittest.TestCase):
         sqrt_price_lower = 45
         sqrt_price_upper = 55
 
-        amount0 = liquidity * (sqrt_price_upper - sqrt_price_current) / (sqrt_price_current * sqrt_price_upper)
+        amount0 = (
+            liquidity
+            * (sqrt_price_upper - sqrt_price_current)
+            / (sqrt_price_current * sqrt_price_upper)
+        )
 
         self.assertGreater(amount0, 0)
 
@@ -568,7 +585,9 @@ class TestGenerateFormulaMethod(unittest.TestCase):
     def setUp(self, mock_system):
         """Set up test fixtures"""
         mock_system.return_value = MockHybridDiscoverySystem()
-        from generators.finance.defi.defi_dataset_20_generator import DeFiFormulaGenerator
+        from generators.finance.defi.defi_dataset_20_generator import (
+            DeFiFormulaGenerator,
+        )
 
         self.generator = DeFiFormulaGenerator(seed=42)
         self.generator.system.discover_validate_interpret = Mock()
@@ -594,7 +613,9 @@ class TestRunAllFormulas(unittest.TestCase):
     def setUp(self, mock_system):
         """Set up test fixtures"""
         mock_system.return_value = MockHybridDiscoverySystem()
-        from generators.finance.defi.defi_dataset_20_generator import DeFiFormulaGenerator
+        from generators.finance.defi.defi_dataset_20_generator import (
+            DeFiFormulaGenerator,
+        )
 
         self.generator = DeFiFormulaGenerator(seed=42)
         self.generator.generate_formula = Mock()
@@ -607,7 +628,9 @@ class TestRunAllFormulas(unittest.TestCase):
         self.assertEqual(self.generator.generate_formula.call_count, 20)
 
         # Check that all formula numbers 1-20 were called
-        called_formula_nums = [call[0][0] for call in self.generator.generate_formula.call_args_list]
+        called_formula_nums = [
+            call[0][0] for call in self.generator.generate_formula.call_args_list
+        ]
         self.assertEqual(sorted(called_formula_nums), list(range(1, 21)))
 
 
@@ -619,7 +642,9 @@ class TestSaveResults(unittest.TestCase):
     def test_save_results_creates_directory(self, mock_makedirs, mock_system):
         """Test that output directory is created"""
         mock_system.return_value = MockHybridDiscoverySystem()
-        from generators.finance.defi.defi_dataset_20_generator import DeFiFormulaGenerator
+        from generators.finance.defi.defi_dataset_20_generator import (
+            DeFiFormulaGenerator,
+        )
 
         generator = DeFiFormulaGenerator(seed=42)
         generator.save_results(output_dir="test_output")
@@ -631,7 +656,9 @@ class TestSaveResults(unittest.TestCase):
     def test_save_results_returns_paths(self, mock_makedirs, mock_system):
         """Test that save_results returns file paths"""
         mock_system.return_value = MockHybridDiscoverySystem()
-        from generators.finance.defi.defi_dataset_20_generator import DeFiFormulaGenerator
+        from generators.finance.defi.defi_dataset_20_generator import (
+            DeFiFormulaGenerator,
+        )
 
         generator = DeFiFormulaGenerator(seed=42)
         json_path, csv_path = generator.save_results()
@@ -648,7 +675,9 @@ class TestPrintSummary(unittest.TestCase):
     def test_print_summary_outputs_stats(self, mock_print, mock_system):
         """Test that summary prints statistics"""
         mock_system.return_value = MockHybridDiscoverySystem()
-        from generators.finance.defi.defi_dataset_20_generator import DeFiFormulaGenerator
+        from generators.finance.defi.defi_dataset_20_generator import (
+            DeFiFormulaGenerator,
+        )
 
         generator = DeFiFormulaGenerator(seed=42)
         generator.print_summary()
@@ -682,7 +711,9 @@ def run_tests():
     suite.addTests(loader.loadTestsFromTestCase(TestFormula17VestingSchedule))
     suite.addTests(loader.loadTestsFromTestCase(TestFormula18ArbitrageProfit))
     suite.addTests(loader.loadTestsFromTestCase(TestFormula19GasCostROI))
-    suite.addTests(loader.loadTestsFromTestCase(TestFormula20ConcentratedLiquidityPosition))
+    suite.addTests(
+        loader.loadTestsFromTestCase(TestFormula20ConcentratedLiquidityPosition)
+    )
     suite.addTests(loader.loadTestsFromTestCase(TestGenerateFormulaMethod))
     suite.addTests(loader.loadTestsFromTestCase(TestRunAllFormulas))
     suite.addTests(loader.loadTestsFromTestCase(TestSaveResults))

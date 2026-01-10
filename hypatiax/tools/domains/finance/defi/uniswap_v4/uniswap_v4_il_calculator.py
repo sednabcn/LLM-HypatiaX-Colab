@@ -77,15 +77,21 @@ class UniswapV4ILCalculator:
             raise ValueError("price_lower must be less than price_upper")
 
         # Calculate liquidity (SAME AS V3)
-        self.liquidity = self._calculate_liquidity(self.amount0_initial, self.amount1_initial, self.P_initial)
+        self.liquidity = self._calculate_liquidity(
+            self.amount0_initial, self.amount1_initial, self.P_initial
+        )
 
-        self.initial_value = self.amount0_initial * self.P_initial + self.amount1_initial
+        self.initial_value = (
+            self.amount0_initial * self.P_initial + self.amount1_initial
+        )
 
     def _sqrt_price(self, price: Decimal) -> Decimal:
         """Square root of price"""
         return price.sqrt()
 
-    def _calculate_liquidity(self, amount0: Decimal, amount1: Decimal, price: Decimal) -> Decimal:
+    def _calculate_liquidity(
+        self, amount0: Decimal, amount1: Decimal, price: Decimal
+    ) -> Decimal:
         """
         Calculate liquidity L (SAME AS V3)
         """
@@ -136,7 +142,9 @@ class UniswapV4ILCalculator:
 
         return amount0, amount1
 
-    def simulate_hook_fee_modifier(self, current_price: float, volatility: float = 0.5) -> float:
+    def simulate_hook_fee_modifier(
+        self, current_price: float, volatility: float = 0.5
+    ) -> float:
         """
         Simulate dynamic fee adjustment via hook
 
@@ -151,7 +159,9 @@ class UniswapV4ILCalculator:
             return 1.0
 
         # Example: Increase fees during high volatility
-        price_change = abs(current_price - float(self.P_initial)) / float(self.P_initial)
+        price_change = abs(current_price - float(self.P_initial)) / float(
+            self.P_initial
+        )
 
         # Base multiplier from volatility
         volatility_multiplier = 1.0 + (volatility * 2.0)
@@ -164,7 +174,9 @@ class UniswapV4ILCalculator:
 
         return total_multiplier
 
-    def calculate_il_at_price(self, current_price: float, volatility: float = 0.3) -> Dict[str, float]:
+    def calculate_il_at_price(
+        self, current_price: float, volatility: float = 0.3
+    ) -> Dict[str, float]:
         """
         Calculate IL at specific price (SAME MATH AS V3)
 
@@ -186,7 +198,11 @@ class UniswapV4ILCalculator:
 
         # IL calculation (SAME AS V3)
         il_absolute = pool_value - hodl_value
-        il_percentage = (il_absolute / hodl_value * Decimal("100")) if hodl_value > 0 else Decimal("0")
+        il_percentage = (
+            (il_absolute / hodl_value * Decimal("100"))
+            if hodl_value > 0
+            else Decimal("0")
+        )
 
         # Check if in range
         in_range = self.Pa <= P_current <= self.Pb
@@ -200,7 +216,9 @@ class UniswapV4ILCalculator:
             effective_fee = float(self.base_fee_tier)
 
         # Price metrics
-        price_change_pct = (P_current - self.P_initial) / self.P_initial * Decimal("100")
+        price_change_pct = (
+            (P_current - self.P_initial) / self.P_initial * Decimal("100")
+        )
         range_width = (self.Pb - self.Pa) / self.Pa * Decimal("100")
 
         # Capital efficiency (same as V3)
@@ -302,18 +320,28 @@ class UniswapV4ILCalculator:
 
         # Calculate APR
         if days_elapsed > 0:
-            fee_apr = (fees_earned / float(self.initial_value)) * (365 / days_elapsed) * 100
-            total_apr = (total_benefit / float(self.initial_value)) * (365 / days_elapsed) * 100
+            fee_apr = (
+                (fees_earned / float(self.initial_value)) * (365 / days_elapsed) * 100
+            )
+            total_apr = (
+                (total_benefit / float(self.initial_value)) * (365 / days_elapsed) * 100
+            )
         else:
             fee_apr = 0
             total_apr = 0
 
         # Net result
         net_result = total_benefit + il_data["il_dollar"]
-        net_percentage = (net_result / il_data["hodl_value"]) * 100 if il_data["hodl_value"] > 0 else 0
+        net_percentage = (
+            (net_result / il_data["hodl_value"]) * 100
+            if il_data["hodl_value"] > 0
+            else 0
+        )
 
         # Breakeven
-        daily_benefit = total_benefit / time_in_range_days if time_in_range_days > 0 else 0
+        daily_benefit = (
+            total_benefit / time_in_range_days if time_in_range_days > 0 else 0
+        )
 
         if daily_benefit > 0 and il_data["il_dollar"] < 0:
             breakeven_days = abs(il_data["il_dollar"]) / daily_benefit
@@ -333,7 +361,9 @@ class UniswapV4ILCalculator:
             "total_apr_with_gas_savings": total_apr,
             "net_result": net_result,
             "net_percentage": net_percentage,
-            "breakeven_days": breakeven_days if breakeven_days != float("inf") else None,
+            "breakeven_days": (
+                breakeven_days if breakeven_days != float("inf") else None
+            ),
             "profitable": net_result > 0,
             # V4 advantages
             "v4_flash_accounting": True,
@@ -342,7 +372,9 @@ class UniswapV4ILCalculator:
             "v4_gas_savings_pct": gas_savings_v4 * 100,
         }
 
-    def compare_v3_vs_v4(self, current_price: float, days_elapsed: float, daily_volume: float) -> Dict[str, Dict]:
+    def compare_v3_vs_v4(
+        self, current_price: float, days_elapsed: float, daily_volume: float
+    ) -> Dict[str, Dict]:
         """
         Compare V3 vs V4 performance
 
@@ -351,14 +383,22 @@ class UniswapV4ILCalculator:
         """
         # V3 calculation (no hooks, no gas savings)
         v3_result = self.calculate_il_with_fees(
-            current_price, days_elapsed, daily_volume, volatility=0.3, gas_savings_v4=0.0  # No V4 benefits
+            current_price,
+            days_elapsed,
+            daily_volume,
+            volatility=0.3,
+            gas_savings_v4=0.0,  # No V4 benefits
         )
         v3_result["version"] = "V3"
         v3_result["hook_enabled"] = False
 
         # V4 calculation (with hooks and gas savings)
         v4_result = self.calculate_il_with_fees(
-            current_price, days_elapsed, daily_volume, volatility=0.3, gas_savings_v4=0.5  # 50% gas savings
+            current_price,
+            days_elapsed,
+            daily_volume,
+            volatility=0.3,
+            gas_savings_v4=0.5,  # 50% gas savings
         )
         v4_result["version"] = "V4"
 
@@ -367,7 +407,8 @@ class UniswapV4ILCalculator:
             "fee_advantage": v4_result["fees_earned"] - v3_result["fees_earned"],
             "gas_savings": v4_result["gas_savings_v4"],
             "total_advantage": v4_result["total_benefit"] - v3_result["total_benefit"],
-            "apr_advantage": v4_result["total_apr_with_gas_savings"] - v3_result["fee_apr"],
+            "apr_advantage": v4_result["total_apr_with_gas_savings"]
+            - v3_result["fee_apr"],
             "net_advantage": v4_result["net_result"] - v3_result["net_result"],
         }
 
@@ -414,7 +455,9 @@ if __name__ == "__main__":
 
     print(f"  Price: ${result_v3_style['current_price']:.0f}")
     print(f"  In Range: {'Yes' if result_v3_style['in_range'] else 'No'}")
-    print(f"  IL: {result_v3_style['il_percentage']:.2f}% (${result_v3_style['il_dollar']:.2f})")
+    print(
+        f"  IL: {result_v3_style['il_percentage']:.2f}% (${result_v3_style['il_dollar']:.2f})"
+    )
     print(f"  Fees: ${result_v3_style['fees_earned']:.2f}")
     print(f"  Fee APR: {result_v3_style['fee_apr']:.1f}%")
     print(f"  Net: ${result_v3_style['net_result']:.2f}")
@@ -442,7 +485,9 @@ if __name__ == "__main__":
 
     print(f"  Price: ${result_v4_style['current_price']:.0f}")
     print(f"  In Range: {'Yes' if result_v4_style['in_range'] else 'No'}")
-    print(f"  IL: {result_v4_style['il_percentage']:.2f}% (${result_v4_style['il_dollar']:.2f})")
+    print(
+        f"  IL: {result_v4_style['il_percentage']:.2f}% (${result_v4_style['il_dollar']:.2f})"
+    )
     print(f"  Base Fee: {result_v4_style['base_fee_bps']:.0f} bps")
     print(
         f"  Effective Fee (Hook): {result_v4_style['effective_fee_bps']:.0f} bps ({result_v4_style['fee_modifier']:.2f}x)"
@@ -456,7 +501,9 @@ if __name__ == "__main__":
     # Direct comparison
     print("\n3️⃣  V3 vs V4 COMPARISON")
     print("-" * 80)
-    comparison = calc_v4_style.compare_v3_vs_v4(current_price=2100, days_elapsed=30, daily_volume=50_000_000)
+    comparison = calc_v4_style.compare_v3_vs_v4(
+        current_price=2100, days_elapsed=30, daily_volume=50_000_000
+    )
 
     print(f"  V3 Total Benefit: ${comparison['v3']['total_benefit']:.2f}")
     print(f"  V4 Total Benefit: ${comparison['v4']['total_benefit']:.2f}")

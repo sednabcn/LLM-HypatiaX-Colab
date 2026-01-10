@@ -53,7 +53,14 @@ class AutoMigrate:
             json.dump(self.state, f, indent=2)
 
     def _resolve_path(
-        self, filename: str, style: str, package: str, modules: str, domains: str, sub_domains: str, folder: str
+        self,
+        filename: str,
+        style: str,
+        package: str,
+        modules: str,
+        domains: str,
+        sub_domains: str,
+        folder: str,
     ) -> Optional[Path]:
         """
         Resolve filename to actual path.
@@ -156,7 +163,9 @@ class AutoMigrate:
 
         return True, "ok"
 
-    def _create_backup(self, path: Path, backup_subdir: str, reason: str = "auto") -> Optional[Path]:
+    def _create_backup(
+        self, path: Path, backup_subdir: str, reason: str = "auto"
+    ) -> Optional[Path]:
         """
         Create timestamped backup - KEEPS ALL OLD VERSIONS.
 
@@ -245,7 +254,9 @@ class AutoMigrate:
         """
 
         # Resolve path
-        obj_path = self._resolve_path(filename, style, package, modules, domains, sub_domains, folder)
+        obj_path = self._resolve_path(
+            filename, style, package, modules, domains, sub_domains, folder
+        )
 
         if obj_path is None:
             return {"status": "error", "message": "Could not resolve path"}
@@ -267,7 +278,9 @@ class AutoMigrate:
         else:
             return {"status": "error", "message": f"Unknown action: {action}"}
 
-    def _migrate(self, obj_path: Path, style: str, backup_subdir: str, force: bool) -> Dict:
+    def _migrate(
+        self, obj_path: Path, style: str, backup_subdir: str, force: bool
+    ) -> Dict:
         """
         Migrate: detect changes, create backups, auto-restore if broken.
         KEEPS ALL OLD VERSIONS with timestamps.
@@ -339,7 +352,10 @@ class AutoMigrate:
             }
 
             self._save_state()
-            return {"status": "new", "backup": str(backup_path) if backup_path else None}
+            return {
+                "status": "new",
+                "backup": str(backup_path) if backup_path else None,
+            }
 
         # EXISTING - check changes
         old_hash = self.state["tracked"][obj_key]["hash"]
@@ -366,7 +382,10 @@ class AutoMigrate:
             )
 
             self._save_state()
-            return {"status": reason, "backup": str(backup_path) if backup_path else None}
+            return {
+                "status": reason,
+                "backup": str(backup_path) if backup_path else None,
+            }
 
         else:
             print(f"   ✓ No changes")
@@ -463,7 +482,9 @@ class AutoBackup:
             @wraps(func)
             def wrapper(*args, **func_kwargs) -> Any:
                 print(f"\n🔒 Auto-backup BEFORE: {func.__name__}")
-                result = self.migrator.execute("migrate", filename, style, force=True, **kwargs)
+                result = self.migrator.execute(
+                    "migrate", filename, style, force=True, **kwargs
+                )
                 print(f"   Backup status: {result.get('status')}")
 
                 return func(*args, **func_kwargs)
@@ -490,7 +511,9 @@ class AutoBackup:
                 result = func(*args, **func_kwargs)
 
                 print(f"\n💾 Auto-backup AFTER: {func.__name__}")
-                backup_result = self.migrator.execute("migrate", filename, style, force=True, **kwargs)
+                backup_result = self.migrator.execute(
+                    "migrate", filename, style, force=True, **kwargs
+                )
                 print(f"   Backup status: {backup_result.get('status')}")
 
                 return result
@@ -516,7 +539,9 @@ class AutoBackup:
         # Backup BEFORE
         if when in ["before", "both"]:
             print(f"\n🔒 Auto-backup BEFORE")
-            result = self.migrator.execute("migrate", filename, style, force=True, **kwargs)
+            result = self.migrator.execute(
+                "migrate", filename, style, force=True, **kwargs
+            )
             print(f"   Status: {result.get('status')}")
 
         try:
@@ -529,7 +554,9 @@ class AutoBackup:
             # Backup AFTER
             if when in ["after", "both"]:
                 print(f"\n💾 Auto-backup AFTER")
-                result = self.migrator.execute("migrate", filename, style, force=True, **kwargs)
+                result = self.migrator.execute(
+                    "migrate", filename, style, force=True, **kwargs
+                )
                 print(f"   Status: {result.get('status')}")
 
 
@@ -562,7 +589,9 @@ def list_backups(filename: str, style: str, **kwargs):
 def restore(filename: str, style: str, backup_index: int = -1, **kwargs):
     """Restore from specific backup version."""
     migrator = AutoMigrate()
-    return migrator.execute("restore", filename, style, backup_index=backup_index, **kwargs)
+    return migrator.execute(
+        "restore", filename, style, backup_index=backup_index, **kwargs
+    )
 
 
 def auto_backup_before(filename: str, style: str, **kwargs):

@@ -12,7 +12,9 @@ Create a novel risk metric for Uniswap V3 liquidity providers that:
 """
 
 # Generate candidates
-candidates = generator.generate_and_validate(requirements=requirement, domain="defi", n_candidates=5)
+candidates = generator.generate_and_validate(
+    requirements=requirement, domain="defi", n_candidates=5
+)
 
 # Best formula
 best = candidates[0]

@@ -97,7 +97,9 @@ class FilesManager:
         raise RuntimeError(
             f"Failed to load model '{filename}' after trying all versions.\n"
             f"Last error: {last_error}\n\n"
-            f"Tried paths:\n" + "\n".join(f"  - {p}" for p in paths_to_try if p.exists()) + f"\n\n💡 Solutions:\n"
+            f"Tried paths:\n"
+            + "\n".join(f"  - {p}" for p in paths_to_try if p.exists())
+            + f"\n\n💡 Solutions:\n"
             f"1. Run migration: python migrate_v_7_8.py\n"
             f"2. Rebuild model from rules\n"
             f"3. Check spaCy version: current={self.spacy_version}"

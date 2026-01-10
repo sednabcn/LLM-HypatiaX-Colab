@@ -57,11 +57,19 @@ def load_rules(rule_type: str = "ruler_tableau_formulas") -> list[dict]:
             try:
                 rule = json.loads(line)
             except json.JSONDecodeError as e:
-                raise ValueError(f"Error parsing JSON in {path_to_file.name} on line {line_number}: {e.msg}")
+                raise ValueError(
+                    f"Error parsing JSON in {path_to_file.name} on line {line_number}: {e.msg}"
+                )
 
             # Basic validation
-            if not isinstance(rule, dict) or "label" not in rule or "pattern" not in rule:
-                raise ValueError(f"Invalid rule format in {path_to_file.name} on line {line_number}: {rule}")
+            if (
+                not isinstance(rule, dict)
+                or "label" not in rule
+                or "pattern" not in rule
+            ):
+                raise ValueError(
+                    f"Invalid rule format in {path_to_file.name} on line {line_number}: {rule}"
+                )
 
             rules.append(rule)
 
@@ -193,5 +201,9 @@ if __name__ == "__main__":
     print("-" * 80)
     print("\n✅ Component test complete!")
     print("\n💡 Backups are automatically managed in .versions/ directory")
-    print("   • To list backups: python -m hypatiax.auto_migrate list ruler_tableau_formulas.jsonl rules")
-    print("   • To restore: python -m hypatiax.auto_migrate restore ruler_tableau_formulas.jsonl rules --index 0")
+    print(
+        "   • To list backups: python -m hypatiax.auto_migrate list ruler_tableau_formulas.jsonl rules"
+    )
+    print(
+        "   • To restore: python -m hypatiax.auto_migrate restore ruler_tableau_formulas.jsonl rules --index 0"
+    )

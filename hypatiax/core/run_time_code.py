@@ -29,8 +29,12 @@ config_data_preparation = {
     "val_data": False,
     "option": None,
 }
-config_data_prep = pd.DataFrame.from_dict(config_data_preparation, columns=list(config_data_preparation.keys()))
-config_path = resources.files("hypatiax.models.queries.tableau.model_configs").joinpath(f"config_data_preparation_{i}")
+config_data_prep = pd.DataFrame.from_dict(
+    config_data_preparation, columns=list(config_data_preparation.keys())
+)
+config_path = resources.files("hypatiax.models.queries.tableau.model_configs").joinpath(
+    f"config_data_preparation_{i}"
+)
 config_data_prep.to_csv(config_path)
 # Preparing the Data
 X_train, X_val, X_test = preparation_data(**config_data_preparation)
@@ -50,8 +54,12 @@ config_training = {
     "val_data": X_val,
     "option": None,
 }
-config_training = pd.DataFrame.from_dict(config_training, columns=list(config_training.keys()))
-config_training_path = resources.files("hypatiax.models.queries.tableau.model_configs").joinpath(f"config_training_{i}")
+config_training = pd.DataFrame.from_dict(
+    config_training, columns=list(config_training.keys())
+)
+config_training_path = resources.files(
+    "hypatiax.models.queries.tableau.model_configs"
+).joinpath(f"config_training_{i}")
 config_data_prep.to_csv(config_training_path)
 
 # Training the Model
@@ -70,7 +78,9 @@ if config_data_preparation["dtype"] == "both":
 else:
     entity_path = resources.files(
         f'hypatiax.data_spacy.{config_data_preparation["domain"]}.{config_data_preparation["sub_domain"]}'
-    ).joinpath(f'ner_{config_data_preparation["sub_domain"]}_{config_data_preparation["dtype"]}')
+    ).joinpath(
+        f'ner_{config_data_preparation["sub_domain"]}_{config_data_preparation["dtype"]}'
+    )
 
 # Validate the Model
 validation_data = X_val

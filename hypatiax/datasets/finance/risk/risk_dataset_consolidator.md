@@ -1,5 +1,5 @@
 (py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/datasets/finance/risk]
-└─$ tree                                                                                                                     
+└─$ tree
 .
 ├── data
 │   ├── historical_prices_20251214_135738.csv
@@ -134,4 +134,3 @@ Output directory: data/processed
 ✓ Consolidation complete! Check the 'data/processed' directory.
 ✓ Scanned 6 CSV files
 ✓ Scanned 7 JSON files
-

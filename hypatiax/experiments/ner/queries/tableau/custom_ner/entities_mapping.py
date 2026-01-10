@@ -228,7 +228,9 @@ class FormulaGenerator:
             formula_parts.append(value)
 
             # Add space after (if not last element)
-            if i < len(formula_entities) - 1 and self._needs_space_after(entity_type, value):
+            if i < len(formula_entities) - 1 and self._needs_space_after(
+                entity_type, value
+            ):
                 formula_parts.append(" ")
 
         return "".join(formula_parts)
@@ -249,7 +251,9 @@ class FormulaGenerator:
             return True
         return False
 
-    def generate_with_validation(self, formula_entities: List[Dict]) -> Tuple[str, bool, str]:
+    def generate_with_validation(
+        self, formula_entities: List[Dict]
+    ) -> Tuple[str, bool, str]:
         """
         Generate formula with validation
         Returns: (formula, is_valid, error_message)
@@ -317,7 +321,9 @@ def demonstrate_point2_and_point3():
     print(f"  {formula}")
 
     # Validate
-    formula_valid, is_valid, message = generator.generate_with_validation(formula_entities)
+    formula_valid, is_valid, message = generator.generate_with_validation(
+        formula_entities
+    )
     print(f"\n[VALIDATION] {message}")
 
     # Test more examples
@@ -326,9 +332,27 @@ def demonstrate_point2_and_point3():
     print("=" * 70)
 
     test_cases = [
-        ("volume of sphere", [{"label": "TARGET", "text": "volume"}, {"label": "OBJECT", "text": "sphere"}]),
-        ("area of square", [{"label": "TARGET", "text": "area"}, {"label": "OBJECT", "text": "square"}]),
-        ("perimeter of square", [{"label": "TARGET", "text": "perimeter"}, {"label": "OBJECT", "text": "square"}]),
+        (
+            "volume of sphere",
+            [
+                {"label": "TARGET", "text": "volume"},
+                {"label": "OBJECT", "text": "sphere"},
+            ],
+        ),
+        (
+            "area of square",
+            [
+                {"label": "TARGET", "text": "area"},
+                {"label": "OBJECT", "text": "square"},
+            ],
+        ),
+        (
+            "perimeter of square",
+            [
+                {"label": "TARGET", "text": "perimeter"},
+                {"label": "OBJECT", "text": "square"},
+            ],
+        ),
     ]
 
     for description, entities in test_cases:
@@ -356,7 +380,10 @@ def demonstrate_training():
     # Training pairs: (description_entities, formula_entities)
     training_data = [
         (
-            [{"label": "TARGET", "text": "circumference"}, {"label": "OBJECT", "text": "circle"}],
+            [
+                {"label": "TARGET", "text": "circumference"},
+                {"label": "OBJECT", "text": "circle"},
+            ],
             [
                 {"type": "VAR", "value": "C"},
                 {"type": "OPER", "value": "="},
@@ -373,7 +400,10 @@ def demonstrate_training():
 
     # Test the trained mapping
     print("\n[TESTING] Using newly learned pattern...")
-    test_entities = [{"label": "TARGET", "text": "circumference"}, {"label": "OBJECT", "text": "circle"}]
+    test_entities = [
+        {"label": "TARGET", "text": "circumference"},
+        {"label": "OBJECT", "text": "circle"},
+    ]
 
     formula_entities = mapper.map_entities(test_entities)
     generator = FormulaGenerator()

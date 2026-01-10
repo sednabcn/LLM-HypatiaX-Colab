@@ -16,12 +16,17 @@ engine = HypatiaXEngine()
 @app.route("/api/map", methods=["POST"])
 def map_description():
     data = request.get_json()
-    result = engine.process(query=data["description"], method=data.get("method", "vocab"))
+    result = engine.process(
+        query=data["description"], method=data.get("method", "vocab")
+    )
 
     return jsonify(
         {
             "formula": result.formula,
-            "entities": [{"text": e.text, "label": e.label, "start": e.start, "end": e.end} for e in result.entities],
+            "entities": [
+                {"text": e.text, "label": e.label, "start": e.start, "end": e.end}
+                for e in result.entities
+            ],
             "confidence": result.confidence,
             "processing_time": result.processing_time,
         }

@@ -91,7 +91,12 @@ class BenchmarkRunner:
             "test_file": test_file,
         }
 
-    def run_all(self, components: List[str] = None, include_slow: bool = False, ci_mode: bool = False) -> Dict:
+    def run_all(
+        self,
+        components: List[str] = None,
+        include_slow: bool = False,
+        ci_mode: bool = False,
+    ) -> Dict:
         """Run all or selected component benchmarks."""
 
         components = components or list(self.components.keys())
@@ -136,8 +141,12 @@ class BenchmarkRunner:
 
         # Generate summary
         total_components = len(results["components"])
-        passed_components = sum(1 for r in results["components"].values() if r.get("passed"))
-        total_time = sum(r.get("elapsed_seconds", 0) for r in results["components"].values())
+        passed_components = sum(
+            1 for r in results["components"].values() if r.get("passed")
+        )
+        total_time = sum(
+            r.get("elapsed_seconds", 0) for r in results["components"].values()
+        )
 
         results["summary"] = {
             "total_components": total_components,
@@ -320,7 +329,9 @@ class UnifiedBenchmarkRegistry:
     """
 
     def __init__(self, storage_path: Path = None):
-        self.storage_path = storage_path or Path("benchmark_results/unified_registry.json")
+        self.storage_path = storage_path or Path(
+            "benchmark_results/unified_registry.json"
+        )
         self.storage_path.parent.mkdir(parents=True, exist_ok=True)
         self.registry = self._load_registry()
 
@@ -394,9 +405,13 @@ class UnifiedBenchmarkRegistry:
             )
 
         self.save_registry()
-        print(f"✅ Registered {len(component_results.get('components', {}))} component results")
+        print(
+            f"✅ Registered {len(component_results.get('components', {}))} component results"
+        )
 
-    def register_result(self, benchmark_id: str, result: Dict, timestamp: str, source: str):
+    def register_result(
+        self, benchmark_id: str, result: Dict, timestamp: str, source: str
+    ):
         """Register individual benchmark result."""
         if benchmark_id not in self.registry["benchmarks"]:
             self.registry["benchmarks"][benchmark_id] = {
@@ -416,9 +431,9 @@ class UnifiedBenchmarkRegistry:
 
         # Keep only last 100 results
         if len(self.registry["benchmarks"][benchmark_id]["history"]) > 100:
-            self.registry["benchmarks"][benchmark_id]["history"] = self.registry["benchmarks"][benchmark_id]["history"][
-                -100:
-            ]
+            self.registry["benchmarks"][benchmark_id]["history"] = self.registry[
+                "benchmarks"
+            ][benchmark_id]["history"][-100:]
 
         # Update global history
         self.registry["history"].append(
@@ -578,7 +593,9 @@ class BenchmarkVisualizer:
 
         html = self._build_html_report(results)
 
-        output_file = self.results_dir / f"report_{results.get('timestamp', 'latest')}.html"
+        output_file = (
+            self.results_dir / f"report_{results.get('timestamp', 'latest')}.html"
+        )
         with open(output_file, "w") as f:
             f.write(html)
 
@@ -1004,7 +1021,11 @@ class BenchmarkComparator:
                         "change_percent": change_percent,
                         "current": current_time,
                         "baseline": baseline_time,
-                        "severity": "critical" if change_percent > 50 else "high" if change_percent > 25 else "medium",
+                        "severity": (
+                            "critical"
+                            if change_percent > 50
+                            else "high" if change_percent > 25 else "medium"
+                        ),
                     }
                 )
             elif change_percent < -5:
@@ -1034,7 +1055,9 @@ class BenchmarkComparator:
 
         # Print component-by-component comparison
         print("🔍 Component Analysis:")
-        print(f"{'Component':<20} {'Change':<12} {'Baseline':<12} {'Current':<12} {'Status'}")
+        print(
+            f"{'Component':<20} {'Change':<12} {'Baseline':<12} {'Current':<12} {'Status'}"
+        )
         print("-" * 80)
 
         for component, data in sorted(comparison["components"].items()):
@@ -1053,20 +1076,32 @@ class BenchmarkComparator:
             # Format change with sign
             change_str = f"{change:+.1f}%"
 
-            print(f"{component:<20} {change_str:<12} {baseline:<12.2f} {current:<12.2f} {status}")
+            print(
+                f"{component:<20} {change_str:<12} {baseline:<12.2f} {current:<12.2f} {status}"
+            )
 
         # Overall summary
         print(f"\n{'-'*80}")
         overall = comparison["overall_change"]
-        overall_status = "improved" if overall < -5 else "regressed" if overall > 10 else "stable"
+        overall_status = (
+            "improved" if overall < -5 else "regressed" if overall > 10 else "stable"
+        )
         print(f"📈 Overall Change: {overall:+.1f}% ({overall_status})")
         print(f"{'-'*80}\n")
 
         # Print regressions with severity
         if comparison["regressions"]:
             print(f"❌ Performance Regressions ({len(comparison['regressions'])}):")
-            for reg in sorted(comparison["regressions"], key=lambda x: x["change_percent"], reverse=True):
-                severity_icon = "🔴" if reg["severity"] == "critical" else "🟠" if reg["severity"] == "high" else "🟡"
+            for reg in sorted(
+                comparison["regressions"],
+                key=lambda x: x["change_percent"],
+                reverse=True,
+            ):
+                severity_icon = (
+                    "🔴"
+                    if reg["severity"] == "critical"
+                    else "🟠" if reg["severity"] == "high" else "🟡"
+                )
                 print(
                     f"   {severity_icon} {reg['component']:<20} {reg['change_percent']:+6.1f}% "
                     f"({reg['baseline']:.2f}s → {reg['current']:.2f}s)"
@@ -1076,7 +1111,9 @@ class BenchmarkComparator:
         # Print improvements
         if comparison["improvements"]:
             print(f"✅ Performance Improvements ({len(comparison['improvements'])}):")
-            for imp in sorted(comparison["improvements"], key=lambda x: x["change_percent"]):
+            for imp in sorted(
+                comparison["improvements"], key=lambda x: x["change_percent"]
+            ):
                 print(
                     f"   ⚡ {imp['component']:<20} {imp['change_percent']:+6.1f}% "
                     f"({imp['baseline']:.2f}s → {imp['current']:.2f}s)"
@@ -1089,7 +1126,9 @@ class BenchmarkComparator:
 
         print(f"{'='*80}\n")
 
-    def generate_comparison_report(self, current_file: Path, baseline_file: Path, output_file: Path = None) -> Path:
+    def generate_comparison_report(
+        self, current_file: Path, baseline_file: Path, output_file: Path = None
+    ) -> Path:
         """Generate a detailed comparison report as JSON."""
         comparison = self.compare_two_runs(current_file, baseline_file)
 
@@ -1146,7 +1185,9 @@ class BenchmarkComparator:
                 # Overall (average of all components)
                 components = results.get("components", {})
                 if components:
-                    avg_time = sum(c.get("elapsed_seconds", 0) for c in components.values()) / len(components)
+                    avg_time = sum(
+                        c.get("elapsed_seconds", 0) for c in components.values()
+                    ) / len(components)
                     trend_data["data_points"].append(
                         {
                             "timestamp": timestamp,
@@ -1165,8 +1206,14 @@ class BenchmarkComparator:
                 "first": values[0],
                 "last": values[-1],
                 "change": values[-1] - values[0],
-                "change_percent": ((values[-1] - values[0]) / values[0] * 100) if values[0] > 0 else 0,
-                "trend": "improving" if values[-1] < values[0] else "degrading" if values[-1] > values[0] else "stable",
+                "change_percent": (
+                    ((values[-1] - values[0]) / values[0] * 100) if values[0] > 0 else 0
+                ),
+                "trend": (
+                    "improving"
+                    if values[-1] < values[0]
+                    else "degrading" if values[-1] > values[0] else "stable"
+                ),
             }
 
         return trend_data
@@ -1213,9 +1260,13 @@ def compare_with_baseline(current_file: Path, baseline_file: Path = None) -> int
 
     # Return exit code based on regressions
     if comparison["regressions"]:
-        critical_regressions = [r for r in comparison["regressions"] if r["severity"] == "critical"]
+        critical_regressions = [
+            r for r in comparison["regressions"] if r["severity"] == "critical"
+        ]
         if critical_regressions:
-            print(f"🔴 CRITICAL: {len(critical_regressions)} critical performance regressions detected!")
+            print(
+                f"🔴 CRITICAL: {len(critical_regressions)} critical performance regressions detected!"
+            )
         return 1
 
     return 0

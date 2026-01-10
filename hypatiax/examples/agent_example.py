@@ -5,8 +5,7 @@ from agents.workflows.hybrid_workflow import HybridWorkflow
 
 def main():
     """Demonstrate agent workflow"""
-    print("Agent-based Expression Mapping Example
-")
+    print("Agent-based Expression Mapping Example")
 
     # Create workflow
     workflow = HybridWorkflow()

@@ -134,9 +134,11 @@ Uses PySR to discover mathematical formulas from test data.
 """
 
 import json
-import pandas as pd
-import numpy as np
 from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
 from typing import Dict, Perfect! Now you have a complete pipeline. Here's how to use it:
 Step-by-Step Workflow
 1. Organize Your Mixed Files
@@ -251,8 +253,10 @@ This creates the input datasets that run_discovery.py will process
 """
 
 import json
-import numpy as np
 from pathlib import Path
+
+import numpy as np
+
 from datetime import datetiNow here's the complete workflow:
 Complete Solution: 3-Step Process
 Step 1: Generate Pure Test Data
@@ -357,7 +361,7 @@ class CompleteDeFiFormulaGenerator:
         """
         try:
             # ==================== PHASE 1: ADVANCED DEFI (1-10) ====================
-            
+
             if formula_num == 1:  # Price Impact
                 print("\n1. Price Impact (Constant Product AMM)")
                 amount_in = np.random.uniform(1, 1000, n_samples)

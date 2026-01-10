@@ -33,7 +33,10 @@ class CombinedData:
         if isinstance(data, pd.DataFrame) and len(data.columns) == 2:
             # Combine the two columns with a colon in between
             data["Combined"] = data[data.columns[0]] + " : " + data[data.columns[1]]
-            assert data.shape == (nrows, ncols + 1), "Data does not have the expected shape."
+            assert data.shape == (
+                nrows,
+                ncols + 1,
+            ), "Data does not have the expected shape."
 
         # Saving data to disk in the appropriate format
         output_path = Path(path_out) / f"{filename_}_combined.{ext}"
@@ -50,6 +53,8 @@ if __name__ == "__main__":
 
     # Assuming 'datasets.queries.training' is a valid Python package
     Cd = CombinedData("datasets", "queries", "tableau", "training")
-    file_path = resources.files("hypatiax.datasets.queries.tableau.training").joinpath("")
+    file_path = resources.files("hypatiax.datasets.queries.tableau.training").joinpath(
+        ""
+    )
     # output_path = Path.cwd()  # Adjust the output directory as needed
     Cd.combined_process("formulas.xlsx", file_path)

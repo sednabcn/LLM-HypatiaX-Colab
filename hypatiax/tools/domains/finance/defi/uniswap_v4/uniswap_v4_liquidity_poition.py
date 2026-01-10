@@ -132,7 +132,12 @@ class UniswapV4Singleton:
         return 1.0001**tick
 
     def _calculate_liquidity(
-        self, amount0: float, amount1: float, price_lower: float, price_upper: float, price_current: float
+        self,
+        amount0: float,
+        amount1: float,
+        price_lower: float,
+        price_upper: float,
+        price_current: float,
     ) -> float:
         """Calculate liquidity (SAME AS V3)"""
         sqrt_Pa = math.sqrt(price_lower)
@@ -144,7 +149,11 @@ class UniswapV4Singleton:
         elif price_current >= price_upper:
             L = amount1 / (sqrt_Pb - sqrt_Pa) if amount1 > 0 else 0
         else:
-            L0 = amount0 * sqrt_P * sqrt_Pb / (sqrt_Pb - sqrt_P) if amount0 > 0 else float("inf")
+            L0 = (
+                amount0 * sqrt_P * sqrt_Pb / (sqrt_Pb - sqrt_P)
+                if amount0 > 0
+                else float("inf")
+            )
             L1 = amount1 / (sqrt_P - sqrt_Pa) if amount1 > 0 else float("inf")
             L = min(L0, L1)
 
@@ -198,15 +207,23 @@ class UniswapV4Singleton:
 
         # HOOK: beforeAddLiquidity
         if pool_key.hook_address:
-            hook_result = self._call_hook_before_add_liquidity(pool_key, amount0_desired, amount1_desired, hook_data)
+            hook_result = self._call_hook_before_add_liquidity(
+                pool_key, amount0_desired, amount1_desired, hook_data
+            )
             if not hook_result["allowed"]:
-                raise ValueError(f"Hook rejected: {hook_result.get('reason', 'Unknown')}")
+                raise ValueError(
+                    f"Hook rejected: {hook_result.get('reason', 'Unknown')}"
+                )
 
         # Calculate liquidity (SAME AS V3)
-        L = self._calculate_liquidity(amount0_desired, amount1_desired, price_lower, price_upper, price_current)
+        L = self._calculate_liquidity(
+            amount0_desired, amount1_desired, price_lower, price_upper, price_current
+        )
 
         # Calculate actual amounts needed (SAME AS V3)
-        amount0, amount1 = self._calculate_amounts(L, price_lower, price_upper, price_current)
+        amount0, amount1 = self._calculate_amounts(
+            L, price_lower, price_upper, price_current
+        )
 
         # Create position NFT
         position_id = self.next_position_id
@@ -248,7 +265,11 @@ class UniswapV4Singleton:
         }
 
     def _call_hook_before_add_liquidity(
-        self, pool_key: PoolKey, amount0: float, amount1: float, hook_data: Optional[bytes]
+        self,
+        pool_key: PoolKey,
+        amount0: float,
+        amount1: float,
+        hook_data: Optional[bytes],
     ) -> Dict:
         """Simulate hook call before adding liquidity"""
         # This would call actual hook contract in real V4
@@ -263,7 +284,9 @@ class UniswapV4Singleton:
 
         return {"allowed": True}
 
-    def _call_hook_after_add_liquidity(self, pool_key: PoolKey, position_id: int, liquidity: float):
+    def _call_hook_after_add_liquidity(
+        self, pool_key: PoolKey, position_id: int, liquidity: float
+    ):
         """Simulate hook call after adding liquidity"""
         # Hook could track liquidity events, update rewards, etc.
         pass
@@ -279,7 +302,10 @@ class UniswapV4Singleton:
 
         # Calculate current amounts (SAME AS V3)
         amount0, amount1 = self._calculate_amounts(
-            position.liquidity, position.price_lower, position.price_upper, price_current
+            position.liquidity,
+            position.price_lower,
+            position.price_upper,
+            price_current,
         )
 
         # Calculate values
@@ -328,8 +354,12 @@ class UniswapV4Singleton:
         del self.positions[position_id]
 
         # FLASH ACCOUNTING: Track deltas
-        self.flash_deltas["token0"] = self.flash_deltas.get("token0", 0) - value_data["amount0"]
-        self.flash_deltas["token1"] = self.flash_deltas.get("token1", 0) - value_data["amount1"]
+        self.flash_deltas["token0"] = (
+            self.flash_deltas.get("token0", 0) - value_data["amount0"]
+        )
+        self.flash_deltas["token1"] = (
+            self.flash_deltas.get("token1", 0) - value_data["amount1"]
+        )
 
         # HOOK: afterRemoveLiquidity
         # (would call hook contract here)
@@ -373,10 +403,14 @@ class UniswapV4Singleton:
         # No actual token transfer yet
         if zero_for_one:
             self.flash_deltas["token0"] = self.flash_deltas.get("token0", 0) + amount_in
-            self.flash_deltas["token1"] = self.flash_deltas.get("token1", 0) - amount_out
+            self.flash_deltas["token1"] = (
+                self.flash_deltas.get("token1", 0) - amount_out
+            )
         else:
             self.flash_deltas["token1"] = self.flash_deltas.get("token1", 0) + amount_in
-            self.flash_deltas["token0"] = self.flash_deltas.get("token0", 0) - amount_out
+            self.flash_deltas["token0"] = (
+                self.flash_deltas.get("token0", 0) - amount_out
+            )
 
         # HOOK: afterSwap
         if pool_key.hook_address:
@@ -459,7 +493,11 @@ def example_v4_position_lifecycle():
 
     # Define pool with hook
     pool_key = PoolKey(
-        token0="ETH", token1="USDC", fee=3000, tick_spacing=60, hook_address="0x1234...5678"  # 0.3%  # Dynamic fee hook
+        token0="ETH",
+        token1="USDC",
+        fee=3000,
+        tick_spacing=60,
+        hook_address="0x1234...5678",  # 0.3%  # Dynamic fee hook
     )
 
     current_price = 2000
@@ -489,14 +527,18 @@ def example_v4_position_lifecycle():
 
     print(f"  Position NFT ID: #{position['position_id']}")
     print(f"  Range: ${position['price_lower']:.0f} - ${position['price_upper']:.0f}")
-    print(f"  Deposited: {position['amount0_deposited']:.4f} ETH + ${position['amount1_deposited']:.2f} USDC")
+    print(
+        f"  Deposited: {position['amount0_deposited']:.4f} ETH + ${position['amount1_deposited']:.2f} USDC"
+    )
     print(f"  Liquidity: {position['liquidity']:.2f}")
     print(f"  Hook: {position['hook_address']}")
     print()
 
     print("STEP 3: PERFORM SWAP WITH FLASH ACCOUNTING")
     print("-" * 80)
-    swap_result = v4_singleton.swap(pool_key=pool_key, amount_in=100, zero_for_one=False)  # 100 USDC
+    swap_result = v4_singleton.swap(
+        pool_key=pool_key, amount_in=100, zero_for_one=False
+    )  # 100 USDC
 
     print(f"  Swap: 100 USDC → {swap_result['amount_out']:.4f} ETH")
     print(f"  Fee Modifier (Hook): {swap_result['fee_modifier']:.2f}x")
@@ -530,7 +572,9 @@ def example_v4_position_lifecycle():
     print("-" * 80)
     withdraw = v4_singleton.burn_position(position["position_id"], new_price)
 
-    print(f"  Withdrew: {withdraw['amount0_withdrawn']:.4f} ETH + ${withdraw['amount1_withdrawn']:.2f} USDC")
+    print(
+        f"  Withdrew: {withdraw['amount0_withdrawn']:.4f} ETH + ${withdraw['amount1_withdrawn']:.2f} USDC"
+    )
     print(f"  Total Value: ${withdraw['total_value']:.2f}")
     print()
 

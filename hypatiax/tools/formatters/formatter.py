@@ -202,7 +202,9 @@ class InterpretationFormatter:
 
     def to_yaml(self, result: Dict) -> str:
         """Convert to YAML format (more readable than JSON)."""
-        return yaml.dump(result, default_flow_style=False, allow_unicode=True, sort_keys=False)
+        return yaml.dump(
+            result, default_flow_style=False, allow_unicode=True, sort_keys=False
+        )
 
     def to_table(self, results: list[Dict]):
         """Display multiple results in a comparison table."""
@@ -215,7 +217,12 @@ class InterpretationFormatter:
 
         for result in results:
             insight = result.get("interpretation", "")[:100] + "..."
-            table.add_row(result["expression"], f"{result['r2_score']:.4f}", result["domain"].upper(), insight)
+            table.add_row(
+                result["expression"],
+                f"{result['r2_score']:.4f}",
+                result["domain"].upper(),
+                insight,
+            )
 
         self.console.print(table)
 

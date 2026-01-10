@@ -14,8 +14,20 @@ def defi_protocols():
             "apy": 0.15,
             "type": "dex",
         },
-        "aave_v3": {"name": "Aave V3", "tvl": 5_800_000_000, "volume_24h": 450_000_000, "apy": 0.03, "type": "lending"},
-        "curve": {"name": "Curve Finance", "tvl": 4_200_000_000, "volume_24h": 800_000_000, "apy": 0.08, "type": "dex"},
+        "aave_v3": {
+            "name": "Aave V3",
+            "tvl": 5_800_000_000,
+            "volume_24h": 450_000_000,
+            "apy": 0.03,
+            "type": "lending",
+        },
+        "curve": {
+            "name": "Curve Finance",
+            "tvl": 4_200_000_000,
+            "volume_24h": 800_000_000,
+            "apy": 0.08,
+            "type": "dex",
+        },
     }
 
 

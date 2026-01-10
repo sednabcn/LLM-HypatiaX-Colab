@@ -53,13 +53,13 @@ self.config = {
     'amm_samples': 100,
     'il_samples': 100,
     # ... more categories
-    
+
     # Reserve scales for different pool sizes
     'reserve_scales': [1000, 10000, 100000, 1000000],
-    
+
     # Fee tiers for different protocols
     'fee_tiers': [0.0005, 0.003, 0.01, 0.03],
-    
+
     # Price ranges for volatility scenarios
     'price_ranges': [(0.1, 10), (0.5, 2.0), (0.8, 1.2)],
 }
@@ -103,15 +103,15 @@ Want to add a new formula variant? Just modify the loop:
 def generate_amm_formulas(self, n_samples=None):
     if n_samples is None:
         n_samples = self.config['amm_samples']
-    
+
     # Easy to add more variants by changing range
     for i in range(30):  # Change to 40 for 40 formulas
         formula_num = i + 1
-        
+
         # Use configurable parameters
         reserve_scale = self.config['reserve_scales'][i % len(self.config['reserve_scales'])]
         fee_tier = self.config['fee_tiers'][i % len(self.config['fee_tiers'])]
-        
+
         # ... rest of formula logic
 ```
 
@@ -128,20 +128,20 @@ def _process_formula(self, formula_num, X, y, var_names, var_desc, description):
     try:
         # 1. Validate first
         self.validate_dataset(X, y)
-        
+
         # 2. Attempt discovery
         result = self.system.discover_validate_interpret(...)
-        
+
         # 3. Track success
         self.successful += 1
-        
+
     except ValueError as e:
         # Data quality issues
         self.failed += 1
         print(f"⚠️  Formula {formula_num} VALIDATION ERROR:")
         print(f"    Description: {description}")
         print(f"    Error: {str(e)}")
-        
+
     except Exception as e:
         # Discovery/processing issues
         self.failed += 1

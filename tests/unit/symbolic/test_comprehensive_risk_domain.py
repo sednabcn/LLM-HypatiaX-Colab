@@ -141,7 +141,9 @@ def latex_to_python(latex_str: str) -> str:
     max_iterations = 10
     for _ in range(max_iterations):
         new = re.sub(
-            r"\\frac\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}", r"((\1)/(\2))", current
+            r"\\frac\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}",
+            r"((\1)/(\2))",
+            current,
         )
         if new == current:
             break

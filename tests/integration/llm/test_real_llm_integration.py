@@ -17,7 +17,10 @@ import pytest
 os.environ.setdefault("ANTHROPIC_API_KEY", "test-key-anthropic")
 os.environ.setdefault("GEMINI_API_KEY", "test-key-gemini")
 
-from hypatiax.tools.symbolic.hybrid_system import HybridDiscoverySystem, LLMProviderError
+from hypatiax.tools.symbolic.hybrid_system import (
+    HybridDiscoverySystem,
+    LLMProviderError,
+)
 
 
 class TestAnthropicIntegration:
@@ -27,18 +30,26 @@ class TestAnthropicIntegration:
     def system(self):
         """Create system with Anthropic as primary provider"""
         return HybridDiscoverySystem(
-            domain="defi", primary_llm="anthropic", enable_fallback=False, max_retries=2, retry_delay=0.1
+            domain="defi",
+            primary_llm="anthropic",
+            enable_fallback=False,
+            max_retries=2,
+            retry_delay=0.1,
         )
 
     def test_anthropic_client_initialization(self, system):
         """Test that Anthropic client initializes correctly"""
         # Should initialize if API key is present
-        assert system.anthropic_client is not None or os.getenv("ANTHROPIC_API_KEY") is None
+        assert (
+            system.anthropic_client is not None
+            or os.getenv("ANTHROPIC_API_KEY") is None
+        )
         assert system.primary_llm == "anthropic"
 
     @pytest.mark.integration
     @pytest.mark.skipif(
-        not os.getenv("ANTHROPIC_API_KEY") or os.getenv("ANTHROPIC_API_KEY").startswith("test-"),
+        not os.getenv("ANTHROPIC_API_KEY")
+        or os.getenv("ANTHROPIC_API_KEY").startswith("test-"),
         reason="Real Anthropic API key required",
     )
     def test_real_anthropic_api_call(self, system):
@@ -47,7 +58,10 @@ class TestAnthropicIntegration:
 
         try:
             response = system._call_anthropic(
-                prompt=prompt, model="claude-sonnet-4-5-20250929", max_tokens=100, temperature=0.0
+                prompt=prompt,
+                model="claude-sonnet-4-5-20250929",
+                max_tokens=100,
+                temperature=0.0,
             )
 
             assert isinstance(response, str)
@@ -97,7 +111,9 @@ class TestAnthropicIntegration:
         """Test parsing of Anthropic response formats"""
         with patch.object(system.anthropic_client.messages, "create") as mock_create:
             # Test normal response
-            mock_create.return_value = Mock(content=[Mock(text="This is a test response")])
+            mock_create.return_value = Mock(
+                content=[Mock(text="This is a test response")]
+            )
 
             response = system._call_anthropic("test")
             assert response == "This is a test response"
@@ -116,8 +132,12 @@ class TestAnthropicIntegration:
         ]
 
         for model in models:
-            with patch.object(system.anthropic_client.messages, "create") as mock_create:
-                mock_create.return_value = Mock(content=[Mock(text=f"Response from {model}")])
+            with patch.object(
+                system.anthropic_client.messages, "create"
+            ) as mock_create:
+                mock_create.return_value = Mock(
+                    content=[Mock(text=f"Response from {model}")]
+                )
 
                 response = system._call_anthropic("test", model=model)
                 assert model in mock_create.call_args[1]["model"] or model in response
@@ -130,7 +150,11 @@ class TestGeminiIntegration:
     def system(self):
         """Create system with Gemini as primary provider"""
         return HybridDiscoverySystem(
-            domain="defi", primary_llm="google", enable_fallback=False, max_retries=2, retry_delay=0.1
+            domain="defi",
+            primary_llm="google",
+            enable_fallback=False,
+            max_retries=2,
+            retry_delay=0.1,
         )
 
     def test_gemini_client_initialization(self, system):
@@ -140,7 +164,8 @@ class TestGeminiIntegration:
 
     @pytest.mark.integration
     @pytest.mark.skipif(
-        not os.getenv("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY").startswith("test-"),
+        not os.getenv("GEMINI_API_KEY")
+        or os.getenv("GEMINI_API_KEY").startswith("test-"),
         reason="Real Gemini API key required",
     )
     def test_real_gemini_api_call(self, system):
@@ -148,7 +173,9 @@ class TestGeminiIntegration:
         prompt = "What is 2+2? Answer with just the number."
 
         try:
-            response = system._call_gemini(prompt=prompt, model="gemini-2.5-flash", max_tokens=50, temperature=0.0)
+            response = system._call_gemini(
+                prompt=prompt, model="gemini-2.5-flash", max_tokens=50, temperature=0.0
+            )
 
             assert isinstance(response, str)
             assert len(response) > 0
@@ -215,7 +242,11 @@ class TestFallbackMechanism:
     def system_with_fallback(self):
         """Create system with fallback enabled"""
         return HybridDiscoverySystem(
-            domain="defi", primary_llm="anthropic", enable_fallback=True, max_retries=1, retry_delay=0.1
+            domain="defi",
+            primary_llm="anthropic",
+            enable_fallback=True,
+            max_retries=1,
+            retry_delay=0.1,
         )
 
     def test_fallback_anthropic_to_gemini(self, system_with_fallback):
@@ -231,7 +262,9 @@ class TestFallbackMechanism:
             mock_claude.side_effect = LLMProviderError("Claude failed")
             mock_gemini.return_value = "Gemini fallback response"
 
-            result = system._interpret_with_llm(expression="x + y", variables={"x": "input", "y": "output"}, r2=0.95)
+            result = system._interpret_with_llm(
+                expression="x + y", variables={"x": "input", "y": "output"}, r2=0.95
+            )
 
             assert mock_claude.call_count == 1
             assert mock_gemini.call_count == 1
@@ -240,7 +273,9 @@ class TestFallbackMechanism:
 
     def test_fallback_gemini_to_anthropic(self):
         """Test fallback from Gemini to Claude on failure"""
-        system = HybridDiscoverySystem(domain="defi", primary_llm="google", enable_fallback=True, max_retries=1)
+        system = HybridDiscoverySystem(
+            domain="defi", primary_llm="google", enable_fallback=True, max_retries=1
+        )
 
         with (
             patch.object(system, "_call_gemini") as mock_gemini,
@@ -250,7 +285,9 @@ class TestFallbackMechanism:
             mock_gemini.side_effect = LLMProviderError("Gemini failed")
             mock_claude.return_value = "Claude fallback response"
 
-            result = system._interpret_with_llm(expression="x * y", variables={"x": "a", "y": "b"}, r2=0.90)
+            result = system._interpret_with_llm(
+                expression="x * y", variables={"x": "a", "y": "b"}, r2=0.90
+            )
 
             assert mock_gemini.call_count == 1
             assert mock_claude.call_count == 1
@@ -258,7 +295,9 @@ class TestFallbackMechanism:
 
     def test_no_fallback_when_disabled(self):
         """Test that fallback doesn't occur when disabled"""
-        system = HybridDiscoverySystem(domain="defi", primary_llm="anthropic", enable_fallback=False)
+        system = HybridDiscoverySystem(
+            domain="defi", primary_llm="anthropic", enable_fallback=False
+        )
 
         with (
             patch.object(system, "_call_anthropic") as mock_claude,
@@ -268,7 +307,9 @@ class TestFallbackMechanism:
             mock_claude.side_effect = LLMProviderError("Claude failed")
 
             with pytest.raises(LLMProviderError):
-                system._interpret_with_llm(expression="x / y", variables={"x": "num", "y": "denom"}, r2=0.85)
+                system._interpret_with_llm(
+                    expression="x / y", variables={"x": "num", "y": "denom"}, r2=0.85
+                )
 
             assert mock_claude.call_count == 1
             assert mock_gemini.call_count == 0
@@ -287,7 +328,9 @@ class TestFallbackMechanism:
             mock_gemini.side_effect = LLMProviderError("Gemini failed")
 
             with pytest.raises(LLMProviderError, match="All LLM providers failed"):
-                system._interpret_with_llm(expression="sqrt(x)", variables={"x": "value"}, r2=0.88)
+                system._interpret_with_llm(
+                    expression="sqrt(x)", variables={"x": "value"}, r2=0.88
+                )
 
             assert system.stats["fallback_count"] == 1
 
@@ -297,7 +340,9 @@ class TestInterpretationPipeline:
 
     @pytest.fixture
     def system(self):
-        return HybridDiscoverySystem(domain="defi", primary_llm="anthropic", enable_fallback=True)
+        return HybridDiscoverySystem(
+            domain="defi", primary_llm="anthropic", enable_fallback=True
+        )
 
     def test_prompt_building(self, system):
         """Test that interpretation prompts are built correctly"""
@@ -363,7 +408,10 @@ class TestEndToEndIntegration:
     @pytest.fixture
     def system(self):
         return HybridDiscoverySystem(
-            domain="defi", primary_llm="anthropic", enable_fallback=True, use_rich_output=False
+            domain="defi",
+            primary_llm="anthropic",
+            enable_fallback=True,
+            use_rich_output=False,
         )
 
     @pytest.fixture
@@ -392,7 +440,10 @@ class TestEndToEndIntegration:
                 X=X,
                 y=y,
                 variable_names=["reserve0", "reserve1"],
-                variable_descriptions={"reserve0": "Token 0 reserves", "reserve1": "Token 1 reserves"},
+                variable_descriptions={
+                    "reserve0": "Token 0 reserves",
+                    "reserve1": "Token 1 reserves",
+                },
                 variable_units={"reserve0": "tokens", "reserve1": "tokens"},
                 description="Test workflow",
                 show_formatted=False,
@@ -508,14 +559,18 @@ class TestLoadTesting:
 
     def test_concurrent_api_calls(self):
         """Test multiple concurrent API calls"""
-        system = HybridDiscoverySystem(domain="defi", primary_llm="anthropic", enable_fallback=True)
+        system = HybridDiscoverySystem(
+            domain="defi", primary_llm="anthropic", enable_fallback=True
+        )
 
         with patch.object(system, "_call_anthropic") as mock_claude:
             mock_claude.return_value = "Response"
 
             # Simulate 10 concurrent calls
             for _ in range(10):
-                system._interpret_with_llm(expression=f"x + y", variables={"x": "a", "y": "b"}, r2=0.9)
+                system._interpret_with_llm(
+                    expression=f"x + y", variables={"x": "a", "y": "b"}, r2=0.9
+                )
 
             assert system.stats["anthropic_calls"] == 10
 
@@ -531,7 +586,9 @@ class TestLoadTesting:
             start = time.time()
             for expr in expressions[:10]:  # Test with 10 for speed
                 try:
-                    system._interpret_with_llm(expression=expr, variables={"x": "input", "y": "output"}, r2=0.9)
+                    system._interpret_with_llm(
+                        expression=expr, variables={"x": "input", "y": "output"}, r2=0.9
+                    )
                 except:
                     pass
             elapsed = time.time() - start

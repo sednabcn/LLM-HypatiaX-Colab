@@ -66,7 +66,9 @@ def patch_test_file():
         print(f"\n✨ Successfully patched {test_file}")
         print(f"\nChanges made:")
         print(f"  • Test 11 (volatility): iterations 20→50, R² threshold 0.50→0.30")
-        print(f"  • Test 12 (impermanent loss): iterations 30→100, R² threshold 0.85→0.65")
+        print(
+            f"  • Test 12 (impermanent loss): iterations 30→100, R² threshold 0.85→0.65"
+        )
         print(f"\n🔬 Run tests now with:")
         print(f"   python -m pytest {test_file} -v")
         return True

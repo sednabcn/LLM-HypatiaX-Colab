@@ -4,7 +4,9 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 from hypatiax.custom_entities.ner_entity import Custom_ner_entities
-from hypatiax.utils.data_utils import save_spacy_training_data_to_json  # Add this import
+from hypatiax.utils.data_utils import (  # Add this import
+    save_spacy_training_data_to_json,
+)
 from hypatiax.utils.files import FilesManager
 
 
@@ -86,7 +88,9 @@ def preparation_data(
             option,
         )
     else:
-        raise ValueError(f"Invalid task_type: {task_type}. Must be 'single' or 'multitask'.")
+        raise ValueError(
+            f"Invalid task_type: {task_type}. Must be 'single' or 'multitask'."
+        )
 
 
 def prepare_unlabeled_data_multitask(
@@ -131,14 +135,18 @@ def prepare_unlabeled_data_multitask(
         # Load predefined datasets
         X_train = [
             Tr.load(f"Train_{sub_domain}_desc_{sizefile}_data.json", style="entity"),
-            Tr.load(f"Train_{sub_domain}_formulas_{sizefile}_data.json", style="entity"),
+            Tr.load(
+                f"Train_{sub_domain}_formulas_{sizefile}_data.json", style="entity"
+            ),
         ]
         X_test = T.load(f"Test_{sub_domain}_both_{sizefile}_data.json", style="entity")
 
         if val_data:
             X_val = [
                 V.load(f"Val_{sub_domain}_desc_{sizefile}_data.json", style="entity"),
-                V.load(f"Val_{sub_domain}_formulas_{sizefile}_data.json", style="entity"),
+                V.load(
+                    f"Val_{sub_domain}_formulas_{sizefile}_data.json", style="entity"
+                ),
             ]
             return X_train, X_val, X_test
 
@@ -146,19 +154,31 @@ def prepare_unlabeled_data_multitask(
 
     elif option in ["split", "build"]:
         if option == "split":
-            data_desc = Tr.load(f"Train_{sub_domain}_desc_{sizefile}_data.json", style="entity")
-            data_formulas = Tr.load(f"Train_{sub_domain}_formulas_{sizefile}_data.json", style="entity")
+            data_desc = Tr.load(
+                f"Train_{sub_domain}_desc_{sizefile}_data.json", style="entity"
+            )
+            data_formulas = Tr.load(
+                f"Train_{sub_domain}_formulas_{sizefile}_data.json", style="entity"
+            )
         elif option == "build":
             F = FilesManager(modules, domain, sub_domain, actions)
             try:
                 data = F.load(filename)
                 entity_path = f"{modules}/{domain}/{sub_domain}/ner_{sub_domain}_desc"
-                _, data_desc = Custom_ner_entities(data, entity_path, "Description").get_entity()
-                entity_path = f"{modules}/{domain}/{sub_domain}/ner_{sub_domain}_formulas"
-                _, data_formulas = Custom_ner_entities(data, entity_path, "Formulas").get_entity()
+                _, data_desc = Custom_ner_entities(
+                    data, entity_path, "Description"
+                ).get_entity()
+                entity_path = (
+                    f"{modules}/{domain}/{sub_domain}/ner_{sub_domain}_formulas"
+                )
+                _, data_formulas = Custom_ner_entities(
+                    data, entity_path, "Formulas"
+                ).get_entity()
                 if "Combined" in data.columns:
                     entity_path = f"{modules}/{domain}/{sub_domain}/ner_{sub_domain}"
-                    _, data_combined = Custom_ner_entities(data, entity_path, "Combined").get_entity()
+                    _, data_combined = Custom_ner_entities(
+                        data, entity_path, "Combined"
+                    ).get_entity()
                     # Use combined data for formulas if available
                     data_formulas = data_combined
             except FileNotFoundError as e:
@@ -170,8 +190,12 @@ def prepare_unlabeled_data_multitask(
 
         # Split data
         val_ratio = 0.5 * test_size
-        X_train_0, X_val_0, X_test_0 = split_data(data_desc, test_size, val_data, val_ratio)
-        X_train_1, X_val_1, X_test_1 = split_data(data_formulas, test_size, val_data, val_ratio)
+        X_train_0, X_val_0, X_test_0 = split_data(
+            data_desc, test_size, val_data, val_ratio
+        )
+        X_train_1, X_val_1, X_test_1 = split_data(
+            data_formulas, test_size, val_data, val_ratio
+        )
 
         X_train = [X_train_0, X_train_1]
         X_test = [X_test_0, X_test_1]
@@ -182,7 +206,9 @@ def prepare_unlabeled_data_multitask(
             # Output files
             file_output = f"Valid_{sub_domain}_{sizefile}_data.json"
             # Save to datasets/queries/tableau/validation_spacy dir
-            json_dir_path = resources.files(f"hypatiax.datasets.{domain}.{sub_domain}.validation_spacy")
+            json_dir_path = resources.files(
+                f"hypatiax.datasets.{domain}.{sub_domain}.validation_spacy"
+            )
             print(f"Saving {file_output} to {json_dir_path}")
             save_spacy_training_data_to_json(json_dir_path, X_val, file_output)
 
@@ -191,7 +217,9 @@ def prepare_unlabeled_data_multitask(
         return X_train, None, X_test
 
     else:
-        raise ValueError(f"Invalid option: {option}. Must be 'None', 'split', or 'build'.")
+        raise ValueError(
+            f"Invalid option: {option}. Must be 'None', 'split', or 'build'."
+        )
 
 
 def prepare_unlabeled_data_single(
@@ -235,16 +263,24 @@ def prepare_unlabeled_data_single(
 
     if option == "None":
         # Load predefined datasets
-        X_train = Tr.load(f"Train_{sub_domain}_{dtype}_{sizefile}_data.json", style="entity")
-        X_test = T.load(f"Test_{sub_domain}_{dtype}_{sizefile}_data.json", style="entity")
+        X_train = Tr.load(
+            f"Train_{sub_domain}_{dtype}_{sizefile}_data.json", style="entity"
+        )
+        X_test = T.load(
+            f"Test_{sub_domain}_{dtype}_{sizefile}_data.json", style="entity"
+        )
         if val_data:
-            X_val = V.load(f"Val_{sub_domain}_{dtype}_{sizefile}_data.json", style="entity")
+            X_val = V.load(
+                f"Val_{sub_domain}_{dtype}_{sizefile}_data.json", style="entity"
+            )
             return X_train, X_val, X_test
         return X_train, None, X_test
 
     elif option == "split":
         # Load data for splitting
-        data = Tr.load(f"Train_{sub_domain}_{dtype}_{sizefile}_data.json", style="entity")
+        data = Tr.load(
+            f"Train_{sub_domain}_{dtype}_{sizefile}_data.json", style="entity"
+        )
         X = data
         X_train, X_test = train_test_split(X, test_size=test_size)
         if val_data:
@@ -277,7 +313,9 @@ def prepare_unlabeled_data_single(
             # Output files
             file_output = f"Valid_{sub_domain}_{sizefile}_data.json"
             # Save to datasets/queries/tableau/validation_spacy dir
-            json_dir_path = resources.files(f"hypatiax.datasets.{domain}.{sub_domain}.validation_spacy")
+            json_dir_path = resources.files(
+                f"hypatiax.datasets.{domain}.{sub_domain}.validation_spacy"
+            )
             print(f"Saving {file_output} to {json_dir_path}")
             save_spacy_training_data_to_json(json_dir_path, X_val, file_output)
 
@@ -285,4 +323,6 @@ def prepare_unlabeled_data_single(
         return X_train, None, X_test
 
     else:
-        raise ValueError(f"Invalid option: {option}. Must be 'None', 'split', or 'build'.")
+        raise ValueError(
+            f"Invalid option: {option}. Must be 'None', 'split', or 'build'."
+        )

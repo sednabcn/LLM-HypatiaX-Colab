@@ -69,8 +69,12 @@ class HybridFormulaMapper:
         try:
             from transformers import AutoTokenizer, T5ForConditionalGeneration
 
-            tokenizer = AutoTokenizer.from_pretrained(self.config.transformer_model_path)
-            model = T5ForConditionalGeneration.from_pretrained(self.config.transformer_model_path)
+            tokenizer = AutoTokenizer.from_pretrained(
+                self.config.transformer_model_path
+            )
+            model = T5ForConditionalGeneration.from_pretrained(
+                self.config.transformer_model_path
+            )
 
             self.models["transformer"] = {"model": model, "tokenizer": tokenizer}
             print("✅ Transformer model loaded")
@@ -141,7 +145,13 @@ class HybridFormulaMapper:
         doc = self.models["spacy"](description)
 
         entities = [
-            {"text": ent.text, "label": ent.label_, "start": ent.start_char, "end": ent.end_char} for ent in doc.ents
+            {
+                "text": ent.text,
+                "label": ent.label_,
+                "start": ent.start_char,
+                "end": ent.end_char,
+            }
+            for ent in doc.ents
         ]
 
         confidence = 0.8 if entities else 0.0
@@ -161,16 +171,25 @@ class HybridFormulaMapper:
             tokenizer = model_info["tokenizer"]
 
             input_text = f"translate description to formula: {description}"
-            inputs = tokenizer(input_text, return_tensors="pt", max_length=128, truncation=True)
+            inputs = tokenizer(
+                input_text, return_tensors="pt", max_length=128, truncation=True
+            )
 
             with torch.no_grad():
-                outputs = model.generate(inputs.input_ids, max_length=128, num_beams=4, early_stopping=True)
+                outputs = model.generate(
+                    inputs.input_ids, max_length=128, num_beams=4, early_stopping=True
+                )
 
             formula = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
             return {"formula": formula, "confidence": 0.85, "available": True}
         except Exception as e:
-            return {"formula": None, "confidence": 0.0, "available": False, "error": str(e)}
+            return {
+                "formula": None,
+                "confidence": 0.0,
+                "available": False,
+                "error": str(e),
+            }
 
     def predict_with_rag(self, description: str) -> Dict:
         """Generate formula using RAG"""
@@ -192,7 +211,12 @@ class HybridFormulaMapper:
                 "available": True,
             }
         except Exception as e:
-            return {"formula": None, "confidence": 0.0, "available": False, "error": str(e)}
+            return {
+                "formula": None,
+                "confidence": 0.0,
+                "available": False,
+                "error": str(e),
+            }
 
     def predict_with_llm(self, description: str) -> Dict:
         """Generate formula using LLM"""
@@ -207,9 +231,16 @@ class HybridFormulaMapper:
 
             return {"formula": formula, "confidence": confidence, "available": True}
         except Exception as e:
-            return {"formula": None, "confidence": 0.0, "available": False, "error": str(e)}
+            return {
+                "formula": None,
+                "confidence": 0.0,
+                "available": False,
+                "error": str(e),
+            }
 
-    def predict_with_ensemble(self, description: str, ner_entities: Optional[List] = None) -> Dict:
+    def predict_with_ensemble(
+        self, description: str, ner_entities: Optional[List] = None
+    ) -> Dict:
         """Generate formula using ensemble mapper"""
         if not self.models.get("ensemble"):
             return {"formula": None, "confidence": 0.0, "available": False}
@@ -226,7 +257,12 @@ class HybridFormulaMapper:
                 "available": True,
             }
         except Exception as e:
-            return {"formula": None, "confidence": 0.0, "available": False, "error": str(e)}
+            return {
+                "formula": None,
+                "confidence": 0.0,
+                "available": False,
+                "error": str(e),
+            }
 
     def predict_hybrid(self, description: str, use_cache: bool = True) -> Dict:
         """
@@ -272,7 +308,13 @@ class HybridFormulaMapper:
                 confidence = result.get("confidence", 0.0)
 
                 if not formula.startswith("Error:"):
-                    formulas.append({"technique": technique, "formula": formula, "confidence": confidence})
+                    formulas.append(
+                        {
+                            "technique": technique,
+                            "formula": formula,
+                            "confidence": confidence,
+                        }
+                    )
 
         # Determine best prediction
         if formulas:
@@ -293,7 +335,11 @@ class HybridFormulaMapper:
                 best["consensus"] = True
                 best["num_agreeing"] = len(formula_votes[best_normalized])
         else:
-            best = {"technique": "none", "formula": "Error: All techniques failed", "confidence": 0.0}
+            best = {
+                "technique": "none",
+                "formula": "Error: All techniques failed",
+                "confidence": 0.0,
+            }
 
         # Compile final result
         final_result = {
@@ -324,7 +370,9 @@ class HybridFormulaMapper:
     def evaluate_techniques(self, test_data: List[Dict]) -> Dict:
         """Evaluate performance of each technique"""
 
-        technique_scores = defaultdict(lambda: {"correct": 0, "total": 0, "accuracy": 0.0})
+        technique_scores = defaultdict(
+            lambda: {"correct": 0, "total": 0, "accuracy": 0.0}
+        )
 
         for example in test_data:
             description = example["description"]
@@ -346,7 +394,9 @@ class HybridFormulaMapper:
         for technique in technique_scores:
             total = technique_scores[technique]["total"]
             correct = technique_scores[technique]["correct"]
-            technique_scores[technique]["accuracy"] = correct / total if total > 0 else 0.0
+            technique_scores[technique]["accuracy"] = (
+                correct / total if total > 0 else 0.0
+            )
 
         return dict(technique_scores)
 

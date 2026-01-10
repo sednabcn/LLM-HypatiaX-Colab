@@ -38,7 +38,19 @@ class HypatiaXService:
 
     # Common prepositions and stop words
     PREPOSITIONS = ["of", "by", "for", "in", "on", "at", "from", "to", "with"]
-    STOP_WORDS = ["the", "a", "an", "all", "each", "every", "calculate", "compute", "find", "get", "show"]
+    STOP_WORDS = [
+        "the",
+        "a",
+        "an",
+        "all",
+        "each",
+        "every",
+        "calculate",
+        "compute",
+        "find",
+        "get",
+        "show",
+    ]
 
     def __init__(self, models_loaded: bool = False, nlp_desc=None, nlp_formula=None):
         """
@@ -55,7 +67,9 @@ class HypatiaXService:
 
         logger.info(f"HypatiaXService initialized (models_loaded={models_loaded})")
 
-    def map_description_to_formula(self, description: str, method: str = "vocab") -> Dict[str, Any]:
+    def map_description_to_formula(
+        self, description: str, method: str = "vocab"
+    ) -> Dict[str, Any]:
         """
         Map natural language description to Tableau formula
 
@@ -80,7 +94,9 @@ class HypatiaXService:
             result["processing_time_ms"] = round((time.time() - start_time) * 1000, 2)
             result["mode"] = "production" if self.models_loaded else "demo"
 
-            logger.info(f"Mapped: '{description}' -> {result['formula']} (confidence={result['confidence']:.2f})")
+            logger.info(
+                f"Mapped: '{description}' -> {result['formula']} (confidence={result['confidence']:.2f})"
+            )
 
             return result
 
@@ -94,7 +110,12 @@ class HypatiaXService:
             # Extract entities using NER model
             doc = self.nlp_desc(description)
             entities = [
-                {"text": ent.text, "label": ent.label_, "start": ent.start_char, "end": ent.end_char}
+                {
+                    "text": ent.text,
+                    "label": ent.label_,
+                    "start": ent.start_char,
+                    "end": ent.end_char,
+                }
                 for ent in doc.ents
             ]
 
@@ -155,7 +176,9 @@ class HypatiaXService:
             "method": method,
         }
 
-    def _extract_operation_from_entities(self, entities: List[Dict], description: str) -> str:
+    def _extract_operation_from_entities(
+        self, entities: List[Dict], description: str
+    ) -> str:
         """Extract operation from NER entities"""
         # Look for OPER label in entities
         for entity in entities:
@@ -171,11 +194,15 @@ class HypatiaXService:
 
         return "SUM"
 
-    def _extract_field_from_entities(self, entities: List[Dict], description: str) -> str:
+    def _extract_field_from_entities(
+        self, entities: List[Dict], description: str
+    ) -> str:
         """Extract field name from NER entities"""
         # Look for NOUN entities that aren't operations
         field_candidates = [
-            ent["text"] for ent in entities if ent["label"] == "NOUN" and ent["text"].lower() not in self.OPERATION_MAP
+            ent["text"]
+            for ent in entities
+            if ent["label"] == "NOUN" and ent["text"].lower() not in self.OPERATION_MAP
         ]
 
         if field_candidates:
@@ -194,14 +221,23 @@ class HypatiaXService:
             if word.lower() in self.PREPOSITIONS:
                 if i + 1 < len(words):
                     remaining = words[i + 1 :]
-                    field_words = [w for w in remaining if w.lower() not in self.STOP_WORDS + self.PREPOSITIONS]
+                    field_words = [
+                        w
+                        for w in remaining
+                        if w.lower() not in self.STOP_WORDS + self.PREPOSITIONS
+                    ]
                     if field_words:
                         return field_words[0].strip(".,!?").capitalize()
 
         # Fallback: take last meaningful word
         for word in reversed(words):
             clean_word = word.lower().strip(".,!?")
-            if clean_word not in list(self.OPERATION_MAP.keys()) + self.STOP_WORDS + self.PREPOSITIONS:
+            if (
+                clean_word
+                not in list(self.OPERATION_MAP.keys())
+                + self.STOP_WORDS
+                + self.PREPOSITIONS
+            ):
                 return word.strip(".,!?").capitalize()
 
         return "Field"
@@ -233,13 +269,19 @@ class HypatiaXService:
         confidence = min(0.95, coverage * 0.65 + operation_bonus + field_bonus)
         return round(confidence, 2)
 
-    def _calculate_rule_confidence(self, description: str, operation: str, field: str) -> float:
+    def _calculate_rule_confidence(
+        self, description: str, operation: str, field: str
+    ) -> float:
         """Calculate confidence for rule-based mapping"""
         confidence = 0.70  # Base confidence for rule-based
 
         # Bonus if operation was explicitly mentioned
         desc_lower = description.lower()
-        op_mentioned = any(keyword in desc_lower for keyword, op in self.OPERATION_MAP.items() if op == operation)
+        op_mentioned = any(
+            keyword in desc_lower
+            for keyword, op in self.OPERATION_MAP.items()
+            if op == operation
+        )
         if op_mentioned:
             confidence += 0.15
 
@@ -271,13 +313,22 @@ class HypatiaXService:
                 label = "NOUN"
 
             if label:
-                entities.append({"text": word, "label": label, "start": start_pos, "end": start_pos + len(word)})
+                entities.append(
+                    {
+                        "text": word,
+                        "label": label,
+                        "start": start_pos,
+                        "end": start_pos + len(word),
+                    }
+                )
 
             start_pos += len(word) + 1
 
         return entities
 
-    def batch_map(self, descriptions: List[str], method: str = "vocab") -> List[Dict[str, Any]]:
+    def batch_map(
+        self, descriptions: List[str], method: str = "vocab"
+    ) -> List[Dict[str, Any]]:
         """
         Map multiple descriptions in batch
 
@@ -334,7 +385,12 @@ class HypatiaXService:
             if operation not in valid_operations:
                 warnings.append(f"Unknown operation: {operation}")
 
-        return {"valid": len(errors) == 0, "errors": errors, "warnings": warnings, "formula": formula}
+        return {
+            "valid": len(errors) == 0,
+            "errors": errors,
+            "warnings": warnings,
+            "formula": formula,
+        }
 
     def suggest_improvements(self, description: str) -> List[str]:
         """
@@ -350,18 +406,26 @@ class HypatiaXService:
         desc_lower = description.lower()
 
         # Check if operation is specified
-        has_operation = any(keyword in desc_lower for keyword in self.OPERATION_MAP.keys())
+        has_operation = any(
+            keyword in desc_lower for keyword in self.OPERATION_MAP.keys()
+        )
         if not has_operation:
-            suggestions.append("Consider specifying an operation (sum, average, count, etc.)")
+            suggestions.append(
+                "Consider specifying an operation (sum, average, count, etc.)"
+            )
 
         # Check if field is specified
         has_preposition = any(prep in desc_lower for prep in self.PREPOSITIONS)
         if not has_preposition:
-            suggestions.append('Consider using "of [field]" to specify the field clearly')
+            suggestions.append(
+                'Consider using "of [field]" to specify the field clearly'
+            )
 
         # Check for ambiguity
         if len(description.split()) < 3:
-            suggestions.append("Description is very short. Consider adding more detail.")
+            suggestions.append(
+                "Description is very short. Consider adding more detail."
+            )
 
         return suggestions
 

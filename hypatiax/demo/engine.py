@@ -48,7 +48,10 @@ class HypatiaXEngine:
     """
 
     def __init__(
-        self, desc_model_path: Optional[str] = None, formula_model_path: Optional[str] = None, use_gpu: bool = False
+        self,
+        desc_model_path: Optional[str] = None,
+        formula_model_path: Optional[str] = None,
+        use_gpu: bool = False,
     ):
         """
         Initialize the HypatiaX engine
@@ -70,7 +73,12 @@ class HypatiaXEngine:
         self.vocab_map = self._load_vocab_mappings()
 
         # Statistics
-        self.stats = {"total_queries": 0, "successful_mappings": 0, "failed_mappings": 0, "avg_processing_time": 0.0}
+        self.stats = {
+            "total_queries": 0,
+            "successful_mappings": 0,
+            "failed_mappings": 0,
+            "avg_processing_time": 0.0,
+        }
 
         logger.info("HypatiaX Engine initialized")
 
@@ -174,7 +182,15 @@ class HypatiaXEngine:
 
         entity_types = {
             "OPER": ["sum", "average", "avg", "count", "max", "min", "total", "median"],
-            "ARG": ["sales", "profit", "revenue", "cost", "price", "customers", "orders"],
+            "ARG": [
+                "sales",
+                "profit",
+                "revenue",
+                "cost",
+                "price",
+                "customers",
+                "orders",
+            ],
             "ADP": ["by", "per", "of", "from", "to", "across"],
             "VERB": ["calculate", "find", "show", "display", "get", "compute"],
         }
@@ -185,14 +201,22 @@ class HypatiaXEngine:
             for entity_type, keywords in entity_types.items():
                 if clean_word in keywords:
                     entities.append(
-                        Entity(text=word, label=entity_type, start=pos, end=pos + len(word), confidence=0.8)
+                        Entity(
+                            text=word,
+                            label=entity_type,
+                            start=pos,
+                            end=pos + len(word),
+                            confidence=0.8,
+                        )
                     )
                     break
             pos += len(word) + 1
 
         return entities
 
-    def generate_formula(self, query: str, entities: List[Entity], method: str = "vocab") -> str:
+    def generate_formula(
+        self, query: str, entities: List[Entity], method: str = "vocab"
+    ) -> str:
         """
         Generate Tableau formula from query and entities
 
@@ -229,7 +253,9 @@ class HypatiaXEngine:
         field_name = "Field"
         for entity in entities:
             if entity.label == "ARG":
-                field_name = self.vocab_map.get(entity.text.lower(), entity.text.capitalize())
+                field_name = self.vocab_map.get(
+                    entity.text.lower(), entity.text.capitalize()
+                )
                 break
 
         return f"{operation}([{field_name}])"
@@ -275,7 +301,9 @@ class HypatiaXEngine:
         # Find operation
         op_match = re.search(op_pattern, query, re.IGNORECASE)
         if op_match:
-            operation = self.vocab_map.get(op_match.group(1).lower(), op_match.group(1).upper())
+            operation = self.vocab_map.get(
+                op_match.group(1).lower(), op_match.group(1).upper()
+            )
 
         # Find field name
         field_match = re.search(field_pattern, query)
@@ -306,7 +334,9 @@ class HypatiaXEngine:
         confidence = avg_entity_conf * 0.7 + entity_count_factor * 0.3 + structure_bonus
         return min(confidence, 1.0)
 
-    def process(self, query: str, method: str = "vocab", use_model: bool = True) -> ProcessingResult:
+    def process(
+        self, query: str, method: str = "vocab", use_model: bool = True
+    ) -> ProcessingResult:
         """
         Process a query end-to-end
 
@@ -337,7 +367,8 @@ class HypatiaXEngine:
             self.stats["total_queries"] += 1
             self.stats["successful_mappings"] += 1
             self.stats["avg_processing_time"] = (
-                self.stats["avg_processing_time"] * (self.stats["total_queries"] - 1) + processing_time
+                self.stats["avg_processing_time"] * (self.stats["total_queries"] - 1)
+                + processing_time
             ) / self.stats["total_queries"]
 
             return ProcessingResult(
@@ -379,7 +410,9 @@ class HypatiaXEngine:
         """Get processing statistics"""
         return self.stats.copy()
 
-    def export_results(self, results: List[ProcessingResult], output_path: str, format: str = "csv") -> bool:
+    def export_results(
+        self, results: List[ProcessingResult], output_path: str, format: str = "csv"
+    ) -> bool:
         """
         Export processing results
 

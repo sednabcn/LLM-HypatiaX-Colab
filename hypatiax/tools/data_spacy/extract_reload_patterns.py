@@ -25,7 +25,8 @@ def extract_patterns_from_old_model(model_path, output_dir):
 
 # Extract patterns
 patterns_dir = extract_patterns_from_old_model(
-    "hypatiax/data_spacy/queries/tableau/ner_tableau_v-3.7.2", "hypatiax/data_spacy/queries/tableau/extracted_patterns"
+    "hypatiax/data_spacy/queries/tableau/ner_tableau_v-3.7.2",
+    "hypatiax/data_spacy/queries/tableau/extracted_patterns",
 )
 
 # Now rebuild with new spaCy version using the extracted patterns

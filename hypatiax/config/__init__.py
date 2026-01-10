@@ -88,7 +88,9 @@ class _SecretsProxy:
         """
         # Avoid infinite recursion on our own attributes
         if name.startswith("_proxy_"):
-            raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
+            raise AttributeError(
+                f"'{type(self).__name__}' object has no attribute '{name}'"
+            )
 
         # Create real instance on first access
         global _secrets_instance, _secrets_initialization_attempted
@@ -103,7 +105,9 @@ class _SecretsProxy:
 
             if not _secrets_initialization_attempted:
                 _secrets_initialization_attempted = True
-                logger.info("🔧 Lazy initialization: Creating SecretsConfig instance on first access")
+                logger.info(
+                    "🔧 Lazy initialization: Creating SecretsConfig instance on first access"
+                )
 
                 try:
                     # Create instance with PathConfig integration
@@ -120,7 +124,8 @@ class _SecretsProxy:
         # Forward attribute access to real instance
         if _secrets_instance is None:
             raise RuntimeError(
-                "SecretsConfig instance is None. " "Initialization may have failed. Check logs for details."
+                "SecretsConfig instance is None. "
+                "Initialization may have failed. Check logs for details."
             )
 
         return getattr(_secrets_instance, name)
@@ -168,7 +173,10 @@ class _SecretsProxy:
         if _secrets_instance is not None:
             return repr(_secrets_instance)
         else:
-            return "<SecretsProxy: not yet initialized - " "will be created on first access>"
+            return (
+                "<SecretsProxy: not yet initialized - "
+                "will be created on first access>"
+            )
 
     def __bool__(self):
         """
@@ -211,7 +219,9 @@ def get_secrets(custom_root=None, force_reinit=False):
     global _secrets_instance
 
     if not _has_secrets_class:
-        raise ImportError("SecretsConfig not available. " "Ensure hypatiax/config/config.py exists.")
+        raise ImportError(
+            "SecretsConfig not available. " "Ensure hypatiax/config/config.py exists."
+        )
 
     # Reinitialize if requested or if custom_root provided
     if force_reinit or custom_root is not None:
@@ -271,7 +281,9 @@ def show_all_config():
     # Show secrets config
     if not _has_secrets_class:
         print("⚠️  SecretsConfig class not available")
-        print("To enable: Ensure hypatiax/config/config.py exists with SecretsConfig class")
+        print(
+            "To enable: Ensure hypatiax/config/config.py exists with SecretsConfig class"
+        )
     elif _secrets_instance is None:
         print("ℹ️  SecretsConfig not yet initialized (lazy loading)")
         print("It will be created automatically on first access to 'secrets'")

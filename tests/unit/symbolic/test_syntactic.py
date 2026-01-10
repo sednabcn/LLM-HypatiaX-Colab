@@ -6,7 +6,9 @@ Comprehensive tests for all validation features
 import pytest
 import sympy as sp
 
-from hypatiax.tools.symbolic.enhanced_symbolic_validator_1111 import EnhancedSymbolicValidator
+from hypatiax.tools.symbolic.enhanced_symbolic_validator_1111 import (
+    EnhancedSymbolicValidator,
+)
 
 # from hypatiax.tools.symbolic.fixed_validator import EnhancedSymbolicValidator
 

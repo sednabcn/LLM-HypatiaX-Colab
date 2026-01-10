@@ -16,7 +16,9 @@ sys.path.insert(0, str(project_root))
 from dotenv import load_dotenv
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
@@ -46,7 +48,9 @@ class MockGoogleProvider:
 
         self.generation_config = MockGenerationConfig()
 
-    def generate_formula(self, requirements: str, domain: str = "defi", n_candidates: int = 1):
+    def generate_formula(
+        self, requirements: str, domain: str = "defi", n_candidates: int = 1
+    ):
         """Generate mock formulas based on requirements"""
 
         mock_responses = {
@@ -149,7 +153,11 @@ class MockGoogleProvider:
                     "Single-hop trade only",
                 ],
                 "novelty_score": 6,
-                "similar_to": ["Slippage calculation", "AMM execution price formula", "Bancor price impact metric"],
+                "similar_to": [
+                    "Slippage calculation",
+                    "AMM execution price formula",
+                    "Bancor price impact metric",
+                ],
                 "advantages": [
                     "Direct calculation from on-chain reserves",
                     "Accounts for protocol trading fees",
@@ -277,7 +285,11 @@ class MockGoogleProvider:
                     "Assumes 365 trading days per year",
                 ],
                 "novelty_score": 4,
-                "similar_to": ["Standard deviation", "Historical volatility", "Realized volatility"],
+                "similar_to": [
+                    "Standard deviation",
+                    "Historical volatility",
+                    "Realized volatility",
+                ],
                 "advantages": [
                     "Standard financial metric",
                     "Easy to calculate and interpret",
@@ -297,7 +309,9 @@ class MockGoogleProvider:
             formula = mock_responses["impermanent loss"]
         elif "price impact" in req_lower or "slippage" in req_lower:
             formula = mock_responses["price impact"]
-        elif "roi" in req_lower or "liquidity provider" in req_lower or "lp" in req_lower:
+        elif (
+            "roi" in req_lower or "liquidity provider" in req_lower or "lp" in req_lower
+        ):
             formula = mock_responses["liquidity provider"]
         elif "volatility" in req_lower or "variance" in req_lower:
             formula = mock_responses["volatility"]
@@ -357,7 +371,9 @@ def execute_formula_safely(formula_dict: dict, function_name: str):
         # Extract and validate function
         if function_name not in namespace:
             available = [k for k in namespace.keys() if callable(namespace[k])]
-            raise ValueError(f"Function '{function_name}' not found. Available: {available}")
+            raise ValueError(
+                f"Function '{function_name}' not found. Available: {available}"
+            )
 
         func = namespace[function_name]
         if not callable(func):
@@ -400,7 +416,9 @@ def main():
     print("=" * 70)
 
     result = provider.generate_formula(
-        requirements="Calculate impermanent loss for Uniswap V2 liquidity pools", domain="defi", n_candidates=1
+        requirements="Calculate impermanent loss for Uniswap V2 liquidity pools",
+        domain="defi",
+        n_candidates=1,
     )
 
     formula = result[0]
@@ -429,7 +447,9 @@ def main():
     print("=" * 70)
 
     result = provider.generate_formula(
-        requirements="Calculate price impact for large trades in constant product AMM", domain="defi", n_candidates=1
+        requirements="Calculate price impact for large trades in constant product AMM",
+        domain="defi",
+        n_candidates=1,
     )
 
     formula = result[0]
@@ -472,7 +492,10 @@ def main():
     print("=" * 70)
 
     original = result[0]
-    refined = provider.refine_formula(formula=original, feedback="Make it more efficient and add support for fee tiers")
+    refined = provider.refine_formula(
+        formula=original,
+        feedback="Make it more efficient and add support for fee tiers",
+    )
 
     print(f"\n📈 Original Novelty Score: {original.get('novelty_score')}/10")
     print(f"📈 Refined Novelty Score: {refined.get('novelty_score')}/10")
@@ -490,7 +513,9 @@ def main():
         # Test 1: Impermanent Loss calculation
         print("Testing Impermanent Loss calculation:")
         il_result = provider.generate_formula("impermanent loss", "defi")[0]
-        calculate_impermanent_loss = execute_formula_safely(il_result, "calculate_impermanent_loss")
+        calculate_impermanent_loss = execute_formula_safely(
+            il_result, "calculate_impermanent_loss"
+        )
 
         test_cases = [
             (2.0, "Price doubled (2x)"),
@@ -508,14 +533,20 @@ def main():
         # Test 2: Price Impact calculation
         print("Testing Price Impact calculation:")
         pi_result = provider.generate_formula("price impact", "defi")[0]
-        calculate_price_impact = execute_formula_safely(pi_result, "calculate_price_impact")
+        calculate_price_impact = execute_formula_safely(
+            pi_result, "calculate_price_impact"
+        )
 
         # Example: Pool with 1M tokens each, trading 10k
-        impact = calculate_price_impact(reserve_in=1_000_000, reserve_out=1_000_000, amount_in=10_000, fee=0.003)
+        impact = calculate_price_impact(
+            reserve_in=1_000_000, reserve_out=1_000_000, amount_in=10_000, fee=0.003
+        )
         print(f"  10k trade on 1M liquidity: {impact:.3f}% price impact")
 
         # Larger trade
-        impact_large = calculate_price_impact(reserve_in=1_000_000, reserve_out=1_000_000, amount_in=100_000, fee=0.003)
+        impact_large = calculate_price_impact(
+            reserve_in=1_000_000, reserve_out=1_000_000, amount_in=100_000, fee=0.003
+        )
         print(f"  100k trade on 1M liquidity: {impact_large:.3f}% price impact")
         print()
 

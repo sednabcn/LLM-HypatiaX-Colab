@@ -48,7 +48,10 @@ class TestTableauDataExtraction:
     def test_get_workbook_list(self):
         """Test retrieving workbook list."""
         mock_server = Mock()
-        mock_workbooks = [{"id": "wb1", "name": "Sales Dashboard"}, {"id": "wb2", "name": "Finance Report"}]
+        mock_workbooks = [
+            {"id": "wb1", "name": "Sales Dashboard"},
+            {"id": "wb2", "name": "Finance Report"},
+        ]
         mock_server.workbooks.all = Mock(return_value=mock_workbooks)
 
         workbooks = mock_server.workbooks.all()
@@ -59,7 +62,10 @@ class TestTableauDataExtraction:
     def test_get_datasource_list(self):
         """Test retrieving datasource list."""
         mock_server = Mock()
-        mock_datasources = [{"id": "ds1", "name": "Customer Data"}, {"id": "ds2", "name": "Product Data"}]
+        mock_datasources = [
+            {"id": "ds1", "name": "Customer Data"},
+            {"id": "ds2", "name": "Product Data"},
+        ]
         mock_server.datasources.all = Mock(return_value=mock_datasources)
 
         datasources = mock_server.datasources.all()
@@ -70,7 +76,10 @@ class TestTableauDataExtraction:
         """Test querying view data."""
         mock_server = Mock()
         mock_data = pd.DataFrame(
-            {"Region": ["North", "South", "East", "West"], "Sales": [100000, 150000, 120000, 180000]}
+            {
+                "Region": ["North", "South", "East", "West"],
+                "Sales": [100000, 150000, 120000, 180000],
+            }
         )
         mock_server.views.get_data = Mock(return_value=mock_data)
 
@@ -158,7 +167,10 @@ class TestTableauFiltering:
         """Test filtering with multiple values."""
         mock_view = Mock()
 
-        filters = {"Region": ["North", "South", "East"], "Product_Category": ["Electronics", "Furniture"]}
+        filters = {
+            "Region": ["North", "South", "East"],
+            "Product_Category": ["Electronics", "Furniture"],
+        }
 
         mock_view.apply_multiple_filters = Mock(return_value=True)
         result = mock_view.apply_multiple_filters(filters)
@@ -214,7 +226,10 @@ class TestTableauPermissions:
     def test_get_workbook_permissions(self):
         """Test retrieving workbook permissions."""
         mock_workbook = Mock()
-        mock_permissions = [{"user": "user1", "role": "Viewer"}, {"user": "user2", "role": "Editor"}]
+        mock_permissions = [
+            {"user": "user1", "role": "Viewer"},
+            {"user": "user2", "role": "Editor"},
+        ]
         mock_workbook.get_permissions = Mock(return_value=mock_permissions)
 
         permissions = mock_workbook.get_permissions()
@@ -248,7 +263,11 @@ class TestTableauScheduling:
     def test_create_refresh_schedule(self):
         """Test creating data refresh schedule."""
         mock_server = Mock()
-        schedule_config = {"datasource_id": "ds123", "frequency": "daily", "time": "02:00"}
+        schedule_config = {
+            "datasource_id": "ds123",
+            "frequency": "daily",
+            "time": "02:00",
+        }
         mock_server.schedules.create = Mock(return_value={"id": "sched123"})
 
         result = mock_server.schedules.create(schedule_config)

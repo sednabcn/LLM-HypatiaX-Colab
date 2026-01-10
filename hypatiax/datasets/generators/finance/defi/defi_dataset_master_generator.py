@@ -66,15 +66,21 @@ class MassiveDeFiFormulaGenerator:
             weight_x = 0.3 + (variation % 5) * 0.14  # 0.3 to 0.86
             weight_y = 1 - weight_x
 
-            token_x = np.random.uniform(scale * weight_x, scale * weight_x * 10, n_samples)
-            token_y = np.random.uniform(scale * weight_y, scale * weight_y * 10, n_samples)
+            token_x = np.random.uniform(
+                scale * weight_x, scale * weight_x * 10, n_samples
+            )
+            token_y = np.random.uniform(
+                scale * weight_y, scale * weight_y * 10, n_samples
+            )
 
             X_data = np.column_stack([token_x, token_y])
             k = token_x + token_y
             k += np.random.normal(0, 50, n_samples)
 
             name = f"Constant_Sum_v{variation}"
-            description = f"Constant Sum with weight ratio {weight_x:.2f}:{weight_y:.2f}"
+            description = (
+                f"Constant Sum with weight ratio {weight_x:.2f}:{weight_y:.2f}"
+            )
 
             self._process_formula(name, description, X_data, k, n_samples)
 
@@ -146,7 +152,9 @@ class MassiveDeFiFormulaGenerator:
             il += np.random.normal(0, volatility, n_samples)
 
             name = f"Impermanent_Loss_v{variation}"
-            description = f"IL scenario: price range [{price_min:.2f}x, {price_max:.2f}x]"
+            description = (
+                f"IL scenario: price range [{price_min:.2f}x, {price_max:.2f}x]"
+            )
 
             self._process_formula(name, description, price_ratio, il, n_samples)
 
@@ -159,12 +167,16 @@ class MassiveDeFiFormulaGenerator:
 
             capital_tier = 10 ** (3 + (variation // 7))  # From $1k to $100M
 
-            lp_share = np.random.uniform(0.001 + (variation % 7) * 0.07, 0.07 + (variation % 7) * 0.07, n_samples)
+            lp_share = np.random.uniform(
+                0.001 + (variation % 7) * 0.07, 0.07 + (variation % 7) * 0.07, n_samples
+            )
             asset_value = np.random.uniform(capital_tier, capital_tier * 100, n_samples)
 
             X_data = np.column_stack([lp_share, asset_value])
             position_value = lp_share * asset_value
-            position_value += np.random.normal(0, position_value.mean() * 0.01, n_samples)
+            position_value += np.random.normal(
+                0, position_value.mean() * 0.01, n_samples
+            )
 
             name = f"Position_Value_v{variation}"
             description = f"LP Position: capital tier ${capital_tier:.0e}"
@@ -217,7 +229,9 @@ class MassiveDeFiFormulaGenerator:
             fees += np.random.normal(0, fees.mean() * 0.05, n_samples)
 
             name = f"Fee_Earnings_v{variation}"
-            description = f"Fees: tier {fee_tier*100:.1f}%, market condition {market_condition}"
+            description = (
+                f"Fees: tier {fee_tier*100:.1f}%, market condition {market_condition}"
+            )
 
             self._process_formula(name, description, X_data, fees, n_samples)
 
@@ -254,9 +268,13 @@ class MassiveDeFiFormulaGenerator:
             liquidity_scale = 1e6 * (2 ** (variation // 7))  # Different pool sizes
 
             trade_size = np.random.uniform(
-                liquidity_scale * trade_size_pct * 0.5, liquidity_scale * trade_size_pct * 1.5, n_samples
+                liquidity_scale * trade_size_pct * 0.5,
+                liquidity_scale * trade_size_pct * 1.5,
+                n_samples,
             )
-            liquidity = np.random.uniform(liquidity_scale, liquidity_scale * 10, n_samples)
+            liquidity = np.random.uniform(
+                liquidity_scale, liquidity_scale * 10, n_samples
+            )
 
             X_data = np.column_stack([trade_size, liquidity])
             slippage = (trade_size / liquidity) ** 2 * 100  # As percentage
@@ -278,7 +296,9 @@ class MassiveDeFiFormulaGenerator:
             pool_scale = 1e6 * (2 ** (variation // 5))
 
             trade_amount = np.random.uniform(1000, 100000, n_samples)
-            pool_depth = pool_scale * np.random.uniform(depth_factor, depth_factor * 2, n_samples)
+            pool_depth = pool_scale * np.random.uniform(
+                depth_factor, depth_factor * 2, n_samples
+            )
 
             X_data = np.column_stack([trade_amount, pool_depth])
             impact = (trade_amount / pool_depth) * 100
@@ -300,14 +320,18 @@ class MassiveDeFiFormulaGenerator:
             target_util = 0.3 + (variation % 5) * 0.14  # 30% to 86%
 
             borrowed = np.random.uniform(0, pool_size * target_util, n_samples)
-            supplied = borrowed / (target_util + 0.01 + np.random.uniform(-0.05, 0.05, n_samples))
+            supplied = borrowed / (
+                target_util + 0.01 + np.random.uniform(-0.05, 0.05, n_samples)
+            )
 
             X_data = np.column_stack([borrowed, supplied])
             util_rate = borrowed / (supplied + 1)
             util_rate += np.random.normal(0, 0.01, n_samples)
 
             name = f"Utilization_v{variation}"
-            description = f"Utilization: pool ${pool_size:.0e}, target {target_util*100:.0f}%"
+            description = (
+                f"Utilization: pool ${pool_size:.0e}, target {target_util*100:.0f}%"
+            )
 
             self._process_formula(name, description, X_data, util_rate, n_samples)
 
@@ -323,11 +347,17 @@ class MassiveDeFiFormulaGenerator:
             reserve_scale = 1000 * (2 ** (variation // 6))
 
             amount_in = np.random.uniform(1, 100, n_samples)
-            reserve_in = np.random.uniform(reserve_scale, reserve_scale * 100, n_samples)
-            reserve_out = np.random.uniform(reserve_scale, reserve_scale * 100, n_samples)
+            reserve_in = np.random.uniform(
+                reserve_scale, reserve_scale * 100, n_samples
+            )
+            reserve_out = np.random.uniform(
+                reserve_scale, reserve_scale * 100, n_samples
+            )
 
             X_data = np.column_stack([amount_in, reserve_in, reserve_out])
-            output = (amount_in * fee_multiplier * reserve_out) / (reserve_in + amount_in * fee_multiplier)
+            output = (amount_in * fee_multiplier * reserve_out) / (
+                reserve_in + amount_in * fee_multiplier
+            )
             output += np.random.normal(0, 0.1, n_samples)
 
             name = f"Swap_Output_v{variation}"
@@ -335,14 +365,18 @@ class MassiveDeFiFormulaGenerator:
 
             self._process_formula(name, description, X_data, output, n_samples)
 
-    def _process_formula(self, name: str, description: str, X: np.ndarray, y: np.ndarray, n_samples: int):
+    def _process_formula(
+        self, name: str, description: str, X: np.ndarray, y: np.ndarray, n_samples: int
+    ):
         """Common formula processing."""
         try:
             result = self.system.discover_validate_interpret(
                 X=X,
                 y=y,
                 variable_names=[f"var_{i}" for i in range(X.shape[1])],
-                variable_descriptions={f"var_{i}": f"Variable {i}" for i in range(X.shape[1])},
+                variable_descriptions={
+                    f"var_{i}": f"Variable {i}" for i in range(X.shape[1])
+                },
                 variable_units={f"var_{i}": "dimensionless" for i in range(X.shape[1])},
                 description=description,
                 validate_first=False,
@@ -350,7 +384,9 @@ class MassiveDeFiFormulaGenerator:
             self.results.append((name, result))
             self.successful_formulas += 1
             if self.formula_id % 20 == 0:
-                print(f"✓ Processed {self.formula_id} formulas... ({self.successful_formulas} successful)")
+                print(
+                    f"✓ Processed {self.formula_id} formulas... ({self.successful_formulas} successful)"
+                )
         except Exception as e:
             self.failed_formulas += 1
             if self.formula_id % 50 == 0:
@@ -360,7 +396,9 @@ class MassiveDeFiFormulaGenerator:
         """Generate all 280 formula variations."""
         print("\n" + "#" * 70)
         print("# DeFi Formula Discovery - MASSIVE SCALE")
-        print(f"# Generating 280 formula variations × {n_samples} samples = 5,600 data points")
+        print(
+            f"# Generating 280 formula variations × {n_samples} samples = 5,600 data points"
+        )
         print(f"# Timestamp: {datetime.now().isoformat()}")
         print(f"# Random seed: {self.seed}")
         print("#" * 70)
@@ -372,7 +410,10 @@ class MassiveDeFiFormulaGenerator:
             ("StableSwap Hybrid (25 variants)", self.generate_stableswap_variants),
             ("Impermanent Loss (30 variants)", self.generate_impermanent_loss_variants),
             ("Position Value (35 variants)", self.generate_position_value_variants),
-            ("Concentrated Liquidity (28 variants)", self.generate_concentrated_liquidity_variants),
+            (
+                "Concentrated Liquidity (28 variants)",
+                self.generate_concentrated_liquidity_variants,
+            ),
             ("Fee Earnings (32 variants)", self.generate_fee_earning_variants),
             ("APY (20 variants)", self.generate_apy_variants),
             ("Slippage (35 variants)", self.generate_slippage_variants),
@@ -450,7 +491,11 @@ class MassiveDeFiFormulaGenerator:
                         discovery.get("complexity", 0),
                         validation.get("total_score", 0),
                         validation.get("valid", False),
-                        interpretation.get("interpretation", "")[:100] if interpretation else "",
+                        (
+                            interpretation.get("interpretation", "")[:100]
+                            if interpretation
+                            else ""
+                        ),
                         metadata.get("llm_provider", ""),
                         self.system.domain,
                     ]

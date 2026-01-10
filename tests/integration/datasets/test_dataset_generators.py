@@ -31,7 +31,13 @@ class TestDeFiDatasetGenerator(unittest.TestCase):
 
     def test_defi_formula_structure(self):
         """Test that DeFi formulas have correct structure"""
-        expected_keys = ["formula_name", "formula", "description", "variables", "category"]
+        expected_keys = [
+            "formula_name",
+            "formula",
+            "description",
+            "variables",
+            "category",
+        ]
 
         sample_formula = {
             "formula_name": "APY",
@@ -75,7 +81,12 @@ class TestDeFiDatasetGenerator(unittest.TestCase):
 
     def test_defi_json_export(self):
         """Test JSON export functionality"""
-        data = {"formulas": [{"name": "APY", "value": 5.5}, {"name": "TVL", "value": 1000000}]}
+        data = {
+            "formulas": [
+                {"name": "APY", "value": 5.5},
+                {"name": "TVL", "value": 1000000},
+            ]
+        }
 
         with open(self.output_file, "w") as f:
             json.dump(data, f)
@@ -104,7 +115,9 @@ class TestDeFiDatasetGenerator(unittest.TestCase):
 
         loaded_df = pd.read_csv(csv_file)
         self.assertEqual(len(loaded_df), 3)
-        self.assertListEqual(list(loaded_df.columns), ["formula_name", "category", "complexity"])
+        self.assertListEqual(
+            list(loaded_df.columns), ["formula_name", "category", "complexity"]
+        )
 
 
 class TestRiskDatasetGenerator(unittest.TestCase):
@@ -123,7 +136,13 @@ class TestRiskDatasetGenerator(unittest.TestCase):
 
     def test_risk_metric_structure(self):
         """Test risk metrics have proper structure"""
-        expected_keys = ["metric_name", "formula", "risk_type", "severity", "description"]
+        expected_keys = [
+            "metric_name",
+            "formula",
+            "risk_type",
+            "severity",
+            "description",
+        ]
 
         sample_metric = {
             "metric_name": "VaR",
@@ -177,7 +196,13 @@ class TestRiskDatasetGenerator(unittest.TestCase):
         """Test risk data JSON export"""
         output_file = os.path.join(self.temp_dir, "risk_comprehensive.json")
 
-        risk_data = {"version": "1.0", "metrics": [{"name": "VaR", "value": 0.05}, {"name": "CVaR", "value": 0.08}]}
+        risk_data = {
+            "version": "1.0",
+            "metrics": [
+                {"name": "VaR", "value": 0.05},
+                {"name": "CVaR", "value": 0.08},
+            ],
+        }
 
         with open(output_file, "w") as f:
             json.dump(risk_data, f, indent=2)
@@ -225,20 +250,33 @@ class TestFullDatasetGenerator(unittest.TestCase):
 
     def test_dataset_versioning(self):
         """Test dataset version tracking"""
-        dataset = {"version": "1.0.0", "generated_at": datetime.now().isoformat(), "data": {}}
+        dataset = {
+            "version": "1.0.0",
+            "generated_at": datetime.now().isoformat(),
+            "data": {},
+        }
 
         self.assertIsNotNone(dataset["version"])
         self.assertIsNotNone(dataset["generated_at"])
 
     def test_dataset_integrity(self):
         """Test dataset integrity checks"""
-        dataset = {"checksum": "abc123", "record_count": 100, "data": [{"id": i} for i in range(100)]}
+        dataset = {
+            "checksum": "abc123",
+            "record_count": 100,
+            "data": [{"id": i} for i in range(100)],
+        }
 
         self.assertEqual(dataset["record_count"], len(dataset["data"]))
 
     def test_multi_format_export(self):
         """Test exporting to multiple formats"""
-        data = {"formulas": [{"name": "Formula1", "type": "DeFi"}, {"name": "Formula2", "type": "Risk"}]}
+        data = {
+            "formulas": [
+                {"name": "Formula1", "type": "DeFi"},
+                {"name": "Formula2", "type": "Risk"},
+            ]
+        }
 
         # JSON export
         json_file = os.path.join(self.temp_dir, "output.json")
@@ -260,7 +298,12 @@ class TestDatasetValidation(unittest.TestCase):
         """Test validation of required fields"""
         required_fields = ["id", "name", "type", "formula"]
 
-        valid_record = {"id": 1, "name": "APY", "type": "DeFi", "formula": "calculation"}
+        valid_record = {
+            "id": 1,
+            "name": "APY",
+            "type": "DeFi",
+            "formula": "calculation",
+        }
 
         for field in required_fields:
             self.assertIn(field, valid_record)
@@ -295,7 +338,11 @@ class TestQueryDatasetGenerator(unittest.TestCase):
 
     def test_defi_query_generation(self):
         """Test DeFi query generation"""
-        queries = ["What is the APY for this pool?", "Calculate impermanent loss", "Show TVL across protocols"]
+        queries = [
+            "What is the APY for this pool?",
+            "Calculate impermanent loss",
+            "Show TVL across protocols",
+        ]
 
         for query in queries:
             self.assertIsInstance(query, str)
@@ -303,11 +350,20 @@ class TestQueryDatasetGenerator(unittest.TestCase):
 
     def test_risk_query_generation(self):
         """Test risk query generation"""
-        queries = ["Calculate VaR at 95% confidence", "What is the Sharpe ratio?", "Assess credit risk exposure"]
+        queries = [
+            "Calculate VaR at 95% confidence",
+            "What is the Sharpe ratio?",
+            "Assess credit risk exposure",
+        ]
 
         for query in queries:
             self.assertIsInstance(query, str)
-            self.assertTrue(any(risk_term in query.lower() for risk_term in ["var", "risk", "sharpe"]))
+            self.assertTrue(
+                any(
+                    risk_term in query.lower()
+                    for risk_term in ["var", "risk", "sharpe"]
+                )
+            )
 
     def test_query_answer_pairs(self):
         """Test query-answer pair generation"""
@@ -341,7 +397,11 @@ class TestTableauDatasetGenerator(unittest.TestCase):
 
     def test_tableau_formula_generation(self):
         """Test Tableau formula generation"""
-        formulas = ["SUM([Sales])", "AVG([Profit])", 'IF [Region] = "East" THEN [Sales] * 1.1 END']
+        formulas = [
+            "SUM([Sales])",
+            "AVG([Profit])",
+            'IF [Region] = "East" THEN [Sales] * 1.1 END',
+        ]
 
         for formula in formulas:
             self.assertTrue("[" in formula or "(" in formula)

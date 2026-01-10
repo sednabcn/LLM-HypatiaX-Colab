@@ -52,11 +52,15 @@ class Migrate_v_7_8:
                 output_path = self.new_model_path
             else:
                 # Default: add version suffix
-                output_path = self.old_model_path.parent / f"{self.old_model_path.name}_v-3.8.0"
+                output_path = (
+                    self.old_model_path.parent / f"{self.old_model_path.name}_v-3.8.0"
+                )
 
         # Create backup if requested
         if self.backup:
-            backup_path = self.old_model_path.parent / f"{self.old_model_path.name}_backup_v3.7"
+            backup_path = (
+                self.old_model_path.parent / f"{self.old_model_path.name}_backup_v3.7"
+            )
             if not backup_path.exists():
                 print(f"📦 Creating backup: {backup_path.name}")
                 shutil.copytree(self.old_model_path, backup_path)
@@ -126,7 +130,9 @@ class Migrate_v_7_8:
             raise
 
 
-def migrate_all_tableau_models(base_path="hypatiax/data_spacy/queries/tableau", in_place=False):
+def migrate_all_tableau_models(
+    base_path="hypatiax/data_spacy/queries/tableau", in_place=False
+):
     """
     Migrate all three tableau NER models
 
@@ -144,7 +150,9 @@ def migrate_all_tableau_models(base_path="hypatiax/data_spacy/queries/tableau", 
     print("TABLEAU MODEL MIGRATION")
     print("=" * 70)
     print(f"Base path: {base_path}")
-    print(f"Mode: {'IN-PLACE (replace originals)' if in_place else 'CREATE NEW VERSIONS'}")
+    print(
+        f"Mode: {'IN-PLACE (replace originals)' if in_place else 'CREATE NEW VERSIONS'}"
+    )
     print(f"SpaCy version: {spacy.__version__}")
     print("=" * 70)
 
@@ -267,7 +275,9 @@ Examples:
     )
     parser.add_argument("--model", type=str, help="Path to single model to migrate")
     parser.add_argument(
-        "--output", type=str, help="Output path for migrated model (optional, will add _v-3.8.0 suffix if not provided)"
+        "--output",
+        type=str,
+        help="Output path for migrated model (optional, will add _v-3.8.0 suffix if not provided)",
     )
     parser.add_argument(
         "--in-place",
@@ -287,7 +297,9 @@ Examples:
         if args.all:
             # Migrate all three tableau models
             print("\n🚀 Starting batch migration of tableau models...\n")
-            results = migrate_all_tableau_models(base_path=args.base_path, in_place=args.in_place)
+            results = migrate_all_tableau_models(
+                base_path=args.base_path, in_place=args.in_place
+            )
 
             # Exit with error code if any migrations failed
             if any(status == "failed" for status in results.values()):
@@ -296,7 +308,9 @@ Examples:
         elif args.model:
             # Migrate single model
             print(f"\n🚀 Migrating single model: {args.model}\n")
-            nlp = migrate_single_model(model_path=args.model, output_path=args.output, in_place=args.in_place)
+            nlp = migrate_single_model(
+                model_path=args.model, output_path=args.output, in_place=args.in_place
+            )
             print(f"\n✅ Migration complete!")
 
         else:

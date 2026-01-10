@@ -128,7 +128,11 @@ class OldSequentialPipeline:
             "formula": formula,
             "confidence": confidence,
             "method": "sequential_pipeline",
-            "steps": [f"NER: {entities} ✅", f"Mapping: {formula_type} ✅", f"Generation: {formula} ✅"],
+            "steps": [
+                f"NER: {entities} ✅",
+                f"Mapping: {formula_type} ✅",
+                f"Generation: {formula} ✅",
+            ],
             "time": time.time() - start_time,
         }
 
@@ -205,7 +209,9 @@ def run_comparison(inputs: List[str]):
                 print(f"⚠️ LLM mapping failed for '{text}': {e}")
                 new_res = None
 
-        comparison = ComparisonResult(input_text=text, old_result=old_res, new_result=new_res or {})
+        comparison = ComparisonResult(
+            input_text=text, old_result=old_res, new_result=new_res or {}
+        )
         comparison.print_comparison()
         results.append(comparison)
 

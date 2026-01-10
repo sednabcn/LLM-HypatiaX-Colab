@@ -121,7 +121,9 @@ class TestNERService(unittest.TestCase):
     def test_entity_positions(self):
         """Test that entity positions are correct"""
         text = "x + y"
-        result = self.ner_service.recognize_entities(text, entity_types=["variable", "operator"])
+        result = self.ner_service.recognize_entities(
+            text, entity_types=["variable", "operator"]
+        )
 
         self.assertGreater(len(result["entities"]), 0)
         for entity in result["entities"]:

@@ -72,7 +72,10 @@ def sentence_test_cases():
     return {
         "simple_org": {
             "text": "Google is in California",
-            "expected": [{"text": "Google", "label": "ORG"}, {"text": "California", "label": "GPE"}],
+            "expected": [
+                {"text": "Google", "label": "ORG"},
+                {"text": "California", "label": "GPE"},
+            ],
         },
         "ambiguous": {
             "text": "Apple released new products",  # Apple = company or fruit?

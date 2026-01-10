@@ -25,7 +25,10 @@ class ModernLLMTrainer:
 
         try:
             response = self.cohere_client.generate(
-                prompt=prompt, max_tokens=256, temperature=0.1, model="command"  # or "command-light", "command-nightly"
+                prompt=prompt,
+                max_tokens=256,
+                temperature=0.1,
+                model="command",  # or "command-light", "command-nightly"
             )
             return response.generations[0].text
         except Exception as e:

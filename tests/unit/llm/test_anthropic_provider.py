@@ -16,7 +16,9 @@ sys.path.insert(0, str(project_root))
 from dotenv import load_dotenv
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
@@ -110,7 +112,9 @@ def main():
     print("=" * 70)
     try:
         result = provider.generate_formula(
-            requirements="Calculate impermanent loss for Uniswap V2 liquidity pools", domain="defi", n_candidates=1
+            requirements="Calculate impermanent loss for Uniswap V2 liquidity pools",
+            domain="defi",
+            n_candidates=1,
         )
 
         formula = result[0]

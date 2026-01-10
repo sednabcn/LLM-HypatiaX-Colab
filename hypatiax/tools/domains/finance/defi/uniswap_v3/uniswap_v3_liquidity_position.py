@@ -67,28 +67,36 @@ class UniswapV3Position:
         sqrt_price = sqrt_price_x96 / (2**96)
         return sqrt_price**2
 
-    def _get_amount0_for_liquidity(self, sqrt_price_a: float, sqrt_price_b: float, liquidity: float) -> float:
+    def _get_amount0_for_liquidity(
+        self, sqrt_price_a: float, sqrt_price_b: float, liquidity: float
+    ) -> float:
         """Calculate amount0 for given liquidity between two sqrt prices"""
         if sqrt_price_a > sqrt_price_b:
             sqrt_price_a, sqrt_price_b = sqrt_price_b, sqrt_price_a
 
         return liquidity * (sqrt_price_b - sqrt_price_a) / (sqrt_price_a * sqrt_price_b)
 
-    def _get_amount1_for_liquidity(self, sqrt_price_a: float, sqrt_price_b: float, liquidity: float) -> float:
+    def _get_amount1_for_liquidity(
+        self, sqrt_price_a: float, sqrt_price_b: float, liquidity: float
+    ) -> float:
         """Calculate amount1 for given liquidity between two sqrt prices"""
         if sqrt_price_a > sqrt_price_b:
             sqrt_price_a, sqrt_price_b = sqrt_price_b, sqrt_price_a
 
         return liquidity * (sqrt_price_b - sqrt_price_a)
 
-    def _get_liquidity_for_amount0(self, sqrt_price_a: float, sqrt_price_b: float, amount0: float) -> float:
+    def _get_liquidity_for_amount0(
+        self, sqrt_price_a: float, sqrt_price_b: float, amount0: float
+    ) -> float:
         """Calculate liquidity for given amount0"""
         if sqrt_price_a > sqrt_price_b:
             sqrt_price_a, sqrt_price_b = sqrt_price_b, sqrt_price_a
 
         return amount0 * sqrt_price_a * sqrt_price_b / (sqrt_price_b - sqrt_price_a)
 
-    def _get_liquidity_for_amount1(self, sqrt_price_a: float, sqrt_price_b: float, amount1: float) -> float:
+    def _get_liquidity_for_amount1(
+        self, sqrt_price_a: float, sqrt_price_b: float, amount1: float
+    ) -> float:
         """Calculate liquidity for given amount1"""
         if sqrt_price_a > sqrt_price_b:
             sqrt_price_a, sqrt_price_b = sqrt_price_b, sqrt_price_a
@@ -96,7 +104,12 @@ class UniswapV3Position:
         return amount1 / (sqrt_price_b - sqrt_price_a)
 
     def calculate_liquidity_amounts(
-        self, price_current: float, price_lower: float, price_upper: float, amount0: float, amount1: float
+        self,
+        price_current: float,
+        price_lower: float,
+        price_upper: float,
+        amount0: float,
+        amount1: float,
     ) -> Dict[str, float]:
         """
         Calculate optimal liquidity and actual amounts needed
@@ -120,28 +133,40 @@ class UniswapV3Position:
 
         if price_current <= price_lower:
             # Price below range - only need token0
-            liquidity = self._get_liquidity_for_amount0(sqrt_price_lower, sqrt_price_upper, amount0)
+            liquidity = self._get_liquidity_for_amount0(
+                sqrt_price_lower, sqrt_price_upper, amount0
+            )
             amount0_actual = amount0
             amount1_actual = 0
 
         elif price_current >= price_upper:
             # Price above range - only need token1
-            liquidity = self._get_liquidity_for_amount1(sqrt_price_lower, sqrt_price_upper, amount1)
+            liquidity = self._get_liquidity_for_amount1(
+                sqrt_price_lower, sqrt_price_upper, amount1
+            )
             amount0_actual = 0
             amount1_actual = amount1
 
         else:
             # Price in range - need both tokens
             # Calculate liquidity from each token
-            liquidity0 = self._get_liquidity_for_amount0(sqrt_price_current, sqrt_price_upper, amount0)
-            liquidity1 = self._get_liquidity_for_amount1(sqrt_price_lower, sqrt_price_current, amount1)
+            liquidity0 = self._get_liquidity_for_amount0(
+                sqrt_price_current, sqrt_price_upper, amount0
+            )
+            liquidity1 = self._get_liquidity_for_amount1(
+                sqrt_price_lower, sqrt_price_current, amount1
+            )
 
             # Take minimum to maintain correct ratio
             liquidity = min(liquidity0, liquidity1)
 
             # Calculate actual amounts needed for this liquidity
-            amount0_actual = self._get_amount0_for_liquidity(sqrt_price_current, sqrt_price_upper, liquidity)
-            amount1_actual = self._get_amount1_for_liquidity(sqrt_price_lower, sqrt_price_current, liquidity)
+            amount0_actual = self._get_amount0_for_liquidity(
+                sqrt_price_current, sqrt_price_upper, liquidity
+            )
+            amount1_actual = self._get_amount1_for_liquidity(
+                sqrt_price_lower, sqrt_price_current, liquidity
+            )
 
         return {
             "liquidity": liquidity,
@@ -241,18 +266,26 @@ class UniswapV3Position:
         # Calculate current token amounts
         if price_current <= position.price_lower:
             # All token0
-            amount0 = self._get_amount0_for_liquidity(sqrt_price_lower, sqrt_price_upper, position.liquidity)
+            amount0 = self._get_amount0_for_liquidity(
+                sqrt_price_lower, sqrt_price_upper, position.liquidity
+            )
             amount1 = 0
 
         elif price_current >= position.price_upper:
             # All token1
             amount0 = 0
-            amount1 = self._get_amount1_for_liquidity(sqrt_price_lower, sqrt_price_upper, position.liquidity)
+            amount1 = self._get_amount1_for_liquidity(
+                sqrt_price_lower, sqrt_price_upper, position.liquidity
+            )
 
         else:
             # Both tokens
-            amount0 = self._get_amount0_for_liquidity(sqrt_price_current, sqrt_price_upper, position.liquidity)
-            amount1 = self._get_amount1_for_liquidity(sqrt_price_lower, sqrt_price_current, position.liquidity)
+            amount0 = self._get_amount0_for_liquidity(
+                sqrt_price_current, sqrt_price_upper, position.liquidity
+            )
+            amount1 = self._get_amount1_for_liquidity(
+                sqrt_price_lower, sqrt_price_current, position.liquidity
+            )
 
         # Calculate values
         value_token0 = amount0 * price_current
@@ -265,7 +298,8 @@ class UniswapV3Position:
         # Calculate position as % of range
         if in_range:
             range_position_pct = (
-                (price_current - position.price_lower) / (position.price_upper - position.price_lower)
+                (price_current - position.price_lower)
+                / (position.price_upper - position.price_lower)
             ) * 100
         else:
             range_position_pct = None
@@ -328,7 +362,9 @@ class UniswapV3Position:
             "fees_token1": fees_token1,
             "total_token0": value_data["amount0"] + fees_token0,
             "total_token1": value_data["amount1"] + fees_token1,
-            "total_value": value_data["total_value"] + (fees_token0 * price_current) + fees_token1,
+            "total_value": value_data["total_value"]
+            + (fees_token0 * price_current)
+            + fees_token1,
         }
 
     def collect_fees(self, position_id: int) -> Dict:
@@ -353,9 +389,15 @@ class UniswapV3Position:
         position.token0_owed = 0
         position.token1_owed = 0
 
-        return {"position_id": position_id, "fees_token0": fees_token0, "fees_token1": fees_token1}
+        return {
+            "position_id": position_id,
+            "fees_token0": fees_token0,
+            "fees_token1": fees_token1,
+        }
 
-    def simulate_fees(self, position_id: int, volume: float, time_in_range: float = 1.0):
+    def simulate_fees(
+        self, position_id: int, volume: float, time_in_range: float = 1.0
+    ):
         """
         Simulate fee accumulation
 
@@ -429,7 +471,9 @@ def example_v3_position_management():
 
     print(f"Alice creates position:")
     print(f"  Position NFT ID: #{alice_position['position_id']}")
-    print(f"  Range: ${alice_position['price_lower']:.0f} - ${alice_position['price_upper']:.0f}")
+    print(
+        f"  Range: ${alice_position['price_lower']:.0f} - ${alice_position['price_upper']:.0f}"
+    )
     print(
         f"  Deposited: {alice_position['amount0_deposited']:.4f} ETH + ${alice_position['amount1_deposited']:.2f} USDC"
     )
@@ -455,8 +499,12 @@ def example_v3_position_management():
 
     print(f"Bob creates position:")
     print(f"  Position NFT ID: #{bob_position['position_id']}")
-    print(f"  Range: ${bob_position['price_lower']:.0f} - ${bob_position['price_upper']:.0f}")
-    print(f"  Deposited: {bob_position['amount0_deposited']:.4f} ETH + ${bob_position['amount1_deposited']:.2f} USDC")
+    print(
+        f"  Range: ${bob_position['price_lower']:.0f} - ${bob_position['price_upper']:.0f}"
+    )
+    print(
+        f"  Deposited: {bob_position['amount0_deposited']:.4f} ETH + ${bob_position['amount1_deposited']:.2f} USDC"
+    )
     print(f"  Liquidity: {bob_position['liquidity']:.2f}")
     print()
 
@@ -471,14 +519,22 @@ def example_v3_position_management():
     bob_value = pool.get_position_value(bob_position["position_id"], new_price)
 
     print(f"Alice's position:")
-    print(f"  In Range: {alice_value['in_range']} ({'✓' if alice_value['in_range'] else '✗'})")
-    print(f"  Current: {alice_value['amount0']:.4f} ETH + ${alice_value['amount1']:.2f} USDC")
+    print(
+        f"  In Range: {alice_value['in_range']} ({'✓' if alice_value['in_range'] else '✗'})"
+    )
+    print(
+        f"  Current: {alice_value['amount0']:.4f} ETH + ${alice_value['amount1']:.2f} USDC"
+    )
     print(f"  Total Value: ${alice_value['total_value']:.2f}")
     print()
 
     print(f"Bob's position:")
-    print(f"  In Range: {bob_value['in_range']} ({'✓' if bob_value['in_range'] else '✗'})")
-    print(f"  Current: {bob_value['amount0']:.4f} ETH + ${bob_value['amount1']:.2f} USDC")
+    print(
+        f"  In Range: {bob_value['in_range']} ({'✓' if bob_value['in_range'] else '✗'})"
+    )
+    print(
+        f"  Current: {bob_value['amount0']:.4f} ETH + ${bob_value['amount1']:.2f} USDC"
+    )
     print(f"  Total Value: ${bob_value['total_value']:.2f}")
     print()
 
@@ -490,7 +546,9 @@ def example_v3_position_management():
 
     for day in range(30):
         # Alice's tight range is in range 100% of time
-        pool.simulate_fees(alice_position["position_id"], daily_volume, time_in_range=1.0)
+        pool.simulate_fees(
+            alice_position["position_id"], daily_volume, time_in_range=1.0
+        )
         # Bob's wide range is also in range
         pool.simulate_fees(bob_position["position_id"], daily_volume, time_in_range=1.0)
 
@@ -499,19 +557,29 @@ def example_v3_position_management():
 
     alice_value = pool.get_position_value(alice_position["position_id"], new_price)
     print(f"Alice's fees earned:")
-    print(f"  Token0 fees: {alice_value['fees_owed_0']:.4f} ETH (${alice_value['fees_owed_0'] * new_price:.2f})")
+    print(
+        f"  Token0 fees: {alice_value['fees_owed_0']:.4f} ETH (${alice_value['fees_owed_0'] * new_price:.2f})"
+    )
     print(f"  Token1 fees: ${alice_value['fees_owed_1']:.2f} USDC")
-    print(f"  Total fees: ${alice_value['fees_owed_0'] * new_price + alice_value['fees_owed_1']:.2f}")
+    print(
+        f"  Total fees: ${alice_value['fees_owed_0'] * new_price + alice_value['fees_owed_1']:.2f}"
+    )
     print()
 
     bob_value = pool.get_position_value(bob_position["position_id"], new_price)
     print(f"Bob's fees earned:")
-    print(f"  Token0 fees: {bob_value['fees_owed_0']:.4f} ETH (${bob_value['fees_owed_0'] * new_price:.2f})")
+    print(
+        f"  Token0 fees: {bob_value['fees_owed_0']:.4f} ETH (${bob_value['fees_owed_0'] * new_price:.2f})"
+    )
     print(f"  Token1 fees: ${bob_value['fees_owed_1']:.2f} USDC")
-    print(f"  Total fees: ${bob_value['fees_owed_0'] * new_price + bob_value['fees_owed_1']:.2f}")
+    print(
+        f"  Total fees: ${bob_value['fees_owed_0'] * new_price + bob_value['fees_owed_1']:.2f}"
+    )
     print()
 
-    print("💡 Note: Alice (tight range) earned more fees due to higher capital efficiency!")
+    print(
+        "💡 Note: Alice (tight range) earned more fees due to higher capital efficiency!"
+    )
     print()
 
     print("SCENARIO 5: PRICE MOVES OUT OF ALICE'S RANGE")
@@ -525,15 +593,23 @@ def example_v3_position_management():
     bob_value = pool.get_position_value(bob_position["position_id"], new_price)
 
     print(f"Alice's position:")
-    print(f"  In Range: {alice_value['in_range']} ({'✓' if alice_value['in_range'] else '✗'})")
-    print(f"  Current: {alice_value['amount0']:.4f} ETH + ${alice_value['amount1']:.2f} USDC")
+    print(
+        f"  In Range: {alice_value['in_range']} ({'✓' if alice_value['in_range'] else '✗'})"
+    )
+    print(
+        f"  Current: {alice_value['amount0']:.4f} ETH + ${alice_value['amount1']:.2f} USDC"
+    )
     print(f"  Total Value: ${alice_value['total_value']:.2f}")
     print(f"  ⚠️  Position is now 100% USDC, earning ZERO fees!")
     print()
 
     print(f"Bob's position:")
-    print(f"  In Range: {bob_value['in_range']} ({'✓' if bob_value['in_range'] else '✗'})")
-    print(f"  Current: {bob_value['amount0']:.4f} ETH + ${bob_value['amount1']:.2f} USDC")
+    print(
+        f"  In Range: {bob_value['in_range']} ({'✓' if bob_value['in_range'] else '✗'})"
+    )
+    print(
+        f"  Current: {bob_value['amount0']:.4f} ETH + ${bob_value['amount1']:.2f} USDC"
+    )
     print(f"  Total Value: ${bob_value['total_value']:.2f}")
     print(f"  ✅ Still earning fees!")
     print()
@@ -545,7 +621,9 @@ def example_v3_position_management():
     alice_withdraw = pool.burn_position(alice_position["position_id"], new_price)
 
     print(f"Alice removes position #{alice_withdraw['position_id']}:")
-    print(f"  Withdrew: {alice_withdraw['total_token0']:.4f} ETH + ${alice_withdraw['total_token1']:.2f} USDC")
+    print(
+        f"  Withdrew: {alice_withdraw['total_token0']:.4f} ETH + ${alice_withdraw['total_token1']:.2f} USDC"
+    )
     print(f"  Total Value: ${alice_withdraw['total_value']:.2f}")
     print()
 

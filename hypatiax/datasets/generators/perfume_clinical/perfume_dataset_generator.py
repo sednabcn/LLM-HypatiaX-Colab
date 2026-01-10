@@ -196,7 +196,9 @@ RESULT: Child dose = 250 mg""",
         print(f"  Total scenarios: {len(self.clinical_data)}")
         print(f"  Format: Question-Answer with step-by-step solutions")
 
-        print(f"\nTotal Training Examples: {len(self.perfume_data) + len(self.clinical_data)}")
+        print(
+            f"\nTotal Training Examples: {len(self.perfume_data) + len(self.clinical_data)}"
+        )
         print("=" * 70)
 
     def run_all(self):

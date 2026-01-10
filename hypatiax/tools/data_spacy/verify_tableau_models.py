@@ -59,7 +59,9 @@ def verify_model(model_path: str, test_texts: list[str] = None):
 
                 print(f"   Labels found: {len(labels)}")
                 print(f"\n   Pattern distribution:")
-                for label, count in sorted(labels.items(), key=lambda x: x[1], reverse=True)[:10]:
+                for label, count in sorted(
+                    labels.items(), key=lambda x: x[1], reverse=True
+                )[:10]:
                     print(f"      {label:30} {count:4} patterns")
 
                 if len(labels) > 10:
@@ -71,7 +73,9 @@ def verify_model(model_path: str, test_texts: list[str] = None):
                     label = pattern.get("label", "UNKNOWN")
                     pat = pattern.get("pattern", [])
                     if isinstance(pat, list) and pat:
-                        text = " ".join(str(p.get("LOWER", p.get("TEXT", ""))) for p in pat[:5])
+                        text = " ".join(
+                            str(p.get("LOWER", p.get("TEXT", ""))) for p in pat[:5]
+                        )
                         if len(pat) > 5:
                             text += " ..."
                     else:
@@ -154,13 +158,22 @@ def verify_all_tableau_models(base_path: str = "hypatiax/data_spacy/queries/tabl
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Verify Tableau NER models have rules loaded correctly")
+    parser = argparse.ArgumentParser(
+        description="Verify Tableau NER models have rules loaded correctly"
+    )
 
-    parser.add_argument("--all", action="store_true", help="Verify all three tableau models")
-    parser.add_argument("--model", type=str, help="Path to single model to verify")
-    parser.add_argument("--test", type=str, nargs="+", help="Test texts for entity recognition")
     parser.add_argument(
-        "--base-path", type=str, default="hypatiax/data_spacy/queries/tableau", help="Base path for models"
+        "--all", action="store_true", help="Verify all three tableau models"
+    )
+    parser.add_argument("--model", type=str, help="Path to single model to verify")
+    parser.add_argument(
+        "--test", type=str, nargs="+", help="Test texts for entity recognition"
+    )
+    parser.add_argument(
+        "--base-path",
+        type=str,
+        default="hypatiax/data_spacy/queries/tableau",
+        help="Base path for models",
     )
 
     args = parser.parse_args()
@@ -188,7 +201,9 @@ if __name__ == "__main__":
                 "Sort by profit descending",
             ],
         )
-        print("\n💡 Use --all to verify all models or --model <path> for a specific model")
+        print(
+            "\n💡 Use --all to verify all models or --model <path> for a specific model"
+        )
 
 """
 Now run this to see the rules inside your model:

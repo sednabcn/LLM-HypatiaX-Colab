@@ -23,17 +23,42 @@ BASELINE_FILE = Path("tests/performance/baseline_performance.json")
 # Performance baselines (in milliseconds)
 # These should be updated when intentional performance improvements are made
 PERFORMANCE_BASELINES = {
-    "symbolic_validation": {"p50": 0.8, "p95": 1.0, "p99": 1.5, "allowed_regression": 0.2},  # 20% regression allowed
-    "dimensional_validation": {"p50": 0.3, "p95": 0.5, "p99": 0.8, "allowed_regression": 0.2},
-    "domain_validation": {"p50": 0.6, "p95": 0.8, "p99": 1.2, "allowed_regression": 0.2},
-    "ensemble_validation": {"p50": 1.5, "p95": 2.0, "p99": 3.0, "allowed_regression": 0.2},
+    "symbolic_validation": {
+        "p50": 0.8,
+        "p95": 1.0,
+        "p99": 1.5,
+        "allowed_regression": 0.2,
+    },  # 20% regression allowed
+    "dimensional_validation": {
+        "p50": 0.3,
+        "p95": 0.5,
+        "p99": 0.8,
+        "allowed_regression": 0.2,
+    },
+    "domain_validation": {
+        "p50": 0.6,
+        "p95": 0.8,
+        "p99": 1.2,
+        "allowed_regression": 0.2,
+    },
+    "ensemble_validation": {
+        "p50": 1.5,
+        "p95": 2.0,
+        "p99": 3.0,
+        "allowed_regression": 0.2,
+    },
     "symbolic_regression_small": {
         "p50": 50.0,
         "p95": 100.0,
         "p99": 150.0,
         "allowed_regression": 0.3,  # ML operations can vary more
     },
-    "end_to_end_workflow": {"p50": 500.0, "p95": 1000.0, "p99": 1500.0, "allowed_regression": 0.25},
+    "end_to_end_workflow": {
+        "p50": 500.0,
+        "p95": 1000.0,
+        "p99": 1500.0,
+        "allowed_regression": 0.25,
+    },
 }
 
 
@@ -73,7 +98,10 @@ class PerformanceRegressionChecker:
     def save_baselines(self, force: bool = False):
         """Save current results as new baseline."""
         if not force and self.baseline_file.exists():
-            warnings.warn(f"Baseline file {self.baseline_file} already exists. " f"Use force=True to overwrite.")
+            warnings.warn(
+                f"Baseline file {self.baseline_file} already exists. "
+                f"Use force=True to overwrite."
+            )
             return
 
         baselines = {}
@@ -91,7 +119,9 @@ class PerformanceRegressionChecker:
 
         print(f"✅ Saved new baseline to {self.baseline_file}")
 
-    def check_regression(self, operation: str, measurements: List[float], strict: bool = False) -> RegressionResult:
+    def check_regression(
+        self, operation: str, measurements: List[float], strict: bool = False
+    ) -> RegressionResult:
         """
         Check if performance has regressed.
 
@@ -132,7 +162,11 @@ class PerformanceRegressionChecker:
         # Check if regression exceeds threshold
         threshold = 0.0 if strict else allowed_regression
 
-        passes = p50_regression <= threshold and p95_regression <= threshold and p99_regression <= threshold
+        passes = (
+            p50_regression <= threshold
+            and p95_regression <= threshold
+            and p99_regression <= threshold
+        )
 
         if passes:
             if max(p50_regression, p95_regression, p99_regression) < 0:
@@ -141,7 +175,10 @@ class PerformanceRegressionChecker:
                 message = f"✅ PASS: {operation} within acceptable range"
         else:
             worst = max(p50_regression, p95_regression, p99_regression)
-            message = f"❌ REGRESSION: {operation} is {worst*100:.1f}% slower " f"(allowed: {threshold*100:.1f}%)"
+            message = (
+                f"❌ REGRESSION: {operation} is {worst*100:.1f}% slower "
+                f"(allowed: {threshold*100:.1f}%)"
+            )
 
         result = RegressionResult(
             operation=operation,
@@ -162,7 +199,14 @@ class PerformanceRegressionChecker:
         return result
 
     def measure_and_check(
-        self, func, *args, operation: str, iterations: int = 100, warmup: int = 5, strict: bool = False, **kwargs
+        self,
+        func,
+        *args,
+        operation: str,
+        iterations: int = 100,
+        warmup: int = 5,
+        strict: bool = False,
+        **kwargs,
     ) -> RegressionResult:
         """
         Measure performance and check against baseline.
@@ -267,7 +311,10 @@ class TestValidationRegression:
         expression = "x**2 + 3*x + 2"
 
         result = self.checker.measure_and_check(
-            mock_symbolic_validator.validate, expression, operation="symbolic_validation", iterations=500
+            mock_symbolic_validator.validate,
+            expression,
+            operation="symbolic_validation",
+            iterations=500,
         )
 
         print(f"\n{result.message}")
@@ -293,7 +340,11 @@ class TestValidationRegression:
         domain = "defi"
 
         result = self.checker.measure_and_check(
-            mock_domain_validator.validate, expression, domain, operation="domain_validation", iterations=500
+            mock_domain_validator.validate,
+            expression,
+            domain,
+            operation="domain_validation",
+            iterations=500,
         )
 
         print(f"\n{result.message}")
@@ -303,7 +354,10 @@ class TestValidationRegression:
         expression = "x**2 + 3*x + 2"
 
         result = self.checker.measure_and_check(
-            mock_ensemble_validator.validate, expression, operation="ensemble_validation", iterations=300
+            mock_ensemble_validator.validate,
+            expression,
+            operation="ensemble_validation",
+            iterations=300,
         )
 
         print(f"\n{result.message}")
@@ -327,7 +381,9 @@ class TestDataProcessingRegression:
         def process():
             return np.mean(X), np.std(y)
 
-        result = self.checker.measure_and_check(process, operation="small_dataset_processing", iterations=2000)
+        result = self.checker.measure_and_check(
+            process, operation="small_dataset_processing", iterations=2000
+        )
 
         assert result.passes, result.message
 
@@ -338,7 +394,9 @@ class TestDataProcessingRegression:
         def process():
             return np.corrcoef(X.flatten(), y)[0, 1]
 
-        result = self.checker.measure_and_check(process, operation="medium_dataset_processing", iterations=1000)
+        result = self.checker.measure_and_check(
+            process, operation="medium_dataset_processing", iterations=1000
+        )
 
         assert result.passes, result.message
 
@@ -349,7 +407,9 @@ class TestDataProcessingRegression:
         def process():
             return np.polyfit(X.flatten(), y, deg=2)
 
-        result = self.checker.measure_and_check(process, operation="large_dataset_processing", iterations=200)
+        result = self.checker.measure_and_check(
+            process, operation="large_dataset_processing", iterations=200
+        )
 
         assert result.passes, result.message
 
@@ -366,7 +426,9 @@ class TestEndToEndRegression:
         yield
         self.checker.print_summary()
 
-    def test_complete_workflow_regression(self, mock_symbolic_engine, mock_ensemble_validator, defi_amm_data):
+    def test_complete_workflow_regression(
+        self, mock_symbolic_engine, mock_ensemble_validator, defi_amm_data
+    ):
         """Test complete discovery-validation workflow hasn't regressed."""
         X, y = defi_amm_data
 
@@ -378,7 +440,9 @@ class TestEndToEndRegression:
             validation = mock_ensemble_validator.validate(expression)
             return predictions, validation
 
-        result = self.checker.measure_and_check(workflow, operation="end_to_end_workflow", iterations=50)
+        result = self.checker.measure_and_check(
+            workflow, operation="end_to_end_workflow", iterations=50
+        )
 
         assert result.passes, result.message
 
@@ -480,6 +544,12 @@ if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--update-baseline":
         update_baseline(force="--force" in sys.argv)
     else:
-        print("Run regression tests with: pytest tests/performance/regression_tests.py -v -m regression")
-        print("Update baseline with: python tests/performance/regression_tests.py --update-baseline")
-        print("Force update baseline: python tests/performance/regression_tests.py --update-baseline --force")
+        print(
+            "Run regression tests with: pytest tests/performance/regression_tests.py -v -m regression"
+        )
+        print(
+            "Update baseline with: python tests/performance/regression_tests.py --update-baseline"
+        )
+        print(
+            "Force update baseline: python tests/performance/regression_tests.py --update-baseline --force"
+        )

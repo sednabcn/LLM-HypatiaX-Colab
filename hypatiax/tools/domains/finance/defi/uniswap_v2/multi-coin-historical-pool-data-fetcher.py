@@ -38,7 +38,11 @@ def get_coin_historical_prices(coin_symbol, days=90):
         prices = []
         for timestamp, price in data["prices"]:
             prices.append(
-                {"timestamp": timestamp, "date": datetime.fromtimestamp(timestamp / 1000), "price_usd": price}
+                {
+                    "timestamp": timestamp,
+                    "date": datetime.fromtimestamp(timestamp / 1000),
+                    "price_usd": price,
+                }
             )
 
         print(f"✅ Fetched {len(prices)} days of {coin_symbol}")

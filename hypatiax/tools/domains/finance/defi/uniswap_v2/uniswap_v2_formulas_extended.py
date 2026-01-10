@@ -38,7 +38,9 @@ class DeFiAdvancedCalculator:
 
         if validate:
             if not (MIN_TICK <= tick <= MAX_TICK):
-                raise ValueError(f"Tick must be in [{MIN_TICK}, {MAX_TICK}], got {tick}")
+                raise ValueError(
+                    f"Tick must be in [{MIN_TICK}, {MAX_TICK}], got {tick}"
+                )
 
         # Clamp tick to safe range
         tick = max(MIN_TICK, min(tick, MAX_TICK))
@@ -52,7 +54,9 @@ class DeFiAdvancedCalculator:
     # FORMULA 22: Constant Sum AMM Output (mStable)
     # ========================================================================
     @staticmethod
-    def constant_sum_output(amount_in: float, fee: float = 0.003, validate: bool = True) -> float:
+    def constant_sum_output(
+        amount_in: float, fee: float = 0.003, validate: bool = True
+    ) -> float:
         """
         Constant Sum AMM for stablecoins (1:1 swap)
         Formula: Output = Amount_in × (1 - fee)
@@ -82,7 +86,9 @@ class DeFiAdvancedCalculator:
     # FORMULA 23: Curve StableSwap Invariant (Simplified)
     # ========================================================================
     @staticmethod
-    def curve_stableswap_d(reserves: List[float], A: float, validate: bool = True) -> float:
+    def curve_stableswap_d(
+        reserves: List[float], A: float, validate: bool = True
+    ) -> float:
         """
         Curve StableSwap invariant calculation (simplified Newton's method)
         Formula: D = (A × n^n × Σx_i + D^(n+1) / (n^n × Πx_i))^(1/2)
@@ -181,7 +187,11 @@ class DeFiAdvancedCalculator:
             rate = r_base + (utilization / u_optimal) * r_slope1
         else:
             # Above optimal utilization (steep increase)
-            rate = r_base + r_slope1 + ((utilization - u_optimal) / (1 - u_optimal)) * r_slope2
+            rate = (
+                r_base
+                + r_slope1
+                + ((utilization - u_optimal) / (1 - u_optimal)) * r_slope2
+            )
 
         return rate
 
@@ -228,7 +238,12 @@ class DeFiAdvancedCalculator:
         # Net APY (can be negative = paid to borrow)
         net_apy = borrow_apr - reward_apy
 
-        return {"borrow_apr": borrow_apr, "reward_apy": reward_apy, "net_apy": net_apy, "paid_to_borrow": net_apy < 0}
+        return {
+            "borrow_apr": borrow_apr,
+            "reward_apy": reward_apy,
+            "net_apy": net_apy,
+            "paid_to_borrow": net_apy < 0,
+        }
 
     # ========================================================================
     # FORMULA 26: Leverage Ratio (DeFi Lending)
@@ -262,7 +277,9 @@ class DeFiAdvancedCalculator:
     # FORMULA 27: Protocol Revenue (Trading Fees)
     # ========================================================================
     @staticmethod
-    def protocol_revenue(volume: float, fee_rate: float, protocol_cut: float, validate: bool = True) -> float:
+    def protocol_revenue(
+        volume: float, fee_rate: float, protocol_cut: float, validate: bool = True
+    ) -> float:
         """
         Protocol earnings from trading fees
         Formula: Revenue = Volume × Fee_Rate × Protocol_Cut
@@ -296,7 +313,9 @@ class DeFiAdvancedCalculator:
     # FORMULA 28: Maker DAO Stability Fee
     # ========================================================================
     @staticmethod
-    def maker_stability_fee(principal: float, rate: float, time_years: float, validate: bool = True) -> Dict:
+    def maker_stability_fee(
+        principal: float, rate: float, time_years: float, validate: bool = True
+    ) -> Dict:
         """
         Continuously compounded interest on MakerDAO CDP
         Formula: Total_Fee = Principal × e^(rate × time) - Principal
@@ -338,7 +357,9 @@ class DeFiAdvancedCalculator:
     # FORMULA 29: Liquidity Mining Dilution Rate
     # ========================================================================
     @staticmethod
-    def dilution_rate(emissions_per_year: float, total_supply: float, validate: bool = True) -> Dict:
+    def dilution_rate(
+        emissions_per_year: float, total_supply: float, validate: bool = True
+    ) -> Dict:
         """
         Annual inflation rate from token emissions
         Formula: Dilution = (Emissions_per_year / Total_Supply) × 100
@@ -352,7 +373,9 @@ class DeFiAdvancedCalculator:
         """
         if validate:
             if emissions_per_year < 0:
-                raise ValueError(f"emissions_per_year must be ≥ 0, got {emissions_per_year}")
+                raise ValueError(
+                    f"emissions_per_year must be ≥ 0, got {emissions_per_year}"
+                )
             if total_supply <= 0:
                 raise ValueError(f"total_supply must be > 0, got {total_supply}")
 
@@ -379,7 +402,9 @@ class DeFiAdvancedCalculator:
     # FORMULA 30: Impermanent Loss with Fees (Net)
     # ========================================================================
     @staticmethod
-    def il_with_fees_net(price_ratio: float, fee_apr: float, time_years: float, validate: bool = True) -> Dict:
+    def il_with_fees_net(
+        price_ratio: float, fee_apr: float, time_years: float, validate: bool = True
+    ) -> Dict:
         """
         Net impermanent loss after fee earnings
         Formula: Net_IL = IL - (Fee_APR × time × 2√(r) / (r + 1))
@@ -459,7 +484,12 @@ class DeFiAdvancedCalculator:
     # ========================================================================
     @staticmethod
     def black_scholes_delta(
-        spot: float, strike: float, rate: float, volatility: float, time_years: float, validate: bool = True
+        spot: float,
+        strike: float,
+        rate: float,
+        volatility: float,
+        time_years: float,
+        validate: bool = True,
     ) -> Dict:
         """
         Options Delta calculation (Black-Scholes)
@@ -487,7 +517,9 @@ class DeFiAdvancedCalculator:
 
         # Calculate d1
         sqrt_t = math.sqrt(time_years)
-        d1 = (math.log(spot / strike) + (rate + 0.5 * volatility**2) * time_years) / (volatility * sqrt_t)
+        d1 = (math.log(spot / strike) + (rate + 0.5 * volatility**2) * time_years) / (
+            volatility * sqrt_t
+        )
 
         # Standard normal CDF approximation
         def norm_cdf(x):
@@ -495,14 +527,23 @@ class DeFiAdvancedCalculator:
 
         delta = norm_cdf(d1)
 
-        return {"delta": delta, "d1": d1, "spot": spot, "strike": strike, "moneyness": spot / strike}
+        return {
+            "delta": delta,
+            "d1": d1,
+            "spot": spot,
+            "strike": strike,
+            "moneyness": spot / strike,
+        }
 
     # ========================================================================
     # FORMULA 33: Perpetual Swap Basis
     # ========================================================================
     @staticmethod
     def perpetual_basis(
-        perpetual_price: float, spot_price: float, days_to_annualize: int = 1, validate: bool = True
+        perpetual_price: float,
+        spot_price: float,
+        days_to_annualize: int = 1,
+        validate: bool = True,
     ) -> Dict:
         """
         Annualized perpetual contract premium/discount
@@ -522,7 +563,9 @@ class DeFiAdvancedCalculator:
             if spot_price <= 0:
                 raise ValueError(f"spot_price must be > 0, got {spot_price}")
             if days_to_annualize <= 0:
-                raise ValueError(f"days_to_annualize must be > 0, got {days_to_annualize}")
+                raise ValueError(
+                    f"days_to_annualize must be > 0, got {days_to_annualize}"
+                )
 
         premium_pct = ((perpetual_price - spot_price) / spot_price) * 100
         basis_annualized = premium_pct * (365 / days_to_annualize)
@@ -610,7 +653,11 @@ class DeFiAdvancedCalculator:
     # ========================================================================
     @staticmethod
     def vesting_cliff_linear(
-        total_tokens: float, time_elapsed_days: int, cliff_days: int, vesting_days: int, validate: bool = True
+        total_tokens: float,
+        time_elapsed_days: int,
+        cliff_days: int,
+        vesting_days: int,
+        validate: bool = True,
     ) -> Dict:
         """
         Token vesting with cliff period then linear release
@@ -631,7 +678,9 @@ class DeFiAdvancedCalculator:
             if total_tokens <= 0:
                 raise ValueError(f"total_tokens must be > 0, got {total_tokens}")
             if time_elapsed_days < 0:
-                raise ValueError(f"time_elapsed_days must be ≥ 0, got {time_elapsed_days}")
+                raise ValueError(
+                    f"time_elapsed_days must be ≥ 0, got {time_elapsed_days}"
+                )
             if cliff_days < 0:
                 raise ValueError(f"cliff_days must be ≥ 0, got {cliff_days}")
             if vesting_days <= 0:
@@ -644,7 +693,9 @@ class DeFiAdvancedCalculator:
         else:
             # Linear vesting after cliff
             time_since_cliff = time_elapsed_days - cliff_days
-            vested_amount = min(total_tokens * (time_since_cliff / vesting_days), total_tokens)
+            vested_amount = min(
+                total_tokens * (time_since_cliff / vesting_days), total_tokens
+            )
 
         locked_amount = total_tokens - vested_amount
         vested_pct = (vested_amount / total_tokens) * 100
@@ -665,7 +716,10 @@ class DeFiAdvancedCalculator:
     # ========================================================================
     @staticmethod
     def bancor_bonding_price(
-        reserve_balance: float, token_supply: float, connector_weight: float, validate: bool = True
+        reserve_balance: float,
+        token_supply: float,
+        connector_weight: float,
+        validate: bool = True,
     ) -> Dict:
         """
         Bancor automated market maker pricing
@@ -685,7 +739,9 @@ class DeFiAdvancedCalculator:
             if token_supply <= 0:
                 raise ValueError(f"token_supply must be > 0, got {token_supply}")
             if not (0 < connector_weight <= 1):
-                raise ValueError(f"connector_weight must be in (0, 1], got {connector_weight}")
+                raise ValueError(
+                    f"connector_weight must be in (0, 1], got {connector_weight}"
+                )
 
         price = reserve_balance / (token_supply * connector_weight)
 
@@ -710,7 +766,9 @@ class DeFiAdvancedCalculator:
     # FORMULA 37: Multi-Asset Collateral Coverage
     # ========================================================================
     @staticmethod
-    def collateral_coverage_multi(collaterals: List[Dict], total_debt: float, validate: bool = True) -> Dict:
+    def collateral_coverage_multi(
+        collaterals: List[Dict], total_debt: float, validate: bool = True
+    ) -> Dict:
         """
         Multi-asset collateral health metric
         Formula: Coverage = (Σ Collateral_i × Liquidation_Threshold_i) / Total_Debt
@@ -736,14 +794,18 @@ class DeFiAdvancedCalculator:
 
             for i, col in enumerate(collaterals):
                 if "value" not in col or "threshold" not in col:
-                    raise ValueError(f"Collateral {i} missing 'value' or 'threshold' key")
+                    raise ValueError(
+                        f"Collateral {i} missing 'value' or 'threshold' key"
+                    )
                 if col["value"] <= 0:
                     raise ValueError(f"Collateral {i} value must be > 0")
                 if not (0 < col["threshold"] <= 1):
                     raise ValueError(f"Collateral {i} threshold must be in (0, 1]")
 
         # Calculate weighted collateral
-        weighted_collateral = sum(col["value"] * col["threshold"] for col in collaterals)
+        weighted_collateral = sum(
+            col["value"] * col["threshold"] for col in collaterals
+        )
 
         coverage_ratio = weighted_collateral / max(total_debt, EPSILON)
 
@@ -775,7 +837,11 @@ class DeFiAdvancedCalculator:
     # ========================================================================
     @staticmethod
     def yield_farming_roi(
-        initial_capital: float, farming_rewards: float, fee_income: float, il_dollar: float, validate: bool = True
+        initial_capital: float,
+        farming_rewards: float,
+        fee_income: float,
+        il_dollar: float,
+        validate: bool = True,
     ) -> Dict:
         """
         Total yield farming return including all components
@@ -793,7 +859,9 @@ class DeFiAdvancedCalculator:
             if farming_rewards < 0:
                 raise ValueError(f"farming_rewards must be ≥ 0, got {farming_rewards}")
             if fee_income < 0:
-                raise ValueError(f"fee_income must be ≥ 0, got {fee_income}")  # Total return (IL is typically negative)
+                raise ValueError(
+                    f"fee_income must be ≥ 0, got {fee_income}"
+                )  # Total return (IL is typically negative)
         total_return = farming_rewards + fee_income + il_dollar
         roi_pct = (total_return / initial_capital) * 100  # Component breakdown
         components = {
@@ -850,7 +918,9 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
                     "description": item["description"],
                 }
             )
-            print(f"Tick {item['tick']:>7}: Price = {price:>15,.6f} | {item['description']}")
+            print(
+                f"Tick {item['tick']:>7}: Price = {price:>15,.6f} | {item['description']}"
+            )
         except Exception as e:
             print(f"Tick {item['tick']}: ERROR - {e}")
 
@@ -879,7 +949,9 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
                 "slippage": 0,
             }
         )
-    print(f"{swap['description']}: ${swap['amount']:,.0f} → ${output:,.2f} (slippage: 0%)")
+    print(
+        f"{swap['description']}: ${swap['amount']:,.0f} → ${output:,.2f} (slippage: 0%)"
+    )
 
     # ========================================================================
     # SCENARIO 3: Curve StableSwap (Different Amplification)
@@ -889,10 +961,26 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
     print("=" * 80)
 
     curve_pools = [
-        {"reserves": [1000000, 1000000], "A": 100, "description": "Balanced 2-pool (A=100)"},
-        {"reserves": [1000000, 1000000, 1000000], "A": 200, "description": "Balanced 3-pool (A=200)"},
-        {"reserves": [800000, 1200000], "A": 50, "description": "Imbalanced 2-pool (A=50)"},
-        {"reserves": [1000000, 1000000], "A": 1000, "description": "High A (more like constant sum)"},
+        {
+            "reserves": [1000000, 1000000],
+            "A": 100,
+            "description": "Balanced 2-pool (A=100)",
+        },
+        {
+            "reserves": [1000000, 1000000, 1000000],
+            "A": 200,
+            "description": "Balanced 3-pool (A=200)",
+        },
+        {
+            "reserves": [800000, 1200000],
+            "A": 50,
+            "description": "Imbalanced 2-pool (A=50)",
+        },
+        {
+            "reserves": [1000000, 1000000],
+            "A": 1000,
+            "description": "High A (more like constant sum)",
+        },
     ]
 
     for pool in curve_pools:
@@ -968,7 +1056,9 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
             comp_price=comp["comp_price"],
             total_borrowed=comp["total_borrowed"],
         )
-        scenarios.append({"scenario": comp["desc"], "formula": "Compound APY with Rewards", **result})
+        scenarios.append(
+            {"scenario": comp["desc"], "formula": "Compound APY with Rewards", **result}
+        )
     print(
         f"{comp['desc']}: Borrow {result['borrow_apr']*100:.2f}% - Rewards {result['reward_apy']*100:.2f}% = Net {result['net_apy']*100:.2f}%"
     )
@@ -985,7 +1075,12 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
     for ltv in ltvs:
         leverage = calc.leverage_ratio(ltv)
         scenarios.append(
-            {"scenario": f"LTV {ltv*100:.0f}%", "formula": "Leverage Ratio", "ltv": ltv, "max_leverage": leverage}
+            {
+                "scenario": f"LTV {ltv*100:.0f}%",
+                "formula": "Leverage Ratio",
+                "ltv": ltv,
+                "max_leverage": leverage,
+            }
         )
     print(f"LTV {ltv*100:>3.0f}%: Max Leverage = {leverage:.2f}x")
 
@@ -1004,7 +1099,9 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
     ]
 
     for protocol in protocols:
-        revenue = calc.protocol_revenue(protocol["volume"], protocol["fee"], protocol["cut"])
+        revenue = calc.protocol_revenue(
+            protocol["volume"], protocol["fee"], protocol["cut"]
+        )
         scenarios.append(
             {
                 "scenario": protocol["name"],
@@ -1034,7 +1131,9 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
 
     for cdp in maker_cdps:
         result = calc.maker_stability_fee(cdp["principal"], cdp["rate"], cdp["time"])
-        scenarios.append({"scenario": cdp["desc"], "formula": "Maker Stability Fee", **result})
+        scenarios.append(
+            {"scenario": cdp["desc"], "formula": "Maker Stability Fee", **result}
+        )
         print(
             f"{cdp['desc']}: ${result['principal']:,.0f} → ${result['total_debt']:,.2f} (Fee: ${result['fee_amount']:,.2f})"
         )
@@ -1047,15 +1146,31 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
     print("=" * 80)
 
     token_emissions = [
-        {"emissions": 1_000_000, "supply": 100_000_000, "name": "Token A (1% dilution)"},
-        {"emissions": 10_000_000, "supply": 100_000_000, "name": "Token B (10% dilution)"},
-        {"emissions": 30_000_000, "supply": 100_000_000, "name": "Token C (30% dilution)"},
+        {
+            "emissions": 1_000_000,
+            "supply": 100_000_000,
+            "name": "Token A (1% dilution)",
+        },
+        {
+            "emissions": 10_000_000,
+            "supply": 100_000_000,
+            "name": "Token B (10% dilution)",
+        },
+        {
+            "emissions": 30_000_000,
+            "supply": 100_000_000,
+            "name": "Token C (30% dilution)",
+        },
     ]
 
     for token in token_emissions:
         result = calc.dilution_rate(token["emissions"], token["supply"])
-        scenarios.append({"scenario": token["name"], "formula": "Dilution Rate", **result})
-        print(f"{token['name']}: {result['dilution_pct']:.1f}% annual dilution - {result['warning']}")
+        scenarios.append(
+            {"scenario": token["name"], "formula": "Dilution Rate", **result}
+        )
+        print(
+            f"{token['name']}: {result['dilution_pct']:.1f}% annual dilution - {result['warning']}"
+        )
 
     # ========================================================================
     # SCENARIO 10: IL with Fees (Net Result)
@@ -1065,15 +1180,39 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
     print("=" * 80)
 
     il_scenarios = [
-        {"ratio": 1.5, "fee_apr": 0.20, "time": 0.25, "desc": "ETH +50%, High Volume, 3mo"},
-        {"ratio": 2.0, "fee_apr": 0.30, "time": 0.5, "desc": "ETH +100%, High Volume, 6mo"},
-        {"ratio": 0.5, "fee_apr": 0.15, "time": 0.25, "desc": "ETH -50%, Medium Volume, 3mo"},
-        {"ratio": 1.2, "fee_apr": 0.50, "time": 1.0, "desc": "Stable, Ultra High Volume, 1yr"},
+        {
+            "ratio": 1.5,
+            "fee_apr": 0.20,
+            "time": 0.25,
+            "desc": "ETH +50%, High Volume, 3mo",
+        },
+        {
+            "ratio": 2.0,
+            "fee_apr": 0.30,
+            "time": 0.5,
+            "desc": "ETH +100%, High Volume, 6mo",
+        },
+        {
+            "ratio": 0.5,
+            "fee_apr": 0.15,
+            "time": 0.25,
+            "desc": "ETH -50%, Medium Volume, 3mo",
+        },
+        {
+            "ratio": 1.2,
+            "fee_apr": 0.50,
+            "time": 1.0,
+            "desc": "Stable, Ultra High Volume, 1yr",
+        },
     ]
 
     for scenario in il_scenarios:
-        result = calc.il_with_fees_net(scenario["ratio"], scenario["fee_apr"], scenario["time"])
-        scenarios.append({"scenario": scenario["desc"], "formula": "IL with Fees Net", **result})
+        result = calc.il_with_fees_net(
+            scenario["ratio"], scenario["fee_apr"], scenario["time"]
+        )
+        scenarios.append(
+            {"scenario": scenario["desc"], "formula": "IL with Fees Net", **result}
+        )
         profitable_mark = "✓" if result["profitable"] else "✗"
         print(
             f"{scenario['desc']}: IL {result['il_pct']:.2f}% + Fees {result['fees_earned_pct']:.2f}% = {result['net_result_pct']:.2f}% {profitable_mark}"
@@ -1104,7 +1243,9 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
                 "total_impact_pct": total_impact * 100,
             }
         )
-    print(f"{route['desc']}: {' + '.join([f'{i*100:.2f}%' for i in route['impacts']])} = {total_impact*100:.2f}% total")
+    print(
+        f"{route['desc']}: {' + '.join([f'{i*100:.2f}%' for i in route['impacts']])} = {total_impact*100:.2f}% total"
+    )
 
     # ========================================================================
     # SCENARIO 12: Options Delta (Black-Scholes)
@@ -1121,8 +1262,12 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
     ]
 
     for option in options:
-        result = calc.black_scholes_delta(option["spot"], option["strike"], 0.05, option["vol"], option["time"])
-        scenarios.append({"scenario": option["desc"], "formula": "Black-Scholes Delta", **result})
+        result = calc.black_scholes_delta(
+            option["spot"], option["strike"], 0.05, option["vol"], option["time"]
+        )
+        scenarios.append(
+            {"scenario": option["desc"], "formula": "Black-Scholes Delta", **result}
+        )
         print(f"{option['desc']}: Δ = {result['delta']:.4f} (d₁ = {result['d1']:.4f})")
 
     # ========================================================================
@@ -1141,7 +1286,9 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
 
     for perp in perps:
         result = calc.perpetual_basis(perp["perp"], perp["spot"])
-        scenarios.append({"scenario": perp["desc"], "formula": "Perpetual Basis", **result})
+        scenarios.append(
+            {"scenario": perp["desc"], "formula": "Perpetual Basis", **result}
+        )
         print(
             f"{perp['desc']}: {result['premium_pct']:+.2f}% premium, {result['basis_annualized']:+.1f}% annualized - {result['sentiment']}"
         )
@@ -1185,9 +1332,16 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
 
     for arb in arbs:
         result = calc.flash_loan_net_profit(
-            arb["price_a"], arb["price_b"], arb["amount"], arb["fee_a"], arb["fee_b"], arb["gas"]
+            arb["price_a"],
+            arb["price_b"],
+            arb["amount"],
+            arb["fee_a"],
+            arb["fee_b"],
+            arb["gas"],
         )
-        scenarios.append({"scenario": arb["desc"], "formula": "Flash Loan Arbitrage", **result})
+        scenarios.append(
+            {"scenario": arb["desc"], "formula": "Flash Loan Arbitrage", **result}
+        )
         profitable_mark = "✓" if result["profitable"] else "✗"
         print(
             f"{arb['desc']}: Gross ${result['gross_profit']:.2f} - Costs ${result['total_costs']:.2f} = ${result['net_profit']:.2f} {profitable_mark}"
@@ -1201,15 +1355,43 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
     print("=" * 80)
 
     vestings = [
-        {"total": 1_000_000, "elapsed": 180, "cliff": 365, "vesting": 1095, "desc": "Before cliff (6mo)"},
-        {"total": 1_000_000, "elapsed": 365, "cliff": 365, "vesting": 1095, "desc": "At cliff (1yr)"},
-        {"total": 1_000_000, "elapsed": 730, "cliff": 365, "vesting": 1095, "desc": "Mid-vesting (2yr)"},
-        {"total": 1_000_000, "elapsed": 1460, "cliff": 365, "vesting": 1095, "desc": "Fully vested (4yr)"},
+        {
+            "total": 1_000_000,
+            "elapsed": 180,
+            "cliff": 365,
+            "vesting": 1095,
+            "desc": "Before cliff (6mo)",
+        },
+        {
+            "total": 1_000_000,
+            "elapsed": 365,
+            "cliff": 365,
+            "vesting": 1095,
+            "desc": "At cliff (1yr)",
+        },
+        {
+            "total": 1_000_000,
+            "elapsed": 730,
+            "cliff": 365,
+            "vesting": 1095,
+            "desc": "Mid-vesting (2yr)",
+        },
+        {
+            "total": 1_000_000,
+            "elapsed": 1460,
+            "cliff": 365,
+            "vesting": 1095,
+            "desc": "Fully vested (4yr)",
+        },
     ]
 
     for vest in vestings:
-        result = calc.vesting_cliff_linear(vest["total"], vest["elapsed"], vest["cliff"], vest["vesting"])
-        scenarios.append({"scenario": vest["desc"], "formula": "Vesting Schedule", **result})
+        result = calc.vesting_cliff_linear(
+            vest["total"], vest["elapsed"], vest["cliff"], vest["vesting"]
+        )
+        scenarios.append(
+            {"scenario": vest["desc"], "formula": "Vesting Schedule", **result}
+        )
         print(
             f"{vest['desc']}: {result['vested_amount']:,.0f} vested ({result['vested_pct']:.1f}%), {result['locked_amount']:,.0f} locked"
         )
@@ -1222,15 +1404,34 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
     print("=" * 80)
 
     bonding = [
-        {"reserve": 1_000_000, "supply": 1_000_000, "cw": 1.0, "desc": "CW=1.0 (Constant price)"},
-        {"reserve": 1_000_000, "supply": 1_000_000, "cw": 0.5, "desc": "CW=0.5 (Square root)"},
-        {"reserve": 1_000_000, "supply": 1_000_000, "cw": 0.2, "desc": "CW=0.2 (Steep curve)"},
+        {
+            "reserve": 1_000_000,
+            "supply": 1_000_000,
+            "cw": 1.0,
+            "desc": "CW=1.0 (Constant price)",
+        },
+        {
+            "reserve": 1_000_000,
+            "supply": 1_000_000,
+            "cw": 0.5,
+            "desc": "CW=0.5 (Square root)",
+        },
+        {
+            "reserve": 1_000_000,
+            "supply": 1_000_000,
+            "cw": 0.2,
+            "desc": "CW=0.2 (Steep curve)",
+        },
     ]
 
     for bond in bonding:
         result = calc.bancor_bonding_price(bond["reserve"], bond["supply"], bond["cw"])
-        scenarios.append({"scenario": bond["desc"], "formula": "Bancor Bonding", **result})
-        print(f"{bond['desc']}: Price = ${result['price']:.2f} - {result['curve_type']}")
+        scenarios.append(
+            {"scenario": bond["desc"], "formula": "Bancor Bonding", **result}
+        )
+        print(
+            f"{bond['desc']}: Price = ${result['price']:.2f} - {result['curve_type']}"
+        )
 
     # ========================================================================
     # SCENARIO 17: Multi-Asset Collateral Health
@@ -1267,8 +1468,16 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
     ]
 
     for col_scenario in collateral_scenarios:
-        result = calc.collateral_coverage_multi(col_scenario["collaterals"], col_scenario["debt"])
-        scenarios.append({"scenario": col_scenario["desc"], "formula": "Multi-Asset Coverage", **result})
+        result = calc.collateral_coverage_multi(
+            col_scenario["collaterals"], col_scenario["debt"]
+        )
+        scenarios.append(
+            {
+                "scenario": col_scenario["desc"],
+                "formula": "Multi-Asset Coverage",
+                **result,
+            }
+        )
         print(
             f"{col_scenario['desc']}: Coverage = {result['coverage_ratio']:.3f} - {result['health_status']} ({result['liquidation_risk']} risk)"
         )
@@ -1281,14 +1490,36 @@ def generate_defi_advanced_scenarios() -> List[Dict]:
     print("=" * 80)
 
     farms = [
-        {"capital": 10000, "rewards": 2000, "fees": 800, "il": -300, "desc": "Profitable farm"},
-        {"capital": 10000, "rewards": 500, "fees": 200, "il": -1000, "desc": "IL exceeds earnings"},
-        {"capital": 50000, "rewards": 8000, "fees": 3000, "il": -1500, "desc": "High volume pool"},
+        {
+            "capital": 10000,
+            "rewards": 2000,
+            "fees": 800,
+            "il": -300,
+            "desc": "Profitable farm",
+        },
+        {
+            "capital": 10000,
+            "rewards": 500,
+            "fees": 200,
+            "il": -1000,
+            "desc": "IL exceeds earnings",
+        },
+        {
+            "capital": 50000,
+            "rewards": 8000,
+            "fees": 3000,
+            "il": -1500,
+            "desc": "High volume pool",
+        },
     ]
 
     for farm in farms:
-        result = calc.yield_farming_roi(farm["capital"], farm["rewards"], farm["fees"], farm["il"])
-        scenarios.append({"scenario": farm["desc"], "formula": "Yield Farming ROI", **result})
+        result = calc.yield_farming_roi(
+            farm["capital"], farm["rewards"], farm["fees"], farm["il"]
+        )
+        scenarios.append(
+            {"scenario": farm["desc"], "formula": "Yield Farming ROI", **result}
+        )
         profitable_mark = "✓" if result["profitable"] else "✗"
         print(
             f"{farm['desc']}: ROI = {result['roi_pct']:.2f}% "
@@ -1336,7 +1567,9 @@ class DeFiBacktestAnalyzer:
             if lower_price <= price <= upper_price:
                 in_range_count += 1
                 # Simplified fee calculation
-            total_fees += liquidity * fee_tier * 0.01  # Assume 1% of liquidity per day in range
+            total_fees += (
+                liquidity * fee_tier * 0.01
+            )  # Assume 1% of liquidity per day in range
 
             in_range_pct = (in_range_count / len(price_history)) * 100
 
@@ -1353,7 +1586,11 @@ class DeFiBacktestAnalyzer:
         """
         Compare interest rate models across protocols
         """
-        results = {"utilization": utilization_range, "aave_rates": [], "compound_rates": []}
+        results = {
+            "utilization": utilization_range,
+            "aave_rates": [],
+            "compound_rates": [],
+        }
 
         for u in utilization_range:
             # Aave kinked model
@@ -1366,7 +1603,9 @@ class DeFiBacktestAnalyzer:
 
             return results
 
-    def find_optimal_il_recovery_time(self, price_ratios: List[float], fee_apr: float) -> List[Dict]:
+    def find_optimal_il_recovery_time(
+        self, price_ratios: List[float], fee_apr: float
+    ) -> List[Dict]:
         """
         Calculate breakeven time for different price movements
         """
@@ -1398,7 +1637,9 @@ class DeFiBacktestAnalyzer:
 
                 return results
 
-    def gas_profitability_threshold(self, gas_price_gwei: float, eth_price: float, gas_limit: int = 300000) -> Dict:
+    def gas_profitability_threshold(
+        self, gas_price_gwei: float, eth_price: float, gas_limit: int = 300000
+    ) -> Dict:
         """
         Calculate minimum profit needed for gas profitability
 
@@ -1436,7 +1677,9 @@ class DeFiBacktestAnalyzer:
             "recommended_action": action,
         }
 
-    def simulate_recursive_leverage(self, initial_capital: float, ltv: float, iterations: int = 10) -> Dict:
+    def simulate_recursive_leverage(
+        self, initial_capital: float, ltv: float, iterations: int = 10
+    ) -> Dict:
         """
         Simulate recursive borrowing to max leverage
         """
@@ -1505,7 +1748,9 @@ class DeFiBacktestAnalyzer:
 
         return "\n".join(report)
 
-    def export_scenarios_json(scenarios: List[Dict], filename: str = "defi_scenarios.json"):
+    def export_scenarios_json(
+        scenarios: List[Dict], filename: str = "defi_scenarios.json"
+    ):
         """Export scenarios to JSON file"""
         import json
 
@@ -1567,7 +1812,9 @@ if __name__ == "__main__":
     ]
 
     for gas_scenario in gas_scenarios:
-        result = analyzer.gas_profitability_threshold(gas_scenario["gwei"], gas_scenario["eth"])
+        result = analyzer.gas_profitability_threshold(
+            gas_scenario["gwei"], gas_scenario["eth"]
+        )
         print(
             f"{gas_scenario['desc']}: ${result['gas_cost_usd']:.2f} cost, "
             f"${result['min_profit_threshold']:.2f} min profit - {result['recommended_action']}"
@@ -1576,11 +1823,18 @@ if __name__ == "__main__":
     # Example 3: Leveraged position simulation
     print("\nLeveraged Position Simulation:")
     lev_result = analyzer.simulate_leveraged_position(
-        initial_collateral=10000, ltv=0.75, leverage_cycles=3, borrow_apr=0.05, lend_apr=0.08, time_years=1.0
+        initial_collateral=10000,
+        ltv=0.75,
+        leverage_cycles=3,
+        borrow_apr=0.05,
+        lend_apr=0.08,
+        time_years=1.0,
     )
 
     print(f"Initial: ${lev_result['initial_collateral']:,.0f}")
-    print(f"Total Exposure: ${lev_result['total_exposure']:,.0f} ({lev_result['leverage_ratio']:.2f}x)")
+    print(
+        f"Total Exposure: ${lev_result['total_exposure']:,.0f} ({lev_result['leverage_ratio']:.2f}x)"
+    )
     print(f"Net APY: {lev_result['net_apy']*100:.2f}%")
     print(f"Net Profit: ${lev_result['net_profit']:,.2f}")
 
@@ -1609,10 +1863,16 @@ if __name__ == "__main__":
 
     # Demo: simple backtest
     price_history = [1.0, 1.1, 1.05, 0.95, 1.02]
-    bt = analyzer.backtest_uniswap_v3_range(1.0, price_history, -1000, 1000, liquidity=10000)
+    bt = analyzer.backtest_uniswap_v3_range(
+        1.0, price_history, -1000, 1000, liquidity=10000
+    )
     print("\nBacktest Uniswap V3 range summary:")
-    print(f"  Lower price: {bt['lower_price']:.6f}, Upper price: {bt['upper_price']:.6f}")
-    print(f"  In range %: {bt['in_range_pct']:.2f}%, Total fees (est): {bt['total_fees']:.4f}")
+    print(
+        f"  Lower price: {bt['lower_price']:.6f}, Upper price: {bt['upper_price']:.6f}"
+    )
+    print(
+        f"  In range %: {bt['in_range_pct']:.2f}%, Total fees (est): {bt['total_fees']:.4f}"
+    )
 
     # Generate and show small scenario list
     print("\nGenerating scenarios (sample):")

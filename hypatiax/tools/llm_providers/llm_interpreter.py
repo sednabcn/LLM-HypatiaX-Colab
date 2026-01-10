@@ -90,7 +90,9 @@ Format as JSON with keys: interpretation, regulatory, known_formulas, practical_
         text = text.strip()
         return text
 
-    def interpret(self, expression: str, domain: str, variables: Dict, r2: float) -> Dict:
+    def interpret(
+        self, expression: str, domain: str, variables: Dict, r2: float
+    ) -> Dict:
         template = self.domain_templates.get(domain, self.domain_templates["defi"])
         var_str = "\n".join([f"  - {k}: {v}" for k, v in variables.items()])
 
@@ -112,7 +114,11 @@ Format as JSON with keys: interpretation, regulatory, known_formulas, practical_
         except json.JSONDecodeError as e:
             print(f"JSON parsing error: {e}")
             print(f"Response text: {response_text[:500]}...")
-            interpretation = {"raw_text": response_text, "status": "unparsed", "error": str(e)}
+            interpretation = {
+                "raw_text": response_text,
+                "status": "unparsed",
+                "error": str(e),
+            }
 
         interpretation["expression"] = expression
         interpretation["domain"] = domain

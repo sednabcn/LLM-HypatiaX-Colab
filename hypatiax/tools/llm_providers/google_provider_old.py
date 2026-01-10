@@ -66,7 +66,8 @@ class GoogleProvider:
             # Add remaining available models
             for model in available_models:
                 if model not in models_to_try and not any(
-                    x in model for x in ["thinking", "tts", "image", "robotics", "computer-use"]
+                    x in model
+                    for x in ["thinking", "tts", "image", "robotics", "computer-use"]
                 ):
                     models_to_try.append(model)
 
@@ -88,7 +89,9 @@ class GoogleProvider:
                     continue
 
             if not model_initialized:
-                raise ValueError(f"Could not initialize any model. Tried: {', '.join(models_to_try[:5])}")
+                raise ValueError(
+                    f"Could not initialize any model. Tried: {', '.join(models_to_try[:5])}"
+                )
 
         # Configure generation settings for more deterministic output
         self.generation_config = genai.GenerationConfig(
@@ -106,7 +109,9 @@ class GoogleProvider:
             HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
         }
 
-    def generate_formula(self, requirements: str, domain: str = "defi", n_candidates: int = 1) -> List[Dict[str, Any]]:
+    def generate_formula(
+        self, requirements: str, domain: str = "defi", n_candidates: int = 1
+    ) -> List[Dict[str, Any]]:
         """
         Generate analytical formulas using Gemini
 
@@ -151,7 +156,11 @@ class GoogleProvider:
                                 if hasattr(candidate.finish_reason, "name")
                                 else str(candidate.finish_reason)
                             )
-                            safety_ratings = candidate.safety_ratings if hasattr(candidate, "safety_ratings") else []
+                            safety_ratings = (
+                                candidate.safety_ratings
+                                if hasattr(candidate, "safety_ratings")
+                                else []
+                            )
 
                         # Handle MAX_TOKENS specifically
                         if finish_reason == "MAX_TOKENS":
@@ -167,19 +176,30 @@ class GoogleProvider:
                                             partial_text += part.text
 
                                 if partial_text:
-                                    print(f"📝 Got partial response ({len(partial_text)} chars)")
+                                    print(
+                                        f"📝 Got partial response ({len(partial_text)} chars)"
+                                    )
                                     formula = self._parse_response(partial_text)
-                                    if "error" not in formula or formula.get("formula_latex") != "Parse error":
-                                        print("✅ Successfully parsed partial response!")
+                                    if (
+                                        "error" not in formula
+                                        or formula.get("formula_latex") != "Parse error"
+                                    ):
+                                        print(
+                                            "✅ Successfully parsed partial response!"
+                                        )
                                         formulas.append(formula)
                                         break
                             except Exception as parse_error:
-                                print(f"❌ Could not parse partial response: {parse_error}")
+                                print(
+                                    f"❌ Could not parse partial response: {parse_error}"
+                                )
 
                             # If we couldn't parse partial, retry with more concise prompt
                             if attempt == 0:
                                 print("🔄 Retrying with more concise prompt...")
-                                prompt = self._build_concise_prompt(requirements, domain)
+                                prompt = self._build_concise_prompt(
+                                    requirements, domain
+                                )
                                 continue
 
                         print(f"\n⚠️  Response blocked - Finish reason: {finish_reason}")
@@ -189,7 +209,9 @@ class GoogleProvider:
                             print("🛡️  Safety ratings:")
                             for rating in safety_ratings:
                                 category_name = (
-                                    rating.category.name if hasattr(rating.category, "name") else str(rating.category)
+                                    rating.category.name
+                                    if hasattr(rating.category, "name")
+                                    else str(rating.category)
                                 )
                                 probability_name = (
                                     rating.probability.name
@@ -221,10 +243,14 @@ class GoogleProvider:
                                         if hasattr(rating.probability, "name")
                                         else str(rating.probability)
                                     )
-                                    blocked_categories.append(f"{cat_name}: {prob_name}")
+                                    blocked_categories.append(
+                                        f"{cat_name}: {prob_name}"
+                                    )
 
                                 if blocked_categories:
-                                    error_details += f"\nCategories: {', '.join(blocked_categories)}"
+                                    error_details += (
+                                        f"\nCategories: {', '.join(blocked_categories)}"
+                                    )
 
                             error_msg = f"Response blocked. {error_details}"
                             formulas.append(
@@ -273,7 +299,9 @@ class GoogleProvider:
         for attempt in range(max_retries):
             try:
                 response = self.model.generate_content(
-                    prompt, generation_config=self.generation_config, safety_settings=self.safety_settings
+                    prompt,
+                    generation_config=self.generation_config,
+                    safety_settings=self.safety_settings,
                 )
                 return response
             except Exception as e:
@@ -402,7 +430,13 @@ Keep all text responses brief. Return valid JSON only."""
             result = json.loads(json_str)
 
             # Ensure all required fields
-            required = ["formula_latex", "formula_python", "variables", "explanation", "novelty_score"]
+            required = [
+                "formula_latex",
+                "formula_python",
+                "variables",
+                "explanation",
+                "novelty_score",
+            ]
             for field in required:
                 if field not in result:
                     result[field] = "N/A"
@@ -515,7 +549,9 @@ if __name__ == "__main__":
 
     # Test formula generation
     results = provider.generate_formula(
-        requirements="Calculate impermanent loss for Uniswap V2 pools", domain="defi", n_candidates=1
+        requirements="Calculate impermanent loss for Uniswap V2 pools",
+        domain="defi",
+        n_candidates=1,
     )
 
     formula = results[0]

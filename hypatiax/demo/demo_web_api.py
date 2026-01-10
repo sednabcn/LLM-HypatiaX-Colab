@@ -1,4 +1,6 @@
+"""
 Web-based visual demo
+
 
 Beautiful web interface
 Real-time entity extraction
@@ -6,7 +8,6 @@ Example buttons
 Visual entity display with confidence scores
 
 
-"""
 HypatiaX Web API - Flask REST API Server
 Provides HTTP endpoints for the HypatiaX engine
 """
@@ -29,22 +30,19 @@ from demo.examples import Example, ExampleManager
 
 # Setup logging
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
 
 # Initialize Flask app
-app = Flask(__name__,
-            template_folder='templates',
-            static_folder='static')
+app = Flask(__name__, template_folder="templates", static_folder="static")
 CORS(app)  # Enable CORS for all routes
 
 # Initialize HypatiaX components
 try:
     engine = HypatiaXEngine(
-        desc_model_path='../data_spacy/queries/tableau/ner_tableau_desc',
-        formula_model_path='../data_spacy/queries/tableau/ner_tableau_formulas'
+        desc_model_path="../data_spacy/queries/tableau/ner_tableau_desc",
+        formula_model_path="../data_spacy/queries/tableau/ner_tableau_formulas",
     )
     models_loaded = engine.load_models()
     logger.info(f"Models loaded: {models_loaded}")
@@ -58,10 +56,10 @@ example_manager = ExampleManager()
 
 # Server stats
 server_stats = {
-    'start_time': datetime.now(),
-    'total_requests': 0,
-    'successful_requests': 0,
-    'failed_requests': 0
+    "start_time": datetime.now(),
+    "total_requests": 0,
+    "successful_requests": 0,
+    "failed_requests": 0,
 }
 
 
@@ -69,36 +67,39 @@ server_stats = {
 # API ROUTES
 # ============================================================================
 
-@app.route('/')
+
+@app.route("/")
 def index():
     """Serve main demo page"""
-    return render_template('demo.html')
+    return render_template("demo.html")
 
 
-@app.route('/api/health', methods=['GET'])
+@app.route("/api/health", methods=["GET"])
 def health_check():
     """
     Health check endpoint
     Returns server status and configuration
     """
-    uptime = (datetime.now() - server_stats['start_time']).total_seconds()
+    uptime = (datetime.now() - server_stats["start_time"]).total_seconds()
 
-    return jsonify({
-        'status': 'online',
-        'version': '1.0.0',
-        'uptime_seconds': uptime,
-        'models_loaded': models_loaded,
-        'mode': 'production' if models_loaded else 'demo',
-        'stats': {
-            'total_requests': server_stats['total_requests'],
-            'successful': server_stats['successful_requests'],
-            'failed': server_stats['failed_requests']
-        },
-        'timestamp': datetime.now().isoformat()
-    })
+    return jsonify(
+        {
+            "status": "online",
+            "version": "1.0.0",
+            "uptime_seconds": uptime,
+            "models_loaded": models_loaded,
+            "mode": "production" if models_loaded else "demo",
+            "stats": {
+                "total_requests": server_stats["total_requests"],
+                "successful": server_stats["successful_requests"],
+                "failed": server_stats["failed_requests"],
+            },
+            "timestamp": datetime.now().isoformat(),
+        }
+    )
 
 
-@app.route('/api/map', methods=['POST'])
+@app.route("/api/map", methods=["POST"])
 def map_description():
     """
     Map natural language description to Tableau formula
@@ -119,74 +120,72 @@ def map_description():
         "method": "vocab"
     }
     """
-    server_stats['total_requests'] += 1
+    server_stats["total_requests"] += 1
 
     try:
         # Validate request
         data = request.get_json()
         if not data:
-            return jsonify({
-                'success': False,
-                'error': 'No JSON data provided'
-            }), 400
+            return jsonify({"success": False, "error": "No JSON data provided"}), 400
 
-        description = data.get('description', '').strip()
+        description = data.get("description", "").strip()
         if not description:
-            return jsonify({
-                'success': False,
-                'error': 'Description field is required'
-            }), 400
+            return (
+                jsonify({"success": False, "error": "Description field is required"}),
+                400,
+            )
 
-        method = data.get('method', 'vocab')
-        use_model = data.get('use_model', models_loaded)
+        method = data.get("method", "vocab")
+        use_model = data.get("use_model", models_loaded)
 
         # Process description
         logger.info(f"Processing: '{description}' with method: {method}")
-        result = engine.process(
-            query=description,
-            method=method,
-            use_model=use_model
-        )
+        result = engine.process(query=description, method=method, use_model=use_model)
 
         # Format response
         response = {
-            'success': True,
-            'formula': result.formula,
-            'entities': [
+            "success": True,
+            "formula": result.formula,
+            "entities": [
                 {
-                    'text': e.text,
-                    'label': e.label,
-                    'start': e.start,
-                    'end': e.end,
-                    'confidence': e.confidence
+                    "text": e.text,
+                    "label": e.label,
+                    "start": e.start,
+                    "end": e.end,
+                    "confidence": e.confidence,
                 }
                 for e in result.entities
             ],
-            'confidence': result.confidence,
-            'processing_time': result.processing_time,
-            'method': result.method,
-            'entity_count': len(result.entities),
-            'metadata': result.metadata
+            "confidence": result.confidence,
+            "processing_time": result.processing_time,
+            "method": result.method,
+            "entity_count": len(result.entities),
+            "metadata": result.metadata,
         }
 
-        server_stats['successful_requests'] += 1
+        server_stats["successful_requests"] += 1
         logger.info(f"Success: {result.formula} (confidence: {result.confidence:.2%})")
 
         return jsonify(response)
 
     except Exception as e:
-        server_stats['failed_requests'] += 1
+        server_stats["failed_requests"] += 1
         logger.error(f"Error processing request: {e}")
         logger.error(traceback.format_exc())
 
-        return jsonify({
-            'success': False,
-            'error': str(e),
-            'traceback': traceback.format_exc() if app.debug else None
-        }), 500
+        return (
+            jsonify(
+                {
+                    "success": False,
+                    "error": str(e),
+                    "traceback": traceback.format_exc() if app.debug else None,
+                }
+            ),
+            500,
+        )
 
 
-@app.route('/api/batch', methods=['POST'])
+@app.route("/api/batch", methods=["POST"])
 def batch_map():
     """
     Batch process multiple descriptions
@@ -206,54 +205,51 @@ def batch_map():
         "failed_count": 0
     }
     """
-    server_stats['total_requests'] += 1
+    server_stats["total_requests"] += 1
 
     try:
         data = request.get_json()
-        descriptions = data.get('descriptions', [])
-        method = data.get('method', 'vocab')
+        descriptions = data.get("descriptions", [])
+        method = data.get("method", "vocab")
 
         if not descriptions:
-            return jsonify({
-                'success': False,
-                'error': 'Descriptions array is required'
-            }), 400
+            return (
+                jsonify({"success": False, "error": "Descriptions array is required"}),
+                400,
+            )
 
         # Process all descriptions
         results = engine.batch_process(descriptions, method=method)
 
         # Format response
         response = {
-            'success': True,
-            'results': [
+            "success": True,
+            "results": [
                 {
-                    'description': r.query,
-                    'formula': r.formula,
-                    'confidence': r.confidence,
-                    'entity_count': len(r.entities),
-                    'processing_time': r.processing_time
+                    "description": r.query,
+                    "formula": r.formula,
+                    "confidence": r.confidence,
+                    "entity_count": len(r.entities),
+                    "processing_time": r.processing_time,
                 }
                 for r in results
             ],
-            'total_count': len(results),
-            'success_count': sum(1 for r in results if r.formula != 'ERROR'),
-            'failed_count': sum(1 for r in results if r.formula == 'ERROR')
+            "total_count": len(results),
+            "success_count": sum(1 for r in results if r.formula != "ERROR"),
+            "failed_count": sum(1 for r in results if r.formula == "ERROR"),
         }
 
-        server_stats['successful_requests'] += 1
+        server_stats["successful_requests"] += 1
         return jsonify(response)
 
     except Exception as e:
-        server_stats['failed_requests'] += 1
+        server_stats["failed_requests"] += 1
         logger.error(f"Batch processing error: {e}")
 
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
-@app.route('/api/examples', methods=['GET'])
+@app.route("/api/examples", methods=["GET"])
 def get_examples():
     """
     Get example queries
@@ -264,15 +260,14 @@ def get_examples():
     - random: If true, return random examples
     """
     try:
-        category = request.args.get('category')
-        count = request.args.get('count', type=int)
-        random_flag = request.args.get('random', 'false').lower() == 'true'
+        category = request.args.get("category")
+        count = request.args.get("count", type=int)
+        random_flag = request.args.get("random", "false").lower() == "true"
 
         # Get examples
         if random_flag and count:
             examples = example_manager.get_random_examples(
-                count=count,
-                category=category
+                count=count, category=category
             )
         elif category:
             examples = example_manager.filter_by_category(category)
@@ -284,50 +279,48 @@ def get_examples():
                 examples = examples[:count]
 
         # Format response
-        return jsonify({
-            'success': True,
-            'examples': [
-                {
-                    'id': e.id,
-                    'description': e.description,
-                    'expected_formula': e.expected_formula,
-                    'category': e.category,
-                    'difficulty': e.difficulty,
-                    'tags': e.tags
-                }
-                for e in examples
-            ],
-            'count': len(examples)
-        })
+        return jsonify(
+            {
+                "success": True,
+                "examples": [
+                    {
+                        "id": e.id,
+                        "description": e.description,
+                        "expected_formula": e.expected_formula,
+                        "category": e.category,
+                        "difficulty": e.difficulty,
+                        "tags": e.tags,
+                    }
+                    for e in examples
+                ],
+                "count": len(examples),
+            }
+        )
 
     except Exception as e:
         logger.error(f"Error getting examples: {e}")
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
-@app.route('/api/examples/categories', methods=['GET'])
+@app.route("/api/examples/categories", methods=["GET"])
 def get_categories():
     """Get all available example categories"""
     try:
         stats = example_manager.get_statistics()
 
-        return jsonify({
-            'success': True,
-            'categories': list(stats.get('by_category', {}).keys()),
-            'counts': stats.get('by_category', {})
-        })
+        return jsonify(
+            {
+                "success": True,
+                "categories": list(stats.get("by_category", {}).keys()),
+                "counts": stats.get("by_category", {}),
+            }
+        )
 
     except Exception as e:
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
-@app.route('/api/validate', methods=['POST'])
+@app.route("/api/validate", methods=["POST"])
 def validate_formula():
     """
     Validate a generated formula against expected result
@@ -350,9 +343,9 @@ def validate_formula():
     """
     try:
         data = request.get_json()
-        description = data.get('description')
-        expected = data.get('expected_formula')
-        method = data.get('method', 'vocab')
+        description = data.get("description")
+        expected = data.get("expected_formula")
+        method = data.get("method", "vocab")
 
         # Process description
         result = engine.process(description, method=method)
@@ -360,77 +353,77 @@ def validate_formula():
         # Compare
         match = result.formula == expected
 
-        return jsonify({
-            'success': True,
-            'match': match,
-            'generated_formula': result.formula,
-            'expected_formula': expected,
-            'confidence': result.confidence,
-            'entity_count': len(result.entities)
-        })
+        return jsonify(
+            {
+                "success": True,
+                "match": match,
+                "generated_formula": result.formula,
+                "expected_formula": expected,
+                "confidence": result.confidence,
+                "entity_count": len(result.entities),
+            }
+        )
 
     except Exception as e:
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
-@app.route('/api/stats', methods=['GET'])
+@app.route("/api/stats", methods=["GET"])
 def get_stats():
     """Get engine and server statistics"""
     try:
         engine_stats = engine.get_stats()
 
-        return jsonify({
-            'success': True,
-            'server': server_stats,
-            'engine': engine_stats,
-            'examples': example_manager.get_statistics()
-        })
+        return jsonify(
+            {
+                "success": True,
+                "server": server_stats,
+                "engine": engine_stats,
+                "examples": example_manager.get_statistics(),
+            }
+        )
 
     except Exception as e:
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
-@app.route('/api/methods', methods=['GET'])
+@app.route("/api/methods", methods=["GET"])
 def get_methods():
     """Get available mapping methods"""
-    return jsonify({
-        'success': True,
-        'methods': [
-            {
-                'name': 'vocab',
-                'description': 'Vocabulary-based mapping using predefined dictionaries',
-                'speed': 'fast',
-                'accuracy': 'high'
-            },
-            {
-                'name': 'sentence',
-                'description': 'Sentence pattern matching',
-                'speed': 'fast',
-                'accuracy': 'medium'
-            },
-            {
-                'name': 'regex',
-                'description': 'Regular expression based extraction',
-                'speed': 'fast',
-                'accuracy': 'medium'
-            },
-            {
-                'name': 'ner',
-                'description': 'Named Entity Recognition using ML models',
-                'speed': 'medium',
-                'accuracy': 'highest'
-            }
-        ]
-    })
+    return jsonify(
+        {
+            "success": True,
+            "methods": [
+                {
+                    "name": "vocab",
+                    "description": "Vocabulary-based mapping using predefined dictionaries",
+                    "speed": "fast",
+                    "accuracy": "high",
+                },
+                {
+                    "name": "sentence",
+                    "description": "Sentence pattern matching",
+                    "speed": "fast",
+                    "accuracy": "medium",
+                },
+                {
+                    "name": "regex",
+                    "description": "Regular expression based extraction",
+                    "speed": "fast",
+                    "accuracy": "medium",
+                },
+                {
+                    "name": "ner",
+                    "description": "Named Entity Recognition using ML models",
+                    "speed": "medium",
+                    "accuracy": "highest",
+                },
+            ],
+        }
+    )
 
 
-@app.route('/api/test', methods=['GET'])
+@app.route("/api/test", methods=["GET"])
 def run_test_suite():
     """
     Run test suite on sample examples
@@ -438,9 +431,9 @@ def run_test_suite():
     """
     try:
         # Get test examples
-        test_examples = example_manager.filter_by_category('basic')[:5]
+        test_examples = example_manager.filter_by_category("basic")[:5]
 
-        methods = ['vocab', 'sentence', 'regex', 'ner']
+        methods = ["vocab", "sentence", "regex", "ner"]
         results = {}
 
         for method in methods:
@@ -453,61 +446,58 @@ def run_test_suite():
                     correct += 1
 
             results[method] = {
-                'accuracy': correct / total if total > 0 else 0,
-                'correct': correct,
-                'total': total
+                "accuracy": correct / total if total > 0 else 0,
+                "correct": correct,
+                "total": total,
             }
 
-        return jsonify({
-            'success': True,
-            'results': results,
-            'test_count': len(test_examples)
-        })
+        return jsonify(
+            {"success": True, "results": results, "test_count": len(test_examples)}
+        )
 
     except Exception as e:
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
 # ============================================================================
 # ERROR HANDLERS
 # ============================================================================
 
+
 @app.errorhandler(404)
 def not_found(e):
-    return jsonify({
-        'success': False,
-        'error': 'Endpoint not found',
-        'message': str(e)
-    }), 404
+    return (
+        jsonify({"success": False, "error": "Endpoint not found", "message": str(e)}),
+        404,
+    )
 
 
 @app.errorhandler(500)
 def internal_error(e):
-    return jsonify({
-        'success': False,
-        'error': 'Internal server error',
-        'message': str(e)
-    }), 500
+    return (
+        jsonify(
+            {"success": False, "error": "Internal server error", "message": str(e)}
+        ),
+        500,
+    )
 
 
 # ============================================================================
 # STARTUP
 # ============================================================================
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description='HypatiaX Web API Server')
-    parser.add_argument('--host', default='127.0.0.1', help='Host to bind to')
-    parser.add_argument('--port', type=int, default=5000, help='Port to bind to')
-    parser.add_argument('--debug', action='store_true', help='Enable debug mode')
+    parser = argparse.ArgumentParser(description="HypatiaX Web API Server")
+    parser.add_argument("--host", default="127.0.0.1", help="Host to bind to")
+    parser.add_argument("--port", type=int, default=5000, help="Port to bind to")
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
 
     args = parser.parse_args()
 
-    print(f"""
+    print(
+        f"""
     ╔═══════════════════════════════════════════════════════════════╗
     ║                   HypatiaX Web API Server                     ║
     ╠═══════════════════════════════════════════════════════════════╣
@@ -530,10 +520,7 @@ if __name__ == '__main__':
     GET  /api/test                  - Run test suite
 
     Press Ctrl+C to stop the server
-    """)
-
-    app.run(
-        host=args.host,
-        port=args.port,
-        debug=args.debug
+    """
     )
+
+    app.run(host=args.host, port=args.port, debug=args.debug)

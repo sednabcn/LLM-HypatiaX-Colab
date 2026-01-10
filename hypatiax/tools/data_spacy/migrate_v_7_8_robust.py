@@ -23,7 +23,9 @@ class Migrate_v_7_8:
 
         # Create backup if requested
         if self.backup:
-            backup_path = self.old_model_path.parent / f"{self.old_model_path.name}_backup"
+            backup_path = (
+                self.old_model_path.parent / f"{self.old_model_path.name}_backup"
+            )
             if not backup_path.exists():
                 print(f"📦 Creating backup: {backup_path}")
                 shutil.copytree(self.old_model_path, backup_path)

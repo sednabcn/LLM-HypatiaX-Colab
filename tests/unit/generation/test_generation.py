@@ -243,7 +243,11 @@ class TestFormulaGeneratorMultiverse:
     def test_consensus_selection(self):
         """Test selecting consensus formula."""
         mock_generator = Mock()
-        candidates = ["total = price * quantity", "total = price * quantity", "total_cost = price * qty"]
+        candidates = [
+            "total = price * quantity",
+            "total = price * quantity",
+            "total_cost = price * qty",
+        ]
 
         consensus = "total = price * quantity"
         mock_generator.get_consensus = Mock(return_value=consensus)
@@ -288,7 +292,11 @@ class TestFormulaRegistry:
         """Test retrieving a formula."""
         mock_registry = Mock()
         formula_id = "formula_001"
-        expected = {"id": "formula_001", "name": "calculate_tax", "formula": "tax = price * tax_rate"}
+        expected = {
+            "id": "formula_001",
+            "name": "calculate_tax",
+            "formula": "tax = price * tax_rate",
+        }
 
         mock_registry.get = Mock(return_value=expected)
         result = mock_registry.get(formula_id)
@@ -300,7 +308,10 @@ class TestFormulaRegistry:
         """Test searching formulas."""
         mock_registry = Mock()
         query = "tax"
-        results = [{"id": "f1", "name": "calculate_tax"}, {"id": "f2", "name": "tax_deduction"}]
+        results = [
+            {"id": "f1", "name": "calculate_tax"},
+            {"id": "f2", "name": "tax_deduction"},
+        ]
 
         mock_registry.search = Mock(return_value=results)
         found = mock_registry.search(query)
@@ -373,7 +384,11 @@ class TestFormulaMetadataMappings:
     def test_validate_metadata(self):
         """Test validating metadata."""
         mock_metadata = Mock()
-        metadata = {"variables": ["x", "y"], "operations": ["addition"], "category": "math"}
+        metadata = {
+            "variables": ["x", "y"],
+            "operations": ["addition"],
+            "category": "math",
+        }
 
         mock_metadata.validate = Mock(return_value=True)
         result = mock_metadata.validate(metadata)
@@ -389,7 +404,9 @@ class TestAutoRegister:
         mock_auto_register = Mock()
         formula = "discount = price * discount_rate"
 
-        mock_auto_register.register = Mock(return_value={"id": "auto_001", "status": "registered"})
+        mock_auto_register.register = Mock(
+            return_value={"id": "auto_001", "status": "registered"}
+        )
         result = mock_auto_register.register(formula)
 
         assert result["status"] == "registered"
@@ -405,7 +422,11 @@ class TestAutoRegister:
             return total
         """
 
-        detected = ["subtotal = price * quantity", "tax = subtotal * tax_rate", "total = subtotal + tax"]
+        detected = [
+            "subtotal = price * quantity",
+            "tax = subtotal * tax_rate",
+            "total = subtotal + tax",
+        ]
 
         mock_auto_register.detect = Mock(return_value=detected)
         results = mock_auto_register.detect(code_snippet)
@@ -415,7 +436,11 @@ class TestAutoRegister:
     def test_batch_registration(self):
         """Test batch formula registration."""
         mock_auto_register = Mock()
-        formulas = ["total = price * quantity", "discount = total * discount_rate", "final_price = total - discount"]
+        formulas = [
+            "total = price * quantity",
+            "discount = total * discount_rate",
+            "final_price = total - discount",
+        ]
 
         mock_auto_register.register_batch = Mock(return_value={"registered": 3})
         result = mock_auto_register.register_batch(formulas)
@@ -429,7 +454,9 @@ class TestProductionAPI:
     def test_api_endpoint_health(self):
         """Test API health endpoint."""
         mock_api = Mock()
-        mock_api.health_check = Mock(return_value={"status": "healthy", "version": "1.0.0"})
+        mock_api.health_check = Mock(
+            return_value={"status": "healthy", "version": "1.0.0"}
+        )
 
         result = mock_api.health_check()
 
@@ -439,7 +466,10 @@ class TestProductionAPI:
         """Test formula generation endpoint."""
         mock_api = Mock()
         request = {"query": "Calculate total with tax", "model": "gpt-4"}
-        response = {"formula": "total_with_tax = subtotal * (1 + tax_rate)", "confidence": 0.95}
+        response = {
+            "formula": "total_with_tax = subtotal * (1 + tax_rate)",
+            "confidence": 0.95,
+        }
 
         mock_api.generate = Mock(return_value=response)
         result = mock_api.generate(request)
@@ -462,7 +492,9 @@ class TestProductionAPI:
         mock_api = Mock()
         credentials = {"api_key": "test_key_123"}
 
-        mock_api.authenticate = Mock(return_value={"authenticated": True, "token": "jwt_token"})
+        mock_api.authenticate = Mock(
+            return_value={"authenticated": True, "token": "jwt_token"}
+        )
         result = mock_api.authenticate(credentials)
 
         assert result["authenticated"] is True
@@ -470,7 +502,9 @@ class TestProductionAPI:
     def test_rate_limiting(self):
         """Test API rate limiting."""
         mock_api = Mock()
-        mock_api.check_rate_limit = Mock(return_value={"allowed": True, "remaining": 95})
+        mock_api.check_rate_limit = Mock(
+            return_value={"allowed": True, "remaining": 95}
+        )
 
         result = mock_api.check_rate_limit("user_123")
 
@@ -543,7 +577,10 @@ class TestPrototypeOperations:
         """Test prototype A lookup."""
         mock_prototype = Mock()
         query = "revenue formula"
-        result = {"formula": "revenue = units_sold * price_per_unit", "source": "prototype_a"}
+        result = {
+            "formula": "revenue = units_sold * price_per_unit",
+            "source": "prototype_a",
+        }
 
         mock_prototype.lookup = Mock(return_value=result)
         found = mock_prototype.lookup(query)
@@ -554,7 +591,10 @@ class TestPrototypeOperations:
         """Test prototype B lookup."""
         mock_prototype = Mock()
         query = "profit margin"
-        result = {"formula": "profit_margin = (revenue - cost) / revenue", "source": "prototype_b"}
+        result = {
+            "formula": "profit_margin = (revenue - cost) / revenue",
+            "source": "prototype_b",
+        }
 
         mock_prototype.lookup = Mock(return_value=result)
         found = mock_prototype.lookup(query)
@@ -565,7 +605,10 @@ class TestPrototypeOperations:
         """Test prototype C lookup."""
         mock_prototype = Mock()
         query = "compound growth"
-        result = {"formula": "final_value = initial_value * (1 + rate)^periods", "source": "prototype_c"}
+        result = {
+            "formula": "final_value = initial_value * (1 + rate)^periods",
+            "source": "prototype_c",
+        }
 
         mock_prototype.lookup = Mock(return_value=result)
         found = mock_prototype.lookup(query)

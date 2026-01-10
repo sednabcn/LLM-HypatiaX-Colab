@@ -33,7 +33,9 @@ class TestEmptyExpressionValidation:
         """Should reject empty string expressions"""
         expression = ""
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions={}, domain="defi"
+        )
         assert result["valid"] == False
         assert any("empty" in str(e).lower() for e in result.get("errors", []))
 
@@ -42,27 +44,36 @@ class TestEmptyExpressionValidation:
         test_cases = ["   ", "\t\n", "  \t  \n  "]
         validator = SymbolicValidator()
         for expression in test_cases:
-            result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+            result = validator.validate(
+                expression=expression, variable_definitions={}, domain="defi"
+            )
             assert result["valid"] == False
 
     def test_none_expression(self):
         """Should handle None input gracefully"""
         expression = None
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions={}, domain="defi"
+        )
         # Should be invalid with errors
         assert result["valid"] == False
         assert len(result.get("errors", [])) > 0
         # Check for common error keywords (None, empty, invalid, etc.)
         error_text = " ".join(str(e).lower() for e in result.get("errors", []))
-        assert any(keyword in error_text for keyword in ["none", "null", "empty", "invalid", "type"])
+        assert any(
+            keyword in error_text
+            for keyword in ["none", "null", "empty", "invalid", "type"]
+        )
 
     def test_null_list_input(self):
         """Should reject empty list/dict inputs"""
         test_cases = [[], {}]
         validator = SymbolicValidator()
         for expression in test_cases:
-            result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+            result = validator.validate(
+                expression=expression, variable_definitions={}, domain="defi"
+            )
             # Should be invalid with errors
             assert result["valid"] == False
             assert len(result.get("errors", [])) > 0
@@ -75,7 +86,9 @@ class TestDivisionByZeroDetection:
         """Should flag direct division by zero: 1/0"""
         expression = "1/0"
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions={}, domain="defi"
+        )
         # Should either be invalid or have critical warnings
         assert result["valid"] == False or len(result.get("warnings", [])) > 0
 
@@ -255,7 +268,11 @@ class TestBoundaryConditions:
 
     def test_infinity_handling(self):
         """Should handle infinity in expressions"""
-        test_cases = ["x / 0", "log(0)", "1 / x"]  # → infinity  # → -infinity  # when x → 0
+        test_cases = [
+            "x / 0",
+            "log(0)",
+            "1 / x",
+        ]  # → infinity  # → -infinity  # when x → 0
         for expression in test_cases:
             # validator = SymbolicValidator()
             # result = validator.validate(expression)

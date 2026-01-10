@@ -1,11 +1,11 @@
 """Example: Using Transformer-based mapping"""
+
 from mappings.transformer_mapping import TransformerMapper
 
 
 def main():
     """Demonstrate transformer mapping"""
-    print("Transformer-based Expression Mapping Example
-")
+    print("Transformer-based Expression Mapping Example")
 
     # Initialize mapper
     mapper = TransformerMapper()
@@ -14,7 +14,7 @@ def main():
     queries = [
         "Find the integral of x squared",
         "What is the derivative of sine x?",
-        "Solve the equation x squared equals 4"
+        "Solve the equation x squared equals 4",
     ]
 
     for query in queries:
@@ -23,6 +23,7 @@ def main():
         print(f"Expression: {result.get('expression', 'N/A')}")
         print(f"Method: {result['method']}")
         print()
+
 
 if __name__ == "__main__":
     main()

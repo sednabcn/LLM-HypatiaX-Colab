@@ -16,7 +16,9 @@ class OpenAIProvider(BaseLLMProvider):
     def __init__(self, api_key: str, model: str = "gpt-4-turbo-preview", **kwargs):
         super().__init__(api_key, **kwargs)
         if OpenAI is None:
-            raise ImportError("openai package not installed. Install: pip install openai")
+            raise ImportError(
+                "openai package not installed. Install: pip install openai"
+            )
         self.client = OpenAI(api_key=api_key)
         self.model = model
 
@@ -30,7 +32,9 @@ class OpenAIProvider(BaseLLMProvider):
         )
         return response.choices[0].message.content
 
-    def generate_with_tools(self, prompt: str, tools: List[Dict], **kwargs) -> Dict[str, Any]:
+    def generate_with_tools(
+        self, prompt: str, tools: List[Dict], **kwargs
+    ) -> Dict[str, Any]:
         """Generate with tool calling"""
         response = self.client.chat.completions.create(
             model=self.model,
@@ -43,7 +47,9 @@ class OpenAIProvider(BaseLLMProvider):
         message = response.choices[0].message
         return {
             "content": message.content,
-            "tool_calls": message.tool_calls if hasattr(message, "tool_calls") else None,
+            "tool_calls": (
+                message.tool_calls if hasattr(message, "tool_calls") else None
+            ),
         }
 
     def chat(self, messages: List[Dict[str, str]], **kwargs) -> str:

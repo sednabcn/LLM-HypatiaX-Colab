@@ -64,7 +64,9 @@ def get_domain_statistics(results: List[Dict[str, Any]]) -> Dict[str, Any]:
     Returns:
         Dictionary of domain-level statistics
     """
-    domain_stats = defaultdict(lambda: {"count": 0, "valid": 0, "scores": [], "r2_scores": [], "formulas": []})
+    domain_stats = defaultdict(
+        lambda: {"count": 0, "valid": 0, "scores": [], "r2_scores": [], "formulas": []}
+    )
 
     for result in results:
         domain = result.get("domain", "unknown")
@@ -88,7 +90,9 @@ def get_domain_statistics(results: List[Dict[str, Any]]) -> Dict[str, Any]:
     return dict(domain_stats)
 
 
-def print_detailed_report(domain_stats: Dict[str, Any], total_formulas: int, valid_formulas: int):
+def print_detailed_report(
+    domain_stats: Dict[str, Any], total_formulas: int, valid_formulas: int
+):
     """
     Print comprehensive validation report.
 
@@ -140,7 +144,10 @@ def print_detailed_report(domain_stats: Dict[str, Any], total_formulas: int, val
         print(f"Domain: {domain.upper()}")
         print(f"{'-'*70}")
         print(f"  Total:           {stats['count']:>4}")
-        print(f"  Valid:           {stats['valid']:>4}/{stats['count']} " f"({stats['valid']/stats['count']*100:.1f}%)")
+        print(
+            f"  Valid:           {stats['valid']:>4}/{stats['count']} "
+            f"({stats['valid']/stats['count']*100:.1f}%)"
+        )
 
         if stats["scores"]:
             print(f"  Avg score:       {np.mean(stats['scores']):>5.1f}/100")
@@ -151,15 +158,23 @@ def print_detailed_report(domain_stats: Dict[str, Any], total_formulas: int, val
         # Top formulas in this domain
         valid_formulas_in_domain = [f for f in stats["formulas"] if f["valid"]]
         if valid_formulas_in_domain:
-            top_formulas = sorted(valid_formulas_in_domain, key=lambda x: x["score"], reverse=True)[:3]
+            top_formulas = sorted(
+                valid_formulas_in_domain, key=lambda x: x["score"], reverse=True
+            )[:3]
             print(f"\n  Top formulas:")
             for i, formula in enumerate(top_formulas, 1):
                 desc = (
-                    formula["description"][:50] + "..." if len(formula["description"]) > 50 else formula["description"]
+                    formula["description"][:50] + "..."
+                    if len(formula["description"]) > 50
+                    else formula["description"]
                 )
                 print(f"    {i}. {desc}")
                 print(f"       Score: {formula['score']:.1f}/100")
-                eq = formula["equation"][:60] + "..." if len(formula["equation"]) > 60 else formula["equation"]
+                eq = (
+                    formula["equation"][:60] + "..."
+                    if len(formula["equation"]) > 60
+                    else formula["equation"]
+                )
                 print(f"       Equation: {eq}")
 
         print()
@@ -171,7 +186,13 @@ def print_detailed_report(domain_stats: Dict[str, Any], total_formulas: int, val
 
     if all_scores:
         bins = [0, 50, 70, 85, 95, 100]
-        labels = ["Poor (0-50)", "Fair (50-70)", "Good (70-85)", "Very Good (85-95)", "Excellent (95-100)"]
+        labels = [
+            "Poor (0-50)",
+            "Fair (50-70)",
+            "Good (70-85)",
+            "Very Good (85-95)",
+            "Excellent (95-100)",
+        ]
 
         for i in range(len(bins) - 1):
             count = sum(1 for s in all_scores if bins[i] <= s < bins[i + 1])
@@ -273,7 +294,9 @@ def print_issues_report(issues: List[Dict[str, Any]]):
         print(f"  ... and {len(issues) - 10} more issues\n")
 
 
-def export_report(stats: Dict[str, Any], output_file: str = "data/validation_report.json"):
+def export_report(
+    stats: Dict[str, Any], output_file: str = "data/validation_report.json"
+):
     """
     Export validation statistics to JSON file.
 
@@ -291,7 +314,10 @@ def export_report(stats: Dict[str, Any], output_file: str = "data/validation_rep
 
 
 def validate_dataset(
-    data_dir: str = "data", pattern: str = "*.json", export: bool = True, verbose: bool = True
+    data_dir: str = "data",
+    pattern: str = "*.json",
+    export: bool = True,
+    verbose: bool = True,
 ) -> Dict[str, Any]:
     """
     Validate all dataset files and generate comprehensive report.
@@ -348,7 +374,9 @@ def validate_dataset(
 
     # Calculate statistics
     total_formulas = len(all_results)
-    valid_formulas = sum(1 for r in all_results if r.get("validation", {}).get("valid", False))
+    valid_formulas = sum(
+        1 for r in all_results if r.get("validation", {}).get("valid", False)
+    )
 
     domain_stats = get_domain_statistics(all_results)
     issues = identify_issues(all_results)
@@ -375,7 +403,9 @@ def validate_dataset(
             domain: {
                 "count": stats["count"],
                 "valid": stats["valid"],
-                "success_rate": stats["valid"] / stats["count"] if stats["count"] > 0 else 0,
+                "success_rate": (
+                    stats["valid"] / stats["count"] if stats["count"] > 0 else 0
+                ),
                 "avg_score": float(np.mean(stats["scores"])) if stats["scores"] else 0,
             }
             for domain, stats in domain_stats.items()
@@ -383,7 +413,13 @@ def validate_dataset(
         "files": file_info,
         "issues_count": len(issues),
         "issue_types": dict(
-            defaultdict(int, {issue["type"]: sum(1 for i in issues if i["type"] == issue["type"]) for issue in issues})
+            defaultdict(
+                int,
+                {
+                    issue["type"]: sum(1 for i in issues if i["type"] == issue["type"])
+                    for issue in issues
+                },
+            )
         ),
     }
 
@@ -405,7 +441,12 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    stats = validate_dataset(data_dir=args.dir, pattern=args.pattern, export=not args.no_export, verbose=not args.quiet)
+    stats = validate_dataset(
+        data_dir=args.dir,
+        pattern=args.pattern,
+        export=not args.no_export,
+        verbose=not args.quiet,
+    )
 
     # Check if we got valid stats
     if "error" in stats:
@@ -414,9 +455,11 @@ if __name__ == "__main__":
 
     # Exit with error code if success rate is below threshold
     success_rate = stats.get("success_rate", 0)
-    
+
     if success_rate < 0.8:
-        print(f"\n⚠ Warning: Success rate {success_rate*100:.1f}% is below 80% threshold")
+        print(
+            f"\n⚠ Warning: Success rate {success_rate*100:.1f}% is below 80% threshold"
+        )
         exit(1)
     else:
         print(f"\n✓ Success rate {success_rate*100:.1f}% meets quality threshold")

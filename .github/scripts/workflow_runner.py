@@ -100,12 +100,23 @@ class WorkflowRunner:
                 "tests",
             ],
             # Simple/Legacy workflow (Version 1 compatibility)
-            "legacy": ["datasets", "patterns", "custom_ner", "data_spacy", "models", "core", "mappings", "scripts_"],
+            "legacy": [
+                "datasets",
+                "patterns",
+                "custom_ner",
+                "data_spacy",
+                "models",
+                "core",
+                "mappings",
+                "scripts_",
+            ],
         }
 
         # Auto-detect best profile or use specified
         self.profile = self._detect_profile() if profile == "auto" else profile
-        self.execution_order = self.execution_profiles.get(self.profile, self.execution_profiles["ner"])
+        self.execution_order = self.execution_profiles.get(
+            self.profile, self.execution_profiles["ner"]
+        )
 
         # Define which directories contain tests vs scripts
         self.test_directories: Set[str] = {
@@ -143,22 +154,34 @@ class WorkflowRunner:
         # Check for key directories
         if (self.base_path / "agents").exists():
             arch_info["has_agents"] = True
-            subdirs = [d.name for d in (self.base_path / "agents").iterdir() if d.is_dir()]
+            subdirs = [
+                d.name for d in (self.base_path / "agents").iterdir() if d.is_dir()
+            ]
             arch_info["notes"]["agents"] = f"Multi-agent system: {', '.join(subdirs)}"
 
         if (self.base_path / "tools").exists():
             arch_info["has_tools"] = True
-            subdirs = [d.name for d in (self.base_path / "tools").iterdir() if d.is_dir()]
+            subdirs = [
+                d.name for d in (self.base_path / "tools").iterdir() if d.is_dir()
+            ]
             arch_info["notes"]["tools"] = f"Tool modules: {', '.join(subdirs)}"
 
         if (self.base_path / "model_implementations").exists():
             arch_info["has_model_implementations"] = True
-            subdirs = [d.name for d in (self.base_path / "model_implementations").iterdir() if d.is_dir()]
-            arch_info["notes"]["model_implementations"] = f"Implementations: {', '.join(subdirs)}"
+            subdirs = [
+                d.name
+                for d in (self.base_path / "model_implementations").iterdir()
+                if d.is_dir()
+            ]
+            arch_info["notes"][
+                "model_implementations"
+            ] = f"Implementations: {', '.join(subdirs)}"
 
         if (self.base_path / "tests").exists():
             arch_info["has_tests_dir"] = True
-            subdirs = [d.name for d in (self.base_path / "tests").iterdir() if d.is_dir()]
+            subdirs = [
+                d.name for d in (self.base_path / "tests").iterdir() if d.is_dir()
+            ]
             arch_info["notes"]["tests"] = f"Test structure: {', '.join(subdirs)}"
 
         # Determine architecture type
@@ -188,7 +211,9 @@ class WorkflowRunner:
         if (self.base_path / "model_implementations" / "transformers").exists():
             return "transformers"
 
-        if (self.base_path / "custom_ner").exists() or (self.base_path / "data_spacy").exists():
+        if (self.base_path / "custom_ner").exists() or (
+            self.base_path / "data_spacy"
+        ).exists():
             return "ner"
 
         # Check for legacy structure (Version 1)
@@ -391,7 +416,11 @@ class WorkflowRunner:
 
         module_result = {
             "module": module_name,
-            "path": str(module_path.relative_to(self.base_path)) if module_path.exists() else module_name,
+            "path": (
+                str(module_path.relative_to(self.base_path))
+                if module_path.exists()
+                else module_name
+            ),
             "exists": module_path.exists(),
             "is_test_directory": is_test_dir,
             "tests": [],
@@ -501,9 +530,13 @@ class WorkflowRunner:
 
     def _write_execution_detail(self, f, result: Dict):
         """Write detailed execution information"""
-        status_symbol = {"success": "✓", "failed": "✗", "error": "⚠", "timeout": "⏱", "not_run": "○"}.get(
-            result["status"], "?"
-        )
+        status_symbol = {
+            "success": "✓",
+            "failed": "✗",
+            "error": "⚠",
+            "timeout": "⏱",
+            "not_run": "○",
+        }.get(result["status"], "?")
 
         f.write(f"\n{status_symbol} {result['file']}\n")
         f.write(f"   Status: {result['status'].upper()}\n")
@@ -579,12 +612,17 @@ class WorkflowRunner:
         self.log(f"Reports Directory: {self.report_dir}")
 
         # Calculate overall success
-        total_files = sum(m["summary"]["total_files"] for m in self.results["modules"].values())
+        total_files = sum(
+            m["summary"]["total_files"] for m in self.results["modules"].values()
+        )
         failed = sum(m["summary"]["failed"] for m in self.results["modules"].values())
         errors = sum(m["summary"]["errors"] for m in self.results["modules"].values())
 
         if failed > 0 or errors > 0:
-            self.log(f"\n⚠ Workflow completed with {failed} failures and {errors} errors", "warning")
+            self.log(
+                f"\n⚠ Workflow completed with {failed} failures and {errors} errors",
+                "warning",
+            )
             return 1
         else:
             self.log(f"\n✓ All {total_files} files executed successfully", "notice")
@@ -619,7 +657,9 @@ class WorkflowRunner:
             f.write(f"Type: {arch.get('type', 'unknown')}\n")
             f.write(f"Has Agents: {arch.get('has_agents', False)}\n")
             f.write(f"Has Tools: {arch.get('has_tools', False)}\n")
-            f.write(f"Has Model Implementations: {arch.get('has_model_implementations', False)}\n")
+            f.write(
+                f"Has Model Implementations: {arch.get('has_model_implementations', False)}\n"
+            )
             f.write(f"Has Tests Directory: {arch.get('has_tests_dir', False)}\n\n")
 
             if arch.get("notes"):
@@ -631,7 +671,13 @@ class WorkflowRunner:
             f.write("MODULE SUMMARIES\n")
             f.write("-" * 80 + "\n\n")
 
-            overall = {"total_files": 0, "successful": 0, "failed": 0, "errors": 0, "timeouts": 0}
+            overall = {
+                "total_files": 0,
+                "successful": 0,
+                "failed": 0,
+                "errors": 0,
+                "timeouts": 0,
+            }
 
             for module_name, module in self.results.get("modules", {}).items():
                 summary = module.get("summary", {})
@@ -689,15 +735,25 @@ Examples:
 Available profiles: ner, llm, agents, transformers, legacy, auto
         """,
     )
-    parser.add_argument("--base-path", default=".", help="Base path to HypatiaX project (default: current directory)")
-    parser.add_argument("--modules", nargs="+", help="Specific modules to run (space-separated, overrides profile)")
+    parser.add_argument(
+        "--base-path",
+        default=".",
+        help="Base path to HypatiaX project (default: current directory)",
+    )
+    parser.add_argument(
+        "--modules",
+        nargs="+",
+        help="Specific modules to run (space-separated, overrides profile)",
+    )
     parser.add_argument(
         "--profile",
         default="auto",
         choices=["auto", "ner", "llm", "agents", "transformers", "legacy"],
         help="Execution profile to use (default: auto-detect)",
     )
-    parser.add_argument("--list-profiles", action="store_true", help="List available profiles and exit")
+    parser.add_argument(
+        "--list-profiles", action="store_true", help="List available profiles and exit"
+    )
 
     args = parser.parse_args()
 

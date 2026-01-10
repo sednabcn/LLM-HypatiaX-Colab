@@ -21,7 +21,11 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler("logs/app.log") if os.path.exists("logs") else logging.StreamHandler(),
+        (
+            logging.FileHandler("logs/app.log")
+            if os.path.exists("logs")
+            else logging.StreamHandler()
+        ),
         logging.StreamHandler(),
     ],
 )
@@ -44,7 +48,11 @@ CORS(
     app,
     resources={
         r"/api/*": {
-            "origins": ["http://localhost:8000", "http://127.0.0.1:8000", "http://localhost:3000"],
+            "origins": [
+                "http://localhost:8000",
+                "http://127.0.0.1:8000",
+                "http://localhost:3000",
+            ],
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": ["Content-Type", "Authorization"],
         }
@@ -71,7 +79,9 @@ try:
     from hypatiax.mappings.mapping import map_description_to_formula
 
     nlp_desc = spacy.load("../hypatiax/data_spacy/queries/tableau/ner_tableau_desc")
-    nlp_formula = spacy.load("../hypatiax/data_spacy/queries/tableau/ner_tableau_formulas")
+    nlp_formula = spacy.load(
+        "../hypatiax/data_spacy/queries/tableau/ner_tableau_formulas"
+    )
     HYPATIAX_LOADED = True
     logger.info("✅ HypatiaX models loaded successfully")
 except Exception as e:
@@ -166,7 +176,18 @@ def mock_ner_extraction(text):
     entities = []
     words = text.lower().split()
 
-    operations = ["sum", "average", "avg", "count", "total", "max", "min", "mean", "maximum", "minimum"]
+    operations = [
+        "sum",
+        "average",
+        "avg",
+        "count",
+        "total",
+        "max",
+        "min",
+        "mean",
+        "maximum",
+        "minimum",
+    ]
     prepositions = ["of", "by", "per", "for", "across", "in", "on"]
     determiners = ["the", "a", "an", "all", "each", "every"]
 
@@ -187,7 +208,14 @@ def mock_ner_extraction(text):
             label = "NOUN"
 
         if label:
-            entities.append({"text": word, "label": label, "start": start_pos, "end": start_pos + len(word)})
+            entities.append(
+                {
+                    "text": word,
+                    "label": label,
+                    "start": start_pos,
+                    "end": start_pos + len(word),
+                }
+            )
 
         start_pos += len(word) + 1
 
@@ -219,7 +247,10 @@ def mock_formula_generation(description, method="vocab"):
             if i + 1 < len(words):
                 remaining = words[i + 1 :]
                 field_words = [
-                    w for w in remaining if w.lower() not in ["by", "per", "for", "the", "a", "an", "in", "on"]
+                    w
+                    for w in remaining
+                    if w.lower()
+                    not in ["by", "per", "for", "the", "a", "an", "in", "on"]
                 ]
                 if field_words:
                     field_name = field_words[0].strip(".,!?")
@@ -283,16 +314,26 @@ def index():
                         "loaded": NER_SERVICE_LOADED,
                         "description": "Mathematical formula extraction and parsing",
                     },
-                    "defi": {"loaded": DEFI_LOADED, "description": "DeFi analytics and IL calculations"},
+                    "defi": {
+                        "loaded": DEFI_LOADED,
+                        "description": "DeFi analytics and IL calculations",
+                    },
                 },
                 "endpoints": {
-                    "health": {"url": "/api/health", "method": "GET", "description": "Service health check"},
+                    "health": {
+                        "url": "/api/health",
+                        "method": "GET",
+                        "description": "Service health check",
+                    },
                     "hypatiax": {
                         "map": {
                             "url": "/api/hypatiax/map",
                             "method": "POST",
                             "description": "Map natural language to Tableau formula",
-                            "example": {"description": "Calculate the total of Sales", "method": "vocab"},
+                            "example": {
+                                "description": "Calculate the total of Sales",
+                                "method": "vocab",
+                            },
                         },
                         "test": {
                             "url": "/api/hypatiax/test",
@@ -341,11 +382,20 @@ def health_check():
                     },
                     "ner_service": {
                         "loaded": NER_SERVICE_LOADED,
-                        "status": "operational" if NER_SERVICE_LOADED else "unavailable",
+                        "status": (
+                            "operational" if NER_SERVICE_LOADED else "unavailable"
+                        ),
                     },
-                    "defi": {"loaded": DEFI_LOADED, "status": "operational" if DEFI_LOADED else "unavailable"},
+                    "defi": {
+                        "loaded": DEFI_LOADED,
+                        "status": "operational" if DEFI_LOADED else "unavailable",
+                    },
                 },
-                "mode": "production" if (HYPATIAX_LOADED or NER_SERVICE_LOADED or DEFI_LOADED) else "demo",
+                "mode": (
+                    "production"
+                    if (HYPATIAX_LOADED or NER_SERVICE_LOADED or DEFI_LOADED)
+                    else "demo"
+                ),
                 "uptime": "operational",
             }
         ),
@@ -392,7 +442,10 @@ def hypatiax_map():
         method = data.get("method", "vocab")
 
         if not description:
-            return jsonify({"success": False, "error": "Description field is required"}), 400
+            return (
+                jsonify({"success": False, "error": "Description field is required"}),
+                400,
+            )
 
         logger.info(f"📊 HypatiaX Processing: '{description}' using method '{method}'")
 
@@ -402,7 +455,12 @@ def hypatiax_map():
                 # Extract entities using NER model
                 doc = nlp_desc(description)
                 entities = [
-                    {"text": ent.text, "label": ent.label_, "start": ent.start_char, "end": ent.end_char}
+                    {
+                        "text": ent.text,
+                        "label": ent.label_,
+                        "start": ent.start_char,
+                        "end": ent.end_char,
+                    }
                     for ent in doc.ents
                 ]
 
@@ -496,7 +554,14 @@ def hypatiax_test():
                 entities = mock_ner_extraction(desc)
                 formula, _ = mock_formula_generation(desc, "vocab")
 
-            results.append({"description": desc, "formula": formula, "entities": entities, "success": True})
+            results.append(
+                {
+                    "description": desc,
+                    "formula": formula,
+                    "entities": entities,
+                    "success": True,
+                }
+            )
             successful += 1
 
         except Exception as e:
@@ -534,13 +599,19 @@ def hypatiax_batch():
     try:
         data = request.get_json()
         if not data or "descriptions" not in data:
-            return jsonify({"success": False, "error": "descriptions field is required"}), 400
+            return (
+                jsonify({"success": False, "error": "descriptions field is required"}),
+                400,
+            )
 
         descriptions = data.get("descriptions", [])
         method = data.get("method", "vocab")
 
         if not isinstance(descriptions, list):
-            return jsonify({"success": False, "error": "descriptions must be an array"}), 400
+            return (
+                jsonify({"success": False, "error": "descriptions must be an array"}),
+                400,
+            )
 
         results = []
         for desc in descriptions:
@@ -557,7 +628,14 @@ def hypatiax_batch():
                     entities = mock_ner_extraction(desc)
                     formula, _ = mock_formula_generation(desc, method)
 
-                results.append({"description": desc, "formula": formula, "entities": entities, "success": True})
+                results.append(
+                    {
+                        "description": desc,
+                        "formula": formula,
+                        "entities": entities,
+                        "success": True,
+                    }
+                )
             except Exception as e:
                 results.append({"description": desc, "error": str(e), "success": False})
 
@@ -602,7 +680,16 @@ def not_found(error):
 def internal_error(error):
     """Handle 500 errors"""
     logger.error(f"Internal server error: {error}")
-    return jsonify({"error": "Internal server error", "status": 500, "message": "An unexpected error occurred"}), 500
+    return (
+        jsonify(
+            {
+                "error": "Internal server error",
+                "status": 500,
+                "message": "An unexpected error occurred",
+            }
+        ),
+        500,
+    )
 
 
 @app.errorhandler(400)
@@ -610,7 +697,11 @@ def bad_request(error):
     """Handle 400 errors"""
     return (
         jsonify(
-            {"error": "Bad request", "status": 400, "message": "Invalid request format or missing required fields"}
+            {
+                "error": "Bad request",
+                "status": 400,
+                "message": "Invalid request format or missing required fields",
+            }
         ),
         400,
     )
@@ -624,9 +715,15 @@ if __name__ == "__main__":
     print("\n" + "=" * 80)
     print("🚀 UNIFIED FORMULA API SERVER")
     print("=" * 80)
-    print(f"📊 HypatiaX (Tableau):    {'✅ Loaded' if HYPATIAX_LOADED else '⚠️  Demo Mode'}")
-    print(f"🔢 NER Service:           {'✅ Loaded' if NER_SERVICE_LOADED else '❌ Not Available'}")
-    print(f"💰 DeFi Calculator:       {'✅ Loaded' if DEFI_LOADED else '❌ Not Available'}")
+    print(
+        f"📊 HypatiaX (Tableau):    {'✅ Loaded' if HYPATIAX_LOADED else '⚠️  Demo Mode'}"
+    )
+    print(
+        f"🔢 NER Service:           {'✅ Loaded' if NER_SERVICE_LOADED else '❌ Not Available'}"
+    )
+    print(
+        f"💰 DeFi Calculator:       {'✅ Loaded' if DEFI_LOADED else '❌ Not Available'}"
+    )
     print(f"\n🌐 Server: http://localhost:5000")
     print(f"📡 API Documentation: http://localhost:5000/")
     print(f"❤️  Health Check: http://localhost:5000/api/health")
@@ -635,7 +732,9 @@ if __name__ == "__main__":
     print(f"   /api/ner/*       - Mathematical formula extraction & parsing")
     print(f"   /api/defi/*      - DeFi calculations & analytics")
     print(f"\n💡 Tips:")
-    print(f"   - HypatiaX endpoints work in {'production' if HYPATIAX_LOADED else 'demo'} mode")
+    print(
+        f"   - HypatiaX endpoints work in {'production' if HYPATIAX_LOADED else 'demo'} mode"
+    )
     print(f"   - Use POST /api/hypatiax/map for single queries")
     print(f"   - Use POST /api/hypatiax/batch for multiple queries")
     print(f"   - Visit / for full API documentation")

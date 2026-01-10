@@ -6,7 +6,9 @@ from hypatiax.custom_ner.queries.tableau import custom_tableau_desc_components
 
 # Load the spaCy model
 
-ner_path = resources.files("hypatiax.data_spacy.queries.tableau").joinpath("ner_tableau_desc")
+ner_path = resources.files("hypatiax.data_spacy.queries.tableau").joinpath(
+    "ner_tableau_desc"
+)
 
 nlp = spacy.load(ner_path)
 

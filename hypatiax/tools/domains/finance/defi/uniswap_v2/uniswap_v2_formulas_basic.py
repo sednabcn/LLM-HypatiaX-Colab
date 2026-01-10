@@ -117,13 +117,18 @@ class UNIv2Calculator:
         # Total value = (token_a * current_price_a) + (token_b * current_price_b_in_a)
         # Assuming token_a = 1 unit for simplicity
         current_value = (
-            position.initial_token_a_amount * position.current_price_b_in_a + position.initial_token_b_amount
+            position.initial_token_a_amount * position.current_price_b_in_a
+            + position.initial_token_b_amount
         )
         il_dollar = current_value * (il_percent / 100)
 
         # Calculate fees earned
         # Fee earnings depend on trading volume and pool share
-        daily_fees = position.daily_volume_usd * position.fee_rate * (position.pool_tvl_usd / 1_000_000)
+        daily_fees = (
+            position.daily_volume_usd
+            * position.fee_rate
+            * (position.pool_tvl_usd / 1_000_000)
+        )
         total_fees = daily_fees * position.days_elapsed
 
         # Net result: fees earned minus IL
@@ -273,7 +278,9 @@ def generate_test_positions() -> List[LPPosition]:
     return positions
 
 
-def export_results_to_csv(results: List[Dict], filename: str = "uniswap_v2_results.csv"):
+def export_results_to_csv(
+    results: List[Dict], filename: str = "uniswap_v2_results.csv"
+):
     """Export analysis results to CSV"""
     if not results:
         return
@@ -302,7 +309,9 @@ if __name__ == "__main__":
 
     # Analyze all positions
     results = []
-    print(f"{'Position':<35} {'IL %':>10} {'IL $':>12} {'Fees':>12} {'Net $':>12} {'BE Days':>10} {'Profitable':>12}")
+    print(
+        f"{'Position':<35} {'IL %':>10} {'IL $':>12} {'Fees':>12} {'Net $':>12} {'BE Days':>10} {'Profitable':>12}"
+    )
     print("-" * 120)
 
     for position in positions:

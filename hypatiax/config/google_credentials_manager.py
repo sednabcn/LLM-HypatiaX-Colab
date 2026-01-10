@@ -50,7 +50,9 @@ class GoogleCredentialsManager:
 
         try:
             if self.config.use_keyring:
-                keyring.set_password(self.SERVICE_NAME, f"api_key_{service_name}", api_key)
+                keyring.set_password(
+                    self.SERVICE_NAME, f"api_key_{service_name}", api_key
+                )
                 print(f"✅ Google API key for {service_name} stored in keyring")
             else:
                 # Store in environment variable
@@ -120,8 +122,16 @@ class GoogleCredentialsManager:
 
             # Also store in keyring
             if self.config.use_keyring:
-                keyring.set_password(self.SERVICE_NAME, "client_id", credentials_dict.get("client_id", ""))
-                keyring.set_password(self.SERVICE_NAME, "client_secret", credentials_dict.get("client_secret", ""))
+                keyring.set_password(
+                    self.SERVICE_NAME,
+                    "client_id",
+                    credentials_dict.get("client_id", ""),
+                )
+                keyring.set_password(
+                    self.SERVICE_NAME,
+                    "client_secret",
+                    credentials_dict.get("client_secret", ""),
+                )
 
             print(f"✅ OAuth credentials saved to {self.credentials_file}")
             return True

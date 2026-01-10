@@ -83,7 +83,9 @@ def test_modified_sharpe_ulcer_martin():
 
 
 def test_drawdown_duration_gain_loss_upside():
-    r = np.concatenate([np.zeros(10), np.array([-0.02] * 5), np.zeros(10), np.array([-0.01] * 3)])
+    r = np.concatenate(
+        [np.zeros(10), np.array([-0.02] * 5), np.zeros(10), np.array([-0.01] * 3)]
+    )
     dd = RiskCalculator.drawdown_duration(r)
     gl = RiskCalculator.gain_loss_ratio(r)
     upr = RiskCalculator.upside_potential_ratio(r, mar=0.0)
@@ -143,7 +145,9 @@ def test_edge_case_constant_returns():
     # zero volatility
     r = np.zeros(252)
     b = np.zeros(252)
-    pos = PortfolioPosition("ZeroVol", 100000.0, 105000.0, r.tolist(), b.tolist(), risk_free_rate=0.01)
+    pos = PortfolioPosition(
+        "ZeroVol", 100000.0, 105000.0, r.tolist(), b.tolist(), risk_free_rate=0.01
+    )
     analyzer = ComprehensiveRiskAnalyzer()
     report = analyzer.analyze(pos)
     # Sharpe should be finite (division by EPSILON handled)

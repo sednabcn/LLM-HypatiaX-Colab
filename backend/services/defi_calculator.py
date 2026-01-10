@@ -32,7 +32,9 @@ class DeFiCalculator:
         daily_il_rate = abs(il_dollar) / days_elapsed if days_elapsed > 0 else 0
 
         # Quality score
-        quality_score = daily_fees / daily_il_rate if daily_il_rate > 0 else float("inf")
+        quality_score = (
+            daily_fees / daily_il_rate if daily_il_rate > 0 else float("inf")
+        )
 
         # Classify tier
         if quality_score > 1.0:
@@ -45,7 +47,9 @@ class DeFiCalculator:
         return {
             "daily_fees": round(daily_fees, 2),
             "daily_il_rate": round(daily_il_rate, 2),
-            "quality_score": round(quality_score, 3) if quality_score != float("inf") else "inf",
+            "quality_score": (
+                round(quality_score, 3) if quality_score != float("inf") else "inf"
+            ),
             "quality_tier": tier,
         }
 
@@ -63,7 +67,9 @@ class DeFiCalculator:
         """Complete position analysis"""
 
         # IL calculation
-        il_percent = DeFiCalculator.calculate_il_percentage(current_price, initial_price)
+        il_percent = DeFiCalculator.calculate_il_percentage(
+            current_price, initial_price
+        )
 
         # Position value
         position_value = initial_token_a * current_price + initial_token_b
@@ -79,7 +85,11 @@ class DeFiCalculator:
         net_result = total_fees - abs(il_dollar)
 
         # Breakeven
-        breakeven_days = abs(il_dollar) / quality["daily_fees"] if quality["daily_fees"] > 0 else float("inf")
+        breakeven_days = (
+            abs(il_dollar) / quality["daily_fees"]
+            if quality["daily_fees"] > 0
+            else float("inf")
+        )
 
         return {
             "il_percent": il_percent,
@@ -90,6 +100,8 @@ class DeFiCalculator:
             "net_result": round(net_result, 2),
             "quality_score": quality["quality_score"],
             "quality_tier": quality["quality_tier"],
-            "breakeven_days": round(breakeven_days, 2) if breakeven_days != float("inf") else "inf",
+            "breakeven_days": (
+                round(breakeven_days, 2) if breakeven_days != float("inf") else "inf"
+            ),
             "profitable": net_result > 0,
         }

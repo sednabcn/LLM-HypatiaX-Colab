@@ -6,7 +6,9 @@ Comprehensive tests for all validation features
 import pytest
 import sympy as sp
 
-from hypatiax.tools.symbolic.enhanced_symbolic_validator import EnhancedSymbolicValidator
+from hypatiax.tools.symbolic.enhanced_symbolic_validator import (
+    EnhancedSymbolicValidator,
+)
 
 # from hypatiax.tools.symbolic.fixed_validator import EnhancedSymbolicValidator
 
@@ -96,7 +98,9 @@ class TestDivisionByZeroDetection:
         result = validator.validate(r"\frac{x}{2}")
         assert result["syntactically_valid"]
         # May have warnings but should not have critical errors
-        critical_errors = [e for e in result["errors"] if "CRITICAL" in e and "zero" in e.lower()]
+        critical_errors = [
+            e for e in result["errors"] if "CRITICAL" in e and "zero" in e.lower()
+        ]
         assert len(critical_errors) == 0
 
     def test_multiple_divisions(self, validator):
@@ -117,7 +121,10 @@ class TestOverflowRiskChecks:
         assert result["syntactically_valid"]
         # Should error on large constant
         assert len(result["errors"]) > 0
-        assert any("large constant" in err.lower() or "overflow" in err.lower() for err in result["errors"])
+        assert any(
+            "large constant" in err.lower() or "overflow" in err.lower()
+            for err in result["errors"]
+        )
 
     def test_exponential_function(self, validator):
         """Test warning for exponential functions"""
@@ -141,7 +148,10 @@ class TestOverflowRiskChecks:
         assert result["syntactically_valid"]
         # Should error on large exponent
         assert len(result["errors"]) > 0
-        assert any("exponent" in err.lower() and "overflow" in err.lower() for err in result["errors"])
+        assert any(
+            "exponent" in err.lower() and "overflow" in err.lower()
+            for err in result["errors"]
+        )
 
     def test_factorial_overflow(self, validator):
         """Test detection of factorial that overflows float64"""
@@ -149,7 +159,10 @@ class TestOverflowRiskChecks:
         assert result["syntactically_valid"]
         # Should error on large factorial
         assert len(result["errors"]) > 0
-        assert any("factorial" in err.lower() and "overflow" in err.lower() for err in result["errors"])
+        assert any(
+            "factorial" in err.lower() and "overflow" in err.lower()
+            for err in result["errors"]
+        )
 
     def test_safe_factorial(self, validator):
         """Test that small factorials don't trigger overflow warnings"""
@@ -193,7 +206,10 @@ class TestUnderflowRiskChecks:
         assert result["syntactically_valid"]
         # Should warn about underflow
         assert len(result["warnings"]) > 0
-        assert any("small" in warn.lower() or "underflow" in warn.lower() for warn in result["warnings"])
+        assert any(
+            "small" in warn.lower() or "underflow" in warn.lower()
+            for warn in result["warnings"]
+        )
 
     def test_negative_exponential(self, validator):
         """Test detection of exp with large negative argument"""
@@ -213,7 +229,10 @@ class TestNumericalStability:
         assert result["syntactically_valid"]
         # Should warn about precision loss
         assert len(result["warnings"]) > 0
-        assert any("subtraction" in warn.lower() or "precision" in warn.lower() for warn in result["warnings"])
+        assert any(
+            "subtraction" in warn.lower() or "precision" in warn.lower()
+            for warn in result["warnings"]
+        )
 
     def test_square_root_domain(self, validator):
         """Test validation of square root domain"""
@@ -221,7 +240,10 @@ class TestNumericalStability:
         assert result["syntactically_valid"]
         # Should warn about non-negative requirement
         assert len(result["warnings"]) > 0
-        assert any("square root" in warn.lower() or "non-negative" in warn.lower() for warn in result["warnings"])
+        assert any(
+            "square root" in warn.lower() or "non-negative" in warn.lower()
+            for warn in result["warnings"]
+        )
 
     def test_logarithm_domain(self, validator):
         """Test validation of logarithm domain"""
@@ -229,7 +251,10 @@ class TestNumericalStability:
         assert result["syntactically_valid"]
         # Should warn about positive requirement
         assert len(result["warnings"]) > 0
-        assert any("logarithm" in warn.lower() or "positive" in warn.lower() for warn in result["warnings"])
+        assert any(
+            "logarithm" in warn.lower() or "positive" in warn.lower()
+            for warn in result["warnings"]
+        )
 
     def test_multiple_multiplications(self, validator):
         """Test warning for accumulated rounding errors"""
@@ -237,7 +262,10 @@ class TestNumericalStability:
         assert result["syntactically_valid"]
         # Should warn about rounding error accumulation
         assert len(result["warnings"]) > 0
-        assert any("multiplication" in warn.lower() or "rounding" in warn.lower() for warn in result["warnings"])
+        assert any(
+            "multiplication" in warn.lower() or "rounding" in warn.lower()
+            for warn in result["warnings"]
+        )
 
 
 class TestDomainSpecificRules:
@@ -249,7 +277,9 @@ class TestDomainSpecificRules:
         assert result["syntactically_valid"]
         # Should have DeFi-specific warnings
         assert len(result["warnings"]) > 0
-        defi_warnings = [w for w in result["warnings"] if "defi" in w.lower() or "amm" in w.lower()]
+        defi_warnings = [
+            w for w in result["warnings"] if "defi" in w.lower() or "amm" in w.lower()
+        ]
         assert len(defi_warnings) > 0
 
     def test_finance_domain(self, validator):
@@ -258,16 +288,24 @@ class TestDomainSpecificRules:
         assert result["syntactically_valid"]
         # Should have finance-specific warnings
         assert len(result["warnings"]) > 0
-        finance_warnings = [w for w in result["warnings"] if "finance" in w.lower() or "return" in w.lower()]
+        finance_warnings = [
+            w
+            for w in result["warnings"]
+            if "finance" in w.lower() or "return" in w.lower()
+        ]
         assert len(finance_warnings) > 0
 
     def test_esg_domain(self, validator):
         """Test ESG-specific rules"""
-        result = validator.validate(r"w_1 \cdot E + w_2 \cdot S + w_3 \cdot G", domain="esg")
+        result = validator.validate(
+            r"w_1 \cdot E + w_2 \cdot S + w_3 \cdot G", domain="esg"
+        )
         assert result["syntactically_valid"]
         # Should have ESG-specific warnings
         assert len(result["warnings"]) > 0
-        esg_warnings = [w for w in result["warnings"] if "esg" in w.lower() or "score" in w.lower()]
+        esg_warnings = [
+            w for w in result["warnings"] if "esg" in w.lower() or "score" in w.lower()
+        ]
         assert len(esg_warnings) > 0
 
     def test_risk_domain(self, validator):
@@ -302,7 +340,10 @@ class TestScoringSystem:
         result_with_warnings = validator.validate(r"\sqrt{x}")
 
         # Errors should penalize more than warnings
-        if len(result_with_errors["errors"]) > 0 and len(result_with_warnings["errors"]) == 0:
+        if (
+            len(result_with_errors["errors"]) > 0
+            and len(result_with_warnings["errors"]) == 0
+        ):
             assert result_with_errors["score"] < result_with_warnings["score"]
 
 

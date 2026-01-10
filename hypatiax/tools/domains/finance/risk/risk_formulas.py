@@ -124,7 +124,9 @@ class RiskCalculator:
         """
         excess_returns = returns - target_return
         downside_returns = returns[returns < target_return]
-        downside_dev = np.std(downside_returns) if len(downside_returns) > 0 else np.std(returns)
+        downside_dev = (
+            np.std(downside_returns) if len(downside_returns) > 0 else np.std(returns)
+        )
 
         sortino = np.mean(excess_returns) / downside_dev if downside_dev > 0 else 0
         sortino_annual = sortino * np.sqrt(252)
@@ -168,7 +170,9 @@ class RiskCalculator:
         }
 
     @staticmethod
-    def calculate_treynor_ratio(returns: np.ndarray, market_returns: np.ndarray, risk_free_rate: float) -> Dict:
+    def calculate_treynor_ratio(
+        returns: np.ndarray, market_returns: np.ndarray, risk_free_rate: float
+    ) -> Dict:
         """
         Calculate Treynor Ratio
 
@@ -189,7 +193,9 @@ class RiskCalculator:
         }
 
     @staticmethod
-    def calculate_information_ratio(returns: np.ndarray, benchmark_returns: np.ndarray) -> Dict:
+    def calculate_information_ratio(
+        returns: np.ndarray, benchmark_returns: np.ndarray
+    ) -> Dict:
         """
         Calculate Information Ratio
 
@@ -224,7 +230,9 @@ class RiskCalculator:
         max_dd_idx = np.argmin(drawdown)
 
         # Find peak before drawdown
-        peak_idx = np.argmax(cumulative_wealth[: max_dd_idx + 1]) if max_dd_idx > 0 else 0
+        peak_idx = (
+            np.argmax(cumulative_wealth[: max_dd_idx + 1]) if max_dd_idx > 0 else 0
+        )
 
         recovery_days = 0
         if max_dd_idx < len(cumulative_wealth) - 1:
@@ -259,17 +267,25 @@ class ComprehensiveRiskAnalyzer:
         # Calculate all metrics
         var_result = self.calculator.calculate_var_95(returns)
         cvar_result = self.calculator.calculate_cvar_95(returns)
-        sharpe_result = self.calculator.calculate_sharpe_ratio(returns, position.risk_free_rate / 252)
-        sortino_result = self.calculator.calculate_sortino_ratio(returns, position.target_return / 252)
+        sharpe_result = self.calculator.calculate_sharpe_ratio(
+            returns, position.risk_free_rate / 252
+        )
+        sortino_result = self.calculator.calculate_sortino_ratio(
+            returns, position.target_return / 252
+        )
         beta_result = self.calculator.calculate_beta(returns, benchmark_returns)
         treynor_result = self.calculator.calculate_treynor_ratio(
             returns, benchmark_returns, position.risk_free_rate / 252
         )
-        ir_result = self.calculator.calculate_information_ratio(returns, benchmark_returns)
+        ir_result = self.calculator.calculate_information_ratio(
+            returns, benchmark_returns
+        )
         mdd_result = self.calculator.calculate_maximum_drawdown(returns)
 
         # Overall assessment
-        total_return = (position.current_value - position.initial_value) / position.initial_value
+        total_return = (
+            position.current_value - position.initial_value
+        ) / position.initial_value
 
         return {
             "position_name": position.name,
@@ -284,7 +300,9 @@ class ComprehensiveRiskAnalyzer:
             "max_drawdown_pct": mdd_result["max_drawdown_pct"],
             "volatility": var_result["volatility"] * 100 * np.sqrt(252),  # Annualized
             "risk_rating": self._assess_risk_rating(
-                sharpe_result["sharpe_ratio"], beta_result["beta"], mdd_result["max_drawdown_pct"]
+                sharpe_result["sharpe_ratio"],
+                beta_result["beta"],
+                mdd_result["max_drawdown_pct"],
             ),
         }
 
@@ -470,7 +488,9 @@ def generate_test_positions() -> List[PortfolioPosition]:
     return positions
 
 
-def export_results_to_csv(results: List[Dict], filename: str = "risk_analysis_results.csv"):
+def export_results_to_csv(
+    results: List[Dict], filename: str = "risk_analysis_results.csv"
+):
     """Export analysis results to CSV"""
     if not results:
         return
@@ -499,7 +519,9 @@ if __name__ == "__main__":
 
     # Analyze all positions
     results = []
-    print(f"{'Portfolio':<25} {'Return':>8} {'Sharpe':>8} {'Beta':>8} {'Max DD':>8} {'VaR 95%':>9} {'Rating':>12}")
+    print(
+        f"{'Portfolio':<25} {'Return':>8} {'Sharpe':>8} {'Beta':>8} {'Max DD':>8} {'VaR 95%':>9} {'Rating':>12}"
+    )
     print("-" * 100)
 
     for position in positions:
@@ -526,8 +548,12 @@ if __name__ == "__main__":
     print(f"  Total Portfolios: {len(results)}")
     print(f"  Average Return: {avg_return:.2f}%")
     print(f"  Average Sharpe Ratio: {avg_sharpe:.2f}")
-    print(f"  Best Risk-Adjusted Return: {best_sharpe['position_name']} (Sharpe: {best_sharpe['sharpe_ratio']:.2f})")
-    print(f"  Largest Drawdown: {worst_dd['position_name']} ({worst_dd['max_drawdown_pct']:.2f}%)")
+    print(
+        f"  Best Risk-Adjusted Return: {best_sharpe['position_name']} (Sharpe: {best_sharpe['sharpe_ratio']:.2f})"
+    )
+    print(
+        f"  Largest Drawdown: {worst_dd['position_name']} ({worst_dd['max_drawdown_pct']:.2f}%)"
+    )
     print()
 
     # Export to CSV

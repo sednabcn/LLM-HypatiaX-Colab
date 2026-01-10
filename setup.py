@@ -62,7 +62,20 @@ setup(
         ]
     },
     package_data={
-        "": [".bin", ".cfg", ".csv", ".json", ".md", ".rst", ".spacy", ".txt", ".xlsx", ".xml", ".yaml", ".yml"],
+        "": [
+            ".bin",
+            ".cfg",
+            ".csv",
+            ".json",
+            ".md",
+            ".rst",
+            ".spacy",
+            ".txt",
+            ".xlsx",
+            ".xml",
+            ".yaml",
+            ".yml",
+        ],
         "hypatiax": [
             "*.md",
             ".versions/docs/*",
@@ -172,7 +185,11 @@ setup(
             "requirements/*",
         ],
         "hypatiax.backup_before_extension.config": ["docs/*"],
-        "hypatiax.backup_before_extension.core": ["deployment/docs/*", "evaluation/docs/*", "training/docs/*"],
+        "hypatiax.backup_before_extension.core": [
+            "deployment/docs/*",
+            "evaluation/docs/*",
+            "training/docs/*",
+        ],
         "hypatiax.backup_before_extension.core.deployment": ["docs/*"],
         "hypatiax.backup_before_extension.core.evaluation": ["docs/*"],
         "hypatiax.backup_before_extension.core.training": ["docs/*"],
@@ -240,8 +257,12 @@ setup(
             "testing_spacy/*",
             "training_spacy/*",
         ],
-        "hypatiax.backup_before_extension.data_spacy.queries.tableau.testing_spacy": ["*.spacy"],
-        "hypatiax.backup_before_extension.data_spacy.queries.tableau.training_spacy": ["*.spacy"],
+        "hypatiax.backup_before_extension.data_spacy.queries.tableau.testing_spacy": [
+            "*.spacy"
+        ],
+        "hypatiax.backup_before_extension.data_spacy.queries.tableau.training_spacy": [
+            "*.spacy"
+        ],
         "hypatiax.backup_before_extension.datasets": [
             "queries/tableau/data/*",
             "queries/tableau/testing/*",
@@ -265,10 +286,21 @@ setup(
         ],
         "hypatiax.backup_before_extension.datasets.queries.tableau.data": ["*.csv"],
         "hypatiax.backup_before_extension.datasets.queries.tableau.testing": ["*.xlsx"],
-        "hypatiax.backup_before_extension.datasets.queries.tableau.testing_spacy": ["*.json"],
-        "hypatiax.backup_before_extension.datasets.queries.tableau.training": ["*.csv", "*.xlsx"],
-        "hypatiax.backup_before_extension.datasets.queries.tableau.training_spacy": ["*.json"],
-        "hypatiax.backup_before_extension.demo": ["*.md", "complete-system-guide/*", "update/*"],
+        "hypatiax.backup_before_extension.datasets.queries.tableau.testing_spacy": [
+            "*.json"
+        ],
+        "hypatiax.backup_before_extension.datasets.queries.tableau.training": [
+            "*.csv",
+            "*.xlsx",
+        ],
+        "hypatiax.backup_before_extension.datasets.queries.tableau.training_spacy": [
+            "*.json"
+        ],
+        "hypatiax.backup_before_extension.demo": [
+            "*.md",
+            "complete-system-guide/*",
+            "update/*",
+        ],
         "hypatiax.backup_before_extension.experiments": [
             "*.json",
             "*.md",
@@ -282,8 +314,14 @@ setup(
             "ner/docs/*",
             "ner/queries/tableau/pipeline/*",
         ],
-        "hypatiax.backup_before_extension.experiments.ner": ["*.json", "docs/*", "queries/tableau/pipeline/*"],
-        "hypatiax.backup_before_extension.experiments.ner.queries.tableau.pipeline": ["*.txt"],
+        "hypatiax.backup_before_extension.experiments.ner": [
+            "*.json",
+            "docs/*",
+            "queries/tableau/pipeline/*",
+        ],
+        "hypatiax.backup_before_extension.experiments.ner.queries.tableau.pipeline": [
+            "*.txt"
+        ],
         "hypatiax.backup_before_extension.models": [
             "queries/tableau/trained_models/Combined_multi_task_data_400.0.5.8/*",
             "queries/tableau/trained_models/Combined_multi_task_data_400.0.5.8/lemmatizer/lookups/*",
@@ -491,7 +529,20 @@ setup(
         ],
     },
     exclude_package_data={
-        "": [".bin", ".cfg", ".csv", ".json", ".md", ".rst", ".spacy", ".txt", ".xlsx", ".xml", ".yaml", ".yml"],
+        "": [
+            ".bin",
+            ".cfg",
+            ".csv",
+            ".json",
+            ".md",
+            ".rst",
+            ".spacy",
+            ".txt",
+            ".xlsx",
+            ".xml",
+            ".yaml",
+            ".yml",
+        ],
         "hypatiax": [
             "*.md",
             ".versions/docs/*",
@@ -601,7 +652,11 @@ setup(
             "requirements/*",
         ],
         "hypatiax.backup_before_extension.config": ["docs/*"],
-        "hypatiax.backup_before_extension.core": ["deployment/docs/*", "evaluation/docs/*", "training/docs/*"],
+        "hypatiax.backup_before_extension.core": [
+            "deployment/docs/*",
+            "evaluation/docs/*",
+            "training/docs/*",
+        ],
         "hypatiax.backup_before_extension.core.deployment": ["docs/*"],
         "hypatiax.backup_before_extension.core.evaluation": ["docs/*"],
         "hypatiax.backup_before_extension.core.training": ["docs/*"],
@@ -669,8 +724,12 @@ setup(
             "testing_spacy/*",
             "training_spacy/*",
         ],
-        "hypatiax.backup_before_extension.data_spacy.queries.tableau.testing_spacy": ["*.spacy"],
-        "hypatiax.backup_before_extension.data_spacy.queries.tableau.training_spacy": ["*.spacy"],
+        "hypatiax.backup_before_extension.data_spacy.queries.tableau.testing_spacy": [
+            "*.spacy"
+        ],
+        "hypatiax.backup_before_extension.data_spacy.queries.tableau.training_spacy": [
+            "*.spacy"
+        ],
         "hypatiax.backup_before_extension.datasets": [
             "queries/tableau/data/*",
             "queries/tableau/testing/*",
@@ -694,10 +753,21 @@ setup(
         ],
         "hypatiax.backup_before_extension.datasets.queries.tableau.data": ["*.csv"],
         "hypatiax.backup_before_extension.datasets.queries.tableau.testing": ["*.xlsx"],
-        "hypatiax.backup_before_extension.datasets.queries.tableau.testing_spacy": ["*.json"],
-        "hypatiax.backup_before_extension.datasets.queries.tableau.training": ["*.csv", "*.xlsx"],
-        "hypatiax.backup_before_extension.datasets.queries.tableau.training_spacy": ["*.json"],
-        "hypatiax.backup_before_extension.demo": ["*.md", "complete-system-guide/*", "update/*"],
+        "hypatiax.backup_before_extension.datasets.queries.tableau.testing_spacy": [
+            "*.json"
+        ],
+        "hypatiax.backup_before_extension.datasets.queries.tableau.training": [
+            "*.csv",
+            "*.xlsx",
+        ],
+        "hypatiax.backup_before_extension.datasets.queries.tableau.training_spacy": [
+            "*.json"
+        ],
+        "hypatiax.backup_before_extension.demo": [
+            "*.md",
+            "complete-system-guide/*",
+            "update/*",
+        ],
         "hypatiax.backup_before_extension.experiments": [
             "*.json",
             "*.md",
@@ -711,8 +781,14 @@ setup(
             "ner/docs/*",
             "ner/queries/tableau/pipeline/*",
         ],
-        "hypatiax.backup_before_extension.experiments.ner": ["*.json", "docs/*", "queries/tableau/pipeline/*"],
-        "hypatiax.backup_before_extension.experiments.ner.queries.tableau.pipeline": ["*.txt"],
+        "hypatiax.backup_before_extension.experiments.ner": [
+            "*.json",
+            "docs/*",
+            "queries/tableau/pipeline/*",
+        ],
+        "hypatiax.backup_before_extension.experiments.ner.queries.tableau.pipeline": [
+            "*.txt"
+        ],
         "hypatiax.backup_before_extension.models": [
             "queries/tableau/trained_models/Combined_multi_task_data_400.0.5.8/*",
             "queries/tableau/trained_models/Combined_multi_task_data_400.0.5.8/lemmatizer/lookups/*",

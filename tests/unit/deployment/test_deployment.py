@@ -52,8 +52,14 @@ class TestDeploymentAPI:
     def test_batch_predict_endpoint(self):
         """Test batch prediction endpoint."""
         mock_api = Mock()
-        input_data = [{"feature1": 1.0, "feature2": 2.0}, {"feature1": 3.0, "feature2": 4.0}]
-        expected_output = [{"prediction": 0.85, "confidence": 0.92}, {"prediction": 0.72, "confidence": 0.88}]
+        input_data = [
+            {"feature1": 1.0, "feature2": 2.0},
+            {"feature1": 3.0, "feature2": 4.0},
+        ]
+        expected_output = [
+            {"prediction": 0.85, "confidence": 0.92},
+            {"prediction": 0.72, "confidence": 0.88},
+        ]
 
         mock_api.batch_predict = Mock(return_value=expected_output)
         results = mock_api.batch_predict(input_data)
@@ -64,7 +70,9 @@ class TestDeploymentAPI:
     def test_health_check_endpoint(self):
         """Test health check endpoint."""
         mock_api = Mock()
-        mock_api.health_check = Mock(return_value={"status": "healthy", "model_loaded": True})
+        mock_api.health_check = Mock(
+            return_value={"status": "healthy", "model_loaded": True}
+        )
 
         result = mock_api.health_check()
 
@@ -82,7 +90,11 @@ class TestDeploymentAPI:
     def test_model_metadata_endpoint(self):
         """Test model metadata endpoint."""
         mock_api = Mock()
-        metadata = {"model_version": "1.0.0", "framework": "sklearn", "created_at": "2024-01-01"}
+        metadata = {
+            "model_version": "1.0.0",
+            "framework": "sklearn",
+            "created_at": "2024-01-01",
+        }
         mock_api.get_metadata = Mock(return_value=metadata)
 
         result = mock_api.get_metadata()
@@ -109,7 +121,9 @@ class TestDeploymentBatch:
         input_file = "data/input.csv"
         output_file = "data/output.csv"
 
-        mock_processor.process_file = Mock(return_value={"processed": 1000, "errors": 0})
+        mock_processor.process_file = Mock(
+            return_value={"processed": 1000, "errors": 0}
+        )
         result = mock_processor.process_file(input_file, output_file)
 
         assert result["processed"] == 1000
@@ -118,7 +132,9 @@ class TestDeploymentBatch:
     def test_batch_prediction(self):
         """Test batch predictions."""
         mock_processor = Mock()
-        input_data = pd.DataFrame({"feature1": [1.0, 2.0, 3.0], "feature2": [4.0, 5.0, 6.0]})
+        input_data = pd.DataFrame(
+            {"feature1": [1.0, 2.0, 3.0], "feature2": [4.0, 5.0, 6.0]}
+        )
         predictions = np.array([0.85, 0.72, 0.91])
 
         mock_processor.predict_batch = Mock(return_value=predictions)
@@ -130,7 +146,9 @@ class TestDeploymentBatch:
     def test_parallel_processing(self):
         """Test parallel batch processing."""
         mock_processor = Mock()
-        mock_processor.process_parallel = Mock(return_value={"total": 10000, "time": 45.2})
+        mock_processor.process_parallel = Mock(
+            return_value={"total": 10000, "time": 45.2}
+        )
 
         result = mock_processor.process_parallel(num_workers=4)
 
@@ -202,7 +220,11 @@ class TestModelEvaluation:
     def test_roc_curve(self):
         """Test ROC curve calculation."""
         mock_evaluator = Mock()
-        roc_data = {"fpr": np.array([0.0, 0.1, 0.3, 1.0]), "tpr": np.array([0.0, 0.7, 0.9, 1.0]), "auc": 0.88}
+        roc_data = {
+            "fpr": np.array([0.0, 0.1, 0.3, 1.0]),
+            "tpr": np.array([0.0, 0.7, 0.9, 1.0]),
+            "auc": 0.88,
+        }
         mock_evaluator.roc_curve = Mock(return_value=roc_data)
 
         result = mock_evaluator.roc_curve()
@@ -213,7 +235,11 @@ class TestModelEvaluation:
     def test_cross_validation(self):
         """Test cross-validation evaluation."""
         mock_evaluator = Mock()
-        cv_scores = {"mean_score": 0.85, "std_score": 0.03, "scores": [0.83, 0.87, 0.84, 0.86, 0.85]}
+        cv_scores = {
+            "mean_score": 0.85,
+            "std_score": 0.03,
+            "scores": [0.83, 0.87, 0.84, 0.86, 0.85],
+        }
         mock_evaluator.cross_validate = Mock(return_value=cv_scores)
 
         result = mock_evaluator.cross_validate(cv=5)
@@ -272,7 +298,11 @@ class TestDeploymentPipeline:
         """Test postprocessing stage."""
         mock_pipeline = Mock()
         raw_output = {"prediction": 0.85}
-        formatted_output = {"prediction": 0.85, "label": "positive", "timestamp": "2024-01-01T00:00:00"}
+        formatted_output = {
+            "prediction": 0.85,
+            "label": "positive",
+            "timestamp": "2024-01-01T00:00:00",
+        }
 
         mock_pipeline.postprocess = Mock(return_value=formatted_output)
         result = mock_pipeline.postprocess(raw_output)
@@ -283,7 +313,9 @@ class TestDeploymentPipeline:
     def test_pipeline_error_recovery(self):
         """Test error recovery in pipeline."""
         mock_pipeline = Mock()
-        mock_pipeline.handle_error = Mock(return_value={"error": "handled", "fallback": True})
+        mock_pipeline.handle_error = Mock(
+            return_value={"error": "handled", "fallback": True}
+        )
 
         result = mock_pipeline.handle_error()
 
@@ -296,7 +328,13 @@ class TestEvaluationUnified:
     def test_unified_metrics_calculation(self):
         """Test calculating unified metrics."""
         mock_evaluator = Mock()
-        metrics = {"accuracy": 0.85, "precision": 0.82, "recall": 0.88, "f1_score": 0.85, "auc": 0.90}
+        metrics = {
+            "accuracy": 0.85,
+            "precision": 0.82,
+            "recall": 0.88,
+            "f1_score": 0.85,
+            "auc": 0.90,
+        }
         mock_evaluator.calculate_all_metrics = Mock(return_value=metrics)
 
         result = mock_evaluator.calculate_all_metrics()
@@ -337,7 +375,12 @@ class TestEvaluationUnified:
     def test_threshold_optimization(self):
         """Test optimizing classification threshold."""
         mock_evaluator = Mock()
-        optimal = {"threshold": 0.45, "f1_score": 0.87, "precision": 0.85, "recall": 0.89}
+        optimal = {
+            "threshold": 0.45,
+            "f1_score": 0.87,
+            "precision": 0.85,
+            "recall": 0.89,
+        }
         mock_evaluator.optimize_threshold = Mock(return_value=optimal)
 
         result = mock_evaluator.optimize_threshold()
@@ -348,7 +391,13 @@ class TestEvaluationUnified:
     def test_feature_importance_analysis(self):
         """Test feature importance analysis."""
         mock_evaluator = Mock()
-        importance = {"feature1": 0.35, "feature2": 0.25, "feature3": 0.20, "feature4": 0.15, "feature5": 0.05}
+        importance = {
+            "feature1": 0.35,
+            "feature2": 0.25,
+            "feature3": 0.20,
+            "feature4": 0.15,
+            "feature5": 0.05,
+        }
         mock_evaluator.feature_importance = Mock(return_value=importance)
 
         result = mock_evaluator.feature_importance()
@@ -377,7 +426,11 @@ class TestDeploymentMonitoring:
     def test_track_model_performance(self):
         """Test tracking model performance over time."""
         mock_monitor = Mock()
-        performance = {"daily_accuracy": [0.85, 0.86, 0.84, 0.87], "average": 0.855, "trend": "stable"}
+        performance = {
+            "daily_accuracy": [0.85, 0.86, 0.84, 0.87],
+            "average": 0.855,
+            "trend": "stable",
+        }
         mock_monitor.track_performance = Mock(return_value=performance)
 
         result = mock_monitor.track_performance()
@@ -388,7 +441,11 @@ class TestDeploymentMonitoring:
     def test_detect_model_drift(self):
         """Test detecting model drift."""
         mock_monitor = Mock()
-        drift_report = {"drift_detected": True, "severity": "moderate", "affected_features": ["feature1", "feature3"]}
+        drift_report = {
+            "drift_detected": True,
+            "severity": "moderate",
+            "affected_features": ["feature1", "feature3"],
+        }
         mock_monitor.detect_drift = Mock(return_value=drift_report)
 
         result = mock_monitor.detect_drift()
@@ -399,7 +456,11 @@ class TestDeploymentMonitoring:
     def test_alert_generation(self):
         """Test alert generation."""
         mock_monitor = Mock()
-        alert = {"type": "performance_degradation", "severity": "high", "message": "Accuracy dropped below threshold"}
+        alert = {
+            "type": "performance_degradation",
+            "severity": "high",
+            "message": "Accuracy dropped below threshold",
+        }
         mock_monitor.generate_alert = Mock(return_value=alert)
 
         result = mock_monitor.generate_alert()

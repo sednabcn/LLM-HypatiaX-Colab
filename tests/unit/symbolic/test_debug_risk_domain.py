@@ -58,7 +58,11 @@ def test_parse_sigma_sqrt():
         print(f"   Final Python: {current}")
 
         # Try to parse with sympify
-        locals_dict = {"sigma": sp.Symbol("sigma"), "t": sp.Symbol("t"), "sqrt": sp.sqrt}
+        locals_dict = {
+            "sigma": sp.Symbol("sigma"),
+            "t": sp.Symbol("t"),
+            "sqrt": sp.sqrt,
+        }
         expr = sp.sympify(current, locals=locals_dict, evaluate=False)
         print(f"   SUCCESS: {expr}")
         return expr

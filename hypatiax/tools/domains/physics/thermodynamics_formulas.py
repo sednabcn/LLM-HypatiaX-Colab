@@ -87,13 +87,17 @@ class IdealGasCalculator:
         elif volume is None:
             if validate:
                 if pressure <= 0 or n_moles <= 0 or temperature <= 0:
-                    raise ValueError("Pressure, moles, and temperature must be positive")
+                    raise ValueError(
+                        "Pressure, moles, and temperature must be positive"
+                    )
             volume = (n_moles * GAS_CONSTANT * temperature) / pressure
 
         elif n_moles is None:
             if validate:
                 if pressure <= 0 or volume <= 0 or temperature <= 0:
-                    raise ValueError("Pressure, volume, and temperature must be positive")
+                    raise ValueError(
+                        "Pressure, volume, and temperature must be positive"
+                    )
             n_moles = (pressure * volume) / (GAS_CONSTANT * temperature)
 
         else:  # temperature is None
@@ -151,7 +155,9 @@ class IdealGasCalculator:
 
             has_final = sum([volume_final is not None, pressure_final is not None])
             if has_final != 1:
-                raise ValueError("Provide exactly one of: volume_final or pressure_final")
+                raise ValueError(
+                    "Provide exactly one of: volume_final or pressure_final"
+                )
 
         # Calculate missing final parameter
         if volume_final is None:
@@ -169,7 +175,12 @@ class IdealGasCalculator:
 
         # Calculate work done (W = nRT ln(V₂/V₁))
         if volume_final > EPSILON:
-            work_done = n_moles * GAS_CONSTANT * temperature * math.log(volume_final / volume_initial)
+            work_done = (
+                n_moles
+                * GAS_CONSTANT
+                * temperature
+                * math.log(volume_final / volume_initial)
+            )
         else:
             work_done = 0
 
@@ -223,14 +234,18 @@ class IdealGasCalculator:
 
             has_final = sum([volume_final is not None, pressure_final is not None])
             if has_final != 1:
-                raise ValueError("Provide exactly one of: volume_final or pressure_final")
+                raise ValueError(
+                    "Provide exactly one of: volume_final or pressure_final"
+                )
 
         # Calculate missing final parameter using P₁V₁^γ = P₂V₂^γ
         if volume_final is None:
             if validate and pressure_final <= 0:
                 raise ValueError("Final pressure must be positive")
             # V₂ = V₁(P₁/P₂)^(1/γ)
-            volume_final = volume_initial * (pressure_initial / pressure_final) ** (1 / gamma)
+            volume_final = volume_initial * (pressure_initial / pressure_final) ** (
+                1 / gamma
+            )
         else:
             if validate and volume_final <= 0:
                 raise ValueError("Final volume must be positive")
@@ -238,7 +253,9 @@ class IdealGasCalculator:
             pressure_final = pressure_initial * (volume_initial / volume_final) ** gamma
 
         # Calculate work done: W = (P₁V₁ - P₂V₂)/(γ - 1)
-        work_done = (pressure_initial * volume_initial - pressure_final * volume_final) / (gamma - 1)
+        work_done = (
+            pressure_initial * volume_initial - pressure_final * volume_final
+        ) / (gamma - 1)
 
         return {
             "pressure_initial": pressure_initial,
@@ -259,7 +276,10 @@ class HeatTransferCalculator:
 
     @staticmethod
     def heat_capacity(
-        mass: float, specific_heat: float, temperature_change: float, validate: bool = True
+        mass: float,
+        specific_heat: float,
+        temperature_change: float,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate heat absorbed or released.
@@ -419,7 +439,9 @@ class HeatTransferCalculator:
         """
         if validate:
             if not 0 <= emissivity <= 1:
-                raise ValueError(f"Emissivity must be between 0 and 1, got {emissivity}")
+                raise ValueError(
+                    f"Emissivity must be between 0 and 1, got {emissivity}"
+                )
             if area <= 0:
                 raise ValueError("Area must be positive")
             if temperature <= 0:
@@ -430,7 +452,12 @@ class HeatTransferCalculator:
                 raise ValueError("Time must be positive")
 
         # Net radiation power
-        power = emissivity * STEFAN_BOLTZMANN_CONSTANT * area * (temperature**4 - ambient_temperature**4)
+        power = (
+            emissivity
+            * STEFAN_BOLTZMANN_CONSTANT
+            * area
+            * (temperature**4 - ambient_temperature**4)
+        )
 
         # Total heat transferred
         heat_transfer = power * time
@@ -479,7 +506,9 @@ class ThermodynamicCycleCalculator:
             has_heats = heat_input is not None and heat_output is not None
 
             if not (has_work or has_heats):
-                raise ValueError("Provide (work_output, heat_input) or (heat_input, heat_output)")
+                raise ValueError(
+                    "Provide (work_output, heat_input) or (heat_input, heat_output)"
+                )
 
         # Calculate missing values
         if work_output is None:
@@ -509,7 +538,9 @@ class ThermodynamicCycleCalculator:
         }
 
     @staticmethod
-    def carnot_efficiency(temperature_hot: float, temperature_cold: float, validate: bool = True) -> Dict[str, float]:
+    def carnot_efficiency(
+        temperature_hot: float, temperature_cold: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate maximum theoretical (Carnot) efficiency.
 
@@ -575,7 +606,9 @@ class ThermodynamicCycleCalculator:
                     raise ValueError("Work input must be positive")
 
             cop = heat_removed / work_input
-            result.update({"cop": cop, "heat_removed": heat_removed, "work_input": work_input})
+            result.update(
+                {"cop": cop, "heat_removed": heat_removed, "work_input": work_input}
+            )
 
         # Calculate Carnot (maximum) COP if temperatures provided
         if temperature_cold is not None and temperature_hot is not None:
@@ -583,11 +616,17 @@ class ThermodynamicCycleCalculator:
                 if temperature_cold <= 0 or temperature_hot <= 0:
                     raise ValueError("Temperatures must be positive (in Kelvin)")
                 if temperature_cold >= temperature_hot:
-                    raise ValueError("Cold temperature must be less than hot temperature")
+                    raise ValueError(
+                        "Cold temperature must be less than hot temperature"
+                    )
 
             cop_carnot = temperature_cold / (temperature_hot - temperature_cold)
             result.update(
-                {"cop_carnot": cop_carnot, "temperature_cold": temperature_cold, "temperature_hot": temperature_hot}
+                {
+                    "cop_carnot": cop_carnot,
+                    "temperature_cold": temperature_cold,
+                    "temperature_hot": temperature_hot,
+                }
             )
 
         result["formula"] = "COP = Q_c/W, COP_Carnot = T_c/(T_h - T_c)"
@@ -598,7 +637,9 @@ class EntropyCalculator:
     """Calculator for entropy and second law of thermodynamics."""
 
     @staticmethod
-    def entropy_change(heat_transfer: float, temperature: float, validate: bool = True) -> Dict[str, float]:
+    def entropy_change(
+        heat_transfer: float, temperature: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate entropy change for reversible process.
 
@@ -627,7 +668,10 @@ class EntropyCalculator:
 
     @staticmethod
     def entropy_isothermal_expansion(
-        n_moles: float, volume_initial: float, volume_final: float, validate: bool = True
+        n_moles: float,
+        volume_initial: float,
+        volume_final: float,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate entropy change for isothermal expansion of ideal gas.
@@ -649,7 +693,9 @@ class EntropyCalculator:
             if volume_initial <= 0 or volume_final <= 0:
                 raise ValueError("Volumes must be positive")
 
-        entropy_change = n_moles * GAS_CONSTANT * math.log(volume_final / volume_initial)
+        entropy_change = (
+            n_moles * GAS_CONSTANT * math.log(volume_final / volume_initial)
+        )
 
         return {
             "entropy_change": entropy_change,
@@ -720,14 +766,19 @@ if __name__ == "__main__":
         n_moles=1.0,
         temperature=None,  # Calculate this
     )
-    print(f"Standard Temperature: {gas['temperature']:.2f} K ({gas['temperature']-273.15:.2f} °C)")
+    print(
+        f"Standard Temperature: {gas['temperature']:.2f} K ({gas['temperature']-273.15:.2f} °C)"
+    )
     print(f"Number of molecules: {gas['n_molecules']:.2e}")
 
     # Isothermal Process
     print("\n2. ISOTHERMAL EXPANSION")
     print("-" * 60)
     isothermal = calc.isothermal_process(
-        pressure_initial=200000, volume_initial=0.01, volume_final=0.02, n_moles=1.0  # Pa  # m³  # m³ (doubled)
+        pressure_initial=200000,
+        volume_initial=0.01,
+        volume_final=0.02,
+        n_moles=1.0,  # Pa  # m³  # m³ (doubled)
     )
     print(f"Initial Pressure: {isothermal['pressure_initial']/1000:.1f} kPa")
     print(f"Final Pressure: {isothermal['pressure_final']/1000:.1f} kPa")
@@ -752,12 +803,16 @@ if __name__ == "__main__":
     print("\n4. HEAT ENGINE EFFICIENCY")
     print("-" * 60)
     engine_calc = ThermodynamicCycleCalculator()
-    engine = engine_calc.heat_engine_efficiency(work_output=500, heat_input=2000)  # J  # J
+    engine = engine_calc.heat_engine_efficiency(
+        work_output=500, heat_input=2000
+    )  # J  # J
     print(f"Efficiency: {engine['efficiency_percent']:.1f}%")
     print(f"Heat Output: {engine['heat_output']:.1f} J")
 
     # Carnot Efficiency
-    carnot = engine_calc.carnot_efficiency(temperature_hot=600, temperature_cold=300)  # K  # K
+    carnot = engine_calc.carnot_efficiency(
+        temperature_hot=600, temperature_cold=300
+    )  # K  # K
     print(f"Carnot (Maximum) Efficiency: {carnot['carnot_efficiency_percent']:.1f}%")
 
     # Entropy Change

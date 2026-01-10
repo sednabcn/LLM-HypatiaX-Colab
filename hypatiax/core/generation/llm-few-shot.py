@@ -132,7 +132,12 @@ Each example shows: Description → Formula"""
         2025 Trend: Structured examples with clear formatting
         """
 
-        examples_text = "\n\n".join([f"Description: {ex['description']}\nFormula: {ex['formula']}" for ex in examples])
+        examples_text = "\n\n".join(
+            [
+                f"Description: {ex['description']}\nFormula: {ex['formula']}"
+                for ex in examples
+            ]
+        )
 
         return f"""EXAMPLES:
 {examples_text}
@@ -156,7 +161,9 @@ class LLMClient:
         self.openai_client = None
 
         if config.anthropic_api_key:
-            self.anthropic_client = anthropic.Anthropic(api_key=config.anthropic_api_key)
+            self.anthropic_client = anthropic.Anthropic(
+                api_key=config.anthropic_api_key
+            )
 
         if config.openai_api_key:
             self.openai_client = OpenAI(api_key=config.openai_api_key)
@@ -179,7 +186,11 @@ class LLMClient:
                     {
                         "type": "text",
                         "text": system_prompt,
-                        "cache_control": {"type": "ephemeral"} if self.config.enable_caching else None,
+                        "cache_control": (
+                            {"type": "ephemeral"}
+                            if self.config.enable_caching
+                            else None
+                        ),
                     }
                 ],
                 messages=[{"role": "user", "content": user_prompt}],
@@ -201,7 +212,10 @@ class LLMClient:
                 max_tokens=self.config.max_tokens,
                 temperature=self.config.temperature,
                 top_p=self.config.top_p,
-                messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
             )
 
             return response.choices[0].message.content.strip()
@@ -280,7 +294,12 @@ class ModernLLMTrainer:
                 if "description" in item and "formula" in item:
                     self.examples.append(item)
                 elif "input_text" in item and "target_text" in item:
-                    self.examples.append({"description": item["input_text"], "formula": item["target_text"]})
+                    self.examples.append(
+                        {
+                            "description": item["input_text"],
+                            "formula": item["target_text"],
+                        }
+                    )
 
         print(f"✅ Loaded {len(self.examples)} examples for few-shot prompting")
 
@@ -306,7 +325,9 @@ class ModernLLMTrainer:
 
             # Build prompts
             system_prompt = self.prompt_optimizer.build_system_prompt()
-            user_prompt = self.prompt_optimizer.build_few_shot_prompt(query, selected_examples)
+            user_prompt = self.prompt_optimizer.build_few_shot_prompt(
+                query, selected_examples
+            )
 
             # Generate with retry
             formula = self.client.generate_with_retry(system_prompt, user_prompt)
@@ -329,7 +350,12 @@ class ModernLLMTrainer:
             self.stats["total_requests"] += 1
             self.stats["failed_requests"] += 1
 
-            return {"query": query, "formula": f"Error: {str(e)}", "success": False, "time": time.time() - start_time}
+            return {
+                "query": query,
+                "formula": f"Error: {str(e)}",
+                "success": False,
+                "time": time.time() - start_time,
+            }
 
     def batch_generate(self, queries: List[str]) -> List[Dict]:
         """
@@ -372,16 +398,31 @@ class ModernLLMTrainer:
             predicted = result["formula"]
 
             # Check correctness
-            is_correct = self._normalize_formula(predicted) == self._normalize_formula(true_formula)
+            is_correct = self._normalize_formula(predicted) == self._normalize_formula(
+                true_formula
+            )
 
-            results.append({"query": query, "true": true_formula, "predicted": predicted, "correct": is_correct})
+            results.append(
+                {
+                    "query": query,
+                    "true": true_formula,
+                    "predicted": predicted,
+                    "correct": is_correct,
+                }
+            )
 
             if is_correct:
                 correct += 1
 
         accuracy = correct / total if total > 0 else 0
 
-        return {"accuracy": accuracy, "correct": correct, "total": total, "results": results, "stats": self.stats}
+        return {
+            "accuracy": accuracy,
+            "correct": correct,
+            "total": total,
+            "results": results,
+            "stats": self.stats,
+        }
 
     def _normalize_formula(self, formula: str) -> str:
         """Normalize formula for comparison"""
@@ -422,7 +463,9 @@ class ModernLLMTrainer:
         if self.stats["total_requests"] > 0:
             avg_time = self.stats["total_time"] / self.stats["total_requests"]
             print(f"Average Time: {avg_time:.2f}s per request")
-            print(f"Success Rate: {self.stats['successful_requests'] / self.stats['total_requests'] * 100:.1f}%")
+            print(
+                f"Success Rate: {self.stats['successful_requests'] / self.stats['total_requests'] * 100:.1f}%"
+            )
 
         print("=" * 70)
 

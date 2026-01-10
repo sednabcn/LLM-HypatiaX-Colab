@@ -121,7 +121,10 @@ PERFUME_QUICK = [
     ("EDP formula", "EDP = 15-20% fragrance + 75-80% alcohol + 5% water"),
     ("EDT formula", "EDT = 5-15% fragrance + 70-80% alcohol + 15-25% water"),
     ("Cologne formula", "Cologne = 2-5% fragrance + 70-90% alcohol + water"),
-    ("Batch total calculation", "Total Weight = Σ(Volume × Density) for all components"),
+    (
+        "Batch total calculation",
+        "Total Weight = Σ(Volume × Density) for all components",
+    ),
     ("Cost per unit", "Unit Cost = Total Ingredient Cost / Number of Units"),
     ("Dilution equation", "C₁V₁ = C₂V₂"),
     ("Profit margin", "Margin % = (Revenue - Cost) / Revenue × 100"),
@@ -262,7 +265,10 @@ CLINICAL_QUICK = [
     ("eGFR MDRD", "eGFR = 175 × SCr^-1.154 × Age^-0.203 × (0.742♀) × (1.212 Black)"),
     ("BUN to creatinine ratio", "BUN/Cr = BUN mg/dL / Creatinine mg/dL"),
     ("Osmolal gap", "OsmGap = Measured - (2×Na + Glucose/18 + BUN/2.8)"),
-    ("Reticulocyte index", "RPI = (Retic% × PatientHct) / (NormalHct × MaturationFactor)"),
+    (
+        "Reticulocyte index",
+        "RPI = (Retic% × PatientHct) / (NormalHct × MaturationFactor)",
+    ),
     ("Absolute reticulocyte", "Absolute Retic = Reticulocyte% × RBC count / 100"),
     ("Plateletcrit", "PCT% = (Platelet Count × MPV) / 10,000"),
     ("Free thyroxine index", "FTI = Total T4 × T3 Uptake / 100"),
@@ -292,7 +298,9 @@ def generate_csv_files():
             writer.writerow([query, formula])
 
     # File 2: Perfume Quick Reference
-    with open(DIR + "perfume_quick_reference_75.csv", "w", newline="", encoding="utf-8") as f:
+    with open(
+        DIR + "perfume_quick_reference_75.csv", "w", newline="", encoding="utf-8"
+    ) as f:
         writer = csv.writer(f)
         writer.writerow(["query_description", "formula"])
         for query, formula in PERFUME_QUICK:
@@ -306,7 +314,9 @@ def generate_csv_files():
             writer.writerow([query, formula])
 
     # File 4: Clinical Quick Reference
-    with open(DIR + "clinical_quick_reference_75.csv", "w", newline="", encoding="utf-8") as f:
+    with open(
+        DIR + "clinical_quick_reference_75.csv", "w", newline="", encoding="utf-8"
+    ) as f:
         writer = csv.writer(f)
         writer.writerow(["query_description", "formula"])
         for query, formula in CLINICAL_QUICK:
@@ -321,7 +331,9 @@ def generate_csv_files():
         f"\nTotal entries: {len(PERFUME_DETAILED) + len(PERFUME_QUICK) + len(CLINICAL_DETAILED) + len(CLINICAL_QUICK)}"
     )
     print("\nNote: This example shows 10 entries each.")
-    print("Full implementation would include all 75 detailed + 55 quick per domain = 260 total")
+    print(
+        "Full implementation would include all 75 detailed + 55 quick per domain = 260 total"
+    )
 
 
 if __name__ == "__main__":

@@ -62,7 +62,12 @@ class HybridFormatter:
         header_text += f"Features: {metadata.get('n_features', 'N/A')}"
 
         self.console.print(
-            Panel(header_text, title="[bold]Discovery Report[/bold]", border_style="blue", padding=(1, 2))
+            Panel(
+                header_text,
+                title="[bold]Discovery Report[/bold]",
+                border_style="blue",
+                padding=(1, 2),
+            )
         )
 
     def _display_discovery(self, discovery: Dict):
@@ -117,7 +122,12 @@ class HybridFormatter:
         status_text = f"[{status_color}]{status_symbol} Overall Score: {total_score:.1f}/100[/{status_color}]"
 
         self.console.print(
-            Panel(status_text, title="[bold]✓ Validation Results[/bold]", border_style=status_color, padding=(0, 2))
+            Panel(
+                status_text,
+                title="[bold]✓ Validation Results[/bold]",
+                border_style=status_color,
+                padding=(0, 2),
+            )
         )
 
         # Layer scores table
@@ -174,7 +184,9 @@ class HybridFormatter:
             for i, rec in enumerate(recommendations[:5], 1):
                 self.console.print(f"  {i}. {rec}", style="blue")
             if len(recommendations) > 5:
-                self.console.print(f"  ... and {len(recommendations) - 5} more", style="dim")
+                self.console.print(
+                    f"  ... and {len(recommendations) - 5} more", style="dim"
+                )
 
     def _display_interpretation(self, interpretation: Dict):
         """Display LLM interpretation."""
@@ -182,7 +194,9 @@ class HybridFormatter:
             return
 
         self.console.print("\n")
-        self.console.print(Panel("[bold]🤖 AI Interpretation[/bold]", border_style="magenta"))
+        self.console.print(
+            Panel("[bold]🤖 AI Interpretation[/bold]", border_style="magenta")
+        )
 
         sections = [
             ("interpretation", "🔍 Interpretation", "green"),
@@ -229,7 +243,9 @@ R²: {r2:.4f} | Validation: {val_score:.1f}/100 | [{status_color}]{status}[/{sta
             self.console.print("[yellow]No results to compare[/yellow]")
             return
 
-        table = Table(title=f"Top {min(top_n, len(results))} Discovery Results", box=box.ROUNDED)
+        table = Table(
+            title=f"Top {min(top_n, len(results))} Discovery Results", box=box.ROUNDED
+        )
 
         table.add_column("Rank", justify="center", style="cyan")
         table.add_column("Expression", style="yellow", no_wrap=False, max_width=40)
@@ -241,7 +257,10 @@ R²: {r2:.4f} | Validation: {val_score:.1f}/100 | [{status_color}]{status}[/{sta
         # Sort by validation score, then R²
         sorted_results = sorted(
             results,
-            key=lambda x: (x.get("validation", {}).get("total_score", 0), x.get("discovery", {}).get("r2_score", 0)),
+            key=lambda x: (
+                x.get("validation", {}).get("total_score", 0),
+                x.get("discovery", {}).get("r2_score", 0),
+            ),
             reverse=True,
         )[:top_n]
 
@@ -592,11 +611,20 @@ if __name__ == "__main__":
         "timestamp": "2025-01-15T10:30:00",
         "description": "AMM Constant Product Formula Discovery",
         "domain": "defi",
-        "discovery": {"expression": "sqrt(reserve0*reserve1)", "r2_score": 0.9995, "complexity": 4},
+        "discovery": {
+            "expression": "sqrt(reserve0*reserve1)",
+            "r2_score": 0.9995,
+            "complexity": 4,
+        },
         "validation": {
             "valid": False,
             "total_score": 89.0,
-            "layer_scores": {"symbolic": 98.0, "dimensional": 65.0, "domain": 95.0, "numerical": 100.0},
+            "layer_scores": {
+                "symbolic": 98.0,
+                "dimensional": 65.0,
+                "domain": 95.0,
+                "numerical": 100.0,
+            },
             "errors": [
                 "Invalid unit for 'reserve0': 'USD' - 'USD' is not defined in the unit registry",
                 "Invalid unit for 'reserve1': 'USD' - 'USD' is not defined in the unit registry",
@@ -631,4 +659,6 @@ if __name__ == "__main__":
     formatter.export_html(sample_result, "/tmp/discovery_report.html")
 
     print("\n")
-    formatter.console.print("[bold green]✓ Demo complete! Check /tmp for exported files[/bold green]")
+    formatter.console.print(
+        "[bold green]✓ Demo complete! Check /tmp for exported files[/bold green]"
+    )

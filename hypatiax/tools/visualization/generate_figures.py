@@ -44,11 +44,34 @@ def create_figure1_score_distribution(df):
     invalid_scores = df[~df["valid"]]["total_score"]
 
     # Plot histograms
-    ax.hist(valid_scores, bins=20, alpha=0.7, label="Valid", color="#2ecc71", edgecolor="black", linewidth=1.2)
-    ax.hist(invalid_scores, bins=20, alpha=0.7, label="Invalid", color="#e74c3c", edgecolor="black", linewidth=1.2)
+    ax.hist(
+        valid_scores,
+        bins=20,
+        alpha=0.7,
+        label="Valid",
+        color="#2ecc71",
+        edgecolor="black",
+        linewidth=1.2,
+    )
+    ax.hist(
+        invalid_scores,
+        bins=20,
+        alpha=0.7,
+        label="Invalid",
+        color="#e74c3c",
+        edgecolor="black",
+        linewidth=1.2,
+    )
 
     # Add threshold line
-    ax.axvline(70, color="black", linestyle="--", linewidth=2.5, label="Threshold (70)", alpha=0.8)
+    ax.axvline(
+        70,
+        color="black",
+        linestyle="--",
+        linewidth=2.5,
+        label="Threshold (70)",
+        alpha=0.8,
+    )
 
     ax.set_xlabel("Validation Score", fontsize=12, fontweight="bold")
     ax.set_ylabel("Frequency", fontsize=12, fontweight="bold")
@@ -87,7 +110,14 @@ def create_figure2_domain_comparison(df):
     risk_valid = df[df["domain"] == "risk"]["valid"].mean() * 100
     success_rates = [defi_valid, risk_valid]
 
-    bars1 = ax1.bar(domains, success_rates, color=["#3498db", "#e74c3c"], edgecolor="black", linewidth=1.5, alpha=0.8)
+    bars1 = ax1.bar(
+        domains,
+        success_rates,
+        color=["#3498db", "#e74c3c"],
+        edgecolor="black",
+        linewidth=1.5,
+        alpha=0.8,
+    )
     ax1.set_ylabel("Success Rate (%)", fontsize=12, fontweight="bold")
     ax1.set_title("Validation Success Rate by Domain", fontsize=14, fontweight="bold")
     ax1.set_ylim(0, 110)
@@ -110,7 +140,14 @@ def create_figure2_domain_comparison(df):
     risk_score = df[df["domain"] == "risk"]["total_score"].mean()
     avg_scores = [defi_score, risk_score]
 
-    bars2 = ax2.bar(domains, avg_scores, color=["#3498db", "#e74c3c"], edgecolor="black", linewidth=1.5, alpha=0.8)
+    bars2 = ax2.bar(
+        domains,
+        avg_scores,
+        color=["#3498db", "#e74c3c"],
+        edgecolor="black",
+        linewidth=1.5,
+        alpha=0.8,
+    )
     ax2.set_ylabel("Average Validation Score", fontsize=12, fontweight="bold")
     ax2.set_title("Average Score by Domain", fontsize=14, fontweight="bold")
     ax2.set_ylim(0, 100)
@@ -139,12 +176,20 @@ def create_figure3_layer_breakdown(df):
     fig, ax = plt.subplots(figsize=(10, 6))
 
     layers = ["Symbolic\nValidation", "Dimensional\nAnalysis", "Domain\nKnowledge"]
-    scores = [df["symbolic_score"].mean(), df["dimensional_score"].mean(), df["domain_score"].mean()]
+    scores = [
+        df["symbolic_score"].mean(),
+        df["dimensional_score"].mean(),
+        df["domain_score"].mean(),
+    ]
     colors = ["#3498db", "#e74c3c", "#2ecc71"]
 
-    bars = ax.barh(layers, scores, color=colors, edgecolor="black", linewidth=1.5, alpha=0.8)
+    bars = ax.barh(
+        layers, scores, color=colors, edgecolor="black", linewidth=1.5, alpha=0.8
+    )
     ax.set_xlabel("Average Score", fontsize=12, fontweight="bold")
-    ax.set_title("Three-Layer Validation System Performance", fontsize=14, fontweight="bold")
+    ax.set_title(
+        "Three-Layer Validation System Performance", fontsize=14, fontweight="bold"
+    )
     ax.set_xlim(0, 100)
     ax.grid(True, alpha=0.3, axis="x")
 
@@ -186,7 +231,11 @@ def create_figure4_r2_complexity(df):
 
     ax.set_xlabel("Formula Complexity", fontsize=12, fontweight="bold")
     ax.set_ylabel("R² Score", fontsize=12, fontweight="bold")
-    ax.set_title("Discovery Quality vs Complexity\n(colored by validation score)", fontsize=14, fontweight="bold")
+    ax.set_title(
+        "Discovery Quality vs Complexity\n(colored by validation score)",
+        fontsize=14,
+        fontweight="bold",
+    )
     ax.grid(True, alpha=0.3)
     ax.set_ylim(-0.05, 1.05)
 
@@ -217,12 +266,24 @@ def create_figure5_method_comparison(df):
     # Calculate actual hybrid success rate from data
     hybrid_success = df["valid"].mean() * 100
 
-    success_rates = [hybrid_success, 0, 75, 100]  # LLM fails validation, NN has no validation
+    success_rates = [
+        hybrid_success,
+        0,
+        75,
+        100,
+    ]  # LLM fails validation, NN has no validation
     times = [15, 3, 120, 1800]  # seconds
     colors = ["#2ecc71", "#f39c12", "#e74c3c", "#3498db"]
 
     # Success rate comparison
-    bars1 = ax1.bar(methods, success_rates, color=colors, edgecolor="black", linewidth=1.5, alpha=0.8)
+    bars1 = ax1.bar(
+        methods,
+        success_rates,
+        color=colors,
+        edgecolor="black",
+        linewidth=1.5,
+        alpha=0.8,
+    )
     ax1.set_ylabel("Success Rate (%)", fontsize=12, fontweight="bold")
     ax1.set_title("Formula Validation Success Rate", fontsize=14, fontweight="bold")
     ax1.set_ylim(0, 110)
@@ -242,8 +303,12 @@ def create_figure5_method_comparison(df):
         )
 
     # Time comparison (log scale)
-    bars2 = ax2.bar(methods, times, color=colors, edgecolor="black", linewidth=1.5, alpha=0.8)
-    ax2.set_ylabel("Time per Formula (seconds, log scale)", fontsize=12, fontweight="bold")
+    bars2 = ax2.bar(
+        methods, times, color=colors, edgecolor="black", linewidth=1.5, alpha=0.8
+    )
+    ax2.set_ylabel(
+        "Time per Formula (seconds, log scale)", fontsize=12, fontweight="bold"
+    )
     ax2.set_yscale("log")
     ax2.set_title("Computational Efficiency", fontsize=14, fontweight="bold")
     ax2.grid(True, alpha=0.3, axis="y", which="both")
@@ -298,13 +363,29 @@ def create_figure6_extrapolation(df):
     width = 0.35
 
     bars1 = ax.bar(
-        x - width / 2, ratios, width, label="Extrap. Error Ratio", color="#e74c3c", edgecolor="black", alpha=0.8
+        x - width / 2,
+        ratios,
+        width,
+        label="Extrap. Error Ratio",
+        color="#e74c3c",
+        edgecolor="black",
+        alpha=0.8,
     )
-    bars2 = ax.bar(x + width / 2, r2_scores, width, label="R² Score", color="#2ecc71", edgecolor="black", alpha=0.8)
+    bars2 = ax.bar(
+        x + width / 2,
+        r2_scores,
+        width,
+        label="R² Score",
+        color="#2ecc71",
+        edgecolor="black",
+        alpha=0.8,
+    )
 
     ax.set_xlabel("Formula Type", fontsize=12, fontweight="bold")
     ax.set_ylabel("Value", fontsize=12, fontweight="bold")
-    ax.set_title("Extrapolation Performance vs Training Fit", fontsize=14, fontweight="bold")
+    ax.set_title(
+        "Extrapolation Performance vs Training Fit", fontsize=14, fontweight="bold"
+    )
     ax.set_xticks(x)
     ax.set_xticklabels(formulas, rotation=15, ha="right")
     ax.legend()

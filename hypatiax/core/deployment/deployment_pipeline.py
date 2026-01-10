@@ -50,7 +50,10 @@ class ModelRegistry:
 
             nlp = spacy.load(model_path)
             self.models[name] = {"type": "spacy", "model": nlp, "path": model_path}
-            self.metadata[name] = {"type": "spacy", "loaded_at": datetime.now().isoformat()}
+            self.metadata[name] = {
+                "type": "spacy",
+                "loaded_at": datetime.now().isoformat(),
+            }
             print(f"✅ Registered spaCy model: {name}")
         except Exception as e:
             print(f"❌ Failed to load spaCy model {name}: {e}")
@@ -63,8 +66,16 @@ class ModelRegistry:
             tokenizer = AutoTokenizer.from_pretrained(model_path)
             model = T5ForConditionalGeneration.from_pretrained(model_path)
 
-            self.models[name] = {"type": "transformer", "model": model, "tokenizer": tokenizer, "path": model_path}
-            self.metadata[name] = {"type": "transformer", "loaded_at": datetime.now().isoformat()}
+            self.models[name] = {
+                "type": "transformer",
+                "model": model,
+                "tokenizer": tokenizer,
+                "path": model_path,
+            }
+            self.metadata[name] = {
+                "type": "transformer",
+                "loaded_at": datetime.now().isoformat(),
+            }
             print(f"✅ Registered Transformer model: {name}")
         except Exception as e:
             print(f"❌ Failed to load Transformer model {name}: {e}")
@@ -79,7 +90,10 @@ class ModelRegistry:
             trainer.load_model(model_path)
 
             self.models[name] = {"type": "rag", "model": trainer, "path": model_path}
-            self.metadata[name] = {"type": "rag", "loaded_at": datetime.now().isoformat()}
+            self.metadata[name] = {
+                "type": "rag",
+                "loaded_at": datetime.now().isoformat(),
+            }
             print(f"✅ Registered RAG model: {name}")
         except Exception as e:
             print(f"❌ Failed to load RAG model {name}: {e}")
@@ -87,7 +101,10 @@ class ModelRegistry:
     def register_ensemble_mapper(self, name: str, mapper):
         """Register ensemble mapper"""
         self.models[name] = {"type": "ensemble", "model": mapper}
-        self.metadata[name] = {"type": "ensemble", "loaded_at": datetime.now().isoformat()}
+        self.metadata[name] = {
+            "type": "ensemble",
+            "loaded_at": datetime.now().isoformat(),
+        }
         print(f"✅ Registered Ensemble mapper: {name}")
 
     def get_model(self, name: str) -> Optional[Dict]:
@@ -121,7 +138,13 @@ class PredictionService:
         doc = nlp(text)
 
         entities = [
-            {"text": ent.text, "label": ent.label_, "start": ent.start_char, "end": ent.end_char} for ent in doc.ents
+            {
+                "text": ent.text,
+                "label": ent.label_,
+                "start": ent.start_char,
+                "end": ent.end_char,
+            }
+            for ent in doc.ents
         ]
 
         return {"model": model_name, "type": "spacy", "entities": entities}
@@ -138,10 +161,14 @@ class PredictionService:
         tokenizer = model_info["tokenizer"]
 
         input_text = f"translate description to formula: {text}"
-        inputs = tokenizer(input_text, return_tensors="pt", max_length=128, truncation=True)
+        inputs = tokenizer(
+            input_text, return_tensors="pt", max_length=128, truncation=True
+        )
 
         with torch.no_grad():
-            outputs = model.generate(inputs.input_ids, max_length=128, num_beams=4, early_stopping=True)
+            outputs = model.generate(
+                inputs.input_ids, max_length=128, num_beams=4, early_stopping=True
+            )
 
         formula = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
@@ -158,9 +185,16 @@ class PredictionService:
         similar_examples = trainer.retrieve(text, k=5)
         formula = trainer.generate_formula(text)
 
-        return {"model": model_name, "type": "rag", "formula": formula, "similar_examples": similar_examples}
+        return {
+            "model": model_name,
+            "type": "rag",
+            "formula": formula,
+            "similar_examples": similar_examples,
+        }
 
-    def predict_with_ensemble(self, model_name: str, text: str, ner_entities: Optional[List] = None) -> Dict:
+    def predict_with_ensemble(
+        self, model_name: str, text: str, ner_entities: Optional[List] = None
+    ) -> Dict:
         """Predict using ensemble mapper"""
         model_info = self.registry.get_model(model_name)
         if not model_info or model_info["type"] != "ensemble":
@@ -178,7 +212,9 @@ class PredictionService:
             "all_candidates": result["all_candidates"],
         }
 
-    def predict(self, model_name: str, text: str, ner_entities: Optional[List] = None) -> Dict:
+    def predict(
+        self, model_name: str, text: str, ner_entities: Optional[List] = None
+    ) -> Dict:
         """Universal predict method"""
         model_info = self.registry.get_model(model_name)
         if not model_info:
@@ -200,7 +236,12 @@ class PredictionService:
         # Log prediction
         self.prediction_count += 1
         self.prediction_history.append(
-            {"timestamp": datetime.now().isoformat(), "model": model_name, "input": text, "output": result}
+            {
+                "timestamp": datetime.now().isoformat(),
+                "model": model_name,
+                "input": text,
+                "output": result,
+            }
         )
 
         return result
@@ -233,7 +274,10 @@ class DeploymentAPI:
         logging.basicConfig(
             level=logging.INFO,
             format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-            handlers=[logging.FileHandler(self.config.log_file), logging.StreamHandler()],
+            handlers=[
+                logging.FileHandler(self.config.log_file),
+                logging.StreamHandler(),
+            ],
         )
         self.logger = logging.getLogger(__name__)
 
@@ -254,7 +298,12 @@ class DeploymentAPI:
         @self.app.route("/models", methods=["GET"])
         def list_models():
             """List available models"""
-            return jsonify({"models": self.registry.list_models(), "metadata": self.registry.get_metadata()})
+            return jsonify(
+                {
+                    "models": self.registry.list_models(),
+                    "metadata": self.registry.get_metadata(),
+                }
+            )
 
         @self.app.route("/predict", methods=["POST"])
         def predict():
@@ -316,7 +365,9 @@ class DeploymentAPI:
             if not data or "text" not in data or "model" not in data:
                 return jsonify({"error": "Missing required fields"}), 400
 
-            result = self.service.predict_with_ensemble(data["model"], data["text"], data.get("ner_entities", None))
+            result = self.service.predict_with_ensemble(
+                data["model"], data["text"], data.get("ner_entities", None)
+            )
             return jsonify(result)
 
         @self.app.route("/metrics", methods=["GET"])
@@ -369,7 +420,13 @@ def main():
 
     context = MappingContext(
         available_columns=["Sales", "Revenue", "Profit", "Region", "Year"],
-        data_types={"Sales": "float", "Revenue": "float", "Profit": "float", "Region": "string", "Year": "int"},
+        data_types={
+            "Sales": "float",
+            "Revenue": "float",
+            "Profit": "float",
+            "Region": "string",
+            "Year": "int",
+        },
     )
     ensemble_mapper = EnhancedMapDescriptionToFormula(context)
 

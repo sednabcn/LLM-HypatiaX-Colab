@@ -14,7 +14,9 @@ from hypatiax.custom_ner.queries.tableau import custom_tableau_components
 
 # nlp = spacy.load("en_core_web_sm")
 
-ner_path = resources.files("hypatiax.data_spacy.queries.tableau").joinpath("ner_tableau")
+ner_path = resources.files("hypatiax.data_spacy.queries.tableau").joinpath(
+    "ner_tableau"
+)
 
 nlp = spacy.load(ner_path)
 
@@ -40,7 +42,9 @@ for ent in doc.ents:
 print("=============================================")
 
 # Test
-text = "Entries with Petal Length between 1.5 and 2.5 : Petal Length BETWEEN 1.5 AND 2.5"
+text = (
+    "Entries with Petal Length between 1.5 and 2.5 : Petal Length BETWEEN 1.5 AND 2.5"
+)
 print(text)
 doc = nlp(text)
 for ent in doc.ents:

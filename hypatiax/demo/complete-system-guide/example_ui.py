@@ -40,8 +40,18 @@ print(ui.formula_display("SUM([Sales])", 0.95))
 
 # Create comparison table
 results = [
-    {"method": "vocab", "formula": "SUM([Sales])", "confidence": 0.95, "processing_time": 12},
-    {"method": "regex", "formula": "SUM([Sales])", "confidence": 0.88, "processing_time": 8},
+    {
+        "method": "vocab",
+        "formula": "SUM([Sales])",
+        "confidence": 0.95,
+        "processing_time": 12,
+    },
+    {
+        "method": "regex",
+        "formula": "SUM([Sales])",
+        "confidence": 0.88,
+        "processing_time": 8,
+    },
 ]
 print(ui.comparison_table(results))
 

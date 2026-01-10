@@ -52,7 +52,9 @@ sales_examples = manager.filter_by_tags(["sales"])
 random_sample = manager.get_random_examples(count=5, category="basic", difficulty=1)
 
 # Split for training
-train, val, test = manager.split_dataset(train_ratio=0.7, val_ratio=0.15, test_ratio=0.15)
+train, val, test = manager.split_dataset(
+    train_ratio=0.7, val_ratio=0.15, test_ratio=0.15
+)
 
 # Generate variations
 base = manager.get_example("basic_sum_01")

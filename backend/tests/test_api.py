@@ -30,7 +30,9 @@ def test_endpoint(method, endpoint, data=None, description=""):
         if method == "GET":
             response = requests.get(url)
         elif method == "POST":
-            response = requests.post(url, json=data, headers={"Content-Type": "application/json"})
+            response = requests.post(
+                url, json=data, headers={"Content-Type": "application/json"}
+            )
 
         print(f"   Status: {response.status_code}")
 
@@ -100,7 +102,12 @@ def main():
         "POST",
         "/api/hypatiax/batch",
         data={
-            "descriptions": ["Sum of Sales", "Average of Profit", "Maximum of Price", "Minimum of Discount"],
+            "descriptions": [
+                "Sum of Sales",
+                "Average of Profit",
+                "Maximum of Price",
+                "Minimum of Discount",
+            ],
             "method": "vocab",
         },
         description="Batch process multiple descriptions",
@@ -209,10 +216,15 @@ def main():
 
     test_endpoint("GET", "/api/nonexistent", description="Test 404 handler")
 
-    test_endpoint("POST", "/api/hypatiax/map", data={}, description="Test missing required fields")
+    test_endpoint(
+        "POST", "/api/hypatiax/map", data={}, description="Test missing required fields"
+    )
 
     test_endpoint(
-        "POST", "/api/defi/calculate-il", data={"initial_price": "invalid"}, description="Test invalid data types"
+        "POST",
+        "/api/defi/calculate-il",
+        data={"initial_price": "invalid"},
+        description="Test invalid data types",
     )
 
     # ========================================================================

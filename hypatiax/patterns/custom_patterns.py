@@ -11,7 +11,9 @@ class CustomPatterns:
         self.sub_domain = sub_domain
         self.query_type = query_type
         self.query_types = ["desc", "formulas", "both"]
-        self.nlp = spacy.load("en_core_web_sm")  # Load the spaCy model here or specify a different model
+        self.nlp = spacy.load(
+            "en_core_web_sm"
+        )  # Load the spaCy model here or specify a different model
 
     def call_my_script(self, script_path, query_type):
         # Using subprocess to call the script externally
@@ -21,7 +23,9 @@ class CustomPatterns:
     def get_custom_patterns(self, option):
         valid_options = ["all", "default"]
         if option not in valid_options:
-            logging.error(f"Invalid option '{option}'. Valid options are {valid_options}")
+            logging.error(
+                f"Invalid option '{option}'. Valid options are {valid_options}"
+            )
 
         try:
             if self.domain == "queries" and sub_domain == "tableau":

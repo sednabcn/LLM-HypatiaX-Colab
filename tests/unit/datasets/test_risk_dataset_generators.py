@@ -23,7 +23,11 @@ class MockHybridDiscoverySystem:
         self.results = []
 
     def discover_validate_interpret(self, **kwargs):
-        result = {"status": "success", "validation": {"valid": True}, "discovery": {"r2_score": 0.95}}
+        result = {
+            "status": "success",
+            "validation": {"valid": True},
+            "discovery": {"r2_score": 0.95},
+        }
         self.results.append(result)
         return result
 
@@ -508,7 +512,12 @@ class TestCornishFisherVaR(unittest.TestCase):
         skewness = 1.0
         kurtosis = 2.0  # Excess kurtosis
 
-        z_cf = z + (z**2 - 1) * skewness / 6 + (z**3 - 3 * z) * kurtosis / 24 - (2 * z**3 - 5 * z) * skewness**2 / 36
+        z_cf = (
+            z
+            + (z**2 - 1) * skewness / 6
+            + (z**3 - 3 * z) * kurtosis / 24
+            - (2 * z**3 - 5 * z) * skewness**2 / 36
+        )
 
         # Adjusted quantile should differ from normal
         self.assertNotAlmostEqual(z_cf, z)
@@ -545,7 +554,9 @@ class TestPortfolioVaR(unittest.TestCase):
         sigma2 = 0.30
         rho = 0.5
 
-        portfolio_vol = np.sqrt(w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * rho)
+        portfolio_vol = np.sqrt(
+            w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * rho
+        )
 
         # Portfolio vol should be between min and max of individual vols
         self.assertGreater(portfolio_vol, min(sigma1, sigma2) * max(w1, w2))
@@ -558,7 +569,9 @@ class TestPortfolioVaR(unittest.TestCase):
         sigma2 = 0.30
         rho = 1.0
 
-        portfolio_vol = np.sqrt(w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * rho)
+        portfolio_vol = np.sqrt(
+            w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * rho
+        )
 
         expected = w1 * sigma1 + w2 * sigma2
         self.assertAlmostEqual(portfolio_vol, expected)
@@ -572,11 +585,19 @@ class TestPortfolioVaR(unittest.TestCase):
 
         # Positive correlation
         rho_pos = 0.5
-        vol_pos = np.sqrt(w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * rho_pos)
+        vol_pos = np.sqrt(
+            w1**2 * sigma1**2
+            + w2**2 * sigma2**2
+            + 2 * w1 * w2 * sigma1 * sigma2 * rho_pos
+        )
 
         # Negative correlation
         rho_neg = -0.5
-        vol_neg = np.sqrt(w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * rho_neg)
+        vol_neg = np.sqrt(
+            w1**2 * sigma1**2
+            + w2**2 * sigma2**2
+            + 2 * w1 * w2 * sigma1 * sigma2 * rho_neg
+        )
 
         self.assertLess(vol_neg, vol_pos)
 
@@ -596,7 +617,11 @@ class TestDiversificationBenefit(unittest.TestCase):
         individual_sum = w1 * sigma1 + w2 * sigma2
 
         # Portfolio risk
-        portfolio_vol = np.sqrt(w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * correlation)
+        portfolio_vol = np.sqrt(
+            w1**2 * sigma1**2
+            + w2**2 * sigma2**2
+            + 2 * w1 * w2 * sigma1 * sigma2 * correlation
+        )
 
         div_benefit = individual_sum - portfolio_vol
 
@@ -612,7 +637,11 @@ class TestDiversificationBenefit(unittest.TestCase):
         correlation = 1.0
 
         individual_sum = w1 * sigma1 + w2 * sigma2
-        portfolio_vol = np.sqrt(w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * correlation)
+        portfolio_vol = np.sqrt(
+            w1**2 * sigma1**2
+            + w2**2 * sigma2**2
+            + 2 * w1 * w2 * sigma1 * sigma2 * correlation
+        )
 
         div_benefit = individual_sum - portfolio_vol
 
@@ -688,7 +717,9 @@ class TestMarketCrashStress(unittest.TestCase):
         crash_pct = -0.20
         diversification = 0.7
 
-        stressed_loss = portfolio_value * market_beta * abs(crash_pct) * (2 - diversification)
+        stressed_loss = (
+            portfolio_value * market_beta * abs(crash_pct) * (2 - diversification)
+        )
 
         # Loss should be substantial
         self.assertGreater(stressed_loss, 0)
@@ -1090,7 +1121,9 @@ class TestLiquidityCrisis(unittest.TestCase):
         bid_ask_spread = 0.01
 
         liquidity_ratio = portfolio_size / daily_volume
-        liquidation_cost = portfolio_size * bid_ask_spread * np.sqrt(liquidity_ratio * 10)
+        liquidation_cost = (
+            portfolio_size * bid_ask_spread * np.sqrt(liquidity_ratio * 10)
+        )
 
         # Cost should be positive and reasonable
         self.assertGreater(liquidation_cost, 0)
@@ -1124,11 +1157,15 @@ class TestCorrelationBreakdown(unittest.TestCase):
 
         # Normal correlation
         normal_corr = 0.5
-        normal_vol = np.sqrt(asset1 + asset2 + 2 * np.sqrt(asset1 * asset2) * normal_corr)
+        normal_vol = np.sqrt(
+            asset1 + asset2 + 2 * np.sqrt(asset1 * asset2) * normal_corr
+        )
 
         # Stress correlation
         stress_corr = 0.95
-        stress_vol = np.sqrt(asset1 + asset2 + 2 * np.sqrt(asset1 * asset2) * stress_corr)
+        stress_vol = np.sqrt(
+            asset1 + asset2 + 2 * np.sqrt(asset1 * asset2) * stress_corr
+        )
 
         impact = (stress_vol - normal_vol) * volatility_mult
 
@@ -1196,7 +1233,9 @@ class TestEdgeCases(unittest.TestCase):
         sigma2 = 0.20
         rho = -1.0
 
-        portfolio_vol = np.sqrt(w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * rho)
+        portfolio_vol = np.sqrt(
+            w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * rho
+        )
 
         # With equal weights and equal vols, should be zero
         self.assertAlmostEqual(portfolio_vol, 0, places=10)
@@ -1214,7 +1253,9 @@ class TestNumericalStability(unittest.TestCase):
         sigma2 = 0.10
         rho = -1.0  # Perfect negative
 
-        variance = w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * rho
+        variance = (
+            w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * rho
+        )
 
         # Variance can be zero but not negative
         self.assertGreaterEqual(variance, 0)

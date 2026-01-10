@@ -16,7 +16,9 @@ sys.path.insert(0, str(project_root))
 from dotenv import load_dotenv
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
@@ -118,7 +120,9 @@ def main():
     print("=" * 70)
     try:
         result = provider.generate_formula(
-            requirements="Calculate impermanent loss for Uniswap V2 liquidity pools", domain="defi", n_candidates=1
+            requirements="Calculate impermanent loss for Uniswap V2 liquidity pools",
+            domain="defi",
+            n_candidates=1,
         )
 
         formula = result[0]
@@ -223,7 +227,9 @@ def main():
     try:
         # Use the formula from Test 1
         result = provider.generate_formula(
-            requirements="Calculate impermanent loss for Uniswap V2 liquidity pools", domain="defi", n_candidates=1
+            requirements="Calculate impermanent loss for Uniswap V2 liquidity pools",
+            domain="defi",
+            n_candidates=1,
         )
 
         original_formula = result[0]
@@ -231,7 +237,8 @@ def main():
         if "error" not in original_formula:
             print("\n📝 Refining formula with feedback...")
             refined = provider.refine_formula(
-                formula=original_formula, feedback="Make it more efficient and add support for fee tiers"
+                formula=original_formula,
+                feedback="Make it more efficient and add support for fee tiers",
             )
 
             if "error" in refined:
@@ -242,7 +249,9 @@ def main():
                 print(refined["formula_python"])
                 print(f"\n📝 Explanation: {refined['explanation']}")
         else:
-            print("\n⚠️  Skipping refinement test due to original formula generation issue")
+            print(
+                "\n⚠️  Skipping refinement test due to original formula generation issue"
+            )
 
         print("\n✓ Test 4 completed!")
 

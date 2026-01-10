@@ -25,7 +25,9 @@ class UniswapV2Pool:
         if self.total_supply == 0:
             # First liquidity provision
             liquidity = math.sqrt(amount0 * amount1)
-            self.MINIMUM_LIQUIDITY = min(min(amount0, amount1) / 10, self.MINIMUM_LIQUIDITY)
+            self.MINIMUM_LIQUIDITY = min(
+                min(amount0, amount1) / 10, self.MINIMUM_LIQUIDITY
+            )
 
             # Uniswap burns MINIMUM_LIQUIDITY tokens on first mint
             # This protects against inflation attacks

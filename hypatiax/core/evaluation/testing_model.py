@@ -62,7 +62,9 @@ def test_spacy_model(model_path, test_data):
             example = Example(predicted=doc, reference=ref_doc)
             examples.append(example)
 
-            print("Reference Entities:", [(ent.text, ent.label_) for ent in ref_doc.ents])
+            print(
+                "Reference Entities:", [(ent.text, ent.label_) for ent in ref_doc.ents]
+            )
 
         except Exception as e:
             print(f"Error processing example: {text}")
@@ -181,7 +183,10 @@ if __name__ == "__main__":
             "Apple Inc. was founded by Steve Jobs in Cupertino",
             {"entities": [(0, 10, "ORG"), (28, 38, "PERSON"), (42, 51, "GPE")]},
         ),
-        ("Google acquired YouTube in 2006", {"entities": [(0, 6, "ORG"), (16, 23, "PRODUCT"), (27, 31, "DATE")]}),
+        (
+            "Google acquired YouTube in 2006",
+            {"entities": [(0, 6, "ORG"), (16, 23, "PRODUCT"), (27, 31, "DATE")]},
+        ),
     ]
 
     # Test the model

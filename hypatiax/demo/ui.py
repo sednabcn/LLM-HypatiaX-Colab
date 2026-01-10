@@ -61,7 +61,9 @@ class UIComponents:
         return f"\n{text}\n{char * width}\n"
 
     @staticmethod
-    def box(text: str, width: int = 80, padding: int = 2, border_char: str = "│") -> str:
+    def box(
+        text: str, width: int = 80, padding: int = 2, border_char: str = "│"
+    ) -> str:
         """Create a text box"""
         lines = text.split("\n")
         top = "┌" + "─" * (width - 2) + "┐"
@@ -76,27 +78,44 @@ class UIComponents:
         return "\n".join([top] + content + [bottom])
 
     @staticmethod
-    def table(headers: List[str], rows: List[List[Any]], col_widths: Optional[List[int]] = None) -> str:
+    def table(
+        headers: List[str],
+        rows: List[List[Any]],
+        col_widths: Optional[List[int]] = None,
+    ) -> str:
         """Create a formatted table"""
         if not col_widths:
-            col_widths = [max(len(str(row[i])) for row in [headers] + rows) + 2 for i in range(len(headers))]
+            col_widths = [
+                max(len(str(row[i])) for row in [headers] + rows) + 2
+                for i in range(len(headers))
+            ]
 
         # Create separator
         separator = "+" + "+".join("-" * width for width in col_widths) + "+"
 
         # Format header
-        header_row = "|" + "|".join(str(h).center(col_widths[i]) for i, h in enumerate(headers)) + "|"
+        header_row = (
+            "|"
+            + "|".join(str(h).center(col_widths[i]) for i, h in enumerate(headers))
+            + "|"
+        )
 
         # Format rows
         data_rows = []
         for row in rows:
-            data_row = "|" + "|".join(str(cell).ljust(col_widths[i]) for i, cell in enumerate(row)) + "|"
+            data_row = (
+                "|"
+                + "|".join(str(cell).ljust(col_widths[i]) for i, cell in enumerate(row))
+                + "|"
+            )
             data_rows.append(data_row)
 
         return "\n".join([separator, header_row, separator] + data_rows + [separator])
 
     @staticmethod
-    def progress_bar(current: int, total: int, width: int = 50, prefix: str = "", suffix: str = "") -> str:
+    def progress_bar(
+        current: int, total: int, width: int = 50, prefix: str = "", suffix: str = ""
+    ) -> str:
         """Create a progress bar"""
         percent = current / total if total > 0 else 0
         filled = int(width * percent)
@@ -105,13 +124,19 @@ class UIComponents:
         return f"{prefix}[{bar}] {percent:.1%} {suffix}"
 
     @staticmethod
-    def entity_visualization(text: str, entities: List[Dict[str, Any]], use_colors: bool = True) -> str:
+    def entity_visualization(
+        text: str, entities: List[Dict[str, Any]], use_colors: bool = True
+    ) -> str:
         """Visualize entities in text with colors/highlighting"""
         if not use_colors:
             # Simple bracket notation
             result = text
             for entity in sorted(entities, key=lambda e: e["start"], reverse=True):
-                result = result[: entity["start"]] + f"[{entity['text']}:{entity['label']}]" + result[entity["end"] :]
+                result = (
+                    result[: entity["start"]]
+                    + f"[{entity['text']}:{entity['label']}]"
+                    + result[entity["end"] :]
+                )
             return result
 
         # Color-coded visualization
@@ -134,7 +159,8 @@ class UIComponents:
             # Add colored entity
             color = entity_colors.get(entity["label"], Colors.WHITE)
             result += (
-                f"{color}{Colors.BOLD}{entity['text']}{Colors.RESET}" f"{Colors.DIM}[{entity['label']}]{Colors.RESET}"
+                f"{color}{Colors.BOLD}{entity['text']}{Colors.RESET}"
+                f"{Colors.DIM}[{entity['label']}]{Colors.RESET}"
             )
 
             last_pos = entity["end"]
@@ -145,7 +171,9 @@ class UIComponents:
         return result
 
     @staticmethod
-    def formula_display(formula: str, confidence: float, use_colors: bool = True) -> str:
+    def formula_display(
+        formula: str, confidence: float, use_colors: bool = True
+    ) -> str:
         """Display formula with confidence indicator"""
         if not use_colors:
             return f"Formula: {formula} (Confidence: {confidence:.1%})"
@@ -193,7 +221,9 @@ class UIComponents:
         return "\n".join(result)
 
     @staticmethod
-    def comparison_table(results: List[Dict[str, Any]], show_entities: bool = False) -> str:
+    def comparison_table(
+        results: List[Dict[str, Any]], show_entities: bool = False
+    ) -> str:
         """Create comparison table for multiple methods"""
         headers = ["Method", "Formula", "Confidence", "Time (ms)"]
         if show_entities:
@@ -227,9 +257,17 @@ class UIComponents:
         return "\n".join(lines) + "\n"
 
     @staticmethod
-    def status_message(message: str, status: str = "info", use_icons: bool = True) -> str:
+    def status_message(
+        message: str, status: str = "info", use_icons: bool = True
+    ) -> str:
         """Display a status message"""
-        icons = {"success": "✓", "error": "✗", "warning": "⚠", "info": "ℹ", "processing": "⟳"}
+        icons = {
+            "success": "✓",
+            "error": "✗",
+            "warning": "⚠",
+            "info": "ℹ",
+            "processing": "⟳",
+        }
 
         colors = {
             "success": Colors.BRIGHT_GREEN,
@@ -270,13 +308,25 @@ class InteractiveDemo:
     def run(self):
         """Run interactive demo loop"""
         print(self.ui.header("🚀 HypatiaX Interactive Demo", width=80))
-        print(self.ui.status_message("Welcome! Enter natural language queries to generate Tableau formulas.", "info"))
+        print(
+            self.ui.status_message(
+                "Welcome! Enter natural language queries to generate Tableau formulas.",
+                "info",
+            )
+        )
 
         while True:
             print("\n" + self.ui.divider())
             print(
                 self.ui.menu(
-                    "Options:", ["Process a query", "Compare methods", "View history", "Show statistics", "Exit"]
+                    "Options:",
+                    [
+                        "Process a query",
+                        "Compare methods",
+                        "View history",
+                        "Show statistics",
+                        "Exit",
+                    ],
                 )
             )
 
@@ -314,7 +364,10 @@ class InteractiveDemo:
         print(
             self.ui.entity_visualization(
                 result.query,
-                [{"text": e.text, "label": e.label, "start": e.start, "end": e.end} for e in result.entities],
+                [
+                    {"text": e.text, "label": e.label, "start": e.start, "end": e.end}
+                    for e in result.entities
+                ],
                 use_colors=True,
             )
         )
@@ -334,7 +387,9 @@ class InteractiveDemo:
 
     def _compare_methods(self):
         """Compare multiple mapping methods"""
-        query = input(f"\n{Colors.BRIGHT_CYAN}Enter query to compare:{Colors.RESET} ").strip()
+        query = input(
+            f"\n{Colors.BRIGHT_CYAN}Enter query to compare:{Colors.RESET} "
+        ).strip()
 
         if not query:
             print(self.ui.status_message("Empty query", "warning"))
@@ -411,10 +466,16 @@ if __name__ == "__main__":
         {"text": "sum", "label": "OPER", "start": 14, "end": 17},
         {"text": "sales", "label": "ARG", "start": 21, "end": 26},
     ]
-    print(ui.entity_visualization("calculate the sum of sales by region", sample_entities))
+    print(
+        ui.entity_visualization("calculate the sum of sales by region", sample_entities)
+    )
 
     print(ui.subheader("4. Formula Display"))
     print(ui.formula_display("SUM([Sales])", 0.95))
 
     print(ui.subheader("5. Metrics"))
-    print(ui.metric_cards({"Queries": 150, "Accuracy": "94%", "Avg Time": "12ms", "Success": "142"}))
+    print(
+        ui.metric_cards(
+            {"Queries": 150, "Accuracy": "94%", "Avg Time": "12ms", "Success": "142"}
+        )
+    )

@@ -9,7 +9,9 @@ def ner_model():
     from unittest.mock import Mock
 
     model = Mock()
-    model.extract.return_value = [{"text": "Apple Inc.", "label": "ORG", "start": 0, "end": 10}]
+    model.extract.return_value = [
+        {"text": "Apple Inc.", "label": "ORG", "start": 0, "end": 10}
+    ]
     return model
 
 

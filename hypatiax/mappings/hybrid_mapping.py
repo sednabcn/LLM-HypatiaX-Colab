@@ -6,7 +6,13 @@ from typing import Any, Dict, List, Optional
 class HybridMapper:
     """Ensemble mapper using multiple strategies"""
 
-    def __init__(self, ner_mapper=None, transformer_mapper=None, llm_mapper=None, agent_mapper=None):
+    def __init__(
+        self,
+        ner_mapper=None,
+        transformer_mapper=None,
+        llm_mapper=None,
+        agent_mapper=None,
+    ):
         self.ner_mapper = ner_mapper
         self.transformer_mapper = transformer_mapper
         self.llm_mapper = llm_mapper

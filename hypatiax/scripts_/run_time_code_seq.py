@@ -24,18 +24,22 @@ def save_config(test_id, config, time_id):
     try:
         # Save data preparation config
         config_data_prep = pd.DataFrame([config[0]])  # Wrap in list for single row
-        config_path = resources.files("hypatiax.models.queries.tableau.model_configs").joinpath(
-            f"config_data_preparation_{test_id}_{time_id}.csv"
-        )
+        config_path = resources.files(
+            "hypatiax.models.queries.tableau.model_configs"
+        ).joinpath(f"config_data_preparation_{test_id}_{time_id}.csv")
         config_data_prep.to_csv(config_path, index=False)
-        print(f"  ✓ Saved data prep config: config_data_preparation_{test_id}_{time_id}.csv")
+        print(
+            f"  ✓ Saved data prep config: config_data_preparation_{test_id}_{time_id}.csv"
+        )
 
         # Save training config (exclude non-serializable data)
-        config_training_save = {k: v for k, v in config[1].items() if k not in ["train_data", "val_data"]}
+        config_training_save = {
+            k: v for k, v in config[1].items() if k not in ["train_data", "val_data"]
+        }
         config_training = pd.DataFrame([config_training_save])  # Wrap in list
-        config_training_path = resources.files("hypatiax.models.queries.tableau.model_configs").joinpath(
-            f"config_training_{test_id}_{time_id}.csv"
-        )
+        config_training_path = resources.files(
+            "hypatiax.models.queries.tableau.model_configs"
+        ).joinpath(f"config_training_{test_id}_{time_id}.csv")
         config_training.to_csv(config_training_path, index=False)  # Fixed variable name
         print(f"  ✓ Saved training config: config_training_{test_id}_{time_id}.csv")
 
@@ -97,7 +101,9 @@ def run_test(test_id, config):
             print(f"  ⚠ Could not plot history: {e}")
 
         # Determine the model path for evaluation
-        model_base_path = resources.files(f'hypatiax.models.{config[1]["domain"]}.{config[1]["sub_domain"]}')
+        model_base_path = resources.files(
+            f'hypatiax.models.{config[1]["domain"]}.{config[1]["sub_domain"]}'
+        )
         model_full_path = str(model_base_path.joinpath(config[1]["output_model_name"]))
 
         # Step 5: Evaluate
@@ -558,7 +564,9 @@ def main():
     print(f"\nSummary:")
     print(f"  Total tests: {total_tests}")
     print(f"  Completed: {sum(1 for r in results if r.get('status') == 'completed')}")
-    print(f"  Failed: {sum(1 for r in results if r.get('status') in ['failed', 'crashed'])}")
+    print(
+        f"  Failed: {sum(1 for r in results if r.get('status') in ['failed', 'crashed'])}"
+    )
 
     # Display summary table
     summary_cols = ["test_id", "status", "model_name", "val_f1", "test_f1"]

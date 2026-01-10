@@ -161,7 +161,9 @@ class TestDomainSpecificTransformation:
         """Test transforming risk formula to computational form."""
         formula = "Sharpe = (R - Rf) / sigma"
 
-        computational = enhanced_interpreter.transform_for_computation(formula, domain="risk")
+        computational = enhanced_interpreter.transform_for_computation(
+            formula, domain="risk"
+        )
 
         assert computational is not None
 
@@ -169,7 +171,9 @@ class TestDomainSpecificTransformation:
         """Test transforming DeFi formula."""
         formula = "x * y = k"
 
-        transformed = enhanced_interpreter.transform_for_computation(formula, domain="defi")
+        transformed = enhanced_interpreter.transform_for_computation(
+            formula, domain="defi"
+        )
 
         assert transformed is not None
 
@@ -190,7 +194,10 @@ class TestFormulaVerification:
     def test_verify_against_examples(self, enhanced_interpreter):
         """Test verifying formula against test cases."""
         formula = "x + y"
-        test_cases = [{"input": {"x": 1, "y": 2}, "expected": 3}, {"input": {"x": 5, "y": 3}, "expected": 8}]
+        test_cases = [
+            {"input": {"x": 1, "y": 2}, "expected": 3},
+            {"input": {"x": 5, "y": 3}, "expected": 8},
+        ]
 
         is_correct = enhanced_interpreter.verify_formula(formula, test_cases)
 
@@ -208,7 +215,11 @@ class TestFormulaVerification:
     def test_verify_dimensional_consistency(self, enhanced_interpreter):
         """Test dimensional analysis."""
         formula = "distance = velocity * time"
-        dimensions = {"distance": {"length": 1}, "velocity": {"length": 1, "time": -1}, "time": {"time": 1}}
+        dimensions = {
+            "distance": {"length": 1},
+            "velocity": {"length": 1, "time": -1},
+            "time": {"time": 1},
+        }
 
         is_consistent = enhanced_interpreter.verify_dimensions(formula, dimensions)
 
@@ -217,7 +228,10 @@ class TestFormulaVerification:
     def test_verify_edge_cases(self, enhanced_interpreter):
         """Test formula with edge cases."""
         formula = "x / y"
-        edge_cases = [{"input": {"x": 1, "y": 0}, "should_error": True}, {"input": {"x": 0, "y": 1}, "expected": 0}]
+        edge_cases = [
+            {"input": {"x": 1, "y": 0}, "should_error": True},
+            {"input": {"x": 0, "y": 1}, "expected": 0},
+        ]
 
         results = enhanced_interpreter.test_edge_cases(formula, edge_cases)
 
@@ -229,7 +243,11 @@ class TestPatternRecognition:
 
     def test_recognize_formula_type(self, enhanced_interpreter):
         """Test recognizing type of formula."""
-        formulas = {"x**2 + 2*x + 1": "quadratic", "a*x + b": "linear", "exp(x)": "exponential"}
+        formulas = {
+            "x**2 + 2*x + 1": "quadratic",
+            "a*x + b": "linear",
+            "exp(x)": "exponential",
+        }
 
         for formula, expected_type in formulas.items():
             detected_type = enhanced_interpreter.recognize_type(formula)
@@ -269,7 +287,9 @@ class TestFormulaComposition:
         """Test chaining multiple transformations."""
         formula = "x + x + x"
 
-        result = enhanced_interpreter.chain_transforms(formula, ["simplify", "factor", "expand"])
+        result = enhanced_interpreter.chain_transforms(
+            formula, ["simplify", "factor", "expand"]
+        )
 
         assert result is not None
 
@@ -330,7 +350,10 @@ class TestIterativeRefinement:
     def test_improve_accuracy(self, enhanced_interpreter):
         """Test improving formula accuracy."""
         formula = "x / y"
-        test_data = {"inputs": [{"x": 10, "y": 2}, {"x": 20, "y": 4}], "outputs": [5, 5]}
+        test_data = {
+            "inputs": [{"x": 10, "y": 2}, {"x": 20, "y": 4}],
+            "outputs": [5, 5],
+        }
 
         improved = enhanced_interpreter.improve_formula(formula, test_data)
 
@@ -546,7 +569,9 @@ def enhanced_interpreter():
 
     # Explanation
     interpreter.explain_structure = MagicMock(return_value="Structure explanation")
-    interpreter.explain_variables = MagicMock(return_value={"x": "input", "y": "output"})
+    interpreter.explain_variables = MagicMock(
+        return_value={"x": "input", "y": "output"}
+    )
     interpreter.generate_steps = MagicMock(return_value=["step1", "step2"])
     interpreter.explain_derivation = MagicMock(return_value="Derivation explanation")
 
@@ -557,7 +582,9 @@ def enhanced_interpreter():
     interpreter.suggest_corrections = MagicMock(return_value=["suggestion1"])
 
     # Advanced features
-    interpreter.interpret_probabilistic = MagicMock(return_value=[{"interpretation": "x + y", "confidence": 0.9}])
+    interpreter.interpret_probabilistic = MagicMock(
+        return_value=[{"interpretation": "x + y", "confidence": 0.9}]
+    )
     interpreter.interpret_with_context = MagicMock(return_value="context_aware_formula")
     interpreter.interpret = MagicMock(return_value="interpreted_formula")
     interpreter.interpret_batch = MagicMock(return_value=["result1", "result2"])

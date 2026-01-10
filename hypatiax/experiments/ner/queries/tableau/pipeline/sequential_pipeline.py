@@ -47,7 +47,9 @@ class DescriptionNER:
 
         for i, token in enumerate(tokens):
             if token in self.patterns:
-                entities.append({"text": token, "label": self.patterns[token], "position": i})
+                entities.append(
+                    {"text": token, "label": self.patterns[token], "position": i}
+                )
 
         return entities
 
@@ -129,7 +131,9 @@ class FormulaNER:
         # Filter out numeric tokens that aren't in patterns (like '4', '2')
         for i, token in enumerate(tokens):
             if token in self.patterns:
-                entities.append({"text": token, "label": self.patterns[token], "position": i})
+                entities.append(
+                    {"text": token, "label": self.patterns[token], "position": i}
+                )
             # Skip numeric literals that aren't constants in our pattern dictionary
 
         return entities
@@ -414,7 +418,9 @@ def main():
 
     # ========== STEP 3: Mapping ==========
     print(f"\n{'─'*70}")
-    print("[STEP 3] (Desc, Entities[Desc]) → Mapping → (Formula Type, Entities[Formula])")
+    print(
+        "[STEP 3] (Desc, Entities[Desc]) → Mapping → (Formula Type, Entities[Formula])"
+    )
     print(f"{'─'*70}")
 
     mapping_result = mapper.map_entities(input_description, desc_entities)
@@ -442,8 +448,12 @@ def main():
 
     mapping_metrics = mapper.evaluate(mapping_test_data)
     print(f"\n📊 STEP 3 METRICS:")
-    print(f"   • Formula Type Classification Accuracy: {mapping_metrics['formula_type_accuracy']:.2%}")
-    print(f"   • Entity Sequence Accuracy: {mapping_metrics['entity_sequence_accuracy']:.2%}")
+    print(
+        f"   • Formula Type Classification Accuracy: {mapping_metrics['formula_type_accuracy']:.2%}"
+    )
+    print(
+        f"   • Entity Sequence Accuracy: {mapping_metrics['entity_sequence_accuracy']:.2%}"
+    )
 
     # ========== STEP 4: Formula Generation ==========
     print(f"\n{'─'*70}")
@@ -461,7 +471,9 @@ def main():
 
     generation_metrics = generator.evaluate(generation_test_data)
     print(f"\n📊 STEP 4 METRICS:")
-    print(f"   • Exact Match Accuracy: {generation_metrics['exact_match_accuracy']:.2%}")
+    print(
+        f"   • Exact Match Accuracy: {generation_metrics['exact_match_accuracy']:.2%}"
+    )
     print(f"   • Syntactic Accuracy: {generation_metrics['syntactic_accuracy']:.2%}")
 
     # ========== FINAL RESULTS ==========
@@ -478,8 +490,12 @@ def main():
     print(f"{'='*70}")
     print(f"Step 1 - Description NER:      {desc_metrics['f1_score']:.2%} (F1)")
     print(f"Step 2 - Formula NER:          {formula_metrics['f1_score']:.2%} (F1)")
-    print(f"Step 3 - Entity Mapping:       {mapping_metrics['formula_type_accuracy']:.2%} (Type Acc)")
-    print(f"Step 4 - Formula Generation:   {generation_metrics['syntactic_accuracy']:.2%} (Syn Acc)")
+    print(
+        f"Step 3 - Entity Mapping:       {mapping_metrics['formula_type_accuracy']:.2%} (Type Acc)"
+    )
+    print(
+        f"Step 4 - Formula Generation:   {generation_metrics['syntactic_accuracy']:.2%} (Syn Acc)"
+    )
     print(f"{'='*70}")
 
     # Error propagation analysis

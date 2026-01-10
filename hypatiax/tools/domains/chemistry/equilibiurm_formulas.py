@@ -64,9 +64,13 @@ class EquilibriumConstantCalculator:
         """
         if validate:
             if len(product_concentrations) != len(product_coefficients):
-                raise ValueError("Mismatch between product concentrations and coefficients")
+                raise ValueError(
+                    "Mismatch between product concentrations and coefficients"
+                )
             if len(reactant_concentrations) != len(reactant_coefficients):
-                raise ValueError("Mismatch between reactant concentrations and coefficients")
+                raise ValueError(
+                    "Mismatch between reactant concentrations and coefficients"
+                )
             if any(c < 0 for c in product_concentrations + reactant_concentrations):
                 raise ValueError("Concentrations cannot be negative")
             if any(coef <= 0 for coef in product_coefficients + reactant_coefficients):
@@ -146,12 +150,16 @@ class EquilibriumConstantCalculator:
             "equilibrium_constant": equilibrium_constant,
             "K": equilibrium_constant,
             "direction": direction,
-            "Q_over_K": Q / equilibrium_constant if equilibrium_constant > EPSILON else None,
+            "Q_over_K": (
+                Q / equilibrium_constant if equilibrium_constant > EPSILON else None
+            ),
             "formula": "Q = [Products]^n / [Reactants]^m",
         }
 
     @staticmethod
-    def kp_from_kc(kc: float, temperature: float, delta_n: int, validate: bool = True) -> Dict[str, float]:
+    def kp_from_kc(
+        kc: float, temperature: float, delta_n: int, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Convert Kc to Kp.
 
@@ -235,7 +243,9 @@ class AcidBaseEquilibriumCalculator:
     """Calculator for acid-base equilibria."""
 
     @staticmethod
-    def ka_from_ph(pH: float, initial_concentration: float, validate: bool = True) -> Dict[str, float]:
+    def ka_from_ph(
+        pH: float, initial_concentration: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate Ka from pH and initial acid concentration.
 
@@ -280,7 +290,9 @@ class AcidBaseEquilibriumCalculator:
         }
 
     @staticmethod
-    def pH_from_ka(ka: float, initial_concentration: float, validate: bool = True) -> Dict[str, float]:
+    def pH_from_ka(
+        ka: float, initial_concentration: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate pH from Ka and initial acid concentration.
 
@@ -338,7 +350,10 @@ class AcidBaseEquilibriumCalculator:
 
     @staticmethod
     def ka_kb_relationship(
-        ka: Optional[float] = None, kb: Optional[float] = None, kw: float = WATER_ION_PRODUCT_25C, validate: bool = True
+        ka: Optional[float] = None,
+        kb: Optional[float] = None,
+        kw: float = WATER_ION_PRODUCT_25C,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate Ka from Kb or vice versa using Ka × Kb = Kw.
@@ -408,7 +423,9 @@ class AcidBaseEquilibriumCalculator:
             Dictionary with pH or concentration ratio
         """
         if validate:
-            has_concentrations = acid_concentration is not None and base_concentration is not None
+            has_concentrations = (
+                acid_concentration is not None and base_concentration is not None
+            )
             has_pH = pH is not None
 
             if not (has_concentrations or has_pH):
@@ -441,7 +458,12 @@ class AcidBaseEquilibriumCalculator:
 
             ratio = 10 ** (pH - pka)
 
-            return {"pH": pH, "pKa": pka, "ratio_base_to_acid": ratio, "formula": "pH = pKa + log([A⁻]/[HA])"}
+            return {
+                "pH": pH,
+                "pKa": pka,
+                "ratio_base_to_acid": ratio,
+                "formula": "pH = pKa + log([A⁻]/[HA])",
+            }
 
     @staticmethod
     def buffer_capacity(
@@ -468,7 +490,9 @@ class AcidBaseEquilibriumCalculator:
         total_concentration = acid_concentration + base_concentration
 
         # Simplified buffer capacity
-        buffer_capacity = 2.303 * (acid_concentration * base_concentration) / total_concentration
+        buffer_capacity = (
+            2.303 * (acid_concentration * base_concentration) / total_concentration
+        )
 
         # Maximum when [acid] = [base]
         max_capacity = 2.303 * total_concentration / 4.0
@@ -490,7 +514,10 @@ class SolubilityCalculator:
 
     @staticmethod
     def ksp_from_solubility(
-        solubility: float, cation_coefficient: int = 1, anion_coefficient: int = 1, validate: bool = True
+        solubility: float,
+        cation_coefficient: int = 1,
+        anion_coefficient: int = 1,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate Ksp from molar solubility.
@@ -530,7 +557,10 @@ class SolubilityCalculator:
 
     @staticmethod
     def solubility_from_ksp(
-        ksp: float, cation_coefficient: int = 1, anion_coefficient: int = 1, validate: bool = True
+        ksp: float,
+        cation_coefficient: int = 1,
+        anion_coefficient: int = 1,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate molar solubility from Ksp.
@@ -555,7 +585,9 @@ class SolubilityCalculator:
         # For MₐXᵦ: Ksp = (as)ᵃ(bs)ᵇ = aᵃbᵇs^(a+b)
         # s = (Ksp/(aᵃbᵇ))^(1/(a+b))
 
-        coefficient_product = (cation_coefficient**cation_coefficient) * (anion_coefficient**anion_coefficient)
+        coefficient_product = (cation_coefficient**cation_coefficient) * (
+            anion_coefficient**anion_coefficient
+        )
         total_ions = cation_coefficient + anion_coefficient
 
         solubility = (ksp / coefficient_product) ** (1.0 / total_ions)
@@ -607,7 +639,11 @@ class SolubilityCalculator:
         # s ≈ (Ksp/(Cᵃbᵇ))^(1/b)
 
         solubility_with_common_ion = (
-            ksp / ((common_ion_concentration**ion_coefficient) * (other_ion_coefficient**other_ion_coefficient))
+            ksp
+            / (
+                (common_ion_concentration**ion_coefficient)
+                * (other_ion_coefficient**other_ion_coefficient)
+            )
         ) ** (1.0 / other_ion_coefficient)
 
         # Calculate solubility without common ion for comparison
@@ -616,7 +652,9 @@ class SolubilityCalculator:
         )["solubility"]
 
         reduction_factor = (
-            solubility_pure / solubility_with_common_ion if solubility_with_common_ion > EPSILON else float("inf")
+            solubility_pure / solubility_with_common_ion
+            if solubility_with_common_ion > EPSILON
+            else float("inf")
         )
 
         return {
@@ -668,7 +706,9 @@ if __name__ == "__main__":
     print(f"Q = {Q['Q']:.4f}, Direction: {Q['direction']}")
 
     # Gibbs free energy
-    gibbs = eq_calc.gibbs_free_energy_from_k(equilibrium_constant=100, temperature=298.15)
+    gibbs = eq_calc.gibbs_free_energy_from_k(
+        equilibrium_constant=100, temperature=298.15
+    )
     print(f"ΔG° = {gibbs['delta_g_standard_kJ_mol']:.2f} kJ/mol")
     print(f"Reaction is {gibbs['spontaneity']}")
 
@@ -677,14 +717,18 @@ if __name__ == "__main__":
     print("-" * 70)
     acid_calc = AcidBaseEquilibriumCalculator()
 
-    pH_calc = acid_calc.pH_from_ka(ka=1.8e-5, initial_concentration=0.1)  # Acetic acid  # M
+    pH_calc = acid_calc.pH_from_ka(
+        ka=1.8e-5, initial_concentration=0.1
+    )  # Acetic acid  # M
     print(f"pH = {pH_calc['pH']:.2f}")
     print(f"pKa = {pH_calc['pKa']:.2f}")
     print(f"Percent dissociation = {pH_calc['percent_dissociation']:.2f}%")
 
     # Henderson-Hasselbalch
     buffer = acid_calc.henderson_hasselbalch(
-        pka=4.76, acid_concentration=0.1, base_concentration=0.1  # Acetic acid  # M  # M
+        pka=4.76,
+        acid_concentration=0.1,
+        base_concentration=0.1,  # Acetic acid  # M  # M
     )
     print(f"\nBuffer pH = {buffer['pH']:.2f}")
     print(f"Ratio [A⁻]/[HA] = {buffer['ratio_base_to_acid']:.2f}")
@@ -705,12 +749,17 @@ if __name__ == "__main__":
     sol_calc = SolubilityCalculator()
 
     # AgCl: Ksp = 1.8×10⁻¹⁰
-    solubility = sol_calc.solubility_from_ksp(ksp=1.8e-10, cation_coefficient=1, anion_coefficient=1)
+    solubility = sol_calc.solubility_from_ksp(
+        ksp=1.8e-10, cation_coefficient=1, anion_coefficient=1
+    )
     print(f"AgCl solubility = {solubility['solubility']:.2e} M")
 
     # Common ion effect
     common_ion = sol_calc.common_ion_effect(
-        ksp=1.8e-10, common_ion_concentration=0.1, ion_coefficient=1, other_ion_coefficient=1  # 0.1 M NaCl
+        ksp=1.8e-10,
+        common_ion_concentration=0.1,
+        ion_coefficient=1,
+        other_ion_coefficient=1,  # 0.1 M NaCl
     )
     print(f"\nWith 0.1 M Cl⁻:")
     print(f"Solubility = {common_ion['solubility_with_common_ion']:.2e} M")

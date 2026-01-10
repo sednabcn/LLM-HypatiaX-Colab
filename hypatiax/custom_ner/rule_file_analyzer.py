@@ -77,7 +77,9 @@ class RuleFileAnalyzer:
         self.findings["expected_files"] = expected_patterns
 
         # Look for actual ruler_*.jsonl files
-        existing_patterns = [f["name"] for f in self.findings["jsonl_files"] if "ruler_" in f["name"]]
+        existing_patterns = [
+            f["name"] for f in self.findings["jsonl_files"] if "ruler_" in f["name"]
+        ]
 
         self.findings["existing_files"] = existing_patterns
 
@@ -111,7 +113,11 @@ class RuleFileAnalyzer:
         report.append("🎯 EXPECTED FILES (from code):")
         report.append("-" * 70)
         for expected in self.findings["expected_files"]:
-            status = "❌ MISSING" if expected in self.findings["missing_files"] else "✓ FOUND"
+            status = (
+                "❌ MISSING"
+                if expected in self.findings["missing_files"]
+                else "✓ FOUND"
+            )
             report.append(f"  {status} {expected}")
         report.append("")
 
@@ -130,11 +136,15 @@ class RuleFileAnalyzer:
 
         if self.findings["missing_files"]:
             report.append("  ⚠️  PROBLEM IDENTIFIED:")
-            report.append("     The code expects versioned rule files (rules_*_version1.jsonl)")
+            report.append(
+                "     The code expects versioned rule files (rules_*_version1.jsonl)"
+            )
             report.append("     but only non-versioned files (ruler_*.jsonl) exist.")
             report.append("")
             report.append("  💡 POSSIBLE SOLUTIONS:")
-            report.append("     1. Rename existing ruler_*.jsonl → rules_*_version1.jsonl")
+            report.append(
+                "     1. Rename existing ruler_*.jsonl → rules_*_version1.jsonl"
+            )
             report.append("     2. Look for a script that generates versioned rules")
             report.append("     3. Check if rules_versions/ should contain these files")
             report.append("     4. Update code to use ruler_*.jsonl naming convention")
@@ -148,7 +158,11 @@ class RuleFileAnalyzer:
 
     def suggest_fix(self) -> Dict:
         """Suggest fix options."""
-        fixes = {"option_1_rename": [], "option_2_generate": None, "option_3_code_change": []}
+        fixes = {
+            "option_1_rename": [],
+            "option_2_generate": None,
+            "option_3_code_change": [],
+        }
 
         # Option 1: Rename files
         mapping = {
@@ -158,27 +172,44 @@ class RuleFileAnalyzer:
         }
 
         for old_name, new_name in mapping.items():
-            old_files = [f for f in self.findings["jsonl_files"] if f["name"] == old_name]
+            old_files = [
+                f for f in self.findings["jsonl_files"] if f["name"] == old_name
+            ]
             if old_files:
                 for old_file in old_files:
                     old_path = self.root_path / old_file["path"]
                     new_path = old_path.parent / new_name
                     fixes["option_1_rename"].append(
-                        {"old": str(old_path), "new": str(new_path), "command": f"mv '{old_path}' '{new_path}'"}
+                        {
+                            "old": str(old_path),
+                            "new": str(new_path),
+                            "command": f"mv '{old_path}' '{new_path}'",
+                        }
                     )
 
         # Option 2: Check for generation script
-        potential_scripts = ["generate_rules.py", "create_versioned_rules.py", "prepare_rules.py"]
+        potential_scripts = [
+            "generate_rules.py",
+            "create_versioned_rules.py",
+            "prepare_rules.py",
+        ]
 
         for script in self.root_path.rglob("*.py"):
-            if any(pattern in script.name for pattern in ["generate", "prepare", "create", "version"]):
+            if any(
+                pattern in script.name
+                for pattern in ["generate", "prepare", "create", "version"]
+            ):
                 if fixes["option_2_generate"] is None:
                     fixes["option_2_generate"] = []
-                fixes["option_2_generate"].append(str(script.relative_to(self.root_path)))
+                fixes["option_2_generate"].append(
+                    str(script.relative_to(self.root_path))
+                )
 
         return fixes
 
-    def generate_fix_script(self, fixes: Dict, output_path: str = "fix_rules.sh") -> None:
+    def generate_fix_script(
+        self, fixes: Dict, output_path: str = "fix_rules.sh"
+    ) -> None:
         """Generate shell script to fix the issue."""
         script_lines = [
             "#!/bin/bash",

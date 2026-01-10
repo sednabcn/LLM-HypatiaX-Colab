@@ -45,9 +45,15 @@ except Exception:
 
 def pytest_configure(config):
     """Configure custom markers and test settings."""
-    config.addinivalue_line("markers", "slow: marks tests as slow (deselect with '-m \"not slow\"')")
-    config.addinivalue_line("markers", "integration: marks tests requiring external services")
-    config.addinivalue_line("markers", "performance: marks performance and benchmark tests")
+    config.addinivalue_line(
+        "markers", "slow: marks tests as slow (deselect with '-m \"not slow\"')"
+    )
+    config.addinivalue_line(
+        "markers", "integration: marks tests requiring external services"
+    )
+    config.addinivalue_line(
+        "markers", "performance: marks performance and benchmark tests"
+    )
     config.addinivalue_line("markers", "edge_case: marks edge case detection tests")
     config.addinivalue_line("markers", "defi: marks DeFi-specific tests")
     config.addinivalue_line("markers", "physics: marks physics domain tests")
@@ -58,7 +64,9 @@ def pytest_configure(config):
 
 def pytest_addoption(parser):
     """Add custom command-line options."""
-    parser.addoption("--run-slow", action="store_true", default=False, help="Run slow tests")
+    parser.addoption(
+        "--run-slow", action="store_true", default=False, help="Run slow tests"
+    )
     parser.addoption(
         "--run-integration",
         action="store_true",
@@ -66,7 +74,10 @@ def pytest_addoption(parser):
         help="Run integration tests requiring external services",
     )
     parser.addoption(
-        "--run-load-tests", action="store_true", default=False, help="Run load and stress tests (1,000+ operations)"
+        "--run-load-tests",
+        action="store_true",
+        default=False,
+        help="Run load and stress tests (1,000+ operations)",
     )
     parser.addoption(
         "--performance-threshold",
@@ -75,7 +86,10 @@ def pytest_addoption(parser):
         help="Performance threshold in milliseconds (default: 1.0ms)",
     )
     parser.addoption(
-        "--benchmark-output", type=str, default="benchmark_results.json", help="Output file for benchmark results"
+        "--benchmark-output",
+        type=str,
+        default="benchmark_results.json",
+        help="Output file for benchmark results",
     )
 
 
@@ -212,7 +226,12 @@ def mock_symbolic_engine():
 def mock_symbolic_validator():
     """Create mock SymbolicValidator."""
     mock = MagicMock()
-    mock.validate.return_value = {"is_valid": True, "score": 90.0, "complexity": 5, "issues": []}
+    mock.validate.return_value = {
+        "is_valid": True,
+        "score": 90.0,
+        "complexity": 5,
+        "issues": [],
+    }
     return mock
 
 
@@ -220,7 +239,12 @@ def mock_symbolic_validator():
 def mock_dimensional_validator():
     """Create mock DimensionalValidator."""
     mock = MagicMock()
-    mock.validate.return_value = {"is_valid": True, "score": 95.0, "dimensional_consistency": True, "issues": []}
+    mock.validate.return_value = {
+        "is_valid": True,
+        "score": 95.0,
+        "dimensional_consistency": True,
+        "issues": [],
+    }
     return mock
 
 
@@ -257,7 +281,9 @@ def mock_anthropic_client():
     """Create mock Anthropic API client."""
     mock = MagicMock()
     mock_response = MagicMock()
-    mock_response.content = [MagicMock(type="text", text="This formula represents quadratic growth.")]
+    mock_response.content = [
+        MagicMock(type="text", text="This formula represents quadratic growth.")
+    ]
     mock.messages.create.return_value = mock_response
     return mock
 
@@ -334,7 +360,9 @@ def performance_tracker():
         def assert_below_threshold(self, threshold_ms):
             """Assert all measurements are below threshold."""
             stats = self.get_stats()
-            assert stats["max"] < threshold_ms, f"Max time {stats['max']:.2f}ms exceeds threshold {threshold_ms}ms"
+            assert (
+                stats["max"] < threshold_ms
+            ), f"Max time {stats['max']:.2f}ms exceeds threshold {threshold_ms}ms"
 
     return PerformanceTracker()
 
@@ -360,7 +388,9 @@ def memory_tracker():
         def assert_no_leak(self, threshold_mb=50):
             """Assert memory hasn't increased by more than threshold."""
             delta = self.usage_delta()
-            assert delta < threshold_mb, f"Memory increased by {delta:.2f}MB (threshold: {threshold_mb}MB)"
+            assert (
+                delta < threshold_mb
+            ), f"Memory increased by {delta:.2f}MB (threshold: {threshold_mb}MB)"
 
     return MemoryTracker()
 
@@ -443,7 +473,9 @@ def cleanup_after_session(benchmark_output_file):
     # Optionally archive old benchmark results
     if benchmark_output_file.exists():
         timestamp = time.strftime("%Y%m%d_%H%M%S")
-        archive_path = benchmark_output_file.with_name(f"benchmark_results_{timestamp}.json")
+        archive_path = benchmark_output_file.with_name(
+            f"benchmark_results_{timestamp}.json"
+        )
         benchmark_output_file.rename(archive_path)
 
 

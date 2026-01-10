@@ -7,7 +7,19 @@ from typing import Any, Dict, List, Tuple
 
 import numpy as np
 import pytest
-from sympy import cos, diff, exp, integrate, lambdify, log, simplify, sin, sqrt, symbols, sympify
+from sympy import (
+    cos,
+    diff,
+    exp,
+    integrate,
+    lambdify,
+    log,
+    simplify,
+    sin,
+    sqrt,
+    symbols,
+    sympify,
+)
 
 
 class TestHybridSystemPipeline:
@@ -271,7 +283,9 @@ class TestEndToEndComputations:
         constraint = w1 + w2 - 1
 
         # Symbolic validation
-        assert portfolio_return.subs([(w1, 0.6), (w2, 0.4), (r1, 0.1), (r2, 0.15)]) == 0.12
+        assert (
+            portfolio_return.subs([(w1, 0.6), (w2, 0.4), (r1, 0.1), (r2, 0.15)]) == 0.12
+        )
 
         # Numerical computation
         port_func = lambdify((w1, w2, r1, r2), portfolio_return, "numpy")
@@ -281,7 +295,9 @@ class TestEndToEndComputations:
         returns_asset1 = 0.10
         returns_asset2 = 0.15
 
-        portfolio_returns = port_func(weights, 1 - weights, returns_asset1, returns_asset2)
+        portfolio_returns = port_func(
+            weights, 1 - weights, returns_asset1, returns_asset2
+        )
 
         # Validate: should increase linearly from 0.10 to 0.15
         assert np.isclose(portfolio_returns[0], 0.10)
@@ -344,7 +360,9 @@ class TestEndToEndComputations:
 
         # Compute metrics
         sharpe_ratio = sharpe_func(portfolio_return, risk_free_rate, total_volatility)
-        sortino_ratio = sortino_func(portfolio_return, risk_free_rate, downside_volatility)
+        sortino_ratio = sortino_func(
+            portfolio_return, risk_free_rate, downside_volatility
+        )
 
         # Validate
         assert sharpe_ratio == 1.0
@@ -369,10 +387,16 @@ class TestEndToEndComputations:
         rate = 0.05
         time_to_expiry = 1.0
 
-        result = pcp_func(call_price, put_price, spot_price, strike_price, rate, time_to_expiry)
+        result = pcp_func(
+            call_price, put_price, spot_price, strike_price, rate, time_to_expiry
+        )
 
         # Should be close to zero if arbitrage-free
-        expected = call_price - put_price - (spot_price - strike_price * np.exp(-rate * time_to_expiry))
+        expected = (
+            call_price
+            - put_price
+            - (spot_price - strike_price * np.exp(-rate * time_to_expiry))
+        )
         assert np.isclose(result, expected)
 
 
@@ -512,7 +536,9 @@ class TestRealWorldScenarios:
     def test_yield_farming_apy(self, hybrid_system):
         """Test yield farming APY calculation."""
         # Base APY + reward APY
-        base_rate, reward_rate, compound_freq = symbols("base_rate reward_rate compound_freq")
+        base_rate, reward_rate, compound_freq = symbols(
+            "base_rate reward_rate compound_freq"
+        )
 
         total_apy = (1 + (base_rate + reward_rate) / compound_freq) ** compound_freq - 1
 

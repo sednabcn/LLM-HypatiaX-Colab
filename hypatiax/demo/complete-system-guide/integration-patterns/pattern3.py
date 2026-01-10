@@ -14,7 +14,12 @@ for example in basic_examples:
     result = engine.process(example.description)
     accuracy = 1.0 if result.formula == example.expected_formula else 0.0
     results.append(
-        {"example": example.id, "expected": example.expected_formula, "got": result.formula, "match": accuracy}
+        {
+            "example": example.id,
+            "expected": example.expected_formula,
+            "got": result.formula,
+            "match": accuracy,
+        }
     )
 
 # Calculate accuracy

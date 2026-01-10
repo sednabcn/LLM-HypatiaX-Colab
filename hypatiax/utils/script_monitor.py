@@ -153,7 +153,9 @@ class ResourceAdvisor:
             "disk_percent": disk.percent,
         }
 
-    def can_run_locally(self, estimated_memory_gb: Optional[float] = None) -> Tuple[bool, str, Dict]:
+    def can_run_locally(
+        self, estimated_memory_gb: Optional[float] = None
+    ) -> Tuple[bool, str, Dict]:
         """
         Determine if script can run locally.
 
@@ -179,7 +181,11 @@ class ResourceAdvisor:
 
         # Check current memory pressure
         if info["memory_percent"] > self.DANGER_MEMORY_PERCENT:
-            return (False, f"❌ Memory pressure too high: {info['memory_percent']:.1f}% already in use", details)
+            return (
+                False,
+                f"❌ Memory pressure too high: {info['memory_percent']:.1f}% already in use",
+                details,
+            )
 
         # Check swap space
         available_swap = info["available_swap_gb"]
@@ -228,7 +234,9 @@ class ResourceAdvisor:
         details["status"] = "ok"
         return (True, reason, details)
 
-    def recommend_cloud_instance(self, peak_memory_gb: float, avg_cpu_percent: float) -> List[Dict]:
+    def recommend_cloud_instance(
+        self, peak_memory_gb: float, avg_cpu_percent: float
+    ) -> List[Dict]:
         """
         Recommend cloud instances based on resource usage.
 
@@ -257,7 +265,9 @@ class ResourceAdvisor:
                     {
                         **instance,
                         "margin_gb": instance["memory_gb"] - peak_memory_gb,
-                        "margin_percent": (instance["memory_gb"] - peak_memory_gb) / peak_memory_gb * 100,
+                        "margin_percent": (instance["memory_gb"] - peak_memory_gb)
+                        / peak_memory_gb
+                        * 100,
                         "estimated_costs": cost_info,
                     }
                 )
@@ -281,7 +291,9 @@ class ResourceAdvisor:
 
         print(f"\n💾 Memory:")
         print(f"   Total: {info['total_memory_gb']:.2f} GB")
-        print(f"   Available: {info['available_memory_gb']:.2f} GB ({100-info['memory_percent']:.1f}% free)")
+        print(
+            f"   Available: {info['available_memory_gb']:.2f} GB ({100-info['memory_percent']:.1f}% free)"
+        )
         print(f"   In use: {info['memory_percent']:.1f}%")
 
         # Visual bar
@@ -299,7 +311,9 @@ class ResourceAdvisor:
 
         print(f"\n💽 Disk (/):")
         print(f"   Total: {info['total_disk_gb']:.1f} GB")
-        print(f"   Free: {info['free_disk_gb']:.1f} GB ({100-info['disk_percent']:.1f}% free)")
+        print(
+            f"   Free: {info['free_disk_gb']:.1f} GB ({100-info['disk_percent']:.1f}% free)"
+        )
 
         print("=" * 70)
 
@@ -307,7 +321,9 @@ class ResourceAdvisor:
 class ScriptMonitor:
     """Monitor a Python script's execution."""
 
-    def __init__(self, script_path: str, script_args: List[str], check_interval: float = 1.0):
+    def __init__(
+        self, script_path: str, script_args: List[str], check_interval: float = 1.0
+    ):
         """
         Initialize monitor.
 
@@ -378,8 +394,10 @@ class ScriptMonitor:
                 memory_percent=virtual_mem.percent,
                 swap_mb=swap_mem.used / (1024**2),
                 swap_percent=swap_mem.percent,
-                disk_read_mb=(disk_io.read_bytes - self.initial_disk_io.read_bytes) / (1024**2),
-                disk_write_mb=(disk_io.write_bytes - self.initial_disk_io.write_bytes) / (1024**2),
+                disk_read_mb=(disk_io.read_bytes - self.initial_disk_io.read_bytes)
+                / (1024**2),
+                disk_write_mb=(disk_io.write_bytes - self.initial_disk_io.write_bytes)
+                / (1024**2),
             )
         except Exception as e:
             return None
@@ -407,7 +425,9 @@ class ScriptMonitor:
             Execution profile
         """
         print(f"\n🚀 Starting script: {self.script_path}")
-        print(f"   Arguments: {' '.join(self.script_args) if self.script_args else '(none)'}")
+        print(
+            f"   Arguments: {' '.join(self.script_args) if self.script_args else '(none)'}"
+        )
         print("\n" + "=" * 70)
         print("LIVE MONITORING (updates every second)")
         print("=" * 70 + "\n")
@@ -415,7 +435,12 @@ class ScriptMonitor:
         # Start script as subprocess
         cmd = [sys.executable, self.script_path] + self.script_args
         self.process = subprocess.Popen(
-            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, bufsize=1, universal_newlines=True
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            bufsize=1,
+            universal_newlines=True,
         )
 
         # Get psutil process handle
@@ -451,9 +476,21 @@ class ScriptMonitor:
             return ExecutionProfile(
                 script_name=self.script_path,
                 script_args=self.script_args,
-                start_time=datetime.fromtimestamp(self.start_time).isoformat() if self.start_time else None,
-                end_time=datetime.fromtimestamp(self.end_time).isoformat() if self.end_time else None,
-                duration_seconds=self.end_time - self.start_time if self.end_time and self.start_time else None,
+                start_time=(
+                    datetime.fromtimestamp(self.start_time).isoformat()
+                    if self.start_time
+                    else None
+                ),
+                end_time=(
+                    datetime.fromtimestamp(self.end_time).isoformat()
+                    if self.end_time
+                    else None
+                ),
+                duration_seconds=(
+                    self.end_time - self.start_time
+                    if self.end_time and self.start_time
+                    else None
+                ),
                 exit_code=exit_code,
                 peak_memory_mb=0,
                 avg_memory_mb=0,
@@ -511,7 +548,9 @@ class ProfileManager:
 
         print(f"\n💾 Profile saved: {filepath}")
 
-    def load_profiles(self, script_name: Optional[str] = None) -> List[ExecutionProfile]:
+    def load_profiles(
+        self, script_name: Optional[str] = None
+    ) -> List[ExecutionProfile]:
         """Load historical profiles."""
         profiles = []
 
@@ -520,7 +559,10 @@ class ProfileManager:
                 with open(filepath, "rb") as f:
                     profile = pickle.load(f)
 
-                if script_name is None or Path(profile.script_name).stem == Path(script_name).stem:
+                if (
+                    script_name is None
+                    or Path(profile.script_name).stem == Path(script_name).stem
+                ):
                     profiles.append(profile)
             except Exception as e:
                 print(f"⚠️  Failed to load {filepath}: {e}")
@@ -543,8 +585,10 @@ class ProfileManager:
         return {
             "avg_memory_mb": sum(p.avg_memory_mb for p in successful) / len(successful),
             "peak_memory_mb": max(p.peak_memory_mb for p in successful),
-            "avg_duration_seconds": sum(p.duration_seconds for p in successful) / len(successful),
-            "avg_cpu_percent": sum(p.avg_cpu_percent for p in successful) / len(successful),
+            "avg_duration_seconds": sum(p.duration_seconds for p in successful)
+            / len(successful),
+            "avg_cpu_percent": sum(p.avg_cpu_percent for p in successful)
+            / len(successful),
             "num_samples": len(successful),
         }
 
@@ -557,7 +601,9 @@ def print_execution_summary(profile: ExecutionProfile, advisor: ResourceAdvisor)
 
     status = "✅ SUCCESS" if profile.success else "❌ FAILED"
     print(f"\nStatus: {status} (exit code: {profile.exit_code})")
-    print(f"Duration: {profile.duration_seconds:.2f}s ({timedelta(seconds=int(profile.duration_seconds))})")
+    print(
+        f"Duration: {profile.duration_seconds:.2f}s ({timedelta(seconds=int(profile.duration_seconds))})"
+    )
 
     print(f"\n📊 Resource Usage:")
     print(f"   CPU:")
@@ -565,8 +611,12 @@ def print_execution_summary(profile: ExecutionProfile, advisor: ResourceAdvisor)
     print(f"     Peak: {profile.peak_cpu_percent:.1f}%")
 
     print(f"   Memory:")
-    print(f"     Average: {profile.avg_memory_mb:.1f} MB ({profile.avg_memory_mb/1024:.2f} GB)")
-    print(f"     Peak: {profile.peak_memory_mb:.1f} MB ({profile.peak_memory_mb/1024:.2f} GB)")
+    print(
+        f"     Average: {profile.avg_memory_mb:.1f} MB ({profile.avg_memory_mb/1024:.2f} GB)"
+    )
+    print(
+        f"     Peak: {profile.peak_memory_mb:.1f} MB ({profile.peak_memory_mb/1024:.2f} GB)"
+    )
 
     if profile.swap_used_mb > 10:  # More than 10MB swap used
         print(f"   ⚠️  Swap used: {profile.swap_used_mb:.1f} MB")
@@ -584,13 +634,19 @@ def print_execution_summary(profile: ExecutionProfile, advisor: ResourceAdvisor)
         print(f"\n☁️  Cloud Instance Recommendations:")
         print(f"   (Based on peak memory: {profile.peak_memory_mb/1024:.2f} GB)")
 
-        recommendations = advisor.recommend_cloud_instance(profile.peak_memory_mb / 1024, profile.avg_cpu_percent)
+        recommendations = advisor.recommend_cloud_instance(
+            profile.peak_memory_mb / 1024, profile.avg_cpu_percent
+        )
 
         for i, rec in enumerate(recommendations[:3], 1):  # Show top 3
             print(f"\n   {i}. {rec['provider']} - {rec['type']}")
             print(f"      vCPU: {rec['vcpu']} | Memory: {rec['memory_gb']} GB")
-            print(f"      Margin: +{rec['margin_gb']:.1f} GB ({rec['margin_percent']:.0f}%)")
-            print(f"      Cost: ${rec['cost_per_hour']:.4f}/hour (${rec['estimated_costs']['24_hours']:.2f}/day)")
+            print(
+                f"      Margin: +{rec['margin_gb']:.1f} GB ({rec['margin_percent']:.0f}%)"
+            )
+            print(
+                f"      Cost: ${rec['cost_per_hour']:.4f}/hour (${rec['estimated_costs']['24_hours']:.2f}/day)"
+            )
             print(f"      Use case: {rec['suitable_for']}")
 
     print("=" * 70)
@@ -619,9 +675,18 @@ Examples:
 
     parser.add_argument("script", nargs="?", help="Python script to monitor")
     parser.add_argument("args", nargs="*", help="Arguments to pass to script")
-    parser.add_argument("--history", action="store_true", help="Show historical profiles")
-    parser.add_argument("--estimate", action="store_true", help="Estimate resource needs from history")
-    parser.add_argument("--interval", type=float, default=1.0, help="Monitoring interval in seconds (default: 1.0)")
+    parser.add_argument(
+        "--history", action="store_true", help="Show historical profiles"
+    )
+    parser.add_argument(
+        "--estimate", action="store_true", help="Estimate resource needs from history"
+    )
+    parser.add_argument(
+        "--interval",
+        type=float,
+        default=1.0,
+        help="Monitoring interval in seconds (default: 1.0)",
+    )
 
     args = parser.parse_args()
 
@@ -676,7 +741,9 @@ Examples:
         print(f"   Expected CPU: ~{estimate['avg_cpu_percent']:.1f}% average")
 
         # Check if can run locally
-        can_run, reason, details = advisor.can_run_locally(estimate["peak_memory_mb"] / 1024)
+        can_run, reason, details = advisor.can_run_locally(
+            estimate["peak_memory_mb"] / 1024
+        )
         print(f"\n{reason}")
 
         return 0
@@ -703,7 +770,9 @@ Examples:
         print(f"   Expected memory: ~{estimate['peak_memory_mb']:.1f} MB")
         print(f"   Expected duration: ~{estimate['avg_duration_seconds']:.1f}s")
 
-        can_run, reason, details = advisor.can_run_locally(estimate["peak_memory_mb"] / 1024)
+        can_run, reason, details = advisor.can_run_locally(
+            estimate["peak_memory_mb"] / 1024
+        )
     else:
         print(f"\n📊 No historical data available")
         print(f"   Performing basic resource check...")

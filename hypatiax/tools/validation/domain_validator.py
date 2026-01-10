@@ -88,8 +88,21 @@ class DomainValidator:
                 ],
             },
             "risk": {
-                "positive_variables": ["var", "cvar", "volatility", "loss", "exposure", "shortfall", "sigma"],
-                "probability_variables": ["prob", "confidence", "likelihood", "probability"],
+                "positive_variables": [
+                    "var",
+                    "cvar",
+                    "volatility",
+                    "loss",
+                    "exposure",
+                    "shortfall",
+                    "sigma",
+                ],
+                "probability_variables": [
+                    "prob",
+                    "confidence",
+                    "likelihood",
+                    "probability",
+                ],
                 "bounded_variables": {
                     "confidence": (0, 1),
                     "probability": (0, 1),
@@ -99,7 +112,13 @@ class DomainValidator:
                 "special_checks": ["var_positive", "confidence_valid"],
             },
             "finance": {
-                "positive_variables": ["price", "volume", "market_cap", "assets", "nav"],
+                "positive_variables": [
+                    "price",
+                    "volume",
+                    "market_cap",
+                    "assets",
+                    "nav",
+                ],
                 "bounded_variables": {
                     "return": (-1, None),  # Can lose 100%, no upper bound
                     "weight": (0, 1),
@@ -109,7 +128,11 @@ class DomainValidator:
                 "special_checks": ["weights_sum_to_one"],
             },
             "esg": {
-                "bounded_variables": {"score": (0, 100), "rating": (0, 10), "weight": (0, 1)},
+                "bounded_variables": {
+                    "score": (0, 100),
+                    "rating": (0, 10),
+                    "weight": (0, 1),
+                },
                 "positive_variables": ["impact", "emissions", "carbon", "footprint"],
                 "special_checks": ["score_range", "weights_sum_to_one"],
             },
@@ -157,17 +180,23 @@ class DomainValidator:
         result = self._check_positive_variables(expression_str, test_data, result)
 
         # WEEK 2 NEW: Check strictly positive variables (must be > 0, not >= 0)
-        result = self._check_strictly_positive_variables(expression_str, test_data, result)
+        result = self._check_strictly_positive_variables(
+            expression_str, test_data, result
+        )
 
         # Check bounded variable constraints
         result = self._check_bounded_variables(expression_str, test_data, result)
 
         # Check probability variables (if applicable)
         if "probability_variables" in self.constraints:
-            result = self._check_probability_variables(expression_str, test_data, result)
+            result = self._check_probability_variables(
+                expression_str, test_data, result
+            )
 
         # Check special domain rules
-        result = self._check_special_rules(expression_str, variable_definitions, test_data, result)
+        result = self._check_special_rules(
+            expression_str, variable_definitions, test_data, result
+        )
 
         # Determine overall validity
         if result["errors"]:
@@ -178,7 +207,10 @@ class DomainValidator:
         return result
 
     def _check_positive_variables(
-        self, expression_str: str, test_data: Optional[Dict[str, np.ndarray]], result: Dict
+        self,
+        expression_str: str,
+        test_data: Optional[Dict[str, np.ndarray]],
+        result: Dict,
     ) -> Dict:
         """Check that variables that must be positive are indeed positive."""
         positive_vars = self.constraints.get("positive_variables", [])
@@ -190,16 +222,23 @@ class DomainValidator:
                 if test_data and var in test_data:
                     values = test_data[var]
                     if np.any(values <= 0):
-                        result["errors"].append(f"Variable '{var}' must be positive (found {np.min(values):.6f})")
+                        result["errors"].append(
+                            f"Variable '{var}' must be positive (found {np.min(values):.6f})"
+                        )
                         result["score"] -= 20
                 else:
-                    result["warnings"].append(f"Variable '{var}' should be positive - add validation")
+                    result["warnings"].append(
+                        f"Variable '{var}' should be positive - add validation"
+                    )
                     result["score"] -= 5
 
         return result
 
     def _check_strictly_positive_variables(
-        self, expression_str: str, test_data: Optional[Dict[str, np.ndarray]], result: Dict
+        self,
+        expression_str: str,
+        test_data: Optional[Dict[str, np.ndarray]],
+        result: Dict,
     ) -> Dict:
         """
         WEEK 2 NEW: Check variables that must be strictly positive (> 0, not >= 0).
@@ -229,20 +268,25 @@ class DomainValidator:
                     # Check for values very close to zero (numerical stability)
                     elif np.any(values < 1e-8):
                         result["warnings"].append(
-                            f"Variable '{var}' has very small values (< 1e-8), " f"may cause numerical instability"
+                            f"Variable '{var}' has very small values (< 1e-8), "
+                            f"may cause numerical instability"
                         )
                         result["score"] -= 5
                 else:
                     # No test data - issue warning
                     result["warnings"].append(
-                        f"Variable '{var}' must be strictly positive (> 0). " f"Add validation: assert {var} > 0"
+                        f"Variable '{var}' must be strictly positive (> 0). "
+                        f"Add validation: assert {var} > 0"
                     )
                     result["score"] -= 8  # Increased penalty for missing validation
 
         return result
 
     def _check_bounded_variables(
-        self, expression_str: str, test_data: Optional[Dict[str, np.ndarray]], result: Dict
+        self,
+        expression_str: str,
+        test_data: Optional[Dict[str, np.ndarray]],
+        result: Dict,
     ) -> Dict:
         """
         Check that bounded variables are within their valid ranges.
@@ -293,13 +337,18 @@ class DomainValidator:
                     else:
                         bound_str = f">= {lower}"
 
-                    result["warnings"].append(f"Variable '{var}' should be in range {bound_str}")
+                    result["warnings"].append(
+                        f"Variable '{var}' should be in range {bound_str}"
+                    )
                     result["score"] -= 5
 
         return result
 
     def _check_probability_variables(
-        self, expression_str: str, test_data: Optional[Dict[str, np.ndarray]], result: Dict
+        self,
+        expression_str: str,
+        test_data: Optional[Dict[str, np.ndarray]],
+        result: Dict,
     ) -> Dict:
         """Check that probability variables are in [0, 1]."""
         prob_vars = self.constraints.get("probability_variables", [])
@@ -318,7 +367,9 @@ class DomainValidator:
                         )
                         result["score"] -= 25
                 else:
-                    result["warnings"].append(f"Probability variable '{var}' should be in [0, 1]")
+                    result["warnings"].append(
+                        f"Probability variable '{var}' should be in [0, 1]"
+                    )
                     result["score"] -= 5
 
         return result
@@ -341,7 +392,9 @@ class DomainValidator:
             if check == "constant_product":
                 result = self._check_constant_product(expression_str, test_data, result)
             elif check == "no_negative_slippage":
-                result = self._check_no_negative_slippage(expression_str, test_data, result)
+                result = self._check_no_negative_slippage(
+                    expression_str, test_data, result
+                )
             elif check == "ratio_positivity":  # NEW WEEK 2
                 result = self._check_ratio_positivity(expression_str, test_data, result)
             elif check == "price_positivity":  # NEW WEEK 2
@@ -353,7 +406,9 @@ class DomainValidator:
             elif check == "confidence_valid":
                 result = self._check_confidence_valid(expression_str, test_data, result)
             elif check == "weights_sum_to_one":
-                result = self._check_weights_sum(expression_str, variable_definitions, result)
+                result = self._check_weights_sum(
+                    expression_str, variable_definitions, result
+                )
             elif check == "score_range":
                 result = self._check_score_range(expression_str, test_data, result)
 
@@ -361,14 +416,20 @@ class DomainValidator:
 
     # Special rule implementations
 
-    def _check_constant_product(self, expr_str: str, test_data: Optional[Dict], result: Dict) -> Dict:
+    def _check_constant_product(
+        self, expr_str: str, test_data: Optional[Dict], result: Dict
+    ) -> Dict:
         """Check DeFi constant product invariant."""
         if "reserve" in expr_str.lower() and test_data:
             result["constraints_checked"].append("constant_product")
-            result["warnings"].append("Verify constant product invariant (x*y=k) is maintained")
+            result["warnings"].append(
+                "Verify constant product invariant (x*y=k) is maintained"
+            )
         return result
 
-    def _check_no_negative_slippage(self, expr_str: str, test_data: Optional[Dict], result: Dict) -> Dict:
+    def _check_no_negative_slippage(
+        self, expr_str: str, test_data: Optional[Dict], result: Dict
+    ) -> Dict:
         """Check that slippage is non-negative."""
         if "slippage" in expr_str.lower():
             result["constraints_checked"].append("no_negative_slippage")
@@ -378,7 +439,9 @@ class DomainValidator:
                     result["score"] -= 20
         return result
 
-    def _check_ratio_positivity(self, expr_str: str, test_data: Optional[Dict], result: Dict) -> Dict:
+    def _check_ratio_positivity(
+        self, expr_str: str, test_data: Optional[Dict], result: Dict
+    ) -> Dict:
         """
         WEEK 2 NEW: Check that ratio variables are strictly positive.
 
@@ -409,13 +472,16 @@ class DomainValidator:
                     values = test_data[var]
                     if np.any(values <= 0):
                         result["errors"].append(
-                            f"Ratio variable '{var}' must be positive, " f"found minimum: {np.min(values):.6f}"
+                            f"Ratio variable '{var}' must be positive, "
+                            f"found minimum: {np.min(values):.6f}"
                         )
                         result["score"] -= 25
 
         return result
 
-    def _check_price_positivity(self, expr_str: str, test_data: Optional[Dict], result: Dict) -> Dict:
+    def _check_price_positivity(
+        self, expr_str: str, test_data: Optional[Dict], result: Dict
+    ) -> Dict:
         """
         WEEK 2 NEW: Check that price variables are strictly positive.
 
@@ -434,12 +500,14 @@ class DomainValidator:
                     values = test_data[var]
                     if np.any(values <= 0):
                         result["errors"].append(
-                            f"Price variable '{var}' must be strictly positive, " f"found minimum: {np.min(values):.6f}"
+                            f"Price variable '{var}' must be strictly positive, "
+                            f"found minimum: {np.min(values):.6f}"
                         )
                         result["score"] -= 20
                 else:
                     result["warnings"].append(
-                        f"Price variable '{var}' must be positive. " f"Add validation: assert {var} > 0"
+                        f"Price variable '{var}' must be positive. "
+                        f"Add validation: assert {var} > 0"
                     )
                     result["score"] -= 8
 
@@ -456,7 +524,10 @@ class DomainValidator:
         # Look for division operators
         if "/" in expr_str or "÷" in expr_str:
             # Check if epsilon protection exists
-            has_epsilon = any(pattern in expr_str.lower() for pattern in ["epsilon", "eps", "ε", "+ 1e-", "+ 0.000"])
+            has_epsilon = any(
+                pattern in expr_str.lower()
+                for pattern in ["epsilon", "eps", "ε", "+ 1e-", "+ 0.000"]
+            )
 
             if not has_epsilon:
                 result["warnings"].append(
@@ -465,25 +536,33 @@ class DomainValidator:
                 )
                 result["score"] -= 5
             else:
-                result["warnings"].append("Epsilon protection detected - verify epsilon value is appropriate")
+                result["warnings"].append(
+                    "Epsilon protection detected - verify epsilon value is appropriate"
+                )
 
         return result
 
-    def _check_var_positive(self, expr_str: str, test_data: Optional[Dict], result: Dict) -> Dict:
+    def _check_var_positive(
+        self, expr_str: str, test_data: Optional[Dict], result: Dict
+    ) -> Dict:
         """Check that VaR (Value at Risk) is positive."""
         if "var" in expr_str.lower():
             result["constraints_checked"].append("var_positive")
             result["warnings"].append("VaR should be positive")
         return result
 
-    def _check_confidence_valid(self, expr_str: str, test_data: Optional[Dict], result: Dict) -> Dict:
+    def _check_confidence_valid(
+        self, expr_str: str, test_data: Optional[Dict], result: Dict
+    ) -> Dict:
         """Check that confidence level is valid."""
         if "confidence" in expr_str.lower():
             result["constraints_checked"].append("confidence_valid")
             if test_data and "confidence" in test_data:
                 conf = test_data["confidence"]
                 if np.any(conf <= 0) or np.any(conf >= 1):
-                    result["errors"].append("Confidence level must be in (0, 1) exclusive")
+                    result["errors"].append(
+                        "Confidence level must be in (0, 1) exclusive"
+                    )
                     result["score"] -= 20
         return result
 
@@ -495,7 +574,9 @@ class DomainValidator:
             result["warnings"].append(f"Verify that weights {weight_vars} sum to 1")
         return result
 
-    def _check_score_range(self, expr_str: str, test_data: Optional[Dict], result: Dict) -> Dict:
+    def _check_score_range(
+        self, expr_str: str, test_data: Optional[Dict], result: Dict
+    ) -> Dict:
         """Check that scores are in valid range."""
         if "score" in expr_str.lower():
             result["constraints_checked"].append("score_range")
@@ -503,7 +584,8 @@ class DomainValidator:
                 scores = test_data["score"]
                 if np.any(scores < 0) or np.any(scores > 100):
                     result["errors"].append(
-                        f"Scores must be in [0, 100] " f"(found range [{np.min(scores):.1f}, {np.max(scores):.1f}])"
+                        f"Scores must be in [0, 100] "
+                        f"(found range [{np.min(scores):.1f}, {np.max(scores):.1f}])"
                     )
                     result["score"] -= 20
         return result
@@ -527,7 +609,12 @@ class DomainValidator:
     def get_statistics(self) -> Dict:
         """Get statistics about validation history."""
         if not self.validation_history:
-            return {"total_validations": 0, "success_rate": 0.0, "average_score": 0.0, "domain": self.domain}
+            return {
+                "total_validations": 0,
+                "success_rate": 0.0,
+                "average_score": 0.0,
+                "domain": self.domain,
+            }
 
         total = len(self.validation_history)
         valid_count = sum(1 for v in self.validation_history if v["valid"])
@@ -576,8 +663,18 @@ if __name__ == "__main__":
     print("\n[TEST 3] Fee variable bounds:")
     result3 = validator.validate(
         expression_str="output = (y0 * dx * (1 - phi)) / (x0 + dx * (1 - phi))",
-        variable_definitions={"y0": "Reserve Y", "dx": "Input amount", "phi": "Fee", "x0": "Reserve X"},
-        test_data={"y0": np.array([1000]), "dx": np.array([10]), "phi": np.array([0.003]), "x0": np.array([1000])},
+        variable_definitions={
+            "y0": "Reserve Y",
+            "dx": "Input amount",
+            "phi": "Fee",
+            "x0": "Reserve X",
+        },
+        test_data={
+            "y0": np.array([1000]),
+            "dx": np.array([10]),
+            "phi": np.array([0.003]),
+            "x0": np.array([1000]),
+        },
     )
     print(f"Valid: {result3['valid']}, Score: {result3['score']}")
     print(f"Warnings: {result3['warnings']}")
@@ -586,7 +683,11 @@ if __name__ == "__main__":
     print("\n[TEST 4] Division protection check:")
     result4 = validator.validate(
         expression_str="output / (input + epsilon)",
-        variable_definitions={"output": "Output", "input": "Input", "epsilon": "Safety"},
+        variable_definitions={
+            "output": "Output",
+            "input": "Input",
+            "epsilon": "Safety",
+        },
         test_data=None,
     )
     print(f"Valid: {result4['valid']}, Score: {result4['score']}")

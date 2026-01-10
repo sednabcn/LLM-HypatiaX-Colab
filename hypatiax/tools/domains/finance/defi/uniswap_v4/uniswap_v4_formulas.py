@@ -134,7 +134,11 @@ class UniswapV4Math:
 
     @staticmethod
     def calculate_liquidity(
-        amount0: float, amount1: float, price_lower: float, price_upper: float, price_current: float
+        amount0: float,
+        amount1: float,
+        price_lower: float,
+        price_upper: float,
+        price_current: float,
     ) -> float:
         """Calculate liquidity L (SAME AS V3)"""
         sqrt_Pa = math.sqrt(price_lower)
@@ -165,7 +169,9 @@ class UniswapV4Math:
         return L
 
     @staticmethod
-    def calculate_amounts(L: float, price_lower: float, price_upper: float, price_current: float) -> tuple:
+    def calculate_amounts(
+        L: float, price_lower: float, price_upper: float, price_current: float
+    ) -> tuple:
         """Calculate token amounts from liquidity (SAME AS V3)"""
         sqrt_Pa = math.sqrt(price_lower)
         sqrt_Pb = math.sqrt(price_upper)
@@ -243,7 +249,11 @@ class V4HookSimulator:
 
         return {
             "allowed": total_value >= min_deposit_usd,
-            "reason": f"Minimum ${min_deposit_usd} required" if total_value < min_deposit_usd else "OK",
+            "reason": (
+                f"Minimum ${min_deposit_usd} required"
+                if total_value < min_deposit_usd
+                else "OK"
+            ),
         }
 
 
@@ -256,7 +266,9 @@ class UniswapV4Calculator:
     """
 
     @staticmethod
-    def calculate_v4_il_with_hooks(position: V4Position, hook: Optional[V4HookSimulator] = None) -> Dict:
+    def calculate_v4_il_with_hooks(
+        position: V4Position, hook: Optional[V4HookSimulator] = None
+    ) -> Dict:
         """
         Calculate IL for V4 position (same math as V3, but with hooks)
         """
@@ -265,7 +277,9 @@ class UniswapV4Calculator:
         P = position.price_current
 
         # Calculate liquidity (SAME AS V3)
-        L = UniswapV4Math.calculate_liquidity(position.amount0_deposited, position.amount1_deposited, Pa, Pb, P)
+        L = UniswapV4Math.calculate_liquidity(
+            position.amount0_deposited, position.amount1_deposited, Pa, Pb, P
+        )
 
         # Calculate current amounts (SAME AS V3)
         amount0_now, amount1_now = UniswapV4Math.calculate_amounts(L, Pa, Pb, P)
@@ -294,13 +308,17 @@ class UniswapV4Calculator:
         # Calculate fees earned
         if in_range:
             position_tvl = current_value
-            pool_share = position_tvl / position.pool_tvl_usd if position.pool_tvl_usd > 0 else 0
+            pool_share = (
+                position_tvl / position.pool_tvl_usd if position.pool_tvl_usd > 0 else 0
+            )
 
             # V4 concentrates liquidity (same as V3)
             range_factor = 100 / (Pb / Pa) if Pa > 0 else 1
             effective_share = pool_share * min(range_factor, 50)
 
-            daily_fees = position.daily_volume_usd * effective_fee_tier * effective_share
+            daily_fees = (
+                position.daily_volume_usd * effective_fee_tier * effective_share
+            )
             total_fees = daily_fees * position.days_elapsed
         else:
             daily_fees = 0
@@ -333,7 +351,9 @@ class UniswapV4Calculator:
             "daily_fees": round(daily_fees, 2),
             "total_fees": round(total_fees, 2),
             "net_result": round(net_result, 2),
-            "breakeven_days": round(breakeven_days, 2) if breakeven_days != float("inf") else "N/A",
+            "breakeven_days": (
+                round(breakeven_days, 2) if breakeven_days != float("inf") else "N/A"
+            ),
             "profitable": "Yes" if net_result > 0 else "No",
             "hook_applied": hook is not None,
             "hook_name": hook.name if hook else "None",
@@ -480,7 +500,9 @@ def generate_v4_test_positions() -> List[V4Position]:
     return positions
 
 
-def export_results_to_csv(results: List[Dict], filename: str = "uniswap_v4_results.csv"):
+def export_results_to_csv(
+    results: List[Dict], filename: str = "uniswap_v4_results.csv"
+):
     """Export V4 results to CSV"""
     if not results:
         return
@@ -515,7 +537,9 @@ if __name__ == "__main__":
     print()
 
     # Create hook simulators
-    dynamic_fee_hook = V4HookSimulator("DynamicFeeHook", [HookPermissions.BEFORE_SWAP, HookPermissions.AFTER_SWAP])
+    dynamic_fee_hook = V4HookSimulator(
+        "DynamicFeeHook", [HookPermissions.BEFORE_SWAP, HookPermissions.AFTER_SWAP]
+    )
 
     # Generate positions
     positions = generate_v4_test_positions()
@@ -523,7 +547,9 @@ if __name__ == "__main__":
 
     # Analyze positions
     results = []
-    print(f"{'Position':<45} {'Range':>15} {'Fee%':>8} {'IL%':>10} {'Fees$':>12} {'Net$':>12} {'Hook':>20}")
+    print(
+        f"{'Position':<45} {'Range':>15} {'Fee%':>8} {'IL%':>10} {'Fees$':>12} {'Net$':>12} {'Hook':>20}"
+    )
     print("-" * 135)
 
     for idx, position in enumerate(positions):

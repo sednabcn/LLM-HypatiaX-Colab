@@ -5,7 +5,9 @@ import pkg_resources
 
 def check_versions(requirements_file="requirements.txt"):
     with open(requirements_file) as f:
-        requirements = [line.strip() for line in f if line.strip() and not line.startswith("#")]
+        requirements = [
+            line.strip() for line in f if line.strip() and not line.startswith("#")
+        ]
 
     print(f"{'Package':<30} {'Required':<15} {'Installed':<15} {'Status'}")
     print("=" * 75)
@@ -19,7 +21,9 @@ def check_versions(requirements_file="requirements.txt"):
             if pkg.specifier and installed.version not in pkg.specifier:
                 status = "⚠ MISMATCH"
 
-            print(f"{pkg.project_name:<30} {str(pkg.specifier):<15} {installed.version:<15} {status}")
+            print(
+                f"{pkg.project_name:<30} {str(pkg.specifier):<15} {installed.version:<15} {status}"
+            )
         except Exception as e:
             print(f"{req:<30} {'ERROR':<15} {str(e):<15}")
 

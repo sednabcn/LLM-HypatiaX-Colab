@@ -43,7 +43,9 @@ class DatasetValidator:
                 reader = csv.DictReader(f)
                 headers = reader.fieldnames
 
-                for row_num, row in enumerate(reader, start=2):  # Start at 2 (after header)
+                for row_num, row in enumerate(
+                    reader, start=2
+                ):  # Start at 2 (after header)
                     records.append(dict(row))
 
             metadata = {
@@ -56,7 +58,9 @@ class DatasetValidator:
             return records, metadata
 
         except Exception as e:
-            self.results["issues"].append({"type": "LOAD_ERROR", "file": filepath, "error": str(e)})
+            self.results["issues"].append(
+                {"type": "LOAD_ERROR", "file": filepath, "error": str(e)}
+            )
             return [], {"format": "CSV", "error": str(e)}
 
     def load_json(self, filepath: str) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
@@ -88,10 +92,14 @@ class DatasetValidator:
             return records, metadata
 
         except json.JSONDecodeError as e:
-            self.results["issues"].append({"type": "JSON_PARSE_ERROR", "file": filepath, "error": str(e)})
+            self.results["issues"].append(
+                {"type": "JSON_PARSE_ERROR", "file": filepath, "error": str(e)}
+            )
             return [], {"format": "JSON", "error": str(e)}
         except Exception as e:
-            self.results["issues"].append({"type": "LOAD_ERROR", "file": filepath, "error": str(e)})
+            self.results["issues"].append(
+                {"type": "LOAD_ERROR", "file": filepath, "error": str(e)}
+            )
             return [], {"format": "JSON", "error": str(e)}
 
     def detect_dataset_type(self, records: List[Dict[str, Any]]) -> str:
@@ -109,7 +117,9 @@ class DatasetValidator:
 
         return "general"
 
-    def analyze_general_data(self, records: List[Dict[str, Any]], filename: str) -> Dict[str, Any]:
+    def analyze_general_data(
+        self, records: List[Dict[str, Any]], filename: str
+    ) -> Dict[str, Any]:
         """Analyze general CSV/JSON data."""
         if not records:
             return {
@@ -128,7 +138,9 @@ class DatasetValidator:
         column_stats = {}
         for col in all_columns:
             values = [record.get(col) for record in records]
-            non_null = [v for v in values if v not in (None, "", "null", "NULL", "None")]
+            non_null = [
+                v for v in values if v not in (None, "", "null", "NULL", "None")
+            ]
 
             # Detect data type
             if non_null:
@@ -171,20 +183,35 @@ class DatasetValidator:
         # Check for high null rates
         for col, stats in column_stats.items():
             if stats["null_percentage"] > 50:
-                issues.append({"type": "HIGH_NULL_RATE", "column": col, "percentage": stats["null_percentage"]})
+                issues.append(
+                    {
+                        "type": "HIGH_NULL_RATE",
+                        "column": col,
+                        "percentage": stats["null_percentage"],
+                    }
+                )
 
         # Check for duplicate rows
         row_hashes = [hash(frozenset(record.items())) for record in records]
         duplicate_count = len(row_hashes) - len(set(row_hashes))
         if duplicate_count > 0:
             issues.append(
-                {"type": "DUPLICATE_ROWS", "count": duplicate_count, "percentage": duplicate_count / len(records) * 100}
+                {
+                    "type": "DUPLICATE_ROWS",
+                    "count": duplicate_count,
+                    "percentage": duplicate_count / len(records) * 100,
+                }
             )
 
         # Check for inconsistent columns (records with different keys)
         all_key_sets = [set(record.keys()) for record in records]
         if len(set(map(frozenset, all_key_sets))) > 1:
-            issues.append({"type": "INCONSISTENT_COLUMNS", "message": "Records have different column sets"})
+            issues.append(
+                {
+                    "type": "INCONSISTENT_COLUMNS",
+                    "message": "Records have different column sets",
+                }
+            )
 
         return {
             "type": "general",
@@ -197,9 +224,19 @@ class DatasetValidator:
             "issues": issues,
         }
 
-    def analyze_formula_data(self, records: List[Dict[str, Any]], filename: str) -> Dict[str, Any]:
+    def analyze_formula_data(
+        self, records: List[Dict[str, Any]], filename: str
+    ) -> Dict[str, Any]:
         """Analyze formula discovery results."""
-        domain_stats = defaultdict(lambda: {"count": 0, "valid": 0, "scores": [], "r2_scores": [], "formulas": []})
+        domain_stats = defaultdict(
+            lambda: {
+                "count": 0,
+                "valid": 0,
+                "scores": [],
+                "r2_scores": [],
+                "formulas": [],
+            }
+        )
 
         for result in records:
             domain = result.get("domain", "unknown")
@@ -243,7 +280,9 @@ class DatasetValidator:
             "issues": self.identify_formula_issues(records),
         }
 
-    def identify_formula_issues(self, records: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def identify_formula_issues(
+        self, records: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
         """Identify issues in formula datasets."""
         issues = []
 
@@ -251,7 +290,13 @@ class DatasetValidator:
             validation = record.get("validation", {})
 
             if not validation.get("valid", False):
-                issues.append({"type": "INVALID_FORMULA", "index": i, "description": record.get("description", "N/A")})
+                issues.append(
+                    {
+                        "type": "INVALID_FORMULA",
+                        "index": i,
+                        "description": record.get("description", "N/A"),
+                    }
+                )
 
             r2 = validation.get("r2_score", 0)
             if validation.get("valid") and r2 < 0.8:
@@ -273,10 +318,19 @@ class DatasetValidator:
         elif ext == ".json":
             records, metadata = self.load_json(filepath)
         else:
-            return {"filename": filename, "error": f"Unsupported file type: {ext}", "supported": [".csv", ".json"]}
+            return {
+                "filename": filename,
+                "error": f"Unsupported file type: {ext}",
+                "supported": [".csv", ".json"],
+            }
 
         if not records:
-            return {"filename": filename, "metadata": metadata, "records": 0, "error": "No records loaded"}
+            return {
+                "filename": filename,
+                "metadata": metadata,
+                "records": 0,
+                "error": "No records loaded",
+            }
 
         # Detect dataset type and analyze
         dataset_type = self.detect_dataset_type(records)
@@ -289,7 +343,10 @@ class DatasetValidator:
         return {"filename": filename, "metadata": metadata, **analysis}
 
     def validate_directory(
-        self, directory: str = "data", pattern: str = "*", extensions: List[str] = [".csv", ".json"]
+        self,
+        directory: str = "data",
+        pattern: str = "*",
+        extensions: List[str] = [".csv", ".json"],
     ) -> Dict[str, Any]:
         """Validate all matching files in directory."""
 
@@ -358,7 +415,9 @@ class DatasetValidator:
         for filepath, result in summary["file_results"].items():
             filename = os.path.basename(filepath)
             print(f"📄 {filename}")
-            print(f"   Format:       {result.get('metadata', {}).get('format', 'Unknown')}")
+            print(
+                f"   Format:       {result.get('metadata', {}).get('format', 'Unknown')}"
+            )
             print(f"   Type:         {result.get('type', 'unknown')}")
             print(f"   Records:      {result.get('total_records', 0):,}")
             print(f"   Valid:        {result.get('valid_records', 0):,}")
@@ -438,7 +497,12 @@ Examples:
 
     parser.add_argument("--dir", default="data", help="Data directory (default: data)")
     parser.add_argument("--pattern", default="*", help="File pattern (default: *)")
-    parser.add_argument("--ext", nargs="+", default=[".csv", ".json"], help="File extensions (default: .csv .json)")
+    parser.add_argument(
+        "--ext",
+        nargs="+",
+        default=[".csv", ".json"],
+        help="File extensions (default: .csv .json)",
+    )
     parser.add_argument("--export", type=str, help="Export report to JSON file")
     parser.add_argument("--quiet", action="store_true", help="Minimal output")
 
@@ -448,7 +512,9 @@ Examples:
     validator = DatasetValidator(verbose=not args.quiet)
 
     # Run validation
-    summary = validator.validate_directory(directory=args.dir, pattern=args.pattern, extensions=args.ext)
+    summary = validator.validate_directory(
+        directory=args.dir, pattern=args.pattern, extensions=args.ext
+    )
 
     # Export if requested
     if args.export:

@@ -26,15 +26,18 @@ class Config:
     # API Information
     API_VERSION = "2.1.0"
     API_TITLE = "HypatiaX Unified Formula API"
-    API_DESCRIPTION = "HypatiaX Tableau NER + Mathematical Formula Extraction + DeFi Analytics"
+    API_DESCRIPTION = (
+        "HypatiaX Tableau NER + Mathematical Formula Extraction + DeFi Analytics"
+    )
     API_PREFIX = "/api"
 
     # ========================================================================
     # CORS SETTINGS
     # ========================================================================
-    CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:8000,http://127.0.0.1:8000,http://localhost:3000").split(
-        ","
-    )
+    CORS_ORIGINS = os.getenv(
+        "CORS_ORIGINS",
+        "http://localhost:8000,http://127.0.0.1:8000,http://localhost:3000",
+    ).split(",")
 
     CORS_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     CORS_ALLOW_HEADERS = ["Content-Type", "Authorization"]
@@ -291,7 +294,9 @@ class DockerConfig(Config):
 
     # PostgreSQL in Docker
     DATABASE_ENABLED = True
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "postgresql://user:password@postgres:5432/hypatiax")
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        "DATABASE_URL", "postgresql://user:password@postgres:5432/hypatiax"
+    )
 
     # Container-friendly paths
     LOG_FILE = "/var/log/hypatiax/app.log"
@@ -382,7 +387,12 @@ def validate_config(config_obj):
 
 def ensure_directories(config_obj):
     """Create necessary directories if they don't exist"""
-    directories = [config_obj.DATA_DIR, config_obj.UPLOAD_DIR, config_obj.CACHE_DIR, Path(config_obj.LOG_FILE).parent]
+    directories = [
+        config_obj.DATA_DIR,
+        config_obj.UPLOAD_DIR,
+        config_obj.CACHE_DIR,
+        Path(config_obj.LOG_FILE).parent,
+    ]
 
     for directory in directories:
         directory = Path(directory)

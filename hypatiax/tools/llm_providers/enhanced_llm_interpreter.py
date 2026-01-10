@@ -117,7 +117,12 @@ Format as JSON with keys: interpretation, components, patterns, applications, li
         return text
 
     def interpret(
-        self, expression: str, domain: str, variables: Dict, r2: float, additional_context: Optional[str] = None
+        self,
+        expression: str,
+        domain: str,
+        variables: Dict,
+        r2: float,
+        additional_context: Optional[str] = None,
     ) -> Dict:
         """
         Interpret a discovered symbolic expression.
@@ -139,7 +144,9 @@ Format as JSON with keys: interpretation, components, patterns, applications, li
         if additional_context:
             context_str = f"\n- Additional context: {additional_context}"
 
-        prompt = template.format(expression=expression, variables=var_str, r2=r2, context=context_str)
+        prompt = template.format(
+            expression=expression, variables=var_str, r2=r2, context=context_str
+        )
 
         response = self.client.messages.create(
             model=self.config.model,
@@ -156,12 +163,19 @@ Format as JSON with keys: interpretation, components, patterns, applications, li
         except json.JSONDecodeError as e:
             print(f"JSON parsing error: {e}")
             print(f"Response text: {response_text[:500]}...")
-            interpretation = {"raw_text": response_text, "status": "unparsed", "error": str(e)}
+            interpretation = {
+                "raw_text": response_text,
+                "status": "unparsed",
+                "error": str(e),
+            }
 
         interpretation["expression"] = expression
         interpretation["domain"] = domain
         interpretation["r2_score"] = r2
-        interpretation["metadata"] = {"model": self.config.model, "temperature": self.config.temperature}
+        interpretation["metadata"] = {
+            "model": self.config.model,
+            "temperature": self.config.temperature,
+        }
 
         return interpretation
 
@@ -187,7 +201,13 @@ Format as JSON with keys: interpretation, components, patterns, applications, li
             results.append(result)
         return results
 
-    def compare_expressions(self, expressions: List[str], domain: str, variables: Dict, r2_scores: List[float]) -> Dict:
+    def compare_expressions(
+        self,
+        expressions: List[str],
+        domain: str,
+        variables: Dict,
+        r2_scores: List[float],
+    ) -> Dict:
         """
         Compare multiple candidate expressions.
 
@@ -201,7 +221,10 @@ Format as JSON with keys: interpretation, components, patterns, applications, li
             Comparative analysis dictionary
         """
         expr_list = "\n".join(
-            [f"{i+1}. {expr} (R²={r2:.4f})" for i, (expr, r2) in enumerate(zip(expressions, r2_scores))]
+            [
+                f"{i+1}. {expr} (R²={r2:.4f})"
+                for i, (expr, r2) in enumerate(zip(expressions, r2_scores))
+            ]
         )
 
         var_str = "\n".join([f"  - {k}: {v}" for k, v in variables.items()])
@@ -265,13 +288,19 @@ if __name__ == "__main__":
         {
             "expression": "log(volume) * sqrt(liquidity)",
             "domain": "defi",
-            "variables": {"volume": "24h trading volume", "liquidity": "Total pool liquidity"},
+            "variables": {
+                "volume": "24h trading volume",
+                "liquidity": "Total pool liquidity",
+            },
             "r2": 0.92,
         },
         {
             "expression": "volatility^2 / (1 + price_impact)",
             "domain": "risk",
-            "variables": {"volatility": "Historical volatility", "price_impact": "Slippage per unit volume"},
+            "variables": {
+                "volatility": "Historical volatility",
+                "price_impact": "Slippage per unit volume",
+            },
             "r2": 0.87,
         },
     ]

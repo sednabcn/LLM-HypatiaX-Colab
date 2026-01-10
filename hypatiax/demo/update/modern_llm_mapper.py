@@ -73,7 +73,8 @@ class ModernLLMMapper:
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise ValueError(
-                "OpenAI API key required. Set OPENAI_API_KEY environment variable " "or pass api_key parameter."
+                "OpenAI API key required. Set OPENAI_API_KEY environment variable "
+                "or pass api_key parameter."
             )
 
         self.model = model
@@ -100,7 +101,9 @@ class ModernLLMMapper:
             prompt += f'- "{desc}" → "{formula}"\n'
 
         prompt += f'\nNow convert this description to a formula:\n"{description}"\n\n'
-        prompt += "Return ONLY the formula, nothing else. Use standard mathematical notation."
+        prompt += (
+            "Return ONLY the formula, nothing else. Use standard mathematical notation."
+        )
 
         return prompt
 
@@ -134,15 +137,25 @@ class ModernLLMMapper:
             formula = response.choices[0].message.content.strip()
 
             # Simple confidence based on response quality
-            confidence = 0.95 if len(formula) > 3 and any(c in formula for c in ["=", "*", "+", "-", "/"]) else 0.70
+            confidence = (
+                0.95
+                if len(formula) > 3
+                and any(c in formula for c in ["=", "*", "+", "-", "/"])
+                else 0.70
+            )
 
             return FormulaResult(
-                input_text=description, formula=formula, confidence=confidence, method=f"llm_few_shot_{self.model}"
+                input_text=description,
+                formula=formula,
+                confidence=confidence,
+                method=f"llm_few_shot_{self.model}",
             )
 
         except Exception as e:
             print(f"Error processing '{description}': {e}")
-            return FormulaResult(input_text=description, formula="ERROR", confidence=0.0, method="error")
+            return FormulaResult(
+                input_text=description, formula="ERROR", confidence=0.0, method="error"
+            )
 
     def map_batch(self, descriptions: List[str]) -> List[FormulaResult]:
         """
@@ -204,7 +217,9 @@ def run_demo():
     accuracy = (successful / len(results)) * 100
 
     print("\n" + "=" * 60)
-    print(f"📊 RESULTS: {successful}/{len(results)} successful ({accuracy:.1f}% accuracy)")
+    print(
+        f"📊 RESULTS: {successful}/{len(results)} successful ({accuracy:.1f}% accuracy)"
+    )
     print("=" * 60)
 
     # Save results
@@ -214,13 +229,24 @@ def run_demo():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Modern LLM-based Formula Mapper (2025 Approach)")
+    parser = argparse.ArgumentParser(
+        description="Modern LLM-based Formula Mapper (2025 Approach)"
+    )
     parser.add_argument("--input", type=str, help="Single description to map")
-    parser.add_argument("--batch", type=str, help="File with descriptions (one per line)")
-    parser.add_argument("--demo", action="store_true", help="Run demonstration with sample sentences")
-    parser.add_argument("--model", type=str, default="gpt-4", help="Model to use (default: gpt-4)")
     parser.add_argument(
-        "--output", type=str, default="results.json", help="Output file for results (default: results.json)"
+        "--batch", type=str, help="File with descriptions (one per line)"
+    )
+    parser.add_argument(
+        "--demo", action="store_true", help="Run demonstration with sample sentences"
+    )
+    parser.add_argument(
+        "--model", type=str, default="gpt-4", help="Model to use (default: gpt-4)"
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        default="results.json",
+        help="Output file for results (default: results.json)",
     )
 
     args = parser.parse_args()

@@ -16,7 +16,9 @@ Provides three different simulation modes for testing NER training pipelines:
 """
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 
 # ============================================================================
@@ -223,9 +225,17 @@ def simulate_realistic_test(config: Dict) -> Dict:
         val_samples = int(base_samples * 0.2)
         test_samples = int(base_samples * 0.2)
 
-        result.update({"train_samples": train_samples, "val_samples": val_samples, "test_samples": test_samples})
+        result.update(
+            {
+                "train_samples": train_samples,
+                "val_samples": val_samples,
+                "test_samples": test_samples,
+            }
+        )
 
-        logging.info(f"Test {test_id} - Train: {train_samples}, Val: {val_samples}, Test: {test_samples}")
+        logging.info(
+            f"Test {test_id} - Train: {train_samples}, Val: {val_samples}, Test: {test_samples}"
+        )
 
         # Step 2: Simulate training (5-15 seconds based on size)
         logging.info(f"Test {test_id} - [2/4] Training model...")
@@ -309,7 +319,11 @@ def run_full_integration_test(config: Dict) -> Dict:
         from hypatiax.core.training.training_spacy import Training
     except ImportError as e:
         logging.error(f"Cannot import hypatiax modules: {e}")
-        return {"test_id": config["test_id"], "status": "error", "error": "hypatiax package not available"}
+        return {
+            "test_id": config["test_id"],
+            "status": "error",
+            "error": "hypatiax package not available",
+        }
 
     test_id = config["test_id"]
     test_name = config["name"]
@@ -390,7 +404,9 @@ def run_full_integration_test(config: Dict) -> Dict:
 # ============================================================================
 
 
-def run_tests_parallel(mode: str = "realistic", max_workers: Optional[int] = None) -> pd.DataFrame:
+def run_tests_parallel(
+    mode: str = "realistic", max_workers: Optional[int] = None
+) -> pd.DataFrame:
     """
     Run all tests in parallel using the specified simulation mode.
 
@@ -402,7 +418,11 @@ def run_tests_parallel(mode: str = "realistic", max_workers: Optional[int] = Non
         DataFrame with test results
     """
     # Select test function based on mode
-    mode_map = {"quick": simulate_quick_test, "realistic": simulate_realistic_test, "full": run_full_integration_test}
+    mode_map = {
+        "quick": simulate_quick_test,
+        "realistic": simulate_realistic_test,
+        "full": run_full_integration_test,
+    }
 
     test_function = mode_map.get(mode.lower())
     if not test_function:
@@ -424,7 +444,9 @@ def run_tests_parallel(mode: str = "realistic", max_workers: Optional[int] = Non
     # Run tests in parallel
     results = []
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        future_to_config = {executor.submit(test_function, config): config for config in test_configs}
+        future_to_config = {
+            executor.submit(test_function, config): config for config in test_configs
+        }
 
         for future in as_completed(future_to_config):
             try:
@@ -468,7 +490,15 @@ def print_results_summary(results_df: pd.DataFrame):
     print("=" * 70)
 
     # Display main results
-    display_cols = ["test_id", "name", "status", "dtype", "val_f1", "test_f1", "training_time"]
+    display_cols = [
+        "test_id",
+        "name",
+        "status",
+        "dtype",
+        "val_f1",
+        "test_f1",
+        "training_time",
+    ]
     available_cols = [col for col in display_cols if col in results_df.columns]
 
     if available_cols:

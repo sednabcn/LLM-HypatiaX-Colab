@@ -78,7 +78,11 @@ class UniswapV3Math:
 
     @staticmethod
     def calculate_liquidity(
-        amount0: float, amount1: float, price_lower: float, price_upper: float, price_current: float
+        amount0: float,
+        amount1: float,
+        price_lower: float,
+        price_upper: float,
+        price_current: float,
     ) -> float:
         """
         Calculate liquidity L for a V3 position
@@ -92,7 +96,12 @@ class UniswapV3Math:
         if price_current <= price_lower:
             # Price below range - only token0
             if amount0 > 0:
-                liquidity = amount0 * sqrt_price_lower * sqrt_price_upper / (sqrt_price_upper - sqrt_price_lower)
+                liquidity = (
+                    amount0
+                    * sqrt_price_lower
+                    * sqrt_price_upper
+                    / (sqrt_price_upper - sqrt_price_lower)
+                )
             else:
                 liquidity = 0
 
@@ -105,14 +114,21 @@ class UniswapV3Math:
 
         else:
             # Price in range - both tokens
-            liquidity_from_0 = amount0 * sqrt_price_current * sqrt_price_upper / (sqrt_price_upper - sqrt_price_current)
+            liquidity_from_0 = (
+                amount0
+                * sqrt_price_current
+                * sqrt_price_upper
+                / (sqrt_price_upper - sqrt_price_current)
+            )
             liquidity_from_1 = amount1 / (sqrt_price_current - sqrt_price_lower)
             liquidity = min(liquidity_from_0, liquidity_from_1)
 
         return liquidity
 
     @staticmethod
-    def calculate_amounts(liquidity: float, price_lower: float, price_upper: float, price_current: float) -> tuple:
+    def calculate_amounts(
+        liquidity: float, price_lower: float, price_upper: float, price_current: float
+    ) -> tuple:
         """
         Calculate token amounts from liquidity
 
@@ -124,7 +140,11 @@ class UniswapV3Math:
 
         if price_current <= price_lower:
             # All token0
-            amount0 = liquidity * (sqrt_price_upper - sqrt_price_lower) / (sqrt_price_lower * sqrt_price_upper)
+            amount0 = (
+                liquidity
+                * (sqrt_price_upper - sqrt_price_lower)
+                / (sqrt_price_lower * sqrt_price_upper)
+            )
             amount1 = 0
 
         elif price_current >= price_upper:
@@ -134,7 +154,11 @@ class UniswapV3Math:
 
         else:
             # Both tokens
-            amount0 = liquidity * (sqrt_price_upper - sqrt_price_current) / (sqrt_price_current * sqrt_price_upper)
+            amount0 = (
+                liquidity
+                * (sqrt_price_upper - sqrt_price_current)
+                / (sqrt_price_current * sqrt_price_upper)
+            )
             amount1 = liquidity * (sqrt_price_current - sqrt_price_lower)
 
         return amount0, amount1
@@ -162,7 +186,9 @@ class UniswapV3Calculator:
 
         # Calculate liquidity
         math_helper = UniswapV3Math()
-        L = math_helper.calculate_liquidity(position.amount0_deposited, position.amount1_deposited, Pa, Pb, P)
+        L = math_helper.calculate_liquidity(
+            position.amount0_deposited, position.amount1_deposited, Pa, Pb, P
+        )
 
         # Calculate current amounts in pool
         amount0_now, amount1_now = math_helper.calculate_amounts(L, Pa, Pb, P)
@@ -187,7 +213,9 @@ class UniswapV3Calculator:
         # Fees only earned when in range
         if in_range:
             position_tvl = current_value
-            pool_share = position_tvl / position.pool_tvl_usd if position.pool_tvl_usd > 0 else 0
+            pool_share = (
+                position_tvl / position.pool_tvl_usd if position.pool_tvl_usd > 0 else 0
+            )
 
             # V3 concentrates liquidity, so effective share is higher
             range_factor = calculate_range_factor(Pa, Pb, P)
@@ -228,13 +256,17 @@ class UniswapV3Calculator:
             "daily_fees": round(daily_fees, 2),
             "total_fees": round(total_fees, 2),
             "net_result": round(net_result, 2),
-            "breakeven_days": round(breakeven_days, 2) if breakeven_days != float("inf") else "N/A",
+            "breakeven_days": (
+                round(breakeven_days, 2) if breakeven_days != float("inf") else "N/A"
+            ),
             "profitable": "Yes" if net_result > 0 else "No",
             "fee_tier": position.fee_tier * 100,  # Convert to percentage
         }
 
 
-def calculate_range_factor(price_lower: float, price_upper: float, price_current: float) -> float:
+def calculate_range_factor(
+    price_lower: float, price_upper: float, price_current: float
+) -> float:
     """
     Calculate capital efficiency factor for concentrated liquidity
 
@@ -395,7 +427,9 @@ def generate_v3_test_positions() -> List[V3Position]:
     return positions
 
 
-def export_results_to_csv(results: List[Dict], filename: str = "uniswap_v3_results.csv"):
+def export_results_to_csv(
+    results: List[Dict], filename: str = "uniswap_v3_results.csv"
+):
     """Export V3 analysis results to CSV"""
     if not results:
         return

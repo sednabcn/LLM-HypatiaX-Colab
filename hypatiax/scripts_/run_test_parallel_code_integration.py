@@ -18,7 +18,9 @@ Usage:
 """
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 
 # ============================================================================
@@ -163,9 +165,17 @@ def simulate_realistic_test(config: Dict) -> Dict:
         val_samples = int(base_samples * 0.2)
         test_samples = int(base_samples * 0.2)
 
-        result.update({"train_samples": train_samples, "val_samples": val_samples, "test_samples": test_samples})
+        result.update(
+            {
+                "train_samples": train_samples,
+                "val_samples": val_samples,
+                "test_samples": test_samples,
+            }
+        )
 
-        logging.info(f"Test {test_id} - Train: {train_samples}, Val: {val_samples}, Test: {test_samples}")
+        logging.info(
+            f"Test {test_id} - Train: {train_samples}, Val: {val_samples}, Test: {test_samples}"
+        )
 
         # Step 2: Simulate training (5-15 seconds based on size)
         logging.info(f"Test {test_id} - [2/4] Training model...")
@@ -404,7 +414,9 @@ def run_test(config: Dict, mode: str = "realistic") -> Dict:
 # ============================================================================
 
 
-def run_all_tests_concurrently(mode: str = "realistic", max_workers: Optional[int] = None) -> List[Dict]:
+def run_all_tests_concurrently(
+    mode: str = "realistic", max_workers: Optional[int] = None
+) -> List[Dict]:
     """
     Run all tests concurrently using ThreadPoolExecutor.
 
@@ -429,7 +441,10 @@ def run_all_tests_concurrently(mode: str = "realistic", max_workers: Optional[in
     results = []
 
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        future_to_test = {executor.submit(run_test, config, mode): config for config in test_configurations}
+        future_to_test = {
+            executor.submit(run_test, config, mode): config
+            for config in test_configurations
+        }
 
         for future in as_completed(future_to_test):
             try:
@@ -471,7 +486,16 @@ def print_results_summary(results_df: pd.DataFrame):
     print("=" * 80)
 
     # Display main results
-    display_cols = ["test_id", "name", "status", "dtype", "sizefile", "val_f1", "test_f1", "training_time"]
+    display_cols = [
+        "test_id",
+        "name",
+        "status",
+        "dtype",
+        "sizefile",
+        "val_f1",
+        "test_f1",
+        "training_time",
+    ]
     available_cols = [col for col in display_cols if col in results_df.columns]
 
     if available_cols:
@@ -526,7 +550,10 @@ def main():
         help="Execution mode: quick (instant mock), realistic (timed simulation), full (actual training)",
     )
     parser.add_argument(
-        "--workers", type=int, default=None, help="Number of parallel workers (default: min(3, CPU count))"
+        "--workers",
+        type=int,
+        default=None,
+        help="Number of parallel workers (default: min(3, CPU count))",
     )
 
     args = parser.parse_args()

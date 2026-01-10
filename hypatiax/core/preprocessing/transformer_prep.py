@@ -17,11 +17,19 @@ class TransformerPreprocessor:
     ) -> Dict[str, Any]:
         """Prepare data for sequence-to-sequence task"""
         inputs = self.tokenizer(
-            input_texts, max_length=max_length, padding="max_length", truncation=True, return_tensors="pt"
+            input_texts,
+            max_length=max_length,
+            padding="max_length",
+            truncation=True,
+            return_tensors="pt",
         )
 
         targets = self.tokenizer(
-            target_texts, max_length=max_length, padding="max_length", truncation=True, return_tensors="pt"
+            target_texts,
+            max_length=max_length,
+            padding="max_length",
+            truncation=True,
+            return_tensors="pt",
         )
 
         return {

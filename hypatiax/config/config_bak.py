@@ -36,7 +36,9 @@ class SecretsConfig:
         client = OpenAI(api_key=secrets.openai_api_key)
     """
 
-    def __init__(self, env_file: Optional[str] = ".env", path_config: Optional[Any] = None):
+    def __init__(
+        self, env_file: Optional[str] = ".env", path_config: Optional[Any] = None
+    ):
         """
         Initialize secrets configuration.
 
@@ -52,7 +54,9 @@ class SecretsConfig:
         self._load_env_file(env_file)
         self._load_secrets()
 
-        logger.info(f"SecretsConfig initialized: environment={self.environment}, source={self._source}")
+        logger.info(
+            f"SecretsConfig initialized: environment={self.environment}, source={self._source}"
+        )
 
     def _detect_environment(self) -> str:
         """Detect execution environment (sync with PathConfig)."""
@@ -103,7 +107,10 @@ class SecretsConfig:
         # No .env file found - will use environment variables
         self._source = "environment variables"
         if self.environment == "local":
-            logger.warning(f"No .env file found. Searched locations:\n" + "\n".join(f"  - {p}" for p in env_paths[:3]))
+            logger.warning(
+                f"No .env file found. Searched locations:\n"
+                + "\n".join(f"  - {p}" for p in env_paths[:3])
+            )
 
     def _load_secrets(self):
         """Load all secrets from environment variables."""
@@ -192,7 +199,9 @@ class SecretsConfig:
         self.hypatiax_api_key = os.getenv("HYPATIAX_API_KEY")
         self.hypatiax_model_version = os.getenv("HYPATIAX_MODEL_VERSION", "latest")
 
-    def validate(self, required_keys: List[str], raise_error: bool = True) -> Dict[str, bool]:
+    def validate(
+        self, required_keys: List[str], raise_error: bool = True
+    ) -> Dict[str, bool]:
         """
         Validate that required secrets are present.
 
@@ -264,10 +273,15 @@ class SecretsConfig:
         """
         if provider == "openai":
             if not self.openai_api_key:
-                raise ValueError("OPENAI_API_KEY not configured. " "Set it in .env file or environment variables.")
+                raise ValueError(
+                    "OPENAI_API_KEY not configured. "
+                    "Set it in .env file or environment variables."
+                )
             from openai import OpenAI
 
-            return OpenAI(api_key=self.openai_api_key, organization=self.openai_org_id, **kwargs)
+            return OpenAI(
+                api_key=self.openai_api_key, organization=self.openai_org_id, **kwargs
+            )
 
         elif provider == "anthropic":
             if not self.anthropic_api_key:
@@ -293,7 +307,9 @@ class SecretsConfig:
 
         elif provider == "azure":
             if not self.azure_openai_key or not self.azure_openai_endpoint:
-                raise ValueError("AZURE_OPENAI_KEY and AZURE_OPENAI_ENDPOINT not configured")
+                raise ValueError(
+                    "AZURE_OPENAI_KEY and AZURE_OPENAI_ENDPOINT not configured"
+                )
             from openai import AzureOpenAI
 
             return AzureOpenAI(
@@ -305,7 +321,8 @@ class SecretsConfig:
 
         else:
             raise ValueError(
-                f"Unknown provider: {provider}. " f"Must be one of: openai, anthropic, google, cohere, azure"
+                f"Unknown provider: {provider}. "
+                f"Must be one of: openai, anthropic, google, cohere, azure"
             )
 
     def get_masked_key(self, key_name: str) -> str:
@@ -415,7 +432,11 @@ class SecretsConfig:
         print("=" * 70)
 
     def __repr__(self) -> str:
-        return f"SecretsConfig(" f"environment={self.environment}, " f"source={self._source})"
+        return (
+            f"SecretsConfig("
+            f"environment={self.environment}, "
+            f"source={self._source})"
+        )
 
 
 # ============================================================

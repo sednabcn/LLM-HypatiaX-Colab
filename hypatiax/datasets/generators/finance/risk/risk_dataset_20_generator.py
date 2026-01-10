@@ -52,8 +52,16 @@ class RiskFormula20Generator:
                 X=X,
                 y=var_95,
                 variable_names=["mu", "sigma", "t"],
-                variable_descriptions={"mu": "Expected return", "sigma": "Volatility", "t": "Time horizon"},
-                variable_units={"mu": "dimensionless", "sigma": "dimensionless", "t": "dimensionless"},
+                variable_descriptions={
+                    "mu": "Expected return",
+                    "sigma": "Volatility",
+                    "t": "Time horizon",
+                },
+                variable_units={
+                    "mu": "dimensionless",
+                    "sigma": "dimensionless",
+                    "t": "dimensionless",
+                },
                 description="Value at Risk at 95% confidence level",
                 validate_first=False,
             )
@@ -99,8 +107,16 @@ class RiskFormula20Generator:
                 X=X,
                 y=cvar_95,
                 variable_names=["mu", "sigma", "t"],
-                variable_descriptions={"mu": "Expected return", "sigma": "Volatility", "t": "Time horizon"},
-                variable_units={"mu": "dimensionless", "sigma": "dimensionless", "t": "dimensionless"},
+                variable_descriptions={
+                    "mu": "Expected return",
+                    "sigma": "Volatility",
+                    "t": "Time horizon",
+                },
+                variable_units={
+                    "mu": "dimensionless",
+                    "sigma": "dimensionless",
+                    "t": "dimensionless",
+                },
                 description="Conditional VaR (Expected Shortfall) at 95%",
                 validate_first=False,
             )
@@ -117,7 +133,10 @@ class RiskFormula20Generator:
                 X=X,
                 y=beta,
                 variable_names=["cov_im", "var_m"],
-                variable_descriptions={"cov_im": "Covariance between asset and market", "var_m": "Market variance"},
+                variable_descriptions={
+                    "cov_im": "Covariance between asset and market",
+                    "var_m": "Market variance",
+                },
                 variable_units={"cov_im": "dimensionless", "var_m": "dimensionless"},
                 description="Beta - measure of systematic risk",
                 validate_first=False,
@@ -141,7 +160,11 @@ class RiskFormula20Generator:
                     "target": "Target return",
                     "downside_dev": "Downside deviation",
                 },
-                variable_units={"returns": "dimensionless", "target": "dimensionless", "downside_dev": "dimensionless"},
+                variable_units={
+                    "returns": "dimensionless",
+                    "target": "dimensionless",
+                    "downside_dev": "dimensionless",
+                },
                 description="Sortino ratio - downside risk-adjusted return",
                 validate_first=False,
             )
@@ -162,7 +185,10 @@ class RiskFormula20Generator:
                     "active_return": "Portfolio return minus benchmark",
                     "tracking_error": "Std dev of active returns",
                 },
-                variable_units={"active_return": "dimensionless", "tracking_error": "dimensionless"},
+                variable_units={
+                    "active_return": "dimensionless",
+                    "tracking_error": "dimensionless",
+                },
                 description="Information ratio - active management skill",
                 validate_first=False,
             )
@@ -179,7 +205,10 @@ class RiskFormula20Generator:
                 X=X,
                 y=max_dd,
                 variable_names=["peak", "trough"],
-                variable_descriptions={"peak": "Peak portfolio value", "trough": "Trough portfolio value"},
+                variable_descriptions={
+                    "peak": "Peak portfolio value",
+                    "trough": "Trough portfolio value",
+                },
                 variable_units={"peak": "dimensionless", "trough": "dimensionless"},
                 description="Maximum Drawdown - largest peak-to-trough decline",
                 validate_first=False,
@@ -203,7 +232,11 @@ class RiskFormula20Generator:
                     "risk_free": "Risk-free rate",
                     "beta": "Systematic risk (beta)",
                 },
-                variable_units={"returns": "dimensionless", "risk_free": "dimensionless", "beta": "dimensionless"},
+                variable_units={
+                    "returns": "dimensionless",
+                    "risk_free": "dimensionless",
+                    "beta": "dimensionless",
+                },
                 description="Treynor ratio - return per unit of systematic risk",
                 validate_first=False,
             )
@@ -220,8 +253,14 @@ class RiskFormula20Generator:
                 X=X,
                 y=calmar,
                 variable_names=["annual_return", "max_drawdown"],
-                variable_descriptions={"annual_return": "Annualized return", "max_drawdown": "Maximum drawdown"},
-                variable_units={"annual_return": "dimensionless", "max_drawdown": "dimensionless"},
+                variable_descriptions={
+                    "annual_return": "Annualized return",
+                    "max_drawdown": "Maximum drawdown",
+                },
+                variable_units={
+                    "annual_return": "dimensionless",
+                    "max_drawdown": "dimensionless",
+                },
                 description="Calmar ratio - return relative to maximum drawdown",
                 validate_first=False,
             )
@@ -260,8 +299,16 @@ class RiskFormula20Generator:
                 X=X,
                 y=var_99,
                 variable_names=["mu", "sigma", "t"],
-                variable_descriptions={"mu": "Expected return", "sigma": "Volatility", "t": "Time horizon"},
-                variable_units={"mu": "dimensionless", "sigma": "dimensionless", "t": "dimensionless"},
+                variable_descriptions={
+                    "mu": "Expected return",
+                    "sigma": "Volatility",
+                    "t": "Time horizon",
+                },
+                variable_units={
+                    "mu": "dimensionless",
+                    "sigma": "dimensionless",
+                    "t": "dimensionless",
+                },
                 description="Value at Risk at 99% confidence level",
                 validate_first=False,
             )
@@ -308,8 +355,14 @@ class RiskFormula20Generator:
                 X=X,
                 y=ulcer,
                 variable_names=["dd_squared_sum", "periods"],
-                variable_descriptions={"dd_squared_sum": "Sum of squared drawdowns", "periods": "Number of periods"},
-                variable_units={"dd_squared_sum": "dimensionless", "periods": "dimensionless"},
+                variable_descriptions={
+                    "dd_squared_sum": "Sum of squared drawdowns",
+                    "periods": "Number of periods",
+                },
+                variable_units={
+                    "dd_squared_sum": "dimensionless",
+                    "periods": "dimensionless",
+                },
                 description="Ulcer Index - downside volatility measure",
                 validate_first=False,
             )
@@ -326,8 +379,14 @@ class RiskFormula20Generator:
                 X=X,
                 y=martin,
                 variable_names=["returns", "ulcer_index"],
-                variable_descriptions={"returns": "Portfolio returns", "ulcer_index": "Ulcer Index"},
-                variable_units={"returns": "dimensionless", "ulcer_index": "dimensionless"},
+                variable_descriptions={
+                    "returns": "Portfolio returns",
+                    "ulcer_index": "Ulcer Index",
+                },
+                variable_units={
+                    "returns": "dimensionless",
+                    "ulcer_index": "dimensionless",
+                },
                 description="Martin ratio - return per unit of Ulcer Index",
                 validate_first=False,
             )
@@ -344,7 +403,10 @@ class RiskFormula20Generator:
                 X=X,
                 y=kappa3,
                 variable_names=["returns", "lpm3"],
-                variable_descriptions={"returns": "Portfolio returns", "lpm3": "Lower partial moment (3rd order)"},
+                variable_descriptions={
+                    "returns": "Portfolio returns",
+                    "lpm3": "Lower partial moment (3rd order)",
+                },
                 variable_units={"returns": "dimensionless", "lpm3": "dimensionless"},
                 description="Kappa 3 ratio - return per unit of downside risk",
                 validate_first=False,
@@ -366,7 +428,10 @@ class RiskFormula20Generator:
                     "avg_gain": "Average gain per winning trade",
                     "avg_loss": "Average loss per losing trade",
                 },
-                variable_units={"avg_gain": "dimensionless", "avg_loss": "dimensionless"},
+                variable_units={
+                    "avg_gain": "dimensionless",
+                    "avg_loss": "dimensionless",
+                },
                 description="Gain-Loss ratio - average win to average loss",
                 validate_first=False,
             )
@@ -387,7 +452,10 @@ class RiskFormula20Generator:
                     "upside_potential": "Expected upside above MAR",
                     "downside_risk": "Downside deviation below MAR",
                 },
-                variable_units={"upside_potential": "dimensionless", "downside_risk": "dimensionless"},
+                variable_units={
+                    "upside_potential": "dimensionless",
+                    "downside_risk": "dimensionless",
+                },
                 description="Upside Potential Ratio",
                 validate_first=False,
             )
@@ -404,8 +472,14 @@ class RiskFormula20Generator:
                 X=X,
                 y=sterling,
                 variable_names=["annual_return", "avg_drawdown"],
-                variable_descriptions={"annual_return": "Annualized return", "avg_drawdown": "Average drawdown"},
-                variable_units={"annual_return": "dimensionless", "avg_drawdown": "dimensionless"},
+                variable_descriptions={
+                    "annual_return": "Annualized return",
+                    "avg_drawdown": "Average drawdown",
+                },
+                variable_units={
+                    "annual_return": "dimensionless",
+                    "avg_drawdown": "dimensionless",
+                },
                 description="Sterling ratio - excess return per unit of average drawdown",
                 validate_first=False,
             )
@@ -426,7 +500,10 @@ class RiskFormula20Generator:
                     "excess_return": "Return above risk-free rate",
                     "sqrt_sum_dd": "Square root of sum of squared drawdowns",
                 },
-                variable_units={"excess_return": "dimensionless", "sqrt_sum_dd": "dimensionless"},
+                variable_units={
+                    "excess_return": "dimensionless",
+                    "sqrt_sum_dd": "dimensionless",
+                },
                 description="Burke ratio - return per unit of drawdown magnitude",
                 validate_first=False,
             )
@@ -443,8 +520,14 @@ class RiskFormula20Generator:
                 X=X,
                 y=pain_ratio,
                 variable_names=["returns", "pain_index"],
-                variable_descriptions={"returns": "Portfolio returns", "pain_index": "Average drawdown over period"},
-                variable_units={"returns": "dimensionless", "pain_index": "dimensionless"},
+                variable_descriptions={
+                    "returns": "Portfolio returns",
+                    "pain_index": "Average drawdown over period",
+                },
+                variable_units={
+                    "returns": "dimensionless",
+                    "pain_index": "dimensionless",
+                },
                 description="Pain ratio - return per unit of pain index",
                 validate_first=False,
             )
@@ -525,7 +608,11 @@ class RiskFormula20Generator:
                         discovery.get("complexity", 0),
                         validation.get("total_score", 0),
                         validation.get("valid", False),
-                        interpretation.get("interpretation", "")[:100] if interpretation else "",
+                        (
+                            interpretation.get("interpretation", "")[:100]
+                            if interpretation
+                            else ""
+                        ),
                         metadata.get("llm_provider", ""),
                         self.system.domain,
                     ]
@@ -546,7 +633,9 @@ class RiskFormula20Generator:
         print(f"  Invalid formulas: {stats['invalid_count']}")
         print(f"  Success rate: {stats['success_rate']:.1%}")
         print(f"  Average R2 score: {stats['average_r2']:.4f}")
-        print(f"  Average validation score: {stats['average_validation_score']:.1f}/100")
+        print(
+            f"  Average validation score: {stats['average_validation_score']:.1f}/100"
+        )
 
         print("\n" + "-" * 70)
         print("Individual Formula Results:")

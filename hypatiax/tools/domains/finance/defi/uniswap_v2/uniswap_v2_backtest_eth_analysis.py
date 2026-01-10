@@ -21,7 +21,11 @@ def get_eth_historical_prices(days=90):
         prices = []
         for timestamp, price in data["prices"]:
             prices.append(
-                {"timestamp": timestamp, "date": datetime.fromtimestamp(timestamp / 1000), "price_usd": price}
+                {
+                    "timestamp": timestamp,
+                    "date": datetime.fromtimestamp(timestamp / 1000),
+                    "price_usd": price,
+                }
             )
         return prices
     except Exception as e:
@@ -59,7 +63,13 @@ def get_uniswap_pool_data(pool_address):
 
 
 def calculate_il_with_fees(
-    initial_price, current_price, initial_x, initial_y, days_elapsed, daily_volume_usd, fee_tier=0.003
+    initial_price,
+    current_price,
+    initial_x,
+    initial_y,
+    days_elapsed,
+    daily_volume_usd,
+    fee_tier=0.003,
 ):
     """
     Calculate Impermanent Loss and Fees Earned
@@ -107,7 +117,9 @@ def calculate_il_with_fees(
 # ===== BACKTESTING ENGINE =====
 
 
-def backtest_lp_strategy(historical_prices, initial_eth=10, initial_usdc=20000, daily_volume=5000000):
+def backtest_lp_strategy(
+    historical_prices, initial_eth=10, initial_usdc=20000, daily_volume=5000000
+):
     """
     Run complete backtest comparing LP vs HODL
 
@@ -151,7 +163,8 @@ def backtest_lp_strategy(historical_prices, initial_eth=10, initial_usdc=20000, 
                 "date": day["date"],
                 "day": days_elapsed,
                 "price": current_price,
-                "price_change_pct": ((current_price - initial_price) / initial_price) * 100,
+                "price_change_pct": ((current_price - initial_price) / initial_price)
+                * 100,
                 "il_percent": calc["il_percent"],
                 "il_usd": calc["il_usd"],
                 "daily_fees": calc["daily_fees"],
@@ -200,7 +213,10 @@ def analyze_results(df):
             "il_at_breakeven": first_breakeven["il_usd"],
         }
     else:
-        analysis["breakeven"] = {"days_to_breakeven": None, "message": "Never reached breakeven in this period"}
+        analysis["breakeven"] = {
+            "days_to_breakeven": None,
+            "message": "Never reached breakeven in this period",
+        }
 
     # Performance metrics
     analysis["performance"] = {
@@ -239,7 +255,9 @@ def print_analysis_report(analysis):
     print("-" * 60)
     s = analysis["summary"]
     print(f"Duration: {s['total_days']} days")
-    print(f"ETH Price: ${s['initial_price']:.2f} → ${s['final_price']:.2f} ({s['price_change_pct']:+.2f}%)")
+    print(
+        f"ETH Price: ${s['initial_price']:.2f} → ${s['final_price']:.2f} ({s['price_change_pct']:+.2f}%)"
+    )
     print(f"Total Fees Earned: ${s['total_fees_earned']:.2f}")
     print(f"Final IL: ${s['final_il_usd']:.2f}")
     print(f"Final LP Advantage: ${s['final_advantage']:+.2f}")
@@ -287,7 +305,9 @@ def create_visualizations(df, save_path=png_path):
         return
 
     fig, axes = plt.subplots(2, 2, figsize=(16, 10))
-    fig.suptitle("LP vs HODL Strategy Backtest Analysis", fontsize=16, fontweight="bold")
+    fig.suptitle(
+        "LP vs HODL Strategy Backtest Analysis", fontsize=16, fontweight="bold"
+    )
 
     # 1. Price and IL over time
     ax1 = axes[0, 0]
@@ -369,7 +389,9 @@ def create_visualizations(df, save_path=png_path):
 # ===== MAIN EXECUTION =====
 
 
-def run_complete_backtest(days=90, initial_eth=10, initial_usdc=20000, daily_volume=5000000, export_excel=True):
+def run_complete_backtest(
+    days=90, initial_eth=10, initial_usdc=20000, daily_volume=5000000, export_excel=True
+):
     """
     Run complete backtest with all analysis and visualizations
     """
@@ -438,7 +460,9 @@ def run_complete_backtest(days=90, initial_eth=10, initial_usdc=20000, daily_vol
 
 # ===== RUN THE ANALYSIS =====
 if __name__ == "__main__":
-    results, analysis = run_complete_backtest(days=90, initial_eth=10, initial_usdc=20000, daily_volume=10000000)
+    results, analysis = run_complete_backtest(
+        days=90, initial_eth=10, initial_usdc=20000, daily_volume=10000000
+    )
 
 
 ### 📊 The Three Key Metrics to Analyze

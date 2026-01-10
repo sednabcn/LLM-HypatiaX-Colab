@@ -31,7 +31,9 @@ from hypatiax.tools.validation.ensemble_validator import EnsembleValidator
 # Configure logging
 load_dotenv("/home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/.env")
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
@@ -94,7 +96,9 @@ class HybridDiscoverySystem:
         self.max_retries = max_retries
 
         logger.info(f"Initializing HybridDiscoverySystem v3.0")
-        logger.info(f"Domain: {domain} | Primary LLM: {primary_llm} | Fallback: {enable_fallback}")
+        logger.info(
+            f"Domain: {domain} | Primary LLM: {primary_llm} | Fallback: {enable_fallback}"
+        )
 
         # Initialize symbolic engine
         logger.info("Initializing symbolic engine...")
@@ -102,7 +106,9 @@ class HybridDiscoverySystem:
 
         # Initialize validator
         logger.info(f"Initializing ensemble validator (domain={domain})...")
-        self.validator = EnsembleValidator(domain=domain, max_history=max_results, weights=validation_weights)
+        self.validator = EnsembleValidator(
+            domain=domain, max_history=max_results, weights=validation_weights
+        )
 
         # Initialize real LLM providers
         logger.info("Initializing LLM providers...")
@@ -146,7 +152,9 @@ class HybridDiscoverySystem:
 
         logger.info("✅ HybridDiscoverySystem initialized successfully")
 
-    def _initialize_llm_providers(self, anthropic_api_key: Optional[str], google_api_key: Optional[str]):
+    def _initialize_llm_providers(
+        self, anthropic_api_key: Optional[str], google_api_key: Optional[str]
+    ):
         """
         Initialize production LLM providers with proper authentication.
 
@@ -160,7 +168,9 @@ class HybridDiscoverySystem:
         try:
             api_key = anthropic_api_key or os.getenv("ANTHROPIC_API_KEY")
             if api_key:
-                self.anthropic_provider = AnthropicProvider(api_key=api_key, max_tokens=4096)
+                self.anthropic_provider = AnthropicProvider(
+                    api_key=api_key, max_tokens=4096
+                )
                 logger.info("✅ Anthropic Claude provider initialized")
             else:
                 self.anthropic_provider = None
@@ -173,7 +183,9 @@ class HybridDiscoverySystem:
         try:
             api_key = google_api_key or os.getenv("GOOGLE_API_KEY")
             if api_key:
-                self.google_provider = GoogleProvider(api_key=api_key, max_output_tokens=8192)
+                self.google_provider = GoogleProvider(
+                    api_key=api_key, max_output_tokens=8192
+                )
                 logger.info("✅ Google Gemini provider initialized")
             else:
                 self.google_provider = None
@@ -194,14 +206,20 @@ class HybridDiscoverySystem:
         # Adjust primary_llm if provider not available
         if self.primary_llm == "anthropic" and not self.anthropic_provider:
             if self.google_provider:
-                logger.warning("⚠️  Anthropic unavailable, switching to Google as primary")
+                logger.warning(
+                    "⚠️  Anthropic unavailable, switching to Google as primary"
+                )
                 self.primary_llm = "google"
             else:
-                raise ValueError("Primary LLM 'anthropic' not available and no fallback")
+                raise ValueError(
+                    "Primary LLM 'anthropic' not available and no fallback"
+                )
 
         if self.primary_llm == "google" and not self.google_provider:
             if self.anthropic_provider:
-                logger.warning("⚠️  Google unavailable, switching to Anthropic as primary")
+                logger.warning(
+                    "⚠️  Google unavailable, switching to Anthropic as primary"
+                )
                 self.primary_llm = "anthropic"
             else:
                 raise ValueError("Primary LLM 'google' not available and no fallback")
@@ -231,18 +249,28 @@ class HybridDiscoverySystem:
             Interpretation dictionary with provider metadata
         """
         # Build structured prompt
-        prompt = self._build_interpretation_prompt(expression, variables, r2, validation_result, context)
+        prompt = self._build_interpretation_prompt(
+            expression, variables, r2, validation_result, context
+        )
 
         # Determine provider order
         if self.primary_llm == "anthropic" and self.anthropic_provider:
             providers = [
                 ("anthropic", self.anthropic_provider),
-                ("google", self.google_provider) if self.enable_fallback else (None, None),
+                (
+                    ("google", self.google_provider)
+                    if self.enable_fallback
+                    else (None, None)
+                ),
             ]
         else:
             providers = [
                 ("google", self.google_provider),
-                ("anthropic", self.anthropic_provider) if self.enable_fallback else (None, None),
+                (
+                    ("anthropic", self.anthropic_provider)
+                    if self.enable_fallback
+                    else (None, None)
+                ),
             ]
 
         # Filter out None providers
@@ -265,15 +293,21 @@ class HybridDiscoverySystem:
 
                 # Use provider's infrastructure but adapt prompt
                 if provider_name == "anthropic":
-                    response = provider._call_with_retry(prompt=prompt, max_retries=self.max_retries)
+                    response = provider._call_with_retry(
+                        prompt=prompt, max_retries=self.max_retries
+                    )
                     content = response.content[0].text
 
                     # Update provider stats
                     provider.stats["total_tokens_input"] += response.usage.input_tokens
-                    provider.stats["total_tokens_output"] += response.usage.output_tokens
+                    provider.stats[
+                        "total_tokens_output"
+                    ] += response.usage.output_tokens
 
                 else:  # google
-                    response = provider._call_with_retry(prompt=prompt, max_retries=self.max_retries)
+                    response = provider._call_with_retry(
+                        prompt=prompt, max_retries=self.max_retries
+                    )
                     content = response.text
 
                 elapsed = time.time() - start_time
@@ -297,7 +331,9 @@ class HybridDiscoverySystem:
 
                 self.stats["interpretations"] += 1
 
-                logger.info(f"✅ Interpretation completed via {provider_name.upper()} in {elapsed:.2f}s")
+                logger.info(
+                    f"✅ Interpretation completed via {provider_name.upper()} in {elapsed:.2f}s"
+                )
                 return interpretation
 
             except Exception as e:
@@ -310,7 +346,9 @@ class HybridDiscoverySystem:
                 else:
                     self.stats["google_failures"] += 1
 
-                logger.error(f"❌ {provider_name.upper()} interpretation failed: {error_msg[:100]}")
+                logger.error(
+                    f"❌ {provider_name.upper()} interpretation failed: {error_msg[:100]}"
+                )
 
                 # If fallback enabled and not last provider
                 if self.enable_fallback and i < len(providers) - 1:
@@ -346,9 +384,13 @@ VALIDATION RESULTS:
 {chr(10).join(f"  - {k.capitalize()}: {v:.1f}" for k, v in validation_result.get('layer_scores', {}).items())}
 """
             if validation_result.get("errors"):
-                validation_summary += f"\n- Errors: {len(validation_result['errors'])} detected"
+                validation_summary += (
+                    f"\n- Errors: {len(validation_result['errors'])} detected"
+                )
             if validation_result.get("warnings"):
-                validation_summary += f"\n- Warnings: {len(validation_result['warnings'])} detected"
+                validation_summary += (
+                    f"\n- Warnings: {len(validation_result['warnings'])} detected"
+                )
 
         prompt = f"""You are a mathematical finance expert analyzing a discovered symbolic expression in the {self.domain} domain.
 
@@ -431,7 +473,12 @@ Return only the JSON object, no other text."""
                 parsed = json.loads(json_str)
 
                 # Ensure required fields
-                required_fields = ["interpretation", "relationships", "use_cases", "limitations"]
+                required_fields = [
+                    "interpretation",
+                    "relationships",
+                    "use_cases",
+                    "limitations",
+                ]
                 for field in required_fields:
                     if field not in parsed:
                         parsed[field] = []
@@ -448,7 +495,9 @@ Return only the JSON object, no other text."""
                     "relationships": [],
                     "domain_insights": [],
                     "use_cases": [],
-                    "limitations": ["Parse error: Could not extract JSON from response"],
+                    "limitations": [
+                        "Parse error: Could not extract JSON from response"
+                    ],
                     "provider": provider,
                     "raw_response": response,
                     "parse_success": False,
@@ -513,7 +562,9 @@ Return only the JSON object, no other text."""
         """
         print(f"\n{'='*70}")
         print(f"WORKFLOW: {description or 'Unnamed Discovery'}")
-        print(f"Domain: {self.domain.upper()} | Primary LLM: {self.primary_llm.upper()}")
+        print(
+            f"Domain: {self.domain.upper()} | Primary LLM: {self.primary_llm.upper()}"
+        )
         print(f"Fallback: {'Enabled' if self.enable_fallback else 'Disabled'}")
         print(f"{'='*70}")
 
@@ -530,10 +581,16 @@ Return only the JSON object, no other text."""
 
         except Exception as e:
             logger.error(f"Discovery failed: {e}")
-            return {"error": "discovery_failed", "message": str(e), "stage": "discovery"}
+            return {
+                "error": "discovery_failed",
+                "message": str(e),
+                "stage": "discovery",
+            }
 
         # STAGE 2: VALIDATE
-        print(f"\n[2/3] ✓ Validating expression across {len(self.validator.weights)} layers...")
+        print(
+            f"\n[2/3] ✓ Validating expression across {len(self.validator.weights)} layers..."
+        )
 
         try:
             # Prepare test data from input features
@@ -550,7 +607,9 @@ Return only the JSON object, no other text."""
 
             # Display validation results
             valid_symbol = "✓" if validation_result["valid"] else "✗"
-            print(f"{valid_symbol} Overall Score: {validation_result['total_score']:.1f}/100")
+            print(
+                f"{valid_symbol} Overall Score: {validation_result['total_score']:.1f}/100"
+            )
             print(f"   Layer Scores:")
             for layer, score in validation_result["layer_scores"].items():
                 layer_symbol = "✓" if score >= 70 else "⚠" if score >= 50 else "✗"
@@ -590,7 +649,9 @@ Return only the JSON object, no other text."""
                     validation_result=validation_result,
                 )
 
-                provider_used = interpretation.get("metadata", {}).get("provider", "unknown")
+                provider_used = interpretation.get("metadata", {}).get(
+                    "provider", "unknown"
+                )
                 print(f"✅ Interpretation complete via {provider_used.upper()}")
 
                 # Show interpretation summary
@@ -637,7 +698,11 @@ Return only the JSON object, no other text."""
                 "n_samples": len(X),
                 "n_features": X.shape[1],
                 "variable_names": variable_names,
-                "llm_provider": interpretation.get("metadata", {}).get("provider") if interpretation else None,
+                "llm_provider": (
+                    interpretation.get("metadata", {}).get("provider")
+                    if interpretation
+                    else None
+                ),
                 "primary_llm": self.primary_llm,
                 "fallback_enabled": self.enable_fallback,
             },
@@ -647,7 +712,9 @@ Return only the JSON object, no other text."""
         self.results.append(complete_result)
 
         print(f"\n{'='*70}")
-        print(f"✅ Workflow complete. Result stored ({len(self.results)}/{self.max_results or '∞'})")
+        print(
+            f"✅ Workflow complete. Result stored ({len(self.results)}/{self.max_results or '∞'})"
+        )
         print(f"{'='*70}\n")
 
         # Display formatted output if requested
@@ -696,7 +763,9 @@ Return only the JSON object, no other text."""
 
         # Add provider-specific statistics if available
         if self.anthropic_provider:
-            stats["anthropic"]["provider_stats"] = self.anthropic_provider.get_statistics()
+            stats["anthropic"][
+                "provider_stats"
+            ] = self.anthropic_provider.get_statistics()
 
         if self.google_provider:
             stats["google"]["provider_stats"] = self.google_provider.get_statistics()
@@ -717,9 +786,13 @@ Return only the JSON object, no other text."""
             # Simple text format
             print(f"Expression: {result.get('discovery', {}).get('expression', 'N/A')}")
             print(f"R²: {result.get('discovery', {}).get('r2_score', 0):.4f}")
-            print(f"Validation: {result.get('validation', {}).get('total_score', 0):.1f}/100")
+            print(
+                f"Validation: {result.get('validation', {}).get('total_score', 0):.1f}/100"
+            )
             if result.get("interpretation"):
-                print(f"Interpretation: {result['interpretation'].get('interpretation', 'N/A')}")
+                print(
+                    f"Interpretation: {result['interpretation'].get('interpretation', 'N/A')}"
+                )
 
     def compare_all_results(self, top_n: int = 10):
         """Display comparison table of all stored results."""
@@ -733,7 +806,9 @@ Return only the JSON object, no other text."""
                 r2 = result.get("discovery", {}).get("r2_score", 0)
                 val_score = result.get("validation", {}).get("total_score", 0)
                 valid = "✓" if result.get("validation", {}).get("valid") else "✗"
-                print(f"{i:2d}. {valid} {expr[:40]:40s} | R²={r2:.4f} | Val={val_score:.1f}")
+                print(
+                    f"{i:2d}. {valid} {expr[:40]:40s} | R²={r2:.4f} | Val={val_score:.1f}"
+                )
 
     def clear_results(self):
         """Clear all stored results."""
@@ -768,10 +843,14 @@ Return only the JSON object, no other text."""
             }
         else:
             total = len(self.results)
-            valid_count = sum(1 for r in self.results if r.get("validation", {}).get("valid", False))
+            valid_count = sum(
+                1 for r in self.results if r.get("validation", {}).get("valid", False)
+            )
 
             r2_scores = [
-                r["discovery"]["r2_score"] for r in self.results if "discovery" in r and "r2_score" in r["discovery"]
+                r["discovery"]["r2_score"]
+                for r in self.results
+                if "discovery" in r and "r2_score" in r["discovery"]
             ]
             avg_r2 = sum(r2_scores) / len(r2_scores) if r2_scores else 0.0
 
@@ -806,7 +885,9 @@ Return only the JSON object, no other text."""
 
         return base_stats
 
-    def export_results(self, filepath: str, format: str = "json", include_metadata: bool = True):
+    def export_results(
+        self, filepath: str, format: str = "json", include_metadata: bool = True
+    ):
         """
         Export results to file.
 
@@ -866,7 +947,9 @@ Return only the JSON object, no other text."""
                             result.get("discovery", {}).get("complexity", 0),
                             result.get("validation", {}).get("total_score", 0),
                             result.get("validation", {}).get("valid", False),
-                            (result.get("interpretation") or {}).get("interpretation", "")[:100],
+                            (result.get("interpretation") or {}).get(
+                                "interpretation", ""
+                            )[:100],
                             result.get("metadata", {}).get("llm_provider", ""),
                             self.domain,
                         ]
@@ -902,13 +985,17 @@ Return only the JSON object, no other text."""
         if llm_stats["anthropic"]["available"]:
             anth = llm_stats["anthropic"]
             print(f"\n   Anthropic Claude:")
-            print(f"     Calls: {anth['calls']} | Success: {anth['successes']} | Failed: {anth['failures']}")
+            print(
+                f"     Calls: {anth['calls']} | Success: {anth['successes']} | Failed: {anth['failures']}"
+            )
             print(f"     Success rate: {anth['success_rate_percent']:.1f}%")
 
         if llm_stats["google"]["available"]:
             goog = llm_stats["google"]
             print(f"\n   Google Gemini:")
-            print(f"     Calls: {goog['calls']} | Success: {goog['successes']} | Failed: {goog['failures']}")
+            print(
+                f"     Calls: {goog['calls']} | Success: {goog['successes']} | Failed: {goog['failures']}"
+            )
             print(f"     Success rate: {goog['success_rate_percent']:.1f}%")
 
         print(f"\n✓ Validation:")

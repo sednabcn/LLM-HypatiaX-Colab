@@ -25,4 +25,9 @@ class AgentMapper:
             results.append({"agent": agent.name, "output": result})
             current_task.update(result)
 
-        return {"query": query, "expression": current_task.get("expression"), "method": "agent", "workflow": results}
+        return {
+            "query": query,
+            "expression": current_task.get("expression"),
+            "method": "agent",
+            "workflow": results,
+        }

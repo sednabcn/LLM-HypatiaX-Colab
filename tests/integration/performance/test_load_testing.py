@@ -482,7 +482,8 @@ class TestLatencyBenchmarks:
         p99_latency = np.percentile(latencies, 99)
 
         print(
-            f"\nCompilation latency - Avg: {avg_latency:.2f}ms, " f"P95: {p95_latency:.2f}ms, P99: {p99_latency:.2f}ms"
+            f"\nCompilation latency - Avg: {avg_latency:.2f}ms, "
+            f"P95: {p95_latency:.2f}ms, P99: {p99_latency:.2f}ms"
         )
 
         # Should be fast
@@ -508,7 +509,10 @@ class TestLatencyBenchmarks:
         avg_latency = statistics.mean(latencies)
         p95_latency = np.percentile(latencies, 95)
 
-        print(f"\nComputation latency - Avg: {avg_latency:.2f}μs, " f"P95: {p95_latency:.2f}μs")
+        print(
+            f"\nComputation latency - Avg: {avg_latency:.2f}μs, "
+            f"P95: {p95_latency:.2f}μs"
+        )
 
         # Should be very fast
         assert avg_latency < 100  # Less than 100 microseconds

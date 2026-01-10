@@ -26,7 +26,9 @@ class SecretsConfig:
     5. Parent directories
     """
 
-    def __init__(self, env_file: Optional[str] = ".env", path_config: Optional[Any] = None):
+    def __init__(
+        self, env_file: Optional[str] = ".env", path_config: Optional[Any] = None
+    ):
         """
         Initialize secrets configuration.
 
@@ -97,7 +99,9 @@ class SecretsConfig:
         for env_path in env_paths:
             if env_path.exists() and env_path not in self._loaded_files:
                 try:
-                    load_dotenv(env_path, override=False)  # Don't override existing vars
+                    load_dotenv(
+                        env_path, override=False
+                    )  # Don't override existing vars
                     self._loaded_files.append(env_path)
                     loaded_count += 1
                     logger.info(f"Loaded environment from {env_path}")
@@ -109,12 +113,15 @@ class SecretsConfig:
             self._source = "environment variables only"
             if self.environment == "local":
                 logger.warning(
-                    f"No .env file found. Searched locations:\n" + "\n".join(f"  - {p}" for p in env_paths[:5])
+                    f"No .env file found. Searched locations:\n"
+                    + "\n".join(f"  - {p}" for p in env_paths[:5])
                 )
         elif loaded_count == 1:
             self._source = f"local {self._loaded_files[0]}"
         else:
-            self._source = f"local {loaded_count} files: " + ", ".join(str(f) for f in self._loaded_files)
+            self._source = f"local {loaded_count} files: " + ", ".join(
+                str(f) for f in self._loaded_files
+            )
 
     def _load_secrets(self):
         """Load all secrets from environment variables."""
@@ -203,7 +210,9 @@ class SecretsConfig:
         self.hypatiax_api_key = os.getenv("HYPATIAX_API_KEY")
         self.hypatiax_model_version = os.getenv("HYPATIAX_MODEL_VERSION", "latest")
 
-    def validate(self, required_keys: List[str], raise_error: bool = True) -> Dict[str, bool]:
+    def validate(
+        self, required_keys: List[str], raise_error: bool = True
+    ) -> Dict[str, bool]:
         """
         Validate that required secrets are present.
 
@@ -238,7 +247,9 @@ class SecretsConfig:
             )
 
             if self.environment == "local":
-                error_msg += f"  - Add to .env file in project root or hypatiax/ directory:\n"
+                error_msg += (
+                    f"  - Add to .env file in project root or hypatiax/ directory:\n"
+                )
                 for key in missing:
                     error_msg += f"      {key.upper()}=your-key-here\n"
             elif self.environment == "github":
@@ -259,10 +270,15 @@ class SecretsConfig:
         """Get LLM client for specified provider."""
         if provider == "openai":
             if not self.openai_api_key:
-                raise ValueError("OPENAI_API_KEY not configured. " "Set it in .env file or environment variables.")
+                raise ValueError(
+                    "OPENAI_API_KEY not configured. "
+                    "Set it in .env file or environment variables."
+                )
             from openai import OpenAI
 
-            return OpenAI(api_key=self.openai_api_key, organization=self.openai_org_id, **kwargs)
+            return OpenAI(
+                api_key=self.openai_api_key, organization=self.openai_org_id, **kwargs
+            )
 
         elif provider == "anthropic":
             if not self.anthropic_api_key:
@@ -288,7 +304,9 @@ class SecretsConfig:
 
         elif provider == "azure":
             if not self.azure_openai_key or not self.azure_openai_endpoint:
-                raise ValueError("AZURE_OPENAI_KEY and AZURE_OPENAI_ENDPOINT not configured")
+                raise ValueError(
+                    "AZURE_OPENAI_KEY and AZURE_OPENAI_ENDPOINT not configured"
+                )
             from openai import AzureOpenAI
 
             return AzureOpenAI(
@@ -300,7 +318,8 @@ class SecretsConfig:
 
         else:
             raise ValueError(
-                f"Unknown provider: {provider}. " f"Must be one of: openai, anthropic, google, cohere, azure"
+                f"Unknown provider: {provider}. "
+                f"Must be one of: openai, anthropic, google, cohere, azure"
             )
 
     def get_masked_key(self, key_name: str) -> str:
@@ -393,10 +412,16 @@ class SecretsConfig:
         print("=" * 70)
 
     def __repr__(self) -> str:
-        return f"SecretsConfig(" f"environment={self.environment}, " f"loaded={len(self._loaded_files)} file(s))"
+        return (
+            f"SecretsConfig("
+            f"environment={self.environment}, "
+            f"loaded={len(self._loaded_files)} file(s))"
+        )
 
 
-def create_secrets(custom_root: Optional[Path] = None, path_config=None) -> SecretsConfig:
+def create_secrets(
+    custom_root: Optional[Path] = None, path_config=None
+) -> SecretsConfig:
     """Create a new SecretsConfig instance."""
     if path_config is None and custom_root:
         try:

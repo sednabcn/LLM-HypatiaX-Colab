@@ -12,7 +12,8 @@ def calculate_il():
 
     try:
         result = calculator.calculate_il_percentage(
-            current_price=float(data["current_price"]), initial_price=float(data["initial_price"])
+            current_price=float(data["current_price"]),
+            initial_price=float(data["initial_price"]),
         )
         return jsonify({"il_percent": result}), 200
     except Exception as e:

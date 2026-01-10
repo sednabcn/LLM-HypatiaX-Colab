@@ -68,7 +68,17 @@ def create_rule_based_model(component_func, model_name):
     except Exception as e:
         print(f"⚠️  Error adding components: {e}")
         # Fall back to basic model
-        nlp = create_basic_ner_model(["FORMULA", "COLUMN", "AGGREGATION", "OPERATOR", "VALUE", "FUNCTION", "KEYWORD"])
+        nlp = create_basic_ner_model(
+            [
+                "FORMULA",
+                "COLUMN",
+                "AGGREGATION",
+                "OPERATOR",
+                "VALUE",
+                "FUNCTION",
+                "KEYWORD",
+            ]
+        )
         print(f"  Fallback pipeline: {nlp.pipe_names}")
 
     return nlp
@@ -155,7 +165,11 @@ def main():
             "FIELD",
         ]
 
-        for model_name in ["ner_tableau_basic", "ner_tableau_formulas_basic", "ner_tableau_desc_basic"]:
+        for model_name in [
+            "ner_tableau_basic",
+            "ner_tableau_formulas_basic",
+            "ner_tableau_desc_basic",
+        ]:
             print(f"\n{'='*80}")
             print(f"Creating basic model: {model_name}")
             print("=" * 80)

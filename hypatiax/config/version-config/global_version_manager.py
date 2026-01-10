@@ -18,7 +18,11 @@ class GlobalVersionManager:
     # Define all versionable directories in the system
     VERSION_DIRECTORIES = {
         # Rules
-        "rules": {"path": "custom_ner/queries/tableau/rules", "patterns": ["*.jsonl"], "exclude": ["rules_versions/*"]},
+        "rules": {
+            "path": "custom_ner/queries/tableau/rules",
+            "patterns": ["*.jsonl"],
+            "exclude": ["rules_versions/*"],
+        },
         # Training data (Excel/CSV)
         "training_data": {
             "path": "datasets/queries/tableau/training",
@@ -50,7 +54,11 @@ class GlobalVersionManager:
             "exclude": ["ner_versions/*"],
         },
         # Vocabulary files
-        "vocab": {"path": "data_spacy/queries/tableau/vocab", "patterns": ["vocab_*"], "exclude": ["vocab_versions/*"]},
+        "vocab": {
+            "path": "data_spacy/queries/tableau/vocab",
+            "patterns": ["vocab_*"],
+            "exclude": ["vocab_versions/*"],
+        },
         # Model configs
         "model_configs": {
             "path": "models/queries/tableau/model_configs",
@@ -58,7 +66,11 @@ class GlobalVersionManager:
             "exclude": [],
         },
         # Patterns
-        "patterns": {"path": "patterns/queries/tableau", "patterns": ["*.py"], "exclude": []},
+        "patterns": {
+            "path": "patterns/queries/tableau",
+            "patterns": ["*.py"],
+            "exclude": [],
+        },
     }
 
     def __init__(self, base_path: Path):
@@ -82,7 +94,12 @@ class GlobalVersionManager:
             with open(self.global_metadata_file, "r", encoding="utf-8") as f:
                 return json.load(f)
 
-        return {"system_version": "1.0.0", "last_updated": None, "data_types": {}, "snapshots": []}
+        return {
+            "system_version": "1.0.0",
+            "last_updated": None,
+            "data_types": {},
+            "snapshots": [],
+        }
 
     def _save_metadata(self):
         """Save global version metadata."""
@@ -104,7 +121,10 @@ class GlobalVersionManager:
     def _get_next_version(self, data_type: str) -> int:
         """Get the next version number for a data type."""
         if data_type not in self.metadata["data_types"]:
-            self.metadata["data_types"][data_type] = {"current_version": 0, "versions": []}
+            self.metadata["data_types"][data_type] = {
+                "current_version": 0,
+                "versions": [],
+            }
 
         current_version = self.metadata["data_types"][data_type]["current_version"]
         return current_version + 1
@@ -183,7 +203,10 @@ class GlobalVersionManager:
             type_dir = snapshot_dir / data_type
             type_dir.mkdir(exist_ok=True)
 
-            snapshot_data["data_types"][data_type] = {"file_count": len(files), "files": []}
+            snapshot_data["data_types"][data_type] = {
+                "file_count": len(files),
+                "files": [],
+            }
 
             for file in files:
                 # Calculate hash
@@ -238,7 +261,10 @@ class GlobalVersionManager:
             print(f"   Date: {snapshot['datetime']}")
             print(f"   Timestamp: {snapshot['timestamp']}")
 
-            total_files = sum(dt.get("file_count", 0) for dt in snapshot.get("data_types", {}).values())
+            total_files = sum(
+                dt.get("file_count", 0)
+                for dt in snapshot.get("data_types", {}).values()
+            )
             print(f"   Total files: {total_files}")
 
             if snapshot.get("notes"):
@@ -249,7 +275,9 @@ class GlobalVersionManager:
                 print(f"      • {dt}: {info.get('file_count', 0)} files")
             print()
 
-    def restore_snapshot(self, snapshot_id: int, data_types: Optional[List[str]] = None):
+    def restore_snapshot(
+        self, snapshot_id: int, data_types: Optional[List[str]] = None
+    ):
         """
         Restore a snapshot.
 
@@ -268,7 +296,9 @@ class GlobalVersionManager:
             print(f"❌ Snapshot #{snapshot_id} not found")
             return False
 
-        snapshot_dir = self.versions_root / f"snapshot_{snapshot_id}_{snapshot['timestamp']}"
+        snapshot_dir = (
+            self.versions_root / f"snapshot_{snapshot_id}_{snapshot['timestamp']}"
+        )
 
         if not snapshot_dir.exists():
             print(f"❌ Snapshot directory not found: {snapshot_dir}")
@@ -280,7 +310,9 @@ class GlobalVersionManager:
 
         # Determine which data types to restore
         if data_types:
-            restore_types = [dt for dt in data_types if dt in snapshot.get("data_types", {})]
+            restore_types = [
+                dt for dt in data_types if dt in snapshot.get("data_types", {})
+            ]
         else:
             restore_types = list(snapshot.get("data_types", {}).keys())
 
@@ -306,7 +338,8 @@ class GlobalVersionManager:
                     # Backup existing file if it exists
                     if dest_path.exists():
                         backup_path = dest_path.with_suffix(
-                            dest_path.suffix + f".backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                            dest_path.suffix
+                            + f".backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
                         )
                         shutil.copy2(dest_path, backup_path)
                         print(f"   📦 Backed up existing: {dest_path.name}")
@@ -357,7 +390,9 @@ class GlobalVersionManager:
 
         if versioned:
             self._save_metadata()
-            print(f"\n✅ Auto-versioning complete: {len(versioned)} data type(s) versioned")
+            print(
+                f"\n✅ Auto-versioning complete: {len(versioned)} data type(s) versioned"
+            )
         else:
             print(f"\nℹ️  No changes detected in any data type")
 
@@ -383,7 +418,9 @@ class GlobalVersionManager:
 
         return False
 
-    def _version_data_type(self, data_type: str, files: List[Path], version: int, notes: str):
+    def _version_data_type(
+        self, data_type: str, files: List[Path], version: int, notes: str
+    ):
         """Version a specific data type."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
@@ -406,13 +443,18 @@ class GlobalVersionManager:
 
             try:
                 shutil.copy2(file, dest_path)
-                version_data["files"].append({"name": file.name, "hash": file_hash, "size": file.stat().st_size})
+                version_data["files"].append(
+                    {"name": file.name, "hash": file_hash, "size": file.stat().st_size}
+                )
             except Exception as e:
                 print(f"      ❌ Failed to version {file.name}: {e}")
 
         # Update metadata
         if data_type not in self.metadata["data_types"]:
-            self.metadata["data_types"][data_type] = {"current_version": 0, "versions": []}
+            self.metadata["data_types"][data_type] = {
+                "current_version": 0,
+                "versions": [],
+            }
 
         self.metadata["data_types"][data_type]["versions"].append(version_data)
         self.metadata["data_types"][data_type]["current_version"] = version
@@ -440,7 +482,11 @@ class GlobalVersionManager:
         for data_type, info in self.metadata.get("data_types", {}).items():
             manifest["current_versions"][data_type] = {
                 "version": info.get("current_version"),
-                "last_updated": info.get("versions", [{}])[-1].get("datetime") if info.get("versions") else None,
+                "last_updated": (
+                    info.get("versions", [{}])[-1].get("datetime")
+                    if info.get("versions")
+                    else None
+                ),
             }
 
         with open(output_file, "w", encoding="utf-8") as f:
@@ -474,10 +520,14 @@ def main():
     # Restore snapshot
     restore_parser = subparsers.add_parser("restore", help="Restore a snapshot")
     restore_parser.add_argument("snapshot_id", type=int, help="Snapshot ID")
-    restore_parser.add_argument("--data-types", nargs="+", help="Specific data types to restore")
+    restore_parser.add_argument(
+        "--data-types", nargs="+", help="Specific data types to restore"
+    )
 
     # Auto-version
-    auto_parser = subparsers.add_parser("auto-version", help="Auto-version all changed data")
+    auto_parser = subparsers.add_parser(
+        "auto-version", help="Auto-version all changed data"
+    )
     auto_parser.add_argument("--notes", default="", help="Version notes")
 
     # Export manifest

@@ -10,7 +10,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 
-def save_demo_results(results: Dict[str, Any], output_path: Optional[Path] = None) -> Path:
+def save_demo_results(
+    results: Dict[str, Any], output_path: Optional[Path] = None
+) -> Path:
     """
     Save demo results to JSON file
 
@@ -95,7 +97,8 @@ def compare_results(result1: Dict[str, Any], result2: Dict[str, Any]) -> Dict[st
     """
     comparison = {
         "same_intent": result1.get("intent") == result2.get("intent"),
-        "entity_count_diff": len(result1.get("entities", [])) - len(result2.get("entities", [])),
+        "entity_count_diff": len(result1.get("entities", []))
+        - len(result2.get("entities", [])),
         "same_output": result1.get("output") == result2.get("output"),
     }
 

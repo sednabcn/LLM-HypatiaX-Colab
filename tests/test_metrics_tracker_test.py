@@ -51,7 +51,9 @@ class TestMetrics:
         if self.coverage_percent is not None:
             lines.append(f"Coverage: {self.coverage_percent:.1f}%")
             if self.coverage_lines_covered and self.coverage_lines_total:
-                lines.append(f"Lines: {self.coverage_lines_covered}/{self.coverage_lines_total}")
+                lines.append(
+                    f"Lines: {self.coverage_lines_covered}/{self.coverage_lines_total}"
+                )
         if self.branch_coverage is not None:
             lines.append(f"Branch Coverage: {self.branch_coverage:.1f}%")
         return "\n".join(lines)
@@ -123,14 +125,19 @@ class TestComparison:
 
         # Failed tests change
         failed_change = self.current.failed - self.previous.failed
-        failed_symbol = "✅" if failed_change < 0 else "❌" if failed_change > 0 else "➡️"
+        failed_symbol = (
+            "✅" if failed_change < 0 else "❌" if failed_change > 0 else "➡️"
+        )
         lines.append(
-            f"{failed_symbol} Failed Tests: {failed_change:+d} " f"({self.previous.failed} → {self.current.failed})"
+            f"{failed_symbol} Failed Tests: {failed_change:+d} "
+            f"({self.previous.failed} → {self.current.failed})"
         )
 
         # Duration change
         duration_change = self.current.duration - self.previous.duration
-        duration_symbol = "⚡" if duration_change < 0 else "🐌" if duration_change > 0 else "➡️"
+        duration_symbol = (
+            "⚡" if duration_change < 0 else "🐌" if duration_change > 0 else "➡️"
+        )
         lines.append(
             f"{duration_symbol} Duration: {duration_change:+.2f}s "
             f"({self.previous.duration:.2f}s → {self.current.duration:.2f}s)"
@@ -166,7 +173,11 @@ class TestMetricsTracker:
             print(f"Warning: Could not save history: {e}", file=sys.stderr)
 
     def run_tests(
-        self, test_path: str = "tests/", with_coverage: bool = True, verbose: bool = True, extra_verbose: bool = False
+        self,
+        test_path: str = "tests/",
+        with_coverage: bool = True,
+        verbose: bool = True,
+        extra_verbose: bool = False,
     ) -> TestMetrics:
         """Run tests and collect metrics."""
         print("Running tests...", flush=True)
@@ -322,13 +333,18 @@ class TestMetricsTracker:
         # Show recent runs
         recent = self.history[-limit:]
 
-        print(f"{'Date':<20} {'Tests':<8} {'Passed':<8} {'Failed':<8} " f"{'Pass%':<8} {'Cov%':<8} {'Duration':<10}")
+        print(
+            f"{'Date':<20} {'Tests':<8} {'Passed':<8} {'Failed':<8} "
+            f"{'Pass%':<8} {'Cov%':<8} {'Duration':<10}"
+        )
         print("-" * 70)
 
         for entry in recent:
             metrics = TestMetrics(**entry)
             date = metrics.timestamp[:19].replace("T", " ")
-            cov = f"{metrics.coverage_percent:.1f}" if metrics.coverage_percent else "N/A"
+            cov = (
+                f"{metrics.coverage_percent:.1f}" if metrics.coverage_percent else "N/A"
+            )
 
             print(
                 f"{date:<20} {metrics.total_tests:<8} {metrics.passed:<8} "
@@ -347,16 +363,23 @@ class TestMetricsTracker:
             print("-" * 70)
 
             pass_change = last.pass_rate - first.pass_rate
-            print(f"Pass Rate: {first.pass_rate:.1f}% → {last.pass_rate:.1f}% " f"({pass_change:+.1f}%)")
+            print(
+                f"Pass Rate: {first.pass_rate:.1f}% → {last.pass_rate:.1f}% "
+                f"({pass_change:+.1f}%)"
+            )
 
             if last.coverage_percent and first.coverage_percent:
                 cov_change = last.coverage_percent - first.coverage_percent
                 print(
-                    f"Coverage: {first.coverage_percent:.1f}% → " f"{last.coverage_percent:.1f}% ({cov_change:+.1f}%)"
+                    f"Coverage: {first.coverage_percent:.1f}% → "
+                    f"{last.coverage_percent:.1f}% ({cov_change:+.1f}%)"
                 )
 
             test_change = last.total_tests - first.total_tests
-            print(f"Total Tests: {first.total_tests} → {last.total_tests} " f"({test_change:+d})")
+            print(
+                f"Total Tests: {first.total_tests} → {last.total_tests} "
+                f"({test_change:+d})"
+            )
 
             print("=" * 70)
 
@@ -445,17 +468,38 @@ class TestMetricsTracker:
 
 def main():
     """Main entry point."""
-    parser = argparse.ArgumentParser(description="Track and report test metrics over time")
-    parser.add_argument("--compare", "-c", action="store_true", help="Compare with previous run")
-    parser.add_argument("--history", "-H", action="store_true", help="Show historical trends")
-    parser.add_argument("--no-coverage", action="store_true", help="Skip coverage analysis (faster)")
-    parser.add_argument(
-        "--test-path", "-p", default="tests/", help="Path to tests (default: tests/). Can be a specific file."
+    parser = argparse.ArgumentParser(
+        description="Track and report test metrics over time"
     )
-    parser.add_argument("--verbose", "-v", action="store_true", help="Extra verbose pytest output")
+    parser.add_argument(
+        "--compare", "-c", action="store_true", help="Compare with previous run"
+    )
+    parser.add_argument(
+        "--history", "-H", action="store_true", help="Show historical trends"
+    )
+    parser.add_argument(
+        "--no-coverage", action="store_true", help="Skip coverage analysis (faster)"
+    )
+    parser.add_argument(
+        "--test-path",
+        "-p",
+        default="tests/",
+        help="Path to tests (default: tests/). Can be a specific file.",
+    )
+    parser.add_argument(
+        "--verbose", "-v", action="store_true", help="Extra verbose pytest output"
+    )
     parser.add_argument("--report", "-r", help="Generate markdown report to file")
-    parser.add_argument("--quiet", "-q", action="store_true", help="Suppress test output")
-    parser.add_argument("--limit", "-l", type=int, default=10, help="Number of history entries to show (default: 10)")
+    parser.add_argument(
+        "--quiet", "-q", action="store_true", help="Suppress test output"
+    )
+    parser.add_argument(
+        "--limit",
+        "-l",
+        type=int,
+        default=10,
+        help="Number of history entries to show (default: 10)",
+    )
 
     args = parser.parse_args()
 
@@ -485,7 +529,10 @@ def main():
     print("=" * 70)
 
     metrics = tracker.run_tests(
-        test_path=args.test_path, with_coverage=not args.no_coverage, verbose=not args.quiet, extra_verbose=args.verbose
+        test_path=args.test_path,
+        with_coverage=not args.no_coverage,
+        verbose=not args.quiet,
+        extra_verbose=args.verbose,
     )
 
     # Save metrics

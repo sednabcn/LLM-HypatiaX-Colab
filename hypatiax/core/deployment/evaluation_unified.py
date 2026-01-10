@@ -65,7 +65,9 @@ class FormulaEvaluator:
     def check_syntax(formula: str) -> bool:
         """Check if formula has valid syntax"""
         # Must have function name
-        if not any(op in formula.upper() for op in ["SUM", "AVG", "COUNT", "MAX", "MIN"]):
+        if not any(
+            op in formula.upper() for op in ["SUM", "AVG", "COUNT", "MAX", "MIN"]
+        ):
             return False
 
         # Must have balanced brackets
@@ -207,7 +209,13 @@ class ComparisonReport:
             print("No results to plot")
             return
 
-        metrics_names = ["Accuracy", "Exact Match", "Partial Match", "Syntax Correct", "Semantic Correct"]
+        metrics_names = [
+            "Accuracy",
+            "Exact Match",
+            "Partial Match",
+            "Syntax Correct",
+            "Semantic Correct",
+        ]
 
         fig, ax = plt.subplots(figsize=(12, 6))
 
@@ -273,7 +281,9 @@ class ComparisonReport:
                 f.write(f"  Partial Match: {metrics.partial_match:.4f}\n")
                 f.write(f"  Syntax Correctness: {metrics.syntax_correctness:.4f}\n")
                 f.write(f"  Semantic Correctness: {metrics.semantic_correctness:.4f}\n")
-                f.write(f"  Correct: {metrics.correct_samples}/{metrics.total_samples}\n")
+                f.write(
+                    f"  Correct: {metrics.correct_samples}/{metrics.total_samples}\n"
+                )
 
         print(f"✅ Report saved to {output_path}")
 
@@ -289,13 +299,21 @@ def main():
 
     # Example: Load test data
     test_data = [
-        {"query": "average of Sales", "predicted": "AVG([Sales])", "true": "AVG([Sales])"},
+        {
+            "query": "average of Sales",
+            "predicted": "AVG([Sales])",
+            "true": "AVG([Sales])",
+        },
         {
             "query": "sum of Revenue by Region",
             "predicted": "SUM([Revenue]) GROUP BY [Region]",
             "true": "SUM([Revenue]) GROUP BY [Region]",
         },
-        {"query": "count unique customers", "predicted": "COUNTD([Customer])", "true": "COUNT(DISTINCT [Customer])"},
+        {
+            "query": "count unique customers",
+            "predicted": "COUNTD([Customer])",
+            "true": "COUNT(DISTINCT [Customer])",
+        },
     ]
 
     # Evaluate

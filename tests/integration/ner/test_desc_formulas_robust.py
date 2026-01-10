@@ -39,7 +39,9 @@ class FixedRobustNERLoader:
                 project_root = current
 
         # Use absolute path to models
-        self.base_path = project_root / "hypatiax" / "data_spacy" / "queries" / "tableau"
+        self.base_path = (
+            project_root / "hypatiax" / "data_spacy" / "queries" / "tableau"
+        )
 
         print(f"📍 Using model path: {self.base_path}")
 
@@ -54,9 +56,15 @@ class FixedRobustNERLoader:
             raise FileNotFoundError(f"Model not found: {model_path}")
 
         strategies = [
-            ("exclude_vectors", lambda: spacy.load(str(model_path), exclude=["vectors"])),
+            (
+                "exclude_vectors",
+                lambda: spacy.load(str(model_path), exclude=["vectors"]),
+            ),
             ("standard", lambda: spacy.load(str(model_path))),
-            ("exclude_more", lambda: spacy.load(str(model_path), exclude=["vectors", "tagger"])),
+            (
+                "exclude_more",
+                lambda: spacy.load(str(model_path), exclude=["vectors", "tagger"]),
+            ),
         ]
 
         for strategy_name, strategy_func in strategies:
@@ -128,7 +136,11 @@ def test_tableau_ner_models():
 
                 # Check if expected entities were found
                 found_texts = [ent.text for ent in doc.ents]
-                missing = [exp for exp in expected if not any(exp in found for found in found_texts)]
+                missing = [
+                    exp
+                    for exp in expected
+                    if not any(exp in found for found in found_texts)
+                ]
 
                 if missing:
                     print(f"⚠ Missing expected entities: {missing}")

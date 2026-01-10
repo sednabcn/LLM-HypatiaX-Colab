@@ -5,11 +5,16 @@ Uses SymPy for mathematical validation
 Part of HypatiaX tools/validation/
 
 WEEK 2 UPDATES:
+- Added biology/ biochemistry domain
 - Added empty expression validation (Issue #1)
 - Enhanced division-by-zero detection (Issue #1)
 - Added overflow risk detection (Issue #1)
 - Improved numerical stability checks
 - Added explicit constraint validation for DeFi formulas
+
+CRITICAL FIX:
+- Fixed all variable_units -> variable_definitions references
+- Fixed expression_str -> expression references
 """
 import re
 from collections import deque
@@ -18,6 +23,37 @@ from typing import Any, Dict, List, Optional
 import sympy as sp
 from sympy import simplify, sympify
 from sympy.parsing.latex import parse_latex
+
+
+def safe_sympify(expression_str: str, variable_names: Optional[List[str]] = None):
+    """Safely sympify with Pint isolation."""
+    if not isinstance(expression_str, str):
+        expression_str = str(expression_str)
+
+    local_dict = {}
+    if variable_names:
+        for var in variable_names:
+            local_dict[var] = sp.Symbol(var, real=True)
+
+    local_dict.update(
+        {
+            "exp": sp.exp,
+            "log": sp.log,
+            "ln": sp.log,
+            "sqrt": sp.sqrt,
+            "sin": sp.sin,
+            "cos": sp.cos,
+            "tan": sp.tan,
+        }
+    )
+
+    try:
+        return sp.sympify(expression_str, locals=local_dict, evaluate=False)
+    except:
+        try:
+            return sp.sympify(expression_str, locals=local_dict, evaluate=True)
+        except Exception as e:
+            raise ValueError(f"Could not parse: {e}")
 
 
 class SymbolicValidator:
@@ -44,6 +80,8 @@ class SymbolicValidator:
             "finance": self._finance_rules,
             "esg": self._esg_rules,
             "risk": self._risk_rules,
+            "biology": self._biology_rules,  # ADD THIS
+            "biochemistry": self._biology_rules,  # ADD THIS
         }
 
         # Bounded validation history
@@ -53,7 +91,11 @@ class SymbolicValidator:
             self.validation_history = []
 
     def validate(
-        self, expression: str, variable_definitions: Dict[str, str], domain: str = "defi", from_latex: bool = False
+        self,
+        expression: str,
+        variable_definitions: Dict[str, str],
+        domain: str = "defi",
+        from_latex: bool = False,
     ) -> Dict[str, Any]:
         """
         Comprehensive validation of a mathematical expression.
@@ -107,7 +149,7 @@ class SymbolicValidator:
             if from_latex:
                 expr = self._safe_parse_latex(expression)
             else:
-                expr = sympify(expression)
+                expr = safe_sympify(expression, list(variable_definitions.keys()))
 
             if expr is None:
                 results["errors"].append("Cannot parse expression")
@@ -119,7 +161,9 @@ class SymbolicValidator:
 
             # 2. Check for undefined variables
             free_vars = expr.free_symbols
-            undefined_vars = [str(v) for v in free_vars if str(v) not in variable_definitions]
+            undefined_vars = [
+                str(v) for v in free_vars if str(v) not in variable_definitions
+            ]
             if undefined_vars:
                 results["errors"].append(f"Undefined variables: {undefined_vars}")
                 results["valid"] = False
@@ -155,7 +199,9 @@ class SymbolicValidator:
                 results["valid"] = False
 
             # 6. Domain-specific rules
-            domain_check = self.domain_rules.get(domain, self._default_rules)(expr, variable_definitions)
+            domain_check = self.domain_rules.get(domain, self._default_rules)(
+                expr, variable_definitions
+            )
 
             results["domain_valid"] = domain_check["valid"]
             results["errors"].extend(domain_check["errors"])
@@ -255,7 +301,8 @@ class SymbolicValidator:
                 # Check if exponent could be very large
                 if self._could_overflow_exp(arg):
                     warnings.append(
-                        f"Exponential overflow risk: exp({arg}). " f"Recommend capping argument or using safe_exp"
+                        f"Exponential overflow risk: exp({arg}). "
+                        f"Recommend capping argument or using safe_exp"
                     )
 
         # 4. ENHANCED: Check for products with overflow detection
@@ -273,7 +320,8 @@ class SymbolicValidator:
             for arg in sqrt_args:
                 if not self._guaranteed_positive(arg):
                     warnings.append(
-                        f"Square root of potentially negative value: sqrt({arg}). " f"Add validation or use abs()"
+                        f"Square root of potentially negative value: sqrt({arg}). "
+                        f"Add validation or use abs()"
                     )
 
         # 6. Check for logarithms (domain issues)
@@ -281,7 +329,10 @@ class SymbolicValidator:
             log_args = self._extract_log_arguments(expr)
             for arg in log_args:
                 if not self._guaranteed_positive(arg):
-                    warnings.append(f"Logarithm of non-positive value risk: log({arg}). " f"Ensure {arg} > 0")
+                    warnings.append(
+                        f"Logarithm of non-positive value risk: log({arg}). "
+                        f"Ensure {arg} > 0"
+                    )
 
         # 7. Check for trigonometric functions (range issues)
         if any(expr.has(func) for func in [sp.sin, sp.cos, sp.tan]):
@@ -293,10 +344,15 @@ class SymbolicValidator:
             for base, exp_val in power_terms:
                 if self._could_overflow_power(base, exp_val):
                     warnings.append(
-                        f"Power overflow risk: ({base})^({exp_val}). " f"Verify bounds on base and exponent"
+                        f"Power overflow risk: ({base})^({exp_val}). "
+                        f"Verify bounds on base and exponent"
                     )
 
-        return {"stable": len(warnings) == 0 and len(errors) == 0, "warnings": warnings, "errors": errors}
+        return {
+            "stable": len(warnings) == 0 and len(errors) == 0,
+            "warnings": warnings,
+            "errors": errors,
+        }
 
     # NEW WEEK 2: Helper methods for enhanced stability checks
 
@@ -430,12 +486,54 @@ class SymbolicValidator:
         return denominators
 
     def _could_be_zero(self, expr) -> bool:
-        """Check if expression could evaluate to zero."""
+        """
+        Check if expression could evaluate to zero.
+
+        Enhanced: Recognize domain-specific safe patterns.
+        """
         if expr.is_Number:
             return abs(float(expr)) < 1e-10
 
-        # Conservative: assume additions could cancel
+        # Check for sum of positive-only variables
         if expr.is_Add:
+            # If all terms are known-positive variables, sum can't be zero
+            all_positive = True
+            has_variables = False
+
+            for term in expr.args:
+                if term.is_Symbol:
+                    has_variables = True
+                    var_name = str(term).lower()
+                    # Known positive variable patterns
+                    is_positive_var = any(
+                        pattern in var_name
+                        for pattern in [
+                            "km",
+                            "vmax",
+                            "kcat",  # Biochemistry constants
+                            "concentration",
+                            "conc",  # Concentrations (≥0)
+                            "price",
+                            "liquidity",  # Finance (>0)
+                            "amount",
+                            "volume",  # Generally positive
+                        ]
+                    )
+                    if not is_positive_var:
+                        all_positive = False
+                        break
+                    elif term.is_Number and float(term) > 0:
+                        has_variables = True
+                        continue
+                    elif not (term.is_Mul and any(arg.is_Symbol for arg in term.args)):
+                        all_positive = False
+                        break
+
+            # If we have variables and all are known positive, sum can't be zero
+            if has_variables and all_positive:
+                return False
+
+            # Otherwise, conservative: additions could cancel
             return True
 
         # Check for (1 + r) patterns where r could be -1
@@ -488,15 +586,21 @@ class SymbolicValidator:
                 )
 
         # Check 2: Price positivity
-        price_vars = [v for v in free_vars if "price" in v or "p_" in v or "p0" in v or "pt" in v]
+        price_vars = [
+            v for v in free_vars if "price" in v or "p_" in v or "p0" in v or "pt" in v
+        ]
         if price_vars:
             warnings.append(
-                f"Price variables {price_vars} must be positive. " f"Add validation: assert all(p > 0 for p in prices)"
+                f"Price variables {price_vars} must be positive. "
+                f"Add validation: assert all(p > 0 for p in prices)"
             )
 
         # Check 3: Fee bounds
         if "fee" in free_vars or "phi" in free_vars or "φ" in expr_str:
-            warnings.append("Fee variable must satisfy 0 ≤ fee < 1. " "Add validation: assert 0 <= fee < 1")
+            warnings.append(
+                "Fee variable must satisfy 0 ≤ fee < 1. "
+                "Add validation: assert 0 <= fee < 1"
+            )
 
         # Check 4: Liquidity must be positive
         if "liquidity" in free_vars:
@@ -512,7 +616,9 @@ class SymbolicValidator:
 
         return {"valid": len(errors) == 0, "errors": errors, "warnings": warnings}
 
-    def _finance_rules(self, expr, variable_definitions: Dict[str, str]) -> Dict[str, Any]:
+    def _finance_rules(
+        self, expr, variable_definitions: Dict[str, str]
+    ) -> Dict[str, Any]:
         """Finance-specific validation rules."""
         errors = []
         warnings = []
@@ -565,7 +671,60 @@ class SymbolicValidator:
 
         return {"valid": len(errors) == 0, "errors": errors, "warnings": warnings}
 
-    def _default_rules(self, expr, variable_definitions: Dict[str, str]) -> Dict[str, Any]:
+    def _biology_rules(
+        self, expr, variable_definitions: Dict[str, str]
+    ) -> Dict[str, Any]:
+        """
+        Biology/biochemistry-specific validation rules.
+
+        Known safe patterns:
+        - Michaelis-Menten: Km + S is always positive (Km > 0, S ≥ 0)
+        - Hill equation: Similar guarantees
+        """
+        errors = []
+        warnings = []
+
+        expr_str = str(expr).lower()
+        free_vars = [str(s).lower() for s in expr.free_symbols]
+
+        # Check for Michaelis-Menten pattern
+        if ("km" in free_vars or "michaelis" in expr_str) and "s" in free_vars:
+            # This is likely Michaelis-Menten kinetics
+            # Km + S is ALWAYS positive (Km > 0 by definition, S ≥ 0)
+            warnings.append(
+                "Michaelis-Menten pattern detected. "
+                "Ensure Km > 0 and S ≥ 0 (standard biochemistry constraints)"
+            )
+
+        # Check for concentration variables (must be non-negative)
+        concentration_vars = [
+            v
+            for v in free_vars
+            if any(term in v for term in ["concentration", "conc", "_c"])
+        ]
+        if concentration_vars:
+            warnings.append(
+                f"Concentration variables {concentration_vars} must be non-negative. "
+                f"Validate input data: all concentrations ≥ 0"
+            )
+
+        # Check for rate constants (must be positive)
+        rate_vars = [
+            v
+            for v in free_vars
+            if any(term in v for term in ["vmax", "kcat", "kd", "ki", "rate"])
+        ]
+        if rate_vars:
+            warnings.append(
+                f"Rate/equilibrium constants {rate_vars} must be positive. "
+                f"Validate input data: all constants > 0"
+            )
+
+        return {"valid": len(errors) == 0, "errors": errors, "warnings": warnings}
+
+    def _default_rules(
+        self, expr, variable_definitions: Dict[str, str]
+    ) -> Dict[str, Any]:
         """Default validation rules."""
         return {"valid": True, "errors": [], "warnings": []}
 
@@ -641,14 +800,18 @@ if __name__ == "__main__":
 
     # Test case 1: Empty expression (NEW WEEK 2)
     print("\n[TEST 1] Empty expression detection:")
-    result1 = validator.validate(expression="", variable_definitions={}, domain="finance")
+    result1 = validator.validate(
+        expression="", variable_definitions={}, domain="finance"
+    )
     print(f"Valid: {result1['valid']}, Score: {result1['score']}")
     print(f"Errors: {result1['errors']}")
 
     # Test case 2: Division by zero without protection
     print("\n[TEST 2] Unprotected division by zero:")
     result2 = validator.validate(
-        expression="sqrt(2*sqrt(r)/(1+r)) - 1", variable_definitions={"r": "Price ratio"}, domain="defi"
+        expression="sqrt(2*sqrt(r)/(1+r)) - 1",
+        variable_definitions={"r": "Price ratio"},
+        domain="defi",
     )
     print(f"Valid: {result2['valid']}, Score: {result2['score']}")
     print(f"Errors: {result2['errors']}")

@@ -16,7 +16,9 @@ sys.path.insert(0, str(project_root))
 from dotenv import load_dotenv
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
@@ -31,7 +33,9 @@ class MockAnthropicProvider:
         self.model = "claude-sonnet-4-20250514"
         logger.info("✓ Mock provider initialized (no API calls will be made)")
 
-    def generate_formula(self, requirements: str, domain: str = "defi", n_candidates: int = 1):
+    def generate_formula(
+        self, requirements: str, domain: str = "defi", n_candidates: int = 1
+    ):
         """Generate mock formulas based on requirements"""
 
         mock_responses = {
@@ -48,8 +52,15 @@ class MockAnthropicProvider:
                 "explanation": "Impermanent loss measures the opportunity cost of providing liquidity versus holding tokens. It occurs when the price ratio changes from the initial deposit.",
                 "constraints": ["p > 0", "Valid for constant product AMMs (x*y=k)"],
                 "novelty_score": 5,
-                "similar_to": ["Uniswap V2 IL formula", "Constant product market maker"],
-                "advantages": ["Simple closed-form solution", "Works for any price change", "Numerically stable"],
+                "similar_to": [
+                    "Uniswap V2 IL formula",
+                    "Constant product market maker",
+                ],
+                "advantages": [
+                    "Simple closed-form solution",
+                    "Works for any price change",
+                    "Numerically stable",
+                ],
                 "limitations": [
                     "Does not account for trading fees",
                     "Assumes constant product formula",
@@ -106,7 +117,11 @@ class MockAnthropicProvider:
                     "ROI": "Return on investment as percentage",
                 },
                 "explanation": "LP ROI combines impermanent loss and fee earnings to determine total profitability of providing liquidity versus holding.",
-                "constraints": ["V_hold > 0", "F ≥ 0", "Time period must be specified for annualized rates"],
+                "constraints": [
+                    "V_hold > 0",
+                    "F ≥ 0",
+                    "Time period must be specified for annualized rates",
+                ],
                 "novelty_score": 7,
                 "similar_to": ["Portfolio return analysis", "Yield farming metrics"],
                 "advantages": [
@@ -175,7 +190,9 @@ def main():
     print("=" * 70)
 
     result = provider.generate_formula(
-        requirements="Calculate impermanent loss for Uniswap V2 liquidity pools", domain="defi", n_candidates=1
+        requirements="Calculate impermanent loss for Uniswap V2 liquidity pools",
+        domain="defi",
+        n_candidates=1,
     )
 
     formula = result[0]
@@ -204,7 +221,9 @@ def main():
     print("=" * 70)
 
     result = provider.generate_formula(
-        requirements="Calculate price impact for large trades in constant product AMM", domain="defi", n_candidates=1
+        requirements="Calculate price impact for large trades in constant product AMM",
+        domain="defi",
+        n_candidates=1,
     )
 
     formula = result[0]
@@ -251,7 +270,9 @@ def main():
     print("Testing Impermanent Loss calculation:")
 
     # We need to regenerate the IL formula, because 'result' currently holds the LP ROI formula.
-    il_result_data = provider.generate_formula(requirements="impermanent loss", domain="defi", n_candidates=1)[0]
+    il_result_data = provider.generate_formula(
+        requirements="impermanent loss", domain="defi", n_candidates=1
+    )[0]
 
     # Execute the IL formula into a namespace
     il_namespace = {}

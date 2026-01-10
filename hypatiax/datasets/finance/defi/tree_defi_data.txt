@@ -1,5 +1,5 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/datasets/finance/defi]
-└─$ tree                                                                                                                     
+└─$ tree
 .
 ├── data
 │   ├── archive
@@ -99,4 +99,3 @@
 └── __init__.py
 
 8 directories, 89 files
-

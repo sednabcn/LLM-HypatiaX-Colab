@@ -69,7 +69,13 @@ class ElectrostaticsCalculator:
     """
 
     @staticmethod
-    def coulombs_law(charge1: float, charge2: float, distance: float, k: float = k_e, validate: bool = True) -> Dict:
+    def coulombs_law(
+        charge1: float,
+        charge2: float,
+        distance: float,
+        k: float = k_e,
+        validate: bool = True,
+    ) -> Dict:
         """
         Calculate electrostatic force between two charges.
         Formula: F = k|q₁q₂|/r²
@@ -114,7 +120,9 @@ class ElectrostaticsCalculator:
         }
 
     @staticmethod
-    def electric_field_point_charge(charge: float, distance: float, k: float = k_e, validate: bool = True) -> Dict:
+    def electric_field_point_charge(
+        charge: float, distance: float, k: float = k_e, validate: bool = True
+    ) -> Dict:
         """
         Calculate electric field from a point charge.
         Formula: E = kq/r²
@@ -151,7 +159,9 @@ class ElectrostaticsCalculator:
         }
 
     @staticmethod
-    def electric_potential_energy(charge: float, potential: float, validate: bool = True) -> Dict:
+    def electric_potential_energy(
+        charge: float, potential: float, validate: bool = True
+    ) -> Dict:
         """
         Calculate potential energy of a charge in an electric field.
         Formula: U = qV
@@ -168,11 +178,19 @@ class ElectrostaticsCalculator:
         # Energy in electron volts (useful for atomic scale)
         energy_eV = energy / e
 
-        return {"charge": charge, "potential": potential, "energy_joules": energy, "energy_eV": energy_eV}
+        return {
+            "charge": charge,
+            "potential": potential,
+            "energy_joules": energy,
+            "energy_eV": energy_eV,
+        }
 
     @staticmethod
     def capacitance(
-        charge: float = None, voltage: float = None, capacitance_value: float = None, validate: bool = True
+        charge: float = None,
+        voltage: float = None,
+        capacitance_value: float = None,
+        validate: bool = True,
     ) -> Dict:
         """
         Capacitor relationship: Q = CV
@@ -186,7 +204,9 @@ class ElectrostaticsCalculator:
         Returns:
             All capacitor parameters and energy stored
         """
-        params_given = sum([charge is not None, voltage is not None, capacitance_value is not None])
+        params_given = sum(
+            [charge is not None, voltage is not None, capacitance_value is not None]
+        )
 
         if params_given != 2:
             raise ValueError("Must provide exactly 2 of 3 parameters")
@@ -245,7 +265,9 @@ class ElectrostaticsCalculator:
             if separation <= 0:
                 raise ValueError(f"separation must be > 0, got {separation}")
             if dielectric_constant < 1:
-                raise ValueError(f"dielectric_constant must be ≥ 1, got {dielectric_constant}")
+                raise ValueError(
+                    f"dielectric_constant must be ≥ 1, got {dielectric_constant}"
+                )
 
         # Capacitance
         capacitance = epsilon_0_val * dielectric_constant * area / separation
@@ -267,7 +289,11 @@ class MagnetismCalculator:
 
     @staticmethod
     def magnetic_force_on_charge(
-        charge: float, velocity: float, magnetic_field: float, angle_degrees: float = 90.0, validate: bool = True
+        charge: float,
+        velocity: float,
+        magnetic_field: float,
+        angle_degrees: float = 90.0,
+        validate: bool = True,
     ) -> Dict:
         """
         Lorentz force on a moving charge in a magnetic field.
@@ -309,7 +335,11 @@ class MagnetismCalculator:
 
     @staticmethod
     def magnetic_force_on_wire(
-        current: float, length: float, magnetic_field: float, angle_degrees: float = 90.0, validate: bool = True
+        current: float,
+        length: float,
+        magnetic_field: float,
+        angle_degrees: float = 90.0,
+        validate: bool = True,
     ) -> Dict:
         """
         Force on a current-carrying wire in a magnetic field.
@@ -346,7 +376,9 @@ class MagnetismCalculator:
         }
 
     @staticmethod
-    def faradays_law(n_turns: int, flux_change: float, time_interval: float, validate: bool = True) -> Dict:
+    def faradays_law(
+        n_turns: int, flux_change: float, time_interval: float, validate: bool = True
+    ) -> Dict:
         """
         Electromagnetic induction (Faraday's Law).
         Formula: ε = -N(ΔΦ/Δt)
@@ -386,7 +418,11 @@ class MagnetismCalculator:
 
     @staticmethod
     def magnetic_field_solenoid(
-        current: float, n_turns: float, length: float, mu_0_val: float = mu_0, validate: bool = True
+        current: float,
+        n_turns: float,
+        length: float,
+        mu_0_val: float = mu_0,
+        validate: bool = True,
     ) -> Dict:
         """
         Magnetic field inside a solenoid.
@@ -431,7 +467,12 @@ class CircuitsCalculator:
     """
 
     @staticmethod
-    def ohms_law(voltage: float = None, current: float = None, resistance: float = None, validate: bool = True) -> Dict:
+    def ohms_law(
+        voltage: float = None,
+        current: float = None,
+        resistance: float = None,
+        validate: bool = True,
+    ) -> Dict:
         """
         Ohm's Law: V = IR
         Provide 2 of 3 parameters.
@@ -444,7 +485,9 @@ class CircuitsCalculator:
         Returns:
             All circuit parameters and power
         """
-        params_given = sum([voltage is not None, current is not None, resistance is not None])
+        params_given = sum(
+            [voltage is not None, current is not None, resistance is not None]
+        )
 
         if params_given != 2:
             raise ValueError("Must provide exactly 2 of 3 parameters")
@@ -538,7 +581,11 @@ class CircuitsCalculator:
 
     @staticmethod
     def rc_circuit_charging(
-        voltage: float, resistance: float, capacitance: float, time: float, validate: bool = True
+        voltage: float,
+        resistance: float,
+        capacitance: float,
+        time: float,
+        validate: bool = True,
     ) -> Dict:
         """
         RC circuit charging analysis.
@@ -597,7 +644,10 @@ class CircuitsCalculator:
 
     @staticmethod
     def power_dissipation(
-        voltage: float = None, current: float = None, resistance: float = None, validate: bool = True
+        voltage: float = None,
+        current: float = None,
+        resistance: float = None,
+        validate: bool = True,
     ) -> Dict:
         """
         Calculate power dissipation in a resistor.
@@ -619,7 +669,11 @@ class CircuitsCalculator:
         energy_per_hour = power * 3600  # Joules
         energy_per_hour_kWh = power * 1 / 1000  # kWh
 
-        return {**ohm_result, "energy_per_hour_J": energy_per_hour, "energy_per_hour_kWh": energy_per_hour_kWh}
+        return {
+            **ohm_result,
+            "energy_per_hour_J": energy_per_hour,
+            "energy_per_hour_kWh": energy_per_hour_kWh,
+        }
 
 
 class ElectromagnetismCalculator:
@@ -700,7 +754,9 @@ if __name__ == "__main__":
     # Example 1: Coulomb's Law
     print("\n1. COULOMB'S LAW (Two Charges)")
     print("-" * 40)
-    force = calc.electrostatics.coulombs_law(charge1=1e-6, charge2=-2e-6, distance=0.1)  # 1 μC  # -2 μC  # 10 cm
+    force = calc.electrostatics.coulombs_law(
+        charge1=1e-6, charge2=-2e-6, distance=0.1
+    )  # 1 μC  # -2 μC  # 10 cm
     print(f"Charges: {force['charge1']*1e6:.1f} μC and {force['charge2']*1e6:.1f} μC")
     print(f"Distance: {force['distance']*100:.0f} cm")
     print(f"Force: {force['force_magnitude']:.6f} N")
@@ -709,7 +765,9 @@ if __name__ == "__main__":
     # Example 2: Electric Field
     print("\n2. ELECTRIC FIELD (Point Charge)")
     print("-" * 40)
-    field = calc.electrostatics.electric_field_point_charge(charge=5e-9, distance=0.05)  # 5 nC  # 5 cm
+    field = calc.electrostatics.electric_field_point_charge(
+        charge=5e-9, distance=0.05
+    )  # 5 nC  # 5 cm
     print(f"Charge: {field['charge']*1e9:.1f} nC")
     print(f"Distance: {field['distance']*100:.0f} cm")
     print(f"Electric field: {field['field_magnitude']:.2f} N/C")
@@ -718,7 +776,9 @@ if __name__ == "__main__":
     # Example 3: Capacitor
     print("\n3. CAPACITOR")
     print("-" * 40)
-    cap = calc.electrostatics.capacitance(capacitance_value=100e-6, voltage=12)  # 100 μF  # 12 V
+    cap = calc.electrostatics.capacitance(
+        capacitance_value=100e-6, voltage=12
+    )  # 100 μF  # 12 V
     print(f"Capacitance: {cap['capacitance_uF']:.0f} μF")
     print(f"Voltage: {cap['voltage']:.0f} V")
     print(f"Charge stored: {cap['charge']*1e3:.2f} mC")
@@ -728,7 +788,10 @@ if __name__ == "__main__":
     print("\n4. MAGNETIC FORCE ON MOVING CHARGE")
     print("-" * 40)
     mag_force = calc.magnetism.magnetic_force_on_charge(
-        charge=e, velocity=1e6, magnetic_field=0.5, angle_degrees=90  # Electron charge  # 1 million m/s  # 0.5 Tesla
+        charge=e,
+        velocity=1e6,
+        magnetic_field=0.5,
+        angle_degrees=90,  # Electron charge  # 1 million m/s  # 0.5 Tesla
     )
     print(f"Charge: {mag_force['charge']/e:.2f}e")
     print(f"Velocity: {mag_force['velocity']:.0e} m/s")
@@ -738,7 +801,9 @@ if __name__ == "__main__":
     # Example 5: Faraday's Law
     print("\n5. ELECTROMAGNETIC INDUCTION")
     print("-" * 40)
-    emf = calc.magnetism.faradays_law(n_turns=500, flux_change=0.01, time_interval=0.1)  # 0.01 Wb  # 0.1 s
+    emf = calc.magnetism.faradays_law(
+        n_turns=500, flux_change=0.01, time_interval=0.1
+    )  # 0.01 Wb  # 0.1 s
     print(f"Coil turns: {emf['n_turns']}")
     print(f"Flux change: {emf['flux_change']:.3f} Wb")
     print(f"Time: {emf['time_interval']:.2f} s")
@@ -757,11 +822,16 @@ if __name__ == "__main__":
     print("\n7. RC CIRCUIT CHARGING")
     print("-" * 40)
     rc = calc.circuits.rc_circuit_charging(
-        voltage=5, resistance=10000, capacitance=100e-6, time=1.0  # 10 kΩ  # 100 μF  # 1 second
+        voltage=5,
+        resistance=10000,
+        capacitance=100e-6,
+        time=1.0,  # 10 kΩ  # 100 μF  # 1 second
     )
     print(f"Source: {rc['voltage_source']:.0f} V")
     print(f"Time constant τ: {rc['time_constant_tau']:.3f} s")
-    print(f"After {rc['time']:.1f}s: {rc['voltage_at_t']:.2f} V ({rc['percent_charged']:.1f}% charged)")
+    print(
+        f"After {rc['time']:.1f}s: {rc['voltage_at_t']:.2f} V ({rc['percent_charged']:.1f}% charged)"
+    )
 
     # Example 8: EM Wave
     print("\n8. ELECTROMAGNETIC WAVE")

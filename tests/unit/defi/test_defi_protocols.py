@@ -64,7 +64,9 @@ class TestAMMProtocols:
         fee = Decimal("0.003")
 
         amount_in_with_fee = amount_in * (1 - fee)
-        amount_out = (amount_in_with_fee * reserve_out) / (reserve_in + amount_in_with_fee)
+        amount_out = (amount_in_with_fee * reserve_out) / (
+            reserve_in + amount_in_with_fee
+        )
 
         assert amount_out > 0
         assert amount_out < reserve_out

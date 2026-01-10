@@ -18,28 +18,84 @@ test_cases = [
     (r"e^{e^{x}}", "Nested exponential", {"syntactically_valid": True, "errors": True}),
     (r"e^{-200}", "Underflow", {"syntactically_valid": True, "warnings": True}),
     (r"\sqrt{x}", "Square root", {"syntactically_valid": True, "warnings": True}),
-    ("a * b * c * d * e * f * g", "Multiple multiplications", {"syntactically_valid": True, "warnings": True}),
-    (r"\frac{x}{0}", "Simple division by zero", {"syntactically_valid": True, "errors": True}),
-    (r"x - x", "Subtraction cancellation", {"syntactically_valid": True, "warnings": True}),
-    (r"\frac{x+y}{y - y}", "Complex denominator cancellation", {"syntactically_valid": True, "errors": True}),
+    (
+        "a * b * c * d * e * f * g",
+        "Multiple multiplications",
+        {"syntactically_valid": True, "warnings": True},
+    ),
+    (
+        r"\frac{x}{0}",
+        "Simple division by zero",
+        {"syntactically_valid": True, "errors": True},
+    ),
+    (
+        r"x - x",
+        "Subtraction cancellation",
+        {"syntactically_valid": True, "warnings": True},
+    ),
+    (
+        r"\frac{x+y}{y - y}",
+        "Complex denominator cancellation",
+        {"syntactically_valid": True, "errors": True},
+    ),
     ("1 / y", "Safe division", {"syntactically_valid": True, "errors": False}),
-    (r"\frac{a}{b} * \frac{c}{d}", "Multiple divisions", {"syntactically_valid": True, "warnings": True}),
-    (r"\sinh(x)", "Hyperbolic function", {"syntactically_valid": True, "warnings": True}),
+    (
+        r"\frac{a}{b} * \frac{c}{d}",
+        "Multiple divisions",
+        {"syntactically_valid": True, "warnings": True},
+    ),
+    (
+        r"\sinh(x)",
+        "Hyperbolic function",
+        {"syntactically_valid": True, "warnings": True},
+    ),
     (r"\ln(x)", "Logarithm", {"syntactically_valid": True, "warnings": True}),
-    ("x + y - z", "Subtraction for numerical stability", {"syntactically_valid": True, "warnings": True}),
-    (r"\sqrt{x + 1}", "Square root domain", {"syntactically_valid": True, "warnings": True}),
+    (
+        "x + y - z",
+        "Subtraction for numerical stability",
+        {"syntactically_valid": True, "warnings": True},
+    ),
+    (
+        r"\sqrt{x + 1}",
+        "Square root domain",
+        {"syntactically_valid": True, "warnings": True},
+    ),
     (r"\log(y)", "Logarithm domain", {"syntactically_valid": True, "warnings": True}),
-    ("x * y / z", "Basic valid formula", {"syntactically_valid": True, "errors": False}),
-    (r"\sqrt{x * y}", "DeFi AMM constant product", {"syntactically_valid": True, "warnings": True}),
-    (r"S = K * exp(-r * T) * N(d2) - S0 * N(d1)", "Black-Scholes", {"syntactically_valid": True, "warnings": True}),
-    (r"Sharpe = (R_p - R_f)/\sigma_p", "Sharpe ratio", {"syntactically_valid": True, "warnings": True}),
+    (
+        "x * y / z",
+        "Basic valid formula",
+        {"syntactically_valid": True, "errors": False},
+    ),
+    (
+        r"\sqrt{x * y}",
+        "DeFi AMM constant product",
+        {"syntactically_valid": True, "warnings": True},
+    ),
+    (
+        r"S = K * exp(-r * T) * N(d2) - S0 * N(d1)",
+        "Black-Scholes",
+        {"syntactically_valid": True, "warnings": True},
+    ),
+    (
+        r"Sharpe = (R_p - R_f)/\sigma_p",
+        "Sharpe ratio",
+        {"syntactically_valid": True, "warnings": True},
+    ),
     (
         r"VaR = -\Phi^{-1}(\alpha) * \sigma_p * \sqrt{T}",
         "Value-at-Risk",
         {"syntactically_valid": True, "warnings": True},
     ),
-    (r"\sqrt{\ln(x) + e^{y}}", "Nested functions", {"syntactically_valid": True, "warnings": True}),
-    (r"(a + b) * (c - d) / e", "Mixed operations", {"syntactically_valid": True, "warnings": True}),
+    (
+        r"\sqrt{\ln(x) + e^{y}}",
+        "Nested functions",
+        {"syntactically_valid": True, "warnings": True},
+    ),
+    (
+        r"(a + b) * (c - d) / e",
+        "Mixed operations",
+        {"syntactically_valid": True, "warnings": True},
+    ),
 ]
 
 
@@ -48,7 +104,9 @@ def test_enhanced_symbolic_validator(formula, desc, expected):
     result = validator.validate(formula)
 
     # Assert syntactic validity
-    assert result["syntactically_valid"] == expected.get("syntactically_valid", True), f"Failed {desc}"
+    assert result["syntactically_valid"] == expected.get(
+        "syntactically_valid", True
+    ), f"Failed {desc}"
 
     # Assert errors exist if expected
     if expected.get("errors"):

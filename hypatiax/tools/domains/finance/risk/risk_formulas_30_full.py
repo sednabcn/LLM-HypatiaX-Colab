@@ -53,39 +53,60 @@ class RiskCalculator:
         # lower tail z for 1-confidence
         z = stats.norm.ppf(1.0 - confidence)
         var = mu + z * sigma
-        return {"var": var, "var_pct": var * 100.0, "mu": mu, "sigma": sigma, "confidence": confidence}
+        return {
+            "var": var,
+            "var_pct": var * 100.0,
+            "mu": mu,
+            "sigma": sigma,
+            "confidence": confidence,
+        }
 
     # -----------------------
     # 2: CVaR (historical expected shortfall)
     # -----------------------
     @staticmethod
-    def cvar_historical(returns: np.ndarray, confidence: float = 0.95) -> Dict[str, Any]:
+    def cvar_historical(
+        returns: np.ndarray, confidence: float = 0.95
+    ) -> Dict[str, Any]:
         sorted_r = np.sort(returns)
         cutoff = int(np.ceil((1.0 - confidence) * len(sorted_r)))
         if cutoff < 1:
             cutoff = 1
         tail = sorted_r[:cutoff]
         cvar = float(np.mean(tail)) if tail.size > 0 else float(sorted_r[0])
-        return {"cvar": cvar, "cvar_pct": cvar * 100.0, "tail_count": tail.size, "confidence": confidence}
+        return {
+            "cvar": cvar,
+            "cvar_pct": cvar * 100.0,
+            "tail_count": tail.size,
+            "confidence": confidence,
+        }
 
     # -----------------------
     # 3: Sharpe Ratio (annualized)
     # -----------------------
     @staticmethod
-    def sharpe_ratio(returns: np.ndarray, risk_free_rate_annual: float) -> Dict[str, Any]:
+    def sharpe_ratio(
+        returns: np.ndarray, risk_free_rate_annual: float
+    ) -> Dict[str, Any]:
         rf_period = risk_free_rate_annual / DAYS_PER_YEAR
         excess = returns - rf_period
         mean_excess = float(np.mean(excess))
         sigma = float(np.std(returns, ddof=0))
         sharpe_period = mean_excess / (sigma + EPSILON)
         sharpe_annual = sharpe_period * math.sqrt(DAYS_PER_YEAR)
-        return {"sharpe": sharpe_annual, "mean_excess": mean_excess, "volatility": sigma}
+        return {
+            "sharpe": sharpe_annual,
+            "mean_excess": mean_excess,
+            "volatility": sigma,
+        }
 
     # -----------------------
     # 4: Sortino Ratio (annualized)
     # -----------------------
     @staticmethod
-    def sortino_ratio(returns: np.ndarray, target_period_return: float) -> Dict[str, Any]:
+    def sortino_ratio(
+        returns: np.ndarray, target_period_return: float
+    ) -> Dict[str, Any]:
         excess = returns - target_period_return
         downside = returns[returns < target_period_return]
         if downside.size > 0:
@@ -95,7 +116,11 @@ class RiskCalculator:
         mean_excess = float(np.mean(excess))
         sortino_period = mean_excess / (downside_dev + EPSILON)
         sortino_annual = sortino_period * math.sqrt(DAYS_PER_YEAR)
-        return {"sortino": sortino_annual, "downside_dev": downside_dev, "mean_excess": mean_excess}
+        return {
+            "sortino": sortino_annual,
+            "downside_dev": downside_dev,
+            "mean_excess": mean_excess,
+        }
 
     # -----------------------
     # 5: Beta
@@ -114,7 +139,9 @@ class RiskCalculator:
     # -----------------------
     @staticmethod
     def treynor_ratio(
-        asset_returns: np.ndarray, market_returns: np.ndarray, risk_free_rate_annual: float
+        asset_returns: np.ndarray,
+        market_returns: np.ndarray,
+        risk_free_rate_annual: float,
     ) -> Dict[str, Any]:
         rf_period = risk_free_rate_annual / DAYS_PER_YEAR
         beta_res = RiskCalculator.beta(asset_returns, market_returns)
@@ -129,14 +156,25 @@ class RiskCalculator:
     # 7: Information Ratio (annualized)
     # -----------------------
     @staticmethod
-    def information_ratio(asset_returns: np.ndarray, benchmark_returns: np.ndarray) -> Dict[str, Any]:
+    def information_ratio(
+        asset_returns: np.ndarray, benchmark_returns: np.ndarray
+    ) -> Dict[str, Any]:
         active = asset_returns - benchmark_returns
         ar = float(np.mean(active))
         te = float(np.std(active, ddof=0))
         ir_period = ar / (te + EPSILON)
         ir_annual = ir_period * math.sqrt(DAYS_PER_YEAR)
-        corr = float(np.corrcoef(asset_returns, benchmark_returns)[0, 1]) if asset_returns.size > 1 else 0.0
-        return {"information_ratio": ir_annual, "active_return": ar, "tracking_error": te, "corr": corr}
+        corr = (
+            float(np.corrcoef(asset_returns, benchmark_returns)[0, 1])
+            if asset_returns.size > 1
+            else 0.0
+        )
+        return {
+            "information_ratio": ir_annual,
+            "active_return": ar,
+            "tracking_error": te,
+            "corr": corr,
+        }
 
     # -----------------------
     # 8: Maximum Drawdown (percent positive)
@@ -145,7 +183,9 @@ class RiskCalculator:
     def maximum_drawdown(returns: np.ndarray) -> Dict[str, Any]:
         wealth = np.cumprod(1.0 + returns)
         running_max = np.maximum.accumulate(wealth)
-        drawdowns = (running_max - wealth) / (running_max + EPSILON)  # positive fraction
+        drawdowns = (running_max - wealth) / (
+            running_max + EPSILON
+        )  # positive fraction
         max_dd = float(np.max(drawdowns))
         trough_idx = int(np.argmax(drawdowns))
         peak_idx = int(np.argmax(wealth[: trough_idx + 1])) if trough_idx > 0 else 0
@@ -161,7 +201,9 @@ class RiskCalculator:
     # 9: Modified VaR (Cornish-Fisher) - better tail adjustment
     # -----------------------
     @staticmethod
-    def var_cornish_fisher(returns: np.ndarray, confidence: float = 0.95) -> Dict[str, Any]:
+    def var_cornish_fisher(
+        returns: np.ndarray, confidence: float = 0.95
+    ) -> Dict[str, Any]:
         mu = float(np.mean(returns))
         sigma = float(np.std(returns, ddof=0))
         skew = float(stats.skew(returns))
@@ -176,13 +218,20 @@ class RiskCalculator:
             - (1 / 36.0) * (2 * z**3 - 5 * z) * (skew**2)
         )
         var_cf = mu + z_cf * sigma
-        return {"var_cf": var_cf, "var_cf_pct": var_cf * 100.0, "skew": skew, "kurtosis": kurt}
+        return {
+            "var_cf": var_cf,
+            "var_cf_pct": var_cf * 100.0,
+            "skew": skew,
+            "kurtosis": kurt,
+        }
 
     # -----------------------
     # 10: Expected Shortfall param + hist (here provide parametric ES)
     # -----------------------
     @staticmethod
-    def expected_shortfall_parametric(returns: np.ndarray, confidence: float = 0.95) -> Dict[str, Any]:
+    def expected_shortfall_parametric(
+        returns: np.ndarray, confidence: float = 0.95
+    ) -> Dict[str, Any]:
         mu = float(np.mean(returns))
         sigma = float(np.std(returns, ddof=0))
         z = stats.norm.ppf(1.0 - confidence)
@@ -195,26 +244,43 @@ class RiskCalculator:
     # -----------------------
     @staticmethod
     def var_long_horizon(
-        returns: np.ndarray, days: int = 10, confidence: float = 0.95, method: str = "sqrt"
+        returns: np.ndarray,
+        days: int = 10,
+        confidence: float = 0.95,
+        method: str = "sqrt",
     ) -> Dict[str, Any]:
         mu = float(np.mean(returns)) * days
-        sigma = float(np.std(returns, ddof=0)) * (math.sqrt(days) if method == "sqrt" else days)
+        sigma = float(np.std(returns, ddof=0)) * (
+            math.sqrt(days) if method == "sqrt" else days
+        )
         z = stats.norm.ppf(1.0 - confidence)
         var = mu + z * sigma
-        return {"var_long": var, "days": days, "method": method, "var_long_pct": var * 100.0}
+        return {
+            "var_long": var,
+            "days": days,
+            "method": method,
+            "var_long_pct": var * 100.0,
+        }
 
     # -----------------------
     # 12: Modified Sharpe (adjust for skewness)
     # -----------------------
     @staticmethod
-    def modified_sharpe(returns: np.ndarray, risk_free_rate_annual: float) -> Dict[str, Any]:
+    def modified_sharpe(
+        returns: np.ndarray, risk_free_rate_annual: float
+    ) -> Dict[str, Any]:
         rf_period = risk_free_rate_annual / DAYS_PER_YEAR
         mean_excess = float(np.mean(returns - rf_period))
         sigma = float(np.std(returns, ddof=0))
         skew = float(stats.skew(returns))
         denom = sigma * (1.0 + (skew / 6.0))
         mod_sharpe = (mean_excess / (denom + EPSILON)) * math.sqrt(DAYS_PER_YEAR)
-        return {"modified_sharpe": mod_sharpe, "mean_excess": mean_excess, "sigma": sigma, "skew": skew}
+        return {
+            "modified_sharpe": mod_sharpe,
+            "mean_excess": mean_excess,
+            "sigma": sigma,
+            "skew": skew,
+        }
 
     # -----------------------
     # 13: Ulcer Index (UI)
@@ -235,7 +301,11 @@ class RiskCalculator:
         annual_return = float(np.mean(returns)) * DAYS_PER_YEAR
         ui = RiskCalculator.ulcer_index(returns)["ulcer_index"]
         martin = annual_return / (ui + EPSILON)
-        return {"martin_ratio": martin, "annual_return": annual_return, "ulcer_index": ui}
+        return {
+            "martin_ratio": martin,
+            "annual_return": annual_return,
+            "ulcer_index": ui,
+        }
 
     # -----------------------
     # 15: Drawdown Duration (average length of drawdowns)
@@ -259,7 +329,11 @@ class RiskCalculator:
                 i += 1
         avg_duration = float(np.mean(durations)) if durations else 0.0
         max_duration = int(max(durations)) if durations else 0
-        return {"avg_duration": avg_duration, "max_duration": max_duration, "durations": durations}
+        return {
+            "avg_duration": avg_duration,
+            "max_duration": max_duration,
+            "durations": durations,
+        }
 
     # -----------------------
     # 16: Gain-Loss Ratio
@@ -270,7 +344,11 @@ class RiskCalculator:
         losses = -returns[returns < 0]  # positive magnitudes
         avg_win = float(np.mean(wins)) if wins.size > 0 else 0.0
         avg_loss = float(np.mean(losses)) if losses.size > 0 else 0.0
-        ratio = (avg_win / (avg_loss + EPSILON)) if avg_loss > 0 else float("inf") if avg_win > 0 else 0.0
+        ratio = (
+            (avg_win / (avg_loss + EPSILON))
+            if avg_loss > 0
+            else float("inf") if avg_win > 0 else 0.0
+        )
         return {"gain_loss_ratio": ratio, "avg_win": avg_win, "avg_loss": avg_loss}
 
     # -----------------------
@@ -281,9 +359,18 @@ class RiskCalculator:
         gains = returns[returns > mar] - mar
         downside = returns[returns < mar] - mar
         upside = float(np.sum(gains**1)) / (gains.size + EPSILON)
-        downside_risk = math.sqrt(float(np.mean((np.minimum(0.0, downside) ** 2)))) if downside.size > 0 else EPSILON
+        downside_risk = (
+            math.sqrt(float(np.mean((np.minimum(0.0, downside) ** 2))))
+            if downside.size > 0
+            else EPSILON
+        )
         upr = upside / (downside_risk + EPSILON)
-        return {"upr": upr, "upside": upside, "downside_risk": downside_risk, "mar": mar}
+        return {
+            "upr": upr,
+            "upside": upside,
+            "downside_risk": downside_risk,
+            "mar": mar,
+        }
 
     # -----------------------
     # 18: Sterling Ratio = (annual_return - 0.10) / avg_drawdown_above_10pct
@@ -298,15 +385,25 @@ class RiskCalculator:
         drawdowns = (running_max - wealth) / (running_max + EPSILON)
         # use drawdowns expressed in decimal (not percent)
         drawdowns_above = drawdowns[drawdowns > baseline]
-        avgdd = float(np.mean(drawdowns_above)) if drawdowns_above.size > 0 else float(np.mean(drawdowns))
+        avgdd = (
+            float(np.mean(drawdowns_above))
+            if drawdowns_above.size > 0
+            else float(np.mean(drawdowns))
+        )
         sterling = (annual_return - baseline) / (avgdd + EPSILON)
-        return {"sterling_ratio": sterling, "annual_return": annual_return, "avg_drawdown": avgdd}
+        return {
+            "sterling_ratio": sterling,
+            "annual_return": annual_return,
+            "avg_drawdown": avgdd,
+        }
 
     # -----------------------
     # 19: Burke Ratio = excess_return / sqrt(sum(dd^2))
     # -----------------------
     @staticmethod
-    def burke_ratio(returns: np.ndarray, risk_free_rate_annual: float) -> Dict[str, Any]:
+    def burke_ratio(
+        returns: np.ndarray, risk_free_rate_annual: float
+    ) -> Dict[str, Any]:
         rf_period = risk_free_rate_annual / DAYS_PER_YEAR
         excess = float(np.mean(returns - rf_period)) * DAYS_PER_YEAR
         wealth = np.cumprod(1.0 + returns)
@@ -314,7 +411,11 @@ class RiskCalculator:
         drawdowns = (running_max - wealth) / (running_max + EPSILON)
         sqrt_sum_sq = math.sqrt(float(np.sum(drawdowns**2))) + EPSILON
         burke = excess / sqrt_sum_sq
-        return {"burke_ratio": burke, "excess_return": excess, "sqrt_sum_sq_dd": sqrt_sum_sq}
+        return {
+            "burke_ratio": burke,
+            "excess_return": excess,
+            "sqrt_sum_sq_dd": sqrt_sum_sq,
+        }
 
     # -----------------------
     # 20: Pain Ratio = annual_return / Pain Index
@@ -328,7 +429,11 @@ class RiskCalculator:
         drawdowns = (running_max - wealth) / (running_max + EPSILON)
         pain_index = math.sqrt(float(np.mean(drawdowns**2)))
         pain = annual_return / (pain_index + EPSILON)
-        return {"pain_ratio": pain, "annual_return": annual_return, "pain_index": pain_index}
+        return {
+            "pain_ratio": pain,
+            "annual_return": annual_return,
+            "pain_index": pain_index,
+        }
 
     # -----------------------
     # 21: CDaR (Conditional Drawdown at Risk)
@@ -341,7 +446,13 @@ class RiskCalculator:
         dar = float(np.percentile(drawdowns, confidence * 100.0))
         tail = drawdowns[drawdowns >= dar]
         cdar = float(np.mean(tail)) if tail.size > 0 else dar
-        return {"dar": dar, "cdar": cdar, "dar_pct": dar * 100.0, "cdar_pct": cdar * 100.0, "tail_count": tail.size}
+        return {
+            "dar": dar,
+            "cdar": cdar,
+            "dar_pct": dar * 100.0,
+            "cdar_pct": cdar * 100.0,
+            "tail_count": tail.size,
+        }
 
     # -----------------------
     # 22: Tail Ratio
@@ -359,10 +470,16 @@ class RiskCalculator:
     # M^2 = Rf + Sharpe * sigma_benchmark
     # -----------------------
     @staticmethod
-    def m_squared(returns: np.ndarray, risk_free_rate_annual: float, benchmark_vol_pct: float) -> Dict[str, Any]:
+    def m_squared(
+        returns: np.ndarray, risk_free_rate_annual: float, benchmark_vol_pct: float
+    ) -> Dict[str, Any]:
         sr = RiskCalculator.sharpe_ratio(returns, risk_free_rate_annual)["sharpe"]
         m2 = risk_free_rate_annual * 100.0 + float(sr) * benchmark_vol_pct
-        return {"m_squared_pct": m2, "sharpe": sr, "benchmark_vol_pct": benchmark_vol_pct}
+        return {
+            "m_squared_pct": m2,
+            "sharpe": sr,
+            "benchmark_vol_pct": benchmark_vol_pct,
+        }
 
     # -----------------------
     # 24: Prospect Ratio (P_win * avg_win^2) / (P_loss * avg_loss^2)
@@ -377,7 +494,12 @@ class RiskCalculator:
         avg_loss = abs(float(np.mean(losses))) if losses.size > 0 else 0.0
         denom = (p_loss * (avg_loss**2)) if p_loss > 0 and avg_loss > 0 else EPSILON
         prospect = (p_win * (avg_win**2)) / denom
-        return {"prospect_ratio": prospect, "p_win": p_win, "avg_win": avg_win, "avg_loss": avg_loss}
+        return {
+            "prospect_ratio": prospect,
+            "p_win": p_win,
+            "avg_win": avg_win,
+            "avg_loss": avg_loss,
+        }
 
     # -----------------------
     # 25: Rachev Ratio (upper-tail CVaR / lower-tail CVaR)
@@ -395,11 +517,17 @@ class RiskCalculator:
         if losses.size > 0:
             low_cut = np.percentile(losses, (1.0 - alpha) * 100.0)
             low_tail = losses[losses <= low_cut]
-            cvar_losses = abs(float(np.mean(low_tail))) if low_tail.size > 0 else abs(low_cut)
+            cvar_losses = (
+                abs(float(np.mean(low_tail))) if low_tail.size > 0 else abs(low_cut)
+            )
         else:
             cvar_losses = EPSILON
         rachev = float(cvar_gains / (cvar_losses + EPSILON))
-        return {"rachev_ratio": rachev, "cvar_gains": cvar_gains, "cvar_losses": cvar_losses}
+        return {
+            "rachev_ratio": rachev,
+            "cvar_gains": cvar_gains,
+            "cvar_losses": cvar_losses,
+        }
 
     # -----------------------
     # 26: D-Ratio (avg underwater / volatility)
@@ -428,7 +556,9 @@ class RiskCalculator:
     # 28: Serenity Ratio (excess return / avg underwater magnitude)
     # -----------------------
     @staticmethod
-    def serenity_ratio(returns: np.ndarray, risk_free_rate_annual: float) -> Dict[str, Any]:
+    def serenity_ratio(
+        returns: np.ndarray, risk_free_rate_annual: float
+    ) -> Dict[str, Any]:
         ann_return = float(np.mean(returns)) * DAYS_PER_YEAR
         rf_pct = risk_free_rate_annual * 100.0
         excess = ann_return - rf_pct
@@ -438,7 +568,11 @@ class RiskCalculator:
         under_periods = underwater[underwater > 0]
         avg_under = float(np.mean(under_periods)) if under_periods.size > 0 else EPSILON
         serenity = excess / (avg_under * 100.0 + EPSILON)
-        return {"serenity": serenity, "excess_return_pct": excess, "avg_underwater_pct": avg_under * 100.0}
+        return {
+            "serenity": serenity,
+            "excess_return_pct": excess,
+            "avg_underwater_pct": avg_under * 100.0,
+        }
 
     # -----------------------
     # 29: Stability Index (R^2 of equity curve vs time)
@@ -457,14 +591,24 @@ class RiskCalculator:
     # 30: Recovery Factor = net profit / max drawdown ($)
     # -----------------------
     @staticmethod
-    def recovery_factor(returns: np.ndarray, initial_capital: float = 100000.0) -> Dict[str, Any]:
+    def recovery_factor(
+        returns: np.ndarray, initial_capital: float = 100000.0
+    ) -> Dict[str, Any]:
         wealth = np.cumprod(1.0 + returns) * initial_capital
         final = float(wealth[-1])
         net_profit = final - initial_capital
         mdd_pct = RiskCalculator.maximum_drawdown(returns)["max_drawdown"]
         mdd_dollars = initial_capital * mdd_pct
-        recovery = float(net_profit / (mdd_dollars + EPSILON)) if mdd_dollars > 0 else float("inf")
-        return {"recovery_factor": recovery, "net_profit": net_profit, "max_drawdown_dollars": mdd_dollars}
+        recovery = (
+            float(net_profit / (mdd_dollars + EPSILON))
+            if mdd_dollars > 0
+            else float("inf")
+        )
+        return {
+            "recovery_factor": recovery,
+            "net_profit": net_profit,
+            "max_drawdown_dollars": mdd_dollars,
+        }
 
 
 class ComprehensiveRiskAnalyzer:
@@ -503,7 +647,11 @@ class ComprehensiveRiskAnalyzer:
 
         out.update(RiskCalculator.cdar(r))
         out.update(RiskCalculator.tail_ratio(r))
-        bench_vol_pct = float(np.std(b, ddof=0) * math.sqrt(DAYS_PER_YEAR) * 100.0) if b.size > 0 else 0.0
+        bench_vol_pct = (
+            float(np.std(b, ddof=0) * math.sqrt(DAYS_PER_YEAR) * 100.0)
+            if b.size > 0
+            else 0.0
+        )
         out.update(RiskCalculator.m_squared(r, pos.risk_free_rate, bench_vol_pct))
         out.update(RiskCalculator.prospect_ratio(r))
         out.update(RiskCalculator.rachev_ratio(r))
@@ -515,9 +663,13 @@ class ComprehensiveRiskAnalyzer:
 
         # summary
         out["position_name"] = pos.name
-        total_return = (pos.current_value - pos.initial_value) / (pos.initial_value + EPSILON)
+        total_return = (pos.current_value - pos.initial_value) / (
+            pos.initial_value + EPSILON
+        )
         out["total_return_pct"] = total_return * 100.0
-        out["volatility_annual_pct"] = float(np.std(r, ddof=0)) * math.sqrt(DAYS_PER_YEAR) * 100.0
+        out["volatility_annual_pct"] = (
+            float(np.std(r, ddof=0)) * math.sqrt(DAYS_PER_YEAR) * 100.0
+        )
         return out
 
 
@@ -554,7 +706,9 @@ def generate_test_positions(seed: int = 42) -> List[PortfolioPosition]:
     return positions
 
 
-def export_results_to_csv(results: List[Dict[str, Any]], filename: str = "risk_analysis_full.csv") -> None:
+def export_results_to_csv(
+    results: List[Dict[str, Any]], filename: str = "risk_analysis_full.csv"
+) -> None:
     if not results:
         return
     keys = list(results[0].keys())
@@ -563,7 +717,10 @@ def export_results_to_csv(results: List[Dict[str, Any]], filename: str = "risk_a
         w.writeheader()
         for r in results:
             # stringify arrays
-            row = {k: (v.tolist() if isinstance(v, np.ndarray) else v) for k, v in r.items()}
+            row = {
+                k: (v.tolist() if isinstance(v, np.ndarray) else v)
+                for k, v in r.items()
+            }
             w.writerow(row)
 
 

@@ -9,10 +9,14 @@ import pandas as pd
 import spacy
 from spacy import load as spacy_load
 
-from hypatiax.patterns.queries.tableau.generation import Generation_custom_tableau_patterns
+from hypatiax.patterns.queries.tableau.generation import (
+    Generation_custom_tableau_patterns,
+)
 
 # Setup logging with more detail
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
@@ -150,9 +154,18 @@ Examples:
         """,
     )
 
-    parser.add_argument("type", choices=["desc", "formulas", "both"], help="Type of patterns to generate")
+    parser.add_argument(
+        "type",
+        choices=["desc", "formulas", "both"],
+        help="Type of patterns to generate",
+    )
 
-    parser.add_argument("--data-file", type=str, default=None, help="Path to custom Excel data file (optional)")
+    parser.add_argument(
+        "--data-file",
+        type=str,
+        default=None,
+        help="Path to custom Excel data file (optional)",
+    )
 
     parser.add_argument(
         "--indicator",
@@ -162,7 +175,12 @@ Examples:
         help="Stopword indicator: S=descriptions, F=formulas, B=both (default: B)",
     )
 
-    parser.add_argument("--output", type=str, default=None, help="Output file path for generated patterns (optional)")
+    parser.add_argument(
+        "--output",
+        type=str,
+        default=None,
+        help="Output file path for generated patterns (optional)",
+    )
 
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
 
@@ -190,7 +208,9 @@ Examples:
         else:
             # Use default resource path
             try:
-                path_data = resources.files("hypatiax.datasets.queries.tableau.training").joinpath("formulas.xlsx")
+                path_data = resources.files(
+                    "hypatiax.datasets.queries.tableau.training"
+                ).joinpath("formulas.xlsx")
 
                 if not path_data.exists():
                     logger.error(f"Default data file not found at {path_data}")
@@ -204,7 +224,9 @@ Examples:
                 sys.exit(1)
 
         # Generate patterns
-        logger.info(f"Generating '{args.type}' patterns with indicator '{args.indicator}'...")
+        logger.info(
+            f"Generating '{args.type}' patterns with indicator '{args.indicator}'..."
+        )
         result = patterns_rules(path_data, args.indicator, args.type)
 
         if result is not None:

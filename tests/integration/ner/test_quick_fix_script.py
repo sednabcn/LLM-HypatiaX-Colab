@@ -20,7 +20,9 @@ class HypatiaXModelLoader:
         self.project_root = self._find_project_root()
 
         # Set correct model path
-        self.model_path = self.project_root / "hypatiax" / "data_spacy" / "queries" / "tableau"
+        self.model_path = (
+            self.project_root / "hypatiax" / "data_spacy" / "queries" / "tableau"
+        )
 
         self.spacy_version = spacy.__version__
 
@@ -151,7 +153,11 @@ class HypatiaXModelLoader:
 
         # Try loading strategies
         strategies = [
-            ("with vectors excluded", ["vectors"]) if exclude_vectors else ("standard", []),
+            (
+                ("with vectors excluded", ["vectors"])
+                if exclude_vectors
+                else ("standard", [])
+            ),
             ("with vectors excluded", ["vectors"]) if not exclude_vectors else None,
             ("with all extras excluded", ["vectors", "tagger", "parser"]),
         ]

@@ -48,7 +48,11 @@ def get_coin_historical_prices(coin_symbol, days=90):
         prices = []
         for timestamp, price in data["prices"]:
             prices.append(
-                {"timestamp": timestamp, "date": datetime.fromtimestamp(timestamp / 1000), "price_usd": price}
+                {
+                    "timestamp": timestamp,
+                    "date": datetime.fromtimestamp(timestamp / 1000),
+                    "price_usd": price,
+                }
             )
         return prices
     except Exception as e:
@@ -142,10 +146,14 @@ def calculate_v3_il_with_fees(
     """
 
     # Calculate initial liquidity
-    L = V3PoolMath.get_liquidity(initial_x, initial_y, price_lower, price_upper, initial_price)
+    L = V3PoolMath.get_liquidity(
+        initial_x, initial_y, price_lower, price_upper, initial_price
+    )
 
     # Get current amounts
-    amount0_now, amount1_now = V3PoolMath.get_amounts(L, price_lower, price_upper, current_price)
+    amount0_now, amount1_now = V3PoolMath.get_amounts(
+        L, price_lower, price_upper, current_price
+    )
 
     # Calculate values
     initial_value = initial_x * initial_price + initial_y
@@ -280,14 +288,25 @@ def backtest_v3_strategy(
         hodl_value = initial_coin * current_price + initial_usdc
 
         # V3 LP value
-        v3_value = v3_calc["amount0_current"] * current_price + v3_calc["amount1_current"] + v3_calc["total_fees"]
+        v3_value = (
+            v3_calc["amount0_current"] * current_price
+            + v3_calc["amount1_current"]
+            + v3_calc["total_fees"]
+        )
 
         # V2 LP value
-        v2_value = v2_calc["amount0_current"] * current_price + v2_calc["amount1_current"] + v2_calc["total_fees"]
+        v2_value = (
+            v2_calc["amount0_current"] * current_price
+            + v2_calc["amount1_current"]
+            + v2_calc["total_fees"]
+        )
 
         # Check if need to rebalance (V3 only)
         needs_rebalance = not v3_calc["in_range"]
-        if needs_rebalance and abs(current_price - last_rebalance_price) / last_rebalance_price > 0.05:
+        if (
+            needs_rebalance
+            and abs(current_price - last_rebalance_price) / last_rebalance_price > 0.05
+        ):
             rebalance_count += 1
             last_rebalance_price = current_price
 
@@ -296,7 +315,8 @@ def backtest_v3_strategy(
                 "date": day["date"],
                 "day": days_elapsed,
                 "price": current_price,
-                "price_change_pct": ((current_price - initial_price) / initial_price) * 100,
+                "price_change_pct": ((current_price - initial_price) / initial_price)
+                * 100,
                 # V3 metrics
                 "v3_in_range": v3_calc["in_range"],
                 "v3_il_percent": v3_calc["il_percent"],
@@ -335,7 +355,12 @@ def analyze_v3_results(df):
     if df.empty:
         return "No data"
 
-    analysis = {"summary": {}, "v3_performance": {}, "v2_comparison": {}, "range_analysis": {}}
+    analysis = {
+        "summary": {},
+        "v3_performance": {},
+        "v2_comparison": {},
+        "range_analysis": {},
+    }
 
     # Summary
     analysis["summary"] = {
@@ -373,7 +398,11 @@ def analyze_v3_results(df):
     analysis["range_analysis"] = {
         "price_lower": df["price_lower"].iloc[0],
         "price_upper": df["price_upper"].iloc[0],
-        "range_width_pct": ((df["price_upper"].iloc[0] - df["price_lower"].iloc[0]) / df["price_lower"].iloc[0]) * 100,
+        "range_width_pct": (
+            (df["price_upper"].iloc[0] - df["price_lower"].iloc[0])
+            / df["price_lower"].iloc[0]
+        )
+        * 100,
         "avg_time_in_range": df["time_in_range_pct"].mean(),
         "price_stayed_in_range": df["v3_in_range"].all(),
     }
@@ -408,7 +437,9 @@ def print_v3_analysis(coin_symbol, analysis):
     print("\n🎯 V3 CONCENTRATED POSITION PERFORMANCE")
     print("-" * 80)
     v3 = analysis["v3_performance"]
-    print(f"Days In Range: {v3['days_in_range']}/{s['total_days']} ({v3['time_in_range_pct']:.1f}%)")
+    print(
+        f"Days In Range: {v3['days_in_range']}/{s['total_days']} ({v3['time_in_range_pct']:.1f}%)"
+    )
     print(f"Days Out of Range: {v3['days_out_of_range']} (earning $0 fees)")
     print(f"Total Fees Earned: ${v3['total_fees_earned']:,.2f}")
     print(f"Final IL: {v3['final_il_percent']:.2f}% (${v3['final_il_dollar']:,.2f})")
@@ -447,13 +478,33 @@ def create_v3_visualizations(df, coin_symbol, save_path):
         return
 
     fig, axes = plt.subplots(2, 3, figsize=(20, 12))
-    fig.suptitle(f"Uniswap V3 Concentrated Liquidity Analysis - {coin_symbol.upper()}", fontsize=16, fontweight="bold")
+    fig.suptitle(
+        f"Uniswap V3 Concentrated Liquidity Analysis - {coin_symbol.upper()}",
+        fontsize=16,
+        fontweight="bold",
+    )
 
     # 1. Price with Range Boundaries
     ax1 = axes[0, 0]
-    ax1.plot(df["date"], df["price"], "b-", linewidth=2, label=f"{coin_symbol.upper()} Price")
-    ax1.axhline(y=df["price_lower"].iloc[0], color="red", linestyle="--", linewidth=2, label="Lower Bound", alpha=0.7)
-    ax1.axhline(y=df["price_upper"].iloc[0], color="red", linestyle="--", linewidth=2, label="Upper Bound", alpha=0.7)
+    ax1.plot(
+        df["date"], df["price"], "b-", linewidth=2, label=f"{coin_symbol.upper()} Price"
+    )
+    ax1.axhline(
+        y=df["price_lower"].iloc[0],
+        color="red",
+        linestyle="--",
+        linewidth=2,
+        label="Lower Bound",
+        alpha=0.7,
+    )
+    ax1.axhline(
+        y=df["price_upper"].iloc[0],
+        color="red",
+        linestyle="--",
+        linewidth=2,
+        label="Upper Bound",
+        alpha=0.7,
+    )
     ax1.fill_between(
         df["date"],
         df["price_lower"].iloc[0],
@@ -563,7 +614,9 @@ def run_v3_backtest(
     """
 
     print("🚀 Starting Uniswap V3 Backtest...")
-    print(f"Parameters: {days} days, {initial_coin} {coin_symbol.upper()}, ${initial_usdc} USDC")
+    print(
+        f"Parameters: {days} days, {initial_coin} {coin_symbol.upper()}, ${initial_usdc} USDC"
+    )
     print(f"Range: ±{price_range_pct}%, Fee Tier: {fee_tier*100}%")
     print("-" * 80)
 
@@ -576,7 +629,9 @@ def run_v3_backtest(
         return None
 
     initial_price = historical_prices[0]["price_usd"]
-    print(f"✅ Fetched {len(historical_prices)} days | Initial price: ${initial_price:.2f}")
+    print(
+        f"✅ Fetched {len(historical_prices)} days | Initial price: ${initial_price:.2f}"
+    )
 
     # Calculate range bounds
     price_lower = initial_price * (1 - price_range_pct / 100)
@@ -609,17 +664,13 @@ def run_v3_backtest(
 
     # Visualize
     print("\n4️⃣ Creating visualizations...")
-    png_path = (
-        f'v3_backtest_{coin_symbol.upper()}_range{price_range_pct}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.png'
-    )
+    png_path = f'v3_backtest_{coin_symbol.upper()}_range{price_range_pct}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.png'
     create_v3_visualizations(results_df, coin_symbol, png_path)
 
     # Export
     if export_excel:
         print("\n5️⃣ Exporting to Excel...")
-        excel_path = (
-            f'v3_backtest_{coin_symbol.upper()}_range{price_range_pct}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
-        )
+        excel_path = f'v3_backtest_{coin_symbol.upper()}_range{price_range_pct}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
 
         with pd.ExcelWriter(excel_path, engine="openpyxl") as writer:
             results_df.to_excel(writer, sheet_name="Daily Results", index=False)

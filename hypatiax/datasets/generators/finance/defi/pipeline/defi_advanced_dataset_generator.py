@@ -51,11 +51,15 @@ class DeFiAdvancedFormulaGenerator:
 
             # x * y = k formula with fee
             amount_in_with_fee = amount_in * (1 - fee)
-            amount_out = reserve_out * amount_in_with_fee / (reserve_in + amount_in_with_fee)
+            amount_out = (
+                reserve_out * amount_in_with_fee / (reserve_in + amount_in_with_fee)
+            )
             expected_price = reserve_out / reserve_in
             actual_price = amount_out / amount_in
             price_impact = (expected_price - actual_price) / expected_price
-            price_impact += np.random.normal(0, self.noise_level * np.mean(price_impact), n_samples)
+            price_impact += np.random.normal(
+                0, self.noise_level * np.mean(price_impact), n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -89,7 +93,9 @@ class DeFiAdvancedFormulaGenerator:
             kelly_fraction = expected_return / (volatility**2)
             position_size = capital * kelly_fraction * risk_tolerance
             position_size = np.clip(position_size, 0, capital)
-            position_size += np.random.normal(0, self.noise_level * np.mean(position_size), n_samples)
+            position_size += np.random.normal(
+                0, self.noise_level * np.mean(position_size), n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -154,7 +160,9 @@ class DeFiAdvancedFormulaGenerator:
 
             # Long liquidation formula
             liq_price_long = entry_price * (1 - 1 / leverage + maintenance_margin)
-            liq_price_long += np.random.normal(0, self.noise_level * entry_price * 0.01, n_samples)
+            liq_price_long += np.random.normal(
+                0, self.noise_level * entry_price * 0.01, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -180,11 +188,17 @@ class DeFiAdvancedFormulaGenerator:
             entry_price_short = np.random.uniform(1000, 50000, n_samples)
             maintenance_margin_short = np.random.uniform(0.03, 0.10, n_samples)
 
-            X = np.column_stack([leverage_short, entry_price_short, maintenance_margin_short])
+            X = np.column_stack(
+                [leverage_short, entry_price_short, maintenance_margin_short]
+            )
 
             # Short liquidation formula
-            liq_price_short = entry_price_short * (1 + 1 / leverage_short - maintenance_margin_short)
-            liq_price_short += np.random.normal(0, self.noise_level * entry_price_short * 0.01, n_samples)
+            liq_price_short = entry_price_short * (
+                1 + 1 / leverage_short - maintenance_margin_short
+            )
+            liq_price_short += np.random.normal(
+                0, self.noise_level * entry_price_short * 0.01, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -215,7 +229,9 @@ class DeFiAdvancedFormulaGenerator:
 
             # Profit calculation
             profit = loan_amount * price_diff - loan_amount * flash_loan_fee - gas_cost
-            profit += np.random.normal(0, self.noise_level * np.abs(profit.mean()), n_samples)
+            profit += np.random.normal(
+                0, self.noise_level * np.abs(profit.mean()), n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -246,8 +262,12 @@ class DeFiAdvancedFormulaGenerator:
 
             # Range width using volatility
             z_score = 1.96  # 95% confidence
-            range_width = current_price * volatility_daily * np.sqrt(days_horizon) * z_score
-            range_width += np.random.normal(0, self.noise_level * range_width.mean(), n_samples)
+            range_width = (
+                current_price * volatility_daily * np.sqrt(days_horizon) * z_score
+            )
+            range_width += np.random.normal(
+                0, self.noise_level * range_width.mean(), n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -307,7 +327,9 @@ class DeFiAdvancedFormulaGenerator:
             borrow_apy = np.where(
                 utilization_rate <= optimal_util,
                 base_rate + slope1 * (utilization_rate / optimal_util),
-                base_rate + slope1 + slope2 * ((utilization_rate - optimal_util) / (1 - optimal_util)),
+                base_rate
+                + slope1
+                + slope2 * ((utilization_rate - optimal_util) / (1 - optimal_util)),
             )
             borrow_apy += np.random.normal(0, self.noise_level * 0.1, n_samples)
 
@@ -319,7 +341,10 @@ class DeFiAdvancedFormulaGenerator:
                     "utilization": "Protocol utilization rate",
                     "base_rate": "Base interest rate",
                 },
-                variable_units={"utilization": "dimensionless", "base_rate": "dimensionless"},
+                variable_units={
+                    "utilization": "dimensionless",
+                    "base_rate": "dimensionless",
+                },
                 description="Dynamic borrow APY with kinked rate model",
                 validate_first=False,
             )
@@ -330,9 +355,13 @@ class DeFiAdvancedFormulaGenerator:
             borrowed_value = np.random.uniform(1000, 300000, n_samples)
             liquidation_threshold = np.random.uniform(0.75, 0.85, n_samples)
             # Ensure borrowed <= collateral * threshold
-            borrowed_value = np.minimum(borrowed_value, collateral_value * liquidation_threshold * 0.95)
+            borrowed_value = np.minimum(
+                borrowed_value, collateral_value * liquidation_threshold * 0.95
+            )
 
-            X = np.column_stack([collateral_value, borrowed_value, liquidation_threshold])
+            X = np.column_stack(
+                [collateral_value, borrowed_value, liquidation_threshold]
+            )
 
             # Health factor = (collateral * liquidation_threshold) / borrowed
             health_factor = (collateral_value * liquidation_threshold) / borrowed_value
@@ -436,7 +465,11 @@ class DeFiAdvancedFormulaGenerator:
                         discovery.get("complexity", 0),
                         validation.get("total_score", 0),
                         validation.get("valid", False),
-                        interpretation.get("interpretation", "")[:100] if interpretation else "",
+                        (
+                            interpretation.get("interpretation", "")[:100]
+                            if interpretation
+                            else ""
+                        ),
                         metadata.get("llm_provider", ""),
                         self.system.domain,
                     ]

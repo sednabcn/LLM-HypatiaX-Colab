@@ -20,7 +20,10 @@ import pytest
 import sympy as sp
 
 sys.path.append("tools/validation")
-from hypatiax.tools.validation.enhanced_domain_validator import ConstraintType, EnhancedDomainValidator
+from hypatiax.tools.validation.enhanced_domain_validator import (
+    ConstraintType,
+    EnhancedDomainValidator,
+)
 
 
 class TestBasicValidation:
@@ -42,7 +45,10 @@ class TestBasicValidation:
     def test_simple_expression_parsing(self):
         """Test basic expression parsing."""
         validator = EnhancedDomainValidator(domain="defi")
-        result = validator.validate(expression_str="x + y", variable_definitions={"x": "Variable x", "y": "Variable y"})
+        result = validator.validate(
+            expression_str="x + y",
+            variable_definitions={"x": "Variable x", "y": "Variable y"},
+        )
         assert result["valid"] == True
         assert "Parsed expression" in str(result["info"])
 
@@ -50,7 +56,11 @@ class TestBasicValidation:
         """Test handling of invalid expression syntax."""
         validator = EnhancedDomainValidator(domain="defi")
         result = validator.validate(
-            expression_str="x + + y", variable_definitions={"x": "Variable x", "y": "Variable y"}  # Invalid syntax
+            expression_str="x + + y",
+            variable_definitions={
+                "x": "Variable x",
+                "y": "Variable y",
+            },  # Invalid syntax
         )
         assert result["valid"] == False
         assert len(result["errors"]) > 0
@@ -66,10 +76,18 @@ class TestDeFiEdgeCases:
 
         il_formula = "2 * sqrt(r) / (1 + r) - 1"
         il_vars = {"r": "Price ratio"}
-        il_constraints = {"r": {"type": "strictly_positive", "min": 0, "reason": "Denominator (1+r)"}}
+        il_constraints = {
+            "r": {"type": "strictly_positive", "min": 0, "reason": "Denominator (1+r)"}
+        }
         test_data = {"r": np.array([0.5, 1.0, 1.5, 2.0, 3.0])}
 
-        result = validator.validate(il_formula, il_vars, il_constraints, test_data, formula_type="impermanent_loss")
+        result = validator.validate(
+            il_formula,
+            il_vars,
+            il_constraints,
+            test_data,
+            formula_type="impermanent_loss",
+        )
 
         assert result["valid"] == True
         assert result["score"] >= 70  # Should have high score
@@ -84,7 +102,13 @@ class TestDeFiEdgeCases:
         il_constraints = {"r": {"type": "strictly_positive", "min": 0}}
         test_data = {"r": np.array([-0.5, 0.5, 1.0])}  # Negative r!
 
-        result = validator.validate(il_formula, il_vars, il_constraints, test_data, formula_type="impermanent_loss")
+        result = validator.validate(
+            il_formula,
+            il_vars,
+            il_constraints,
+            test_data,
+            formula_type="impermanent_loss",
+        )
 
         assert result["valid"] == False
         assert len(result["errors"]) > 0
@@ -109,7 +133,12 @@ class TestDeFiEdgeCases:
         validator = EnhancedDomainValidator(domain="defi")
 
         swap_formula = "y * dx * (1 - fee) / (x + dx * (1 - fee))"
-        swap_vars = {"y": "Output reserve", "x": "Input reserve", "dx": "Input amount", "fee": "Swap fee"}
+        swap_vars = {
+            "y": "Output reserve",
+            "x": "Input reserve",
+            "dx": "Input amount",
+            "fee": "Swap fee",
+        }
         swap_constraints = {"fee": {"type": "percentage_strict", "max": 1.0}}
         test_data = {
             "x": np.array([1000.0]),
@@ -118,7 +147,9 @@ class TestDeFiEdgeCases:
             "fee": np.array([1.0]),  # 100% fee - breaks (1-fee)
         }
 
-        result = validator.validate(swap_formula, swap_vars, swap_constraints, test_data)
+        result = validator.validate(
+            swap_formula, swap_vars, swap_constraints, test_data
+        )
 
         assert result["valid"] == False
         assert len(result["errors"]) > 0
@@ -131,13 +162,18 @@ class TestDeFiEdgeCases:
 
         amm_formula = "x * y"
         amm_vars = {"x": "Reserve X", "y": "Reserve Y"}
-        test_data = {"x": np.array([0.0, 100.0, 200.0]), "y": np.array([200.0, 150.0, 100.0])}  # Zero reserve!
+        test_data = {
+            "x": np.array([0.0, 100.0, 200.0]),
+            "y": np.array([200.0, 150.0, 100.0]),
+        }  # Zero reserve!
 
         result = validator.validate(amm_formula, amm_vars, None, test_data)
 
         assert result["valid"] == False
         assert len(result["errors"]) > 0
-        assert any("reserve" in err.lower() or "x" in err.lower() for err in result["errors"])
+        assert any(
+            "reserve" in err.lower() or "x" in err.lower() for err in result["errors"]
+        )
 
 
 class TestConstraintValidation:
@@ -163,7 +199,10 @@ class TestConstraintValidation:
 
         expr = "x + y"
         vars_def = {"x": "Reserve X", "y": "Reserve Y"}
-        test_data = {"x": np.array([0.0, 2.0, 3.0]), "y": np.array([-1.0, 5.0, 6.0])}  # Zero!  # Negative!
+        test_data = {
+            "x": np.array([0.0, 2.0, 3.0]),
+            "y": np.array([-1.0, 5.0, 6.0]),
+        }  # Zero!  # Negative!
 
         result = validator.validate(expr, vars_def, None, test_data)
 
@@ -177,7 +216,10 @@ class TestConstraintValidation:
 
         expr = "amount * (1 - fee)"
         vars_def = {"amount": "Amount", "fee": "Fee"}
-        test_data = {"amount": np.array([100.0]), "fee": np.array([0.003])}  # Valid: 0.3%
+        test_data = {
+            "amount": np.array([100.0]),
+            "fee": np.array([0.003]),
+        }  # Valid: 0.3%
 
         result = validator.validate(expr, vars_def, None, test_data)
 
@@ -190,7 +232,10 @@ class TestConstraintValidation:
 
         expr = "amount * (1 - fee)"
         vars_def = {"amount": "Amount", "fee": "Fee"}
-        test_data = {"amount": np.array([100.0]), "fee": np.array([1.5])}  # Invalid: > 1.0
+        test_data = {
+            "amount": np.array([100.0]),
+            "fee": np.array([1.5]),
+        }  # Invalid: > 1.0
 
         result = validator.validate(expr, vars_def, None, test_data)
 
@@ -203,7 +248,10 @@ class TestConstraintValidation:
 
         expr = "amount * (1 - fee)"
         vars_def = {"amount": "Amount", "fee": "Fee"}
-        test_data = {"amount": np.array([100.0]), "fee": np.array([-0.1])}  # Invalid: < 0
+        test_data = {
+            "amount": np.array([100.0]),
+            "fee": np.array([-0.1]),
+        }  # Invalid: < 0
 
         result = validator.validate(expr, vars_def, None, test_data)
 
@@ -216,7 +264,13 @@ class TestConstraintValidation:
 
         expr = "sqrt(r)"
         vars_def = {"r": "Ratio"}
-        constraints = {"r": {"type": "strictly_positive", "min": 0.1, "reason": "Must be positive for sqrt"}}
+        constraints = {
+            "r": {
+                "type": "strictly_positive",
+                "min": 0.1,
+                "reason": "Must be positive for sqrt",
+            }
+        }
         test_data = {"r": np.array([0.5, 1.0, 2.0])}
 
         result = validator.validate(expr, vars_def, constraints, test_data)
@@ -230,7 +284,13 @@ class TestConstraintValidation:
 
         expr = "sqrt(r)"
         vars_def = {"r": "Ratio"}
-        constraints = {"r": {"type": "strictly_positive", "min": 0.1, "reason": "Must be positive for sqrt"}}
+        constraints = {
+            "r": {
+                "type": "strictly_positive",
+                "min": 0.1,
+                "reason": "Must be positive for sqrt",
+            }
+        }
         test_data = {"r": np.array([-0.5, 1.0, 2.0])}  # Negative!
 
         result = validator.validate(expr, vars_def, constraints, test_data)
@@ -323,7 +383,11 @@ class TestFinanceDomain:
 
         sharpe = "(r - rf) / sigma"
         vars_def = {"r": "Return", "rf": "Risk-free rate", "sigma": "Volatility"}
-        test_data = {"r": np.array([0.10]), "rf": np.array([0.02]), "sigma": np.array([0.0])}  # Zero volatility!
+        test_data = {
+            "r": np.array([0.10]),
+            "rf": np.array([0.02]),
+            "sigma": np.array([0.0]),
+        }  # Zero volatility!
 
         result = validator.validate(sharpe, vars_def, None, test_data)
 
@@ -339,7 +403,10 @@ class TestValidationHistory:
         validator = EnhancedDomainValidator(domain="defi", max_history=10)
 
         for i in range(5):
-            validator.validate(expression_str=f"x{i} + y{i}", variable_definitions={f"x{i}": "X", f"y{i}": "Y"})
+            validator.validate(
+                expression_str=f"x{i} + y{i}",
+                variable_definitions={f"x{i}": "X", f"y{i}": "Y"},
+            )
 
         assert len(validator.validation_history) == 5
 
@@ -348,7 +415,10 @@ class TestValidationHistory:
         validator = EnhancedDomainValidator(domain="defi", max_history=3)
 
         for i in range(5):
-            validator.validate(expression_str=f"x{i} + y{i}", variable_definitions={f"x{i}": "X", f"y{i}": "Y"})
+            validator.validate(
+                expression_str=f"x{i} + y{i}",
+                variable_definitions={f"x{i}": "X", f"y{i}": "Y"},
+            )
 
         assert len(validator.validation_history) == 3  # Limited to 3
 
@@ -421,7 +491,10 @@ class TestEdgeCaseDetection:
 
         expr = "x * y"
         vars_def = {"x": "Reserve X", "y": "Reserve Y"}
-        test_data = {"x": np.array([1e-10, 1.0]), "y": np.array([1.0, 1.0])}  # Very small value
+        test_data = {
+            "x": np.array([1e-10, 1.0]),
+            "y": np.array([1.0, 1.0]),
+        }  # Very small value
 
         result = validator.validate(expr, vars_def, None, test_data)
 
@@ -452,7 +525,12 @@ class TestRemediationGuidance:
         il_formula = "2 * sqrt(r) / (1 + r) - 1"
         test_data = {"r": np.array([-0.5])}  # Invalid
 
-        result = validator.validate(il_formula, {"r": "Price ratio"}, {"r": {"type": "strictly_positive"}}, test_data)
+        result = validator.validate(
+            il_formula,
+            {"r": "Price ratio"},
+            {"r": {"type": "strictly_positive"}},
+            test_data,
+        )
 
         assert len(result["remediation_steps"]) > 0
         assert any("constraint" in step.lower() for step in result["remediation_steps"])
@@ -502,10 +580,16 @@ class TestIntegration:
         """Test complete DeFi validation pipeline."""
         il_formula = "2 * sqrt(r) / (1 + r) - 1"
         il_vars = {"r": "Price ratio"}
-        il_constraints = {"r": {"type": "strictly_positive", "min": 0, "reason": "IL denominator"}}
+        il_constraints = {
+            "r": {"type": "strictly_positive", "min": 0, "reason": "IL denominator"}
+        }
 
         result = defi_validator.validate(
-            il_formula, il_vars, il_constraints, valid_il_data, formula_type="impermanent_loss"
+            il_formula,
+            il_vars,
+            il_constraints,
+            valid_il_data,
+            formula_type="impermanent_loss",
         )
 
         # Should pass all checks

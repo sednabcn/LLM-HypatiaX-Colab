@@ -75,7 +75,9 @@ class CompleteCBCPanel:
     }
 
     @staticmethod
-    def calculate_indices(hemoglobin: float, rbc: float, hematocrit: float) -> Dict[str, any]:
+    def calculate_indices(
+        hemoglobin: float, rbc: float, hematocrit: float
+    ) -> Dict[str, any]:
         """
         Calculate red blood cell indices.
         MCV = (Hct × 10) / RBC
@@ -107,19 +109,36 @@ class CompleteCBCPanel:
 
     @staticmethod
     def analyze_complete_cbc(
-        wbc: float, rbc: float, hemoglobin: float, hematocrit: float, platelets: float, gender: Gender
+        wbc: float,
+        rbc: float,
+        hemoglobin: float,
+        hematocrit: float,
+        platelets: float,
+        gender: Gender,
     ) -> Dict[str, any]:
         """Complete CBC with interpretation."""
 
-        ranges = CompleteCBCPanel.RANGES_MALE if gender == Gender.MALE else CompleteCBCPanel.RANGES_FEMALE
+        ranges = (
+            CompleteCBCPanel.RANGES_MALE
+            if gender == Gender.MALE
+            else CompleteCBCPanel.RANGES_FEMALE
+        )
 
         # Calculate indices
         indices = CompleteCBCPanel.calculate_indices(hemoglobin, rbc, hematocrit)
 
         # Interpret all values
         results = {
-            "wbc": {"value": wbc, "status": ranges["wbc"].interpret(wbc).value, "unit": "10³/µL"},
-            "rbc": {"value": rbc, "status": ranges["rbc"].interpret(rbc).value, "unit": "10⁶/µL"},
+            "wbc": {
+                "value": wbc,
+                "status": ranges["wbc"].interpret(wbc).value,
+                "unit": "10³/µL",
+            },
+            "rbc": {
+                "value": rbc,
+                "status": ranges["rbc"].interpret(rbc).value,
+                "unit": "10⁶/µL",
+            },
             "hemoglobin": {
                 "value": hemoglobin,
                 "status": ranges["hemoglobin"].interpret(hemoglobin).value,
@@ -135,7 +154,11 @@ class CompleteCBCPanel:
                 "status": ranges["platelets"].interpret(platelets).value,
                 "unit": "10³/µL",
             },
-            "mcv": {"value": indices["mcv"], "status": indices["mcv_status"], "unit": "fL"},
+            "mcv": {
+                "value": indices["mcv"],
+                "status": indices["mcv_status"],
+                "unit": "fL",
+            },
             "mch": {"value": indices["mch"], "unit": "pg"},
             "mchc": {"value": indices["mchc"], "unit": "g/dL"},
         }
@@ -230,7 +253,9 @@ class MetabolicPanel:
         }
 
     @staticmethod
-    def calculate_anion_gap(sodium: float, chloride: float, bicarbonate: float) -> Dict[str, any]:
+    def calculate_anion_gap(
+        sodium: float, chloride: float, bicarbonate: float
+    ) -> Dict[str, any]:
         """
         Anion Gap = Na⁺ - (Cl⁻ + HCO₃⁻)
         Normal: 8-16 mEq/L
@@ -266,7 +291,9 @@ class MetabolicPanel:
 
     @staticmethod
     def assess_glucose_diabetes(
-        fasting_glucose: Optional[float] = None, hba1c: Optional[float] = None, random_glucose: Optional[float] = None
+        fasting_glucose: Optional[float] = None,
+        hba1c: Optional[float] = None,
+        random_glucose: Optional[float] = None,
     ) -> Dict[str, any]:
         """
         Comprehensive diabetes assessment.
@@ -305,7 +332,9 @@ class MetabolicPanel:
         statuses = [s for s in [status_fpg, status_a1c, status_random] if s]
         if "Diabetes" in statuses:
             diagnosis = "Diabetes Mellitus"
-            recommendation = "Start diabetes management protocol, refer to endocrinologist"
+            recommendation = (
+                "Start diabetes management protocol, refer to endocrinologist"
+            )
         elif "Prediabetes" in statuses:
             diagnosis = "Prediabetes"
             recommendation = "Lifestyle modification, repeat testing in 3-6 months"
@@ -315,9 +344,17 @@ class MetabolicPanel:
 
         return {
             "diagnosis": diagnosis,
-            "fasting_glucose": {"value": fasting_glucose, "status": status_fpg} if fasting_glucose else None,
+            "fasting_glucose": (
+                {"value": fasting_glucose, "status": status_fpg}
+                if fasting_glucose
+                else None
+            ),
             "hba1c": {"value": hba1c, "status": status_a1c} if hba1c else None,
-            "random_glucose": {"value": random_glucose, "status": status_random} if random_glucose else None,
+            "random_glucose": (
+                {"value": random_glucose, "status": status_random}
+                if random_glucose
+                else None
+            ),
             "recommendation": recommendation,
             "criteria": {
                 "normal_fpg": "<100 mg/dL",
@@ -334,7 +371,9 @@ class LipidProfile:
     """Complete lipid panel and cardiovascular risk."""
 
     @staticmethod
-    def calculate_ldl(total_chol: float, hdl: float, triglycerides: float) -> Dict[str, any]:
+    def calculate_ldl(
+        total_chol: float, hdl: float, triglycerides: float
+    ) -> Dict[str, any]:
         """
         Friedewald equation: LDL = TC - HDL - (TG/5)
         Valid only if TG <400 mg/dL
@@ -381,7 +420,9 @@ class LipidProfile:
         }
 
     @staticmethod
-    def calculate_ratios(total_chol: float, hdl: float, ldl: float, triglycerides: float) -> Dict[str, any]:
+    def calculate_ratios(
+        total_chol: float, hdl: float, ldl: float, triglycerides: float
+    ) -> Dict[str, any]:
         """
         Calculate cardiovascular risk ratios.
         """
@@ -416,7 +457,9 @@ class LipidProfile:
         }
 
     @staticmethod
-    def complete_lipid_analysis(total_chol: float, hdl: float, triglycerides: float) -> Dict[str, any]:
+    def complete_lipid_analysis(
+        total_chol: float, hdl: float, triglycerides: float
+    ) -> Dict[str, any]:
         """Full lipid panel with risk assessment."""
 
         ldl_result = LipidProfile.calculate_ldl(total_chol, hdl, triglycerides)
@@ -452,16 +495,30 @@ class LipidProfile:
             "test_date": datetime.now().strftime("%Y-%m-%d"),
             "lipid_values": {
                 "total_cholesterol": {"value": total_chol, "unit": "mg/dL"},
-                "ldl_cholesterol": {"value": ldl, "unit": "mg/dL", "status": ldl_result["risk_category"]},
-                "hdl_cholesterol": {"value": hdl, "unit": "mg/dL", "status": hdl_status},
-                "triglycerides": {"value": triglycerides, "unit": "mg/dL", "status": tg_status},
+                "ldl_cholesterol": {
+                    "value": ldl,
+                    "unit": "mg/dL",
+                    "status": ldl_result["risk_category"],
+                },
+                "hdl_cholesterol": {
+                    "value": hdl,
+                    "unit": "mg/dL",
+                    "status": hdl_status,
+                },
+                "triglycerides": {
+                    "value": triglycerides,
+                    "unit": "mg/dL",
+                    "status": tg_status,
+                },
                 "non_hdl_cholesterol": {"value": round(non_hdl, 1), "unit": "mg/dL"},
             },
             "ratios": ratios,
             "cardiovascular_risk": ldl_result["risk_level"],
             "requires_treatment": ldl >= 190 or (ldl >= 130 and hdl < 40),
             "lifestyle_modifications_needed": ldl >= 130 or triglycerides >= 150,
-            "recommendations": LipidProfile._get_recommendations(ldl, hdl, triglycerides),
+            "recommendations": LipidProfile._get_recommendations(
+                ldl, hdl, triglycerides
+            ),
         }
 
     @staticmethod
@@ -484,7 +541,9 @@ class ThyroidPanel:
     """Thyroid function testing."""
 
     @staticmethod
-    def analyze_thyroid(tsh: float, free_t4: Optional[float] = None, free_t3: Optional[float] = None) -> Dict[str, any]:
+    def analyze_thyroid(
+        tsh: float, free_t4: Optional[float] = None, free_t3: Optional[float] = None
+    ) -> Dict[str, any]:
         """
         Comprehensive thyroid analysis.
         TSH: 0.4-4.0 mIU/L
@@ -543,15 +602,23 @@ class ThyroidPanel:
             "diagnosis": diagnosis,
             "severity": severity,
             "treatment_recommendation": treatment,
-            "reference_ranges": {"tsh": "0.4-4.0 mIU/L", "free_t4": "0.8-1.8 ng/dL", "free_t3": "2.3-4.2 pg/mL"},
+            "reference_ranges": {
+                "tsh": "0.4-4.0 mIU/L",
+                "free_t4": "0.8-1.8 ng/dL",
+                "free_t3": "2.3-4.2 pg/mL",
+            },
         }
 
         if free_t4:
-            t4_status = "Low" if free_t4 < 0.8 else ("High" if free_t4 > 1.8 else "Normal")
+            t4_status = (
+                "Low" if free_t4 < 0.8 else ("High" if free_t4 > 1.8 else "Normal")
+            )
             result["free_t4"] = {"value": free_t4, "unit": "ng/dL", "status": t4_status}
 
         if free_t3:
-            t3_status = "Low" if free_t3 < 2.3 else ("High" if free_t3 > 4.2 else "Normal")
+            t3_status = (
+                "Low" if free_t3 < 2.3 else ("High" if free_t3 > 4.2 else "Normal")
+            )
             result["free_t3"] = {"value": free_t3, "unit": "pg/mL", "status": t3_status}
 
         return result
@@ -705,7 +772,12 @@ if __name__ == "__main__":
     print("\n1. COMPLETE BLOOD COUNT (CBC)")
     print("-" * 70)
     cbc = CompleteCBCPanel.analyze_complete_cbc(
-        wbc=7.5, rbc=4.8, hemoglobin=14.2, hematocrit=42.0, platelets=250, gender=Gender.MALE
+        wbc=7.5,
+        rbc=4.8,
+        hemoglobin=14.2,
+        hematocrit=42.0,
+        platelets=250,
+        gender=Gender.MALE,
     )
 
     print(f"Test Date: {cbc['test_date']}")
@@ -739,8 +811,12 @@ if __name__ == "__main__":
     print(f"Risk Category: {cv_risk['risk_category']}")
     print(f"Point Score: {cv_risk['point_score']}")
     print(f"\nRecommended Action: {cv_risk['recommended_action']}")
-    print(f"Aspirin Therapy: {'Recommended' if cv_risk['aspirin_candidate'] else 'Not indicated'}")
-    print(f"Statin Therapy: {'Recommended' if cv_risk['statin_candidate'] else 'Not indicated'}")
+    print(
+        f"Aspirin Therapy: {'Recommended' if cv_risk['aspirin_candidate'] else 'Not indicated'}"
+    )
+    print(
+        f"Statin Therapy: {'Recommended' if cv_risk['statin_candidate'] else 'Not indicated'}"
+    )
 
     print(f"\nRisk Factors Present:")
     for factor, present in cv_risk["risk_factors"].items():

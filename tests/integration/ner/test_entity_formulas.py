@@ -15,7 +15,10 @@ from hypatiax.custom_ner.queries.tableau import (
     custom_tableau_formulas_components,
 )
 from hypatiax.utils.files import FilesManager
-from hypatiax.utils.utils import save_spacy_training_data, save_spacy_training_data_to_json
+from hypatiax.utils.utils import (
+    save_spacy_training_data,
+    save_spacy_training_data_to_json,
+)
 
 # Import path configuration
 try:
@@ -85,7 +88,9 @@ def main():
     print(f"   ✅ Testing data loaded: {len(data_t)} rows")
 
     # Get NER model path using resources (works with installed packages)
-    path_formulas = resources.files("hypatiax.data_spacy.queries.tableau") / "ner_tableau_formulas"
+    path_formulas = (
+        resources.files("hypatiax.data_spacy.queries.tableau") / "ner_tableau_formulas"
+    )
     print(f"   ✅ NER path: {path_formulas}")
 
     # ========================================================================
@@ -96,7 +101,9 @@ def main():
     print("TRAINING DATA PROCESSING")
     print("=" * 70)
 
-    ent_formulas, Train_formulas_data = Custom_ner_entities(data, path_formulas, NAME_COL).get_entity()
+    ent_formulas, Train_formulas_data = Custom_ner_entities(
+        data, path_formulas, NAME_COL
+    ).get_entity()
 
     print(f"\n📊 Training Entities: {ent_formulas}")
     print(f"📊 Training Samples: {len(Train_formulas_data)}")
@@ -116,7 +123,9 @@ def main():
     print("TESTING DATA PROCESSING")
     print("=" * 70)
 
-    ent_test_formulas, Test_formulas_data = Custom_ner_entities(data_t, path_formulas, NAME_COL).get_entity()
+    ent_test_formulas, Test_formulas_data = Custom_ner_entities(
+        data_t, path_formulas, NAME_COL
+    ).get_entity()
 
     print(f"\n📊 Testing Entities: {ent_test_formulas}")
     print(f"📊 Testing Samples: {len(Test_formulas_data)}")
@@ -143,8 +152,12 @@ def main():
         path_vo = config.get_output_path("spacy_data", "vocab")
 
         # Alternative save location in datasets
-        path_tr_datasets = config.get_output_path("datasets", "tableau", "training_spacy")
-        path_te_datasets = config.get_output_path("datasets", "tableau", "testing_spacy")
+        path_tr_datasets = config.get_output_path(
+            "datasets", "tableau", "training_spacy"
+        )
+        path_te_datasets = config.get_output_path(
+            "datasets", "tableau", "testing_spacy"
+        )
 
         print(f"\n💾 Saving to:")
         print(f"   Training: {path_tr}")
@@ -154,21 +167,39 @@ def main():
         try:
             # Save training data
             print("\n📝 Saving training data...")
-            save_spacy_training_data(str(path_tr), Train_formulas_data, "Train_tableau_formulas_sm_data", path_formulas)
+            save_spacy_training_data(
+                str(path_tr),
+                Train_formulas_data,
+                "Train_tableau_formulas_sm_data",
+                path_formulas,
+            )
             save_spacy_training_data_to_json(
-                str(path_tr_datasets), Train_formulas_data, "Train_tableau_formulas_sm_data"
+                str(path_tr_datasets),
+                Train_formulas_data,
+                "Train_tableau_formulas_sm_data",
             )
             print("   ✅ Training data saved")
 
             # Save test data
             print("\n📝 Saving test data...")
-            save_spacy_training_data(str(path_te), Test_formulas_data, "Test_tableau_formulas_sm_data", path_formulas)
-            save_spacy_training_data_to_json(str(path_te_datasets), Test_formulas_data, "Test_tableau_formulas_sm_data")
+            save_spacy_training_data(
+                str(path_te),
+                Test_formulas_data,
+                "Test_tableau_formulas_sm_data",
+                path_formulas,
+            )
+            save_spacy_training_data_to_json(
+                str(path_te_datasets),
+                Test_formulas_data,
+                "Test_tableau_formulas_sm_data",
+            )
             print("   ✅ Test data saved")
 
             # Save vocabulary
             print("\n📝 Saving vocabulary...")
-            save_spacy_training_data_to_json(str(path_vo), ent_formulas, "vocab_tableau_formulas_Formula_sm")
+            save_spacy_training_data_to_json(
+                str(path_vo), ent_formulas, "vocab_tableau_formulas_Formula_sm"
+            )
             print("   ✅ Vocabulary saved")
 
             print(f"\n✅ All data saved successfully!")

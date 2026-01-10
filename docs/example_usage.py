@@ -5,8 +5,10 @@ HypatiaX Example Usage
 Basic example showing how to use HypatiaX for NER on Tableau queries.
 """
 
-import spacy
 from pathlib import Path
+
+import spacy
+
 
 def main():
     """Run basic NER example."""
@@ -14,7 +16,7 @@ def main():
 
     # Load base spaCy model
     print("Loading spaCy model...")
-    nlp = spacy.load('en_core_web_sm')
+    nlp = spacy.load("en_core_web_sm")
 
     # Example Tableau query
     query = "SELECT SUM(Sales) FROM Orders WHERE Region = 'West'"

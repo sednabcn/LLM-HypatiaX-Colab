@@ -14,10 +14,14 @@ if __name__ == "__main__":
     from importlib import resources
 
     # training test
-    path_to_file = resources.files("hypatiax.datasets.queries.tableau.training").joinpath("formulas.xlsx")
+    path_to_file = resources.files(
+        "hypatiax.datasets.queries.tableau.training"
+    ).joinpath("formulas.xlsx")
     df = get_normalization(path_to_file, "Formulas")
     df.to_excel(path_to_file)
     # testing test
-    path_to_test_file = resources.files("hypatiax.datasets.queries.tableau.testing").joinpath("formulas_test.xlsx")
+    path_to_test_file = resources.files(
+        "hypatiax.datasets.queries.tableau.testing"
+    ).joinpath("formulas_test.xlsx")
     dg = get_normalization(path_to_test_file, "Formulas")
     dg.to_excel(path_to_test_file)

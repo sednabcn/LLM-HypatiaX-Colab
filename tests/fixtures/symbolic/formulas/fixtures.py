@@ -75,6 +75,10 @@ def formula_evaluation_cases():
     """Multiple formula evaluation test cases"""
     return [
         {"formula": "2 * x + 5", "variables": {"x": 3}, "expected": 11},
-        {"formula": "(a + b) * c", "variables": {"a": 2, "b": 3, "c": 4}, "expected": 20},
+        {
+            "formula": "(a + b) * c",
+            "variables": {"a": 2, "b": 3, "c": 4},
+            "expected": 20,
+        },
         {"formula": "sqrt(x^2 + y^2)", "variables": {"x": 3, "y": 4}, "expected": 5.0},
     ]

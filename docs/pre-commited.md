@@ -284,7 +284,7 @@ tests/performance/benchmark_suite.py: failed parsing with CPython 3.12.2:
         """Print formatted summary of benchmark results."""
            ^^^^^
     SyntaxError: invalid syntax
-    
+
 hypatiax/tools/domains/finance/defi/uniswap_v2/il_calculator.py: failed parsing with CPython 3.12.2:
 
     Traceback (most recent call last):
@@ -296,7 +296,7 @@ hypatiax/tools/domains/finance/defi/uniswap_v2/il_calculator.py: failed parsing 
       File "hypatiax/tools/domains/finance/defi/uniswap_v2/il_calculator.py", line 833
         """
     SyntaxError: expected 'except' or 'finally' block
-    
+
 hypatiax/tools/validation/fixes.py: failed parsing with CPython 3.12.2:
 
     Traceback (most recent call last):
@@ -308,7 +308,7 @@ hypatiax/tools/validation/fixes.py: failed parsing with CPython 3.12.2:
       File "hypatiax/tools/validation/fixes.py", line 14
         if not expression_str or not expression_str.strip():
     IndentationError: unexpected indent
-    
+
 hypatiax/tools/data_spacy/quick_verification_check.py: failed parsing with CPython 3.12.2:
 
     Traceback (most recent call last):
@@ -487,8 +487,8 @@ reformatted hypatiax/tools/data_spacy/migrate_save_models.py
 reformatted hypatiax/tools/data_spacy/migrate_v_7_8_robust.py
 reformatted hypatiax/tools/data_spacy/ner_manager.py
 reformatted hypatiax/tools/data_spacy/migrate_v_7_8_ruler.py
-error: cannot format hypatiax/tools/data_spacy/quick_verification_check.py: cannot use --safe with this file; failed to parse source file AST: unexpected character after line continuation character (<unknown>, line 5)                                   
-This could be caused by running Black with an older Python version that does not support new syntax used in your source file. 
+error: cannot format hypatiax/tools/data_spacy/quick_verification_check.py: cannot use --safe with this file; failed to parse source file AST: unexpected character after line continuation character (<unknown>, line 5)
+This could be caused by running Black with an older Python version that does not support new syntax used in your source file.
 reformatted hypatiax/tools/data_spacy/rebuild_models.py
 reformatted hypatiax/tools/data_spacy/verify_tableau_models.py
 error: cannot format hypatiax/tools/domains/finance/defi/uniswap_v2/il_calculator.py: Cannot parse: 833:0: """
@@ -504,7 +504,7 @@ reformatted hypatiax/tools/validation/dimensional_validator_21.py
 reformatted hypatiax/tools/validation/enhanced_domain_validator.py
 reformatted hypatiax/tools/validation/enhanced_domain_validator_2.py
 reformatted hypatiax/tools/validation/ensemble_validator.py
-error: cannot format hypatiax/tools/validation/fixes.py: Cannot parse: 14:0:         if not expression_str or not expression_str.strip():                                                                                                                   
+error: cannot format hypatiax/tools/validation/fixes.py: Cannot parse: 14:0:         if not expression_str or not expression_str.strip():
 reformatted hypatiax/tools/validation/enhanced_domian_validator_27.py
 reformatted hypatiax/tools/validation/validator_scaffold.py
 reformatted hypatiax/utils/script_monitor.py
@@ -515,7 +515,7 @@ reformatted tests/benchmark/benchmark_runner.py
 reformatted tests/integration/ner/test_entity_formulas.py
 reformatted tests/integration/ner/test_quick_fix_script.py
 reformatted tests/integration/ner/test_ner_model_loader.py
-error: cannot format tests/performance/benchmark_suite.py: Cannot parse: 734:11:         """Print formatted summary of benchmark results."""                                                                                                                
+error: cannot format tests/performance/benchmark_suite.py: Cannot parse: 734:11:         """Print formatted summary of benchmark results."""
 reformatted tests/integration/ner/test_simple_spacy_model_upgrade.py
 reformatted tests/test_metrics_tracker.py
 reformatted tests/test_metrics_tracker_test.py
@@ -2246,7 +2246,7 @@ Type check with MyPy.....................................................Failed
 - hook id: mypy
 - exit code: 2
 
-hypatiax/tools/data_spacy/quick_verification_check.py:6: error: unexpected character after line continuation character  [syntax]                                                                                                                            
+hypatiax/tools/data_spacy/quick_verification_check.py:6: error: unexpected character after line continuation character  [syntax]
 Found 1 error in 1 file (errors prevented further checking)
 
 Security check with Bandit...............................................Failed
@@ -2261,442 +2261,442 @@ Security check with Bandit...............................................Failed
 Working... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:19
 Run started:2025-12-14 19:37:17.956577
 
-Test results:                                                                                                                 
+Test results:
 >> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
-   Severity: High   Confidence: High                                                                                          
-   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b324_hashlib.html                                                
-   Location: hypatiax/config/version-config/global_version_manager.py:95:19                                                   
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b324_hashlib.html
+   Location: hypatiax/config/version-config/global_version_manager.py:95:19
 94              """Calculate MD5 hash of a file."""
 95              md5_hash = hashlib.md5()
 96              try:
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/dataset-generator.py:75:40                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/dataset-generator.py:75:40
 74                          "price_usd": round(current_price, 2),
 75                          "volume_24h": round(random.uniform(500000000, 2000000000), 2),
 76                          "volatility_7d": round(abs(random.gauss(0.45, 0.15)), 4),
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/hypatiax_dataset.py:70:40                                                           
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/hypatiax_dataset.py:70:40
 69                          "price_usd": round(current_price, 2),
 70                          "volume_24h": round(random.uniform(500000000, 2000000000), 2),
 71                          "volatility_7d": round(abs(random.gauss(0.45, 0.15)), 4),
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/hypatiax_dataset.py:365:23                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/hypatiax_dataset.py:365:23
 364                 # 5-10 trades per day
 365                 n_trades = random.randint(5, 10)
 366                 for _ in range(n_trades):
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/hypatiax_dataset.py:370:44                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/hypatiax_dataset.py:370:44
 369                             "day": day,
 370                             "amount_usd": round(random.uniform(1000, 50000), 2),
 371                             "price": round(price * random.uniform(0.99, 1.01), 2),
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/hypatiax_dataset.py:371:47                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/hypatiax_dataset.py:371:47
 370                             "amount_usd": round(random.uniform(1000, 50000), 2),
 371                             "price": round(price * random.uniform(0.99, 1.01), 2),
 372                             "direction": random.choice(["buy_eth", "sell_eth"]),
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/hypatiax_dataset.py:372:37                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/hypatiax_dataset.py:372:37
 371                             "price": round(price * random.uniform(0.99, 1.01), 2),
 372                             "direction": random.choice(["buy_eth", "sell_eth"]),
 373                         }
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/hypatiax_dataset.py:384:20                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/hypatiax_dataset.py:384:20
 383                 # Price swings ±20%
 384                 swing = random.uniform(-0.2, 0.2)
 385                 day_price = base_price * (1 + swing)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/hypatiax_dataset.py:387:23                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/hypatiax_dataset.py:387:23
 386
 387                 n_trades = random.randint(10, 20)
 388                 for _ in range(n_trades):
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/hypatiax_dataset.py:392:44                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/hypatiax_dataset.py:392:44
 391                             "day": day,
 392                             "amount_usd": round(random.uniform(5000, 100000), 2),
 393                             "price": round(day_price * random.uniform(0.95, 1.05), 2),
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/hypatiax_dataset.py:393:51                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/hypatiax_dataset.py:393:51
 392                             "amount_usd": round(random.uniform(5000, 100000), 2),
 393                             "price": round(day_price * random.uniform(0.95, 1.05), 2),
 394                             "direction": random.choice(["buy_eth", "sell_eth"]),
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/hypatiax_dataset.py:394:37                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/hypatiax_dataset.py:394:37
 393                             "price": round(day_price * random.uniform(0.95, 1.05), 2),
 394                             "direction": random.choice(["buy_eth", "sell_eth"]),
 395                         }
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:29:15                       
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:29:15
 28          for i in range(30):
 29              conc = random.choice(concentrations)
 30              vol = random.choice(volumes)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:30:14                       
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:30:14
 29              conc = random.choice(concentrations)
 30              vol = random.choice(volumes)
 31              alcohol_pct = 100 - conc - random.randint(2, 8)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:31:35                       
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:31:35
 30              vol = random.choice(volumes)
 31              alcohol_pct = 100 - conc - random.randint(2, 8)
 32              water_pct = 100 - conc - alcohol_pct
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:77:21                       
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:77:21
 76          for i in range(25):
 77              start_conc = random.choice([20, 25, 30, 35, 40])
 78              target_conc = random.choice([5, 8, 10, 12, 15])
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:78:22                       
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:78:22
 77              start_conc = random.choice([20, 25, 30, 35, 40])
 78              target_conc = random.choice([5, 8, 10, 12, 15])
 79              start_vol = random.choice([50, 100, 150, 200])
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:79:20                       
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:79:20
 78              target_conc = random.choice([5, 8, 10, 12, 15])
 79              start_vol = random.choice([50, 100, 150, 200])
 80
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:119:14                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:119:14
 118         for i in range(25):
 119             vol = random.choice([200, 300, 500, 750, 1000])
 120             total_frag = random.randint(10, 20)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:120:21                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:120:21
 119             vol = random.choice([200, 300, 500, 750, 1000])
 120             total_frag = random.randint(10, 20)
 121
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:123:14                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:123:14
 122             # Pyramid ratios
 123             top = random.randint(30, 60)
 124             base = random.randint(10, 25)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:124:15                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:124:15
 123             top = random.randint(30, 60)
 124             base = random.randint(10, 25)
 125             middle = 100 - top - base
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:176:14                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:176:14
 175         for i in range(20):
 176             vol = random.choice([100, 250, 500])
 177             conc1 = random.choice([5, 8, 10])
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:177:16                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:177:16
 176             vol = random.choice([100, 250, 500])
 177             conc1 = random.choice([5, 8, 10])
 178             conc2 = random.choice([15, 18, 20, 25])
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:178:16                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:178:16
 177             conc1 = random.choice([5, 8, 10])
 178             conc2 = random.choice([15, 18, 20, 25])
 179             oil_cost = random.choice([30, 40, 50, 60, 80])
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:179:19                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:179:19
 178             conc2 = random.choice([15, 18, 20, 25])
 179             oil_cost = random.choice([30, 40, 50, 60, 80])
 180
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:248:19                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:248:19
 247         for i in range(20):
 248             orig_vol = random.choice([50, 100, 250])
 249             scale = random.choice([5, 10, 20, 40])
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:249:16                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:249:16
 248             orig_vol = random.choice([50, 100, 250])
 249             scale = random.choice([5, 10, 20, 40])
 250             new_vol = orig_vol * scale
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:252:15                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:252:15
 251
 252             conc = random.randint(10, 18)
 253             oils = round(orig_vol * conc / 100, 2)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:314:23                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:314:23
 313         for i in range(20):
 314             oil1, price1 = random.choice(luxury_oils)
 315             oil2, price2 = random.choice(luxury_oils)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:315:23                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:315:23
 314             oil1, price1 = random.choice(luxury_oils)
 315             oil2, price2 = random.choice(luxury_oils)
 316             oil3, price3 = random.choice(luxury_oils)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:316:23                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:316:23
 315             oil2, price2 = random.choice(luxury_oils)
 316             oil3, price3 = random.choice(luxury_oils)
 317
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:318:14                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:318:14
 317
 318             vol = random.choice([100, 200, 300])
 319             conc = random.randint(15, 22)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:319:15                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:319:15
 318             vol = random.choice([100, 200, 300])
 319             conc = random.randint(15, 22)
 320
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:322:19                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:322:19
 321             total_oil = vol * conc / 100
 322             oil1_pct = random.randint(35, 50)
 323             oil2_pct = random.randint(25, 40)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:323:19                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:323:19
 322             oil1_pct = random.randint(35, 50)
 323             oil2_pct = random.randint(25, 40)
 324             oil3_pct = 100 - oil1_pct - oil2_pct
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:397:14                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:397:14
 396         for i in range(25):
 397             age = random.randint(25, 85)
 398             weight = random.randint(50, 120)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:398:17                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:398:17
 397             age = random.randint(25, 85)
 398             weight = random.randint(50, 120)
 399             scr = round(random.uniform(0.6, 3.5), 2)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:399:20                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:399:20
 398             weight = random.randint(50, 120)
 399             scr = round(random.uniform(0.6, 3.5), 2)
 400             gender = random.choice(["male", "female"])
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:400:17                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:400:17
 399             scr = round(random.uniform(0.6, 3.5), 2)
 400             gender = random.choice(["male", "female"])
 401
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:448:13                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:448:13
 447         for i in range(20):
 448             na = random.randint(135, 145)
 449             cl = random.randint(95, 110)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:449:13                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:449:13
 448             na = random.randint(135, 145)
 449             cl = random.randint(95, 110)
 450             hco3 = random.randint(18, 30)
 
 --------------------------------------------------
 >> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random                              
-   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:450:15                      
+   Severity: Low   Confidence: High
+   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b311-random
+   Location: hypatiax/datasets/generators/queries/perfume_clinical/ai_perfume_clinical_lab_150.py:450:15
 449             cl = random.randint(95, 110)
 450             hco3 = random.randint(18, 30)
 451
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/data_spacy/migrate_v_7_8_ruler.py:267:20                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/data_spacy/migrate_v_7_8_ruler.py:267:20
 266                             patterns.append(json.loads(line))
 267                         except:
 268                             pass
@@ -2704,30 +2704,30 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)                                                               
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_imports.html#b404-import-subprocess                 
-   Location: hypatiax/tools/data_spacy/rebuild_spacy_models_v_3.8.py:69:8                                                     
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: hypatiax/tools/data_spacy/rebuild_spacy_models_v_3.8.py:69:8
 68              print(f"❌ Base model '{base_model}' not found. Installing...")
 69              import subprocess
 70
 
 --------------------------------------------------
 >> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)                                                               
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b603_subprocess_without_shell_equals_true.html                   
-   Location: hypatiax/tools/data_spacy/rebuild_spacy_models_v_3.8.py:71:8                                                     
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: hypatiax/tools/data_spacy/rebuild_spacy_models_v_3.8.py:71:8
 70
 71              subprocess.check_call([sys.executable, "-m", "spacy", "download", base_model])
 72              nlp = spacy.load(base_model)
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:200:8                                                     
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:200:8
 199                     return expr
 200             except Exception:
 201                 pass
@@ -2735,10 +2735,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:211:8                                                     
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:211:8
 210                     return expr
 211             except Exception:
 212                 pass
@@ -2746,10 +2746,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:223:8                                                     
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:223:8
 222                 return expr
 223             except Exception:
 224                 pass
@@ -2757,10 +2757,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:256:8                                                     
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:256:8
 255                     return expr
 256             except Exception:
 257                 pass
@@ -2768,10 +2768,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:267:8                                                     
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:267:8
 266                 return expr
 267             except Exception:
 268                 pass
@@ -2779,10 +2779,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:289:8                                                     
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:289:8
 288                     return expr
 289             except Exception:
 290                 pass
@@ -2790,10 +2790,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:298:8                                                     
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:298:8
 297                     return expr
 298             except Exception:
 299                 pass
@@ -2801,10 +2801,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:500:8                                                     
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:500:8
 499                         denominators.append(denom)
 500             except:
 501                 pass
@@ -2812,10 +2812,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:582:20                                                    
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:582:20
 581                                 errors.append(f"Large exponential: exp({arg}) - high overflow risk")
 582                         except:
 583                             pass
@@ -2823,10 +2823,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:606:20                                                    
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:606:20
 605                                 errors.append(f"Large exponential: e^{exp_arg} - high overflow risk")
 606                         except:
 607                             pass
@@ -2834,10 +2834,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:630:20                                                    
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:630:20
 629                                 errors.append(f"Large exponent: {base}^{exp_val} - overflow risk")
 630                         except:
 631                             pass
@@ -2845,10 +2845,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:651:20                                                    
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:651:20
 650                                 warnings.append(f"Large factorial: factorial({n})")
 651                         except:
 652                             pass
@@ -2856,10 +2856,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:664:24                                                    
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:664:24
 663                                     large_factors.append(arg)
 664                             except:
 665                                 pass
@@ -2867,10 +2867,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:687:16                                                    
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:687:16
 686                             warnings.append(f"Very small constant {val:.2e} - underflow risk")
 687                     except:
 688                         pass
@@ -2878,10 +2878,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:698:20                                                    
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:698:20
 697                                 warnings.append(f"Negative exponential: exp({arg}) may underflow to zero")
 698                         except:
 699                             pass
@@ -2889,10 +2889,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:709:20                                                    
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator.py:709:20
 708                                 warnings.append(f"Negative exponential: e^({exp_arg}) may underflow to zero")
 709                         except:
 710                             pass
@@ -2900,10 +2900,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:200:8                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:200:8
 199                     return expr
 200             except Exception:
 201                 pass
@@ -2911,10 +2911,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:211:8                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:211:8
 210                     return expr
 211             except Exception:
 212                 pass
@@ -2922,10 +2922,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:223:8                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:223:8
 222                 return expr
 223             except Exception:
 224                 pass
@@ -2933,10 +2933,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:256:8                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:256:8
 255                     return expr
 256             except Exception:
 257                 pass
@@ -2944,10 +2944,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:267:8                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:267:8
 266                 return expr
 267             except Exception:
 268                 pass
@@ -2955,10 +2955,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:289:8                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:289:8
 288                     return expr
 289             except Exception:
 290                 pass
@@ -2966,10 +2966,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:298:8                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:298:8
 297                     return expr
 298             except Exception:
 299                 pass
@@ -2977,10 +2977,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:500:8                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:500:8
 499                         denominators.append(denom)
 500             except:
 501                 pass
@@ -2988,10 +2988,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:582:20                                               
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:582:20
 581                                 errors.append(f"Large exponential: exp({arg}) - high overflow risk")
 582                         except:
 583                             pass
@@ -2999,10 +2999,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:606:20                                               
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:606:20
 605                                 errors.append(f"Large exponential: e^{exp_arg} - high overflow risk")
 606                         except:
 607                             pass
@@ -3010,10 +3010,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:630:20                                               
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:630:20
 629                                 errors.append(f"Large exponent: {base}^{exp_val} - overflow risk")
 630                         except:
 631                             pass
@@ -3021,10 +3021,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:651:20                                               
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:651:20
 650                                 warnings.append(f"Large factorial: factorial({n})")
 651                         except:
 652                             pass
@@ -3032,10 +3032,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:664:24                                               
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:664:24
 663                                     large_factors.append(arg)
 664                             except:
 665                                 pass
@@ -3043,10 +3043,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:687:16                                               
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:687:16
 686                             warnings.append(f"Very small constant {val:.2e} - underflow risk")
 687                     except:
 688                         pass
@@ -3054,10 +3054,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:698:20                                               
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:698:20
 697                                 warnings.append(f"Negative exponential: exp({arg}) may underflow to zero")
 698                         except:
 699                             pass
@@ -3065,10 +3065,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:709:20                                               
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/enhanced_symbolic_validator_1111.py:709:20
 708                                 warnings.append(f"Negative exponential: e^({exp_arg}) may underflow to zero")
 709                         except:
 710                             pass
@@ -3076,10 +3076,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:178:8                                                                 
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:178:8
 177                     return expr
 178             except Exception:
 179                 pass
@@ -3087,10 +3087,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:189:8                                                                 
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:189:8
 188                     return expr
 189             except Exception:
 190                 pass
@@ -3098,10 +3098,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:201:8                                                                 
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:201:8
 200                 return expr
 201             except Exception:
 202                 pass
@@ -3109,10 +3109,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:212:8                                                                 
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:212:8
 211                 return expr
 212             except Exception:
 213                 pass
@@ -3120,10 +3120,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:249:8                                                                 
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:249:8
 248                     return expr
 249             except Exception:
 250                 # swallow and continue to final failure
@@ -3132,10 +3132,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:272:8                                                                 
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:272:8
 271                     return expr
 272             except Exception:
 273                 pass
@@ -3143,10 +3143,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:281:8                                                                 
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:281:8
 280                     return expr
 281             except Exception:
 282                 pass
@@ -3154,10 +3154,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:505:8                                                                 
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:505:8
 504                         denominators.append(denom)
 505             except:
 506                 pass
@@ -3165,10 +3165,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:587:20                                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:587:20
 586                                 errors.append(f"Large exponential: exp({arg}) - high overflow risk")
 587                         except:
 588                             pass
@@ -3176,10 +3176,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:606:20                                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:606:20
 605                                 errors.append(f"Large exponential: e^{exp_arg} - high overflow risk")
 606                         except:
 607                             pass
@@ -3187,10 +3187,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:624:20                                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:624:20
 623                                 errors.append(f"Large exponent: {base}^{exp_val} - overflow risk")
 624                         except:
 625                             pass
@@ -3198,10 +3198,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:645:20                                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:645:20
 644                                 warnings.append(f"Large factorial: factorial({n})")
 645                         except:
 646                             pass
@@ -3209,10 +3209,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:658:24                                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:658:24
 657                                     large_factors.append(arg)
 658                             except:
 659                                 pass
@@ -3220,10 +3220,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:681:16                                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:681:16
 680                             warnings.append(f"Very small constant {val:.2e} - underflow risk")
 681                     except:
 682                         pass
@@ -3231,10 +3231,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:692:20                                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:692:20
 691                                 warnings.append(f"Negative exponential: exp({arg}) may underflow to zero")
 692                         except:
 693                             pass
@@ -3242,10 +3242,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/symbolic/fixed_validator.py:703:20                                                                
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/symbolic/fixed_validator.py:703:20
 702                                 warnings.append(f"Negative exponential: e^({exp_arg}) may underflow to zero")
 703                         except:
 704                             pass
@@ -3253,10 +3253,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/validation/dimensional_validator.py:44:8                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/validation/dimensional_validator.py:44:8
 43                  self.ureg.define("USD = [currency]")
 44              except:
 45                  pass
@@ -3264,10 +3264,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/validation/dimensional_validator.py:185:8                                                         
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/validation/dimensional_validator.py:185:8
 184                     self.validation_history.append(result)
 185             except Exception:
 186                 pass
@@ -3275,10 +3275,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/validation/dimensional_validator.py:277:8                                                         
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/validation/dimensional_validator.py:277:8
 276                         result["penalty"] += 50
 277             except:
 278                 pass
@@ -3286,10 +3286,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/validation/dimensional_validator_21.py:45:8                                                       
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/validation/dimensional_validator_21.py:45:8
 44                  self.ureg.define("USD = [currency]")
 45              except:
 46                  pass
@@ -3297,10 +3297,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/validation/dimensional_validator_21.py:188:8                                                      
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/validation/dimensional_validator_21.py:188:8
 187                     self.validation_history.append(result)
 188             except Exception:
 189                 pass
@@ -3308,10 +3308,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/validation/dimensional_validator_21.py:298:8                                                      
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/validation/dimensional_validator_21.py:298:8
 297                         result["penalty"] += 50
 298             except:
 299                 pass
@@ -3319,10 +3319,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B112:try_except_continue] Try, Except, Continue detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b112_try_except_continue.html                                    
-   Location: hypatiax/tools/validation/enhanced_domain_validator.py:748:12                                                    
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b112_try_except_continue.html
+   Location: hypatiax/tools/validation/enhanced_domain_validator.py:748:12
 747                         break
 748                 except Exception:
 749                     # Be defensive: if sympy objects behave unexpectedly, fall back to string heuristics
@@ -3331,10 +3331,10 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B110:try_except_pass] Try, Except, Pass detected.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html                                        
-   Location: hypatiax/tools/validation/validator_scaffold.py:183:12                                                           
+   Severity: Low   Confidence: High
+   CWE: CWE-703 (https://cwe.mitre.org/data/definitions/703.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b110_try_except_pass.html
+   Location: hypatiax/tools/validation/validator_scaffold.py:183:12
 182                         result["non_finite"] = True
 183                 except Exception:
 184                     pass
@@ -3342,30 +3342,30 @@ Test results:
 
 --------------------------------------------------
 >> Issue: [B403:blacklist] Consider possible security implications associated with pickle module.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_imports.html#b403-import-pickle                     
-   Location: hypatiax/utils/script_monitor.py:22:0                                                                            
+   Severity: Low   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_imports.html#b403-import-pickle
+   Location: hypatiax/utils/script_monitor.py:22:0
 21      import os
 22      import pickle
 23      import signal
 
 --------------------------------------------------
 >> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)                                                               
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_imports.html#b404-import-subprocess                 
-   Location: hypatiax/utils/script_monitor.py:24:0                                                                            
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: hypatiax/utils/script_monitor.py:24:0
 23      import signal
 24      import subprocess
 25      import sys
 
 --------------------------------------------------
 >> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)                                                               
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b603_subprocess_without_shell_equals_true.html                   
-   Location: hypatiax/utils/script_monitor.py:417:23                                                                          
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: hypatiax/utils/script_monitor.py:417:23
 416             cmd = [sys.executable, self.script_path] + self.script_args
 417             self.process = subprocess.Popen(
 418                 cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, bufsize=1, universal_newlines=True
@@ -3373,82 +3373,82 @@ Test results:
 420
 
 --------------------------------------------------
->> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.                                                                                                                  
-   Severity: Medium   Confidence: High                                                                                        
-   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b301-pickle                              
-   Location: hypatiax/utils/script_monitor.py:521:30                                                                          
+>> Issue: [B301:blacklist] Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.
+   Severity: Medium   Confidence: High
+   CWE: CWE-502 (https://cwe.mitre.org/data/definitions/502.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_calls.html#b301-pickle
+   Location: hypatiax/utils/script_monitor.py:521:30
 520                     with open(filepath, "rb") as f:
 521                         profile = pickle.load(f)
 522
 
 --------------------------------------------------
 >> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)                                                               
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_imports.html#b404-import-subprocess                 
-   Location: hypatiax/utils/utils.py:13:0                                                                                     
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: hypatiax/utils/utils.py:13:0
 12      import shutil
 13      import subprocess
 14      import sys
 
 --------------------------------------------------
 >> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
-   Severity: High   Confidence: High                                                                                          
-   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)                                                             
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b324_hashlib.html                                                
-   Location: hypatiax/utils/utils.py:37:15                                                                                    
+   Severity: High   Confidence: High
+   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b324_hashlib.html
+   Location: hypatiax/utils/utils.py:37:15
 36          """Calculate MD5 hash of file to detect if it changed"""
 37          hash_md5 = hashlib.md5()
 38          with open(filepath, "rb") as f:
 
 --------------------------------------------------
 >> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)                                                               
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b603_subprocess_without_shell_equals_true.html                   
-   Location: hypatiax/utils/utils.py:102:17                                                                                   
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: hypatiax/utils/utils.py:102:17
 101         try:
 102             result = subprocess.run(command, capture_output=True, text=True, check=True)
 103         except subprocess.CalledProcessError as e:
 
 --------------------------------------------------
 >> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)                                                               
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b603_subprocess_without_shell_equals_true.html                   
-   Location: hypatiax/utils/utils.py:128:17                                                                                   
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: hypatiax/utils/utils.py:128:17
 127         try:
 128             result = subprocess.run([python_executable, script_path], capture_output=True, text=True, check=True)
 129             print(f"{script_path} completed successfully: {result.stdout}")
 
 --------------------------------------------------
 >> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)                                                               
-   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_imports.html#b404-import-subprocess                 
-   Location: hypatiax/utils/utils.py:236:4                                                                                    
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: hypatiax/utils/utils.py:236:4
 235     def convert_json_to_spacy(input_file, output_dir, language="en"):
 236         import subprocess
 237
 
 --------------------------------------------------
 >> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
-   Severity: Low   Confidence: High                                                                                           
-   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)                                                               
-   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b603_subprocess_without_shell_equals_true.html                   
-   Location: hypatiax/utils/utils.py:251:17                                                                                   
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/0.0.0/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: hypatiax/utils/utils.py:251:17
 250             ]
 251             result = subprocess.run(command, check=True, text=True, capture_output=True)
 252             print("Output:", result.stdout)
 
 --------------------------------------------------
 
-Code scanned:                                                                                                                 
+Code scanned:
         Total lines of code: 21273
         Total lines skipped (#nosec): 0
 
-Run metrics:                                                                                                                  
+Run metrics:
         Total issues (by severity):
                 Undefined: 0
                 Low: 109
@@ -4855,4 +4855,4 @@ hypatiax/backup_before_extension/scripts_/run_time_parallel_code.py:69:        #
 Validate formula constraint definitions..............(no files to check)Skipped
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ git commit -m "Add benchmarks and tests"                                                                                  
+└─$ git commit -m "Add benchmarks and tests"

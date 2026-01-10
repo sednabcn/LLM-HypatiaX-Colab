@@ -1,4 +1,5 @@
 """Example: Using LLM-based mapping"""
+
 import os
 
 from mappings.llm_mapping import LLMMapper
@@ -7,8 +8,7 @@ from tools.llm_providers.openai_provider import OpenAIProvider
 
 def main():
     """Demonstrate LLM mapping"""
-    print("LLM-based Expression Mapping Example
-")
+    print("LLM-based Expression Mapping Example")
 
     # Check for API key
     api_key = os.getenv("OPENAI_API_KEY")
@@ -27,7 +27,7 @@ def main():
     queries = [
         "Find the integral of x squared from 0 to 1",
         "What is the derivative of cos(x)?",
-        "Solve dy/dx = 2x"
+        "Solve dy/dx = 2x",
     ]
 
     for query in queries:
@@ -36,6 +36,7 @@ def main():
         print(f"Expression: {result.get('expression', 'N/A')}")
         print(f"Provider: {result.get('provider', 'N/A')}")
         print()
+
 
 if __name__ == "__main__":
     main()

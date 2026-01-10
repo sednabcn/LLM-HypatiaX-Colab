@@ -180,9 +180,19 @@ print("SUMMARY TABLE")
 print("=" * 80)
 print(f"{'Pool':<20} {'Quality Score':<15} {'Tier':<20} {'Action':<20}")
 print("-" * 80)
-print(f"{'ETH/USDC':<20} {result1['quality_score']:<15} {result1['tier']:<20} {'❌ AVOID':<20}")
-print(f"{'USDC/USDT':<20} {result2['quality_score']:<15} {result2['tier']:<20} {'✅ GREAT':<20}")
-print(f"{'DAI/USDC':<20} {result3['quality_score']:<15} {result3['tier']:<20} {'✅ GREAT':<20}")
-print(f"{'UNI/ETH':<20} {result4['quality_score']:<15} {result4['tier']:<20} {'⚠️ MODERATE':<20}")
-print(f"{'SHIB/USDC':<20} {result5['quality_score']:<15} {result5['tier']:<20} {'❌ AVOID':<20}")
+print(
+    f"{'ETH/USDC':<20} {result1['quality_score']:<15} {result1['tier']:<20} {'❌ AVOID':<20}"
+)
+print(
+    f"{'USDC/USDT':<20} {result2['quality_score']:<15} {result2['tier']:<20} {'✅ GREAT':<20}"
+)
+print(
+    f"{'DAI/USDC':<20} {result3['quality_score']:<15} {result3['tier']:<20} {'✅ GREAT':<20}"
+)
+print(
+    f"{'UNI/ETH':<20} {result4['quality_score']:<15} {result4['tier']:<20} {'⚠️ MODERATE':<20}"
+)
+print(
+    f"{'SHIB/USDC':<20} {result5['quality_score']:<15} {result5['tier']:<20} {'❌ AVOID':<20}"
+)
 print("=" * 80)

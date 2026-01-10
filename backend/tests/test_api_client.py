@@ -38,9 +38,14 @@ class DeFiAPIClient:
         """Check API health"""
         return self._get("/health")
 
-    def calculate_il_percentage(self, initial_price: float, current_price: float) -> Dict[str, Any]:
+    def calculate_il_percentage(
+        self, initial_price: float, current_price: float
+    ) -> Dict[str, Any]:
         """Calculate impermanent loss percentage"""
-        return self._post("/defi/il-percentage", {"initial_price": initial_price, "current_price": current_price})
+        return self._post(
+            "/defi/il-percentage",
+            {"initial_price": initial_price, "current_price": current_price},
+        )
 
     def calculate_quality_score(
         self,
@@ -120,7 +125,11 @@ def main():
 
     # 3. Quality Score
     quality_result = client.calculate_quality_score(
-        daily_volume_usd=500000, position_value=5000, pool_tvl=10000000, il_dollar=-101, days_elapsed=30
+        daily_volume_usd=500000,
+        position_value=5000,
+        pool_tvl=10000000,
+        il_dollar=-101,
+        days_elapsed=30,
     )
     print_result("Quality Score", quality_result)
 
@@ -202,8 +211,12 @@ def main():
         print("📈 SUMMARY REPORT")
         print("=" * 80)
         print(f"Total Positions:      {summary['total_positions']}")
-        print(f"Profitable:           {summary['profitable_count']}/{summary['successful']}")
-        print(f"Good Quality:         {summary['good_quality_count']}/{summary['successful']}")
+        print(
+            f"Profitable:           {summary['profitable_count']}/{summary['successful']}"
+        )
+        print(
+            f"Good Quality:         {summary['good_quality_count']}/{summary['successful']}"
+        )
         print(f"Average IL:           {summary['average_il_percent']}%")
         print(f"Average Quality:      {summary['average_quality_score']}")
         print(f"Total Net Result:     ${summary['total_net_result']:,.2f}")

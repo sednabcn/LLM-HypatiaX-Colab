@@ -60,27 +60,72 @@ def demo_risk_metrics():
 
     # Tech stock - high volatility, high return
     aapl_returns = np.random.normal(0.0008, 0.025, 252)
-    rm.add_asset(Asset("AAPL", aapl_returns, weight=0.25, market_value=250000, beta=1.2, sector="Technology"))
+    rm.add_asset(
+        Asset(
+            "AAPL",
+            aapl_returns,
+            weight=0.25,
+            market_value=250000,
+            beta=1.2,
+            sector="Technology",
+        )
+    )
     print("  - AAPL: 25% weight, $250k, Tech sector, β=1.2")
 
     # Financial stock - moderate volatility
     jpm_returns = np.random.normal(0.0005, 0.020, 252)
-    rm.add_asset(Asset("JPM", jpm_returns, weight=0.20, market_value=200000, beta=1.1, sector="Financials"))
+    rm.add_asset(
+        Asset(
+            "JPM",
+            jpm_returns,
+            weight=0.20,
+            market_value=200000,
+            beta=1.1,
+            sector="Financials",
+        )
+    )
     print("  - JPM:  20% weight, $200k, Financials, β=1.1")
 
     # Consumer goods - lower volatility
     pg_returns = np.random.normal(0.0004, 0.015, 252)
-    rm.add_asset(Asset("PG", pg_returns, weight=0.20, market_value=200000, beta=0.8, sector="Consumer"))
+    rm.add_asset(
+        Asset(
+            "PG",
+            pg_returns,
+            weight=0.20,
+            market_value=200000,
+            beta=0.8,
+            sector="Consumer",
+        )
+    )
     print("  - PG:   20% weight, $200k, Consumer, β=0.8")
 
     # Healthcare - moderate volatility
     jnj_returns = np.random.normal(0.0005, 0.018, 252)
-    rm.add_asset(Asset("JNJ", jnj_returns, weight=0.20, market_value=200000, beta=0.9, sector="Healthcare"))
+    rm.add_asset(
+        Asset(
+            "JNJ",
+            jnj_returns,
+            weight=0.20,
+            market_value=200000,
+            beta=0.9,
+            sector="Healthcare",
+        )
+    )
     print("  - JNJ:  20% weight, $200k, Healthcare, β=0.9")
 
     # Bonds - low volatility, low return
     bonds_returns = np.random.normal(0.0002, 0.008, 252)
-    rm.add_asset(Asset("AGG", bonds_returns, weight=0.15, market_value=150000, beta=0.3, sector="Fixed Income"))
+    rm.add_asset(
+        Asset(
+            "AGG",
+            bonds_returns,
+            weight=0.15,
+            market_value=150000,
+            beta=0.3,
+            sector="Fixed Income",
+        )
+    )
     print("  - AGG:  15% weight, $150k, Fixed Income, β=0.3")
 
     # Set benchmark (S&P 500)
@@ -128,7 +173,9 @@ def demo_risk_metrics():
     downside = rm.downside_deviation(mar=0.0)
     print(f"  Downside Deviation: {downside['downside_deviation_pct']:.2f}%")
     print(f"  Downside Frequency: {downside['downside_frequency']*100:.1f}%")
-    print(f"  Negative return days: {downside['downside_periods']}/{downside['total_periods']}")
+    print(
+        f"  Negative return days: {downside['downside_periods']}/{downside['total_periods']}"
+    )
 
     # ========================================================================
     # 3. Risk-Adjusted Performance
@@ -211,7 +258,9 @@ def demo_risk_metrics():
     print(f"  Portfolio Volatility: {div['portfolio_volatility']:.6f}")
     print(f"  Diversification Benefit: {div['diversification_benefit']:.2f}%")
     print(f"\n  Interpretation: DR > 1 indicates diversification benefit")
-    print(f"  Your portfolio reduces risk by {div['diversification_benefit']:.1f}% through diversification")
+    print(
+        f"  Your portfolio reduces risk by {div['diversification_benefit']:.1f}% through diversification"
+    )
 
     # ========================================================================
     # 6. Risk Attribution & Budgeting
@@ -226,7 +275,11 @@ def demo_risk_metrics():
 
     total_comp_var = sum(abs(c["component_var"]) for c in comp_var)
     for comp in comp_var:
-        pct_of_total = abs(comp["component_var"]) / total_comp_var * 100 if total_comp_var > 0 else 0
+        pct_of_total = (
+            abs(comp["component_var"]) / total_comp_var * 100
+            if total_comp_var > 0
+            else 0
+        )
         print(
             f"  {comp['asset']:>5}   {comp['weight']:>6.1%}    {comp['marginal_var']:>11.6f}    "
             f"{comp['component_var']:>13.6f}    {pct_of_total:>7.1f}%"
@@ -316,7 +369,9 @@ def demo_risk_metrics():
     print(f"  Sharpe Ratio: {dashboard['sharpe_ratio']['sharpe']:.3f}")
     print(f"  Sortino Ratio: {dashboard['sortino_ratio']['sortino']:.3f}")
     print(f"  Max Drawdown: {dashboard['drawdown']['max_drawdown_pct']:.2f}%")
-    print(f"  Diversification Ratio: {dashboard['diversification']['diversification_ratio']:.3f}")
+    print(
+        f"  Diversification Ratio: {dashboard['diversification']['diversification_ratio']:.3f}"
+    )
     print(f"  Average Correlation: {dashboard['correlation']['average']:.3f}")
 
     if dashboard["warnings"]:
@@ -346,7 +401,9 @@ def demo_risk_metrics():
     compliance = rm.risk_limits_check(limits)
 
     print(f"\n[Compliance Status]")
-    print(f"  Overall Status: {'✓ COMPLIANT' if compliance['compliant'] else '✗ BREACHES DETECTED'}")
+    print(
+        f"  Overall Status: {'✓ COMPLIANT' if compliance['compliant'] else '✗ BREACHES DETECTED'}"
+    )
     print(f"  Number of Breaches: {compliance['num_breaches']}")
 
     if compliance["breaches"]:

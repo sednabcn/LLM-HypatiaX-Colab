@@ -32,7 +32,10 @@ class TestTransformerTokenization:
 
         mock_tokenizer = Mock()
         mock_tokenizer.encode = Mock(
-            side_effect=[[101, 2159, 102, 0, 0, 0, 0, 0, 0, 0], [101, 2023, 2003, 1037, 2936, 6251, 102, 0, 0, 0]]
+            side_effect=[
+                [101, 2159, 102, 0, 0, 0, 0, 0, 0, 0],
+                [101, 2023, 2003, 1037, 2936, 6251, 102, 0, 0, 0],
+            ]
         )
 
         tokenized = [mock_tokenizer.encode(text) for text in texts]
@@ -113,7 +116,11 @@ class TestTransformerLayers:
         batch_size = 2
         seq_len = 10
 
-        ffn = torch.nn.Sequential(torch.nn.Linear(d_model, d_ff), torch.nn.ReLU(), torch.nn.Linear(d_ff, d_model))
+        ffn = torch.nn.Sequential(
+            torch.nn.Linear(d_model, d_ff),
+            torch.nn.ReLU(),
+            torch.nn.Linear(d_ff, d_model),
+        )
 
         x = torch.randn(batch_size, seq_len, d_model)
         output = ffn(x)
@@ -140,7 +147,9 @@ class TestModelInference:
         vocab_size = 1000
 
         mock_model = Mock()
-        mock_model.forward = Mock(return_value=torch.randn(batch_size, seq_len, vocab_size))
+        mock_model.forward = Mock(
+            return_value=torch.randn(batch_size, seq_len, vocab_size)
+        )
 
         input_ids = torch.randint(0, vocab_size, (batch_size, seq_len))
         output = mock_model.forward(input_ids)

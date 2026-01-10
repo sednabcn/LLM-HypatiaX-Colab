@@ -48,7 +48,9 @@ Be creative but mathematically rigorous!
 """
 
         message = self.client.messages.create(
-            model="claude-sonnet-4-20250514", max_tokens=2000, messages=[{"role": "user", "content": prompt}]
+            model="claude-sonnet-4-20250514",
+            max_tokens=2000,
+            messages=[{"role": "user", "content": prompt}],
         )
 
         # Parse response

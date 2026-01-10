@@ -20,20 +20,50 @@ perfume_data = [
         "Calculate perfume concentration percentage",
         "Concentration % = (Fragrance Oil Weight / Total Formula Weight) × 100",
     ],
-    ["Determine eau de parfum dilution ratio", "EDP = 15-20% fragrance + 75-80% alcohol + 5% water"],
+    [
+        "Determine eau de parfum dilution ratio",
+        "EDP = 15-20% fragrance + 75-80% alcohol + 5% water",
+    ],
     ["Calculate eau de toilette strength", "EDT = 5-15% fragrance oil in alcohol base"],
     ["Compute cologne concentration", "Cologne = 2-5% fragrance in 70-90% alcohol"],
     ["Find parfum extrait percentage", "Parfum = 20-40% fragrance concentration"],
-    ["Calculate alcohol volume for dilution", "Alcohol mL = Total Volume × (Alcohol % / 100)"],
-    ["Determine fragrance oil needed for 100ml EDP", "Fragrance Oil = 100ml × 0.18 = 18ml"],
-    ["Calculate water content in perfume", "Water mL = Total Volume - (Alcohol + Fragrance)"],
-    ["Find total perfume weight from volumes", "Total Weight = (Volume₁ × Density₁) + (Volume₂ × Density₂) + ..."],
-    ["Calculate cost per ml of perfume", "Cost/mL = Total Ingredient Cost / Final Volume"],
+    [
+        "Calculate alcohol volume for dilution",
+        "Alcohol mL = Total Volume × (Alcohol % / 100)",
+    ],
+    [
+        "Determine fragrance oil needed for 100ml EDP",
+        "Fragrance Oil = 100ml × 0.18 = 18ml",
+    ],
+    [
+        "Calculate water content in perfume",
+        "Water mL = Total Volume - (Alcohol + Fragrance)",
+    ],
+    [
+        "Find total perfume weight from volumes",
+        "Total Weight = (Volume₁ × Density₁) + (Volume₂ × Density₂) + ...",
+    ],
+    [
+        "Calculate cost per ml of perfume",
+        "Cost/mL = Total Ingredient Cost / Final Volume",
+    ],
     # Top Notes Formulation
-    ["Calculate top note percentage in formula", "Top Notes % = (Top Note Weight / Total Fragrance Weight) × 100"],
-    ["Determine citrus oil ratio for freshness", "Citrus Ratio = Bergamot:Lemon:Orange = 3:2:1"],
-    ["Calculate bergamot evaporation rate compensation", "Bergamot Adjusted = Base Amount × (1 + Evaporation Rate)"],
-    ["Find optimal lemon oil concentration", "Lemon Oil = 5-15% of total fragrance oil"],
+    [
+        "Calculate top note percentage in formula",
+        "Top Notes % = (Top Note Weight / Total Fragrance Weight) × 100",
+    ],
+    [
+        "Determine citrus oil ratio for freshness",
+        "Citrus Ratio = Bergamot:Lemon:Orange = 3:2:1",
+    ],
+    [
+        "Calculate bergamot evaporation rate compensation",
+        "Bergamot Adjusted = Base Amount × (1 + Evaporation Rate)",
+    ],
+    [
+        "Find optimal lemon oil concentration",
+        "Lemon Oil = 5-15% of total fragrance oil",
+    ],
     ["Calculate grapefruit blend ratio", "Grapefruit = 10-25% of top note accord"],
     ["Determine mandarin oil proportion", "Mandarin = 8-20% of citrus blend"],
     ["Calculate neroli concentration for elegance", "Neroli = 2-8% of total fragrance"],
@@ -41,7 +71,10 @@ perfume_data = [
     ["Calculate mint freshness factor", "Mint Oil = 1-5% for fresh effect"],
     ["Determine lavender top note amount", "Lavender = 5-15% in fougère compositions"],
     # Heart/Middle Notes
-    ["Calculate heart note percentage", "Heart Notes % = (Middle Note Weight / Total Fragrance) × 100"],
+    [
+        "Calculate heart note percentage",
+        "Heart Notes % = (Middle Note Weight / Total Fragrance) × 100",
+    ],
     ["Determine rose absolute concentration", "Rose Absolute = 2-10% of fragrance oil"],
     ["Calculate jasmine dilution ratio", "Jasmine = 3-15% in floral formulas"],
     ["Find ylang-ylang optimal level", "Ylang-Ylang = 2-8% of total fragrance"],
@@ -52,7 +85,10 @@ perfume_data = [
     ["Calculate carnation spice level", "Carnation = 2-8% for spicy florals"],
     ["Determine lily of valley accord", "Lily = 10-25% of heart notes"],
     # Base Notes
-    ["Calculate base note percentage", "Base Notes % = (Base Weight / Total Fragrance) × 100"],
+    [
+        "Calculate base note percentage",
+        "Base Notes % = (Base Weight / Total Fragrance) × 100",
+    ],
     ["Determine sandalwood concentration", "Sandalwood = 10-30% of base notes"],
     ["Calculate patchouli earthiness level", "Patchouli = 5-20% for oriental blends"],
     ["Find vetiver grounding proportion", "Vetiver = 8-25% in woody bases"],
@@ -63,18 +99,48 @@ perfume_data = [
     ["Calculate musk fixative concentration", "Musk = 5-20% for longevity"],
     ["Determine oakmoss classic chypre ratio", "Oakmoss = 2-8% (IFRA compliant)"],
     # Accord Building
-    ["Calculate floral accord balance", "Floral Accord = Rose:Jasmine:Ylang = 40:40:20"],
-    ["Determine citrus accord composition", "Citrus = Bergamot:Lemon:Orange:Grapefruit = 40:25:20:15"],
+    [
+        "Calculate floral accord balance",
+        "Floral Accord = Rose:Jasmine:Ylang = 40:40:20",
+    ],
+    [
+        "Determine citrus accord composition",
+        "Citrus = Bergamot:Lemon:Orange:Grapefruit = 40:25:20:15",
+    ],
     ["Calculate woody accord ratio", "Woody = Sandalwood:Cedar:Vetiver = 50:30:20"],
-    ["Find oriental accord balance", "Oriental = Vanilla:Amber:Patchouli:Spices = 30:30:25:15"],
-    ["Calculate fougère accord structure", "Fougère = Lavender:Coumarin:Oakmoss = 50:30:20"],
-    ["Determine chypre accord formula", "Chypre = Bergamot:Rose:Oakmoss:Patchouli = 25:25:25:25"],
-    ["Calculate aquatic accord freshness", "Aquatic = Calone:Citrus:Marine Notes = 30:40:30"],
-    ["Find gourmand accord sweetness", "Gourmand = Vanilla:Caramel:Tonka:Fruits = 40:20:20:20"],
-    ["Calculate green accord composition", "Green = Galbanum:Violet Leaf:Cut Grass = 40:35:25"],
-    ["Determine leather accord intensity", "Leather = Birch Tar:Castoreum:Labdanum = 45:30:25"],
+    [
+        "Find oriental accord balance",
+        "Oriental = Vanilla:Amber:Patchouli:Spices = 30:30:25:15",
+    ],
+    [
+        "Calculate fougère accord structure",
+        "Fougère = Lavender:Coumarin:Oakmoss = 50:30:20",
+    ],
+    [
+        "Determine chypre accord formula",
+        "Chypre = Bergamot:Rose:Oakmoss:Patchouli = 25:25:25:25",
+    ],
+    [
+        "Calculate aquatic accord freshness",
+        "Aquatic = Calone:Citrus:Marine Notes = 30:40:30",
+    ],
+    [
+        "Find gourmand accord sweetness",
+        "Gourmand = Vanilla:Caramel:Tonka:Fruits = 40:20:20:20",
+    ],
+    [
+        "Calculate green accord composition",
+        "Green = Galbanum:Violet Leaf:Cut Grass = 40:35:25",
+    ],
+    [
+        "Determine leather accord intensity",
+        "Leather = Birch Tar:Castoreum:Labdanum = 45:30:25",
+    ],
     # Fixative Calculations
-    ["Calculate total fixative percentage", "Fixatives = 10-25% of total fragrance base"],
+    [
+        "Calculate total fixative percentage",
+        "Fixatives = 10-25% of total fragrance base",
+    ],
     ["Determine benzoin resin amount", "Benzoin = 3-10% as fixative"],
     ["Calculate labdanum stickiness factor", "Labdanum = 5-15% for longevity"],
     ["Find ambergris synthetic ratio", "Ambroxan = 2-8% for diffusion"],
@@ -88,7 +154,10 @@ perfume_data = [
     ["Calculate ethanol purity for perfume", "Ethanol = 95-96% purity, denatured"],
     ["Determine dipropylene glycol (DPG) amount", "DPG = 5-20% for oil solubilization"],
     ["Calculate isopropyl myristate carrier", "IPM = 2-10% for skin feel"],
-    ["Find benzyl benzoate solvent ratio", "Benzyl Benzoate = 5-15% for solubilization"],
+    [
+        "Find benzyl benzoate solvent ratio",
+        "Benzyl Benzoate = 5-15% for solubilization",
+    ],
     ["Calculate triethyl citrate amount", "Triethyl Citrate = 3-10% as solvent"],
     ["Determine propylene glycol level", "Propylene Glycol = 5-15% in water-based"],
     ["Calculate glycerin moisture content", "Glycerin = 2-8% for hydration"],
@@ -107,7 +176,10 @@ perfume_data = [
     ["Calculate coffee absolute richness", "Coffee = 1-5% in gourmands"],
     ["Determine chocolate intensity", "Chocolate = 2-8% for sweetness"],
     # Aldehyde Formulations
-    ["Calculate aldehyde C-12 soapy effect", "Aldehyde C-12 = 0.5-2% for classic soapiness"],
+    [
+        "Calculate aldehyde C-12 soapy effect",
+        "Aldehyde C-12 = 0.5-2% for classic soapiness",
+    ],
     ["Determine aldehyde C-11 fatty floral", "Aldehyde C-11 = 0.3-1.5% for lift"],
     ["Calculate aldehyde C-14 peachy note", "Aldehyde C-14 = 0.5-2% for fruity"],
     ["Find aldehyde C-18 coconut cream", "Aldehyde C-18 = 0.2-1% for lactonic"],
@@ -116,7 +188,10 @@ perfume_data = [
     ["Calculate methyl ionone violet", "Methyl Ionone = 2-8% for powdery"],
     ["Find hydroxycitronellal fresh floral", "Hydroxycitronellal = 5-15% for clean"],
     ["Calculate hexyl cinnamic aldehyde jasmine", "HCA = 2-10% for jasmine facet"],
-    ["Determine anisic aldehyde sweet hawthorn", "Anisic Aldehyde = 1-5% for sweet floral"],
+    [
+        "Determine anisic aldehyde sweet hawthorn",
+        "Anisic Aldehyde = 1-5% for sweet floral",
+    ],
     # Modern Synthetic Molecules
     ["Calculate Iso E Super halo effect", "Iso E Super = 10-40% for radiance"],
     ["Determine Hedione jasmine transparency", "Hedione = 10-30% for diffusive floral"],
@@ -170,7 +245,10 @@ perfume_data = [
     ["Determine hay absolute tobacco facet", "Hay = 2-8% for warm dried"],
     ["Calculate immortelle curry tobacco", "Immortelle = 1-5% for maple curry"],
     ["Find mate absolute green tobacco", "Mate = 2-6% for bitter green"],
-    ["Calculate nagarmotha cypriol woody leather", "Nagarmotha = 2-8% for earthy leather"],
+    [
+        "Calculate nagarmotha cypriol woody leather",
+        "Nagarmotha = 2-8% for earthy leather",
+    ],
     ["Determine papyrus dry woody", "Papyrus = 3-10% for mineral wood"],
     # Aquatic and Marine
     ["Calculate calone ozone marine", "Calone = 0.5-3% for seabreeze"],
@@ -184,9 +262,15 @@ perfume_data = [
     ["Calculate mineral notes stone coolness", "Mineral = 2-8% for rock water"],
     ["Determine seaspray salty mist", "Sea Spray = 2-8% for coastal breeze"],
     # Concentration Adjustments
-    ["Calculate perfume to body spray dilution", "Body Spray = Perfume concentration × 0.25"],
+    [
+        "Calculate perfume to body spray dilution",
+        "Body Spray = Perfume concentration × 0.25",
+    ],
     ["Determine splash cologne from concentrate", "Splash = 3-5% in 80% alcohol"],
-    ["Calculate aftershave lotion strength", "Aftershave = 2-4% fragrance + soothing agents"],
+    [
+        "Calculate aftershave lotion strength",
+        "Aftershave = 2-4% fragrance + soothing agents",
+    ],
     ["Find hair mist safe concentration", "Hair Mist = 1-3% in light alcohol"],
     ["Calculate linen spray dilution", "Linen Spray = 2-5% in water-alcohol mix"],
     ["Determine reed diffuser oil strength", "Reed Diffuser = 10-20% in carrier oil"],
@@ -195,8 +279,14 @@ perfume_data = [
     ["Calculate lotion perfume percentage", "Lotion = 1-3% in emulsion base"],
     ["Determine shampoo fragrance load", "Shampoo = 0.5-2% in surfactant base"],
     # Maturation and Aging
-    ["Calculate maceration time formula", "Maceration Days = 30-90 for optimal blending"],
-    ["Determine aging improvement factor", "Aging Improvement = log(Days + 1) × Quality Factor"],
+    [
+        "Calculate maceration time formula",
+        "Maceration Days = 30-90 for optimal blending",
+    ],
+    [
+        "Determine aging improvement factor",
+        "Aging Improvement = log(Days + 1) × Quality Factor",
+    ],
     ["Calculate temperature for maturation", "Maturation Temp = 15-20°C constant"],
     ["Find optimal storage humidity", "Storage Humidity = 40-60% RH"],
     ["Calculate evaporation loss percentage", "Evaporation Loss = 2-5% over 6 months"],
@@ -206,7 +296,10 @@ perfume_data = [
     ["Calculate shake-and-settle time", "Settling = 24-48 hours after mixing"],
     ["Determine cold stability test", "Cold Test = 0°C for 48 hours, no cloudiness"],
     # Allergen Management
-    ["Calculate total allergen percentage", "Total Allergens = Sum(Each Allergen %) must be listed if >0.001%"],
+    [
+        "Calculate total allergen percentage",
+        "Total Allergens = Sum(Each Allergen %) must be listed if >0.001%",
+    ],
     ["Determine IFRA category compliance", "IFRA Cat = Product Type QRA limit check"],
     ["Calculate limonene natural level", "Limonene = 60-95% in citrus oils"],
     ["Find linalool lavender content", "Linalool = 25-45% in lavender oil"],
@@ -217,16 +310,37 @@ perfume_data = [
     ["Calculate citral limit compliance", "Citral = Max 0.6-2% (skin sensitizer)"],
     ["Determine farnesol natural occurrence", "Farnesol = 2-15% in jasmine/ylang"],
     # Cost Analysis Formulas
-    ["Calculate raw material cost per batch", "Batch Cost = Σ(Ingredient Weight × Price per kg)"],
+    [
+        "Calculate raw material cost per batch",
+        "Batch Cost = Σ(Ingredient Weight × Price per kg)",
+    ],
     ["Determine cost per finished unit", "Unit Cost = Batch Cost / Number of Units"],
     ["Calculate markup for retail price", "Retail Price = Unit Cost × (1 + Markup %)"],
-    ["Find break-even production volume", "Break-Even = Fixed Costs / (Price - Variable Cost)"],
-    ["Calculate ingredient cost percentage", "Ingredient % = (Ingredient Cost / Total Cost) × 100"],
-    ["Determine profit margin on perfume", "Profit Margin = (Revenue - Cost) / Revenue × 100"],
+    [
+        "Find break-even production volume",
+        "Break-Even = Fixed Costs / (Price - Variable Cost)",
+    ],
+    [
+        "Calculate ingredient cost percentage",
+        "Ingredient % = (Ingredient Cost / Total Cost) × 100",
+    ],
+    [
+        "Determine profit margin on perfume",
+        "Profit Margin = (Revenue - Cost) / Revenue × 100",
+    ],
     ["Calculate wholesale discount amount", "Wholesale = Retail × (1 - Discount %)"],
-    ["Find production cost efficiency", "Efficiency = Actual Yield / Theoretical Yield × 100"],
-    ["Calculate packaging cost ratio", "Packaging % = Packaging Cost / Total Cost × 100"],
-    ["Determine sample vial costing", "Sample Cost = (Fragrance Cost × Sample mL) + Vial Cost"],
+    [
+        "Find production cost efficiency",
+        "Efficiency = Actual Yield / Theoretical Yield × 100",
+    ],
+    [
+        "Calculate packaging cost ratio",
+        "Packaging % = Packaging Cost / Total Cost × 100",
+    ],
+    [
+        "Determine sample vial costing",
+        "Sample Cost = (Fragrance Cost × Sample mL) + Vial Cost",
+    ],
 ]
 
 # ============================================================================
@@ -234,46 +348,112 @@ perfume_data = [
 # ============================================================================
 
 clinical_data = [
-    ["Calculate absolute neutrophil count (ANC)", "ANC = WBC × (% Neutrophils + % Bands) / 100"],
-    ["Determine corrected calcium for albumin", "Corrected Ca = Measured Ca + 0.8 × (4.0 - Albumin g/dL)"],
+    [
+        "Calculate absolute neutrophil count (ANC)",
+        "ANC = WBC × (% Neutrophils + % Bands) / 100",
+    ],
+    [
+        "Determine corrected calcium for albumin",
+        "Corrected Ca = Measured Ca + 0.8 × (4.0 - Albumin g/dL)",
+    ],
     ["Calculate anion gap", "Anion Gap = Na⁺ - (Cl⁻ + HCO₃⁻)"],
     [
         "Find creatinine clearance (Cockcroft-Gault)",
         "CrCl = [(140 - Age) × Weight kg × (0.85 if female)] / (72 × SCr mg/dL)",
     ],
     ["Calculate body mass index (BMI)", "BMI = Weight kg / (Height m)²"],
-    ["Determine mean corpuscular volume (MCV)", "MCV fL = (Hematocrit % × 10) / RBC count (millions/μL)"],
-    ["Calculate mean corpuscular hemoglobin (MCH)", "MCH pg = (Hemoglobin g/dL × 10) / RBC count (millions/μL)"],
+    [
+        "Determine mean corpuscular volume (MCV)",
+        "MCV fL = (Hematocrit % × 10) / RBC count (millions/μL)",
+    ],
+    [
+        "Calculate mean corpuscular hemoglobin (MCH)",
+        "MCH pg = (Hemoglobin g/dL × 10) / RBC count (millions/μL)",
+    ],
     ["Find MCHC concentration", "MCHC g/dL = (Hemoglobin g/dL × 100) / Hematocrit %"],
     [
         "Calculate reticulocyte production index",
         "RPI = (Reticulocyte % × Patient Hct) / (Normal Hct × Maturation Factor)",
     ],
-    ["Determine absolute reticulocyte count", "Absolute Retic = Reticulocyte % × RBC count / 100"],
+    [
+        "Determine absolute reticulocyte count",
+        "Absolute Retic = Reticulocyte % × RBC count / 100",
+    ],
     # Renal Function Tests
-    ["Calculate estimated GFR (MDRD)", "eGFR = 175 × (SCr)⁻¹·¹⁵⁴ × (Age)⁻⁰·²⁰³ × (0.742 if female) × (1.212 if Black)"],
-    ["Determine BUN to creatinine ratio", "BUN/Cr Ratio = BUN mg/dL / Creatinine mg/dL"],
-    ["Calculate fractional excretion of sodium", "FENa % = [(UNa × PCr) / (PNa × UCr)] × 100"],
-    ["Find urine protein to creatinine ratio", "UPCR = Urine Protein mg/dL / Urine Creatinine mg/dL"],
-    ["Calculate albumin to creatinine ratio", "ACR mg/g = (Urine Albumin mg/L / Urine Creatinine mg/L) × 1000"],
-    ["Determine protein excretion rate", "24h Protein = Urine Protein mg/dL × 24h Volume L × 10"],
-    ["Calculate osmolal gap (serum)", "Osm Gap = Measured Osm - Calculated Osm (2×Na + Glucose/18 + BUN/2.8)"],
-    ["Find urine osmolal gap", "Urine Osm Gap = Measured - 2×(Na + K) - Urea/2.8 - Glucose/18"],
-    ["Calculate transtubular potassium gradient", "TTKG = (Urine K / Plasma K) / (Urine Osm / Plasma Osm)"],
-    ["Determine creatinine production rate", "Cr Production = UCr × 24h Volume / (1440 × Weight kg)"],
+    [
+        "Calculate estimated GFR (MDRD)",
+        "eGFR = 175 × (SCr)⁻¹·¹⁵⁴ × (Age)⁻⁰·²⁰³ × (0.742 if female) × (1.212 if Black)",
+    ],
+    [
+        "Determine BUN to creatinine ratio",
+        "BUN/Cr Ratio = BUN mg/dL / Creatinine mg/dL",
+    ],
+    [
+        "Calculate fractional excretion of sodium",
+        "FENa % = [(UNa × PCr) / (PNa × UCr)] × 100",
+    ],
+    [
+        "Find urine protein to creatinine ratio",
+        "UPCR = Urine Protein mg/dL / Urine Creatinine mg/dL",
+    ],
+    [
+        "Calculate albumin to creatinine ratio",
+        "ACR mg/g = (Urine Albumin mg/L / Urine Creatinine mg/L) × 1000",
+    ],
+    [
+        "Determine protein excretion rate",
+        "24h Protein = Urine Protein mg/dL × 24h Volume L × 10",
+    ],
+    [
+        "Calculate osmolal gap (serum)",
+        "Osm Gap = Measured Osm - Calculated Osm (2×Na + Glucose/18 + BUN/2.8)",
+    ],
+    [
+        "Find urine osmolal gap",
+        "Urine Osm Gap = Measured - 2×(Na + K) - Urea/2.8 - Glucose/18",
+    ],
+    [
+        "Calculate transtubular potassium gradient",
+        "TTKG = (Urine K / Plasma K) / (Urine Osm / Plasma Osm)",
+    ],
+    [
+        "Determine creatinine production rate",
+        "Cr Production = UCr × 24h Volume / (1440 × Weight kg)",
+    ],
     # Liver Function Tests
-    ["Calculate Child-Pugh score", "Child-Pugh = Points(Bilirubin + Albumin + INR + Ascites + Encephalopathy)"],
-    ["Determine MELD score", "MELD = 3.78×ln(Bili) + 11.2×ln(INR) + 9.57×ln(Cr) + 6.43"],
+    [
+        "Calculate Child-Pugh score",
+        "Child-Pugh = Points(Bilirubin + Albumin + INR + Ascites + Encephalopathy)",
+    ],
+    [
+        "Determine MELD score",
+        "MELD = 3.78×ln(Bili) + 11.2×ln(INR) + 9.57×ln(Cr) + 6.43",
+    ],
     ["Calculate AST to ALT ratio", "AST/ALT Ratio = AST IU/L / ALT IU/L"],
-    ["Find alkaline phosphatase to bilirubin ratio", "ALP/Bili = ALP IU/L / Total Bili mg/dL"],
-    ["Calculate APRI score (fibrosis)", "APRI = [(AST/ULN) / Platelet count (10⁹/L)] × 100"],
+    [
+        "Find alkaline phosphatase to bilirubin ratio",
+        "ALP/Bili = ALP IU/L / Total Bili mg/dL",
+    ],
+    [
+        "Calculate APRI score (fibrosis)",
+        "APRI = [(AST/ULN) / Platelet count (10⁹/L)] × 100",
+    ],
     ["Determine FIB-4 index", "FIB-4 = (Age × AST) / (Platelet count × √ALT)"],
-    ["Calculate direct to total bilirubin ratio", "Direct/Total Bili = Direct Bili / Total Bili"],
-    ["Find albumin to globulin ratio", "A/G Ratio = Albumin g/dL / (Total Protein - Albumin)"],
+    [
+        "Calculate direct to total bilirubin ratio",
+        "Direct/Total Bili = Direct Bili / Total Bili",
+    ],
+    [
+        "Find albumin to globulin ratio",
+        "A/G Ratio = Albumin g/dL / (Total Protein - Albumin)",
+    ],
     ["Calculate prothrombin time ratio", "PT Ratio = Patient PT / Control PT"],
     ["Determine INR value", "INR = (Patient PT / Mean Normal PT)^ISI"],
     # Lipid Panel Calculations
-    ["Calculate LDL cholesterol (Friedewald)", "LDL = Total Chol - HDL - (Triglycerides / 5) [if TG < 400]"],
+    [
+        "Calculate LDL cholesterol (Friedewald)",
+        "LDL = Total Chol - HDL - (Triglycerides / 5) [if TG < 400]",
+    ],
     ["Determine non-HDL cholesterol", "Non-HDL = Total Cholesterol - HDL"],
     ["Calculate VLDL cholesterol estimate", "VLDL = Triglycerides / 5"],
     ["Find cholesterol to HDL ratio", "Total Chol/HDL = Total Cholesterol / HDL"],
@@ -282,29 +462,74 @@ clinical_data = [
     ["Calculate Castelli risk index I", "Castelli I = Total Cholesterol / HDL"],
     ["Find Castelli risk index II", "Castelli II = LDL / HDL"],
     ["Calculate coronary risk ratio", "Coronary Risk = Total Chol / HDL"],
-    ["Determine apoB to apoA1 ratio", "ApoB/ApoA1 = Apolipoprotein B / Apolipoprotein A1"],
+    [
+        "Determine apoB to apoA1 ratio",
+        "ApoB/ApoA1 = Apolipoprotein B / Apolipoprotein A1",
+    ],
     # Acid-Base Balance
-    ["Calculate base excess", "Base Excess = (HCO₃⁻ - 24.4) + (2.3 × Hgb + 7.7) × (pH - 7.4)"],
-    ["Determine expected PCO₂ in metabolic acidosis", "Expected PCO₂ = 1.5 × HCO₃⁻ + 8 (±2)"],
-    ["Calculate expected HCO₃⁻ in respiratory disorder", "Acute: ΔHCO₃⁻ = ΔPCo₂ × 0.1; Chronic: ΔHCO₃⁻ = ΔPCO₂ × 0.4"],
+    [
+        "Calculate base excess",
+        "Base Excess = (HCO₃⁻ - 24.4) + (2.3 × Hgb + 7.7) × (pH - 7.4)",
+    ],
+    [
+        "Determine expected PCO₂ in metabolic acidosis",
+        "Expected PCO₂ = 1.5 × HCO₃⁻ + 8 (±2)",
+    ],
+    [
+        "Calculate expected HCO₃⁻ in respiratory disorder",
+        "Acute: ΔHCO₃⁻ = ΔPCo₂ × 0.1; Chronic: ΔHCO₃⁻ = ΔPCO₂ × 0.4",
+    ],
     ["Find delta ratio (gap-gap)", "Delta Ratio = (Anion Gap - 12) / (24 - HCO₃⁻)"],
-    ["Calculate osmolar gap", "Osm Gap = Measured Osm - (2×Na + Glucose/18 + BUN/2.8 + Ethanol/4.6)"],
+    [
+        "Calculate osmolar gap",
+        "Osm Gap = Measured Osm - (2×Na + Glucose/18 + BUN/2.8 + Ethanol/4.6)",
+    ],
     ["Determine Henderson-Hasselbalch pH", "pH = 6.1 + log(HCO₃⁻ / (0.03 × PCO₂))"],
-    ["Calculate alveolar-arterial gradient", "A-a Gradient = [(FiO₂ × (Patm - 47) - PaCO₂/0.8] - PaO₂"],
+    [
+        "Calculate alveolar-arterial gradient",
+        "A-a Gradient = [(FiO₂ × (Patm - 47) - PaCO₂/0.8] - PaO₂",
+    ],
     ["Find oxygen content arterial", "CaO₂ = (1.34 × Hgb × SaO₂) + (0.003 × PaO₂)"],
     ["Calculate PaO₂/FiO₂ ratio", "P/F Ratio = PaO₂ mmHg / FiO₂ (decimal)"],
     ["Determine oxygen saturation gap", "O₂ Sat Gap = Calculated SaO₂ - Measured SpO₂"],
     # Diabetes and Glucose Monitoring
-    ["Calculate estimated average glucose from HbA1c", "eAG mg/dL = (28.7 × HbA1c %) - 46.7"],
-    ["Determine HOMA-IR insulin resistance", "HOMA-IR = (Fasting Insulin μU/mL × Fasting Glucose mg/dL) / 405"],
-    ["Calculate HOMA-B beta cell function", "HOMA-B = (360 × Fasting Insulin) / (Fasting Glucose - 63)"],
-    ["Find glucose management indicator", "GMI % = 3.31 + 0.02392 × Mean Glucose mg/dL"],
+    [
+        "Calculate estimated average glucose from HbA1c",
+        "eAG mg/dL = (28.7 × HbA1c %) - 46.7",
+    ],
+    [
+        "Determine HOMA-IR insulin resistance",
+        "HOMA-IR = (Fasting Insulin μU/mL × Fasting Glucose mg/dL) / 405",
+    ],
+    [
+        "Calculate HOMA-B beta cell function",
+        "HOMA-B = (360 × Fasting Insulin) / (Fasting Glucose - 63)",
+    ],
+    [
+        "Find glucose management indicator",
+        "GMI % = 3.31 + 0.02392 × Mean Glucose mg/dL",
+    ],
     ["Calculate insulin to carb ratio", "I:C Ratio = 500 / Total Daily Insulin"],
-    ["Determine correction factor (insulin sensitivity)", "Correction Factor = 1800 / Total Daily Insulin"],
-    ["Calculate glycemic variability (CV)", "CV % = (SD of Glucose / Mean Glucose) × 100"],
-    ["Find time in range percentage", "TIR % = (Readings 70-180 mg/dL / Total Readings) × 100"],
-    ["Calculate glucose area under curve", "AUC = Σ[(Glucose₁ + Glucose₂)/2 × Time Interval]"],
-    ["Determine fructosamine-estimated A1c", "Est A1c = (Fructosamine μmol/L - 158) / 21.3"],
+    [
+        "Determine correction factor (insulin sensitivity)",
+        "Correction Factor = 1800 / Total Daily Insulin",
+    ],
+    [
+        "Calculate glycemic variability (CV)",
+        "CV % = (SD of Glucose / Mean Glucose) × 100",
+    ],
+    [
+        "Find time in range percentage",
+        "TIR % = (Readings 70-180 mg/dL / Total Readings) × 100",
+    ],
+    [
+        "Calculate glucose area under curve",
+        "AUC = Σ[(Glucose₁ + Glucose₂)/2 × Time Interval]",
+    ],
+    [
+        "Determine fructosamine-estimated A1c",
+        "Est A1c = (Fructosamine μmol/L - 158) / 21.3",
+    ],
     # Thyroid Function Tests
     ["Calculate free thyroxine index (FTI)", "FTI = Total T4 × T3 Uptake / 100"],
     ["Determine thyroid hormone ratio", "T3/T4 Ratio = Total T3 / Total T4"],
@@ -313,111 +538,273 @@ clinical_data = [
     ["Calculate T3 resin uptake ratio", "T3RU Ratio = Patient T3RU / Mean Normal T3RU"],
     ["Determine total T3 from free T3", "Total T3 ≈ Free T3 × 154"],
     ["Calculate reverse T3 ratio", "rT3 Ratio = Reverse T3 / Total T3"],
-    ["Find TSH-T4 dissociation index", "SPINA-GT = (TSH × FT4) / Reference Range Product"],
+    [
+        "Find TSH-T4 dissociation index",
+        "SPINA-GT = (TSH × FT4) / Reference Range Product",
+    ],
     # Coagulation Studies
-    ["Calculate activated clotting time ratio", "ACT Ratio = Patient ACT / Control ACT"],
+    [
+        "Calculate activated clotting time ratio",
+        "ACT Ratio = Patient ACT / Control ACT",
+    ],
     ["Determine aPTT ratio", "aPTT Ratio = Patient aPTT / Mean Normal aPTT"],
     ["Calculate thrombin time ratio", "TT Ratio = Patient TT / Control TT"],
-    ["Find fibrinogen activity percentage", "Fibrinogen Activity = (Patient Clot / Reference) × 100"],
+    [
+        "Find fibrinogen activity percentage",
+        "Fibrinogen Activity = (Patient Clot / Reference) × 100",
+    ],
     ["Calculate D-dimer FEU conversion", "D-dimer FEU = DDU × 2"],
-    ["Determine bleeding time adjusted", "Bleeding Time Adjusted = Observed Time / Template Width"],
-    ["Calculate platelet function analyzer closure time", "PFA-CT = Closure Time (ADP or Epi cartridge)"],
-    ["Find clot retraction percentage", "Clot Retraction % = (Serum Volume / Total Volume) × 100"],
-    ["Calculate mixing study correction", "Correction = [(Mix PT - Patient PT) / Patient PT] × 100 > 10%"],
+    [
+        "Determine bleeding time adjusted",
+        "Bleeding Time Adjusted = Observed Time / Template Width",
+    ],
+    [
+        "Calculate platelet function analyzer closure time",
+        "PFA-CT = Closure Time (ADP or Epi cartridge)",
+    ],
+    [
+        "Find clot retraction percentage",
+        "Clot Retraction % = (Serum Volume / Total Volume) × 100",
+    ],
+    [
+        "Calculate mixing study correction",
+        "Correction = [(Mix PT - Patient PT) / Patient PT] × 100 > 10%",
+    ],
     ["Determine factor VIII activity", "Factor VIII = % Activity from PT-based assay"],
     # Electrolyte and Mineral Balance
-    ["Calculate corrected sodium for glucose", "Corrected Na = Measured Na + 0.016 × (Glucose - 100)"],
-    ["Determine free calcium from total", "Free Ca = 0.9 + 0.55 × Total Ca - 0.3 × Albumin"],
-    ["Calculate calcium-phosphate product", "Ca × PO₄ = Calcium mg/dL × Phosphate mg/dL"],
+    [
+        "Calculate corrected sodium for glucose",
+        "Corrected Na = Measured Na + 0.016 × (Glucose - 100)",
+    ],
+    [
+        "Determine free calcium from total",
+        "Free Ca = 0.9 + 0.55 × Total Ca - 0.3 × Albumin",
+    ],
+    [
+        "Calculate calcium-phosphate product",
+        "Ca × PO₄ = Calcium mg/dL × Phosphate mg/dL",
+    ],
     ["Find potassium correction for pH", "K⁺ change = 0.6 mEq/L per 0.1 pH unit"],
-    ["Calculate magnesium to calcium ratio", "Mg/Ca Ratio = Magnesium mg/dL / Calcium mg/dL"],
-    ["Determine sodium deficit", "Na Deficit = 0.6 × Weight kg × (Desired Na - Actual Na)"],
-    ["Calculate free water deficit", "Water Deficit = TBW × [(Actual Na / Desired Na) - 1]"],
+    [
+        "Calculate magnesium to calcium ratio",
+        "Mg/Ca Ratio = Magnesium mg/dL / Calcium mg/dL",
+    ],
+    [
+        "Determine sodium deficit",
+        "Na Deficit = 0.6 × Weight kg × (Desired Na - Actual Na)",
+    ],
+    [
+        "Calculate free water deficit",
+        "Water Deficit = TBW × [(Actual Na / Desired Na) - 1]",
+    ],
     ["Find chloride to sodium ratio", "Cl/Na Ratio = Chloride mEq/L / Sodium mEq/L"],
-    ["Calculate phosphate correction for albumin", "Corrected PO₄ = Measured PO₄ + (3.5 - Albumin)"],
+    [
+        "Calculate phosphate correction for albumin",
+        "Corrected PO₄ = Measured PO₄ + (3.5 - Albumin)",
+    ],
     ["Determine ionized calcium from pH", "ΔiCa = 0.05 mmol/L per 0.1 pH increase"],
     # Hematology Indices
-    ["Calculate red cell distribution width CV", "RDW-CV % = (SD of RBC Volume / MCV) × 100"],
+    [
+        "Calculate red cell distribution width CV",
+        "RDW-CV % = (SD of RBC Volume / MCV) × 100",
+    ],
     ["Determine platelet distribution width", "PDW = SD of Platelet Volume"],
-    ["Calculate mean platelet volume", "MPV fL = Plateletcrit % / Platelet Count × 10⁶"],
+    [
+        "Calculate mean platelet volume",
+        "MPV fL = Plateletcrit % / Platelet Count × 10⁶",
+    ],
     ["Find plateletcrit percentage", "PCT % = (Platelet Count × MPV) / 10,000"],
-    ["Calculate immature platelet fraction", "IPF % = Immature Platelets / Total Platelets × 100"],
-    ["Determine nucleated RBC count", "nRBC/100 WBC, Corrected WBC = Counted WBC × 100/(100 + nRBC)"],
+    [
+        "Calculate immature platelet fraction",
+        "IPF % = Immature Platelets / Total Platelets × 100",
+    ],
+    [
+        "Determine nucleated RBC count",
+        "nRBC/100 WBC, Corrected WBC = Counted WBC × 100/(100 + nRBC)",
+    ],
     ["Calculate large unstained cells", "LUC = Total WBC - (Lymph + Mono + Gran)"],
     ["Find red cell hemoglobin content", "CHr pg = Mean Hgb Content of Reticulocytes"],
-    ["Calculate RBC morphology index", "RDW-SD fL = Width at 20% Height of RBC Histogram"],
+    [
+        "Calculate RBC morphology index",
+        "RDW-SD fL = Width at 20% Height of RBC Histogram",
+    ],
     ["Determine blast percentage", "Blast % = (Blast Count / Total WBC) × 100"],
     # Tumor Markers and Ratios
     ["Calculate PSA density", "PSAD = Total PSA / Prostate Volume mL"],
     ["Determine PSA velocity", "PSA Velocity = (PSA₂ - PSA₁) / Time years"],
-    ["Calculate free to total PSA ratio", "Free/Total PSA % = (Free PSA / Total PSA) × 100"],
+    [
+        "Calculate free to total PSA ratio",
+        "Free/Total PSA % = (Free PSA / Total PSA) × 100",
+    ],
     ["Find CA-125 to CEA ratio", "CA-125/CEA = CA-125 U/mL / CEA ng/mL"],
-    ["Calculate AFP to total protein ratio", "AFP Ratio = AFP ng/mL / Total Protein g/L"],
+    [
+        "Calculate AFP to total protein ratio",
+        "AFP Ratio = AFP ng/mL / Total Protein g/L",
+    ],
     ["Determine tumor marker doubling time", "Doubling Time = (t × ln2) / ln(C₂/C₁)"],
-    ["Calculate HCG discriminatory zone", "HCG Threshold = 1500-2000 mIU/mL for IUP visualization"],
+    [
+        "Calculate HCG discriminatory zone",
+        "HCG Threshold = 1500-2000 mIU/mL for IUP visualization",
+    ],
     ["Find CA 19-9 to bilirubin ratio", "CA 19-9/Bili = CA 19-9 / Total Bilirubin"],
     ["Calculate CEA to CA 19-9 ratio", "CEA/CA 19-9 = CEA ng/mL / CA 19-9 U/mL"],
     ["Determine LDH to ALT ratio", "LDH/ALT = LDH IU/L / ALT IU/L"],
     # Urinalysis Calculations
-    ["Calculate specific gravity from osmolality", "Specific Gravity ≈ 1.000 + (Osm / 1000 × 0.035)"],
-    ["Determine urine albumin excretion rate", "AER mg/24h = Urine Albumin × 24h Volume / 1000"],
-    ["Calculate urine protein excretion", "Protein g/24h = Urine Protein mg/dL × Volume L × 0.01"],
-    ["Find fractional excretion of urea", "FEUrea % = [(Uurea × PCr) / (Purea × UCr)] × 100"],
+    [
+        "Calculate specific gravity from osmolality",
+        "Specific Gravity ≈ 1.000 + (Osm / 1000 × 0.035)",
+    ],
+    [
+        "Determine urine albumin excretion rate",
+        "AER mg/24h = Urine Albumin × 24h Volume / 1000",
+    ],
+    [
+        "Calculate urine protein excretion",
+        "Protein g/24h = Urine Protein mg/dL × Volume L × 0.01",
+    ],
+    [
+        "Find fractional excretion of urea",
+        "FEUrea % = [(Uurea × PCr) / (Purea × UCr)] × 100",
+    ],
     ["Calculate renal failure index", "RFI = UNa / (UCr / PCr)"],
     ["Determine urine anion gap", "Urine AG = (UNa + UK) - UCl"],
-    ["Calculate urine osmolal gap for NH₄⁺", "UOG = Measured Osm - Calculated, NH₄⁺ ≈ UOG/2"],
-    ["Find urine calcium to creatinine ratio", "UCa/Cr = (Urine Ca mg/dL / Urine Cr mg/dL)"],
-    ["Calculate 24-hour calcium excretion", "Ca Excretion = Urine Ca mg/dL × Volume L × 10"],
-    ["Determine urine uric acid to creatinine ratio", "U-UA/Cr = Urine Uric Acid / Urine Creatinine"],
+    [
+        "Calculate urine osmolal gap for NH₄⁺",
+        "UOG = Measured Osm - Calculated, NH₄⁺ ≈ UOG/2",
+    ],
+    [
+        "Find urine calcium to creatinine ratio",
+        "UCa/Cr = (Urine Ca mg/dL / Urine Cr mg/dL)",
+    ],
+    [
+        "Calculate 24-hour calcium excretion",
+        "Ca Excretion = Urine Ca mg/dL × Volume L × 10",
+    ],
+    [
+        "Determine urine uric acid to creatinine ratio",
+        "U-UA/Cr = Urine Uric Acid / Urine Creatinine",
+    ],
     # Immunology and Serology
-    ["Calculate antibody titer dilution", "Titer = Highest Dilution with Positive Reaction"],
-    ["Determine IgG index for CSF", "IgG Index = (CSF IgG / Serum IgG) / (CSF Albumin / Serum Albumin)"],
-    ["Calculate CSF/serum albumin ratio", "Albumin Ratio = (CSF Albumin / Serum Albumin) × 1000"],
-    ["Find IgG synthesis rate", "IgG Synthesis = [(CSF IgG - Serum IgG/369) - (CSF Alb/230)] × 5"],
+    [
+        "Calculate antibody titer dilution",
+        "Titer = Highest Dilution with Positive Reaction",
+    ],
+    [
+        "Determine IgG index for CSF",
+        "IgG Index = (CSF IgG / Serum IgG) / (CSF Albumin / Serum Albumin)",
+    ],
+    [
+        "Calculate CSF/serum albumin ratio",
+        "Albumin Ratio = (CSF Albumin / Serum Albumin) × 1000",
+    ],
+    [
+        "Find IgG synthesis rate",
+        "IgG Synthesis = [(CSF IgG - Serum IgG/369) - (CSF Alb/230)] × 5",
+    ],
     ["Calculate C3 to C4 ratio", "C3/C4 = Complement C3 / Complement C4"],
     ["Determine CH50 complement activity", "CH50 = Dilution causing 50% Hemolysis"],
     ["Calculate antigen-antibody ratio", "Ag:Ab = Antigen Conc / Antibody Conc"],
-    ["Find rheumatoid factor units", "RF IU/mL = Patient OD / Cutoff OD × Calibrator Value"],
+    [
+        "Find rheumatoid factor units",
+        "RF IU/mL = Patient OD / Cutoff OD × Calibrator Value",
+    ],
     ["Calculate anti-CCP antibody level", "Anti-CCP U/mL from Standard Curve"],
     ["Determine ANA titer pattern", "ANA = Titer × Pattern (e.g., 1:320 Homogeneous)"],
     # Cardiac Biomarkers
     ["Calculate troponin delta change", "Δ Troponin = Troponin₂ - Troponin₁"],
-    ["Determine troponin relative change", "% Change = [(Trop₂ - Trop₁) / Trop₁] × 100"],
+    [
+        "Determine troponin relative change",
+        "% Change = [(Trop₂ - Trop₁) / Trop₁] × 100",
+    ],
     ["Calculate BNP to NT-proBNP conversion", "NT-proBNP ≈ BNP × 8"],
     ["Find CK-MB relative index", "CK-MB Index % = (CK-MB / Total CK) × 100"],
-    ["Calculate myoglobin to troponin ratio", "Myoglobin/Trop = Myoglobin ng/mL / Troponin ng/mL"],
+    [
+        "Calculate myoglobin to troponin ratio",
+        "Myoglobin/Trop = Myoglobin ng/mL / Troponin ng/mL",
+    ],
     ["Determine hs-cTn delta at 1 hour", "1h Δhs-cTn for Rule-in/Rule-out Protocol"],
-    ["Calculate copeptin combined with troponin", "Combined Score = Troponin + Copeptin Algorithm"],
+    [
+        "Calculate copeptin combined with troponin",
+        "Combined Score = Troponin + Copeptin Algorithm",
+    ],
     ["Find H-FABP heart fatty acid protein", "H-FABP ng/mL elevation for early MI"],
     ["Calculate troponin clearance rate", "Clearance = (Peak - Current) / Time hours"],
-    ["Determine GRACE risk score", "GRACE = Points(Age + HR + SBP + Cr + Killip + Arrest + ST + Cardiac Enzymes)"],
+    [
+        "Determine GRACE risk score",
+        "GRACE = Points(Age + HR + SBP + Cr + Killip + Arrest + ST + Cardiac Enzymes)",
+    ],
     # Microbiology Calculations
-    ["Calculate colony forming units", "CFU/mL = (Colony Count × Dilution Factor) / Volume Plated"],
+    [
+        "Calculate colony forming units",
+        "CFU/mL = (Colony Count × Dilution Factor) / Volume Plated",
+    ],
     ["Determine bacterial growth rate", "Growth Rate = ln(N₂/N₁) / (t₂ - t₁)"],
     ["Calculate doubling time", "Doubling Time = ln(2) / Growth Rate"],
-    ["Find minimum inhibitory concentration", "MIC = Lowest Antibiotic Conc with No Visible Growth"],
+    [
+        "Find minimum inhibitory concentration",
+        "MIC = Lowest Antibiotic Conc with No Visible Growth",
+    ],
     ["Calculate zone of inhibition diameter", "ZOI = Diameter mm of Clear Zone"],
-    ["Determine bacterial load reduction", "Log Reduction = log₁₀(Initial CFU) - log₁₀(Final CFU)"],
+    [
+        "Determine bacterial load reduction",
+        "Log Reduction = log₁₀(Initial CFU) - log₁₀(Final CFU)",
+    ],
     ["Calculate D-value sterilization", "D-value = Time for 1 Log₁₀ Reduction"],
-    ["Find bactericidal ratio", "MBC/MIC Ratio = Bactericidal / Inhibitory Concentration"],
+    [
+        "Find bactericidal ratio",
+        "MBC/MIC Ratio = Bactericidal / Inhibitory Concentration",
+    ],
     ["Calculate viral load copies", "Viral Load = Copies/mL from PCR Ct Value"],
-    ["Determine antibiotic synergy", "FIC Index = (MIC_A combo / MIC_A alone) + (MIC_B combo / MIC_B alone)"],
+    [
+        "Determine antibiotic synergy",
+        "FIC Index = (MIC_A combo / MIC_A alone) + (MIC_B combo / MIC_B alone)",
+    ],
     # Cerebrospinal Fluid Analysis
-    ["Calculate CSF protein to albumin ratio", "CSF Protein/Albumin = CSF Total Protein / CSF Albumin"],
-    ["Determine CSF glucose to serum ratio", "CSF/Serum Glucose = CSF Glucose / Serum Glucose"],
-    ["Calculate CSF WBC corrected for RBC", "Corrected WBC = Observed WBC - (Blood WBC × CSF RBC / Blood RBC)"],
+    [
+        "Calculate CSF protein to albumin ratio",
+        "CSF Protein/Albumin = CSF Total Protein / CSF Albumin",
+    ],
+    [
+        "Determine CSF glucose to serum ratio",
+        "CSF/Serum Glucose = CSF Glucose / Serum Glucose",
+    ],
+    [
+        "Calculate CSF WBC corrected for RBC",
+        "Corrected WBC = Observed WBC - (Blood WBC × CSF RBC / Blood RBC)",
+    ],
     ["Find CSF opening pressure", "Opening Pressure mmH₂O via Manometry"],
     ["Calculate oligoclonal band number", "OCB = Number of Bands in CSF not in Serum"],
-    ["Determine CSF IgG to total protein", "IgG % = (CSF IgG / CSF Total Protein) × 100"],
-    ["Calculate intrathecal IgG synthesis", "IgG Synthesis = (CSF IgG / Serum IgG) - (CSF Alb / Serum Alb)"],
-    ["Find CSF lactate to glucose ratio", "Lactate/Glucose = CSF Lactate / CSF Glucose"],
-    ["Calculate CSF chloride significance", "CSF Chloride mEq/L (↓ in bacterial meningitis)"],
+    [
+        "Determine CSF IgG to total protein",
+        "IgG % = (CSF IgG / CSF Total Protein) × 100",
+    ],
+    [
+        "Calculate intrathecal IgG synthesis",
+        "IgG Synthesis = (CSF IgG / Serum IgG) - (CSF Alb / Serum Alb)",
+    ],
+    [
+        "Find CSF lactate to glucose ratio",
+        "Lactate/Glucose = CSF Lactate / CSF Glucose",
+    ],
+    [
+        "Calculate CSF chloride significance",
+        "CSF Chloride mEq/L (↓ in bacterial meningitis)",
+    ],
     ["Determine xanthochromia index", "Xanthochromia = Spectrophotometry at 460nm"],
     # Hormone Assays
-    ["Calculate testosterone free from total", "Free Testosterone = Total × % Free (from SHBG calculation)"],
-    ["Determine DHEA-S to testosterone ratio", "DHEAS/Testosterone = DHEAS μg/dL / Testosterone ng/dL"],
+    [
+        "Calculate testosterone free from total",
+        "Free Testosterone = Total × % Free (from SHBG calculation)",
+    ],
+    [
+        "Determine DHEA-S to testosterone ratio",
+        "DHEAS/Testosterone = DHEAS μg/dL / Testosterone ng/dL",
+    ],
     ["Calculate estradiol to estrone ratio", "E2/E1 = Estradiol pg/mL / Estrone pg/mL"],
-    ["Find progesterone luteal adequacy", "Progesterone > 10 ng/mL in mid-luteal phase"],
+    [
+        "Find progesterone luteal adequacy",
+        "Progesterone > 10 ng/mL in mid-luteal phase",
+    ],
     ["Calculate cortisol to ACTH ratio", "Cortisol/ACTH = Cortisol μg/dL / ACTH pg/mL"],
     ["Determine aldosterone to renin ratio", "ARR = Aldosterone ng/dL / Renin ng/mL/h"],
     ["Calculate free androgen index", "FAI = (Total Testosterone / SHBG) × 100"],
@@ -426,11 +813,17 @@ clinical_data = [
     ["Determine 25-OH vitamin D total", "Total Vit D = 25-OH-D2 + 25-OH-D3"],
     # Toxicology Screening
     ["Calculate ethanol blood level", "Ethanol mg/dL = BAC % × 1000"],
-    ["Determine salicylate level significance", "Salicylate mg/dL + Done Nomogram for Toxicity"],
+    [
+        "Determine salicylate level significance",
+        "Salicylate mg/dL + Done Nomogram for Toxicity",
+    ],
     ["Calculate acetaminophen hepatotoxicity", "APAP μg/mL on Rumack-Matthew Nomogram"],
     ["Find lithium therapeutic index", "Lithium = 0.6-1.2 mEq/L Therapeutic Range"],
     ["Calculate digoxin steady state", "Digoxin SS = Dose / (CLr + CLnr) × F"],
-    ["Determine phenytoin corrected for albumin", "Corrected Phenytoin = Measured / (0.2 × Albumin + 0.1)"],
+    [
+        "Determine phenytoin corrected for albumin",
+        "Corrected Phenytoin = Measured / (0.2 × Albumin + 0.1)",
+    ],
     ["Calculate carboxyhemoglobin percentage", "COHb % = (COHb / Total Hb) × 100"],
     ["Find methemoglobin level", "MetHb % = (MetHb / Total Hb) × 100"],
     ["Calculate osmolal gap for toxins", "Osm Gap > 10 suggests volatile toxin"],
@@ -438,7 +831,10 @@ clinical_data = [
     # Blood Gas Analysis
     ["Calculate bicarbonate from pH and PCO₂", "HCO₃⁻ = 0.03 × PCO₂ × 10^(pH - 6.1)"],
     ["Determine oxygen saturation from PO₂", "SaO₂ % from Oxygen Dissociation Curve"],
-    ["Calculate P50 oxygen affinity", "P50 = PO₂ at 50% Saturation (normal 26-27 mmHg)"],
+    [
+        "Calculate P50 oxygen affinity",
+        "P50 = PO₂ at 50% Saturation (normal 26-27 mmHg)",
+    ],
     ["Find shunt fraction", "Qs/Qt = (CcO₂ - CaO₂) / (CcO₂ - CvO₂)"],
     ["Calculate oxygen delivery", "DO₂ = CO × CaO₂ × 10"],
     ["Determine oxygen consumption", "VO₂ = CO × (CaO₂ - CvO₂) × 10"],
@@ -455,18 +851,36 @@ clinical_data = [
     ["Determine protein C activity", "Protein C % Activity from Clotting Assay"],
     ["Calculate protein S free antigen", "Free Protein S % of Total"],
     ["Find antithrombin activity", "AT % = Heparin Cofactor Activity"],
-    ["Calculate lupus anticoagulant ratio", "LA Ratio = (Patient / Control) for dRVVT or aPTT"],
+    [
+        "Calculate lupus anticoagulant ratio",
+        "LA Ratio = (Patient / Control) for dRVVT or aPTT",
+    ],
     ["Determine platelet aggregation response", "Aggregation % = ΔLight Transmission"],
     # Special Chemistry
-    ["Calculate serum viscosity relative", "Relative Viscosity = Serum Viscosity / Water Viscosity"],
+    [
+        "Calculate serum viscosity relative",
+        "Relative Viscosity = Serum Viscosity / Water Viscosity",
+    ],
     ["Determine cryoglobulin precipitation", "Cryoglobulin mg/dL after 72h at 4°C"],
-    ["Calculate amylase to lipase ratio", "Amylase/Lipase = Amylase IU/L / Lipase IU/L"],
-    ["Find lipase to amylase ratio significance", "Lipase/Amylase > 2 suggests acute pancreatitis"],
+    [
+        "Calculate amylase to lipase ratio",
+        "Amylase/Lipase = Amylase IU/L / Lipase IU/L",
+    ],
+    [
+        "Find lipase to amylase ratio significance",
+        "Lipase/Amylase > 2 suggests acute pancreatitis",
+    ],
     ["Calculate sweat chloride for CF", "Sweat Cl⁻ > 60 mEq/L positive for CF"],
     ["Determine alpha-1 antitrypsin phenotype", "AAT mg/dL + PI Typing for Deficiency"],
-    ["Calculate ceruloplasmin to copper ratio", "Ceruloplasmin/Copper for Wilson's Disease"],
+    [
+        "Calculate ceruloplasmin to copper ratio",
+        "Ceruloplasmin/Copper for Wilson's Disease",
+    ],
     ["Find lactate to pyruvate ratio", "L/P Ratio = Lactate / Pyruvate (normal 10:1)"],
-    ["Calculate ammonia to glutamine ratio", "NH₃/Glutamine for hepatic encephalopathy"],
+    [
+        "Calculate ammonia to glutamine ratio",
+        "NH₃/Glutamine for hepatic encephalopathy",
+    ],
     ["Determine porphobilinogen quantitative", "PBG mg/24h for Acute Porphyria"],
 ]
 
@@ -482,13 +896,17 @@ def create_csv_files():
     """Generate two separate CSV files for the datasets"""
 
     # Create Perfume Dataset CSV
-    with open(DIR + "perfume_formulation_dataset_150_.csv", "w", newline="", encoding="utf-8") as f:
+    with open(
+        DIR + "perfume_formulation_dataset_150_.csv", "w", newline="", encoding="utf-8"
+    ) as f:
         writer = csv.writer(f)
         writer.writerow(["query_description", "formula"])
         writer.writerows(perfume_data)
 
     # Create Clinical Laboratory Dataset CSV
-    with open(DIR + "clinical_laboratory_dataset_150_.csv", "w", newline="", encoding="utf-8") as f:
+    with open(
+        DIR + "clinical_laboratory_dataset_150_.csv", "w", newline="", encoding="utf-8"
+    ) as f:
         writer = csv.writer(f)
         writer.writerow(["query_description", "formula"])
         writer.writerows(clinical_data)

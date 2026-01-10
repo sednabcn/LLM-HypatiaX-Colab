@@ -55,21 +55,50 @@ class MockEnsembleValidator:
 
     def __init__(self, domain="defi", max_history=100, weights=None):
         self.domain = domain
-        self.weights = weights or {"symbolic": 0.35, "dimensional": 0.25, "domain": 0.30, "numerical": 0.10}
+        self.weights = weights or {
+            "symbolic": 0.35,
+            "dimensional": 0.25,
+            "domain": 0.30,
+            "numerical": 0.10,
+        }
         self.validation_history = []
 
-    def validate_complete(self, expression_str, variable_definitions, variable_units, test_data=None):
-        self.validation_history.append({"expression": expression_str, "timestamp": datetime.now().isoformat()})
+    def validate_complete(
+        self, expression_str, variable_definitions, variable_units, test_data=None
+    ):
+        self.validation_history.append(
+            {"expression": expression_str, "timestamp": datetime.now().isoformat()}
+        )
 
         return {
             "valid": True,
             "total_score": 87.5,
-            "layer_scores": {"symbolic": 90.0, "dimensional": 85.0, "domain": 88.0, "numerical": 82.0},
+            "layer_scores": {
+                "symbolic": 90.0,
+                "dimensional": 85.0,
+                "domain": 88.0,
+                "numerical": 82.0,
+            },
             "layer_results": {
-                "symbolic": {"valid": True, "score": 90.0, "errors": [], "warnings": []},
-                "dimensional": {"valid": True, "score": 85.0, "errors": [], "warnings": []},
+                "symbolic": {
+                    "valid": True,
+                    "score": 90.0,
+                    "errors": [],
+                    "warnings": [],
+                },
+                "dimensional": {
+                    "valid": True,
+                    "score": 85.0,
+                    "errors": [],
+                    "warnings": [],
+                },
                 "domain": {"valid": True, "score": 88.0, "errors": [], "warnings": []},
-                "numerical": {"valid": True, "score": 82.0, "errors": [], "warnings": []},
+                "numerical": {
+                    "valid": True,
+                    "score": 82.0,
+                    "errors": [],
+                    "warnings": [],
+                },
             },
             "errors": [],
             "warnings": [],
@@ -111,7 +140,10 @@ class MockHybridDiscoverySystem:
         interpretation = None
         if validation["valid"] or not validate_first:
             interpretation = self.llm_interpreter.interpret(
-                discovery["expression"], self.domain, variable_descriptions, discovery["r2_score"]
+                discovery["expression"],
+                self.domain,
+                variable_descriptions,
+                discovery["r2_score"],
             )
 
         result = {
@@ -121,7 +153,11 @@ class MockHybridDiscoverySystem:
             "discovery": discovery,
             "validation": validation,
             "interpretation": interpretation,
-            "metadata": {"n_samples": len(X), "n_features": X.shape[1], "variable_names": variable_names},
+            "metadata": {
+                "n_samples": len(X),
+                "n_features": X.shape[1],
+                "variable_names": variable_names,
+            },
         }
 
         self.results.append(result)
@@ -253,7 +289,9 @@ class HybridSystemTestSuite:
             print("-" * 80)
 
             try:
-                system = MockHybridDiscoverySystem(domain=test["domain"], max_results=50)
+                system = MockHybridDiscoverySystem(
+                    domain=test["domain"], max_results=50
+                )
 
                 X = np.random.uniform(10, 1000, (test["n_samples"], test["n_features"]))
                 y = np.sqrt(X[:, 0]) + np.random.normal(0, 1, test["n_samples"])
@@ -272,7 +310,12 @@ class HybridSystemTestSuite:
                 )
 
                 # Verify result structure
-                required_keys = ["discovery", "validation", "interpretation", "metadata"]
+                required_keys = [
+                    "discovery",
+                    "validation",
+                    "interpretation",
+                    "metadata",
+                ]
                 has_all_keys = all(key in result for key in required_keys)
 
                 print(f"Domain: {test['domain']}")
@@ -281,7 +324,9 @@ class HybridSystemTestSuite:
                 print(f"R² Score: {result['discovery']['r2_score']:.4f}")
                 print(f"Validation: {result['validation']['total_score']:.1f}/100")
                 print(f"Valid: {result['validation']['valid']}")
-                print(f"Interpretation: {result['interpretation']['interpretation'][:80]}...")
+                print(
+                    f"Interpretation: {result['interpretation']['interpretation'][:80]}..."
+                )
 
                 if has_all_keys and result["validation"]["valid"]:
                     print("✅ TEST PASSED")
@@ -290,12 +335,18 @@ class HybridSystemTestSuite:
                     print("❌ TEST FAILED - Missing keys or invalid")
 
                 self.results["basic_workflow"].append(
-                    {"test": test["name"], "passed": has_all_keys and result["validation"]["valid"], "result": result}
+                    {
+                        "test": test["name"],
+                        "passed": has_all_keys and result["validation"]["valid"],
+                        "result": result,
+                    }
                 )
 
             except Exception as e:
                 print(f"❌ Exception: {type(e).__name__}: {e}")
-                self.results["basic_workflow"].append({"test": test["name"], "passed": False, "error": str(e)})
+                self.results["basic_workflow"].append(
+                    {"test": test["name"], "passed": False, "error": str(e)}
+                )
 
         print(f"\n{'=' * 80}")
         print(f"Basic Workflow: {passed}/{len(test_cases)} passed")
@@ -326,9 +377,12 @@ class HybridSystemTestSuite:
 
         validation = result["validation"]
         layers_present = all(
-            layer in validation["layer_scores"] for layer in ["symbolic", "dimensional", "domain", "numerical"]
+            layer in validation["layer_scores"]
+            for layer in ["symbolic", "dimensional", "domain", "numerical"]
         )
-        all_scores_valid = all(0 <= score <= 100 for score in validation["layer_scores"].values())
+        all_scores_valid = all(
+            0 <= score <= 100 for score in validation["layer_scores"].values()
+        )
 
         print(f"Layers present: {layers_present}")
         print(f"Layer scores:")
@@ -363,7 +417,11 @@ class HybridSystemTestSuite:
             print(f"Handled invalid data: {len(system.results)} results stored")
             print("✅ TEST PASSED - Error handling working")
             self.results["validation_integration"].append(
-                {"test": "Validation Error Handling", "passed": True, "result": result_invalid}
+                {
+                    "test": "Validation Error Handling",
+                    "passed": True,
+                    "result": result_invalid,
+                }
             )
         except Exception as e:
             print(f"❌ Failed to handle error: {e}")
@@ -408,7 +466,11 @@ class HybridSystemTestSuite:
         print("✅ TEST PASSED" if test_passed else "❌ TEST FAILED")
 
         self.results["interpretation_integration"].append(
-            {"test": "Interpretation Generation", "passed": test_passed, "result": result}
+            {
+                "test": "Interpretation Generation",
+                "passed": test_passed,
+                "result": result,
+            }
         )
 
     def _test_result_management(self):
@@ -451,7 +513,11 @@ class HybridSystemTestSuite:
             {
                 "test": "Store and Retrieve",
                 "passed": test_passed,
-                "counts": {"stored": stored, "retrieved_all": retrieved_all, "retrieved_limit": retrieved_limit},
+                "counts": {
+                    "stored": stored,
+                    "retrieved_all": retrieved_all,
+                    "retrieved_limit": retrieved_limit,
+                },
             }
         )
 
@@ -461,8 +527,14 @@ class HybridSystemTestSuite:
         best_valid = system.get_best_result(require_valid=True)
 
         has_best = best_r2 is not None and best_valid is not None
-        print(f"Best by R²: {best_r2['discovery']['r2_score']:.4f}" if best_r2 else "None")
-        print(f"Best valid: {best_valid['validation']['total_score']:.1f}/100" if best_valid else "None")
+        print(
+            f"Best by R²: {best_r2['discovery']['r2_score']:.4f}" if best_r2 else "None"
+        )
+        print(
+            f"Best valid: {best_valid['validation']['total_score']:.1f}/100"
+            if best_valid
+            else "None"
+        )
 
         print("✅ TEST PASSED" if has_best else "❌ TEST FAILED")
 
@@ -470,7 +542,10 @@ class HybridSystemTestSuite:
             {
                 "test": "Best Result Selection",
                 "passed": has_best,
-                "best_results": {"r2": best_r2 is not None, "valid": best_valid is not None},
+                "best_results": {
+                    "r2": best_r2 is not None,
+                    "valid": best_valid is not None,
+                },
             }
         )
 
@@ -483,10 +558,16 @@ class HybridSystemTestSuite:
         print(f"Average R²: {stats['average_r2']:.4f}")
         print(f"Average validation: {stats['average_validation_score']:.1f}")
 
-        stats_valid = stats["total_runs"] == 5 and stats["success_rate"] > 0 and 0 <= stats["average_r2"] <= 1
+        stats_valid = (
+            stats["total_runs"] == 5
+            and stats["success_rate"] > 0
+            and 0 <= stats["average_r2"] <= 1
+        )
         print("✅ TEST PASSED" if stats_valid else "❌ TEST FAILED")
 
-        self.results["result_management"].append({"test": "Statistics", "passed": stats_valid, "stats": stats})
+        self.results["result_management"].append(
+            {"test": "Statistics", "passed": stats_valid, "stats": stats}
+        )
 
     def _test_export_functionality(self):
         """Test result export"""
@@ -528,14 +609,26 @@ class HybridSystemTestSuite:
                 export_path.unlink()
                 print("✅ TEST PASSED")
                 self.results["export"].append(
-                    {"test": "JSON Export", "passed": True, "details": {"records": len(data), "file_size": file_size}}
+                    {
+                        "test": "JSON Export",
+                        "passed": True,
+                        "details": {"records": len(data), "file_size": file_size},
+                    }
                 )
             else:
                 print("❌ TEST FAILED - File not created")
-                self.results["export"].append({"test": "JSON Export", "passed": False, "error": "File creation failed"})
+                self.results["export"].append(
+                    {
+                        "test": "JSON Export",
+                        "passed": False,
+                        "error": "File creation failed",
+                    }
+                )
         except Exception as e:
             print(f"❌ Exception: {e}")
-            self.results["export"].append({"test": "JSON Export", "passed": False, "error": str(e)})
+            self.results["export"].append(
+                {"test": "JSON Export", "passed": False, "error": str(e)}
+            )
 
     def _test_edge_cases(self):
         """Test edge cases"""
@@ -545,9 +638,18 @@ class HybridSystemTestSuite:
 
         edge_cases = [
             {"name": "Empty Results", "test_fn": lambda s: len(s.get_results()) == 0},
-            {"name": "Best Result on Empty", "test_fn": lambda s: s.get_best_result() is None},
-            {"name": "Clear Results", "test_fn": lambda s: (s.clear_results(), len(s.results) == 0)[1]},
-            {"name": "Statistics on Empty", "test_fn": lambda s: s.get_statistics()["total_runs"] == 0},
+            {
+                "name": "Best Result on Empty",
+                "test_fn": lambda s: s.get_best_result() is None,
+            },
+            {
+                "name": "Clear Results",
+                "test_fn": lambda s: (s.clear_results(), len(s.results) == 0)[1],
+            },
+            {
+                "name": "Statistics on Empty",
+                "test_fn": lambda s: s.get_statistics()["total_runs"] == 0,
+            },
         ]
 
         for idx, case in enumerate(edge_cases, 1):
@@ -560,13 +662,19 @@ class HybridSystemTestSuite:
 
                 if result is True or (isinstance(result, (int, bool)) and result == 0):
                     print("✅ TEST PASSED")
-                    self.results["edge_cases"].append({"test": case["name"], "passed": True})
+                    self.results["edge_cases"].append(
+                        {"test": case["name"], "passed": True}
+                    )
                 else:
                     print("❌ TEST FAILED")
-                    self.results["edge_cases"].append({"test": case["name"], "passed": False, "result": result})
+                    self.results["edge_cases"].append(
+                        {"test": case["name"], "passed": False, "result": result}
+                    )
             except Exception as e:
                 print(f"❌ Exception: {e}")
-                self.results["edge_cases"].append({"test": case["name"], "passed": False, "error": str(e)})
+                self.results["edge_cases"].append(
+                    {"test": case["name"], "passed": False, "error": str(e)}
+                )
 
     def _test_performance(self):
         """Test performance"""
@@ -608,14 +716,21 @@ class HybridSystemTestSuite:
             {
                 "test": "Multiple Runs",
                 "passed": perf_ok,
-                "metrics": {"runs": n_runs, "total_time_s": elapsed, "avg_time_ms": avg_time},
+                "metrics": {
+                    "runs": n_runs,
+                    "total_time_s": elapsed,
+                    "avg_time_ms": avg_time,
+                },
             }
         )
 
     def _generate_summary(self) -> Dict[str, Any]:
         """Generate test summary"""
         total_tests = sum(len(v) for v in self.results.values())
-        passed_tests = sum(sum(1 for t in tests if t.get("passed", False)) for tests in self.results.values())
+        passed_tests = sum(
+            sum(1 for t in tests if t.get("passed", False))
+            for tests in self.results.values()
+        )
 
         elapsed = time.time() - self.start_time
 

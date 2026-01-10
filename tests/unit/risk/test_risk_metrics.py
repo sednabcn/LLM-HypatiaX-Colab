@@ -253,7 +253,13 @@ class TestConditionalValueAtRisk:
 
         cvar_A = abs(np.mean(returns_A[returns_A <= np.percentile(returns_A, 5)]))
         cvar_B = abs(np.mean(returns_B[returns_B <= np.percentile(returns_B, 5)]))
-        cvar_P = abs(np.mean(returns_portfolio[returns_portfolio <= np.percentile(returns_portfolio, 5)]))
+        cvar_P = abs(
+            np.mean(
+                returns_portfolio[
+                    returns_portfolio <= np.percentile(returns_portfolio, 5)
+                ]
+            )
+        )
 
         # Sub-additivity: CVaR(A+B) <= CVaR(A) + CVaR(B)
         assert cvar_P <= cvar_A + cvar_B
@@ -489,7 +495,11 @@ class TestOmegaRatio:
 
         gains_high = returns[returns > threshold_high] - threshold_high
         losses_high = threshold_high - returns[returns <= threshold_high]
-        omega_high = np.sum(gains_high) / np.sum(losses_high) if np.sum(losses_high) > 0 else np.inf
+        omega_high = (
+            np.sum(gains_high) / np.sum(losses_high)
+            if np.sum(losses_high) > 0
+            else np.inf
+        )
 
         # Higher threshold typically means lower Omega
         assert omega_low > omega_high or np.isinf(omega_high)
@@ -512,7 +522,9 @@ class TestSkewnessKurtosis:
         """Test negative skewness detection."""
         # Create left-skewed distribution
         np.random.seed(42)
-        returns = np.concatenate([np.random.normal(0.01, 0.01, 900), np.random.normal(-0.05, 0.01, 100)])
+        returns = np.concatenate(
+            [np.random.normal(0.01, 0.01, 900), np.random.normal(-0.05, 0.01, 100)]
+        )
 
         skewness = stats.skew(returns)
 
@@ -533,7 +545,9 @@ class TestSkewnessKurtosis:
         """Test high kurtosis with fat tails."""
         # Create distribution with fat tails
         np.random.seed(42)
-        returns = np.concatenate([np.random.normal(0.0, 0.01, 900), np.random.normal(0.0, 0.05, 100)])
+        returns = np.concatenate(
+            [np.random.normal(0.0, 0.01, 900), np.random.normal(0.0, 0.05, 100)]
+        )
 
         kurt = stats.kurtosis(returns)
 
@@ -550,7 +564,10 @@ class TestRollingMetrics:
 
         window = 20
         rolling_vol = np.array(
-            [np.std(returns[max(0, i - window) : i + 1]) * np.sqrt(252) for i in range(len(returns))]
+            [
+                np.std(returns[max(0, i - window) : i + 1]) * np.sqrt(252)
+                for i in range(len(returns))
+            ]
         )
 
         assert len(rolling_vol) == len(returns)

@@ -31,7 +31,9 @@ engine.load_models()
 
 # Process single query
 result = engine.process(
-    query="average profit per product", method="vocab", use_model=True  # or 'sentence', 'regex', 'ner'
+    query="average profit per product",
+    method="vocab",
+    use_model=True,  # or 'sentence', 'regex', 'ner'
 )
 
 # Batch process

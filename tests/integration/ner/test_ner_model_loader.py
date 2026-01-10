@@ -98,7 +98,11 @@ class NERModelLoader:
 
         try:
             # Handle version ranges like ">=3.8.0,<3.9.0"
-            if ">=" in model_spacy_version or "<" in model_spacy_version or "~" in model_spacy_version:
+            if (
+                ">=" in model_spacy_version
+                or "<" in model_spacy_version
+                or "~" in model_spacy_version
+            ):
                 # Extract the minimum version from range
                 # e.g., ">=3.8.0,<3.9.0" -> "3.8.0"
                 import re
@@ -120,7 +124,10 @@ class NERModelLoader:
 
             if model_spacy_version == self.spacy_version:
                 return "exact"
-            elif model_parts[0] == current_parts[0] and model_parts[1] == current_parts[1]:
+            elif (
+                model_parts[0] == current_parts[0]
+                and model_parts[1] == current_parts[1]
+            ):
                 return "compatible"
             elif model_parts[0] == current_parts[0]:
                 return "minor_mismatch"
@@ -207,7 +214,9 @@ class NERModelLoader:
                     print(f"   ✓ Model loaded successfully (without vectors)")
                     info["loaded"] = True
                     info["excluded_components"] = exclude
-                    info["warning"] = "Loaded without vectors due to compatibility issues"
+                    info["warning"] = (
+                        "Loaded without vectors due to compatibility issues"
+                    )
                     return nlp, info
                 except Exception as e2:
                     print(f"   ✗ Retry failed: {str(e2)}")
@@ -354,7 +363,9 @@ def test_specific_model(model_name="ner_tableau", test_texts=None, base_path=Non
             doc = nlp(text)
             if doc.ents:
                 for ent in doc.ents:
-                    print(f"   - '{ent.text}' [{ent.label_}] (start: {ent.start_char}, end: {ent.end_char})")
+                    print(
+                        f"   - '{ent.text}' [{ent.label_}] (start: {ent.start_char}, end: {ent.end_char})"
+                    )
             else:
                 print(f"   (no entities found)")
 

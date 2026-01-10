@@ -160,3 +160,15 @@ npm-debug.log*
 frontend/build/
 frontend/dist/
 .github/workflows-templates/
+
+strategy/
+
+experiments/
+outputs/
+paper/
+strategy/
+pytools/
+htmlcov/
+.hypothesis/
+
+Notes-LLM-CV.md

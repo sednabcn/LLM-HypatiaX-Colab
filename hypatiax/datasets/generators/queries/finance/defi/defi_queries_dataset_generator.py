@@ -20,20 +20,32 @@ class DeFiQueriesDataset:
 
     def add_query(self, description: str, formula: str, category: str):
         """Add a single query."""
-        self.queries.append({"description": description, "analytical_formula": formula, "category": category})
+        self.queries.append(
+            {
+                "description": description,
+                "analytical_formula": formula,
+                "category": category,
+            }
+        )
 
     def generate_constant_product(self):
         """Generate 30 Constant Product variants."""
         print("Generating Constant Product (30 variants)...")
 
         # Base
-        self.add_query("Calculate the constant product for a token pair in an AMM", "k = x * y", "Constant Product")
+        self.add_query(
+            "Calculate the constant product for a token pair in an AMM",
+            "k = x * y",
+            "Constant Product",
+        )
 
         # Variants with different fees
         for i in range(1, 10):
             fee = 0.001 + i * 0.001  # 0.1% to 0.9%
             self.add_query(
-                f"Constant product with {fee*100:.1f}% fee", f"k = x * y * (1 - {fee:.4f})", "Constant Product"
+                f"Constant product with {fee*100:.1f}% fee",
+                f"k = x * y * (1 - {fee:.4f})",
+                "Constant Product",
             )
 
         # Variants with different reserve scales
@@ -47,14 +59,20 @@ class DeFiQueriesDataset:
         # Variants with slippage
         for slippage in range(1, 11):
             self.add_query(
-                f"Constant product with {slippage}% price slippage", f"k = x * y + ε * {slippage}", "Constant Product"
+                f"Constant product with {slippage}% price slippage",
+                f"k = x * y + ε * {slippage}",
+                "Constant Product",
             )
 
     def generate_constant_sum(self):
         """Generate 25 Constant Sum variants."""
         print("Generating Constant Sum (25 variants)...")
 
-        self.add_query("Calculate constant sum invariant for stablecoin pairs", "k = x + y", "Constant Sum")
+        self.add_query(
+            "Calculate constant sum invariant for stablecoin pairs",
+            "k = x + y",
+            "Constant Sum",
+        )
 
         # Weighted variants
         for w in range(1, 13):
@@ -70,55 +88,81 @@ class DeFiQueriesDataset:
         for scale in range(0, 12):
             pool_size = 10 ** (3 + scale)
             self.add_query(
-                f"Constant sum in ${pool_size:.0e} pool", f"k = x + y, pool_value={pool_size}", "Constant Sum"
+                f"Constant sum in ${pool_size:.0e} pool",
+                f"k = x + y, pool_value={pool_size}",
+                "Constant Sum",
             )
 
     def generate_constant_mean(self):
         """Generate 20 Constant Mean variants."""
         print("Generating Constant Mean (20 variants)...")
 
-        self.add_query("Calculate constant mean for multi-asset pool", "(x * y * z)^(1/3) = k", "Constant Mean")
+        self.add_query(
+            "Calculate constant mean for multi-asset pool",
+            "(x * y * z)^(1/3) = k",
+            "Constant Mean",
+        )
 
         # Three-asset variants
         for i in range(1, 5):
             self.add_query(
-                f"Three-asset constant mean variant {i}", f"(x * y * z)^(1/3) = k, scaling={i}", "Constant Mean"
+                f"Three-asset constant mean variant {i}",
+                f"(x * y * z)^(1/3) = k, scaling={i}",
+                "Constant Mean",
             )
 
         # Four-asset variants
         for i in range(1, 5):
             self.add_query(
-                f"Four-asset constant mean variant {i}", f"(x * y * z * w)^(1/4) = k, scaling={i}", "Constant Mean"
+                f"Four-asset constant mean variant {i}",
+                f"(x * y * z * w)^(1/4) = k, scaling={i}",
+                "Constant Mean",
             )
 
         # Five-asset variants
         for i in range(1, 5):
             self.add_query(
-                f"Five-asset constant mean variant {i}", f"(x * y * z * w * v)^(1/5) = k, scaling={i}", "Constant Mean"
+                f"Five-asset constant mean variant {i}",
+                f"(x * y * z * w * v)^(1/5) = k, scaling={i}",
+                "Constant Mean",
             )
 
         # Two-asset high-power variants
         for i in range(1, 6):
-            self.add_query(f"Two-asset constant mean variant {i}", f"(x * y)^(1/2) = k, power=0.5", "Constant Mean")
+            self.add_query(
+                f"Two-asset constant mean variant {i}",
+                f"(x * y)^(1/2) = k, power=0.5",
+                "Constant Mean",
+            )
 
     def generate_stableswap(self):
         """Generate 25 StableSwap Hybrid variants."""
         print("Generating StableSwap Hybrid (25 variants)...")
 
-        self.add_query("Curve Finance StableSwap formula", "A*(x+y) + xy = A*k^2", "StableSwap Hybrid")
+        self.add_query(
+            "Curve Finance StableSwap formula",
+            "A*(x+y) + xy = A*k^2",
+            "StableSwap Hybrid",
+        )
 
         # Different amplification factors
         for A in [1, 50, 100, 200, 400, 600, 800, 1000]:
             for i in range(1, 4):
                 self.add_query(
-                    f"StableSwap amplification A={A} variant {i}", f"A*(x+y) + xy = A*k^2, A={A}", "StableSwap Hybrid"
+                    f"StableSwap amplification A={A} variant {i}",
+                    f"A*(x+y) + xy = A*k^2, A={A}",
+                    "StableSwap Hybrid",
                 )
 
     def generate_impermanent_loss(self):
         """Generate 30 Impermanent Loss variants."""
         print("Generating Impermanent Loss (30 variants)...")
 
-        self.add_query("Calculate impermanent loss for 50/50 pool", "IL = 2*sqrt(p)/(1+p) - 1", "Impermanent Loss")
+        self.add_query(
+            "Calculate impermanent loss for 50/50 pool",
+            "IL = 2*sqrt(p)/(1+p) - 1",
+            "Impermanent Loss",
+        )
 
         # Different price ranges
         for price_move in [1.5, 2.0, 3.0, 5.0, 10.0]:
@@ -142,7 +186,11 @@ class DeFiQueriesDataset:
         """Generate 35 Position Value variants."""
         print("Generating Position Value (35 variants)...")
 
-        self.add_query("Calculate LP position value", "value = LP_share * pool_assets", "Position Value")
+        self.add_query(
+            "Calculate LP position value",
+            "value = LP_share * pool_assets",
+            "Position Value",
+        )
 
         # Different ownership percentages
         for ownership in range(1, 8):
@@ -198,7 +246,9 @@ class DeFiQueriesDataset:
         """Generate 20 APY Calculation variants."""
         print("Generating APY Calculation (20 variants)...")
 
-        self.add_query("Calculate APY with compounding", "APY = (1 + r/n)^n - 1", "APY Calculation")
+        self.add_query(
+            "Calculate APY with compounding", "APY = (1 + r/n)^n - 1", "APY Calculation"
+        )
 
         # Different yields and compounding frequencies
         for yield_pct in [5, 10, 20, 50]:
@@ -214,7 +264,9 @@ class DeFiQueriesDataset:
         print("Generating Slippage (35 variants)...")
 
         self.add_query(
-            "Calculate trading slippage percentage", "slippage% = (expected - actual) / expected * 100", "Slippage"
+            "Calculate trading slippage percentage",
+            "slippage% = (expected - actual) / expected * 100",
+            "Slippage",
         )
 
         # Different trade sizes and pool sizes
@@ -231,7 +283,11 @@ class DeFiQueriesDataset:
         """Generate 20 Price Impact variants."""
         print("Generating Price Impact (20 variants)...")
 
-        self.add_query("Calculate price movement from trade", "impact% = (trade / pool) * 100", "Price Impact")
+        self.add_query(
+            "Calculate price movement from trade",
+            "impact% = (trade / pool) * 100",
+            "Price Impact",
+        )
 
         # Different market conditions
         for depth_factor in [0.5, 1.0, 2.0]:
@@ -246,7 +302,11 @@ class DeFiQueriesDataset:
         """Generate 25 Utilization Rate variants."""
         print("Generating Utilization Rate (25 variants)...")
 
-        self.add_query("Calculate lending pool utilization", "util = borrowed / supplied", "Utilization Rate")
+        self.add_query(
+            "Calculate lending pool utilization",
+            "util = borrowed / supplied",
+            "Utilization Rate",
+        )
 
         # Different pools and targets
         for pool_scale in range(0, 5):
@@ -262,7 +322,9 @@ class DeFiQueriesDataset:
         print("Generating Swap Output (30 variants)...")
 
         self.add_query(
-            "Calculate swap output with fees", "out = (in * (1-fee) * r_out) / (r_in + in*(1-fee))", "Swap Output"
+            "Calculate swap output with fees",
+            "out = (in * (1-fee) * r_out) / (r_in + in*(1-fee))",
+            "Swap Output",
         )
 
         # Different fee tiers and reserve scales
@@ -304,14 +366,20 @@ class DeFiQueriesDataset:
         """Convert to DataFrame."""
         return pd.DataFrame(self.queries)
 
-    def save_csv(self, filename="hypatiax/datasets/generators/queries/finance/defi/defi_queries_280.csv"):
+    def save_csv(
+        self,
+        filename="hypatiax/datasets/generators/queries/finance/defi/defi_queries_280.csv",
+    ):
         """Save to CSV."""
         df = self.to_dataframe()
         df.to_csv(filename, index=False)
         print(f"✓ Saved CSV: {filename}")
         return filename
 
-    def save_json(self, filename="hypatiax/datasets/generators/queries/finance/defi/defi_queries_280.json"):
+    def save_json(
+        self,
+        filename="hypatiax/datasets/generators/queries/finance/defi/defi_queries_280.json",
+    ):
         """Save to JSON."""
         df = self.to_dataframe()
         df.to_json(filename, orient="records", indent=2)

@@ -7,7 +7,11 @@ import re
 from typing import Any, Dict, List, Tuple
 
 import sympy as sp
-from sympy.parsing.sympy_parser import implicit_multiplication_application, parse_expr, standard_transformations
+from sympy.parsing.sympy_parser import (
+    implicit_multiplication_application,
+    parse_expr,
+    standard_transformations,
+)
 
 
 class NERService:
@@ -87,7 +91,9 @@ class NERService:
             r"([a-zA-Z_][a-zA-Z0-9_]*(?:\s*[+\-*/^]\s*[a-zA-Z0-9_]+)+)",
         ]
 
-    def extract_formulas(self, text: str, domain: str = "general", extract_variables: bool = True) -> Dict[str, Any]:
+    def extract_formulas(
+        self, text: str, domain: str = "general", extract_variables: bool = True
+    ) -> Dict[str, Any]:
         """
         Extract mathematical formulas from text
 
@@ -148,7 +154,9 @@ class NERService:
             "count": len(formulas),
         }
 
-    def recognize_entities(self, text: str, entity_types: List[str] = None) -> Dict[str, Any]:
+    def recognize_entities(
+        self, text: str, entity_types: List[str] = None
+    ) -> Dict[str, Any]:
         """
         Recognize mathematical entities in text
 
@@ -197,7 +205,12 @@ class NERService:
             for op in self.OPERATORS:
                 for match in re.finditer(re.escape(op), text):
                     entities.append(
-                        {"text": op, "type": "operator", "position": [match.start(), match.end()], "confidence": 1.0}
+                        {
+                            "text": op,
+                            "type": "operator",
+                            "position": [match.start(), match.end()],
+                            "confidence": 1.0,
+                        }
                     )
 
         # Recognize functions
@@ -206,12 +219,19 @@ class NERService:
                 pattern = rf"\b{func}\b"
                 for match in re.finditer(pattern, text):
                     entities.append(
-                        {"text": func, "type": "function", "position": [match.start(), match.end()], "confidence": 1.0}
+                        {
+                            "text": func,
+                            "type": "function",
+                            "position": [match.start(), match.end()],
+                            "confidence": 1.0,
+                        }
                     )
 
         return {"entities": entities, "total_count": len(entities)}
 
-    def parse_expression(self, expression: str, output_format: str = "tree") -> Dict[str, Any]:
+    def parse_expression(
+        self, expression: str, output_format: str = "tree"
+    ) -> Dict[str, Any]:
         """
         Parse mathematical expression into structured format
 
@@ -224,7 +244,9 @@ class NERService:
         """
         try:
             # Parse using sympy
-            transformations = standard_transformations + (implicit_multiplication_application,)
+            transformations = standard_transformations + (
+                implicit_multiplication_application,
+            )
             expr = parse_expr(expression, transformations=transformations)
 
             # Extract components
@@ -251,9 +273,14 @@ class NERService:
             }
 
         except Exception as e:
-            return {"error": f"Failed to parse expression: {str(e)}", "expression": expression}
+            return {
+                "error": f"Failed to parse expression: {str(e)}",
+                "expression": expression,
+            }
 
-    def convert_to_latex(self, expression: str, style: str = "inline") -> Dict[str, Any]:
+    def convert_to_latex(
+        self, expression: str, style: str = "inline"
+    ) -> Dict[str, Any]:
         """
         Convert mathematical expression to LaTeX
 
@@ -266,7 +293,9 @@ class NERService:
         """
         try:
             # Parse using sympy
-            transformations = standard_transformations + (implicit_multiplication_application,)
+            transformations = standard_transformations + (
+                implicit_multiplication_application,
+            )
             expr = parse_expr(expression, transformations=transformations)
 
             # Convert to LaTeX
@@ -320,7 +349,9 @@ class NERService:
         # Find best match
         if max(domain_scores.values()) > 0:
             best_domain = max(domain_scores, key=domain_scores.get)
-            confidence = domain_scores[best_domain] / len(self.DOMAIN_KEYWORDS[best_domain])
+            confidence = domain_scores[best_domain] / len(
+                self.DOMAIN_KEYWORDS[best_domain]
+            )
 
             return {
                 "domain": best_domain,
@@ -328,12 +359,19 @@ class NERService:
                 "keywords": found_keywords[best_domain],
                 "alternative_domains": [
                     {"domain": d, "score": s}
-                    for d, s in sorted(domain_scores.items(), key=lambda x: x[1], reverse=True)[1:3]
+                    for d, s in sorted(
+                        domain_scores.items(), key=lambda x: x[1], reverse=True
+                    )[1:3]
                     if s > 0
                 ],
             }
         else:
-            return {"domain": "general", "confidence": 0.0, "keywords": [], "alternative_domains": []}
+            return {
+                "domain": "general",
+                "confidence": 0.0,
+                "keywords": [],
+                "alternative_domains": [],
+            }
 
     def validate_syntax(self, expression: str, strict: bool = False) -> Dict[str, Any]:
         """
@@ -370,7 +408,9 @@ class NERService:
 
         # Try to parse with sympy
         try:
-            transformations = standard_transformations + (implicit_multiplication_application,)
+            transformations = standard_transformations + (
+                implicit_multiplication_application,
+            )
             parse_expr(expression, transformations=transformations)
             valid = len(errors) == 0
         except Exception as e:

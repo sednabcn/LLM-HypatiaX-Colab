@@ -60,12 +60,16 @@ class VectorStore:
             self.index.add(embeddings.astype("float32"))
             self.examples.extend(examples)
 
-    def search(self, query_embedding: np.ndarray, k: int = 5) -> List[Tuple[float, Dict]]:
+    def search(
+        self, query_embedding: np.ndarray, k: int = 5
+    ) -> List[Tuple[float, Dict]]:
         """Search for similar examples"""
         if not FAISS_AVAILABLE or self.index is None:
             return []
 
-        distances, indices = self.index.search(query_embedding.astype("float32").reshape(1, -1), k)
+        distances, indices = self.index.search(
+            query_embedding.astype("float32").reshape(1, -1), k
+        )
 
         results = []
         for dist, idx in zip(distances[0], indices[0]):
@@ -131,7 +135,9 @@ class RAGTrainer:
         descriptions = [ex["description"] for ex in examples]
 
         # Generate embeddings
-        embeddings = self.encoder.encode(descriptions, show_progress_bar=True, convert_to_numpy=True)
+        embeddings = self.encoder.encode(
+            descriptions, show_progress_bar=True, convert_to_numpy=True
+        )
 
         # Add to vector store
         self.vector_store.add_examples(embeddings, examples)
@@ -152,7 +158,11 @@ class RAGTrainer:
         results = self.vector_store.search(query_embedding, k)
 
         # Filter by threshold
-        filtered_results = [example for dist, example in results if dist < (1 - self.config.similarity_threshold)]
+        filtered_results = [
+            example
+            for dist, example in results
+            if dist < (1 - self.config.similarity_threshold)
+        ]
 
         return filtered_results
 
@@ -231,7 +241,12 @@ def evaluate_rag(trainer: RAGTrainer, test_data: List[Dict]) -> Dict:
 
     accuracy = correct / total if total > 0 else 0
 
-    return {"accuracy": accuracy, "correct": correct, "total": total, "predictions": predictions}
+    return {
+        "accuracy": accuracy,
+        "correct": correct,
+        "total": total,
+        "predictions": predictions,
+    }
 
 
 def main():
@@ -247,7 +262,10 @@ def main():
 
     # Configuration
     config = RAGConfig(
-        embedding_model="all-MiniLM-L6-v2", top_k=5, similarity_threshold=0.7, output_dir="./models/rag_formula_mapper"
+        embedding_model="all-MiniLM-L6-v2",
+        top_k=5,
+        similarity_threshold=0.7,
+        output_dir="./models/rag_formula_mapper",
     )
 
     # Initialize trainer
@@ -269,7 +287,11 @@ def main():
     print("TEST RETRIEVAL")
     print("=" * 70)
 
-    test_queries = ["average of Sales", "sum of Revenue by Region", "count unique customers"]
+    test_queries = [
+        "average of Sales",
+        "sum of Revenue by Region",
+        "count unique customers",
+    ]
 
     for query in test_queries:
         print(f"\nQuery: {query}")

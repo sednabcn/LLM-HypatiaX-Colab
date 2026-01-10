@@ -7,7 +7,10 @@ import pandas as pd
 import spacy
 
 from hypatiax.auto_migrate import migrate
-from hypatiax.utils.utils import upload_spacy_training_data, upload_spacy_training_data_from_json
+from hypatiax.utils.utils import (
+    upload_spacy_training_data,
+    upload_spacy_training_data_from_json,
+)
 
 
 def load(filename=None, path=None, style=None, auto_migrate=True):
@@ -71,7 +74,12 @@ def load(filename=None, path=None, style=None, auto_migrate=True):
 
             # Execute migration (detects changes, creates backups, auto-restores if broken)
             migrate(
-                filename=filename, style=style, modules=modules, domains="queries", sub_domains="tableau", folder=folder
+                filename=filename,
+                style=style,
+                modules=modules,
+                domains="queries",
+                sub_domains="tableau",
+                folder=folder,
             )
 
         except ImportError:
@@ -106,9 +114,13 @@ def load(filename=None, path=None, style=None, auto_migrate=True):
             ner_entity = os.path.join(os.path.abspath(".."), ner_entity)
             nlp = spacy.load(ner_entity)
 
-            return upload_spacy_training_data(os.path.abspath("."), filename.rsplit(".", 1)[0], nlp)
+            return upload_spacy_training_data(
+                os.path.abspath("."), filename.rsplit(".", 1)[0], nlp
+            )
         elif filename.endswith(".json") and style == "entity":
-            return upload_spacy_training_data_from_json(os.path.abspath("."), filename.rsplit(".", 1)[0])
+            return upload_spacy_training_data_from_json(
+                os.path.abspath("."), filename.rsplit(".", 1)[0]
+            )
         elif style == "models":
             from hypatiax.custom_ner.queries.tableau import (
                 custom_tableau_desc_components,

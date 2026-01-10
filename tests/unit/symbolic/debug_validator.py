@@ -26,7 +26,9 @@ def debug_parse(latex_str):
                 print(f"      Base: {atom.base} (type: {atom.base.__class__.__name__})")
                 print(f"      Exp: {atom.exp} (type: {atom.exp.__class__.__name__})")
                 print(f"      Base is E: {atom.base == sp.E}")
-                print(f"      Exp is negative: {atom.exp.is_negative if hasattr(atom.exp, 'is_negative') else 'N/A'}")
+                print(
+                    f"      Exp is negative: {atom.exp.is_negative if hasattr(atom.exp, 'is_negative') else 'N/A'}"
+                )
             elif atom.func == sp.exp:
                 print(f"    Exp function: {atom}")
                 print(f"      Arg: {atom.args[0]}")

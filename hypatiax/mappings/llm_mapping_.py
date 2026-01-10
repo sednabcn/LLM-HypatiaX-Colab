@@ -55,12 +55,16 @@ class LLMMapper:
         enhanced_query = self._enhance_with_ner(query, ner_entities)
 
         # Generate formula candidates
-        candidates = self.llm.generate_formula(requirements=enhanced_query, domain=domain, n_candidates=3)
+        candidates = self.llm.generate_formula(
+            requirements=enhanced_query, domain=domain, n_candidates=3
+        )
 
         # Validate each candidate
         validated = []
         for candidate in candidates:
-            validation = self.validator.validate(candidate["formula_latex"], domain=domain)
+            validation = self.validator.validate(
+                candidate["formula_latex"], domain=domain
+            )
             candidate["validation"] = validation
             candidate["score"] = self._calculate_overall_score(candidate, validation)
             validated.append(candidate)

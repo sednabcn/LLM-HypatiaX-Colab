@@ -27,7 +27,12 @@ class ParserAgent(BaseAgent):
         # Remember this interaction
         self.remember({"query": query, "entities": entities, "intent": intent})
 
-        return {"query": query, "entities": entities, "intent": intent, "agent": self.name}
+        return {
+            "query": query,
+            "entities": entities,
+            "intent": intent,
+            "agent": self.name,
+        }
 
     def _analyze_intent(self, query: str, entities: list) -> Dict[str, Any]:
         """Analyze mathematical intent from query"""

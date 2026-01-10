@@ -19,29 +19,29 @@ jobs:
           script: |
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            
+
             // Configuration - ULTRA aggressive cleanup
             const KEEP_RECENT_RUNS = 3;   // Keep only 3 runs per workflow MAX
-            const KEEP_DAYS = 3;          // Keep runs from last 3 days only  
+            const KEEP_DAYS = 3;          // Keep runs from last 3 days only
             const MAX_TOTAL_RUNS = 25;    // STRICT global limit
             const MAX_PAGES = 30;         // Increase to catch all runs
-            
+
             console.log('🧹 Starting ULTRA aggressive workflow cleanup...');
             console.log(`Policy: STRICT limit of ${MAX_TOTAL_RUNS} runs total (max ${KEEP_RECENT_RUNS} per workflow)`);
             console.log(`Priority given to runs from last ${KEEP_DAYS} days`);
             console.log(`Repository: ${owner}/${repo}`);
             console.log('================================');
-            
+
             const cutoffDate = new Date();
             cutoffDate.setDate(cutoffDate.getDate() - KEEP_DAYS);
             console.log(`Cutoff date: ${cutoffDate.toISOString()}`);
-            
+
             let totalDeleted = 0;
             let totalKept = 0;
             let totalProcessed = 0;
             let workflowCount = 0;
             let allRunsAcrossWorkflows = []; // Track all runs globally
-            
+
             try {
               // First pass: collect ALL runs from ALL workflows
               console.log('📋 Getting workflows...');
@@ -49,15 +49,15 @@ jobs:
                 owner,
                 repo
               });
-              
+
               const workflows = workflowsData.workflows;
               workflowCount = workflows.length;
               console.log(`Found ${workflowCount} workflows`);
-              
+
               // Collect all runs first
               for (const workflow of workflows) {
                 console.log(`\n🔍 Collecting runs from: ${workflow.name} (ID: ${workflow.id})`);
-                
+
                 let page = 1;
                 while (page <= MAX_PAGES) {
                   try {
@@ -69,21 +69,21 @@ jobs:
                       page,
                       per_page: 100
                     });
-                    
+
                     console.log(`    📊 Got ${runsPage.workflow_runs.length} runs on page ${page}`);
-                    
+
                     if (runsPage.workflow_runs.length === 0) break;
-                    
+
                     // Add workflow info to each run
                     const runsWithWorkflow = runsPage.workflow_runs.map(run => ({
                       ...run,
                       workflow_name: workflow.name,
                       workflow_id: workflow.id
                     }));
-                    
+
                     allRunsAcrossWorkflows = allRunsAcrossWorkflows.concat(runsWithWorkflow);
                     console.log(`    📈 Total runs collected so far: ${allRunsAcrossWorkflows.length}`);
-                    
+
                     page++;
                     await new Promise(resolve => setTimeout(resolve, 100));
                   } catch (error) {
@@ -93,32 +93,32 @@ jobs:
                   }
                 }
               }
-              
+
               totalProcessed = allRunsAcrossWorkflows.length;
               console.log(`\n📊 Total runs collected: ${totalProcessed}`);
-              
+
               // Sort ALL runs by creation date (newest first)
               allRunsAcrossWorkflows.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-              
+
               // Apply global policies
               const runsToKeep = [];
               const runsToDelete = [];
               const workflowRunCounts = {};
-              
+
               for (let i = 0; i < allRunsAcrossWorkflows.length; i++) {
                 const run = allRunsAcrossWorkflows[i];
                 const runDate = new Date(run.created_at);
                 const workflowId = run.workflow_id;
-                
+
                 // Count runs per workflow
                 if (!workflowRunCounts[workflowId]) {
                   workflowRunCounts[workflowId] = 0;
                 }
-                
+
                 const isWithinDays = runDate > cutoffDate;
                 const isWithinWorkflowLimit = workflowRunCounts[workflowId] < KEEP_RECENT_RUNS;
                 const isWithinGlobalLimit = runsToKeep.length < MAX_TOTAL_RUNS;
-                
+
                 // STRICT global limit - only keep if within global limit
                 // Priority: recent runs within workflow limits, but NEVER exceed global limit
                 if (isWithinGlobalLimit && (isWithinDays || isWithinWorkflowLimit)) {
@@ -128,11 +128,11 @@ jobs:
                   runsToDelete.push(run);
                 }
               }
-              
+
               console.log(`\n📊 Final decision:`);
               console.log(`  📦 Will keep: ${runsToKeep.length} runs`);
               console.log(`  🗑️  Will delete: ${runsToDelete.length} runs`);
-              
+
               // Group deletions by workflow for organized processing
               const deletesByWorkflow = {};
               for (const run of runsToDelete) {
@@ -141,21 +141,21 @@ jobs:
                 }
                 deletesByWorkflow[run.workflow_id].push(run);
               }
-              
+
               // Process deletions by workflow
-              
+
               for (const [workflowId, runs] of Object.entries(deletesByWorkflow)) {
                 const workflowName = runs[0].workflow_name;
                 console.log(`\n🗑️  Deleting ${runs.length} runs from: ${workflowName}`);
-                
+
                 // Delete in batches
                 const BATCH_SIZE = 5;
                 let workflowDeleted = 0;
-                
+
                 for (let i = 0; i < runs.length; i += BATCH_SIZE) {
                   const batch = runs.slice(i, i + BATCH_SIZE);
                   console.log(`    🗑️  Batch ${Math.floor(i/BATCH_SIZE) + 1}/${Math.ceil(runs.length/BATCH_SIZE)} (${batch.length} runs)`);
-                  
+
                   const deletePromises = batch.map(async (run) => {
                     try {
                       await github.rest.actions.deleteWorkflowRun({
@@ -169,28 +169,28 @@ jobs:
                       return false;
                     }
                   });
-                  
+
                   const results = await Promise.allSettled(deletePromises);
                   const successful = results.filter(r => r.status === 'fulfilled' && r.value).length;
                   workflowDeleted += successful;
-                  
+
                   // Delay between batches
                   if (i + BATCH_SIZE < runs.length) {
                     await new Promise(resolve => setTimeout(resolve, 1000));
                   }
                 }
-                
+
                 console.log(`  📊 Deleted ${workflowDeleted}/${runs.length} runs from ${workflowName}`);
                 totalDeleted += workflowDeleted;
               }
-              
+
               totalKept = runsToKeep.length;
-              
+
             } catch (error) {
               console.error('❌ Fatal error during cleanup:', error.message);
               throw error;
             }
-            
+
             console.log('\n=================================');
             console.log('🎉 Cleanup completed!');
             console.log('📊 Total summary:');
@@ -199,7 +199,7 @@ jobs:
             console.log(`  • Runs kept: ${totalKept}`);
             console.log(`  • Runs deleted: ${totalDeleted}`);
             console.log(`  • Success rate: ${totalProcessed > 0 ? Math.round((totalDeleted + totalKept) / totalProcessed * 100) : 0}%`);
-            
+
             // Create issue with summary if significant cleanup happened
             if (totalDeleted > 10) {
               const issueBody = [
@@ -223,7 +223,7 @@ jobs:
                 '### Status',
                 '✅ Cleanup completed successfully'
               ].join('\n');
-              
+
               await github.rest.issues.create({
                 owner,
                 repo,

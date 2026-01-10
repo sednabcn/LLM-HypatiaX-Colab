@@ -82,9 +82,24 @@ class DeFiFormulaAPI:
                 "latex_formula": r"k = x \times y",
                 "category": "Constant Product",
                 "variables": [
-                    {"name": "x", "description": "Token X reserve", "unit": "tokens", "type": "float"},
-                    {"name": "y", "description": "Token Y reserve", "unit": "tokens", "type": "float"},
-                    {"name": "k", "description": "Constant product", "unit": "token_pairs", "type": "float"},
+                    {
+                        "name": "x",
+                        "description": "Token X reserve",
+                        "unit": "tokens",
+                        "type": "float",
+                    },
+                    {
+                        "name": "y",
+                        "description": "Token Y reserve",
+                        "unit": "tokens",
+                        "type": "float",
+                    },
+                    {
+                        "name": "k",
+                        "description": "Constant product",
+                        "unit": "token_pairs",
+                        "type": "float",
+                    },
                 ],
                 "parameters": {"fee": 0.003},
                 "implementation": "uniswap_v2",
@@ -100,7 +115,14 @@ class DeFiFormulaAPI:
                 "analytical_formula": "IL = 2*sqrt(p)/(1+p) - 1",
                 "latex_formula": r"IL = \frac{2\sqrt{p}}{1+p} - 1",
                 "category": "Impermanent Loss",
-                "variables": [{"name": "p", "description": "Price ratio", "unit": "dimensionless", "type": "float"}],
+                "variables": [
+                    {
+                        "name": "p",
+                        "description": "Price ratio",
+                        "unit": "dimensionless",
+                        "type": "float",
+                    }
+                ],
                 "parameters": None,
                 "implementation": "balancer",
                 "complexity": "O(1)",
@@ -131,7 +153,9 @@ class DeFiFormulaAPI:
             return self._format_response(formulas, format)
 
         @self.app.get("/api/formula/{formula_id}")
-        async def get_formula(formula_id: str, format: FormatType = Query(FormatType.STRUCTURED)):
+        async def get_formula(
+            formula_id: str, format: FormatType = Query(FormatType.STRUCTURED)
+        ):
             """Get single formula by ID."""
             formula = next((f for f in self.formulas if f["id"] == formula_id), None)
             if not formula:
@@ -141,11 +165,15 @@ class DeFiFormulaAPI:
 
         @self.app.get("/api/search")
         async def search_formulas(
-            query: str, format: FormatType = Query(FormatType.QUERY_RESPONSE), limit: int = Query(5, ge=1, le=100)
+            query: str,
+            format: FormatType = Query(FormatType.QUERY_RESPONSE),
+            limit: int = Query(5, ge=1, le=100),
         ):
             """Search formulas by description."""
             query_lower = query.lower()
-            results = [f for f in self.formulas if query_lower in f["description"].lower()][:limit]
+            results = [
+                f for f in self.formulas if query_lower in f["description"].lower()
+            ][:limit]
 
             if not results:
                 raise HTTPException(status_code=404, detail="No formulas found")
@@ -156,7 +184,11 @@ class DeFiFormulaAPI:
         async def get_categories():
             """Get all formula categories."""
             categories = list(set(f["category"] for f in self.formulas))
-            return {"categories": sorted(categories), "count": len(categories), "total_formulas": len(self.formulas)}
+            return {
+                "categories": sorted(categories),
+                "count": len(categories),
+                "total_formulas": len(self.formulas),
+            }
 
         @self.app.get("/api/export")
         async def export_formulas(format: FormatType = Query(FormatType.CSV)):
@@ -193,7 +225,11 @@ class DeFiFormulaAPI:
     def _to_query_response(self, formulas: List[Dict]) -> List[Dict]:
         """Format: Simple Q&A structure."""
         return [
-            {"query": f["description"], "response": f["analytical_formula"], "category": f["category"]}
+            {
+                "query": f["description"],
+                "response": f["analytical_formula"],
+                "category": f["category"],
+            }
             for f in formulas
         ]
 
@@ -208,14 +244,20 @@ class DeFiFormulaAPI:
                     "difficulty": f.get("difficulty"),
                     "implementation": f.get("implementation"),
                 },
-                "query": {"text": f["description"], "semantic_keywords": self._extract_keywords(f["description"])},
+                "query": {
+                    "text": f["description"],
+                    "semantic_keywords": self._extract_keywords(f["description"]),
+                },
                 "answer": {
                     "formula": f["analytical_formula"],
                     "latex": f.get("latex_formula"),
                     "variables": f.get("variables"),
                     "parameters": f.get("parameters"),
                 },
-                "testing": {"test_case_input": f.get("test_case_input"), "expected_output": f.get("expected_output")},
+                "testing": {
+                    "test_case_input": f.get("test_case_input"),
+                    "expected_output": f.get("expected_output"),
+                },
                 "use_case": f.get("use_case"),
             }
             for f in formulas
@@ -231,7 +273,9 @@ class DeFiFormulaAPI:
                 "semantic_meaning": self._generate_semantic_meaning(f),
                 "domain": "DeFi",
                 "subdomain": f["category"],
-                "variables": {v["name"]: v["description"] for v in f.get("variables", [])},
+                "variables": {
+                    v["name"]: v["description"] for v in f.get("variables", [])
+                },
                 "context": f.get("use_case"),
             }
             for f in formulas
@@ -241,14 +285,19 @@ class DeFiFormulaAPI:
         """Format: Code generation ready."""
         return [
             {
-                "function_name": self._formula_to_function_name(f["analytical_formula"]),
+                "function_name": self._formula_to_function_name(
+                    f["analytical_formula"]
+                ),
                 "description": f["description"],
                 "formula": f["analytical_formula"],
                 "signature": self._generate_signature(f),
                 "parameters": [v["name"] for v in f.get("variables", [])],
                 "return_type": "float",
                 "implementation_template": f"return {self._formula_to_code(f['analytical_formula'])}",
-                "test_case": {"input": f.get("test_case_input"), "output": f.get("expected_output")},
+                "test_case": {
+                    "input": f.get("test_case_input"),
+                    "output": f.get("expected_output"),
+                },
             }
             for f in formulas
         ]
@@ -260,8 +309,13 @@ class DeFiFormulaAPI:
                 "id": f["id"],
                 "description": f["description"],
                 "formula_text": f["analytical_formula"],
-                "formula_latex": f.get("latex_formula", self._to_latex_formula(f["analytical_formula"])),
-                "variables_latex": {v["name"]: f"${v['name']}$: {v['description']}" for v in f.get("variables", [])},
+                "formula_latex": f.get(
+                    "latex_formula", self._to_latex_formula(f["analytical_formula"])
+                ),
+                "variables_latex": {
+                    v["name"]: f"${v['name']}$: {v['description']}"
+                    for v in f.get("variables", [])
+                },
             }
             for f in formulas
         ]
@@ -273,7 +327,11 @@ class DeFiFormulaAPI:
     def _to_extended(self, formulas: List[Dict]) -> List[Dict]:
         """Format: All fields combined."""
         return [
-            {**f, "keywords": self._extract_keywords(f["description"]), "timestamp": datetime.now().isoformat()}
+            {
+                **f,
+                "keywords": self._extract_keywords(f["description"]),
+                "timestamp": datetime.now().isoformat(),
+            }
             for f in formulas
         ]
 
@@ -344,7 +402,9 @@ class DeFiFormulaAPI:
 
     def _generate_signature(self, formula: Dict) -> str:
         """Generate function signature."""
-        params = ", ".join([f"{v['name']}: float" for v in formula.get("variables", [])])
+        params = ", ".join(
+            [f"{v['name']}: float" for v in formula.get("variables", [])]
+        )
         return f"def {self._formula_to_function_name(formula['analytical_formula'])}({params}) -> float:"
 
     def _formula_to_code(self, formula: str) -> str:
@@ -401,8 +461,18 @@ if __name__ == "__main__":
             "latex_formula": r"k = x \times y",
             "category": "Constant Product",
             "variables": [
-                {"name": "x", "description": "Token X reserve", "unit": "tokens", "type": "float"},
-                {"name": "y", "description": "Token Y reserve", "unit": "tokens", "type": "float"},
+                {
+                    "name": "x",
+                    "description": "Token X reserve",
+                    "unit": "tokens",
+                    "type": "float",
+                },
+                {
+                    "name": "y",
+                    "description": "Token Y reserve",
+                    "unit": "tokens",
+                    "type": "float",
+                },
             ],
             "complexity": "O(1)",
             "difficulty": "beginner",
@@ -412,7 +482,11 @@ if __name__ == "__main__":
 
     # Show examples
     print("\n1. QUERY_RESPONSE Format:")
-    print(json.dumps(api._format_response(test_formula, FormatType.QUERY_RESPONSE), indent=2))
+    print(
+        json.dumps(
+            api._format_response(test_formula, FormatType.QUERY_RESPONSE), indent=2
+        )
+    )
 
     print("\n2. SEMANTIC Format:")
     print(json.dumps(api._format_response(test_formula, FormatType.SEMANTIC), indent=2))

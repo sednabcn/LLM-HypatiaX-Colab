@@ -10,7 +10,9 @@ from hypatiax.custom_ner.queries.tableau import custom_tableau_formulas_componen
 
 # nlp = spacy.load("en_core_web_sm")
 
-ner_path = resources.files("hypatiax.data_spacy.queries.tableau").joinpath("ner_tableau_formulas")
+ner_path = resources.files("hypatiax.data_spacy.queries.tableau").joinpath(
+    "ner_tableau_formulas"
+)
 
 nlp = spacy.load(ner_path)
 

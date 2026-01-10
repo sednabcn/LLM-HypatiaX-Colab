@@ -105,7 +105,9 @@ class UNIv2Calculator:
         return il
 
     @staticmethod
-    def calculate_quality_score(daily_fees: float, il_dollar: float, days_elapsed: int) -> Dict:
+    def calculate_quality_score(
+        daily_fees: float, il_dollar: float, days_elapsed: int
+    ) -> Dict:
         """
         Calculate pool quality score - measures if fees compensate for IL
 
@@ -123,13 +125,19 @@ class UNIv2Calculator:
             < 0.5  = POOR ❌ (IL exceeds fee earnings rate)
         """
         if days_elapsed == 0 or il_dollar == 0:
-            return {"quality_score": float("inf"), "quality_tier": "EXCELLENT ✅", "daily_il_rate": 0}
+            return {
+                "quality_score": float("inf"),
+                "quality_tier": "EXCELLENT ✅",
+                "daily_il_rate": 0,
+            }
 
         # Calculate daily IL rate
         daily_il_rate = abs(il_dollar) / days_elapsed
 
         # Quality score = daily fees / daily IL rate
-        quality_score = daily_fees / daily_il_rate if daily_il_rate > 0 else float("inf")
+        quality_score = (
+            daily_fees / daily_il_rate if daily_il_rate > 0 else float("inf")
+        )
 
         # Classify tier
         if quality_score > 1.0:
@@ -139,7 +147,11 @@ class UNIv2Calculator:
         else:
             tier = "POOR ❌"
 
-        return {"quality_score": quality_score, "quality_tier": tier, "daily_il_rate": daily_il_rate}
+        return {
+            "quality_score": quality_score,
+            "quality_tier": tier,
+            "daily_il_rate": daily_il_rate,
+        }
 
     @staticmethod
     def calculate_il_with_fees(position: LPPosition) -> Dict:
@@ -158,22 +170,30 @@ class UNIv2Calculator:
 
         # Calculate IL in dollars
         current_value = (
-            position.initial_token_a_amount * position.current_price_b_in_a + position.initial_token_b_amount
+            position.initial_token_a_amount * position.current_price_b_in_a
+            + position.initial_token_b_amount
         )
         il_dollar = current_value * (il_percent / 100)
 
         # Calculate position's share of pool (estimate based on TVL)
         position_value = (
-            position.initial_token_a_amount * position.current_price_b_in_a + position.initial_token_b_amount
+            position.initial_token_a_amount * position.current_price_b_in_a
+            + position.initial_token_b_amount
         )
-        pool_share = position_value / position.pool_tvl_usd if position.pool_tvl_usd > 0 else 0.01
+        pool_share = (
+            position_value / position.pool_tvl_usd
+            if position.pool_tvl_usd > 0
+            else 0.01
+        )
 
         # Calculate fees earned (more accurate formula)
         daily_fees = position.daily_volume_usd * position.fee_rate * pool_share
         total_fees = daily_fees * position.days_elapsed
 
         # Calculate quality score
-        quality_metrics = UNIv2Calculator.calculate_quality_score(daily_fees, il_dollar, position.days_elapsed)
+        quality_metrics = UNIv2Calculator.calculate_quality_score(
+            daily_fees, il_dollar, position.days_elapsed
+        )
 
         # Net result: fees earned minus IL
         net_result = total_fees - abs(il_dollar)
@@ -326,7 +346,9 @@ def generate_test_positions() -> List[LPPosition]:
     return positions
 
 
-def export_results_to_csv(results: List[Dict], filename: str = "uniswap_v2_results.csv"):
+def export_results_to_csv(
+    results: List[Dict], filename: str = "uniswap_v2_results.csv"
+):
     """Export analysis results to CSV"""
     if not results:
         return
@@ -365,7 +387,11 @@ if __name__ == "__main__":
         results.append(result)
 
         # Format quality score display
-        q_score_display = f"{result['quality_score']:.2f}" if result["quality_score"] != float("inf") else "∞"
+        q_score_display = (
+            f"{result['quality_score']:.2f}"
+            if result["quality_score"] != float("inf")
+            else "∞"
+        )
 
         print(
             f"{result['position_name']:<35} {result['il_percent']:>7.2f}% "
@@ -379,10 +405,16 @@ if __name__ == "__main__":
 
     # Summary statistics
     profitable_count = sum(1 for r in results if r["profitable"] == "Yes")
-    good_quality_count = sum(1 for r in results if "GOOD" in r["quality_tier"] or "EXCELLENT" in r["quality_tier"])
+    good_quality_count = sum(
+        1
+        for r in results
+        if "GOOD" in r["quality_tier"] or "EXCELLENT" in r["quality_tier"]
+    )
     avg_il = sum(r["il_percent"] for r in results) / len(results)
     avg_net = sum(r["net_result"] for r in results) / len(results)
-    finite_scores = [r["quality_score"] for r in results if r["quality_score"] != float("inf")]
+    finite_scores = [
+        r["quality_score"] for r in results if r["quality_score"] != float("inf")
+    ]
     avg_quality = sum(finite_scores) / len(finite_scores) if finite_scores else 0
 
     print(f"SUMMARY STATISTICS")

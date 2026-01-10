@@ -26,7 +26,11 @@ def load_rules_from_jsonl(rules_path: Path) -> list[dict]:
                 continue
             try:
                 rule = json.loads(line)
-                if not isinstance(rule, dict) or "label" not in rule or "pattern" not in rule:
+                if (
+                    not isinstance(rule, dict)
+                    or "label" not in rule
+                    or "pattern" not in rule
+                ):
                     raise ValueError(f"Invalid rule format on line {line_num}")
                 rules.append(rule)
             except json.JSONDecodeError as e:
@@ -35,7 +39,13 @@ def load_rules_from_jsonl(rules_path: Path) -> list[dict]:
     return rules
 
 
-def rebuild_model(base_model: str, rules_path: Path, output_path: Path, component_name: str, backup_old: bool = True):
+def rebuild_model(
+    base_model: str,
+    rules_path: Path,
+    output_path: Path,
+    component_name: str,
+    backup_old: bool = True,
+):
     """
     Rebuild a spaCy model with EntityRuler from rules.
 
@@ -126,7 +136,11 @@ def rebuild_all_tableau_models(
 
     # Model configurations: (model_name, rules_file, component_name)
     models_config = [
-        ("ner_tableau_formulas", "ruler_tableau_formulas.jsonl", "ruler_tableau_formulas"),
+        (
+            "ner_tableau_formulas",
+            "ruler_tableau_formulas.jsonl",
+            "ruler_tableau_formulas",
+        ),
         ("ner_tableau_desc", "ruler_tableau_desc.jsonl", "ruler_tableau_desc"),
         ("ner_tableau", "ruler_tableau_both.jsonl", "ruler_tableau"),
     ]
@@ -199,12 +213,20 @@ def rebuild_all_tableau_models(
         print("   Your code should now work without issues")
         print(f"\n💾 Old models backed up with '_backup_v3.7' suffix")
         print("\n🧪 Test your models:")
-        print(f"   python -c \"import spacy; nlp = spacy.load('{base_path}/ner_tableau'); print(nlp.pipe_names)\"")
+        print(
+            f"   python -c \"import spacy; nlp = spacy.load('{base_path}/ner_tableau'); print(nlp.pipe_names)\""
+        )
 
     return results
 
 
-def rebuild_single_model(base_model: str, rules_path: str, output_path: str, component_name: str, backup: bool = True):
+def rebuild_single_model(
+    base_model: str,
+    rules_path: str,
+    output_path: str,
+    component_name: str,
+    backup: bool = True,
+):
     """Rebuild a single model from rules."""
     return rebuild_model(
         base_model=base_model,
@@ -241,12 +263,27 @@ Examples:
     )
 
     parser.add_argument("--all", action="store_true", help="Rebuild all tableau models")
-    parser.add_argument("--model", type=str, help="Name of single model to rebuild (e.g., ner_tableau_formulas)")
-    parser.add_argument("--rules", type=str, help="Path to JSONL rules file (for single model rebuild)")
-    parser.add_argument("--output", type=str, help="Output path for model (for single model rebuild)")
-    parser.add_argument("--component", type=str, help="Name for EntityRuler component (for single model rebuild)")
     parser.add_argument(
-        "--base-model", type=str, default="en_core_web_sm", help="Base spaCy model to use (default: en_core_web_sm)"
+        "--model",
+        type=str,
+        help="Name of single model to rebuild (e.g., ner_tableau_formulas)",
+    )
+    parser.add_argument(
+        "--rules", type=str, help="Path to JSONL rules file (for single model rebuild)"
+    )
+    parser.add_argument(
+        "--output", type=str, help="Output path for model (for single model rebuild)"
+    )
+    parser.add_argument(
+        "--component",
+        type=str,
+        help="Name for EntityRuler component (for single model rebuild)",
+    )
+    parser.add_argument(
+        "--base-model",
+        type=str,
+        default="en_core_web_sm",
+        help="Base spaCy model to use (default: en_core_web_sm)",
     )
     parser.add_argument(
         "--base-path",
@@ -260,7 +297,11 @@ Examples:
         default="hypatiax/custom_ner/queries/tableau/rules",
         help="Path to rules directory (default: hypatiax/custom_ner/queries/tableau/rules)",
     )
-    parser.add_argument("--no-backup", action="store_true", help="Don't create backups of existing models")
+    parser.add_argument(
+        "--no-backup",
+        action="store_true",
+        help="Don't create backups of existing models",
+    )
 
     args = parser.parse_args()
 
@@ -295,7 +336,9 @@ Examples:
             # Show help
             parser.print_help()
             print("\n💡 Use --all to rebuild all tableau models")
-            print("   or specify --model, --rules, --output, and --component for single model")
+            print(
+                "   or specify --model, --rules, --output, and --component for single model"
+            )
 
     except Exception as e:
         print(f"\n❌ Rebuild failed: {e}")

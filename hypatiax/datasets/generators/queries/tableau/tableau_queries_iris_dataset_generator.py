@@ -16,7 +16,11 @@ import pandas as pd
 class TableauIrisQueriesDataset:
     """Generate comprehensive Tableau-style queries for Iris dataset."""
 
-    def __init__(self, seed: int = 42, output_dir: str = "hypatiax/datasets/generators/queries/tableau"):
+    def __init__(
+        self,
+        seed: int = 42,
+        output_dir: str = "hypatiax/datasets/generators/queries/tableau",
+    ):
         """
         Initialize the dataset generator.
 
@@ -32,7 +36,13 @@ class TableauIrisQueriesDataset:
 
     def add_query(self, description: str, formula: str, category: str):
         """Add a single query."""
-        self.queries.append({"description": description, "analytical_formula": formula, "category": category})
+        self.queries.append(
+            {
+                "description": description,
+                "analytical_formula": formula,
+                "category": category,
+            }
+        )
         self.formula_count += 1
 
     def generate_basic_aggregations(self):
@@ -56,22 +66,34 @@ class TableauIrisQueriesDataset:
             )
 
         # Count calculations
-        self.add_query("Count total number of iris samples", "COUNT([species])", "Basic Aggregations")
-        self.add_query("Count distinct iris species", "COUNTD([species])", "Basic Aggregations")
+        self.add_query(
+            "Count total number of iris samples",
+            "COUNT([species])",
+            "Basic Aggregations",
+        )
+        self.add_query(
+            "Count distinct iris species", "COUNTD([species])", "Basic Aggregations"
+        )
 
         # Min/Max
         for feature in ["sepal_length", "petal_length"]:
             self.add_query(
-                f"Find maximum {feature.replace('_', ' ')} measurement", f"MAX([{feature}])", "Basic Aggregations"
+                f"Find maximum {feature.replace('_', ' ')} measurement",
+                f"MAX([{feature}])",
+                "Basic Aggregations",
             )
             self.add_query(
-                f"Find minimum {feature.replace('_', ' ')} measurement", f"MIN([{feature}])", "Basic Aggregations"
+                f"Find minimum {feature.replace('_', ' ')} measurement",
+                f"MIN([{feature}])",
+                "Basic Aggregations",
             )
 
         # Median
         for feature in ["sepal_width", "petal_width"]:
             self.add_query(
-                f"Calculate median {feature.replace('_', ' ')}", f"MEDIAN([{feature}])", "Basic Aggregations"
+                f"Calculate median {feature.replace('_', ' ')}",
+                f"MEDIAN([{feature}])",
+                "Basic Aggregations",
             )
 
         print(f"    ✅ Generated 25 basic aggregation formulas")
@@ -89,7 +111,11 @@ class TableauIrisQueriesDataset:
             )
 
         # Count by species
-        self.add_query("Count samples per species", "{FIXED [species]: COUNT()}", "Species Grouping")
+        self.add_query(
+            "Count samples per species",
+            "{FIXED [species]: COUNT()}",
+            "Species Grouping",
+        )
 
         # Sum by species
         for feature in ["sepal_length", "petal_length"]:
@@ -127,14 +153,38 @@ class TableauIrisQueriesDataset:
         print("  Generating calculated field formulas (20 variants)...")
 
         # Ratios
-        self.add_query("Calculate sepal length to width ratio", "[sepal_length] / [sepal_width]", "Calculated Fields")
-        self.add_query("Calculate petal length to width ratio", "[petal_length] / [petal_width]", "Calculated Fields")
-        self.add_query("Calculate sepal to petal length ratio", "[sepal_length] / [petal_length]", "Calculated Fields")
-        self.add_query("Calculate sepal to petal width ratio", "[sepal_width] / [petal_width]", "Calculated Fields")
+        self.add_query(
+            "Calculate sepal length to width ratio",
+            "[sepal_length] / [sepal_width]",
+            "Calculated Fields",
+        )
+        self.add_query(
+            "Calculate petal length to width ratio",
+            "[petal_length] / [petal_width]",
+            "Calculated Fields",
+        )
+        self.add_query(
+            "Calculate sepal to petal length ratio",
+            "[sepal_length] / [petal_length]",
+            "Calculated Fields",
+        )
+        self.add_query(
+            "Calculate sepal to petal width ratio",
+            "[sepal_width] / [petal_width]",
+            "Calculated Fields",
+        )
 
         # Areas (approximations)
-        self.add_query("Estimate sepal area (length × width)", "[sepal_length] * [sepal_width]", "Calculated Fields")
-        self.add_query("Estimate petal area (length × width)", "[petal_length] * [petal_width]", "Calculated Fields")
+        self.add_query(
+            "Estimate sepal area (length × width)",
+            "[sepal_length] * [sepal_width]",
+            "Calculated Fields",
+        )
+        self.add_query(
+            "Estimate petal area (length × width)",
+            "[petal_length] * [petal_width]",
+            "Calculated Fields",
+        )
         self.add_query(
             "Calculate total flower area estimate",
             "([sepal_length] * [sepal_width]) + ([petal_length] * [petal_width])",
@@ -142,12 +192,28 @@ class TableauIrisQueriesDataset:
         )
 
         # Perimeters
-        self.add_query("Estimate sepal perimeter", "2 * ([sepal_length] + [sepal_width])", "Calculated Fields")
-        self.add_query("Estimate petal perimeter", "2 * ([petal_length] + [petal_width])", "Calculated Fields")
+        self.add_query(
+            "Estimate sepal perimeter",
+            "2 * ([sepal_length] + [sepal_width])",
+            "Calculated Fields",
+        )
+        self.add_query(
+            "Estimate petal perimeter",
+            "2 * ([petal_length] + [petal_width])",
+            "Calculated Fields",
+        )
 
         # Combined measurements
-        self.add_query("Calculate total sepal dimensions", "[sepal_length] + [sepal_width]", "Calculated Fields")
-        self.add_query("Calculate total petal dimensions", "[petal_length] + [petal_width]", "Calculated Fields")
+        self.add_query(
+            "Calculate total sepal dimensions",
+            "[sepal_length] + [sepal_width]",
+            "Calculated Fields",
+        )
+        self.add_query(
+            "Calculate total petal dimensions",
+            "[petal_length] + [petal_width]",
+            "Calculated Fields",
+        )
         self.add_query(
             "Calculate total flower measurements",
             "[sepal_length] + [sepal_width] + [petal_length] + [petal_width]",
@@ -155,13 +221,23 @@ class TableauIrisQueriesDataset:
         )
 
         # Differences
-        self.add_query("Calculate sepal length-width difference", "[sepal_length] - [sepal_width]", "Calculated Fields")
-        self.add_query("Calculate petal length-width difference", "[petal_length] - [petal_width]", "Calculated Fields")
+        self.add_query(
+            "Calculate sepal length-width difference",
+            "[sepal_length] - [sepal_width]",
+            "Calculated Fields",
+        )
+        self.add_query(
+            "Calculate petal length-width difference",
+            "[petal_length] - [petal_width]",
+            "Calculated Fields",
+        )
 
         # Squared values
         for feature in ["sepal_length", "petal_length"]:
             self.add_query(
-                f"Calculate {feature.replace('_', ' ')} squared", f"SQUARE([{feature}])", "Calculated Fields"
+                f"Calculate {feature.replace('_', ' ')} squared",
+                f"SQUARE([{feature}])",
+                "Calculated Fields",
             )
 
         # Normalized values
@@ -180,7 +256,9 @@ class TableauIrisQueriesDataset:
 
         # Species classification
         self.add_query(
-            "Classify as Setosa or Other", "IF [species] = 'setosa' THEN 'Setosa' ELSE 'Other' END", "Conditional Logic"
+            "Classify as Setosa or Other",
+            "IF [species] = 'setosa' THEN 'Setosa' ELSE 'Other' END",
+            "Conditional Logic",
         )
         self.add_query(
             "Classify as Versicolor or Not",
@@ -271,7 +349,9 @@ class TableauIrisQueriesDataset:
         # Variance
         for feature in ["sepal_length", "sepal_width", "petal_length", "petal_width"]:
             self.add_query(
-                f"Calculate variance of {feature.replace('_', ' ')}", f"VAR([{feature}])", "Statistical Measures"
+                f"Calculate variance of {feature.replace('_', ' ')}",
+                f"VAR([{feature}])",
+                "Statistical Measures",
             )
 
         # Coefficient of variation
@@ -328,25 +408,35 @@ class TableauIrisQueriesDataset:
         # Rank functions
         for feature in ["sepal_length", "petal_length"]:
             self.add_query(
-                f"Rank samples by {feature.replace('_', ' ')}", f"RANK(SUM([{feature}]))", "Window Functions"
+                f"Rank samples by {feature.replace('_', ' ')}",
+                f"RANK(SUM([{feature}]))",
+                "Window Functions",
             )
 
         # Dense rank
         for feature in ["sepal_width", "petal_width"]:
             self.add_query(
-                f"Dense rank by {feature.replace('_', ' ')}", f"RANK_DENSE(SUM([{feature}]))", "Window Functions"
+                f"Dense rank by {feature.replace('_', ' ')}",
+                f"RANK_DENSE(SUM([{feature}]))",
+                "Window Functions",
             )
 
         # Window sum
         self.add_query(
-            "Calculate sum of sepal length within species", "WINDOW_SUM(SUM([sepal_length]))", "Window Functions"
+            "Calculate sum of sepal length within species",
+            "WINDOW_SUM(SUM([sepal_length]))",
+            "Window Functions",
         )
         self.add_query(
-            "Calculate average petal length within species", "WINDOW_AVG(AVG([petal_length]))", "Window Functions"
+            "Calculate average petal length within species",
+            "WINDOW_AVG(AVG([petal_length]))",
+            "Window Functions",
         )
 
         # Row number
-        self.add_query("Assign row number within each species", "INDEX()", "Window Functions")
+        self.add_query(
+            "Assign row number within each species", "INDEX()", "Window Functions"
+        )
 
         print(f"    ✅ Generated 15 window function formulas")
 
@@ -506,8 +596,12 @@ class TableauIrisQueriesDataset:
         """Save datasets to CSV and JSON with timestamps."""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-        csv_path = os.path.join(self.output_dir, f"tableau_queries_iris_{timestamp}.csv")
-        json_path = os.path.join(self.output_dir, f"tableau_queries_iris_{timestamp}.json")
+        csv_path = os.path.join(
+            self.output_dir, f"tableau_queries_iris_{timestamp}.csv"
+        )
+        json_path = os.path.join(
+            self.output_dir, f"tableau_queries_iris_{timestamp}.json"
+        )
 
         df = self.to_dataframe()
 
@@ -561,7 +655,9 @@ def main():
     print("█  Classic Machine Learning Dataset Analysis")
     print("█" * 70)
 
-    generator = TableauIrisQueriesDataset(seed=42, output_dir="hypatiax/datasets/generators/queries/tableau/")
+    generator = TableauIrisQueriesDataset(
+        seed=42, output_dir="hypatiax/datasets/generators/queries/tableau/"
+    )
 
     # Generate all formulas
     total = generator.generate_all()

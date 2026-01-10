@@ -54,7 +54,11 @@ def get_coin_historical_prices(coin_symbol, days=90):
         prices = []
         for timestamp, price in data["prices"]:
             prices.append(
-                {"timestamp": timestamp, "date": datetime.fromtimestamp(timestamp / 1000), "price_usd": price}
+                {
+                    "timestamp": timestamp,
+                    "date": datetime.fromtimestamp(timestamp / 1000),
+                    "price_usd": price,
+                }
             )
         return prices
     except Exception as e:
@@ -80,7 +84,11 @@ class V4PoolMath:
         elif price_current >= price_upper:
             L = amount1 / (sqrt_Pb - sqrt_Pa) if amount1 > 0 else 0
         else:
-            L0 = amount0 * sqrt_P * sqrt_Pb / (sqrt_Pb - sqrt_P) if amount0 > 0 else float("inf")
+            L0 = (
+                amount0 * sqrt_P * sqrt_Pb / (sqrt_Pb - sqrt_P)
+                if amount0 > 0
+                else float("inf")
+            )
             L1 = amount1 / (sqrt_P - sqrt_Pa) if amount1 > 0 else float("inf")
             L = min(L0, L1)
 
@@ -109,7 +117,9 @@ class V4PoolMath:
 # ===== V4 HOOK SIMULATOR =====
 
 
-def simulate_dynamic_fee_hook(price_current, price_initial, base_fee, volatility_estimate):
+def simulate_dynamic_fee_hook(
+    price_current, price_initial, base_fee, volatility_estimate
+):
     """
     Simulate dynamic fee adjustment via V4 hook
 
@@ -179,14 +189,19 @@ def backtest_v4_strategy(
 
         # Calculate volatility (std dev of returns)
         if len(price_history) > 1:
-            returns = [price_history[i] / price_history[i - 1] - 1 for i in range(1, len(price_history))]
+            returns = [
+                price_history[i] / price_history[i - 1] - 1
+                for i in range(1, len(price_history))
+            ]
             volatility = np.std(returns) if returns else 0.3
         else:
             volatility = 0.3
 
         # V4 calculation (with hook)
         if enable_hooks:
-            effective_fee_v4 = simulate_dynamic_fee_hook(current_price, initial_price, base_fee, volatility)
+            effective_fee_v4 = simulate_dynamic_fee_hook(
+                current_price, initial_price, base_fee, volatility
+            )
         else:
             effective_fee_v4 = base_fee
 
@@ -222,10 +237,17 @@ def backtest_v4_strategy(
         v4_gas_savings = days_elapsed * 5 * 0.5  # ~$2.50/day saved
 
         # V4 total value
-        v4_value = v4_calc["amount0"] * current_price + v4_calc["amount1"] + v4_calc["fees"] + v4_gas_savings
+        v4_value = (
+            v4_calc["amount0"] * current_price
+            + v4_calc["amount1"]
+            + v4_calc["fees"]
+            + v4_gas_savings
+        )
 
         # V3 total value
-        v3_value = v3_calc["amount0"] * current_price + v3_calc["amount1"] + v3_calc["fees"]
+        v3_value = (
+            v3_calc["amount0"] * current_price + v3_calc["amount1"] + v3_calc["fees"]
+        )
 
         results.append(
             {
@@ -233,7 +255,8 @@ def backtest_v4_strategy(
                 "day": days_elapsed,
                 "price": current_price,
                 "volatility": volatility,
-                "price_change_pct": ((current_price - initial_price) / initial_price) * 100,
+                "price_change_pct": ((current_price - initial_price) / initial_price)
+                * 100,
                 # V4 metrics
                 "v4_in_range": v4_calc["in_range"],
                 "v4_effective_fee": effective_fee_v4 * 100,
@@ -262,15 +285,27 @@ def backtest_v4_strategy(
 
 
 def calculate_position_metrics(
-    initial_price, current_price, price_lower, price_upper, initial_x, initial_y, days_elapsed, daily_volume, fee_tier
+    initial_price,
+    current_price,
+    price_lower,
+    price_upper,
+    initial_x,
+    initial_y,
+    days_elapsed,
+    daily_volume,
+    fee_tier,
 ):
     """Calculate position metrics (same logic as V3)"""
 
     # Calculate liquidity
-    L = V4PoolMath.get_liquidity(initial_x, initial_y, price_lower, price_upper, initial_price)
+    L = V4PoolMath.get_liquidity(
+        initial_x, initial_y, price_lower, price_upper, initial_price
+    )
 
     # Current amounts
-    amount0, amount1 = V4PoolMath.get_amounts(L, price_lower, price_upper, current_price)
+    amount0, amount1 = V4PoolMath.get_amounts(
+        L, price_lower, price_upper, current_price
+    )
 
     # Values
     initial_value = initial_x * initial_price + initial_y
@@ -300,7 +335,13 @@ def calculate_position_metrics(
     total_volume = daily_volume * days_elapsed * time_in_range
     fees = total_volume * fee_tier * effective_share
 
-    return {"amount0": amount0, "amount1": amount1, "il": il, "fees": fees, "in_range": in_range}
+    return {
+        "amount0": amount0,
+        "amount1": amount1,
+        "il": il,
+        "fees": fees,
+        "in_range": in_range,
+    }
 
 
 # ===== ANALYSIS =====
@@ -401,13 +442,19 @@ def create_v4_visualizations(df, coin_symbol, save_path):
         return
 
     fig, axes = plt.subplots(2, 3, figsize=(20, 12))
-    fig.suptitle(f"Uniswap V4 vs V3 Backtest - {coin_symbol.upper()}", fontsize=16, fontweight="bold")
+    fig.suptitle(
+        f"Uniswap V4 vs V3 Backtest - {coin_symbol.upper()}",
+        fontsize=16,
+        fontweight="bold",
+    )
 
     # 1. Price with dynamic fees
     ax1 = axes[0, 0]
     ax1_twin = ax1.twinx()
     ax1.plot(df["date"], df["price"], "b-", linewidth=2, label="Price")
-    ax1_twin.plot(df["date"], df["v4_effective_fee"], "r-", linewidth=2, label="V4 Dynamic Fee")
+    ax1_twin.plot(
+        df["date"], df["v4_effective_fee"], "r-", linewidth=2, label="V4 Dynamic Fee"
+    )
     ax1.axhline(y=df["price_lower"].iloc[0], color="gray", linestyle="--", alpha=0.5)
     ax1.axhline(y=df["price_upper"].iloc[0], color="gray", linestyle="--", alpha=0.5)
     ax1.set_xlabel("Date")
@@ -420,7 +467,13 @@ def create_v4_visualizations(df, coin_symbol, save_path):
 
     # 2. V4 vs V3 vs HODL
     ax2 = axes[0, 1]
-    ax2.plot(df["date"], df["v4_value"], "purple", linewidth=2, label="V4 (Hooks + Gas Savings)")
+    ax2.plot(
+        df["date"],
+        df["v4_value"],
+        "purple",
+        linewidth=2,
+        label="V4 (Hooks + Gas Savings)",
+    )
     ax2.plot(df["date"], df["v3_value"], "blue", linewidth=2, label="V3 (Concentrated)")
     ax2.plot(df["date"], df["hodl_value"], "orange", linewidth=2, label="HODL")
     ax2.set_xlabel("Date")
@@ -432,9 +485,16 @@ def create_v4_visualizations(df, coin_symbol, save_path):
     # 3. Fees comparison
     ax3 = axes[0, 2]
     ax3.plot(df["date"], df["v4_fees"], "green", linewidth=2, label="V4 Fees (Dynamic)")
-    ax3.plot(df["date"], df["v3_fees"], "lightgreen", linewidth=2, label="V3 Fees (Static)")
+    ax3.plot(
+        df["date"], df["v3_fees"], "lightgreen", linewidth=2, label="V3 Fees (Static)"
+    )
     ax3.fill_between(
-        df["date"], df["v4_fees"], df["v3_fees"], where=(df["v4_fees"] >= df["v3_fees"]), alpha=0.3, color="green"
+        df["date"],
+        df["v4_fees"],
+        df["v3_fees"],
+        where=(df["v4_fees"] >= df["v3_fees"]),
+        alpha=0.3,
+        color="green",
     )
     ax3.set_xlabel("Date")
     ax3.set_ylabel("Cumulative Fees (USD)")
@@ -492,7 +552,9 @@ def run_v4_backtest(
     """Run complete V4 backtest"""
 
     print("🚀 Starting Uniswap V4 Backtest...")
-    print(f"Parameters: {days} days, {initial_coin} {coin_symbol.upper()}, ${initial_usdc} USDC")
+    print(
+        f"Parameters: {days} days, {initial_coin} {coin_symbol.upper()}, ${initial_usdc} USDC"
+    )
     print(f"Range: ±{price_range_pct}%, Base Fee: {base_fee*100}%")
     print(f"Hooks Enabled: {enable_hooks}")
     print("-" * 80)
@@ -516,7 +578,14 @@ def run_v4_backtest(
     # Run backtest
     print("\n2️⃣ Running V4 backtest...")
     results_df = backtest_v4_strategy(
-        historical_prices, price_lower, price_upper, initial_coin, initial_usdc, daily_volume, base_fee, enable_hooks
+        historical_prices,
+        price_lower,
+        price_upper,
+        initial_coin,
+        initial_usdc,
+        daily_volume,
+        base_fee,
+        enable_hooks,
     )
 
     if results_df.empty:
@@ -542,9 +611,15 @@ def run_v4_backtest(
 
         with pd.ExcelWriter(excel_path, engine="openpyxl") as writer:
             results_df.to_excel(writer, sheet_name="Daily Results", index=False)
-            pd.DataFrame([analysis["summary"]]).to_excel(writer, sheet_name="Summary", index=False)
-            pd.DataFrame([analysis["v4_performance"]]).to_excel(writer, sheet_name="V4 Performance", index=False)
-            pd.DataFrame([analysis["v4_vs_v3"]]).to_excel(writer, sheet_name="V4 vs V3", index=False)
+            pd.DataFrame([analysis["summary"]]).to_excel(
+                writer, sheet_name="Summary", index=False
+            )
+            pd.DataFrame([analysis["v4_performance"]]).to_excel(
+                writer, sheet_name="V4 Performance", index=False
+            )
+            pd.DataFrame([analysis["v4_vs_v3"]]).to_excel(
+                writer, sheet_name="V4 vs V3", index=False
+            )
 
         print(f"✅ Saved: {excel_path}")
 

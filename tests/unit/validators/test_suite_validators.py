@@ -105,13 +105,27 @@ except ImportError as e:
             self.dimensional_validator = DimensionalValidator(max_history)
             self.domain_validator = DomainValidator(domain, max_history)
             self.validation_history = []
-            self.weights = weights or {"symbolic": 0.35, "dimensional": 0.25, "domain": 0.30, "numerical": 0.10}
+            self.weights = weights or {
+                "symbolic": 0.35,
+                "dimensional": 0.25,
+                "domain": 0.30,
+                "numerical": 0.10,
+            }
 
         def validate_complete(
-            self, expression_str, variable_definitions, variable_units, test_data=None, from_latex=False
+            self,
+            expression_str,
+            variable_definitions,
+            variable_units,
+            test_data=None,
+            from_latex=False,
         ):
-            dim_result = self.dimensional_validator.validate(expression_str, variable_units)
-            dom_result = self.domain_validator.validate(expression_str, variable_definitions, test_data)
+            dim_result = self.dimensional_validator.validate(
+                expression_str, variable_units
+            )
+            dom_result = self.domain_validator.validate(
+                expression_str, variable_definitions, test_data
+            )
 
             total_score = (
                 self.weights["dimensional"] * dim_result["score"]
@@ -130,7 +144,12 @@ except ImportError as e:
                     "numerical": 100.0,
                 },
                 "layer_results": {
-                    "symbolic": {"valid": True, "score": 100.0, "errors": [], "warnings": []},
+                    "symbolic": {
+                        "valid": True,
+                        "score": 100.0,
+                        "errors": [],
+                        "warnings": [],
+                    },
                     "dimensional": dim_result,
                     "domain": dom_result,
                     "numerical": {"score": 100.0, "errors": [], "warnings": []},
@@ -152,11 +171,19 @@ except ImportError as e:
 
         def get_statistics(self):
             if not self.validation_history:
-                return {"total_validations": 0, "success_rate": 0.0, "average_total_score": 0.0}
+                return {
+                    "total_validations": 0,
+                    "success_rate": 0.0,
+                    "average_total_score": 0.0,
+                }
             total = len(self.validation_history)
             valid = sum(1 for v in self.validation_history if v["valid"])
             avg_score = sum(v["total_score"] for v in self.validation_history) / total
-            return {"total_validations": total, "success_rate": valid / total, "average_total_score": avg_score}
+            return {
+                "total_validations": total,
+                "success_rate": valid / total,
+                "average_total_score": avg_score,
+            }
 
         def get_weakest_layer(self):
             if not self.validation_history:
@@ -186,7 +213,10 @@ class ComprehensiveTestSuite:
                 {
                     "name": "Basic Constant Product",
                     "expression": "reserve0 * reserve1",
-                    "variables": {"reserve0": "Token 0 reserve amount", "reserve1": "Token 1 reserve amount"},
+                    "variables": {
+                        "reserve0": "Token 0 reserve amount",
+                        "reserve1": "Token 1 reserve amount",
+                    },
                     "units": {"reserve0": "USD", "reserve1": "USD"},
                     "test_data": {
                         "reserve0": np.array([100.0, 200.0, 300.0, 400.0, 500.0]),
@@ -198,7 +228,10 @@ class ComprehensiveTestSuite:
                 {
                     "name": "Price Ratio",
                     "expression": "reserve1 / reserve0",
-                    "variables": {"reserve0": "Token 0 reserve", "reserve1": "Token 1 reserve"},
+                    "variables": {
+                        "reserve0": "Token 0 reserve",
+                        "reserve1": "Token 1 reserve",
+                    },
                     "units": {"reserve0": "USD", "reserve1": "USD"},
                     "test_data": {
                         "reserve0": np.array([100.0, 200.0, 300.0]),
@@ -210,7 +243,11 @@ class ComprehensiveTestSuite:
                 {
                     "name": "Impermanent Loss (Square Root)",
                     "expression": "sqrt(reserve0 * reserve1) / liquidity",
-                    "variables": {"reserve0": "Reserve 0", "reserve1": "Reserve 1", "liquidity": "Pool liquidity"},
+                    "variables": {
+                        "reserve0": "Reserve 0",
+                        "reserve1": "Reserve 1",
+                        "liquidity": "Pool liquidity",
+                    },
                     "units": {"reserve0": "USD", "reserve1": "USD", "liquidity": "USD"},
                     "test_data": {
                         "reserve0": np.array([100.0, 200.0, 300.0]),
@@ -280,7 +317,11 @@ class ComprehensiveTestSuite:
                         "volatility": "Volatility measure",
                         "confidence": "Confidence level",
                     },
-                    "units": {"portfolio_value": "USD", "volatility": "dimensionless", "confidence": "dimensionless"},
+                    "units": {
+                        "portfolio_value": "USD",
+                        "volatility": "dimensionless",
+                        "confidence": "dimensionless",
+                    },
                     "test_data": {
                         "portfolio_value": np.array([10000.0, 20000.0, 30000.0]),
                         "volatility": np.array([0.15, 0.20, 0.25]),
@@ -357,7 +398,9 @@ class ComprehensiveTestSuite:
             print(f"\nTest {idx}/{len(test_cases)}: {test['name']}")
             print("-" * 80)
 
-            result = validator.validate(expression_str=test["expr"], variable_units=test["units"])
+            result = validator.validate(
+                expression_str=test["expr"], variable_units=test["units"]
+            )
 
             test_passed = result["valid"] == test["should_pass"]
 
@@ -375,7 +418,9 @@ class ComprehensiveTestSuite:
             if test_passed:
                 passed += 1
 
-            self.results["dimensional"].append({"test": test["name"], "passed": test_passed, "result": result})
+            self.results["dimensional"].append(
+                {"test": test["name"], "passed": test_passed, "result": result}
+            )
 
         print(f"\n{'=' * 80}")
         print(f"Dimensional Validator: {passed}/{len(test_cases)} passed")
@@ -420,7 +465,9 @@ class ComprehensiveTestSuite:
                 if result["errors"]:
                     print(f"  Errors: {len(result['errors'])}")
 
-                self.results["domain"].append({"domain": domain, "test": test["name"], "result": result})
+                self.results["domain"].append(
+                    {"domain": domain, "test": test["name"], "result": result}
+                )
 
     def _test_ensemble_validator(self):
         """Test ensemble validator"""
@@ -433,7 +480,9 @@ class ComprehensiveTestSuite:
         passed = 0
 
         for idx, test in enumerate(self.test_data["defi_expressions"], 1):
-            print(f"\nTest {idx}/{len(self.test_data['defi_expressions'])}: {test['name']}")
+            print(
+                f"\nTest {idx}/{len(self.test_data['defi_expressions'])}: {test['name']}"
+            )
             print("-" * 80)
 
             result = validator.validate_complete(
@@ -470,10 +519,14 @@ class ComprehensiveTestSuite:
             if test_passed:
                 passed += 1
 
-            self.results["ensemble"].append({"test": test["name"], "passed": test_passed, "result": result})
+            self.results["ensemble"].append(
+                {"test": test["name"], "passed": test_passed, "result": result}
+            )
 
         print(f"\n{'=' * 80}")
-        print(f"Ensemble Validator: {passed}/{len(self.test_data['defi_expressions'])} passed")
+        print(
+            f"Ensemble Validator: {passed}/{len(self.test_data['defi_expressions'])} passed"
+        )
         print(f"{'=' * 80}")
 
         stats = validator.get_statistics()
@@ -491,7 +544,11 @@ class ComprehensiveTestSuite:
         ensemble = EnsembleValidator(domain="defi")
 
         test_expr = "reserve0 * reserve1 / liquidity"
-        test_vars = {"reserve0": "Reserve 0", "reserve1": "Reserve 1", "liquidity": "Liquidity"}
+        test_vars = {
+            "reserve0": "Reserve 0",
+            "reserve1": "Reserve 1",
+            "liquidity": "Liquidity",
+        }
         test_units = {"reserve0": "USD", "reserve1": "USD", "liquidity": "USD"}
         test_data = {
             "reserve0": np.array([100.0, 200.0, 300.0]),
@@ -501,34 +558,51 @@ class ComprehensiveTestSuite:
 
         print("\n--- Test: Coordinated Validation ---")
         result = ensemble.validate_complete(
-            expression_str=test_expr, variable_definitions=test_vars, variable_units=test_units, test_data=test_data
+            expression_str=test_expr,
+            variable_definitions=test_vars,
+            variable_units=test_units,
+            test_data=test_data,
         )
 
         print(f"Expression: {test_expr}")
         print(f"Total Score: {result['total_score']:.2f}")
 
         layers_ran = all(
-            layer in result["layer_results"] for layer in ["symbolic", "dimensional", "domain", "numerical"]
+            layer in result["layer_results"]
+            for layer in ["symbolic", "dimensional", "domain", "numerical"]
         )
 
-        print("✅ All validation layers executed" if layers_ran else "❌ Missing layers")
+        print(
+            "✅ All validation layers executed" if layers_ran else "❌ Missing layers"
+        )
 
-        self.results["integration"].append({"test": "Coordinated Validation", "passed": layers_ran, "result": result})
+        self.results["integration"].append(
+            {"test": "Coordinated Validation", "passed": layers_ran, "result": result}
+        )
 
         print("\n--- Test: History Management ---")
         ensemble.clear_history()
 
         for i in range(5):
             ensemble.validate_complete(
-                expression_str=test_expr, variable_definitions=test_vars, variable_units=test_units, test_data=test_data
+                expression_str=test_expr,
+                variable_definitions=test_vars,
+                variable_units=test_units,
+                test_data=test_data,
             )
 
         stats = ensemble.get_statistics()
         history_ok = stats["total_validations"] == 5
         print(f"History tracking: {stats['total_validations']} validations recorded")
-        print("✅ History management working" if history_ok else "❌ History management issue")
+        print(
+            "✅ History management working"
+            if history_ok
+            else "❌ History management issue"
+        )
 
-        self.results["integration"].append({"test": "History Management", "passed": history_ok, "stats": stats})
+        self.results["integration"].append(
+            {"test": "History Management", "passed": history_ok, "stats": stats}
+        )
 
     def _test_edge_cases(self):
         """Test edge cases and error handling"""
@@ -539,13 +613,22 @@ class ComprehensiveTestSuite:
         ensemble = EnsembleValidator(domain="defi")
 
         edge_cases = [
-            {"name": "Empty Expression", "expr": "", "vars": {}, "units": {}, "should_error": True},
+            {
+                "name": "Empty Expression",
+                "expr": "",
+                "vars": {},
+                "units": {},
+                "should_error": True,
+            },
             {
                 "name": "Division by Zero Risk",
                 "expr": "numerator / denominator",
                 "vars": {"numerator": "Top", "denominator": "Bottom"},
                 "units": {"numerator": "USD", "denominator": "USD"},
-                "test_data": {"numerator": np.array([100.0, 200.0]), "denominator": np.array([0.0, 50.0])},
+                "test_data": {
+                    "numerator": np.array([100.0, 200.0]),
+                    "denominator": np.array([0.0, 50.0]),
+                },
                 "should_warn": True,
             },
             {
@@ -553,7 +636,10 @@ class ComprehensiveTestSuite:
                 "expr": "x * y",
                 "vars": {"x": "X", "y": "Y"},
                 "units": {"x": "USD", "y": "dimensionless"},
-                "test_data": {"x": np.array([1e15, 1e16, 1e17]), "y": np.array([1e15, 1e16, 1e17])},
+                "test_data": {
+                    "x": np.array([1e15, 1e16, 1e17]),
+                    "y": np.array([1e15, 1e16, 1e17]),
+                },
                 "should_warn": True,
             },
         ]
@@ -583,13 +669,21 @@ class ComprehensiveTestSuite:
                 elif test.get("should_warn"):
                     test_passed = has_warnings
 
-                print("✅ Edge case handled correctly" if test_passed else "❌ Unexpected behavior")
+                print(
+                    "✅ Edge case handled correctly"
+                    if test_passed
+                    else "❌ Unexpected behavior"
+                )
 
-                self.results["edge_cases"].append({"test": test["name"], "passed": test_passed, "result": result})
+                self.results["edge_cases"].append(
+                    {"test": test["name"], "passed": test_passed, "result": result}
+                )
 
             except Exception as e:
                 print(f"❌ Exception raised: {type(e).__name__}: {e}")
-                self.results["edge_cases"].append({"test": test["name"], "passed": False, "error": str(e)})
+                self.results["edge_cases"].append(
+                    {"test": test["name"], "passed": False, "error": str(e)}
+                )
 
     def _test_performance(self):
         """Test performance and memory usage"""
@@ -614,7 +708,10 @@ class ComprehensiveTestSuite:
 
         for i in range(n_iterations):
             result = ensemble.validate_complete(
-                expression_str=test_expr, variable_definitions=test_vars, variable_units=test_units, test_data=test_data
+                expression_str=test_expr,
+                variable_definitions=test_vars,
+                variable_units=test_units,
+                test_data=test_data,
             )
 
         elapsed = time.time() - start
@@ -639,7 +736,10 @@ class ComprehensiveTestSuite:
     def _generate_summary(self) -> Dict[str, Any]:
         """Generate test summary"""
         total_tests = sum(len(v) for v in self.results.values())
-        passed_tests = sum(sum(1 for t in tests if t.get("passed", False)) for tests in self.results.values())
+        passed_tests = sum(
+            sum(1 for t in tests if t.get("passed", False))
+            for tests in self.results.values()
+        )
 
         elapsed = time.time() - self.start_time
 

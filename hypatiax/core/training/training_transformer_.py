@@ -131,9 +131,13 @@ Provide only the formula without explanation."""
         self.model = get_peft_model(model, lora_config)
 
         # Print trainable parameters (should be <1% of total)
-        trainable_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
+        trainable_params = sum(
+            p.numel() for p in self.model.parameters() if p.requires_grad
+        )
         total_params = sum(p.numel() for p in self.model.parameters())
-        print(f"Trainable: {trainable_params:,} ({100 * trainable_params / total_params:.2f}%)")
+        print(
+            f"Trainable: {trainable_params:,} ({100 * trainable_params / total_params:.2f}%)"
+        )
 
     def train(self, train_dataset: Dataset, val_dataset: Optional[Dataset] = None):
         """Modern training with best practices"""
@@ -141,13 +145,18 @@ Provide only the formula without explanation."""
         # Tokenize dataset
         def tokenize_function(examples):
             return self.tokenizer(
-                examples["text"], truncation=True, max_length=self.config.max_seq_length, padding="max_length"
+                examples["text"],
+                truncation=True,
+                max_length=self.config.max_seq_length,
+                padding="max_length",
             )
 
         tokenized_train = train_dataset.map(tokenize_function, batched=True)
 
         # Data collator
-        data_collator = DataCollatorForLanguageModeling(tokenizer=self.tokenizer, mlm=False)  # Causal LM
+        data_collator = DataCollatorForLanguageModeling(
+            tokenizer=self.tokenizer, mlm=False
+        )  # Causal LM
 
         # Training arguments (2025 best practices)
         training_args = TrainingArguments(
@@ -173,7 +182,11 @@ Provide only the formula without explanation."""
             model=self.model,
             args=training_args,
             train_dataset=tokenized_train,
-            eval_dataset=val_dataset.map(tokenize_function, batched=True) if val_dataset else None,
+            eval_dataset=(
+                val_dataset.map(tokenize_function, batched=True)
+                if val_dataset
+                else None
+            ),
             data_collator=data_collator,
         )
 

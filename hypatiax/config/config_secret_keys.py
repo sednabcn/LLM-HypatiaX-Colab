@@ -275,7 +275,9 @@ def example_basic_usage():
 
     client = OpenAI(api_key=config.openai_api_key)
 
-    response = client.chat.completions.create(model="gpt-4", messages=[{"role": "user", "content": "Hello!"}])
+    response = client.chat.completions.create(
+        model="gpt-4", messages=[{"role": "user", "content": "Hello!"}]
+    )
     print(response.choices[0].message.content)
 
 
@@ -293,7 +295,9 @@ def example_multi_provider():
     )
 
     anthropic_response = anthropic_client.messages.create(
-        model="claude-3-5-sonnet-20241022", max_tokens=1024, messages=[{"role": "user", "content": "Explain AI"}]
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": "Explain AI"}],
     )
 
 

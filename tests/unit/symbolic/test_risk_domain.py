@@ -6,7 +6,9 @@ import sys
 
 sys.path.insert(0, "/home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab")
 
-from hypatiax.tools.symbolic.enhanced_symbolic_validator_1111 import EnhancedSymbolicValidator
+from hypatiax.tools.symbolic.enhanced_symbolic_validator import (
+    EnhancedSymbolicValidator,
+)
 
 
 def test_risk_domain():

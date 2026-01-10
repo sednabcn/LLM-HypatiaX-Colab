@@ -71,7 +71,9 @@ class VocabToVocabStrategy(MappingStrategy):
         words = description.split()
         capitalized = [w for w in words if w[0].isupper() and len(w) > 1]
         if capitalized:
-            return " ".join(capitalized[-2:]) if len(capitalized) >= 2 else capitalized[-1]
+            return (
+                " ".join(capitalized[-2:]) if len(capitalized) >= 2 else capitalized[-1]
+            )
 
         return None
 
@@ -144,7 +146,9 @@ class RegexStrategy(MappingStrategy):
         groupby_match = re.search(self.groupby_pattern, desc_lower)
         if groupby_match:
             groupby_col = groupby_match.group(1)
-            groupby_formatted = " ".join(word.capitalize() for word in groupby_col.split())
+            groupby_formatted = " ".join(
+                word.capitalize() for word in groupby_col.split()
+            )
             formula += f" GROUP BY [{groupby_formatted}]"
 
         return formula
@@ -155,7 +159,14 @@ class NERBasedStrategy(MappingStrategy):
 
     def __init__(self):
         self.entity_to_function = {
-            "OPER": {"sum": "SUM", "average": "AVG", "count": "COUNT", "max": "MAX", "min": "MIN", "total": "SUM"},
+            "OPER": {
+                "sum": "SUM",
+                "average": "AVG",
+                "count": "COUNT",
+                "max": "MAX",
+                "min": "MIN",
+                "total": "SUM",
+            },
             "TARGET": {},  # Extracted from NER
             "OBJECT": {},  # Context for formula selection
         }
@@ -217,7 +228,12 @@ class MLModelStrategy(MappingStrategy):
 class MapDescriptionToFormula:
     """Main class for mapping descriptions to formulas"""
 
-    def __init__(self, description: str = "", rules: Dict = None, ner_entities: Optional[List] = None):
+    def __init__(
+        self,
+        description: str = "",
+        rules: Dict = None,
+        ner_entities: Optional[List] = None,
+    ):
         self.description = description
         self.custom_rules = rules or {}
         self.ner_entities = ner_entities
@@ -231,7 +247,12 @@ class MapDescriptionToFormula:
             "ml": MLModelStrategy(),
         }
 
-    def map(self, description: str = None, strategy: str = "vocab", ner_entities: Optional[List] = None) -> str:
+    def map(
+        self,
+        description: str = None,
+        strategy: str = "vocab",
+        ner_entities: Optional[List] = None,
+    ) -> str:
         """
         Map description to formula using specified strategy
 

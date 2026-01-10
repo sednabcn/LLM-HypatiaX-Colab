@@ -10,14 +10,28 @@ class FormulaExtractionSchema(Schema):
     """Schema for formula extraction requests"""
 
     text = fields.Str(
-        required=True, validate=validate.Length(min=1, max=10000), error_messages={"required": "Text field is required"}
+        required=True,
+        validate=validate.Length(min=1, max=10000),
+        error_messages={"required": "Text field is required"},
     )
     domain = fields.Str(
         missing="general",
-        validate=validate.OneOf(["general", "defi", "finance", "physics", "mathematics", "statistics", "economics"]),
+        validate=validate.OneOf(
+            [
+                "general",
+                "defi",
+                "finance",
+                "physics",
+                "mathematics",
+                "statistics",
+                "economics",
+            ]
+        ),
     )
     extract_variables = fields.Bool(missing=True)
-    output_format = fields.Str(missing="json", validate=validate.OneOf(["json", "latex", "both"]))
+    output_format = fields.Str(
+        missing="json", validate=validate.OneOf(["json", "latex", "both"])
+    )
 
 
 class EntityRecognitionSchema(Schema):
@@ -25,7 +39,11 @@ class EntityRecognitionSchema(Schema):
 
     text = fields.Str(required=True, validate=validate.Length(min=1, max=10000))
     entity_types = fields.List(
-        fields.Str(validate=validate.OneOf(["variable", "constant", "operator", "function", "symbol", "unit"])),
+        fields.Str(
+            validate=validate.OneOf(
+                ["variable", "constant", "operator", "function", "symbol", "unit"]
+            )
+        ),
         missing=["variable", "constant", "operator"],
     )
     include_positions = fields.Bool(missing=True)
@@ -35,11 +53,23 @@ class BatchNERSchema(Schema):
     """Schema for batch NER processing"""
 
     texts = fields.List(
-        fields.Str(validate=validate.Length(min=1, max=10000)), required=True, validate=validate.Length(min=1, max=100)
+        fields.Str(validate=validate.Length(min=1, max=10000)),
+        required=True,
+        validate=validate.Length(min=1, max=100),
     )
     domain = fields.Str(
         missing="general",
-        validate=validate.OneOf(["general", "defi", "finance", "physics", "mathematics", "statistics", "economics"]),
+        validate=validate.OneOf(
+            [
+                "general",
+                "defi",
+                "finance",
+                "physics",
+                "mathematics",
+                "statistics",
+                "economics",
+            ]
+        ),
     )
     extract_variables = fields.Bool(missing=True)
 
@@ -55,7 +85,9 @@ class ExpressionParseSchema(Schema):
     """Schema for expression parsing"""
 
     expression = fields.Str(required=True, validate=validate.Length(min=1, max=1000))
-    output_format = fields.Str(missing="tree", validate=validate.OneOf(["tree", "list", "graph"]))
+    output_format = fields.Str(
+        missing="tree", validate=validate.OneOf(["tree", "list", "graph"])
+    )
     simplify = fields.Bool(missing=False)
 
 
@@ -63,7 +95,9 @@ class LatexConversionSchema(Schema):
     """Schema for LaTeX conversion"""
 
     expression = fields.Str(required=True, validate=validate.Length(min=1, max=1000))
-    style = fields.Str(missing="inline", validate=validate.OneOf(["inline", "display", "equation"]))
+    style = fields.Str(
+        missing="inline", validate=validate.OneOf(["inline", "display", "equation"])
+    )
     numbered = fields.Bool(missing=False)
 
 

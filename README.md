@@ -552,6 +552,13 @@ kubectl get services -n hypatiax
 - 🌍 **50+** scientific domains covered
 
 ---
+## 📚 Publications
+
+This project has resulted in multiple peer-reviewed publications:
+- [JMLR 2025: Beyond Reproduction](https://github.com/your-org/LLM-HypatiaX-PAPERS/tree/main/2025-JMLR)
+- [KDD 2025: Automated Discovery](https://github.com/your-org/LLM-HypatiaX-PAPERS/tree/main/2025-KDD)
+
+See [LLM-HypatiaX-PAPERS](https://github.com/your-org/LLM-HypatiaX-PAPERS) for all publications.
 
 ## 🤝 Contributing
 

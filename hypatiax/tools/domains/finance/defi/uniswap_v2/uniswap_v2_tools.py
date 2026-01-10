@@ -156,7 +156,9 @@ class UniswapV2Pool:
             "fee_paid": float(Decimal(str(amount_in)) * self.fee),
         }
 
-    def add_liquidity(self, amount0: float, amount1: float) -> Tuple[float, float, float]:
+    def add_liquidity(
+        self, amount0: float, amount1: float
+    ) -> Tuple[float, float, float]:
         """
         Calculate liquidity tokens minted for added liquidity.
 
@@ -292,7 +294,9 @@ class UniswapV2Router:
             "path": path,
         }
 
-    def find_best_path(self, amount_in: float, paths: List[List[str]]) -> Dict[str, any]:
+    def find_best_path(
+        self, amount_in: float, paths: List[List[str]]
+    ) -> Dict[str, any]:
         """
         Find the best path among multiple options.
 
@@ -328,7 +332,9 @@ class UniswapV2Router:
         }
 
 
-def calculate_price_impact(reserve_in: float, reserve_out: float, amount_in: float, fee: float = 0.003) -> float:
+def calculate_price_impact(
+    reserve_in: float, reserve_out: float, amount_in: float, fee: float = 0.003
+) -> float:
     """
     Calculate price impact for a swap without creating a pool object.
 

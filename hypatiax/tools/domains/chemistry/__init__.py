@@ -138,7 +138,10 @@ class UnitConverter:
 
     @staticmethod
     def concentration_to_molarity(
-        value: float, from_unit: str, molar_mass: Optional[float] = None, density: Optional[float] = None
+        value: float,
+        from_unit: str,
+        molar_mass: Optional[float] = None,
+        density: Optional[float] = None,
     ) -> float:
         """
         Convert concentration to molarity (mol/L).
@@ -223,7 +226,9 @@ def get_constant(name: str) -> float:
     constants = ChemistryConstants.get_all_constants()
 
     if name_lower not in constants:
-        raise ValueError(f"Unknown constant: {name}. " f"Available: {', '.join(constants.keys())}")
+        raise ValueError(
+            f"Unknown constant: {name}. " f"Available: {', '.join(constants.keys())}"
+        )
 
     return constants[name_lower]
 
@@ -358,11 +363,19 @@ def dilution_calculation(
         raise ValueError("Must provide exactly 3 parameters")
 
     if concentration_initial is None:
-        if volume_initial is None or concentration_final is None or volume_final is None:
+        if (
+            volume_initial is None
+            or concentration_final is None
+            or volume_final is None
+        ):
             raise ValueError("Invalid parameter combination")
         concentration_initial = (concentration_final * volume_final) / volume_initial
     elif volume_initial is None:
-        if concentration_initial is None or concentration_final is None or volume_final is None:
+        if (
+            concentration_initial is None
+            or concentration_final is None
+            or volume_final is None
+        ):
             raise ValueError("Invalid parameter combination")
         volume_initial = (concentration_final * volume_final) / concentration_initial
     elif concentration_final is None:
@@ -370,7 +383,9 @@ def dilution_calculation(
     else:  # volume_final is None
         volume_final = (concentration_initial * volume_initial) / concentration_final
 
-    dilution_factor = concentration_initial / concentration_final if concentration_final > 0 else 0
+    dilution_factor = (
+        concentration_initial / concentration_final if concentration_final > 0 else 0
+    )
     volume_to_add = volume_final - volume_initial
 
     return {
@@ -442,7 +457,12 @@ try:
         EquilibriumConstantCalculator,
         SolubilityCalculator,
     )
-    from .rate_equations import ArrheniusCalculator, HalfLifeCalculator, KineticsCalculator, RateEquationCalculator
+    from .rate_equations import (
+        ArrheniusCalculator,
+        HalfLifeCalculator,
+        KineticsCalculator,
+        RateEquationCalculator,
+    )
 
     __all__ = [
         # Constants and conversions
@@ -537,16 +557,25 @@ if __name__ == "__main__":
     molar_mass = 18.015  # g/mol
     moles = calculate_moles_from_mass(mass_g, molar_mass)
     print(f"{mass_g} g of H₂O = {moles:.3f} mol")
-    print(f"{moles:.3f} mol of H₂O = {calculate_mass_from_moles(moles, molar_mass):.2f} g")
+    print(
+        f"{moles:.3f} mol of H₂O = {calculate_mass_from_moles(moles, molar_mass):.2f} g"
+    )
 
     # Dilution
     print("\n6. DILUTION CALCULATION (C₁V₁ = C₂V₂)")
     print("-" * 70)
     dilution = dilution_calculation(
-        concentration_initial=2.0, volume_initial=0.1, concentration_final=0.5, volume_final=None  # M  # L  # M
+        concentration_initial=2.0,
+        volume_initial=0.1,
+        concentration_final=0.5,
+        volume_final=None,  # M  # L  # M
     )
-    print(f"Initial: {dilution['concentration_initial']:.2f} M × {dilution['volume_initial']:.2f} L")
-    print(f"Final: {dilution['concentration_final']:.2f} M × {dilution['volume_final']:.2f} L")
+    print(
+        f"Initial: {dilution['concentration_initial']:.2f} M × {dilution['volume_initial']:.2f} L"
+    )
+    print(
+        f"Final: {dilution['concentration_final']:.2f} M × {dilution['volume_final']:.2f} L"
+    )
     print(f"Dilution factor: {dilution['dilution_factor']:.1f}×")
     print(f"Volume to add: {dilution['volume_to_add']:.2f} L")
 

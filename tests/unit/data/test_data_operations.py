@@ -349,7 +349,10 @@ class TestDataMerging:
         """Test joining data structures on a common key."""
         users = [{"id": 1, "name": "Alice"}, {"id": 2, "name": "Bob"}]
 
-        orders = [{"user_id": 1, "product": "Widget"}, {"user_id": 2, "product": "Gadget"}]
+        orders = [
+            {"user_id": 1, "product": "Widget"},
+            {"user_id": 2, "product": "Gadget"},
+        ]
 
         # Simple join
         joined = []
@@ -382,7 +385,11 @@ class TestDataSorting:
 
     def test_sort_by_custom_key(self):
         """Test sorting with custom key function."""
-        data = [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}, {"name": "Charlie", "age": 35}]
+        data = [
+            {"name": "Alice", "age": 30},
+            {"name": "Bob", "age": 25},
+            {"name": "Charlie", "age": 35},
+        ]
 
         sorted_by_age = sorted(data, key=lambda x: x["age"])
 

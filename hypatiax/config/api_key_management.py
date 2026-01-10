@@ -122,7 +122,9 @@ class APIKeyManager:
         # 5. No key found - return None (caller decides whether to prompt)
         return None
 
-    def set_api_key(self, provider: str, api_key: str, storage: str = "keyring") -> bool:
+    def set_api_key(
+        self, provider: str, api_key: str, storage: str = "keyring"
+    ) -> bool:
         """
         Store API key with specified storage method
 
@@ -249,7 +251,9 @@ class APIKeyManager:
             client = anthropic.Anthropic(api_key=api_key)
             # Make a minimal test request
             response = client.messages.create(
-                model="claude-3-haiku-20240307", max_tokens=10, messages=[{"role": "user", "content": "Hi"}]
+                model="claude-3-haiku-20240307",
+                max_tokens=10,
+                messages=[{"role": "user", "content": "Hi"}],
             )
             return True
         except Exception as e:
@@ -264,7 +268,9 @@ class APIKeyManager:
             client = OpenAI(api_key=api_key)
             # Make a minimal test request
             response = client.chat.completions.create(
-                model="gpt-3.5-turbo", max_tokens=10, messages=[{"role": "user", "content": "Hi"}]
+                model="gpt-3.5-turbo",
+                max_tokens=10,
+                messages=[{"role": "user", "content": "Hi"}],
             )
             return True
         except Exception as e:
@@ -279,7 +285,9 @@ class APIKeyManager:
 
             client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
             response = client.chat.completions.create(
-                model="deepseek-chat", max_tokens=10, messages=[{"role": "user", "content": "Hi"}]
+                model="deepseek-chat",
+                max_tokens=10,
+                messages=[{"role": "user", "content": "Hi"}],
             )
             return True
         except Exception as e:
@@ -320,7 +328,10 @@ class APIKeyManager:
             genai.configure(api_key=api_key)
             # Make a minimal test request with Gemini
             model = genai.GenerativeModel("gemini-pro")
-            response = model.generate_content("Hi", generation_config=genai.types.GenerationConfig(max_output_tokens=5))
+            response = model.generate_content(
+                "Hi",
+                generation_config=genai.types.GenerationConfig(max_output_tokens=5),
+            )
             return True
         except Exception as e:
             print(f"❌ Google API key validation failed: {e}")
@@ -467,7 +478,9 @@ class APIKeyManager:
         except Exception as e:
             print(f"Warning: Failed to remove from encrypted file: {e}")
 
-    def prompt_for_api_key(self, provider: str, store: bool = True, storage: str = "keyring") -> Optional[str]:
+    def prompt_for_api_key(
+        self, provider: str, store: bool = True, storage: str = "keyring"
+    ) -> Optional[str]:
         """
         Prompt user to enter API key interactively
 
@@ -501,7 +514,9 @@ class APIKeyManager:
         print()
 
         # Prompt for key (hidden input)
-        api_key = getpass.getpass(f"Enter your {provider} API key (input hidden): ").strip()
+        api_key = getpass.getpass(
+            f"Enter your {provider} API key (input hidden): "
+        ).strip()
 
         if not api_key:
             print("❌ No API key entered")
@@ -517,7 +532,9 @@ class APIKeyManager:
                 if self.set_api_key(provider, api_key, storage):
                     print(f"✅ API key stored using {storage} method")
                 else:
-                    print("⚠️  Failed to store API key, but you can still use it this session")
+                    print(
+                        "⚠️  Failed to store API key, but you can still use it this session"
+                    )
 
             return api_key
         else:
@@ -575,7 +592,14 @@ class APIKeyManager:
         elif choice == "6":
             providers_to_setup = ["HUGGINGFACE"]
         elif choice == "7":
-            providers_to_setup = ["ANTHROPIC", "OPENAI", "DEEPSEEK", "COHERE", "GOOGLE", "HUGGINGFACE"]
+            providers_to_setup = [
+                "ANTHROPIC",
+                "OPENAI",
+                "DEEPSEEK",
+                "COHERE",
+                "GOOGLE",
+                "HUGGINGFACE",
+            ]
 
         # Storage method
         print("\nChoose storage method:")
@@ -616,7 +640,10 @@ def main():
     set_parser = subparsers.add_parser("set", help="Set API key")
     set_parser.add_argument("provider", help="Provider name")
     set_parser.add_argument(
-        "--storage", choices=["keyring", "env", "encrypted"], default="keyring", help="Storage method"
+        "--storage",
+        choices=["keyring", "env", "encrypted"],
+        default="keyring",
+        help="Storage method",
     )
 
     # Delete command
@@ -648,7 +675,9 @@ def main():
             print(f"\nRun 'python api_key_manager.py setup' to configure")
 
     elif args.command == "set":
-        key = manager.prompt_for_api_key(args.provider, store=True, storage=args.storage)
+        key = manager.prompt_for_api_key(
+            args.provider, store=True, storage=args.storage
+        )
         if not key:
             print("❌ Failed to set API key")
 

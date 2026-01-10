@@ -7,7 +7,11 @@ import pytest
 def e2e_test_environment():
     """Setup complete test environment for E2E tests"""
     # Setup: database, models, API clients, etc.
-    env = {"db": setup_test_db(), "models": load_test_models(), "config": load_test_config()}
+    env = {
+        "db": setup_test_db(),
+        "models": load_test_models(),
+        "config": load_test_config(),
+    }
 
     yield env
 

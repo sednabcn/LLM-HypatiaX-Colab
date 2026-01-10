@@ -19,7 +19,9 @@ from hypatiax.tools.symbolic.hybrid_system import HybridDiscoverySystem
 class AdvancedRiskGenerator:
     """Generate advanced risk management formulas with three phases."""
 
-    def __init__(self, domain: str = "risk", seed: int = 42, noise_level: float = 0.001):
+    def __init__(
+        self, domain: str = "risk", seed: int = 42, noise_level: float = 0.001
+    ):
         """
         Initialize the advanced risk generator.
 
@@ -56,7 +58,10 @@ class AdvancedRiskGenerator:
 
             z = 1.645
             z_cf = (
-                z + (z**2 - 1) * skewness / 6 + (z**3 - 3 * z) * kurtosis / 24 - (2 * z**3 - 5 * z) * skewness**2 / 36
+                z
+                + (z**2 - 1) * skewness / 6
+                + (z**3 - 3 * z) * kurtosis / 24
+                - (2 * z**3 - 5 * z) * skewness**2 / 36
             )
             var_cf = mu - z_cf * sigma
             var_cf += np.random.normal(0, self.noise_level, n_samples)
@@ -125,7 +130,11 @@ class AdvancedRiskGenerator:
                     "sigma": "Volatility",
                     "df": "Degrees of freedom (t-distribution)",
                 },
-                variable_units={"mu": "dimensionless", "sigma": "dimensionless", "df": "dimensionless"},
+                variable_units={
+                    "mu": "dimensionless",
+                    "sigma": "dimensionless",
+                    "df": "dimensionless",
+                },
                 description="Modified VaR using Student's t-distribution (heavy tails)",
                 validate_first=False,
             )
@@ -140,7 +149,11 @@ class AdvancedRiskGenerator:
 
             X = np.column_stack([w1, w2, sigma1, sigma2, rho])
 
-            portfolio_vol = np.sqrt(w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * rho)
+            portfolio_vol = np.sqrt(
+                w1**2 * sigma1**2
+                + w2**2 * sigma2**2
+                + 2 * w1 * w2 * sigma1 * sigma2 * rho
+            )
             portfolio_var = -1.645 * portfolio_vol
             portfolio_var += np.random.normal(0, self.noise_level, n_samples)
 
@@ -177,7 +190,11 @@ class AdvancedRiskGenerator:
             X = np.column_stack([sigma1, sigma2, w1, w2, correlation])
 
             individual_var_sum = w1 * sigma1 + w2 * sigma2
-            portfolio_vol = np.sqrt(w1**2 * sigma1**2 + w2**2 * sigma2**2 + 2 * w1 * w2 * sigma1 * sigma2 * correlation)
+            portfolio_vol = np.sqrt(
+                w1**2 * sigma1**2
+                + w2**2 * sigma2**2
+                + 2 * w1 * w2 * sigma1 * sigma2 * correlation
+            )
             div_benefit = individual_var_sum - portfolio_vol
             div_benefit += np.random.normal(0, self.noise_level * 0.1, n_samples)
 
@@ -223,7 +240,11 @@ class AdvancedRiskGenerator:
                     "weight": "Asset weight in portfolio",
                     "beta": "Asset beta to portfolio",
                 },
-                variable_units={"portfolio_var": "dimensionless", "weight": "dimensionless", "beta": "dimensionless"},
+                variable_units={
+                    "portfolio_var": "dimensionless",
+                    "weight": "dimensionless",
+                    "beta": "dimensionless",
+                },
                 description="Marginal VaR - risk contribution of individual asset",
                 validate_first=False,
             )
@@ -248,7 +269,11 @@ class AdvancedRiskGenerator:
                     "weight": "Asset weight",
                     "beta": "Asset beta to portfolio",
                 },
-                variable_units={"portfolio_var": "dimensionless", "weight": "dimensionless", "beta": "dimensionless"},
+                variable_units={
+                    "portfolio_var": "dimensionless",
+                    "weight": "dimensionless",
+                    "beta": "dimensionless",
+                },
                 description="Component VaR - total contribution to portfolio risk",
                 validate_first=False,
             )
@@ -268,7 +293,10 @@ class AdvancedRiskGenerator:
                 X=X,
                 y=tail_ratio,
                 variable_names=["cvar", "var"],
-                variable_descriptions={"cvar": "Expected Shortfall (CVaR)", "var": "Value at Risk (VaR)"},
+                variable_descriptions={
+                    "cvar": "Expected Shortfall (CVaR)",
+                    "var": "Value at Risk (VaR)",
+                },
                 variable_units={"cvar": "dimensionless", "var": "dimensionless"},
                 description="Tail Risk Ratio - measures severity of tail events",
                 validate_first=False,
@@ -294,7 +322,11 @@ class AdvancedRiskGenerator:
                     "loss": "Expected loss",
                     "capital": "Economic capital (risk measure)",
                 },
-                variable_units={"return": "dimensionless", "loss": "dimensionless", "capital": "dimensionless"},
+                variable_units={
+                    "return": "dimensionless",
+                    "loss": "dimensionless",
+                    "capital": "dimensionless",
+                },
                 description="Risk-Adjusted Return on Capital (RAROC)",
                 validate_first=False,
             )
@@ -307,7 +339,9 @@ class AdvancedRiskGenerator:
 
             X = np.column_stack([volatility, sharpe_ratio, time_horizon])
 
-            expected_mdd = 0.63 * volatility * np.sqrt(time_horizon) / (sharpe_ratio + 0.1)
+            expected_mdd = (
+                0.63 * volatility * np.sqrt(time_horizon) / (sharpe_ratio + 0.1)
+            )
             expected_mdd += np.random.normal(0, self.noise_level * 0.1, n_samples)
 
             self.system.discover_validate_interpret(
@@ -319,7 +353,11 @@ class AdvancedRiskGenerator:
                     "sharpe": "Sharpe ratio",
                     "horizon": "Time horizon",
                 },
-                variable_units={"volatility": "dimensionless", "sharpe": "dimensionless", "horizon": "dimensionless"},
+                variable_units={
+                    "volatility": "dimensionless",
+                    "sharpe": "dimensionless",
+                    "horizon": "dimensionless",
+                },
                 description="Expected maximum drawdown over time horizon",
                 validate_first=False,
             )
@@ -332,15 +370,26 @@ class AdvancedRiskGenerator:
             crash_pct = np.random.uniform(-0.3, -0.10, n_samples)
             diversification = np.random.uniform(0.5, 0.95, n_samples)
 
-            X = np.column_stack([portfolio_value, market_beta, crash_pct, diversification])
+            X = np.column_stack(
+                [portfolio_value, market_beta, crash_pct, diversification]
+            )
 
-            stressed_loss = portfolio_value * market_beta * abs(crash_pct) * (2 - diversification)
-            stressed_loss += np.random.normal(0, self.noise_level * portfolio_value.mean() * 0.01, n_samples)
+            stressed_loss = (
+                portfolio_value * market_beta * abs(crash_pct) * (2 - diversification)
+            )
+            stressed_loss += np.random.normal(
+                0, self.noise_level * portfolio_value.mean() * 0.01, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
                 y=stressed_loss,
-                variable_names=["portfolio_value", "beta", "crash_pct", "diversification"],
+                variable_names=[
+                    "portfolio_value",
+                    "beta",
+                    "crash_pct",
+                    "diversification",
+                ],
                 variable_descriptions={
                     "portfolio_value": "Base portfolio value",
                     "beta": "Market beta",
@@ -368,7 +417,9 @@ class AdvancedRiskGenerator:
 
             price_change_pct = -duration * rate_shock + 0.5 * convexity * rate_shock**2
             portfolio_loss = bond_portfolio * abs(price_change_pct)
-            portfolio_loss += np.random.normal(0, self.noise_level * bond_portfolio.mean() * 0.01, n_samples)
+            portfolio_loss += np.random.normal(
+                0, self.noise_level * bond_portfolio.mean() * 0.01, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -431,9 +482,13 @@ class AdvancedRiskGenerator:
 
             X = np.column_stack([portfolio_size, daily_volume, bid_ask_spread])
 
-            liquidation_cost = portfolio_size * bid_ask_spread * np.sqrt(liquidity_ratio * 10)
+            liquidation_cost = (
+                portfolio_size * bid_ask_spread * np.sqrt(liquidity_ratio * 10)
+            )
             liquidation_cost = np.clip(liquidation_cost, 0, portfolio_size * 0.5)
-            liquidation_cost += np.random.normal(0, self.noise_level * portfolio_size.mean() * 0.001, n_samples)
+            liquidation_cost += np.random.normal(
+                0, self.noise_level * portfolio_size.mean() * 0.001, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -462,22 +517,40 @@ class AdvancedRiskGenerator:
             volatility_mult = np.random.uniform(1.5, 3.0, n_samples)
 
             X = np.column_stack(
-                [asset1_exposure, asset2_exposure, normal_correlation, stress_correlation, volatility_mult]
+                [
+                    asset1_exposure,
+                    asset2_exposure,
+                    normal_correlation,
+                    stress_correlation,
+                    volatility_mult,
+                ]
             )
 
             normal_vol = np.sqrt(
-                asset1_exposure + asset2_exposure + 2 * np.sqrt(asset1_exposure * asset2_exposure) * normal_correlation
+                asset1_exposure
+                + asset2_exposure
+                + 2 * np.sqrt(asset1_exposure * asset2_exposure) * normal_correlation
             )
             stress_vol = np.sqrt(
-                asset1_exposure + asset2_exposure + 2 * np.sqrt(asset1_exposure * asset2_exposure) * stress_correlation
+                asset1_exposure
+                + asset2_exposure
+                + 2 * np.sqrt(asset1_exposure * asset2_exposure) * stress_correlation
             )
             correlation_impact = (stress_vol - normal_vol) * volatility_mult
-            correlation_impact += np.random.normal(0, self.noise_level * 1000, n_samples)
+            correlation_impact += np.random.normal(
+                0, self.noise_level * 1000, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
                 y=correlation_impact,
-                variable_names=["asset1", "asset2", "normal_corr", "stress_corr", "vol_mult"],
+                variable_names=[
+                    "asset1",
+                    "asset2",
+                    "normal_corr",
+                    "stress_corr",
+                    "vol_mult",
+                ],
                 variable_descriptions={
                     "asset1": "Asset 1 exposure",
                     "asset2": "Asset 2 exposure",
@@ -722,7 +795,9 @@ class AdvancedRiskGenerator:
 
                 traceback.print_exc()
 
-    def run_all_formulas(self, n_samples_p1: int = 150, n_samples_p2: int = 120, n_samples_p3: int = 120):
+    def run_all_formulas(
+        self, n_samples_p1: int = 150, n_samples_p2: int = 120, n_samples_p3: int = 120
+    ):
         """Generate all 20 formulas in three phases."""
         self.run_phase1(n_samples_p1)
         self.run_phase2(n_samples_p2)
@@ -782,7 +857,11 @@ class AdvancedRiskGenerator:
                         discovery.get("complexity", 0),
                         validation.get("total_score", 0),
                         validation.get("valid", False),
-                        interpretation.get("interpretation", "")[:100] if interpretation else "",
+                        (
+                            interpretation.get("interpretation", "")[:100]
+                            if interpretation
+                            else ""
+                        ),
                         metadata.get("llm_provider", ""),
                         self.system.domain,
                     ]
@@ -803,7 +882,9 @@ class AdvancedRiskGenerator:
         print(f"  Invalid formulas: {stats['invalid_count']}")
         print(f"  Success rate: {stats['success_rate']:.1%}")
         print(f"  Average R2 score: {stats['average_r2']:.4f}")
-        print(f"  Average validation score: {stats['average_validation_score']:.1f}/100")
+        print(
+            f"  Average validation score: {stats['average_validation_score']:.1f}/100"
+        )
 
         results = self.system.get_results()
         if len(results) >= 15:

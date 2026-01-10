@@ -3,7 +3,11 @@ NER (Named Entity Recognition) Routes for Formula Extraction
 File: backend/api/routes/ner_routes.py
 """
 
-from api.schemas.ner_schemas import BatchNERSchema, EntityRecognitionSchema, FormulaExtractionSchema
+from api.schemas.ner_schemas import (
+    BatchNERSchema,
+    EntityRecognitionSchema,
+    FormulaExtractionSchema,
+)
 from flask import Blueprint, jsonify, request
 from marshmallow import ValidationError
 from services.ner_service import NERService
@@ -23,7 +27,16 @@ batch_schema = BatchNERSchema()
 @ner_bp.route("/health", methods=["GET"])
 def health_check():
     """Health check for NER service"""
-    return jsonify({"status": "healthy", "service": "ner-formula-extraction", "version": "1.0.0"}), 200
+    return (
+        jsonify(
+            {
+                "status": "healthy",
+                "service": "ner-formula-extraction",
+                "version": "1.0.0",
+            }
+        ),
+        200,
+    )
 
 
 @ner_bp.route("/extract-formula", methods=["POST"])
@@ -90,7 +103,8 @@ def recognize_entities():
 
         # Recognize entities
         result = ner_service.recognize_entities(
-            text=data["text"], entity_types=data.get("entity_types", ["variable", "constant", "operator"])
+            text=data["text"],
+            entity_types=data.get("entity_types", ["variable", "constant", "operator"]),
         )
 
         return jsonify(result), 200
@@ -127,7 +141,8 @@ def parse_expression():
             return jsonify({"error": "Missing expression field"}), 400
 
         result = ner_service.parse_expression(
-            expression=data["expression"], output_format=data.get("output_format", "tree")
+            expression=data["expression"],
+            output_format=data.get("output_format", "tree"),
         )
 
         return jsonify(result), 200
@@ -159,7 +174,9 @@ def convert_to_latex():
         if not data or "expression" not in data:
             return jsonify({"error": "Missing expression field"}), 400
 
-        result = ner_service.convert_to_latex(expression=data["expression"], style=data.get("style", "inline"))
+        result = ner_service.convert_to_latex(
+            expression=data["expression"], style=data.get("style", "inline")
+        )
 
         return jsonify(result), 200
 
@@ -280,7 +297,9 @@ def validate_syntax():
         if not data or "expression" not in data:
             return jsonify({"error": "Missing expression field"}), 400
 
-        result = ner_service.validate_syntax(expression=data["expression"], strict=data.get("strict", False))
+        result = ner_service.validate_syntax(
+            expression=data["expression"], strict=data.get("strict", False)
+        )
 
         return jsonify(result), 200
 

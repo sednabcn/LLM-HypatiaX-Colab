@@ -10,4 +10,12 @@ def run(cmd):
 
 if __name__ == "__main__":
     # Default: run full tests with coverage
-    run([sys.executable, "-m", "pytest", "--cov=uniswap_v2_formulas_extended", "--cov-report=term-missing"])
+    run(
+        [
+            sys.executable,
+            "-m",
+            "pytest",
+            "--cov=uniswap_v2_formulas_extended",
+            "--cov-report=term-missing",
+        ]
+    )

@@ -51,7 +51,12 @@ class ModelRegistry:
             tokenizer = AutoTokenizer.from_pretrained(model_path)
             model = T5ForConditionalGeneration.from_pretrained(model_path)
 
-            self.models[name] = {"type": "transformer", "model": model, "tokenizer": tokenizer, "path": model_path}
+            self.models[name] = {
+                "type": "transformer",
+                "model": model,
+                "tokenizer": tokenizer,
+                "path": model_path,
+            }
             print(f"✅ Registered Transformer model: {name}")
         except Exception as e:
             print(f"⚠️  Failed to register Transformer model {name}: {e}")
@@ -121,9 +126,17 @@ class DeploymentAPI:
             models_info = []
             for name in self.registry.list_models():
                 model_info = self.registry.get_model(name)
-                models_info.append({"name": name, "type": model_info["type"], "path": model_info.get("path", "N/A")})
+                models_info.append(
+                    {
+                        "name": name,
+                        "type": model_info["type"],
+                        "path": model_info.get("path", "N/A"),
+                    }
+                )
 
-            return jsonify({"models": models_info, "default": self.registry.default_model})
+            return jsonify(
+                {"models": models_info, "default": self.registry.default_model}
+            )
 
         @self.app.route("/predict", methods=["POST"])
         def predict():
@@ -221,20 +234,37 @@ class DeploymentAPI:
                 tokenizer = model_info["tokenizer"]
 
                 input_text = f"translate description to formula: {description}"
-                inputs = tokenizer(input_text, return_tensors="pt", max_length=128, truncation=True)
+                inputs = tokenizer(
+                    input_text, return_tensors="pt", max_length=128, truncation=True
+                )
 
                 with torch.no_grad():
-                    outputs = model.generate(inputs.input_ids, max_length=128, num_beams=4, early_stopping=True)
+                    outputs = model.generate(
+                        inputs.input_ids,
+                        max_length=128,
+                        num_beams=4,
+                        early_stopping=True,
+                    )
 
                 formula = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-                return {"description": description, "formula": formula, "confidence": 0.85, "model_type": "transformer"}
+                return {
+                    "description": description,
+                    "formula": formula,
+                    "confidence": 0.85,
+                    "model_type": "transformer",
+                }
 
             elif model_type == "rag":
                 trainer = model_info["model"]
                 formula = trainer.generate_formula(description)
 
-                return {"description": description, "formula": formula, "confidence": 0.80, "model_type": "rag"}
+                return {
+                    "description": description,
+                    "formula": formula,
+                    "confidence": 0.80,
+                    "model_type": "rag",
+                }
 
             elif model_type == "spacy":
                 nlp = model_info["model"]
@@ -242,7 +272,11 @@ class DeploymentAPI:
 
                 entities = [{"text": ent.text, "label": ent.label_} for ent in doc.ents]
 
-                return {"description": description, "entities": entities, "model_type": "spacy_ner"}
+                return {
+                    "description": description,
+                    "entities": entities,
+                    "model_type": "spacy_ner",
+                }
 
             else:
                 return {"error": f"Unknown model type: {model_type}"}
@@ -252,10 +286,16 @@ class DeploymentAPI:
 
     def run(self):
         """Start the API server"""
-        self.logger.info(f"Starting API server on {self.config.api_host}:{self.config.api_port}")
+        self.logger.info(
+            f"Starting API server on {self.config.api_host}:{self.config.api_port}"
+        )
         self.logger.info(f"Available models: {self.registry.list_models()}")
 
-        self.app.run(host=self.config.api_host, port=self.config.api_port, debug=self.config.debug)
+        self.app.run(
+            host=self.config.api_host,
+            port=self.config.api_port,
+            debug=self.config.debug,
+        )
 
 
 def main():
@@ -284,7 +324,9 @@ def main():
 
     transformer_model_path = Path("./models/transformer_formula_mapper")
     if transformer_model_path.exists():
-        api.registry.register_transformer_model("transformer", str(transformer_model_path))
+        api.registry.register_transformer_model(
+            "transformer", str(transformer_model_path)
+        )
 
     rag_model_path = Path("./models/rag_formula_mapper")
     if rag_model_path.exists():

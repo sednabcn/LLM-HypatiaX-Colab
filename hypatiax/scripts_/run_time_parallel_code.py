@@ -14,7 +14,9 @@ Features:
 """
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 # Example configurations for each test
 test_configurations = [
@@ -105,7 +107,9 @@ def run_all_tests_concurrently(max_workers=None):
     results = []
 
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        future_to_test = {executor.submit(run_test, config): config for config in test_configurations}
+        future_to_test = {
+            executor.submit(run_test, config): config for config in test_configurations
+        }
 
         for future in as_completed(future_to_test):
             try:
@@ -115,7 +119,11 @@ def run_all_tests_concurrently(max_workers=None):
                 config = future_to_test[future]
                 logging.error(f"Unexpected error for test {config['test_id']}: {e}")
                 results.append(
-                    {"test_id": config["test_id"], "status": "error", "error": f"Unexpected error: {str(e)}"}
+                    {
+                        "test_id": config["test_id"],
+                        "status": "error",
+                        "error": f"Unexpected error: {str(e)}",
+                    }
                 )
 
     logging.info("All tests completed")

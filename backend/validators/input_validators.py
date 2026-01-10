@@ -12,21 +12,37 @@ class HypatiaXSchema(Schema):
 
 class NERSchema(Schema):
     text = fields.Str(required=True, validate=validate.Length(min=1, max=5000))
-    domain = fields.Str(validate=validate.OneOf(["general", "defi", "finance", "physics"]))
+    domain = fields.Str(
+        validate=validate.OneOf(["general", "defi", "finance", "physics"])
+    )
 
 
 class DeFiILSchema(Schema):
-    initial_price = fields.Float(required=True, validate=validate.Range(min=0, min_inclusive=False))
-    current_price = fields.Float(required=True, validate=validate.Range(min=0, min_inclusive=False))
+    initial_price = fields.Float(
+        required=True, validate=validate.Range(min=0, min_inclusive=False)
+    )
+    current_price = fields.Float(
+        required=True, validate=validate.Range(min=0, min_inclusive=False)
+    )
 
 
 class DeFiPositionSchema(Schema):
-    initial_token_a = fields.Float(required=True, validate=validate.Range(min=0, min_inclusive=False))
-    initial_token_b = fields.Float(required=True, validate=validate.Range(min=0, min_inclusive=False))
-    initial_price = fields.Float(required=True, validate=validate.Range(min=0, min_inclusive=False))
-    current_price = fields.Float(required=True, validate=validate.Range(min=0, min_inclusive=False))
+    initial_token_a = fields.Float(
+        required=True, validate=validate.Range(min=0, min_inclusive=False)
+    )
+    initial_token_b = fields.Float(
+        required=True, validate=validate.Range(min=0, min_inclusive=False)
+    )
+    initial_price = fields.Float(
+        required=True, validate=validate.Range(min=0, min_inclusive=False)
+    )
+    current_price = fields.Float(
+        required=True, validate=validate.Range(min=0, min_inclusive=False)
+    )
     daily_volume_usd = fields.Float(required=True, validate=validate.Range(min=0))
-    pool_tvl_usd = fields.Float(required=True, validate=validate.Range(min=0, min_inclusive=False))
+    pool_tvl_usd = fields.Float(
+        required=True, validate=validate.Range(min=0, min_inclusive=False)
+    )
     days_elapsed = fields.Int(required=True, validate=validate.Range(min=1))
     fee_rate = fields.Float(required=True, validate=validate.Range(min=0, max=1))
 

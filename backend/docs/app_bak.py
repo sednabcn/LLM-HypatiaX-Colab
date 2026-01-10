@@ -33,7 +33,9 @@ try:
 
     # Load trained NER models
     nlp_desc = spacy.load("../hypatiax/data_spacy/queries/tableau/ner_tableau_desc")
-    nlp_formula = spacy.load("../hypatiax/data_spacy/queries/tableau/ner_tableau_formulas")
+    nlp_formula = spacy.load(
+        "../hypatiax/data_spacy/queries/tableau/ner_tableau_formulas"
+    )
     MODELS_LOADED = True
     logger.info("✅ Models loaded successfully")
 except Exception as e:
@@ -85,7 +87,14 @@ def mock_ner_extraction(text):
             label = "NOUN"
 
         if label:
-            entities.append({"text": word, "label": label, "start": start_pos, "end": start_pos + len(word)})
+            entities.append(
+                {
+                    "text": word,
+                    "label": label,
+                    "start": start_pos,
+                    "end": start_pos + len(word),
+                }
+            )
 
         start_pos += len(word) + 1
 
@@ -116,7 +125,11 @@ def mock_formula_generation(description, method):
                 # Get next word(s) as field name
                 remaining = words[i + 1 :]
                 # Filter out prepositions
-                field_words = [w for w in remaining if w.lower() not in ["by", "per", "for", "the", "a", "an"]]
+                field_words = [
+                    w
+                    for w in remaining
+                    if w.lower() not in ["by", "per", "for", "the", "a", "an"]
+                ]
                 if field_words:
                     field_name = field_words[0]
                     break
@@ -124,7 +137,18 @@ def mock_formula_generation(description, method):
     # Fallback: use last noun-like word
     if not field_name:
         for word in reversed(words):
-            if word.lower() not in ["sum", "average", "avg", "count", "total", "of", "by", "the", "a", "an"]:
+            if word.lower() not in [
+                "sum",
+                "average",
+                "avg",
+                "count",
+                "total",
+                "of",
+                "by",
+                "the",
+                "a",
+                "an",
+            ]:
                 field_name = word
                 break
 
@@ -145,8 +169,14 @@ def index():
             "version": "1.0.0",
             "description": "Natural language to Tableau formula mapping",
             "models_loaded": MODELS_LOADED,
-            "endpoints": {"health": "/api/health", "map": "/api/map (POST)", "test": "/api/test"},
-            "usage": {"example": 'POST /api/map with JSON: {"description": "sum of sales"}'},
+            "endpoints": {
+                "health": "/api/health",
+                "map": "/api/map (POST)",
+                "test": "/api/test",
+            },
+            "usage": {
+                "example": 'POST /api/map with JSON: {"description": "sum of sales"}'
+            },
         }
     )
 
@@ -189,7 +219,12 @@ def map_description():
                 # Process with NER
                 doc = nlp_desc(description)
                 entities = [
-                    {"text": ent.text, "label": ent.label_, "start": ent.start_char, "end": ent.end_char}
+                    {
+                        "text": ent.text,
+                        "label": ent.label_,
+                        "start": ent.start_char,
+                        "end": ent.end_char,
+                    }
                     for ent in doc.ents
                 ]
 
@@ -259,7 +294,9 @@ def test_endpoint():
                 entities = mock_ner_extraction(desc)
                 formula, _ = mock_formula_generation(desc, "vocab")
 
-            results.append({"description": desc, "formula": formula, "entities": entities})
+            results.append(
+                {"description": desc, "formula": formula, "entities": entities}
+            )
         except Exception as e:
             results.append({"description": desc, "error": str(e)})
 
@@ -270,7 +307,15 @@ def test_endpoint():
 def not_found(e):
     return (
         jsonify(
-            {"error": "Endpoint not found", "available_endpoints": ["/", "/api/health", "/api/map (POST)", "/api/test"]}
+            {
+                "error": "Endpoint not found",
+                "available_endpoints": [
+                    "/",
+                    "/api/health",
+                    "/api/map (POST)",
+                    "/api/test",
+                ],
+            }
         ),
         404,
     )

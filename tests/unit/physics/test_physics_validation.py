@@ -91,7 +91,9 @@ class TestKinematicsValidation:
         """Test that negative initial height raises ValueError."""
         calc = KinematicsCalculator()
         with pytest.raises(ValueError, match="Initial height cannot be negative"):
-            calc.projectile_motion(initial_velocity=50.0, angle_degrees=45.0, initial_height=-5.0)
+            calc.projectile_motion(
+                initial_velocity=50.0, angle_degrees=45.0, initial_height=-5.0
+            )
 
     def test_circular_motion_negative_radius_raises_error(self):
         """Test that negative radius raises ValueError."""
@@ -117,13 +119,17 @@ class TestKinematicsValidation:
         with pytest.raises(ValueError, match="No real solution"):
             # Object starting at 10 m/s cannot stop in 1 m with -10 m/s²
             calc.velocity_squared_formula(
-                initial_velocity=10.0, acceleration=-100.0, displacement=1.0  # Too much deceleration
+                initial_velocity=10.0,
+                acceleration=-100.0,
+                displacement=1.0,  # Too much deceleration
             )
 
     def test_displacement_boundary_zero_time(self):
         """Test displacement at t=0 returns zero displacement."""
         calc = KinematicsCalculator()
-        result = calc.displacement_constant_acceleration(initial_velocity=10.0, acceleration=5.0, time=0.0)
+        result = calc.displacement_constant_acceleration(
+            initial_velocity=10.0, acceleration=5.0, time=0.0
+        )
         assert result["displacement"] == 0.0
         assert result["final_velocity"] == 10.0
 
@@ -152,7 +158,9 @@ class TestDynamicsValidation:
     def test_friction_negative_coefficient_raises_error(self):
         """Test that negative friction coefficient raises ValueError."""
         calc = DynamicsCalculator()
-        with pytest.raises(ValueError, match="Coefficient of friction cannot be negative"):
+        with pytest.raises(
+            ValueError, match="Coefficient of friction cannot be negative"
+        ):
             calc.friction_force(normal_force=100.0, coefficient=-0.5)
 
     def test_spring_force_negative_constant_raises_error(self):
@@ -232,7 +240,9 @@ class TestMomentumValidation:
     def test_elastic_collision_conservation_laws(self):
         """Test that elastic collision conserves momentum and energy."""
         calc = MomentumCalculator()
-        result = calc.elastic_collision_1d(m1=2.0, v1_initial=5.0, m2=3.0, v2_initial=-2.0)
+        result = calc.elastic_collision_1d(
+            m1=2.0, v1_initial=5.0, m2=3.0, v2_initial=-2.0
+        )
 
         # Check momentum conservation
         assert result["momentum_conserved"] == True
@@ -264,7 +274,9 @@ class TestIdealGasValidation:
 
         # All parameters provided
         with pytest.raises(ValueError, match="Must provide exactly 3 parameters"):
-            calc.ideal_gas_law(pressure=101325, volume=0.0224, n_moles=1.0, temperature=273.15)
+            calc.ideal_gas_law(
+                pressure=101325, volume=0.0224, n_moles=1.0, temperature=273.15
+            )
 
     def test_ideal_gas_negative_pressure_raises_error(self):
         """Test that negative pressure raises ValueError."""
@@ -282,21 +294,29 @@ class TestIdealGasValidation:
         """Test that missing final state parameter raises error."""
         calc = IdealGasCalculator()
         with pytest.raises(ValueError, match="Provide exactly one"):
-            calc.isothermal_process(pressure_initial=200000, volume_initial=0.01, n_moles=1.0)
+            calc.isothermal_process(
+                pressure_initial=200000, volume_initial=0.01, n_moles=1.0
+            )
 
     def test_adiabatic_process_invalid_gamma_raises_error(self):
         """Test that gamma <= 1 raises ValueError."""
         calc = IdealGasCalculator()
         with pytest.raises(ValueError, match="Gamma must be > 1"):
             calc.adiabatic_process(
-                pressure_initial=200000, volume_initial=0.01, volume_final=0.02, gamma=0.8  # Invalid gamma
+                pressure_initial=200000,
+                volume_initial=0.01,
+                volume_final=0.02,
+                gamma=0.8,  # Invalid gamma
             )
 
     def test_isothermal_expansion_work_sign(self):
         """Test that isothermal expansion does positive work."""
         calc = IdealGasCalculator()
         result = calc.isothermal_process(
-            pressure_initial=200000, volume_initial=0.01, volume_final=0.02, n_moles=1.0  # Expansion: V_f > V_i
+            pressure_initial=200000,
+            volume_initial=0.01,
+            volume_final=0.02,
+            n_moles=1.0,  # Expansion: V_f > V_i
         )
         # Expansion does positive work
         assert result["work_done"] > 0
@@ -309,13 +329,20 @@ class TestHeatTransferValidation:
         """Test that negative mass raises ValueError."""
         calc = HeatTransferCalculator()
         with pytest.raises(ValueError, match="Mass must be positive"):
-            calc.heat_capacity(mass=-10.0, specific_heat=4186.0, temperature_change=20.0)
+            calc.heat_capacity(
+                mass=-10.0, specific_heat=4186.0, temperature_change=20.0
+            )
 
     def test_conduction_negative_thermal_conductivity_raises_error(self):
         """Test that negative thermal conductivity raises ValueError."""
         calc = HeatTransferCalculator()
         with pytest.raises(ValueError, match="Thermal conductivity must be positive"):
-            calc.conduction(thermal_conductivity=-0.8, area=10.0, temperature_difference=20.0, thickness=0.1)
+            calc.conduction(
+                thermal_conductivity=-0.8,
+                area=10.0,
+                temperature_difference=20.0,
+                thickness=0.1,
+            )
 
     def test_radiation_emissivity_out_of_range_raises_error(self):
         """Test that emissivity outside [0,1] raises ValueError."""
@@ -323,17 +350,23 @@ class TestHeatTransferValidation:
 
         # Emissivity > 1
         with pytest.raises(ValueError, match="Emissivity must be between 0 and 1"):
-            calc.radiation(emissivity=1.5, area=1.0, temperature=400.0, ambient_temperature=300.0)
+            calc.radiation(
+                emissivity=1.5, area=1.0, temperature=400.0, ambient_temperature=300.0
+            )
 
         # Emissivity < 0
         with pytest.raises(ValueError, match="Emissivity must be between 0 and 1"):
-            calc.radiation(emissivity=-0.5, area=1.0, temperature=400.0, ambient_temperature=300.0)
+            calc.radiation(
+                emissivity=-0.5, area=1.0, temperature=400.0, ambient_temperature=300.0
+            )
 
     def test_radiation_negative_temperature_raises_error(self):
         """Test that negative absolute temperature raises ValueError."""
         calc = HeatTransferCalculator()
         with pytest.raises(ValueError, match="Temperature must be positive"):
-            calc.radiation(emissivity=0.9, area=1.0, temperature=-50.0, ambient_temperature=300.0)  # Invalid Kelvin
+            calc.radiation(
+                emissivity=0.9, area=1.0, temperature=-50.0, ambient_temperature=300.0
+            )  # Invalid Kelvin
 
 
 class TestThermodynamicCyclesValidation:
@@ -349,19 +382,25 @@ class TestThermodynamicCyclesValidation:
         """Test that heat output > input raises ValueError."""
         calc = ThermodynamicCycleCalculator()
         with pytest.raises(ValueError, match="cannot exceed"):
-            calc.heat_engine_efficiency(heat_input=1000.0, heat_output=1500.0)  # Violates energy conservation
+            calc.heat_engine_efficiency(
+                heat_input=1000.0, heat_output=1500.0
+            )  # Violates energy conservation
 
     def test_carnot_cold_temp_exceeds_hot_raises_error(self):
         """Test that T_cold >= T_hot raises ValueError."""
         calc = ThermodynamicCycleCalculator()
         with pytest.raises(ValueError, match="Cold temperature must be less than hot"):
-            calc.carnot_efficiency(temperature_hot=300.0, temperature_cold=400.0)  # Invalid
+            calc.carnot_efficiency(
+                temperature_hot=300.0, temperature_cold=400.0
+            )  # Invalid
 
     def test_carnot_efficiency_zero_kelvin_raises_error(self):
         """Test that zero or negative Kelvin raises ValueError."""
         calc = ThermodynamicCycleCalculator()
         with pytest.raises(ValueError, match="must be positive"):
-            calc.carnot_efficiency(temperature_hot=300.0, temperature_cold=0.0)  # Absolute zero
+            calc.carnot_efficiency(
+                temperature_hot=300.0, temperature_cold=0.0
+            )  # Absolute zero
 
     def test_carnot_efficiency_upper_bound(self):
         """Test that Carnot efficiency is always less than 100%."""
@@ -413,7 +452,9 @@ class TestElectrostaticsValidation:
         """Test that dielectric constant < 1 raises ValueError."""
         calc = ElectrostaticsCalculator()
         with pytest.raises(ValueError, match="dielectric_constant must be ≥ 1"):
-            calc.parallel_plate_capacitor(area=0.01, separation=0.001, dielectric_constant=0.5)  # Invalid
+            calc.parallel_plate_capacitor(
+                area=0.01, separation=0.001, dielectric_constant=0.5
+            )  # Invalid
 
 
 class TestMagnetismValidation:
@@ -423,14 +464,19 @@ class TestMagnetismValidation:
         """Test that negative velocity raises ValueError."""
         calc = MagnetismCalculator()
         with pytest.raises(ValueError, match="velocity must be ≥ 0"):
-            calc.magnetic_force_on_charge(charge=1.6e-19, velocity=-1e6, magnetic_field=0.5)
+            calc.magnetic_force_on_charge(
+                charge=1.6e-19, velocity=-1e6, magnetic_field=0.5
+            )
 
     def test_magnetic_force_invalid_angle_raises_error(self):
         """Test that angle outside [0, 180] raises ValueError."""
         calc = MagnetismCalculator()
         with pytest.raises(ValueError, match="angle must be in"):
             calc.magnetic_force_on_charge(
-                charge=1.6e-19, velocity=1e6, magnetic_field=0.5, angle_degrees=200.0  # Invalid
+                charge=1.6e-19,
+                velocity=1e6,
+                magnetic_field=0.5,
+                angle_degrees=200.0,  # Invalid
             )
 
     def test_faradays_law_negative_turns_raises_error(self):
@@ -483,13 +529,18 @@ class TestCircuitsValidation:
         """Test that negative capacitance raises ValueError."""
         calc = CircuitsCalculator()
         with pytest.raises(ValueError, match="capacitance must be > 0"):
-            calc.rc_circuit_charging(voltage=5.0, resistance=10000.0, capacitance=-100e-6, time=1.0)
+            calc.rc_circuit_charging(
+                voltage=5.0, resistance=10000.0, capacitance=-100e-6, time=1.0
+            )
 
     def test_rc_circuit_time_constant(self):
         """Test that time constant is calculated correctly."""
         calc = CircuitsCalculator()
         result = calc.rc_circuit_charging(
-            voltage=5.0, resistance=10000.0, capacitance=100e-6, time=1.0  # 10 kΩ  # 100 μF
+            voltage=5.0,
+            resistance=10000.0,
+            capacitance=100e-6,
+            time=1.0,  # 10 kΩ  # 100 μF
         )
         expected_tau = 10000.0 * 100e-6  # R * C = 1.0 s
         assert abs(result["time_constant_tau"] - expected_tau) < 1e-10
@@ -524,7 +575,9 @@ class TestPhysicsEdgeCases:
     def test_equal_masses_elastic_collision_velocity_exchange(self):
         """Test that equal mass elastic collision exchanges velocities."""
         calc = MomentumCalculator()
-        result = calc.elastic_collision_1d(m1=5.0, v1_initial=10.0, m2=5.0, v2_initial=0.0)
+        result = calc.elastic_collision_1d(
+            m1=5.0, v1_initial=10.0, m2=5.0, v2_initial=0.0
+        )
         # Equal masses: velocities should exchange
         assert abs(result["v1_final"] - 0.0) < 1e-10
         assert abs(result["v2_final"] - 10.0) < 1e-10

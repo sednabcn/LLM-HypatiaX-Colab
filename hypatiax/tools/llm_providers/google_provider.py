@@ -38,7 +38,12 @@ class GoogleProvider:
         result = provider.generate_formula(requirements="...", domain="defi")
     """
 
-    def __init__(self, api_key: Optional[str] = None, model_name: Optional[str] = None, max_output_tokens: int = 8192):
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        model_name: Optional[str] = None,
+        max_output_tokens: int = 8192,
+    ):
         """
         Initialize Google Gemini client with automatic model selection.
 
@@ -138,7 +143,14 @@ class GoogleProvider:
                 models_to_try.append(pref)
 
         # Add remaining available models (exclude special purpose ones)
-        excluded_keywords = ["thinking", "tts", "image", "robotics", "computer-use", "vision"]
+        excluded_keywords = [
+            "thinking",
+            "tts",
+            "image",
+            "robotics",
+            "computer-use",
+            "vision",
+        ]
         for model in available_models:
             if model not in models_to_try:
                 if not any(keyword in model.lower() for keyword in excluded_keywords):
@@ -157,10 +169,16 @@ class GoogleProvider:
                 print(f"   ⚠️  Model {model_name} failed: {str(e)[:80]}...")
                 continue
 
-        raise ValueError(f"Could not initialize any model. Tried: {', '.join(models_to_try[:5])}")
+        raise ValueError(
+            f"Could not initialize any model. Tried: {', '.join(models_to_try[:5])}"
+        )
 
     def generate_formula(
-        self, requirements: str, domain: str = "defi", n_candidates: int = 1, max_retries: int = 3
+        self,
+        requirements: str,
+        domain: str = "defi",
+        n_candidates: int = 1,
+        max_retries: int = 3,
     ) -> List[Dict[str, Any]]:
         """
         Generate analytical formulas using Gemini with comprehensive error handling.
@@ -239,15 +257,22 @@ class GoogleProvider:
                         formula_generated = True
                         break
                     else:
-                        print(f"   ⚠️  Invalid formula structure, trying next strategy...")
+                        print(
+                            f"   ⚠️  Invalid formula structure, trying next strategy..."
+                        )
                         continue
 
                 except Exception as e:
                     error_str = str(e)
-                    print(f"   ⚠️  {strategy_name.capitalize()} strategy failed: {error_str[:80]}")
+                    print(
+                        f"   ⚠️  {strategy_name.capitalize()} strategy failed: {error_str[:80]}"
+                    )
 
                     # Check for token limit
-                    if "max_tokens" in error_str.lower() or "token limit" in error_str.lower():
+                    if (
+                        "max_tokens" in error_str.lower()
+                        or "token limit" in error_str.lower()
+                    ):
                         self.stats["token_limit_hits"] += 1
                         print(f"   💡 Token limit hit, trying more concise prompt...")
                         continue
@@ -260,12 +285,18 @@ class GoogleProvider:
 
             # If no strategy worked
             if not formula_generated:
-                formulas.append(self._create_error_formula("All prompt strategies failed (safety filters or errors)"))
+                formulas.append(
+                    self._create_error_formula(
+                        "All prompt strategies failed (safety filters or errors)"
+                    )
+                )
                 self.stats["failed_requests"] += 1
 
         return formulas
 
-    def _call_with_retry(self, prompt: str, max_retries: int = 3) -> genai.types.GenerateContentResponse:
+    def _call_with_retry(
+        self, prompt: str, max_retries: int = 3
+    ) -> genai.types.GenerateContentResponse:
         """
         Call Gemini API with exponential backoff retry logic.
 
@@ -282,7 +313,9 @@ class GoogleProvider:
         for attempt in range(max_retries):
             try:
                 response = self.model.generate_content(
-                    prompt, generation_config=self.generation_config, safety_settings=self.safety_settings
+                    prompt,
+                    generation_config=self.generation_config,
+                    safety_settings=self.safety_settings,
                 )
                 return response
 
@@ -292,7 +325,8 @@ class GoogleProvider:
 
                 # Check if it's a rate limit/quota error
                 is_rate_limit = any(
-                    keyword in error_str.lower() for keyword in ["429", "quota", "rate limit", "resource exhausted"]
+                    keyword in error_str.lower()
+                    for keyword in ["429", "quota", "rate limit", "resource exhausted"]
                 )
 
                 if is_rate_limit and attempt < max_retries - 1:
@@ -306,13 +340,17 @@ class GoogleProvider:
                     except:
                         pass
 
-                    print(f"   ⏳ Rate limit hit. Waiting {wait_time:.1f}s (retry {attempt + 2}/{max_retries})...")
+                    print(
+                        f"   ⏳ Rate limit hit. Waiting {wait_time:.1f}s (retry {attempt + 2}/{max_retries})..."
+                    )
                     time.sleep(wait_time)
                     continue
 
                 # If last attempt or non-retryable error
                 if attempt == max_retries - 1:
-                    print(f"   ❌ Failed after {max_retries} attempts: {error_str[:100]}")
+                    print(
+                        f"   ❌ Failed after {max_retries} attempts: {error_str[:100]}"
+                    )
                     raise
 
                 # Generic retry with exponential backoff
@@ -322,7 +360,9 @@ class GoogleProvider:
 
         raise Exception(f"Max retries ({max_retries}) exceeded")
 
-    def _handle_blocked_response(self, response: genai.types.GenerateContentResponse, strategy_name: str):
+    def _handle_blocked_response(
+        self, response: genai.types.GenerateContentResponse, strategy_name: str
+    ):
         """Handle and log blocked responses with details."""
         finish_reason = "UNKNOWN"
         safety_ratings = []
@@ -334,7 +374,9 @@ class GoogleProvider:
                 if hasattr(candidate.finish_reason, "name")
                 else str(candidate.finish_reason)
             )
-            safety_ratings = candidate.safety_ratings if hasattr(candidate, "safety_ratings") else []
+            safety_ratings = (
+                candidate.safety_ratings if hasattr(candidate, "safety_ratings") else []
+            )
 
         print(f"   ⚠️  Response blocked - Reason: {finish_reason}")
 
@@ -344,8 +386,16 @@ class GoogleProvider:
         elif safety_ratings:
             print(f"   🛡️  Safety ratings:")
             for rating in safety_ratings:
-                cat_name = rating.category.name if hasattr(rating.category, "name") else str(rating.category)
-                prob_name = rating.probability.name if hasattr(rating.probability, "name") else str(rating.probability)
+                cat_name = (
+                    rating.category.name
+                    if hasattr(rating.category, "name")
+                    else str(rating.category)
+                )
+                prob_name = (
+                    rating.probability.name
+                    if hasattr(rating.probability, "name")
+                    else str(rating.probability)
+                )
                 print(f"      • {cat_name}: {prob_name}")
 
     def _build_prompt(self, requirements: str, domain: str, variant: int) -> str:
@@ -456,7 +506,13 @@ JSON only."""
             result = json.loads(json_str)
 
             # Ensure required fields
-            required = ["formula_latex", "formula_python", "variables", "explanation", "novelty_score"]
+            required = [
+                "formula_latex",
+                "formula_python",
+                "variables",
+                "explanation",
+                "novelty_score",
+            ]
             for field in required:
                 if field not in result or not result[field]:
                     result[field] = f"Missing: {field}"
@@ -502,8 +558,10 @@ JSON only."""
             return False
 
         checks = [
-            formula.get("formula_latex", "").lower() not in ["parse error", "json parse error", "missing", ""],
-            formula.get("formula_python", "").lower() not in ["# error", "# failed", "missing", ""],
+            formula.get("formula_latex", "").lower()
+            not in ["parse error", "json parse error", "missing", ""],
+            formula.get("formula_python", "").lower()
+            not in ["# error", "# failed", "missing", ""],
             formula.get("explanation", "").lower() not in ["failed", "missing", ""],
             isinstance(formula.get("variables"), dict),
             isinstance(formula.get("novelty_score"), (int, float)),
@@ -526,7 +584,9 @@ JSON only."""
             "similar_to": [],
         }
 
-    def refine_formula(self, formula: Dict[str, Any], feedback: str, max_retries: int = 3) -> Dict[str, Any]:
+    def refine_formula(
+        self, formula: Dict[str, Any], feedback: str, max_retries: int = 3
+    ) -> Dict[str, Any]:
         """
         Improve formula based on user feedback.
 
@@ -568,7 +628,9 @@ Address the feedback while maintaining mathematical validity. JSON only."""
 
             if not response.parts:
                 self._handle_blocked_response(response, "refinement")
-                return self._create_error_formula("Refinement blocked by safety filters")
+                return self._create_error_formula(
+                    "Refinement blocked by safety filters"
+                )
 
             content = response.text
             refined = self._parse_response(content)
@@ -597,7 +659,11 @@ Address the feedback while maintaining mathematical validity. JSON only."""
             else 0
         )
 
-        return {**self.stats, "success_rate_percent": round(success_rate, 1), "model": self.model._model_name}
+        return {
+            **self.stats,
+            "success_rate_percent": round(success_rate, 1),
+            "model": self.model._model_name,
+        }
 
     def reset_statistics(self):
         """Reset usage statistics."""
@@ -631,7 +697,9 @@ if __name__ == "__main__":
 
     # Test formula generation
     results = provider.generate_formula(
-        requirements="Calculate impermanent loss for Uniswap V2 liquidity pools", domain="defi", n_candidates=1
+        requirements="Calculate impermanent loss for Uniswap V2 liquidity pools",
+        domain="defi",
+        n_candidates=1,
     )
 
     formula = results[0]

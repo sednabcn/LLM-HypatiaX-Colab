@@ -10,7 +10,9 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
@@ -45,7 +47,9 @@ class PathConfig:
         self._setup_paths()
         self._validate_environment()
 
-        logger.info(f"PathConfig initialized: environment={self.environment}, root={self._root}")
+        logger.info(
+            f"PathConfig initialized: environment={self.environment}, root={self._root}"
+        )
 
     @staticmethod
     def _detect_environment() -> str:
@@ -92,7 +96,12 @@ class PathConfig:
 
         # 3. Docker specific - check common mount points
         if self.environment == "docker":
-            docker_paths = [Path("/app"), Path("/workspace"), Path("/code"), Path("/opt/hypatiax")]
+            docker_paths = [
+                Path("/app"),
+                Path("/workspace"),
+                Path("/code"),
+                Path("/opt/hypatiax"),
+            ]
             for docker_path in docker_paths:
                 if docker_path.exists() and (docker_path / "hypatiax").exists():
                     logger.info(f"Using Docker path: {docker_path}")
@@ -112,7 +121,15 @@ class PathConfig:
 
         # 5. Search upward from current file location (development)
         current = Path(__file__).resolve().parent
-        markers = ["setup.py", "pyproject.toml", ".git", "hypatiax", "README.md", "requirements.txt", "requirements"]
+        markers = [
+            "setup.py",
+            "pyproject.toml",
+            ".git",
+            "hypatiax",
+            "README.md",
+            "requirements.txt",
+            "requirements",
+        ]
 
         for _ in range(8):  # Search up to 8 levels
             # Check if this looks like project root
@@ -404,7 +421,9 @@ class PathConfig:
         }
 
         if path_type not in path_map:
-            raise ValueError(f"Unknown path_type: {path_type}. Must be one of {list(path_map.keys())}")
+            raise ValueError(
+                f"Unknown path_type: {path_type}. Must be one of {list(path_map.keys())}"
+            )
 
         return path_map[path_type].exists()
 
@@ -573,7 +592,9 @@ def show_config_path():
         config_path.print_config_path()
     else:
         print("⚠️  Configuration not initialized")
-        print("Try: from hypatiax.config import PathConfig; PathConfig().print_config()")
+        print(
+            "Try: from hypatiax.config import PathConfig; PathConfig().print_config()"
+        )
 
 
 if __name__ == "__main__":

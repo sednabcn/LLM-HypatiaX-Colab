@@ -39,7 +39,11 @@ def get_historical_prices(symbol, days=365):
         prices = []
         for timestamp, price in data["prices"]:
             prices.append(
-                {"timestamp": timestamp, "date": datetime.fromtimestamp(timestamp / 1000), "price_usd": price}
+                {
+                    "timestamp": timestamp,
+                    "date": datetime.fromtimestamp(timestamp / 1000),
+                    "price_usd": price,
+                }
             )
         return prices
     except Exception as e:
@@ -65,7 +69,11 @@ def calculate_rolling_metrics(returns: pd.Series, window: int = 30) -> pd.DataFr
 
     # Rolling Sharpe (assuming 3% risk-free rate)
     risk_free_daily = 0.03 / 252
-    df["sharpe"] = (returns.rolling(window).mean() - risk_free_daily) / returns.rolling(window).std() * np.sqrt(252)
+    df["sharpe"] = (
+        (returns.rolling(window).mean() - risk_free_daily)
+        / returns.rolling(window).std()
+        * np.sqrt(252)
+    )
 
     # Rolling VaR 95%
     df["var_95"] = returns.rolling(window).quantile(0.05) * 100
@@ -79,7 +87,9 @@ def calculate_rolling_metrics(returns: pd.Series, window: int = 30) -> pd.DataFr
     return df
 
 
-def calculate_portfolio_metrics(returns: np.ndarray, benchmark_returns: np.ndarray = None) -> Dict:
+def calculate_portfolio_metrics(
+    returns: np.ndarray, benchmark_returns: np.ndarray = None
+) -> Dict:
     """Calculate comprehensive portfolio metrics"""
 
     # Basic statistics
@@ -98,7 +108,9 @@ def calculate_portfolio_metrics(returns: np.ndarray, benchmark_returns: np.ndarr
     # Sortino Ratio
     downside_returns = returns[returns < 0]
     sortino = (
-        (np.mean(returns) - risk_free) / np.std(downside_returns) * np.sqrt(252) if len(downside_returns) > 0 else 0
+        (np.mean(returns) - risk_free) / np.std(downside_returns) * np.sqrt(252)
+        if len(downside_returns) > 0
+        else 0
     )
 
     # Maximum Drawdown
@@ -136,7 +148,11 @@ def calculate_portfolio_metrics(returns: np.ndarray, benchmark_returns: np.ndarr
 
         # Information Ratio
         active_returns = returns - benchmark_returns
-        ir = np.mean(active_returns) / np.std(active_returns) * np.sqrt(252) if np.std(active_returns) > 0 else 0
+        ir = (
+            np.mean(active_returns) / np.std(active_returns) * np.sqrt(252)
+            if np.std(active_returns) > 0
+            else 0
+        )
 
         # Correlation
         correlation = np.corrcoef(returns, benchmark_returns)[0, 1]
@@ -158,7 +174,9 @@ def calculate_portfolio_metrics(returns: np.ndarray, benchmark_returns: np.ndarr
 
 
 def backtest_portfolio_strategy(
-    prices: List[Dict], initial_investment: float = 100000, rebalance_frequency: int = 30
+    prices: List[Dict],
+    initial_investment: float = 100000,
+    rebalance_frequency: int = 30,
 ) -> pd.DataFrame:
     """
     Backtest a simple portfolio strategy
@@ -179,7 +197,9 @@ def backtest_portfolio_strategy(
 
     # Calculate drawdown
     df["running_max"] = df["portfolio_value"].cummax()
-    df["drawdown"] = (df["portfolio_value"] - df["running_max"]) / df["running_max"] * 100
+    df["drawdown"] = (
+        (df["portfolio_value"] - df["running_max"]) / df["running_max"] * 100
+    )
 
     # Calculate rolling metrics
     rolling_metrics = calculate_rolling_metrics(df["returns"].dropna())
@@ -257,12 +277,16 @@ def create_risk_dashboard(df: pd.DataFrame, symbol: str, save_path: str):
         return
 
     fig, axes = plt.subplots(3, 2, figsize=(16, 12))
-    fig.suptitle(f"{symbol.upper()} Risk Analysis Dashboard", fontsize=16, fontweight="bold")
+    fig.suptitle(
+        f"{symbol.upper()} Risk Analysis Dashboard", fontsize=16, fontweight="bold"
+    )
 
     # 1. Portfolio Value & Drawdown
     ax1 = axes[0, 0]
     ax1_twin = ax1.twinx()
-    ax1.plot(df["date"], df["portfolio_value"], "b-", linewidth=2, label="Portfolio Value")
+    ax1.plot(
+        df["date"], df["portfolio_value"], "b-", linewidth=2, label="Portfolio Value"
+    )
     ax1_twin.plot(df["date"], df["drawdown"], "r-", linewidth=2, label="Drawdown %")
     ax1.set_xlabel("Date")
     ax1.set_ylabel("Portfolio Value ($)", color="b")
@@ -306,7 +330,11 @@ def create_risk_dashboard(df: pd.DataFrame, symbol: str, save_path: str):
     returns_pct = df["returns"].dropna() * 100
     ax5.hist(returns_pct, bins=50, alpha=0.7, color="blue", edgecolor="black")
     ax5.axvline(
-        x=returns_pct.mean(), color="red", linestyle="--", linewidth=2, label=f"Mean: {returns_pct.mean():.2f}%"
+        x=returns_pct.mean(),
+        color="red",
+        linestyle="--",
+        linewidth=2,
+        label=f"Mean: {returns_pct.mean():.2f}%",
     )
     ax5.axvline(
         x=np.percentile(returns_pct, 5),
@@ -325,8 +353,24 @@ def create_risk_dashboard(df: pd.DataFrame, symbol: str, save_path: str):
     ax6 = axes[2, 1]
     cumulative_pct = (df["cumulative_returns"] - 1) * 100
     ax6.plot(df["date"], cumulative_pct, "darkgreen", linewidth=2)
-    ax6.fill_between(df["date"], 0, cumulative_pct, where=(cumulative_pct > 0), alpha=0.3, color="green", label="Gain")
-    ax6.fill_between(df["date"], 0, cumulative_pct, where=(cumulative_pct < 0), alpha=0.3, color="red", label="Loss")
+    ax6.fill_between(
+        df["date"],
+        0,
+        cumulative_pct,
+        where=(cumulative_pct > 0),
+        alpha=0.3,
+        color="green",
+        label="Gain",
+    )
+    ax6.fill_between(
+        df["date"],
+        0,
+        cumulative_pct,
+        where=(cumulative_pct < 0),
+        alpha=0.3,
+        color="red",
+        label="Loss",
+    )
     ax6.set_xlabel("Date")
     ax6.set_ylabel("Cumulative Return (%)")
     ax6.set_title("Cumulative Returns")
@@ -351,7 +395,9 @@ def print_risk_report(metrics: Dict, symbol: str):
     print("-" * 70)
     print(f"Total Return:        {metrics['total_return']:>8.2f}%")
     print(f"Annualized Return:   {metrics['annual_return']:>8.2f}%")
-    print(f"Win Rate:            {metrics['win_rate']:>8.2f}% ({metrics['winning_days']} winning days)")
+    print(
+        f"Win Rate:            {metrics['win_rate']:>8.2f}% ({metrics['winning_days']} winning days)"
+    )
 
     print("\n⚡ VOLATILITY METRICS")
     print("-" * 70)
@@ -405,7 +451,9 @@ def print_risk_report(metrics: Dict, symbol: str):
 # ===== MAIN EXECUTION =====
 
 
-def run_complete_risk_analysis(symbol="BTC", days=365, initial_investment=100000, export_excel=True):
+def run_complete_risk_analysis(
+    symbol="BTC", days=365, initial_investment=100000, export_excel=True
+):
     """Run complete risk analysis with all metrics and visualizations"""
 
     print("🚀 Starting Comprehensive Risk Analysis...")
@@ -466,7 +514,9 @@ def run_complete_risk_analysis(symbol="BTC", days=365, initial_investment=100000
     # Export to Excel
     if export_excel:
         print("\n6️⃣  Exporting to Excel...")
-        excel_path = f'risk_analysis_{symbol}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
+        excel_path = (
+            f'risk_analysis_{symbol}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
+        )
 
         with pd.ExcelWriter(excel_path, engine="openpyxl") as writer:
             results_df.to_excel(writer, sheet_name="Daily Data", index=False)
@@ -493,5 +543,7 @@ if __name__ == "__main__":
     assets = ["BTC", "ETH", "SPY"]
 
     for symbol in assets:
-        results, metrics = run_complete_risk_analysis(symbol=symbol, days=365, initial_investment=100000)
+        results, metrics = run_complete_risk_analysis(
+            symbol=symbol, days=365, initial_investment=100000
+        )
         print("\n" + "=" * 70 + "\n")

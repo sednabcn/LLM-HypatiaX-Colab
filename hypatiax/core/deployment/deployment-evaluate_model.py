@@ -135,7 +135,11 @@ class FormulaAccuracyEvaluator:
         scorer = Scorer(self.nlp)
         scores = scorer.score(examples)
 
-        return {"precision": scores.get("ents_p", 0), "recall": scores.get("ents_r", 0), "f1": scores.get("ents_f", 0)}
+        return {
+            "precision": scores.get("ents_p", 0),
+            "recall": scores.get("ents_r", 0),
+            "f1": scores.get("ents_f", 0),
+        }
 
     def generate_report(self, metrics: Dict, output_file: str):
         """Generate evaluation report"""
@@ -150,7 +154,9 @@ class FormulaAccuracyEvaluator:
             f.write(f"  Exact Match: {metrics.get('exact_match_accuracy', 0):.4f}\n")
             f.write(f"  Partial Match: {metrics.get('partial_match_avg', 0):.4f}\n")
             f.write(f"  Syntax Correct: {metrics.get('syntax_correctness', 0):.4f}\n")
-            f.write(f"  Semantic Correct: {metrics.get('semantic_correctness', 0):.4f}\n")
+            f.write(
+                f"  Semantic Correct: {metrics.get('semantic_correctness', 0):.4f}\n"
+            )
 
             f.write("\n" + "=" * 70 + "\n")
 
@@ -167,7 +173,11 @@ def main():
 
     # Sample predictions
     test_predictions = [
-        {"description": "average of Sales", "predicted": "AVG([Sales])", "ground_truth": "AVG([Sales])"},
+        {
+            "description": "average of Sales",
+            "predicted": "AVG([Sales])",
+            "ground_truth": "AVG([Sales])",
+        },
         {
             "description": "sum of Revenue by Region",
             "predicted": "SUM([Revenue]) GROUP BY [Region]",

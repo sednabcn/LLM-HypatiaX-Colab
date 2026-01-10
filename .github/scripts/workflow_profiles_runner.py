@@ -147,7 +147,11 @@ class WorkflowRunner:
                 continue
 
             # Skip backup files and hidden files
-            if item.name.endswith("~") or item.name.startswith("#") or item.name.startswith("."):
+            if (
+                item.name.endswith("~")
+                or item.name.startswith("#")
+                or item.name.startswith(".")
+            ):
                 continue
 
             # Skip backup_before_extension directory
@@ -177,7 +181,15 @@ class WorkflowRunner:
             # Training, evaluation, deployment files
             elif any(
                 x in item.name.lower()
-                for x in ["run_", "train", "evaluate", "deploy", "workflow", "pipeline", "proc_time"]
+                for x in [
+                    "run_",
+                    "train",
+                    "evaluate",
+                    "deploy",
+                    "workflow",
+                    "pipeline",
+                    "proc_time",
+                ]
             ):
                 scripts.append(item)
 
@@ -268,7 +280,11 @@ class WorkflowRunner:
         module_path = self.base_path / module_name
         module_result = {
             "module": module_name,
-            "path": str(module_path.relative_to(self.base_path)) if module_path.exists() else module_name,
+            "path": (
+                str(module_path.relative_to(self.base_path))
+                if module_path.exists()
+                else module_name
+            ),
             "exists": module_path.exists(),
             "is_test_directory": module_name in self.test_directories,
             "tests": [],
@@ -390,9 +406,13 @@ class WorkflowRunner:
 
     def _write_execution_detail(self, f, result: Dict):
         """Write detailed execution information"""
-        status_symbol = {"success": "✓", "failed": "✗", "error": "⚠", "timeout": "⏱", "not_run": "○"}.get(
-            result["status"], "?"
-        )
+        status_symbol = {
+            "success": "✓",
+            "failed": "✗",
+            "error": "⚠",
+            "timeout": "⏱",
+            "not_run": "○",
+        }.get(result["status"], "?")
 
         f.write(f"\n{status_symbol} {result['file']}\n")
         f.write(f"   Status: {result['status'].upper()}\n")
@@ -466,12 +486,17 @@ class WorkflowRunner:
         self.log(f"Reports Directory: {self.report_dir}")
 
         # Calculate overall success
-        total_files = sum(m["summary"]["total_files"] for m in self.results["modules"].values())
+        total_files = sum(
+            m["summary"]["total_files"] for m in self.results["modules"].values()
+        )
         failed = sum(m["summary"]["failed"] for m in self.results["modules"].values())
         errors = sum(m["summary"]["errors"] for m in self.results["modules"].values())
 
         if failed > 0 or errors > 0:
-            self.log(f"\n⚠ Workflow completed with {failed} failures and {errors} errors", "warning")
+            self.log(
+                f"\n⚠ Workflow completed with {failed} failures and {errors} errors",
+                "warning",
+            )
             return 1
         else:
             self.log(f"\n✓ All {total_files} files executed successfully", "notice")
@@ -507,7 +532,13 @@ class WorkflowRunner:
             f.write("MODULE SUMMARIES\n")
             f.write("-" * 80 + "\n\n")
 
-            overall = {"total_files": 0, "successful": 0, "failed": 0, "errors": 0, "timeouts": 0}
+            overall = {
+                "total_files": 0,
+                "successful": 0,
+                "failed": 0,
+                "errors": 0,
+                "timeouts": 0,
+            }
 
             for module_name, module in self.results.get("modules", {}).items():
                 summary = module.get("summary", {})
@@ -531,7 +562,9 @@ class WorkflowRunner:
             f.write(f"Total Errors: {overall['errors']}\n")
             f.write(f"Total Timeouts: {overall['timeouts']}\n")
             if overall["total_files"] > 0:
-                f.write(f"Success Rate: {(overall['successful']/overall['total_files']*100):.1f}%\n")
+                f.write(
+                    f"Success Rate: {(overall['successful']/overall['total_files']*100):.1f}%\n"
+                )
 
         self.log(f"\n✓ Master reports saved:")
         self.log(f"  - {json_path}")
@@ -542,9 +575,17 @@ def main():
     """Main entry point"""
     import argparse
 
-    parser = argparse.ArgumentParser(description="HypatiaX Workflow Runner - Execute tests and scripts with reporting")
-    parser.add_argument("--base-path", default=".", help="Base path to HypatiaX project (default: current directory)")
-    parser.add_argument("--modules", nargs="+", help="Specific modules to run (space-separated)")
+    parser = argparse.ArgumentParser(
+        description="HypatiaX Workflow Runner - Execute tests and scripts with reporting"
+    )
+    parser.add_argument(
+        "--base-path",
+        default=".",
+        help="Base path to HypatiaX project (default: current directory)",
+    )
+    parser.add_argument(
+        "--modules", nargs="+", help="Specific modules to run (space-separated)"
+    )
 
     args = parser.parse_args()
 

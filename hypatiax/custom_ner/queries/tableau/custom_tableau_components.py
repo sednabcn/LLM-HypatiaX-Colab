@@ -37,7 +37,8 @@ def load_rules(rule_type: str = "ruler_tableau_both") -> list:
         raise FileNotFoundError(
             f"Rule file not found: {path_to_file}\n"
             f"Expected location: {path_to_file}\n"
-            f"Available files in {RULES_DIR}:\n" + "\n".join(f"  - {f.name}" for f in RULES_DIR.glob("*.jsonl"))
+            f"Available files in {RULES_DIR}:\n"
+            + "\n".join(f"  - {f.name}" for f in RULES_DIR.glob("*.jsonl"))
         )
 
     print(f"📂 Loading rules: {path_to_file.name}")
@@ -52,7 +53,10 @@ def load_rules(rule_type: str = "ruler_tableau_both") -> list:
                     rules.append(json.loads(line))
             except json.JSONDecodeError as e:
                 # Provide a more informative error message
-                raise ValueError(f"Error parsing JSON in {path_to_file.name} " f"on line {line_number}: {e.msg}")
+                raise ValueError(
+                    f"Error parsing JSON in {path_to_file.name} "
+                    f"on line {line_number}: {e.msg}"
+                )
 
     print(f"✅ Loaded {len(rules)} rules from {path_to_file.name}")
     return rules
@@ -243,5 +247,9 @@ if __name__ == "__main__":
 
     print("✅ Component test complete")
     print("\n💡 Backups are automatically managed in .versions/ directory")
-    print("   • To list backups: python -m hypatiax.auto_migrate list ruler_tableau_both.jsonl rules")
-    print("   • To restore: python -m hypatiax.auto_migrate restore ruler_tableau_both.jsonl rules --index 0")
+    print(
+        "   • To list backups: python -m hypatiax.auto_migrate list ruler_tableau_both.jsonl rules"
+    )
+    print(
+        "   • To restore: python -m hypatiax.auto_migrate restore ruler_tableau_both.jsonl rules --index 0"
+    )

@@ -33,7 +33,9 @@ class DeFiFormulaGenerator:
                 X=price_ratios,
                 y=il,
                 variable_names=["price_ratio"],
-                variable_descriptions={"price_ratio": "Ratio of current price to initial price"},
+                variable_descriptions={
+                    "price_ratio": "Ratio of current price to initial price"
+                },
                 variable_units={"price_ratio": "dimensionless"},
                 description="Impermanent Loss in AMM Pool",
                 validate_first=False,
@@ -56,7 +58,11 @@ class DeFiFormulaGenerator:
             self.system.discover_validate_interpret(
                 X=X,
                 y=y_out,
-                variable_names=["amount_in_ratio", "reserve_in_ratio", "reserve_out_ratio"],
+                variable_names=[
+                    "amount_in_ratio",
+                    "reserve_in_ratio",
+                    "reserve_out_ratio",
+                ],
                 variable_descriptions={
                     "amount_in_ratio": "Input amount (normalized)",
                     "reserve_in_ratio": "Input reserve ratio",
@@ -83,8 +89,14 @@ class DeFiFormulaGenerator:
                 X=X,
                 y=util,
                 variable_names=["borrowed", "supplied"],
-                variable_descriptions={"borrowed": "Total borrowed", "supplied": "Total supplied"},
-                variable_units={"borrowed": "dimensionless", "supplied": "dimensionless"},
+                variable_descriptions={
+                    "borrowed": "Total borrowed",
+                    "supplied": "Total supplied",
+                },
+                variable_units={
+                    "borrowed": "dimensionless",
+                    "supplied": "dimensionless",
+                },
                 description="Lending Pool Utilization Rate",
                 validate_first=False,
             )
@@ -94,7 +106,9 @@ class DeFiFormulaGenerator:
             reserve0 = np.random.uniform(100, 10000, n_samples)
             reserve1 = np.random.uniform(100, 10000, n_samples)
             X = np.column_stack([reserve0, reserve1])
-            value = 2 * np.sqrt(reserve0 * reserve1) + np.random.normal(0, 10, n_samples)
+            value = 2 * np.sqrt(reserve0 * reserve1) + np.random.normal(
+                0, 10, n_samples
+            )
 
             X[:, 0] /= np.mean(X[:, 0])
             X[:, 1] /= np.mean(X[:, 1])
@@ -107,7 +121,10 @@ class DeFiFormulaGenerator:
                     "reserve0_ratio": "Reserve 0 (normalized)",
                     "reserve1_ratio": "Reserve 1 (normalized)",
                 },
-                variable_units={"reserve0_ratio": "dimensionless", "reserve1_ratio": "dimensionless"},
+                variable_units={
+                    "reserve0_ratio": "dimensionless",
+                    "reserve1_ratio": "dimensionless",
+                },
                 description="Constant Product Pool Total Value",
                 validate_first=False,
             )
@@ -118,7 +135,9 @@ class DeFiFormulaGenerator:
             utilization = np.random.uniform(0.3, 0.9, n_samples)
             slope = np.random.uniform(0.05, 0.15, n_samples)
             X = np.column_stack([base_rate, utilization, slope])
-            rate = base_rate + slope * utilization + np.random.normal(0, 0.001, n_samples)
+            rate = (
+                base_rate + slope * utilization + np.random.normal(0, 0.001, n_samples)
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -129,7 +148,11 @@ class DeFiFormulaGenerator:
                     "utilization": "Pool utilization",
                     "slope": "Rate slope",
                 },
-                variable_units={"base_rate": "dimensionless", "utilization": "dimensionless", "slope": "dimensionless"},
+                variable_units={
+                    "base_rate": "dimensionless",
+                    "utilization": "dimensionless",
+                    "slope": "dimensionless",
+                },
                 description="Compound-style Interest Rate Model",
                 validate_first=False,
             )
@@ -139,13 +162,18 @@ class DeFiFormulaGenerator:
             collateral_value = np.random.uniform(1000, 10000, n_samples)
             debt_value = collateral_value * np.random.uniform(0.3, 0.8, n_samples)
             X = np.column_stack([collateral_value, debt_value])
-            col_ratio = collateral_value / debt_value + np.random.normal(0, 0.01, n_samples)
+            col_ratio = collateral_value / debt_value + np.random.normal(
+                0, 0.01, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
                 y=col_ratio,
                 variable_names=["collateral", "debt"],
-                variable_descriptions={"collateral": "Collateral value", "debt": "Debt value"},
+                variable_descriptions={
+                    "collateral": "Collateral value",
+                    "debt": "Debt value",
+                },
                 variable_units={"collateral": "dimensionless", "debt": "dimensionless"},
                 description="Collateralization Ratio",
                 validate_first=False,
@@ -166,7 +194,10 @@ class DeFiFormulaGenerator:
                     "entry_price": "Position entry price",
                     "liq_threshold": "Liquidation threshold ratio",
                 },
-                variable_units={"entry_price": "dimensionless", "liq_threshold": "dimensionless"},
+                variable_units={
+                    "entry_price": "dimensionless",
+                    "liq_threshold": "dimensionless",
+                },
                 description="Liquidation Price for Leveraged Position",
                 validate_first=False,
             )
@@ -177,7 +208,9 @@ class DeFiFormulaGenerator:
             blocks_per_year = np.full(n_samples, 2102400)  # ~13s blocks
             total_staked = np.random.uniform(1000, 100000, n_samples)
             X = np.column_stack([rewards_per_block, blocks_per_year, total_staked])
-            apy = (rewards_per_block * blocks_per_year) / total_staked + np.random.normal(0, 0.01, n_samples)
+            apy = (
+                rewards_per_block * blocks_per_year
+            ) / total_staked + np.random.normal(0, 0.01, n_samples)
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -202,14 +235,22 @@ class DeFiFormulaGenerator:
             amount_in = np.random.uniform(1, 100, n_samples)
             reserve = np.random.uniform(1000, 10000, n_samples)
             X = np.column_stack([amount_in, reserve])
-            slippage = amount_in / (reserve + amount_in) + np.random.normal(0, 0.001, n_samples)
+            slippage = amount_in / (reserve + amount_in) + np.random.normal(
+                0, 0.001, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
                 y=slippage,
                 variable_names=["amount_in", "reserve"],
-                variable_descriptions={"amount_in": "Input amount", "reserve": "Pool reserve"},
-                variable_units={"amount_in": "dimensionless", "reserve": "dimensionless"},
+                variable_descriptions={
+                    "amount_in": "Input amount",
+                    "reserve": "Pool reserve",
+                },
+                variable_units={
+                    "amount_in": "dimensionless",
+                    "reserve": "dimensionless",
+                },
                 description="Trade Slippage in AMM",
                 validate_first=False,
             )
@@ -220,7 +261,9 @@ class DeFiFormulaGenerator:
             total_liquidity = np.random.uniform(10000, 100000, n_samples)
             total_shares = np.random.uniform(1000, 10000, n_samples)
             X = np.column_stack([deposit_amount, total_liquidity, total_shares])
-            lp_tokens = (deposit_amount / total_liquidity) * total_shares + np.random.normal(0, 1, n_samples)
+            lp_tokens = (
+                deposit_amount / total_liquidity
+            ) * total_shares + np.random.normal(0, 1, n_samples)
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -246,7 +289,9 @@ class DeFiFormulaGenerator:
             liquidation_threshold = np.random.uniform(0.75, 0.85, n_samples)
             debt = collateral * np.random.uniform(0.5, 0.9, n_samples)
             X = np.column_stack([collateral, liquidation_threshold, debt])
-            health = (collateral * liquidation_threshold) / debt + np.random.normal(0, 0.01, n_samples)
+            health = (collateral * liquidation_threshold) / debt + np.random.normal(
+                0, 0.01, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -272,9 +317,9 @@ class DeFiFormulaGenerator:
             index_price = mark_price * np.random.uniform(0.98, 1.02, n_samples)
             funding_interval = np.full(n_samples, 8)  # 8 hours
             X = np.column_stack([mark_price, index_price, funding_interval])
-            funding = (mark_price - index_price) / index_price / funding_interval + np.random.normal(
-                0, 0.0001, n_samples
-            )
+            funding = (
+                mark_price - index_price
+            ) / index_price / funding_interval + np.random.normal(0, 0.0001, n_samples)
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -299,14 +344,22 @@ class DeFiFormulaGenerator:
             trade_size = np.random.uniform(10, 500, n_samples)
             liquidity = np.random.uniform(5000, 50000, n_samples)
             X = np.column_stack([trade_size, liquidity])
-            impact = (trade_size / liquidity) ** 0.5 + np.random.normal(0, 0.001, n_samples)
+            impact = (trade_size / liquidity) ** 0.5 + np.random.normal(
+                0, 0.001, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
                 y=impact,
                 variable_names=["trade_size", "liquidity"],
-                variable_descriptions={"trade_size": "Trade size", "liquidity": "Available liquidity"},
-                variable_units={"trade_size": "dimensionless", "liquidity": "dimensionless"},
+                variable_descriptions={
+                    "trade_size": "Trade size",
+                    "liquidity": "Available liquidity",
+                },
+                variable_units={
+                    "trade_size": "dimensionless",
+                    "liquidity": "dimensionless",
+                },
                 description="Price Impact Estimation",
                 validate_first=False,
             )
@@ -317,7 +370,9 @@ class DeFiFormulaGenerator:
             reward_rate = np.random.uniform(0.05, 0.20, n_samples)
             time_staked = np.random.uniform(1, 365, n_samples)
             X = np.column_stack([staked_amount, reward_rate, time_staked])
-            rewards = staked_amount * reward_rate * (time_staked / 365) + np.random.normal(0, 1, n_samples)
+            rewards = staked_amount * reward_rate * (
+                time_staked / 365
+            ) + np.random.normal(0, 1, n_samples)
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -328,7 +383,11 @@ class DeFiFormulaGenerator:
                     "rate": "Annual reward rate",
                     "time_days": "Days staked",
                 },
-                variable_units={"staked": "dimensionless", "rate": "dimensionless", "time_days": "dimensionless"},
+                variable_units={
+                    "staked": "dimensionless",
+                    "rate": "dimensionless",
+                    "time_days": "dimensionless",
+                },
                 description="Staking Rewards Calculation",
                 validate_first=False,
             )
@@ -344,8 +403,14 @@ class DeFiFormulaGenerator:
                 X=X,
                 y=price,
                 variable_names=["supply", "reserve_ratio"],
-                variable_descriptions={"supply": "Token supply", "reserve_ratio": "Reserve ratio"},
-                variable_units={"supply": "dimensionless", "reserve_ratio": "dimensionless"},
+                variable_descriptions={
+                    "supply": "Token supply",
+                    "reserve_ratio": "Reserve ratio",
+                },
+                variable_units={
+                    "supply": "dimensionless",
+                    "reserve_ratio": "dimensionless",
+                },
                 description="Linear Bonding Curve Price",
                 validate_first=False,
             )
@@ -361,8 +426,14 @@ class DeFiFormulaGenerator:
                 X=X,
                 y=fee,
                 variable_names=["loan_amount", "fee_rate"],
-                variable_descriptions={"loan_amount": "Flash loan amount", "fee_rate": "Fee rate"},
-                variable_units={"loan_amount": "dimensionless", "fee_rate": "dimensionless"},
+                variable_descriptions={
+                    "loan_amount": "Flash loan amount",
+                    "fee_rate": "Fee rate",
+                },
+                variable_units={
+                    "loan_amount": "dimensionless",
+                    "fee_rate": "dimensionless",
+                },
                 description="Flash Loan Fee Calculation",
                 validate_first=False,
             )
@@ -373,7 +444,9 @@ class DeFiFormulaGenerator:
             time_elapsed = np.random.uniform(0, 365, n_samples)
             vesting_period = np.full(n_samples, 365)
             X = np.column_stack([total_tokens, time_elapsed, vesting_period])
-            vested = total_tokens * (time_elapsed / vesting_period) + np.random.normal(0, 10, n_samples)
+            vested = total_tokens * (time_elapsed / vesting_period) + np.random.normal(
+                0, 10, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -384,7 +457,11 @@ class DeFiFormulaGenerator:
                     "elapsed": "Time elapsed (days)",
                     "period": "Vesting period (days)",
                 },
-                variable_units={"total": "dimensionless", "elapsed": "dimensionless", "period": "dimensionless"},
+                variable_units={
+                    "total": "dimensionless",
+                    "elapsed": "dimensionless",
+                    "period": "dimensionless",
+                },
                 description="Linear Vesting Schedule",
                 validate_first=False,
             )
@@ -395,7 +472,9 @@ class DeFiFormulaGenerator:
             price_b = price_a * np.random.uniform(0.98, 1.05, n_samples)
             trade_size = np.random.uniform(10, 100, n_samples)
             X = np.column_stack([price_a, price_b, trade_size])
-            profit = (price_b - price_a) * trade_size + np.random.normal(0, 1, n_samples)
+            profit = (price_b - price_a) * trade_size + np.random.normal(
+                0, 1, n_samples
+            )
 
             self.system.discover_validate_interpret(
                 X=X,
@@ -406,7 +485,11 @@ class DeFiFormulaGenerator:
                     "price_b": "Price on exchange B",
                     "size": "Trade size",
                 },
-                variable_units={"price_a": "dimensionless", "price_b": "dimensionless", "size": "dimensionless"},
+                variable_units={
+                    "price_a": "dimensionless",
+                    "price_b": "dimensionless",
+                    "size": "dimensionless",
+                },
                 description="Cross-Exchange Arbitrage Profit",
                 validate_first=False,
             )
@@ -422,7 +505,10 @@ class DeFiFormulaGenerator:
                 X=X,
                 y=roi,
                 variable_names=["profit", "gas_cost"],
-                variable_descriptions={"profit": "Transaction profit", "gas_cost": "Gas cost"},
+                variable_descriptions={
+                    "profit": "Transaction profit",
+                    "gas_cost": "Gas cost",
+                },
                 variable_units={"profit": "dimensionless", "gas_cost": "dimensionless"},
                 description="Gas-Adjusted ROI",
                 validate_first=False,
@@ -434,8 +520,14 @@ class DeFiFormulaGenerator:
             sqrt_price_current = np.random.uniform(10, 100, n_samples)
             sqrt_price_lower = sqrt_price_current * 0.9
             sqrt_price_upper = sqrt_price_current * 1.1
-            X = np.column_stack([liquidity, sqrt_price_current, sqrt_price_lower, sqrt_price_upper])
-            amount0 = liquidity * (sqrt_price_upper - sqrt_price_current) / (sqrt_price_current * sqrt_price_upper)
+            X = np.column_stack(
+                [liquidity, sqrt_price_current, sqrt_price_lower, sqrt_price_upper]
+            )
+            amount0 = (
+                liquidity
+                * (sqrt_price_upper - sqrt_price_current)
+                / (sqrt_price_current * sqrt_price_upper)
+            )
             amount0 += np.random.normal(0, 1, n_samples)
 
             self.system.discover_validate_interpret(

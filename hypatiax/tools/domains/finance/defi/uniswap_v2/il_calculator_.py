@@ -21,7 +21,13 @@ class ImpermanentLossCalculator:
     Calculator for impermanent loss in constant product AMM pools.
     """
 
-    def __init__(self, initial_price: float, initial_amount0: float, initial_amount1: float, fee_tier: float = 0.003):
+    def __init__(
+        self,
+        initial_price: float,
+        initial_amount0: float,
+        initial_amount1: float,
+        fee_tier: float = 0.003,
+    ):
         """
         Initialize the IL calculator.
 
@@ -37,7 +43,9 @@ class ImpermanentLossCalculator:
         self.fee_tier = Decimal(str(fee_tier))
 
         # Calculate initial value
-        self.initial_value = self.initial_amount0 * self.initial_price + self.initial_amount1
+        self.initial_value = (
+            self.initial_amount0 * self.initial_price + self.initial_amount1
+        )
 
         # Calculate k constant
         self.k = self.initial_amount0 * self.initial_amount1
@@ -74,12 +82,16 @@ class ImpermanentLossCalculator:
         il_percentage = (il_absolute / hold_value) * Decimal("100")
 
         # Calculate value multiplier
-        value_multiplier = float(price_ratio.sqrt() * Decimal("2") / (price_ratio + Decimal("1")))
+        value_multiplier = float(
+            price_ratio.sqrt() * Decimal("2") / (price_ratio + Decimal("1"))
+        )
 
         return {
             "current_price": float(current_price),
             "price_ratio": float(price_ratio),
-            "price_change_percent": float((price_ratio - Decimal("1")) * Decimal("100")),
+            "price_change_percent": float(
+                (price_ratio - Decimal("1")) * Decimal("100")
+            ),
             "current_amount0": float(current_amount0),
             "current_amount1": float(current_amount1),
             "pool_value": float(current_value_pool),
@@ -90,7 +102,10 @@ class ImpermanentLossCalculator:
         }
 
     def calculate_il_with_fees(
-        self, current_price: float, volume_as_multiple_of_liquidity: float, time_period_days: float = 1
+        self,
+        current_price: float,
+        volume_as_multiple_of_liquidity: float,
+        time_period_days: float = 1,
     ) -> Dict[str, float]:
         """
         Calculate impermanent loss including earned fees.
@@ -118,7 +133,11 @@ class ImpermanentLossCalculator:
 
         # Calculate APR from fees
         if time_period_days > 0:
-            fee_apr = (fees_earned / float(self.initial_value)) * (365 / time_period_days) * 100
+            fee_apr = (
+                (fees_earned / float(self.initial_value))
+                * (365 / time_period_days)
+                * 100
+            )
         else:
             fee_apr = 0
 
@@ -129,11 +148,15 @@ class ImpermanentLossCalculator:
             "net_percentage": net_percentage,
             "fee_apr": fee_apr,
             "breakeven_volume_multiple": (
-                abs(il_absolute) / (float(self.initial_value) * float(self.fee_tier)) if il_absolute < 0 else 0
+                abs(il_absolute) / (float(self.initial_value) * float(self.fee_tier))
+                if il_absolute < 0
+                else 0
             ),
         }
 
-    def generate_il_curve(self, price_range: Tuple[float, float], steps: int = 50) -> List[Dict[str, float]]:
+    def generate_il_curve(
+        self, price_range: Tuple[float, float], steps: int = 50
+    ) -> List[Dict[str, float]]:
         """
         Generate IL curve data over a price range.
 
@@ -181,7 +204,9 @@ def calculate_il_simple(price_change_ratio: float) -> float:
         Impermanent loss as a percentage
     """
     price_ratio = Decimal(str(price_change_ratio))
-    il = (Decimal("2") * price_ratio.sqrt()) / (Decimal("1") + price_ratio) - Decimal("1")
+    il = (Decimal("2") * price_ratio.sqrt()) / (Decimal("1") + price_ratio) - Decimal(
+        "1"
+    )
     return float(il * Decimal("100"))
 
 
@@ -234,7 +259,10 @@ def compare_strategies(
     amount1 = initial_investment / 2
 
     calculator = ImpermanentLossCalculator(
-        initial_price=initial_price, initial_amount0=amount0, initial_amount1=amount1, fee_tier=fee_tier
+        initial_price=initial_price,
+        initial_amount0=amount0,
+        initial_amount1=amount1,
+        fee_tier=fee_tier,
     )
 
     il_data = calculator.calculate_il_with_fees(current_price, volume_multiple)
@@ -250,13 +278,17 @@ def compare_strategies(
             "initial_value": initial_investment,
             "final_value": hold_value,
             "profit": hold_value - initial_investment,
-            "return_percentage": ((hold_value - initial_investment) / initial_investment) * 100,
+            "return_percentage": (
+                (hold_value - initial_investment) / initial_investment
+            )
+            * 100,
         },
         "lp_strategy": {
             "initial_value": initial_investment,
             "final_value": lp_value,
             "profit": lp_value - initial_investment,
-            "return_percentage": ((lp_value - initial_investment) / initial_investment) * 100,
+            "return_percentage": ((lp_value - initial_investment) / initial_investment)
+            * 100,
             "il_loss": il_data["il_absolute"],
             "fees_earned": il_data["fees_earned"],
         },
@@ -315,7 +347,9 @@ if __name__ == "__main__":
     # Scenario 3: With fees
     print("Scenario 3: Price doubles, but with trading fees")
     il_with_fees = calculator.calculate_il_with_fees(
-        current_price=4000, volume_as_multiple_of_liquidity=10, time_period_days=30  # 10x volume
+        current_price=4000,
+        volume_as_multiple_of_liquidity=10,
+        time_period_days=30,  # 10x volume
     )
     print(f"  IL: {il_with_fees['il_percentage']:.2f}%")
     print(f"  Fees earned: ${il_with_fees['fees_earned']:.2f}")
@@ -325,7 +359,12 @@ if __name__ == "__main__":
 
     # Compare strategies
     print("Strategy Comparison:")
-    comparison = compare_strategies(initial_investment=4000, initial_price=2000, current_price=3000, volume_multiple=5)
+    comparison = compare_strategies(
+        initial_investment=4000,
+        initial_price=2000,
+        current_price=3000,
+        volume_multiple=5,
+    )
     print(
         f"  Hold: ${comparison['hold_strategy']['final_value']:.2f} "
         f"({comparison['hold_strategy']['return_percentage']:.2f}%)"

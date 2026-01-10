@@ -255,7 +255,10 @@ class ExampleManager:
             return [e for e in self.examples if any(tag in e.tags for tag in tags)]
 
     def get_random_examples(
-        self, count: int, category: Optional[str] = None, difficulty: Optional[int] = None
+        self,
+        count: int,
+        category: Optional[str] = None,
+        difficulty: Optional[int] = None,
     ) -> List[Example]:
         """Get random examples with optional filtering"""
         filtered = self.examples
@@ -269,7 +272,11 @@ class ExampleManager:
         return random.sample(filtered, min(count, len(filtered)))
 
     def split_dataset(
-        self, train_ratio: float = 0.7, val_ratio: float = 0.15, test_ratio: float = 0.15, shuffle: bool = True
+        self,
+        train_ratio: float = 0.7,
+        val_ratio: float = 0.15,
+        test_ratio: float = 0.15,
+        shuffle: bool = True,
     ) -> Tuple[List[Example], List[Example], List[Example]]:
         """
         Split examples into train/validation/test sets
@@ -408,15 +415,20 @@ class ExampleManager:
             "total_examples": len(self.examples),
             "by_category": {},
             "by_difficulty": {},
-            "avg_difficulty": sum(e.difficulty for e in self.examples) / len(self.examples),
+            "avg_difficulty": sum(e.difficulty for e in self.examples)
+            / len(self.examples),
             "unique_tags": set(),
         }
 
         # Count by category
         for example in self.examples:
-            stats["by_category"][example.category] = stats["by_category"].get(example.category, 0) + 1
+            stats["by_category"][example.category] = (
+                stats["by_category"].get(example.category, 0) + 1
+            )
 
-            stats["by_difficulty"][example.difficulty] = stats["by_difficulty"].get(example.difficulty, 0) + 1
+            stats["by_difficulty"][example.difficulty] = (
+                stats["by_difficulty"].get(example.difficulty, 0) + 1
+            )
 
             stats["unique_tags"].update(example.tags)
 
@@ -444,7 +456,11 @@ class ExampleManager:
                         {
                             "text": e.description,
                             "formula": e.expected_formula,
-                            "meta": {"category": e.category, "difficulty": e.difficulty, "tags": e.tags},
+                            "meta": {
+                                "category": e.category,
+                                "difficulty": e.difficulty,
+                                "tags": e.tags,
+                            },
                         }
                         for e in dataset
                     ]
@@ -458,7 +474,11 @@ class ExampleManager:
                     {
                         "text": e.description,
                         "formula": e.expected_formula,
-                        "meta": {"category": e.category, "difficulty": e.difficulty, "tags": e.tags},
+                        "meta": {
+                            "category": e.category,
+                            "difficulty": e.difficulty,
+                            "tags": e.tags,
+                        },
                     }
                     for e in self.examples
                 ]

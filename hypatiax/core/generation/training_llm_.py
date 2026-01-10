@@ -76,14 +76,26 @@ class OpenAIClient:
         self.model = model
         self.base_url = "https://api.openai.com/v1/chat/completions"
 
-    def generate(self, prompt: str, system_prompt: str, temperature: float = 0.1, max_tokens: int = 256) -> str:
+    def generate(
+        self,
+        prompt: str,
+        system_prompt: str,
+        temperature: float = 0.1,
+        max_tokens: int = 256,
+    ) -> str:
         """Generate completion"""
 
-        headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json",
+        }
 
         data = {
             "model": self.model,
-            "messages": [{"role": "system", "content": system_prompt}, {"role": "user", "content": prompt}],
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt},
+            ],
             "temperature": temperature,
             "max_tokens": max_tokens,
         }
@@ -106,10 +118,20 @@ class AnthropicClient:
         self.model = model
         self.base_url = "https://api.anthropic.com/v1/messages"
 
-    def generate(self, prompt: str, system_prompt: str, temperature: float = 0.1, max_tokens: int = 256) -> str:
+    def generate(
+        self,
+        prompt: str,
+        system_prompt: str,
+        temperature: float = 0.1,
+        max_tokens: int = 256,
+    ) -> str:
         """Generate completion"""
 
-        headers = {"x-api-key": self.api_key, "anthropic-version": "2023-06-01", "Content-Type": "application/json"}
+        headers = {
+            "x-api-key": self.api_key,
+            "anthropic-version": "2023-06-01",
+            "Content-Type": "application/json",
+        }
 
         data = {
             "model": self.model,
@@ -140,7 +162,9 @@ class LLMTrainer:
 
         # Initialize API client
         api_key = self.config.api_key or os.getenv(
-            "OPENAI_API_KEY" if self.config.provider == "openai" else "ANTHROPIC_API_KEY"
+            "OPENAI_API_KEY"
+            if self.config.provider == "openai"
+            else "ANTHROPIC_API_KEY"
         )
 
         if not api_key:
@@ -198,7 +222,9 @@ class LLMTrainer:
         system_prompt = self.prompt_builder.build_system_prompt()
 
         # Generate
-        formula = self.client.generate(prompt, system_prompt, self.config.temperature, self.config.max_tokens)
+        formula = self.client.generate(
+            prompt, system_prompt, self.config.temperature, self.config.max_tokens
+        )
 
         return formula
 
@@ -248,7 +274,12 @@ def evaluate_llm(trainer: LLMTrainer, test_data: List[Dict]) -> Dict:
         is_correct = predicted_formula.strip() == true_formula.strip()
 
         predictions.append(
-            {"query": query, "true": true_formula, "predicted": predicted_formula, "correct": is_correct}
+            {
+                "query": query,
+                "true": true_formula,
+                "predicted": predicted_formula,
+                "correct": is_correct,
+            }
         )
 
         if is_correct:
@@ -259,7 +290,12 @@ def evaluate_llm(trainer: LLMTrainer, test_data: List[Dict]) -> Dict:
 
     accuracy = correct / total if total > 0 else 0
 
-    return {"accuracy": accuracy, "correct": correct, "total": total, "predictions": predictions}
+    return {
+        "accuracy": accuracy,
+        "correct": correct,
+        "total": total,
+        "predictions": predictions,
+    }
 
 
 def main():
@@ -278,7 +314,11 @@ def main():
 
     # Configuration
     config = LLMConfig(
-        provider="openai", model="gpt-4", temperature=0.1, num_examples=5, output_dir="./models/llm_formula_mapper"
+        provider="openai",
+        model="gpt-4",
+        temperature=0.1,
+        num_examples=5,
+        output_dir="./models/llm_formula_mapper",
     )
 
     # Initialize trainer

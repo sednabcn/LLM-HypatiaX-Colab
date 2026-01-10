@@ -1,5 +1,11 @@
 def calculate_quality_score(
-    daily_volume_usd, fee_rate, tvl_usd, current_price, initial_price, amount_token_a, amount_token_b
+    daily_volume_usd,
+    fee_rate,
+    tvl_usd,
+    current_price,
+    initial_price,
+    amount_token_a,
+    amount_token_b,
 ):
     """
     Calculate pool quality score

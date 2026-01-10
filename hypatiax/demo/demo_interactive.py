@@ -66,14 +66,24 @@ class HypatiaXDemo:
             # Use actual model
             doc = self.model(text)
             entities = [
-                {"text": ent.text, "label": ent.label_, "start": ent.start_char, "end": ent.end_char}
+                {
+                    "text": ent.text,
+                    "label": ent.label_,
+                    "start": ent.start_char,
+                    "end": ent.end_char,
+                }
                 for ent in doc.ents
             ]
         else:
             # Mock entities for demo
             entities = self._mock_entities(text)
 
-        return {"text": text, "entities": entities, "model_type": self.model_type, "entity_count": len(entities)}
+        return {
+            "text": text,
+            "entities": entities,
+            "model_type": self.model_type,
+            "entity_count": len(entities),
+        }
 
     def _mock_entities(self, text: str) -> List[Dict]:
         """Generate mock entities for demo mode"""
@@ -113,7 +123,14 @@ class HypatiaXDemo:
         for pattern, label in patterns.items():
             if pattern.lower() in text_lower:
                 start = text_lower.index(pattern.lower())
-                entities.append({"text": pattern, "label": label, "start": start, "end": start + len(pattern)})
+                entities.append(
+                    {
+                        "text": pattern,
+                        "label": label,
+                        "start": start,
+                        "end": start + len(pattern),
+                    }
+                )
 
         return entities
 
@@ -291,7 +308,9 @@ def main():
     elif choice == "4":
         run_comparison_demo()
     elif choice == "5":
-        model_choice = input("Choose model (desc/formulas/both) [desc]: ").strip() or "desc"
+        model_choice = (
+            input("Choose model (desc/formulas/both) [desc]: ").strip() or "desc"
+        )
         demo = HypatiaXDemo(model_type=model_choice)
         demo.interactive_mode()
     elif choice == "6":

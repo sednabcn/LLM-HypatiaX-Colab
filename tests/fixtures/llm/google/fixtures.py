@@ -17,12 +17,19 @@ def gemini_mock_response():
     return {
         "candidates": [
             {
-                "content": {"parts": [{"text": "This is a test response from Gemini"}], "role": "model"},
+                "content": {
+                    "parts": [{"text": "This is a test response from Gemini"}],
+                    "role": "model",
+                },
                 "finish_reason": "STOP",
                 "safety_ratings": [],
             }
         ],
-        "usage_metadata": {"prompt_token_count": 8, "candidates_token_count": 15, "total_token_count": 23},
+        "usage_metadata": {
+            "prompt_token_count": 8,
+            "candidates_token_count": 15,
+            "total_token_count": 23,
+        },
     }
 
 

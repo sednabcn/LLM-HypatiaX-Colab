@@ -190,7 +190,9 @@ def run_test(config):
             model_base_path = resources.files(
                 f"hypatiax.models.{config['training']['domain']}.{config['training']['sub_domain']}"
             )
-            model_full_path = str(model_base_path.joinpath(config["training"]["output_model_name"]))
+            model_full_path = str(
+                model_base_path.joinpath(config["training"]["output_model_name"])
+            )
         except Exception as e:
             print(f"  ⚠ Could not construct resource path: {e}")
             # Fallback to direct path
@@ -304,7 +306,9 @@ def main():
             results.append(result)
         except Exception as e:
             print(f"\n✗ Test {config['test_id']} crashed: {e}")
-            results.append({"test_id": config["test_id"], "status": "crashed", "error": str(e)})
+            results.append(
+                {"test_id": config["test_id"], "status": "crashed", "error": str(e)}
+            )
 
     # Convert results to DataFrame
     print(f"\n\n{'='*70}")
@@ -320,7 +324,9 @@ def main():
     print(f"\nSummary:")
     print(f"  Total tests: {len(test_configurations)}")
     print(f"  Completed: {sum(1 for r in results if r.get('status') == 'completed')}")
-    print(f"  Failed: {sum(1 for r in results if r.get('status') in ['failed', 'crashed'])}")
+    print(
+        f"  Failed: {sum(1 for r in results if r.get('status') in ['failed', 'crashed'])}"
+    )
 
     # Display results table
     display_cols = ["test_id", "status", "model_name", "dtype", "val_f1", "test_f1"]

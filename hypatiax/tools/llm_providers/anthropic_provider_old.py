@@ -24,7 +24,9 @@ class AnthropicProvider:
         self.client = anthropic.Anthropic(api_key=api_key)
         self.model = "claude-sonnet-4-20250514"
 
-    def generate_formula(self, requirements: str, domain: str = "defi", n_candidates: int = 1) -> List[Dict[str, Any]]:
+    def generate_formula(
+        self, requirements: str, domain: str = "defi", n_candidates: int = 1
+    ) -> List[Dict[str, Any]]:
         """
         Generate analytical formulas using Claude
 
@@ -52,7 +54,9 @@ class AnthropicProvider:
             prompt = self._build_prompt(requirements, domain, i)
 
             message = self.client.messages.create(
-                model=self.model, max_tokens=2000, messages=[{"role": "user", "content": prompt}]
+                model=self.model,
+                max_tokens=2000,
+                messages=[{"role": "user", "content": prompt}],
             )
 
             # Parse response
@@ -114,7 +118,13 @@ Be creative but ensure mathematical validity!"""
             result = json.loads(json_str)
 
             # Ensure all required fields
-            required = ["formula_latex", "formula_python", "variables", "explanation", "novelty_score"]
+            required = [
+                "formula_latex",
+                "formula_python",
+                "variables",
+                "explanation",
+                "novelty_score",
+            ]
             for field in required:
                 if field not in result:
                     result[field] = "N/A"
@@ -158,7 +168,9 @@ Return ONLY valid JSON with the same structure as before.
 """
 
         message = self.client.messages.create(
-            model=self.model, max_tokens=2000, messages=[{"role": "user", "content": prompt}]
+            model=self.model,
+            max_tokens=2000,
+            messages=[{"role": "user", "content": prompt}],
         )
 
         content = message.content[0].text
@@ -185,7 +197,9 @@ if __name__ == "__main__":
 
     # Test formula generation
     results = provider.generate_formula(
-        requirements="Calculate impermanent loss for Uniswap V2 pools", domain="defi", n_candidates=1
+        requirements="Calculate impermanent loss for Uniswap V2 pools",
+        domain="defi",
+        n_candidates=1,
     )
 
     formula = results[0]

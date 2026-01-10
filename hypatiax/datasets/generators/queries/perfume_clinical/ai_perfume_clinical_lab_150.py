@@ -451,9 +451,7 @@ CrCl = **{crcl} mL/min**
 
         ag = na - (cl + hco3)
 
-        query = (
-            f"Calculate anion gap: Sodium {na} mEq/L, Chloride {cl} mEq/L, Bicarbonate {hco3} mEq/L. Interpret results."
-        )
+        query = f"Calculate anion gap: Sodium {na} mEq/L, Chloride {cl} mEq/L, Bicarbonate {hco3} mEq/L. Interpret results."
 
         response = f"""ANION GAP CALCULATION:
 
@@ -532,7 +530,9 @@ def main():
         writer.writerows(perfume_data)
 
     # Save clinical scenarios
-    with open(DIR + "clinical_detailed_150.csv", "w", newline="", encoding="utf-8") as f:
+    with open(
+        DIR + "clinical_detailed_150.csv", "w", newline="", encoding="utf-8"
+    ) as f:
         writer = csv.DictWriter(f, fieldnames=["query", "response"])
         writer.writeheader()
         writer.writerows(clinical_data)
@@ -540,7 +540,9 @@ def main():
     print(f"\n✅ GENERATION COMPLETE!")
     print(f"📊 Perfume scenarios: {len(perfume_data)}")
     print(f"📊 Clinical scenarios: {len(clinical_data)}")
-    print(f"📊 Total: {len(perfume_data) + len(clinical_data)} detailed training entries")
+    print(
+        f"📊 Total: {len(perfume_data) + len(clinical_data)} detailed training entries"
+    )
     print(f"\n📁 Files created:")
     print(f"  - perfume_detailed_150.csv")
     print(f"  - clinical_detailed_150.csv")

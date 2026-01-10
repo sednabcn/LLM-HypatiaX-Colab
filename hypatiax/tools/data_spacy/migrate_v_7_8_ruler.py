@@ -42,7 +42,9 @@ class Migrate_v_7_8:
 
         # Create backup if requested
         if self.backup:
-            backup_path = self.old_model_path.parent / f"{self.old_model_path.name}_backup"
+            backup_path = (
+                self.old_model_path.parent / f"{self.old_model_path.name}_backup"
+            )
             if not backup_path.exists():
                 print(f"📦 Creating backup: {backup_path}")
                 shutil.copytree(self.old_model_path, backup_path)
@@ -96,7 +98,10 @@ class Migrate_v_7_8:
                 continue
 
             # Check if this is a ruler component
-            if component_dir.name.startswith("ruler_") or component_dir.name == "span_ruler":
+            if (
+                component_dir.name.startswith("ruler_")
+                or component_dir.name == "span_ruler"
+            ):
                 ruler_name = component_dir.name
                 print(f"  📋 Migrating component: {ruler_name}")
 
@@ -116,7 +121,9 @@ class Migrate_v_7_8:
                         ruler = nlp_new.get_pipe(ruler_name)
                         ruler.add_patterns(patterns)
 
-                        print(f"    ✓ Loaded {len(patterns)} patterns from {patterns_file.name}")
+                        print(
+                            f"    ✓ Loaded {len(patterns)} patterns from {patterns_file.name}"
+                        )
                         migrated_count += 1
                     else:
                         print(f"    ⚠️  No valid patterns found in {patterns_file.name}")
@@ -128,7 +135,9 @@ class Migrate_v_7_8:
             if not component_dir.is_dir():
                 continue
 
-            if component_dir.name == "entity_ruler" or component_dir.name.startswith("ner_"):
+            if component_dir.name == "entity_ruler" or component_dir.name.startswith(
+                "ner_"
+            ):
                 ruler_name = component_dir.name
                 print(f"  📋 Migrating entity_ruler component: {ruler_name}")
 
@@ -218,7 +227,8 @@ def migrate_all_tableau_models(base_path="hypatiax/data_spacy/queries/tableau"):
 
 
 def rebuild_from_rules(
-    rules_dir="hypatiax/custom_ner/queries/tableau/rules", output_dir="hypatiax/data_spacy/queries/tableau"
+    rules_dir="hypatiax/custom_ner/queries/tableau/rules",
+    output_dir="hypatiax/data_spacy/queries/tableau",
 ):
     """
     Rebuild models from rule files without importing custom components
@@ -286,9 +296,13 @@ def rebuild_from_rules(
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Migrate spaCy models from v3.7.x to v3.8.x")
+    parser = argparse.ArgumentParser(
+        description="Migrate spaCy models from v3.7.x to v3.8.x"
+    )
     parser.add_argument("--all", action="store_true", help="Migrate all tableau models")
-    parser.add_argument("--rebuild", action="store_true", help="Rebuild from rule files instead")
+    parser.add_argument(
+        "--rebuild", action="store_true", help="Rebuild from rule files instead"
+    )
     parser.add_argument("--old", type=str, help="Old model path")
     parser.add_argument("--new", type=str, help="New model path")
 

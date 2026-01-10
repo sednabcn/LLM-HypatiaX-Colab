@@ -5,7 +5,9 @@ from pathlib import Path
 from typing import List, Optional, Tuple
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
@@ -56,17 +58,38 @@ class PathManager:
                 root = Path(os.getenv("PROJECT_ROOT"))
                 if root.exists():
                     return root
-                logger.warning(f"PROJECT_ROOT env var set but path doesn't exist: {root}")
+                logger.warning(
+                    f"PROJECT_ROOT env var set but path doesn't exist: {root}"
+                )
 
             # Environment-specific paths
             env_paths = {
-                "colab": [Path(f"/content/drive/MyDrive/{self.project_name}"), Path(f"/content/{self.project_name}")],
+                "colab": [
+                    Path(f"/content/drive/MyDrive/{self.project_name}"),
+                    Path(f"/content/{self.project_name}"),
+                ],
                 "github": [Path(os.getenv("GITHUB_WORKSPACE", ".")), Path(".")],
-                "kaggle": [Path(f"/kaggle/working/{self.project_name}"), Path(f"/kaggle/input/{self.project_name}")],
-                "aws": [Path(f"/tmp/{self.project_name}"), Path(f"./{self.project_name}")],
-                "azure": [Path(f"/home/{self.project_name}"), Path(f"./{self.project_name}")],
-                "docker": [Path(f"/app/{self.project_name}"), Path(f"./{self.project_name}")],
-                "local": [Path(self.project_name), Path(f"./{self.project_name}"), Path.cwd() / self.project_name],
+                "kaggle": [
+                    Path(f"/kaggle/working/{self.project_name}"),
+                    Path(f"/kaggle/input/{self.project_name}"),
+                ],
+                "aws": [
+                    Path(f"/tmp/{self.project_name}"),
+                    Path(f"./{self.project_name}"),
+                ],
+                "azure": [
+                    Path(f"/home/{self.project_name}"),
+                    Path(f"./{self.project_name}"),
+                ],
+                "docker": [
+                    Path(f"/app/{self.project_name}"),
+                    Path(f"./{self.project_name}"),
+                ],
+                "local": [
+                    Path(self.project_name),
+                    Path(f"./{self.project_name}"),
+                    Path.cwd() / self.project_name,
+                ],
             }
 
             # Try each path for the detected environment
@@ -85,7 +108,9 @@ class PathManager:
                 current = current.parent
 
             # Last resort: use current directory
-            logger.warning(f"Project directory '{self.project_name}' not found. Using current directory.")
+            logger.warning(
+                f"Project directory '{self.project_name}' not found. Using current directory."
+            )
             return Path.cwd()
 
         except Exception as e:
@@ -117,7 +142,10 @@ class PathManager:
             return None
 
     def walk_directory(
-        self, *parts: str, file_pattern: Optional[str] = None, exclude_dirs: Optional[List[str]] = None
+        self,
+        *parts: str,
+        file_pattern: Optional[str] = None,
+        exclude_dirs: Optional[List[str]] = None,
     ) -> List[Tuple[str, List[str], List[str]]]:
         """
         Walk directory with error handling
@@ -168,7 +196,9 @@ class PathManager:
 
         return results
 
-    def list_files(self, *parts: str, recursive: bool = True, file_pattern: Optional[str] = None) -> List[Path]:
+    def list_files(
+        self, *parts: str, recursive: bool = True, file_pattern: Optional[str] = None
+    ) -> List[Path]:
         """
         List all files in directory
 

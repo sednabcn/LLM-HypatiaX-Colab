@@ -12,4 +12,8 @@ def sample_csv_data():
 @pytest.fixture
 def sample_dataframe_data():
     """Sample data for DataFrame creation"""
-    return {"name": ["Alice", "Bob", "Charlie"], "age": [25, 30, 35], "score": [85.5, 92.0, 78.5]}
+    return {
+        "name": ["Alice", "Bob", "Charlie"],
+        "age": [25, 30, 35],
+        "score": [85.5, 92.0, 78.5],
+    }

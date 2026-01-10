@@ -65,7 +65,9 @@ class ExperimentTracker:
         if self.registry_file.exists():
             with open(self.registry_file, "r") as f:
                 data = json.load(f)
-                return {exp_id: Experiment(**exp_data) for exp_id, exp_data in data.items()}
+                return {
+                    exp_id: Experiment(**exp_data) for exp_id, exp_data in data.items()
+                }
         return {}
 
     def _save_registry(self):
@@ -89,7 +91,9 @@ class ExperimentTracker:
         exp_id = f"{technology.value}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
         # Create results directory
-        results_path = self.experiments_dir / technology.value / name.replace(" ", "_") / "results"
+        results_path = (
+            self.experiments_dir / technology.value / name.replace(" ", "_") / "results"
+        )
         results_path.mkdir(parents=True, exist_ok=True)
 
         experiment = Experiment(
@@ -215,20 +219,30 @@ def main():
     # Register command
     register_parser = subparsers.add_parser("register", help="Register new experiment")
     register_parser.add_argument("--name", required=True, help="Experiment name")
-    register_parser.add_argument("--tech", required=True, choices=["ner", "transformers", "llm", "agents", "hybrid"])
+    register_parser.add_argument(
+        "--tech",
+        required=True,
+        choices=["ner", "transformers", "llm", "agents", "hybrid"],
+    )
     register_parser.add_argument("--description", required=True, help="Description")
     register_parser.add_argument("--author", required=True, help="Author name")
     register_parser.add_argument("--tags", nargs="+", help="Tags")
 
     # List command
     list_parser = subparsers.add_parser("list", help="List experiments")
-    list_parser.add_argument("--tech", choices=["ner", "transformers", "llm", "agents", "hybrid"])
-    list_parser.add_argument("--status", choices=["planned", "running", "completed", "failed", "archived"])
+    list_parser.add_argument(
+        "--tech", choices=["ner", "transformers", "llm", "agents", "hybrid"]
+    )
+    list_parser.add_argument(
+        "--status", choices=["planned", "running", "completed", "failed", "archived"]
+    )
 
     # Update command
     update_parser = subparsers.add_parser("update", help="Update experiment")
     update_parser.add_argument("--id", required=True, help="Experiment ID")
-    update_parser.add_argument("--status", choices=["planned", "running", "completed", "failed", "archived"])
+    update_parser.add_argument(
+        "--status", choices=["planned", "running", "completed", "failed", "archived"]
+    )
     update_parser.add_argument("--notes", help="Notes")
 
     # Report command
@@ -241,7 +255,11 @@ def main():
     if args.command == "register":
         tech = TechnologyType(args.tech)
         exp_id = tracker.register_experiment(
-            name=args.name, technology=tech, description=args.description, author=args.author, tags=args.tags or []
+            name=args.name,
+            technology=tech,
+            description=args.description,
+            author=args.author,
+            tags=args.tags or [],
         )
         print(f"\n🎯 Experiment ID: {exp_id}")
 

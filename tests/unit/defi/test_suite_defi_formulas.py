@@ -152,7 +152,9 @@ def test_multi_hop_invalid():
 # FORMULA 32 - Black-Scholes Delta
 # ---------------------------------------------------------------------
 def test_black_scholes():
-    res = calc.black_scholes_delta(spot=100, strike=100, rate=0.02, volatility=0.2, time_years=1)
+    res = calc.black_scholes_delta(
+        spot=100, strike=100, rate=0.02, volatility=0.2, time_years=1
+    )
     assert 0 < res["delta"] < 1
 
 
@@ -183,7 +185,9 @@ def test_flashloan_profit():
 # FORMULA 35 - Vesting Cliff + Linear
 # ---------------------------------------------------------------------
 def test_vesting():
-    res = calc.vesting_cliff_linear(total_tokens=1000, time_elapsed_days=200, cliff_days=100, vesting_days=300)
+    res = calc.vesting_cliff_linear(
+        total_tokens=1000, time_elapsed_days=200, cliff_days=100, vesting_days=300
+    )
     assert res["vested_amount"] > 0
 
 
@@ -200,7 +204,8 @@ def test_bancor_bonding():
 # ---------------------------------------------------------------------
 def test_collateral_coverage():
     res = calc.collateral_coverage_multi(
-        [{"value": 1000, "threshold": 0.8}, {"value": 2000, "threshold": 0.5}], total_debt=2000
+        [{"value": 1000, "threshold": 0.8}, {"value": 2000, "threshold": 0.5}],
+        total_debt=2000,
     )
     assert "coverage_ratio" in res
 
@@ -219,7 +224,11 @@ def test_yield_farming():
 def test_backtest_range():
     prices = [1.0, 1.1, 0.9, 1.05]
     res = analyzer.backtest_uniswap_v3_range(
-        initial_price=1.0, price_history=prices, lower_tick=-500, upper_tick=500, liquidity=10000
+        initial_price=1.0,
+        price_history=prices,
+        lower_tick=-500,
+        upper_tick=500,
+        liquidity=10000,
     )
     assert "in_range_pct" in res
 

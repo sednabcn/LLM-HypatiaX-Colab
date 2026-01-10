@@ -36,7 +36,9 @@ class RateEquationCalculator:
     """Calculator for reaction rate equations."""
 
     @staticmethod
-    def zero_order_rate(rate_constant: float, validate: bool = True) -> Dict[str, float]:
+    def zero_order_rate(
+        rate_constant: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate reaction rate for zero-order reaction.
 
@@ -52,10 +54,17 @@ class RateEquationCalculator:
         if validate and rate_constant < 0:
             raise ValueError("Rate constant cannot be negative")
 
-        return {"rate": rate_constant, "rate_constant": rate_constant, "order": 0, "formula": "rate = k"}
+        return {
+            "rate": rate_constant,
+            "rate_constant": rate_constant,
+            "order": 0,
+            "formula": "rate = k",
+        }
 
     @staticmethod
-    def first_order_rate(rate_constant: float, concentration: float, validate: bool = True) -> Dict[str, float]:
+    def first_order_rate(
+        rate_constant: float, concentration: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate reaction rate for first-order reaction.
 
@@ -86,7 +95,9 @@ class RateEquationCalculator:
         }
 
     @staticmethod
-    def second_order_rate(rate_constant: float, concentration: float, validate: bool = True) -> Dict[str, float]:
+    def second_order_rate(
+        rate_constant: float, concentration: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate reaction rate for second-order reaction (single reactant).
 
@@ -118,7 +129,10 @@ class RateEquationCalculator:
 
     @staticmethod
     def second_order_rate_two_reactants(
-        rate_constant: float, concentration_a: float, concentration_b: float, validate: bool = True
+        rate_constant: float,
+        concentration_a: float,
+        concentration_b: float,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate reaction rate for second-order reaction (two reactants).
@@ -153,7 +167,10 @@ class RateEquationCalculator:
 
     @staticmethod
     def general_rate_law(
-        rate_constant: float, concentrations: List[float], orders: List[int], validate: bool = True
+        rate_constant: float,
+        concentrations: List[float],
+        orders: List[int],
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate reaction rate using general rate law.
@@ -293,7 +310,9 @@ class IntegratedRateLawCalculator:
         if time is not None:
             if validate and time < 0:
                 raise ValueError("Time cannot be negative")
-            final_concentration = initial_concentration * math.exp(-rate_constant * time)
+            final_concentration = initial_concentration * math.exp(
+                -rate_constant * time
+            )
         else:
             if validate:
                 if final_concentration <= 0:
@@ -349,14 +368,18 @@ class IntegratedRateLawCalculator:
         if time is not None:
             if validate and time < 0:
                 raise ValueError("Time cannot be negative")
-            final_concentration = 1.0 / (1.0 / initial_concentration + rate_constant * time)
+            final_concentration = 1.0 / (
+                1.0 / initial_concentration + rate_constant * time
+            )
         else:
             if validate:
                 if final_concentration <= 0:
                     raise ValueError("Final concentration must be positive")
                 if final_concentration > initial_concentration:
                     raise ValueError("Final concentration cannot exceed initial")
-            time = (1.0 / final_concentration - 1.0 / initial_concentration) / rate_constant
+            time = (
+                1.0 / final_concentration - 1.0 / initial_concentration
+            ) / rate_constant
 
         return {
             "initial_concentration": initial_concentration,
@@ -373,7 +396,10 @@ class ArrheniusCalculator:
 
     @staticmethod
     def arrhenius_equation(
-        activation_energy: float, temperature: float, pre_exponential_factor: float, validate: bool = True
+        activation_energy: float,
+        temperature: float,
+        pre_exponential_factor: float,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate rate constant using Arrhenius equation.
@@ -451,7 +477,9 @@ class ArrheniusCalculator:
 
         # Calculate pre-exponential factor using k₁
         # A = k₁ * exp(Ea/RT₁)
-        pre_exponential_factor = rate_constant_1 * math.exp(activation_energy / (GAS_CONSTANT * temperature_1))
+        pre_exponential_factor = rate_constant_1 * math.exp(
+            activation_energy / (GAS_CONSTANT * temperature_1)
+        )
 
         return {
             "activation_energy": activation_energy,
@@ -496,7 +524,9 @@ class ArrheniusCalculator:
                 raise ValueError("Activation energy cannot be negative")
 
         # k₂ = k₁ * exp[(Ea/R)(1/T₁ - 1/T₂)]
-        exponent = (activation_energy / GAS_CONSTANT) * (1.0 / temperature_initial - 1.0 / temperature_new)
+        exponent = (activation_energy / GAS_CONSTANT) * (
+            1.0 / temperature_initial - 1.0 / temperature_new
+        )
         rate_constant_new = rate_constant_initial * math.exp(exponent)
 
         # Calculate ratio
@@ -520,7 +550,10 @@ class ArrheniusCalculator:
 
     @staticmethod
     def collision_frequency_factor(
-        temperature: float, molecular_diameter: float, molecular_mass: float, validate: bool = True
+        temperature: float,
+        molecular_diameter: float,
+        molecular_mass: float,
+        validate: bool = True,
     ) -> Dict[str, float]:
         """
         Calculate collision frequency factor from collision theory.
@@ -612,7 +645,9 @@ class HalfLifeCalculator:
         }
 
     @staticmethod
-    def first_order_half_life(rate_constant: float, validate: bool = True) -> Dict[str, float]:
+    def first_order_half_life(
+        rate_constant: float, validate: bool = True
+    ) -> Dict[str, float]:
         """
         Calculate half-life for first-order reaction.
 
@@ -806,9 +841,12 @@ class KineticsCalculator:
             mean_x = sum(x_vals) / n
             mean_y = sum(y_vals) / n
 
-            numerator = sum((x_vals[i] - mean_x) * (y_vals[i] - mean_y) for i in range(n))
+            numerator = sum(
+                (x_vals[i] - mean_x) * (y_vals[i] - mean_y) for i in range(n)
+            )
             denominator = math.sqrt(
-                sum((x_vals[i] - mean_x) ** 2 for i in range(n)) * sum((y_vals[i] - mean_y) ** 2 for i in range(n))
+                sum((x_vals[i] - mean_x) ** 2 for i in range(n))
+                * sum((y_vals[i] - mean_y) ** 2 for i in range(n))
             )
 
             return abs(numerator / denominator) if denominator > EPSILON else 0
@@ -851,11 +889,15 @@ if __name__ == "__main__":
     print("-" * 70)
     rate_calc = RateEquationCalculator()
 
-    first_order = rate_calc.first_order_rate(rate_constant=0.05, concentration=2.0)  # s⁻¹  # M
+    first_order = rate_calc.first_order_rate(
+        rate_constant=0.05, concentration=2.0
+    )  # s⁻¹  # M
     print(f"First-order: rate = {first_order['rate']:.3f} M/s")
     print(f"Formula: {first_order['formula']}")
 
-    second_order = rate_calc.second_order_rate(rate_constant=0.1, concentration=2.0)  # M⁻¹s⁻¹  # M
+    second_order = rate_calc.second_order_rate(
+        rate_constant=0.1, concentration=2.0
+    )  # M⁻¹s⁻¹  # M
     print(f"Second-order: rate = {second_order['rate']:.3f} M/s")
 
     two_reactants = rate_calc.second_order_rate_two_reactants(
@@ -880,14 +922,18 @@ if __name__ == "__main__":
         initial_concentration=1.0, rate_constant=0.1, time=10.0  # M  # s⁻¹  # s
     )
     print(f"  [A]₀ = {first_int['initial_concentration']:.2f} M")
-    print(f"  After {first_int['time']}s: [A] = {first_int['final_concentration']:.4f} M")
+    print(
+        f"  After {first_int['time']}s: [A] = {first_int['final_concentration']:.4f} M"
+    )
 
     print("\nSecond-order reaction:")
     second_int = integrated_calc.second_order_integrated(
         initial_concentration=1.0, rate_constant=0.5, time=2.0  # M  # M⁻¹s⁻¹  # s
     )
     print(f"  [A]₀ = {second_int['initial_concentration']:.2f} M")
-    print(f"  After {second_int['time']}s: [A] = {second_int['final_concentration']:.3f} M")
+    print(
+        f"  After {second_int['time']}s: [A] = {second_int['final_concentration']:.3f} M"
+    )
 
     # 3. Arrhenius equation
     print("\n3. ARRHENIUS EQUATION")
@@ -895,7 +941,9 @@ if __name__ == "__main__":
     arrhenius_calc = ArrheniusCalculator()
 
     k = arrhenius_calc.arrhenius_equation(
-        activation_energy=75000, temperature=298.15, pre_exponential_factor=1e10  # J/mol  # K (25°C)  # s⁻¹
+        activation_energy=75000,
+        temperature=298.15,
+        pre_exponential_factor=1e10,  # J/mol  # K (25°C)  # s⁻¹
     )
     print(f"Activation energy: {k['activation_energy_kJ_mol']:.1f} kJ/mol")
     print(f"Temperature: {k['temperature']:.2f} K ({k['temperature_celsius']:.2f}°C)")
@@ -922,8 +970,12 @@ if __name__ == "__main__":
         temperature_new=308,  # 10°C increase
         activation_energy=50000,  # J/mol
     )
-    print(f"  Initial: k = {new_k['rate_constant_initial']:.3f} at {new_k['temperature_initial']:.0f} K")
-    print(f"  New: k = {new_k['rate_constant_new']:.3f} at {new_k['temperature_new']:.0f} K")
+    print(
+        f"  Initial: k = {new_k['rate_constant_initial']:.3f} at {new_k['temperature_initial']:.0f} K"
+    )
+    print(
+        f"  New: k = {new_k['rate_constant_new']:.3f} at {new_k['temperature_new']:.0f} K"
+    )
     print(f"  Rate increases by {new_k['percent_change']:.1f}%")
     print(f"  Rate ratio: {new_k['rate_ratio']:.2f}×")
 
@@ -933,7 +985,9 @@ if __name__ == "__main__":
     half_life_calc = HalfLifeCalculator()
 
     print("Zero-order:")
-    t_half_zero = half_life_calc.zero_order_half_life(initial_concentration=2.0, rate_constant=0.1)
+    t_half_zero = half_life_calc.zero_order_half_life(
+        initial_concentration=2.0, rate_constant=0.1
+    )
     print(f"  t₁/₂ = {t_half_zero['half_life']:.2f} s")
     print(f"  Time to completion = {t_half_zero['time_to_completion']:.2f} s")
     print(f"  Concentration dependent: {t_half_zero['concentration_dependent']}")
@@ -946,7 +1000,9 @@ if __name__ == "__main__":
     print(f"  Concentration independent: {not t_half_first['concentration_dependent']}")
 
     print("\nSecond-order:")
-    t_half_second = half_life_calc.second_order_half_life(initial_concentration=1.0, rate_constant=0.1)  # M  # M⁻¹s⁻¹
+    t_half_second = half_life_calc.second_order_half_life(
+        initial_concentration=1.0, rate_constant=0.1
+    )  # M  # M⁻¹s⁻¹
     print(f"  First t₁/₂ = {t_half_second['half_life']:.2f} s")
     print(f"  Second t₁/₂ = {t_half_second['second_half_life']:.2f} s")
     print(f"  Ratio = {t_half_second['half_life_ratio']:.1f}× (increases with time)")
@@ -954,16 +1010,21 @@ if __name__ == "__main__":
     # Number of half-lives
     print("\nNumber of half-lives elapsed:")
     n_half = half_life_calc.number_of_half_lives(
-        initial_concentration=100.0, final_concentration=12.5  # M  # M (after 3 half-lives)
+        initial_concentration=100.0,
+        final_concentration=12.5,  # M  # M (after 3 half-lives)
     )
-    print(f"  [A]₀ = {n_half['initial_concentration']:.1f} M → [A] = {n_half['final_concentration']:.1f} M")
+    print(
+        f"  [A]₀ = {n_half['initial_concentration']:.1f} M → [A] = {n_half['final_concentration']:.1f} M"
+    )
     print(f"  Number of half-lives: {n_half['n_half_lives']:.1f}")
     print(f"  Percent remaining: {n_half['percent_remaining']:.1f}%")
     print(f"  Percent reacted: {n_half['percent_reacted']:.1f}%")
 
     # Concentration after n half-lives
     print("\nConcentration after specific half-lives:")
-    conc_after = half_life_calc.concentration_after_n_half_lives(initial_concentration=80.0, n_half_lives=4.0)
+    conc_after = half_life_calc.concentration_after_n_half_lives(
+        initial_concentration=80.0, n_half_lives=4.0
+    )
     print(f"  After {conc_after['n_half_lives']:.1f} half-lives:")
     print(f"  [A] = {conc_after['final_concentration']:.2f} M")
     print(f"  ({conc_after['percent_remaining']:.2f}% remaining)")
@@ -977,7 +1038,9 @@ if __name__ == "__main__":
     times = [0, 10, 20, 30, 40, 50]
     concentrations = [1.0, 0.9048, 0.8187, 0.7408, 0.6703, 0.6065]
 
-    order_analysis = kinetics_calc.determine_reaction_order(concentrations=concentrations, times=times)
+    order_analysis = kinetics_calc.determine_reaction_order(
+        concentrations=concentrations, times=times
+    )
     print(f"Data points: {order_analysis['data_points']}")
     print(f"Likely reaction order: {order_analysis['likely_order']}")
     print(f"\nLinearity analysis (R²):")
@@ -990,7 +1053,9 @@ if __name__ == "__main__":
     print("\n6. COLLISION THEORY")
     print("-" * 70)
     collision = arrhenius_calc.collision_frequency_factor(
-        temperature=298, molecular_diameter=3.0e-10, molecular_mass=0.032  # K  # m (3 Å)  # kg/mol (O₂)
+        temperature=298,
+        molecular_diameter=3.0e-10,
+        molecular_mass=0.032,  # K  # m (3 Å)  # kg/mol (O₂)
     )
     print(f"Temperature: {collision['temperature']:.0f} K")
     print(f"Molecular diameter: {collision['molecular_diameter']*1e10:.1f} Å")
@@ -1024,7 +1089,8 @@ if __name__ == "__main__":
 
     # How many half-lives?
     n_half_lives = kinetics_calc.half_life.number_of_half_lives(
-        initial_concentration=initial_conc, final_concentration=final_conc["final_concentration"]
+        initial_concentration=initial_conc,
+        final_concentration=final_conc["final_concentration"],
     )
     print(f"  Number of half-lives: {n_half_lives['n_half_lives']:.2f}")
 

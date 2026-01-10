@@ -38,7 +38,11 @@ class TestProviderInitialization:
 
     def test_provider_configuration(self, anthropic_provider):
         """Test provider configuration options."""
-        config = {"model": "claude-3-5-sonnet-20241022", "temperature": 0.7, "max_tokens": 1000}
+        config = {
+            "model": "claude-3-5-sonnet-20241022",
+            "temperature": 0.7,
+            "max_tokens": 1000,
+        }
 
         anthropic_provider.configure(config)
 
@@ -65,13 +69,18 @@ class TestBasicGeneration:
 
         assert response is not None
         response_str = str(response).lower()
-        assert any(term in response_str for term in ["sharpe", "ratio", "return", "risk"])
+        assert any(
+            term in response_str for term in ["sharpe", "ratio", "return", "risk"]
+        )
 
     def test_multi_turn_conversation(self, anthropic_provider):
         """Test multi-turn conversation."""
         messages = [
             {"role": "user", "content": "What is the Sharpe ratio?"},
-            {"role": "assistant", "content": "The Sharpe ratio measures risk-adjusted returns."},
+            {
+                "role": "assistant",
+                "content": "The Sharpe ratio measures risk-adjusted returns.",
+            },
             {"role": "user", "content": "How do I calculate it?"},
         ]
 
@@ -201,7 +210,9 @@ class TestErrorHandling:
 
     def test_rate_limit_handling(self, anthropic_provider):
         """Test handling rate limits."""
-        with patch.object(anthropic_provider, "_call_api", side_effect=Exception("Rate limit")):
+        with patch.object(
+            anthropic_provider, "_call_api", side_effect=Exception("Rate limit")
+        ):
             with pytest.raises(Exception):
                 anthropic_provider.generate("test")
 
@@ -313,7 +324,9 @@ class TestSystemPrompts:
         """Test context preservation across calls."""
         context = {"domain": "risk_management", "formulas_discussed": ["sharpe_ratio"]}
 
-        response = anthropic_provider.generate("Now explain Sortino ratio", context=context)
+        response = anthropic_provider.generate(
+            "Now explain Sortino ratio", context=context
+        )
 
         assert response is not None
 
@@ -332,7 +345,11 @@ class TestMultiModalInputs:
 
     def test_formula_with_context(self, anthropic_provider):
         """Test formula with contextual information."""
-        prompt = {"query": "Explain this formula", "formula": "(R - Rf) / sigma", "context": "Risk-adjusted returns"}
+        prompt = {
+            "query": "Explain this formula",
+            "formula": "(R - Rf) / sigma",
+            "context": "Risk-adjusted returns",
+        }
 
         response = anthropic_provider.generate_complex(prompt)
 
@@ -344,7 +361,11 @@ class TestBatchProcessing:
 
     def test_batch_generation(self, anthropic_provider):
         """Test batch generation."""
-        prompts = ["Formula for mean", "Formula for variance", "Formula for standard deviation"]
+        prompts = [
+            "Formula for mean",
+            "Formula for variance",
+            "Formula for standard deviation",
+        ]
 
         responses = anthropic_provider.generate_batch(prompts)
 
@@ -436,7 +457,9 @@ def anthropic_provider():
     provider.config = {"temperature": 0.7}
     provider.generate_with_history = MagicMock(return_value="Response")
     provider.count_tokens = MagicMock(return_value=10)
-    provider.generate_with_usage = MagicMock(return_value=("Response", {"input_tokens": 10, "output_tokens": 20}))
+    provider.generate_with_usage = MagicMock(
+        return_value=("Response", {"input_tokens": 10, "output_tokens": 20})
+    )
     provider.generate_stream = MagicMock(return_value=iter(["chunk1", "chunk2"]))
     provider.clear_cache = MagicMock()
     provider.generate_complex = MagicMock(return_value="Complex response")

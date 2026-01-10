@@ -59,12 +59,20 @@ class HypatiaXVisualizer:
 
         # Plot 1: IL Percentage
         ax1.fill_between(
-            dates, il_values, 0, where=np.array(il_values) < 0, color=self.colors["loss"], alpha=0.3, label="Loss"
+            dates,
+            il_values,
+            0,
+            where=np.array(il_values) < 0,
+            color=self.colors["loss"],
+            alpha=0.3,
+            label="Loss",
         )
         ax1.plot(dates, il_values, color=self.colors["loss"], linewidth=2)
         ax1.axhline(y=0, color="black", linestyle="--", linewidth=1, alpha=0.5)
         ax1.set_ylabel("Impermanent Loss (%)", fontsize=12, fontweight="bold")
-        ax1.set_title("Impermanent Loss Over Time", fontsize=14, fontweight="bold", pad=20)
+        ax1.set_title(
+            "Impermanent Loss Over Time", fontsize=14, fontweight="bold", pad=20
+        )
         ax1.grid(True, alpha=0.3)
         ax1.legend(loc="lower left")
 
@@ -80,13 +88,27 @@ class HypatiaXVisualizer:
             label="Net Profit",
         )
         ax2.fill_between(
-            dates, net_values, 0, where=np.array(net_values) < 0, color=self.colors["loss"], alpha=0.3, label="Net Loss"
+            dates,
+            net_values,
+            0,
+            where=np.array(net_values) < 0,
+            color=self.colors["loss"],
+            alpha=0.3,
+            label="Net Loss",
         )
-        ax2.plot(dates, net_values, color=self.colors["neutral"], linewidth=2.5, label="Net Position")
+        ax2.plot(
+            dates,
+            net_values,
+            color=self.colors["neutral"],
+            linewidth=2.5,
+            label="Net Position",
+        )
         ax2.axhline(y=0, color="black", linestyle="--", linewidth=1, alpha=0.5)
         ax2.set_xlabel("Date", fontsize=12, fontweight="bold")
         ax2.set_ylabel("Net Value ($)", fontsize=12, fontweight="bold")
-        ax2.set_title("Net Position: IL + Fee Income", fontsize=14, fontweight="bold", pad=20)
+        ax2.set_title(
+            "Net Position: IL + Fee Income", fontsize=14, fontweight="bold", pad=20
+        )
         ax2.grid(True, alpha=0.3)
         ax2.legend(loc="upper left")
 
@@ -132,7 +154,9 @@ class HypatiaXVisualizer:
         print(f"✅ Saved: {save_path}")
         plt.close()
 
-    def plot_risk_score_breakdown(self, il_pct, volatility, range_width, days, save_path="risk_breakdown.png"):
+    def plot_risk_score_breakdown(
+        self, il_pct, volatility, range_width, days, save_path="risk_breakdown.png"
+    ):
         """
         Bar chart showing risk score components
         """
@@ -142,7 +166,12 @@ class HypatiaXVisualizer:
             "Range Risk": 100 - min(100, range_width * 10),
             "Time Risk": min(100, days / 365 * 100),
         }
-        weights = {"IL Risk": 0.4, "Volatility": 0.3, "Range Risk": 0.2, "Time Risk": 0.1}
+        weights = {
+            "IL Risk": 0.4,
+            "Volatility": 0.3,
+            "Range Risk": 0.2,
+            "Time Risk": 0.1,
+        }
 
         weighted_scores = {k: v * weights[k] for k, v in components.items()}
         total_score = sum(weighted_scores.values())
@@ -150,15 +179,27 @@ class HypatiaXVisualizer:
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
 
         # Plot 1: Component Scores
-        colors_list = [self.colors["loss"], self.colors["highlight"], self.colors["neutral"], self.colors["profit"]]
+        colors_list = [
+            self.colors["loss"],
+            self.colors["highlight"],
+            self.colors["neutral"],
+            self.colors["profit"],
+        ]
         bars = ax1.bar(
-            range(len(components)), components.values(), color=colors_list, alpha=0.7, edgecolor="black", linewidth=1.5
+            range(len(components)),
+            components.values(),
+            color=colors_list,
+            alpha=0.7,
+            edgecolor="black",
+            linewidth=1.5,
         )
         ax1.set_xticks(range(len(components)))
         ax1.set_xticklabels(components.keys(), rotation=45, ha="right")
         ax1.set_ylabel("Score (0-100)", fontsize=12, fontweight="bold")
         ax1.set_title("Risk Component Scores", fontsize=14, fontweight="bold", pad=20)
-        ax1.axhline(y=50, color="red", linestyle="--", alpha=0.5, label="High Risk Threshold")
+        ax1.axhline(
+            y=50, color="red", linestyle="--", alpha=0.5, label="High Risk Threshold"
+        )
         ax1.grid(axis="y", alpha=0.3)
         ax1.legend()
 
@@ -183,7 +224,12 @@ class HypatiaXVisualizer:
             startangle=90,
             textprops={"fontweight": "bold"},
         )
-        ax2.set_title(f"Weighted Risk Score: {total_score:.1f}/100", fontsize=14, fontweight="bold", pad=20)
+        ax2.set_title(
+            f"Weighted Risk Score: {total_score:.1f}/100",
+            fontsize=14,
+            fontweight="bold",
+            pad=20,
+        )
 
         # Determine risk category
         if total_score < 30:
@@ -199,14 +245,24 @@ class HypatiaXVisualizer:
             category = "EXTREME RISK"
             cat_color = "#dc2626"
 
-        ax2.text(0, -1.3, category, ha="center", fontsize=16, fontweight="bold", color=cat_color)
+        ax2.text(
+            0,
+            -1.3,
+            category,
+            ha="center",
+            fontsize=16,
+            fontweight="bold",
+            color=cat_color,
+        )
 
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches="tight", facecolor="white")
         print(f"✅ Saved: {save_path}")
         plt.close()
 
-    def plot_scenario_comparison(self, scenarios_data, save_path="scenario_comparison.png"):
+    def plot_scenario_comparison(
+        self, scenarios_data, save_path="scenario_comparison.png"
+    ):
         """
         Compare multiple Uniswap scenarios side by side
         """
@@ -223,7 +279,15 @@ class HypatiaXVisualizer:
         ax1.set_title("Impermanent Loss by Scenario", fontsize=13, fontweight="bold")
         ax1.grid(axis="x", alpha=0.3)
         for i, (bar, val) in enumerate(zip(bars1, il_values)):
-            ax1.text(val - 0.3, i, f"{val:.2f}%", va="center", ha="right", fontweight="bold", color="white")
+            ax1.text(
+                val - 0.3,
+                i,
+                f"{val:.2f}%",
+                va="center",
+                ha="right",
+                fontweight="bold",
+                color="white",
+            )
 
         # Plot 2: Fee Income
         bars2 = ax2.barh(scenarios, fee_values, color=self.colors["profit"], alpha=0.7)
@@ -231,10 +295,14 @@ class HypatiaXVisualizer:
         ax2.set_title("Fee Income by Scenario", fontsize=13, fontweight="bold")
         ax2.grid(axis="x", alpha=0.3)
         for i, (bar, val) in enumerate(zip(bars2, fee_values)):
-            ax2.text(val + 30, i, f"${val:.0f}", va="center", ha="left", fontweight="bold")
+            ax2.text(
+                val + 30, i, f"${val:.0f}", va="center", ha="left", fontweight="bold"
+            )
 
         # Plot 3: Net Result
-        colors_net = [self.colors["profit"] if v > 0 else self.colors["loss"] for v in net_values]
+        colors_net = [
+            self.colors["profit"] if v > 0 else self.colors["loss"] for v in net_values
+        ]
         bars3 = ax3.barh(scenarios, net_values, color=colors_net, alpha=0.7)
         ax3.set_xlabel("Net Result ($)", fontsize=11, fontweight="bold")
         ax3.set_title("Net Position (IL + Fees)", fontsize=13, fontweight="bold")
@@ -257,7 +325,11 @@ class HypatiaXVisualizer:
         bars4 = ax4.bar(
             perf_metrics,
             values,
-            color=[self.colors["highlight"], self.colors["profit"], self.colors["neutral"]],
+            color=[
+                self.colors["highlight"],
+                self.colors["profit"],
+                self.colors["neutral"],
+            ],
             alpha=0.7,
         )
         ax4.set_ylabel("Value", fontsize=11, fontweight="bold")
@@ -265,9 +337,19 @@ class HypatiaXVisualizer:
         ax4.grid(axis="y", alpha=0.3)
         for i, (bar, scenario) in enumerate(zip(bars4, best_scenarios)):
             height = bar.get_height()
-            ax4.text(i, height + 50, scenario, ha="center", va="bottom", fontweight="bold", fontsize=10)
+            ax4.text(
+                i,
+                height + 50,
+                scenario,
+                ha="center",
+                va="bottom",
+                fontweight="bold",
+                fontsize=10,
+            )
 
-        plt.suptitle("Uniswap Scenario Comparison", fontsize=16, fontweight="bold", y=0.995)
+        plt.suptitle(
+            "Uniswap Scenario Comparison", fontsize=16, fontweight="bold", y=0.995
+        )
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches="tight", facecolor="white")
         print(f"✅ Saved: {save_path}")
@@ -285,14 +367,23 @@ class HypatiaXVisualizer:
 
         # Calculate metrics
         initial_price = prices[0]
-        il_values = [(2 * np.sqrt(p / initial_price) / (p / initial_price + 1) - 1) * 100 for p in prices]
+        il_values = [
+            (2 * np.sqrt(p / initial_price) / (p / initial_price + 1) - 1) * 100
+            for p in prices
+        ]
         fees = [i * 0.05 for i in range(len(prices))]
         hodl = [100 * p + 180000 for p in prices]
         lp_value = [200 * np.sqrt(initial_price * p) + f for p, f in zip(prices, fees)]
 
         # Plot 1: Price Movement (Large, top)
         ax1 = fig.add_subplot(gs[0, :])
-        ax1.plot(dates, prices, color=self.colors["neutral"], linewidth=2.5, label="ETH Price")
+        ax1.plot(
+            dates,
+            prices,
+            color=self.colors["neutral"],
+            linewidth=2.5,
+            label="ETH Price",
+        )
         ax1.fill_between(
             dates,
             prices,
@@ -311,7 +402,9 @@ class HypatiaXVisualizer:
             alpha=0.2,
             label="Price Decrease",
         )
-        ax1.axhline(y=initial_price, color="black", linestyle="--", linewidth=1, alpha=0.5)
+        ax1.axhline(
+            y=initial_price, color="black", linestyle="--", linewidth=1, alpha=0.5
+        )
         ax1.set_ylabel("ETH Price (USD)", fontsize=12, fontweight="bold")
         ax1.set_title("90-Day Price Movement", fontsize=14, fontweight="bold", pad=15)
         ax1.legend(loc="best")
@@ -335,8 +428,21 @@ class HypatiaXVisualizer:
 
         # Plot 4: Strategy Comparison
         ax4 = fig.add_subplot(gs[2, :])
-        ax4.plot(dates, hodl, color=self.colors["highlight"], linewidth=2.5, label="HODL Strategy", linestyle="--")
-        ax4.plot(dates, lp_value, color=self.colors["profit"], linewidth=2.5, label="LP Strategy")
+        ax4.plot(
+            dates,
+            hodl,
+            color=self.colors["highlight"],
+            linewidth=2.5,
+            label="HODL Strategy",
+            linestyle="--",
+        )
+        ax4.plot(
+            dates,
+            lp_value,
+            color=self.colors["profit"],
+            linewidth=2.5,
+            label="LP Strategy",
+        )
         ax4.fill_between(
             dates,
             hodl,
@@ -357,7 +463,9 @@ class HypatiaXVisualizer:
         )
         ax4.set_xlabel("Date", fontsize=12, fontweight="bold")
         ax4.set_ylabel("Portfolio Value ($)", fontsize=12, fontweight="bold")
-        ax4.set_title("Strategy Performance Comparison", fontsize=14, fontweight="bold", pad=15)
+        ax4.set_title(
+            "Strategy Performance Comparison", fontsize=14, fontweight="bold", pad=15
+        )
         ax4.legend(loc="best")
         ax4.grid(True, alpha=0.3)
 

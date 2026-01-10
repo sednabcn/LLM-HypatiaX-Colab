@@ -71,9 +71,13 @@ def compare_methods():
     # Hybrid method metrics
     hybrid_formulas = len(hybrid)
     hybrid_valid = sum(1 for r in hybrid if r.get("validation", {}).get("valid", False))
-    hybrid_validation_rate = hybrid_valid / hybrid_formulas if hybrid_formulas > 0 else 0
+    hybrid_validation_rate = (
+        hybrid_valid / hybrid_formulas if hybrid_formulas > 0 else 0
+    )
     hybrid_r2_scores = [
-        r.get("discovery", {}).get("r2_score", 0) for r in hybrid if "discovery" in r and "r2_score" in r["discovery"]
+        r.get("discovery", {}).get("r2_score", 0)
+        for r in hybrid
+        if "discovery" in r and "r2_score" in r["discovery"]
     ]
     hybrid_avg_r2 = safe_mean(hybrid_r2_scores, 0)
 
@@ -90,7 +94,9 @@ def compare_methods():
     llm_formulas = len(llm)
     llm_valid = sum(1 for r in llm if r.get("valid", False))
     llm_validation_rate = llm_valid / llm_formulas if llm_formulas > 0 else 0
-    llm_extrap_errors = [r.get("extrapolation_error", 4.0) for r in llm if "extrapolation_error" in r]
+    llm_extrap_errors = [
+        r.get("extrapolation_error", 4.0) for r in llm if "extrapolation_error" in r
+    ]
     llm_avg_extrap = safe_mean(llm_extrap_errors, 4.0)
 
     # Neural network metrics
@@ -102,7 +108,12 @@ def compare_methods():
     # Create comparison table
     comparison = {
         "Method": ["Hybrid (Ours)", "Pure LLM", "Neural Network", "Manual (Expert)"],
-        "Formulas Generated": [hybrid_formulas, llm_formulas, len(nn), 5],  # Typical expert-derived formulas in DeFi
+        "Formulas Generated": [
+            hybrid_formulas,
+            llm_formulas,
+            len(nn),
+            5,
+        ],  # Typical expert-derived formulas in DeFi
         "Validation Rate": [
             format_percentage(hybrid_validation_rate),
             format_percentage(llm_validation_rate),
@@ -110,15 +121,31 @@ def compare_methods():
             "100.0%",
         ],
         "Avg R² Score": [
-            f"{hybrid_avg_r2:.4f}" if isinstance(hybrid_avg_r2, (int, float)) else "N/A",
+            (
+                f"{hybrid_avg_r2:.4f}"
+                if isinstance(hybrid_avg_r2, (int, float))
+                else "N/A"
+            ),
             "N/A",
             f"{nn_avg_r2:.4f}" if isinstance(nn_avg_r2, (int, float)) else "N/A",
             "0.9800",
         ],
         "Extrapolation Error": [
-            format_percentage(hybrid_avg_extrap) if isinstance(hybrid_avg_extrap, (int, float)) else "<30%",
-            format_percentage(llm_avg_extrap) if isinstance(llm_avg_extrap, (int, float)) else ">400%",
-            format_percentage(nn_avg_extrap) if isinstance(nn_avg_extrap, (int, float)) else ">400%",
+            (
+                format_percentage(hybrid_avg_extrap)
+                if isinstance(hybrid_avg_extrap, (int, float))
+                else "<30%"
+            ),
+            (
+                format_percentage(llm_avg_extrap)
+                if isinstance(llm_avg_extrap, (int, float))
+                else ">400%"
+            ),
+            (
+                format_percentage(nn_avg_extrap)
+                if isinstance(nn_avg_extrap, (int, float))
+                else ">400%"
+            ),
             "<20%",
         ],
         "Interpretable": ["Yes", "Yes", "No", "Yes"],
@@ -166,21 +193,35 @@ def compare_methods():
             "formulas_generated": hybrid_formulas,
             "valid_formulas": hybrid_valid,
             "validation_rate": float(hybrid_validation_rate),
-            "avg_r2": float(hybrid_avg_r2) if isinstance(hybrid_avg_r2, (int, float)) else None,
+            "avg_r2": (
+                float(hybrid_avg_r2)
+                if isinstance(hybrid_avg_r2, (int, float))
+                else None
+            ),
             "avg_extrapolation_error": (
-                float(hybrid_avg_extrap) if isinstance(hybrid_avg_extrap, (int, float)) else None
+                float(hybrid_avg_extrap)
+                if isinstance(hybrid_avg_extrap, (int, float))
+                else None
             ),
         },
         "llm": {
             "formulas_generated": llm_formulas,
             "valid_formulas": llm_valid,
             "validation_rate": float(llm_validation_rate),
-            "avg_extrapolation_error": float(llm_avg_extrap) if isinstance(llm_avg_extrap, (int, float)) else None,
+            "avg_extrapolation_error": (
+                float(llm_avg_extrap)
+                if isinstance(llm_avg_extrap, (int, float))
+                else None
+            ),
         },
         "neural_network": {
             "formulas_evaluated": len(nn),
             "avg_r2": float(nn_avg_r2) if isinstance(nn_avg_r2, (int, float)) else None,
-            "avg_extrapolation_error": float(nn_avg_extrap) if isinstance(nn_avg_extrap, (int, float)) else None,
+            "avg_extrapolation_error": (
+                float(nn_avg_extrap)
+                if isinstance(nn_avg_extrap, (int, float))
+                else None
+            ),
         },
     }
 

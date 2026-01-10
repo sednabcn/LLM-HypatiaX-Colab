@@ -104,7 +104,11 @@ def llm_interpreter(mock_anthropic_provider):
     interpreter.provider = mock_anthropic_provider
     interpreter.interpret = MagicMock(return_value="Sharpe Ratio = (R - Rf) / sigma")
     interpreter.parse_response = MagicMock(
-        return_value={"formula": "sharpe_ratio", "expression": "(R - Rf) / sigma", "variables": ["R", "Rf", "sigma"]}
+        return_value={
+            "formula": "sharpe_ratio",
+            "expression": "(R - Rf) / sigma",
+            "variables": ["R", "Rf", "sigma"],
+        }
     )
     return interpreter
 
@@ -135,7 +139,9 @@ def formula_generator(mock_anthropic_provider):
     generator.provider = mock_anthropic_provider
     generator.generate = MagicMock(return_value="generated_formula")
     generator.validate = MagicMock(return_value=True)
-    generator.get_supported_domains = MagicMock(return_value=["risk", "defi", "statistics"])
+    generator.get_supported_domains = MagicMock(
+        return_value=["risk", "defi", "statistics"]
+    )
     return generator
 
 
@@ -151,19 +157,31 @@ def sample_formulas():
         "sharpe_ratio": {
             "name": "Sharpe Ratio",
             "formula": "(R - Rf) / sigma",
-            "variables": {"R": "portfolio return", "Rf": "risk-free rate", "sigma": "volatility"},
+            "variables": {
+                "R": "portfolio return",
+                "Rf": "risk-free rate",
+                "sigma": "volatility",
+            },
             "domain": "risk",
         },
         "var_parametric": {
             "name": "Value at Risk (Parametric)",
             "formula": "mu - z * sigma",
-            "variables": {"mu": "expected return", "z": "z-score", "sigma": "volatility"},
+            "variables": {
+                "mu": "expected return",
+                "z": "z-score",
+                "sigma": "volatility",
+            },
             "domain": "risk",
         },
         "constant_product": {
             "name": "Constant Product",
             "formula": "x * y = k",
-            "variables": {"x": "token x reserves", "y": "token y reserves", "k": "constant"},
+            "variables": {
+                "x": "token x reserves",
+                "y": "token y reserves",
+                "k": "constant",
+            },
             "domain": "defi",
         },
         "impermanent_loss": {
@@ -299,7 +317,13 @@ def mock_llm_response():
         - Rf is the risk-free rate
         - σ (sigma) is the portfolio volatility
         """,
-        "formulas": [{"name": "Sharpe Ratio", "expression": "(R - Rf) / sigma", "variables": ["R", "Rf", "sigma"]}],
+        "formulas": [
+            {
+                "name": "Sharpe Ratio",
+                "expression": "(R - Rf) / sigma",
+                "variables": ["R", "Rf", "sigma"],
+            }
+        ],
     }
 
 
@@ -338,7 +362,10 @@ def test_config():
 @pytest.fixture
 def api_keys():
     """API keys for testing (use environment variables)."""
-    return {"anthropic": os.getenv("ANTHROPIC_API_KEY", "test_key"), "google": os.getenv("GOOGLE_API_KEY", "test_key")}
+    return {
+        "anthropic": os.getenv("ANTHROPIC_API_KEY", "test_key"),
+        "google": os.getenv("GOOGLE_API_KEY", "test_key"),
+    }
 
 
 # ============================================================================

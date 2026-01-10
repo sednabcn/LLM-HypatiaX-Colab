@@ -17,7 +17,9 @@ class BaseLLMProvider(ABC):
         pass
 
     @abstractmethod
-    def generate_with_tools(self, prompt: str, tools: List[Dict], **kwargs) -> Dict[str, Any]:
+    def generate_with_tools(
+        self, prompt: str, tools: List[Dict], **kwargs
+    ) -> Dict[str, Any]:
         """Generate with tool/function calling"""
         pass
 

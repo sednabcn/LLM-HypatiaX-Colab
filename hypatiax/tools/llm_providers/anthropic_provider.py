@@ -34,7 +34,12 @@ class AnthropicProvider:
         result = provider.generate_formula(requirements="...", domain="defi")
     """
 
-    def __init__(self, api_key: Optional[str] = None, model: Optional[str] = None, max_tokens: int = 4096):
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        model: Optional[str] = None,
+        max_tokens: int = 4096,
+    ):
         """
         Initialize Anthropic client with configuration.
 
@@ -48,7 +53,8 @@ class AnthropicProvider:
             api_key = os.getenv("ANTHROPIC_API_KEY")
             if api_key is None:
                 raise ValueError(
-                    "API key required. Set ANTHROPIC_API_KEY environment variable " "or pass api_key parameter"
+                    "API key required. Set ANTHROPIC_API_KEY environment variable "
+                    "or pass api_key parameter"
                 )
 
         self.client = anthropic.Anthropic(api_key=api_key)
@@ -70,7 +76,11 @@ class AnthropicProvider:
         print(f"   Max tokens: {self.max_tokens}")
 
     def generate_formula(
-        self, requirements: str, domain: str = "defi", n_candidates: int = 1, max_retries: int = 3
+        self,
+        requirements: str,
+        domain: str = "defi",
+        n_candidates: int = 1,
+        max_retries: int = 3,
     ) -> List[Dict[str, Any]]:
         """
         Generate analytical formulas using Claude with retry logic.
@@ -114,7 +124,9 @@ class AnthropicProvider:
 
                     # Call API with retry logic
                     start_time = time.time()
-                    response = self._call_with_retry(prompt=prompt, max_retries=max_retries)
+                    response = self._call_with_retry(
+                        prompt=prompt, max_retries=max_retries
+                    )
                     elapsed = time.time() - start_time
 
                     # Extract content
@@ -145,11 +157,17 @@ class AnthropicProvider:
                         break  # Success, exit attempt loop
                     else:
                         if attempt == 0:
-                            print(f"   ⚠️  Invalid formula structure, trying fallback...")
+                            print(
+                                f"   ⚠️  Invalid formula structure, trying fallback..."
+                            )
                             continue
                         else:
                             print(f"   ❌ Failed to generate valid formula")
-                            formulas.append(self._create_error_formula("Invalid formula structure after retry"))
+                            formulas.append(
+                                self._create_error_formula(
+                                    "Invalid formula structure after retry"
+                                )
+                            )
                             break
 
                 except anthropic.RateLimitError as e:
@@ -188,7 +206,9 @@ class AnthropicProvider:
 
         return formulas
 
-    def _call_with_retry(self, prompt: str, max_retries: int = 3) -> anthropic.types.Message:
+    def _call_with_retry(
+        self, prompt: str, max_retries: int = 3
+    ) -> anthropic.types.Message:
         """
         Call Claude API with exponential backoff retry logic.
 
@@ -224,7 +244,9 @@ class AnthropicProvider:
                 if attempt < max_retries - 1:
                     # Exponential backoff: 2, 4, 8 seconds
                     wait_time = 2 ** (attempt + 1)
-                    print(f"   ⏳ Rate limit hit. Waiting {wait_time}s (retry {attempt + 2}/{max_retries})...")
+                    print(
+                        f"   ⏳ Rate limit hit. Waiting {wait_time}s (retry {attempt + 2}/{max_retries})..."
+                    )
                     time.sleep(wait_time)
                     continue
                 else:
@@ -236,7 +258,9 @@ class AnthropicProvider:
                 # Retry on 5xx server errors
                 if e.status_code >= 500 and attempt < max_retries - 1:
                     wait_time = 2**attempt  # 1, 2, 4 seconds
-                    print(f"   ⏳ Server error ({e.status_code}). Waiting {wait_time}s...")
+                    print(
+                        f"   ⏳ Server error ({e.status_code}). Waiting {wait_time}s..."
+                    )
                     time.sleep(wait_time)
                     continue
                 else:
@@ -354,7 +378,9 @@ Generate a formula that is:
 
 Return ONLY the JSON object."""
 
-    def _build_fallback_prompt(self, requirements: str, domain: str, variant: int) -> str:
+    def _build_fallback_prompt(
+        self, requirements: str, domain: str, variant: int
+    ) -> str:
         """
         Build simplified fallback prompt for when primary prompt fails.
 
@@ -417,7 +443,13 @@ JSON only, no other text."""
             result = json.loads(json_str)
 
             # Ensure all required fields exist
-            required_fields = ["formula_latex", "formula_python", "variables", "explanation", "novelty_score"]
+            required_fields = [
+                "formula_latex",
+                "formula_python",
+                "variables",
+                "explanation",
+                "novelty_score",
+            ]
 
             for field in required_fields:
                 if field not in result or result[field] in [None, "", "N/A"]:
@@ -469,8 +501,10 @@ JSON only, no other text."""
 
         # Check required fields are not error messages
         required_checks = [
-            formula.get("formula_latex", "").lower() not in ["parse error", "json parse error", ""],
-            formula.get("formula_python", "").lower() not in ["# error", "# failed", ""],
+            formula.get("formula_latex", "").lower()
+            not in ["parse error", "json parse error", ""],
+            formula.get("formula_python", "").lower()
+            not in ["# error", "# failed", ""],
             formula.get("explanation", "").lower() not in ["failed", "missing", ""],
             isinstance(formula.get("variables"), dict),
             isinstance(formula.get("novelty_score"), (int, float)),
@@ -493,7 +527,9 @@ JSON only, no other text."""
             "similar_to": [],
         }
 
-    def refine_formula(self, formula: Dict[str, Any], feedback: str, max_retries: int = 3) -> Dict[str, Any]:
+    def refine_formula(
+        self, formula: Dict[str, Any], feedback: str, max_retries: int = 3
+    ) -> Dict[str, Any]:
         """
         Iteratively improve formula based on user feedback.
 
@@ -580,7 +616,9 @@ Return JSON only."""
         Returns:
             Dictionary with usage stats
         """
-        total_tokens = self.stats["total_tokens_input"] + self.stats["total_tokens_output"]
+        total_tokens = (
+            self.stats["total_tokens_input"] + self.stats["total_tokens_output"]
+        )
         success_rate = (
             self.stats["successful_requests"] / self.stats["total_requests"] * 100
             if self.stats["total_requests"] > 0
@@ -592,7 +630,9 @@ Return JSON only."""
             "total_tokens": total_tokens,
             "success_rate_percent": round(success_rate, 1),
             "avg_tokens_per_request": (
-                total_tokens / self.stats["total_requests"] if self.stats["total_requests"] > 0 else 0
+                total_tokens / self.stats["total_requests"]
+                if self.stats["total_requests"] > 0
+                else 0
             ),
         }
 
@@ -629,7 +669,9 @@ if __name__ == "__main__":
 
     # Test formula generation
     results = provider.generate_formula(
-        requirements="Calculate impermanent loss for Uniswap V2 liquidity pools", domain="defi", n_candidates=1
+        requirements="Calculate impermanent loss for Uniswap V2 liquidity pools",
+        domain="defi",
+        n_candidates=1,
     )
 
     formula = results[0]
@@ -663,7 +705,9 @@ if __name__ == "__main__":
             print(f"\n📊 Metadata:")
             print(f"   Model: {meta.get('model')}")
             print(f"   Generation time: {meta.get('generation_time_seconds')}s")
-            print(f"   Tokens: {meta.get('input_tokens')} in, {meta.get('output_tokens')} out")
+            print(
+                f"   Tokens: {meta.get('input_tokens')} in, {meta.get('output_tokens')} out"
+            )
 
     # Show statistics
     print("\n" + "=" * 70)

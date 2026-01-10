@@ -237,7 +237,9 @@ class RiskCalculator:
         """Formula 4: Sortino Ratio"""
         excess_returns = returns - target_return
         downside_returns = returns[returns < target_return]
-        downside_dev = np.std(downside_returns) if len(downside_returns) > 0 else np.std(returns)
+        downside_dev = (
+            np.std(downside_returns) if len(downside_returns) > 0 else np.std(returns)
+        )
 
         sortino = np.mean(excess_returns) / downside_dev if downside_dev > 0 else 0
         sortino_annual = sortino * np.sqrt(252)
@@ -275,7 +277,9 @@ class RiskCalculator:
         }
 
     @staticmethod
-    def calculate_treynor_ratio(returns: np.ndarray, market_returns: np.ndarray, risk_free_rate: float) -> Dict:
+    def calculate_treynor_ratio(
+        returns: np.ndarray, market_returns: np.ndarray, risk_free_rate: float
+    ) -> Dict:
         """Formula 6: Treynor Ratio"""
         beta_result = RiskCalculator.calculate_beta(returns, market_returns)
         beta = beta_result["beta"]
@@ -292,7 +296,9 @@ class RiskCalculator:
         }
 
     @staticmethod
-    def calculate_information_ratio(returns: np.ndarray, benchmark_returns: np.ndarray) -> Dict:
+    def calculate_information_ratio(
+        returns: np.ndarray, benchmark_returns: np.ndarray
+    ) -> Dict:
         """Formula 7: Information Ratio"""
         active_returns = returns - benchmark_returns
         active_return = np.mean(active_returns)
@@ -317,7 +323,9 @@ class RiskCalculator:
 
         max_dd = np.min(drawdown)
         max_dd_idx = np.argmin(drawdown)
-        peak_idx = np.argmax(cumulative_wealth[: max_dd_idx + 1]) if max_dd_idx > 0 else 0
+        peak_idx = (
+            np.argmax(cumulative_wealth[: max_dd_idx + 1]) if max_dd_idx > 0 else 0
+        )
 
         recovery_days = 0
         if max_dd_idx < len(cumulative_wealth) - 1:
@@ -359,7 +367,9 @@ class RiskCalculator:
             "dar_pct": dar * 100,
             "confidence": confidence,
             "tail_observations": len(tail_drawdowns),
-            "interpretation": "Good" if cdar > -0.15 else "Moderate" if cdar > -0.25 else "High Risk",
+            "interpretation": (
+                "Good" if cdar > -0.15 else "Moderate" if cdar > -0.25 else "High Risk"
+            ),
         }
 
     @staticmethod
@@ -384,7 +394,9 @@ class RiskCalculator:
         }
 
     @staticmethod
-    def calculate_m_squared(returns: np.ndarray, risk_free_rate: float, benchmark_vol: float) -> Dict:
+    def calculate_m_squared(
+        returns: np.ndarray, risk_free_rate: float, benchmark_vol: float
+    ) -> Dict:
         """Formula 23: M² (Modigliani-Modigliani)"""
         sharpe_result = RiskCalculator.calculate_sharpe_ratio(returns, risk_free_rate)
         sharpe = sharpe_result["sharpe_ratio"]
@@ -429,11 +441,17 @@ class RiskCalculator:
         """Formula 25: Rachev Ratio (Tail Risk Ratio)"""
         # CVaR of gains (upper tail)
         gains = returns[returns > 0]
-        cvar_gains = np.mean(np.percentile(gains, [alpha * 100, 100])) if len(gains) > 0 else 0
+        cvar_gains = (
+            np.mean(np.percentile(gains, [alpha * 100, 100])) if len(gains) > 0 else 0
+        )
 
         # CVaR of losses (lower tail)
         losses = returns[returns < 0]
-        cvar_losses = abs(np.mean(np.percentile(losses, [0, (1 - alpha) * 100]))) if len(losses) > 0 else 1
+        cvar_losses = (
+            abs(np.mean(np.percentile(losses, [0, (1 - alpha) * 100])))
+            if len(losses) > 0
+            else 1
+        )
 
         rachev = cvar_gains / cvar_losses if cvar_losses > 0 else 0
 
@@ -462,7 +480,9 @@ class RiskCalculator:
             "d_ratio": d_ratio,
             "avg_underwater_pct": avg_underwater * 100,
             "total_volatility": total_vol * 100,
-            "interpretation": "Excellent" if d_ratio < 0.5 else "Good" if d_ratio < 1.0 else "Poor",
+            "interpretation": (
+                "Excellent" if d_ratio < 0.5 else "Good" if d_ratio < 1.0 else "Poor"
+            ),
         }
 
     @staticmethod
@@ -478,7 +498,9 @@ class RiskCalculator:
             "romad": romad,
             "annual_return_pct": annual_return,
             "max_drawdown_pct": max_dd,
-            "interpretation": "Excellent" if romad > 5 else "Good" if romad > 2 else "Moderate",
+            "interpretation": (
+                "Excellent" if romad > 5 else "Good" if romad > 2 else "Moderate"
+            ),
         }
 
     @staticmethod
@@ -492,7 +514,9 @@ class RiskCalculator:
         underwater = (cumulative_wealth - running_max) / running_max
         underwater_periods = underwater[underwater < 0]
 
-        avg_underwater = abs(np.mean(underwater_periods)) if len(underwater_periods) > 0 else 0.01
+        avg_underwater = (
+            abs(np.mean(underwater_periods)) if len(underwater_periods) > 0 else 0.01
+        )
 
         excess_return = annual_return - risk_free_rate
         serenity = excess_return / avg_underwater if avg_underwater > 0 else 0
@@ -501,7 +525,9 @@ class RiskCalculator:
             "serenity_ratio": serenity,
             "excess_return_pct": excess_return * 100,
             "avg_underwater_pct": avg_underwater * 100,
-            "interpretation": "Strong" if serenity > 1.5 else "Moderate" if serenity > 0.5 else "Weak",
+            "interpretation": (
+                "Strong" if serenity > 1.5 else "Moderate" if serenity > 0.5 else "Weak"
+            ),
         }
 
     @staticmethod
@@ -511,7 +537,9 @@ class RiskCalculator:
         x = np.arange(len(cumulative_returns))
 
         # Linear regression
-        slope, intercept, r_value, p_value, std_err = stats.linregress(x, cumulative_returns)
+        slope, intercept, r_value, p_value, std_err = stats.linregress(
+            x, cumulative_returns
+        )
         r_squared = r_value**2
 
         interpretation = "Excellent"
@@ -522,10 +550,17 @@ class RiskCalculator:
         elif r_squared < 0.95:
             interpretation = "Good"
 
-        return {"stability_index": r_squared, "r_squared": r_squared, "slope": slope, "interpretation": interpretation}
+        return {
+            "stability_index": r_squared,
+            "r_squared": r_squared,
+            "slope": slope,
+            "interpretation": interpretation,
+        }
 
     @staticmethod
-    def calculate_recovery_factor(returns: np.ndarray, initial_capital: float = 100000) -> Dict:
+    def calculate_recovery_factor(
+        returns: np.ndarray, initial_capital: float = 100000
+    ) -> Dict:
         """Formula 30: Recovery Factor"""
         # Net profit
         final_value = initial_capital * (1 + returns).prod()
@@ -542,7 +577,9 @@ class RiskCalculator:
             "recovery_factor": recovery,
             "net_profit": net_profit,
             "max_drawdown_dollar": max_dd_dollar,
-            "interpretation": "Excellent" if recovery > 5 else "Good" if recovery > 3 else "Moderate",
+            "interpretation": (
+                "Excellent" if recovery > 5 else "Good" if recovery > 3 else "Moderate"
+            ),
         }
 
 
@@ -562,31 +599,45 @@ class ComprehensiveRiskAnalyzer:
         # Calculate all original metrics (1-8)
         var_result = self.calculator.calculate_var_95(returns)
         cvar_result = self.calculator.calculate_cvar_95(returns)
-        sharpe_result = self.calculator.calculate_sharpe_ratio(returns, position.risk_free_rate / 252)
-        sortino_result = self.calculator.calculate_sortino_ratio(returns, position.target_return / 252)
+        sharpe_result = self.calculator.calculate_sharpe_ratio(
+            returns, position.risk_free_rate / 252
+        )
+        sortino_result = self.calculator.calculate_sortino_ratio(
+            returns, position.target_return / 252
+        )
         beta_result = self.calculator.calculate_beta(returns, benchmark_returns)
         treynor_result = self.calculator.calculate_treynor_ratio(
             returns, benchmark_returns, position.risk_free_rate / 252
         )
-        ir_result = self.calculator.calculate_information_ratio(returns, benchmark_returns)
+        ir_result = self.calculator.calculate_information_ratio(
+            returns, benchmark_returns
+        )
         mdd_result = self.calculator.calculate_maximum_drawdown(returns)
 
         # Calculate all new metrics (21-30)
         cdar_result = self.calculator.calculate_cdar(returns)
         tail_result = self.calculator.calculate_tail_ratio(returns)
         m2_result = self.calculator.calculate_m_squared(
-            returns, position.risk_free_rate / 252, np.std(benchmark_returns) * np.sqrt(252) * 100
+            returns,
+            position.risk_free_rate / 252,
+            np.std(benchmark_returns) * np.sqrt(252) * 100,
         )
         prospect_result = self.calculator.calculate_prospect_ratio(returns)
         rachev_result = self.calculator.calculate_rachev_ratio(returns)
         d_ratio_result = self.calculator.calculate_d_ratio(returns)
         romad_result = self.calculator.calculate_romad(returns)
-        serenity_result = self.calculator.calculate_serenity_ratio(returns, position.risk_free_rate / 252)
+        serenity_result = self.calculator.calculate_serenity_ratio(
+            returns, position.risk_free_rate / 252
+        )
         stability_result = self.calculator.calculate_stability_index(returns)
-        recovery_result = self.calculator.calculate_recovery_factor(returns, position.initial_value)
+        recovery_result = self.calculator.calculate_recovery_factor(
+            returns, position.initial_value
+        )
 
         # Overall assessment
-        total_return = (position.current_value - position.initial_value) / position.initial_value
+        total_return = (
+            position.current_value - position.initial_value
+        ) / position.initial_value
 
         return {
             "position_name": position.name,
@@ -807,7 +858,9 @@ def generate_test_positions() -> List[PortfolioPosition]:
     return positions
 
 
-def export_results_to_csv(results: List[Dict], filename: str = "extended_risk_analysis.csv"):
+def export_results_to_csv(
+    results: List[Dict], filename: str = "extended_risk_analysis.csv"
+):
     """Export results to CSV"""
     if not results:
         return
@@ -834,7 +887,9 @@ if __name__ == "__main__":
     analyzer = ComprehensiveRiskAnalyzer()
 
     results = []
-    print(f"{'Portfolio':<25} {'Return':>8} {'Sharpe':>8} {'Beta':>8} {'RoMaD':>8} {'Stability':>10} {'Rating':>12}")
+    print(
+        f"{'Portfolio':<25} {'Return':>8} {'Sharpe':>8} {'Beta':>8} {'RoMaD':>8} {'Stability':>10} {'Rating':>12}"
+    )
     print("-" * 105)
 
     for position in positions:
@@ -856,17 +911,23 @@ if __name__ == "__main__":
     print(f"  Total Portfolios: {len(results)}")
     print(f"  Average Return: {np.mean([r['total_return_pct'] for r in results]):.2f}%")
     print(f"  Average Sharpe: {np.mean([r['sharpe_ratio'] for r in results]):.2f}")
-    print(f"  Average Stability: {np.mean([r['stability_index'] for r in results]):.3f}")
+    print(
+        f"  Average Stability: {np.mean([r['stability_index'] for r in results]):.3f}"
+    )
     print(f"  Average RoMaD: {np.mean([r['romad'] for r in results]):.2f}")
     print()
     best = max(results, key=lambda x: x["sharpe_ratio"])
     print(f"  Best Sharpe: {best['position_name']} ({best['sharpe_ratio']:.2f})")
 
     most_stable = max(results, key=lambda x: x["stability_index"])
-    print(f"  Most Stable: {most_stable['position_name']} (R²={most_stable['stability_index']:.3f})")
+    print(
+        f"  Most Stable: {most_stable['position_name']} (R²={most_stable['stability_index']:.3f})"
+    )
 
     best_recovery = max(results, key=lambda x: x["recovery_factor"])
-    print(f"  Best Recovery: {best_recovery['position_name']} ({best_recovery['recovery_factor']:.2f}x)")
+    print(
+        f"  Best Recovery: {best_recovery['position_name']} ({best_recovery['recovery_factor']:.2f}x)"
+    )
     print()
 
 export_results_to_csv(results)

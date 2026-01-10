@@ -125,7 +125,9 @@ def elapsed_run_time(start_time, end_time):
 def run_script(script_path, python_executable="python3.11"):
     """Runs the specified script using a specified Python version and handles the output."""
     try:
-        result = subprocess.run([python_executable, script_path], capture_output=True, text=True, check=True)
+        result = subprocess.run(
+            [python_executable, script_path], capture_output=True, text=True, check=True
+        )
         print(f"{script_path} completed successfully: {result.stdout}")
     except subprocess.CalledProcessError as e:
         print(f"Error running {script_path}: {e.stderr}")
@@ -138,7 +140,9 @@ def get_formatted_patterns(*patterns_list):
     rules_patterns = []
     for patterns_dict in patterns_list:
         for key, patterns in patterns_dict.items():
-            rules_patterns.extend([{"label": key, "pattern": pattern} for pattern in patterns])
+            rules_patterns.extend(
+                [{"label": key, "pattern": pattern} for pattern in patterns]
+            )
     return rules_patterns
 
 
@@ -260,7 +264,11 @@ def dict_list_to_dict_dict(dictionary):
     new_dict = {}
     for key, value in dictionary.items():
         if isinstance(value, list):
-            new_dict[key] = {item_key: item_value for d in value for item_key, item_value in d.items()}
+            new_dict[key] = {
+                item_key: item_value
+                for d in value
+                for item_key, item_value in d.items()
+            }
     return new_dict
 
 
@@ -462,7 +470,10 @@ def evaluation_profiler(function, *args, **kwargs):
 
 
 def evaluate_the_model(nlp, TEST_DATA):
-    examples = [Example.from_dict(nlp.make_doc(text), annotations) for text, annotations in TEST_DATA]
+    examples = [
+        Example.from_dict(nlp.make_doc(text), annotations)
+        for text, annotations in TEST_DATA
+    ]
     return nlp.evaluate(examples).scores
 
 
@@ -499,7 +510,15 @@ def upload_spacy_training_data(input_dir, filename, nlp):
     docs = list(doc_bin.get_docs(nlp.vocab))
 
     training_data = [
-        (doc.text, {"entities": [(ent.start_char, ent.end_char, ent.label_) for ent in doc.ents]}) for doc in docs
+        (
+            doc.text,
+            {
+                "entities": [
+                    (ent.start_char, ent.end_char, ent.label_) for ent in doc.ents
+                ]
+            },
+        )
+        for doc in docs
     ]
 
     print(f"✓ Loaded {len(training_data)} examples from {file_path}")
@@ -578,7 +597,9 @@ def dataset_normalized(path_data, col_name):
         elif path_data.endswith(".csv"):
             df = pd.read_csv(path_data)
         else:
-            raise ValueError("Unsupported file format. Only Excel and CSV files are supported.")
+            raise ValueError(
+                "Unsupported file format. Only Excel and CSV files are supported."
+            )
 
         if col_name not in df.columns:
             raise ValueError(f"Column {col_name} not found in the data.")
@@ -616,7 +637,18 @@ def get_patterns(data, col_name, nlp):
     patterns_head = []
     for key in pos_:
         patterns.update(
-            {key: list(set([d[key] for d in dp if key == list(d.keys())[0] and d[key] not in data["stopwords"]]))}
+            {
+                key: list(
+                    set(
+                        [
+                            d[key]
+                            for d in dp
+                            if key == list(d.keys())[0]
+                            and d[key] not in data["stopwords"]
+                        ]
+                    )
+                )
+            }
         )
     return patterns
 
@@ -646,20 +678,26 @@ def get_ner_desc_formulas(nlp_formulas, nlp_desc, ruler_name="ruler_arg"):
             desc_ruler = nlp.get_pipe(ruler_name)
 
             # Merge patterns from both rulers
-            if isinstance(formulas_ruler, EntityRuler) and isinstance(desc_ruler, EntityRuler):
+            if isinstance(formulas_ruler, EntityRuler) and isinstance(
+                desc_ruler, EntityRuler
+            ):
                 # Get patterns from both rulers
                 formulas_patterns = formulas_ruler.patterns
                 desc_patterns = desc_ruler.patterns
 
                 # Combine patterns (avoiding duplicates)
-                combined_patterns = desc_patterns + [p for p in formulas_patterns if p not in desc_patterns]
+                combined_patterns = desc_patterns + [
+                    p for p in formulas_patterns if p not in desc_patterns
+                ]
 
                 # Remove old ruler and add new one with combined patterns
                 nlp.remove_pipe(ruler_name)
                 ruler = nlp.add_pipe("entity_ruler", name=ruler_name, before="ner")
                 ruler.add_patterns(combined_patterns)
 
-                print(f"✅ Merged {len(desc_patterns)} desc patterns + {len(formulas_patterns)} formulas patterns")
+                print(
+                    f"✅ Merged {len(desc_patterns)} desc patterns + {len(formulas_patterns)} formulas patterns"
+                )
                 print(f"   Total unique patterns: {len(combined_patterns)}")
         else:
             # Add formulas ruler to desc pipeline if it doesn't exist
@@ -775,7 +813,9 @@ def set_entity(data, col_name, ner_base_entity=None):
         dt_e = {"entities": []}
         for ent in doc.ents:
             dp.append([ent.text, ent.label_])
-            dt_e["entities"].append((int(ent.start_char), int(ent.end_char), ent.label_))
+            dt_e["entities"].append(
+                (int(ent.start_char), int(ent.end_char), ent.label_)
+            )
         dt.append((text, dt_e))
         dd.append(dp)
     return dd, dt
@@ -792,10 +832,14 @@ def create_ruler(rules, nlp=None, ner_base_model=None):
         formatted_patterns = rules
     elif isinstance(rules, dict) == True and isinstance(*rules.values(), list) == True:
         formatted_patterns = [
-            {"label": label, "pattern": pattern} for (label, patterns) in rules.items() for pattern in patterns
+            {"label": label, "pattern": pattern}
+            for (label, patterns) in rules.items()
+            for pattern in patterns
         ]
     elif isinstance(rules, dict) == True and isinstance(*rules.values(), list) == False:
-        formatted_patterns = [{"label": label, "pattern": pattern} for (label, pattern) in rules.items()]
+        formatted_patterns = [
+            {"label": label, "pattern": pattern} for (label, pattern) in rules.items()
+        ]
     else:
         pass
     ruler.add_patterns(formatted_patterns)
@@ -824,7 +868,9 @@ def preproc_ent(path_data, stopwords, train=True):
     else:
         # Validate path parameter
         if not isinstance(path_data, (str, Path)):
-            raise ValueError("path_data must be a string/Path representing the file path or a DataFrame.")
+            raise ValueError(
+                "path_data must be a string/Path representing the file path or a DataFrame."
+            )
 
         # Load data from file
         path_str = str(path_data)
@@ -836,7 +882,9 @@ def preproc_ent(path_data, stopwords, train=True):
             elif file_data.endswith(".csv"):
                 df = pd.read_csv(path_data)
             else:
-                raise ValueError("Unsupported file format. Only Excel and CSV files are supported.")
+                raise ValueError(
+                    "Unsupported file format. Only Excel and CSV files are supported."
+                )
         except Exception as e:
             raise IOError(f"An error occurred while loading the data: {e}")
 
@@ -861,7 +909,12 @@ def preproc_ent(path_data, stopwords, train=True):
             out = out_d if idx == 0 else out_f
             out["text"] = [str(sentence) for sentence in df[col]]
             out["vocab"] = list(
-                set(word for sentence in dg_tok[col] for word in sentence if word not in out["stopwords"])
+                set(
+                    word
+                    for sentence in dg_tok[col]
+                    for word in sentence
+                    if word not in out["stopwords"]
+                )
             )
 
         return out_d, out_f
@@ -890,7 +943,9 @@ def preproc_ent(path_data, stopwords, train=True):
     else:
         # Validate path parameter
         if not isinstance(path_data, (str, Path)):
-            raise ValueError("path_data must be a string/Path representing the file path or a DataFrame.")
+            raise ValueError(
+                "path_data must be a string/Path representing the file path or a DataFrame."
+            )
 
         # Load data from file
         path_str = str(path_data)
@@ -902,7 +957,9 @@ def preproc_ent(path_data, stopwords, train=True):
             elif file_data.endswith(".csv"):
                 df = pd.read_csv(path_data)
             else:
-                raise ValueError("Unsupported file format. Only Excel and CSV files are supported.")
+                raise ValueError(
+                    "Unsupported file format. Only Excel and CSV files are supported."
+                )
         except Exception as e:
             raise IOError(f"An error occurred while loading the data: {e}")
 
@@ -927,7 +984,12 @@ def preproc_ent(path_data, stopwords, train=True):
             out = out_d if idx == 0 else out_f
             out["text"] = [str(sentence) for sentence in df[col]]
             out["vocab"] = list(
-                set(word for sentence in dg_tok[col] for word in sentence if word not in out["stopwords"])
+                set(
+                    word
+                    for sentence in dg_tok[col]
+                    for word in sentence
+                    if word not in out["stopwords"]
+                )
             )
 
         return out_d, out_f
@@ -951,7 +1013,9 @@ def tok_formulas(path_data, not_oper):
     """
     # Validate not_oper parameter
     if not isinstance(not_oper, list):
-        raise ValueError("not_oper must be a list of strings representing non-operator tokens.")
+        raise ValueError(
+            "not_oper must be a list of strings representing non-operator tokens."
+        )
 
     # Check if input is already a DataFrame
     if isinstance(path_data, pd.DataFrame):
@@ -959,7 +1023,9 @@ def tok_formulas(path_data, not_oper):
     else:
         # Validate path parameter
         if not isinstance(path_data, (str, Path)):
-            raise ValueError("path_data must be a string/Path representing the file path or a DataFrame.")
+            raise ValueError(
+                "path_data must be a string/Path representing the file path or a DataFrame."
+            )
 
         # Check the file format and read the file accordingly
         path_str = str(path_data)
@@ -976,7 +1042,9 @@ def tok_formulas(path_data, not_oper):
             except Exception as e:
                 raise IOError(f"Failed to load CSV file: {e}")
         else:
-            raise ValueError("Unsupported file format. Only Excel and CSV files are supported.")
+            raise ValueError(
+                "Unsupported file format. Only Excel and CSV files are supported."
+            )
 
     # Define regex pattern for splitting
     patterns = r"\(| = | >= | > | \[ | \) | \{ | \]"

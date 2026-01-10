@@ -6,7 +6,15 @@ import spacy
 
 
 class CustomNerComponent:
-    def __init__(self, domain, sub_domain, type, python_version, path_entity_name=None, ner_base_model=None):
+    def __init__(
+        self,
+        domain,
+        sub_domain,
+        type,
+        python_version,
+        path_entity_name=None,
+        ner_base_model=None,
+    ):
         self.domain = domain
         self.sub_domain = sub_domain
         self.type = type
@@ -20,7 +28,9 @@ class CustomNerComponent:
         # Using resources to safely access package resources
         try:
             if self.domain == "queries":
-                path_dir = resources.files(f"hypatiax.custom_ner.queries.{self.sub_donain}.components")
+                path_dir = resources.files(
+                    f"hypatiax.custom_ner.queries.{self.sub_donain}.components"
+                )
 
                 if self.type == "desc":
                     path_entity = path_dir / f"ruler_{self.sub_domain}_desc.py"
@@ -40,7 +50,9 @@ class CustomNerComponent:
                 raise ValueError(f"No handling defined for domain: {self.domain}")
 
             # Run the Python script for the specified entity ruler
-            result = subprocess.run([self.py_version, str(path_entity)], capture_output=True, text=True)
+            result = subprocess.run(
+                [self.py_version, str(path_entity)], capture_output=True, text=True
+            )
             if result.returncode != 0:
                 raise Exception(f"Error running script {path_entity}: {result.stderr}")
             return result.stdout

@@ -20,7 +20,13 @@ from sympy import lambdify, symbols, sympify
 
 # Skip all tests if no API keys configured
 pytestmark = pytest.mark.skipif(
-    not any([os.getenv("OPENAI_API_KEY"), os.getenv("ANTHROPIC_API_KEY"), os.getenv("GEMINI_API_KEY")]),
+    not any(
+        [
+            os.getenv("OPENAI_API_KEY"),
+            os.getenv("ANTHROPIC_API_KEY"),
+            os.getenv("GEMINI_API_KEY"),
+        ]
+    ),
     reason="No LLM API keys configured",
 )
 
@@ -37,7 +43,10 @@ class TestLLMFormulaGeneration:
         Use 'r' for the price ratio (final_price / initial_price)."""
 
         response = openai_client.chat.completions.create(
-            model="gpt-4", messages=[{"role": "user", "content": prompt}], temperature=0.1, max_tokens=200
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.1,
+            max_tokens=200,
         )
 
         formula_text = response.choices[0].message.content.strip()
@@ -88,7 +97,10 @@ class TestLLMFormulaGeneration:
 
         if llm_provider == "openai":
             response = client.chat.completions.create(
-                model="gpt-4", messages=[{"role": "user", "content": prompt}], temperature=0.0, max_tokens=100
+                model="gpt-4",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.0,
+                max_tokens=100,
             )
             formula = response.choices[0].message.content
         else:  # anthropic
@@ -123,7 +135,10 @@ class TestLLMFormulaExplanation:
         3. Expected behavior for different price ratios"""
 
         response = openai_client.chat.completions.create(
-            model="gpt-4", messages=[{"role": "user", "content": prompt}], temperature=0.3, max_tokens=500
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3,
+            max_tokens=500,
         )
 
         explanation = response.choices[0].message.content
@@ -131,7 +146,9 @@ class TestLLMFormulaExplanation:
         # Validate explanation quality
         assert len(explanation) > 200
         assert "r" in explanation.lower()
-        assert any(word in explanation.lower() for word in ["ratio", "price", "liquidity"])
+        assert any(
+            word in explanation.lower() for word in ["ratio", "price", "liquidity"]
+        )
         assert any(word in explanation.lower() for word in ["loss", "negative"])
 
     @pytest.mark.anthropic
@@ -178,7 +195,10 @@ class TestE2EWorkflows:
         Provide the impermanent loss formula and the calculation steps."""
 
         response = openai_client.chat.completions.create(
-            model="gpt-4", messages=[{"role": "user", "content": formula_prompt}], temperature=0.2, max_tokens=400
+            model="gpt-4",
+            messages=[{"role": "user", "content": formula_prompt}],
+            temperature=0.2,
+            max_tokens=400,
         )
 
         llm_response = response.choices[0].message.content
@@ -195,7 +215,9 @@ class TestE2EWorkflows:
         assert float(il_value) > -0.01  # Small loss for 25% change
 
         # Verify LLM mentioned key concepts
-        assert any(word in llm_response.lower() for word in ["loss", "impermanent", "ratio"])
+        assert any(
+            word in llm_response.lower() for word in ["loss", "impermanent", "ratio"]
+        )
 
     @pytest.mark.anthropic
     @pytest.mark.slow
@@ -214,12 +236,19 @@ class TestE2EWorkflows:
                 anthropic_client.messages.create,
                 model="claude-3-5-sonnet-20241022",
                 max_tokens=200,
-                messages=[{"role": "user", "content": f"Briefly explain this formula: {formula}"}],
+                messages=[
+                    {
+                        "role": "user",
+                        "content": f"Briefly explain this formula: {formula}",
+                    }
+                ],
             )
             return response.content[0].text
 
         # Process all formulas concurrently
-        explanations = await asyncio.gather(*[explain_formula(f) for f in formulas_to_explain])
+        explanations = await asyncio.gather(
+            *[explain_formula(f) for f in formulas_to_explain]
+        )
 
         # Validate all explanations received
         assert len(explanations) == len(formulas_to_explain)
@@ -232,7 +261,12 @@ class TestE2EWorkflows:
         initial_formula = "profit = revenue - cost"
 
         # Step 1: Initial formula
-        messages = [{"role": "user", "content": f"Evaluate this profit formula: {initial_formula}"}]
+        messages = [
+            {
+                "role": "user",
+                "content": f"Evaluate this profit formula: {initial_formula}",
+            }
+        ]
 
         response1 = openai_client.chat.completions.create(
             model="gpt-4", messages=messages, temperature=0.3, max_tokens=200
@@ -242,7 +276,12 @@ class TestE2EWorkflows:
 
         # Step 2: Refine based on feedback
         messages.append({"role": "assistant", "content": feedback1})
-        messages.append({"role": "user", "content": "Now add consideration for taxes and operating expenses"})
+        messages.append(
+            {
+                "role": "user",
+                "content": "Now add consideration for taxes and operating expenses",
+            }
+        )
 
         response2 = openai_client.chat.completions.create(
             model="gpt-4", messages=messages, temperature=0.3, max_tokens=200
@@ -268,7 +307,9 @@ class TestErrorHandling:
         for i in range(5):
             try:
                 response = openai_client.chat.completions.create(
-                    model="gpt-3.5-turbo", messages=[{"role": "user", "content": f"Test {i}"}], max_tokens=10
+                    model="gpt-3.5-turbo",
+                    messages=[{"role": "user", "content": f"Test {i}"}],
+                    max_tokens=10,
                 )
                 results.append(response.choices[0].message.content)
             except Exception as e:
@@ -288,7 +329,9 @@ class TestErrorHandling:
         prompt = f"Is this a valid mathematical formula? {invalid_formula}"
 
         response = anthropic_client.messages.create(
-            model="claude-3-5-sonnet-20241022", max_tokens=100, messages=[{"role": "user", "content": prompt}]
+            model="claude-3-5-sonnet-20241022",
+            max_tokens=100,
+            messages=[{"role": "user", "content": prompt}],
         )
 
         validation = response.content[0].text.lower()
@@ -301,7 +344,9 @@ class TestErrorHandling:
         """Test handling of malformed requests."""
         with pytest.raises(Exception) as exc_info:
             # Missing required parameters
-            openai_client.chat.completions.create(model="gpt-4", messages=[])  # Empty messages
+            openai_client.chat.completions.create(
+                model="gpt-4", messages=[]
+            )  # Empty messages
 
         assert exc_info.value is not None
 
@@ -316,7 +361,10 @@ class TestCostTracking:
         prompt = "Calculate the Sharpe Ratio for a portfolio with 12% return, 3% risk-free rate, and 10% volatility."
 
         response = openai_client.chat.completions.create(
-            model="gpt-4", messages=[{"role": "user", "content": prompt}], temperature=0.1, max_tokens=150
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.1,
+            max_tokens=150,
         )
 
         usage = response.usage
@@ -338,14 +386,20 @@ class TestCostTracking:
     @pytest.mark.slow
     def test_batch_cost_estimation(self, anthropic_client):
         """Test cost estimation for batch processing."""
-        prompts = ["Explain Sharpe Ratio", "Explain Sortino Ratio", "Explain Calmar Ratio"]
+        prompts = [
+            "Explain Sharpe Ratio",
+            "Explain Sortino Ratio",
+            "Explain Calmar Ratio",
+        ]
 
         total_input_tokens = 0
         total_output_tokens = 0
 
         for prompt in prompts:
             response = anthropic_client.messages.create(
-                model="claude-3-5-sonnet-20241022", max_tokens=150, messages=[{"role": "user", "content": prompt}]
+                model="claude-3-5-sonnet-20241022",
+                max_tokens=150,
+                messages=[{"role": "user", "content": prompt}],
             )
 
             total_input_tokens += response.usage.input_tokens
@@ -372,7 +426,10 @@ class TestLLMResponseQuality:
         responses = []
         for _ in range(3):
             response = openai_client.chat.completions.create(
-                model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}], temperature=0.0, max_tokens=10
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.0,
+                max_tokens=10,
             )
             responses.append(response.choices[0].message.content.strip())
 
@@ -392,7 +449,9 @@ class TestLLMResponseQuality:
         5. σ - Volatility"""
 
         response = anthropic_client.messages.create(
-            model="claude-3-5-sonnet-20241022", max_tokens=1000, messages=[{"role": "user", "content": prompt}]
+            model="claude-3-5-sonnet-20241022",
+            max_tokens=1000,
+            messages=[{"role": "user", "content": prompt}],
         )
 
         content = response.content[0].text

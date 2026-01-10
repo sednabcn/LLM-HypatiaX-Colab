@@ -43,13 +43,19 @@ for latex_str, desc in test_cases:
         print(f"  Exponential functions: {len(exps)}")
 
         # Check for E^x
-        e_pows = [atom for atom in sp.preorder_traversal(expr) if atom.is_Pow and atom.base == sp.E]
+        e_pows = [
+            atom
+            for atom in sp.preorder_traversal(expr)
+            if atom.is_Pow and atom.base == sp.E
+        ]
         print(f"  E^x operations: {len(e_pows)}")
         for ep in e_pows[:3]:
             print(f"    - E^{ep.exp}")
 
         # Check for factorials
-        facts = [atom for atom in sp.preorder_traversal(expr) if atom.func == sp.factorial]
+        facts = [
+            atom for atom in sp.preorder_traversal(expr) if atom.func == sp.factorial
+        ]
         print(f"  Factorials: {len(facts)}")
 
     except Exception as e:
@@ -77,7 +83,9 @@ test_e = [
 ]
 for t in test_e:
     try:
-        expr = parse_latex(t) if "\\" in t or "^" in t else sp.sympify(t, evaluate=False)
+        expr = (
+            parse_latex(t) if "\\" in t or "^" in t else sp.sympify(t, evaluate=False)
+        )
         has_E = expr.has(sp.E)
         has_exp = any(atom.func == sp.exp for atom in sp.preorder_traversal(expr))
         print(f"  {t:15s} -> {str(expr):20s} | has_E={has_E}, has_exp={has_exp}")

@@ -37,4 +37,9 @@ def temp_csv_file(tmp_path):
 @pytest.fixture
 def mock_config():
     """Mock configuration object"""
-    return {"api_timeout": 30, "max_retries": 3, "batch_size": 32, "enable_caching": True}
+    return {
+        "api_timeout": 30,
+        "max_retries": 3,
+        "batch_size": 32,
+        "enable_caching": True,
+    }

@@ -17,7 +17,9 @@ from typing import Any, Dict, List, Optional, Union
 # ============================================================================
 
 
-def validate_required_fields(data: Dict, required_fields: List[str]) -> tuple[bool, Optional[str]]:
+def validate_required_fields(
+    data: Dict, required_fields: List[str]
+) -> tuple[bool, Optional[str]]:
     """
     Validate that required fields are present in data
 
@@ -241,7 +243,9 @@ def format_datetime(dt: datetime, format_str: str = "%Y-%m-%d %H:%M:%S") -> str:
     return dt.strftime(format_str)
 
 
-def parse_datetime(date_str: str, format_str: str = "%Y-%m-%d %H:%M:%S") -> Optional[datetime]:
+def parse_datetime(
+    date_str: str, format_str: str = "%Y-%m-%d %H:%M:%S"
+) -> Optional[datetime]:
     """
     Parse datetime string
 
@@ -737,7 +741,9 @@ def retry(max_attempts: int = 3, delay: float = 1.0, backoff: float = 2.0):
                     if attempt == max_attempts - 1:
                         raise
 
-                    print(f"Attempt {attempt + 1} failed: {e}. Retrying in {current_delay}s...")
+                    print(
+                        f"Attempt {attempt + 1} failed: {e}. Retrying in {current_delay}s..."
+                    )
                     time.sleep(current_delay)
                     current_delay *= backoff
 
@@ -920,7 +926,9 @@ if __name__ == "__main__":
 
     # Test validation
     print("Testing validation...")
-    is_valid, error = validate_required_fields({"name": "test", "age": 25}, ["name", "age", "email"])
+    is_valid, error = validate_required_fields(
+        {"name": "test", "age": 25}, ["name", "age", "email"]
+    )
     print(f"Validation result: {is_valid}, Error: {error}")
 
     # Test text processing

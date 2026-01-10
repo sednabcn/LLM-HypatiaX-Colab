@@ -32,7 +32,11 @@ class PipelineConfig:
         # Model configurations
         self.spacy_config = {"n_iter": 30, "batch_size": 8}
 
-        self.transformer_config = {"model_name": "t5-small", "num_epochs": 5, "batch_size": 8}
+        self.transformer_config = {
+            "model_name": "t5-small",
+            "num_epochs": 5,
+            "batch_size": 8,
+        }
 
         self.rag_config = {"embedding_model": "all-MiniLM-L6-v2", "top_k": 5}
 
@@ -81,7 +85,10 @@ class PipelineExecutor:
 
     def _setup_logging(self):
         """Setup logging"""
-        log_file = self.config.logs_dir / f"pipeline_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+        log_file = (
+            self.config.logs_dir
+            / f"pipeline_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+        )
 
         import logging
 
@@ -117,7 +124,8 @@ class PipelineExecutor:
 
             # Initialize preprocessor
             prep_config = PreprocessingConfig(
-                input_file=str(self.config.raw_data_file), output_dir=str(self.config.preprocessed_dir)
+                input_file=str(self.config.raw_data_file),
+                output_dir=str(self.config.preprocessed_dir),
             )
 
             preprocessor = DataPreprocessor(prep_config)
@@ -141,7 +149,11 @@ class PipelineExecutor:
             stats = preprocessor.generate_statistics(data)
 
             self.log("✅ Data preparation complete")
-            self.results["prepare_data"] = {"status": "success", "num_examples": len(data), "statistics": stats}
+            self.results["prepare_data"] = {
+                "status": "success",
+                "num_examples": len(data),
+                "statistics": stats,
+            }
 
             return True
 
@@ -178,7 +190,10 @@ class PipelineExecutor:
             )
 
             self.log(f"✅ spaCy model saved to {model_path}")
-            self.results["train_spacy"] = {"status": "success", "model_path": str(model_path)}
+            self.results["train_spacy"] = {
+                "status": "success",
+                "model_path": str(model_path),
+            }
 
             return True
 
@@ -196,11 +211,17 @@ class PipelineExecutor:
         try:
             from training_transformer import TransformerConfig, TransformerTrainer
 
-            train_file = self.config.preprocessed_dir / "transformer" / "train_transformer.json"
-            val_file = self.config.preprocessed_dir / "transformer" / "val_transformer.json"
+            train_file = (
+                self.config.preprocessed_dir / "transformer" / "train_transformer.json"
+            )
+            val_file = (
+                self.config.preprocessed_dir / "transformer" / "val_transformer.json"
+            )
 
             if not train_file.exists():
-                self.log("Training data not found, skipping Transformer training", "warning")
+                self.log(
+                    "Training data not found, skipping Transformer training", "warning"
+                )
                 self.results["train_transformer"] = {"status": "skipped"}
                 return True
 
@@ -224,7 +245,10 @@ class PipelineExecutor:
             train_result = trainer.train(train_data, val_data)
 
             self.log("✅ Transformer training complete")
-            self.results["train_transformer"] = {"status": "success", "model_path": config.output_dir}
+            self.results["train_transformer"] = {
+                "status": "success",
+                "model_path": config.output_dir,
+            }
 
             return True
 
@@ -359,13 +383,19 @@ class PipelineExecutor:
             predictions = []
             for item in test_data:
                 if isinstance(item, list):
-                    predictions.append({"description": item[0], "true": item[1], "predicted": item[1]})  # Placeholder
+                    predictions.append(
+                        {"description": item[0], "true": item[1], "predicted": item[1]}
+                    )  # Placeholder
                 elif isinstance(item, dict):
                     predictions.append(
                         {
-                            "description": item.get("description", item.get("input_text", "")),
+                            "description": item.get(
+                                "description", item.get("input_text", "")
+                            ),
                             "true": item.get("formula", item.get("target_text", "")),
-                            "predicted": item.get("formula", item.get("target_text", "")),
+                            "predicted": item.get(
+                                "formula", item.get("target_text", "")
+                            ),
                         }
                     )
 
@@ -380,7 +410,9 @@ class PipelineExecutor:
             for pred in predictions:
                 desc = pred["description"]
                 result = mapper.map(desc, strategy="ensemble")
-                ensemble_predictions.append({"description": desc, "true": pred["true"], "predicted": result})
+                ensemble_predictions.append(
+                    {"description": desc, "true": pred["true"], "predicted": result}
+                )
 
             ensemble_metrics = evaluator.evaluate_predictions(ensemble_predictions)
             report.add_model_results("Ensemble", ensemble_metrics)
@@ -420,7 +452,9 @@ class PipelineExecutor:
 
             self.log("Setting up deployment API...")
 
-            deploy_config = DeploymentConfig(model_dir=str(self.config.models_dir), api_port=5000)
+            deploy_config = DeploymentConfig(
+                model_dir=str(self.config.models_dir), api_port=5000
+            )
 
             api = DeploymentAPI(deploy_config)
 
@@ -434,9 +468,13 @@ class PipelineExecutor:
             if spacy_model_path.exists():
                 api.registry.register_spacy_model("ner", str(spacy_model_path))
 
-            transformer_model_path = self.config.models_dir / "transformer_formula_mapper"
+            transformer_model_path = (
+                self.config.models_dir / "transformer_formula_mapper"
+            )
             if transformer_model_path.exists():
-                api.registry.register_transformer_model("transformer", str(transformer_model_path))
+                api.registry.register_transformer_model(
+                    "transformer", str(transformer_model_path)
+                )
 
             rag_model_path = self.config.models_dir / "rag_formula_mapper"
             if rag_model_path.exists():
@@ -593,7 +631,9 @@ class PipelineExecutor:
         self.log("\nStep Results:")
         for step_name, result in self.results.items():
             status = result.get("status", "unknown")
-            status_icon = "✅" if status == "success" else "❌" if status == "failed" else "⏭️"
+            status_icon = (
+                "✅" if status == "success" else "❌" if status == "failed" else "⏭️"
+            )
             self.log(f"  {status_icon} {step_name}: {status}")
 
             if "error" in result:
@@ -602,10 +642,17 @@ class PipelineExecutor:
         self.log("=" * 70)
 
         # Check overall success
-        failed_steps = [name for name, result in self.results.items() if result.get("status") == "failed"]
+        failed_steps = [
+            name
+            for name, result in self.results.items()
+            if result.get("status") == "failed"
+        ]
 
         if failed_steps:
-            self.log(f"\n❌ Pipeline completed with {len(failed_steps)} failed step(s)", "error")
+            self.log(
+                f"\n❌ Pipeline completed with {len(failed_steps)} failed step(s)",
+                "error",
+            )
         else:
             self.log("\n✅ Pipeline completed successfully!")
 
@@ -613,7 +660,10 @@ class PipelineExecutor:
 
     def save_results(self):
         """Save pipeline results"""
-        results_file = self.config.results_dir / f"pipeline_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        results_file = (
+            self.config.results_dir
+            / f"pipeline_results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        )
 
         full_results = {
             "start_time": self.start_time.isoformat(),
@@ -645,7 +695,11 @@ def main():
         ],
         help="Specific steps to run (default: all steps)",
     )
-    parser.add_argument("--skip-training", action="store_true", help="Skip all training steps (useful for testing)")
+    parser.add_argument(
+        "--skip-training",
+        action="store_true",
+        help="Skip all training steps (useful for testing)",
+    )
 
     args = parser.parse_args()
 

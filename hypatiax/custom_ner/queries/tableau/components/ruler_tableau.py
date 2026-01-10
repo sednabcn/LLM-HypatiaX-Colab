@@ -15,13 +15,18 @@ nlp = spacy.load("en_core_web_sm")
 
 @Language.component("custom_tableau_ruler")
 def custom_tableau_ruler_component(
-    doc, nlp=nlp, name="custom_tableau_ruler", sub_domain="tableau", type="both", path_to_file=None
+    doc,
+    nlp=nlp,
+    name="custom_tableau_ruler",
+    sub_domain="tableau",
+    type="both",
+    path_to_file=None,
 ):
     if path_to_file is None:
         # Dynamically construct the path based on provided parameters
-        path_to_file = resources.files("hypatiax.custom_ner.queries.tableau.rules").joinpath(
-            f"rule_{sub_domain}_{type}.jsonl"
-        )
+        path_to_file = resources.files(
+            "hypatiax.custom_ner.queries.tableau.rules"
+        ).joinpath(f"rule_{sub_domain}_{type}.jsonl")
 
     try:
         rules = load(path=path_to_file, style="rules")
@@ -59,7 +64,9 @@ def setup_nlp_pipeline():
     for label in custom_labels:
         nlp.vocab.strings.add(label)
 
-    ner_path = resources.files("hypatiax.data_spacy.queries.tableau").joinpath("ner_tableau")
+    ner_path = resources.files("hypatiax.data_spacy.queries.tableau").joinpath(
+        "ner_tableau"
+    )
     nlp.to_disk(ner_path)
     return nlp
 

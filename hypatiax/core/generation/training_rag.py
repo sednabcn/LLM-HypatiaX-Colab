@@ -84,7 +84,8 @@ class ModernRAGSystem:
             print(f"Loaded existing collection: {config.collection_name}")
         except:
             self.collection = self.chroma_client.create_collection(
-                name=config.collection_name, metadata={"hnsw:space": "cosine"}  # Cosine similarity
+                name=config.collection_name,
+                metadata={"hnsw:space": "cosine"},  # Cosine similarity
             )
             print(f"Created new collection: {config.collection_name}")
 
@@ -119,21 +120,34 @@ class ModernRAGSystem:
             # Create rich text for embedding (2025: combine all relevant info)
             text_to_embed = f"{doc['description']} | Formula: {doc['formula']}"
             if "metadata" in doc and doc["metadata"]:
-                metadata_str = " | ".join(f"{k}: {v}" for k, v in doc["metadata"].items())
+                metadata_str = " | ".join(
+                    f"{k}: {v}" for k, v in doc["metadata"].items()
+                )
                 text_to_embed += f" | {metadata_str}"
 
             documents_text.append(text_to_embed)
 
             # Store metadata
-            metadata = {"description": doc["description"], "formula": doc["formula"], **(doc.get("metadata", {}))}
+            metadata = {
+                "description": doc["description"],
+                "formula": doc["formula"],
+                **(doc.get("metadata", {})),
+            }
             metadatas.append(metadata)
 
         # Generate embeddings in batches
         print("Generating embeddings...")
-        embeddings = self.embedder.encode(documents_text, show_progress_bar=True, batch_size=32).tolist()
+        embeddings = self.embedder.encode(
+            documents_text, show_progress_bar=True, batch_size=32
+        ).tolist()
 
         # Add to ChromaDB
-        self.collection.add(ids=ids, embeddings=embeddings, metadatas=metadatas, documents=documents_text)
+        self.collection.add(
+            ids=ids,
+            embeddings=embeddings,
+            metadatas=metadatas,
+            documents=documents_text,
+        )
 
         # Initialize BM25 for hybrid search
         if self.config.use_hybrid_search:
@@ -159,12 +173,17 @@ Provide only the alternatives, one per line, without numbering."""
 
         if self.config.llm_provider == "openai":
             response = self.llm_client.chat.completions.create(
-                model="gpt-4o-mini", messages=[{"role": "user", "content": prompt}], temperature=0.3, max_tokens=100
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.3,
+                max_tokens=100,
             )
             alternatives = response.choices[0].message.content.strip().split("\n")
         else:
             response = self.llm_client.messages.create(
-                model="claude-3-5-haiku-20241022", max_tokens=100, messages=[{"role": "user", "content": prompt}]
+                model="claude-3-5-haiku-20241022",
+                max_tokens=100,
+                messages=[{"role": "user", "content": prompt}],
             )
             alternatives = response.content[0].text.strip().split("\n")
 
@@ -184,12 +203,17 @@ Generate a hypothetical perfect answer (just the formula, no explanation)."""
 
         if self.config.llm_provider == "openai":
             response = self.llm_client.chat.completions.create(
-                model="gpt-4o-mini", messages=[{"role": "user", "content": prompt}], temperature=0.3, max_tokens=50
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.3,
+                max_tokens=50,
             )
             hyde_doc = response.choices[0].message.content.strip()
         else:
             response = self.llm_client.messages.create(
-                model="claude-3-5-haiku-20241022", max_tokens=50, messages=[{"role": "user", "content": prompt}]
+                model="claude-3-5-haiku-20241022",
+                max_tokens=50,
+                messages=[{"role": "user", "content": prompt}],
             )
             hyde_doc = response.content[0].text.strip()
 
@@ -202,7 +226,9 @@ Generate a hypothetical perfect answer (just the formula, no explanation)."""
         """
         # Dense retrieval (vector search)
         query_embedding = self.embedder.encode(query).tolist()
-        dense_results = self.collection.query(query_embeddings=[query_embedding], n_results=top_k)
+        dense_results = self.collection.query(
+            query_embeddings=[query_embedding], n_results=top_k
+        )
 
         # Create score dict for dense results
         dense_scores = {}
@@ -240,7 +266,9 @@ Generate a hypothetical perfect answer (just the formula, no explanation)."""
             combined_scores[doc_id] = combined_scores.get(doc_id, 0) + bm25_contribution
 
         # Sort by combined score
-        sorted_ids = sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)[:top_k]
+        sorted_ids = sorted(combined_scores.items(), key=lambda x: x[1], reverse=True)[
+            :top_k
+        ]
 
         # Retrieve full metadata
         results = []
@@ -251,7 +279,9 @@ Generate a hypothetical perfect answer (just the formula, no explanation)."""
 
         return results
 
-    def rerank(self, query: str, results: List[Tuple[Dict, float]]) -> List[Tuple[Dict, float]]:
+    def rerank(
+        self, query: str, results: List[Tuple[Dict, float]]
+    ) -> List[Tuple[Dict, float]]:
         """
         Rerank results using cross-encoder (2025 standard)
         Much more accurate than bi-encoder similarity
@@ -266,12 +296,16 @@ Generate a hypothetical perfect answer (just the formula, no explanation)."""
         rerank_scores = self.reranker.predict(pairs)
 
         # Combine with original results
-        reranked = [(results[i][0], float(rerank_scores[i])) for i in range(len(results))]
+        reranked = [
+            (results[i][0], float(rerank_scores[i])) for i in range(len(results))
+        ]
         reranked.sort(key=lambda x: x[1], reverse=True)
 
         return reranked[: self.config.top_k_rerank]
 
-    def generate_answer(self, query: str, retrieved_docs: List[Tuple[Dict, float]]) -> str:
+    def generate_answer(
+        self, query: str, retrieved_docs: List[Tuple[Dict, float]]
+    ) -> str:
         """
         Generate answer using LLM with retrieved context (2025 RAG)
         This is the KEY difference from old RAG - we generate, not just retrieve
@@ -303,7 +337,9 @@ Provide ONLY the formula, without any explanation or additional text."""
             return response.choices[0].message.content.strip()
         else:
             response = self.llm_client.messages.create(
-                model="claude-3-5-sonnet-20241022", max_tokens=150, messages=[{"role": "user", "content": prompt}]
+                model="claude-3-5-sonnet-20241022",
+                max_tokens=150,
+                messages=[{"role": "user", "content": prompt}],
             )
             return response.content[0].text.strip()
 
@@ -337,7 +373,9 @@ Provide ONLY the formula, without any explanation or additional text."""
             else:
                 doc_scores[key] = (doc, score)
 
-        top_results = sorted(doc_scores.values(), key=lambda x: x[1], reverse=True)[: self.config.top_k_retrieval]
+        top_results = sorted(doc_scores.values(), key=lambda x: x[1], reverse=True)[
+            : self.config.top_k_retrieval
+        ]
 
         # Step 4: Rerank
         reranked = self.rerank(query, top_results)
@@ -350,7 +388,11 @@ Provide ONLY the formula, without any explanation or additional text."""
 
         if return_sources:
             result["sources"] = [
-                {"description": doc["description"], "formula": doc["formula"], "score": float(score)}
+                {
+                    "description": doc["description"],
+                    "formula": doc["formula"],
+                    "score": float(score),
+                }
                 for doc, score in reranked
             ]
 
@@ -437,7 +479,9 @@ def main():
         print(f"Answer: {result['answer']}")
         print(f"\nTop sources:")
         for i, source in enumerate(result["sources"], 1):
-            print(f"  {i}. {source['description']} → {source['formula']} (score: {source['score']:.3f})")
+            print(
+                f"  {i}. {source['description']} → {source['formula']} (score: {source['score']:.3f})"
+            )
 
 
 if __name__ == "__main__":

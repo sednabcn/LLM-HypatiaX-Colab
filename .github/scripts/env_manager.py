@@ -15,7 +15,9 @@ def get_venv_info():
     info = {}
 
     # Check if in venv
-    info["in_venv"] = hasattr(sys, "real_prefix") or (hasattr(sys, "base_prefix") and sys.base_prefix != sys.prefix)
+    info["in_venv"] = hasattr(sys, "real_prefix") or (
+        hasattr(sys, "base_prefix") and sys.base_prefix != sys.prefix
+    )
 
     # Get paths
     info["python_executable"] = sys.executable
@@ -189,7 +191,9 @@ def main():
             # Count items
             try:
                 items = list(site_pkg.iterdir())
-                pkg_count = sum(1 for i in items if i.is_dir() and not i.name.endswith(".dist-info"))
+                pkg_count = sum(
+                    1 for i in items if i.is_dir() and not i.name.endswith(".dist-info")
+                )
                 print(f"        └── {pkg_count} packages installed")
             except PermissionError:
                 print(f"        └── Cannot access directory")

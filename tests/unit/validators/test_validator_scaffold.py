@@ -44,7 +44,11 @@ def test_find_denominator_detects_pow_minus_one():
 def test_lambdify_and_eval_basic_success():
     expr = safe_sympify("(r - rf) / sigma", var_names=["r", "rf", "sigma"])
     # scalar numpy arrays
-    test_data = {"r": np.array([0.10]), "rf": np.array([0.02]), "sigma": np.array([0.15])}
+    test_data = {
+        "r": np.array([0.10]),
+        "rf": np.array([0.02]),
+        "sigma": np.array([0.15]),
+    }
     out = lambdify_and_eval(expr, test_data, symbol_order=["r", "rf", "sigma"])
     assert out["success"] is True
     assert out["value"] is not None
@@ -62,7 +66,11 @@ def test_lambdify_and_eval_missing_data():
 # Hypothesis-based test: generate sigma near zero to check numeric stability handling.
 # We expect either evaluation to succeed with finite values, or the scaffold to capture the error.
 @settings(max_examples=50)
-@given(sigma=st.floats(min_value=-1e-6, max_value=1e-6, allow_nan=False, allow_infinity=False))
+@given(
+    sigma=st.floats(
+        min_value=-1e-6, max_value=1e-6, allow_nan=False, allow_infinity=False
+    )
+)
 def test_numerical_stability_sharpe(sigma):
     """
     For expression (r - rf) / sigma, we generate small sigma values (including negative and zero)
@@ -74,7 +82,9 @@ def test_numerical_stability_sharpe(sigma):
     rf = np.array([0.02])
     sigma_arr = np.array([sigma])
 
-    out = lambdify_and_eval(expr, {"r": r, "rf": rf, "sigma": sigma_arr}, symbol_order=["r", "rf", "sigma"])
+    out = lambdify_and_eval(
+        expr, {"r": r, "rf": rf, "sigma": sigma_arr}, symbol_order=["r", "rf", "sigma"]
+    )
 
     # If success, value must be finite OR non_finite flagged True (we accept either but must not raise)
     if out["success"]:

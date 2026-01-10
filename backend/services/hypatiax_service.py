@@ -91,7 +91,12 @@ class HypatiaXService:
             "formula": "[token_a_amount] * [token_a_price] + [token_b_amount] * [token_b_price]",
             "latex": r"V = n_a \times p_a + n_b \times p_b",
             "description": "LP Position Value",
-            "variables": ["token_a_amount", "token_a_price", "token_b_amount", "token_b_price"],
+            "variables": [
+                "token_a_amount",
+                "token_a_price",
+                "token_b_amount",
+                "token_b_price",
+            ],
             "category": "liquidity",
         },
         "quality_score": {
@@ -130,7 +135,21 @@ class HypatiaXService:
 
     # Common prepositions and stop words
     PREPOSITIONS = ["of", "by", "for", "in", "on", "at", "from", "to", "with", "using"]
-    STOP_WORDS = ["the", "a", "an", "all", "each", "every", "calculate", "compute", "find", "get", "show", "what", "is"]
+    STOP_WORDS = [
+        "the",
+        "a",
+        "an",
+        "all",
+        "each",
+        "every",
+        "calculate",
+        "compute",
+        "find",
+        "get",
+        "show",
+        "what",
+        "is",
+    ]
 
     def __init__(self, models_loaded: bool = False, nlp_desc=None, nlp_formula=None):
         """
@@ -231,7 +250,9 @@ class HypatiaXService:
         tableau_score = sum(1 for keyword in tableau_keywords if keyword in desc_lower)
 
         # Also check for typical Tableau field references
-        if re.search(r"\b(sales|profit|revenue|orders|customers|products)\b", desc_lower):
+        if re.search(
+            r"\b(sales|profit|revenue|orders|customers|products)\b", desc_lower
+        ):
             tableau_score += 2
 
         logger.debug(f"Domain detection: DeFi={defi_score}, Tableau={tableau_score}")
@@ -325,7 +346,12 @@ class HypatiaXService:
             # Extract entities using NER model
             doc = self.nlp_desc(description)
             entities = [
-                {"text": ent.text, "label": ent.label_, "start": ent.start_char, "end": ent.end_char}
+                {
+                    "text": ent.text,
+                    "label": ent.label_,
+                    "start": ent.start_char,
+                    "end": ent.end_char,
+                }
                 for ent in doc.ents
             ]
 
@@ -407,7 +433,9 @@ class HypatiaXService:
 
         return values
 
-    def _extract_operation_from_entities(self, entities: List[Dict], description: str) -> str:
+    def _extract_operation_from_entities(
+        self, entities: List[Dict], description: str
+    ) -> str:
         """Extract operation from NER entities"""
         for entity in entities:
             if entity["label"] == "OPER":
@@ -422,12 +450,15 @@ class HypatiaXService:
 
         return "SUM"
 
-    def _extract_field_from_entities(self, entities: List[Dict], description: str) -> str:
+    def _extract_field_from_entities(
+        self, entities: List[Dict], description: str
+    ) -> str:
         """Extract field name from NER entities"""
         field_candidates = [
             ent["text"]
             for ent in entities
-            if ent["label"] == "NOUN" and ent["text"].lower() not in self.TABLEAU_OPERATIONS
+            if ent["label"] == "NOUN"
+            and ent["text"].lower() not in self.TABLEAU_OPERATIONS
         ]
 
         if field_candidates:
@@ -444,14 +475,23 @@ class HypatiaXService:
             if word.lower() in self.PREPOSITIONS:
                 if i + 1 < len(words):
                     remaining = words[i + 1 :]
-                    field_words = [w for w in remaining if w.lower() not in self.STOP_WORDS + self.PREPOSITIONS]
+                    field_words = [
+                        w
+                        for w in remaining
+                        if w.lower() not in self.STOP_WORDS + self.PREPOSITIONS
+                    ]
                     if field_words:
                         return field_words[0].strip(".,!?").capitalize()
 
         # Fallback: take last meaningful word
         for word in reversed(words):
             clean_word = word.lower().strip(".,!?")
-            if clean_word not in list(self.TABLEAU_OPERATIONS.keys()) + self.STOP_WORDS + self.PREPOSITIONS:
+            if (
+                clean_word
+                not in list(self.TABLEAU_OPERATIONS.keys())
+                + self.STOP_WORDS
+                + self.PREPOSITIONS
+            ):
                 return word.strip(".,!?").capitalize()
 
         return "Field"
@@ -473,15 +513,23 @@ class HypatiaXService:
         has_operation = any(e["label"] == "OPER" for e in entities)
         has_field = any(e["label"] == "NOUN" for e in entities)
 
-        confidence = coverage * 0.65 + (0.2 if has_operation else 0) + (0.15 if has_field else 0)
+        confidence = (
+            coverage * 0.65 + (0.2 if has_operation else 0) + (0.15 if has_field else 0)
+        )
         return round(min(0.95, confidence), 2)
 
-    def _calculate_rule_confidence(self, description: str, operation: str, field: str) -> float:
+    def _calculate_rule_confidence(
+        self, description: str, operation: str, field: str
+    ) -> float:
         """Calculate confidence for rule-based mapping"""
         confidence = 0.70
 
         desc_lower = description.lower()
-        op_mentioned = any(keyword in desc_lower for keyword, op in self.TABLEAU_OPERATIONS.items() if op == operation)
+        op_mentioned = any(
+            keyword in desc_lower
+            for keyword, op in self.TABLEAU_OPERATIONS.items()
+            if op == operation
+        )
 
         if op_mentioned:
             confidence += 0.15
@@ -512,7 +560,14 @@ class HypatiaXService:
                 label = "NOUN"
 
             if label:
-                entities.append({"text": word, "label": label, "start": start_pos, "end": start_pos + len(word)})
+                entities.append(
+                    {
+                        "text": word,
+                        "label": label,
+                        "start": start_pos,
+                        "end": start_pos + len(word),
+                    }
+                )
 
             start_pos += len(word) + 1
 
@@ -529,7 +584,9 @@ class HypatiaXService:
             Dictionary of formulas
         """
         if category:
-            return {k: v for k, v in self.DEFI_FORMULAS.items() if v["category"] == category}
+            return {
+                k: v for k, v in self.DEFI_FORMULAS.items() if v["category"] == category
+            }
         return self.DEFI_FORMULAS
 
     def get_defi_categories(self) -> List[str]:
@@ -570,7 +627,9 @@ class HypatiaXService:
         suggestions.sort(key=lambda x: x["score"], reverse=True)
         return suggestions
 
-    def batch_map(self, descriptions: List[str], method: str = "vocab", domain: str = "auto") -> List[Dict[str, Any]]:
+    def batch_map(
+        self, descriptions: List[str], method: str = "vocab", domain: str = "auto"
+    ) -> List[Dict[str, Any]]:
         """
         Map multiple descriptions in batch
 

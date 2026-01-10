@@ -8,10 +8,9 @@ from tools.llm_providers.openai_provider import OpenAIProvider
 
 def main():
     """Demonstrate hybrid mapping combining all methods"""
-    print("Hybrid Expression Mapping Example
-")
-    print("This combines NER + Transformer + LLM + Agents
-")
+    print("Hybrid Expression Mapping Example")
+
+    print("This combines NER + Transformer + LLM + Agents")
 
     # Initialize LLM mapper (if API key available)
     llm_mapper = None
@@ -20,8 +19,7 @@ def main():
         llm = OpenAIProvider(api_key=api_key)
         llm_mapper = LLMMapper(llm_provider=llm)
     else:
-        print("⚠️  OPENAI_API_KEY not set, LLM mapping will be skipped
-")
+        print("⚠️  OPENAI_API_KEY not set, LLM mapping will be skipped")
 
     # Initialize hybrid mapper
     hybrid = HybridMapper(llm_mapper=llm_mapper)

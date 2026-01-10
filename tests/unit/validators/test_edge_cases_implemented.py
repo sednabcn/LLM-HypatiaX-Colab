@@ -32,7 +32,9 @@ class TestEmptyExpressionValidation:
         """Should reject empty string expressions"""
         expression = ""
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions={}, domain="defi"
+        )
         assert result["valid"] == False
         assert any("empty" in str(e).lower() for e in result.get("errors", []))
 
@@ -41,25 +43,34 @@ class TestEmptyExpressionValidation:
         test_cases = ["   ", "\t\n", "  \t  \n  "]
         validator = SymbolicValidator()
         for expression in test_cases:
-            result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+            result = validator.validate(
+                expression=expression, variable_definitions={}, domain="defi"
+            )
             assert result["valid"] == False
 
     def test_none_expression(self):
         """Should handle None input gracefully"""
         expression = None
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions={}, domain="defi"
+        )
         assert result["valid"] == False
         assert len(result.get("errors", [])) > 0
         error_text = " ".join(str(e).lower() for e in result.get("errors", []))
-        assert any(keyword in error_text for keyword in ["none", "null", "empty", "invalid", "type"])
+        assert any(
+            keyword in error_text
+            for keyword in ["none", "null", "empty", "invalid", "type"]
+        )
 
     def test_null_list_input(self):
         """Should reject empty list/dict inputs"""
         test_cases = [[], {}]
         validator = SymbolicValidator()
         for expression in test_cases:
-            result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+            result = validator.validate(
+                expression=expression, variable_definitions={}, domain="defi"
+            )
             assert result["valid"] == False
             assert len(result.get("errors", [])) > 0
 
@@ -71,7 +82,9 @@ class TestDivisionByZeroDetection:
         """Should flag direct division by zero: 1/0"""
         expression = "1/0"
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions={}, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions={}, domain="defi"
+        )
         # Should either be invalid or have critical warnings
         assert result["valid"] == False or len(result.get("warnings", [])) > 0
 
@@ -80,7 +93,9 @@ class TestDivisionByZeroDetection:
         expression = "x / y"
         constraints = {"x": {"min": 0, "max": 100}, "y": {"min": -10, "max": 10}}
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # Should warn about potential division by zero since y can be 0
         assert result["valid"] == False or len(result.get("warnings", [])) > 0
 
@@ -89,7 +104,9 @@ class TestDivisionByZeroDetection:
         expression = "sqrt(2*sqrt(r)/(1+r)) - 1"
         constraints = {"r": {"min": -1, "max": 10}}  # r can be negative!
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # Should be invalid because r must be > 0
         assert result["valid"] == False or len(result.get("warnings", [])) > 0
 
@@ -99,7 +116,9 @@ class TestDivisionByZeroDetection:
         expression = "sqrt(2*sqrt(r)/((1+r)+1e-10)) - 1"
         constraints = {"r": {"min": 0.001, "max": 100}}  # r > 0
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # With current validator behavior, it may still warn about division
         # The key is that it's syntactically valid and constraints are proper
         assert result["syntactically_valid"] == True
@@ -117,7 +136,9 @@ class TestDivisionByZeroDetection:
             "epsilon": {"min": 0, "max": 0.1},  # epsilon can be very small
         }
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # Should warn about small epsilon causing division issues
         assert len(result.get("warnings", [])) > 0 or result["valid"] == False
 
@@ -135,7 +156,9 @@ class TestNumericalOverflowDetection:
         # FIX: DimensionalValidator doesn't take expression parameter
         validator = SymbolicValidator()
         for expression, constraints in test_cases:
-            result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+            result = validator.validate(
+                expression=expression, variable_definitions=constraints, domain="defi"
+            )
             # Should have warnings about potential overflow
             # Note: Not all validators catch all overflow cases
             assert len(result.get("warnings", [])) > 0 or result["valid"] == True
@@ -146,7 +169,9 @@ class TestNumericalOverflowDetection:
         constraints = {"x": {"min": 10, "max": 100}}
         # FIX: Use SymbolicValidator instead
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # Should warn about overflow or be invalid (soft check)
         # Some cases might pass if validator doesn't catch it
         assert len(result.get("warnings", [])) > 0 or result["valid"] == True
@@ -156,7 +181,9 @@ class TestNumericalOverflowDetection:
         expression = "factorial(x)"
         constraints = {"x": {"min": 100, "max": 1000}}
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # FIX: Factorial might not be caught by all validators
         # This is a known limitation - just verify it doesn't crash
         assert result is not None
@@ -168,7 +195,9 @@ class TestNumericalOverflowDetection:
         constraints = {"x": {"min": 0, "max": 10}, "y": {"min": 0, "max": 5}}
         # FIX: Use SymbolicValidator
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # Should be valid or have minimal warnings
         assert result["valid"] == True or len(result.get("errors", [])) == 0
 
@@ -181,7 +210,9 @@ class TestNumericalStabilityChecks:
         expression = "sqrt(x)"
         constraints = {"x": {"min": -10, "max": 10}}
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # FIX: Validator may not catch this without explicit domain check
         # Check if x can be negative - that's the real issue
         assert constraints["x"]["min"] < 0, "Test setup should include negative domain"
@@ -195,7 +226,9 @@ class TestNumericalStabilityChecks:
         ]
         validator = SymbolicValidator()
         for expression, constraints in test_cases:
-            result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+            result = validator.validate(
+                expression=expression, variable_definitions=constraints, domain="defi"
+            )
             # Should be invalid or have warnings
             assert result["valid"] == False or len(result.get("warnings", [])) > 0
 
@@ -204,7 +237,9 @@ class TestNumericalStabilityChecks:
         expression = "arcsin(x)"
         constraints = {"x": {"min": -2, "max": 2}}
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # FIX: Not all validators catch domain violations
         # At minimum, verify the constraint is outside [-1, 1]
         assert constraints["x"]["min"] < -1 or constraints["x"]["max"] > 1
@@ -215,7 +250,9 @@ class TestNumericalStabilityChecks:
         constraints = {"x": {"min": 1e10, "max": 1e12}, "y": {"min": 0.001, "max": 1}}
         # FIX: Use SymbolicValidator
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # This is a soft check - not all validators detect this
         # Just ensure it doesn't crash
         assert result is not None
@@ -232,13 +269,20 @@ class TestDeFiSpecificEdgeCases:
         constraints_bad = {"Pt": {"min": 0, "max": 100}, "P0": {"min": -10, "max": 100}}
         # FIX: DomainValidator API - check the actual implementation
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints_bad, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints_bad, domain="defi"
+        )
         # Should flag P0 can be zero (division by zero)
         assert result["valid"] == False or len(result.get("warnings", [])) > 0
 
         # Should pass with positive prices
-        constraints_good = {"Pt": {"min": 0.001, "max": 1000}, "P0": {"min": 0.001, "max": 1000}}
-        result = validator.validate(expression=expression, variable_definitions=constraints_good, domain="defi")
+        constraints_good = {
+            "Pt": {"min": 0.001, "max": 1000},
+            "P0": {"min": 0.001, "max": 1000},
+        }
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints_good, domain="defi"
+        )
         # May still have warnings but should be syntactically valid
         assert result["syntactically_valid"] == True
 
@@ -247,15 +291,25 @@ class TestDeFiSpecificEdgeCases:
         expression = "V * (1 - phi)"
 
         # Should warn when fee can be >= 1
-        constraints_bad = {"V": {"min": 0, "max": 1000000}, "phi": {"min": 0, "max": 1.5}}
+        constraints_bad = {
+            "V": {"min": 0, "max": 1000000},
+            "phi": {"min": 0, "max": 1.5},
+        }
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints_bad, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints_bad, domain="defi"
+        )
         # Check if phi > 1 is flagged (soft check)
         assert constraints_bad["phi"]["max"] > 1.0
 
         # Should pass with proper fee bounds
-        constraints_good = {"V": {"min": 0, "max": 1000000}, "phi": {"min": 0, "max": 0.999}}
-        result = validator.validate(expression=expression, variable_definitions=constraints_good, domain="defi")
+        constraints_good = {
+            "V": {"min": 0, "max": 1000000},
+            "phi": {"min": 0, "max": 0.999},
+        }
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints_good, domain="defi"
+        )
         assert result["syntactically_valid"] == True
 
     def test_liquidity_pool_ratio_bounds(self):
@@ -263,9 +317,14 @@ class TestDeFiSpecificEdgeCases:
         expression = "sqrt(r1 / r2)"
 
         # Should validate both reserves are positive
-        constraints = {"r1": {"min": 0.001, "max": 1e9}, "r2": {"min": 0.001, "max": 1e9}}
+        constraints = {
+            "r1": {"min": 0.001, "max": 1e9},
+            "r2": {"min": 0.001, "max": 1e9},
+        }
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # Should be syntactically valid with positive constraints
         assert result["syntactically_valid"] == True
 
@@ -282,7 +341,9 @@ class TestBoundaryConditions:
         ]
         validator = SymbolicValidator()
         for expression, constraints in test_cases:
-            result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+            result = validator.validate(
+                expression=expression, variable_definitions=constraints, domain="defi"
+            )
             # FIX: Some expressions might be syntactically valid
             # Just check we get a result
             assert result is not None
@@ -296,7 +357,9 @@ class TestBoundaryConditions:
         ]
         validator = SymbolicValidator()
         for expression, constraints in test_cases:
-            result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+            result = validator.validate(
+                expression=expression, variable_definitions=constraints, domain="defi"
+            )
             # FIX: Validators may parse these as syntactically valid
             # The key is they should be flagged somewhere in warnings/errors
             assert result is not None
@@ -304,9 +367,14 @@ class TestBoundaryConditions:
     def test_very_small_numbers(self):
         """Should handle underflow to zero"""
         expression = "x * y"
-        constraints = {"x": {"min": 1e-200, "max": 1e-150}, "y": {"min": 1e-200, "max": 1e-150}}
+        constraints = {
+            "x": {"min": 1e-200, "max": 1e-150},
+            "y": {"min": 1e-200, "max": 1e-150},
+        }
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # Soft check - just verify it doesn't crash
         assert result is not None
 
@@ -319,16 +387,23 @@ class TestConstraintValidation:
         expression = "a * b / c"
         constraints = {"a": {"min": 0, "max": 100}}  # b and c missing
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # Should have warnings about missing constraints
         assert len(result.get("warnings", [])) > 0 or result["valid"] == False
 
     def test_constraint_consistency(self):
         """Should validate constraint logical consistency"""
         expression = "x + y"
-        constraints = {"x": {"min": 10, "max": 5}, "y": {"min": 0, "max": 100}}  # Invalid: min > max
+        constraints = {
+            "x": {"min": 10, "max": 5},
+            "y": {"min": 0, "max": 100},
+        }  # Invalid: min > max
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # FIX: Validator may not catch illogical constraints
         # At minimum, verify our constraint is illogical
         assert constraints["x"]["min"] > constraints["x"]["max"]
@@ -339,13 +414,17 @@ class TestConstraintValidation:
         expression_safe = "x / (y + 1e-10)"
         constraints = {"x": {"min": 0, "max": 100}, "y": {"min": -1, "max": 1}}
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression_safe, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression_safe, variable_definitions=constraints, domain="defi"
+        )
         # Should be valid or have fewer warnings than without guard
         safe_warnings = len(result.get("warnings", []))
 
         # Without epsilon guard: riskier
         expression_risky = "x / y"
-        result = validator.validate(expression=expression_risky, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression_risky, variable_definitions=constraints, domain="defi"
+        )
         risky_warnings = len(result.get("warnings", []))
 
         # The risky version should have more warnings
@@ -395,7 +474,9 @@ class TestIntegrationEdgeCases:
         }
 
         validator = SymbolicValidator()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         # Validator is conservative - verify it parses and constraints are proper
         assert result["syntactically_valid"] == True
         # Verify all critical constraints are set correctly
@@ -415,7 +496,9 @@ class TestPerformanceEdgeCases:
 
         validator = SymbolicValidator()
         start = time.perf_counter()
-        result = validator.validate(expression=expression, variable_definitions=constraints, domain="defi")
+        result = validator.validate(
+            expression=expression, variable_definitions=constraints, domain="defi"
+        )
         duration = time.perf_counter() - start
 
         # FIX: Relaxed threshold to 100ms for complex validation
@@ -435,7 +518,10 @@ class TestPerformanceEdgeCases:
         import time
 
         start = time.perf_counter()
-        results = [validator.validate(expr, constraints, "defi") for expr, constraints in formulas]
+        results = [
+            validator.validate(expr, constraints, "defi")
+            for expr, constraints in formulas
+        ]
         duration = time.perf_counter() - start
 
         # FIX: Relaxed to 500ms for batch validation

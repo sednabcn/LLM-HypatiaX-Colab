@@ -192,9 +192,19 @@ if __name__ == "__main__":
         ),
         (
             "Google acquired YouTube in 2006 for $1.65 billion",
-            {"entities": [(0, 6, "ORG"), (16, 23, "PRODUCT"), (27, 31, "DATE"), (36, 50, "MONEY")]},
+            {
+                "entities": [
+                    (0, 6, "ORG"),
+                    (16, 23, "PRODUCT"),
+                    (27, 31, "DATE"),
+                    (36, 50, "MONEY"),
+                ]
+            },
         ),
-        ("Microsoft CEO Satya Nadella announced new products", {"entities": [(0, 9, "ORG"), (14, 27, "PERSON")]}),
+        (
+            "Microsoft CEO Satya Nadella announced new products",
+            {"entities": [(0, 9, "ORG"), (14, 27, "PERSON")]},
+        ),
     ]
 
     # Evaluate the model

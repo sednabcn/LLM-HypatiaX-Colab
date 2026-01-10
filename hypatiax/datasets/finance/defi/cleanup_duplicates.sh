@@ -119,13 +119,13 @@ read -p "Move remaining old files to archive? (yes/no): " archive_confirm
 if [ "$archive_confirm" == "yes" ]; then
     mkdir -p data/archive/csv_old
     mkdir -p data/archive/json_old
-    
+
     # Archive old CSV files
     find data/csv_data -name "*_2025*.csv" -type f | while read file; do
         echo "📦 Archiving $(basename $file)"
         mv "$file" data/archive/csv_old/
     done
-    
+
     echo "✓ Old files archived to data/archive/"
 fi
 

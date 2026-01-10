@@ -33,7 +33,9 @@ class DataSource(ABC):
         """Track API requests"""
         self.request_count += 1
         self.last_request_time = datetime.now()
-        print(f"[{self.name}] Request #{self.request_count} at {self.last_request_time}")
+        print(
+            f"[{self.name}] Request #{self.request_count} at {self.last_request_time}"
+        )
 
 
 # ============================================================================
@@ -55,14 +57,21 @@ class CoinGeckoAPI(DataSource):
     def fetch_data(self, coin_id: str = "ethereum", **kwargs) -> Dict:
         """Fetch current price data"""
         endpoint = f"{self.BASE_URL}/simple/price"
-        params = {"ids": coin_id, "vs_currencies": "usd", "include_24hr_change": "true", "include_market_cap": "true"}
+        params = {
+            "ids": coin_id,
+            "vs_currencies": "usd",
+            "include_24hr_change": "true",
+            "include_market_cap": "true",
+        }
 
         self._log_request()
         response = requests.get(endpoint, params=params)
         response.raise_for_status()
         return response.json()
 
-    def get_historical_prices(self, coin_id: str = "ethereum", days: int = 90, interval: str = "daily") -> List[Dict]:
+    def get_historical_prices(
+        self, coin_id: str = "ethereum", days: int = 90, interval: str = "daily"
+    ) -> List[Dict]:
         """
         Fetch historical price data
 
@@ -96,7 +105,12 @@ class CoinGeckoAPI(DataSource):
     def get_market_data(self, coin_id: str = "ethereum") -> Dict:
         """Get comprehensive market data for a coin"""
         endpoint = f"{self.BASE_URL}/coins/{coin_id}"
-        params = {"localization": "false", "tickers": "false", "community_data": "false", "developer_data": "false"}
+        params = {
+            "localization": "false",
+            "tickers": "false",
+            "community_data": "false",
+            "developer_data": "false",
+        }
 
         self._log_request()
         response = requests.get(endpoint, params=params)
@@ -299,7 +313,9 @@ class RPCProvider(DataSource):
             contract_address: Contract address
             data: Encoded function call data
         """
-        result = self.fetch_data("eth_call", [{"to": contract_address, "data": data}, "latest"])
+        result = self.fetch_data(
+            "eth_call", [{"to": contract_address, "data": data}, "latest"]
+        )
         return result["result"]
 
 
@@ -329,7 +345,9 @@ class LocalDatabaseManager:
         self.tables["pools"].append(data)
         print(f"[LocalDB] Inserted pool record: {data.get('id', 'unknown')}")
 
-    def query_prices(self, coin_id: str = None, start_date: datetime = None) -> pd.DataFrame:
+    def query_prices(
+        self, coin_id: str = None, start_date: datetime = None
+    ) -> pd.DataFrame:
         """
         SELECT * FROM prices WHERE coin_id = ? AND date >= ?
 
@@ -432,13 +450,17 @@ class DeFiDataManager:
         if pool_data:
             # Store in database
             self.db.insert_pool_data(pool_data)
-            print(f"✅ Stored pool: {pool_data['token0']['symbol']}/{pool_data['token1']['symbol']}")
+            print(
+                f"✅ Stored pool: {pool_data['token0']['symbol']}/{pool_data['token1']['symbol']}"
+            )
             return pool_data
         else:
             print("❌ Pool not found")
             return None
 
-    def analyze_pool_with_prices(self, pool_address: str, coin_id: str = "ethereum", days: int = 90):
+    def analyze_pool_with_prices(
+        self, pool_address: str, coin_id: str = "ethereum", days: int = 90
+    ):
         """
         Complete workflow: Fetch pool + prices → Analyze → Export
         """
@@ -459,7 +481,9 @@ class DeFiDataManager:
             summary = {
                 "pool_address": pool_address,
                 "tokens": (
-                    f"{pool_data['token0']['symbol']}/{pool_data['token1']['symbol']}" if pool_data else "Unknown"
+                    f"{pool_data['token0']['symbol']}/{pool_data['token1']['symbol']}"
+                    if pool_data
+                    else "Unknown"
                 ),
                 "tvl_usd": float(pool_data["reserveUSD"]) if pool_data else 0,
                 "avg_price": price_df["price_usd"].mean(),
@@ -480,7 +504,9 @@ class DeFiDataManager:
     def export_all_data(self, filename: str = None):
         """Export all collected data to Excel"""
         if filename is None:
-            filename = f"defi_data_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+            filename = (
+                f"defi_data_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+            )
 
         self.db.export_to_excel(filename)
         return filename
@@ -522,14 +548,18 @@ def example_usage():
     print("\nTop 5 pools by TVL:")
     top_pools = manager.the_graph.get_top_pools(limit=5)
     for pool in top_pools.get("data", {}).get("pairs", []):
-        print(f"  {pool['token0']['symbol']}/{pool['token1']['symbol']}: ${float(pool['reserveUSD']):,.0f}")
+        print(
+            f"  {pool['token0']['symbol']}/{pool['token1']['symbol']}: ${float(pool['reserveUSD']):,.0f}"
+        )
 
     # ===== PATTERN 3: Local Database Queries =====
     print("\n3️⃣ LOCAL DATABASE - SQL-style queries")
     print("-" * 60)
 
     # Query stored prices
-    recent_prices = manager.db.query_prices(coin_id="ethereum", start_date=datetime.now() - timedelta(days=7))
+    recent_prices = manager.db.query_prices(
+        coin_id="ethereum", start_date=datetime.now() - timedelta(days=7)
+    )
     print(f"Prices from last 7 days: {len(recent_prices)} records")
 
     # Query stored pools
@@ -540,7 +570,9 @@ def example_usage():
     print("\n4️⃣ COMPLETE WORKFLOW - Fetch, Store, Analyze, Export")
     print("-" * 60)
 
-    analysis = manager.analyze_pool_with_prices(pool_address=eth_usdc_pool, coin_id="ethereum", days=90)
+    analysis = manager.analyze_pool_with_prices(
+        pool_address=eth_usdc_pool, coin_id="ethereum", days=90
+    )
 
     # ===== PATTERN 5: Export to Excel =====
     print("\n5️⃣ EXPORT - Save to Excel workbook")

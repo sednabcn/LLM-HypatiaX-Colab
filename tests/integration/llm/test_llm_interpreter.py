@@ -51,7 +51,9 @@ class TestFormulaInterpretation:
 
         # Check response contains relevant terms
         response_str = str(response).lower()
-        assert any(term in response_str for term in ["sharpe", "ratio", "risk", "return"])
+        assert any(
+            term in response_str for term in ["sharpe", "ratio", "risk", "return"]
+        )
 
     def test_interpret_defi_formula(self, llm_interpreter):
         """Test interpreting DeFi-specific formula."""
@@ -60,7 +62,9 @@ class TestFormulaInterpretation:
         response = llm_interpreter.interpret(query)
 
         response_str = str(response).lower()
-        assert any(term in response_str for term in ["x * y", "constant", "product", "uniswap"])
+        assert any(
+            term in response_str for term in ["x * y", "constant", "product", "uniswap"]
+        )
 
     def test_interpret_with_context(self, llm_interpreter):
         """Test interpretation with additional context."""
@@ -104,7 +108,12 @@ class TestNaturalLanguageProcessing:
 
     def test_parse_mathematical_notation(self, llm_interpreter):
         """Test parsing mathematical notation from text."""
-        notations = ["sigma squared", "square root of variance", "sum from i=1 to n", "partial derivative"]
+        notations = [
+            "sigma squared",
+            "square root of variance",
+            "sum from i=1 to n",
+            "partial derivative",
+        ]
 
         for notation in notations:
             result = llm_interpreter.parse_notation(notation)
@@ -121,7 +130,11 @@ class TestNaturalLanguageProcessing:
 
     def test_context_understanding(self, llm_interpreter):
         """Test understanding context across multiple queries."""
-        queries = ["What is the Sharpe ratio?", "How do I calculate it?", "What's a good value?"]
+        queries = [
+            "What is the Sharpe ratio?",
+            "How do I calculate it?",
+            "What's a good value?",
+        ]
 
         responses = []
         for query in queries:
@@ -136,7 +149,11 @@ class TestResponseParsing:
 
     def test_parse_json_response(self, llm_interpreter):
         """Test parsing JSON-formatted response."""
-        json_response = {"formula": "sharpe_ratio", "expression": "(R - Rf) / sigma", "variables": ["R", "Rf", "sigma"]}
+        json_response = {
+            "formula": "sharpe_ratio",
+            "expression": "(R - Rf) / sigma",
+            "variables": ["R", "Rf", "sigma"],
+        }
 
         parsed = llm_interpreter.parse_response(json.dumps(json_response))
 
@@ -208,7 +225,11 @@ class TestFormulaGeneration:
     def test_generate_with_constraints(self, llm_interpreter):
         """Test generating formula with constraints."""
         description = "Portfolio return calculation"
-        constraints = {"variables": ["weights", "returns"], "output": "float", "domain": "finance"}
+        constraints = {
+            "variables": ["weights", "returns"],
+            "output": "float",
+            "domain": "finance",
+        }
 
         formula = llm_interpreter.generate_formula(description, constraints=constraints)
 
@@ -251,7 +272,11 @@ class TestDomainSpecificInterpretation:
 
     def test_interpret_risk_metrics(self, llm_interpreter):
         """Test interpreting risk management formulas."""
-        risk_queries = ["Value at Risk calculation", "Maximum drawdown formula", "Beta coefficient"]
+        risk_queries = [
+            "Value at Risk calculation",
+            "Maximum drawdown formula",
+            "Beta coefficient",
+        ]
 
         for query in risk_queries:
             response = llm_interpreter.interpret(query, domain="risk")
@@ -259,7 +284,11 @@ class TestDomainSpecificInterpretation:
 
     def test_interpret_defi_protocols(self, llm_interpreter):
         """Test interpreting DeFi protocol formulas."""
-        defi_queries = ["Uniswap V2 price impact", "Impermanent loss calculation", "Liquidity pool fees"]
+        defi_queries = [
+            "Uniswap V2 price impact",
+            "Impermanent loss calculation",
+            "Liquidity pool fees",
+        ]
 
         for query in defi_queries:
             response = llm_interpreter.interpret(query, domain="defi")
@@ -267,7 +296,11 @@ class TestDomainSpecificInterpretation:
 
     def test_interpret_statistical_formulas(self, llm_interpreter):
         """Test interpreting statistical formulas."""
-        stat_queries = ["Standard deviation", "Covariance matrix", "Correlation coefficient"]
+        stat_queries = [
+            "Standard deviation",
+            "Covariance matrix",
+            "Correlation coefficient",
+        ]
 
         for query in stat_queries:
             response = llm_interpreter.interpret(query, domain="statistics")
@@ -301,7 +334,9 @@ class TestErrorHandling:
 
     def test_handle_api_error(self, llm_interpreter):
         """Test handling API errors."""
-        with patch.object(llm_interpreter.provider, "generate", side_effect=Exception("API Error")):
+        with patch.object(
+            llm_interpreter.provider, "generate", side_effect=Exception("API Error")
+        ):
             with pytest.raises(Exception):
                 llm_interpreter.interpret("test query")
 
@@ -319,7 +354,10 @@ class TestErrorHandling:
         query = "test query"
 
         with patch.object(llm_interpreter.provider, "generate") as mock_generate:
-            mock_generate.side_effect = [Exception("Temporary error"), {"result": "success"}]
+            mock_generate.side_effect = [
+                Exception("Temporary error"),
+                {"result": "success"},
+            ]
 
             response = llm_interpreter.interpret_with_retry(query, max_retries=2)
 
@@ -446,14 +484,20 @@ def llm_interpreter():
 
     # Mock basic methods
     interpreter.interpret = MagicMock(return_value="Sharpe Ratio: (R - Rf) / sigma")
-    interpreter.get_config = MagicMock(return_value={"model": "test", "temperature": 0.7})
-    interpreter.extract_components = MagicMock(return_value={"variables": ["R", "Rf", "sigma"]})
+    interpreter.get_config = MagicMock(
+        return_value={"model": "test", "temperature": 0.7}
+    )
+    interpreter.extract_components = MagicMock(
+        return_value={"variables": ["R", "Rf", "sigma"]}
+    )
     interpreter.identify_variables = MagicMock(return_value=["R", "Rf", "sigma"])
     interpreter.parse_notation = MagicMock(return_value="parsed")
     interpreter.parse_response = MagicMock(return_value={"formula": "test"})
     interpreter.parse_latex = MagicMock(return_value="parsed_latex")
     interpreter.extract_formula = MagicMock(return_value="x * y = k")
-    interpreter.parse_multiple_formulas = MagicMock(return_value=[{"name": "sharpe", "formula": "test"}])
+    interpreter.parse_multiple_formulas = MagicMock(
+        return_value=[{"name": "sharpe", "formula": "test"}]
+    )
     interpreter.generate_formula = MagicMock(return_value="generated_formula")
     interpreter.generate_symbolic = MagicMock(return_value="2*x")
     interpreter.generate_from_examples = MagicMock(return_value="(new - old) / old")
@@ -462,7 +506,9 @@ def llm_interpreter():
     interpreter.clear_cache = MagicMock()
     interpreter.to_symbolic = MagicMock(return_value="symbolic_expr")
     interpreter.check_dimensions = MagicMock(return_value={"length": 1, "time": -1})
-    interpreter.interpret_with_metrics = MagicMock(return_value=("result", {"tokens": 100}))
+    interpreter.interpret_with_metrics = MagicMock(
+        return_value=("result", {"tokens": 100})
+    )
 
     return interpreter
 

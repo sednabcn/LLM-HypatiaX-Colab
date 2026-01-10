@@ -58,7 +58,7 @@ def test_extrapolation(formula_name, ground_truth_func, X_range, n_samples=100):
 
     # Discover formula
     print("Running symbolic regression...")
-    engine = SymbolicEngine(DiscoveryConfig(niterations=40, populations=15, population_size=50))
+    engine = SymbolicEngine(DiscoveryConfig(niterations=40, populations=15))
     result = engine.discover(X_train, y_train, variable_names=["x"])
 
     print(f"Discovered: {result['expression']}")
@@ -76,7 +76,9 @@ def test_extrapolation(formula_name, ground_truth_func, X_range, n_samples=100):
         expr = result["sympy_expr"]
 
         # Vectorized evaluation
-        y_pred = np.array([float(expr.subs(x_sym, float(x_val))) for x_val in X_test[:, 0]])
+        y_pred = np.array(
+            [float(expr.subs(x_sym, float(x_val))) for x_val in X_test[:, 0]]
+        )
     except Exception as e:
         print(f"Error evaluating expression: {e}")
         return None
@@ -87,40 +89,73 @@ def test_extrapolation(formula_name, ground_truth_func, X_range, n_samples=100):
 
     # In-domain metrics
     in_domain_mae = np.mean(np.abs(y_true[in_domain_mask] - y_pred[in_domain_mask]))
-    in_domain_relative = in_domain_mae / (np.mean(np.abs(y_true[in_domain_mask])) + 1e-10)
+    in_domain_relative = in_domain_mae / (
+        np.mean(np.abs(y_true[in_domain_mask])) + 1e-10
+    )
 
     # Out-of-domain metrics
     out_domain_mae = np.mean(np.abs(y_true[out_domain_mask] - y_pred[out_domain_mask]))
-    out_domain_relative = out_domain_mae / (np.mean(np.abs(y_true[out_domain_mask])) + 1e-10)
+    out_domain_relative = out_domain_mae / (
+        np.mean(np.abs(y_true[out_domain_mask])) + 1e-10
+    )
 
     extrapolation_ratio = out_domain_relative / (in_domain_relative + 1e-10)
 
     print(f"In-domain error: {in_domain_relative:.4f} ({in_domain_relative*100:.2f}%)")
-    print(f"Out-of-domain error: {out_domain_relative:.4f} ({out_domain_relative*100:.2f}%)")
+    print(
+        f"Out-of-domain error: {out_domain_relative:.4f} ({out_domain_relative*100:.2f}%)"
+    )
     print(f"Extrapolation ratio: {extrapolation_ratio:.2f}x")
 
     # Create visualization
     plt.figure(figsize=(10, 6))
 
     # Training data
-    plt.scatter(X_train, y_train, alpha=0.5, s=20, c="blue", label="Training data", zorder=3)
+    plt.scatter(
+        X_train, y_train, alpha=0.5, s=20, c="blue", label="Training data", zorder=3
+    )
 
     # Ground truth
-    plt.plot(X_test, y_true, "g-", label="Ground truth", linewidth=2.5, alpha=0.8, zorder=2)
+    plt.plot(
+        X_test, y_true, "g-", label="Ground truth", linewidth=2.5, alpha=0.8, zorder=2
+    )
 
     # Discovered formula
-    plt.plot(X_test, y_pred, "r--", label="Discovered formula", linewidth=2, alpha=0.8, zorder=2)
+    plt.plot(
+        X_test,
+        y_pred,
+        "r--",
+        label="Discovered formula",
+        linewidth=2,
+        alpha=0.8,
+        zorder=2,
+    )
 
     # Mark training boundary
-    plt.axvline(X_range[1], color="black", linestyle=":", linewidth=2, label="Training boundary", zorder=1)
+    plt.axvline(
+        X_range[1],
+        color="black",
+        linestyle=":",
+        linewidth=2,
+        label="Training boundary",
+        zorder=1,
+    )
 
     # Shade extrapolation region
-    plt.axvspan(X_range[1], X_range[1] * 2, alpha=0.1, color="red", label="Extrapolation region", zorder=0)
+    plt.axvspan(
+        X_range[1],
+        X_range[1] * 2,
+        alpha=0.1,
+        color="red",
+        label="Extrapolation region",
+        zorder=0,
+    )
 
     plt.xlabel("X", fontsize=12)
     plt.ylabel("Y", fontsize=12)
     plt.title(
-        f"Extrapolation Test: {formula_name}\n" f"Discovered: {result['expression']} (R²={result['r2_score']:.4f})",
+        f"Extrapolation Test: {formula_name}\n"
+        f"Discovered: {result['expression']} (R²={result['r2_score']:.4f})",
         fontsize=11,
     )
     plt.legend(loc="best", fontsize=10)
@@ -139,7 +174,9 @@ def test_extrapolation(formula_name, ground_truth_func, X_range, n_samples=100):
         "formula": formula_name,
         "discovered_expression": result["expression"],
         "r2_train": float(result["r2_score"]),
-        "complexity": result["complexity"],
+        "complexity": (
+            int(result["complexity"]) if result["complexity"] is not None else 0
+        ),
         "in_domain_error": float(in_domain_relative),
         "out_domain_error": float(out_domain_relative),
         "extrapolation_ratio": float(extrapolation_ratio),
@@ -201,7 +238,7 @@ def run_all_extrapolation_tests():
 
     # Save results
     os.makedirs("results", exist_ok=True)
-    output_path = "results/extrapolation_results.json"
+    output_path = "hypatiax/data/results/formulas_extrapolation_results.json"
     with open(output_path, "w") as f:
         json.dump(results, f, indent=2)
 
@@ -230,7 +267,9 @@ def run_all_extrapolation_tests():
         print("\nAVERAGE METRICS:")
         print(f"  Mean R² (training): {avg_r2:.4f}")
         print(f"  Mean extrapolation ratio: {avg_ratio:.2f}x")
-        print(f"  Interpretation: Discovered formulas have {avg_ratio:.1f}x higher error")
+        print(
+            f"  Interpretation: Discovered formulas have {avg_ratio:.1f}x higher error"
+        )
         print("                  when extrapolating vs interpolating\n")
 
     return results

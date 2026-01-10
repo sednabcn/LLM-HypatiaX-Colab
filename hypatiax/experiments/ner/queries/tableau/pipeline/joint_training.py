@@ -43,14 +43,20 @@ class JointEntityExtractor:
 
         for token in tokens:
             if token in self.desc_patterns:
-                desc_entities.append({"text": token, "label": self.desc_patterns[token]})
+                desc_entities.append(
+                    {"text": token, "label": self.desc_patterns[token]}
+                )
 
         formula_entities = []
-        formula_tokens = formula.replace("=", " ").replace("*", " * ").replace("^", " ^ ").split()
+        formula_tokens = (
+            formula.replace("=", " ").replace("*", " * ").replace("^", " ^ ").split()
+        )
 
         for token in formula_tokens:
             if token in self.formula_patterns:
-                formula_entities.append({"text": token, "label": self.formula_patterns[token]})
+                formula_entities.append(
+                    {"text": token, "label": self.formula_patterns[token]}
+                )
 
         return {"desc_entities": desc_entities, "formula_entities": formula_entities}
 
@@ -113,7 +119,12 @@ class JointMappingModel:
 
     def evaluate(self, test_data: List[Tuple[str, str]]) -> Dict:
         """Evaluate on test data with error propagation"""
-        results = {"exact_match": 0, "partial_match": 0, "total": len(test_data), "predictions": []}
+        results = {
+            "exact_match": 0,
+            "partial_match": 0,
+            "total": len(test_data),
+            "predictions": [],
+        }
 
         print("\n[EVALUATION] Testing on held-out data...")
         for i, (desc, expected_formula) in enumerate(test_data):
@@ -124,7 +135,9 @@ class JointMappingModel:
             predicted_norm = predicted_formula.replace(" ", "")
 
             exact_match = expected_norm == predicted_norm
-            partial_match = any(token in predicted_norm for token in expected_norm.split("*"))
+            partial_match = any(
+                token in predicted_norm for token in expected_norm.split("*")
+            )
 
             if exact_match:
                 results["exact_match"] += 1
@@ -137,7 +150,12 @@ class JointMappingModel:
                 match_type = "✗ FAIL"
 
             results["predictions"].append(
-                {"description": desc, "expected": expected_formula, "predicted": predicted_formula, "match": match_type}
+                {
+                    "description": desc,
+                    "expected": expected_formula,
+                    "predicted": predicted_formula,
+                    "match": match_type,
+                }
             )
 
             print(f"  Test {i+1} [{match_type}]:")
@@ -225,8 +243,12 @@ def main():
     print("RESULTS SUMMARY:")
     print("=" * 60)
     print(f"Total test cases:      {results['total']}")
-    print(f"Exact matches:         {results['exact_match']} ({results['exact_match_rate']:.1%})")
-    print(f"Partial matches:       {results['partial_match']} ({results['partial_match_rate']:.1%})")
+    print(
+        f"Exact matches:         {results['exact_match']} ({results['exact_match_rate']:.1%})"
+    )
+    print(
+        f"Partial matches:       {results['partial_match']} ({results['partial_match_rate']:.1%})"
+    )
     print(f"Exact match accuracy:  {results['exact_match_rate']:.1%}")
 
     # Detailed error analysis on first test case

@@ -25,7 +25,9 @@ def check_environment():
     print(f"Python executable: {sys.executable}")
 
     # Check if we're in a virtual environment
-    in_venv = hasattr(sys, "real_prefix") or (hasattr(sys, "base_prefix") and sys.base_prefix != sys.prefix)
+    in_venv = hasattr(sys, "real_prefix") or (
+        hasattr(sys, "base_prefix") and sys.base_prefix != sys.prefix
+    )
     print(f"Virtual environment: {'Yes' if in_venv else 'No'}")
 
     return spacy.__version__

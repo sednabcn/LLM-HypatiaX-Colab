@@ -22,7 +22,10 @@ def combined_process(path_data, path_out, actions, option=None):
     if isinstance(data, pd.DataFrame) and len(data.columns) == 2:
         # Combine the two columns with a colon in between
         data["Combined"] = data[data.columns[0]] + " : " + data[data.columns[1]]
-        assert data.shape == (nrows, ncols + 1), "Data does not have the expected shape."
+        assert data.shape == (
+            nrows,
+            ncols + 1,
+        ), "Data does not have the expected shape."
     # Saving data to disk in the appropriate format
     if ext in ["xls", "xlsx"]:
         output_path = f"{path_out}/{filename}_combined.xlsx"

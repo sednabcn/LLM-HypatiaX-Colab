@@ -36,10 +36,12 @@ def main():
 
     # Save data preparation config
     try:
-        config_data_prep = pd.DataFrame([config_data_preparation])  # Fixed: wrap in list
-        config_path = resources.files("hypatiax.models.queries.tableau.model_configs").joinpath(
-            f"config_data_preparation_{i}.csv"
-        )
+        config_data_prep = pd.DataFrame(
+            [config_data_preparation]
+        )  # Fixed: wrap in list
+        config_path = resources.files(
+            "hypatiax.models.queries.tableau.model_configs"
+        ).joinpath(f"config_data_preparation_{i}.csv")
         config_data_prep.to_csv(config_path, index=False)
         print(f"✓ Data preparation config saved to: {config_path}")
     except Exception as e:
@@ -87,15 +89,21 @@ def main():
 
     # Save training config (exclude train_data and val_data to avoid serialization issues)
     try:
-        config_training_save = {k: v for k, v in config_training.items() if k not in ["train_data", "val_data"]}
+        config_training_save = {
+            k: v
+            for k, v in config_training.items()
+            if k not in ["train_data", "val_data"]
+        }
         config_training_save["train_samples"] = len(X_train) if X_train else 0
         config_training_save["val_samples"] = len(X_val) if X_val else 0
 
         config_training_df = pd.DataFrame([config_training_save])  # Fixed: wrap in list
-        config_training_path = resources.files("hypatiax.models.queries.tableau.model_configs").joinpath(
-            f"config_training_{i}.csv"
-        )
-        config_training_df.to_csv(config_training_path, index=False)  # Fixed: use correct variable
+        config_training_path = resources.files(
+            "hypatiax.models.queries.tableau.model_configs"
+        ).joinpath(f"config_training_{i}.csv")
+        config_training_df.to_csv(
+            config_training_path, index=False
+        )  # Fixed: use correct variable
         print(f"✓ Training config saved to: {config_training_path}")
     except Exception as e:
         print(f"Warning: Could not save training config: {e}")
@@ -156,9 +164,13 @@ def main():
             # Check if model meets quality threshold
             f1_threshold = 0.75
             if validation_scores.get("ents_f", 0) >= f1_threshold:
-                print(f"✓ Model passed validation (F1: {validation_scores['ents_f']:.4f} >= {f1_threshold})")
+                print(
+                    f"✓ Model passed validation (F1: {validation_scores['ents_f']:.4f} >= {f1_threshold})"
+                )
             else:
-                print(f"⚠ Model below threshold (F1: {validation_scores['ents_f']:.4f} < {f1_threshold})")
+                print(
+                    f"⚠ Model below threshold (F1: {validation_scores['ents_f']:.4f} < {f1_threshold})"
+                )
 
         except Exception as e:
             print(f"✗ Error during validation: {e}")
