@@ -1,0 +1,31 @@
+{
+  "session_id": "llm_defi_20260113_180317",
+  "timestamp": "2026-01-13T18:14:10.704073",
+  "completed": [
+    "liquidation_liquidation_short",
+    "expected_shortfall_es_from_var",
+    "staking_staking_dilution",
+    "liquidation_liquidation_long",
+    "liquidation_required_collateral"
+  ],
+  "failed": [
+    "staking_staking_rewards",
+    "amm_price_impact",
+    "risk_var_portfolio_var",
+    "liquidation_max_leverage",
+    "amm_il_percentage",
+    "expected_shortfall_es_99",
+    "amm_impermanent_loss",
+    "liquidity_capital_efficiency",
+    "staking_compound_staking",
+    "liquidity_apy_from_apr",
+    "amm_constant_product",
+    "risk_var_var_99",
+    "risk_var_var_multiday",
+    "expected_shortfall_es_95",
+    "liquidity_kelly_criterion",
+    "expected_shortfall_portfolio_es",
+    "risk_var_var_95",
+    "liquidity_lp_fee_share"
+  ]
+}

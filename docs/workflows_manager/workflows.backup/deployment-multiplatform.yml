@@ -1,0 +1,455 @@
+# ============================================
+# GITHUB ACTIONS WORKFLOW
+# ============================================
+# Save as: .github/workflows/deployment.yml
+
+name: HypatiaX Data Processing Pipeline
+
+on:
+  push:
+    branches: 
+      - main
+      - develop
+    paths:
+      - 'hypatiax/datasets/**'
+      - 'script.py'
+      - '.github/workflows/deployment.yml'
+  pull_request:
+    branches: 
+      - main
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+          - development
+
+env:
+  PROJECT_ROOT: ${{ github.workspace }}
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Validate paths
+        run: |
+          python script.py --validate-only
+      
+      - name: Run unit tests
+        run: |
+          python -m pytest tests/ -v
+
+  process:
+    name: Process Data
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name != 'pull_request'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Process tableau testing data
+        run: |
+          python script.py
+        env:
+          PROJECT_ROOT: ${{ github.workspace }}
+          LOG_LEVEL: INFO
+      
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: processing-results
+          path: |
+            logs/
+            output/
+          retention-days: 30
+
+  build-docker:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/hypatia-processor
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix={{branch}}-
+            type=semver,pattern={{version}}
+            type=raw,value=latest,enable={{is_default_branch}}
+      
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+---
+# ============================================
+# KUBERNETES DEPLOYMENT
+# ============================================
+# Save as: k8s/deployment.yml
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hypatia-processing
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hypatia-config
+  namespace: hypatia-processing
+data:
+  PROJECT_ROOT: "/app/LLM-HypatiaX-OLD"
+  LOG_LEVEL: "INFO"
+  TARGET_PATH: "hypatiax/datasets/queries/tableau/testing"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hypatia-data-pvc
+  namespace: hypatia-processing
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: standard
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hypatia-processor
+  namespace: hypatia-processing
+  labels:
+    app: hypatia-processor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hypatia-processor
+  template:
+    metadata:
+      labels:
+        app: hypatia-processor
+    spec:
+      containers:
+      - name: processor
+        image: ghcr.io/YOUR_USERNAME/hypatia-processor:latest
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: hypatia-config
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        volumeMounts:
+        - name: data-volume
+          mountPath: /app/LLM-HypatiaX-OLD
+        - name: logs-volume
+          mountPath: /app/logs
+      volumes:
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: hypatia-data-pvc
+      - name: logs-volume
+        emptyDir: {}
+      restartPolicy: Always
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hypatia-scheduled-processor
+  namespace: hypatia-processing
+spec:
+  schedule: "0 2 * * *"  # Daily at 2 AM UTC
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: processor
+            image: ghcr.io/YOUR_USERNAME/hypatia-processor:latest
+            envFrom:
+            - configMapRef:
+                name: hypatia-config
+            volumeMounts:
+            - name: data-volume
+              mountPath: /app/LLM-HypatiaX-OLD
+          volumes:
+          - name: data-volume
+            persistentVolumeClaim:
+              claimName: hypatia-data-pvc
+          restartPolicy: OnFailure
+      backoffLimit: 3
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hypatia-processor-service
+  namespace: hypatia-processing
+spec:
+  selector:
+    app: hypatia-processor
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: ClusterIP
+
+---
+# ============================================
+# DOCKER COMPOSE
+# ============================================
+# Save as: docker-compose.yml
+
+version: '3.8'
+
+services:
+  hypatia-processor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hypatia-processor:latest
+    container_name: hypatia-processor
+    environment:
+      - PROJECT_ROOT=/app/LLM-HypatiaX-OLD
+      - LOG_LEVEL=INFO
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./LLM-HypatiaX-OLD:/app/LLM-HypatiaX-OLD:ro
+      - ./logs:/app/logs
+      - ./output:/app/output
+    working_dir: /app
+    command: python script.py
+    restart: unless-stopped
+    networks:
+      - hypatia-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional: Add a scheduler for periodic processing
+  hypatia-scheduler:
+    image: hypatia-processor:latest
+    container_name: hypatia-scheduler
+    environment:
+      - PROJECT_ROOT=/app/LLM-HypatiaX-OLD
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./LLM-HypatiaX-OLD:/app/LLM-HypatiaX-OLD:ro
+      - ./logs:/app/logs
+      - ./output:/app/output
+    command: |
+      sh -c "while true; do
+        echo 'Running scheduled processing...'
+        python script.py
+        echo 'Sleeping for 24 hours...'
+        sleep 86400
+      done"
+    restart: unless-stopped
+    networks:
+      - hypatia-network
+
+networks:
+  hypatia-network:
+    driver: bridge
+
+---
+# ============================================
+# DOCKERFILE
+# ============================================
+# Save as: Dockerfile
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first for better caching
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY script.py .
+COPY LLM-HypatiaX-OLD ./LLM-HypatiaX-OLD
+
+# Create directories for logs and output
+RUN mkdir -p /app/logs /app/output
+
+# Set environment variables
+ENV PROJECT_ROOT=/app/LLM-HypatiaX-OLD
+ENV PYTHONUNBUFFERED=1
+ENV LOG_LEVEL=INFO
+
+# Run the script
+CMD ["python", "script.py"]
+
+---
+# ============================================
+# REQUIREMENTS.TXT
+# ============================================
+# Save as: requirements.txt
+
+# Core dependencies
+python-dateutil>=2.8.2
+pathlib>=1.0.1
+
+# Optional: Add based on your needs
+# pandas>=2.0.0
+# numpy>=1.24.0
+# pytest>=7.4.0
+
+---
+# ============================================
+# .dockerignore
+# ============================================
+# Save as: .dockerignore
+
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist/
+build/
+.git
+.github
+.gitignore
+README.md
+.env
+.venv
+venv/
+*.log
+.DS_Store
+.pytest_cache/
+.coverage
+htmlcov/
+
+---
+# ============================================
+# KUBERNETES COMMANDS CHEAT SHEET
+# ============================================
+
+# Apply all Kubernetes resources
+# kubectl apply -f k8s/deployment.yml
+
+# Check deployment status
+# kubectl get deployments -n hypatia-processing
+
+# View pods
+# kubectl get pods -n hypatia-processing
+
+# Check logs
+# kubectl logs -f deployment/hypatia-processor -n hypatia-processing
+
+# View CronJob status
+# kubectl get cronjobs -n hypatia-processing
+
+# Manually trigger CronJob
+# kubectl create job --from=cronjob/hypatia-scheduled-processor manual-run -n hypatia-processing
+
+# Delete all resources
+# kubectl delete namespace hypatia-processing
+
+---
+# ============================================
+# DOCKER COMMANDS CHEAT SHEET
+# ============================================
+
+# Build image
+# docker build -t hypatia-processor:latest .
+
+# Run container
+# docker run -v $(pwd)/LLM-HypatiaX-OLD:/app/LLM-HypatiaX-OLD hypatia-processor:latest
+
+# Run with Docker Compose
+# docker-compose up -d
+
+# View logs
+# docker-compose logs -f hypatia-processor
+
+# Stop services
+# docker-compose down
+
+# Rebuild and restart
+# docker-compose up -d --build

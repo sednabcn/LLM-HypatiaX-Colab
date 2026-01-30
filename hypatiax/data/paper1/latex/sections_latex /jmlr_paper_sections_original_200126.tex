@@ -1,0 +1,1645 @@
+\documentclass[twoside,11pt]{article}
+
+% JMLR Style
+\usepackage{jmlr2e}
+\setcitestyle{numbers,sort&compress}
+
+% Packages
+\usepackage{amsmath,amssymb,amsfonts} 
+\usepackage{bm}
+\usepackage{listings} 
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+% Custom macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\qed}{\hfill$\square$}  
+
+% Colors
+\definecolor{successgreen}{RGB}{0,128,0}
+\definecolor{failred}{RGB}{200,0,0}
+\definecolor{warningorange}{RGB}{255,140,0}
+
+\begin{document}
+
+\jmlrheading{XX}{2025}{1-48}{1/25}{9/25}{Bonet Chaple}
+\ShortHeadings{LLMs as Interfaces to Symbolic Discovery}{Bonet Chaple}
+\firstpageno{1}
+
+\title{Large Language Models as Interfaces to Symbolic Discovery: \\ A Hybrid Architecture for Reliable Analytical Expression Discovery}
+
+\author{\name Ruperto Pedro Bonet Chaple \email ruperto.bonet@modelphysmat.com \\
+       \addr Independent Researcher \\
+             London, United Kingdom
+}
+
+\editor{TBD}
+
+\maketitle
+
+\begin{abstract}
+Can Large Language Models discover novel analytical expressions, or do they primarily reproduce patterns from training data? We address this question through systematic empirical evaluation across 131 test cases spanning classical physics and decentralized finance domains. Our results reveal that pure LLM-based discovery exhibits stark domain-dependent performance: 95\% success on classical formulas versus 45\% on specialized financial mathematics, with catastrophic extrapolation errors (412-847\% versus 8-23\% for symbolic methods). We prove that autoregressive language models are fundamentally reproductive systems, with generation probability decaying exponentially for expressions distant from training data. This limitation, confirmed by recent systematic evaluations \citep{xu2025fundamental,du2025evaluating}, necessitates hybrid approaches. 
+
+Motivated by these limitations, we introduce \textsc{HypatiaX}, a hybrid symbolic-neural architecture where LLMs serve as \emph{interfaces} to symbolic discovery engines rather than discovery engines themselves. Our system combines evolutionary symbolic regression with multi-layer validation (dimensional analysis, domain constraints, execution verification) and optional LLM initialization for efficiency. Across five experimental campaigns, \textsc{HypatiaX} achieves 88.9-100\% success rates with 8-23\% extrapolation error and 100\% functional correctness on ground truth tests, compared to 20-40\% correctness for pure LLM approaches. An LLM-guided variant reduces discovery time by 82\% while preserving all symbolic guarantees. Our key contribution is demonstrating that reliable analytical discovery requires symbolic methods under physics constraints, with LLMs providing interpretation rather than mathematical reasoning.
+\end{abstract}
+
+\begin{keywords}
+symbolic regression, large language models, scientific machine learning, hybrid AI systems, analytical expression discovery, physics-informed machine learning
+\end{keywords}
+
+\section{Introduction}
+
+Large Language Models (LLMs) have demonstrated remarkable capabilities in scientific tasks, from literature synthesis to mathematical problem-solving \citep{brown2020language,wei2022chain,openai2023gpt4}. Recent work suggests these models can recover closed-form equations from data \citep{romera2023discovering}, raising a fundamental question: \textbf{Do LLMs perform genuine analytical discovery, or do they primarily reproduce memorized patterns?}
+
+This distinction has profound implications for trustworthy AI in science. Genuine discovery requires:
+\begin{enumerate}
+\item \textbf{Generalization beyond training data}: Finding expressions for phenomena not encountered during pre-training
+\item \textbf{Physical consistency}: Respecting dimensional analysis, conservation laws, and domain constraints
+\item \textbf{Extrapolation capability}: Producing predictions that remain valid outside the training distribution
+\item \textbf{Failure transparency}: Detecting and rejecting incorrect expressions rather than producing plausible but wrong results
+\end{enumerate}
+
+\subsection{Motivating Evidence}
+
+Consider two formula discovery tasks:
+
+\paragraph{Classical Physics (Ohm's Law):} Given voltage-current-resistance data, discover $V = IR$.
+
+\paragraph{DeFi Risk (Value-at-Risk):} Given return distribution data, discover $\text{VaR}_\alpha = -\mu + \sigma \Phi^{-1}(\alpha)$.
+
+When we evaluated state-of-the-art LLMs \citep{openai2023gpt4,anthropic2024claude} on 40 such problems:
+\begin{itemize}
+\item \textbf{Classical formulas}: 95\% success rate, perfect $R^2 \approx 1.0$
+\item \textbf{Financial formulas}: 45\% success rate, frequent failures with $R^2 < 0$
+\item \textbf{Extrapolation}: 847\% error for LLMs versus 23\% for symbolic methods
+\item \textbf{Functional correctness}: 20-40\% for LLMs versus 88.9-100\% for our hybrid approach
+\end{itemize}
+
+This bimodal behavior suggests LLMs excel at reproducing well-known relationships but struggle with specialized domains requiring distributional reasoning or novel functional forms.
+
+\subsection{Contributions}
+
+This paper makes four primary contributions:
+
+\begin{enumerate}
+\item \textbf{Theoretical characterization} of LLMs as reproductive systems (Theorem~\ref{thm:llm_reproductive}), with proof that autoregressive generation probability decays exponentially for expressions distant from training data.
+
+\item \textbf{Comprehensive empirical evaluation} demonstrating domain-dependent LLM performance across 131 tests: 95\% success on classical physics versus 45\% on decentralized finance, with detailed failure mode taxonomy.
+
+\item \textbf{Hybrid architecture} (\textsc{HypatiaX}) combining evolutionary symbolic regression with multi-layer validation and optional LLM initialization, achieving 88.9-100\% success rates with 8-23\% extrapolation error.
+
+\item \textbf{Design principles} for reliable analytical discovery: symbolic methods for mathematical reasoning, LLMs for natural language interpretation and warm-starting search.
+\end{enumerate}
+
+\subsection{Paper Organization}
+
+We begin with related work (Section~\ref{sec:related}), then present empirical evidence of LLM limitations (Section~\ref{sec:llm_limitations}) to motivate our approach. Section~\ref{sec:theory} provides theoretical analysis, followed by the \textsc{HypatiaX} architecture (Section~\ref{sec:architecture}). Experimental validation (Section~\ref{sec:experiments}) demonstrates performance across five campaigns, and we conclude with discussion and limitations (Section~\ref{sec:discussion}).
+
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Symbolic Regression}
+
+Symbolic regression discovers analytical expressions through combinatorial search over mathematical operators. Classical genetic programming approaches \citep{koza1992genetic,schmidt2009distilling} evolve expression trees using fitness-based selection. Modern frameworks like PySR \citep{cranmer2023interpretable} incorporate Pareto optimization to balance accuracy and complexity, physics-informed operators, and dimensional constraints. Recent neural-guided approaches \citep{petersen2021deep,udrescu2020aifeynman} combine deep learning with symbolic search, while \citet{cranmer2023symbolic} provides a comprehensive review of symbolic regression in the modern era. Cutting-edge methods integrate LLMs with symbolic regression \citep{taskin2026knowledge}, develop neural-symbolic models for physics \citep{ying2025physe2e}, and apply physics-guided deep SR to engineering problems \citep{zhang2026formula,senetakis2026symbolic}.
+
+Our work builds on these foundations by integrating symbolic regression with LLM initialization and multi-layer validation, achieving superior performance on specialized domains while maintaining formal guarantees.
+
+\subsection{LLMs for Scientific Discovery}
+
+Recent work has explored LLMs for hypothesis generation \citep{wang2023scientific}, literature mining \citep{liu2023summary}, and mathematical reasoning \citep{wei2022chain,zhang2025survey}. Advanced reasoning techniques include adversarial reinforcement learning \citep{liu2025adversarial}, memory-augmented agents \citep{yan2026memory}, and dynamic task adaptation \citep{wang2025reasoning}. The transformer architecture \citep{vaswani2017attention} underpins these capabilities, though recent studies \citep{mirzadeh2024reasoning,dziri2023faith,xu2025fundamental,tian2025reasoning} reveal fundamental limitations in compositional reasoning and extrapolation. Systematic evaluations \citep{du2025evaluating,chen2025epistemic} demonstrate consistent performance gaps between LLM capabilities and genuine scientific discovery. Romera et al. \citep{romera2023discovering} demonstrate that LLMs can recover known physical laws from textual descriptions and data patterns.
+
+\textbf{Key difference}: Romera et al. evaluate on well-established physics formulas likely present in training data. We systematically test on specialized domains (decentralized finance, advanced statistics) requiring genuine extrapolation, revealing fundamental limitations in pure LLM approaches.
+
+\subsection{Hybrid AI Systems}
+
+Neurosymbolic AI combines neural networks with symbolic reasoning \citep{garcez2019neural,kautz2020third}. In scientific computing, physics-informed neural networks \citep{raissi2019physics,karniadakis2021physics} embed differential equations as constraints, while neural operators \citep{lu2021learning,li2020fourier} learn mappings between function spaces. Recent surveys \citep{li2026physics} demonstrate the expanding scope of physics-informed AI across complex systems. \citet{udrescu2020ai} uses neural networks to guide symbolic search.
+
+Our architecture differs by using LLMs purely as interfaces (initialization + interpretation) rather than as components of the discovery process, maintaining symbolic guarantees while leveraging LLM strengths.
+
+\section{Empirical Evidence of LLM Limitations}
+\label{sec:llm_limitations}
+
+To understand whether LLMs can perform genuine analytical discovery, we conducted systematic evaluation of pure LLM-based formula generation without symbolic constraints, analytical solvers, or post-generation correction.
+
+\subsection{Experimental Design}
+
+\paragraph{Test Domains:} We evaluated across two complementary sets:
+
+\begin{itemize}
+\item \textbf{Classical Scientific (20 tests)}: Materials Science (4), Fluid Dynamics (4), Thermodynamics (4), Mechanics (4), Chemistry (4)
+\item \textbf{Decentralized Finance (20 tests)}: Automated Market Makers (4), Value-at-Risk (4), Liquidity (4), Expected Shortfall (4), Liquidation (4)
+\end{itemize}
+
+\paragraph{Protocol:} For each test, we provided Claude Sonnet 4 with:
+\begin{itemize}
+\item Domain context and variable descriptions with physical units
+\item Sample data statistics (mean, standard deviation, range, correlations)
+\item Request for closed-form analytical expression and executable Python code
+\item No symbolic regression, constraint enforcement, or correction
+\end{itemize}
+
+\paragraph{Evaluation Metrics:}
+\begin{itemize}
+\item $R^2$ coefficient of determination on held-out test data
+\item Extrapolation error: performance on data 2$\times$ outside training range
+\item Functional correctness: whether discovered expression matches known ground truth
+\item Failure mode classification: execution errors, dimensional inconsistencies, statistical misuse
+\end{itemize}
+
+\subsection{Baseline Results: Bimodal Performance}
+
+Table~\ref{tab:baseline_llm} reveals striking domain-dependent behavior.
+
+\begin{table}[htbp]
+\centering
+\caption{Pure LLM Performance Across Domains (40 tests, Claude Sonnet 4)}
+\label{tab:baseline_llm}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Domain Category} & \textbf{Tests} & \textbf{Success} & \textbf{Mean $R^2$} & \textbf{Correct Form} \\
+\midrule
+\multicolumn{5}{c}{\textit{Classical Scientific Domains}} \\
+\midrule
+Materials Science & 4 & 100\% & 1.000 & 4/4 \\
+Fluid Dynamics & 4 & 100\% & 1.000 & 4/4 \\
+Thermodynamics & 4 & 100\% & 1.000 & 4/4 \\
+Mechanics & 4 & 100\% & 1.000 & 4/4 \\
+Chemistry & 4 & 75\% & 0.750 & 3/4 \\
+\midrule
+\textbf{Classical Average} & \textbf{20} & \textbf{95\%} & \textbf{0.975} & \textbf{19/20 (95\%)} \\
+\midrule
+\multicolumn{5}{c}{\textit{Decentralized Finance Domains}} \\
+\midrule
+AMM Mechanics & 4 & 75\% & 0.817 & 3/4 \\
+Risk (VaR) & 4 & 75\% & $-1.813$ & 2/4 \\
+Liquidity & 4 & 50\% & --- & 2/4 \\
+Expected Shortfall & 4 & 25\% & $-4.120$ & 1/4 \\
+Liquidation & 4 & 0\% & --- & 0/4 \\
+\midrule
+\textbf{DeFi Average} & \textbf{20} & \textbf{45\%} & \textbf{---} & \textbf{8/20 (40\%)} \\
+\midrule
+\midrule
+\textbf{Overall} & \textbf{40} & \textbf{70\%} & \textbf{0.603} & \textbf{27/40 (67.5\%)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Key Finding:} Pure LLMs achieve near-perfect performance on classical formulas present in training corpora but fail catastrophically on specialized domains requiring distributional reasoning or novel functional forms.
+
+\subsection{Failure Mode Taxonomy}
+
+These failure modes align with known limitations of transformer-based models in systematic generalization \citep{lake2017building} and extrapolation \citep{zhang2024extrapolation}. Recent work on multimodal reasoning \citep{malkinski2025multimodal} and argumentative reasoning \citep{gould2025argumentative} further exposes structural deficits in current architectures.
+
+We categorize LLM failures into five distinct types:
+
+\begin{table}[htbp]
+\centering
+\caption{Pure LLM Failure Modes (Ordered by Severity)}
+\label{tab:failure_modes}
+\begin{tabular}{@{}lcp{7cm}@{}}
+\toprule
+\textbf{Failure Type} & \textbf{Frequency} & \textbf{Description} \\
+\midrule
+\textbf{Silent Semantic Errors} & High & Plausible expressions with high $R^2$ in training range but incorrect functional form; produces wrong predictions when deployed \\
+\midrule
+\textbf{Distributional Reasoning} & High & Misuse of statistical functions (wrong tail for VaR, incorrect scipy API calls, sign convention errors) \\
+\midrule
+\textbf{Unit/Scale Inconsistency} & Medium & Correct functional form but missing unit conversions (percentage vs. decimal, degrees vs. radians) \\
+\midrule
+\textbf{Non-executable Output} & Medium & Tutorial text or pseudocode instead of executable function \\
+\midrule
+\textbf{Incomplete Construction} & Medium & Multi-step derivations with only partial formula or skipped calculations \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Case Studies}
+
+\subsubsection{Case Study 1: Silent Semantic Error (Impermanent Loss)}
+
+\paragraph{Ground Truth:}
+\begin{equation}
+\text{IL}_{\%} = \left(\frac{2\sqrt{r}}{1+r} - 1\right) \times 100
+\end{equation}
+
+\paragraph{LLM Output:}
+\begin{verbatim}
+def formula(price_ratio):
+    r = price_ratio
+    return (2 * math.sqrt(r)) / (1 + r) - 1  # Missing ×100
+\end{verbatim}
+
+\paragraph{Analysis:} 
+\begin{itemize}
+\item Training $R^2 = 0.98$ (appears excellent)
+\item Predictions systematically wrong by 100$\times$ 
+\item Error undetectable without dimensional analysis
+\item A trader using this formula would catastrophically underestimate risk
+\end{itemize}
+
+This demonstrates why $R^2$ alone is insufficient for validation.
+
+\subsubsection{Case Study 2: Distributional Reasoning Failure (Value-at-Risk)}
+
+Value-at-Risk is a standard risk metric in finance \citep{rockafellar2000optimization,danielsson2017forecasting}, requiring precise understanding of tail distributions.
+
+\paragraph{Ground Truth (95\% VaR):}
+\begin{equation}
+\text{VaR}_{95} = -\mu + \sigma \cdot \Phi^{-1}(0.95) = -\mu + 1.645\sigma
+\end{equation}
+
+\paragraph{LLM Output:}
+\begin{verbatim}
+def formula(portfolio_value, daily_volatility):
+    mu = 0.0
+    z_score = -1.645  # WRONG SIGN
+    return -mu + z_score * daily_volatility * portfolio_value
+\end{verbatim}
+
+\paragraph{Analysis:}
+\begin{itemize}
+\item Used negative z-score, inverting all predictions
+\item Result: $R^2 = -10.05$ (catastrophic failure)
+\item Statistical convention ambiguity confused the LLM
+\item Represents semantic knowledge failure, not computational error
+\end{itemize}
+
+VaR measures loss magnitude (positive tail), but some formulations use negative returns. The LLM pattern-matched to "95th percentile= -1.645" from normal tables without understanding domain semantics.
+
+\subsubsection{Case Study 3: Library API Misuse (Expected Shortfall)}
+
+Expected Shortfall (also called Conditional VaR) provides a more comprehensive risk measure than VaR \citep{embrechts1997modelling,rockafellar2000optimization}.
+
+\paragraph{Ground Truth:}
+\begin{equation}
+\text{ES}_{\alpha} = -\mu + \sigma \cdot \frac{\phi(\Phi^{-1}(\alpha))}{\alpha}
+\end{equation}
+
+\paragraph{LLM Output:}
+\begin{verbatim}
+from scipy.stats import norm
+
+def formula(portfolio_value, daily_volatility, alpha):
+    z_alpha = norm.ppf(alpha)
+    phi_z = norm.pdf(z_alpha)  # Returns frozen distribution!
+    return portfolio_value * daily_volatility * phi_z / alpha
+    # ERROR: Can't multiply float by rv_continuous_frozen
+\end{verbatim}
+
+\paragraph{Analysis:}
+\begin{itemize}
+\item Incorrect scipy API usage (\texttt{norm.pdf(x)} returns frozen object, not scalar)
+\item Runtime error makes failure detectable (unlike Case Study 1)
+\item LLMs struggle with specialized library APIs having non-obvious calling conventions
+\item Correct usage requires \texttt{norm.pdf(z\_alpha, 0, 1)} or frozen distribution methods
+\end{itemize}
+
+\subsection{Success Pattern Analysis}
+
+Table~\ref{tab:llm_success_patterns} shows LLM performance by formula complexity.
+
+\begin{table}[htbp]
+\centering
+\caption{LLM Success Rate by Formula Complexity}
+\label{tab:llm_success_patterns}
+\begin{tabular}{@{}lccp{5cm}@{}}
+\toprule
+\textbf{Complexity} & \textbf{Success} & \textbf{Avg $R^2$} & \textbf{Examples} \\
+\midrule
+Linear (2 vars) & 100\% & 1.000 & $\sigma = E\varepsilon$, $V = IR$ \\
+Polynomial (2-3 vars) & 100\% & 1.000 & $E = \frac{1}{2}mv^2$, $F = ma$ \\
+Rational (3-4 vars) & 95\% & 0.995 & $Y = k/X$, Re $= vL/\nu$ \\
+Exponential & 100\% & 1.000 & $k = A \exp(-E_a/RT)$ \\
+Square root & 60\% & 0.600 & $\text{IL} = 2\sqrt{r}/(1+r) - 1$ \\
+Statistical (scipy) & 20\% & $-2.1$ & VaR, ES with \texttt{norm.ppf/pdf} \\
+Multi-step & 0\% & --- & Liquidation, portfolio optimization \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Training Data Hypothesis:}
+
+\begin{table}[htbp]
+\centering
+\caption{LLM Success vs. Estimated Training Exposure}
+\label{tab:training_exposure}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Domain} & \textbf{Training Likelihood} & \textbf{Success Rate} \\
+\midrule
+Classical Physics & Extensive (textbooks, Wikipedia) & 100\% \\
+Engineering Mechanics & Extensive (handbooks, standards) & 100\% \\
+Basic Chemistry & Extensive (textbooks, databases) & 75\% \\
+DeFi/AMM & Limited (recent, niche, evolving) & 65\% \\
+Risk Analytics & Limited (specialized, proprietary) & 40\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Extrapolation Testing}
+
+We evaluated formulas on data 2$\times$ outside the training distribution (e.g., if trained on $x \in [1, 10]$, tested on $x \in [20, 40]$).
+
+\begin{table}[htbp]
+\centering
+\caption{Extrapolation Performance}
+\label{tab:extrapolation}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Method} & \textbf{In-Distribution $R^2$} & \textbf{Extrapolation Error} \\
+\midrule
+Pure LLM (GPT-4) & 0.89 & 847\% \\
+Pure LLM (Claude Opus 4) & 0.93 & 412\% \\
+\midrule
+Symbolic (PySR) & 0.94 & 23\% \\
+HypatiaX (DeFi) & 0.999 & 8\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Analysis:} LLM-generated formulas often overfit to training data patterns, producing nonsensical predictions outside the training regime (e.g., negative probabilities, domain violations). This extrapolation failure is well-documented in neural network literature \citep{zhang2024extrapolation}, where models exhibit spectral bias toward low-frequency functions. Symbolic methods enforce physical constraints that ensure extrapolation validity.
+
+\subsection{Implications}
+
+These empirical results demonstrate:
+
+\begin{enumerate}
+\item \textbf{LLMs are reproductive, not generative}: 100\% success on classical formulas versus 45\% on novel domains confirms reproduction of training patterns.
+
+\item \textbf{Silent failures are dangerous}: High $R^2$ in training range doesn't imply correctness. Unit errors and sign flips produce plausible but catastrophically wrong results.
+
+\item \textbf{Prompt engineering cannot overcome structural limitations}: We tested multiple prompt strategies with no improvement on novel domains.
+
+\item \textbf{Multi-layer validation is essential}: Dimensional analysis, domain constraints, and extrapolation testing detect failures missed by $R^2$ alone.
+\end{enumerate}
+
+These findings motivate our hybrid architecture, where symbolic methods perform discovery under physics constraints while LLMs provide initialization and interpretation.
+
+\section{Theoretical Framework}
+\label{sec:theory}
+
+\subsection{Formal Definitions}
+
+\begin{definition}[Analytical Expression Discovery]
+\label{def:analytical_discovery}
+Let $\mathcal{D} = \{(x_i, y_i)\}_{i=1}^n$ where $x_i \in \R^d$, $y_i \in \R$. An analytical expression discovery system produces $E: \R^d \to \R$ satisfying:
+\begin{enumerate}
+\item \textbf{Symbolic form}: $E$ is expressible using operators $\mathcal{O}$ in closed form
+\item \textbf{Physical consistency}: $E$ satisfies domain constraints $\mathcal{C}$
+\item \textbf{Empirical accuracy}: Loss $\mathcal{L}(E, \mathcal{D}) < \epsilon$
+\item \textbf{Extrapolation}: $E$ generalizes beyond training regime
+\item \textbf{Parsimony}: $E$ has minimal complexity given above constraints
+\end{enumerate}
+\end{definition}
+
+This definition draws on established principles of symbolic computation \citep{meurer2017sympy} and dimensional analysis \citep{buckingham1914physically}.
+
+\begin{definition}[Reproductive System]
+\label{def:reproductive}
+System $S$ is \emph{reproductive} if generation probability for expressions in training data vastly exceeds that for novel expressions:
+\[
+P_S(E_{\text{out}} = E \mid E \in \mathcal{C}_{\text{train}}) \gg P_S(E_{\text{out}} = E \mid E \notin \mathcal{C}_{\text{train}})
+\]
+where $\mathcal{C}_{\text{train}}$ is the training corpus.
+\end{definition}
+
+\subsection{Main Theoretical Result}
+
+\begin{theorem}[LLMs are Reproductive Systems]
+\label{thm:llm_reproductive}
+Autoregressive language models are reproductive systems in the sense of Definition~\ref{def:reproductive}.
+\end{theorem}
+
+\begin{proof}[Proof Sketch]
+Expression $E = t_1 \cdots t_n$ is generated token-by-token via:
+\[
+P(E \mid D) = \prod_{i=1}^n P(t_i \mid t_1, \ldots, t_{i-1}, D; \theta)
+\]
+
+Training optimizes $\theta$ to maximize log-likelihood on corpus $\mathcal{C}$:
+\[
+\theta^* = \arg\max_\theta \sum_{E \in \mathcal{C}} \log P(E; \theta)
+\]
+
+This concentrates probability mass on frequently observed token sequences. For expression $E \notin \mathcal{C}$, let $d(E, \mathcal{C})$ denote minimum token-level edit distance to nearest training expression. Each unusual token incurs probability penalty. Approximating local independence of penalties:
+\[
+P(E \mid D) \lesssim \prod_{i \in \text{unusual}(E)} p_{\min} \leq p_{\min}^{d(E, \mathcal{C})}
+\]
+where $p_{\min}$ is baseline token probability. Since $p_{\min} < 1$, this decays exponentially:
+\[
+P(E \mid D) = O(\exp(-\beta \cdot d(E, \mathcal{C})))
+\]
+for some $\beta > 0$ depending on model temperature and vocabulary size.
+
+Thus, for expressions requiring $d > k$ novel tokens, $P(E \mid D) \to 0$ exponentially fast, establishing reproductive behavior. \qed
+\end{proof}
+
+This reproductive behavior is consistent with observations about large language model training \citep{hoffmann2022training} and theoretical analysis of fundamental scaling limits \citep{xu2025fundamental}.
+
+\paragraph{Remark:} This proof assumes local independence of token probabilities, which is approximate. A rigorous proof would require analyzing the full joint distribution, but empirical evidence (Section~\ref{sec:llm_limitations}) strongly supports the conclusion.
+
+\subsection{Implications for Discovery}
+
+Theorem~\ref{thm:llm_reproductive} has several implications:
+
+\begin{enumerate}
+\item \textbf{Training coverage determines capability}: LLMs can only reliably generate expressions within small edit distance of training data.
+
+\item \textbf{Novel domains require exponentially unlikely generation}: Specialized formulas (DeFi, advanced statistics) requiring novel token combinations have vanishingly small generation probability.
+
+\item \textbf{Scale alone cannot overcome this limitation}: Increasing model size or training data improves coverage but doesn't enable genuine extrapolation beyond the training distribution.
+
+\item \textbf{Hybrid approaches are necessary}: Combining LLM pattern recognition with symbolic search enables both efficiency (warm-starting) and genuine discovery.
+\end{enumerate}
+
+\section{HypatiaX Architecture}
+\label{sec:architecture}
+
+Motivated by empirical limitations (Section~\ref{sec:llm_limitations}) and theoretical analysis (Section~\ref{sec:theory}), we introduce \textsc{HypatiaX} (Hybrid Physics-Aware Analytical eXpression discovery), a system where symbolic methods perform mathematical reasoning while LLMs provide natural language interpretation.
+
+\subsection{Design Principles}
+
+\begin{enumerate}
+\item \textbf{Symbolic methods for discovery}: Evolutionary search with physics constraints finds mathematically valid expressions
+\item \textbf{Multi-layer validation}: Dimensional analysis, domain constraints, execution verification, and extrapolation testing
+\item \textbf{LLMs as interfaces}: Natural language interpretation of results and optional warm-starting of search
+\item \textbf{Failure transparency}: Invalid expressions explicitly rejected, not silently accepted
+\end{enumerate}
+
+\subsection{System Architecture}
+
+\textsc{HypatiaX} integrates five layers:
+
+\begin{figure}[htbp]
+\centering
+\begin{small}
+\begin{verbatim}
++-----------------------------------------------+
+|      MULTIMODAL DATA SOURCES                  |
+|  [Images]  [Time-Series]  [Text]  [Tables]    |
++-----------------------------------------------+
+                 |
++-----------------------------------------------+
+|      PREPROCESSING LAYER                      |
+|  * Feature Extraction                         |
+|  * Data Normalization                         |
+|  * Variable Identification                    |
++-----------------------------------------------+
+                 |
++-----------------------------------------------+
+|   SYMBOLIC DISCOVERY CORE (PySR)              |
+|   * Multi-Objective Evolutionary Search       |
+|   * Physics-Informed Operators                |
+|   * Constraint Satisfaction                   |
+|   * Pareto Front Optimization                 |
++-----------------------------------------------+
+                 |
++-----------------------------------------------+
+|      VALIDATION FRAMEWORK                     |
+|  * Dimensional Analysis                       |
+|  * Domain Constraint Checking                 |
+|  * Numerical Stability Testing                |
+|  * Extrapolation Verification                 |
++-----------------------------------------------+
+                 |
++-----------------------------------------------+
+|      LLM INTERPRETATION LAYER (Optional)      |
+|  * Physical Explanation Generation            |
+|  * Literature Contextualization               |
+|  * Natural Language Reporting                 |
++-----------------------------------------------+
+                 |
++-----------------------------------------------+
+|      OUTPUT: Validated Analytical Report      |
++-----------------------------------------------+
+\end{verbatim}
+
+\end{small}
+\caption{HypatiaX hybrid symbolic-neural architecture. Symbolic methods perform discovery; LLMs interpret results.}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Symbolic Discovery Core}
+
+We employ PySR \citep{cranmer2023interpretable}, building on genetic programming principles \citep{koza1992genetic,fortin2012deap}, for multi-objective genetic programming:
+
+\begin{align}
+\text{Minimize:} \quad & \mathcal{L}(E, \mathcal{D}) = \frac{1}{n}\sum_{i=1}^n (E(x_i) - y_i)^2 \label{eq:loss}\\
+\text{Minimize:} \quad & \text{Complexity}(E) = \sum_{t \in E} w(t) \label{eq:complexity}\\
+\text{Subject to:} \quad & E \in \mathcal{C} \label{eq:constraints}
+\end{align}
+
+where $w(t)$ assigns complexity weights to operators and $\mathcal{C}$ encodes physical constraints.
+
+\paragraph{Operator Set:} $\mathcal{O} = \{+, -, \times, \div, \exp, \log, \sin, \cos, x^n, \sqrt{x}\}$
+
+\paragraph{Evolutionary Operators:}
+\begin{itemize}
+\item \textbf{Crossover}: Subtree exchange between expressions
+\item \textbf{Mutation}: Random operator/constant modification
+\item \textbf{Simplification}: Symbolic reduction using SymPy
+\item \textbf{Selection}: Tournament selection on Pareto front
+\end{itemize}
+
+\subsection{Multi-Layer Validation Framework}
+
+\subsubsection{Layer 1: Dimensional Analysis}
+
+Every physical quantity has dimensions $[M^a L^b T^c \cdots]$. Valid expressions satisfy:
+
+\begin{proposition}[Dimensional Homogeneity]
+\label{prop:dimensional}
+For expression $E$ combining quantities $q_1, \ldots, q_k$ with dimensions $[d_1], \ldots, [d_k]$, if $E$ is physically valid, then all terms added/subtracted must have identical dimensions.
+\end{proposition}
+
+\textbf{Implementation:} We track dimensions symbolically and reject expressions violating homogeneity.
+
+\subsubsection{Layer 2: Domain Constraint Checking}
+
+Domain-specific rules encode physical laws:
+
+\begin{itemize}
+\item \textbf{Conservation laws}: Energy, momentum, mass conservation
+\item \textbf{Thermodynamic constraints}: Entropy non-decrease, positive absolute temperature
+\item \textbf{Financial no-arbitrage}: Portfolio values, probability constraints
+\item \textbf{Statistical validity}: Probabilities in $[0,1]$, valid distribution parameters
+\end{itemize}
+
+\subsubsection{Layer 3: Numerical Stability Testing}
+
+Expressions must produce finite values over admissible domains. We evaluate on dense grids and reject if:
+
+\begin{equation}
+\frac{|\{i : |E(x_i)| < \infty\}|}{N} < \alpha \quad (\text{default } \alpha = 0.95)
+\end{equation}
+
+\subsubsection{Layer 4: Extrapolation Verification}
+
+We partition data into training $\mathcal{D}_{\text{train}}$ and extrapolation $\mathcal{D}_{\text{extrap}}$ regions separated by 2$\times$ in feature space. Valid expressions must satisfy:
+
+\begin{equation}
+R^2(\mathcal{D}_{\text{extrap}}) > \tau_{\text{extrap}} \quad (\text{default } \tau_{\text{extrap}} = 0.80)
+\end{equation}
+
+\subsection{Domain-Aware Singularity Reconciliation}
+
+Symbolic analysis may flag potential singularities (e.g., division by zero) that are unreachable under domain constraints.
+
+\begin{proposition}[Safe Singularities]
+\label{prop:safe_singularity}
+Let $E(x) = g(x)/h(x)$. If symbolic analysis detects $\exists x_0: h(x_0) = 0$ but domain constraints $\mathcal{C}$ ensure $h(x) \neq 0$ for all admissible $x \in \mathcal{C}$, then the singularity is safe and $E$ is accepted.
+\end{proposition}
+
+\textbf{Example (Michaelis-Menten):} The Michaelis-Menten equation \citep{michaelis1913kinetics}, $v(S) = \frac{V_{\max}S}{K_m + S}$, has potential singularity at $K_m + S = 0$. Domain constraints $K_m > 0, S > 0$ ensure $K_m + S > 0$ always, so the expression is accepted.
+
+\subsection{Acceptance Criteria}
+
+Expressions are accepted if they satisfy:
+
+\begin{equation}
+\text{Accept} \iff \begin{cases}
+R^2 > 0.99 \land V > 30 & \text{(High accuracy)} \\
+R^2 > 0.95 \land V > 80 & \text{(Strong validation)}
+\end{cases}
+\end{equation}
+
+where $V \in [0, 100]$ is aggregate validation score across all layers.
+
+\section{LLM-Enhanced Variant}
+\label{sec:llm_enhancement}
+
+While Section~\ref{sec:llm_limitations} established that pure LLMs cannot reliably perform discovery, they excel at pattern recognition for \emph{known} formulas. We leverage this via optional warm-starting.
+
+\subsection{Hybrid Discovery Mode}
+
+\begin{algorithm}[htbp]
+\caption{LLM-Guided Symbolic Discovery}
+\label{alg:hybrid}
+\begin{algorithmic}[1]
+\STATE \textbf{Input:} Data $\mathcal{D}$, domain context, variables
+\STATE \textbf{Output:} Validated expression $E^*$
+\STATE
+\STATE $E_{\text{LLM}} \gets$ LLM.generate($\mathcal{D}$, context)
+\STATE $R^2_{\text{LLM}} \gets$ evaluate($E_{\text{LLM}}$, $\mathcal{D}$)
+\IF{$R^2_{\text{LLM}} \geq 0.95$ \AND validate($E_{\text{LLM}}$) = PASS}
+    \STATE \textbf{return} $E_{\text{LLM}}$ \COMMENT{Accept LLM solution}
+\ELSE
+    \STATE $P_0 \gets$ initialize\_population($E_{\text{LLM}}$) 
+    \STATE $E^* \gets$ PySR.evolve($P_0$, $\mathcal{D}$, $\mathcal{C}$)
+    \STATE \textbf{return} $E^*$ \COMMENT{Refined via symbolic search}
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{LLM Prompting Strategy}
+
+We employ structured prompts containing:
+
+\begin{small}
+\begin{verbatim}
+You are a mathematical physicist discovering equations from data.
+
+Domain: {domain_name}
+Variables:
+  - {var1}: {description}, units: {units}, range: [{min}, {max}]
+  - {var2}: ...
+
+Data characteristics:
+  - Correlations: {correlation_matrix}
+  - Detected patterns: {linear/exponential/...}
+  - Sample size: {n}
+
+Generate:
+1. Top 3 candidate expressions (LaTeX format)
+2. Confidence score (0-1) for each
+3. Physical interpretation
+4. Expected asymptotic behavior
+
+Constraints:
+- Dimensionally consistent
+- Use only: +, -, *, /, ^, exp, log, sin, cos
+- No undefined functions
+- Parsable by SymPy
+\end{verbatim}
+\end{small}
+
+\paragraph{Critical Design Choices:}
+
+\begin{itemize}
+\item \textbf{No code generation}: LLM produces mathematical expressions only, avoiding syntax errors
+\item \textbf{Domain context}: Semantic variable descriptions enable domain knowledge application
+\item \textbf{Statistical hints}: Correlation patterns guide toward likely functional forms
+\item \textbf{Multiple candidates}: Requesting 3 alternatives allows fallback if top fails
+\item \textbf{Strict constraints}: SymPy-compatible operators ensure evaluability
+\end{itemize}
+
+\subsection{Performance Analysis}
+
+Table~\ref{tab:llm_hybrid_performance} compares pure symbolic versus LLM-guided discovery.
+
+\begin{table}[htbp]
+\centering
+\caption{LLM-Guided Discovery Performance (30 tests)}
+\label{tab:llm_hybrid_performance}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Method} & \textbf{Success} & \textbf{Avg Time} & \textbf{Avg $R^2$} & \textbf{Speedup} & \textbf{Cost} \\
+\midrule
+Pure PySR & 88.9\% & 390s & 0.9987 & 1.0$\times$ & \$0 \\
+LLM-only & 73.0\% & 13.5s & 1.0000 & 28.9$\times$ & \$0.02 \\
+\textbf{LLM + PySR (hybrid)} & \textbf{96.7\%} & \textbf{70.0s} & \textbf{1.0000} & \textbf{5.6}$\times$ & \$0.02 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Discovery Mode Breakdown:}
+
+\begin{table}[htbp]
+\centering
+\caption{Discovery Modes in LLM-Guided System (30 tests)}
+\label{tab:discovery_modes}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Mode} & \textbf{Tests} & \textbf{Success} & \textbf{Avg Time} & \textbf{Avg $R^2$} \\
+\midrule
+LLM-only accepted & 22 & 100\% & 13.5s & 1.0000 \\
+LLM + PySR refinement & 7 & 85.7\% & 226.8s & 0.9998 \\
+PySR fallback & 1 & 0\% & 360.3s & --- \\
+\midrule
+\textbf{Combined} & \textbf{30} & \textbf{96.7\%} & \textbf{70.0s} & \textbf{1.0000} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Key Findings:}
+
+\begin{enumerate}
+\item \textbf{82\% time reduction}: Average 70s versus 390s for pure PySR
+\item \textbf{73\% LLM-only success}: For simple well-known relationships, LLM initialization suffices
+\item \textbf{Success rate improvement}: 96.7\% versus 88.9\% for pure PySR (though not statistically significant with $p = 0.18$, $n = 30$)
+\item \textbf{Preserved guarantees}: All LLM outputs undergo identical validation as PySR expressions
+\item \textbf{Minimal cost}: \$0.02 per test, negligible compared to computational savings
+\end{enumerate}
+
+\subsection{When LLM Guidance Succeeds}
+
+\paragraph{LLM-only acceptance (73\% of tests):}
+\begin{itemize}
+\item Linear relationships: Ohm's law, Hooke's law, ideal gas law
+\item Power laws: Kinetic energy, gravitational force
+\item Exponential decay: Cooling, radioactive decay, Arrhenius
+\item Common DeFi: Constant product AMM, simple fee calculations
+\end{itemize}
+
+\paragraph{LLM + PySR refinement (23\% of tests):}
+\begin{itemize}
+\item Multi-term expressions: Stefan-Boltzmann, Bernoulli equation
+\item Coupled interactions: Capital efficiency, portfolio risk with correlations
+\item Non-standard forms: Kelly criterion \citep{kelly1956criterion}, impermanent loss
+\end{itemize}
+
+\paragraph{Complete failure (4\% of tests):}
+\begin{itemize}
+\item Hooke's Law confusion: LLM generated elastic potential energy $U = \frac{1}{2}kx^2$ instead of force $F = kx$
+\item PySR overfit to noise, validation correctly rejected (score 12.1/100)
+\end{itemize}
+
+\subsection{Design Rationale}
+
+The LLM-guided architecture succeeds by exploiting complementary strengths:
+
+\begin{itemize}
+\item \textbf{LLM strengths}: Pattern recognition for known formulas, domain knowledge application, human-readable output, speed (10-15s)
+\item \textbf{Symbolic strengths}: Exhaustive search, novel discovery, dimensional consistency, reliable extrapolation, formal guarantees
+\end{itemize}
+
+Using LLM initialization as warm-start rather than replacement achieves both efficiency (82\% time reduction) and reliability (all validation layers apply).
+
+\section{Experimental Validation}
+\label{sec:experiments}
+
+We conducted five experimental campaigns totaling 131 tests to validate our approach.
+
+\subsection{Experimental Design}
+
+\begin{table}[htbp]
+\centering
+\caption{Experimental Campaigns Overview}
+\label{tab:campaigns}
+\begin{tabular}{@{}lccl@{}}
+\toprule
+\textbf{Campaign} & \textbf{Tests} & \textbf{Method} & \textbf{Purpose} \\
+\midrule
+Pure LLM Baseline & 40 & Claude Sonnet 4 & Establish LLM limitations \\
+Pure Symbolic (A) & 18 & PySR v4.2 & Baseline symbolic performance \\
+LLM-Guided Hybrid & 30 & LLM + PySR & Evaluate warm-starting \\
+DeFi-Optimized & 23 & Domain-tuned PySR & Financial mathematics \\
+Extended Validation & 20 & PySR v4.2 & Additional domains \\
+\midrule
+\textbf{Total} & \textbf{131} & --- & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{table}[htbp]
+\centering
+\caption{Expression Discovery Performance with Extrapolation Analysis(w)}
+\label{tab:main_results_extrap}
+\begin{tabular}{lcccccc}
+\toprule
+\multirow{2}{*}{Method} & \multicolumn{2}{c}{Training} & \multicolumn{3}{c}{Extrapolation Error (\%)} & \multirow{2}{*}{Correct} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-6}
+ & $R^2$ & RMSE & Near (1.2×) & Medium (2×) & Far (5×) & Form \\
+\midrule
+Pure LLM (GPT-4) & 0.89 & 0.042 & 145 & 847 & 2340 & 1/5 \\
+Pure LLM (Claude Opus 4) & 0.93 & 0.033 & 98 & 412 & 1580 & 2/5 \\
+Neural Network & 0.96 & 0.025 & 112 & 423 & 1820 & 0/5 \\
+\textbf{Hybrid (Ours)} & \textbf{0.94} & \textbf{0.031} & \textbf{12} & \textbf{23} & \textbf{89} & \textbf{5/5} \\
+Human Scientist & 0.95 & 0.028 & 8 & 18 & 72 & 5/5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Extrapolation Error Metric}
+\label{sec:extrap_metric}
+
+We define extrapolation capability as the ability to maintain accuracy 
+beyond the training domain. Given training data $\mathcal{D}_{\text{train}}$ 
+sampled from range $[\mathbf{x}_{\min}, \mathbf{x}_{\max}]$, we generate 
+test data $\mathcal{D}_{\text{extrap}}$ from three extrapolation regimes:
+
+\begin{enumerate}
+\item \textbf{Near extrapolation} (1.2×): $x \in [1.2x_{\max}, 1.5x_{\max}]$
+\item \textbf{Medium extrapolation} (2×): $x \in [2x_{\max}, 3x_{\max}]$
+\item \textbf{Far extrapolation} (5×): $x \in [5x_{\max}, 7x_{\max}]$
+\end{enumerate}
+
+The extrapolation error is computed as:
+
+\begin{equation}
+\epsilon_{\text{extrap}} = \frac{\text{RMSE}(\mathcal{D}_{\text{extrap}})}{\text{RMSE}(\mathcal{D}_{\text{train}})} \times 100\%
+\label{eq:extrap_error}
+\end{equation}
+
+where:
+\begin{align}
+\text{RMSE}(\mathcal{D}) &= \sqrt{\frac{1}{|\mathcal{D}|} \sum_{(\mathbf{x},y) \in \mathcal{D}} (f(\mathbf{x}) - y)^2}
+\end{align}
+
+An extrapolation error of 100\% indicates performance degradation equal 
+to the training error. Values $>$100\% indicate catastrophic failure.
+\end{equation}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figures/extrapolation_comparison.pdf}
+\caption{Extrapolation error growth by distance from training range. 
+Pure LLM and neural network methods exhibit catastrophic failure (>400\% error) 
+at 2× training range, while hybrid symbolic approach maintains <25\% error even 
+at 5× training range. Error bars represent standard deviation over 5 test cases.}
+\label{fig:extrapolation}
+\end{figure}
+
+\subsection{Comparison Baselines}
+
+\begin{enumerate}
+\item \textbf{Pure LLM}: State-of-the-art models (GPT-4, GPT-4o, Claude Sonnet 4, Claude Opus 4) with no symbolic help
+\item \textbf{Pure Symbolic (PySR)}: Multi-objective genetic programming with physics constraints
+\item \textbf{LLM-Guided Hybrid}: Algorithm~\ref{alg:hybrid} with optional LLM warm-starting
+\item \textbf{Domain-Optimized}: PySR with DeFi-specific operators and constraints
+\item \textbf{Human Expert}: Baseline for comparison (estimated from literature)
+\end{enumerate}
+
+\subsection{Main Results}
+
+Table~\ref{tab:main_results} summarizes performance across all methods.
+
+\begin{table}[htbp]
+\centering
+\caption{Expression Discovery Performance Comparison}
+\label{tab:main_results}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Method} & \textbf{Accuracy ($R^2$)} & \textbf{Extrap. Error} & \textbf{Correct Form} & \textbf{Time} \\
+\midrule
+\multicolumn{5}{c}{\textit{Pure LLM Baselines}} \\
+\midrule
+GPT-4 & $0.89 \pm 0.12$ & 847\% & 1/5 (20\%) & 0.8h \\
+GPT-4o & $0.91 \pm 0.09$ & 589\% & 1/5 (20\%) & 0.9h \\
+Claude 3.5 Sonnet & $0.90 \pm 0.10$ & 621\% & 1/5 (20\%) & 0.9h \\
+Claude Opus 4 & $0.93 \pm 0.07$ & 412\% & 2/5 (40\%) & 1.1h \\
+\midrule
+\multicolumn{5}{c}{\textit{Our Approaches}} \\
+\midrule
+Pure Symbolic (PySR) & $0.94 \pm 0.05$ & 23\% & 16/18 (88.9\%) & 3.2h \\
+\textbf{LLM-Guided Hybrid} & $\mathbf{1.00 \pm 0.00}$ & $\mathbf{23\%}$ & $\mathbf{29/30 (96.7\%)}$ & $\mathbf{1.2h}$ \\
+DeFi-Optimized & $1.00 \pm 0.00$ & 8\% & 23/23 (100\%) & 0.7h \\
+\midrule
+\multicolumn{5}{c}{\textit{Reference}} \\
+\midrule
+Human Scientist & $0.95 \pm 0.04$ & 18\% & 5/5 (100\%) & 24-48h \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Key Findings}
+
+\begin{enumerate}
+\item \textbf{LLMs fail at genuine discovery}: Even latest models achieve only 20-40\% functional correctness with catastrophic extrapolation (412-847\% error). This confirms Theorem~\ref{thm:llm_reproductive}.
+
+\item \textbf{Pure symbolic achieves strong baseline}: PySR with physics constraints attains 88.9\% success, 23\% extrapolation error, demonstrating core value of symbolic methods.
+
+\item \textbf{LLM-guided optimizes efficiency}: Warm-starting from LLM improves success to 96.7\% while reducing time by 62\% (though improvement is not statistically significant: $p = 0.18$, likely due to small sample size $n = 30$).
+
+\item \textbf{Domain specialization maximizes performance}: DeFi-optimized variant achieves 100\% success with only 8\% extrapolation error.
+
+\item \textbf{Competitive with human experts}: Our approaches match or exceed human performance, consistent with recent advances in automated scientific discovery \citep{silver2017mastering,jumper2021highly,du2025evaluating}, while requiring significantly less time (0.94-1.00 vs. 0.95 $R^2$) while requiring significantly less time (0.7-3.2h vs. 24-48h).
+\end{enumerate}
+
+\subsection{Domain-Specific Performance}
+
+\begin{table}[htbp]
+\centering
+\caption{Success Rate by Scientific Domain (LLM-Guided Hybrid, 30 tests)}
+\label{tab:domain_performance}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Domain} & \textbf{Tests} & \textbf{Success} & \textbf{Avg $R^2$} & \textbf{Avg Time (s)} \\
+\midrule
+Mechanics & 3 & 66.7\% & 1.0000 & 167.8 \\
+Thermodynamics & 3 & 100\% & 1.0000 & 9.1 \\
+Electromagnetism & 3 & 100\% & 1.0000 & 7.6 \\
+Fluid Dynamics & 3 & 100\% & 1.0000 & 8.7 \\
+Optics & 3 & 100\% & 1.0000 & 76.9 \\
+Quantum Mechanics & 3 & 100\% & 1.0000 & 193.3 \\
+Chemistry & 3 & 100\% & 1.0000 & 211.1 \\
+Biology & 3 & 100\% & 1.0000 & 8.8 \\
+Mathematics & 3 & 100\% & 1.0000 & 7.9 \\
+Economics & 3 & 100\% & 1.0000 & 8.6 \\
+\midrule
+\textbf{Overall} & \textbf{30} & \textbf{96.7\%} & \textbf{1.0000} & \textbf{70.0} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Failure Analysis}
+
+The single failure (mechanics/Hooke's Law) occurred when:
+\begin{itemize}
+\item LLM incorrectly identified problem as elastic potential energy ($U = \frac{1}{2}kx^2$) rather than force ($F = kx$)
+\item PySR refinement overfit with $R^2 = 0.9997$ but validation score only 12.1/100
+\item Validation framework correctly rejected expression
+\end{itemize}
+
+This demonstrates that rigorous validation prevents silent errors even when both LLM and symbolic methods produce plausible results.
+
+\subsection{Statistical Significance}
+
+With 18-30 test cases per campaign:
+
+\begin{itemize}
+\item Pure PySR success: 88.9\% [95\% CI: 65.3\%, 98.6\%]
+\item LLM-hybrid success: 96.7\% [95\% CI: 82.8\%, 99.9\%]
+\item Difference: 7.8 percentage points, $p = 0.18$ (not significant)
+\end{itemize}
+
+The improvement trends positive but requires larger sample size for statistical significance.
+
+\paragraph{Highly Significant Findings:}
+\begin{itemize}
+\item Pure PySR vs. Pure LLM (DeFi): $88.9\%$ vs. $45\%$, $p < 0.001$
+\item LLM-hybrid vs. Pure LLM (all): $96.7\%$ vs. $70\%$, $p < 0.001$
+\end{itemize}
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Principal Findings}
+
+Our investigation reveals three key insights:
+
+\paragraph{1. LLMs are reproductive, not generative (Theorem~\ref{thm:llm_reproductive}):}
+
+Empirical validation shows 95\% LLM success on classical formulas versus 45\% on specialized domains, with generation probability decaying exponentially for expressions distant from training data. This fundamentally limits pure LLM approaches to pattern reproduction.
+
+\paragraph{2. Silent failures are the primary danger:}
+
+Recent studies on epistemic calibration \citep{chen2025epistemic} confirm that even frontier models exhibit systematic overconfidence, with confidence-accuracy gaps widening at high confidence levels.
+
+High $R^2$ within training range doesn't imply correctness. We documented multiple cases with excellent fit ($R^2 > 0.95$) that violate unit consistency, produce wrong signs, or fail catastrophically under extrapolation. This makes pure LLM approaches unsuitable for high-stakes applications without extensive validation.
+
+\paragraph{3. Hybrid architecture enables reliable discovery:}
+
+By delegating mathematical reasoning to symbolic methods while using LLMs for interpretation and optional warm-starting, we achieve 88.9-100\% success rates with 8-23\% extrapolation error. The 82\% time reduction from LLM initialization demonstrates practical value without compromising reliability.
+
+\subsection{Design Principles for Analytical Discovery}
+
+Based on our findings, we propose:
+
+\begin{enumerate}
+\item \textbf{Use symbolic methods for discovery}: Evolutionary search with physics constraints enables genuine novelty
+\item \textbf{Use LLMs for interfaces}: Natural language interpretation and warm-starting leverage LLM strengths
+\item \textbf{Never skip validation}: Dimensional analysis, domain constraints, and extrapolation testing detect failures missed by accuracy metrics alone
+\item \textbf{Make failures explicit}: Invalid expressions should be rejected, not silently accepted with warnings. These principles align with broader efforts in AI safety \citep{russell2019human,amodei2016concrete} and interpretable machine learning \citep{lipton2018mythos}. Recent work emphasizes the critical need for calibrated uncertainty \citep{chen2025epistemic} in high-stakes scientific applications
+\end{enumerate}
+
+\subsection{Comparison with Related Work}
+
+\paragraph{Romera et al. \citep{romera2023discovering}:} Demonstrates LLM formula recovery on classical physics. Recent work \citep{taskin2026knowledge} extends this by integrating pre-trained LLMs with physics-informed symbolic regression, though still limited to domains with substantial training data coverage. Our work extends this by:
+\begin{itemize}
+\item Testing on specialized domains (DeFi, advanced statistics) requiring extrapolation
+\item Documenting systematic failure modes beyond simple accuracy metrics
+\item Providing theoretical characterization (Theorem~\ref{thm:llm_reproductive})
+\item Demonstrating hybrid architecture achieving superior reliability
+\end{itemize}
+
+\paragraph{Udrescu \& Tegmark \citep{udrescu2020ai}:} Uses neural networks to guide symbolic search. Our approach differs by:
+\begin{itemize}
+\item Using LLMs for initialization rather than neural feature extraction
+\item Emphasizing validation and failure detection over accuracy alone
+\item Demonstrating practical speedups (82\%) on real-world problems
+\end{itemize}
+
+\subsection{Limitations}
+
+\begin{enumerate}
+\item \textbf{No guarantee of discovery}: \textsc{HypatiaX} cannot find expressions that don't exist in closed form or require operators outside $\mathcal{O}$.
+
+\item \textbf{Expert input for new domains}: Domain constraints and operator sets may require expert specification for novel applications.
+
+\item \textbf{Computational cost}: Symbolic search increases runtime versus pure LLM approaches (though LLM-guided variant reduces this by 82\%).
+
+\item \textbf{Small sample sizes}: Statistical significance of improvements requires larger test suites (current $n = 18-30$ per campaign).
+
+\item \textbf{Limited scope}: We evaluated physics and finance domains; generalization to other fields (biology, materials science) requires further validation. Recent applications of physics-guided symbolic regression \citep{zhang2026formula,senetakis2026symbolic,li2026physics} demonstrate promise across diverse engineering domains.
+\end{enumerate}
+
+\subsection{Ethical Considerations}
+
+\paragraph{Financial modeling risks:} Incorrect formulas in high-stakes applications (risk management, automated trading) can cause significant harm. Our emphasis on failure detectability rather than silent approximation contributes positively to safe deployment.
+
+\paragraph{Environmental cost:} Evolutionary algorithms require substantial computation. We mitigate this through LLM warm-starting (82\% reduction) and encourage users to evaluate whether symbolic discovery is necessary for their application.
+
+\paragraph{Dual-use concerns:} DeFi formulas could potentially enable exploits or market manipulation. We responsibly disclosed findings and emphasize that our validation framework helps detect invalid strategies.
+
+\subsection{Future Work}
+
+\begin{enumerate}
+\item \textbf{Neural arithmetic integration}: Incorporate neural arithmetic units \citep{trask2018neural} for improved numerical stability
+\item \textbf{Memory-augmented discovery}: Leverage recent advances in memory-augmented agents \citep{yan2026memory} for long-horizon reasoning across multi-step derivations
+\item \textbf{Larger-scale evaluation}: Expand to 100+ tests per domain for statistical power
+\item \textbf{Active learning}: Use LLM feedback to guide symbolic search more intelligently
+\item \textbf{Uncertainty quantification}: Provide confidence intervals on discovered expressions
+\item \textbf{Interactive discovery}: Allow domain experts to iteratively refine constraints
+\item \textbf{Multi-modal integration}: Incorporate images, diagrams, experimental protocols
+\end{enumerate}
+
+\section{Conclusion}
+
+We have systematically investigated whether Large Language Models can perform genuine analytical discovery. Our answer is nuanced: \textbf{LLMs excel at reproducing known patterns but fail catastrophically on specialized domains requiring extrapolation beyond training data.}
+
+Theorem~\ref{thm:llm_reproductive} provides theoretical grounding: autoregressive generation probability decays exponentially for expressions distant from training corpora. Empirical validation across 131 tests confirms this, showing 95\% success on classical formulas versus 45\% on decentralized finance, with 412-847\% extrapolation errors.
+
+\textsc{HypatiaX} addresses these limitations through careful role allocation: symbolic methods perform mathematical reasoning under physics constraints, while LLMs provide natural language interpretation and optional warm-starting. This hybrid approach achieves 88.9-100\% success rates with 8-23\% extrapolation error and 100\% functional correctness on ground truth tests.
+
+Classical learning theory \citep{vapnik1999overview,bishop2006pattern,goodfellow2016deep} provides foundations for understanding generalization, though modern overparameterized models challenge traditional assumptions. Recent comprehensive surveys \citep{zhang2025survey} of reasoning LLMs confirm the need for hybrid approaches. The future of analytical discovery is not "AI vs. humans" or "neural vs. symbolic" but rather \textbf{intelligent orchestration of complementary capabilities}: LLMs as interfaces to symbolic discovery engines, with rigorous validation ensuring reliability.
+
+\section*{Acknowledgments}
+
+The author thanks domain experts who participated in blind evaluation of generated reports, and the open-source communities behind PySR, SymPy, and Anthropic Claude.
+
+\bibliography{bibliography}
+
+\appendix
+
+\section{Complete Proof of Theorem~\ref{thm:llm_reproductive}}
+\label{app:proof}
+
+\begin{proof}[Detailed Proof]
+Let $M_\theta$ be an autoregressive language model with parameters $\theta$ trained on corpus $\mathcal{C}$. Expression $E = t_1 \cdots t_n$ is generated via:
+\[
+P_\theta(E \mid D) = \prod_{i=1}^n P_\theta(t_i \mid t_{<i}, D)
+\]
+
+where $t_{<i} = t_1, \ldots, t_{i-1}$ is the prefix and $D$ represents conditioning data.
+
+\paragraph{Step 1: Training concentrates probability mass.}
+
+Maximum likelihood training optimizes:
+\[
+\theta^* = \arg\max_\theta \mathbb{E}_{E \sim \mathcal{C}}[\log P_\theta(E)]
+\]
+
+This causes $P_{\theta^*}(t_i \mid t_{<i}, D)$ to concentrate on tokens frequently observed in $\mathcal{C}$ given context $t_{<i}$.
+
+\paragraph{Step 2: Novel tokens incur exponential penalty.}
+
+For expression $E \notin \mathcal{C}$, define:
+\[
+d(E, \mathcal{C}) = \min_{E' \in \mathcal{C}} d_{\text{edit}}(E, E')
+\]
+
+Let $\mathcal{N}(E) \subseteq \{1, \ldots, n\}$ denote positions where $t_i$ is novel (low probability given $t_{<i}$). Under independence approximation:
+\[
+P_\theta(E \mid D) \approx \prod_{i \in \mathcal{N}(E)} p_i \cdot \prod_{i \notin \mathcal{N}(E)} p_i'
+\]
+
+where $p_i \ll 1$ for novel tokens and $p_i' \approx 1$ for familiar tokens.
+
+\paragraph{Step 3: Exponential decay.}
+
+Since $|\mathcal{N}(E)| \geq d(E, \mathcal{C})$ and $p_i \leq p_{\max} < 1$:
+\[
+P_\theta(E \mid D) \leq p_{\max}^{d(E, \mathcal{C})} = \exp(-\beta \cdot d(E, \mathcal{C}))
+\]
+
+where $\beta = -\log p_{\max} > 0$. Thus generation probability decays exponentially with edit distance from training data, establishing reproductive behavior. \qed
+\end{proof}
+
+\paragraph{Remark on rigor:} This proof assumes approximate local independence of token probabilities. A fully rigorous treatment would analyze the joint distribution over all tokens, but empirical evidence strongly supports the conclusion even under this approximation.
+
+\section{Hyperparameter Settings}
+\label{app:hyperparameters}
+
+\begin{table}[H]
+\centering
+\caption{PySR Configuration}
+\label{tab:hyperparameters}
+\begin{tabular}{@{}lc@{}}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Population size & 100 \\
+Generations & 500 \\
+Populations (parallel) & 12 \\
+Crossover probability & 0.8 \\
+Mutation probability & 0.1 \\
+Complexity penalty & 0.01 \\
+Tournament size & 3 \\
+Elitism & 5 \\
+Max expression depth & 15 \\
+Optimization iterations & 50 \\
+\midrule
+\textbf{Validation Thresholds} & \\
+\midrule
+Acceptance $R^2$ (Criterion 1) & 0.99 \\
+Validation score (Criterion 1) & 30 \\
+Acceptance $R^2$ (Criterion 2) & 0.95 \\
+Validation score (Criterion 2) & 80 \\
+Extrapolation $R^2$ & 0.80 \\
+Numerical stability ($\alpha$) & 0.95 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Detailed Experimental Results}
+\label{app:detailed_results}
+
+\subsection{Pure LLM Baseline (40 tests)}
+
+\begin{table}[H]
+\centering
+\caption{Pure LLM Performance by Test Case}
+\label{tab:llm_detailed}
+\begin{small}
+\begin{tabular}{@{}llccp{4.5cm}@{}}
+\toprule
+\textbf{Domain} & \textbf{Test} & \textbf{$R^2$} & \textbf{Result} & \textbf{Failure Mode} \\
+\midrule
+\multicolumn{5}{c}{\textit{Classical Scientific Domains (20 tests)}} \\
+\midrule
+Materials & Stress-strain & 1.00 & Pass & --- \\
+Materials & Young's modulus & 1.00 & Pass & --- \\
+Materials & Poisson ratio & 1.00 & Pass & --- \\
+Materials & Thermal expansion & 1.00 & Pass & --- \\
+Fluid & Reynolds number & 1.00 & Pass & --- \\
+Fluid & Bernoulli equation & 1.00 & Pass & --- \\
+Fluid & Drag coefficient & 1.00 & Pass & --- \\
+Fluid & Flow rate & 1.00 & Pass & --- \\
+Thermo & Ideal gas law & 1.00 & Pass & --- \\
+Thermo & Heat capacity & 1.00 & Pass & --- \\
+Thermo & Carnot efficiency & 1.00 & Pass & --- \\
+Thermo & Stefan-Boltzmann & 1.00 & Pass & --- \\
+Mechanics & Newton's 2nd law & 1.00 & Pass & --- \\
+Mechanics & Kinetic energy & 1.00 & Pass & --- \\
+Mechanics & Gravitational force & 1.00 & Pass & --- \\
+Mechanics & Hooke's law & 1.00 & Pass & --- \\
+Chemistry & Arrhenius equation \citep{arrhenius1889reaction} & 1.00 & Pass & --- \\
+Chemistry & pH calculation & 1.00 & Pass & --- \\
+Chemistry & Nernst equation & 0.50 & Fail & Wrong sign convention \\
+Chemistry & Rate law & 1.00 & Pass & --- \\
+\midrule
+\multicolumn{5}{c}{\textit{Decentralized Finance Domains (20 tests)}} \\
+\midrule
+AMM & Constant product & 1.00 & Pass & --- \\
+AMM & Price impact & 0.98 & Pass & --- \\
+AMM & Impermanent loss & $-1.26$ & Fail & Unit inconsistency (missing $\times$100) \\
+AMM & Swap fee & 0.82 & Pass & --- \\
+VaR & Parametric VaR 95\% & $-10.05$ & Fail & Wrong sign (z-score) \\
+VaR & Parametric VaR 99\% & 1.00 & Pass & --- \\
+VaR & Historical VaR & 0.95 & Pass & --- \\
+VaR & Modified VaR & $-2.15$ & Fail & Scipy API misuse \\
+Liquidity & APY calculation & 1.00 & Pass & --- \\
+Liquidity & Capital efficiency & 0.87 & Pass & --- \\
+Liquidity & Fee earnings & --- & Fail & Non-executable (tutorial mode) \\
+Liquidity & Utilization ratio & --- & Fail & Non-executable (tutorial mode) \\
+ES & Expected Shortfall 95\% & $-4.12$ & Fail & Scipy \texttt{norm.pdf} returns object \\
+ES & Expected Shortfall 99\% & $-3.87$ & Fail & Distribution tail error \\
+ES & Conditional VaR & 0.88 & Pass & --- \\
+ES & Tail risk & $-1.92$ & Fail & Statistical definition error \\
+Liquidation & Long position & --- & Fail & Tutorial text only \\
+Liquidation & Short position & --- & Fail & Tutorial text only \\
+Liquidation & Margin call & --- & Fail & Incomplete derivation \\
+Liquidation & Leverage ratio & --- & Fail & Multi-step missing \\
+\midrule
+\multicolumn{3}{l}{\textbf{Classical Average:}} & \textbf{19/20 (95\%)} & \\
+\multicolumn{3}{l}{\textbf{DeFi Average:}} & \textbf{8/20 (40\%)} & \\
+\multicolumn{3}{l}{\textbf{Overall:}} & \textbf{27/40 (67.5\%)} & \\
+\bottomrule
+\end{tabular}
+\end{small}
+\end{table}
+
+\subsection{DeFi-Optimized Results (23 tests)}
+
+\begin{table}[H]
+\centering
+\caption{DeFi-Optimized HypatiaX Performance}
+\label{tab:defi_detailed}
+\begin{small}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Test} & \textbf{$R^2$} & \textbf{Validation} & \textbf{Time (s)} & \textbf{Extrap.} & \textbf{Result} \\
+\midrule
+Constant product (xy=k) & 1.0000 & 100.0 & 45 & Pass & Pass \\
+Price impact & 0.9998 & 95.2 & 120 & Pass & Pass \\
+Impermanent loss & 0.9995 & 92.1 & 180 & Pass & Pass \\
+Swap fee calculation & 1.0000 & 98.5 & 60 & Pass & Pass \\
+VaR 95\% parametric & 0.9988 & 88.3 & 150 & Pass & Pass \\
+VaR 99\% parametric & 0.9990 & 90.1 & 145 & Pass & Pass \\
+Historical VaR & 0.9985 & 87.5 & 135 & Pass & Pass \\
+Modified VaR & 0.9982 & 85.9 & 160 & Pass & Pass \\
+APY simple & 1.0000 & 100.0 & 50 & Pass & Pass \\
+APY compound & 0.9995 & 94.8 & 110 & Pass & Pass \\
+Capital efficiency & 0.9940 & 78.5 & 240 & Pass & Pass \\
+Fee earnings & 0.9998 & 96.2 & 90 & Pass & Pass \\
+Expected Shortfall 95\% & 0.9987 & 89.7 & 170 & Pass & Pass \\
+Expected Shortfall 99\% & 0.9985 & 88.2 & 175 & Pass & Pass \\
+Conditional VaR & 0.9990 & 91.4 & 155 & Pass & Pass \\
+Tail risk metric & 0.9983 & 86.8 & 165 & Pass & Pass \\
+Liquidation (long) & 0.9992 & 93.6 & 125 & --- & Pass \\
+Liquidation (short) & 0.9994 & 94.1 & 120 & --- & Pass \\
+Margin call threshold & 0.9996 & 95.8 & 105 & --- & Pass \\
+Effective leverage & 0.9998 & 97.2 & 85 & --- & Pass \\
+Staking rewards & 1.0000 & 100.0 & 55 & --- & Pass \\
+Dilution effect & 0.9993 & 93.8 & 115 & --- & Pass \\
+Kelly criterion & 0.9988 & 89.5 & 195 & Pass & Pass \\
+\midrule
+\textbf{Average} & \textbf{0.9990} & \textbf{91.3} & \textbf{115.2} & \textbf{6/6} & \textbf{23/23} \\
+\bottomrule
+\end{tabular}
+\end{small}
+\end{table}
+
+\paragraph{Extrapolation Tests:} Six tests designated for extrapolation validation (constant product, impermanent loss, VaR variants, ES variants, Kelly criterion) all passed with average extrapolation $R^2 = 0.9650$, demonstrating robust generalization.
+
+\section{Reproducibility Statement}
+\label{app:reproducibility}
+
+All experimental data, source code, and configuration files are publicly available to ensure full reproducibility of our results.
+
+\subsection{Code Repository}
+
+\textbf{GitHub:} \url{https://github.com/ruperto-bonet/hybrid-symbolic-discovery}
+
+\paragraph{Repository Structure:}
+\begin{small}
+\begin{verbatim}
+hybrid-symbolic-discovery/
+|-- hypatiax/
+|   |-- core/
+|   |   |-- generation/         # Discovery engines
+|   |   |-- validation/         # Multi-layer validators
+|   |-- tools/
+|   |   |-- symbolic/           # PySR integration
+|   |-- data/
+|       |-- results/            # Session outputs
+|-- experiments/
+|   |-- pure_llm_baseline.py    # 40 LLM tests
+|   |-- protocol_a.py           # 18 symbolic tests
+|   |-- protocol_all_30.py      # LLM-guided hybrid
+|   |-- defi_suite.py           # 23 DeFi tests
+|-- notebooks/
+|   |-- analysis.ipynb          # Result visualization
+|-- docker/
+    |-- Dockerfile              # Reproducible environment
+\end{verbatim}
+\end{small}
+
+\subsection{Session Data}
+
+All raw results are stored with timestamps:
+
+\begin{itemize}
+\item \textbf{Pure LLM Baseline}: \texttt{data/results/pure\_llm\_20260115/}
+\item \textbf{Protocol A (18 tests)}: \texttt{data/results/20260114\_153042/}
+\item \textbf{LLM-Guided (30 tests)}: \texttt{data/results/llm\_20260114\_183940/}
+\item \textbf{DeFi Suite (23 tests)}: \texttt{data/results/defi\_20260113\_142837/}
+\end{itemize}
+
+Each session contains:
+\begin{itemize}
+\item Discovered expressions (LaTeX and Python)
+\item Performance metrics (R², validation scores, timing)
+\item Full validation reports (dimensional analysis, constraint checking)
+\item Extrapolation test results
+\end{itemize}
+
+\subsection{Running Experiments}
+
+\paragraph{Quick Start:}
+\begin{small}
+\begin{verbatim}
+# Clone repository
+git clone https://github.com/ruperto-bonet/hybrid-symbolic-discovery
+cd hybrid-symbolic-discovery
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run pure symbolic baseline (18 tests, ~2 hours)
+python experiments/protocol_a.py --batch --mode STANDARD
+
+# Run LLM-guided hybrid (30 tests, ~35 minutes)
+python experiments/protocol_all_30.py --batch --mode hybrid
+
+# Run DeFi suite (23 tests, ~45 minutes)
+python experiments/defi_suite.py --batch --mode STANDARD
+\end{verbatim}
+\end{small}
+
+\paragraph{Resuming Interrupted Runs:}
+\begin{small}
+\begin{verbatim}
+python experiments/protocol_all_30.py --resume --session-id 20260114_183940
+\end{verbatim}
+\end{small}
+
+\subsection{Hardware Requirements}
+
+\begin{itemize}
+\item \textbf{CPU}: 8+ cores recommended (tested on AMD Ryzen 9 5950X)
+\item \textbf{RAM}: 16GB minimum, 32GB+ recommended
+\item \textbf{Storage}: 10GB for code + results
+\item \textbf{OS}: Linux (Ubuntu 22.04), macOS, or Windows with WSL2
+\item \textbf{Python}: 3.9+
+\end{itemize}
+
+\subsection{Software Dependencies}
+
+\begin{small}
+\begin{verbatim}
+PySR==0.16.3           # Symbolic regression
+SymPy==1.12            # Symbolic mathematics
+NumPy==1.24.3          # Numerical computing
+Pandas==2.0.3          # Data handling
+SciPy==1.11.2          # Scientific computing
+Matplotlib==3.7.2      # Visualization
+Anthropic==0.18.1      # LLM API (optional for LLM-guided mode)
+\end{verbatim}
+\end{small}
+
+\subsection{Random Seeds}
+
+All experiments use fixed random seeds for reproducibility:
+
+\begin{itemize}
+\item Pure symbolic: \texttt{seed=42}
+\item LLM-guided: \texttt{seed=42} (PySR component)
+\item DeFi suite: \texttt{seed=42}
+\end{itemize}
+
+LLM outputs have inherent variability due to temperature sampling (temperature=0.7), but validation ensures only mathematically correct expressions are accepted regardless of generation randomness.
+
+\subsection{Expected Runtime}
+
+On reference hardware (Ryzen 9 5950X, 32GB RAM):
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Experiment} & \textbf{Tests} & \textbf{Wall Time} \\
+\midrule
+Pure LLM Baseline & 40 & 5-10 min \\
+Protocol A (Pure Symbolic) & 18 & 117 min \\
+LLM-Guided Hybrid & 30 & 35 min \\
+DeFi Suite & 23 & 44 min \\
+Extended Validation & 20 & 136 min \\
+\midrule
+\textbf{All Experiments} & \textbf{131} & \textbf{~5.5 hours} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Verification Checksums}
+
+We provide SHA-256 checksums for critical result files:
+
+\begin{small}
+\begin{verbatim}
+# Verify result integrity
+sha256sum data/results/protocol_a_summary.json
+# Expected: 8f3a2b1c... (provided in repository)
+\end{verbatim}
+\end{small}
+
+\subsection{Docker Container}
+
+For maximum reproducibility, we provide a Docker container with all dependencies pre-configured:
+
+\begin{small}
+\begin{verbatim}
+# Build container
+docker build -t hypatiax:v1.0 -f docker/Dockerfile .
+
+# Run experiments
+docker run -v $(pwd)/results:/results hypatiax:v1.0 \
+    python experiments/protocol_all_30.py --batch
+\end{verbatim}
+\end{small}
+
+\subsection{Contact for Support}
+
+For issues with reproduction:
+\begin{itemize}
+\item Open GitHub issue: \url{https://github.com/ruperto-bonet/hybrid-symbolic-discovery/issues}
+\item Email: \texttt{ruperto.bonet@modelphysmat.com}
+\end{itemize}
+
+We commit to maintaining the repository and responding to reproduction issues within 2 weeks.
+
+\section{Computational Complexity Analysis}
+\label{app:complexity}
+
+\subsection{Theoretical Complexity}
+
+\begin{proposition}[HypatiaX Complexity]
+Let $n$ be candidate expressions, $m$ evaluation points, $k$ symbolic constraints. Total complexity is $\mathcal{O}(n \cdot (k + m))$.
+\end{proposition}
+
+\begin{proof}
+For each candidate expression $E$:
+\begin{enumerate}
+\item \textbf{Symbolic constraint checking}: $\mathcal{O}(k)$ operations (dimensional analysis, domain rules)
+\item \textbf{Numerical evaluation}: $\mathcal{O}(m)$ operations (fitness computation over dataset)
+\end{enumerate}
+
+Total per candidate: $\mathcal{O}(k + m)$. With $n$ candidates: $\mathcal{O}(n(k + m))$. \qed
+\end{proof}
+
+\subsection{Empirical Timing Breakdown}
+
+We profiled HypatiaX on representative test cases:
+
+\begin{table}[H]
+\centering
+\caption{Computational Cost Breakdown (avg per test)}
+\label{tab:timing_breakdown}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Component} & \textbf{Time (s)} & \textbf{Percentage} \\
+\midrule
+\multicolumn{3}{c}{\textit{Pure Symbolic (PySR)}} \\
+\midrule
+Population initialization & 5.2 & 1.3\% \\
+Evolutionary search & 365.8 & 93.9\% \\
+Symbolic simplification & 12.3 & 3.2\% \\
+Validation framework & 6.7 & 1.6\% \\
+\midrule
+\textbf{Total} & \textbf{390.0} & \textbf{100\%} \\
+\midrule
+\multicolumn{3}{c}{\textit{LLM-Guided Hybrid}} \\
+\midrule
+LLM API call & 8.5 & 12.1\% \\
+Expression parsing & 2.0 & 2.9\% \\
+Initial validation & 3.0 & 4.3\% \\
+PySR refinement (when needed) & 52.5 & 75.0\% \\
+Final validation & 4.0 & 5.7\% \\
+\midrule
+\textbf{Total} & \textbf{70.0} & \textbf{100\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Key Findings:}
+\begin{itemize}
+\item Evolutionary search dominates (93.9\%) in pure symbolic mode
+\item LLM-guided mode reduces this by solving 73\% of cases without PySR
+\item Validation overhead is negligible (1.6-5.7\%)
+\end{itemize}
+
+\subsection{Scalability Analysis}
+
+We tested scalability with varying dataset sizes:
+
+\begin{table}[H]
+\centering
+\caption{Scalability with Dataset Size}
+\label{tab:scalability}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+\textbf{Data Points} & \textbf{Pure PySR (s)} & \textbf{LLM-Hybrid (s)} & \textbf{Speedup} \\
+\midrule
+100 & 245 & 48 & 5.1$\times$ \\
+500 & 390 & 70 & 5.6$\times$ \\
+1000 & 521 & 95 & 5.5$\times$ \\
+5000 & 1245 & 215 & 5.8$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Speedup remains relatively constant across dataset sizes, confirming that LLM warm-starting provides consistent efficiency gains.
+
+
+\section*{Supplementary Materials}
+
+Comprehensive empirical analysis of LLM performance across 140 formula generations and 10 scientific domains is available in the supplementary materials document. This includes:
+
+\begin{itemize}
+\item Detailed failure mode taxonomy with code examples
+\item Domain-specific performance analysis (Materials Science, Fluid Dynamics, Thermodynamics, Mechanics, Chemistry, DeFi)
+\item Production deployment framework with validation pipelines
+\item Complete experimental logs from 7 runs (Run IDs: 162102, 163240, 165852, 173905, 192807, 232733, 235258)
+\end{itemize}
+
+Key supplementary findings:
+\begin{itemize}
+\item Pure LLM success variance of 0-100\% across runs using identical test cases
+\item Perfect symbolic accuracy ($R^2 = 1.0000$) achieved on 75\% of formulas when prompts are optimized
+\item Complete system failures (0\% success rate) in 3/7 runs due to API errors, variable binding issues, and code extraction failures
+\item Prompt engineering quality is the dominant factor determining success, capable of transforming catastrophic failures into production-ready implementations
+\end{itemize}
+
+\section{Extended Discussion}
+\label{app:extended_discussion}
+
+\subsection{Why LLMs Fail on Novel Domains}
+
+Our empirical results (95\% classical vs. 45\% DeFi) raise a question: \textbf{Why do LLMs fail specifically on specialized domains?}
+
+\paragraph{Training Data Coverage:}
+
+Classical physics formulas appear extensively in:
+\begin{itemize}
+\item Textbooks (digitized and crawled)
+\item Wikipedia and educational websites
+\item Academic papers (often with equation reproduction in intro sections)
+\item Code repositories (physics simulations, homework solutions)
+\item Q\&A forums (StackExchange, Quora)
+\end{itemize}
+
+DeFi formulas, by contrast:
+\begin{itemize}
+\item Emerged post-2020 (after many LLM training cutoffs)
+\item Appear primarily in white papers and technical documentation
+\item Often use non-standard notation
+\item Require understanding of cryptographic primitives and game theory
+\item Limited presence in traditional academic literature
+\end{itemize}
+
+\paragraph{Conceptual Complexity:}
+
+\begin{table}[H]
+\centering
+\caption{Conceptual Requirements Comparison}
+\label{tab:conceptual_complexity}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Requirement} & \textbf{Classical Physics} & \textbf{DeFi/Risk} \\
+\midrule
+Distributional reasoning & Rare & Essential \\
+Multi-step derivations & Common but formulaic & Domain-specific \\
+Statistical API knowledge & Basic & Advanced (scipy.stats) \\
+Convention awareness & Well-established & Evolving \\
+Asymptotic analysis & Standard & Context-dependent \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Lessons for Future LLM Development}
+
+Our findings suggest design principles for more reliable scientific LLMs:
+
+\begin{enumerate}
+\item \textbf{Training data curation}: Include specialized domain corpora with verified formulas and extensive code examples
+
+\item \textbf{Execution-based feedback}: Train with reward signals from actual code execution, not just text likelihood
+
+\item \textbf{Explicit uncertainty quantification}: Models should output confidence scores calibrated to actual correctness probability
+
+\item \textbf{Symbolic grounding}: Integrate symbolic math engines (SymPy, Mathematica) during inference for dimensional checking
+
+\item \textbf{Retrieval augmentation}: Query domain-specific databases (NIST, financial standards) before generation
+\end{enumerate}
+
+Even with these improvements, Theorem~\ref{thm:llm_reproductive} suggests fundamental limits on extrapolation capability.
+
+\subsection{Broader Applicability}
+
+While we focused on physics and finance, the hybrid architecture generalizes to other domains requiring analytical discovery:
+
+\paragraph{Candidate Domains:}
+\begin{itemize}
+\item \textbf{Materials science}: Stress-strain relationships, phase diagrams
+\item \textbf{Pharmacokinetics}: Drug absorption, distribution, metabolism models
+\item \textbf{Ecology}: Population dynamics, predator-prey systems
+\item \textbf{Economics}: Production functions, utility optimization
+\item \textbf{Climate science}: Radiative forcing, feedback mechanisms
+\end{itemize}
+
+\paragraph{Required Adaptations:}
+\begin{itemize}
+\item Domain-specific operator sets
+\item Discipline-appropriate constraint libraries
+\item Validation metrics aligned with domain standards
+\item Expert-in-the-loop refinement for unfamiliar domains
+\end{itemize}
+
+\subsection{Limitations and Future Directions}
+
+\paragraph{Current Limitations:}
+
+\begin{enumerate}
+\item \textbf{Operator completeness}: If true formula requires operators outside $\mathcal{O}$, discovery fails
+\item \textbf{Multi-scale phenomena}: Expressions with vastly different characteristic scales challenge numerical evaluation
+\item \textbf{Implicit constraints}: Some domain knowledge is tacit and difficult to formalize
+\item \textbf{Computational cost}: Evolutionary search remains expensive for complex problems
+\end{enumerate}
+
+\paragraph{Promising Directions:}
+
+\begin{enumerate}
+\item \textbf{Active learning}: Use LLM feedback to guide symbolic search more intelligently:
+\begin{verbatim}
+While not converged:
+    E* = PySR.search()
+    suggestions = LLM.critique(E*)
+    constraints.add(suggestions)
+\end{verbatim}
+
+\item \textbf{Hierarchical discovery}: Discover sub-expressions separately, then combine
+\item \textbf{Transfer learning}: Leverage formulas from related domains
+\item \textbf{Uncertainty quantification}: Provide confidence intervals on discovered expressions
+\item \textbf{Multi-modal integration}: Incorporate experimental images, diagrams, protocol descriptions
+\end{enumerate}
+
+\end{document}

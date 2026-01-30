@@ -1,0 +1,18 @@
+{
+  "error": "name 'portfolio' is not defined",
+  "test_name": "expected_shortfall_es_99",
+  "timing": {
+    "total": 0.0011398792266845703
+  },
+  "timestamp": "2026-01-13T18:03:17.504801",
+  "success": false,
+  "difficulty": "medium",
+  "extrapolation_test": false,
+  "_metadata": {
+    "session_id": "llm_defi_20260113_180317",
+    "timestamp": "2026-01-13T18:03:17.504864",
+    "passed": false,
+    "test_name": "expected_shortfall_es_99",
+    "method": "llm_guided_defi_v1.0"
+  }
+}

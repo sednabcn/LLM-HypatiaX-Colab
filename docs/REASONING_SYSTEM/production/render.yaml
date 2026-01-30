@@ -1,0 +1,11 @@
+# Option 2: Render (Also Fast - 1 hour)
+# render.yaml
+services:
+  - type: web
+    name: quantapi
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12

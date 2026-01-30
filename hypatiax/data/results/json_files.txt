@@ -1,7 +1,0 @@
-./all_results/all_18_domains_20260102_064124.json
-./all_results/all_18_domains_20260101_235334.json
-./all_results/all_18_domains_20251227_135133.json
-./all_results/all_18_domains_20260102_051644.json
-./all_results/all_18_domains_20251227_103227.json
-./all_results/all_18_domains_20260101_212300.json
-./all_results/all_18_domains_20260101_192859.json

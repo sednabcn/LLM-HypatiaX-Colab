@@ -1,0 +1,918 @@
+Julia Version 1.12.2
+Commit ca9b6662be4 (2025-11-20 16:25 UTC)
+Build Info:
+  Official https://julialang.org release
+Platform Info:
+  OS: Linux (x86_64-linux-gnu)
+      Kali GNU/Linux Rolling
+  uname: Linux 6.12.13-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.12.13-1kali1 (2025-02-11) x86_64 unknown
+  CPU: Celeron(R) Dual-Core CPU       T3100  @ 1.90GHz: 
+              speed         user         nice          sys         idle          irq
+       #1     0 MHz        450 s          9 s        311 s       4547 s          0 s
+       #2     0 MHz        549 s          9 s        304 s       4592 s          0 s
+  Memory: 3.764636993408203 GB (2300.40625 MB free)
+  Uptime: 757.7 sec
+  Load Avg:  0.56  0.88  0.97
+  WORD_SIZE: 64
+  LLVM: libLLVM-18.1.7 (ORCJIT, penryn)
+  GC: Built with stock GC
+Threads: 1 default, 1 interactive, 1 GC (on 2 virtual cores)
+Environment:
+  XDG_CONFIG_HOME = /home/agagora/.config
+  WINDOWPATH = 2
+  HOME = /home/agagora
+  XDG_CACHE_HOME = /home/agagora/.cache
+  GEM_HOME = /home/agagora/gems
+  PYTHONPATH = /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab:
+  TERM = xterm-256color
+  NVM_CD_FLAGS = 
+  PATH = /home/agagora/Downloads/py312/bin:/home/agagora/Downloads/google-cloud-sdk/bin:/home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/bin:/home/agagora/.pyenv/shims:/home/agagora/.pyenv/bin:/home/agagora/.pyenv/bin:/home/agagora/.rbenv/shims:/home/agagora/.rbenv/bin:/home/agagora/gems/bin:/home/agagora/.local/share/gem/ruby/3.1.0/bin:/home/agagora/.juliaup/bin:/home/agagora/.local/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/lib/python3.11/dist-packages:/usr/bin:/bin:/usr/local/games:/usr/games:/home/agagora/.local/bin:/bin:/usr/bin:/home/agagora/.dotnet/tools:/home/agagora/.local/bin:/bin:/usr/bin:/usr/local/lib/python3.11/dist-packages:/usr/bin:/usr/local/bin:/home/agagora/Downloads/google-cloud-sdk/bin
+✅ PySR available
+⚠️  No .env file found
+✅ Advanced methods available
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+⚠️  HybridDiscoverySystem missing 'discover' method
+
+================================================================================
+                   ULTIMATE COMPARATIVE SUITE - FIXED VERSION                   
+================================================================================
+Methods available: 9
+PySR: ✅
+Advanced Methods: ✅
+API Key: ✅
+================================================================================
+
+
+🚀 Running 15 test(s)...
+
+
+==============================================================================================================
+                                                  TEST 1/15                                                   
+==============================================================================================================
+
+================================================================================
+Test: Arrhenius Equation: k = A*exp(-Ea/(R*T))
+Domain: chemistry
+Data: 200 samples × 1 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 0.6744, RMSE: 0.0777, Time: 73.2s
+
+[2/9] Running Pure PySR... ✓ R²: 0.9959, RMSE: 0.0087, Time: 25.7s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: -5574976734176.1924, RMSE: 321567.4980, Time: 2.7s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.6s
+
+[5/9] Running Neural Network... ✓ R²: 0.9567, RMSE: 0.0279, Time: 20.5s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.0s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               0.6744     0.077718     73.2    s 8                          
+Pure PySR                                     0.9959     0.008741     25.7    s 6                          
+Pure LLM (Basic)                              -5574976734176.1924 321567.498006 2.7     s -                          
+Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER            
+Neural Network                                0.9567     0.027896     20.5    s 7                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 3                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 4                          
+Hybrid System v40                             1.0000     0.000000     4.0     s 5                          
+==============================================================================================================
+
+🎯 WINNER: Pure LLM (Enhanced)
+   R²: 1.0000
+
+   Advantages over other methods:
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+     • Hybrid System v40: +0.0000 (0.0% better)
+     • Pure PySR: +0.0041 (0.4% better)
+
+==============================================================================================================
+                                                  TEST 2/15                                                   
+==============================================================================================================
+
+================================================================================
+Test: Henderson-Hasselbalch: pH = pKa + log10([A-]/[HA])
+Domain: chemistry
+Data: 200 samples × 2 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 0.9982, RMSE: 0.0210, Time: 23.8s
+
+[2/9] Running Pure PySR... ✓ R²: 0.9846, RMSE: 0.0613, Time: 18.7s
+
+[3/9] Running Pure LLM (Basic)... ✗ Code execution failed
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.6s
+
+[5/9] Running Neural Network... ✓ R²: 0.9830, RMSE: 0.0660, Time: 1.4s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.0s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.6s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               0.9982     0.021000     23.8    s 6                          
+Pure PySR                                     0.9846     0.061331     18.7    s 7                          
+Pure LLM (Basic)                              N/A        N/A          2.7     s -      Code execution      
+Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER            
+Neural Network                                0.9830     0.065990     1.4     s 8                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.0     s 3                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.6     s 4                          
+Hybrid System v40                             1.0000     0.000000     4.1     s 5                          
+==============================================================================================================
+
+🎯 WINNER: Pure LLM (Enhanced)
+   R²: 1.0000
+
+   Advantages over other methods:
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+     • Hybrid System v40: +0.0000 (0.0% better)
+     • LLM-Guided PySR: +0.0018 (0.2% better)
+
+==============================================================================================================
+                                                  TEST 3/15                                                   
+==============================================================================================================
+
+================================================================================
+Test: Rate Law: rate = k*[A]²*[B]
+Domain: chemistry
+Data: 200 samples × 2 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 1.0000, RMSE: 0.0000, Time: 23.6s
+
+[2/9] Running Pure PySR... ✓ R²: 1.0000, RMSE: 0.0000, Time: 17.0s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: -0.6286, RMSE: 15.3343, Time: 2.7s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.5s
+
+[5/9] Running Neural Network... ✓ R²: 0.9885, RMSE: 1.3035, Time: 1.4s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.3s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.0s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.8s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               1.0000     0.000000     23.6    s 1      🏆 WINNER            
+Pure PySR                                     1.0000     0.000000     17.0    s 2                          
+Pure LLM (Basic)                              -0.6286    15.334288    2.7     s -                          
+Pure LLM (Enhanced)                           1.0000     0.000000     2.5     s 3                          
+Neural Network                                0.9885     1.303460     1.4     s 8                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.3     s 4                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.0     s 5                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.8     s 6                          
+Hybrid System v40                             1.0000     0.000000     4.1     s 7                          
+==============================================================================================================
+
+🎯 WINNER: LLM-Guided PySR
+   R²: 1.0000
+
+   Advantages over other methods:
+     • Pure PySR: +0.0000 (0.0% better)
+     • Pure LLM (Enhanced): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+
+==============================================================================================================
+                                                  TEST 4/15                                                   
+==============================================================================================================
+
+================================================================================
+Test: Allometric Scaling: Y = a*M^b (metabolic rate)
+Domain: biology
+Data: 200 samples × 1 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 1.0000, RMSE: 0.0023, Time: 24.4s
+
+[2/9] Running Pure PySR... ✓ R²: 1.0000, RMSE: 0.0000, Time: 14.5s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: -1.6872, RMSE: 49.3314, Time: 3.3s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.8s
+
+[5/9] Running Neural Network... ✓ R²: 0.9980, RMSE: 1.3499, Time: 1.5s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               1.0000     0.002284     24.4    s 7                          
+Pure PySR                                     1.0000     0.000003     14.5    s 6                          
+Pure LLM (Basic)                              -1.6872    49.331392    3.3     s -                          
+Pure LLM (Enhanced)                           1.0000     0.000000     2.8     s 1      🏆 WINNER            
+Neural Network                                0.9980     1.349941     1.5     s 8                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 3                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 4                          
+Hybrid System v40                             1.0000     0.000000     4.1     s 5                          
+==============================================================================================================
+
+🎯 WINNER: Pure LLM (Enhanced)
+   R²: 1.0000
+
+   Advantages over other methods:
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+     • Hybrid System v40: +0.0000 (0.0% better)
+     • Pure PySR: +0.0000 (0.0% better)
+
+==============================================================================================================
+                                                  TEST 5/15                                                   
+==============================================================================================================
+
+================================================================================
+Test: Michaelis-Menten: v = (Vmax*[S])/(Km+[S])
+Domain: biology
+Data: 200 samples × 1 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✗ Variable name S is already a function name.
+
+[2/9] Running Pure PySR... ✗ Variable name S is already a function name.
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: -8.8036, RMSE: 32.6685, Time: 2.6s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.5s
+
+[5/9] Running Neural Network... ✓ R²: 0.9835, RMSE: 1.2692, Time: 1.4s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.2s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.6s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.9s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               N/A        N/A          0.0     s -      Variable name S     
+Pure PySR                                     N/A        N/A          0.0     s -      Variable name S     
+Pure LLM (Basic)                              -8.8036    32.668533    2.6     s -                          
+Pure LLM (Enhanced)                           1.0000     0.000000     2.5     s 1      🏆 WINNER            
+Neural Network                                0.9835     1.269245     1.4     s 6                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.2     s 3                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     3.6     s 4                          
+Hybrid System v40                             1.0000     0.000000     3.9     s 5                          
+==============================================================================================================
+
+🎯 WINNER: Pure LLM (Enhanced)
+   R²: 1.0000
+
+   Advantages over other methods:
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+     • Hybrid System v40: +0.0000 (0.0% better)
+     • Neural Network: +0.0165 (1.7% better)
+
+==============================================================================================================
+                                                  TEST 6/15                                                   
+==============================================================================================================
+
+================================================================================
+Test: Logistic Growth: dN/dt = r*N*(1-N/K)
+Domain: biology
+Data: 200 samples × 1 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✗ Variable name N is already a function name.
+
+[2/9] Running Pure PySR... ✗ Variable name N is already a function name.
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: -30375.6671, RMSE: 3476.7419, Time: 2.3s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.6s
+
+[5/9] Running Neural Network... ✓ R²: 0.9778, RMSE: 3.1502, Time: 1.4s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.8s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.8s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.6s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.9s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               N/A        N/A          0.0     s -      Variable name N     
+Pure PySR                                     N/A        N/A          0.0     s -      Variable name N     
+Pure LLM (Basic)                              -30375.6671 3476.741887  2.3     s -                          
+Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER            
+Neural Network                                0.9778     3.150214     1.4     s 6                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     3.8     s 2                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     3.8     s 3                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.6     s 4                          
+Hybrid System v40                             1.0000     0.000000     3.9     s 5                          
+==============================================================================================================
+
+🎯 WINNER: Pure LLM (Enhanced)
+   R²: 1.0000
+
+   Advantages over other methods:
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+     • Hybrid System v40: +0.0000 (0.0% better)
+     • Neural Network: +0.0222 (2.3% better)
+
+==============================================================================================================
+                                                  TEST 7/15                                                   
+==============================================================================================================
+
+================================================================================
+Test: Kinetic Energy: KE = 0.5*m*v²
+Domain: physics
+Data: 200 samples × 2 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 1.0000, RMSE: 0.0000, Time: 25.2s
+
+[2/9] Running Pure PySR... ✓ R²: 1.0000, RMSE: 0.0004, Time: 16.8s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.6s
+
+[5/9] Running Neural Network... ✓ R²: 0.9910, RMSE: 188.2173, Time: 1.4s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.2s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.0s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               1.0000     0.000000     25.2    s 1      🏆 WINNER            
+Pure PySR                                     1.0000     0.000415     16.8    s 8                          
+Pure LLM (Basic)                              1.0000     0.000000     2.7     s 2                          
+Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 3                          
+Neural Network                                0.9910     188.217332   1.4     s 9                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 4                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 5                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 6                          
+Hybrid System v40                             1.0000     0.000000     4.0     s 7                          
+==============================================================================================================
+
+🎯 WINNER: LLM-Guided PySR
+   R²: 1.0000
+
+   Advantages over other methods:
+     • Pure LLM (Basic): +0.0000 (0.0% better)
+     • Pure LLM (Enhanced): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+
+==============================================================================================================
+                                                  TEST 8/15                                                   
+==============================================================================================================
+
+================================================================================
+Test: Gravitational Force: F = G*m1*m2/r²
+Domain: physics
+Data: 200 samples × 3 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: -0.0257, RMSE: 28438508097774242758656.0000, Time: 18.4s
+
+[2/9] Running Pure PySR... ✓ R²: -0.0257, RMSE: 28438508097774242758656.0000, Time: 15.7s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: 1.0000, RMSE: 1278326705025671424.0000, Time: 2.6s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.6s
+
+[5/9] Running Neural Network... ✓ R²: 0.1531, RMSE: 14507879500151070392320.0000, Time: 1.4s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.9s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.0s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               -0.0257    28438508097774242758656.000000 18.4    s -                          
+Pure PySR                                     -0.0257    28438508097774242758656.000000 15.7    s -                          
+Pure LLM (Basic)                              1.0000     1278326705025671424.000000 2.6     s 6                          
+Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER            
+Neural Network                                0.1531     14507879500151070392320.000000 1.4     s 7                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.9     s 2                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 3                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 4                          
+Hybrid System v40                             1.0000     0.000000     4.0     s 5                          
+==============================================================================================================
+
+🎯 WINNER: Pure LLM (Enhanced)
+   R²: 1.0000
+
+   Advantages over other methods:
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+     • Hybrid System v40: +0.0000 (0.0% better)
+     • Pure LLM (Basic): +0.0000 (0.0% better)
+
+==============================================================================================================
+                                                  TEST 9/15                                                   
+==============================================================================================================
+
+================================================================================
+Test: Ideal Gas Law: P = nRT/V
+Domain: physics
+Data: 200 samples × 3 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 1.0000, RMSE: 0.0008, Time: 24.8s
+
+[2/9] Running Pure PySR... ✓ R²: 1.0000, RMSE: 0.0000, Time: 17.3s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[5/9] Running Neural Network... ✓ R²: 0.6513, RMSE: 95467.7975, Time: 2.3s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.9s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.2s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               1.0000     0.000847     24.8    s 1      🏆 WINNER            
+Pure PySR                                     1.0000     0.000000     17.3    s 2                          
+Pure LLM (Basic)                              1.0000     0.000000     2.7     s 3                          
+Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 4                          
+Neural Network                                0.6513     95467.797473 2.3     s 9                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 5                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     3.9     s 6                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 7                          
+Hybrid System v40                             1.0000     0.000000     4.2     s 8                          
+==============================================================================================================
+
+🎯 WINNER: LLM-Guided PySR
+   R²: 1.0000
+
+   Advantages over other methods:
+     • Pure PySR: +0.0000 (0.0% better)
+     • Pure LLM (Basic): +0.0000 (0.0% better)
+     • Pure LLM (Enhanced): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+
+==============================================================================================================
+                                                  TEST 10/15                                                  
+==============================================================================================================
+
+================================================================================
+Test: Impermanent Loss: IL = 2*sqrt(r)/(1+r) - 1
+Domain: defi_amm
+Data: 200 samples × 1 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 1.0000, RMSE: 0.0002, Time: 25.0s
+
+[2/9] Running Pure PySR... ✓ R²: 0.9999, RMSE: 0.0002, Time: 15.9s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.3s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[5/9] Running Neural Network... ✓ R²: 0.9793, RMSE: 0.0042, Time: 1.4s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.3s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.9s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               1.0000     0.000171     25.0    s 7                          
+Pure PySR                                     0.9999     0.000213     15.9    s 8                          
+Pure LLM (Basic)                              1.0000     0.000000     3.3     s 1      🏆 WINNER            
+Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 2                          
+Neural Network                                0.9793     0.004223     1.4     s 9                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 3                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.3     s 4                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 5                          
+Hybrid System v40                             1.0000     0.000000     3.9     s 6                          
+==============================================================================================================
+
+🎯 WINNER: Pure LLM (Basic)
+   R²: 1.0000
+
+   Advantages over other methods:
+     • Pure LLM (Enhanced): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+     • Hybrid System v40: +0.0000 (0.0% better)
+
+==============================================================================================================
+                                                  TEST 11/15                                                  
+==============================================================================================================
+
+================================================================================
+Test: Price Impact: impact = dx/(x+dx)
+Domain: defi_amm
+Data: 200 samples × 2 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 1.0000, RMSE: 0.0000, Time: 15.7s
+
+[2/9] Running Pure PySR... ✓ R²: 1.0000, RMSE: 0.0000, Time: 14.6s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.5s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[5/9] Running Neural Network... ✓ R²: 0.9908, RMSE: 0.0027, Time: 1.4s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.2s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.0s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.1s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 5.4s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               1.0000     0.000000     15.7    s 1      🏆 WINNER            
+Pure PySR                                     1.0000     0.000000     14.6    s 2                          
+Pure LLM (Basic)                              1.0000     0.000000     2.5     s 3                          
+Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 4                          
+Neural Network                                0.9908     0.002681     1.4     s 9                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 5                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.0     s 6                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     3.1     s 7                          
+Hybrid System v40                             1.0000     0.000000     5.4     s 8                          
+==============================================================================================================
+
+🎯 WINNER: LLM-Guided PySR
+   R²: 1.0000
+
+   Advantages over other methods:
+     • Pure PySR: +0.0000 (0.0% better)
+     • Pure LLM (Basic): +0.0000 (0.0% better)
+     • Pure LLM (Enhanced): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+
+==============================================================================================================
+                                                  TEST 12/15                                                  
+==============================================================================================================
+
+================================================================================
+Test: Constant Product: y = k/x
+Domain: defi_amm
+Data: 200 samples × 1 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 1.0000, RMSE: 0.0000, Time: 18.5s
+
+[2/9] Running Pure PySR... ✓ R²: 1.0000, RMSE: 0.0000, Time: 15.0s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: -0.6535, RMSE: 604.6627, Time: 2.5s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.4s
+
+[5/9] Running Neural Network... ✓ R²: 0.9047, RMSE: 138.5504, Time: 1.4s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.9s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.9s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.5s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.0s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               1.0000     0.000000     18.5    s 1      🏆 WINNER            
+Pure PySR                                     1.0000     0.000000     15.0    s 2                          
+Pure LLM (Basic)                              -0.6535    604.662668   2.5     s -                          
+Pure LLM (Enhanced)                           1.0000     0.000000     2.4     s 3                          
+Neural Network                                0.9047     138.550355   1.4     s 8                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     3.9     s 4                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     3.9     s 5                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.5     s 6                          
+Hybrid System v40                             1.0000     0.000000     4.0     s 7                          
+==============================================================================================================
+
+🎯 WINNER: LLM-Guided PySR
+   R²: 1.0000
+
+   Advantages over other methods:
+     • Pure PySR: +0.0000 (0.0% better)
+     • Pure LLM (Enhanced): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+
+==============================================================================================================
+                                                  TEST 13/15                                                  
+==============================================================================================================
+
+================================================================================
+Test: Value at Risk 95%: VaR = P*σ*1.645
+Domain: defi_risk
+Data: 200 samples × 2 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 1.0000, RMSE: 0.0000, Time: 18.8s
+
+[2/9] Running Pure PySR... ✓ R²: 1.0000, RMSE: 0.1230, Time: 19.0s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.1s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[5/9] Running Neural Network... ✓ R²: 0.9959, RMSE: 1104.8080, Time: 1.5s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.2s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.2s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.0s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.5s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               1.0000     0.000000     18.8    s 1      🏆 WINNER            
+Pure PySR                                     1.0000     0.123008     19.0    s 8                          
+Pure LLM (Basic)                              1.0000     0.000000     3.1     s 2                          
+Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 3                          
+Neural Network                                0.9959     1104.808028  1.5     s 9                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 4                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.2     s 5                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     3.0     s 6                          
+Hybrid System v40                             1.0000     0.000000     4.5     s 7                          
+==============================================================================================================
+
+🎯 WINNER: LLM-Guided PySR
+   R²: 1.0000
+
+   Advantages over other methods:
+     • Pure LLM (Basic): +0.0000 (0.0% better)
+     • Pure LLM (Enhanced): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+
+==============================================================================================================
+                                                  TEST 14/15                                                  
+==============================================================================================================
+
+================================================================================
+Test: Liquidation Price LONG: liq = entry*(1 - 1/(L*0.8))
+Domain: defi_risk
+Data: 200 samples × 2 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 1.0000, RMSE: 0.2935, Time: 17.2s
+
+[2/9] Running Pure PySR... ✓ R²: 1.0000, RMSE: 0.0002, Time: 14.8s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.6s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.8s
+
+[5/9] Running Neural Network... ✓ R²: 0.9925, RMSE: 683.1183, Time: 1.4s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               1.0000     0.293465     17.2    s 8                          
+Pure PySR                                     1.0000     0.000244     14.8    s 7                          
+Pure LLM (Basic)                              1.0000     0.000000     2.6     s 1      🏆 WINNER            
+Pure LLM (Enhanced)                           1.0000     0.000000     2.8     s 2                          
+Neural Network                                0.9925     683.118254   1.4     s 9                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 3                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 4                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 5                          
+Hybrid System v40                             1.0000     0.000000     4.1     s 6                          
+==============================================================================================================
+
+🎯 WINNER: Pure LLM (Basic)
+   R²: 1.0000
+
+   Advantages over other methods:
+     • Pure LLM (Enhanced): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+     • Hybrid System v40: +0.0000 (0.0% better)
+
+==============================================================================================================
+                                                  TEST 15/15                                                  
+==============================================================================================================
+
+================================================================================
+Test: Portfolio VaR: sqrt(var1² + var2² + 2ρ*var1*var2)
+Domain: defi_risk
+Data: 200 samples × 3 variables
+================================================================================
+
+[1/9] Running LLM-Guided PySR... ✓ R²: 0.9653, RMSE: 2437.6307, Time: 21.4s
+
+[2/9] Running Pure PySR... ✓ R²: 0.9653, RMSE: 2437.6307, Time: 17.3s
+
+[3/9] Running Pure LLM (Basic)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.9s
+
+[4/9] Running Pure LLM (Enhanced)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.7s
+
+[5/9] Running Neural Network... ✓ R²: 0.9882, RMSE: 1560.6584, Time: 1.5s
+
+[6/9] Running LLM+NN Ensemble (Simple)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.2s
+
+[7/9] Running LLM+NN Ensemble (Smart)... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+[8/9] Running Integrated LLM Discovery v11.1... ✓ R²: 1.0000, RMSE: 0.0000, Time: 2.2s
+
+[9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
+
+==============================================================================================================
+                                              COMPARISON RESULTS                                              
+==============================================================================================================
+
+Method                                        R²         RMSE         Time     Rank   Status              
+--------------------------------------------------------------------------------------------------------------
+LLM-Guided PySR                               0.9653     2437.630735  21.4    s 9                          
+Pure PySR                                     0.9653     2437.630724  17.3    s 8                          
+Pure LLM (Basic)                              1.0000     0.000000     2.9     s 1      🏆 WINNER            
+Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 2                          
+Neural Network                                0.9882     1560.658431  1.5     s 7                          
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 3                          
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 4                          
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.2     s 5                          
+Hybrid System v40                             1.0000     0.000000     4.1     s 6                          
+==============================================================================================================
+
+🎯 WINNER: Pure LLM (Basic)
+   R²: 1.0000
+
+   Advantages over other methods:
+     • Pure LLM (Enhanced): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Simple): +0.0000 (0.0% better)
+     • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
+     • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
+     • Hybrid System v40: +0.0000 (0.0% better)
+
+==============================================================================================================
+                                               OVERALL SUMMARY                                                
+==============================================================================================================
+
+📊 Total tests: 15
+
+🏆 Wins by method:
+   Pure LLM (Enhanced)                            6/15  ( 40.0%) ████████
+   LLM-Guided PySR                                6/15  ( 40.0%) ████████
+   Pure LLM (Basic)                               3/15  ( 20.0%) ████
+
+📈 Average R² by method:
+   Pure LLM (Enhanced)                           1.0000 ± 0.0000  (success: 100%)
+   LLM+NN Ensemble (Simple)                      1.0000 ± 0.0000  (success: 100%)
+   LLM+NN Ensemble (Smart)                       1.0000 ± 0.0000  (success: 100%)
+   Integrated LLM Discovery v11.1                1.0000 ± 0.0000  (success: 100%)
+   Hybrid System v40                             1.0000 ± 0.0000  (success: 100%)
+   Pure PySR                                     0.9169 ± 0.2723  (success: 87%)
+   Neural Network                                0.9023 ± 0.2174  (success: 100%)
+   LLM-Guided PySR                               0.8932 ± 0.2789  (success: 87%)
+   Pure LLM (Basic)                              -398212626039.6880 ± 1435776033297.5208  (success: 93%)
+
+📉 Average RMSE by method:
+   Pure LLM (Enhanced)                           0.000000 ± 0.000000
+   LLM+NN Ensemble (Simple)                      0.000000 ± 0.000000
+   LLM+NN Ensemble (Smart)                       0.000000 ± 0.000000
+   Integrated LLM Discovery v11.1                0.000000 ± 0.000000
+   Hybrid System v40                             0.000000 ± 0.000000
+   Pure LLM (Basic)                              91309050358999808.000000 ± 329219462983206976.000000
+   Neural Network                                967191966676737982464.000000 ± 3618900966544432431104.000000
+   LLM-Guided PySR                               2187577545982634098688.000000 ± 7577990910277528322048.000000
+   Pure PySR                                     2187577545982634098688.000000 ± 7577990910277528322048.000000
+
+==============================================================================================================
+
+💾 Results saved to: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/experiments/pyfigures/5_data/results/comparison_FIXED_20260124_164440.json
+
+✅ Complete!
+

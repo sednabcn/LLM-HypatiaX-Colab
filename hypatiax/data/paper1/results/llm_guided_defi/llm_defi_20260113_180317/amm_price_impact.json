@@ -1,0 +1,18 @@
+{
+  "error": "name 'dx' is not defined",
+  "test_name": "amm_price_impact",
+  "timing": {
+    "total": 0.001155853271484375
+  },
+  "timestamp": "2026-01-13T18:03:17.419941",
+  "success": false,
+  "difficulty": "easy",
+  "extrapolation_test": false,
+  "_metadata": {
+    "session_id": "llm_defi_20260113_180317",
+    "timestamp": "2026-01-13T18:03:17.420015",
+    "passed": false,
+    "test_name": "amm_price_impact",
+    "method": "llm_guided_defi_v1.0"
+  }
+}

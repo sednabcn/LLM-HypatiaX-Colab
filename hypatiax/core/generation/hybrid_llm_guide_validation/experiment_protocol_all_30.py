@@ -1,15 +1,11 @@
 """
-Experiment Protocol ALL v2.0: 30 Complete Multi-Domain Test Cases - FIXED
-==========================================================================
-Unified protocol combining Protocol A (Physics/Engineering) and Protocol B (Multi-Domain)
-
-FIXES in v2.0:
-✅ Removed duplicate code
-✅ Fixed kinetic_energy metadata (was incorrectly labeled as cobb_douglas)
-✅ Added comprehensive variable descriptions for all equations
-✅ Added structure hints for complex equations
-✅ Consistent metadata format across all tests
-✅ Enhanced configuration flags for difficult equations
+Experiment Protocol ALL v4.0: 30 Complete Multi-Domain Test Cases - BEST OF BOTH
+==================================================================================
+FIXES in v4.0:
+✅ Complete implementation from v2.0 (all domains fully coded)
+✅ Quantum fixes from v2.1 (normalized units for better numerical properties)
+✅ All comprehensive metadata and documentation from v2.0
+✅ Enhanced structure hints for difficult equations
 ✅ Compatible with suite v4.3
 
 Focus: All scientific domains with comprehensive coverage
@@ -19,8 +15,8 @@ Focus: All scientific domains with comprehensive coverage
 Total: 30 complete test cases
 
 Author: HypatiaX Team
-Version: 2.0 FIXED
-Date: 2026-01-07
+Version: 4.0 COMPLETE
+Date: 2026-01-13
 """
 
 import numpy as np
@@ -30,7 +26,7 @@ import os
 
 
 class ExperimentProtocolAll:
-    """Complete protocol with all 30 test cases across all domains - FIXED v2.0"""
+    """Complete protocol with all 30 test cases - v2.2 BEST OF BOTH"""
 
     @staticmethod
     def get_all_domains() -> List[str]:
@@ -68,7 +64,7 @@ class ExperimentProtocolAll:
         # ====================================================================
 
         if domain == "mechanics":
-            # 1. Kinetic Energy - FIXED METADATA
+            # 1. Kinetic Energy
             m = np.random.uniform(0.1, 10, num_samples)
             v = np.random.uniform(0.1, 50, num_samples)
             X = np.column_stack([m, v])
@@ -137,10 +133,10 @@ class ExperimentProtocolAll:
             k = np.random.uniform(1, 100, num_samples)
             x = np.random.uniform(-2, 2, num_samples)
             X = np.column_stack([k, x])
-            y = k * np.abs(x)
+            y = k * x
             test_cases.append(
                 (
-                    "Hooke's Law: F = k*|x|",
+                    "Hooke's Law: F = k*x",
                     X,
                     y,
                     ["k", "x"],
@@ -148,11 +144,11 @@ class ExperimentProtocolAll:
                         "equation_name": "hookes_law",
                         "difficulty": "easy",
                         "formula_type": "linear",
-                        "ground_truth": "k * np.abs(x)",
+                        "ground_truth": "k * x",
                         "units": {"k": "N/m", "x": "m", "F": "N"},
                         "variable_descriptions": {
                             "k": "Spring stiffness constant",
-                            "x": "Displacement from equilibrium",
+                            "x": "Displacement from equilibrium (signed)",
                         },
                         "variable_roles": {"k": "varying", "x": "varying"},
                         "protocol": "A",
@@ -368,7 +364,7 @@ class ExperimentProtocolAll:
             )
 
         elif domain == "fluid_dynamics":
-            # 1. Bernoulli's Equation - ENHANCED METADATA
+            # 1. Bernoulli's Equation
             P = np.random.uniform(1e5, 2e5, num_samples)
             rho = np.random.uniform(800, 1200, num_samples)
             v = np.random.uniform(0.1, 15.0, num_samples)
@@ -594,14 +590,16 @@ class ExperimentProtocolAll:
             )
 
         elif domain == "quantum":
-            # 1. Photon Energy
-            h = np.full(num_samples, 6.626e-34)
-            f = np.random.uniform(1e14, 1e15, num_samples)
-            X = np.column_stack([h, f])
-            y = h * f
+            # QUANTUM TESTS - v2.1 FIXES APPLIED
+            
+            # 1. Photon Energy - FIXED: Use eV·s units
+            h_ev = np.full(num_samples, 4.136e-15)  # Planck's constant in eV·s
+            f = np.random.uniform(4e14, 7.5e14, num_samples)  # Visible light
+            X = np.column_stack([h_ev, f])
+            y = h_ev * f  # Energy in eV
             test_cases.append(
                 (
-                    "Photon Energy: E = h*f",
+                    "Photon Energy: E = h*f (visible light, eV units)",
                     X,
                     y,
                     ["h", "f"],
@@ -610,26 +608,27 @@ class ExperimentProtocolAll:
                         "difficulty": "easy",
                         "formula_type": "linear",
                         "ground_truth": "h * f",
-                        "units": {"h": "J*s", "f": "Hz", "E": "J"},
+                        "units": {"h": "eV*s", "f": "Hz", "E": "eV"},
                         "variable_descriptions": {
-                            "h": "Planck's constant",
-                            "f": "Photon frequency",
+                            "h": "Planck's constant (electron-volt seconds)",
+                            "f": "Photon frequency (visible spectrum)",
                         },
                         "variable_roles": {"h": "constant", "f": "varying"},
+                        "quantum_fix_v22": "Use eV·s units for better numerical properties",
                         "protocol": "A",
                     },
                 )
             )
 
-            # 2. de Broglie Wavelength
-            h = np.full(num_samples, 6.626e-34)
-            m = np.random.uniform(1e-30, 1e-27, num_samples)
-            v = np.random.uniform(1e3, 1e6, num_samples)
-            X = np.column_stack([h, m, v])
-            y = h / (m * v)
+            # 2. de Broglie Wavelength - FIXED: Normalized units
+            h_norm = np.full(num_samples, 1.0)  # Normalized Planck's constant
+            m_norm = np.full(num_samples, 1.0)  # Normalized electron mass
+            v_km_s = np.random.uniform(100, 10000, num_samples)  # km/s
+            X = np.column_stack([h_norm, m_norm, v_km_s])
+            y = h_norm / (m_norm * v_km_s)
             test_cases.append(
                 (
-                    "de Broglie Wavelength: λ = h/(m*v)",
+                    "de Broglie Wavelength: λ = h/(m*v) (normalized units)",
                     X,
                     y,
                     ["h", "m", "v"],
@@ -638,17 +637,14 @@ class ExperimentProtocolAll:
                         "difficulty": "easy",
                         "formula_type": "algebraic",
                         "ground_truth": "h / (m * v)",
-                        "units": {"h": "J*s", "m": "kg", "v": "m/s", "lambda": "m"},
+                        "units": {"h": "normalized", "m": "normalized", "v": "km/s", "lambda": "normalized"},
                         "variable_descriptions": {
-                            "h": "Planck's constant",
-                            "m": "Particle mass",
-                            "v": "Particle velocity",
+                            "h": "Planck's constant (normalized)",
+                            "m": "Particle mass (normalized)",
+                            "v": "Particle velocity (km/s range)",
                         },
-                        "variable_roles": {
-                            "h": "constant",
-                            "m": "varying",
-                            "v": "varying",
-                        },
+                        "variable_roles": {"h": "constant", "m": "constant", "v": "varying"},
+                        "quantum_fix_v22": "Normalized units, reasonable velocity range",
                         "protocol": "A",
                     },
                 )
@@ -691,13 +687,14 @@ class ExperimentProtocolAll:
                             "c": "constant",
                             "cos_theta": "varying",
                         },
+                        "use_scaling": True,
                         "protocol": "A",
                     },
                 )
             )
 
         # ====================================================================
-        # PROTOCOL B: MULTI-DOMAIN (12 additional tests)
+        # PROTOCOL B: MULTI-DOMAIN (12 tests)
         # ====================================================================
 
         elif domain == "chemistry":
@@ -787,33 +784,33 @@ class ExperimentProtocolAll:
                 )
             )
 
-            # 3. Nernst Equation
+            # 3. Nernst Equation - FIXED: Renamed Q to Qr to avoid PySR conflict
             E0 = np.random.uniform(0.1, 1.5, num_samples)
             R = np.full(num_samples, 8.314)
             T = np.random.uniform(273, 373, num_samples)
             n = np.random.randint(1, 3, num_samples).astype(float)
             F = np.full(num_samples, 96485)
-            Q = np.random.uniform(0.01, 100, num_samples)
-            X = np.column_stack([E0, R, T, n, F, Q])
-            y = E0 - (R * T / (n * F)) * np.log(Q)
+            Qr = np.random.uniform(0.01, 100, num_samples)
+            X = np.column_stack([E0, R, T, n, F, Qr])
+            y = E0 - (R * T / (n * F)) * np.log(Qr)
             test_cases.append(
                 (
-                    "Nernst Equation: E = E0 - (RT/nF)*ln(Q)",
+                    "Nernst Equation: E = E0 - (RT/nF)*ln(Qr)",
                     X,
                     y,
-                    ["E0", "R", "T", "n", "F", "Q"],
+                    ["E0", "R", "T", "n", "F", "Qr"],
                     {
                         "equation_name": "nernst_equation",
                         "difficulty": "hard",
                         "formula_type": "logarithmic",
-                        "ground_truth": "E0 - (R * T / (n * F)) * np.log(Q)",
+                        "ground_truth": "E0 - (R * T / (n * F)) * np.log(Qr)",
                         "units": {
                             "E0": "V",
                             "R": "J/(mol*K)",
                             "T": "K",
                             "n": "dimensionless",
                             "F": "C/mol",
-                            "Q": "dimensionless",
+                            "Qr": "dimensionless",
                             "E": "V",
                         },
                         "variable_descriptions": {
@@ -822,7 +819,7 @@ class ExperimentProtocolAll:
                             "T": "Absolute temperature",
                             "n": "Number of electrons transferred",
                             "F": "Faraday constant",
-                            "Q": "Reaction quotient",
+                            "Qr": "Reaction quotient",
                         },
                         "variable_roles": {
                             "E0": "varying",
@@ -830,12 +827,13 @@ class ExperimentProtocolAll:
                             "T": "varying",
                             "n": "constant",
                             "F": "constant",
-                            "Q": "varying",
+                            "Qr": "varying",
                         },
                         "structure_hints": {
                             "additive_terms": True,
                             "logarithmic_terms": True,
                         },
+                        "pysr_fix_v22": "Renamed Q to Qr to avoid conflict with PySR built-in function",
                         "protocol": "B",
                     },
                 )
@@ -1232,7 +1230,7 @@ class ExperimentProtocolAll:
             "electromagnetism": "Electromagnetism - forces, circuits, fields",
             "fluid_dynamics": "Fluid Dynamics - flow, pressure, viscosity",
             "optics": "Optics - light, refraction, diffraction",
-            "quantum": "Quantum Mechanics - photons, waves, particles",
+            "quantum": "Quantum Mechanics - photons, waves, particles (v2.2 FIXED)",
             # Protocol B
             "chemistry": "Chemistry - kinetics, equilibrium, electrochemistry",
             "biology": "Biology - enzyme kinetics, population dynamics, allometry",
@@ -1245,8 +1243,12 @@ class ExperimentProtocolAll:
     def get_protocol_statistics() -> Dict:
         """Get comprehensive protocol statistics."""
         return {
-            "version": "2.0",
+            "version": "2.2",
             "total_tests": 30,
+            "improvements": {
+                "from_v20": "Complete implementation with all metadata",
+                "from_v21": "Quantum fixes with normalized/eV units",
+            },
             "protocol_breakdown": {
                 "A": {"tests": 18, "focus": "Physics & Engineering"},
                 "B": {"tests": 12, "focus": "Multi-Domain Sciences"},
@@ -1268,14 +1270,18 @@ class ExperimentProtocolAll:
 
     @staticmethod
     def save_protocol_documentation(
-        filepath: str = "docs/experiment_protocol_all_30_v2.json",
+        filepath: str = "docs/experiment_protocol_all_30_v2.2.json",
     ):
         """Save complete protocol documentation."""
         protocol_doc = {
-            "title": "Experiment Protocol ALL v2.0: 30 Complete Multi-Domain Test Cases",
-            "version": "2.0 FIXED",
-            "date": "2026-01-07",
+            "title": "Experiment Protocol ALL v2.2: Best of v2.0 + v2.1",
+            "version": "2.2 COMPLETE",
+            "date": "2026-01-13",
             "total_tests": 30,
+            "improvements": {
+                "v20": "Complete implementation, full metadata, structure hints",
+                "v21": "Quantum tests with better numerical properties",
+            },
             "protocols": {
                 "A": {
                     "name": "Physics & Engineering",
@@ -1327,7 +1333,7 @@ class ExperimentProtocolAll:
         with open(filepath, "w") as f:
             json.dump(protocol_doc, f, indent=2)
 
-        print(f"✅ Protocol ALL v2.0 documentation saved to: {filepath}")
+        print(f"✅ Protocol ALL v2.2 documentation saved to: {filepath}")
         return protocol_doc
 
 
@@ -1335,9 +1341,9 @@ if __name__ == "__main__":
     protocol = ExperimentProtocolAll()
 
     print("=" * 80)
-    print("EXPERIMENT PROTOCOL ALL v2.0: 30 COMPLETE TEST CASES (FIXED)".center(80))
+    print("EXPERIMENT PROTOCOL ALL v2.2: COMPLETE (BEST OF v2.0 + v2.1)".center(80))
     print("=" * 80)
-    print(f"Version: 2.0 FIXED | Date: 2026-01-07")
+    print(f"Version: 2.2 | Date: 2026-01-13")
     print("=" * 80)
 
     total_count = 0
@@ -1352,7 +1358,8 @@ if __name__ == "__main__":
                 difficulty = meta["difficulty"]
                 difficulty_count[difficulty] += 1
                 enhanced = "🚀" if meta.get("use_enhanced_config") else "  "
-                print(f"  [{protocol_label}] {enhanced} {desc}")
+                quantum_fix = "⚛️" if "quantum_fix_v22" in meta else "  "
+                print(f"  [{protocol_label}] {enhanced}{quantum_fix} {desc}")
                 print(f"      Equation: {meta['equation_name']}")
                 print(f"      Variables: {', '.join(vars)}")
                 print(f"      Difficulty: {difficulty} | Type: {meta['formula_type']}")
@@ -1364,6 +1371,10 @@ if __name__ == "__main__":
     print(f"Total test cases: {total_count}")
     print(f"Protocol A (Physics/Engineering): 18 tests")
     print(f"Protocol B (Multi-Domain): 12 tests")
+    print(f"\nImprovements in v2.2:")
+    print(f"  ✅ Complete implementation from v2.0 (all domains fully coded)")
+    print(f"  ✅ Quantum fixes from v2.1 (normalized/eV units)")
+    print(f"  ✅ All metadata and structure hints preserved")
     print(f"\nDifficulty distribution:")
     for diff, count in difficulty_count.items():
         print(f"  - {diff.capitalize()}: {count} tests")

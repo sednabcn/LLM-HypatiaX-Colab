@@ -1,0 +1,671 @@
+{
+  "timestamp": "2026-01-23T22:35:54.354598",
+  "version": "Systems 2 & 3 Extraction",
+  "methods": [
+    "System 2 Symbolic",
+    "System 3 LLM+Fallback"
+  ],
+  "total_tests": 30,
+  "tests": [
+    {
+      "test_name": "biology_allometric_scaling",
+      "domain": "biology",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "biology_allometric_scaling",
+          "domain": "biology",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 10.550716161727905,
+          "formula": "a * M**b",
+          "error": null,
+          "metadata": {
+            "validation_score": 91.3,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "biology_logistic_growth",
+      "domain": "biology",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "biology_logistic_growth",
+          "domain": "biology",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 7.828675031661987,
+          "formula": "r * N * (1 - N/K)",
+          "error": null,
+          "metadata": {
+            "validation_score": 98.5,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "biology_michaelis_menten",
+      "domain": "biology",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "biology_michaelis_menten",
+          "domain": "biology",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 8.077127933502197,
+          "formula": "(Vmax * S) / (Km + S)",
+          "error": null,
+          "metadata": {
+            "validation_score": 91.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "chemistry_arrhenius_equation",
+      "domain": "chemistry",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "chemistry_arrhenius_equation",
+          "domain": "chemistry",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 7.424362659454346,
+          "formula": "A * exp(-Ea / (R * T))",
+          "error": null,
+          "metadata": {
+            "validation_score": 88.6,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "chemistry_henderson_hasselbalch",
+      "domain": "chemistry",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "chemistry_henderson_hasselbalch",
+          "domain": "chemistry",
+          "success": true,
+          "r2": 0.9990314168440244,
+          "rmse": Infinity,
+          "time": 429.30504322052,
+          "formula": "pKa - ((A_minus - HA) * ((-2.2914078 / (((HA + 0.06694371) * (A_minus + 0.06868311)) * 18.92267)) - 0.45465365))",
+          "error": null,
+          "metadata": {
+            "validation_score": 91.3,
+            "llm_mode": "hybrid_pysr_better",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "chemistry_nernst_equation",
+      "domain": "chemistry",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "chemistry_nernst_equation",
+          "domain": "chemistry",
+          "success": true,
+          "r2": 0.9999943615210617,
+          "rmse": Infinity,
+          "time": 196.6800537109375,
+          "formula": "(T / ((((R / (Qr + (-0.81812054 / Qr))) + ((R - -0.8443103) - (Qr / (F / Qr)))) - R) * (n / -0.00033086902))) + E0",
+          "error": null,
+          "metadata": {
+            "validation_score": 100.0,
+            "llm_mode": "hybrid_pysr_better",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "economics_break_even_point",
+      "domain": "economics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "economics_break_even_point",
+          "domain": "economics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 8.750768899917603,
+          "formula": "FC / (P - VC)",
+          "error": null,
+          "metadata": {
+            "validation_score": 91.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "economics_cobb_douglas",
+      "domain": "economics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "economics_cobb_douglas",
+          "domain": "economics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 8.400819301605225,
+          "formula": "A * K**alpha * L**beta",
+          "error": null,
+          "metadata": {
+            "validation_score": 91.3,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "economics_elasticity_demand",
+      "domain": "economics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "economics_elasticity_demand",
+          "domain": "economics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 8.478546380996704,
+          "formula": "(delta_Q / Qr) / (delta_P / P)",
+          "error": null,
+          "metadata": {
+            "validation_score": 92.1,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "electromagnetism_coulomb_law",
+      "domain": "electromagnetism",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "electromagnetism_coulomb_law",
+          "domain": "electromagnetism",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 8.53644871711731,
+          "formula": "k * q1 * q2 / r**2",
+          "error": null,
+          "metadata": {
+            "validation_score": 91.3,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "electromagnetism_lorentz_force",
+      "domain": "electromagnetism",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "electromagnetism_lorentz_force",
+          "domain": "electromagnetism",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 7.53851580619812,
+          "formula": "q * v * B",
+          "error": null,
+          "metadata": {
+            "validation_score": 100.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "electromagnetism_ohms_law",
+      "domain": "electromagnetism",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "electromagnetism_ohms_law",
+          "domain": "electromagnetism",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 6.747997045516968,
+          "formula": "I * R",
+          "error": null,
+          "metadata": {
+            "validation_score": 100.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "fluid_dynamics_bernoulli_equation",
+      "domain": "fluid_dynamics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "fluid_dynamics_bernoulli_equation",
+          "domain": "fluid_dynamics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 8.473809480667114,
+          "formula": "P + 0.5 * rho * v**2 + rho * g * h",
+          "error": null,
+          "metadata": {
+            "validation_score": 91.3,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "fluid_dynamics_hagen_poiseuille",
+      "domain": "fluid_dynamics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "fluid_dynamics_hagen_poiseuille",
+          "domain": "fluid_dynamics",
+          "success": true,
+          "r2": 0.9999999999992553,
+          "rmse": Infinity,
+          "time": 9.441710233688354,
+          "formula": "(3.14159 * dP * r**4) / (8 * mu * L)",
+          "error": null,
+          "metadata": {
+            "validation_score": 89.5,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "fluid_dynamics_reynolds_number",
+      "domain": "fluid_dynamics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "fluid_dynamics_reynolds_number",
+          "domain": "fluid_dynamics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 8.254697322845459,
+          "formula": "rho * v * L / mu",
+          "error": null,
+          "metadata": {
+            "validation_score": 91.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "mathematics_compound_interest",
+      "domain": "mathematics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "mathematics_compound_interest",
+          "domain": "mathematics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 9.031455755233765,
+          "formula": "P * (1 + r/n)**(n*t)",
+          "error": null,
+          "metadata": {
+            "validation_score": 90.4,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "mathematics_pythagorean_theorem",
+      "domain": "mathematics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "mathematics_pythagorean_theorem",
+          "domain": "mathematics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 8.22202730178833,
+          "formula": "(a**2 + b**2)**0.5",
+          "error": null,
+          "metadata": {
+            "validation_score": 100.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "mathematics_quadratic_discriminant",
+      "domain": "mathematics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "mathematics_quadratic_discriminant",
+          "domain": "mathematics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 6.552982330322266,
+          "formula": "b**2 - 4*a*c",
+          "error": null,
+          "metadata": {
+            "validation_score": 99.4,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "mechanics_gravitational_potential_energy",
+      "domain": "mechanics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "mechanics_gravitational_potential_energy",
+          "domain": "mechanics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 118.94421291351318,
+          "formula": "m * g * h",
+          "error": null,
+          "metadata": {
+            "validation_score": 100.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "mechanics_hookes_law",
+      "domain": "mechanics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "mechanics_hookes_law",
+          "domain": "mechanics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 13.025285005569458,
+          "formula": "k * x",
+          "error": null,
+          "metadata": {
+            "validation_score": 100.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "mechanics_kinetic_energy",
+      "domain": "mechanics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "mechanics_kinetic_energy",
+          "domain": "mechanics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 24.349461793899536,
+          "formula": "0.5 * m * v**2",
+          "error": null,
+          "metadata": {
+            "validation_score": 100.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "optics_single_slit_diffraction",
+      "domain": "optics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "optics_single_slit_diffraction",
+          "domain": "optics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 8.113584756851196,
+          "formula": "wavelength / a",
+          "error": null,
+          "metadata": {
+            "validation_score": 99.1,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "optics_snells_law",
+      "domain": "optics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "optics_snells_law",
+          "domain": "optics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 8.01519250869751,
+          "formula": "n1 * sin_theta1",
+          "error": null,
+          "metadata": {
+            "validation_score": 100.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "optics_thin_lens_equation",
+      "domain": "optics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "optics_thin_lens_equation",
+          "domain": "optics",
+          "success": true,
+          "r2": 0.9999999999999999,
+          "rmse": Infinity,
+          "time": 214.6099328994751,
+          "formula": "(1.0 / do) - ((1.0510925 / di) * -0.95139104)",
+          "error": null,
+          "metadata": {
+            "validation_score": 90.4,
+            "llm_mode": "hybrid_pysr_better",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "quantum_compton_shift",
+      "domain": "quantum",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "quantum_compton_shift",
+          "domain": "quantum",
+          "success": true,
+          "r2": 0.9999999999999982,
+          "rmse": Infinity,
+          "time": 208.36099982261658,
+          "formula": "100.1 - (cos_theta + -1.2255921e-6)",
+          "error": null,
+          "metadata": {
+            "validation_score": 100.0,
+            "llm_mode": "hybrid_pysr_better",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "quantum_de_broglie_wavelength",
+      "domain": "quantum",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "quantum_de_broglie_wavelength",
+          "domain": "quantum",
+          "success": true,
+          "r2": 0.999999999999997,
+          "rmse": Infinity,
+          "time": 202.43238353729248,
+          "formula": "((((23.367804 / ((v + (((m + m) + 13.504067) / 11.090331)) / 5.787419)) + (m + m)) + -1.2378498) - (m - (-0.009802008 / m))) * 0.999844",
+          "error": null,
+          "metadata": {
+            "validation_score": 85.6,
+            "llm_mode": "hybrid_pysr_better",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "quantum_photon_energy",
+      "domain": "quantum",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "quantum_photon_energy",
+          "domain": "quantum",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 169.11778497695923,
+          "formula": "f",
+          "error": null,
+          "metadata": {
+            "validation_score": 100.0,
+            "llm_mode": "hybrid_pysr_better",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "thermodynamics_carnot_efficiency",
+      "domain": "thermodynamics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "thermodynamics_carnot_efficiency",
+          "domain": "thermodynamics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 9.299617528915405,
+          "formula": "1 - Tc/Th",
+          "error": null,
+          "metadata": {
+            "validation_score": 98.5,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "thermodynamics_heat_capacity",
+      "domain": "thermodynamics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "thermodynamics_heat_capacity",
+          "domain": "thermodynamics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 7.975822925567627,
+          "formula": "m * c * dT",
+          "error": null,
+          "metadata": {
+            "validation_score": 100.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    },
+    {
+      "test_name": "thermodynamics_ideal_gas_law",
+      "domain": "thermodynamics",
+      "results": {
+        "System 3 LLM Fallback": {
+          "method": "System 3 LLM Fallback",
+          "test_name": "thermodynamics_ideal_gas_law",
+          "domain": "thermodynamics",
+          "success": true,
+          "r2": 1.0,
+          "rmse": Infinity,
+          "time": 10.019225358963013,
+          "formula": "n * R * T / V",
+          "error": null,
+          "metadata": {
+            "validation_score": 91.0,
+            "llm_mode": "hybrid_llm_only",
+            "discovery_engine": "symbolic"
+          }
+        }
+      }
+    }
+  ]
+}

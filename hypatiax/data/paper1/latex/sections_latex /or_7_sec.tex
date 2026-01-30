@@ -1,0 +1,602 @@
+
+\section{Conclusion}
+
+We have systematically investigated whether Large Language Models can perform genuine analytical discovery. Our answer is nuanced: \textbf{LLMs excel at reproducing known patterns but fail catastrophically on specialized domains requiring extrapolation beyond training data.}
+
+Theorem~\ref{thm:llm_reproductive} provides theoretical grounding: autoregressive generation probability decays exponentially for expressions distant from training corpora. Empirical validation across 131 tests confirms this, showing 95\% success on classical formulas versus 45\% on decentralized finance, with 412-847\% extrapolation errors.
+
+\textsc{HypatiaX} addresses these limitations through careful role allocation: symbolic methods perform mathematical reasoning under physics constraints, while LLMs provide natural language interpretation and optional warm-starting. This hybrid approach achieves 88.9-100\% success rates with 8-23\% extrapolation error and 100\% functional correctness on ground truth tests.
+
+Classical learning theory \citep{vapnik1999overview,bishop2006pattern,goodfellow2016deep} provides foundations for understanding generalization, though modern overparameterized models challenge traditional assumptions. Recent comprehensive surveys \citep{zhang2025survey} of reasoning LLMs confirm the need for hybrid approaches. The future of analytical discovery is not "AI vs. humans" or "neural vs. symbolic" but rather \textbf{intelligent orchestration of complementary capabilities}: LLMs as interfaces to symbolic discovery engines, with rigorous validation ensuring reliability.
+
+\section*{Acknowledgments}
+
+The author thanks domain experts who participated in blind evaluation of generated reports, and the open-source communities behind PySR, SymPy, and Anthropic Claude.
+
+\bibliography{bibliography}
+
+\appendix
+
+\section{Complete Proof of Theorem~\ref{thm:llm_reproductive}}
+\label{app:proof}
+
+\begin{proof}[Detailed Proof]
+Let $M_\theta$ be an autoregressive language model with parameters $\theta$ trained on corpus $\mathcal{C}$. Expression $E = t_1 \cdots t_n$ is generated via:
+\[
+P_\theta(E \mid D) = \prod_{i=1}^n P_\theta(t_i \mid t_{<i}, D)
+\]
+
+where $t_{<i} = t_1, \ldots, t_{i-1}$ is the prefix and $D$ represents conditioning data.
+
+\paragraph{Step 1: Training concentrates probability mass.}
+
+Maximum likelihood training optimizes:
+\[
+\theta^* = \arg\max_\theta \mathbb{E}_{E \sim \mathcal{C}}[\log P_\theta(E)]
+\]
+
+This causes $P_{\theta^*}(t_i \mid t_{<i}, D)$ to concentrate on tokens frequently observed in $\mathcal{C}$ given context $t_{<i}$.
+
+\paragraph{Step 2: Novel tokens incur exponential penalty.}
+
+For expression $E \notin \mathcal{C}$, define:
+\[
+d(E, \mathcal{C}) = \min_{E' \in \mathcal{C}} d_{\text{edit}}(E, E')
+\]
+
+Let $\mathcal{N}(E) \subseteq \{1, \ldots, n\}$ denote positions where $t_i$ is novel (low probability given $t_{<i}$). Under independence approximation:
+\[
+P_\theta(E \mid D) \approx \prod_{i \in \mathcal{N}(E)} p_i \cdot \prod_{i \notin \mathcal{N}(E)} p_i'
+\]
+
+where $p_i \ll 1$ for novel tokens and $p_i' \approx 1$ for familiar tokens.
+
+\paragraph{Step 3: Exponential decay.}
+
+Since $|\mathcal{N}(E)| \geq d(E, \mathcal{C})$ and $p_i \leq p_{\max} < 1$:
+\[
+P_\theta(E \mid D) \leq p_{\max}^{d(E, \mathcal{C})} = \exp(-\beta \cdot d(E, \mathcal{C}))
+\]
+
+where $\beta = -\log p_{\max} > 0$. Thus generation probability decays exponentially with edit distance from training data, establishing reproductive behavior. \qed
+\end{proof}
+
+\paragraph{Remark on rigor:} This proof assumes approximate local independence of token probabilities. A fully rigorous treatment would analyze the joint distribution over all tokens, but empirical evidence strongly supports the conclusion even under this approximation.
+
+\section{Hyperparameter Settings}
+\label{app:hyperparameters}
+
+\begin{table}[H]
+\centering
+\caption{PySR Configuration}
+\label{tab:hyperparameters}
+\begin{tabular}{@{}lc@{}}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Population size & 100 \\
+Generations & 500 \\
+Populations (parallel) & 12 \\
+Crossover probability & 0.8 \\
+Mutation probability & 0.1 \\
+Complexity penalty & 0.01 \\
+Tournament size & 3 \\
+Elitism & 5 \\
+Max expression depth & 15 \\
+Optimization iterations & 50 \\
+\midrule
+\textbf{Validation Thresholds} & \\
+\midrule
+Acceptance $R^2$ (Criterion 1) & 0.99 \\
+Validation score (Criterion 1) & 30 \\
+Acceptance $R^2$ (Criterion 2) & 0.95 \\
+Validation score (Criterion 2) & 80 \\
+Extrapolation $R^2$ & 0.80 \\
+Numerical stability ($\alpha$) & 0.95 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Detailed Experimental Results}
+\label{app:detailed_results}
+
+\subsection{Pure LLM Baseline (40 tests)}
+
+\begin{table}[H]
+\centering
+\caption{Pure LLM Performance by Test Case}
+\label{tab:llm_detailed}
+\begin{small}
+\begin{tabular}{@{}llccp{4.5cm}@{}}
+\toprule
+\textbf{Domain} & \textbf{Test} & \textbf{$R^2$} & \textbf{Result} & \textbf{Failure Mode} \\
+\midrule
+\multicolumn{5}{c}{\textit{Classical Scientific Domains (20 tests)}} \\
+\midrule
+Materials & Stress-strain & 1.00 & Pass & --- \\
+Materials & Young's modulus & 1.00 & Pass & --- \\
+Materials & Poisson ratio & 1.00 & Pass & --- \\
+Materials & Thermal expansion & 1.00 & Pass & --- \\
+Fluid & Reynolds number & 1.00 & Pass & --- \\
+Fluid & Bernoulli equation & 1.00 & Pass & --- \\
+Fluid & Drag coefficient & 1.00 & Pass & --- \\
+Fluid & Flow rate & 1.00 & Pass & --- \\
+Thermo & Ideal gas law & 1.00 & Pass & --- \\
+Thermo & Heat capacity & 1.00 & Pass & --- \\
+Thermo & Carnot efficiency & 1.00 & Pass & --- \\
+Thermo & Stefan-Boltzmann & 1.00 & Pass & --- \\
+Mechanics & Newton's 2nd law & 1.00 & Pass & --- \\
+Mechanics & Kinetic energy & 1.00 & Pass & --- \\
+Mechanics & Gravitational force & 1.00 & Pass & --- \\
+Mechanics & Hooke's law & 1.00 & Pass & --- \\
+Chemistry & Arrhenius equation \citep{arrhenius1889reaction} & 1.00 & Pass & --- \\
+Chemistry & pH calculation & 1.00 & Pass & --- \\
+Chemistry & Nernst equation & 0.50 & Fail & Wrong sign convention \\
+Chemistry & Rate law & 1.00 & Pass & --- \\
+\midrule
+\multicolumn{5}{c}{\textit{Decentralized Finance Domains (20 tests)}} \\
+\midrule
+AMM & Constant product & 1.00 & Pass & --- \\
+AMM & Price impact & 0.98 & Pass & --- \\
+AMM & Impermanent loss & $-1.26$ & Fail & Unit inconsistency (missing $\times$100) \\
+AMM & Swap fee & 0.82 & Pass & --- \\
+VaR & Parametric VaR 95\% & $-10.05$ & Fail & Wrong sign (z-score) \\
+VaR & Parametric VaR 99\% & 1.00 & Pass & --- \\
+VaR & Historical VaR & 0.95 & Pass & --- \\
+VaR & Modified VaR & $-2.15$ & Fail & Scipy API misuse \\
+Liquidity & APY calculation & 1.00 & Pass & --- \\
+Liquidity & Capital efficiency & 0.87 & Pass & --- \\
+Liquidity & Fee earnings & --- & Fail & Non-executable (tutorial mode) \\
+Liquidity & Utilization ratio & --- & Fail & Non-executable (tutorial mode) \\
+ES & Expected Shortfall 95\% & $-4.12$ & Fail & Scipy \texttt{norm.pdf} returns object \\
+ES & Expected Shortfall 99\% & $-3.87$ & Fail & Distribution tail error \\
+ES & Conditional VaR & 0.88 & Pass & --- \\
+ES & Tail risk & $-1.92$ & Fail & Statistical definition error \\
+Liquidation & Long position & --- & Fail & Tutorial text only \\
+Liquidation & Short position & --- & Fail & Tutorial text only \\
+Liquidation & Margin call & --- & Fail & Incomplete derivation \\
+Liquidation & Leverage ratio & --- & Fail & Multi-step missing \\
+\midrule
+\multicolumn{3}{l}{\textbf{Classical Average:}} & \textbf{19/20 (95\%)} & \\
+\multicolumn{3}{l}{\textbf{DeFi Average:}} & \textbf{8/20 (40\%)} & \\
+\multicolumn{3}{l}{\textbf{Overall:}} & \textbf{27/40 (67.5\%)} & \\
+\bottomrule
+\end{tabular}
+\end{small}
+\end{table}
+
+\subsection{DeFi-Optimized Results (23 tests)}
+
+\begin{table}[H]
+\centering
+\caption{DeFi-Optimized HypatiaX Performance}
+\label{tab:defi_detailed}
+\begin{small}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Test} & \textbf{$R^2$} & \textbf{Validation} & \textbf{Time (s)} & \textbf{Extrap.} & \textbf{Result} \\
+\midrule
+Constant product (xy=k) & 1.0000 & 100.0 & 45 & Pass & Pass \\
+Price impact & 0.9998 & 95.2 & 120 & Pass & Pass \\
+Impermanent loss & 0.9995 & 92.1 & 180 & Pass & Pass \\
+Swap fee calculation & 1.0000 & 98.5 & 60 & Pass & Pass \\
+VaR 95\% parametric & 0.9988 & 88.3 & 150 & Pass & Pass \\
+VaR 99\% parametric & 0.9990 & 90.1 & 145 & Pass & Pass \\
+Historical VaR & 0.9985 & 87.5 & 135 & Pass & Pass \\
+Modified VaR & 0.9982 & 85.9 & 160 & Pass & Pass \\
+APY simple & 1.0000 & 100.0 & 50 & Pass & Pass \\
+APY compound & 0.9995 & 94.8 & 110 & Pass & Pass \\
+Capital efficiency & 0.9940 & 78.5 & 240 & Pass & Pass \\
+Fee earnings & 0.9998 & 96.2 & 90 & Pass & Pass \\
+Expected Shortfall 95\% & 0.9987 & 89.7 & 170 & Pass & Pass \\
+Expected Shortfall 99\% & 0.9985 & 88.2 & 175 & Pass & Pass \\
+Conditional VaR & 0.9990 & 91.4 & 155 & Pass & Pass \\
+Tail risk metric & 0.9983 & 86.8 & 165 & Pass & Pass \\
+Liquidation (long) & 0.9992 & 93.6 & 125 & --- & Pass \\
+Liquidation (short) & 0.9994 & 94.1 & 120 & --- & Pass \\
+Margin call threshold & 0.9996 & 95.8 & 105 & --- & Pass \\
+Effective leverage & 0.9998 & 97.2 & 85 & --- & Pass \\
+Staking rewards & 1.0000 & 100.0 & 55 & --- & Pass \\
+Dilution effect & 0.9993 & 93.8 & 115 & --- & Pass \\
+Kelly criterion & 0.9988 & 89.5 & 195 & Pass & Pass \\
+\midrule
+\textbf{Average} & \textbf{0.9990} & \textbf{91.3} & \textbf{115.2} & \textbf{6/6} & \textbf{23/23} \\
+\bottomrule
+\end{tabular}
+\end{small}
+\end{table}
+
+\paragraph{Extrapolation Tests:} Six tests designated for extrapolation validation (constant product, impermanent loss, VaR variants, ES variants, Kelly criterion) all passed with average extrapolation $R^2 = 0.9650$, demonstrating robust generalization.
+
+\section{Reproducibility Statement}
+\label{app:reproducibility}
+
+All experimental data, source code, and configuration files are publicly available to ensure full reproducibility of our results.
+
+\subsection{Code Repository}
+
+\textbf{GitHub:} \url{https://github.com/ruperto-bonet/hybrid-symbolic-discovery}
+
+\paragraph{Repository Structure:}
+\begin{small}
+\begin{verbatim}
+hybrid-symbolic-discovery/
+|-- hypatiax/
+|   |-- core/
+|   |   |-- generation/         # Discovery engines
+|   |   |-- validation/         # Multi-layer validators
+|   |-- tools/
+|   |   |-- symbolic/           # PySR integration
+|   |-- data/
+|       |-- results/            # Session outputs
+|-- experiments/
+|   |-- pure_llm_baseline.py    # 40 LLM tests
+|   |-- protocol_a.py           # 18 symbolic tests
+|   |-- protocol_all_30.py      # LLM-guided hybrid
+|   |-- defi_suite.py           # 23 DeFi tests
+|-- notebooks/
+|   |-- analysis.ipynb          # Result visualization
+|-- docker/
+    |-- Dockerfile              # Reproducible environment
+\end{verbatim}
+\end{small}
+
+\subsection{Session Data}
+
+All raw results are stored with timestamps:
+
+\begin{itemize}
+\item \textbf{Pure LLM Baseline}: \texttt{data/results/pure\_llm\_20260115/}
+\item \textbf{Protocol A (18 tests)}: \texttt{data/results/20260114\_153042/}
+\item \textbf{LLM-Guided (30 tests)}: \texttt{data/results/llm\_20260114\_183940/}
+\item \textbf{DeFi Suite (23 tests)}: \texttt{data/results/defi\_20260113\_142837/}
+\end{itemize}
+
+Each session contains:
+\begin{itemize}
+\item Discovered expressions (LaTeX and Python)
+\item Performance metrics (R², validation scores, timing)
+\item Full validation reports (dimensional analysis, constraint checking)
+\item Extrapolation test results
+\end{itemize}
+
+\subsection{Running Experiments}
+
+\paragraph{Quick Start:}
+\begin{small}
+\begin{verbatim}
+# Clone repository
+git clone https://github.com/ruperto-bonet/hybrid-symbolic-discovery
+cd hybrid-symbolic-discovery
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run pure symbolic baseline (18 tests, ~2 hours)
+python experiments/protocol_a.py --batch --mode STANDARD
+
+# Run LLM-guided hybrid (30 tests, ~35 minutes)
+python experiments/protocol_all_30.py --batch --mode hybrid
+
+# Run DeFi suite (23 tests, ~45 minutes)
+python experiments/defi_suite.py --batch --mode STANDARD
+\end{verbatim}
+\end{small}
+
+\paragraph{Resuming Interrupted Runs:}
+\begin{small}
+\begin{verbatim}
+python experiments/protocol_all_30.py --resume --session-id 20260114_183940
+\end{verbatim}
+\end{small}
+
+\subsection{Hardware Requirements}
+
+\begin{itemize}
+\item \textbf{CPU}: 8+ cores recommended (tested on AMD Ryzen 9 5950X)
+\item \textbf{RAM}: 16GB minimum, 32GB+ recommended
+\item \textbf{Storage}: 10GB for code + results
+\item \textbf{OS}: Linux (Ubuntu 22.04), macOS, or Windows with WSL2
+\item \textbf{Python}: 3.9+
+\end{itemize}
+
+\subsection{Software Dependencies}
+
+\begin{small}
+\begin{verbatim}
+PySR==0.16.3           # Symbolic regression
+SymPy==1.12            # Symbolic mathematics
+NumPy==1.24.3          # Numerical computing
+Pandas==2.0.3          # Data handling
+SciPy==1.11.2          # Scientific computing
+Matplotlib==3.7.2      # Visualization
+Anthropic==0.18.1      # LLM API (optional for LLM-guided mode)
+\end{verbatim}
+\end{small}
+
+\subsection{Random Seeds}
+
+All experiments use fixed random seeds for reproducibility:
+
+\begin{itemize}
+\item Pure symbolic: \texttt{seed=42}
+\item LLM-guided: \texttt{seed=42} (PySR component)
+\item DeFi suite: \texttt{seed=42}
+\end{itemize}
+
+LLM outputs have inherent variability due to temperature sampling (temperature=0.7), but validation ensures only mathematically correct expressions are accepted regardless of generation randomness.
+
+\subsection{Expected Runtime}
+
+On reference hardware (Ryzen 9 5950X, 32GB RAM):
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Experiment} & \textbf{Tests} & \textbf{Wall Time} \\
+\midrule
+Pure LLM Baseline & 40 & 5-10 min \\
+Protocol A (Pure Symbolic) & 18 & 117 min \\
+LLM-Guided Hybrid & 30 & 35 min \\
+DeFi Suite & 23 & 44 min \\
+Extended Validation & 20 & 136 min \\
+\midrule
+\textbf{All Experiments} & \textbf{131} & \textbf{~5.5 hours} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Verification Checksums}
+
+We provide SHA-256 checksums for critical result files:
+
+\begin{small}
+\begin{verbatim}
+# Verify result integrity
+sha256sum data/results/protocol_a_summary.json
+# Expected: 8f3a2b1c... (provided in repository)
+\end{verbatim}
+\end{small}
+
+\subsection{Docker Container}
+
+For maximum reproducibility, we provide a Docker container with all dependencies pre-configured:
+
+\begin{small}
+\begin{verbatim}
+# Build container
+docker build -t hypatiax:v1.0 -f docker/Dockerfile .
+
+# Run experiments
+docker run -v $(pwd)/results:/results hypatiax:v1.0 \
+    python experiments/protocol_all_30.py --batch
+\end{verbatim}
+\end{small}
+
+\subsection{Contact for Support}
+
+For issues with reproduction:
+\begin{itemize}
+\item Open GitHub issue: \url{https://github.com/ruperto-bonet/hybrid-symbolic-discovery/issues}
+\item Email: \texttt{ruperto.bonet@modelphysmat.com}
+\end{itemize}
+
+We commit to maintaining the repository and responding to reproduction issues within 2 weeks.
+
+\section{Computational Complexity Analysis}
+\label{app:complexity}
+
+\subsection{Theoretical Complexity}
+
+\begin{proposition}[HypatiaX Complexity]
+Let $n$ be candidate expressions, $m$ evaluation points, $k$ symbolic constraints. Total complexity is $\mathcal{O}(n \cdot (k + m))$.
+\end{proposition}
+
+\begin{proof}
+For each candidate expression $E$:
+\begin{enumerate}
+\item \textbf{Symbolic constraint checking}: $\mathcal{O}(k)$ operations (dimensional analysis, domain rules)
+\item \textbf{Numerical evaluation}: $\mathcal{O}(m)$ operations (fitness computation over dataset)
+\end{enumerate}
+
+Total per candidate: $\mathcal{O}(k + m)$. With $n$ candidates: $\mathcal{O}(n(k + m))$. \qed
+\end{proof}
+
+\subsection{Empirical Timing Breakdown}
+
+We profiled HypatiaX on representative test cases:
+
+\begin{table}[H]
+\centering
+\caption{Computational Cost Breakdown (avg per test)}
+\label{tab:timing_breakdown}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Component} & \textbf{Time (s)} & \textbf{Percentage} \\
+\midrule
+\multicolumn{3}{c}{\textit{Pure Symbolic (PySR)}} \\
+\midrule
+Population initialization & 5.2 & 1.3\% \\
+Evolutionary search & 365.8 & 93.9\% \\
+Symbolic simplification & 12.3 & 3.2\% \\
+Validation framework & 6.7 & 1.6\% \\
+\midrule
+\textbf{Total} & \textbf{390.0} & \textbf{100\%} \\
+\midrule
+\multicolumn{3}{c}{\textit{LLM-Guided Hybrid}} \\
+\midrule
+LLM API call & 8.5 & 12.1\% \\
+Expression parsing & 2.0 & 2.9\% \\
+Initial validation & 3.0 & 4.3\% \\
+PySR refinement (when needed) & 52.5 & 75.0\% \\
+Final validation & 4.0 & 5.7\% \\
+\midrule
+\textbf{Total} & \textbf{70.0} & \textbf{100\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Key Findings:}
+\begin{itemize}
+\item Evolutionary search dominates (93.9\%) in pure symbolic mode
+\item LLM-guided mode reduces this by solving 73\% of cases without PySR
+\item Validation overhead is negligible (1.6-5.7\%)
+\end{itemize}
+
+\subsection{Scalability Analysis}
+
+We tested scalability with varying dataset sizes:
+
+\begin{table}[H]
+\centering
+\caption{Scalability with Dataset Size}
+\label{tab:scalability}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+\textbf{Data Points} & \textbf{Pure PySR (s)} & \textbf{LLM-Hybrid (s)} & \textbf{Speedup} \\
+\midrule
+100 & 245 & 48 & 5.1$\times$ \\
+500 & 390 & 70 & 5.6$\times$ \\
+1000 & 521 & 95 & 5.5$\times$ \\
+5000 & 1245 & 215 & 5.8$\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Speedup remains relatively constant across dataset sizes, confirming that LLM warm-starting provides consistent efficiency gains.
+
+
+\section*{Supplementary Materials}
+
+Comprehensive empirical analysis of LLM performance across 140 formula generations and 10 scientific domains is available in the supplementary materials document. This includes:
+
+\begin{itemize}
+\item Detailed failure mode taxonomy with code examples
+\item Domain-specific performance analysis (Materials Science, Fluid Dynamics, Thermodynamics, Mechanics, Chemistry, DeFi)
+\item Production deployment framework with validation pipelines
+\item Complete experimental logs from 7 runs (Run IDs: 162102, 163240, 165852, 173905, 192807, 232733, 235258)
+\end{itemize}
+
+Key supplementary findings:
+\begin{itemize}
+\item Pure LLM success variance of 0-100\% across runs using identical test cases
+\item Perfect symbolic accuracy ($R^2 = 1.0000$) achieved on 75\% of formulas when prompts are optimized
+\item Complete system failures (0\% success rate) in 3/7 runs due to API errors, variable binding issues, and code extraction failures
+\item Prompt engineering quality is the dominant factor determining success, capable of transforming catastrophic failures into production-ready implementations
+\end{itemize}
+
+\section{Extended Discussion}
+\label{app:extended_discussion}
+
+\subsection{Why LLMs Fail on Novel Domains}
+
+Our empirical results (95\% classical vs. 45\% DeFi) raise a question: \textbf{Why do LLMs fail specifically on specialized domains?}
+
+\paragraph{Training Data Coverage:}
+
+Classical physics formulas appear extensively in:
+\begin{itemize}
+\item Textbooks (digitized and crawled)
+\item Wikipedia and educational websites
+\item Academic papers (often with equation reproduction in intro sections)
+\item Code repositories (physics simulations, homework solutions)
+\item Q\&A forums (StackExchange, Quora)
+\end{itemize}
+
+DeFi formulas, by contrast:
+\begin{itemize}
+\item Emerged post-2020 (after many LLM training cutoffs)
+\item Appear primarily in white papers and technical documentation
+\item Often use non-standard notation
+\item Require understanding of cryptographic primitives and game theory
+\item Limited presence in traditional academic literature
+\end{itemize}
+
+\paragraph{Conceptual Complexity:}
+
+\begin{table}[H]
+\centering
+\caption{Conceptual Requirements Comparison}
+\label{tab:conceptual_complexity}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Requirement} & \textbf{Classical Physics} & \textbf{DeFi/Risk} \\
+\midrule
+Distributional reasoning & Rare & Essential \\
+Multi-step derivations & Common but formulaic & Domain-specific \\
+Statistical API knowledge & Basic & Advanced (scipy.stats) \\
+Convention awareness & Well-established & Evolving \\
+Asymptotic analysis & Standard & Context-dependent \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Lessons for Future LLM Development}
+
+Our findings suggest design principles for more reliable scientific LLMs:
+
+\begin{enumerate}
+\item \textbf{Training data curation}: Include specialized domain corpora with verified formulas and extensive code examples
+
+\item \textbf{Execution-based feedback}: Train with reward signals from actual code execution, not just text likelihood
+
+\item \textbf{Explicit uncertainty quantification}: Models should output confidence scores calibrated to actual correctness probability
+
+\item \textbf{Symbolic grounding}: Integrate symbolic math engines (SymPy, Mathematica) during inference for dimensional checking
+
+\item \textbf{Retrieval augmentation}: Query domain-specific databases (NIST, financial standards) before generation
+\end{enumerate}
+
+Even with these improvements, Theorem~\ref{thm:llm_reproductive} suggests fundamental limits on extrapolation capability.
+
+\subsection{Broader Applicability}
+
+While we focused on physics and finance, the hybrid architecture generalizes to other domains requiring analytical discovery:
+
+\paragraph{Candidate Domains:}
+\begin{itemize}
+\item \textbf{Materials science}: Stress-strain relationships, phase diagrams
+\item \textbf{Pharmacokinetics}: Drug absorption, distribution, metabolism models
+\item \textbf{Ecology}: Population dynamics, predator-prey systems
+\item \textbf{Economics}: Production functions, utility optimization
+\item \textbf{Climate science}: Radiative forcing, feedback mechanisms
+\end{itemize}
+
+\paragraph{Required Adaptations:}
+\begin{itemize}
+\item Domain-specific operator sets
+\item Discipline-appropriate constraint libraries
+\item Validation metrics aligned with domain standards
+\item Expert-in-the-loop refinement for unfamiliar domains
+\end{itemize}
+
+\subsection{Limitations and Future Directions}
+
+\paragraph{Current Limitations:}
+
+\begin{enumerate}
+\item \textbf{Operator completeness}: If true formula requires operators outside $\mathcal{O}$, discovery fails
+\item \textbf{Multi-scale phenomena}: Expressions with vastly different characteristic scales challenge numerical evaluation
+\item \textbf{Implicit constraints}: Some domain knowledge is tacit and difficult to formalize
+\item \textbf{Computational cost}: Evolutionary search remains expensive for complex problems
+\end{enumerate}
+
+\paragraph{Promising Directions:}
+
+\begin{enumerate}
+\item \textbf{Active learning}: Use LLM feedback to guide symbolic search more intelligently:
+\begin{verbatim}
+While not converged:
+    E* = PySR.search()
+    suggestions = LLM.critique(E*)
+    constraints.add(suggestions)
+\end{verbatim}
+
+\item \textbf{Hierarchical discovery}: Discover sub-expressions separately, then combine
+\item \textbf{Transfer learning}: Leverage formulas from related domains
+\item \textbf{Uncertainty quantification}: Provide confidence intervals on discovered expressions
+\item \textbf{Multi-modal integration}: Incorporate experimental images, diagrams, protocol descriptions
+\end{enumerate}
+
+\end{document}

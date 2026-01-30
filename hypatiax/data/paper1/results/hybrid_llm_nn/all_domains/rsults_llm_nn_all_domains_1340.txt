@@ -1,0 +1,473 @@
+─(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/hybrid_all_domains_llm_nn/hybrid_system_llm_nn_all_domains.py --samples 200 --verbose
+✅ Loaded .env from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/.env
+✅ Loaded ExperimentProtocolAll from: hypatiax/protocols/
+================================================================================
+                        🔬 HYBRID SYSTEM - ALL DOMAINS 🔬                         
+================================================================================
+Strategy: LLM (R²>0.95) → Ensemble (0.80-0.95) → NN (<0.80)
+Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, quantum, chemistry, biology, mathematics, economics
+================================================================================
+
+================================================================================
+                               DOMAIN: MECHANICS                                
+================================================================================
+
+[1/3] Kinetic Energy: KE = (1/2)*m*v²
+  Variables: m, v
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9892
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[2/3] Gravitational Potential Energy: PE = m*g*h
+  Variables: m, g, h
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9710
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[3/3] Hooke's Law: F = k*x
+  Variables: k, x
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9900
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+================================================================================
+                             DOMAIN: THERMODYNAMICS                             
+================================================================================
+
+[1/3] Ideal Gas Law: PV = nRT => P = nRT/V
+  Variables: n, R, T, V
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: -0.1919
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.8099
+  [HYBRID] Decision: NN - NN primary (LLM struggled)
+  ✅ Decision: NN
+  R²: 0.809914, RMSE: 50147.109961
+  📊 FAIR
+
+[2/3] Heat Capacity: Q = m*c*ΔT
+  Variables: m, c, dT
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9813
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[3/3] Carnot Efficiency: η = 1 - Tc/Th
+  Variables: Tc, Th
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9966
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+================================================================================
+                            DOMAIN: ELECTROMAGNETISM                            
+================================================================================
+
+[1/3] Coulomb's Law: F = k*q1*q2/r²
+  Variables: k, q1, q2, r
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: -5562327370054863924417237509481218472677862719934349443072.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.3963
+  [HYBRID] Decision: NN - NN primary (LLM struggled)
+  ✅ Decision: NN
+  R²: 0.396325, RMSE: 0.544126
+  📊 POOR
+
+[2/3] Ohm's Law: V = I*R
+  Variables: I, R
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9860
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[3/3] Lorentz Force: F = q*v*B
+  Variables: q, v, B
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9790
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+================================================================================
+                             DOMAIN: FLUID_DYNAMICS                             
+================================================================================
+
+[1/3] Bernoulli's Equation: Total = P + (1/2)*ρ*v² + ρ*g*h
+  Variables: P, rho, v, g, h
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: -0.2164
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9926
+  [HYBRID] Decision: NN - NN primary (LLM struggled)
+  ✅ Decision: NN
+  R²: 0.992586, RMSE: 4582.503327
+  📊 FAIR
+
+[2/3] Reynolds Number: Re = ρ*v*L/μ
+  Variables: rho, v, L, mu
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.4947
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[3/3] Hagen-Poiseuille: Q = π*r⁴*ΔP/(8*μ*L)
+  Variables: dP, r, mu, L
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.5188
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+================================================================================
+                                 DOMAIN: OPTICS                                 
+================================================================================
+
+[1/3] Thin Lens: 1/f = 1/do + 1/di
+  Variables: do, di
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.6759
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[2/3] Snell's Law: n1*sin(θ1) = n2*sin(θ2)
+  Variables: n1, sin_theta1
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9796
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[3/3] Diffraction: sin(θ) = λ/a
+  Variables: wavelength, a
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.7814
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+================================================================================
+                                DOMAIN: QUANTUM                                 
+================================================================================
+
+[1/3] Photon Energy: E = h*f (visible light, eV units)
+  Variables: h, f
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9946
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[2/3] de Broglie Wavelength: λ = h/(m*v) (normalized units)
+  Variables: h, m, v
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.8321
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[3/3] Compton Shift: Δλ = (h/(me*c))*(1-cos(θ))
+  Variables: h, me, c, cos_theta
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 0.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.0000
+  [HYBRID] Decision: NN - NN primary (LLM struggled)
+  ✅ Decision: NN
+  R²: 0.000000, RMSE: 0.000000
+  📊 POOR
+
+================================================================================
+                               DOMAIN: CHEMISTRY                                
+================================================================================
+
+[1/3] Arrhenius Equation: k = A*exp(-Ea/(R*T))
+  Variables: A, Ea, R, T
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9502
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[2/3] Henderson-Hasselbalch: pH = pKa + log10([A-]/[HA])
+  Variables: pKa, A_minus, HA
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9659
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[3/3] Nernst Equation: E = E0 - (RT/nF)*ln(Qr)
+  Variables: E0, R, T, n, F, Qr
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9926
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+================================================================================
+                                DOMAIN: BIOLOGY                                 
+================================================================================
+
+[1/3] Michaelis-Menten: v = (Vmax*[S])/(Km+[S])
+  Variables: Vmax, S, Km
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9793
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[2/3] Logistic Growth: dN/dt = r*N*(1-N/K)
+  Variables: r, N, K
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9748
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[3/3] Allometric Scaling: Y = a*M^b
+  Variables: a, M, b
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9908
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+================================================================================
+                              DOMAIN: MATHEMATICS                               
+================================================================================
+
+[1/3] Pythagorean Theorem: c = sqrt(a² + b²)
+  Variables: a, b
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9896
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[2/3] Compound Interest: A = P*(1+r/n)^(n*t)
+  Variables: P, r, n, t
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9592
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[3/3] Quadratic Discriminant: Δ = b² - 4ac
+  Variables: a, b, c
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9401
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+================================================================================
+                               DOMAIN: ECONOMICS                                
+================================================================================
+
+[1/3] Price Elasticity: Ed = (ΔQ/Q)/(ΔP/P)
+  Variables: Q, delta_Q, P, delta_P
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: -1.5954
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000001
+  📊 EXCELLENT
+
+[2/3] Cobb-Douglas: Y = A*K^α*L^β
+  Variables: A, K, L, alpha, beta
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.9852
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  📊 EXCELLENT
+
+[3/3] Break-Even Point: BEP = FC/(P-VC)
+  Variables: FC, P, VC
+
+  [HYBRID] Generating LLM formula...
+  [HYBRID] LLM R²: 1.0000
+  [HYBRID] Training NN...
+  [HYBRID] NN R²: 0.0342
+  [HYBRID] Decision: LLM - LLM excellent (R² > 0.95)
+  ✅ Decision: LLM
+  R²: 1.000000, RMSE: 0.000002
+  📊 EXCELLENT
+✅ Results saved: hypatiax/data/results/hybrid_llm_nn_all_domains_20260115_133510.json
+
+============================================================================================================================================
+                                                           DETAILED RESULTS TABLE                                                           
+============================================================================================================================================
+#    Domain             Test Case                           R²         Val.Score    Observations                                      
+--------------------------------------------------------------------------------------------------------------------------------------------
+1    mechanics          Kinetic Energy: KE = (1/2)*m*v²     1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+2    mechanics          Gravitational Potential Energy: PE  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+3    mechanics          Hooke's Law: F = k*x                1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+4    thermodynamics     Ideal Gas Law: PV = nRT => P = nRT  0.809914 ~ FAIR         NN significantly better                           
+5    thermodynamics     Heat Capacity: Q = m*c*ΔT           1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+6    thermodynamics     Carnot Efficiency: η = 1 - Tc/Th    1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+7    electromagnetism   Coulomb's Law: F = k*q1*q2/r²       0.396325 ✗ POOR         NN significantly better                           
+8    electromagnetism   Ohm's Law: V = I*R                  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+9    electromagnetism   Lorentz Force: F = q*v*B            1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+10   fluid_dynamics     Bernoulli's Equation: Total = P +   0.992586 ✓ FAIR         NN significantly better                           
+11   fluid_dynamics     Reynolds Number: Re = ρ*v*L/μ       1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+12   fluid_dynamics     Hagen-Poiseuille: Q = π*r⁴*ΔP/(8*μ  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+13   optics             Thin Lens: 1/f = 1/do + 1/di        1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+14   optics             Snell's Law: n1*sin(θ1) = n2*sin(θ  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+15   optics             Diffraction: sin(θ) = λ/a           1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+16   quantum            Photon Energy: E = h*f (visible li  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+17   quantum            de Broglie Wavelength: λ = h/(m*v)  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+18   quantum            Compton Shift: Δλ = (h/(me*c))*(1-  0.000000 ✗ POOR         Normal                                            
+19   chemistry          Arrhenius Equation: k = A*exp(-Ea/  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+20   chemistry          Henderson-Hasselbalch: pH = pKa +   1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+21   chemistry          Nernst Equation: E = E0 - (RT/nF)*  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+22   biology            Michaelis-Menten: v = (Vmax*[S])/(  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+23   biology            Logistic Growth: dN/dt = r*N*(1-N/  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+24   biology            Allometric Scaling: Y = a*M^b       1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+25   mathematics        Pythagorean Theorem: c = sqrt(a² +  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+26   mathematics        Compound Interest: A = P*(1+r/n)^(  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+27   mathematics        Quadratic Discriminant: Δ = b² - 4  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+28   economics          Price Elasticity: Ed = (ΔQ/Q)/(ΔP/  1.000000 ✓ EXCELLENT    Perfect symbolic fit, NN worse than baseline      
+29   economics          Cobb-Douglas: Y = A*K^α*L^β         1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+30   economics          Break-Even Point: BEP = FC/(P-VC)   1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+============================================================================================================================================
+
+================================================================================
+                               SUMMARY STATISTICS                               
+================================================================================
+
+📊 Total Test Cases: 30
+Mean R²: 0.939961
+Median R²: 1.000000
+Std Dev R²: 0.207563
+Min R²: 0.000000
+Max R²: 1.000000
+
+🎯 Decision Breakdown:
+  LLM: 26/30 (86.7%) - Mean R² = 1.0000
+  NN: 4/30 (13.3%) - Mean R² = 0.5497
+
+📈 Validation Score Breakdown:
+  EXCELLENT: 26/30 (86.7%)
+  FAIR: 2/30 (6.7%)
+  POOR: 2/30 (6.7%)
+
+================================================================================
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$                           

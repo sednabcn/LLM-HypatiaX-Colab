@@ -1,0 +1,1711 @@
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/hybrid_defi_llm_guided/llm_guided_symbolic_discovery_defi.py --batch --resume  ✅ Using integrated SymbolicEngineWithLLM v20
+✅ Loaded DeFi Protocol v3.0
+
+📄 Loading DeFi Protocol v3.0...
+
+================================================================================
+                            DEFI PROTOCOL STATISTICS                            
+================================================================================
+Total tests: 20
+Extrapolation tests: 6
+Domains: 6
+Difficulty: Easy: 7 | Medium: 8 | Hard: 5
+================================================================================
+
+📥 Converting DeFi Protocol to test cases...
+   Domains: amm, risk_var, liquidity, expected_shortfall, liquidation, staking
+✅ Converted 23 test cases from protocol
+
+🚀 Extrapolation tests (6):
+   - amm_impermanent_loss
+   - risk_var_var_95
+   - liquidity_kelly_criterion
+   - expected_shortfall_es_95
+   - liquidation_liquidation_long
+   - staking_compound_staking
+
+📂 Checkpoint: 8 completed, 0 failed
+
+================================================================================
+LLM-GUIDED DISCOVERY - DEFI SUITE v1.0
+================================================================================
+Tests: 23
+Mode: hybrid
+Iterations: 50
+Running: 15/23 tests
+
+================================================================================
+TEST 1/15: liquidity_kelly_criterion
+================================================================================
+
+================================================================================
+Running: Kelly Criterion | Domain: liquidity
+================================================================================
+Difficulty: hard
+🚀 EXTRAPOLATION TEST
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: liquidity
+Variables: expected_fee_apy, il_risk
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:17:40,546 - INFO - ======================================================================
+2026-01-13 19:17:40,546 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:17:40,546 - INFO - ======================================================================
+2026-01-13 19:17:40,546 - INFO - Domain: liquidity
+2026-01-13 19:17:40,547 - INFO - Discovery mode: calibrated
+2026-01-13 19:17:40,547 - INFO - Primary LLM: anthropic
+2026-01-13 19:17:40,547 - INFO - Auto-config: True
+2026-01-13 19:17:40,547 - INFO - Max retries: 3
+2026-01-13 19:17:40,547 - INFO - PhysicsAware fallback: False
+2026-01-13 19:17:40,548 - INFO - Complexity threshold: 20
+2026-01-13 19:17:40,548 - INFO - ======================================================================
+2026-01-13 19:17:40,548 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:18:04,496 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Kelly Criterion
+Domain: LIQUIDITY
+Samples: 1000
+Variables: ['expected_fee_apy', 'il_risk']
+Equation hint: Kelly Criterion
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:18:04,497 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:18:14,905 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 1.0 / (1.0 + il_risk - 0.3 * expected_fee_apy)
+   LLM R²: -1.1472
+   LLM time: 10.48s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: expected_fee_apy, il_risk
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: (((((il_risk * il_risk) / expected_fee_apy) + -0.2457641) * (il_risk / expected_fee_apy)) * (expected_fee_apy - il_risk)) + 1.0067276
+   R²: 0.9338
+   PySR time: 205.01s
+   PySR R²: 0.9338
+   ✅ PySR refinement improved result
+2026-01-13 19:21:39,998 - INFO -    Result: (((((il_risk * il_risk) / expected_fee_apy) + -0.2457641) * (il_risk / expected_fee_apy)) * (expected_fee_apy - il_risk)) + 1.0067276
+2026-01-13 19:21:39,998 - INFO -    R2 = 0.9338
+2026-01-13 19:21:39,999 - WARNING -    [WARNING] Possible overfit
+2026-01-13 19:21:39,999 - WARNING -       High complexity (133) but R2=0.9338
+2026-01-13 19:21:39,999 - INFO -    [BEST] New best!
+2026-01-13 19:21:39,999 - INFO - 
+[SYMBOLIC] Attempt 2/3 (seed=43)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:21:50,587 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 1.0 - 0.3 * il_risk + 0.2 * expected_fee_apy
+   LLM R²: 0.1581
+   LLM time: 10.59s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: expected_fee_apy, il_risk
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: 0.9728667 - (((il_risk * (il_risk / expected_fee_apy)) - 0.41679487) * (il_risk * (il_risk / expected_fee_apy)))
+   R²: 0.9062
+   PySR time: 157.25s
+   PySR R²: 0.9062
+   ✅ PySR refinement improved result
+2026-01-13 19:24:27,845 - INFO -    Result: 0.9728667 - (((il_risk * (il_risk / expected_fee_apy)) - 0.41679487) * (il_risk * (il_risk / expected_fee_apy)))
+2026-01-13 19:24:27,846 - INFO -    R2 = 0.9062
+2026-01-13 19:24:27,846 - WARNING -    [WARNING] Possible overfit
+2026-01-13 19:24:27,846 - WARNING -       High complexity (112) but R2=0.9062
+2026-01-13 19:24:27,846 - INFO - 
+[SYMBOLIC] Attempt 3/3 (seed=44)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:24:38,721 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 1.0 / (1.0 + il_risk - 0.3 * expected_fee_apy)
+   LLM R²: -1.1472
+   LLM time: 10.88s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: expected_fee_apy, il_risk
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: ((((((il_risk * (0.13012144 / expected_fee_apy)) - 0.7993304) * (il_risk * ((il_risk / expected_fee_apy) / expected_fee_apy))) - -1.516047) * ((il_risk * (il_risk / expected_fee_apy)) - il_risk)) * il_risk) - -1.0065796
+   R²: 0.9549
+   PySR time: 156.41s
+   PySR R²: 0.9549
+   ✅ PySR refinement improved result
+2026-01-13 19:27:15,148 - INFO -    Result: ((((((il_risk * (0.13012144 / expected_fee_apy)) - 0.7993304) * (il_risk * ((il_risk / expected_fee_apy) / expected_fee_apy))) - -1.516047) * ((il_risk * (il_risk / expected_fee_apy)) - il_risk)) * il_risk) - -1.0065796
+2026-01-13 19:27:15,148 - INFO -    R2 = 0.9549
+2026-01-13 19:27:15,149 - WARNING -    [WARNING] Possible overfit
+2026-01-13 19:27:15,149 - WARNING -       High complexity (219) but R2=0.9549
+2026-01-13 19:27:15,149 - INFO -    [BEST] New best!
+2026-01-13 19:27:15,149 - INFO - 
+[SUCCESS] SymbolicEngine succeeded (R2=0.9549)
+
+[OK] Discovery complete
+   Expression: ((((((il_risk * (0.13012144 / expected_fee_apy)) - 0.7993304) * (il_risk * ((il_risk / expected_fee_apy) / expected_fee_apy))) - -1.516047) * ((il_risk * (il_risk / expected_fee_apy)) - il_risk)) * il_risk) - -1.0065796
+   R2 Score: 0.9549
+   Engine: symbolic
+   Attempt: 3/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: ((((((il_risk * (0.13012144 / expected_fee_apy)) - 0.7993304) * (il_risk * ((il_risk / expected_fee_apy) / expected_fee_apy))) - -1.516047) * ((il_risk * (il_risk / expected_fee_apy)) - il_risk)) * il_risk) - -1.0065796
+   R² Score: 0.9549
+   Validation: 99.4/100
+   Total time: 576.24s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: liquidity_kelly_criterion.json
+
+================================================================================
+TEST 2/15: liquidity_lp_fee_share
+================================================================================
+
+================================================================================
+Running: Lp Fee Share | Domain: liquidity
+================================================================================
+Difficulty: easy
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: liquidity
+Variables: liquidity_provided, pool_liquidity, total_fees
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:27:16,592 - INFO - ======================================================================
+2026-01-13 19:27:16,592 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:27:16,592 - INFO - ======================================================================
+2026-01-13 19:27:16,592 - INFO - Domain: liquidity
+2026-01-13 19:27:16,593 - INFO - Discovery mode: calibrated
+2026-01-13 19:27:16,593 - INFO - Primary LLM: anthropic
+2026-01-13 19:27:16,593 - INFO - Auto-config: True
+2026-01-13 19:27:16,593 - INFO - Max retries: 3
+2026-01-13 19:27:16,593 - INFO - PhysicsAware fallback: False
+2026-01-13 19:27:16,593 - INFO - Complexity threshold: 20
+2026-01-13 19:27:16,594 - INFO - ======================================================================
+2026-01-13 19:27:16,594 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:27:17,490 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Lp Fee Share
+Domain: LIQUIDITY
+Samples: 1000
+Variables: ['liquidity_provided', 'pool_liquidity', 'total_fees']
+Equation hint: Lp Fee Share
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:27:17,491 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:27:24,050 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: total_fees * liquidity_provided / pool_liquidity
+   LLM R²: 1.0000
+   LLM time: 6.56s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-13 19:27:24,062 - INFO -    Result: total_fees * liquidity_provided / pool_liquidity
+2026-01-13 19:27:24,062 - INFO -    R2 = 1.0000
+2026-01-13 19:27:24,063 - INFO -    [BEST] New best!
+2026-01-13 19:27:24,063 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: total_fees * liquidity_provided / pool_liquidity
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: total_fees * liquidity_provided / pool_liquidity
+   R² Score: 1.0000
+   Validation: 99.1/100
+   Total time: 7.55s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: liquidity_lp_fee_share.json
+
+================================================================================
+TEST 3/15: liquidity_capital_efficiency
+================================================================================
+
+================================================================================
+Running: Capital Efficiency | Domain: liquidity
+================================================================================
+Difficulty: medium
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: liquidity
+Variables: price_lower, price_upper, price_current
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:27:24,154 - INFO - ======================================================================
+2026-01-13 19:27:24,155 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:27:24,155 - INFO - ======================================================================
+2026-01-13 19:27:24,155 - INFO - Domain: liquidity
+2026-01-13 19:27:24,155 - INFO - Discovery mode: calibrated
+2026-01-13 19:27:24,155 - INFO - Primary LLM: anthropic
+2026-01-13 19:27:24,156 - INFO - Auto-config: True
+2026-01-13 19:27:24,156 - INFO - Max retries: 3
+2026-01-13 19:27:24,156 - INFO - PhysicsAware fallback: False
+2026-01-13 19:27:24,156 - INFO - Complexity threshold: 20
+2026-01-13 19:27:24,156 - INFO - ======================================================================
+2026-01-13 19:27:24,157 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:27:25,085 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Capital Efficiency
+Domain: LIQUIDITY
+Samples: 1000
+Variables: ['price_lower', 'price_upper', 'price_current']
+Equation hint: Capital Efficiency
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:27:25,086 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+ 2026-01-13 19:27:34,327 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 5.75 + 0.1 * (price_current - price_lower) * (price_upper - price_current) / (price_upper - price_lower)**2
+   LLM R²: -0.0253
+   LLM time: 9.24s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: price_lower, price_upper, price_current
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: (price_current * 0.0012499997) - -3.1250005
+   R²: 1.0000
+   PySR time: 161.84s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-13 19:30:16,181 - INFO -    Result: (price_current * 0.0012499997) - -3.1250005
+2026-01-13 19:30:16,182 - INFO -    R2 = 1.0000
+2026-01-13 19:30:16,182 - INFO -    [BEST] New best!
+2026-01-13 19:30:16,182 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (price_current * 0.0012499997) - -3.1250005
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: (price_current * 0.0012499997) - -3.1250005
+   R² Score: 1.0000
+   Validation: 99.4/100
+   Total time: 172.15s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: liquidity_capital_efficiency.json
+
+================================================================================
+TEST 4/15: liquidity_apy_from_apr
+================================================================================
+
+================================================================================
+Running: Apy From Apr | Domain: liquidity
+================================================================================
+Difficulty: medium
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: liquidity
+Variables: apr
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:30:16,322 - INFO - ======================================================================
+2026-01-13 19:30:16,323 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:30:16,323 - INFO - ======================================================================
+2026-01-13 19:30:16,323 - INFO - Domain: liquidity
+2026-01-13 19:30:16,323 - INFO - Discovery mode: calibrated
+2026-01-13 19:30:16,324 - INFO - Primary LLM: anthropic
+2026-01-13 19:30:16,324 - INFO - Auto-config: True
+2026-01-13 19:30:16,324 - INFO - Max retries: 3
+2026-01-13 19:30:16,324 - INFO - PhysicsAware fallback: False
+2026-01-13 19:30:16,324 - INFO - Complexity threshold: 20
+2026-01-13 19:30:16,325 - INFO - ======================================================================
+2026-01-13 19:30:16,325 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:30:17,292 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Apy From Apr
+Domain: LIQUIDITY
+Samples: 1000
+Variables: ['apr']
+Equation hint: Apy From Apr
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:30:17,293 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:30:24,647 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: apr + apr**2/2 + apr**3/6
+   LLM R²: 1.0000
+   LLM time: 7.36s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-13 19:30:24,659 - INFO -    Result: apr + apr**2/2 + apr**3/6
+2026-01-13 19:30:24,660 - INFO -    R2 = 1.0000
+2026-01-13 19:30:24,660 - INFO -    [BEST] New best!
+2026-01-13 19:30:24,660 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: apr + apr**2/2 + apr**3/6
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: apr + apr**2/2 + apr**3/6
+   R² Score: 1.0000
+   Validation: 91.3/100
+   Total time: 8.49s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: liquidity_apy_from_apr.json
+
+================================================================================
+TEST 5/15: expected_shortfall_es_95
+================================================================================
+
+================================================================================
+Running: Es 95 | Domain: expected_shortfall
+================================================================================
+Difficulty: medium
+🚀 EXTRAPOLATION TEST
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: expected_shortfall
+Variables: portfolio_value, daily_volatility
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:30:24,829 - INFO - ======================================================================
+2026-01-13 19:30:24,830 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:30:24,830 - INFO - ======================================================================
+2026-01-13 19:30:24,830 - INFO - Domain: expected_shortfall
+2026-01-13 19:30:24,830 - INFO - Discovery mode: calibrated
+2026-01-13 19:30:24,831 - INFO - Primary LLM: anthropic
+2026-01-13 19:30:24,831 - INFO - Auto-config: True
+2026-01-13 19:30:24,831 - INFO - Max retries: 3
+2026-01-13 19:30:24,831 - INFO - PhysicsAware fallback: False
+2026-01-13 19:30:24,832 - INFO - Complexity threshold: 20
+2026-01-13 19:30:24,832 - INFO - ======================================================================
+2026-01-13 19:30:24,832 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:30:26,383 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Es 95
+Domain: EXPECTED_SHORTFALL
+Samples: 1000
+Variables: ['portfolio_value', 'daily_volatility']
+Equation hint: Es 95
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:30:26,384 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:30:35,325 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: portfolio_value * (2.062 * daily_volatility + 0.013 * daily_volatility**2)
+   LLM R²: 1.0000
+   LLM time: 8.94s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-13 19:30:35,338 - INFO -    Result: portfolio_value * (2.062 * daily_volatility + 0.013 * daily_volatility**2)
+2026-01-13 19:30:35,338 - INFO -    R2 = 1.0000
+2026-01-13 19:30:35,338 - INFO -    [BEST] New best!
+2026-01-13 19:30:35,339 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: portfolio_value * (2.062 * daily_volatility + 0.013 * daily_volatility**2)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: portfolio_value * (2.062 * daily_volatility + 0.013 * daily_volatility**2)
+   R² Score: 1.0000
+   Validation: 99.4/100
+   Total time: 10.71s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: expected_shortfall_es_95.json
+
+================================================================================
+TEST 6/15: expected_shortfall_es_99
+================================================================================
+
+================================================================================
+Running: Es 99 | Domain: expected_shortfall
+================================================================================
+Difficulty: medium
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: expected_shortfall
+Variables: portfolio_value, daily_volatility
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:30:35,553 - INFO - ======================================================================
+2026-01-13 19:30:35,554 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:30:35,554 - INFO - ======================================================================
+2026-01-13 19:30:35,554 - INFO - Domain: expected_shortfall
+2026-01-13 19:30:35,554 - INFO - Discovery mode: calibrated
+2026-01-13 19:30:35,554 - INFO - Primary LLM: anthropic
+2026-01-13 19:30:35,554 - INFO - Auto-config: True
+2026-01-13 19:30:35,555 - INFO - Max retries: 3
+2026-01-13 19:30:35,555 - INFO - PhysicsAware fallback: False
+2026-01-13 19:30:35,555 - INFO - Complexity threshold: 20
+2026-01-13 19:30:35,555 - INFO - ======================================================================
+2026-01-13 19:30:35,555 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:30:36,750 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Es 99
+Domain: EXPECTED_SHORTFALL
+Samples: 1000
+Variables: ['portfolio_value', 'daily_volatility']
+Equation hint: Es 99
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:30:36,751 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:30:44,872 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 2.326 * portfolio_value * daily_volatility
+   LLM R²: 0.9584
+   LLM time: 8.12s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-13 19:30:44,883 - INFO -    Result: 2.326 * portfolio_value * daily_volatility
+2026-01-13 19:30:44,883 - INFO -    R2 = 0.9584
+2026-01-13 19:30:44,884 - WARNING -    [WARNING] Possible overfit
+2026-01-13 19:30:44,884 - WARNING -       High complexity (42) but R2=0.9584
+2026-01-13 19:30:44,884 - INFO -    [BEST] New best!
+2026-01-13 19:30:44,884 - INFO - 
+[SYMBOLIC] Attempt 2/3 (seed=43)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:30:53,309 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 2.33 * portfolio_value * daily_volatility
+   LLM R²: 0.9594
+   LLM time: 8.43s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-13 19:30:53,320 - INFO -    Result: 2.33 * portfolio_value * daily_volatility
+2026-01-13 19:30:53,321 - INFO -    R2 = 0.9594
+2026-01-13 19:30:53,321 - WARNING -    [WARNING] Possible overfit
+2026-01-13 19:30:53,321 - WARNING -       High complexity (41) but R2=0.9594
+2026-01-13 19:30:53,322 - INFO -    [BEST] New best!
+2026-01-13 19:30:53,322 - INFO - 
+[SYMBOLIC] Attempt 3/3 (seed=44)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:31:01,282 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 2.326 * portfolio_value * daily_volatility
+   LLM R²: 0.9584
+   LLM time: 7.96s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-13 19:31:01,294 - INFO -    Result: 2.326 * portfolio_value * daily_volatility
+2026-01-13 19:31:01,294 - INFO -    R2 = 0.9584
+2026-01-13 19:31:01,295 - WARNING -    [WARNING] Possible overfit
+2026-01-13 19:31:01,295 - WARNING -       High complexity (42) but R2=0.9584
+2026-01-13 19:31:01,295 - INFO - 
+[SUCCESS] SymbolicEngine succeeded (R2=0.9594)
+
+[OK] Discovery complete
+   Expression: 2.33 * portfolio_value * daily_volatility
+   R2 Score: 0.9594
+   Engine: symbolic
+   Attempt: 2/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: 2.33 * portfolio_value * daily_volatility
+   R² Score: 0.9594
+   Validation: 100.0/100
+   Total time: 25.84s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: expected_shortfall_es_99.json
+
+================================================================================
+TEST 7/15: expected_shortfall_es_from_var
+================================================================================
+
+================================================================================
+Running: Es From Var | Domain: expected_shortfall
+================================================================================
+Difficulty: easy
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: expected_shortfall
+Variables: var_95
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:31:01,406 - INFO - ======================================================================
+2026-01-13 19:31:01,406 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:31:01,407 - INFO - ======================================================================
+2026-01-13 19:31:01,407 - INFO - Domain: expected_shortfall
+2026-01-13 19:31:01,407 - INFO - Discovery mode: calibrated
+2026-01-13 19:31:01,407 - INFO - Primary LLM: anthropic
+2026-01-13 19:31:01,408 - INFO - Auto-config: True
+2026-01-13 19:31:01,408 - INFO - Max retries: 3
+2026-01-13 19:31:01,408 - INFO - PhysicsAware fallback: False
+2026-01-13 19:31:01,408 - INFO - Complexity threshold: 20
+2026-01-13 19:31:01,408 - INFO - ======================================================================
+2026-01-13 19:31:01,409 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:31:03,044 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Es From Var
+Domain: EXPECTED_SHORTFALL
+Samples: 1000
+Variables: ['var_95']
+Equation hint: Es From Var
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:31:03,045 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:31:11,231 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 1.2 * var_95 + 500
+   LLM R²: 0.9935
+   LLM time: 8.19s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-13 19:31:11,243 - INFO -    Result: 1.2 * var_95 + 500
+2026-01-13 19:31:11,244 - INFO -    R2 = 0.9935
+2026-01-13 19:31:11,244 - INFO -    [BEST] New best!
+2026-01-13 19:31:11,244 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: 1.2 * var_95 + 500
+   R2 Score: 0.9935
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: 1.2 * var_95 + 500
+   R² Score: 0.9935
+   Validation: 99.4/100
+   Total time: 9.97s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: expected_shortfall_es_from_var.json
+
+================================================================================
+TEST 8/15: expected_shortfall_portfolio_es
+================================================================================
+
+================================================================================
+Running: Portfolio Es | Domain: expected_shortfall
+================================================================================
+Difficulty: hard
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: expected_shortfall
+Variables: position1_es, position2_es, correlation
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:31:11,384 - INFO - ======================================================================
+2026-01-13 19:31:11,385 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:31:11,385 - INFO - ======================================================================
+2026-01-13 19:31:11,385 - INFO - Domain: expected_shortfall
+2026-01-13 19:31:11,385 - INFO - Discovery mode: calibrated
+2026-01-13 19:31:11,385 - INFO - Primary LLM: anthropic
+2026-01-13 19:31:11,386 - INFO - Auto-config: True
+2026-01-13 19:31:11,386 - INFO - Max retries: 3
+2026-01-13 19:31:11,386 - INFO - PhysicsAware fallback: False
+2026-01-13 19:31:11,386 - INFO - Complexity threshold: 20
+2026-01-13 19:31:11,386 - INFO - ======================================================================
+2026-01-13 19:31:11,386 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:31:12,301 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Portfolio Es
+Domain: EXPECTED_SHORTFALL
+Samples: 1000
+Variables: ['position1_es', 'position2_es', 'correlation']
+Equation hint: Portfolio Es
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:31:12,302 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:31:20,207 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: position1_es * position2_es * correlation + position1_es**2 + position2_es**2
+   LLM R²: -16933089184.7795
+   LLM time: 7.91s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: position1_es, position2_es, correlation
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: position1_es * ((correlation * 0.70710677) + 1.5)
+   R²: 1.0000
+   PySR time: 176.76s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-13 19:34:16,983 - INFO -    Result: position1_es * ((correlation * 0.70710677) + 1.5)
+2026-01-13 19:34:16,983 - INFO -    R2 = 1.0000
+2026-01-13 19:34:16,983 - INFO -    [BEST] New best!
+2026-01-13 19:34:16,983 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: position1_es * ((correlation * 0.70710677) + 1.5)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: position1_es * ((correlation * 0.70710677) + 1.5)
+   R² Score: 1.0000
+   Validation: 99.4/100
+   Total time: 185.76s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: expected_shortfall_portfolio_es.json
+
+================================================================================
+TEST 9/15: liquidation_liquidation_long
+================================================================================
+
+================================================================================
+Running: Liquidation Long | Domain: liquidation
+================================================================================
+Difficulty: hard
+🚀 EXTRAPOLATION TEST
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: liquidation
+Variables: entry_price, leverage
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:34:17,153 - INFO - ======================================================================
+2026-01-13 19:34:17,153 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:34:17,154 - INFO - ======================================================================
+2026-01-13 19:34:17,154 - INFO - Domain: liquidation
+2026-01-13 19:34:17,154 - INFO - Discovery mode: calibrated
+2026-01-13 19:34:17,154 - INFO - Primary LLM: anthropic
+2026-01-13 19:34:17,154 - INFO - Auto-config: True
+2026-01-13 19:34:17,155 - INFO - Max retries: 3
+2026-01-13 19:34:17,155 - INFO - PhysicsAware fallback: False
+2026-01-13 19:34:17,155 - INFO - Complexity threshold: 20
+2026-01-13 19:34:17,155 - INFO - ======================================================================
+2026-01-13 19:34:17,155 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:34:18,072 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Liquidation Long
+Domain: LIQUIDATION
+Samples: 1000
+Variables: ['entry_price', 'leverage']
+Equation hint: Liquidation Long
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:34:18,073 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:34:25,862 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: entry_price * leverage
+   LLM R²: -1112.0078
+   LLM time: 7.79s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: entry_price, leverage
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: entry_price + (entry_price / (leverage / -1.25))
+   R²: 1.0000
+   PySR time: 194.18s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-13 19:37:40,063 - INFO -    Result: entry_price + (entry_price / (leverage / -1.25))
+2026-01-13 19:37:40,063 - INFO -    R2 = 1.0000
+2026-01-13 19:37:40,063 - INFO -    [BEST] New best!
+2026-01-13 19:37:40,063 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: entry_price + (entry_price / (leverage / -1.25))
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 98.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: entry_price + (entry_price / (leverage / -1.25))
+   R² Score: 1.0000
+   Validation: 98.5/100
+   Total time: 203.11s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: liquidation_liquidation_long.json
+
+================================================================================
+TEST 10/15: liquidation_liquidation_short
+================================================================================
+
+================================================================================
+Running: Liquidation Short | Domain: liquidation
+================================================================================
+Difficulty: hard
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: liquidation
+Variables: entry_price, leverage
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:37:40,273 - INFO - ======================================================================
+2026-01-13 19:37:40,273 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:37:40,273 - INFO - ======================================================================
+2026-01-13 19:37:40,274 - INFO - Domain: liquidation
+2026-01-13 19:37:40,274 - INFO - Discovery mode: calibrated
+2026-01-13 19:37:40,274 - INFO - Primary LLM: anthropic
+2026-01-13 19:37:40,274 - INFO - Auto-config: True
+2026-01-13 19:37:40,274 - INFO - Max retries: 3
+2026-01-13 19:37:40,274 - INFO - PhysicsAware fallback: False
+2026-01-13 19:37:40,275 - INFO - Complexity threshold: 20
+2026-01-13 19:37:40,275 - INFO - ======================================================================
+2026-01-13 19:37:40,275 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:37:41,135 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Liquidation Short
+Domain: LIQUIDATION
+Samples: 1000
+Variables: ['entry_price', 'leverage']
+Equation hint: Liquidation Short
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:37:41,136 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:37:48,838 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: entry_price * (1 + 1/leverage)
+   LLM R²: 0.6193
+   LLM time: 7.70s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: entry_price, leverage
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+    ✅ Found: (entry_price + (((34567.945 - entry_price) / leverage) * 3.2661138)) + 11290.286
+   R²: 1.0000
+   PySR time: 163.68s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-13 19:40:32,534 - INFO -    Result: (entry_price + (((34567.945 - entry_price) / leverage) * 3.2661138)) + 11290.286
+2026-01-13 19:40:32,535 - INFO -    R2 = 1.0000
+2026-01-13 19:40:32,535 - INFO -    [BEST] New best!
+2026-01-13 19:40:32,535 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (entry_price + (((34567.945 - entry_price) / leverage) * 3.2661138)) + 11290.286
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 98.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: (entry_price + (((34567.945 - entry_price) / leverage) * 3.2661138)) + 11290.286
+   R² Score: 1.0000
+   Validation: 98.5/100
+   Total time: 172.51s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: liquidation_liquidation_short.json
+
+================================================================================
+TEST 11/15: liquidation_max_leverage
+================================================================================
+
+================================================================================
+Running: Max Leverage | Domain: liquidation
+================================================================================
+Difficulty: medium
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: liquidation
+Variables: entry_price, acceptable_loss_pct
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:40:32,797 - INFO - ======================================================================
+2026-01-13 19:40:32,797 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:40:32,797 - INFO - ======================================================================
+2026-01-13 19:40:32,797 - INFO - Domain: liquidation
+2026-01-13 19:40:32,798 - INFO - Discovery mode: calibrated
+2026-01-13 19:40:32,798 - INFO - Primary LLM: anthropic
+2026-01-13 19:40:32,798 - INFO - Auto-config: True
+2026-01-13 19:40:32,798 - INFO - Max retries: 3
+2026-01-13 19:40:32,799 - INFO - PhysicsAware fallback: False
+2026-01-13 19:40:32,799 - INFO - Complexity threshold: 20
+2026-01-13 19:40:32,799 - INFO - ======================================================================
+2026-01-13 19:40:32,799 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:40:33,712 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Max Leverage
+Domain: LIQUIDATION
+Samples: 1000
+Variables: ['entry_price', 'acceptable_loss_pct']
+Equation hint: Max Leverage
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:40:33,713 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:40:41,433 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 1 / acceptable_loss_pct
+   LLM R²: 0.7264
+   LLM time: 7.72s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: entry_price, acceptable_loss_pct
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: 1.25 / acceptable_loss_pct
+   R²: 1.0000
+   PySR time: 151.74s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-13 19:43:13,181 - INFO -    Result: 1.25 / acceptable_loss_pct
+2026-01-13 19:43:13,182 - INFO -    R2 = 1.0000
+2026-01-13 19:43:13,182 - INFO -    [BEST] New best!
+2026-01-13 19:43:13,182 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: 1.25 / acceptable_loss_pct
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: 1.25 / acceptable_loss_pct
+   R² Score: 1.0000
+   Validation: 99.1/100
+   Total time: 160.47s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: liquidation_max_leverage.json
+
+================================================================================
+TEST 12/15: liquidation_required_collateral
+================================================================================
+
+================================================================================
+Running: Required Collateral | Domain: liquidation
+================================================================================
+Difficulty: easy
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: liquidation
+Variables: position_size, leverage
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:43:13,280 - INFO - ======================================================================
+2026-01-13 19:43:13,280 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:43:13,280 - INFO - ======================================================================
+2026-01-13 19:43:13,280 - INFO - Domain: liquidation
+2026-01-13 19:43:13,281 - INFO - Discovery mode: calibrated
+2026-01-13 19:43:13,281 - INFO - Primary LLM: anthropic
+2026-01-13 19:43:13,281 - INFO - Auto-config: True
+2026-01-13 19:43:13,281 - INFO - Max retries: 3
+2026-01-13 19:43:13,282 - INFO - PhysicsAware fallback: False
+2026-01-13 19:43:13,282 - INFO - Complexity threshold: 20
+2026-01-13 19:43:13,282 - INFO - ======================================================================
+2026-01-13 19:43:13,282 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:43:14,209 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Required Collateral
+Domain: LIQUIDATION
+Samples: 1000
+Variables: ['position_size', 'leverage']
+Equation hint: Required Collateral
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:43:14,210 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:43:20,820 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: position_size / leverage
+   LLM R²: 1.0000
+   LLM time: 6.61s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-13 19:43:20,833 - INFO -    Result: position_size / leverage
+2026-01-13 19:43:20,833 - INFO -    R2 = 1.0000
+2026-01-13 19:43:20,833 - INFO -    [BEST] New best!
+2026-01-13 19:43:20,834 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: position_size / leverage
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: position_size / leverage
+   R² Score: 1.0000
+   Validation: 99.1/100
+   Total time: 7.62s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: liquidation_required_collateral.json
+
+================================================================================
+TEST 13/15: staking_staking_rewards
+================================================================================
+
+================================================================================
+Running: Staking Rewards | Domain: staking
+================================================================================
+Difficulty: easy
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: staking
+Variables: stake_amount, apr, time_days
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:43:20,915 - INFO - ======================================================================
+2026-01-13 19:43:20,916 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:43:20,916 - INFO - ======================================================================
+2026-01-13 19:43:20,916 - INFO - Domain: staking
+2026-01-13 19:43:20,916 - INFO - Discovery mode: calibrated
+2026-01-13 19:43:20,916 - INFO - Primary LLM: anthropic
+2026-01-13 19:43:20,916 - INFO - Auto-config: True
+2026-01-13 19:43:20,917 - INFO - Max retries: 3
+2026-01-13 19:43:20,917 - INFO - PhysicsAware fallback: False
+2026-01-13 19:43:20,917 - INFO - Complexity threshold: 20
+2026-01-13 19:43:20,917 - INFO - ======================================================================
+2026-01-13 19:43:20,918 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:43:21,875 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Staking Rewards
+Domain: STAKING
+Samples: 1000
+Variables: ['stake_amount', 'apr', 'time_days']
+Equation hint: Staking Rewards
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:43:21,876 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:43:28,894 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: stake_amount * apr * time_days / 365
+   LLM R²: 1.0000
+   LLM time: 7.02s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-13 19:43:28,906 - INFO -    Result: stake_amount * apr * time_days / 365
+2026-01-13 19:43:28,906 - INFO -    R2 = 1.0000
+2026-01-13 19:43:28,907 - INFO -    [BEST] New best!
+2026-01-13 19:43:28,907 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: stake_amount * apr * time_days / 365
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: stake_amount * apr * time_days / 365
+   R² Score: 1.0000
+   Validation: 91.3/100
+   Total time: 8.07s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: staking_staking_rewards.json
+
+================================================================================
+TEST 14/15: staking_staking_dilution
+================================================================================
+
+================================================================================
+Running: Staking Dilution | Domain: staking
+================================================================================
+Difficulty: medium
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: staking
+Variables: user_stake, total_staked, new_emissions
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:43:28,999 - INFO - ======================================================================
+2026-01-13 19:43:29,000 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:43:29,000 - INFO - ======================================================================
+2026-01-13 19:43:29,000 - INFO - Domain: staking
+2026-01-13 19:43:29,000 - INFO - Discovery mode: calibrated
+2026-01-13 19:43:29,000 - INFO - Primary LLM: anthropic
+2026-01-13 19:43:29,001 - INFO - Auto-config: True
+2026-01-13 19:43:29,001 - INFO - Max retries: 3
+2026-01-13 19:43:29,001 - INFO - PhysicsAware fallback: False
+2026-01-13 19:43:29,001 - INFO - Complexity threshold: 20
+2026-01-13 19:43:29,002 - INFO - ======================================================================
+2026-01-13 19:43:29,002 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:43:29,881 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Staking Dilution
+Domain: STAKING
+Samples: 1000
+Variables: ['user_stake', 'total_staked', 'new_emissions']
+Equation hint: Staking Dilution
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:43:29,881 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:43:38,158 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: new_emissions / (total_staked + user_stake)
+   LLM R²: -1.4180
+   LLM time: 8.28s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: user_stake, total_staked, new_emissions
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: user_stake / (total_staked + new_emissions)
+   R²: 1.0000
+   PySR time: 125.16s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-13 19:45:43,330 - INFO -    Result: user_stake / (total_staked + new_emissions)
+2026-01-13 19:45:43,330 - INFO -    R2 = 1.0000
+2026-01-13 19:45:43,331 - INFO -    [BEST] New best!
+2026-01-13 19:45:43,331 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: user_stake / (total_staked + new_emissions)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: user_stake / (total_staked + new_emissions)
+   R² Score: 1.0000
+   Validation: 91.0/100
+   Total time: 134.76s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: staking_staking_dilution.json
+
+================================================================================
+TEST 15/15: staking_compound_staking
+================================================================================
+
+================================================================================
+Running: Compound Staking | Domain: staking
+================================================================================
+Difficulty: hard
+🚀 EXTRAPOLATION TEST
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: staking
+Variables: principal, apr, periods_per_year, time_years
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 19:45:43,772 - INFO - ======================================================================
+2026-01-13 19:45:43,772 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 19:45:43,772 - INFO - ======================================================================
+2026-01-13 19:45:43,773 - INFO - Domain: staking
+2026-01-13 19:45:43,773 - INFO - Discovery mode: calibrated
+2026-01-13 19:45:43,773 - INFO - Primary LLM: anthropic
+2026-01-13 19:45:43,773 - INFO - Auto-config: True
+2026-01-13 19:45:43,773 - INFO - Max retries: 3
+2026-01-13 19:45:43,774 - INFO - PhysicsAware fallback: False
+2026-01-13 19:45:43,774 - INFO - Complexity threshold: 20
+2026-01-13 19:45:43,774 - INFO - ======================================================================
+2026-01-13 19:45:43,774 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 19:45:44,657 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Compound Staking
+Domain: STAKING
+Samples: 1000
+Variables: ['principal', 'apr', 'periods_per_year', 'time_years']
+Equation hint: Compound Staking
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 19:45:44,658 - INFO - 
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-13 19:45:51,837 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: principal * (1 + apr / periods_per_year)**(periods_per_year * time_years)
+   LLM R²: 1.0000
+   LLM time: 7.18s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-13 19:45:51,849 - INFO -    Result: principal * (1 + apr / periods_per_year)**(periods_per_year * time_years)
+2026-01-13 19:45:51,850 - INFO -    R2 = 1.0000
+2026-01-13 19:45:51,850 - INFO -    [BEST] New best!
+2026-01-13 19:45:51,850 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: principal * (1 + apr / periods_per_year)**(periods_per_year * time_years)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 90.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: principal * (1 + apr / periods_per_year)**(periods_per_year * time_years)
+   R² Score: 1.0000
+   Validation: 90.4/100
+   Total time: 8.27s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: staking_compound_staking.json
+
+📊 Summary saved: hypatiax/data/results/llm_guided_defi/llm_defi_20260113_183450/summary.json
+📦 Complete results: hypatiax/data/results/llm_guided_defi/llm_defi_20260113_183450/complete_results.json
+   Size: 1658.9 KB
+
+========================================================================================================================
+                                          LLM-GUIDED DISCOVERY - DEFI RESULTS                                           
+========================================================================================================================
+Test Name                                |     R² |   Val |   Time | Status | Observations                            
+------------------------------------------------------------------------------------------------------------------------
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+AMM
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+amm_constant_product                     | 1.0000 |  99.1 |  11.8s | ✅ PASS | Excellent fit, Strong val               
+amm_il_percentage                        | 1.0000 |  98.5 | 290.9s | ✅ PASS | Excellent fit, Strong val               
+amm_impermanent_loss                     | 1.0000 |  90.4 | 293.2s | ✅ PASS | Extrap, Excellent fit, Strong val       
+amm_price_impact                         | 1.0000 |  91.0 |   8.3s | ✅ PASS | Excellent fit, Strong val               
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+EXPECTED_SHORTFALL
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+expected_shortfall_es_95                 | 1.0000 |  99.4 |  10.7s | ✅ PASS | Extrap, Excellent fit, Strong val       
+expected_shortfall_es_99                 | 0.9594 | 100.0 |  25.8s | ✅ PASS | Good fit, Strong val                    
+expected_shortfall_es_from_var           | 0.9935 |  99.4 |  10.0s | ✅ PASS | Excellent fit, Strong val               
+expected_shortfall_portfolio_es          | 1.0000 |  99.4 | 185.8s | ✅ PASS | Excellent fit, Strong val               
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+LIQUIDATION
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+liquidation_liquidation_long             | 1.0000 |  98.5 | 203.1s | ✅ PASS | Extrap, Excellent fit, Strong val       
+liquidation_liquidation_short            | 1.0000 |  98.5 | 172.5s | ✅ PASS | Excellent fit, Strong val               
+liquidation_max_leverage                 | 1.0000 |  99.1 | 160.5s | ✅ PASS | Excellent fit, Strong val               
+liquidation_required_collateral          | 1.0000 |  99.1 |   7.6s | ✅ PASS | Excellent fit, Strong val               
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+LIQUIDITY
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+liquidity_apy_from_apr                   | 1.0000 |  91.3 |   8.5s | ✅ PASS | Excellent fit, Strong val               
+liquidity_capital_efficiency             | 1.0000 |  99.4 | 172.2s | ✅ PASS | Excellent fit, Strong val               
+liquidity_kelly_criterion                | 0.9549 |  99.4 | 576.2s | ✅ PASS | Extrap, Good fit, Strong val            
+liquidity_lp_fee_share                   | 1.0000 |  99.1 |   7.6s | ✅ PASS | Excellent fit, Strong val               
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+RISK_VAR
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+risk_var_portfolio_var                   | 1.0000 |  91.0 | 263.4s | ✅ PASS | Excellent fit, Strong val               
+risk_var_var_95                          | 1.0000 | 100.0 |  10.3s | ✅ PASS | Extrap, Excellent fit, Strong val       
+risk_var_var_99                          | 1.0000 | 100.0 | 404.8s | ✅ PASS | Excellent fit, Strong val               
+risk_var_var_multiday                    | 1.0000 |  99.4 |  10.3s | ✅ PASS | Excellent fit, Strong val               
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+STAKING
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+staking_compound_staking                 | 1.0000 |  90.4 |   8.3s | ✅ PASS | Extrap, Excellent fit, Strong val       
+staking_staking_dilution                 | 1.0000 |  91.0 | 134.8s | ✅ PASS | Excellent fit, Strong val               
+staking_staking_rewards                  | 1.0000 |  91.3 |   8.1s | ✅ PASS | Excellent fit, Strong val               
+========================================================================================================================
+
+SUMMARY: 23/23 passed (100.0%)
+
+📈 R² Statistics:
+   Mean: 0.9960
+   Median: 1.0000
+   Std Dev: 0.0121
+   Min: 0.9549
+   Max: 1.0000
+
+📊 Validation Statistics:
+   Mean: 96.7/100
+   Median: 99.1/100
+   Std Dev: 3.9
+   Min: 90.4/100
+   Max: 100.0/100
+========================================================================================================================
+
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$                                                                             

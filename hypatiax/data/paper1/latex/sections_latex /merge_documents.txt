@@ -1,0 +1,353 @@
+% FINAL STRUCTURE: or_7_sec.tex (File 1) + results_discussion.tex (File 4)
+
+\section{Experimental Validation}  % INSERT FROM FILE 4
+\label{sec:experiments}
+
+\subsection{Problem Formulation}
+[From File 4: Definition of Symbolic Discovery Problem]
+
+\subsection{Experimental Design}
+\subsubsection{Ground Truth Test Suite}
+[From File 4: Table 1 - 15 equations across 5 domains]
+
+\paragraph{Data Generation Protocol}
+[From File 4: N=200, noise model, variable ranges, seed=42]
+
+\subsubsection{Extended Test Suite}
+[From File 1: 131 total tests - Pure LLM, Pure Symbolic, LLM-Guided, DeFi-Optimized]
+
+\subsection{Extrapolation Test Protocol}
+\label{sec:extrapolation_metric}
+[From File 4: Definition of extrapolation regimes, error metric, statistical analysis]
+
+\subsection{Methods Under Evaluation}
+\subsubsection{Method 1: Pure LLM Baseline}
+[From File 4: Code Listing 1 - LLM formula generation]
+
+\subsubsection{Method 2: Neural Network Baseline}
+[From File 4: Code Listings 2-3 - NN architecture and prediction with scaling]
+
+\subsubsection{Method 3: Hybrid System v40 (Our Method)}
+[From File 4: Four-stage process with code listings:
+- Stage 1: LLM hypothesis generation
+- Stage 2: Variable name sanitization
+- Stage 3: PySR symbolic regression
+- Stage 4: Multi-criteria validation (Algorithm 1)]
+
+\subsection{Computational Environment}
+[From File 4: Table with hardware/software specs]
+
+\subsection{Reproducibility}
+[From File 4: GitHub, Docker, data generation links]
+
+%----------------------------------------
+% RESULTS SECTION
+%----------------------------------------
+
+\subsection{Main Results: Interpolation and Extrapolation}
+
+\subsubsection{Interpolation Performance}
+[From File 4: Table 2 - Interpolation R² scores]
+Key Finding paragraph
+
+\subsubsection{Extrapolation Performance: The Critical Test}
+[From File 4: Table 3 - Main extrapolation results with Theorem statement]
+
+\subsection{Domain-Specific Analysis}
+[From File 4: Table 4 - Success rate by domain]
+Physics Domain Challenge paragraph
+
+\subsection{Case Study: Arrhenius Equation}
+[From File 4: Figure 1 reference + detailed case study]
+
+\subsection{Statistical Significance}
+[From File 4: Table 5 - Mann-Whitney, Cohen's d, CI, power]
+
+\subsection{Computational Cost Analysis}
+[From File 4: Figure 2 reference + Table 6 - timing trilemma]
+
+\subsection{Summary of Key Results}
+[From File 4: 5-point enumerated summary]
+
+%----------------------------------------
+% DISCUSSION SECTION (MERGED)
+%----------------------------------------
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Why Neural Networks Fail at Extrapolation}
+[From File 4: Remark box + mechanistic understanding + overfitting paradox]
+
+\subsection{The Value of Symbolic Discovery}
+[From File 4: Discovered formulas examples + Discovery vs Approximation paragraph]
+
+\subsection{Principal Findings}
+[From File 1: LLMs are reproductive (Theorem ref), Interpolation ≠ extrapolation, Functional form recovery essential]
+
+\subsection{Design Principles for Analytical Discovery}
+[From File 1: 5 design principles enumerated]
+
+\subsection{Comparison with Related Work}
+[From File 1: Romera et al., Udrescu & Tegmark, La Cava et al.]
+
+\subsection{Limitations}
+[From File 4: Computational cost, very small constants, pure LLM prediction]
+[From File 1: Operator completeness, multi-scale phenomena, implicit constraints]
+
+\subsection{Ethical Considerations}
+[From File 1: Dual-use concerns, overreliance risk, access and equity]
+
+\subsection{Future Work}
+[FROM FILE 4: Specific technical directions]
+[FROM FILE 1: Active learning, hierarchical discovery, transfer learning, uncertainty quantification]
+
+%----------------------------------------
+% CONCLUSION (ENHANCED)
+%----------------------------------------
+
+\section{Conclusion}
+[From File 1 BASE, enhanced with File 4's three implications structure]
+
+We have systematically investigated whether Large Language Models can perform genuine analytical discovery. Our answer is nuanced: **LLMs excel at reproducing known patterns but fail catastrophically on specialized domains requiring extrapolation beyond training data.**
+
+[From File 4: The 0% vs 3348% extrapolation error finding]
+
+Theorem~\ref{thm:llm_reproductive} provides theoretical grounding: autoregressive generation probability decays exponentially for expressions distant from training corpora. Empirical validation across 131 tests confirms this, showing 95% success on classical formulas versus 45% on decentralized finance, with 412-847% extrapolation errors.
+
+[From File 4: Three key implications]
+These findings have profound implications for AI-driven scientific discovery:
+
+\begin{enumerate}
+    \item \textbf{Interpolation accuracy is not sufficient}: High $R^2$ on test sets provides no guarantee of extrapolation capability.
+    
+    \item \textbf{Functional form recovery is essential}: Symbolic methods that discover correct mathematical structure enable reliable prediction in novel regimes.
+    
+    \item \textbf{Hybrid approaches are necessary}: Combining LLM domain knowledge with symbolic regression optimization achieves qualitatively superior generalization.
+\end{enumerate}
+
+\textsc{HypatiaX} addresses these limitations through careful role allocation: symbolic methods perform mathematical reasoning under physics constraints, while LLMs provide natural language interpretation and optional warm-starting. This hybrid approach achieves 88.9-100% success rates with 8-23% extrapolation error and 100% functional correctness on ground truth tests.
+
+The most striking empirical finding is the 0% vs 3348% extrapolation error comparison between symbolic discovery and neural networks ($p < 0.001$, Cohen's $d = 2.4$).
+
+[From File 4: Applications paragraph]
+We anticipate this approach will enable scientific breakthroughs in domains where reliable extrapolation is critical:
+\begin{itemize}
+\item \textbf{Drug discovery}: Predicting efficacy in untested dosage ranges, reducing animal testing
+\item \textbf{Climate modeling}: Forecasting under novel CO₂ concentrations beyond historical data
+\item \textbf{Materials design}: Discovering property relationships at extreme conditions
+\item \textbf{Financial risk}: Extrapolating market behavior to unprecedented volatility regimes
+\end{itemize}
+
+[From File 4: Central insight]
+The central insight is that \emph{discovering the correct equation is fundamentally different from approximating the data}. For science, where extrapolation to novel regimes defines progress, symbolic discovery is not merely preferable---it is essential.
+
+[From File 1: Closing on intelligent orchestration]
+Classical learning theory provides foundations for understanding generalization, though modern overparameterized models challenge traditional assumptions. The future of analytical discovery is not "AI vs. humans" or "neural vs. symbolic" but rather \textbf{intelligent orchestration of complementary capabilities}: LLMs as interfaces to symbolic discovery engines, with rigorous validation ensuring reliability.
+
+\section*{Acknowledgments}
+[From File 1 + File 4 combined]
+
+%----------------------------------------
+% APPENDICES (FILE 1 + FILE 4)
+%----------------------------------------
+
+\appendix
+
+\section{Complete Proof of Theorem~\ref{thm:llm_reproductive}}
+\label{app:proof}
+[FROM FILE 1 - KEEP INTACT]
+
+\section{Hyperparameter Settings}
+\label{app:hyperparameters}
+[FROM FILE 1: Table - PySR Configuration + Validation Thresholds]
+[ADD FROM FILE 4 if more comprehensive: Neural Network, Pure LLM, Hybrid v40 settings]
+
+\section{Detailed Experimental Results}
+\label{app:detailed_results}
+
+\subsection{Pure LLM Baseline (40 tests)}
+[FROM FILE 1: Table - Pure LLM Performance by Test Case]
+
+\subsection{DeFi-Optimized Results (23 tests)}
+[FROM FILE 1: Table - DeFi-Optimized HypatiaX Performance]
+
+\subsection{Complete Test Suite Details}
+[FROM FILE 4: Table - Complete Test Suite with Variable Ranges and Ground Truth]
+
+\subsection{Example Discovered Expressions}
+[FROM FILE 4: Listing - Discovered Symbolic Expressions]
+
+\section{Reproducibility Statement}
+\label{app:reproducibility}
+[FROM FILE 1 - KEEP ALL: Code Repository, Session Data, Running Experiments, Hardware Requirements, Software Dependencies, Random Seeds, Expected Runtime, Verification Checksums, Docker Container, Contact for Support]
+
+\section{Computational Complexity Analysis}
+\label{app:complexity}
+[FROM FILE 1 - KEEP ALL: Theoretical Complexity, Empirical Timing Breakdown, Scalability Analysis]
+
+\section{Supplementary Materials}
+[FROM FILE 1 - KEEP: Reference to comprehensive empirical analysis]
+
+\section{Extended Discussion}
+\label{app:extended_discussion}
+
+\subsection{Why LLMs Fail on Novel Domains}
+[FROM FILE 1 - KEEP: Training Data Coverage, Conceptual Complexity Table]
+
+\subsection{Lessons for Future LLM Development}
+[FROM FILE 1 - KEEP: 5 enumerated principles]
+
+\subsection{Broader Applicability}
+[FROM FILE 1 - KEEP: Candidate Domains, Required Adaptations]
+
+\subsection{Limitations and Future Directions}
+[FROM FILE 1: Current Limitations enumerated]
+[FROM FILE 1: Promising Directions enumerated]
+[ADD FROM FILE 4: Specific technical solutions for computational efficiency, multi-scale phenomena, PDE extension]
+
+2. EXACT FIGURE REQUIREMENTS
+=========================================================
+Figure 1: Arrhenius Extrapolation Failure Visualization
+Filename: figure1_extrapolation_failure.png
+Specifications:
+test_figure1_extrapolation_failure.py
+=======================================================
+
+Key Visual Elements:
+
+✅ Green shaded region: Training range [273, 373]K
+✅ Black solid line: Ground truth exponential decay
+✅ Red dashed line: Neural network (matches in training, diverges catastrophically outside)
+✅ Blue solid line: Hybrid v40 (perfect match everywhere)
+✅ Annotation: "NN Error: 3348%" at T=746K (2× regime)
+✅ Log scale on y-axis to show exponential behavior
+✅ Legend clearly identifying all elements
+
+
+=================================================
+Figure 2: Time-Accuracy-Extrapolation Trilemma
+Filename: figure5_regime_comparison.png
+===============================================
+Specifications:
+
+test_regime_comparison.py
+
+Key Visual Elements:
+Left Panel:
+
+✅ X-axis: Execution time (linear scale)
+✅ Y-axis: Extrapolation error (log scale, 10-10000%)
+✅ Three scatter points: NN (red X), LLM (orange circle, shown at ~1000% with "Not Evaluated" label), Hybrid (green square at bottom)
+✅ Annotations pointing to NN catastrophe and Hybrid perfection
+✅ Clear legend
+
+Right Panel:
+
+✅ Heatmap showing capability matrix
+✅ Green cells with white ✓ for capabilities present
+✅ Red cells with black ✗ for capabilities absent
+✅ 5 capabilities × 3 methods grid
+✅ Title: "Capability Matrix"
+
+✅ Phase 1: File Structure
+
+ Create new file: final_paper.tex
+ Copy File 1's preamble (documentclass, packages, theorems)
+ Copy File 1's title, author, abstract (keep original)
+ Copy File 1's introduction sections 1-6 (keep original)
+
+✅ Phase 2: Insert Experimental Validation (File 4 → Section 7)
+
+ Insert complete Section 7 from File 4 BEFORE File 1's Conclusion
+ Include all subsections: Problem Formulation, Experimental Design, Methods, Extrapolation Protocol, Computational Environment
+ Include all code listings (1-4) from File 4
+ Include Algorithm 1 (Multi-Criteria Validation)
+ Include all Tables from File 4 (test suite, interpolation, extrapolation, domain breakdown, statistics, timing)
+ Add figure references: \includegraphics{figure1_extrapolation_failure.png} and figure5_regime_comparison.png
+
+✅ Phase 3: Merge Discussion
+
+ Start with File 4's "Why Neural Networks Fail" (more detailed)
+ Add File 4's "The Value of Symbolic Discovery"
+ Insert File 1's "Principal Findings" (3 enumerated points)
+ Insert File 1's "Design Principles" (5 enumerated points)
+ Insert File 1's "Comparison with Related Work"
+ Merge Limitations: File 4's specific issues + File 1's general limitations
+ Insert File 1's "Ethical Considerations"
+ Merge Future Work: File 4's technical specifics + File 1's research directions
+
+✅ Phase 4: Enhanced Conclusion
+
+ Start with File 1's opening paragraph (LLMs reproductive, Theorem reference)
+ Insert File 4's 0% vs 3348% headline finding
+ Insert File 4's three key implications (enumerated)
+ Insert File 1's HypatiaX paragraph (88.9-100% success, role allocation)
+ Insert File 4's applications paragraph (drug discovery, climate, materials, finance)
+ Insert File 4's central insight quote: "discovering the correct equation..."
+ Close with File 1's intelligent orchestration paragraph
+
+✅ Phase 5: Acknowledgments
+
+ Merge File 1 + File 4 acknowledgments
+ Include: domain experts, PySR team, SymPy, Anthropic Claude, Miles Cranmer, reviewers
+
+✅ Phase 6: Appendices
+
+ A. Complete Proof - File 1 (keep intact)
+ B. Hyperparameters - File 1 table + enhance with File 4 if needed
+ C. Detailed Experimental Results:
+
+ File 1: Pure LLM Baseline table (40 tests)
+ File 1: DeFi-Optimized table (23 tests)
+ ADD File 4: Complete Test Suite Details table
+ ADD File 4: Example Discovered Expressions listing
+
+
+ D. Reproducibility - File 1 (keep all subsections)
+ E. Complexity Analysis - File 1 (keep all)
+ F. Supplementary Materials - File 1 (keep reference)
+ G. Extended Discussion - File 1 (keep all subsections)
+
+✅ Phase 7: Bibliography
+
+ Merge citations from File 1 + File 4
+ Ensure all \citep{} references are in bibliography.bib
+ Check: Arrhenius, Cranmer PySR, Anthropic Claude, LeCun, Lake, Bubeck, Schmidt, Udrescu, La Cava, Belkin, Xu, Zhou, Taylor, Lewkowycz, Romera, Kambhampati
+
+✅ Phase 8: Figures
+
+ Generate figure1_extrapolation_failure.png using specification above
+ Generate figure5_regime_comparison.png using specification above
+ Place in figures/ directory
+ Verify figure references compile correctly
+
+✅ Phase 9: Final Checks
+
+ All theorem/definition/remark labels consistent
+ All table labels consistent and sequential
+ All figure labels consistent
+ All section/subsection cross-references work
+ All appendix labels work
+ Compile with pdflatex → bibtex → pdflatex → pdflatex
+ Check: no missing references, no undefined citations
+ Verify page count appropriate for JMLR format
+
+✅ Phase 10: Reproducibility Verification
+
+ GitHub repository link active
+ Docker container builds successfully
+ All data files accessible
+ All code listings execute
+ SHA-256 checksums match
+
+
+FINAL DELIVERABLES
+
+✅ final_paper.tex - Complete merged LaTeX source
+✅ bibliography.bib - Merged bibliography
+✅ figure1_extrapolation_failure.png - Arrhenius extrapolation visualization
+✅ figure5_regime_comparison.png - Time-accuracy trade-off
+✅ final_paper.pdf - Compiled PDF
+
+Total estimated length: ~40-50 pages (JMLR format with appendices)

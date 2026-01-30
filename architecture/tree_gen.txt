@@ -1,0 +1,104 @@
+hypatiax/core/generation
+├── baseline_pure_llm_defi_discovery.py
+├── baseline_pure_llm_defi.py
+├── baseline_pure_llm.py
+├── docs
+│   ├── ANALYSIS_AND_FIXES.md
+│   ├── assessment_tex_hybrid_visualizations.md
+│   ├── extrapolation_system.md
+│   ├── hybrid_ARCH_systems.md
+│   ├── hybrid_system.md
+│   ├── hybrid-systems-comparison.docx
+│   ├── Hypatiax-Complete-Workflow-Diagram.md
+│   └── project_goal.md
+├── experiment_protocol_defi_20.py
+├── experiment_protocol_defi.py
+├── experiment_protocol.py
+├── hybrid_all_domains
+│   ├── experiment_protocol_all_18_a.py
+│   ├── experiment_protocol_all_18_b.py
+│   ├── experiment_protocol_all_18_b_v1.py
+│   ├── experiment_protocol_all_20_b.py
+│   ├── notes_.txt
+│   ├── nots_2.txt
+│   ├── __pycache__
+│   │   ├── experiment_protocol_all_20_b.cpython-312.pyc
+│   │   └── experiment_protocol_all_30.cpython-312.pyc
+│   ├── smart_analysis_diagnostic.py
+│   ├── suite_hybrid_system_all_domains.py
+│   ├── suite_hybrid_system_all_domains_v5.py
+│   ├── suite_v4.3_fixed.py
+│   ├── Test-Framework-Stability.docx
+│   ├── Test-Framework-Stability.txt
+│   └── test_stability_framework.py
+├── hybrid_all_domains_llm_nn
+│   ├── experiment_protocol_all_30.py
+│   ├── hybrid_system_all_domains.py
+│   ├── hybrid_system_llm_nn_all_domains.py
+│   ├── hybrid_system_llm_nn_all_domains.py~
+│   ├── hybrid_system_llm_nn_all_domains_v1.py
+│   ├── hybrid_system_llm_nn_all_domains_v2.py
+│   └── hybrid_system_llm_nn_all_domains_v3.py
+├── hybrid_defi_llm_guided
+│   ├── experiment_protocol_defi_20.py
+│   ├── llm_guided_symbolic_discovery_defi.py
+│   ├── llm_guided_symbolic_discovery_defi_v1.py
+│   ├── llm_guided_symbolic_discovery_defi_v2.py
+│   ├── llm_guided_symbolic_discovery_defi_v2.py~
+│   └── __pycache__
+│       └── experiment_protocol_defi_20.cpython-312.pyc
+├── hybrid_defi_llm_nn
+│   ├── experiment_protocol_defi_20.py
+│   ├── hybrid_ensemble_system_defi_domain.py
+│   ├── hybrid_system_defi_basic.py
+│   ├── hybrid_system_defi_llm_nn.py
+│   ├── hybrid_system_defi_llm_nn_v1.py
+│   ├── hybrid_system_defi_llm_nn_v2.py
+│   ├── hybrid_system_defi_llm_nn_v3.py
+│   ├── hybrid_system_nn_defi_domain.py
+│   └── __pycache__
+│       ├── experiment_protocol_defi_20.cpython-312.pyc
+│       └── hybrid_system_defi_llm_nn.cpython-312.pyc
+├── hybrid_defi_system
+│   ├── complete_defi_hybrid_system.py
+│   ├── experiment_protocol_defi_20.py
+│   ├── hybrid_system_defi_full.py
+│   ├── notes_defi_20.txt
+│   ├── __pycache__
+│   │   └── experiment_protocol_defi_20.cpython-312.pyc
+│   ├── suite_defi_hybrid_system.py
+│   └── suite_defi_hybrid_system_v2.py
+├── hybrid_llm_guide_validation
+│   ├── experiment_protocol_all_20.py
+│   ├── experiment_protocol_all_30.py
+│   ├── experiment_protocol_all_30_v1.py
+│   ├── experiment_protocol_all_30_v2.py
+│   ├── experiment_protocol_all_30_v3.py
+│   ├── experiment_protocol_all_30_v4.py
+│   ├── experiment_protocol_defi_20.py
+│   ├── llm_guided_symbolic_discovery.py
+│   ├── llm_guided_symbolic_discovery_v10.py
+│   ├── llm_guided_symbolic_discovery_v11.py
+│   ├── llm_guided_symbolic_discovery_v12.py
+│   ├── llm_guided_symbolic_discovery_v1.py
+│   ├── llm_guided_symbolic_discovry_v1.py
+│   ├── __pycache__
+│   │   └── experiment_protocol_all_30.cpython-312.pyc
+│   └── quickstat.md
+├── __init__.py
+├── llm-few-shot.py
+├── llm-rag.py
+├── __pycache__
+│   ├── baseline_pure_llm.cpython-312.pyc
+│   ├── baseline_pure_llm_defi.cpython-312.pyc
+│   ├── baseline_pure_llm_defi_discovery.cpython-312.pyc
+│   ├── experiment_protocol.cpython-312.pyc
+│   ├── experiment_protocol_defi.cpython-312.pyc
+│   ├── hybrid_system_defi_domain.cpython-312.pyc
+│   └── __init__.cpython-312.pyc
+├── training_llm.py
+├── training_llm_.py
+├── training_rag.py
+└── training_rag_.py
+
+14 directories, 88 files

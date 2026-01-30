@@ -1,0 +1,967 @@
+================================================================================
+CITATION INSERTION DIFF
+================================================================================
+
+Line 33:
+  - \ShortHeadings{LLMs as Interfaces to Symbolic Discovery}{Bonet Chaple}
+  + \ShortHeadings{LLMs as Interfaces to Symbolic Discovery}{Bonet Chaple}\citep{koza1994genetic}\citep{kambhampati2024llms}
+
+Line 36:
+  - \title{Large Language Models as Interfaces to Symbolic Discovery: \\ A Hybrid Architecture for Reliable Analytical Expression Discovery}
+  + \title{Large Language Models as Interfaces to Symbolic Discovery: \\ A Hybrid Architecture for Reliable Analytical Expression Discovery}\citep{koza1994genetic}\citep{lewkowycz2022minerva}
+
+Line 50:
+  - Motivated by these limitations, we introduce \textsc{HypatiaX}, a hybrid symbolic-neural architecture where LLMs serve as \emph{interfaces} to symbolic discovery engines rather than discovery engines themselves. Our system combines evolutionary symbolic regression with multi-layer validation (dimensional analysis, domain constraints, execution verification) and optional LLM initialization for efficiency. Across five experimental campaigns, \textsc{HypatiaX} achieves 88.9-100\% success rates with 8-23\% extrapolation error and 100\% functional correctness on ground truth tests, compared to 20-40\% correctness for pure LLM approaches. An LLM-guided variant reduces discovery time by 82\% while preserving all symbolic guarantees. Our key contribution is demonstrating that reliable analytical discovery requires symbolic methods under physics constraints, with LLMs providing interpretation rather than mathematical reasoning.
+  + Motivated by these limitations, we introduce \textsc{HypatiaX}, a hybrid symbolic-neural architecture where LLMs serve as \emph{interfaces} to symbolic discovery engines rather than discovery engines themselves. Our system combines evolutionary symbolic regression with multi-layer validation (dimensional analysis, domain constraints, execution verification) and optional LLM initialization for efficiency. Across five experimental campaigns, \textsc{HypatiaX} achieves 88.9-100\% success rates with 8-23\% extrapolation error and 100\% functional correctness on ground truth tests, compared to 20-40\% correctness for pure LLM approaches. An LLM-guided variant reduces discovery time by 82\% while preserving all symbolic guarantees. Our key contribution is demonstrating that reliable analytical discovery requires symbolic methods under physics constraints, with LLMs providing interpretation rather than mathematical reasoning\citep{koza1994genetic}\citep{la2021contemporary}\citep{kambhampati2024llms}\citep{lewkowycz2022minerva}.
+
+Line 54:
+  - symbolic regression, large language models, scientific machine learning, hybrid AI systems, analytical expression discovery, physics-informed machine learning
+  + symbolic regression, large language models, scientific machine learning, hybrid AI systems, analytical expression discovery, physics-informed machine learning\citep{koza1994genetic}\citep{molnar2020interpretable}\citep{rudin2019stop}\citep{la2021contemporary}\citep{lewkowycz2022minerva}\citep{virtanen2020scipy}
+
+Line 61:
+  - This distinction has profound implications for trustworthy AI in science. Genuine discovery requires:
+  + This distinction has profound implications for trustworthy AI in science\citep{koza1994genetic}. Genuine discovery requires:
+
+Line 63:
+  - \item \textbf{Generalization beyond training data}: Finding expressions for phenomena not encountered during pre-training
+  + \item \textbf{Generalization beyond training data}: Finding expressions for phenomena not encountered during pre-training\citep{liu2020understanding}\citep{neyshabur2017exploring}\citep{zhang2021understanding}
+
+Line 71:
+  - Consider two formula discovery tasks:
+  + Consider two formula discovery tasks:\citep{koza1994genetic}
+
+Line 81:
+  - \item \textbf{Extrapolation}: 847\% error for LLMs versus 23\% for symbolic methods
+  + \item \textbf{Extrapolation}: 847\% error for LLMs versus 23\% for symbolic methods\citep{kambhampati2024llms}
+
+Line 82:
+  - \item \textbf{Functional correctness}: 20-40\% for LLMs versus 88.9-100\% for our hybrid approach
+  + \item \textbf{Functional correctness}: 20-40\% for LLMs versus 88\citep{kambhampati2024llms}.9-100\% for our hybrid approach
+
+Line 85:
+  - This bimodal behavior suggests LLMs excel at reproducing well-known relationships but struggle with specialized domains requiring distributional reasoning or novel functional forms.
+  + This bimodal behavior suggests LLMs excel at reproducing well-known relationships but struggle with specialized domains requiring distributional reasoning or novel functional forms\citep{kambhampati2024llms}\citep{lewkowycz2022minerva}.
+
+Line 92:
+  - \item \textbf{Theoretical characterization} of LLMs as reproductive systems (Theorem~\ref{thm:llm_reproductive}), with proof that autoregressive generation probability decays exponentially for expressions distant from training data.
+  + \item \textbf{Theoretical characterization} of LLMs as reproductive systems (Theorem~\ref{thm:llm_reproductive}), with proof that autoregressive generation probability decays exponentially for expressions distant from training data\citep{kambhampati2024llms}.
+
+Line 94:
+  - \item \textbf{Comprehensive empirical evaluation} demonstrating domain-dependent LLM performance across 131 tests: 95\% success on classical physics versus 45\% on decentralized finance, with detailed failure mode taxonomy.
+  + \item \textbf{Comprehensive empirical evaluation} demonstrating domain-dependent LLM performance across 131 tests: 95\% success on classical physics versus 45\% on decentralized finance, with detailed failure mode taxonomy\citep{kambhampati2024llms}.
+
+Line 96:
+  - \item \textbf{Hybrid architecture} (\textsc{HypatiaX}) combining evolutionary symbolic regression with multi-layer validation and optional LLM initialization, achieving 88.9-100\% success rates with 8-23\% extrapolation error.
+  + \item \textbf{Hybrid architecture} (\textsc{HypatiaX}) combining evolutionary symbolic regression with multi-layer validation and optional LLM initialization, achieving 88.9-100\% success rates with 8-23\% extrapolation error\citep{la2021contemporary}\citep{kambhampati2024llms}.
+
+Line 98:
+  - \item \textbf{Design principles} for reliable analytical discovery: symbolic methods for mathematical reasoning, LLMs for natural language interpretation and warm-starting search.
+  + \item \textbf{Design principles} for reliable analytical discovery: symbolic methods for mathematical reasoning, LLMs for natural language interpretation and warm-starting search\citep{koza1994genetic}\citep{lewkowycz2022minerva}\citep{kambhampati2024llms}.
+
+Line 103:
+  - We begin with related work (Section~\ref{sec:related}), then present empirical evidence of LLM limitations (Section~\ref{sec:llm_limitations}) to motivate our approach. Section~\ref{sec:theory} provides theoretical analysis, followed by the \textsc{HypatiaX} architecture (Section~\ref{sec:architecture}). Experimental validation (Section~\ref{sec:experiments}) demonstrates performance across five campaigns, and we conclude with discussion and limitations (Section~\ref{sec:discussion}).
+  + We begin with related work (Section~\ref{sec:related}), then present empirical evidence of LLM limitations (Section~\ref{sec:llm_limitations}) to motivate our approach. Section~\ref{sec:theory} provides theoretical analysis, followed by the \textsc{HypatiaX} architecture (Section~\ref{sec:architecture}). Experimental validation (Section~\ref{sec:experiments}) demonstrates performance across five campaigns, and we conclude with discussion and limitations (Section~\ref{sec:discussion})\citep{kambhampati2024llms}.
+
+Line 108:
+  - \subsection{Symbolic Regression}
+  + \subsection{Symbolic Regression}\citep{la2021contemporary}
+
+Line 112:
+  - Our work builds on these foundations by integrating symbolic regression with LLM initialization and multi-layer validation, achieving superior performance on specialized domains while maintaining formal guarantees.
+  + Our work builds on these foundations by integrating symbolic regression with LLM initialization and multi-layer validation, achieving superior performance on specialized domains while maintaining formal guarantees\citep{la2021contemporary}\citep{kambhampati2024llms}.
+
+Line 114:
+  - \subsection{LLMs for Scientific Discovery}
+  + \subsection{LLMs for Scientific Discovery}\citep{koza1994genetic}\citep{virtanen2020scipy}\citep{kambhampati2024llms}
+
+Line 118:
+  - \textbf{Key difference}: Romera et al. evaluate on well-established physics formulas likely present in training data. We systematically test on specialized domains (decentralized finance, advanced statistics) requiring genuine extrapolation, revealing fundamental limitations in pure LLM approaches.
+  + \textbf{Key difference}: Romera et al. evaluate on well-established physics formulas likely present in training data. We systematically test on specialized domains (decentralized finance, advanced statistics) requiring genuine extrapolation, revealing fundamental limitations in pure LLM approaches\citep{kambhampati2024llms}.
+
+Line 124:
+  - Our architecture differs by using LLMs purely as interfaces (initialization + interpretation) rather than as components of the discovery process, maintaining symbolic guarantees while leveraging LLM strengths.
+  + Our architecture differs by using LLMs purely as interfaces (initialization + interpretation) rather than as components of the discovery process, maintaining symbolic guarantees while leveraging LLM strengths\citep{koza1994genetic}\citep{kambhampati2024llms}.
+
+Line 126:
+  - \section{Empirical Evidence of LLM Limitations}
+  + \section{Empirical Evidence of LLM Limitations}\citep{kambhampati2024llms}
+
+Line 129:
+  - To understand whether LLMs can perform genuine analytical discovery, we conducted systematic evaluation of pure LLM-based formula generation without symbolic constraints, analytical solvers, or post-generation correction.
+  + To understand whether LLMs can perform genuine analytical discovery, we conducted systematic evaluation of pure LLM-based formula generation without symbolic constraints, analytical solvers, or post-generation correction\citep{koza1994genetic}\citep{kambhampati2024llms}.
+
+Line 136:
+  - \item \textbf{Classical Scientific (20 tests)}: Materials Science (4), Fluid Dynamics (4), Thermodynamics (4), Mechanics (4), Chemistry (4)
+  + \item \textbf{Classical Scientific (20 tests)}: Materials Science (4), Fluid Dynamics (4), Thermodynamics (4), Mechanics (4), Chemistry (4)\citep{virtanen2020scipy}
+
+Line 145:
+  - \item No symbolic regression, constraint enforcement, or correction
+  + \item No symbolic regression, constraint enforcement, or correction\citep{la2021contemporary}
+
+Line 158:
+  - Table~\ref{tab:baseline_llm} reveals striking domain-dependent behavior.
+  + Table~\ref{tab:baseline_llm} reveals striking domain-dependent behavior\citep{kambhampati2024llms}.
+
+Line 168:
+  - \multicolumn{5}{c}{\textit{Classical Scientific Domains}} \\
+  + \multicolumn{5}{c}{\textit{Classical Scientific Domains}} \\\citep{virtanen2020scipy}
+
+Line 194:
+  - \paragraph{Key Finding:} Pure LLMs achieve near-perfect performance on classical formulas present in training corpora but fail catastrophically on specialized domains requiring distributional reasoning or novel functional forms.
+  + \paragraph{Key Finding:} Pure LLMs achieve near-perfect performance on classical formulas present in training corpora but fail catastrophically on specialized domains requiring distributional reasoning or novel functional forms\citep{kambhampati2024llms}\citep{lewkowycz2022minerva}.
+
+Line 200:
+  - We categorize LLM failures into five distinct types:
+  + We categorize LLM failures into five distinct types:\citep{kambhampati2024llms}
+
+Line 212:
+  - \textbf{Distributional Reasoning} & High & Misuse of statistical functions (wrong tail for VaR, incorrect scipy API calls, sign convention errors) \\
+  + \textbf{Distributional Reasoning} & High & Misuse of statistical functions (wrong tail for VaR, incorrect scipy API calls, sign convention errors) \\\citep{lewkowycz2022minerva}
+
+Line 249:
+  - \subsubsection{Case Study 2: Distributional Reasoning Failure (Value-at-Risk)}
+  + \subsubsection{Case Study 2: Distributional Reasoning Failure (Value-at-Risk)}\citep{lewkowycz2022minerva}
+
+Line 270:
+  - \item Statistical convention ambiguity confused the LLM
+  + \item Statistical convention ambiguity confused the LLM\citep{kambhampati2024llms}
+
+Line 274:
+  - VaR measures loss magnitude (positive tail), but some formulations use negative returns. The LLM pattern-matched to "95th percentile= -1.645" from normal tables without understanding domain semantics.
+  + VaR measures loss magnitude (positive tail), but some formulations use negative returns. The LLM pattern-matched to "95th percentile= -1.645" from normal tables without understanding domain semantics\citep{kambhampati2024llms}.
+
+Line 300:
+  - \item LLMs struggle with specialized library APIs having non-obvious calling conventions
+  + \item LLMs struggle with specialized library APIs having non-obvious calling conventions\citep{kambhampati2024llms}
+
+Line 306:
+  - Table~\ref{tab:llm_success_patterns} shows LLM performance by formula complexity.
+  + Table~\ref{tab:llm_success_patterns} shows LLM performance by formula complexity\citep{kambhampati2024llms}.
+
+Line 358:
+  - Pure LLM (GPT-4) & 0.89 & 847\% \\
+  + Pure LLM (GPT-4) & 0\citep{bubeck2023sparks}\citep{romera2023mathematical}\citep{kambhampati2024llms}.89 & 847\% \\
+
+Line 359:
+  - Pure LLM (Claude Opus 4) & 0.93 & 412\% \\
+  + Pure LLM (Claude Opus 4) & 0\citep{kambhampati2024llms}.93 & 412\% \\
+
+Line 374:
+  - \item \textbf{LLMs are reproductive, not generative}: 100\% success on classical formulas versus 45\% on novel domains confirms reproduction of training patterns.
+  + \item \textbf{LLMs are reproductive, not generative}: 100\% success on classical formulas versus 45\% on novel domains confirms reproduction of training patterns\citep{kambhampati2024llms}.
+
+Line 383:
+  - These findings motivate our hybrid architecture, where symbolic methods perform discovery under physics constraints while LLMs provide initialization and interpretation.
+  + These findings motivate our hybrid architecture, where symbolic methods perform discovery under physics constraints while LLMs provide initialization and interpretation\citep{koza1994genetic}\citep{kambhampati2024llms}.
+
+Line 392:
+  - Let $\mathcal{D} = \{(x_i, y_i)\}_{i=1}^n$ where $x_i \in \R^d$, $y_i \in \R$. An analytical expression discovery system produces $E: \R^d \to \R$ satisfying:
+  + Let $\mathcal{D} = \{(x_i, y_i)\}_{i=1}^n$ where $x_i \in \R^d$, $y_i \in \R$\citep{koza1994genetic}. An analytical expression discovery system produces $E: \R^d \to \R$ satisfying:
+
+Line 417:
+  - Autoregressive language models are reproductive systems in the sense of Definition~\ref{def:reproductive}.
+  + Autoregressive language models are reproductive systems in the sense of Definition~\ref{def:reproductive}\citep{lewkowycz2022minerva}.
+
+Line 446:
+  - \paragraph{Remark:} This proof assumes local independence of token probabilities, which is approximate. A rigorous proof would require analyzing the full joint distribution, but empirical evidence (Section~\ref{sec:llm_limitations}) strongly supports the conclusion.
+  + \paragraph{Remark:} This proof assumes local independence of token probabilities, which is approximate. A rigorous proof would require analyzing the full joint distribution, but empirical evidence (Section~\ref{sec:llm_limitations}) strongly supports the conclusion\citep{kambhampati2024llms}.
+
+Line 448:
+  - \subsection{Implications for Discovery}
+  + \subsection{Implications for Discovery}\citep{koza1994genetic}
+
+Line 450:
+  - Theorem~\ref{thm:llm_reproductive} has several implications:
+  + Theorem~\ref{thm:llm_reproductive} has several implications:\citep{kambhampati2024llms}
+
+Line 453:
+  - \item \textbf{Training coverage determines capability}: LLMs can only reliably generate expressions within small edit distance of training data.
+  + \item \textbf{Training coverage determines capability}: LLMs can only reliably generate expressions within small edit distance of training data\citep{kambhampati2024llms}.
+
+Line 459:
+  - \item \textbf{Hybrid approaches are necessary}: Combining LLM pattern recognition with symbolic search enables both efficiency (warm-starting) and genuine discovery.
+  + \item \textbf{Hybrid approaches are necessary}: Combining LLM pattern recognition with symbolic search enables both efficiency (warm-starting) and genuine discovery\citep{koza1994genetic}\citep{kambhampati2024llms}.
+
+Line 465:
+  - Motivated by empirical limitations (Section~\ref{sec:llm_limitations}) and theoretical analysis (Section~\ref{sec:theory}), we introduce \textsc{HypatiaX} (Hybrid Physics-Aware Analytical eXpression discovery), a system where symbolic methods perform mathematical reasoning while LLMs provide natural language interpretation.
+  + Motivated by empirical limitations (Section~\ref{sec:llm_limitations}) and theoretical analysis (Section~\ref{sec:theory}), we introduce \textsc{HypatiaX} (Hybrid Physics-Aware Analytical eXpression discovery), a system where symbolic methods perform mathematical reasoning while LLMs provide natural language interpretation\citep{koza1994genetic}\citep{lewkowycz2022minerva}\citep{kambhampati2024llms}.
+
+Line 470:
+  - \item \textbf{Symbolic methods for discovery}: Evolutionary search with physics constraints finds mathematically valid expressions
+  + \item \textbf{Symbolic methods for discovery}: Evolutionary search with physics constraints finds mathematically valid expressions\citep{koza1994genetic}
+
+Line 472:
+  - \item \textbf{LLMs as interfaces}: Natural language interpretation of results and optional warm-starting of search
+  + \item \textbf{LLMs as interfaces}: Natural language interpretation of results and optional warm-starting of search\citep{kambhampati2024llms}
+
+Line 497:
+  - |   SYMBOLIC DISCOVERY CORE (PySR)              |
+  + |   SYMBOLIC DISCOVERY CORE (PySR)              |\citep{koza1994genetic}
+
+Line 513:
+  - |      LLM INTERPRETATION LAYER (Optional)      |
+  + |      LLM INTERPRETATION LAYER (Optional)      |\citep{kambhampati2024llms}
+
+Line 529:
+  - \subsection{Symbolic Discovery Core}
+  + \subsection{Symbolic Discovery Core}\citep{koza1994genetic}
+
+Line 615:
+  - \section{LLM-Enhanced Variant}
+  + \section{LLM-Enhanced Variant}\citep{kambhampati2024llms}
+
+Line 618:
+  - While Section~\ref{sec:llm_limitations} established that pure LLMs cannot reliably perform discovery, they excel at pattern recognition for \emph{known} formulas. We leverage this via optional warm-starting.
+  + While Section~\ref{sec:llm_limitations} established that pure LLMs cannot reliably perform discovery, they excel at pattern recognition for \emph{known} formulas. We leverage this via optional warm-starting\citep{koza1994genetic}\citep{kambhampati2024llms}.
+
+Line 620:
+  - \subsection{Hybrid Discovery Mode}
+  + \subsection{Hybrid Discovery Mode}\citep{koza1994genetic}
+
+Line 629:
+  - \STATE $E_{\text{LLM}} \gets$ LLM.generate($\mathcal{D}$, context)
+  + \STATE $E_{\text{LLM}} \gets$ LLM\citep{kambhampati2024llms}.generate($\mathcal{D}$, context)
+
+Line 630:
+  - \STATE $R^2_{\text{LLM}} \gets$ evaluate($E_{\text{LLM}}$, $\mathcal{D}$)
+  + \STATE $R^2_{\text{LLM}} \gets$ evaluate($E_{\text{LLM}}$, $\mathcal{D}$)\citep{kambhampati2024llms}
+
+Line 631:
+  - \IF{$R^2_{\text{LLM}} \geq 0.95$ \AND validate($E_{\text{LLM}}$) = PASS}
+  + \IF{$R^2_{\text{LLM}} \geq 0\citep{kambhampati2024llms}.95$ \AND validate($E_{\text{LLM}}$) = PASS}
+
+Line 632:
+  -     \STATE \textbf{return} $E_{\text{LLM}}$ \COMMENT{Accept LLM solution}
+  +     \STATE \textbf{return} $E_{\text{LLM}}$ \COMMENT{Accept LLM solution}\citep{kambhampati2024llms}
+
+Line 634:
+  -     \STATE $P_0 \gets$ initialize\_population($E_{\text{LLM}}$) 
+  +     \STATE $P_0 \gets$ initialize\_population($E_{\text{LLM}}$)\citep{kambhampati2024llms} 
+
+Line 641:
+  - \subsection{LLM Prompting Strategy}
+  + \subsection{LLM Prompting Strategy}\citep{kambhampati2024llms}
+
+Line 676:
+  - \item \textbf{No code generation}: LLM produces mathematical expressions only, avoiding syntax errors
+  + \item \textbf{No code generation}: LLM produces mathematical expressions only, avoiding syntax errors\citep{kambhampati2024llms}
+
+Line 685:
+  - Table~\ref{tab:llm_hybrid_performance} compares pure symbolic versus LLM-guided discovery.
+  + Table~\ref{tab:llm_hybrid_performance} compares pure symbolic versus LLM-guided discovery\citep{koza1994genetic}\citep{kambhampati2024llms}.
+
+Line 696:
+  - LLM-only & 73.0\% & 13.5s & 1.0000 & 28.9$\times$ & \$0.02 \\
+  + LLM-only & 73.0\% & 13.5s & 1.0000 & 28.9$\times$ & \$0\citep{kambhampati2024llms}.02 \\
+
+Line 697:
+  - \textbf{LLM + PySR (hybrid)} & \textbf{96.7\%} & \textbf{70.0s} & \textbf{1.0000} & \textbf{5.6}$\times$ & \$0.02 \\
+  + \textbf{LLM + PySR (hybrid)} & \textbf{96.7\%} & \textbf{70.0s} & \textbf{1.0000} & \textbf{5.6}$\times$ & \$0\citep{kambhampati2024llms}.02 \\
+
+Line 702:
+  - \paragraph{Discovery Mode Breakdown:}
+  + \paragraph{Discovery Mode Breakdown:}\citep{koza1994genetic}
+
+Line 712:
+  - LLM-only accepted & 22 & 100\% & 13.5s & 1.0000 \\
+  + LLM-only accepted & 22 & 100\% & 13.5s & 1\citep{kambhampati2024llms}.0000 \\
+
+Line 713:
+  - LLM + PySR refinement & 7 & 85.7\% & 226.8s & 0.9998 \\
+  + LLM + PySR refinement & 7 & 85.7\% & 226.8s & 0\citep{kambhampati2024llms}.9998 \\
+
+Line 725:
+  - \item \textbf{73\% LLM-only success}: For simple well-known relationships, LLM initialization suffices
+  + \item \textbf{73\% LLM-only success}: For simple well-known relationships, LLM initialization suffices\citep{kambhampati2024llms}
+
+Line 727:
+  - \item \textbf{Preserved guarantees}: All LLM outputs undergo identical validation as PySR expressions
+  + \item \textbf{Preserved guarantees}: All LLM outputs undergo identical validation as PySR expressions\citep{kambhampati2024llms}
+
+Line 731:
+  - \subsection{When LLM Guidance Succeeds}
+  + \subsection{When LLM Guidance Succeeds}\citep{kambhampati2024llms}
+
+Line 733:
+  - \paragraph{LLM-only acceptance (73\% of tests):}
+  + \paragraph{LLM-only acceptance (73\% of tests):}\citep{kambhampati2024llms}
+
+Line 741:
+  - \paragraph{LLM + PySR refinement (23\% of tests):}
+  + \paragraph{LLM + PySR refinement (23\% of tests):}\citep{kambhampati2024llms}
+
+Line 750:
+  - \item Hooke's Law confusion: LLM generated elastic potential energy $U = \frac{1}{2}kx^2$ instead of force $F = kx$
+  + \item Hooke's Law confusion: LLM generated elastic potential energy $U = \frac{1}{2}kx^2$ instead of force $F = kx$\citep{kambhampati2024llms}
+
+Line 756:
+  - The LLM-guided architecture succeeds by exploiting complementary strengths:
+  + The LLM-guided architecture succeeds by exploiting complementary strengths:\citep{kambhampati2024llms}
+
+Line 759:
+  - \item \textbf{LLM strengths}: Pattern recognition for known formulas, domain knowledge application, human-readable output, speed (10-15s)
+  + \item \textbf{LLM strengths}: Pattern recognition for known formulas, domain knowledge application, human-readable output, speed (10-15s)\citep{kambhampati2024llms}
+
+Line 760:
+  - \item \textbf{Symbolic strengths}: Exhaustive search, novel discovery, dimensional consistency, reliable extrapolation, formal guarantees
+  + \item \textbf{Symbolic strengths}: Exhaustive search, novel discovery, dimensional consistency, reliable extrapolation, formal guarantees\citep{koza1994genetic}
+
+Line 763:
+  - Using LLM initialization as warm-start rather than replacement achieves both efficiency (82\% time reduction) and reliability (all validation layers apply).
+  + Using LLM initialization as warm-start rather than replacement achieves both efficiency (82\% time reduction) and reliability (all validation layers apply)\citep{kambhampati2024llms}.
+
+Line 771:
+  - We present comprehensive experimental results across 15 ground truth equations spanning five scientific and financial domains, plus extended validation across 131 total tests. Our evaluation compares pure LLM formula generation, neural network regression, pure symbolic regression (PySR), and our hybrid HypatiaX system.
+  + We present comprehensive experimental results across 15 ground truth equations spanning five scientific and financial domains, plus extended validation across 131 total tests. Our evaluation compares pure LLM formula generation, neural network regression, pure symbolic regression (PySR), and our hybrid HypatiaX system\citep{la2021contemporary}\citep{virtanen2020scipy}\citep{kambhampati2024llms}.
+
+Line 784:
+  - Traditional machine learning optimizes only criterion (1). We argue that criterion (3)---extrapolation---is the litmus test for discovering true functional relationships versus memorizing patterns.
+  + Traditional machine learning optimizes only criterion (1). We argue that criterion (3)---extrapolation---is the litmus test for discovering true functional relationships versus memorizing patterns\citep{molnar2020interpretable}\citep{rudin2019stop}.
+
+Line 796:
+  -     \item \textbf{Practical relevance}: Used in real-world scientific or financial applications
+  +     \item \textbf{Practical relevance}: Used in real-world scientific or financial applications\citep{virtanen2020scipy}
+
+Line 851:
+  - \item \textbf{Pure LLM Baseline}: 40 tests (20 classical physics, 20 DeFi)
+  + \item \textbf{Pure LLM Baseline}: 40 tests (20 classical physics, 20 DeFi)\citep{kambhampati2024llms}
+
+Line 853:
+  - \item \textbf{LLM-Guided Hybrid}: 30 tests evaluating warm-starting benefits
+  + \item \textbf{LLM-Guided Hybrid}: 30 tests evaluating warm-starting benefits\citep{kambhampati2024llms}
+
+Line 929:
+  - \subsubsection{Method 1: Pure LLM Baseline}
+  + \subsubsection{Method 1: Pure LLM Baseline}\citep{kambhampati2024llms}
+
+Line 937:
+  -         prompt = f"""You are a scientific equation discovery system.
+  +         prompt = f"""You are a scientific equation discovery system\citep{koza1994genetic}\citep{virtanen2020scipy}.
+
+Line 1047:
+  - Our hybrid approach integrates LLM guidance with symbolic regression through four stages:
+  + Our hybrid approach integrates LLM guidance with symbolic regression through four stages:\citep{la2021contemporary}\citep{kambhampati2024llms}
+
+Line 1049:
+  - \paragraph{Stage 1: LLM-Guided Hypothesis Generation}
+  + \paragraph{Stage 1: LLM-Guided Hypothesis Generation}\citep{kambhampati2024llms}
+
+Line 1062:
+  - candidates = llm.generate_symbolic_hypotheses(
+  + candidates = llm\citep{kambhampati2024llms}.generate_symbolic_hypotheses(
+
+Line 1110:
+  - \paragraph{Stage 3: Symbolic Regression with PySR}
+  + \paragraph{Stage 3: Symbolic Regression with PySR}\citep{la2021contemporary}
+
+Line 1112:
+  - We employ PySR, a high-performance symbolic regression library:
+  + We employ PySR, a high-performance symbolic regression library:\citep{la2021contemporary}
+
+Line 1117:
+  - discovery_config = DiscoveryConfig(
+  + discovery_config = DiscoveryConfig(\citep{koza1994genetic}
+
+Line 1127:
+  - # Initialize symbolic engine with LLM guidance
+  + # Initialize symbolic engine with LLM guidance\citep{kambhampati2024llms}
+
+Line 1128:
+  - symbolic_engine = SymbolicEngineWithLLM(
+  + symbolic_engine = SymbolicEngineWithLLM(\citep{kambhampati2024llms}
+
+Line 1129:
+  -     config=discovery_config,
+  +     config=discovery_config,\citep{koza1994genetic}
+
+Line 1132:
+  -     llm_mode="hybrid"  # Use LLM candidates as seeds
+  +     llm_mode="hybrid"  # Use LLM candidates as seeds\citep{kambhampati2024llms}
+
+Line 1135:
+  - # Run discovery
+  + # Run discovery\citep{koza1994genetic}
+
+Line 1172:
+  - \item \textbf{Pure LLM}: Claude Sonnet 4 and GPT-4 with domain-specific prompting
+  + \item \textbf{Pure LLM}: Claude Sonnet 4 and GPT-4 with domain-specific prompting\citep{bubeck2023sparks}\citep{romera2023mathematical}\citep{kambhampati2024llms}
+
+Line 1174:
+  - \item \textbf{Pure Symbolic (PySR)}: Multi-objective genetic programming with physics constraints
+  + \item \textbf{Pure Symbolic (PySR)}: Multi-objective genetic programming with physics constraints\citep{koza1994genetic}\citep{stephens2018gplearn}
+
+Line 1175:
+  - \item \textbf{LLM-Guided Hybrid}: Our HypatiaX system combining LLM initialization with symbolic search
+  + \item \textbf{LLM-Guided Hybrid}: Our HypatiaX system combining LLM initialization with symbolic search\citep{kambhampati2024llms}
+
+Line 1203:
+  - Pure LLM (avg) & 6.9s per test \\
+  + Pure LLM (avg) & 6\citep{kambhampati2024llms}.9s per test \\
+
+Line 1211:
+  - Neural network training utilized GPU acceleration (CUDA), while symbolic regression executed on CPU with 12 parallel populations.
+  + Neural network training utilized GPU acceleration (CUDA), while symbolic regression executed on CPU with 12 parallel populations\citep{la2021contemporary}.
+
+Line 1218:
+  -     \item \textbf{Source code}: \url{https://github.com/hypatiax/llm-symbolic-discovery}
+  +     \item \textbf{Source code}: \url{https://github\citep{koza1994genetic}\citep{kambhampati2024llms}.com/hypatiax/llm-symbolic-discovery}
+
+Line 1243:
+  - Pure LLM (Claude Sonnet 4) & $1.0000$ & $0.0000$ & 15/15 (100\%) \\
+  + Pure LLM (Claude Sonnet 4) & $1.0000$ & $0\citep{kambhampati2024llms}.0000$ & 15/15 (100\%) \\
+
+Line 1251:
+  - \paragraph{Key Finding:} High interpolation accuracy ($R^2 > 0.93$) is necessary but \emph{not sufficient} for extrapolation. Neural networks achieve strong test set performance yet fail catastrophically outside the training distribution.
+  + \paragraph{Key Finding:} High interpolation accuracy ($R^2 > 0.93$) is necessary but \emph{not sufficient} for extrapolation. Neural networks achieve strong test set performance yet fail catastrophically outside the training distribution\citep{liu2020understanding}\citep{zhou2020universality}.
+
+Line 1275:
+  - Pure LLM        & Medium (2$\times$)   & 412-847\% & ---      & ---   & --- \\
+  + Pure LLM        & Medium (2$\times$)   & 412-847\% & ---      & ---   & --- \\\citep{kambhampati2024llms}
+
+Line 1283:
+  - \item Pure LLM extrapolation based on extended test suite (formulas correct but evaluation limited).
+  + \item Pure LLM extrapolation based on extended test suite (formulas correct but evaluation limited)\citep{kambhampati2024llms}.
+
+Line 1289:
+  - Across 15 ground truth equations and 3 extrapolation regimes, neural networks trained to $R^2 = 0.93$ interpolation accuracy exhibit mean extrapolation error $E_{\text{extrap}} = 3348\%$ at $2\times$ training range, statistically significantly worse than symbolic methods ($p < 0.001$, Cohen's $d = 2.4$).
+  + Across 15 ground truth equations and 3 extrapolation regimes, neural networks trained to $R^2 = 0.93$ interpolation accuracy exhibit mean extrapolation error $E_{\text{extrap}} = 3348\%$ at $2\times$ training range, statistically significantly worse than symbolic methods ($p < 0.001$, Cohen's $d = 2.4$)\citep{liu2020understanding}\citep{zhou2020universality}.
+
+Line 1307:
+  - & \multicolumn{2}{c}{\textbf{Pure LLM}} & \multicolumn{2}{c}{\textbf{Neural Network}} & \multicolumn{2}{c}{\textbf{HypatiaX v40}} \\
+  + & \multicolumn{2}{c}{\textbf{Pure LLM}} & \multicolumn{2}{c}{\textbf{Neural Network}} & \multicolumn{2}{c}{\textbf{HypatiaX v40}} \\\citep{kambhampati2024llms}
+
+Line 1326:
+  - \item \textbf{Root cause}: Universal gravitational constant $G = 6.674 \times 10^{-11}$ challenges both gradient descent and genetic programming
+  + \item \textbf{Root cause}: Universal gravitational constant $G = 6\citep{koza1994genetic}\citep{stephens2018gplearn}.674 \times 10^{-11}$ challenges both gradient descent and genetic programming
+
+Line 1329:
+  - This motivates future work on multi-scale symbolic regression with logarithmic transformations (see Section~\ref{sec:discussion}).
+  + This motivates future work on multi-scale symbolic regression with logarithmic transformations (see Section~\ref{sec:discussion})\citep{la2021contemporary}.
+
+Line 1343:
+  - \multicolumn{5}{c}{\textit{Pure LLM Baseline (40 tests)}} \\
+  + \multicolumn{5}{c}{\textit{Pure LLM Baseline (40 tests)}} \\\citep{kambhampati2024llms}
+
+Line 1345:
+  - Classical Scientific & 20 & 95\% & 0.975 & 847\% (GPT-4) \\
+  + Classical Scientific & 20 & 95\% & 0\citep{virtanen2020scipy}\citep{bubeck2023sparks}\citep{romera2023mathematical}.975 & 847\% (GPT-4) \\
+
+Line 1351:
+  - LLM-Guided (30 tests) & 30 & 96.7\% & 1.000 & 23\% \\
+  + LLM-Guided (30 tests) & 30 & 96.7\% & 1\citep{kambhampati2024llms}.000 & 23\% \\
+
+Line 1361:
+  - \item \textbf{Domain-dependent LLM performance}: 95\% success on classical formulas vs 45\% on DeFi
+  + \item \textbf{Domain-dependent LLM performance}: 95\% success on classical formulas vs 45\% on DeFi\citep{kambhampati2024llms}
+
+Line 1362:
+  - \item \textbf{LLM warm-starting benefits}: 96.7\% success with 82\% time reduction (70s vs 390s)
+  + \item \textbf{LLM warm-starting benefits}: 96\citep{kambhampati2024llms}.7\% success with 82\% time reduction (70s vs 390s)
+
+Line 1364:
+  - \item \textbf{Functional correctness}: 88.9-100\% for hybrid approaches vs 40\% for pure LLM on DeFi
+  + \item \textbf{Functional correctness}: 88\citep{kambhampati2024llms}.9-100\% for hybrid approaches vs 40\% for pure LLM on DeFi
+
+Line 1383:
+  - \item \textbf{Pure LLM}: Exact formula generation, $R^2 = 1.0000$ (not validated for extrapolation)
+  + \item \textbf{Pure LLM}: Exact formula generation, $R^2 = 1\citep{kambhampati2024llms}.0000$ (not validated for extrapolation)
+
+Line 1429:
+  - Pure LLM & 6.9 & \textbf{1.00} & 412-847\% & \textbf{Yes} \\
+  + Pure LLM & 6.9 & \textbf{1\citep{kambhampati2024llms}.00} & 412-847\% & \textbf{Yes} \\
+
+Line 1431:
+  - LLM-Guided & 70.0 & \textbf{1.00} & 23\% & \textbf{Yes} \\
+  + LLM-Guided & 70.0 & \textbf{1\citep{kambhampati2024llms}.00} & 23\% & \textbf{Yes} \\
+
+Line 1446:
+  - \item Neural networks optimize speed but fail catastrophically at extrapolation
+  + \item Neural networks optimize speed but fail catastrophically at extrapolation\citep{liu2020understanding}\citep{zhou2020universality}
+
+Line 1447:
+  - \item Pure LLM generates perfect formulas quickly but with unreliable execution
+  + \item Pure LLM generates perfect formulas quickly but with unreliable execution\citep{kambhampati2024llms}
+
+Line 1449:
+  - \item LLM-guided hybrid reduces time by 82\% while maintaining guarantees
+  + \item LLM-guided hybrid reduces time by 82\% while maintaining guarantees\citep{kambhampati2024llms}
+
+Line 1456:
+  - \item \textbf{Perfect extrapolation via symbolic discovery}: HypatiaX achieves 0\% extrapolation error across all regimes by recovering true functional forms
+  + \item \textbf{Perfect extrapolation via symbolic discovery}: HypatiaX achieves 0\% extrapolation error across all regimes by recovering true functional forms\citep{koza1994genetic}
+
+Line 1462:
+  - \item \textbf{LLM warm-starting benefits}: 82\% time reduction (70s vs 390s) with 96.7\% success rate
+  + \item \textbf{LLM warm-starting benefits}: 82\% time reduction (70s vs 390s) with 96\citep{kambhampati2024llms}.7\% success rate
+
+Line 1464:
+  - \item \textbf{Domain-dependent LLM performance}: 95\% classical physics vs 45\% DeFi success confirms reproductive behavior (Theorem~\ref{thm:llm_reproductive})
+  + \item \textbf{Domain-dependent LLM performance}: 95\% classical physics vs 45\% DeFi success confirms reproductive behavior (Theorem~\ref{thm:llm_reproductive})\citep{kambhampati2024llms}
+
+Line 1466:
+  - \item \textbf{Functional correctness critical}: 88.9-100\% for hybrid methods vs 20-40\% for pure LLM on specialized domains
+  + \item \textbf{Functional correctness critical}: 88\citep{kambhampati2024llms}.9-100\% for hybrid methods vs 20-40\% for pure LLM on specialized domains
+
+Line 1474:
+  - \subsection{Why Neural Networks Fail at Extrapolation}
+  + \subsection{Why Neural Networks Fail at Extrapolation}\citep{liu2020understanding}\citep{zhou2020universality}
+
+Line 1476:
+  - Our results provide empirical validation of theoretical predictions: neural networks learn \emph{local approximations} rather than \emph{global functional forms}.
+  + Our results provide empirical validation of theoretical predictions: neural networks learn \emph{local approximations} rather than \emph{global functional forms}\citep{liu2020understanding}\citep{zhou2020universality}.
+
+Line 1479:
+  - High interpolation accuracy ($R^2 = 0.93$) is necessary but not sufficient for extrapolation. Neural networks achieve strong interpolation by:
+  + High interpolation accuracy ($R^2 = 0.93$) is necessary but not sufficient for extrapolation\citep{liu2020understanding}\citep{zhou2020universality}. Neural networks achieve strong interpolation by:
+
+Line 1488:
+  - \paragraph{Mechanistic Understanding:} Neural networks with ReLU activations create piecewise linear decision boundaries. For the Arrhenius equation, a 64-32-1 architecture learns approximately 64 linear segments in training range $[273, 373]$K. Outside this range, the network extrapolates linearly from boundary segments---catastrophically wrong for exponential decay.
+  + \paragraph{Mechanistic Understanding:} Neural networks with ReLU activations create piecewise linear decision boundaries. For the Arrhenius equation, a 64-32-1 architecture learns approximately 64 linear segments in training range $[273, 373]$K. Outside this range, the network extrapolates linearly from boundary segments---catastrophically wrong for exponential decay\citep{liu2020understanding}\citep{zhou2020universality}.
+
+Line 1490:
+  - \paragraph{The Overfitting Paradox:} Counterintuitively, neural networks achieving $R^2 = 0.999$ on held-out test data can still fail at extrapolation. The test set, drawn from the same distribution as training data, validates interpolation but not generalization to novel regimes.
+  + \paragraph{The Overfitting Paradox:} Counterintuitively, neural networks achieving $R^2 = 0.999$ on held-out test data can still fail at extrapolation. The test set, drawn from the same distribution as training data, validates interpolation but not generalization to novel regimes\citep{liu2020understanding}\citep{liu2020understanding}\citep{neyshabur2017exploring}\citep{zhang2021understanding}\citep{zhou2020universality}.
+
+Line 1492:
+  - \subsection{The Value of Symbolic Discovery}
+  + \subsection{The Value of Symbolic Discovery}\citep{koza1994genetic}
+
+Line 1502:
+  - These are not "close approximations"---they are the \emph{ground truth equations}. This demonstrates LLM-guided symbolic regression can achieve human-scientist-level insight.
+  + These are not "close approximations"---they are the \emph{ground truth equations}. This demonstrates LLM-guided symbolic regression can achieve human-scientist-level insight\citep{la2021contemporary}\citep{kambhampati2024llms}.
+
+Line 1504:
+  - \paragraph{Discovery vs Approximation:} The distinction between discovering $E = 0.5mv^2$ and approximating it with a neural network is fundamental. The symbolic form:
+  + \paragraph{Discovery vs Approximation:} The distinction between discovering $E = 0.5mv^2$ and approximating it with a neural network is fundamental\citep{koza1994genetic}. The symbolic form:
+
+Line 1520:
+  - \paragraph{1. LLMs are reproductive, not generative (Theorem~\ref{thm:llm_reproductive}):}
+  + \paragraph{1\citep{kambhampati2024llms}. LLMs are reproductive, not generative (Theorem~\ref{thm:llm_reproductive}):}
+
+Line 1522:
+  - Empirical validation shows 95\% LLM success on classical formulas versus 45\% on specialized domains, with generation probability decaying exponentially for expressions distant from training data. Pure LLM approaches exhibit 412-847\% extrapolation errors, confirming fundamental limitations in genuine discovery beyond pattern reproduction.
+  + Empirical validation shows 95\% LLM success on classical formulas versus 45\% on specialized domains, with generation probability decaying exponentially for expressions distant from training data. Pure LLM approaches exhibit 412-847\% extrapolation errors, confirming fundamental limitations in genuine discovery beyond pattern reproduction\citep{koza1994genetic}\citep{kambhampati2024llms}.
+
+Line 1526:
+  - Neural networks with $R^2 = 0.93$ exhibit 3348\% extrapolation error at 2$\times$ training range. This finding has immediate implications:
+  + Neural networks with $R^2 = 0.93$ exhibit 3348\% extrapolation error at 2$\times$ training range\citep{liu2020understanding}\citep{zhou2020universality}. This finding has immediate implications:
+
+Line 1528:
+  - \item Test set validation is insufficient for scientific applications
+  + \item Test set validation is insufficient for scientific applications\citep{virtanen2020scipy}
+
+Line 1537:
+  - \subsection{Design Principles for Analytical Discovery}
+  + \subsection{Design Principles for Analytical Discovery}\citep{koza1994genetic}
+
+Line 1542:
+  - \item \textbf{Use symbolic methods for discovery}: Evolutionary search with physics constraints enables genuine novelty beyond training data patterns
+  + \item \textbf{Use symbolic methods for discovery}: Evolutionary search with physics constraints enables genuine novelty beyond training data patterns\citep{koza1994genetic}
+
+Line 1544:
+  - \item \textbf{Use LLMs as interfaces}: Natural language interpretation and warm-starting leverage LLM strengths while avoiding reproductive limitations. Our LLM-guided variant achieves 82\% time reduction with preserved guarantees.
+  + \item \textbf{Use LLMs as interfaces}: Natural language interpretation and warm-starting leverage LLM strengths while avoiding reproductive limitations. Our LLM-guided variant achieves 82\% time reduction with preserved guarantees\citep{kambhampati2024llms}.
+
+Line 1553:
+  - These principles align with broader efforts in AI safety and interpretable machine learning. Recent work emphasizes the critical need for calibrated uncertainty in high-stakes scientific applications.
+  + These principles align with broader efforts in AI safety and interpretable machine learning. Recent work emphasizes the critical need for calibrated uncertainty in high-stakes scientific applications\citep{molnar2020interpretable}\citep{rudin2019stop}\citep{virtanen2020scipy}.
+
+Line 1559:
+  - \paragraph{1. LLMs are reproductive, not generative (Theorem~\ref{thm:llm_reproductive}):}
+  + \paragraph{1\citep{kambhampati2024llms}. LLMs are reproductive, not generative (Theorem~\ref{thm:llm_reproductive}):}
+
+Line 1561:
+  - Empirical validation shows 95\% LLM success on classical formulas versus 45\% on specialized domains, with generation probability decaying exponentially for expressions distant from training data. Pure LLM approaches exhibit 412-847\% extrapolation errors, confirming fundamental limitations in genuine discovery beyond pattern reproduction.
+  + Empirical validation shows 95\% LLM success on classical formulas versus 45\% on specialized domains, with generation probability decaying exponentially for expressions distant from training data. Pure LLM approaches exhibit 412-847\% extrapolation errors, confirming fundamental limitations in genuine discovery beyond pattern reproduction\citep{koza1994genetic}\citep{kambhampati2024llms}.
+
+Line 1565:
+  - Neural networks with $R^2 = 0.93$ exhibit 3348\% extrapolation error at 2$\times$ training range. This finding has immediate implications:
+  + Neural networks with $R^2 = 0.93$ exhibit 3348\% extrapolation error at 2$\times$ training range\citep{liu2020understanding}\citep{zhou2020universality}. This finding has immediate implications:
+
+Line 1567:
+  - \item Test set validation is insufficient for scientific applications
+  + \item Test set validation is insufficient for scientific applications\citep{virtanen2020scipy}
+
+Line 1576:
+  - \subsection{Design Principles for Analytical Discovery}
+  + \subsection{Design Principles for Analytical Discovery}\citep{koza1994genetic}
+
+Line 1581:
+  - \item \textbf{Use symbolic methods for discovery}: Evolutionary search with physics constraints enables genuine novelty beyond training data patterns
+  + \item \textbf{Use symbolic methods for discovery}: Evolutionary search with physics constraints enables genuine novelty beyond training data patterns\citep{koza1994genetic}
+
+Line 1583:
+  - \item \textbf{Use LLMs as interfaces}: Natural language interpretation and warm-starting leverage LLM strengths while avoiding reproductive limitations. Our LLM-guided variant achieves 82\% time reduction with preserved guarantees.
+  + \item \textbf{Use LLMs as interfaces}: Natural language interpretation and warm-starting leverage LLM strengths while avoiding reproductive limitations. Our LLM-guided variant achieves 82\% time reduction with preserved guarantees\citep{kambhampati2024llms}.
+
+Line 1592:
+  - These principles align with broader efforts in AI safety and interpretable machine learning. Recent work emphasizes the critical need for calibrated uncertainty in high-stakes scientific applications.
+  + These principles align with broader efforts in AI safety and interpretable machine learning. Recent work emphasizes the critical need for calibrated uncertainty in high-stakes scientific applications\citep{molnar2020interpretable}\citep{rudin2019stop}\citep{virtanen2020scipy}.
+
+Line 1598:
+  - \paragraph{1. LLMs are reproductive, not generative (Theorem~\ref{thm:llm_reproductive}):}
+  + \paragraph{1\citep{kambhampati2024llms}. LLMs are reproductive, not generative (Theorem~\ref{thm:llm_reproductive}):}
+
+Line 1600:
+  - Empirical validation shows 95\% LLM success on classical formulas versus 45\% on specialized domains, with generation probability decaying exponentially for expressions distant from training data. Pure LLM approaches exhibit 412-847\% extrapolation errors, confirming fundamental limitations in genuine discovery beyond pattern reproduction.
+  + Empirical validation shows 95\% LLM success on classical formulas versus 45\% on specialized domains, with generation probability decaying exponentially for expressions distant from training data. Pure LLM approaches exhibit 412-847\% extrapolation errors, confirming fundamental limitations in genuine discovery beyond pattern reproduction\citep{koza1994genetic}\citep{kambhampati2024llms}.
+
+Line 1604:
+  - Neural networks with $R^2 = 0.93$ exhibit 3348\% extrapolation error at 2$\times$ training range. This finding has immediate implications:
+  + Neural networks with $R^2 = 0.93$ exhibit 3348\% extrapolation error at 2$\times$ training range\citep{liu2020understanding}\citep{zhou2020universality}. This finding has immediate implications:
+
+Line 1606:
+  - \item Test set validation is insufficient for scientific applications
+  + \item Test set validation is insufficient for scientific applications\citep{virtanen2020scipy}
+
+Line 1615:
+  - \subsection{Design Principles for Analytical Discovery}
+  + \subsection{Design Principles for Analytical Discovery}\citep{koza1994genetic}
+
+Line 1620:
+  - \item \textbf{Use symbolic methods for discovery}: Evolutionary search with physics constraints enables genuine novelty beyond training data patterns
+  + \item \textbf{Use symbolic methods for discovery}: Evolutionary search with physics constraints enables genuine novelty beyond training data patterns\citep{koza1994genetic}
+
+Line 1622:
+  - \item \textbf{Use LLMs as interfaces}: Natural language interpretation and warm-starting leverage LLM strengths while avoiding reproductive limitations. Our LLM-guided variant achieves 82\% time reduction with preserved guarantees.
+  + \item \textbf{Use LLMs as interfaces}: Natural language interpretation and warm-starting leverage LLM strengths while avoiding reproductive limitations. Our LLM-guided variant achieves 82\% time reduction with preserved guarantees\citep{kambhampati2024llms}.
+
+Line 1631:
+  - These principles align with broader efforts in AI safety and interpretable machine learning. Recent work emphasizes the critical need for calibrated uncertainty in high-stakes scientific applications.
+  + These principles align with broader efforts in AI safety and interpretable machine learning. Recent work emphasizes the critical need for calibrated uncertainty in high-stakes scientific applications\citep{molnar2020interpretable}\citep{rudin2019stop}\citep{virtanen2020scipy}.
+
+Line 1637:
+  - \paragraph{Romera et al. (2023):} Demonstrates LLM formula recovery on classical physics. Our work extends by:
+  + \paragraph{Romera et al. (2023):} Demonstrates LLM formula recovery on classical physics\citep{kambhampati2024llms}. Our work extends by:
+
+Line 1641:
+  - \item Providing theoretical characterization (Theorem~\ref{thm:llm_reproductive})
+  + \item Providing theoretical characterization (Theorem~\ref{thm:llm_reproductive})\citep{kambhampati2024llms}
+
+Line 1645:
+  - \paragraph{Udrescu \& Tegmark (2020):} AI Feynman uses neural networks to guide symbolic search. Our approach differs by:
+  + \paragraph{Udrescu \& Tegmark (2020):} AI Feynman uses neural networks to guide symbolic search\citep{liu2020understanding}\citep{zhou2020universality}. Our approach differs by:
+
+Line 1647:
+  - \item Using LLMs for initialization rather than neural feature extraction
+  + \item Using LLMs for initialization rather than neural feature extraction\citep{kambhampati2024llms}
+
+Line 1653:
+  - \paragraph{La Cava et al. (2021):} Benchmarked 14 SR methods focused on interpolation accuracy. Our contribution demonstrates that symbolic discovery achieves qualitatively different extrapolation performance (0\% vs 3348\% error).
+  + \paragraph{La Cava et al. (2021):} Benchmarked 14 SR methods focused on interpolation accuracy. Our contribution demonstrates that symbolic discovery achieves qualitatively different extrapolation performance (0\% vs 3348\% error)\citep{koza1994genetic}.
+
+Line 1659:
+  - \paragraph{Computational Cost:} HypatiaX requires 27$\times$ more time than neural networks (45.6s vs 1.7s per test). Future work should:
+  + \paragraph{Computational Cost:} HypatiaX requires 27$\times$ more time than neural networks (45.6s vs 1.7s per test)\citep{zhou2020universality}\citep{liu2020understanding}. Future work should:
+
+Line 1661:
+  - \item Parallelize symbolic regression populations across GPU cores
+  + \item Parallelize symbolic regression populations across GPU cores\citep{la2021contemporary}
+
+Line 1663:
+  - \item Use early stopping when LLM candidate achieves $R^2 > 0.99$
+  + \item Use early stopping when LLM candidate achieves $R^2 > 0\citep{kambhampati2024llms}.99$
+
+Line 1675:
+  - \paragraph{Pure LLM Prediction Integration:} Our implementation did not successfully validate Pure LLM extrapolation due to formula-to-callable compilation challenges. Future work needs:
+  + \paragraph{Pure LLM Prediction Integration:} Our implementation did not successfully validate Pure LLM extrapolation due to formula-to-callable compilation challenges\citep{kambhampati2024llms}. Future work needs:
+
+Line 1692:
+  - \paragraph{Operator Completeness:} If true formula requires operators outside $\mathcal{O}$, discovery fails.
+  + \paragraph{Operator Completeness:} If true formula requires operators outside $\mathcal{O}$, discovery fails\citep{koza1994genetic}.
+
+Line 1702:
+  - \paragraph{Computational Cost:} HypatiaX requires 27$\times$ more time than neural networks (45.6s vs 1.7s per test). Future work should:
+  + \paragraph{Computational Cost:} HypatiaX requires 27$\times$ more time than neural networks (45.6s vs 1.7s per test)\citep{zhou2020universality}\citep{liu2020understanding}. Future work should:
+
+Line 1704:
+  - \item Parallelize symbolic regression populations across GPU cores
+  + \item Parallelize symbolic regression populations across GPU cores\citep{la2021contemporary}
+
+Line 1706:
+  - \item Use early stopping when LLM candidate achieves $R^2 > 0.99$
+  + \item Use early stopping when LLM candidate achieves $R^2 > 0\citep{kambhampati2024llms}.99$
+
+Line 1718:
+  - \paragraph{Pure LLM Prediction Integration:} Our implementation did not successfully validate Pure LLM extrapolation due to formula-to-callable compilation challenges. Future work needs:
+  + \paragraph{Pure LLM Prediction Integration:} Our implementation did not successfully validate Pure LLM extrapolation due to formula-to-callable compilation challenges\citep{kambhampati2024llms}. Future work needs:
+
+Line 1735:
+  - \paragraph{Operator Completeness:} If true formula requires operators outside $\mathcal{O}$, discovery fails.
+  + \paragraph{Operator Completeness:} If true formula requires operators outside $\mathcal{O}$, discovery fails\citep{koza1994genetic}.
+
+Line 1747:
+  - \paragraph{Dual-Use Concerns:} Methods enabling discovery of chemical or biological relationships could be misused. Mitigations:
+  + \paragraph{Dual-Use Concerns:} Methods enabling discovery of chemical or biological relationships could be misused\citep{koza1994genetic}. Mitigations:
+
+Line 1761:
+  - \paragraph{Access and Equity:} Current implementation requires programming expertise (Python, Julia) and computational resources (GPU, LLM API access), creating barriers for researchers in developing countries. Proposed solutions:
+  + \paragraph{Access and Equity:} Current implementation requires programming expertise (Python, Julia) and computational resources (GPU, LLM API access), creating barriers for researchers in developing countries\citet{kambhampati2024llms}. Proposed solutions:
+
+Line 1773:
+  - \paragraph{Computational Efficiency:} Hybrid approaches require 27$\times$ more time than neural networks. Future work should explore:
+  + \paragraph{Computational Efficiency:} Hybrid approaches require 27$\times$ more time than neural networks\citep{zhou2020universality}\citep{liu2020understanding}. Future work should explore:
+
+Line 1775:
+  - \item Parallelization of symbolic regression populations
+  + \item Parallelization of symbolic regression populations\citep{la2021contemporary}
+
+Line 1777:
+  - \item Early stopping when LLM candidate achieves $R^2 > 0.99$
+  + \item Early stopping when LLM candidate achieves $R^2 > 0\citep{kambhampati2024llms}.99$
+
+Line 1778:
+  - \item GPU acceleration of genetic programming operations
+  + \item GPU acceleration of genetic programming operations\citep{koza1994genetic}\citep{stephens2018gplearn}
+
+Line 1788:
+  - \paragraph{Extending to PDEs:} Combine Fourier Neural Operators with symbolic regression:
+  + \paragraph{Extending to PDEs:} Combine Fourier Neural Operators with symbolic regression:\citep{la2021contemporary}
+
+Line 1792:
+  - \item Apply symbolic regression to discover PDE structure
+  + \item Apply symbolic regression to discover PDE structure\citep{la2021contemporary}
+
+Line 1796:
+  - \paragraph{Active Learning:} Use LLM feedback to guide symbolic search more intelligently:
+  + \paragraph{Active Learning:} Use LLM feedback to guide symbolic search more intelligently:\citep{kambhampati2024llms}
+
+Line 1800:
+  -     suggestions = LLM.critique(E*)
+  +     suggestions = LLM\citep{kambhampati2024llms}.critique(E*)
+
+Line 1806:
+  - \paragraph{Hierarchical Discovery:} Discover sub-expressions separately, then combine.
+  + \paragraph{Hierarchical Discovery:} Discover sub-expressions separately, then combine\citep{koza1994genetic}.
+
+Line 1824:
+  - While we focused on physics and finance, the hybrid architecture generalizes to other domains requiring analytical discovery:
+  + While we focused on physics and finance, the hybrid architecture generalizes to other domains requiring analytical discovery:\citep{koza1994genetic}
+
+Line 1847:
+  - We have systematically investigated whether Large Language Models can perform genuine analytical discovery. Our answer is nuanced: \textbf{LLMs excel at reproducing known patterns but fail catastrophically on specialized domains requiring extrapolation beyond training data.}
+  + We have systematically investigated whether Large Language Models can perform genuine analytical discovery. Our answer is nuanced: \textbf{LLMs excel at reproducing known patterns but fail catastrophically on specialized domains requiring extrapolation beyond training data\citep{koza1994genetic}\citep{lewkowycz2022minerva}\citep{kambhampati2024llms}.}
+
+Line 1849:
+  - We have demonstrated that neural networks---despite achieving 93\% interpolation accuracy---catastrophically fail when extrapolating beyond their training distribution, with errors reaching 3348\% at merely 2$\times$ the training range ($p < 0.001$, Cohen's $d = 2.4$). In contrast, our hybrid LLM-symbolic method achieves perfect extrapolation (0\% error) across all regimes by discovering true functional forms rather than memorizing patterns.
+  + We have demonstrated that neural networks---despite achieving 93\% interpolation accuracy---catastrophically fail when extrapolating beyond their training distribution, with errors reaching 3348\% at merely 2$\times$ the training range ($p < 0.001$, Cohen's $d = 2.4$). In contrast, our hybrid LLM-symbolic method achieves perfect extrapolation (0\% error) across all regimes by discovering true functional forms rather than memorizing patterns\citet{liu2020understanding}\citet{zhou2020universality}\citet{kambhampati2024llms}.
+
+Line 1851:
+  - Theorem~\ref{thm:llm_reproductive} provides theoretical grounding: autoregressive generation probability decays exponentially for expressions distant from training corpora. Empirical validation across 131 tests confirms this, showing 95\% success on classical formulas versus 45\% on decentralized finance, with 412-847\% extrapolation errors.
+  + Theorem~\ref{thm:llm_reproductive} provides theoretical grounding: autoregressive generation probability decays exponentially for expressions distant from training corpora. Empirical validation across 131 tests confirms this, showing 95\% success on classical formulas versus 45\% on decentralized finance, with 412-847\% extrapolation errors\citep{kambhampati2024llms}.
+
+Line 1853:
+  - These findings have profound implications for AI-driven scientific discovery:
+  + These findings have profound implications for AI-driven scientific discovery:\citep{koza1994genetic}\citep{virtanen2020scipy}
+
+Line 1858:
+  -     \item \textbf{Functional form recovery is essential}: Symbolic methods that discover correct mathematical structure enable reliable prediction in novel regimes---the core requirement for scientific discovery.
+  +     \item \textbf{Functional form recovery is essential}: Symbolic methods that discover correct mathematical structure enable reliable prediction in novel regimes---the core requirement for scientific discovery\citep{koza1994genetic}\citep{virtanen2020scipy}.
+
+Line 1860:
+  -     \item \textbf{Hybrid approaches are necessary}: Combining LLM domain knowledge with symbolic regression optimization achieves qualitatively superior generalization compared to either approach alone.
+  +     \item \textbf{Hybrid approaches are necessary}: Combining LLM domain knowledge with symbolic regression optimization achieves qualitatively superior generalization compared to either approach alone\citep{la2021contemporary}\citep{liu2020understanding}\citep{neyshabur2017exploring}\citep{zhang2021understanding}\citep{kambhampati2024llms}.
+
+Line 1863:
+  - \textsc{HypatiaX} addresses these limitations through careful role allocation: symbolic methods perform mathematical reasoning under physics constraints, while LLMs provide natural language interpretation and optional warm-starting. This hybrid approach achieves 88.9-100\% success rates with 8-23\% extrapolation error and 100\% functional correctness on ground truth tests.
+  + \textsc{HypatiaX} addresses these limitations through careful role allocation: symbolic methods perform mathematical reasoning under physics constraints, while LLMs provide natural language interpretation and optional warm-starting. This hybrid approach achieves 88.9-100\% success rates with 8-23\% extrapolation error and 100\% functional correctness on ground truth tests\citep{lewkowycz2022minerva}\citep{kambhampati2024llms}.
+
+Line 1865:
+  - The most striking empirical finding is the 0\% vs 3348\% extrapolation error comparison between symbolic discovery and neural networks ($p < 0.001$, Cohen's $d = 2.4$). This demonstrates that:
+  + The most striking empirical finding is the 0\% vs 3348\% extrapolation error comparison between symbolic discovery and neural networks ($p < 0.001$, Cohen's $d = 2.4$)\citep{koza1994genetic}\citep{liu2020understanding}\citep{zhou2020universality}. This demonstrates that:
+
+Line 1870:
+  - \item \textbf{Hybrid approaches are necessary}: Combining LLM domain knowledge with symbolic regression optimization achieves qualitatively superior generalization
+  + \item \textbf{Hybrid approaches are necessary}: Combining LLM domain knowledge with symbolic regression optimization achieves qualitatively superior generalization\citep{la2021contemporary}\citep{liu2020understanding}\citep{neyshabur2017exploring}\citep{zhang2021understanding}\citep{kambhampati2024llms}
+
+Line 1873:
+  - Our work provides both a rigorous evaluation framework (15 ground truth equations, 3 extrapolation regimes, 5 scientific domains) and a production-ready implementation for LLM-guided symbolic discovery. We anticipate this approach will enable scientific breakthroughs in domains where reliable extrapolation is critical:
+  + Our work provides both a rigorous evaluation framework (15 ground truth equations, 3 extrapolation regimes, 5 scientific domains) and a production-ready implementation for LLM-guided symbolic discovery\citep{koza1994genetic}\citep{virtanen2020scipy}\citep{kambhampati2024llms}. We anticipate this approach will enable scientific breakthroughs in domains where reliable extrapolation is critical:
+
+Line 1876:
+  - \item \textbf{Drug discovery}: Predicting efficacy in untested dosage ranges, reducing animal testing
+  + \item \textbf{Drug discovery}: Predicting efficacy in untested dosage ranges, reducing animal testing\citep{koza1994genetic}
+
+Line 1882:
+  - The central insight is that \emph{discovering the correct equation is fundamentally different from approximating the data}. For science, where extrapolation to novel regimes defines progress, symbolic discovery is not merely preferable---it is essential.
+  + The central insight is that \emph{discovering the correct equation is fundamentally different from approximating the data}. For science, where extrapolation to novel regimes defines progress, symbolic discovery is not merely preferable---it is essential\citep{koza1994genetic}.
+
+Line 1886:
+  - The code, data, and complete experimental protocol are available at \url{https://github.com/ruperto-bonet/hybrid-symbolic-discovery} to facilitate reproduction and extension of these results.
+  + The code, data, and complete experimental protocol are available at \url{https://github.com/ruperto-bonet/hybrid-symbolic-discovery} to facilitate reproduction and extension of these results\citep{koza1994genetic}.
+
+Line 1919:
+  - \section{Complete Proof of Theorem~\ref{thm:llm_reproductive}}
+  + \section{Complete Proof of Theorem~\ref{thm:llm_reproductive}}\citep{kambhampati2024llms}
+
+Line 2051:
+  - \subsection{Pure LLM Baseline (40 tests)}
+  + \subsection{Pure LLM Baseline (40 tests)}\citep{kambhampati2024llms}
+
+Line 2062:
+  - \multicolumn{5}{c}{\textit{Classical Scientific Domains (20 tests)}} \\
+  + \multicolumn{5}{c}{\textit{Classical Scientific Domains (20 tests)}} \\\citep{virtanen2020scipy}
+
+Line 2157:
+  - \paragraph{Extrapolation Tests:} Six tests designated for extrapolation validation (constant product, impermanent loss, VaR variants, ES variants, Kelly criterion) all passed with average extrapolation $R^2 = 0.9650$, demonstrating robust generalization.
+  + \paragraph{Extrapolation Tests:} Six tests designated for extrapolation validation (constant product, impermanent loss, VaR variants, ES variants, Kelly criterion) all passed with average extrapolation $R^2 = 0.9650$, demonstrating robust generalization\citep{liu2020understanding}\citep{neyshabur2017exploring}\citep{zhang2021understanding}.
+
+Line 2259:
+  - \textbf{Analysis}: While not an exact match to the exponential form, the discovered expression is a rational function that perfectly captures the decay behavior. Symbolic regression often finds algebraically equivalent but structurally different representations.
+  + \textbf{Analysis}: While not an exact match to the exponential form, the discovered expression is a rational function that perfectly captures the decay behavior. Symbolic regression often finds algebraically equivalent but structurally different representations\citep{la2021contemporary}.
+
+Line 2293:
+  - \textbf{Physical interpretation}: This demonstrates symbolic regression can discover fundamental physical constants from data alone, without prior knowledge of their values.
+  + \textbf{Physical interpretation}: This demonstrates symbolic regression can discover fundamental physical constants from data alone, without prior knowledge of their values\citep{la2021contemporary}.
+
+Line 2334:
+  - \textbf{Recommended Solution}: Dimensional analysis preprocessing to identify required constant scales before symbolic regression. Alternatively, use logarithmic transformation: $\log F = \log G + \log m_1 + \log m_2 - 2\log r$, which converts the problem to discovering linear coefficients in log-space.
+  + \textbf{Recommended Solution}: Dimensional analysis preprocessing to identify required constant scales before symbolic regression. Alternatively, use logarithmic transformation: $\log F = \log G + \log m_1 + \log m_2 - 2\log r$, which converts the problem to discovering linear coefficients in log-space\citep{la2021contemporary}.
+
+Line 2378:
+  - \textbf{GitHub:} \url{https://github.com/ruperto-bonet/hybrid-symbolic-discovery}
+  + \textbf{GitHub:} \url{https://github\citep{koza1994genetic}.com/ruperto-bonet/hybrid-symbolic-discovery}
+
+Line 2383:
+  - hybrid-symbolic-discovery/
+  + hybrid-symbolic-discovery/\citep{koza1994genetic}
+
+Line 2386:
+  - |   |   |-- generation/         # Discovery engines
+  + |   |   |-- generation/         # Discovery engines\citep{koza1994genetic}
+
+Line 2393:
+  - |   |-- pure_llm_baseline.py    # 40 LLM tests
+  + |   |-- pure_llm_baseline\citep{kambhampati2024llms}.py    # 40 LLM tests
+
+Line 2395:
+  - |   |-- protocol_all_30.py      # LLM-guided hybrid
+  + |   |-- protocol_all_30\citep{kambhampati2024llms}.py      # LLM-guided hybrid
+
+Line 2409:
+  - \item \textbf{Pure LLM Baseline}: \texttt{data/results/pure\_llm\_20260115/}
+  + \item \textbf{Pure LLM Baseline}: \texttt{data/results/pure\_llm\_20260115/}\citep{kambhampati2024llms}
+
+Line 2411:
+  - \item \textbf{LLM-Guided (30 tests)}: \texttt{data/results/llm\_20260114\_183940/}
+  + \item \textbf{LLM-Guided (30 tests)}: \texttt{data/results/llm\_20260114\_183940/}\citep{kambhampati2024llms}
+
+Line 2429:
+  - git clone https://github.com/ruperto-bonet/hybrid-symbolic-discovery
+  + git clone https://github\citep{koza1994genetic}.com/ruperto-bonet/hybrid-symbolic-discovery
+
+Line 2430:
+  - cd hybrid-symbolic-discovery
+  + cd hybrid-symbolic-discovery\citep{koza1994genetic}
+
+Line 2438:
+  - # Run LLM-guided hybrid (30 tests, ~35 minutes)
+  + # Run LLM-guided hybrid (30 tests, ~35 minutes)\citep{kambhampati2024llms}
+
+Line 2467:
+  - PySR==0.16.3           # Symbolic regression
+  + PySR==0.16\citep{la2021contemporary}.3           # Symbolic regression
+
+Line 2471:
+  - SciPy==1.11.2          # Scientific computing
+  + SciPy==1.11\citep{virtanen2020scipy}.2          # Scientific computing
+
+Line 2473:
+  - Anthropic==0.18.1      # LLM API (optional for LLM-guided mode)
+  + Anthropic==0.18\citep{kambhampati2024llms}.1      # LLM API (optional for LLM-guided mode)
+
+Line 2483:
+  - \item LLM-guided: \texttt{seed=42} (PySR component)
+  + \item LLM-guided: \texttt{seed=42} (PySR component)\citep{kambhampati2024llms}
+
+Line 2487:
+  - LLM outputs have inherent variability due to temperature sampling (temperature=0.7), but validation ensures only mathematically correct expressions are accepted regardless of generation randomness.
+  + LLM outputs have inherent variability due to temperature sampling (temperature=0.7), but validation ensures only mathematically correct expressions are accepted regardless of generation randomness\citep{kambhampati2024llms}.
+
+Line 2499:
+  - Pure LLM Baseline & 40 & 5-10 min \\
+  + Pure LLM Baseline & 40 & 5-10 min \\\citep{kambhampati2024llms}
+
+Line 2501:
+  - LLM-Guided Hybrid & 30 & 35 min \\
+  + LLM-Guided Hybrid & 30 & 35 min \\\citep{kambhampati2024llms}
+
+Line 2541:
+  - \item Open GitHub issue: \url{https://github.com/ruperto-bonet/hybrid-symbolic-discovery/issues}
+  + \item Open GitHub issue: \url{https://github\citep{koza1994genetic}.com/ruperto-bonet/hybrid-symbolic-discovery/issues}
+
+Line 2589:
+  - \multicolumn{3}{c}{\textit{LLM-Guided Hybrid}} \\
+  + \multicolumn{3}{c}{\textit{LLM-Guided Hybrid}} \\\citep{kambhampati2024llms}
+
+Line 2591:
+  - LLM API call & 8.5 & 12.1\% \\
+  + LLM API call & 8.5 & 12\citep{kambhampati2024llms}.1\% \\
+
+Line 2605:
+  - \item LLM-guided mode reduces this by solving 73\% of cases without PySR
+  + \item LLM-guided mode reduces this by solving 73\% of cases without PySR\citep{kambhampati2024llms}
+
+Line 2619:
+  - \textbf{Data Points} & \textbf{Pure PySR (s)} & \textbf{LLM-Hybrid (s)} & \textbf{Speedup} \\
+  + \textbf{Data Points} & \textbf{Pure PySR (s)} & \textbf{LLM-Hybrid (s)} & \textbf{Speedup} \\\citep{kambhampati2024llms}
+
+Line 2629:
+  - Speedup remains relatively constant across dataset sizes, confirming that LLM warm-starting provides consistent efficiency gains.
+  + Speedup remains relatively constant across dataset sizes, confirming that LLM warm-starting provides consistent efficiency gains\citep{kambhampati2024llms}.
+
+Line 2635:
+  - Comprehensive empirical analysis of LLM performance across 140 formula generations and 10 scientific domains is available in the supplementary materials document. This includes:
+  + Comprehensive empirical analysis of LLM performance across 140 formula generations and 10 scientific domains is available in the supplementary materials document\citep{virtanen2020scipy}\citep{kambhampati2024llms}. This includes:
+
+Line 2646:
+  - \item Pure LLM success variance of 0-100\% across runs using identical test cases
+  + \item Pure LLM success variance of 0-100\% across runs using identical test cases\citep{kambhampati2024llms}
+
+Line 2657:
+  - \subsection{Why LLMs Fail on Novel Domains}
+  + \subsection{Why LLMs Fail on Novel Domains}\citep{kambhampati2024llms}
+
+Line 2659:
+  - Our empirical results (95\% classical vs. 45\% DeFi) raise a question: \textbf{Why do LLMs fail specifically on specialized domains?}
+  + Our empirical results (95\% classical vs\citep{kambhampati2024llms}. 45\% DeFi) raise a question: \textbf{Why do LLMs fail specifically on specialized domains?}
+
+Line 2674:
+  - \item Emerged post-2020 (after many LLM training cutoffs)
+  + \item Emerged post-2020 (after many LLM training cutoffs)\citep{kambhampati2024llms}
+
+Line 2691:
+  - Distributional reasoning & Rare & Essential \\
+  + Distributional reasoning & Rare & Essential \\\citep{lewkowycz2022minerva}
+
+Line 2700:
+  - \subsection{Lessons for Future LLM Development}
+  + \subsection{Lessons for Future LLM Development}\citep{kambhampati2024llms}
+
+Line 2702:
+  - Our findings suggest design principles for more reliable scientific LLMs:
+  + Our findings suggest design principles for more reliable scientific LLMs:\citep{virtanen2020scipy}\citep{kambhampati2024llms}
+
+Line 2716:
+  - Even with these improvements, Theorem~\ref{thm:llm_reproductive} suggests fundamental limits on extrapolation capability.
+  + Even with these improvements, Theorem~\ref{thm:llm_reproductive} suggests fundamental limits on extrapolation capability\citep{kambhampati2024llms}.
+
+Line 2720:
+  - While we focused on physics and finance, the hybrid architecture generalizes to other domains requiring analytical discovery:
+  + While we focused on physics and finance, the hybrid architecture generalizes to other domains requiring analytical discovery:\citep{koza1994genetic}
+
+Line 2744:
+  - \item \textbf{Operator completeness}: If true formula requires operators outside $\mathcal{O}$, discovery fails
+  + \item \textbf{Operator completeness}: If true formula requires operators outside $\mathcal{O}$, discovery fails\citep{koza1994genetic}
+
+Line 2753:
+  - \item \textbf{Active learning}: Use LLM feedback to guide symbolic search more intelligently:
+  + \item \textbf{Active learning}: Use LLM feedback to guide symbolic search more intelligently:\citep{kambhampati2024llms}
+
+Line 2757:
+  -     suggestions = LLM.critique(E*)
+  +     suggestions = LLM\citep{kambhampati2024llms}.critique(E*)
+
+Line 2761:
+  - \item \textbf{Hierarchical discovery}: Discover sub-expressions separately, then combine
+  + \item \textbf{Hierarchical discovery}: Discover sub-expressions separately, then combine\citep{koza1994genetic}

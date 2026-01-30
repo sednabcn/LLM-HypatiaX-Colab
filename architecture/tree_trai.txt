@@ -1,0 +1,21 @@
+hypatiax/core/training
+├── baseline_neural_network_defi.py
+├── baseline_neural_network.py
+├── docs
+│   ├── docs.txt
+│   ├── training.docx
+│   └── usage-nn.md
+├── experiment_protocol_defi.py
+├── experiment_protocol.py
+├── __init__.py
+├── __pycache__
+│   ├── baseline_neural_network_defi_improved.cpython-312.pyc
+│   ├── experiment_protocol.cpython-312.pyc
+│   ├── experiment_protocol_defi.cpython-312.pyc
+│   └── __init__.cpython-312.pyc
+├── training_spacy.py
+├── training_tranformer_.py
+├── training_transformer.py
+└── training_transformer_.py
+
+3 directories, 16 files

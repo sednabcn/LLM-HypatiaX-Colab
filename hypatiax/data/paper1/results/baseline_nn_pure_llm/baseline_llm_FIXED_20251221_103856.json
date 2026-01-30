@@ -1,0 +1,712 @@
+[
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Impermanent loss in constant product AMM (Uniswap V2)",
+    "domain": "amm",
+    "formula": "IL = 2\u221ar/(1+r) - 1",
+    "latex": "$$IL = \\frac{2\\sqrt{r}}{1+r} - 1$$\n\nwhere $r = \\frac{P_1}{P_0}$",
+    "python_code": "def formula(params):\n    import numpy as np\n    price_ratio = params['price_ratio']\n    r = price_ratio\n    impermanent_loss = (2 * np.sqrt(r)) / (1 + r) - 1\n    return impermanent_loss",
+    "variables": "- price_ratio (r): Final token price divided by initial token price",
+    "assumptions": "- Constant product formula (x * y = k)\n- Equal initial token values (50/50 pool)\n- No trading fees considered\n- No external arbitrage delays\n- Tokens maintain liquidity throughout\n- Price changes are the primary source of IL",
+    "explanation": "Impermanent loss measures the opportunity cost of providing liquidity versus holding tokens. When the price ratio deviates from 1, liquidity providers experience loss relative to simply holding the original tokens. The formula shows IL is always negative (loss) when price_ratio \u2260 1, with maximum loss approaching -25% as price_ratio approaches 0 or infinity.",
+    "raw_response": "FORMULA:\nIL = 2\u221ar/(1+r) - 1\n\nwhere r is the price ratio (final_price/initial_price)\n\nLATEX:\n$$IL = \\frac{2\\sqrt{r}}{1+r} - 1$$\n\nwhere $r = \\frac{P_1}{P_0}$\n\nPYTHON:\n```python\ndef formula(params):\n    import numpy as np\n    price_ratio = params['price_ratio']\n    r = price_ratio\n    impermanent_loss = (2 * np.sqrt(r)) / (1 + r) - 1\n    return impermanent_loss\n```\n\nVARIABLES:\n- price_ratio (r): Final token price divided by initial token price\n\nASSUMPTIONS:\n- Constant product formula (x * y = k)\n- Equal initial token values (50/50 pool)\n- No trading fees considered\n- No external arbitrage delays\n- Tokens maintain liquidity throughout\n- Price changes are the primary source of IL\n\nEXPLANATION:\nImpermanent loss measures the opportunity cost of providing liquidity versus holding tokens. When the price ratio deviates from 1, liquidity providers experience loss relative to simply holding the original tokens. The formula shows IL is always negative (loss) when price_ratio \u2260 1, with maximum loss approaching -25% as price_ratio approaches 0 or infinity.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:36:03.207870",
+    "generation_time": 8.891808271408081,
+    "metadata": {
+      "difficulty": "hard",
+      "formula_type": "algebraic_with_sqrt",
+      "ground_truth": "IL = 2\u221ar/(1+r) - 1",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "price_ratio": "dimensionless",
+        "IL": "fraction"
+      },
+      "extrapolation_test": true,
+      "description": "Price ratio r = P_final/P_initial"
+    },
+    "evaluation": {
+      "mse": 0.0,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "r2": 1.0,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Impermanent loss percentage in AMM",
+    "domain": "amm",
+    "formula": "IL% = (2\u221ar)/(1+r) - 1",
+    "latex": "IL\\% = \\frac{2\\sqrt{r}}{1+r} - 1",
+    "python_code": "def formula(params):\n    import numpy as np\n    price_ratio = params['price_ratio']\n    return (2 * np.sqrt(price_ratio)) / (1 + price_ratio) - 1",
+    "variables": "- price_ratio: ratio of final token price to initial token price (P\u2081/P\u2080)",
+    "assumptions": "- 50/50 AMM pool (equal value weights)\n- Constant product formula (x*y=k)\n- No fees considered\n- Comparison against holding original tokens\n- Price ratio applies to one token relative to the other\n- No slippage or trading costs",
+    "explanation": "Impermanent loss represents the opportunity cost of providing liquidity to an AMM versus simply holding the tokens. The formula calculates the percentage loss due to price divergence between the two tokens in the pool. Maximum loss approaches 100% as price ratio approaches infinity, while equal prices (ratio = 1) result in zero impermanent loss.",
+    "raw_response": "FORMULA:\nIL% = (2\u221ar)/(1+r) - 1\n\nwhere r is the price ratio (final_price/initial_price)\n\nLATEX:\nIL\\% = \\frac{2\\sqrt{r}}{1+r} - 1\n\nPYTHON:\n```python\ndef formula(params):\n    import numpy as np\n    price_ratio = params['price_ratio']\n    return (2 * np.sqrt(price_ratio)) / (1 + price_ratio) - 1\n```\n\nVARIABLES:\n- price_ratio: ratio of final token price to initial token price (P\u2081/P\u2080)\n\nASSUMPTIONS:\n- 50/50 AMM pool (equal value weights)\n- Constant product formula (x*y=k)\n- No fees considered\n- Comparison against holding original tokens\n- Price ratio applies to one token relative to the other\n- No slippage or trading costs\n\nEXPLANATION:\nImpermanent loss represents the opportunity cost of providing liquidity to an AMM versus simply holding the tokens. The formula calculates the percentage loss due to price divergence between the two tokens in the pool. Maximum loss approaches 100% as price ratio approaches infinity, while equal prices (ratio = 1) result in zero impermanent loss.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:36:11.563959",
+    "generation_time": 7.354557037353516,
+    "metadata": {
+      "difficulty": "hard",
+      "formula_type": "algebraic_with_sqrt",
+      "ground_truth": "IL% = (2\u221ar/(1+r) - 1) \u00d7 100",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "price_ratio": "dimensionless",
+        "IL": "percent"
+      }
+    },
+    "evaluation": {
+      "mse": 7.192616424757642,
+      "mae": 2.0184267157053224,
+      "rmse": 2.681905372073676,
+      "r2": -1.2604858371063736,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Constant product formula: reserve Y given reserve X and invariant k",
+    "domain": "amm",
+    "formula": "Y = k / X",
+    "latex": "Y = \\frac{k}{X}",
+    "python_code": "def formula(params):\n    reserve_x = params['reserve_x']\n    invariant_k = params['invariant_k']\n    return invariant_k / reserve_x",
+    "variables": "- reserve_x: Current reserve amount of token X in the pool\n- invariant_k: Constant product invariant (k = X * Y)\n- Y: Resulting reserve amount of token Y",
+    "assumptions": "- reserve_x > 0 (pool must have positive reserves)\n- invariant_k > 0 (constant product must be positive)\n- No fees considered in the basic formula\n- Assumes constant product AMM model (X * Y = k)\n- Pool is in equilibrium state",
+    "explanation": "In a constant product AMM, the product of reserves X and Y equals the invariant k. Given the current reserve X and the invariant k, the corresponding reserve Y is calculated by dividing k by X. This maintains the constant product relationship where any change in one reserve inversely affects the other.",
+    "raw_response": "FORMULA:\nY = k / X\n\nLATEX:\nY = \\frac{k}{X}\n\nPYTHON:\n```python\ndef formula(params):\n    reserve_x = params['reserve_x']\n    invariant_k = params['invariant_k']\n    return invariant_k / reserve_x\n```\n\nVARIABLES:\n- reserve_x: Current reserve amount of token X in the pool\n- invariant_k: Constant product invariant (k = X * Y)\n- Y: Resulting reserve amount of token Y\n\nASSUMPTIONS:\n- reserve_x > 0 (pool must have positive reserves)\n- invariant_k > 0 (constant product must be positive)\n- No fees considered in the basic formula\n- Assumes constant product AMM model (X * Y = k)\n- Pool is in equilibrium state\n\nEXPLANATION:\nIn a constant product AMM, the product of reserves X and Y equals the invariant k. Given the current reserve X and the invariant k, the corresponding reserve Y is calculated by dividing k by X. This maintains the constant product relationship where any change in one reserve inversely affects the other.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:36:19.368878",
+    "generation_time": 6.8030242919921875,
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "y = k/x",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "reserve_x": "tokens",
+        "invariant_k": "tokens\u00b2",
+        "reserve_y": "tokens"
+      }
+    },
+    "evaluation": {
+      "mse": 0.0,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "r2": 1.0,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Price impact of swap in constant product AMM",
+    "domain": "amm",
+    "formula": "price_impact = 1 - (reserve_x / (reserve_x + swap_amount))",
+    "latex": "$$\\text{price\\_impact} = 1 - \\frac{x}{x + \\Delta x}$$",
+    "python_code": "def formula(params):\n    reserve_x = params['reserve_x']\n    swap_amount = params['swap_amount']\n    \n    price_impact = 1 - (reserve_x / (reserve_x + swap_amount))\n    return price_impact",
+    "variables": "- reserve_x: Initial reserve amount of token X in the pool\n- swap_amount: Amount of token X being swapped into the pool",
+    "assumptions": "- Constant product AMM (x * y = k)\n- No trading fees considered\n- Swap amount is positive (buying pressure on token X)\n- Pool has sufficient liquidity\n- reserve_x > 0 and swap_amount > 0",
+    "explanation": "Price impact measures how much a swap moves the price relative to the initial price. In a constant product AMM, the marginal price is inversely related to the reserve ratio. As more tokens are swapped in, the reserve increases, causing the relative price to decrease. The formula captures this relationship by comparing the initial reserve ratio to the post-swap ratio.",
+    "raw_response": "FORMULA:\nprice_impact = 1 - (reserve_x / (reserve_x + swap_amount))\n\nLATEX:\n$$\\text{price\\_impact} = 1 - \\frac{x}{x + \\Delta x}$$\n\nPYTHON:\n```python\ndef formula(params):\n    reserve_x = params['reserve_x']\n    swap_amount = params['swap_amount']\n    \n    price_impact = 1 - (reserve_x / (reserve_x + swap_amount))\n    return price_impact\n```\n\nVARIABLES:\n- reserve_x: Initial reserve amount of token X in the pool\n- swap_amount: Amount of token X being swapped into the pool\n\nASSUMPTIONS:\n- Constant product AMM (x * y = k)\n- No trading fees considered\n- Swap amount is positive (buying pressure on token X)\n- Pool has sufficient liquidity\n- reserve_x > 0 and swap_amount > 0\n\nEXPLANATION:\nPrice impact measures how much a swap moves the price relative to the initial price. In a constant product AMM, the marginal price is inversely related to the reserve ratio. As more tokens are swapped in, the reserve increases, causing the relative price to decrease. The formula captures this relationship by comparing the initial reserve ratio to the post-swap ratio.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:36:27.078121",
+    "generation_time": 6.7079784870147705,
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "price_impact = \u0394x/(x + \u0394x)",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "reserve_x": "tokens",
+        "swap_amount": "tokens",
+        "price_impact": "fraction"
+      }
+    },
+    "evaluation": {
+      "mse": 2.670108146423887e-33,
+      "mae": 4.181984619711088e-17,
+      "rmse": 5.167308918986639e-17,
+      "r2": 1.0,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Parametric Value at Risk at 95% confidence (1-day)",
+    "domain": "risk_var",
+    "formula": "VaR\u2089\u2085% = Portfolio_Value \u00d7 Daily_Volatility \u00d7 1.645",
+    "latex": "VaR_{95\\%} = P \\times \\sigma_{daily} \\times 1.645",
+    "python_code": "def formula(params):\n    portfolio_value = params['portfolio_value']\n    daily_volatility = params['daily_volatility']\n    confidence_factor = 1.645  # 95% confidence z-score\n    \n    var_95 = portfolio_value * daily_volatility * confidence_factor\n    return var_95",
+    "variables": "- portfolio_value: Current market value of the portfolio (USD)\n- daily_volatility: Daily volatility of portfolio returns (decimal, e.g., 0.02 for 2%)",
+    "assumptions": "- Portfolio returns follow a normal distribution\n- Volatility is constant over the risk horizon\n- No correlation changes during the holding period\n- Linear relationship between risk factors and portfolio value\n- No extreme market events (fat tails not considered)\n- 1-day holding period\n- Portfolio composition remains unchanged",
+    "explanation": "Parametric VaR estimates the maximum expected loss at 95% confidence over 1 day using the normal distribution assumption. The 1.645 factor represents the 95th percentile z-score, meaning there's a 5% probability that losses will exceed this amount. This method is computationally efficient but may underestimate tail risks in volatile market conditions.",
+    "raw_response": "FORMULA:\nVaR\u2089\u2085% = Portfolio_Value \u00d7 Daily_Volatility \u00d7 1.645\n\nLATEX:\nVaR_{95\\%} = P \\times \\sigma_{daily} \\times 1.645\n\nPYTHON:\n```python\ndef formula(params):\n    portfolio_value = params['portfolio_value']\n    daily_volatility = params['daily_volatility']\n    confidence_factor = 1.645  # 95% confidence z-score\n    \n    var_95 = portfolio_value * daily_volatility * confidence_factor\n    return var_95\n```\n\nVARIABLES:\n- portfolio_value: Current market value of the portfolio (USD)\n- daily_volatility: Daily volatility of portfolio returns (decimal, e.g., 0.02 for 2%)\n\nASSUMPTIONS:\n- Portfolio returns follow a normal distribution\n- Volatility is constant over the risk horizon\n- No correlation changes during the holding period\n- Linear relationship between risk factors and portfolio value\n- No extreme market events (fat tails not considered)\n- 1-day holding period\n- Portfolio composition remains unchanged\n\nEXPLANATION:\nParametric VaR estimates the maximum expected loss at 95% confidence over 1 day using the normal distribution assumption. The 1.645 factor represents the 95th percentile z-score, meaning there's a 5% probability that losses will exceed this amount. This method is computationally efficient but may underestimate tail risks in volatile market conditions.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:36:35.821689",
+    "generation_time": 7.741222143173218,
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "linear",
+      "ground_truth": "VaR = V \u00d7 \u03c3 \u00d7 z",
+      "domain_specific": true,
+      "constants": {
+        "z_score": 1.645
+      },
+      "units": {
+        "portfolio_value": "USD",
+        "daily_volatility": "fraction",
+        "VaR": "USD"
+      },
+      "extrapolation_test": true,
+      "description": "z = 1.645 for 95% confidence"
+    },
+    "evaluation": {
+      "mse": 0.0,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "r2": 1.0,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Parametric Value at Risk at 99% confidence (1-day)",
+    "domain": "risk_var",
+    "formula": "VaR\u2089\u2089% = Portfolio Value \u00d7 Daily Volatility \u00d7 Z\u2089\u2089%",
+    "latex": "VaR_{99\\%} = PV \\times \\sigma_{daily} \\times z_{0.99}",
+    "python_code": "import numpy as np\n\ndef formula(params):\n    portfolio_value = params['portfolio_value']\n    daily_volatility = params['daily_volatility']\n    z_99 = 2.326  # 99% confidence z-score\n    \n    var_99 = portfolio_value * daily_volatility * z_99\n    return var_99",
+    "variables": "- portfolio_value: Current market value of the portfolio\n- daily_volatility: Daily volatility (standard deviation) of portfolio returns",
+    "assumptions": "- Portfolio returns are normally distributed\n- Historical volatility is representative of future volatility\n- No correlation changes over the time horizon\n- Linear relationship between risk factors and portfolio value\n- Constant portfolio composition over 1-day period\n- No liquidity constraints or transaction costs",
+    "explanation": "Parametric VaR uses the normal distribution assumption to calculate the maximum expected loss at 99% confidence over 1 day. It multiplies the portfolio value by daily volatility and the 99th percentile z-score (2.326), representing the loss threshold that should not be exceeded 99% of the time under normal market conditions.",
+    "raw_response": "FORMULA:\nVaR\u2089\u2089% = Portfolio Value \u00d7 Daily Volatility \u00d7 Z\u2089\u2089%\nwhere Z\u2089\u2089% = 2.326 (99th percentile of standard normal distribution)\n\nLATEX:\nVaR_{99\\%} = PV \\times \\sigma_{daily} \\times z_{0.99}\n\nPYTHON:\n```python\nimport numpy as np\n\ndef formula(params):\n    portfolio_value = params['portfolio_value']\n    daily_volatility = params['daily_volatility']\n    z_99 = 2.326  # 99% confidence z-score\n    \n    var_99 = portfolio_value * daily_volatility * z_99\n    return var_99\n```\n\nVARIABLES:\n- portfolio_value: Current market value of the portfolio\n- daily_volatility: Daily volatility (standard deviation) of portfolio returns\n\nASSUMPTIONS:\n- Portfolio returns are normally distributed\n- Historical volatility is representative of future volatility\n- No correlation changes over the time horizon\n- Linear relationship between risk factors and portfolio value\n- Constant portfolio composition over 1-day period\n- No liquidity constraints or transaction costs\n\nEXPLANATION:\nParametric VaR uses the normal distribution assumption to calculate the maximum expected loss at 99% confidence over 1 day. It multiplies the portfolio value by daily volatility and the 99th percentile z-score (2.326), representing the loss threshold that should not be exceeded 99% of the time under normal market conditions.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:36:44.583506",
+    "generation_time": 7.760202646255493,
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "linear",
+      "ground_truth": "VaR = V \u00d7 \u03c3 \u00d7 z",
+      "domain_specific": true,
+      "constants": {
+        "z_score": 2.326
+      },
+      "units": {
+        "portfolio_value": "USD",
+        "daily_volatility": "fraction",
+        "VaR": "USD"
+      },
+      "description": "z = 2.326 for 99% confidence"
+    },
+    "evaluation": {
+      "mse": 0.0,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "r2": 1.0,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Multi-day Value at Risk using square root of time rule",
+    "domain": "risk_var",
+    "formula": "VaR(T) = VaR(1) \u00d7 \u221aT",
+    "latex": "VaR_T = VaR_1 \\times \\sqrt{T}",
+    "python_code": "def formula(params):\n    var_1day = params['var_1day']\n    time_horizon_days = params['time_horizon_days']\n    \n    var_multi_day = var_1day * np.sqrt(time_horizon_days)\n    return var_multi_day",
+    "variables": "- var_1day: One-day Value at Risk (in currency units)\n- time_horizon_days: Time horizon in days for VaR calculation",
+    "assumptions": "- Returns are independently and identically distributed (i.i.d.)\n- Daily returns follow a normal distribution\n- No serial correlation in returns\n- Constant volatility over the time horizon\n- No drift in returns (zero mean assumption)\n- Linear scaling relationship holds for the specified time horizon\n- Market conditions remain stable over the projection period",
+    "explanation": "The square root of time rule scales one-day VaR to multi-day horizons by multiplying by the square root of the number of days. This assumes that variance scales linearly with time, making standard deviation (and thus VaR) scale with the square root of time. While computationally simple, this method may underestimate risk during volatile periods due to its restrictive assumptions about return distribution and independence.",
+    "raw_response": "FORMULA:\nVaR(T) = VaR(1) \u00d7 \u221aT\n\nLATEX:\nVaR_T = VaR_1 \\times \\sqrt{T}\n\nPYTHON:\n```python\ndef formula(params):\n    var_1day = params['var_1day']\n    time_horizon_days = params['time_horizon_days']\n    \n    var_multi_day = var_1day * np.sqrt(time_horizon_days)\n    return var_multi_day\n```\n\nVARIABLES:\n- var_1day: One-day Value at Risk (in currency units)\n- time_horizon_days: Time horizon in days for VaR calculation\n\nASSUMPTIONS:\n- Returns are independently and identically distributed (i.i.d.)\n- Daily returns follow a normal distribution\n- No serial correlation in returns\n- Constant volatility over the time horizon\n- No drift in returns (zero mean assumption)\n- Linear scaling relationship holds for the specified time horizon\n- Market conditions remain stable over the projection period\n\nEXPLANATION:\nThe square root of time rule scales one-day VaR to multi-day horizons by multiplying by the square root of the number of days. This assumes that variance scales linearly with time, making standard deviation (and thus VaR) scale with the square root of time. While computationally simple, this method may underestimate risk during volatile periods due to its restrictive assumptions about return distribution and independence.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:36:53.177165",
+    "generation_time": 7.591823577880859,
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "power_law",
+      "ground_truth": "VaR_T = VaR_1 \u00d7 \u221aT",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "var_1day": "USD",
+        "time_horizon_days": "days",
+        "VaR": "USD"
+      }
+    },
+    "evaluation": {
+      "mse": 0.0,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "r2": 1.0,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Portfolio VaR for two correlated assets",
+    "domain": "risk_var",
+    "formula": "VaR_portfolio = \u221a(w\u2081\u00b2\u00b7VaR\u2081\u00b2 + w\u2082\u00b2\u00b7VaR\u2082\u00b2 + 2\u00b7w\u2081\u00b7w\u2082\u00b7\u03c1\u2081\u2082\u00b7VaR\u2081\u00b7VaR\u2082)",
+    "latex": "VaR_{portfolio} = \\sqrt{w_1^2 \\cdot VaR_1^2 + w_2^2 \\cdot VaR_2^2 + 2 \\cdot w_1 \\cdot w_2 \\cdot \\rho_{12} \\cdot VaR_1 \\cdot VaR_2}",
+    "python_code": "import numpy as np\n\ndef formula(params):\n    w1 = params['weight_asset1']\n    w2 = params['weight_asset2'] \n    var1 = params['var_asset1']\n    var2 = params['var_asset2']\n    correlation = params['correlation']\n    \n    portfolio_var = np.sqrt(\n        w1**2 * var1**2 + \n        w2**2 * var2**2 + \n        2 * w1 * w2 * correlation * var1 * var2\n    )\n    \n    return portfolio_var",
+    "variables": "- w\u2081, w\u2082: Portfolio weights for asset 1 and asset 2\n- VaR\u2081, VaR\u2082: Individual Value-at-Risk for each asset\n- \u03c1\u2081\u2082: Correlation coefficient between the two assets",
+    "assumptions": "- Portfolio weights sum to 1 (w\u2081 + w\u2082 = 1)\n- Correlation coefficient is between -1 and 1\n- VaR values are positive\n- Returns follow a normal distribution (for standard VaR calculation)\n- Same confidence level and time horizon for both individual VaRs",
+    "explanation": "This formula calculates the portfolio VaR for two correlated assets using the variance-covariance approach. It accounts for diversification benefits through the correlation term - when correlation is less than 1, the portfolio VaR is typically lower than the weighted sum of individual VaRs due to diversification effects.",
+    "raw_response": "FORMULA:\nVaR_portfolio = \u221a(w\u2081\u00b2\u00b7VaR\u2081\u00b2 + w\u2082\u00b2\u00b7VaR\u2082\u00b2 + 2\u00b7w\u2081\u00b7w\u2082\u00b7\u03c1\u2081\u2082\u00b7VaR\u2081\u00b7VaR\u2082)\n\nLATEX:\nVaR_{portfolio} = \\sqrt{w_1^2 \\cdot VaR_1^2 + w_2^2 \\cdot VaR_2^2 + 2 \\cdot w_1 \\cdot w_2 \\cdot \\rho_{12} \\cdot VaR_1 \\cdot VaR_2}\n\nPYTHON:\n```python\nimport numpy as np\n\ndef formula(params):\n    w1 = params['weight_asset1']\n    w2 = params['weight_asset2'] \n    var1 = params['var_asset1']\n    var2 = params['var_asset2']\n    correlation = params['correlation']\n    \n    portfolio_var = np.sqrt(\n        w1**2 * var1**2 + \n        w2**2 * var2**2 + \n        2 * w1 * w2 * correlation * var1 * var2\n    )\n    \n    return portfolio_var\n```\n\nVARIABLES:\n- w\u2081, w\u2082: Portfolio weights for asset 1 and asset 2\n- VaR\u2081, VaR\u2082: Individual Value-at-Risk for each asset\n- \u03c1\u2081\u2082: Correlation coefficient between the two assets\n\nASSUMPTIONS:\n- Portfolio weights sum to 1 (w\u2081 + w\u2082 = 1)\n- Correlation coefficient is between -1 and 1\n- VaR values are positive\n- Returns follow a normal distribution (for standard VaR calculation)\n- Same confidence level and time horizon for both individual VaRs\n\nEXPLANATION:\nThis formula calculates the portfolio VaR for two correlated assets using the variance-covariance approach. It accounts for diversification benefits through the correlation term - when correlation is less than 1, the portfolio VaR is typically lower than the weighted sum of individual VaRs due to diversification effects.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:37:02.792974",
+    "generation_time": 8.614160537719727,
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "algebraic_with_sqrt",
+      "ground_truth": "VaR_p = \u221a(VaR\u2081\u00b2 + VaR\u2082\u00b2 + 2\u03c1VaR\u2081VaR\u2082)",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "var_asset1": "USD",
+        "var_asset2": "USD",
+        "correlation": "dimensionless",
+        "VaR_portfolio": "USD"
+      }
+    },
+    "evaluation": {
+      "error": "Function evaluation failed: Dict-style evaluation failed: 'weight_asset1'",
+      "success": false,
+      "code_snippet": "import numpy as np\n\ndef formula(params):\n    w1 = params['weight_asset1']\n    w2 = params['weight_asset2'] \n    var1 = params['var_asset1']\n    var2 = params['var_asset2']\n    correlation = params['co"
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Optimal LP position size using risk-adjusted Kelly criterion",
+    "domain": "liquidity",
+    "formula": "N/A",
+    "latex": "N/A",
+    "python_code": "N/A",
+    "variables": "N/A",
+    "assumptions": "N/A",
+    "explanation": "N/A",
+    "raw_response": "# Optimal LP Position Size Using Risk-Adjusted Kelly Criterion\n\n## Formula\n```\nf* = min(expected_fee_apy/(2*il_risk**2), 1.0)\n```\n\n## LaTeX\n```latex\nf^* = \\min\\left(\\frac{\\mu}{2\\sigma^2}, 1\\right)\n```\n\n## Python Implementation\n```python\ndef formula(expected_fee_apy, il_risk):\n    risk_aversion = 2.0\n    position = expected_fee_apy / (risk_aversion * il_risk**2)\n    return np.minimum(position, 1.0)\n```\n\n## Variables\n- **expected_fee_apy** (\u03bc): Expected annual percentage yield from LP fees\n- **il_risk** (\u03c3): Standard deviation of impermanent loss risk\n\n## Parameters\n- **Risk aversion coefficient** (\u03bb): 2.0 (moderate risk aversion)\n- **Maximum position size**: 100% (capped at 1.0)\n\n## Explanation\nThis implements a risk-adjusted Kelly criterion for optimal liquidity provider (LP) position sizing. The formula balances expected returns from LP fees against impermanent loss risk:\n\n- **Numerator**: Expected fee APY represents the reward for providing liquidity\n- **Denominator**: 2\u03c3\u00b2 incorporates both the variance of impermanent loss and risk aversion\n- **Cap at 1.0**: Prevents over-leveraging by limiting position size to 100% of capital\n\nThe risk aversion parameter \u03bb=2.0 represents moderate risk aversion, making the strategy more conservative than the standard Kelly criterion. Higher impermanent loss risk quadratically reduces the optimal position size, while higher expected fees increase it proportionally.",
+    "specialized_prompt": true,
+    "timestamp": "2025-12-21T10:37:12.198066",
+    "generation_time": 8.402878522872925,
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "algebraic",
+      "ground_truth": "f* = min(\u03bc/(\u03bb\u03c3\u00b2), 1)",
+      "domain_specific": true,
+      "constants": {
+        "risk_aversion": 2.0
+      },
+      "units": {
+        "expected_fee_apy": "fraction",
+        "il_risk": "fraction",
+        "position_size": "fraction"
+      },
+      "extrapolation_test": true,
+      "description": "\u03bb = 2.0 (risk aversion), capped at 1.0"
+    },
+    "evaluation": {
+      "error": "No code",
+      "success": false
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "LP fee earnings based on liquidity share",
+    "domain": "liquidity",
+    "formula": "fee_earnings = (liquidity_provided / pool_liquidity) \u00d7 total_fees",
+    "latex": "$$\\text{fee\\_earnings} = \\frac{L_p}{L_{pool}} \\times F_{total}$$",
+    "python_code": "def formula(params):\n    liquidity_provided = params['liquidity_provided']\n    pool_liquidity = params['pool_liquidity']\n    total_fees = params['total_fees']\n    \n    return (liquidity_provided / pool_liquidity) * total_fees",
+    "variables": "- liquidity_provided: Amount of liquidity contributed by the LP\n- pool_liquidity: Total liquidity in the pool\n- total_fees: Total fees collected by the pool in the period",
+    "assumptions": "- Pool liquidity is non-zero (pool_liquidity > 0)\n- Fees are distributed proportionally to liquidity share\n- No fee compound effects during the calculation period\n- Liquidity provided is less than or equal to total pool liquidity\n- All fees are distributed to LPs (no protocol fees considered)\n- Constant liquidity shares during the fee collection period",
+    "explanation": "LP fee earnings are calculated as a proportional share of total pool fees based on the liquidity provider's contribution relative to the total pool liquidity. This represents the fundamental fee distribution mechanism in AMM protocols where rewards are distributed pro-rata to liquidity contributions.",
+    "raw_response": "FORMULA:\nfee_earnings = (liquidity_provided / pool_liquidity) \u00d7 total_fees\n\nLATEX:\n$$\\text{fee\\_earnings} = \\frac{L_p}{L_{pool}} \\times F_{total}$$\n\nPYTHON:\n```python\ndef formula(params):\n    liquidity_provided = params['liquidity_provided']\n    pool_liquidity = params['pool_liquidity']\n    total_fees = params['total_fees']\n    \n    return (liquidity_provided / pool_liquidity) * total_fees\n```\n\nVARIABLES:\n- liquidity_provided: Amount of liquidity contributed by the LP\n- pool_liquidity: Total liquidity in the pool\n- total_fees: Total fees collected by the pool in the period\n\nASSUMPTIONS:\n- Pool liquidity is non-zero (pool_liquidity > 0)\n- Fees are distributed proportionally to liquidity share\n- No fee compound effects during the calculation period\n- Liquidity provided is less than or equal to total pool liquidity\n- All fees are distributed to LPs (no protocol fees considered)\n- Constant liquidity shares during the fee collection period\n\nEXPLANATION:\nLP fee earnings are calculated as a proportional share of total pool fees based on the liquidity provider's contribution relative to the total pool liquidity. This represents the fundamental fee distribution mechanism in AMM protocols where rewards are distributed pro-rata to liquidity contributions.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:37:20.626143",
+    "generation_time": 7.427708148956299,
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "fees = (L_user/L_total) \u00d7 F",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "liquidity_provided": "USD",
+        "pool_liquidity": "USD",
+        "total_fees": "USD",
+        "user_fees": "USD"
+      }
+    },
+    "evaluation": {
+      "mse": 0.0,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "r2": 1.0,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Capital efficiency multiplier for concentrated liquidity position",
+    "domain": "liquidity",
+    "formula": "N/A",
+    "latex": "N/A",
+    "python_code": "N/A",
+    "variables": "N/A",
+    "assumptions": "N/A",
+    "explanation": "N/A",
+    "raw_response": "I notice there's an inconsistency in this formula for concentrated liquidity capital efficiency. Let me provide the correct formulation:\n\n## Capital Efficiency Multiplier for Concentrated Liquidity\n\n**CORRECTED FORMULA:**\n```\nefficiency = sqrt(P_u) / (sqrt(P_u) - sqrt(P_l))\n```\n\n**LATEX:**\n```latex\n\\text{efficiency} = \\frac{\\sqrt{P_{upper}}}{\\sqrt{P_{upper}} - \\sqrt{P_{lower}}}\n```\n\n**PYTHON:**\n```python\nimport math\n\ndef capital_efficiency_multiplier(price_lower, price_upper, price_current=None):\n    \"\"\"\n    Calculate capital efficiency multiplier for concentrated liquidity position.\n    \n    Args:\n        price_lower: Lower bound of price range\n        price_upper: Upper bound of price range  \n        price_current: Current price (optional, not used in calculation)\n    \n    Returns:\n        Capital efficiency multiplier\n    \"\"\"\n    if price_lower >= price_upper:\n        raise ValueError(\"price_lower must be less than price_upper\")\n    if price_lower <= 0 or price_upper <= 0:\n        raise ValueError(\"Prices must be positive\")\n    \n    sqrt_upper = math.sqrt(price_upper)\n    sqrt_lower = math.sqrt(price_lower)\n    \n    return sqrt_upper / (sqrt_upper - sqrt_lower)\n```\n\n**WHY THE SQUARE ROOTS?**\n\nIn Uniswap V3 concentrated liquidity:\n- Liquidity is proportional to price square roots, not prices directly\n- The geometric mean of the price range determines capital efficiency\n- This reflects the constant product formula: x \u00d7 y = k\n\n**KEY INSIGHTS:**\n- **Narrow ranges** \u2192 Higher efficiency multiplier\n- **Wide ranges** \u2192 Lower efficiency (approaches 1)\n- **Efficiency > 1** always (concentrated > full range)\n\n**EXAMPLE:**\n```python\n# Tight range around $2000\nefficiency_tight = capital_efficiency_multiplier(1900, 2100)  # \u2248 10.5x\n\n# Wide range  \nefficiency_wide = capital_efficiency_multiplier(1000, 4000)   # \u2248 2.0x\n```\n\nThe square root formulation correctly captures how liquidity concentration amplifies capital efficiency in AMM protocols.",
+    "specialized_prompt": true,
+    "timestamp": "2025-12-21T10:37:32.543212",
+    "generation_time": 10.915446996688843,
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "algebraic",
+      "ground_truth": "efficiency = P_u/(P_u - P_l)",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "price_lower": "USD",
+        "price_upper": "USD",
+        "price_current": "USD",
+        "efficiency": "multiplier"
+      }
+    },
+    "evaluation": {
+      "error": "No code",
+      "success": false
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "APY calculation from APR with daily compounding",
+    "domain": "liquidity",
+    "formula": "APY = (1 + APR/365)^365 - 1",
+    "latex": "```latex\nAPY = \\left(1 + \\frac{APR}{365}\\right)^{365} - 1\n```",
+    "python_code": "def formula(params):\n    import numpy as np\n    apr = params['apr']\n    return np.power(1 + apr/365, 365) - 1",
+    "variables": "- apr: Annual Percentage Rate (as decimal, e.g., 0.12 for 12%)",
+    "assumptions": "- Compounding occurs exactly 365 times per year (daily)\n- No fees or slippage considered\n- APR remains constant throughout the year\n- Interest is reinvested immediately upon compounding\n- Standard calendar year (365 days, not leap year)",
+    "explanation": "This formula converts APR to APY by accounting for the compound effect of daily reinvestment. Each day, the interest earned (APR/365) is added to the principal and earns additional interest for the remaining days. The result represents the actual annual yield an investor would receive when returns are compounded daily.",
+    "raw_response": "FORMULA:\nAPY = (1 + APR/365)^365 - 1\n\nLATEX:\n```latex\nAPY = \\left(1 + \\frac{APR}{365}\\right)^{365} - 1\n```\n\nPYTHON:\n```python\ndef formula(params):\n    import numpy as np\n    apr = params['apr']\n    return np.power(1 + apr/365, 365) - 1\n```\n\nVARIABLES:\n- apr: Annual Percentage Rate (as decimal, e.g., 0.12 for 12%)\n\nASSUMPTIONS:\n- Compounding occurs exactly 365 times per year (daily)\n- No fees or slippage considered\n- APR remains constant throughout the year\n- Interest is reinvested immediately upon compounding\n- Standard calendar year (365 days, not leap year)\n\nEXPLANATION:\nThis formula converts APR to APY by accounting for the compound effect of daily reinvestment. Each day, the interest earned (APR/365) is added to the principal and earns additional interest for the remaining days. The result represents the actual annual yield an investor would receive when returns are compounded daily.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:37:39.936261",
+    "generation_time": 6.392643690109253,
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "exponential",
+      "ground_truth": "APY = (1 + APR/n)\u207f - 1",
+      "domain_specific": false,
+      "constants": {
+        "compounds_per_year": 365
+      },
+      "units": {
+        "apr": "fraction",
+        "apy": "fraction"
+      },
+      "description": "n = 365 for daily compounding"
+    },
+    "evaluation": {
+      "mse": 0.0,
+      "mae": 0.0,
+      "rmse": 0.0,
+      "r2": 1.0,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Expected Shortfall (CVaR) at 95% confidence for normal returns",
+    "domain": "expected_shortfall",
+    "formula": "CVaR\u2089\u2085% = P\u2080 \u00d7 \u03c3 \u00d7 \u03c6(\u03a6\u207b\u00b9(0.05)) / 0.05",
+    "latex": "\\text{CVaR}_{95\\%} = P_0 \\times \\sigma \\times \\frac{\\phi(\\Phi^{-1}(0.05))}{0.05}",
+    "python_code": "import numpy as np\nfrom scipy.stats import norm\n\ndef formula(params):\n    portfolio_value = params['portfolio_value']\n    daily_volatility = params['daily_volatility']\n    \n    confidence_level = 0.95\n    alpha = 1 - confidence_level\n    \n    # Calculate z-score for 5% tail\n    z_score = norm.ppf(alpha)\n    \n    # Calculate Expected Shortfall (CVaR)\n    cvar = portfolio_value * daily_volatility * norm.pdf(z_score) / alpha\n    \n    return cvar",
+    "variables": "- portfolio_value: Current market value of the portfolio (P\u2080)\n- daily_volatility: Daily return volatility (\u03c3)",
+    "assumptions": "- Portfolio returns follow normal distribution\n- Zero expected return (conservative assumption)\n- Daily returns are independently distributed\n- Volatility is constant over the holding period\n- No serial correlation in returns\n- Linear portfolio (no options or complex derivatives)",
+    "explanation": "Expected Shortfall (CVaR) at 95% confidence measures the average loss in the worst 5% of scenarios. For normally distributed returns, it equals the portfolio value times volatility times the conditional expectation of the standard normal distribution below the 5% quantile. This provides the expected loss given that a loss exceeds the 95% VaR threshold.",
+    "raw_response": "FORMULA:\nCVaR\u2089\u2085% = P\u2080 \u00d7 \u03c3 \u00d7 \u03c6(\u03a6\u207b\u00b9(0.05)) / 0.05\n\nLATEX:\n\\text{CVaR}_{95\\%} = P_0 \\times \\sigma \\times \\frac{\\phi(\\Phi^{-1}(0.05))}{0.05}\n\nPYTHON:\n```python\nimport numpy as np\nfrom scipy.stats import norm\n\ndef formula(params):\n    portfolio_value = params['portfolio_value']\n    daily_volatility = params['daily_volatility']\n    \n    confidence_level = 0.95\n    alpha = 1 - confidence_level\n    \n    # Calculate z-score for 5% tail\n    z_score = norm.ppf(alpha)\n    \n    # Calculate Expected Shortfall (CVaR)\n    cvar = portfolio_value * daily_volatility * norm.pdf(z_score) / alpha\n    \n    return cvar\n```\n\nVARIABLES:\n- portfolio_value: Current market value of the portfolio (P\u2080)\n- daily_volatility: Daily return volatility (\u03c3)\n\nASSUMPTIONS:\n- Portfolio returns follow normal distribution\n- Zero expected return (conservative assumption)\n- Daily returns are independently distributed\n- Volatility is constant over the holding period\n- No serial correlation in returns\n- Linear portfolio (no options or complex derivatives)\n\nEXPLANATION:\nExpected Shortfall (CVaR) at 95% confidence measures the average loss in the worst 5% of scenarios. For normally distributed returns, it equals the portfolio value times volatility times the conditional expectation of the standard normal distribution below the 5% quantile. This provides the expected loss given that a loss exceeds the 95% VaR threshold.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:37:49.567933",
+    "generation_time": 8.629440307617188,
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "linear",
+      "ground_truth": "ES = V \u00d7 \u03c3 \u00d7 m",
+      "domain_specific": true,
+      "constants": {
+        "multiplier": 2.063
+      },
+      "units": {
+        "portfolio_value": "USD",
+        "daily_volatility": "fraction",
+        "ES": "USD"
+      },
+      "extrapolation_test": true,
+      "description": "m = 2.063 for 95% confidence (normal)"
+    },
+    "evaluation": {
+      "error": "Function evaluation failed: Positional evaluation failed: float() argument must be a string or a real number, not 'rv_continuous_frozen'",
+      "success": false,
+      "code_snippet": "import numpy as np\nfrom scipy.stats import norm\n\ndef formula(params):\n    portfolio_value = params['portfolio_value']\n    daily_volatility = params['daily_volatility']\n    \n    confidence_level = 0.95"
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Expected Shortfall (CVaR) at 99% confidence for normal returns",
+    "domain": "expected_shortfall",
+    "formula": "ES\u2089\u2089% = P\u2080 \u00d7 \u03c3 \u00d7 \u03c6(\u03a6\u207b\u00b9(0.01)) / 0.01",
+    "latex": "ES_{99\\%} = P_0 \\times \\sigma \\times \\frac{\\phi(\\Phi^{-1}(0.01))}{0.01}",
+    "python_code": "def formula(params):\n    import numpy as np\n    from scipy.stats import norm\n    \n    portfolio_value = params['portfolio_value']\n    daily_volatility = params['daily_volatility']\n    \n    # 99% confidence level means 1% tail probability\n    alpha = 0.01\n    \n    # Standard normal quantile at 1% (negative value)\n    z_alpha = norm.ppf(alpha)\n    \n    # Standard normal PDF at the quantile\n    phi_z = norm.pdf(z_alpha)\n    \n    # Expected Shortfall calculation\n    expected_shortfall = portfolio_value * daily_volatility * phi_z / alpha\n    \n    return expected_shortfall",
+    "variables": "- portfolio_value: Total value of the portfolio (P\u2080)\n- daily_volatility: Daily return volatility (\u03c3)",
+    "assumptions": "- Portfolio returns follow a normal distribution\n- Daily returns are independent and identically distributed\n- Zero expected return (risk-neutral assumption)\n- Constant volatility over the risk horizon\n- No autocorrelation in returns\n- Single-day risk horizon (1-day ES)",
+    "explanation": "Expected Shortfall (CVaR) at 99% confidence measures the expected loss in the worst 1% of scenarios. For normally distributed returns, it equals the portfolio value times volatility times the ratio of the standard normal probability density function evaluated at the 1% quantile divided by the tail probability (0.01). This provides the average loss beyond the 99% VaR threshold.",
+    "raw_response": "FORMULA:\nES\u2089\u2089% = P\u2080 \u00d7 \u03c3 \u00d7 \u03c6(\u03a6\u207b\u00b9(0.01)) / 0.01\n\nLATEX:\nES_{99\\%} = P_0 \\times \\sigma \\times \\frac{\\phi(\\Phi^{-1}(0.01))}{0.01}\n\nPYTHON:\n```python\ndef formula(params):\n    import numpy as np\n    from scipy.stats import norm\n    \n    portfolio_value = params['portfolio_value']\n    daily_volatility = params['daily_volatility']\n    \n    # 99% confidence level means 1% tail probability\n    alpha = 0.01\n    \n    # Standard normal quantile at 1% (negative value)\n    z_alpha = norm.ppf(alpha)\n    \n    # Standard normal PDF at the quantile\n    phi_z = norm.pdf(z_alpha)\n    \n    # Expected Shortfall calculation\n    expected_shortfall = portfolio_value * daily_volatility * phi_z / alpha\n    \n    return expected_shortfall\n```\n\nVARIABLES:\n- portfolio_value: Total value of the portfolio (P\u2080)\n- daily_volatility: Daily return volatility (\u03c3)\n\nASSUMPTIONS:\n- Portfolio returns follow a normal distribution\n- Daily returns are independent and identically distributed\n- Zero expected return (risk-neutral assumption)\n- Constant volatility over the risk horizon\n- No autocorrelation in returns\n- Single-day risk horizon (1-day ES)\n\nEXPLANATION:\nExpected Shortfall (CVaR) at 99% confidence measures the expected loss in the worst 1% of scenarios. For normally distributed returns, it equals the portfolio value times volatility times the ratio of the standard normal probability density function evaluated at the 1% quantile divided by the tail probability (0.01). This provides the average loss beyond the 99% VaR threshold.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:38:00.049701",
+    "generation_time": 9.476361989974976,
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "linear",
+      "ground_truth": "ES = V \u00d7 \u03c3 \u00d7 m",
+      "domain_specific": true,
+      "constants": {
+        "multiplier": 2.665
+      },
+      "units": {
+        "portfolio_value": "USD",
+        "daily_volatility": "fraction",
+        "ES": "USD"
+      },
+      "description": "m = 2.665 for 99% confidence (normal)"
+    },
+    "evaluation": {
+      "mse": 14.80487722204337,
+      "mae": 3.1624574523577165,
+      "rmse": 3.8477106468708597,
+      "r2": 0.9999999800862838,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Expected Shortfall from VaR using tail risk multiplier",
+    "domain": "expected_shortfall",
+    "formula": "ES\u2089\u2085 = VaR\u2089\u2085 \u00d7 (\u03c6(\u03a6\u207b\u00b9(0.05))) / 0.05",
+    "latex": "```latex\nES_{95} = VaR_{95} \\times \\frac{\\phi(\\Phi^{-1}(0.05))}{0.05}\n```",
+    "python_code": "def formula(params):\n    import numpy as np\n    from scipy.stats import norm\n    \n    var_95 = params['var_95']\n    \n    # Calculate tail risk multiplier for 95% confidence level\n    alpha = 0.05\n    z_alpha = norm.ppf(alpha)  # Inverse normal CDF at 5%\n    phi_z_alpha = norm.pdf(z_alpha)  # Standard normal PDF at z_alpha\n    \n    tail_multiplier = phi_z_alpha / alpha\n    \n    expected_shortfall = var_95 * tail_multiplier\n    \n    return expected_shortfall",
+    "variables": "- var_95: Value at Risk at 95% confidence level (positive value representing loss)",
+    "assumptions": "- Returns follow a normal distribution\n- VaR is calculated at 95% confidence level (\u03b1 = 0.05)\n- Expected Shortfall represents the average loss beyond the VaR threshold\n- VaR input is expressed as a positive loss value\n- Tail risk multiplier for normal distribution \u2248 1.253 for 95% confidence level",
+    "explanation": "Expected Shortfall (ES) is calculated from VaR using a tail risk multiplier that depends on the confidence level and distributional assumption. For normally distributed returns, the multiplier is the ratio of the standard normal PDF to the tail probability at the confidence level. This provides the average loss in the tail beyond the VaR threshold.",
+    "raw_response": "FORMULA:\nES\u2089\u2085 = VaR\u2089\u2085 \u00d7 (\u03c6(\u03a6\u207b\u00b9(0.05))) / 0.05\n\nLATEX:\n```latex\nES_{95} = VaR_{95} \\times \\frac{\\phi(\\Phi^{-1}(0.05))}{0.05}\n```\n\nPYTHON:\n```python\ndef formula(params):\n    import numpy as np\n    from scipy.stats import norm\n    \n    var_95 = params['var_95']\n    \n    # Calculate tail risk multiplier for 95% confidence level\n    alpha = 0.05\n    z_alpha = norm.ppf(alpha)  # Inverse normal CDF at 5%\n    phi_z_alpha = norm.pdf(z_alpha)  # Standard normal PDF at z_alpha\n    \n    tail_multiplier = phi_z_alpha / alpha\n    \n    expected_shortfall = var_95 * tail_multiplier\n    \n    return expected_shortfall\n```\n\nVARIABLES:\n- var_95: Value at Risk at 95% confidence level (positive value representing loss)\n\nASSUMPTIONS:\n- Returns follow a normal distribution\n- VaR is calculated at 95% confidence level (\u03b1 = 0.05)\n- Expected Shortfall represents the average loss beyond the VaR threshold\n- VaR input is expressed as a positive loss value\n- Tail risk multiplier for normal distribution \u2248 1.253 for 95% confidence level\n\nEXPLANATION:\nExpected Shortfall (ES) is calculated from VaR using a tail risk multiplier that depends on the confidence level and distributional assumption. For normally distributed returns, the multiplier is the ratio of the standard normal PDF to the tail probability at the confidence level. This provides the average loss in the tail beyond the VaR threshold.",
+    "specialized_prompt": false,
+    "timestamp": "2025-12-21T10:38:10.563606",
+    "generation_time": 9.511215209960938,
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "linear",
+      "ground_truth": "ES = VaR \u00d7 r",
+      "domain_specific": true,
+      "constants": {
+        "ratio": 1.25
+      },
+      "units": {
+        "var_95": "USD",
+        "ES": "USD"
+      },
+      "description": "r = 1.25 for normal distribution at 95%"
+    },
+    "evaluation": {
+      "mse": 2526794552.13067,
+      "mae": 43906.283757282654,
+      "rmse": 50267.231395121315,
+      "r2": -0.7830910150734542,
+      "success": true
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Portfolio Expected Shortfall for correlated positions",
+    "domain": "expected_shortfall",
+    "formula": "N/A",
+    "latex": "N/A",
+    "python_code": "N/A",
+    "variables": "N/A",
+    "assumptions": "N/A",
+    "explanation": "N/A",
+    "raw_response": "I notice there's an error in the provided formula for Portfolio Expected Shortfall. Let me provide the correct version:\n\n## Portfolio Expected Shortfall for Correlated Positions\n\n**CORRECTED FORMULA:**\n```\nES_p = \u221a(ES\u2081\u00b2 + ES\u2082\u00b2 + 2\u03c1\u00d7ES\u2081\u00d7ES\u2082)\n```\n\n**LATEX:**\n```latex\nES_p = \\sqrt{ES_1^2 + ES_2^2 + 2\\rho \\cdot ES_1 \\cdot ES_2}\n```\n\n**PYTHON:**\n```python\nimport numpy as np\n\ndef portfolio_expected_shortfall(position1_es, position2_es, correlation):\n    \"\"\"\n    Calculate portfolio Expected Shortfall for two correlated positions\n    \n    Args:\n        position1_es: Expected Shortfall of position 1\n        position2_es: Expected Shortfall of position 2  \n        correlation: Correlation coefficient between positions (-1 to 1)\n    \n    Returns:\n        Portfolio Expected Shortfall\n    \"\"\"\n    return np.sqrt(position1_es**2 + position2_es**2 + \n                  2 * correlation * position1_es * position2_es)\n```\n\n**VARIABLES:**\n- `position1_es`, `position2_es`: Expected Shortfall values for individual positions\n- `correlation`: Correlation coefficient between the two positions (\u03c1 \u2208 [-1, 1])\n\n**KEY CORRECTIONS:**\n1. **Square root structure**: Portfolio ES uses quadratic aggregation, not linear\n2. **Factor of 2**: The cross-correlation term needs coefficient 2\n3. **Squared individual ES values**: Each position's ES is squared before summation\n\n**ASSUMPTIONS:**\n- Bivariate normal distribution of returns\n- Constant correlation structure\n- Same confidence level for all ES calculations\n\n**EXPLANATION:**\nThis formula accounts for diversification benefits (when \u03c1 < 1) or concentration risk (when \u03c1 > 1) in portfolio Expected Shortfall. It's analogous to portfolio variance calculation but applied to tail risk measures.\n\n**SPECIAL CASES:**\n- When \u03c1 = 1: ES_p = ES\u2081 + ES\u2082 (perfect correlation, no diversification)\n- When \u03c1 = 0: ES_p = \u221a(ES\u2081\u00b2 + ES\u2082\u00b2) (independent positions)\n- When \u03c1 = -1: ES_p = |ES\u2081 - ES\u2082| (perfect hedge)",
+    "specialized_prompt": true,
+    "timestamp": "2025-12-21T10:38:22.111581",
+    "generation_time": 10.545281887054443,
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "algebraic_with_sqrt",
+      "ground_truth": "ES_p = ES\u2081 + ES\u2082 + \u03c1\u221a(ES\u2081ES\u2082)",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "position1_es": "USD",
+        "position2_es": "USD",
+        "correlation": "dimensionless",
+        "ES_portfolio": "USD"
+      }
+    },
+    "evaluation": {
+      "error": "No code",
+      "success": false
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Liquidation price for leveraged long position",
+    "domain": "liquidation",
+    "formula": "N/A",
+    "latex": "N/A",
+    "python_code": "N/A",
+    "variables": "N/A",
+    "assumptions": "N/A",
+    "explanation": "N/A",
+    "raw_response": "Looking at this liquidation price formula for leveraged long positions, I need to point out a critical issue with the maintenance margin value.\n\n## Problem with Current Formula\n\nThe formula uses `m = 0.8` (80% maintenance margin), which is unrealistically high. Most trading platforms use maintenance margins between 0.5% to 10%.\n\n## Corrected Analysis\n\n**Standard Liquidation Formula:**\n```\nP_liq = P_e \u00d7 (1 - 1/(L \u00d7 (1 + m)))\n```\n\nWhere `m` is typically 0.005 to 0.10 (0.5% to 10%)\n\n## Current Formula Issues\n\nWith `m = 0.8`:\n- **10x leverage**: Liquidation at 87.5% of entry (12.5% drop)\n- **50x leverage**: Liquidation at 97.5% of entry (2.5% drop)\n\nThese are extremely conservative and don't match real trading conditions.\n\n## Realistic Example\n\nWith `m = 0.05` (5% maintenance margin):\n- **10x leverage**: Liquidation at ~90.5% of entry (~9.5% drop)\n- **50x leverage**: Liquidation at ~98.1% of entry (~1.9% drop)\n\n## Recommendation\n\nVerify the maintenance margin value with your specific trading platform, as 80% is likely incorrect for practical use.\n\nWould you like me to provide the corrected formula with a more realistic maintenance margin?",
+    "specialized_prompt": true,
+    "timestamp": "2025-12-21T10:38:31.451819",
+    "generation_time": 8.3389732837677,
+    "metadata": {
+      "difficulty": "hard",
+      "formula_type": "algebraic",
+      "ground_truth": "P_liq = P_e \u00d7 (1 - 1/(L\u00d7m))",
+      "domain_specific": true,
+      "constants": {
+        "liquidation_threshold": 0.8
+      },
+      "units": {
+        "entry_price": "USD",
+        "leverage": "multiplier",
+        "liquidation_price": "USD"
+      },
+      "extrapolation_test": true,
+      "description": "m = 0.8 (80% maintenance margin)"
+    },
+    "evaluation": {
+      "error": "No code",
+      "success": false
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Liquidation price for leveraged short position",
+    "domain": "liquidation",
+    "formula": "N/A",
+    "latex": "N/A",
+    "python_code": "N/A",
+    "variables": "N/A",
+    "assumptions": "N/A",
+    "explanation": "N/A",
+    "raw_response": "# Liquidation Price for Leveraged Short Position\n\n## Overview\nCalculates the price level at which a leveraged short position gets liquidated due to insufficient margin.\n\n## Formula\n**Basic Form:** `P_liq = P_e \u00d7 (1 + 1/(L\u00d7m))` where m=0.8\n\n**Implementation:** `entry_price * (1 + 1/(leverage * 0.8))`\n\n**LaTeX:** P_{liq} = P_e \\times \\left(1 + \\frac{1}{L \\times m}\\right)\n\n## Python Implementation\n```python\ndef formula(entry_price, leverage):\n    maintenance_margin = 0.8\n    return entry_price * (1 + 1/(leverage * maintenance_margin))\n```\n\n## Variables\n- **entry_price**: Entry price of the short position\n- **leverage**: Leverage multiplier (e.g., 10 for 10x leverage)\n\n## Key Assumptions\n- Short position liquidates when price rises above the liquidation level\n- Maintenance margin ratio is 80% (0.8)\n- No additional margin is added to the position\n\n## Explanation\nFor short positions, liquidation occurs when the asset price rises sufficiently to exhaust the available margin. The liquidation price increases with higher leverage, making the position more vulnerable to upward price movements. The maintenance margin factor (0.8) represents the minimum margin ratio required to keep the position open.\n\n## Example\n- Entry price: $100\n- Leverage: 10x\n- Liquidation price = $100 \u00d7 (1 + 1/(10 \u00d7 0.8)) = $100 \u00d7 1.125 = $112.50",
+    "specialized_prompt": true,
+    "timestamp": "2025-12-21T10:38:39.679029",
+    "generation_time": 7.226793527603149,
+    "metadata": {
+      "difficulty": "hard",
+      "formula_type": "algebraic",
+      "ground_truth": "P_liq = P_e \u00d7 (1 + 1/(L\u00d7m))",
+      "domain_specific": true,
+      "constants": {
+        "liquidation_threshold": 0.8
+      },
+      "units": {
+        "entry_price": "USD",
+        "leverage": "multiplier",
+        "liquidation_price": "USD"
+      },
+      "description": "m = 0.8 (80% maintenance margin)"
+    },
+    "evaluation": {
+      "error": "No code",
+      "success": false
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Maximum safe leverage for given acceptable loss tolerance",
+    "domain": "liquidation",
+    "formula": "N/A",
+    "latex": "N/A",
+    "python_code": "N/A",
+    "variables": "N/A",
+    "assumptions": "N/A",
+    "explanation": "N/A",
+    "raw_response": "# Maximum Safe Leverage Calculator\n\n## Overview\nThis formula calculates the maximum safe leverage for a trading position based on your acceptable loss tolerance.\n\n## Formula\n**L_max = 1 / (acceptable_loss_pct \u00d7 0.8)**\n\n### LaTeX Notation\n```latex\nL_{max} = \\frac{1}{\\text{loss} \\times m}\n```\nwhere m = 0.8 (maintenance margin factor)\n\n## Python Implementation\n```python\ndef formula(entry_price, acceptable_loss_pct):\n    maintenance_margin = 0.8\n    return 1.0 / (acceptable_loss_pct * maintenance_margin)\n```\n\n## Variables\n- **entry_price**: Entry price of the position (not used in calculation)\n- **acceptable_loss_pct**: Your loss tolerance as a decimal (e.g., 0.05 for 5%)\n\n## Key Assumptions\n- Inverse relationship: Higher loss tolerance allows for higher leverage\n- Maintenance margin factor of 0.8 provides a safety buffer\n- Formula assumes liquidation occurs at the maintenance margin level\n\n## Explanation\nThe formula works on the principle that higher loss tolerance enables higher leverage. The 0.8 factor acts as a conservative buffer to account for:\n- Market volatility\n- Slippage during liquidation\n- Exchange-specific margin requirements\n\n## Example\nIf you can tolerate a 10% loss (0.10):\n- Maximum leverage = 1 / (0.10 \u00d7 0.8) = 12.5x\n\nThis ensures your position won't be liquidated unless losses exceed your tolerance level.",
+    "specialized_prompt": true,
+    "timestamp": "2025-12-21T10:38:48.094158",
+    "generation_time": 7.4143311977386475,
+    "metadata": {
+      "difficulty": "medium",
+      "formula_type": "algebraic",
+      "ground_truth": "L_max = 1/(loss\u00d7m)",
+      "domain_specific": true,
+      "constants": {
+        "liquidation_threshold": 0.8
+      },
+      "units": {
+        "entry_price": "USD",
+        "acceptable_loss_pct": "fraction",
+        "max_leverage": "multiplier"
+      }
+    },
+    "evaluation": {
+      "error": "No code",
+      "success": false
+    }
+  },
+  {
+    "method": "pure_llm",
+    "model": "claude-sonnet-4-20250514",
+    "description": "Required collateral for leveraged position",
+    "domain": "liquidation",
+    "formula": "N/A",
+    "latex": "N/A",
+    "python_code": "N/A",
+    "variables": "N/A",
+    "assumptions": "N/A",
+    "explanation": "N/A",
+    "raw_response": "# Required Collateral for Leveraged Position\n\n## Formula\n```\ncollateral = position_size / leverage\n```\n\n## LaTeX\n```latex\n\\text{collateral} = \\frac{\\text{position\\_size}}{L}\n```\n\n## Python Implementation\n```python\ndef formula(position_size, leverage):\n    return position_size / leverage\n```\n\n## Variables\n- **position_size**: Total value of the position you want to open\n- **leverage**: Leverage multiplier (e.g., 2x, 10x, 100x)\n\n## Key Assumptions\n- Direct inverse relationship between leverage and required collateral\n- No additional fees or margin requirements considered\n- Perfect leverage efficiency (no over-collateralization required)\n\n## Explanation\nThe required collateral decreases as leverage increases. With 2x leverage, you need 50% collateral; with 10x leverage, only 10% collateral is required. This inverse relationship allows traders to control larger positions with smaller capital amounts, though it also increases risk proportionally.\n\n## Example\n- Position size: $10,000\n- Leverage: 5x\n- Required collateral: $10,000 \u00f7 5 = $2,000",
+    "specialized_prompt": true,
+    "timestamp": "2025-12-21T10:38:55.516338",
+    "generation_time": 6.421790838241577,
+    "metadata": {
+      "difficulty": "easy",
+      "formula_type": "algebraic",
+      "ground_truth": "collateral = position_size/leverage",
+      "domain_specific": true,
+      "constants": {},
+      "units": {
+        "position_size": "USD",
+        "leverage": "multiplier",
+        "collateral": "USD"
+      }
+    },
+    "evaluation": {
+      "error": "No code",
+      "success": false
+    }
+  }
+]

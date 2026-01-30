@@ -1,0 +1,108 @@
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         COMPLETE PIPELINE FLOW                           │
+└─────────────────────────────────────────────────────────────────────────┘
+
+1️⃣ PREPROCESSING PHASE
+┌───────────────────────────────────────────────────────────────────┐
+│ 📁 Location: hypatiax/core/preprocessing/                         │
+│                                                                    │
+│ ✅ preparation_data.py (EXISTS)                                   │
+│    ├─ Prepares data for spaCy NER training                       │
+│    └─ Output: .spacy format                                       │
+│                                                                    │
+│ ❌ preprocessing_pipeline.py (MISSING - needs creation)           │
+│    ├─ Prepares data for Transformer (JSON format)                │
+│    ├─ Prepares data for RAG (embeddings)                         │
+│    └─ Prepares data for mapping strategies                        │
+└───────────────────────────────────────────────────────────────────┘
+                                ↓
+
+2️⃣ TRAINING PHASE
+┌───────────────────────────────────────────────────────────────────┐
+│ 📁 Location: hypatiax/core/training/                              │
+│                                                                    │
+│ ✅ training_spacy.py (EXISTS)                                     │
+│    └─ Trains spaCy NER model                                      │
+│                                                                    │
+│ ❌ training_transformer.py (MISSING - in document)                │
+│    └─ Trains T5/BERT for seq2seq formula generation              │
+│                                                                    │
+│ ❌ training_rag.py (MISSING - in document)                        │
+│    └─ Builds vector index for similarity search                   │
+│                                                                    │
+│ ❌ training_llm.py (MISSING - in document)                        │
+│    └─ Sets up LLM API integration with few-shot examples         │
+└───────────────────────────────────────────────────────────────────┘
+                                ↓
+
+3️⃣ MAPPING/INFERENCE PHASE
+┌───────────────────────────────────────────────────────────────────┐
+│ 📁 Location: hypatiax/mappings/                                   │
+│                                                                    │
+│ ✅ mapping.py (EXISTS - BASIC VERSION)                            │
+│    ├─ VocabToVocabStrategy                                        │
+│    ├─ SentenceToSentenceStrategy                                  │
+│    ├─ RegexStrategy                                               │
+│    ├─ NERBasedStrategy (uses spaCy output)                        │
+│    └─ MLModelStrategy (placeholder)                               │
+│                                                                    │
+│ ❌ mapping_plus.py (MISSING - in document)                        │
+│    ├─ Enhanced strategies with fuzzy matching                     │
+│    ├─ Confidence scoring                                          │
+│    ├─ Ensemble voting                                             │
+│    ├─ Context awareness                                           │
+│    └─ Learning from corrections                                   │
+│                                                                    │
+│ ❌ mapping_hybrid.py (MISSING - in document)                      │
+│    └─ Integrates ALL techniques:                                  │
+│        ├─ spaCy NER                                               │
+│        ├─ Transformer model                                       │
+│        ├─ RAG retrieval                                           │
+│        ├─ LLM API                                                 │
+│        └─ Ensemble mapper                                         │
+└───────────────────────────────────────────────────────────────────┘
+                                ↓
+
+4️⃣ EVALUATION PHASE
+┌───────────────────────────────────────────────────────────────────┐
+│ 📁 Location: hypatiax/core/evaluation/                            │
+│                                                                    │
+│ ✅ testing_model.py (EXISTS - basic testing)                      │
+│                                                                    │
+│ ⚠️ evaluate_model.py (EXISTS but in deployment/ - should move)   │
+│    └─ Currently evaluates NER, not formula accuracy               │
+│                                                                    │
+│ ❌ evaluation_unified.py (MISSING - in document)                  │
+│    ├─ Formula correctness metrics                                 │
+│    ├─ Exact match, partial match, syntax check                    │
+│    ├─ Semantic correctness                                        │
+│    └─ Comparison across all models                                │
+└───────────────────────────────────────────────────────────────────┘
+                                ↓
+
+5️⃣ DEPLOYMENT PHASE
+┌───────────────────────────────────────────────────────────────────┐
+│ 📁 Location: hypatiax/core/deployment/                            │
+│                                                                    │
+│ ✅ evaluate_model.py (EXISTS - but for NER only)                  │
+│                                                                    │
+│ ❌ deployment_api.py (MISSING - needs creation)                   │
+│    └─ REST API for formula generation                             │
+│                                                                    │
+│ ❌ deployment_batch.py (MISSING - needs creation)                 │
+│    └─ Batch processing of descriptions                            │
+└───────────────────────────────────────────────────────────────────┘
+                                ↓
+
+6️⃣ RUNTIME/ORCHESTRATION
+┌───────────────────────────────────────────────────────────────────┐
+│ 📁 Location: hypatiax/core/                                       │
+│                                                                    │
+│ ✅ run_time_code.py (EXISTS)                                      │
+│ ✅ run_time_code_seq.py (EXISTS)                                  │
+│ ✅ run_time_parallel_code.py (EXISTS)                             │
+│ ✅ run_time_bundle_code.py (EXISTS)                               │
+│                                                                    │
+│ ❌ master_pipeline.py (MISSING - needs creation)                  │
+│    └─ Orchestrates entire flow: prep → train → map → evaluate    │
+└───────────────────────────────────────────────────────────────────┘

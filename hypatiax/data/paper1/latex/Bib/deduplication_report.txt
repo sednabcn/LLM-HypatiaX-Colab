@@ -1,0 +1,131 @@
+================================================================================
+BIBLIOGRAPHY DEDUPLICATION REPORT
+================================================================================
+
+NEW FILE ENTRIES:      31
+ORIGINAL FILE ENTRIES: 73
+EXACT DUPLICATES:      9
+SIMILAR ENTRIES:       2
+GENUINELY NEW:         20
+
+--------------------------------------------------------------------------------
+EXACT DUPLICATES (Same citation key in both files)
+--------------------------------------------------------------------------------
+  ✗ adams2021uniswap
+      Keep: ORIGINAL (from ref.bib)
+  ✗ anthropic2024claude
+      Keep: ORIGINAL (from ref.bib)
+  ✗ karniadakis2021physics
+      Keep: ORIGINAL (from ref.bib)
+  ✗ lake2017building
+      Keep: ORIGINAL (from ref.bib)
+  ✗ meurer2017sympy
+      Keep: ORIGINAL (from ref.bib)
+  ✗ michaelis1913kinetics
+      Keep: ORIGINAL (from ref.bib)
+  ✗ raissi2019physics
+      Keep: ORIGINAL (from ref.bib)
+  ✗ schmidt2009distilling
+      Keep: ORIGINAL (from ref.bib)
+  ✗ udrescu2020ai
+      Keep: ORIGINAL (from ref.bib)
+
+--------------------------------------------------------------------------------
+SIMILAR ENTRIES (Different keys, same content)
+--------------------------------------------------------------------------------
+  ≈ arrhenius1889kinetics → arrhenius1889reaction
+      New:      {\"U
+      Original: {\"U
+      Action: Use original key 'arrhenius1889reaction' in LaTeX
+  ≈ cranmer2023pysr → cranmer2023interpretable
+      New:      Interpretable machine learning for science with PySR and Sym
+      Original: Interpretable machine learning for science with PySR and Sym
+      Action: Use original key 'cranmer2023interpretable' in LaTeX
+
+--------------------------------------------------------------------------------
+GENUINELY NEW ENTRIES (Add to merged bibliography)
+--------------------------------------------------------------------------------
+  ✓ belkin2019reconciling
+      Title:  Reconciling modern machine-learning practice and the classic
+      Author: Belkin, Mikhail and Hsu, Daniel and Ma, Siyuan and Mandal, S
+      Year:   2019
+  ✓ bubeck2023sparks
+      Title:  Sparks of artificial general intelligence: Early experiments
+      Author: Bubeck, S{\'e
+      Year:   2023
+  ✓ kambhampati2024llms
+      Title:  LLMs can't plan, but can help planning in LLM-modulo framewo
+      Author: Kambhampati, Subbarao and Valmeekam, Karthik and Guan, Lin a
+      Year:   2024
+  ✓ koza1994genetic
+      Title:  Genetic programming II: automatic discovery of reusable prog
+      Author: Koza, John R
+      Year:   1994
+  ✓ la2021contemporary
+      Title:  Contemporary symbolic regression methods and their relative 
+      Author: La Cava, William and Orzechowski, Patryk and Burlacu, Bogdan
+      Year:   2021
+  ✓ lecun2015deep
+      Title:  Deep learning
+      Author: LeCun, Yann and Bengio, Yoshua and Hinton, Geoffrey
+      Year:   2015
+  ✓ lewkowycz2022minerva
+      Title:  Solving quantitative reasoning problems with language models
+      Author: Lewkowycz, Aitor and Andreassen, Anders and Dohan, David and
+      Year:   2022
+  ✓ liu2020understanding
+      Title:  Understanding the generalization of 'lottery tickets' in neu
+      Author: Liu, Zhuang and Sun, Mingjie and Zhou, Tinghui and Huang, Ga
+      Year:   2020
+  ✓ molnar2020interpretable
+      Title:  Interpretable machine learning
+      Author: Molnar, Christoph
+      Year:   2020
+  ✓ neyshabur2017exploring
+      Title:  Exploring generalization in deep learning
+      Author: Neyshabur, Behnam and Bhojanapalli, Srinadh and McAllester, 
+      Year:   2017
+  ✓ paszke2019pytorch
+      Title:  PyTorch: An imperative style, high-performance deep learning
+      Author: Paszke, Adam and Gross, Sam and Massa, Francisco and Lerer, 
+      Year:   2019
+  ✓ romera2023mathematical
+      Title:  Mathematical capabilities of ChatGPT
+      Author: Romera-Paredes, Bernardino and Barekatain, Mohammadamin and 
+      Year:   2023
+  ✓ rudin2019stop
+      Title:  Stop explaining black box machine learning models for high s
+      Author: Rudin, Cynthia
+      Year:   2019
+  ✓ stephens2018gplearn
+      Title:  gplearn: Genetic Programming in Python
+      Author: Stephens, Trevor
+      Year:   2018
+  ✓ taylor2022galactica
+      Title:  Galactica: A large language model for science
+      Author: Taylor, Ross and Kardas, Marcin and Cucurull, Guillem and Sc
+      Year:   2022
+  ✓ verhulst1838notice
+      Title:  Notice sur la loi que la population suit dans son accroissem
+      Author: Verhulst, Pierre-Fran{\c{c
+      Year:   1838
+  ✓ virtanen2020scipy
+      Title:  SciPy 1.0: fundamental algorithms for scientific computing i
+      Author: Virtanen, Pauli and Gommers, Ralf and Oliphant, Travis E and
+      Year:   2020
+  ✓ xu2020neural
+      Title:  When and why PINNs fail to train: A neural tangent kernel pe
+      Author: Wang, Sifan and Yu, Xinling and Perdikaris, Paris
+      Year:   2022
+  ✓ zhang2021understanding
+      Title:  Understanding deep learning (still) requires rethinking gene
+      Author: Zhang, Chiyuan and Bengio, Samy and Hardt, Moritz and Recht,
+      Year:   2021
+  ✓ zhou2020universality
+      Title:  Universality of deep convolutional neural networks
+      Author: Zhou, Ding-Xuan
+      Year:   2020
+
+================================================================================
+RECOMMENDATION: Add only GENUINELY NEW entries to ref.bib
+================================================================================

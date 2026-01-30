@@ -1,0 +1,18 @@
+{
+  "error": "invalid character '\u00b2' (U+00B2) (<string>, line 1)",
+  "test_name": "liquidity_kelly_criterion",
+  "timing": {
+    "total": 0.01700305938720703
+  },
+  "timestamp": "2026-01-13T18:03:17.458771",
+  "success": false,
+  "difficulty": "hard",
+  "extrapolation_test": true,
+  "_metadata": {
+    "session_id": "llm_defi_20260113_180317",
+    "timestamp": "2026-01-13T18:03:17.458839",
+    "passed": false,
+    "test_name": "liquidity_kelly_criterion",
+    "method": "llm_guided_defi_v1.0"
+  }
+}

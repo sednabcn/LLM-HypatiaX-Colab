@@ -1,0 +1,21 @@
+Description,Domain,Formula Type,LLM R²,NN R²,LLM RMSE,NN RMSE,Extrapolation,Winner,R² Difference
+Hall-Petch relationship: yield strength as functio,materials,unknown,1.0,0.9944,0.0,0.185614,False,LLM,0.005600000000000049
+Gibson-Ashby: Young's modulus as function of poros,materials,unknown,1.0,1.0,0.0,0.185368,False,Tie,0.0
+Linear thermal expansion of materials,materials,unknown,1.0,1.0,0.0,0.003541,False,Tie,0.0
+Power law creep: strain rate as function of applie,materials,unknown,1.0,0.9997,0.0,0.0,False,Tie,0.00029999999999996696
+Darcy-Weisbach equation: pressure head loss in pip,fluids,unknown,1.0,0.8934,0.0,5.147516,False,LLM,0.10660000000000003
+Reynolds number for characterizing flow regime,fluids,unknown,1.0,0.9846,0.0,75411.841837,False,LLM,0.01539999999999997
+Bernoulli equation: total mechanical energy in flu,fluids,unknown,1.0,0.9997,0.0,697.247693,False,Tie,0.00029999999999996696
+Hagen-Poiseuille law: volumetric flow rate in lami,fluids,unknown,1.0,0.9788,0.0,0.007175,False,LLM,0.021199999999999997
+Newton's law of cooling: convective heat transfer ,thermodynamics,unknown,1.0,0.9988,0.0,285.972465,False,LLM,0.0011999999999999789
+Ideal gas law: number of moles from PVT data,thermodynamics,unknown,1.0,0.9969,0.0,2.294428,False,LLM,0.0030999999999999917
+Carnot efficiency: maximum theoretical efficiency ,thermodynamics,unknown,1.0,0.9996,0.0,0.002031,False,Tie,0.00039999999999995595
+Stefan-Boltzmann law: radiative heat transfer from,thermodynamics,unknown,1.0,0.9934,0.0,6059.725042,False,LLM,0.00660000000000005
+Euler buckling load: critical load for column buck,mechanics,unknown,1.0,0.989,0.0,74429.610475,False,LLM,0.01100000000000001
+Hooke's law: linear elastic stress-strain relation,mechanics,unknown,1.0,1.0,0.0,1842881.70426,False,Tie,0.0
+Torsional shear stress in circular shaft,mechanics,unknown,1.0,0.9775,0.0,44012145.070827,False,LLM,0.022499999999999964
+Bending stress in beam under flexure,mechanics,unknown,1.0,0.9812,0.0,229650252.214071,False,LLM,0.01880000000000004
+Arrhenius equation: temperature dependence of reac,chemistry,unknown,1.0,0.9999,0.0,1.797375,False,Tie,9.999999999998899e-05
+Henderson-Hasselbalch equation: pH of buffer solut,chemistry,unknown,-3.0003,0.9969,1.169375,0.033125,False,NN,-3.9972000000000003
+Beer-Lambert law: light absorption in solution,chemistry,unknown,1.0,0.9993,0.0,6.000721,False,Tie,0.0007000000000000339
+Nernst equation: electrode potential as function o,chemistry,unknown,1.0,1.0,0.0,2.6e-05,False,Tie,0.0

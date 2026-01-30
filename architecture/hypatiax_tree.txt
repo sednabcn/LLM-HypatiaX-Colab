@@ -1,0 +1,512 @@
+┌──(agagora㉿localhost)-[~/Downloads/LLM-HypatiaX-OLD/hypatiax]
+└─$ tree                                                                                                                         
+.
+├── core
+│   ├── deployment
+│   │   ├── docs.txt
+│   │   ├── evaluate_model.py
+│   │   └── __init__.py
+│   ├── docs.txt
+│   ├── evaluation
+│   │   ├── docs.txt
+│   │   ├── __init__.py
+│   │   └── testing_model.py
+│   ├── __init__.py
+│   ├── preprocessing
+│   │   ├── __init__.py
+│   │   ├── preparation_data.py
+│   │   └── preparation_data.py~
+│   ├── run_time_bundle_code.py
+│   ├── run_time_code.py
+│   ├── run_time_code_seq.py
+│   ├── run_time_parallel_code.py
+│   └── training
+│       ├── docs.txt
+│       ├── __init__.py
+│       └── training_spacy.py
+├── custom_entities
+│   ├── __init__.py
+│   └── ner_entity.py
+├── custom_ner
+│   ├── custom_ruler.py
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── custom_ruler.cpython-313.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   └── __init__.cpython-313.pyc
+│   └── queries
+│       ├── __init__.py
+│       ├── __pycache__
+│       │   ├── __init__.cpython-312.pyc
+│       │   └── __init__.cpython-313.pyc
+│       └── tableau
+│           ├── components
+│           │   ├── __init__.py
+│           │   ├── ruler_tableau_desc.py
+│           │   ├── ruler_tableau_formulas.py
+│           │   └── ruler_tableau.py
+│           ├── custom_tableau_components.py
+│           ├── custom_tableau_desc_components.py
+│           ├── custom_tableau_formulas_components.py
+│           ├── __init__.py
+│           ├── __pycache__
+│           │   ├── custom_tableau_desc_components.cpython-312.pyc
+│           │   ├── custom_tableau_desc_components.cpython-313.pyc
+│           │   ├── __init__.cpython-312.pyc
+│           │   └── __init__.cpython-313.pyc
+│           ├── rules
+│           │   ├── __init__.py
+│           │   ├── __pycache__
+│           │   │   ├── __init__.cpython-312.pyc
+│           │   │   └── __init__.cpython-313.pyc
+│           │   ├── ruler_tableau_desc.jsonl
+│           │   ├── ruler_tableau_formulas.jsonl
+│           │   ├── ruler_tableau.jsonl
+│           │   └── rules_versions
+│           │       └── __init__.py
+│           ├── scripts
+│           │   ├── __init__.py
+│           │   ├── proc_timed.py
+│           │   ├── proc_timef.py
+│           │   └── proc_time.py
+│           └── tests
+│               ├── __init__.py
+│               ├── test_F_ner_tableau_desc.py
+│               ├── test_F_ner_tableau_formulas.py
+│               ├── #test_tableau_desc.py#
+│               ├── test_tableau_desc.py
+│               ├── test_tableau_formulas.py
+│               └── test_tableau.py
+├── datasets
+│   ├── __init__.py
+│   └── queries
+│       ├── combined
+│       │   ├── combined_data.py
+│       │   └── __init__.py
+│       ├── __init__.py
+│       ├── normalize
+│       │   ├── __init__.py
+│       │   └── test.py
+│       └── tableau
+│           ├── data
+│           │   ├── __init__.py
+│           │   ├── tableau_data.csv
+│           │   └── test.py
+│           ├── __init__.py
+│           ├── testing
+│           │   ├── formulas_test_combined.xlsx
+│           │   ├── formulas_test_nor_combined.xlsx
+│           │   ├── formulas_test_nor.xlsx
+│           │   ├── formulas_test.xlsx
+│           │   ├── __init__.py
+│           │   ├── test_combined.py
+│           │   ├── testing_versions
+│           │   │   └── __init__.py
+│           │   ├── test.py
+│           │   └── test_update_labels.py
+│           ├── testing_spacy
+│           │   ├── __init__.py
+│           │   ├── Test_desc_data.json
+│           │   ├── Test_formulas_data.json
+│           │   ├── testing_spacy_versions
+│           │   │   └── __init__.py
+│           │   ├── test.py
+│           │   ├── Test_tableau_both_sm_data.json
+│           │   ├── Test_tableau_desc_sm_data.json
+│           │   └── Test_tableau_formulas_sm_data.json
+│           ├── training
+│           │   ├── formulas_combined.xlsx
+│           │   ├── formulas_nor_combined.xlsx
+│           │   ├── formulas_nor.xlsx
+│           │   ├── formulas.xlsx
+│           │   ├── gformulas_combined.xlsx
+│           │   ├── gformulas.csv
+│           │   ├── gformulas_nor_combined.xlsx
+│           │   ├── gformulas_nor.xlsx
+│           │   ├── gformulas.xlsx
+│           │   ├── __init__.py
+│           │   ├── test_combined.py
+│           │   ├── test.py
+│           │   ├── test_update_labels.py
+│           │   └── training_versions
+│           │       └── __init__.py
+│           ├── training_spacy
+│           │   ├── __init__.py
+│           │   ├── test.py
+│           │   ├── Train_desc_data.json
+│           │   ├── Train_formulas_data.json
+│           │   ├── training_spacy_versions
+│           │   │   └── __init__.py
+│           │   ├── Train_tableau_both_bsm_data.json
+│           │   ├── Train_tableau_both_sm_data.json
+│           │   ├── Train_tableau_desc_bsm_data.json
+│           │   ├── Train_tableau_desc_sm_data.json
+│           │   ├── Train_tableau_formulas_bsm_data.json
+│           │   └── Train_tableau_formulas_sm_data.json
+│           ├── validation
+│           │   ├── __init__.py
+│           │   ├── test.py
+│           │   └── validation_versions
+│           │       └── __init__.py
+│           └── validation_spacy
+│               └── __init__.py
+├── data_spacy
+│   ├── corpus
+│   │   └── __init__.py
+│   ├── embedding
+│   │   └── __init__.py
+│   ├── __init__.py
+│   ├── pipelines
+│   │   └── __init__.py
+│   ├── pre_trained_models
+│   │   ├── en_core_web_sm
+│   │   │   ├── en_core_web_sm-3.7.1
+│   │   │   │   ├── accuracy.json
+│   │   │   │   ├── attribute_ruler
+│   │   │   │   │   └── patterns
+│   │   │   │   ├── config.cfg
+│   │   │   │   ├── lemmatizer
+│   │   │   │   │   └── lookups
+│   │   │   │   │       └── lookups.bin
+│   │   │   │   ├── LICENSE
+│   │   │   │   ├── LICENSES_SOURCES
+│   │   │   │   ├── meta.json
+│   │   │   │   ├── ner
+│   │   │   │   │   ├── cfg
+│   │   │   │   │   ├── model
+│   │   │   │   │   └── moves
+│   │   │   │   ├── parser
+│   │   │   │   │   ├── cfg
+│   │   │   │   │   ├── model
+│   │   │   │   │   └── moves
+│   │   │   │   ├── README.md
+│   │   │   │   ├── senter
+│   │   │   │   │   ├── cfg
+│   │   │   │   │   └── model
+│   │   │   │   ├── tagger
+│   │   │   │   │   ├── cfg
+│   │   │   │   │   └── model
+│   │   │   │   ├── tok2vec
+│   │   │   │   │   ├── cfg
+│   │   │   │   │   └── model
+│   │   │   │   ├── tokenizer
+│   │   │   │   └── vocab
+│   │   │   │       ├── key2row
+│   │   │   │       ├── lookups.bin
+│   │   │   │       ├── strings.json
+│   │   │   │       ├── vectors
+│   │   │   │       └── vectors.cfg
+│   │   │   ├── __init__.py
+│   │   │   └── meta.json
+│   │   ├── en_core_web_sm-3.7.1.dist-info
+│   │   │   ├── direct_url.json
+│   │   │   ├── entry_points.txt
+│   │   │   ├── INSTALLER
+│   │   │   ├── LICENSE
+│   │   │   ├── LICENSES_SOURCES
+│   │   │   ├── METADATA
+│   │   │   ├── RECORD
+│   │   │   ├── REQUESTED
+│   │   │   ├── top_level.txt
+│   │   │   └── WHEEL
+│   │   └── __init__.py
+│   └── queries
+│       ├── __init__.py
+│       └── tableau
+│           ├── __init__.py
+│           ├── ner_tableau
+│           │   ├── attribute_ruler
+│           │   │   └── patterns
+│           │   ├── config.cfg
+│           │   ├── lemmatizer
+│           │   │   └── lookups
+│           │   │       └── lookups.bin
+│           │   ├── meta.json
+│           │   ├── ner
+│           │   │   ├── cfg
+│           │   │   ├── model
+│           │   │   └── moves
+│           │   ├── parser
+│           │   │   ├── cfg
+│           │   │   ├── model
+│           │   │   └── moves
+│           │   ├── senter
+│           │   │   ├── cfg
+│           │   │   └── model
+│           │   ├── tagger
+│           │   │   ├── cfg
+│           │   │   └── model
+│           │   ├── tok2vec
+│           │   │   ├── cfg
+│           │   │   └── model
+│           │   ├── tokenizer
+│           │   └── vocab
+│           │       ├── key2row
+│           │       ├── lookups.bin
+│           │       ├── strings.json
+│           │       ├── vectors
+│           │       └── vectors.cfg
+│           ├── ner_tableau_desc
+│           │   ├── attribute_ruler
+│           │   │   └── patterns
+│           │   ├── config.cfg
+│           │   ├── lemmatizer
+│           │   │   └── lookups
+│           │   │       └── lookups.bin
+│           │   ├── meta.json
+│           │   ├── ner
+│           │   │   ├── cfg
+│           │   │   ├── model
+│           │   │   └── moves
+│           │   ├── parser
+│           │   │   ├── cfg
+│           │   │   ├── model
+│           │   │   └── moves
+│           │   ├── senter
+│           │   │   ├── cfg
+│           │   │   └── model
+│           │   ├── tagger
+│           │   │   ├── cfg
+│           │   │   └── model
+│           │   ├── tok2vec
+│           │   │   ├── cfg
+│           │   │   └── model
+│           │   ├── tokenizer
+│           │   └── vocab
+│           │       ├── key2row
+│           │       ├── lookups.bin
+│           │       ├── strings.json
+│           │       ├── vectors
+│           │       └── vectors.cfg
+│           ├── ner_tableau_formulas
+│           │   ├── attribute_ruler
+│           │   │   └── patterns
+│           │   ├── config.cfg
+│           │   ├── lemmatizer
+│           │   │   └── lookups
+│           │   │       └── lookups.bin
+│           │   ├── meta.json
+│           │   ├── ner
+│           │   │   ├── cfg
+│           │   │   ├── model
+│           │   │   └── moves
+│           │   ├── parser
+│           │   │   ├── cfg
+│           │   │   ├── model
+│           │   │   └── moves
+│           │   ├── senter
+│           │   │   ├── cfg
+│           │   │   └── model
+│           │   ├── tagger
+│           │   │   ├── cfg
+│           │   │   └── model
+│           │   ├── tok2vec
+│           │   │   ├── cfg
+│           │   │   └── model
+│           │   ├── tokenizer
+│           │   └── vocab
+│           │       ├── key2row
+│           │       ├── lookups.bin
+│           │       ├── strings.json
+│           │       ├── vectors
+│           │       └── vectors.cfg
+│           ├── ner_versions
+│           │   ├── __init__.py
+│           │   └── version03052024-2209
+│           │       ├── __init__.py
+│           │       ├── ner_queries
+│           │       │   ├── attribute_ruler
+│           │       │   │   └── patterns
+│           │       │   ├── config.cfg
+│           │       │   ├── lemmatizer
+│           │       │   │   └── lookups
+│           │       │   │       └── lookups.bin
+│           │       │   ├── meta.json
+│           │       │   ├── ner
+│           │       │   │   ├── cfg
+│           │       │   │   ├── model
+│           │       │   │   └── moves
+│           │       │   ├── parser
+│           │       │   │   ├── cfg
+│           │       │   │   ├── model
+│           │       │   │   └── moves
+│           │       │   ├── senter
+│           │       │   │   ├── cfg
+│           │       │   │   └── model
+│           │       │   ├── tagger
+│           │       │   │   ├── cfg
+│           │       │   │   └── model
+│           │       │   ├── tok2vec
+│           │       │   │   ├── cfg
+│           │       │   │   └── model
+│           │       │   ├── tokenizer
+│           │       │   └── vocab
+│           │       │       ├── key2row
+│           │       │       ├── lookups.bin
+│           │       │       ├── strings.json
+│           │       │       ├── vectors
+│           │       │       └── vectors.cfg
+│           │       ├── ner_queries_desc
+│           │       │   ├── attribute_ruler
+│           │       │   │   └── patterns
+│           │       │   ├── config.cfg
+│           │       │   ├── lemmatizer
+│           │       │   │   └── lookups
+│           │       │   │       └── lookups.bin
+│           │       │   ├── meta.json
+│           │       │   ├── ner
+│           │       │   │   ├── cfg
+│           │       │   │   ├── model
+│           │       │   │   └── moves
+│           │       │   ├── parser
+│           │       │   │   ├── cfg
+│           │       │   │   ├── model
+│           │       │   │   └── moves
+│           │       │   ├── senter
+│           │       │   │   ├── cfg
+│           │       │   │   └── model
+│           │       │   ├── tagger
+│           │       │   │   ├── cfg
+│           │       │   │   └── model
+│           │       │   ├── tok2vec
+│           │       │   │   ├── cfg
+│           │       │   │   └── model
+│           │       │   ├── tokenizer
+│           │       │   └── vocab
+│           │       │       ├── key2row
+│           │       │       ├── lookups.bin
+│           │       │       ├── strings.json
+│           │       │       ├── vectors
+│           │       │       └── vectors.cfg
+│           │       └── ner_queries_formulas
+│           │           ├── attribute_ruler
+│           │           │   └── patterns
+│           │           ├── config.cfg
+│           │           ├── lemmatizer
+│           │           │   └── lookups
+│           │           │       └── lookups.bin
+│           │           ├── meta.json
+│           │           ├── ner
+│           │           │   ├── cfg
+│           │           │   ├── model
+│           │           │   └── moves
+│           │           ├── parser
+│           │           │   ├── cfg
+│           │           │   ├── model
+│           │           │   └── moves
+│           │           ├── senter
+│           │           │   ├── cfg
+│           │           │   └── model
+│           │           ├── tagger
+│           │           │   ├── cfg
+│           │           │   └── model
+│           │           ├── tok2vec
+│           │           │   ├── cfg
+│           │           │   └── model
+│           │           ├── tokenizer
+│           │           └── vocab
+│           │               ├── key2row
+│           │               ├── lookups.bin
+│           │               ├── strings.json
+│           │               ├── vectors
+│           │               └── vectors.cfg
+│           ├── testing_spacy
+│           │   ├── __init__.py
+│           │   ├── Test_desc_data.spacy
+│           │   ├── Test_formulas_data.spacy
+│           │   ├── testing_spacy_versions
+│           │   │   └── __init__.py
+│           │   ├── test.py
+│           │   ├── Test_tableau_both_dsm_data.spacy
+│           │   ├── Test_tableau_desc_sm_data.spacy
+│           │   └── Test_tableau_formulas_sm_data.spacy
+│           ├── test_ner_desc.py
+│           ├── test_ner_formulas.py
+│           ├── training_spacy
+│           │   ├── __init__.py
+│           │   ├── test.py
+│           │   ├── Train_desc_data.spacy
+│           │   ├── Train_formulas_data.spacy
+│           │   ├── training_spacy_versions
+│           │   │   └── __init__.py
+│           │   ├── Train_tableau_both_bdsm_data.spacy
+│           │   ├── Train_tableau_both_dsm_data.spacy
+│           │   ├── Train_tableau_desc_bsm_data.spacy
+│           │   ├── Train_tableau_desc_sm_data.spacy
+│           │   ├── Train_tableau_formulas_bsm_data.spacy
+│           │   └── Train_tableau_formulas_sm_data.spacy
+│           └── vocab
+│               ├── __init__.py
+│               ├── vocab_tableau_both_Combined_bdsm
+│               ├── vocab_tableau_both_Combined_dsm
+│               ├── vocab_tableau_desc_Description_bsm
+│               ├── vocab_tableau_desc_Description_sm
+│               ├── vocab_tableau_formulas_Formula (Tableau)_bsm
+│               ├── vocab_tableau_formulas_Formula (Tableau)_sm
+│               └── vocab_versions
+│                   ├── __init__.py
+│                   └── version-09052024-1705
+│                       └── __init__.py
+├── __init__.py
+├── mappings
+│   ├── __init__.py
+│   └── mapping.py
+├── models
+│   ├── __init__.py
+│   └── queries
+│       ├── __init__.py
+│       └── tableau
+│           ├── checkpoints
+│           │   └── __init__.py
+│           ├── __init__.py
+│           ├── model_configs
+│           │   └── __init__.py
+│           ├── trained_models
+│           │   ├── __init__.py
+│           │   ├── test_comb_multi_task_model.py
+│           │   ├── test_description_model.py
+│           │   ├── test_formulas_model.py
+│           │   └── trained_models_versions
+│           │       └── __init__.py
+│           └── training_history
+│               ├── __init__.py
+│               └── training_history_versions
+│                   └── __init__.py
+├── patterns
+│   ├── custom_patterns.py
+│   ├── __init__.py
+│   └── queries
+│       ├── __init__.py
+│       └── tableau
+│           ├── generation.py
+│           ├── __init__.py
+│           ├── test_create_ruler_tableau.py
+│           └── test_rules_tableau_patterns.py
+├── __pycache__
+│   ├── __init__.cpython-312.pyc
+│   └── __init__.cpython-313.pyc
+├── scripts_
+│   ├── __init__.py
+│   ├── script_combined_data.py
+│   ├── script_custom_entities.py
+│   ├── script_custom_entities.py~
+│   ├── script_custom_ner.py
+│   └── script_custom_patterns.py
+└── utils
+    ├── colab.py
+    ├── colab.py~
+    ├── files_local.py
+    ├── files.py
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── __init__.cpython-312.pyc
+    │   ├── __init__.cpython-313.pyc
+    │   ├── tree_id_op.cpython-312.pyc
+    │   ├── tree_id_op.cpython-313.pyc
+    │   ├── utils.cpython-312.pyc
+    │   └── utils.cpython-313.pyc
+    ├── tree_id_op.py
+    └── utils.py
+
+141 directories, 366 files
+

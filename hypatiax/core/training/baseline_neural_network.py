@@ -73,11 +73,19 @@ def train_and_evaluate(X, y, description, domain, metadata=None, epochs=200):
         ss_res = np.sum((y_test_original - y_pred) ** 2)
         ss_tot = np.sum((y_test_original - np.mean(y_test_original)) ** 2)
         r2 = 1 - (ss_res / ss_tot) if ss_tot > 0 else 0
+        
+    assert model is not None
 
     return {
         "method": "neural_network",
         "description": description,
         "domain": domain,
+
+        # 🔑 REQUIRED for extrapolation
+        "model": model,
+        "scaler_X": scaler_X,
+        "scaler_y": scaler_y,
+        
         "evaluation": {  # Wrap metrics in "evaluation" to match Pure LLM format
             "r2": float(r2),
             "rmse": float(rmse),
@@ -87,6 +95,20 @@ def train_and_evaluate(X, y, description, domain, metadata=None, epochs=200):
         },
         "timestamp": datetime.now().isoformat(),
     }
+
+def nn_predict(model, scaler_X, scaler_y, X_new):
+    """
+    Predict using trained NN with proper scaling.
+    """
+    model.eval()
+
+    X_scaled = scaler_X.transform(X_new)
+    X_t = torch.FloatTensor(X_scaled)
+
+    with torch.no_grad():
+        y_scaled = model(X_t).numpy().reshape(-1, 1)
+
+    return scaler_y.inverse_transform(y_scaled).flatten()
 
 
 def run_nn_baseline(domains=None, save_dir="hypatiax/data/results"):
@@ -117,6 +139,26 @@ def run_nn_baseline(domains=None, save_dir="hypatiax/data/results"):
             print(f"\n[{i}/{len(test_cases)}] {description}")
 
             result = train_and_evaluate(X, y, description, domain, metadata, epochs=200)
+
+            # Add extrapolation test
+            model = result['model']
+            scaler_X = result['scaler_X']
+            scaler_y = result['scaler_y']
+
+            # Create extrapolation point
+            X_extrap = X.max(axis=0).reshape(1, -1) * 1.2
+            
+            assert callable(nn_predict)
+            
+            y_pred = nn_predict(model, scaler_X, scaler_y, X_extrap)
+
+            # Validate prediction
+            assert y_pred is not None, "Prediction should not be None"
+            assert len(y_pred) == 1, f"Expected 1 prediction, got {len(y_pred)}"
+            assert not np.isnan(y_pred[0]), "Prediction should not be NaN"
+            assert not np.isinf(y_pred[0]), "Prediction should not be Inf"
+            
+            print(f"  🔮 Extrapolation prediction: {y_pred[0]:.6f}")
 
             # Fix: Access metrics from the 'evaluation' dictionary
             print(f"  ✓ R² Score: {result['evaluation']['r2']:.4f}")

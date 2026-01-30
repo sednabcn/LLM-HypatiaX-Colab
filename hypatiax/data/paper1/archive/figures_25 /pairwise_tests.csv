@@ -1,0 +1,2 @@
+Comparison,n1,n2,Median1,Median2,U-statistic,p-value,Significant
+Main: Hybrid v40 vs Neural Network,14,13,0.0,86.72543765946794,0.0,1.1086020782513886e-06,Yes (p<0.05)

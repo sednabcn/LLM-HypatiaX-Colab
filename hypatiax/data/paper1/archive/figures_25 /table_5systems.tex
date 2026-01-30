@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\centering
+\begin{threeparttable}
+\caption{Comprehensive System Comparison: Extrapolation Performance}
+\label{tab:five_systems}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{System} & \textbf{n} & \textbf{Medium (2×)} & \textbf{R² Train} & \textbf{Architecture} \\
+\midrule
+System 1: NN+LLM          & 14 & \textbf{0.0\%}  & 0.798 & Extrapolation-aware \\
+Neural Network            & 14 & 26371501427.1\% & 0.935 & Baseline \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Mann-Whitney U tests, one-tailed, $p < 0.001$ for all Hybrid v40 comparisons
+\item System 1 achieves near-perfect extrapolation by recovering true functional forms
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

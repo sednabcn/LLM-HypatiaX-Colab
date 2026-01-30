@@ -1,0 +1,69 @@
+Summary of Files Created
+I've created 4 different requirements files based on your notebook:
+1. requirements.txt (Recommended for development)
+
+Flexible version ranges
+Includes all CUDA libraries for GPU support
+Comments explaining each section
+Safe for future updates
+
+2. requirements-exact.txt (For reproduction)
+
+Exact versions from your working notebook
+Guarantees reproducibility
+Use when you need identical environment
+Pinned to working versions
+
+3. requirements-minimal.txt (Quick setup)
+
+Only top-level packages
+Lets pip resolve sub-dependencies
+Fastest installation
+Good for testing/prototyping
+
+4. install_deps.sh (Automated installer)
+
+Handles installation order
+Creates virtual environment
+Installs spaCy models
+Verifies everything works
+GPU detection
+
+How to Use
+Option 1: Quick Setup (Recommended for most users)
+bashcd ~/Downloads/GITHUB/LLM-HypatiaX
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install minimal dependencies
+pip install -r requirements-minimal.txt
+
+# Download spaCy models
+python -m spacy download en_core_web_sm
+python -m spacy download en_core_web_trf
+Option 2: Automated Installation
+bashcd ~/Downloads/GITHUB/LLM-HypatiaX
+chmod +x install_deps.sh
+./install_deps.sh
+Option 3: Exact Reproduction
+bashpip install -r requirements-exact.txt
+python -m spacy download en_core_web_sm
+python -m spacy download en_core_web_trf
+Key Packages from Your Notebook
+From your code, you're using:
+
+✅ spacy (3.7.4) - Core NLP
+✅ spacy-transformers (1.3.4) - BERT models
+✅ torch (2.2.1) - Deep learning
+✅ transformers (4.36.2) - HuggingFace
+✅ pandas - Data manipulation
+✅ numpy - Numerical computing
+✅ sklearn - Machine learning
+✅ nltk - Text processing
+✅ matplotlib - Visualization
+✅ opencv-python - Image processing
+✅ openpyxl - Excel files
+
+All of these are now in the req
