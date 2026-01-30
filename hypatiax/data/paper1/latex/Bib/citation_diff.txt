@@ -235,8 +235,8 @@ Line 632:
   +     \STATE \textbf{return} $E_{\text{LLM}}$ \COMMENT{Accept LLM solution}\citep{kambhampati2024llms}
 
 Line 634:
-  -     \STATE $P_0 \gets$ initialize\_population($E_{\text{LLM}}$) 
-  +     \STATE $P_0 \gets$ initialize\_population($E_{\text{LLM}}$)\citep{kambhampati2024llms} 
+  -     \STATE $P_0 \gets$ initialize\_population($E_{\text{LLM}}$)
+  +     \STATE $P_0 \gets$ initialize\_population($E_{\text{LLM}}$)\citep{kambhampati2024llms}
 
 Line 641:
   - \subsection{LLM Prompting Strategy}

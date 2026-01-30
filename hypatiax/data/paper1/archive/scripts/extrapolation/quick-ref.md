@@ -101,7 +101,7 @@ Nobody wants to say "three hundred thirty-four thousand percent error"!
 ### Problem 3: Confusing "0%"
 ```
 Perfect extrapolation (RMSE_extrap = RMSE_train):
-  
+
   As multiplier: 1.0× ✅ Clear ("same as training")
   As percentage: 100% ❓ Confusing ("100% error?")
   As increase: 0% ❓ Ambiguous ("zero increase" but still has error)
@@ -125,16 +125,16 @@ Perfect extrapolation (RMSE_extrap = RMSE_train):
 def calculate_extrapolation_degradation(y_true, y_pred_train, y_pred_extrap):
     """
     Calculate extrapolation degradation factor.
-    
+
     Returns:
         float: Multiplier showing how much worse extrapolation is.
                1.0 = perfect, >1 = degraded, <1 = improved (rare).
     """
     rmse_train = np.sqrt(np.mean((y_true[:n_train] - y_pred_train)**2))
     rmse_extrap = np.sqrt(np.mean((y_true[n_train:] - y_pred_extrap)**2))
-    
+
     degradation = rmse_extrap / rmse_train
-    
+
     return degradation
 
 # Example usage
@@ -163,7 +163,7 @@ extrap_increase = ((rmse_extrap / rmse_train) - 1) * 100
 ```latex
 \begin{definition}[Extrapolation Degradation Factor]
 \label{def:extrap_error}
-Given a learned model $\hat{f}$ with training RMSE $\epsilon_{\text{train}}$ 
+Given a learned model $\hat{f}$ with training RMSE $\epsilon_{\text{train}}$
 and extrapolation RMSE $\epsilon_{\text{extrap}}$:
 \begin{equation}
 D_{\text{extrap}} = \frac{\epsilon_{\text{extrap}}}{\epsilon_{\text{train}}}
@@ -188,10 +188,10 @@ Pure PySR & 0.12 & 23× \\
 
 ### In-Text Usage
 ```latex
-The neural network exhibits catastrophic extrapolation failure with 
-degradation factor $D_{\text{extrap}} = 3348$, meaning predictions 
-are 3348 times worse than training error. In contrast, Hybrid v40 
-achieves $D_{\text{extrap}} = 1.00 \pm 0.00$ across all 14 test 
+The neural network exhibits catastrophic extrapolation failure with
+degradation factor $D_{\text{extrap}} = 3348$, meaning predictions
+are 3348 times worse than training error. In contrast, Hybrid v40
+achieves $D_{\text{extrap}} = 1.00 \pm 0.00$ across all 14 test
 cases, indicating perfect preservation of training accuracy.
 ```
 
@@ -220,7 +220,7 @@ After making changes, verify:
 A: The abstract is correct. Body needs fixing. Use "×" everywhere.
 
 **Q: Should I report "0% error" for Hybrid v40?**
-A: No. Report "1.0× degradation (perfect)" or "<1.01×". 
+A: No. Report "1.0× degradation (perfect)" or "<1.01×".
    Zero degradation means RMSE_extrap = RMSE_train = same error.
 
 **Q: What if RMSE_train is actually zero (perfect fit)?**
@@ -228,7 +228,7 @@ A: Then degradation = RMSE_extrap / 0 = undefined. Report separately:
    "Training: RMSE = 0.000 (perfect), Extrapolation: RMSE = 0.002"
 
 **Q: Can degradation be less than 1?**
-A: Theoretically yes (if extrapolation easier than interpolation), 
+A: Theoretically yes (if extrapolation easier than interpolation),
    but rare. Usually 1.0-1.5 for good models, >100 for failures.
 
 **Q: Why unified analysis got 2.64×10¹⁰?**

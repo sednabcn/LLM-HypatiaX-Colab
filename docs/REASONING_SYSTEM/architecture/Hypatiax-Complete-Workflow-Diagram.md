@@ -110,7 +110,7 @@ python master_analyzer.py --modules tables figures hybrid_viz
 
 # Or individually:
 python generate_tables.py          # → LaTeX tables
-python generate_figures.py         # → Publication figures  
+python generate_figures.py         # → Publication figures
 python hypatiax_hybrid_system_visualization.py --all  # → Statistical tests
 ```
 **Output:**

@@ -11,11 +11,11 @@ Your paper says "3348%" but it should say "3348×" (3348 times worse).
 ```latex
 \begin{definition}[Extrapolation Error]
 \label{def:extrap_error}
-Given a learned model $\hat{f}$ with training RMSE $\text{RMSE}_{\text{train}}$ 
+Given a learned model $\hat{f}$ with training RMSE $\text{RMSE}_{\text{train}}$
 and extrapolation test set $\mathcal{D}_{\text{extrap}}$:
 \begin{equation}
 E_{\text{extrap}} = \frac{\text{RMSE}(\hat{f}, \mathcal{D}_{\text{extrap}})}
-                         {\text{RMSE}(\hat{f}, \mathcal{D}_{\text{train}})} 
+                         {\text{RMSE}(\hat{f}, \mathcal{D}_{\text{train}})}
                     \times 100\%
 \label{eq:extrap_error}
 \end{equation}
@@ -26,7 +26,7 @@ E_{\text{extrap}} = \frac{\text{RMSE}(\hat{f}, \mathcal{D}_{\text{extrap}})}
 ```latex
 \begin{definition}[Extrapolation Degradation]
 \label{def:extrap_error}
-Given a learned model $\hat{f}$ with training RMSE $\text{RMSE}_{\text{train}}$ 
+Given a learned model $\hat{f}$ with training RMSE $\text{RMSE}_{\text{train}}$
 and extrapolation test set $\mathcal{D}_{\text{extrap}}$:
 \begin{equation}
 E_{\text{extrap}} = \frac{\text{RMSE}(\hat{f}, \mathcal{D}_{\text{extrap}})}
@@ -90,8 +90,8 @@ Should now show **3348×** instead of 26 billion%.
 
 ## Done!
 
-Your paper will now consistently report extrapolation as **multipliers** (3348×) 
+Your paper will now consistently report extrapolation as **multipliers** (3348×)
 instead of confusing percentages (3348%).
 
-**Time**: 30 minutes  
+**Time**: 30 minutes
 **Impact**: Fixes major inconsistency

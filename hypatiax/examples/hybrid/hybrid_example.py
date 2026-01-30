@@ -1,4 +1,5 @@
 """Example: Using Hybrid mapping (all methods)"""
+
 import os
 
 from mappings.hybrid_mapping import HybridMapper
@@ -35,18 +36,19 @@ def main():
         use_ner=True,
         use_transformer=True,
         use_llm=bool(llm_mapper),
-        use_agents=False
+        use_agents=False,
     )
 
     print("Results from each method:")
-    for method, output in result['methods'].items():
+    for method, output in result["methods"].items():
         print(f"  {method.upper()}:")
-        if 'error' in output:
+        if "error" in output:
             print(f"Error: {output['error']}")
         else:
             print(f"Expression: {output.get('expression', 'N/A')}")
 
     print(f"Best Expression: {result['best_expression']}")
+
 
 if __name__ == "__main__":
     main()

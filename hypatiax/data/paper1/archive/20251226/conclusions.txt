@@ -85,7 +85,7 @@ Looking at these files, I can identify clear patterns showing both the limitatio
 1. API/Format Errors (baseline_pure_llm_defi_20251220_165852.json & 163240.json)
 json
 
-"error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 
+"error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error',
 'message': 'messages.0.content: Input should be a valid list'}"
 
     Problem: LLM struggles with correct API formatting
@@ -138,7 +138,7 @@ json
   "success": true
 }
 
-// VaR calculations  
+// VaR calculations
 "mse": 6.720454736081216e-24  // Essentially 0
 "r2": 1.0
 
@@ -156,9 +156,9 @@ The LLM successfully generated:
 3. Rich Documentation (baseline_pure_llm_defi_20251220_162102.json)
 python
 
-"explanation": "This formula calculates the impermanent loss experienced by a 
-liquidity provider in a constant product AMM like Uniswap V2. Impermanent loss 
-represents the opportunity cost of providing liquidity versus simply holding 
+"explanation": "This formula calculates the impermanent loss experienced by a
+liquidity provider in a constant product AMM like Uniswap V2. Impermanent loss
+represents the opportunity cost of providing liquidity versus simply holding
 the tokens..."
 
 "assumptions": [
@@ -171,7 +171,7 @@ Production Value: HIGH - immediate documentation for audits
 4. Self-Correction Capability (baseline_llm_FIXED_20251220_235258.json)
 json
 
-"raw_response": "I notice there's an issue with the Expected Shortfall (ES) 
+"raw_response": "I notice there's an issue with the Expected Shortfall (ES)
 portfolio aggregation formula provided. Let me correct this:
 
 **Corrected Formula:**
@@ -207,7 +207,7 @@ python
 def production_formula_generator(description):
     # 1. LLM generates formula + explanation
     llm_output = llm_generate(description)
-    
+
     # 2. Validation layer
     if validate_syntax(llm_output.code):
         # 3. Test against ground truth
@@ -217,10 +217,8 @@ def production_formula_generator(description):
                 'docs': llm_output.explanation,  # ← LLM's unique value
                 'source': 'llm_validated'
             }
-    
+
     # 4. Fallback to neural network
     return neural_network_generate(description)
 
 The files show: LLMs are brilliant but unreliable - perfect for generating documentation and symbolic formulas, but need validation layers before production deployment.
-
-

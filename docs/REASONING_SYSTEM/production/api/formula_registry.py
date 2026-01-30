@@ -121,7 +121,10 @@ class FormulaRegistry:
                     )
                 ],
                 output_unit="percentage",
-                implementation=lambda price_ratio: 2 * np.sqrt(price_ratio) / (price_ratio + 1) - 1,
+                implementation=lambda price_ratio: 2
+                * np.sqrt(price_ratio)
+                / (price_ratio + 1)
+                - 1,
                 domain="defi",
                 constraints=["price_ratio > 0"],
                 examples=[
@@ -186,7 +189,12 @@ class FormulaRegistry:
                 constraints=["reserve_in > 0", "reserve_out > 0", "0 <= fee <= 0.1"],
                 examples=[
                     {
-                        "inputs": {"amount_in": 1.0, "reserve_in": 1000, "reserve_out": 2000, "fee": 0.003},
+                        "inputs": {
+                            "amount_in": 1.0,
+                            "reserve_in": 1000,
+                            "reserve_out": 2000,
+                            "fee": 0.003,
+                        },
                         "output": 1.992,
                     }
                 ],
@@ -204,17 +212,30 @@ class FormulaRegistry:
                 formula_python="reserve_x * reserve_y",
                 inputs=[
                     FormulaInput(
-                        name="reserve_x", description="Token X reserve", unit="tokens", type="float", min_value=0
+                        name="reserve_x",
+                        description="Token X reserve",
+                        unit="tokens",
+                        type="float",
+                        min_value=0,
                     ),
                     FormulaInput(
-                        name="reserve_y", description="Token Y reserve", unit="tokens", type="float", min_value=0
+                        name="reserve_y",
+                        description="Token Y reserve",
+                        unit="tokens",
+                        type="float",
+                        min_value=0,
                     ),
                 ],
                 output_unit="tokens^2",
                 implementation=lambda reserve_x, reserve_y: reserve_x * reserve_y,
                 domain="defi",
                 constraints=["reserve_x > 0", "reserve_y > 0"],
-                examples=[{"inputs": {"reserve_x": 1000, "reserve_y": 2000}, "output": 2000000}],
+                examples=[
+                    {
+                        "inputs": {"reserve_x": 1000, "reserve_y": 2000},
+                        "output": 2000000,
+                    }
+                ],
             )
         )
 
@@ -234,17 +255,35 @@ class FormulaRegistry:
                 formula_latex="VaR_{95} = \\mu - 1.645 \\cdot \\sigma \\cdot \\sqrt{t}",
                 formula_python="mu - 1.645 * sigma * np.sqrt(t)",
                 inputs=[
-                    FormulaInput(name="mu", description="Expected return", unit="percentage", type="float"),
-                    FormulaInput(name="sigma", description="Volatility", unit="percentage", type="float", min_value=0),
                     FormulaInput(
-                        name="t", description="Time horizon (days)", unit="days", type="float", min_value=0, default=1
+                        name="mu",
+                        description="Expected return",
+                        unit="percentage",
+                        type="float",
+                    ),
+                    FormulaInput(
+                        name="sigma",
+                        description="Volatility",
+                        unit="percentage",
+                        type="float",
+                        min_value=0,
+                    ),
+                    FormulaInput(
+                        name="t",
+                        description="Time horizon (days)",
+                        unit="days",
+                        type="float",
+                        min_value=0,
+                        default=1,
                     ),
                 ],
                 output_unit="percentage",
                 implementation=lambda mu, sigma, t=1: mu - 1.645 * sigma * np.sqrt(t),
                 domain="risk",
                 constraints=["sigma > 0", "t > 0"],
-                examples=[{"inputs": {"mu": 0.05, "sigma": 0.2, "t": 1}, "output": -0.279}],
+                examples=[
+                    {"inputs": {"mu": 0.05, "sigma": 0.2, "t": 1}, "output": -0.279}
+                ],
             )
         )
 
@@ -259,7 +298,10 @@ class FormulaRegistry:
                 formula_python="(return_portfolio - risk_free_rate) / volatility",
                 inputs=[
                     FormulaInput(
-                        name="return_portfolio", description="Portfolio return", unit="percentage", type="float"
+                        name="return_portfolio",
+                        description="Portfolio return",
+                        unit="percentage",
+                        type="float",
                     ),
                     FormulaInput(
                         name="risk_free_rate",
@@ -278,12 +320,21 @@ class FormulaRegistry:
                 ],
                 output_unit="ratio",
                 implementation=lambda return_portfolio, risk_free_rate=0.02, volatility=1: (
-                    (return_portfolio - risk_free_rate) / volatility if volatility > 0 else 0
+                    (return_portfolio - risk_free_rate) / volatility
+                    if volatility > 0
+                    else 0
                 ),
                 domain="risk",
                 constraints=["volatility > 0"],
                 examples=[
-                    {"inputs": {"return_portfolio": 0.15, "risk_free_rate": 0.02, "volatility": 0.2}, "output": 0.65}
+                    {
+                        "inputs": {
+                            "return_portfolio": 0.15,
+                            "risk_free_rate": 0.02,
+                            "volatility": 0.2,
+                        },
+                        "output": 0.65,
+                    }
                 ],
             )
         )

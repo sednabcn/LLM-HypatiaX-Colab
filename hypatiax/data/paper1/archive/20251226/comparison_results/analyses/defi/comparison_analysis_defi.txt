@@ -3,7 +3,7 @@
 ✅ Loaded LLM results from: results/baseline_llm_FIXED_20251220_235258.json
 ✅ Loaded NN results from: results/baseline_nn_defi_20251220_162650.json
 ====================================================================================================
-                            GENERATING COMPREHENSIVE COMPARISON ANALYSIS                            
+                            GENERATING COMPREHENSIVE COMPARISON ANALYSIS
 ====================================================================================================
 
 📊 Creating comparison tables...
@@ -19,7 +19,7 @@
 ✅ Saved: results/comparison_analysis/summary_tables.txt
 
 ====================================================================================================
-                                         SUMMARY STATISTICS                                         
+                                         SUMMARY STATISTICS
 ====================================================================================================
 
 Overall Performance:
@@ -42,7 +42,7 @@ Performance by Quality:
     NN:  3/20 (15.0%)
 
 ====================================================================================================
-                                      DOMAIN-SPECIFIC ANALYSIS                                      
+                                      DOMAIN-SPECIFIC ANALYSIS
 ====================================================================================================
 
 AMM:
@@ -76,7 +76,7 @@ RISK_VAR:
   Advantage:   -3.3987 (NN wins)
 
 ====================================================================================================
-                                         CRITICAL INSIGHTS                                          
+                                         CRITICAL INSIGHTS
 ====================================================================================================
 
 🎯 Cases where LLM dominantly outperforms (R² diff > 0.2):
@@ -84,7 +84,7 @@ RISK_VAR:
     LLM: 1.0000 vs NN: -260606.2429 (Δ = +260607.2429)
   • LP fee earnings based on liquidity share
     LLM: 1.0000 vs NN: -375.4934 (Δ = +376.4934)
-  • Constant product formula: reserve Y given reserve 
+  • Constant product formula: reserve Y given reserve
     LLM: 1.0000 vs NN: 0.2078 (Δ = +0.7922)
   • Parametric Value at Risk at 99% confidence (1-day)
     LLM: 1.0000 vs NN: 0.4933 (Δ = +0.5067)
@@ -98,7 +98,7 @@ RISK_VAR:
     NN: 0.4026 vs LLM: -1.2605 (Δ = -1.6631)
 
 ====================================================================================================
-                                          FAILURE ANALYSIS                                          
+                                          FAILURE ANALYSIS
 ====================================================================================================
 
 LLM Failures (R² < 0.80): 3/20
@@ -112,7 +112,7 @@ LLM Failures (R² < 0.80): 3/20
 NN Failures (R² < 0.80): 13/20
   • Impermanent loss percentage in AMM
     R² = 0.4026, Domain: amm
-  • Constant product formula: reserve Y given reserve 
+  • Constant product formula: reserve Y given reserve
     R² = 0.2078, Domain: amm
   • Price impact of swap in constant product AMM
     R² = -260606.2429, Domain: amm
@@ -151,7 +151,7 @@ NN Failures (R² < 0.80): 13/20
     • Maximum safe leverage for given acceptable loss to: R² = -1.3623
 
 ====================================================================================================
-                                          RECOMMENDATIONS                                           
+                                          RECOMMENDATIONS
 ====================================================================================================
 
 💡 Based on the analysis:
@@ -181,4 +181,3 @@ Generated files:
   • domain_comparison.png
   • formula_type_comparison.png
   • extrapolation_analysis.png
-

@@ -1,10 +1,10 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/core/generation/hybrid_llm_guide_validation/llm_guided_symbolic_discovery_v12.py \                                
+└─$ python hypatiax/core/generation/hybrid_llm_guide_validation/llm_guided_symbolic_discovery_v12.py \
   --protocol ALL \
   --batch \
   --mode hybrid \
   --niterations 50 \
-  --resume  
+  --resume
 ✅ Using integrated SymbolicEngineWithLLM v20
 ✅ Loaded Protocol ALL from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/core/generation/hybrid_llm_guide_validation/experiment_protocol_all_30.py
 ✅ Converted 30 test cases from protocol
@@ -75,7 +75,7 @@ Equation hint: Hookes Law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 20:07:41,261 - INFO - 
+2026-01-14 20:07:41,261 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -116,79 +116,79 @@ Equation hint: Hookes Law
    💾 Saved: mechanics_hookes_law.json
 
 ========================================================================================================================
-                                     INTEGRATED LLM-GUIDED DISCOVERY RESULTS v11.1                                      
+                                     INTEGRATED LLM-GUIDED DISCOVERY RESULTS v11.1
 ========================================================================================================================
-Test Name                                 R²    Val   Time LLM Mode         Status 
+Test Name                                 R²    Val   Time LLM Mode         Status
 ----------------------------------- -------- ------ ------ --------------- --------
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 BIOLOGY
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-biology_allometric_scaling            1.0000   91.3   10.6s hybrid_llm_only  ✅ PASS 
-biology_logistic_growth               1.0000   98.5    7.8s hybrid_llm_only  ✅ PASS 
-biology_michaelis_menten              1.0000   91.0    8.1s hybrid_llm_only  ✅ PASS 
+biology_allometric_scaling            1.0000   91.3   10.6s hybrid_llm_only  ✅ PASS
+biology_logistic_growth               1.0000   98.5    7.8s hybrid_llm_only  ✅ PASS
+biology_michaelis_menten              1.0000   91.0    8.1s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 CHEMISTRY
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-chemistry_arrhenius_equation          1.0000   88.6    7.4s hybrid_llm_only  ✅ PASS 
-chemistry_henderson_hasselbalch       0.9990   91.3  429.3s hybrid_pysr_better  ✅ PASS 
-chemistry_nernst_equation             1.0000  100.0  196.7s hybrid_pysr_better  ✅ PASS 
+chemistry_arrhenius_equation          1.0000   88.6    7.4s hybrid_llm_only  ✅ PASS
+chemistry_henderson_hasselbalch       0.9990   91.3  429.3s hybrid_pysr_better  ✅ PASS
+chemistry_nernst_equation             1.0000  100.0  196.7s hybrid_pysr_better  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ECONOMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-economics_break_even_point            1.0000   91.0    8.8s hybrid_llm_only  ✅ PASS 
-economics_cobb_douglas                1.0000   91.3    8.4s hybrid_llm_only  ✅ PASS 
-economics_elasticity_demand           1.0000   92.1    8.5s hybrid_llm_only  ✅ PASS 
+economics_break_even_point            1.0000   91.0    8.8s hybrid_llm_only  ✅ PASS
+economics_cobb_douglas                1.0000   91.3    8.4s hybrid_llm_only  ✅ PASS
+economics_elasticity_demand           1.0000   92.1    8.5s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ELECTROMAGNETISM
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-electromagnetism_coulomb_law          1.0000   91.3    8.5s hybrid_llm_only  ✅ PASS 
-electromagnetism_lorentz_force        1.0000  100.0    7.5s hybrid_llm_only  ✅ PASS 
-electromagnetism_ohms_law             1.0000  100.0    6.7s hybrid_llm_only  ✅ PASS 
+electromagnetism_coulomb_law          1.0000   91.3    8.5s hybrid_llm_only  ✅ PASS
+electromagnetism_lorentz_force        1.0000  100.0    7.5s hybrid_llm_only  ✅ PASS
+electromagnetism_ohms_law             1.0000  100.0    6.7s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 FLUID_DYNAMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-fluid_dynamics_bernoulli_equation     1.0000   91.3    8.5s hybrid_llm_only  ✅ PASS 
-fluid_dynamics_hagen_poiseuille       1.0000   89.5    9.4s hybrid_llm_only  ✅ PASS 
-fluid_dynamics_reynolds_number        1.0000   91.0    8.3s hybrid_llm_only  ✅ PASS 
+fluid_dynamics_bernoulli_equation     1.0000   91.3    8.5s hybrid_llm_only  ✅ PASS
+fluid_dynamics_hagen_poiseuille       1.0000   89.5    9.4s hybrid_llm_only  ✅ PASS
+fluid_dynamics_reynolds_number        1.0000   91.0    8.3s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 MATHEMATICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-mathematics_compound_interest         1.0000   90.4    9.0s hybrid_llm_only  ✅ PASS 
-mathematics_pythagorean_theorem       1.0000  100.0    8.2s hybrid_llm_only  ✅ PASS 
-mathematics_quadratic_discriminant    1.0000   99.4    6.6s hybrid_llm_only  ✅ PASS 
+mathematics_compound_interest         1.0000   90.4    9.0s hybrid_llm_only  ✅ PASS
+mathematics_pythagorean_theorem       1.0000  100.0    8.2s hybrid_llm_only  ✅ PASS
+mathematics_quadratic_discriminant    1.0000   99.4    6.6s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 MECHANICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-mechanics_gravitational_potential_energy   1.0000  100.0  118.9s hybrid_llm_only  ✅ PASS 
-mechanics_hookes_law                  1.0000  100.0   13.0s hybrid_llm_only  ✅ PASS 
-mechanics_kinetic_energy              1.0000  100.0   24.3s hybrid_llm_only  ✅ PASS 
+mechanics_gravitational_potential_energy   1.0000  100.0  118.9s hybrid_llm_only  ✅ PASS
+mechanics_hookes_law                  1.0000  100.0   13.0s hybrid_llm_only  ✅ PASS
+mechanics_kinetic_energy              1.0000  100.0   24.3s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 OPTICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-optics_single_slit_diffraction        1.0000   99.1    8.1s hybrid_llm_only  ✅ PASS 
-optics_snells_law                     1.0000  100.0    8.0s hybrid_llm_only  ✅ PASS 
-optics_thin_lens_equation             1.0000   90.4  214.6s hybrid_pysr_better  ✅ PASS 
+optics_single_slit_diffraction        1.0000   99.1    8.1s hybrid_llm_only  ✅ PASS
+optics_snells_law                     1.0000  100.0    8.0s hybrid_llm_only  ✅ PASS
+optics_thin_lens_equation             1.0000   90.4  214.6s hybrid_pysr_better  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 QUANTUM
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-quantum_compton_shift                 1.0000  100.0  208.4s hybrid_pysr_better  ✅ PASS 
-quantum_de_broglie_wavelength         1.0000   85.6  202.4s hybrid_pysr_better  ✅ PASS 
-quantum_photon_energy                 1.0000  100.0  169.1s hybrid_pysr_better  ✅ PASS 
+quantum_compton_shift                 1.0000  100.0  208.4s hybrid_pysr_better  ✅ PASS
+quantum_de_broglie_wavelength         1.0000   85.6  202.4s hybrid_pysr_better  ✅ PASS
+quantum_photon_energy                 1.0000  100.0  169.1s hybrid_pysr_better  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 THERMODYNAMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-thermodynamics_carnot_efficiency      1.0000   98.5    9.3s hybrid_llm_only  ✅ PASS 
-thermodynamics_heat_capacity          1.0000  100.0    8.0s hybrid_llm_only  ✅ PASS 
-thermodynamics_ideal_gas_law          1.0000   91.0   10.0s hybrid_llm_only  ✅ PASS 
+thermodynamics_carnot_efficiency      1.0000   98.5    9.3s hybrid_llm_only  ✅ PASS
+thermodynamics_heat_capacity          1.0000  100.0    8.0s hybrid_llm_only  ✅ PASS
+thermodynamics_ideal_gas_law          1.0000   91.0   10.0s hybrid_llm_only  ✅ PASS
 ========================================================================================================================
 
 SUMMARY: 30/30 passed (100.0%)
@@ -197,4 +197,4 @@ Avg R²: 1.0000 | Avg Val: 95.1 | Avg Time: 58.4s
 
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                               
+└─$

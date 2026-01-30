@@ -74,7 +74,7 @@ echo "📦 PYTHON ENVIRONMENT:"
 if command -v python &> /dev/null; then
     python_version=$(python --version 2>&1)
     echo "  Python: $python_version"
-    
+
     # Check key packages
     for pkg in spacy pandas numpy; do
         if python -c "import $pkg" 2>/dev/null; then

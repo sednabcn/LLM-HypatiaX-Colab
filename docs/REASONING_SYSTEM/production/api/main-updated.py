@@ -32,9 +32,13 @@ async def calculate(formula_id: str, inputs: Dict[str, float]):
             if input_def.name in inputs:
                 value = inputs[input_def.name]
                 if input_def.min_value and value < input_def.min_value:
-                    raise ValueError(f"{input_def.name} must be >= {input_def.min_value}")
+                    raise ValueError(
+                        f"{input_def.name} must be >= {input_def.min_value}"
+                    )
                 if input_def.max_value and value > input_def.max_value:
-                    raise ValueError(f"{input_def.name} must be <= {input_def.max_value}")
+                    raise ValueError(
+                        f"{input_def.name} must be <= {input_def.max_value}"
+                    )
 
         # Execute formula
         result = formula.implementation(**inputs)
@@ -58,7 +62,15 @@ async def calculate(formula_id: str, inputs: Dict[str, float]):
 async def search_formulas(q: str):
     """Search formulas by description."""
     results = REGISTRY.search(q)
-    return [{"id": f.id, "name": f.name, "description": f.description, "category": f.category} for f in results]
+    return [
+        {
+            "id": f.id,
+            "name": f.name,
+            "description": f.description,
+            "category": f.category,
+        }
+        for f in results
+    ]
 
 
 @app.get("/formulas/{formula_id}")

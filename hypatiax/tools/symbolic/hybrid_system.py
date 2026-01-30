@@ -45,6 +45,7 @@ from hypatiax.tools.symbolic.symbolic_engine import DiscoveryConfig, SymbolicEng
 # Optional imports with fallbacks
 try:
     from hypatiax.tools.symbolic.physics_aware_regressor import PhysicsAwareRegressor
+
     HAS_PHYSICS = True
 except ImportError:
     HAS_PHYSICS = False
@@ -52,6 +53,7 @@ except ImportError:
 
 try:
     from hypatiax.tools.validation.ensemble_validator import EnsembleValidator
+
     HAS_VALIDATOR = True
 except ImportError:
     HAS_VALIDATOR = False
@@ -69,30 +71,31 @@ logger = logging.getLogger(__name__)
 # UTILITY FUNCTIONS
 # ============================================================================
 
+
 def detect_collapsed_constants(expression: str, variable_names: List[str]) -> List[str]:
     """
     Detect collapsed physical constants in discovered expressions.
-    
+
     This function identifies when fundamental constants (like c, G, h, k_B, etc.)
     have been absorbed into numeric coefficients, which is common in physics
     when working with dimensionless or normalized data.
-    
+
     Args:
         expression: Discovered symbolic expression
         variable_names: List of variable names used
-        
+
     Returns:
         List of likely collapsed constant names
-        
+
     Example:
         >>> detect_collapsed_constants("3.0e8 * x", ["x"])
         ["c (speed of light)"]
     """
     collapsed = []
-    
+
     # Extract numeric constants from expression
     constants = re.findall(r"(\d+\.?\d*(?:[eE][+-]?\d+)?)", expression)
-    
+
     # Known physical constants and their approximate values
     PHYSICAL_CONSTANTS = {
         "c (speed of light)": [2.998e8, 3.0e8],
@@ -105,11 +108,11 @@ def detect_collapsed_constants(expression: str, variable_names: List[str]) -> Li
         "epsilon_0 (permittivity)": [8.854e-12, 8.85e-12],
         "mu_0 (permeability)": [1.257e-6, 1.26e-6],
     }
-    
+
     for const_str in constants:
         try:
             value = float(const_str)
-            
+
             # Check against known constants (with tolerance)
             for const_name, const_values in PHYSICAL_CONSTANTS.items():
                 for const_val in const_values:
@@ -120,7 +123,7 @@ def detect_collapsed_constants(expression: str, variable_names: List[str]) -> Li
                         break
         except ValueError:
             continue
-    
+
     return collapsed
 
 
@@ -128,17 +131,19 @@ def detect_collapsed_constants(expression: str, variable_names: List[str]) -> Li
 # ENUMS
 # ============================================================================
 
+
 class DiscoveryMode(Enum):
     """
     Discovery acceptance modes.
-    
+
     STRICT: Requires high validation score (>= min_validation_score)
             Use for critical applications requiring full validation
-            
+
     CALIBRATED: Accepts high R² with moderate validation (R² >= 0.99, validation >= 30)
                 Use for physics problems where constants may be absorbed
                 More lenient for dimensional analysis issues
     """
+
     STRICT = "strict"
     CALIBRATED = "calibrated"
 
@@ -147,15 +152,16 @@ class DiscoveryMode(Enum):
 # UNIFIED HYBRID DISCOVERY SYSTEM v4.2
 # ============================================================================
 
+
 class HybridDiscoverySystem:
     """
     Unified Hybrid Discovery System v4.2 - TRUE CONSOLIDATION
-    
+
     This is the definitive version that combines ALL features from:
     - v4.1: Clean architecture, DiscoveryMode enum, optional imports
     - v4.0: Collapsed constants detection, physics acceptance logic
     - v3.8: Proven stability, comprehensive error handling
-    
+
     Key Features:
     ✅ Configurable iterations (no hardcoded defaults)
     ✅ Discovery mode (STRICT vs CALIBRATED)
@@ -166,7 +172,7 @@ class HybridDiscoverySystem:
     ✅ Comprehensive validation
     ✅ Quality checking and overfit detection
     ✅ Complete statistics tracking
-    
+
     Integration Points:
     - SymbolicEngine (base PySR discovery)
     - PhysicsAwareRegressor (optional fallback)
@@ -196,7 +202,7 @@ class HybridDiscoverySystem:
     ):
         """
         Initialize hybrid discovery system v4.2.
-        
+
         Args:
             domain: Problem domain (physics, defi, biology, general, etc.)
             discovery_config: DiscoveryConfig with niterations, etc.
@@ -300,6 +306,7 @@ class HybridDiscoverySystem:
             from hypatiax.tools.llm_providers.anthropic_provider import (
                 AnthropicProvider,
             )
+
             api_key = anthropic_api_key or os.getenv("ANTHROPIC_API_KEY")
             if api_key:
                 self.anthropic_provider = AnthropicProvider(
@@ -310,6 +317,7 @@ class HybridDiscoverySystem:
 
         try:
             from hypatiax.tools.llm_providers.google_provider import GoogleProvider
+
             api_key = google_api_key or os.getenv("GOOGLE_API_KEY")
             if api_key:
                 self.google_provider = GoogleProvider(
@@ -322,7 +330,7 @@ class HybridDiscoverySystem:
         """Create physics-aware regressor."""
         if not HAS_PHYSICS:
             raise ImportError("PhysicsAwareRegressor not available")
-        
+
         return PhysicsAwareRegressor(
             domain=self.domain,
             verbose=True,
@@ -333,11 +341,11 @@ class HybridDiscoverySystem:
     def _check_expression_quality(self, expression: str, r2: float) -> Dict[str, Any]:
         """
         Check expression quality for overfitting indicators.
-        
+
         Args:
             expression: Discovered expression
             r2: R² score
-            
+
         Returns:
             Quality assessment dict with:
             - is_overfit: Boolean flag
@@ -383,11 +391,11 @@ class HybridDiscoverySystem:
     ) -> Dict[str, Any]:
         """
         Discovery with retry logic and collapsed constants detection.
-        
+
         Tries SymbolicEngine multiple times with different seeds.
         Detects collapsed physical constants in results.
         Optionally falls back to PhysicsAwareRegressor.
-        
+
         Args:
             X: Input features (n_samples, n_features)
             y: Target values (n_samples,)
@@ -395,7 +403,7 @@ class HybridDiscoverySystem:
             variable_descriptions: Dict of variable descriptions
             variable_units: Dict of variable units
             equation_name: Optional equation identifier for auto-config
-            
+
         Returns:
             Best discovery result dict
         """
@@ -425,7 +433,7 @@ class HybridDiscoverySystem:
                 # Detect collapsed physical constants
                 collapsed = detect_collapsed_constants(expr, variable_names)
                 result["collapsed_constants"] = collapsed
-                
+
                 if collapsed:
                     logger.info(f"   Collapsed constants: {collapsed}")
                     self.stats["collapsed_constants_detected"] += 1
@@ -578,14 +586,14 @@ class HybridDiscoverySystem:
     ) -> Dict[str, Any]:
         """
         Complete discovery workflow with validation and interpretation.
-        
+
         This is the main entry point for the discovery system.
-        
+
         Workflow:
         1. DISCOVER: Run symbolic regression with retry logic
         2. VALIDATE: Check expression quality and physical correctness
         3. ACCEPT: Apply discovery mode criteria (STRICT/CALIBRATED)
-        
+
         Args:
             X: Input features (n_samples, n_features)
             y: Target values (n_samples,)
@@ -598,7 +606,7 @@ class HybridDiscoverySystem:
             show_formatted: Show formatted output
             use_llm: Use LLM interpretation (if available)
             min_validation_score: Minimum validation score for STRICT mode
-            
+
         Returns:
             Complete result dict with:
             - discovery: Discovery results (expression, R², engine, etc.)
@@ -641,7 +649,9 @@ class HybridDiscoverySystem:
                 print(f"   Attempt: {discovery_result['attempt']}/{self.max_retries}")
 
             if discovery_result.get("collapsed_constants"):
-                print(f"   Collapsed constants: {discovery_result['collapsed_constants']}")
+                print(
+                    f"   Collapsed constants: {discovery_result['collapsed_constants']}"
+                )
 
             if discovery_result.get("auto_configuration", {}).get("used"):
                 auto_cfg = discovery_result["auto_configuration"]["config"]
@@ -693,7 +703,7 @@ class HybridDiscoverySystem:
         elif self.discovery_mode == DiscoveryMode.CALIBRATED:
             accepted = r2_score >= 0.99 and validation_score >= 30.0
             accept_reason = "CALIBRATED mode: R² >= 0.99, validation >= 30"
-            
+
             # Extra note for collapsed constants
             if accepted and discovery_result.get("collapsed_constants"):
                 accept_reason += " (constants absorbed)"
@@ -740,7 +750,9 @@ class HybridDiscoverySystem:
         print(f"\nOverall:")
         print(f"   Discoveries: {self.stats['discoveries']}")
         print(f"   Validations: {self.stats['validations']}")
-        print(f"   Collapsed constants detected: {self.stats['collapsed_constants_detected']}")
+        print(
+            f"   Collapsed constants detected: {self.stats['collapsed_constants_detected']}"
+        )
 
         print(f"\nSymbolicEngine:")
         print(f"   Attempts: {self.stats['symbolic_attempts']}")
@@ -831,7 +843,9 @@ if __name__ == "__main__":
     np.random.seed(42)
     I_current = np.random.uniform(0.1, 10, 100)
     R_resistance = np.random.uniform(1, 100, 100)
-    V = I_current * R_resistance + np.random.normal(0, np.abs(I_current * R_resistance) * 0.01, 100)
+    V = I_current * R_resistance + np.random.normal(
+        0, np.abs(I_current * R_resistance) * 0.01, 100
+    )
 
     X = np.column_stack([I_current, R_resistance])
 
@@ -855,7 +869,7 @@ if __name__ == "__main__":
         variable_names=["current", "resistance"],  # Changed from ["I", "R"]
         variable_descriptions={
             "current": "Current in amperes",
-            "resistance": "Resistance in ohms"
+            "resistance": "Resistance in ohms",
         },
         variable_units={"current": "A", "resistance": "Ohm"},
         description="Ohm's Law",
@@ -869,8 +883,8 @@ if __name__ == "__main__":
     print(f"R²: {result['discovery']['r2_score']:.4f}")
     print(f"Engine: {result['discovery'].get('discovery_engine')}")
     print(f"Accepted: {result['acceptance']['accepted']}")
-    
-    if result['discovery'].get('collapsed_constants'):
+
+    if result["discovery"].get("collapsed_constants"):
         print(f"Collapsed constants: {result['discovery']['collapsed_constants']}")
 
     # Check success
@@ -881,7 +895,7 @@ if __name__ == "__main__":
         print("\n❌ [FAILED] Expression still contains addition")
 
     system.print_statistics_summary()
-    
+
     print("\n" + "=" * 80)
     print("v4.2 TEST COMPLETE - All features verified!")
     print("=" * 80)

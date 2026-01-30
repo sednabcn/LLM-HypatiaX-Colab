@@ -1,7 +1,7 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/core/generation/test_three_failures_defi.py 
+└─$ python hypatiax/core/generation/test_three_failures_defi.py
 ================================================================================
-                         TESTING 3 PROBLEMATIC FORMULAS                         
+                         TESTING 3 PROBLEMATIC FORMULAS
 ================================================================================
 Model: claude-sonnet-4-20250514
 ================================================================================
@@ -25,7 +25,7 @@ The optimal position size for liquidity provision using the risk-adjusted Kelly 
 
 Where:
 - μ = expected_fee_apy (expected return)
-- σ = il_risk (impermanent loss risk/volatility) 
+- σ = il_risk (impermanent loss risk/volatility)
 - λ = risk_aversion = 2.0
 
 ## Mathematical Formulation
@@ -49,11 +49,11 @@ import numpy as np
 def optimal_lp_position_size(expected_fee_apy, il_risk):
     """
     Calculate optimal LP position size using risk-adjusted Kelly criterion
-    
+
     Args:
         expected_fee_apy: Expected annual fee return (decimal, e.g., 0.15 for 15%)
         il_risk: Impermanent loss risk/volatility (decimal, e.g., 0.3 for 30%)
-    
+
     Returns:
         position_size: Optimal fraction of capital to allocate (0 to 1)
     """
@@ -139,11 +139,11 @@ explanation: N/A...
   def optimal_lp_position_size(expected_fee_apy, il_risk):
       """
       Calculate optimal LP position size using risk-adjusted Kelly criterion
-      
+
       Args:
           expected_fee_apy: Expected annual fee return (decimal, e.g., 0.15 for 15%)
           il_risk: Impermanent loss risk/volatility (decimal, e.g., 0.3 for 30%)
-      
+
       Returns:
           position_size: Optimal fraction of capital to allocate (0 to 1)
       """
@@ -160,11 +160,11 @@ explanation: N/A...
 def optimal_lp_position_size(expected_fee_apy, il_risk):
     """
     Calculate optimal LP position size using risk-adjusted Kelly criterion
-    
+
     Args:
         expected_fee_apy: Expected annual fee return (decimal, e.g., 0.15 for 15%)
         il_risk: Impermanent loss risk/volatility (decimal, e.g., 0.3 for 30%)
-    
+
     Returns:
         position_size: Optimal fraction of capital to allocate (0 to 1)
     """
@@ -230,7 +230,7 @@ def formula(price_lower, price_upper, price_current):
 
 ## Variables
 - **price_lower**: Lower bound of the liquidity range
-- **price_upper**: Upper bound of the liquidity range  
+- **price_upper**: Upper bound of the liquidity range
 - **price_current**: Current market price (NOT used in this formula)
 
 ## Key Insight
@@ -319,12 +319,12 @@ import numpy as np
 def portfolio_expected_shortfall(position1_es, position2_es, correlation):
     """
     Calculate portfolio Expected Shortfall for two correlated positions
-    
+
     Parameters:
     - position1_es: Expected Shortfall of position 1
-    - position2_es: Expected Shortfall of position 2  
+    - position2_es: Expected Shortfall of position 2
     - correlation: Correlation coefficient between positions (-1 to +1)
-    
+
     Returns: Portfolio Expected Shortfall
     """
     corr_term = correlation * np.sqrt(position1_es * position2_es)
@@ -359,7 +359,7 @@ ES satisfies: `ES(X + Y) ≤ ES(X) + ES(Y)`
 ```python
 # Example: Two trading positions
 position1_es = 100000  # $100k ES
-position2_es = 150000  # $150k ES  
+position2_es = 150000  # $150k ES
 correlation = 0.6      # 60% correlation
 
 portfolio_es = portfolio_expected_shortfall(position1_es, position2_es, correlation)
@@ -401,12 +401,12 @@ explanation: N/A...
   def portfolio_expected_shortfall(position1_es, position2_es, correlation):
       """
       Calculate portfolio Expected Shortfall for two correlated positions
-      
+
       Parameters:
       - position1_es: Expected Shortfall of position 1
-      - position2_es: Expected Shortfall of position 2  
+      - position2_es: Expected Shortfall of position 2
       - correlation: Correlation coefficient between positions (-1 to +1)
-      
+
       Returns: Portfolio Expected Shortfall
       """
       corr_term = correlation * np.sqrt(position1_es * position2_es)
@@ -421,12 +421,12 @@ explanation: N/A...
 def portfolio_expected_shortfall(position1_es, position2_es, correlation):
     """
     Calculate portfolio Expected Shortfall for two correlated positions
-    
+
     Parameters:
     - position1_es: Expected Shortfall of position 1
-    - position2_es: Expected Shortfall of position 2  
+    - position2_es: Expected Shortfall of position 2
     - correlation: Correlation coefficient between positions (-1 to +1)
-    
+
     Returns: Portfolio Expected Shortfall
     """
     corr_term = correlation * np.sqrt(position1_es * position2_es)
@@ -441,7 +441,7 @@ def portfolio_expected_shortfall(position1_es, position2_es, correlation):
   🎯 EXCELLENT FIT!
 
 ================================================================================
-                                    SUMMARY                                     
+                                    SUMMARY
 ================================================================================
 
 ✅ Successfully generated: 3/3

@@ -9,7 +9,7 @@
    # Copy the "Security Vulnerability Fix Script" artifact content
    nano fix_vulnerabilities.sh
    # Paste the script, then Ctrl+X, Y, Enter
-   
+
    # Make it executable
    chmod +x fix_vulnerabilities.sh
    ```
@@ -149,7 +149,7 @@ safety check
 
 ## Common Issues
 
-### "No space left on device" 
+### "No space left on device"
 ```bash
 export TMPDIR=~/tmp_pip
 mkdir -p ~/tmp_pip

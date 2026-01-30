@@ -5,9 +5,9 @@
 \setcitestyle{numbers,sort&compress}
 
 % Packages
-\usepackage{amsmath,amssymb,amsfonts} 
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{bm}
-\usepackage{listings} 
+\usepackage{listings}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{booktabs}
@@ -20,7 +20,7 @@
 
 % Custom macros
 \newcommand{\R}{\mathbb{R}}
-\newcommand{\qed}{\hfill$\square$}  
+\newcommand{\qed}{\hfill$\square$}
 
 % Colors
 \definecolor{successgreen}{RGB}{0,128,0}
@@ -45,7 +45,7 @@
 \maketitle
 
 \begin{abstract}
-Can Large Language Models discover novel analytical expressions, or do they primarily reproduce patterns from training data? We address this question through systematic empirical evaluation across 131 test cases spanning classical physics and decentralized finance domains. Our results reveal that pure LLM-based discovery exhibits stark domain-dependent performance: 95\% success on classical formulas versus 45\% on specialized financial mathematics, with catastrophic extrapolation errors (412-847\% versus 8-23\% for symbolic methods). We prove that autoregressive language models are fundamentally reproductive systems, with generation probability decaying exponentially for expressions distant from training data. This limitation, confirmed by recent systematic evaluations \citep{xu2025fundamental,du2025evaluating}, necessitates hybrid approaches. 
+Can Large Language Models discover novel analytical expressions, or do they primarily reproduce patterns from training data? We address this question through systematic empirical evaluation across 131 test cases spanning classical physics and decentralized finance domains. Our results reveal that pure LLM-based discovery exhibits stark domain-dependent performance: 95\% success on classical formulas versus 45\% on specialized financial mathematics, with catastrophic extrapolation errors (412-847\% versus 8-23\% for symbolic methods). We prove that autoregressive language models are fundamentally reproductive systems, with generation probability decaying exponentially for expressions distant from training data. This limitation, confirmed by recent systematic evaluations \citep{xu2025fundamental,du2025evaluating}, necessitates hybrid approaches.
 
 Motivated by these limitations, we introduce \textsc{HypatiaX}, a hybrid symbolic-neural architecture where LLMs serve as \emph{interfaces} to symbolic discovery engines rather than discovery engines themselves. Our system combines evolutionary symbolic regression with multi-layer validation (dimensional analysis, domain constraints, execution verification) and optional LLM initialization for efficiency. Across five experimental campaigns, \textsc{HypatiaX} achieves 88.9-100\% success rates with 8-23\% extrapolation error and 100\% functional correctness on ground truth tests, compared to 20-40\% correctness for pure LLM approaches. An LLM-guided variant reduces discovery time by 82\% while preserving all symbolic guarantees. Our key contribution is demonstrating that reliable analytical discovery requires symbolic methods under physics constraints, with LLMs providing interpretation rather than mathematical reasoning.
 \end{abstract}
@@ -236,10 +236,10 @@ def formula(price_ratio):
     return (2 * math.sqrt(r)) / (1 + r) - 1  # Missing ×100
 \end{verbatim}
 
-\paragraph{Analysis:} 
+\paragraph{Analysis:}
 \begin{itemize}
 \item Training $R^2 = 0.98$ (appears excellent)
-\item Predictions systematically wrong by 100$\times$ 
+\item Predictions systematically wrong by 100$\times$
 \item Error undetectable without dimensional analysis
 \item A trader using this formula would catastrophically underestimate risk
 \end{itemize}
@@ -631,7 +631,7 @@ While Section~\ref{sec:llm_limitations} established that pure LLMs cannot reliab
 \IF{$R^2_{\text{LLM}} \geq 0.95$ \AND validate($E_{\text{LLM}}$) = PASS}
     \STATE \textbf{return} $E_{\text{LLM}}$ \COMMENT{Accept LLM solution}
 \ELSE
-    \STATE $P_0 \gets$ initialize\_population($E_{\text{LLM}}$) 
+    \STATE $P_0 \gets$ initialize\_population($E_{\text{LLM}}$)
     \STATE $E^* \gets$ PySR.evolve($P_0$, $\mathcal{D}$, $\mathcal{C}$)
     \STATE \textbf{return} $E^*$ \COMMENT{Refined via symbolic search}
 \ENDIF
@@ -811,9 +811,9 @@ Human Scientist & 0.95 & 0.028 & 8 & 18 & 72 & 5/5 \\
 \subsection{Extrapolation Error Metric}
 \label{sec:extrap_metric}
 
-We define extrapolation capability as the ability to maintain accuracy 
-beyond the training domain. Given training data $\mathcal{D}_{\text{train}}$ 
-sampled from range $[\mathbf{x}_{\min}, \mathbf{x}_{\max}]$, we generate 
+We define extrapolation capability as the ability to maintain accuracy
+beyond the training domain. Given training data $\mathcal{D}_{\text{train}}$
+sampled from range $[\mathbf{x}_{\min}, \mathbf{x}_{\max}]$, we generate
 test data $\mathcal{D}_{\text{extrap}}$ from three extrapolation regimes:
 
 \begin{enumerate}
@@ -834,16 +834,16 @@ where:
 \text{RMSE}(\mathcal{D}) &= \sqrt{\frac{1}{|\mathcal{D}|} \sum_{(\mathbf{x},y) \in \mathcal{D}} (f(\mathbf{x}) - y)^2}
 \end{align}
 
-An extrapolation error of 100\% indicates performance degradation equal 
+An extrapolation error of 100\% indicates performance degradation equal
 to the training error. Values $>$100\% indicate catastrophic failure.
 \end{equation}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{figures/extrapolation_comparison.pdf}
-\caption{Extrapolation error growth by distance from training range. 
-Pure LLM and neural network methods exhibit catastrophic failure (>400\% error) 
-at 2× training range, while hybrid symbolic approach maintains <25\% error even 
+\caption{Extrapolation error growth by distance from training range.
+Pure LLM and neural network methods exhibit catastrophic failure (>400\% error)
+at 2× training range, while hybrid symbolic approach maintains <25\% error even
 at 5× training range. Error bars represent standard deviation over 5 test cases.}
 \label{fig:extrapolation}
 \end{figure}

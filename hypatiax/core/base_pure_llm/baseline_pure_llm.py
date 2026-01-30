@@ -247,7 +247,6 @@ Be mathematically precise and use standard conventions for the {domain} domain."
 
         return None
 
-
     def test_formula_accuracy(
         self,
         formula_dict: Dict,

@@ -1,5 +1,5 @@
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/integration/extrapolation/test_extrapolation.py                                                                 
+└─$ python tests/integration/extrapolation/test_extrapolation.py
 
 ================================================================================
 EXTRAPOLATION TESTING
@@ -16,14 +16,14 @@ Running symbolic regression...
 Previous usage of `multithreading=True` (default) is now `parallelism='multithreading'`; `multithreading=False, procs=0` is now `parallelism='serial'`; and `multithreading=True, procs={int}` is now `parallelism='multiprocessing', procs={int}`.
   warnings.warn(
 Discovered: 0.703416819061921*log((1.0008636*x - 0.0206170615312992 + (1.5678278**x)**(1/8)/x)**(-0.3833463)) + 0.1932936381154
-R² on training: 0.9999                                                                                                           
-In-domain error: 0.0061 (0.61%)                                                                                                  
-Out-of-domain error: 0.0063 (0.63%)                                                                                              
-Extrapolation ratio: 1.05x                                                                                                       
-Plot saved to results/extrapolation_impermanent_loss.png                                                                         
-                                                                                                                                 
-[2/3] Value at Risk (95% confidence)                                                                                             
-                                                                                                                                 
+R² on training: 0.9999
+In-domain error: 0.0061 (0.61%)
+Out-of-domain error: 0.0063 (0.63%)
+Extrapolation ratio: 1.05x
+Plot saved to results/extrapolation_impermanent_loss.png
+
+[2/3] Value at Risk (95% confidence)
+
 Testing: var_95
 ------------------------------------------------------------
 Training range: [1.00, 30.00]
@@ -60,11 +60,11 @@ Plot saved to results/extrapolation_quadratic.png
 EXTRAPOLATION SUMMARY
 ================================================================================
 
-Formula              R² Train     Out/In Ratio    Out Error   
+Formula              R² Train     Out/In Ratio    Out Error
 --------------------------------------------------------------------------------
-impermanent_loss     0.9999       1.05            0.0063      
-var_95               0.9999       1.00            0.0002      
-quadratic            0.9999       0.39            0.0004      
+impermanent_loss     0.9999       1.05            0.0063
+var_95               0.9999       1.00            0.0002
+quadratic            0.9999       0.39            0.0004
 
 ================================================================================
 Results saved to hypatiax/data/results/formulas_extrapolation_results.json
@@ -76,4 +76,3 @@ AVERAGE METRICS:
   Mean extrapolation ratio: 0.81x
   Interpretation: Discovered formulas have 0.8x higher error
                   when extrapolating vs interpolating
-

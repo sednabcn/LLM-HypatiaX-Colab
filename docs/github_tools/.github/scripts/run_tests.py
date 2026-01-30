@@ -444,13 +444,13 @@ def main():
 Examples:
   # Quick tests for PRs
   python .github/scripts/run_tests.py --quick-only
-  
+
   # Full test suite for weekly runs
   python .github/scripts/run_tests.py --all
-  
+
   # Run single test
   python .github/scripts/run_tests.py --test mechanics_kinetic_energy
-  
+
   # List critical tests
   python .github/scripts/run_tests.py --list
         """,

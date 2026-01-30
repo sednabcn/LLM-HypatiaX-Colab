@@ -47,7 +47,12 @@ async def calculate_fast(req: CalculateRequest):
         formula = REGISTRY.get(req.formula_id)
         result = formula.implementation(**req.inputs)
 
-        return {"mode": "fast", "result": float(result), "formula": formula.formula_latex, "response_time_ms": 50}
+        return {
+            "mode": "fast",
+            "result": float(result),
+            "formula": formula.formula_latex,
+            "response_time_ms": 50,
+        }
     except Exception as e:
         raise HTTPException(400, str(e))
 
@@ -145,7 +150,9 @@ async def discover_formula(req: DiscoverRequest):
         else:
             # Generate synthetic data based on description
             X, y = generate_synthetic_data(
-                description=req.description, variable_names=req.variable_names, n_samples=req.n_samples
+                description=req.description,
+                variable_names=req.variable_names,
+                n_samples=req.n_samples,
             )
 
         # DISCOVERY + VALIDATION + INTERPRETATION
@@ -180,7 +187,9 @@ async def discover_formula(req: DiscoverRequest):
 
 
 @app.post("/discover-and-register")
-async def discover_and_register(req: DiscoverRequest, background_tasks: BackgroundTasks):
+async def discover_and_register(
+    req: DiscoverRequest, background_tasks: BackgroundTasks
+):
     """
     Discover formula AND add to registry for future fast access.
 
@@ -263,7 +272,9 @@ async def enhance_formula(formula_id: str):
 # ==================== HELPER FUNCTIONS ====================
 
 
-def generate_synthetic_data(description: str, variable_names: List[str], n_samples: int):
+def generate_synthetic_data(
+    description: str, variable_names: List[str], n_samples: int
+):
     """
     Generate synthetic data matching the description.
 

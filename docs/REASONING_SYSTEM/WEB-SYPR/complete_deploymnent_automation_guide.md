@@ -170,10 +170,10 @@ print(f"Job created: {job_id}")
 while True:
     status = requests.get(f'http://localhost:8000/jobs/{job_id}/status').json()
     print(f"Status: {status['status']}, Progress: {status['progress']:.1f}%")
-    
+
     if status['status'] in ['success', 'error']:
         break
-    
+
     time.sleep(1)
 
 # Get results
@@ -204,56 +204,56 @@ class SymbolicRegressionEngine:
             min_r2=config.target_r2
         )
         self.validator = SymbolicRegressionValidator()
-        
+
     async def run_discovery(self, callback=None):
         """Run actual symbolic regression"""
         X, y = self.generate_data()
-        
+
         # Fit model with progress callback
         for gen in range(self.config.generations):
             # Run one generation
             # ... your implementation ...
-            
+
             if callback:
                 await callback({
                     'generation': gen,
                     'r2': current_r2,
                     'progress': (gen / self.config.generations) * 100
                 })
-        
+
         expression = self.regressor.get_expression()
         r2 = self.regressor.best_fitness_
-        
+
         return expression, r2
-    
+
     def validate(self, expression: str):
         """Run actual validation"""
         checks = []
-        
+
         # Discovery check
         passed, msg = self.validator.check_discovery_success(expression)
         checks.append(ValidationCheck(name="Discovery", passed=passed, message=msg))
-        
+
         # Validity check
         passed, msg = self.validator.check_expression_validity(
             expression, self.config.variables
         )
         checks.append(ValidationCheck(name="Validity", passed=passed, message=msg))
-        
+
         # Dimensional check
         passed, msg = self.validator.check_dimensional_consistency(
             expression, self.config.units
         )
         checks.append(ValidationCheck(name="Dimensions", passed=passed, message=msg))
-        
+
         # Complexity check
         passed, msg = self.validator.check_expression_complexity(expression)
         checks.append(ValidationCheck(name="Complexity", passed=passed, message=msg))
-        
+
         # Fit check
         passed, msg = self.validator.evaluate_fit_quality(self.regressor.best_fitness_)
         checks.append(ValidationCheck(name="Fit Quality", passed=passed, message=msg))
-        
+
         return checks
 ```
 
@@ -298,7 +298,7 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
-    
+
   frontend:
     image: nginx:alpine
     ports:
@@ -410,33 +410,33 @@ def test_job_creation():
             'data_points': 50
         }
     })
-    
+
     assert response.status_code == 200
     job_id = response.json()['job_id']
     print(f"✅ Job created: {job_id}")
-    
+
     # Wait for completion
     max_wait = 30
     for i in range(max_wait):
         status = requests.get(f"{BASE_URL}/jobs/{job_id}/status").json()
-        
+
         if status['status'] in ['success', 'error']:
             break
-        
+
         time.sleep(1)
-    
+
     # Check results
     result = requests.get(f"{BASE_URL}/jobs/{job_id}").json()
     assert result['status'] == 'success'
     assert result['expression'] is not None
     print(f"✅ Job completed: {result['expression']}")
-    
+
     return job_id
 
 def test_export(job_id):
     """Test export functionality"""
     formats = ['json', 'latex', 'python']
-    
+
     for fmt in formats:
         response = requests.post(f"{BASE_URL}/jobs/{job_id}/export?format={fmt}")
         assert response.status_code == 200
@@ -447,18 +447,18 @@ def run_all_tests():
     print("\n" + "="*80)
     print("TESTING SYMBOLIC REGRESSION DEPLOYMENT")
     print("="*80 + "\n")
-    
+
     try:
         test_api_health()
         test_examples()
         job_id = test_job_creation()
         test_export(job_id)
-        
+
         print("\n" + "="*80)
         print("✅ ALL TESTS PASSED")
         print("="*80 + "\n")
         return 0
-        
+
     except Exception as e:
         print(f"\n❌ TEST FAILED: {e}")
         return 1
@@ -491,7 +491,7 @@ async def create_job(
     # Validate token
     if not validate_token(credentials.credentials):
         raise HTTPException(status_code=401, detail="Invalid token")
-    
+
     # ... rest of code ...
 ```
 
@@ -518,7 +518,7 @@ from pydantic import validator
 
 class ConfigModel(BaseModel):
     ground_truth: Optional[str]
-    
+
     @validator('ground_truth')
     def validate_expression(cls, v):
         if v:

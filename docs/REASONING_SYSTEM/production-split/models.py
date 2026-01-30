@@ -89,7 +89,9 @@ class MultiStrategyResult:
             "total_time_ms": self.total_time_ms,
             "strategies_succeeded": self.strategies_succeeded,
             "strategies_validated": self.strategies_validated,
-            "recommended_strategy": self.recommended_strategy.value if self.recommended_strategy else None,
+            "recommended_strategy": (
+                self.recommended_strategy.value if self.recommended_strategy else None
+            ),
             "recommendation_reason": self.recommendation_reason,
             "recommendation_score": self.recommendation_score,
         }

@@ -11,14 +11,14 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -27,38 +27,38 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-        
+
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 30px;
             text-align: center;
         }
-        
+
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
         }
-        
+
         .header p {
             opacity: 0.9;
             font-size: 1.1em;
         }
-        
+
         .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             padding: 30px;
         }
-        
+
         .panel {
             background: #f8f9fa;
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
+
         .panel h2 {
             color: #667eea;
             margin-bottom: 20px;
@@ -67,7 +67,7 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .step {
             background: white;
             border-radius: 10px;
@@ -75,14 +75,14 @@
             margin-bottom: 15px;
             border-left: 4px solid #667eea;
         }
-        
+
         .step-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
         }
-        
+
         .step-number {
             background: #667eea;
             color: white;
@@ -94,51 +94,51 @@
             justify-content: center;
             font-weight: bold;
         }
-        
+
         .status-badge {
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.85em;
             font-weight: bold;
         }
-        
+
         .status-pending {
             background: #e9ecef;
             color: #6c757d;
         }
-        
+
         .status-running {
             background: #fff3cd;
             color: #856404;
             animation: pulse 2s infinite;
         }
-        
+
         .status-success {
             background: #d4edda;
             color: #155724;
         }
-        
+
         .status-error {
             background: #f8d7da;
             color: #721c24;
         }
-        
+
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-        
+
         .input-group {
             margin-bottom: 15px;
         }
-        
+
         .input-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
             color: #495057;
         }
-        
+
         .input-group input,
         .input-group select,
         .input-group textarea {
@@ -149,14 +149,14 @@
             font-size: 1em;
             transition: border-color 0.3s;
         }
-        
+
         .input-group input:focus,
         .input-group select:focus,
         .input-group textarea:focus {
             outline: none;
             border-color: #667eea;
         }
-        
+
         .btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -170,18 +170,18 @@
             width: 100%;
             margin-top: 10px;
         }
-        
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
-        
+
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
         }
-        
+
         .progress-bar {
             width: 100%;
             height: 8px;
@@ -190,13 +190,13 @@
             overflow: hidden;
             margin-top: 10px;
         }
-        
+
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
             transition: width 0.5s ease;
         }
-        
+
         .result-box {
             background: white;
             border-radius: 10px;
@@ -204,7 +204,7 @@
             margin-top: 15px;
             border: 2px solid #e9ecef;
         }
-        
+
         .result-box pre {
             background: #f8f9fa;
             padding: 15px;
@@ -212,7 +212,7 @@
             overflow-x: auto;
             font-size: 0.9em;
         }
-        
+
         .metric {
             display: flex;
             justify-content: space-between;
@@ -221,25 +221,25 @@
             border-radius: 8px;
             margin-bottom: 10px;
         }
-        
+
         .metric-value {
             font-weight: bold;
             color: #667eea;
         }
-        
+
         .chart-container {
             position: relative;
             height: 300px;
             margin-top: 20px;
         }
-        
+
         .examples {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 10px;
             margin-top: 10px;
         }
-        
+
         .example-btn {
             background: white;
             border: 2px solid #667eea;
@@ -250,12 +250,12 @@
             font-weight: 600;
             transition: all 0.3s;
         }
-        
+
         .example-btn:hover {
             background: #667eea;
             color: white;
         }
-        
+
         .log-entry {
             padding: 8px 12px;
             margin-bottom: 5px;
@@ -263,12 +263,12 @@
             font-size: 0.9em;
             font-family: monospace;
         }
-        
+
         .log-info { background: #d1ecf1; color: #0c5460; }
         .log-success { background: #d4edda; color: #155724; }
         .log-warning { background: #fff3cd; color: #856404; }
         .log-error { background: #f8d7da; color: #721c24; }
-        
+
         .full-width {
             grid-column: 1 / -1;
         }
@@ -280,12 +280,12 @@
             <h1>🔬 Symbolic Regression Pipeline</h1>
             <p>Automated equation discovery with validation and monitoring</p>
         </div>
-        
+
         <div class="main-content">
             <!-- Left Panel: Configuration -->
             <div class="panel">
                 <h2>⚙️ Configuration</h2>
-                
+
                 <div class="input-group">
                     <label>Select Example Dataset</label>
                     <div class="examples">
@@ -295,46 +295,46 @@
                         <button class="example-btn" onclick="loadExample('custom')">Custom</button>
                     </div>
                 </div>
-                
+
                 <div class="input-group">
                     <label>Ground Truth Equation (Optional)</label>
                     <input type="text" id="groundTruth" placeholder="e.g., (Vmax * S) / (Km + S)">
                 </div>
-                
+
                 <div class="input-group">
                     <label>Variables (comma-separated)</label>
                     <input type="text" id="variables" placeholder="e.g., S, Km, Vmax">
                 </div>
-                
+
                 <div class="input-group">
                     <label>Units (JSON format)</label>
                     <textarea id="units" rows="3" placeholder='{"S": "mol/L", "Km": "mol/L", "Vmax": "mol/(L*s)"}'></textarea>
                 </div>
-                
+
                 <div class="input-group">
                     <label>Population Size</label>
                     <input type="number" id="populationSize" value="100" min="10" max="500">
                 </div>
-                
+
                 <div class="input-group">
                     <label>Generations</label>
                     <input type="number" id="generations" value="30" min="5" max="200">
                 </div>
-                
+
                 <div class="input-group">
                     <label>Target R² Score</label>
                     <input type="number" id="targetR2" value="0.95" min="0.5" max="1" step="0.01">
                 </div>
-                
+
                 <button class="btn" onclick="startPipeline()" id="startBtn">
                     🚀 Start Pipeline
                 </button>
             </div>
-            
+
             <!-- Right Panel: Pipeline Status -->
             <div class="panel">
                 <h2>📊 Pipeline Status</h2>
-                
+
                 <div class="step">
                     <div class="step-header">
                         <div style="display: flex; align-items: center; gap: 10px;">
@@ -347,7 +347,7 @@
                         <div class="progress-fill" id="progress-1" style="width: 0%"></div>
                     </div>
                 </div>
-                
+
                 <div class="step">
                     <div class="step-header">
                         <div style="display: flex; align-items: center; gap: 10px;">
@@ -360,7 +360,7 @@
                         <div class="progress-fill" id="progress-2" style="width: 0%"></div>
                     </div>
                 </div>
-                
+
                 <div class="step">
                     <div class="step-header">
                         <div style="display: flex; align-items: center; gap: 10px;">
@@ -373,7 +373,7 @@
                         <div class="progress-fill" id="progress-3" style="width: 0%"></div>
                     </div>
                 </div>
-                
+
                 <div class="step">
                     <div class="step-header">
                         <div style="display: flex; align-items: center; gap: 10px;">
@@ -387,23 +387,23 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Results Panel (Full Width) -->
             <div class="panel full-width">
                 <h2>✨ Results</h2>
-                
+
                 <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
                     <div>
                         <div class="result-box">
                             <h3 style="margin-bottom: 10px;">Discovered Equation</h3>
                             <pre id="discoveredEq">Waiting for results...</pre>
                         </div>
-                        
+
                         <div class="chart-container">
                             <canvas id="convergenceChart"></canvas>
                         </div>
                     </div>
-                    
+
                     <div>
                         <h3 style="margin-bottom: 10px;">Metrics</h3>
                         <div class="metric">
@@ -422,13 +422,13 @@
                             <span>Time</span>
                             <span class="metric-value" id="time">-</span>
                         </div>
-                        
+
                         <h3 style="margin: 20px 0 10px;">Validation Checks</h3>
                         <div id="validationChecks"></div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Logs Panel (Full Width) -->
             <div class="panel full-width">
                 <h2>📝 Execution Log</h2>
@@ -436,11 +436,11 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         let convergenceChart = null;
         let startTime = null;
-        
+
         // Example datasets
         const examples = {
             michaelis: {
@@ -468,7 +468,7 @@
                 description: 'Custom dataset'
             }
         };
-        
+
         function loadExample(type) {
             const example = examples[type];
             document.getElementById('groundTruth').value = example.groundTruth;
@@ -476,7 +476,7 @@
             document.getElementById('units').value = example.units;
             addLog(`Loaded ${type} example: ${example.description}`, 'info');
         }
-        
+
         function addLog(message, type = 'info') {
             const logs = document.getElementById('logs');
             const entry = document.createElement('div');
@@ -486,33 +486,33 @@
             logs.appendChild(entry);
             logs.scrollTop = logs.scrollHeight;
         }
-        
+
         function updateStatus(step, status, progress = null) {
             const statusEl = document.getElementById(`status-${step}`);
             statusEl.className = `status-badge status-${status}`;
             statusEl.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-            
+
             if (progress !== null) {
                 document.getElementById(`progress-${step}`).style.width = `${progress}%`;
             }
         }
-        
+
         function simulateDiscovery() {
             return new Promise((resolve) => {
                 const generations = parseInt(document.getElementById('generations').value);
                 const convergenceData = [];
                 let gen = 0;
-                
+
                 const interval = setInterval(() => {
                     gen++;
                     const r2 = Math.min(0.999, 0.3 + (gen / generations) * 0.7 + Math.random() * 0.1);
                     convergenceData.push(r2);
-                    
+
                     updateStatus(2, 'running', (gen / generations) * 100);
                     addLog(`Generation ${gen}/${generations}: R² = ${r2.toFixed(4)}`, 'info');
-                    
+
                     updateChart(convergenceData);
-                    
+
                     if (gen >= generations || r2 >= parseFloat(document.getElementById('targetR2').value)) {
                         clearInterval(interval);
                         resolve({
@@ -525,7 +525,7 @@
                 }, 100);
             });
         }
-        
+
         function updateChart(data) {
             if (convergenceChart) {
                 convergenceChart.data.datasets[0].data = data;
@@ -575,12 +575,12 @@
                 });
             }
         }
-        
+
         async function startPipeline() {
             startTime = Date.now();
             document.getElementById('startBtn').disabled = true;
             addLog('🚀 Starting symbolic regression pipeline...', 'success');
-            
+
             try {
                 // Step 1: Data Generation
                 updateStatus(1, 'running');
@@ -588,22 +588,22 @@
                 await sleep(1000);
                 updateStatus(1, 'success', 100);
                 addLog('✓ Data generated successfully', 'success');
-                
+
                 // Step 2: Symbolic Regression
                 updateStatus(2, 'running');
                 addLog('Step 2: Running symbolic regression...', 'info');
                 const result = await simulateDiscovery();
                 updateStatus(2, 'success', 100);
                 addLog(`✓ Equation discovered: ${result.expression}`, 'success');
-                
+
                 document.getElementById('discoveredEq').textContent = result.expression;
                 document.getElementById('r2Score').textContent = result.r2.toFixed(6);
-                
+
                 // Step 3: Validation
                 updateStatus(3, 'running');
                 addLog('Step 3: Validating discovered equation...', 'info');
                 await sleep(1500);
-                
+
                 const checks = {
                     'Discovery': Math.random() > 0.1,
                     'Validity': Math.random() > 0.1,
@@ -611,10 +611,10 @@
                     'Complexity': Math.random() > 0.15,
                     'Fit Quality': result.r2 >= 0.95
                 };
-                
+
                 const allPassed = Object.values(checks).every(v => v);
                 updateStatus(3, allPassed ? 'success' : 'error', 100);
-                
+
                 let checksHTML = '';
                 for (const [check, passed] of Object.entries(checks)) {
                     const icon = passed ? '✅' : '❌';
@@ -624,19 +624,19 @@
                 document.getElementById('validationChecks').innerHTML = checksHTML;
                 document.getElementById('validation').textContent = allPassed ? '✅ Passed' : '❌ Failed';
                 document.getElementById('complexity').textContent = `${Math.floor(result.expression.length / 10)} terms`;
-                
+
                 // Step 4: Export
                 updateStatus(4, 'running');
                 addLog('Step 4: Exporting results...', 'info');
                 await sleep(1000);
                 updateStatus(4, 'success', 100);
                 addLog('✓ Results exported successfully', 'success');
-                
+
                 const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
                 document.getElementById('time').textContent = `${elapsed}s`;
-                
+
                 addLog(`🎉 Pipeline completed in ${elapsed}s`, 'success');
-                
+
             } catch (error) {
                 addLog(`❌ Error: ${error.message}`, 'error');
                 for (let i = 1; i <= 4; i++) {
@@ -646,14 +646,14 @@
                     }
                 }
             }
-            
+
             document.getElementById('startBtn').disabled = false;
         }
-        
+
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
-        
+
         // Initialize
         loadExample('michaelis');
         addLog('Interface initialized. Select an example or configure custom parameters.', 'info');

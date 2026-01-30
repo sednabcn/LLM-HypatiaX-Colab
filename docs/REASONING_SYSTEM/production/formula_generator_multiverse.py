@@ -42,7 +42,9 @@ try:
     SENTENCE_TRANSFORMERS_AVAILABLE = True
 except:
     SENTENCE_TRANSFORMERS_AVAILABLE = False
-    print("⚠️  sentence-transformers not available. Install: pip install sentence-transformers")
+    print(
+        "⚠️  sentence-transformers not available. Install: pip install sentence-transformers"
+    )
 
 try:
     import anthropic
@@ -155,7 +157,9 @@ class SmartLookupStrategy:
 
         # Pre-compute embeddings
         logging.info("Computing embeddings for formula database...")
-        self.embeddings = self.model.encode(self.formulas_df["description"].tolist(), show_progress_bar=False)
+        self.embeddings = self.model.encode(
+            self.formulas_df["description"].tolist(), show_progress_bar=False
+        )
         logging.info(f"✓ Loaded {len(self.formulas_df)} formulas")
 
     def generate(self, query: str, domain: str) -> FormulaResult:
@@ -168,7 +172,8 @@ class SmartLookupStrategy:
 
             # Cosine similarity
             similarities = np.dot(self.embeddings, query_embedding) / (
-                np.linalg.norm(self.embeddings, axis=1) * np.linalg.norm(query_embedding)
+                np.linalg.norm(self.embeddings, axis=1)
+                * np.linalg.norm(query_embedding)
             )
 
             # Best match
@@ -209,12 +214,17 @@ class SmartLookupStrategy:
                 match_similarity=similarity,
                 time_ms=elapsed_ms,
                 cost_estimate=0.0001,  # Essentially free
-                warnings=[] if similarity > 0.6 else [f"Low similarity: {similarity:.2f}"],
+                warnings=(
+                    [] if similarity > 0.6 else [f"Low similarity: {similarity:.2f}"]
+                ),
             )
 
         except Exception as e:
             return FormulaResult(
-                strategy=self.name, status="error", error_message=str(e), time_ms=(time.time() - start) * 1000
+                strategy=self.name,
+                status="error",
+                error_message=str(e),
+                time_ms=(time.time() - start) * 1000,
             )
 
     def _extract_variables(self, formula: str) -> List[Dict]:
@@ -226,7 +236,13 @@ class SmartLookupStrategy:
         vars_unique = [v for v in set(vars_raw) if v not in functions]
 
         return [
-            {"name": v, "description": f"Variable {v}", "unit": "dimensionless", "type": "float"} for v in vars_unique
+            {
+                "name": v,
+                "description": f"Variable {v}",
+                "unit": "dimensionless",
+                "type": "float",
+            }
+            for v in vars_unique
         ]
 
     def _quick_validate(self, formula: str) -> Dict:
@@ -371,7 +387,9 @@ JSON only, no other text."""
     def _validate_formula(self, formula_data: Dict, domain: str) -> Dict:
         """Validate using ensemble validator."""
         try:
-            variable_defs = {v["name"]: v["description"] for v in formula_data["variables"]}
+            variable_defs = {
+                v["name"]: v["description"] for v in formula_data["variables"]
+            }
             variable_units = {v["name"]: v["unit"] for v in formula_data["variables"]}
 
             result = self.validator.validate_complete(
@@ -596,7 +614,11 @@ class FormulaGeneratorMultiverse:
     """
 
     def __init__(
-        self, defi_csv: str, risk_csv: str, anthropic_api_key: str, enable_strategies: Optional[List[Strategy]] = None
+        self,
+        defi_csv: str,
+        risk_csv: str,
+        anthropic_api_key: str,
+        enable_strategies: Optional[List[Strategy]] = None,
     ):
         """
         Initialize all strategies.
@@ -623,28 +645,36 @@ class FormulaGeneratorMultiverse:
 
         if Strategy.SMART_LOOKUP in enabled:
             try:
-                self.strategies[Strategy.SMART_LOOKUP] = SmartLookupStrategy(defi_csv, risk_csv)
+                self.strategies[Strategy.SMART_LOOKUP] = SmartLookupStrategy(
+                    defi_csv, risk_csv
+                )
                 logging.info("✓ Smart Lookup ready")
             except Exception as e:
                 logging.warning(f"✗ Smart Lookup failed: {e}")
 
         if Strategy.LLM_GENERATION in enabled:
             try:
-                self.strategies[Strategy.LLM_GENERATION] = LLMGenerationStrategy(anthropic_api_key)
+                self.strategies[Strategy.LLM_GENERATION] = LLMGenerationStrategy(
+                    anthropic_api_key
+                )
                 logging.info("✓ LLM Generation ready")
             except Exception as e:
                 logging.warning(f"✗ LLM Generation failed: {e}")
 
         if Strategy.SYMBOLIC_DISCOVERY in enabled:
             try:
-                self.strategies[Strategy.SYMBOLIC_DISCOVERY] = SymbolicDiscoveryStrategy(anthropic_api_key)
+                self.strategies[Strategy.SYMBOLIC_DISCOVERY] = (
+                    SymbolicDiscoveryStrategy(anthropic_api_key)
+                )
                 logging.info("✓ Symbolic Discovery ready")
             except Exception as e:
                 logging.warning(f"✗ Symbolic Discovery failed: {e}")
 
         logging.info(f"Multiverse initialized with {len(self.strategies)} strategies")
 
-    def generate_all_strategies(self, query: str, domain: str = "defi", parallel: bool = True) -> MultiStrategyResult:
+    def generate_all_strategies(
+        self, query: str, domain: str = "defi", parallel: bool = True
+    ) -> MultiStrategyResult:
         """
         Generate formula using ALL available strategies.
 
@@ -665,7 +695,9 @@ class FormulaGeneratorMultiverse:
         logging.info(f"Strategies: {len(self.strategies)}")
         logging.info(f"{'='*80}\n")
 
-        result = MultiStrategyResult(query=query, domain=domain, timestamp=datetime.now().isoformat())
+        result = MultiStrategyResult(
+            query=query, domain=domain, timestamp=datetime.now().isoformat()
+        )
 
         if parallel:
             # Run strategies in parallel for speed
@@ -682,7 +714,8 @@ class FormulaGeneratorMultiverse:
                         result.results[strategy_name] = strategy_result
 
                         logging.info(
-                            f"✓ {strategy_name.value}: {strategy_result.status} " f"({strategy_result.time_ms:.0f}ms)"
+                            f"✓ {strategy_name.value}: {strategy_result.status} "
+                            f"({strategy_result.time_ms:.0f}ms)"
                         )
 
                         if strategy_result.status == "success":
@@ -700,7 +733,8 @@ class FormulaGeneratorMultiverse:
                     result.results[strategy_name] = strategy_result
 
                     logging.info(
-                        f"✓ {strategy_name.value}: {strategy_result.status} " f"({strategy_result.time_ms:.0f}ms)"
+                        f"✓ {strategy_name.value}: {strategy_result.status} "
+                        f"({strategy_result.time_ms:.0f}ms)"
                     )
 
                     if strategy_result.status == "success":
@@ -714,19 +748,25 @@ class FormulaGeneratorMultiverse:
         result.total_time_ms = (time.time() - start_time) * 1000
 
         # Determine recommendation
-        result.recommended_strategy, result.recommendation_reason = self._recommend_strategy(result)
+        result.recommended_strategy, result.recommendation_reason = (
+            self._recommend_strategy(result)
+        )
 
         # Store in history
         self.results_history.append(result)
 
         logging.info(f"\n{'='*80}")
-        logging.info(f"RECOMMENDATION: {result.recommended_strategy.value if result.recommended_strategy else 'None'}")
+        logging.info(
+            f"RECOMMENDATION: {result.recommended_strategy.value if result.recommended_strategy else 'None'}"
+        )
         logging.info(f"REASON: {result.recommendation_reason}")
         logging.info(f"{'='*80}\n")
 
         return result
 
-    def _recommend_strategy(self, result: MultiStrategyResult) -> Tuple[Optional[Strategy], str]:
+    def _recommend_strategy(
+        self, result: MultiStrategyResult
+    ) -> Tuple[Optional[Strategy], str]:
         """
         Determine which strategy performed best for this query.
 
@@ -818,10 +858,14 @@ class FormulaGeneratorMultiverse:
             validated = sum(1 for r in strategy_results if r.validation_passed)
 
             avg_time = np.mean([r.time_ms for r in strategy_results])
-            avg_score = np.mean([r.validation_score for r in strategy_results if r.status == "success"])
+            avg_score = np.mean(
+                [r.validation_score for r in strategy_results if r.status == "success"]
+            )
             avg_cost = np.mean([r.cost_estimate for r in strategy_results])
 
-            times_recommended = sum(1 for mr in self.results_history if mr.recommended_strategy == strategy)
+            times_recommended = sum(
+                1 for mr in self.results_history if mr.recommended_strategy == strategy
+            )
 
             analytics.append(
                 {
@@ -858,7 +902,9 @@ class FormulaGeneratorMultiverse:
                 "domain": multi_result.domain,
                 "timestamp": multi_result.timestamp,
                 "recommended_strategy": (
-                    multi_result.recommended_strategy.value if multi_result.recommended_strategy else None
+                    multi_result.recommended_strategy.value
+                    if multi_result.recommended_strategy
+                    else None
                 ),
                 "recommendation_reason": multi_result.recommendation_reason,
                 "strategies": {},
@@ -904,7 +950,9 @@ class FormulaGeneratorMultiverse:
         for i, result in enumerate(self.results_history, 1):
             print(f"\n{i}. Query: {result.query[:60]}...")
             print(f"   Domain: {result.domain}")
-            print(f"   Winner: {result.recommended_strategy.value if result.recommended_strategy else 'None'}")
+            print(
+                f"   Winner: {result.recommended_strategy.value if result.recommended_strategy else 'None'}"
+            )
             print(f"   Reason: {result.recommendation_reason}")
 
         print("\n" + "=" * 80)

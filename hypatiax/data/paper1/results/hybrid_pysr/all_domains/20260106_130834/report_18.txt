@@ -1,5 +1,5 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/core/generation/hybrid_all_domains/suite_hybrid_system_all_domains.py  --protocol B --batch --iterations 50    
+└─$ python hypatiax/core/generation/hybrid_all_domains/suite_hybrid_system_all_domains.py  --protocol B --batch --iterations 50
 ✅ Loaded Protocol B from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/core/generation/hybrid_all_domains/experiment_protocol_all_20_b.py
 
 ✅ Converted 18 test cases
@@ -51,7 +51,7 @@ Equation hint: kinetic_energy
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:09:23,055 - INFO - 
+2026-01-06 13:09:23,055 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -138,7 +138,7 @@ Equation hint: ohms_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:12:27,372 - INFO - 
+2026-01-06 13:12:27,372 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
    [SANITIZE] I -> I_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -225,7 +225,7 @@ Equation hint: ideal_gas_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:12:54,680 - INFO - 
+2026-01-06 13:12:54,680 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -314,7 +314,7 @@ Equation hint: projectile_motion
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:15:23,009 - INFO - 
+2026-01-06 13:15:23,009 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -343,7 +343,7 @@ Equation hint: projectile_motion
 2026-01-06 13:18:06,525 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:18:06,526 - WARNING -       High complexity (67) but R2=0.9974
 2026-01-06 13:18:06,526 - INFO -    [BEST] New best!
-2026-01-06 13:18:06,526 - INFO - 
+2026-01-06 13:18:06,526 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -371,7 +371,7 @@ Equation hint: projectile_motion
 2026-01-06 13:20:41,257 - INFO -    R2 = 0.9949
 2026-01-06 13:20:41,257 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:20:41,257 - WARNING -       High complexity (74) but R2=0.9949
-2026-01-06 13:20:41,257 - INFO - 
+2026-01-06 13:20:41,257 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -399,7 +399,7 @@ Equation hint: projectile_motion
 2026-01-06 13:23:04,244 - INFO -    R2 = 0.9971
 2026-01-06 13:23:04,244 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:23:04,244 - WARNING -       High complexity (66) but R2=0.9971
-2026-01-06 13:23:04,245 - INFO - 
+2026-01-06 13:23:04,245 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -427,7 +427,7 @@ Equation hint: projectile_motion
 2026-01-06 13:24:53,082 - INFO -    R2 = 0.9941
 2026-01-06 13:24:53,082 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:24:53,082 - WARNING -       High complexity (74) but R2=0.9941
-2026-01-06 13:24:53,083 - INFO - 
+2026-01-06 13:24:53,083 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -456,7 +456,7 @@ Equation hint: projectile_motion
 2026-01-06 13:27:15,340 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:27:15,340 - WARNING -       High complexity (91) but R2=0.9946
 2026-01-06 13:27:15,340 - WARNING -       Many constants detected (6)
-2026-01-06 13:27:15,340 - INFO - 
+2026-01-06 13:27:15,340 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9974)
 
 [OK] Discovery complete
@@ -519,7 +519,7 @@ Equation hint: arrhenius_equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:27:16,665 - INFO - 
+2026-01-06 13:27:16,665 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -558,7 +558,7 @@ Equation hint: arrhenius_equation
 2026-01-06 13:28:45,742 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:28:45,742 - WARNING -       High complexity (69) but R2=0.9982
 2026-01-06 13:28:45,742 - INFO -    [BEST] New best!
-2026-01-06 13:28:45,742 - INFO - 
+2026-01-06 13:28:45,742 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -657,7 +657,7 @@ Equation hint: henderson_hasselbalch
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:30:29,045 - INFO - 
+2026-01-06 13:30:29,045 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -683,7 +683,7 @@ Equation hint: henderson_hasselbalch
 2026-01-06 13:31:42,780 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:31:42,780 - WARNING -       High complexity (55) but R2=0.9800
 2026-01-06 13:31:42,780 - INFO -    [BEST] New best!
-2026-01-06 13:31:42,780 - INFO - 
+2026-01-06 13:31:42,780 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -709,7 +709,7 @@ Equation hint: henderson_hasselbalch
 2026-01-06 13:32:32,178 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:32:32,179 - WARNING -       High complexity (64) but R2=0.9921
 2026-01-06 13:32:32,179 - INFO -    [BEST] New best!
-2026-01-06 13:32:32,179 - INFO - 
+2026-01-06 13:32:32,179 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -734,7 +734,7 @@ Equation hint: henderson_hasselbalch
 2026-01-06 13:33:55,880 - INFO -    R2 = 0.9842
 2026-01-06 13:33:55,880 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:33:55,881 - WARNING -       High complexity (80) but R2=0.9842
-2026-01-06 13:33:55,881 - INFO - 
+2026-01-06 13:33:55,881 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -759,7 +759,7 @@ Equation hint: henderson_hasselbalch
 2026-01-06 13:35:12,897 - INFO -    R2 = 0.9797
 2026-01-06 13:35:12,898 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:35:12,898 - WARNING -       High complexity (79) but R2=0.9797
-2026-01-06 13:35:12,898 - INFO - 
+2026-01-06 13:35:12,898 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -784,7 +784,7 @@ Equation hint: henderson_hasselbalch
 2026-01-06 13:36:12,236 - INFO -    R2 = 0.9910
 2026-01-06 13:36:12,237 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:36:12,237 - WARNING -       High complexity (63) but R2=0.9910
-2026-01-06 13:36:12,237 - INFO - 
+2026-01-06 13:36:12,237 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9921)
 
 [OK] Discovery complete
@@ -847,7 +847,7 @@ Equation hint: nernst_equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:36:13,357 - INFO - 
+2026-01-06 13:36:13,357 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
    [SANITIZE] Q -> Q_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -941,7 +941,7 @@ Equation hint: michaelis_menten
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:37:14,926 - INFO - 
+2026-01-06 13:37:14,926 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -967,7 +967,7 @@ Equation hint: michaelis_menten
 2026-01-06 13:37:15,012 - INFO -    Result: DISCOVERY_FAILED
 2026-01-06 13:37:15,013 - INFO -    R2 = 0.0000
 2026-01-06 13:37:15,013 - INFO -    [BEST] New best!
-2026-01-06 13:37:15,013 - INFO - 
+2026-01-06 13:37:15,013 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -992,7 +992,7 @@ Equation hint: michaelis_menten
 [ERROR] Discovery failed: Variable name S is already a function name.
 2026-01-06 13:37:15,099 - INFO -    Result: DISCOVERY_FAILED
 2026-01-06 13:37:15,099 - INFO -    R2 = 0.0000
-2026-01-06 13:37:15,100 - INFO - 
+2026-01-06 13:37:15,100 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1017,7 +1017,7 @@ Equation hint: michaelis_menten
 [ERROR] Discovery failed: Variable name S is already a function name.
 2026-01-06 13:37:15,190 - INFO -    Result: DISCOVERY_FAILED
 2026-01-06 13:37:15,191 - INFO -    R2 = 0.0000
-2026-01-06 13:37:15,191 - INFO - 
+2026-01-06 13:37:15,191 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1042,7 +1042,7 @@ Equation hint: michaelis_menten
 [ERROR] Discovery failed: Variable name S is already a function name.
 2026-01-06 13:37:15,285 - INFO -    Result: DISCOVERY_FAILED
 2026-01-06 13:37:15,285 - INFO -    R2 = 0.0000
-2026-01-06 13:37:15,285 - INFO - 
+2026-01-06 13:37:15,285 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1067,7 +1067,7 @@ Equation hint: michaelis_menten
 [ERROR] Discovery failed: Variable name S is already a function name.
 2026-01-06 13:37:15,371 - INFO -    Result: DISCOVERY_FAILED
 2026-01-06 13:37:15,371 - INFO -    R2 = 0.0000
-2026-01-06 13:37:15,371 - WARNING - 
+2026-01-06 13:37:15,371 - WARNING -
 [WARNING] SymbolicEngine best R2=0.0000
 
 [OK] Discovery complete
@@ -1129,7 +1129,7 @@ Equation hint: logistic_growth
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:37:16,312 - INFO - 
+2026-01-06 13:37:16,312 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
    [SANITIZE] N -> N_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -1159,7 +1159,7 @@ Equation hint: logistic_growth
 2026-01-06 13:39:41,519 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:39:41,519 - WARNING -       High complexity (32) but R2=0.9389
 2026-01-06 13:39:41,520 - INFO -    [BEST] New best!
-2026-01-06 13:39:41,520 - INFO - 
+2026-01-06 13:39:41,520 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
    [SANITIZE] N -> N_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -1189,7 +1189,7 @@ Equation hint: logistic_growth
 2026-01-06 13:41:35,386 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:41:35,387 - WARNING -       High complexity (33) but R2=0.9315
 2026-01-06 13:41:35,387 - WARNING -       Suspicious constants: ['0.00029244839']
-2026-01-06 13:41:35,387 - INFO - 
+2026-01-06 13:41:35,387 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
    [SANITIZE] N -> N_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -1219,7 +1219,7 @@ Equation hint: logistic_growth
 2026-01-06 13:43:51,294 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:43:51,294 - WARNING -       High complexity (90) but R2=0.9662
 2026-01-06 13:43:51,294 - INFO -    [BEST] New best!
-2026-01-06 13:43:51,295 - INFO - 
+2026-01-06 13:43:51,295 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
    [SANITIZE] N -> N_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -1248,7 +1248,7 @@ Equation hint: logistic_growth
 2026-01-06 13:45:57,423 - INFO -    R2 = 0.9540
 2026-01-06 13:45:57,423 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:45:57,423 - WARNING -       High complexity (62) but R2=0.9540
-2026-01-06 13:45:57,424 - INFO - 
+2026-01-06 13:45:57,424 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
    [SANITIZE] N -> N_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -1278,7 +1278,7 @@ Equation hint: logistic_growth
 2026-01-06 13:48:31,879 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:48:31,879 - WARNING -       High complexity (62) but R2=0.9840
 2026-01-06 13:48:31,880 - INFO -    [BEST] New best!
-2026-01-06 13:48:31,880 - INFO - 
+2026-01-06 13:48:31,880 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9840)
 
 [OK] Discovery complete
@@ -1340,7 +1340,7 @@ Equation hint: allometric_scaling
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:48:33,037 - INFO - 
+2026-01-06 13:48:33,037 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1425,7 +1425,7 @@ Equation hint: reynolds_number
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:50:02,280 - INFO - 
+2026-01-06 13:50:02,280 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1522,7 +1522,7 @@ Equation hint: hookes_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:52:36,189 - INFO - 
+2026-01-06 13:52:36,189 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1547,7 +1547,7 @@ Equation hint: hookes_law
 2026-01-06 13:53:35,690 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:53:35,690 - WARNING -       High complexity (46) but R2=0.9974
 2026-01-06 13:53:35,690 - INFO -    [BEST] New best!
-2026-01-06 13:53:35,691 - INFO - 
+2026-01-06 13:53:35,691 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1571,7 +1571,7 @@ Equation hint: hookes_law
 2026-01-06 13:54:31,332 - INFO -    R2 = 0.9915
 2026-01-06 13:54:31,332 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:54:31,332 - WARNING -       High complexity (52) but R2=0.9915
-2026-01-06 13:54:31,333 - INFO - 
+2026-01-06 13:54:31,333 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1595,7 +1595,7 @@ Equation hint: hookes_law
 2026-01-06 13:55:31,787 - INFO -    R2 = 0.9905
 2026-01-06 13:55:31,787 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:55:31,788 - WARNING -       High complexity (35) but R2=0.9905
-2026-01-06 13:55:31,788 - INFO - 
+2026-01-06 13:55:31,788 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1619,7 +1619,7 @@ Equation hint: hookes_law
 2026-01-06 13:56:25,775 - INFO -    R2 = 0.9885
 2026-01-06 13:56:25,775 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:56:25,775 - WARNING -       High complexity (30) but R2=0.9885
-2026-01-06 13:56:25,775 - INFO - 
+2026-01-06 13:56:25,775 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1705,7 +1705,7 @@ Equation hint: bernoulli_equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 13:57:22,561 - INFO - 
+2026-01-06 13:57:22,561 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1733,7 +1733,7 @@ Equation hint: bernoulli_equation
 2026-01-06 13:58:16,937 - WARNING -       High complexity (33) but R2=0.9433
 2026-01-06 13:58:16,937 - WARNING -       Suspicious constants: ['7406.042']
 2026-01-06 13:58:16,938 - INFO -    [BEST] New best!
-2026-01-06 13:58:16,938 - INFO - 
+2026-01-06 13:58:16,938 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1759,7 +1759,7 @@ Equation hint: bernoulli_equation
 2026-01-06 13:59:13,389 - INFO -    R2 = 0.9303
 2026-01-06 13:59:13,390 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:59:13,390 - WARNING -       High complexity (53) but R2=0.9303
-2026-01-06 13:59:13,390 - INFO - 
+2026-01-06 13:59:13,390 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1785,7 +1785,7 @@ Equation hint: bernoulli_equation
 2026-01-06 13:59:48,911 - INFO -    R2 = 0.9135
 2026-01-06 13:59:48,911 - WARNING -    [WARNING] Possible overfit
 2026-01-06 13:59:48,912 - WARNING -       High complexity (44) but R2=0.9135
-2026-01-06 13:59:48,912 - INFO - 
+2026-01-06 13:59:48,912 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1813,7 +1813,7 @@ Equation hint: bernoulli_equation
 2026-01-06 14:00:20,829 - WARNING -       High complexity (57) but R2=0.9665
 2026-01-06 14:00:20,830 - WARNING -       Suspicious constants: ['9604.104', '7541.7656', '77634.375']
 2026-01-06 14:00:20,830 - INFO -    [BEST] New best!
-2026-01-06 14:00:20,830 - INFO - 
+2026-01-06 14:00:20,830 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1839,7 +1839,7 @@ Equation hint: bernoulli_equation
 2026-01-06 14:01:26,934 - INFO -    R2 = 0.9614
 2026-01-06 14:01:26,934 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:01:26,934 - WARNING -       High complexity (42) but R2=0.9614
-2026-01-06 14:01:26,934 - INFO - 
+2026-01-06 14:01:26,934 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9665)
 
 [OK] Discovery complete
@@ -1901,7 +1901,7 @@ Equation hint: pythagorean_theorem
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 14:01:28,779 - INFO - 
+2026-01-06 14:01:28,779 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1926,7 +1926,7 @@ Equation hint: pythagorean_theorem
 2026-01-06 14:01:46,944 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:01:46,944 - WARNING -       High complexity (61) but R2=0.9889
 2026-01-06 14:01:46,945 - INFO -    [BEST] New best!
-2026-01-06 14:01:46,945 - INFO - 
+2026-01-06 14:01:46,945 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1951,7 +1951,7 @@ Equation hint: pythagorean_theorem
 2026-01-06 14:02:04,779 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:02:04,779 - WARNING -       High complexity (63) but R2=0.9941
 2026-01-06 14:02:04,779 - INFO -    [BEST] New best!
-2026-01-06 14:02:04,779 - INFO - 
+2026-01-06 14:02:04,779 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1976,7 +1976,7 @@ Equation hint: pythagorean_theorem
 2026-01-06 14:02:31,728 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:02:31,728 - WARNING -       High complexity (61) but R2=0.9966
 2026-01-06 14:02:31,728 - INFO -    [BEST] New best!
-2026-01-06 14:02:31,729 - INFO - 
+2026-01-06 14:02:31,729 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2001,7 +2001,7 @@ Equation hint: pythagorean_theorem
 2026-01-06 14:02:52,595 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:02:52,595 - WARNING -       High complexity (50) but R2=0.9979
 2026-01-06 14:02:52,596 - INFO -    [BEST] New best!
-2026-01-06 14:02:52,596 - INFO - 
+2026-01-06 14:02:52,596 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2025,7 +2025,7 @@ Equation hint: pythagorean_theorem
 2026-01-06 14:03:26,407 - INFO -    R2 = 0.9876
 2026-01-06 14:03:26,407 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:03:26,407 - WARNING -       High complexity (48) but R2=0.9876
-2026-01-06 14:03:26,407 - INFO - 
+2026-01-06 14:03:26,407 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9979)
 
 [OK] Discovery complete
@@ -2088,7 +2088,7 @@ Equation hint: compound_interest
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 14:03:27,972 - INFO - 
+2026-01-06 14:03:27,972 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2177,7 +2177,7 @@ Equation hint: quadratic_discriminant
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 14:06:00,989 - INFO - 
+2026-01-06 14:06:00,989 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2262,7 +2262,7 @@ Equation hint: elasticity_demand
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 14:06:43,869 - INFO - 
+2026-01-06 14:06:43,869 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
    [SANITIZE] Q -> Q_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -2291,7 +2291,7 @@ Equation hint: elasticity_demand
 2026-01-06 14:07:22,127 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:07:22,127 - WARNING -       High complexity (21) but R2=0.9977
 2026-01-06 14:07:22,127 - INFO -    [BEST] New best!
-2026-01-06 14:07:22,127 - INFO - 
+2026-01-06 14:07:22,127 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
    [SANITIZE] Q -> Q_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -2319,7 +2319,7 @@ Equation hint: elasticity_demand
 2026-01-06 14:07:55,760 - INFO -    R2 = 0.9977
 2026-01-06 14:07:55,760 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:07:55,760 - WARNING -       High complexity (25) but R2=0.9977
-2026-01-06 14:07:55,760 - INFO - 
+2026-01-06 14:07:55,760 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
    [SANITIZE] Q -> Q_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -2347,7 +2347,7 @@ Equation hint: elasticity_demand
 2026-01-06 14:08:26,373 - INFO -    R2 = 0.9977
 2026-01-06 14:08:26,373 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:08:26,373 - WARNING -       High complexity (25) but R2=0.9977
-2026-01-06 14:08:26,373 - INFO - 
+2026-01-06 14:08:26,373 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
    [SANITIZE] Q -> Q_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -2375,7 +2375,7 @@ Equation hint: elasticity_demand
 2026-01-06 14:08:52,039 - INFO -    R2 = 0.9977
 2026-01-06 14:08:52,039 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:08:52,039 - WARNING -       High complexity (21) but R2=0.9977
-2026-01-06 14:08:52,040 - INFO - 
+2026-01-06 14:08:52,040 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
    [SANITIZE] Q -> Q_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -2403,7 +2403,7 @@ Equation hint: elasticity_demand
 2026-01-06 14:09:19,488 - INFO -    R2 = 0.9977
 2026-01-06 14:09:19,488 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:09:19,488 - WARNING -       High complexity (21) but R2=0.9977
-2026-01-06 14:09:19,489 - INFO - 
+2026-01-06 14:09:19,489 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9977)
 
 [OK] Discovery complete
@@ -2466,7 +2466,7 @@ Equation hint: cobb_douglas
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 14:09:20,545 - INFO - 
+2026-01-06 14:09:20,545 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
    [SANITIZE] alpha -> alpha_var (reserved name)
    [SANITIZE] beta -> beta_var (reserved name)
@@ -2496,7 +2496,7 @@ Equation hint: cobb_douglas
 2026-01-06 14:11:11,100 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:11:11,100 - WARNING -       High complexity (34) but R2=0.9792
 2026-01-06 14:11:11,100 - INFO -    [BEST] New best!
-2026-01-06 14:11:11,100 - INFO - 
+2026-01-06 14:11:11,100 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
    [SANITIZE] alpha -> alpha_var (reserved name)
    [SANITIZE] beta -> beta_var (reserved name)
@@ -2525,7 +2525,7 @@ Equation hint: cobb_douglas
 2026-01-06 14:12:54,847 - INFO -    R2 = 0.9718
 2026-01-06 14:12:54,848 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:12:54,848 - WARNING -       High complexity (52) but R2=0.9718
-2026-01-06 14:12:54,848 - INFO - 
+2026-01-06 14:12:54,848 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
    [SANITIZE] alpha -> alpha_var (reserved name)
    [SANITIZE] beta -> beta_var (reserved name)
@@ -2555,7 +2555,7 @@ Equation hint: cobb_douglas
 2026-01-06 14:14:24,121 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:14:24,121 - WARNING -       High complexity (21) but R2=0.9984
 2026-01-06 14:14:24,121 - INFO -    [BEST] New best!
-2026-01-06 14:14:24,121 - INFO - 
+2026-01-06 14:14:24,121 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
    [SANITIZE] alpha -> alpha_var (reserved name)
    [SANITIZE] beta -> beta_var (reserved name)
@@ -2584,7 +2584,7 @@ Equation hint: cobb_douglas
 2026-01-06 14:15:40,601 - INFO -    R2 = 0.9963
 2026-01-06 14:15:40,601 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:15:40,602 - WARNING -       High complexity (48) but R2=0.9963
-2026-01-06 14:15:40,602 - INFO - 
+2026-01-06 14:15:40,602 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
    [SANITIZE] alpha -> alpha_var (reserved name)
    [SANITIZE] beta -> beta_var (reserved name)
@@ -2613,7 +2613,7 @@ Equation hint: cobb_douglas
 2026-01-06 14:17:09,753 - INFO -    R2 = 0.9983
 2026-01-06 14:17:09,754 - WARNING -    [WARNING] Possible overfit
 2026-01-06 14:17:09,754 - WARNING -       High complexity (37) but R2=0.9983
-2026-01-06 14:17:09,754 - INFO - 
+2026-01-06 14:17:09,754 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9984)
 
 [OK] Discovery complete
@@ -2637,16 +2637,16 @@ Equation hint: cobb_douglas
    High R²=0.9984, Val=98.5 (dim check issue)
 
 ========================================================================================================================
-                                                  FINAL RESULTS TABLE                                                   
+                                                  FINAL RESULTS TABLE
 ========================================================================================================================
-Test Name                                 R²    Val  Status  Observation                                       
+Test Name                                 R²    Val  Status  Observation
 ----------------------------------- -------- ------ -------- --------------------------------------------------
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 BIOLOGY
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 biology_allometric_scaling            0.9977   91.9  ✅ PASS  Override: High R²=0.9977, Val=91.9 (dim check issue)
-biology_logistic_growth               0.9840   90.1  ✅ PASS  Good discovery                                    
-biology_michaelis_menten              0.0000   94.5  ❌ FAIL  Low R² - discovery failed                         
+biology_logistic_growth               0.9840   90.1  ✅ PASS  Good discovery
+biology_michaelis_menten              0.0000   94.5  ❌ FAIL  Low R² - discovery failed
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 CHEMISTRY
@@ -2664,7 +2664,7 @@ economics_elasticity_demand           0.9977   97.6  ✅ PASS  Override: High R�
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ENGINEERING
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-engineering_bernoulli_equation        0.9665   12.4  ❌ FAIL  Low validation score                              
+engineering_bernoulli_equation        0.9665   12.4  ❌ FAIL  Low validation score
 engineering_hookes_law                0.9997  100.0  ✅ PASS  Override: High R²=0.9997, Val=100.0 (dim check issue)
 engineering_reynolds_number           0.9998   91.0  ✅ PASS  Override: High R²=0.9998, Val=91.0 (dim check issue)
 
@@ -2689,4 +2689,4 @@ SUMMARY: 16/18 passed (88.9%) | Avg R²: 0.9403 | Avg Val: 88.8
 
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                           
+└─$

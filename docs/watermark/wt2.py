@@ -7,7 +7,7 @@ width, height = letter
 
 # Add watermark text (centered, rotated)
 c.saveState()
-c.translate(width/2, height/2)
+c.translate(width / 2, height / 2)
 c.rotate(45)  # Diagonal watermark
 c.setFont("Helvetica", 60)
 c.setFillColorRGB(0.5, 0.5, 0.5, alpha=0.3)  # Semi-transparent gray

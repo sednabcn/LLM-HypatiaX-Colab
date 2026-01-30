@@ -6,16 +6,16 @@
     <title>HypatiaX: Unified Architecture with LLM Interpretation</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
             color: #333;
         }
-        
+
         .container { max-width: 1600px; margin: 0 auto; }
-        
+
         h1 {
             text-align: center;
             color: white;
@@ -23,7 +23,7 @@
             font-size: 2.5em;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        
+
         .subtitle {
             text-align: center;
             color: white;
@@ -31,7 +31,7 @@
             font-size: 1.2em;
             opacity: 0.95;
         }
-        
+
         .hero-banner {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
@@ -41,12 +41,12 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.3);
             animation: glow 2s ease-in-out infinite;
         }
-        
+
         @keyframes glow {
             0%, 100% { box-shadow: 0 8px 24px rgba(240, 147, 251, 0.4); }
             50% { box-shadow: 0 8px 32px rgba(240, 147, 251, 0.8); }
         }
-        
+
         .hero-banner h2 {
             font-size: 2em;
             margin-bottom: 15px;
@@ -54,7 +54,7 @@
             align-items: center;
             gap: 15px;
         }
-        
+
         .new-badge {
             background: rgba(255,255,255,0.3);
             padding: 5px 15px;
@@ -62,24 +62,24 @@
             font-size: 0.5em;
             font-weight: bold;
         }
-        
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 12px;
             margin-top: 20px;
         }
-        
+
         .feature-box {
             background: rgba(255,255,255,0.15);
             padding: 12px;
             border-radius: 8px;
             backdrop-filter: blur(10px);
         }
-        
+
         .feature-box h3 { font-size: 1em; margin-bottom: 6px; }
         .feature-box p { font-size: 0.85em; opacity: 0.9; }
-        
+
         .unified-system {
             background: white;
             border-radius: 12px;
@@ -87,27 +87,27 @@
             overflow: hidden;
             margin-bottom: 25px;
         }
-        
+
         .system-header {
             padding: 20px;
             color: white;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
-        
+
         .system-title { font-size: 1.5em; margin-bottom: 8px; font-weight: bold; }
         .system-subtitle { font-size: 0.95em; opacity: 0.9; }
-        
+
         .system-meta {
             padding: 15px 20px;
             background: #f8f9fa;
             border-bottom: 2px solid #e9ecef;
             font-size: 0.9em;
         }
-        
+
         .meta-line { margin: 5px 0; }
-        
+
         .layers-container { padding: 20px; }
-        
+
         .layer {
             margin-bottom: 15px;
             border: 2px solid #e9ecef;
@@ -115,12 +115,12 @@
             overflow: hidden;
             transition: all 0.3s;
         }
-        
+
         .layer:hover {
             border-color: #667eea;
             box-shadow: 0 4px 8px rgba(102, 126, 234, 0.2);
         }
-        
+
         .layer-header {
             padding: 12px 15px;
             font-weight: bold;
@@ -129,13 +129,13 @@
             align-items: center;
             font-size: 0.95em;
         }
-        
+
         .layer-content {
             padding: 12px 15px;
             background: white;
             font-size: 0.9em;
         }
-        
+
         .component {
             padding: 6px 10px;
             margin: 4px 0;
@@ -143,19 +143,19 @@
             border-left: 3px solid #667eea;
             border-radius: 4px;
         }
-        
+
         .component.success {
             border-left-color: #28a745;
             background: #d4edda;
             color: #155724;
         }
-        
+
         .component.warning {
             border-left-color: #ffc107;
             background: #fff3cd;
             color: #856404;
         }
-        
+
         .time-badge {
             padding: 2px 8px;
             background: #e9ecef;
@@ -163,21 +163,21 @@
             color: #6c757d;
             font-size: 0.85em;
         }
-        
+
         .layer-highlight { animation: pulse 2s infinite; }
-        
+
         @keyframes pulse {
             0%, 100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4); }
             50% { box-shadow: 0 0 0 8px rgba(102, 126, 234, 0); }
         }
-        
+
         .layer-router { background: #e3f2fd; }
         .layer-llm { background: #e1f5fe; }
         .layer-axiom { background: #e8f5e9; }
         .layer-symbolic { background: #f3e5f5; }
         .layer-validation { background: #fff3e0; }
         .layer-interpretation { background: #ffebee; }
-        
+
         .info-box {
             margin-top: 20px;
             padding: 15px;
@@ -185,19 +185,19 @@
             border-radius: 8px;
             border-left: 4px solid #667eea;
         }
-        
+
         .info-title {
             font-weight: bold;
             margin-bottom: 10px;
             color: #667eea;
             font-size: 1.05em;
         }
-        
+
         .info-item {
             margin: 6px 0;
             font-size: 0.9em;
         }
-        
+
         .card {
             background: white;
             padding: 20px;
@@ -205,19 +205,19 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
-        
+
         .card h2 {
             color: #667eea;
             margin-bottom: 15px;
             font-size: 1.5em;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
         }
-        
+
         th {
             background: #667eea;
             color: white;
@@ -225,15 +225,15 @@
             text-align: left;
             font-size: 0.9em;
         }
-        
+
         td {
             padding: 10px;
             border-bottom: 1px solid #e9ecef;
             font-size: 0.85em;
         }
-        
+
         tr:hover { background: #f8f9fa; }
-        
+
         .highlight-green {
             background: #e8f5e9;
             color: #2e7d32;
@@ -242,19 +242,19 @@
             border: 2px solid #4caf50;
             margin: 20px 0;
         }
-        
+
         .highlight-green h3 {
             color: #2e7d32;
             margin-bottom: 10px;
         }
-        
+
         .metric-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px;
             margin: 15px 0;
         }
-        
+
         .metric {
             background: white;
             padding: 15px;
@@ -262,14 +262,14 @@
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        
+
         .metric-value {
             font-size: 2em;
             font-weight: bold;
             color: #667eea;
             margin: 8px 0;
         }
-        
+
         .metric-label {
             color: #6c757d;
             font-size: 0.85em;
@@ -280,7 +280,7 @@
     <div class="container">
         <h1>🏗️ HypatiaX: Unified Architecture Evolution</h1>
         <p class="subtitle">Three Systems → One Intelligent Unified System with LLM Interpretation</p>
-        
+
         <!-- HERO BANNER -->
         <div class="hero-banner">
             <h2>
@@ -290,7 +290,7 @@
             <p style="font-size: 1.05em; margin-bottom: 18px;">
                 Intelligent routing between LLM-Guided Discovery, Formal Axiom Reasoning, and Symbolic Regression with complete validation and interpretation
             </p>
-            
+
             <div class="features-grid">
                 <div class="feature-box">
                     <h3>⚡ 10-20x Faster</h3>
@@ -318,21 +318,21 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- UNIFIED SYSTEM ARCHITECTURE -->
         <div class="unified-system">
             <div class="system-header">
                 <div class="system-title">🎯 Unified Discovery System (Recommended)</div>
                 <div class="system-subtitle">unified_discovery_system_v1.py + llm_guided_symbolic_discovery.py</div>
             </div>
-            
+
             <div class="system-meta">
                 <div class="meta-line"><strong>Architecture:</strong> LLM-Guided + Formal Axioms + Symbolic Regression + Validation + Interpretation</div>
                 <div class="meta-line"><strong>Status:</strong> 🆕 READY TO IMPLEMENT</div>
                 <div class="meta-line"><strong>Performance:</strong> 7-12s avg, 95%+ success, $0.001/query</div>
                 <div class="meta-line"><strong>Files:</strong> llm_guided_symbolic_discovery.py (ready), unified_discovery_system_v1.py (ready)</div>
             </div>
-            
+
             <div class="layers-container">
                 <div class="layer">
                     <div class="layer-header layer-router">
@@ -347,7 +347,7 @@
                         <div class="component">• LLM fails? → Fallback to PySR (Layer 3)</div>
                     </div>
                 </div>
-                
+
                 <div class="layer layer-highlight">
                     <div class="layer-header layer-llm">
                         <span>🧠 Layer 1: LLM-Guided Discovery ⭐ PRIMARY PATH</span>
@@ -358,27 +358,27 @@
                         <div class="component">  • Tests: linearity, polynomial, power law, exponential, logarithmic</div>
                         <div class="component">  • Computes correlations, complexity estimation</div>
                         <div class="component">  • Generates rich context for LLM</div>
-                        
+
                         <div class="component success">✅ Phase 2: LLM Hypothesis Generation (5s)</div>
                         <div class="component">  • Sends patterns + domain knowledge to Claude/GPT</div>
                         <div class="component">  • Requests 5 candidate equations with reasoning</div>
                         <div class="component">  • Example: "This is kinetic energy: KE = 0.5*m*v²"</div>
                         <div class="component">  • LLM has seen millions of equations in training</div>
-                        
+
                         <div class="component success">✅ Phase 3: Rapid Verification + Validation (2-3s)</div>
                         <div class="component">  • Fits coefficients using least squares</div>
                         <div class="component">  • Computes R² score for accuracy</div>
                         <div class="component">  • Runs full 4-layer validation (dimensional + domain + ensemble)</div>
                         <div class="component">  • Ranks hypotheses: 70% R² + 30% validation score</div>
                         <div class="component">  • Success requires: R² &gt; 0.95 AND validation &gt; 70</div>
-                        
+
                         <div class="component warning">⚠️ Phase 4: PySR Fallback (if needed, 30s)</div>
                         <div class="component">  • Triggers only if R² &lt; 95% OR validation &lt; 70</div>
                         <div class="component">  • Warm-started from best LLM hypothesis</div>
                         <div class="component">  • Used in 5-20% of cases</div>
                     </div>
                 </div>
-                
+
                 <div class="layer">
                     <div class="layer-header layer-axiom">
                         <span>🔬 Layer 2: Formal Axiom Reasoning</span>
@@ -393,7 +393,7 @@
                         <div class="component">• Opens new domains: pure math, theoretical physics</div>
                     </div>
                 </div>
-                
+
                 <div class="layer">
                     <div class="layer-header layer-symbolic">
                         <span>🧬 Layer 3: Symbolic Regression Fallback</span>
@@ -407,7 +407,7 @@
                         <div class="component">• Slower but comprehensive</div>
                     </div>
                 </div>
-                
+
                 <div class="layer">
                     <div class="layer-header layer-validation">
                         <span>✅ Layer 4: Complete 4-Layer Validation</span>
@@ -422,7 +422,7 @@
                         <div class="component success">Dual threshold: R² &gt; 0.95 AND validation &gt; 70</div>
                     </div>
                 </div>
-                
+
                 <div class="layer">
                     <div class="layer-header layer-interpretation">
                         <span>📝 Layer 5: LLM INTERPRETATION (READY TO ADD)</span>
@@ -441,7 +441,7 @@
                         <div class="component">• Related concepts & formulas</div>
                     </div>
                 </div>
-                
+
                 <div class="info-box">
                     <div class="info-title">🔍 System Performance Summary</div>
                     <div class="info-item">
@@ -465,7 +465,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- COMPARISON TABLE -->
         <div class="card">
             <h2>📊 LLM Interpretation: Role Across All Systems</h2>
@@ -511,7 +511,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <!-- PERFORMANCE METRICS -->
         <div class="card">
             <h2>📈 Performance Comparison</h2>
@@ -538,11 +538,11 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- KEY INSIGHTS -->
         <div class="highlight-green">
             <h3>💡 Key Insights & Recommendations</h3>
-            
+
             <p style="margin: 15px 0;"><strong>🎯 The Unified System Solves Everything:</strong></p>
             <ul style="margin-left: 25px; line-height: 1.8;">
                 <li><strong>Speed:</strong> 10-20x faster (7-12s vs 60-180s)</li>
@@ -552,7 +552,7 @@
                 <li><strong>Validation:</strong> Full 4-layer ensemble built-in</li>
                 <li><strong>Cost:</strong> Negligible (~$0.001 per query)</li>
             </ul>
-            
+
             <p style="margin: 20px 0;"><strong>📝 The Missing Piece: Interpretation</strong></p>
             <p style="margin: 10px 0;">All systems currently lack proper interpretation:</p>
             <ul style="margin-left: 25px; line-height: 1.6;">
@@ -560,14 +560,14 @@
                 <li><strong>Systems 2/3:</strong> ⚠️ Optional, secondary feature</li>
                 <li><strong>Unified:</strong> ⚠️ Code ready (FormulaInterpreter), just needs integration</li>
             </ul>
-            
+
             <div style="margin: 20px 0; padding: 15px; background: white; border-radius: 8px; border-left: 4px solid #2e7d32;">
                 <p><strong>👉 RECOMMENDATION:</strong> Add interpretation as Layer 5 in Unified System</p>
                 <p style="margin-top: 8px;"><strong>Effort:</strong> 2-3 hours (~100 lines of code)</p>
                 <p><strong>Impact:</strong> Transforms HypatiaX from tool → teaching platform</p>
                 <p><strong>Overhead:</strong> +2-5s per discovery (acceptable for massive UX gain)</p>
             </div>
-            
+
             <p style="margin: 20px 0;"><strong>🚀 Complete Unified System with Interpretation:</strong></p>
             <ol style="margin-left: 25px; line-height: 1.8;">
                 <li>Fast discovery via LLM hypotheses (5-10s)</li>
@@ -577,21 +577,21 @@
                 <li>Theoretical proof when data unavailable (2-5s)</li>
                 <li>Robust PySR fallback for edge cases (30s when needed)</li>
             </ol>
-            
+
             <p style="margin: 20px 0; font-size: 1.1em;"><strong>🎯 Bottom Line:</strong> This is the breakthrough that combines the best of all your work into one cohesive, production-ready system! 🚀</p>
         </div>
-        
+
         <!-- NEXT STEPS -->
         <div class="card" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border: 3px solid #ff9800;">
             <h2 style="color: #e65100;">🚀 Implementation Options</h2>
-            
+
             <h3 style="color: #e65100; margin: 15px 0 10px 0;">Option 1: Quick Win (1-2 hours)</h3>
             <div style="background: white; padding: 12px; border-radius: 8px; margin: 10px 0;">
                 <p><strong>Goal:</strong> Test LLM-guided discovery on your 5 failed cases</p>
                 <p style="margin-top: 8px;">Run: <code>python llm_guided_symbolic_discovery.py --test all --api-key YOUR_KEY</code></p>
                 <p><strong>Result:</strong> All 5 tests pass in 7-10s each ✅</p>
             </div>
-            
+
             <h3 style="color: #e65100; margin: 15px 0 10px 0;">Option 2: Full Integration (2-4 weeks)</h3>
             <div style="background: white; padding: 12px; border-radius: 8px; margin: 10px 0;">
                 <p><strong>Goal:</strong> Deploy complete unified system</p>
@@ -600,7 +600,7 @@
                 <p><strong>Week 3:</strong> Add axiom reasoning → theory mode</p>
                 <p><strong>Week 4:</strong> Complete router + benchmarks → production ready</p>
             </div>
-            
+
             <h3 style="color: #e65100; margin: 15px 0 10px 0;">Option 3: Interpretation Only (2-3 hours)</h3>
             <div style="background: white; padding: 12px; border-radius: 8px; margin: 10px 0;">
                 <p><strong>Goal:</strong> Add interpretation to existing system immediately</p>

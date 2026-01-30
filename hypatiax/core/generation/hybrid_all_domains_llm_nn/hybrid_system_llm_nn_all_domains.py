@@ -45,10 +45,12 @@ sys.path.insert(0, str(project_root))
 # Import protocol
 try:
     from hypatiax.protocols.experiment_protocol_all_30 import ExperimentProtocolAll
+
     print("✅ Loaded ExperimentProtocolAll from: hypatiax/protocols/")
 except ImportError:
     try:
         from experiment_protocol_all_30 import ExperimentProtocolAll
+
         print("✅ Loaded ExperimentProtocolAll from: current directory")
     except ImportError:
         print("❌ Error: experiment_protocol_all_30.py not found")
@@ -173,7 +175,12 @@ NO markdown code blocks, individual parameters NOT dict."""
 
         # Handle edge cases
         if len(X) < 10:
-            return None, {"r2": 0.0, "rmse": float('inf'), "mae": float('inf'), "error": "Insufficient data"}
+            return None, {
+                "r2": 0.0,
+                "rmse": float("inf"),
+                "mae": float("inf"),
+                "error": "Insufficient data",
+            }
 
         X_train, X_test, y_train, y_test = train_test_split(
             X, y, test_size=0.2, random_state=42
@@ -205,7 +212,7 @@ NO markdown code blocks, individual parameters NOT dict."""
         y_train_t = torch.FloatTensor(y_train_s).reshape(-1, 1)
 
         # Training loop with early stopping
-        best_loss = float('inf')
+        best_loss = float("inf")
         patience = 50
         patience_counter = 0
 
@@ -276,7 +283,11 @@ NO markdown code blocks, individual parameters NOT dict."""
             y_pred = self._evaluate_function(func, X, var_names)
 
             if len(y_pred) != len(y_true):
-                return {"error": f"Shape mismatch: {len(y_pred)} vs {len(y_true)}", "success": False, "r2": 0.0}
+                return {
+                    "error": f"Shape mismatch: {len(y_pred)} vs {len(y_true)}",
+                    "success": False,
+                    "r2": 0.0,
+                }
 
             # Handle inf/nan values
             if not np.all(np.isfinite(y_pred)):
@@ -351,7 +362,9 @@ NO markdown code blocks, individual parameters NOT dict."""
             if llm_metrics.get("success"):
                 print(f"  [HYBRID] LLM R²: {llm_metrics['r2']:.4f}")
             else:
-                print(f"  [HYBRID] LLM failed: {llm_metrics.get('error', 'Unknown')[:50]}")
+                print(
+                    f"  [HYBRID] LLM failed: {llm_metrics.get('error', 'Unknown')[:50]}"
+                )
 
         # Step 2: Train NN
         if verbose:
@@ -369,7 +382,7 @@ NO markdown code blocks, individual parameters NOT dict."""
         if llm_r2 > 0.95:
             decision = "llm"
             final_r2 = llm_r2
-            final_rmse = llm_metrics.get("rmse", float('inf'))
+            final_rmse = llm_metrics.get("rmse", float("inf"))
             reason = "LLM excellent (R² > 0.95)"
             validation_score = "EXCELLENT"
         elif llm_r2 > 0.80 and llm_metrics.get("success"):
@@ -393,8 +406,10 @@ NO markdown code blocks, individual parameters NOT dict."""
         if llm_r2 > 0.99:
             observations.append("Perfect symbolic fit")
         elif not llm_metrics.get("success"):
-            observations.append(f"LLM error: {llm_metrics.get('error', 'Unknown')[:50]}")
-        
+            observations.append(
+                f"LLM error: {llm_metrics.get('error', 'Unknown')[:50]}"
+            )
+
         if nn_r2 < 0:
             observations.append("NN worse than baseline")
         elif nn_r2 > llm_r2 + 0.1:
@@ -435,20 +450,20 @@ NO markdown code blocks, individual parameters NOT dict."""
         print("\n" + "=" * 140)
         print("DETAILED RESULTS TABLE".center(140))
         print("=" * 140)
-        
+
         # Header
         header = f"{'#':<4} {'Domain':<18} {'Test Case':<35} {'R²':<10} {'Val.Score':<12} {'Observations':<50}"
         print(header)
         print("-" * 140)
-        
+
         # Data rows
         for i, r in enumerate(results, 1):
-            domain = r['domain'][:17]
-            desc = r['description'][:34]
-            r2 = r['evaluation']['r2']
-            val_score = r['validation_score']
-            obs = r['observations'][:49]
-            
+            domain = r["domain"][:17]
+            desc = r["description"][:34]
+            r2 = r["evaluation"]["r2"]
+            val_score = r["validation_score"]
+            obs = r["observations"][:49]
+
             # Color coding for R²
             if r2 > 0.95:
                 r2_str = f"{r2:.6f} ✓"
@@ -456,10 +471,12 @@ NO markdown code blocks, individual parameters NOT dict."""
                 r2_str = f"{r2:.6f} ~"
             else:
                 r2_str = f"{r2:.6f} ✗"
-            
-            row = f"{i:<4} {domain:<18} {desc:<35} {r2_str:<10} {val_score:<12} {obs:<50}"
+
+            row = (
+                f"{i:<4} {domain:<18} {desc:<35} {r2_str:<10} {val_score:<12} {obs:<50}"
+            )
             print(row)
-        
+
         print("=" * 140)
 
 
@@ -540,7 +557,9 @@ def run_hybrid_test_all_domains(
             count = len(r2_list)
             pct = 100 * count / len(all_results)
             mean_r2 = np.mean(r2_list)
-            print(f"  {dec.upper()}: {count}/{len(all_results)} ({pct:.1f}%) - Mean R² = {mean_r2:.4f}")
+            print(
+                f"  {dec.upper()}: {count}/{len(all_results)} ({pct:.1f}%) - Mean R² = {mean_r2:.4f}"
+            )
 
     # Validation score breakdown
     print(f"\n📈 Validation Score Breakdown:")
@@ -548,7 +567,7 @@ def run_hybrid_test_all_domains(
     for r in all_results:
         score = r["validation_score"]
         val_scores[score] = val_scores.get(score, 0) + 1
-    
+
     for score, count in sorted(val_scores.items(), key=lambda x: x[1], reverse=True):
         pct = 100 * count / len(all_results)
         print(f"  {score}: {count}/{len(all_results)} ({pct:.1f}%)")
@@ -558,16 +577,14 @@ def run_hybrid_test_all_domains(
 
 if __name__ == "__main__":
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="Hybrid System - All Domains")
-    parser.add_argument('--domains', nargs='+', default=None)
-    parser.add_argument('--samples', type=int, default=100)
-    parser.add_argument('--verbose', action='store_true')
-    
+    parser.add_argument("--domains", nargs="+", default=None)
+    parser.add_argument("--samples", type=int, default=100)
+    parser.add_argument("--verbose", action="store_true")
+
     args = parser.parse_args()
-    
+
     run_hybrid_test_all_domains(
-        domains=args.domains,
-        num_samples=args.samples,
-        verbose=args.verbose
+        domains=args.domains, num_samples=args.samples, verbose=args.verbose
     )

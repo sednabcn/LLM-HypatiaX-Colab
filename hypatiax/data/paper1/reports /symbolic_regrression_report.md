@@ -1,5 +1,5 @@
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/test_suite_symbolic_regression.py                                                                               
+└─$ python tests/test_suite_symbolic_regression.py
 ====================================================== test session starts ======================================================
 platform linux -- Python 3.12.2, pytest-9.0.1, pluggy-1.6.0 -- /home/agagora/Downloads/py312/bin/python
 cachedir: .pytest_cache
@@ -7,7 +7,7 @@ hypothesis profile 'default'
 rootdir: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/tests
 configfile: pytest.ini
 plugins: anyio-4.11.0, xdist-3.8.0, hypothesis-6.148.7, cov-7.0.0
-collected 7 items                                                                                                               
+collected 7 items
 
 tests/test_suite_symbolic_regression.py::TestSymbolicRegressionFailures::test_michaelis_menten_discovery PASSED           [ 14%]
 tests/test_suite_symbolic_regression.py::TestSymbolicRegressionFailures::test_bernoulli_equation_issues PASSED            [ 28%]
@@ -20,11 +20,11 @@ tests/test_suite_symbolic_regression.py::test_full_validation_pipeline PASSED   
 ======================================================= 7 passed in 7.35s =======================================================
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/test_final_veification.py                                                              
+└─$ python tests/test_final_veification.py
 python: can't open file '/home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/tests/test_final_veification.py': [Errno 2] No such file or directory
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/test_final_verification.py                                                                                      
+└─$ python tests/test_final_verification.py
 ================================================================================
 FINAL FIX VERIFICATION
 ================================================================================

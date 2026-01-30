@@ -20,7 +20,11 @@ from domains.finance.risk.risk_formulas import *
 from llm_providers.llm_interpreter import LLMInterpreter
 from validation.ensemble_validator import EnsembleValidator
 
-app = FastAPI(title="QuantAPI - Finance Formulas", description="580+ validated DeFi & Risk formulas", version="1.0.0")
+app = FastAPI(
+    title="QuantAPI - Finance Formulas",
+    description="580+ validated DeFi & Risk formulas",
+    version="1.0.0",
+)
 
 # CORS for web apps
 app.add_middleware(
@@ -148,7 +152,9 @@ async def calculate_var(req: VaRRequest):
         # Use YOUR existing risk_formulas
         from domains.finance.risk.risk_formulas import calculate_var
 
-        var_value = calculate_var(mu=req.mu, sigma=req.sigma, confidence=req.confidence, t=req.time_horizon)
+        var_value = calculate_var(
+            mu=req.mu, sigma=req.sigma, confidence=req.confidence, t=req.time_horizon
+        )
 
         return VaRResponse(
             var=var_value,
@@ -178,10 +184,15 @@ async def uniswap_v2_swap(req: UniswapV2SwapRequest):
     """
     try:
         # Use YOUR existing uniswap_v2_formulas
-        from domains.finance.defi.uniswap_v2.uniswap_v2_formulas import calculate_swap_output
+        from domains.finance.defi.uniswap_v2.uniswap_v2_formulas import (
+            calculate_swap_output,
+        )
 
         amount_out = calculate_swap_output(
-            amount_in=req.amount_in, reserve_in=req.reserve_in, reserve_out=req.reserve_out, fee=req.fee
+            amount_in=req.amount_in,
+            reserve_in=req.reserve_in,
+            reserve_out=req.reserve_out,
+            fee=req.fee,
         )
 
         price_impact = (req.amount_in / req.reserve_in) * 100

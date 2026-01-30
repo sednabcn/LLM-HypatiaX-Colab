@@ -415,7 +415,7 @@ path = config.datasets
    ```bash
    # Local
    python tests/test_entity_desc.py
-   
+
    # Docker
    docker build --target testing -t hypatiax:test .
    docker run hypatiax:test
@@ -445,19 +445,19 @@ When adding new code that uses file paths:
 
 ## ❓ FAQ
 
-**Q: Do I need to run setup_environment.sh every time?**  
+**Q: Do I need to run setup_environment.sh every time?**
 A: No! Once set up, just activate with `source activate_hypatiax.sh`
 
-**Q: Can I customize the output directory?**  
+**Q: Can I customize the output directory?**
 A: Yes! Set `HYPATIAX_OUTPUT_DIR` environment variable
 
-**Q: Does this work on Windows?**  
+**Q: Does this work on Windows?**
 A: The bash scripts work in WSL/Git Bash. The Python config works everywhere.
 
-**Q: How do I test locally before pushing to GitHub?**  
+**Q: How do I test locally before pushing to GitHub?**
 A: Use Docker: `docker build --target testing -t hypatiax:test . && docker run hypatiax:test`
 
-**Q: Can I still use absolute paths?**  
+**Q: Can I still use absolute paths?**
 A: Yes, but use config: `str(config.get_dataset_path('data.xlsx'))` gives absolute path
 
 ---
@@ -466,13 +466,13 @@ A: Yes, but use config: `str(config.get_dataset_path('data.xlsx'))` gives absolu
 
 The updated HypatiaX setup provides:
 
-✅ **Universal compatibility** - Works everywhere  
-✅ **No hardcoded paths** - Dynamic path resolution  
-✅ **Environment detection** - Automatic adaptation  
-✅ **Easy testing** - Run from anywhere  
-✅ **CI/CD ready** - GitHub Actions configured  
-✅ **Docker support** - Multi-stage builds  
-✅ **Developer friendly** - Simple activation script  
+✅ **Universal compatibility** - Works everywhere
+✅ **No hardcoded paths** - Dynamic path resolution
+✅ **Environment detection** - Automatic adaptation
+✅ **Easy testing** - Run from anywhere
+✅ **CI/CD ready** - GitHub Actions configured
+✅ **Docker support** - Multi-stage builds
+✅ **Developer friendly** - Simple activation script
 
 **Just run `./setup_environment.sh` and you're ready to go!** 🚀
 Key Improvements:

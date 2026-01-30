@@ -1,7 +1,7 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/core/generation/final_corrected_stricter_test_defi.py                                       
+└─$ python hypatiax/core/generation/final_corrected_stricter_test_defi.py
 ================================================================================
-                       FINAL TEST WITH CORRECTED PROMPTS                        
+                       FINAL TEST WITH CORRECTED PROMPTS
 ================================================================================
 Model: claude-sonnet-4-20250514
 Passing threshold: R² ≥ 0.95
@@ -68,7 +68,7 @@ Ground Truth: position1_es + position2_es + correlation * sqrt(position1_es * po
    MAE: 0.000000
 
 ================================================================================
-                                 FINAL RESULTS                                  
+                                 FINAL RESULTS
 ================================================================================
 
 ✅ PASSED: 3/3
@@ -80,4 +80,4 @@ Ground Truth: position1_es + position2_es + correlation * sqrt(position1_es * po
 💾 Results saved to: results/final_corrected_test_20251220_191338.json
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                            
+└─$

@@ -2,7 +2,7 @@
 └─$ python standalone_real_methods_test.py --all --extrapolation
 
 ================================================================================
-        STANDALONE TEST SUITE v4 - ALL DOMAINS + EXTRAPOLATION (FIXED!)         
+        STANDALONE TEST SUITE v4 - ALL DOMAINS + EXTRAPOLATION (FIXED!)
 ================================================================================
 
 📦 Loading real method implementations...
@@ -27,7 +27,7 @@
 
 
 ================================================================================
-                             DOMAIN 1/5: CHEMISTRY                              
+                             DOMAIN 1/5: CHEMISTRY
 ================================================================================
 
 [1/15] arrhenius
@@ -52,7 +52,7 @@
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -95,9 +95,9 @@ Equation hint: arrhenius
 
 [DISCOVER] Running symbolic regression...
 2026-01-24 13:01:12,262 - INFO -    Sanitized: T → var_T
-2026-01-24 13:01:12,262 - INFO - 
+2026-01-24 13:01:12,262 - INFO -
 [SANITIZATION] Detected problematic variable names
-2026-01-24 13:01:12,262 - INFO - 
+2026-01-24 13:01:12,262 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -115,7 +115,7 @@ Equation hint: arrhenius
 2026-01-24 13:02:42,854 - WARNING -       High complexity (170) but R²=0.9816
 2026-01-24 13:02:42,854 - WARNING -       Many constants detected (6)
 2026-01-24 13:02:42,854 - INFO -    [BEST] New best!
-2026-01-24 13:02:42,855 - INFO - 
+2026-01-24 13:02:42,855 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 
 [DISCOVERY] Starting symbolic regression...
@@ -133,7 +133,7 @@ Equation hint: arrhenius
 2026-01-24 13:03:07,404 - WARNING -       High complexity (144) but R²=0.9989
 2026-01-24 13:03:07,404 - WARNING -       Many constants detected (6)
 2026-01-24 13:03:07,404 - INFO -    [BEST] New best!
-2026-01-24 13:03:07,404 - INFO - 
+2026-01-24 13:03:07,404 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 
 [DISCOVERY] Starting symbolic regression...
@@ -150,7 +150,7 @@ Equation hint: arrhenius
 2026-01-24 13:03:33,691 - WARNING -    [WARNING] Possible overfit
 2026-01-24 13:03:33,692 - WARNING -       High complexity (149) but R²=0.9880
 2026-01-24 13:03:33,692 - WARNING -       Many constants detected (7)
-2026-01-24 13:03:33,692 - INFO - 
+2026-01-24 13:03:33,692 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 
 [DISCOVERY] Starting symbolic regression...
@@ -166,7 +166,7 @@ Equation hint: arrhenius
 2026-01-24 13:03:56,733 - INFO -    Restored: ((11.902848 / (386.0505 - T)) + (135.88815 / T)) - 0.5959763
 2026-01-24 13:03:56,733 - WARNING -    [WARNING] Possible overfit
 2026-01-24 13:03:56,733 - WARNING -       High complexity (68) but R²=0.9972
-2026-01-24 13:03:56,734 - INFO - 
+2026-01-24 13:03:56,734 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 
 [DISCOVERY] Starting symbolic regression...
@@ -183,7 +183,7 @@ Equation hint: arrhenius
 2026-01-24 13:04:22,045 - WARNING -    [WARNING] Possible overfit
 2026-01-24 13:04:22,045 - WARNING -       High complexity (177) but R²=0.9814
 2026-01-24 13:04:22,045 - WARNING -       Many constants detected (8)
-2026-01-24 13:04:22,046 - INFO - 
+2026-01-24 13:04:22,046 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R²=0.9989)
 
 [OK] Discovery complete
@@ -234,7 +234,7 @@ R²=0.9989, Extrap: 0.0% ✓
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -276,7 +276,7 @@ Equation hint: henderson_hasselbalch
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:04:32,692 - INFO - 
+2026-01-24 13:04:32,692 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -339,7 +339,7 @@ R²=0.9991, Extrap: 0.0% ✓
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -381,7 +381,7 @@ Equation hint: rate_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:05:06,574 - INFO - 
+2026-01-24 13:05:06,574 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -430,7 +430,7 @@ DOMAIN SUMMARY: CHEMISTRY
   Hybrid System v40              Success: 3/3 (100.0%), Avg R²: 0.9993, Avg Extrap:    0.0%
 
 ================================================================================
-                              DOMAIN 2/5: BIOLOGY                               
+                              DOMAIN 2/5: BIOLOGY
 ================================================================================
 
 [4/15] allometric_scaling
@@ -455,7 +455,7 @@ DOMAIN SUMMARY: CHEMISTRY
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -497,7 +497,7 @@ Equation hint: allometric_scaling
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:05:41,901 - INFO - 
+2026-01-24 13:05:41,901 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -560,7 +560,7 @@ R²=1.0000, Extrap: 0.0% ✓
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -602,7 +602,7 @@ Equation hint: michaelis_menten
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:06:16,873 - INFO - 
+2026-01-24 13:06:16,873 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -665,7 +665,7 @@ R²=1.0000, Extrap: 0.0% ✓
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -707,7 +707,7 @@ Equation hint: logistic_growth
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:06:49,812 - INFO - 
+2026-01-24 13:06:49,812 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -756,7 +756,7 @@ DOMAIN SUMMARY: BIOLOGY
   Hybrid System v40              Success: 3/3 (100.0%), Avg R²: 1.0000, Avg Extrap:    0.0%
 
 ================================================================================
-                              DOMAIN 3/5: PHYSICS                               
+                              DOMAIN 3/5: PHYSICS
 ================================================================================
 
 [7/15] kinetic_energy
@@ -781,7 +781,7 @@ DOMAIN SUMMARY: BIOLOGY
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -823,7 +823,7 @@ Equation hint: kinetic_energy
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:07:23,290 - INFO - 
+2026-01-24 13:07:23,290 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -886,7 +886,7 @@ R²=1.0000, Extrap: 0.0% ✓
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -928,7 +928,7 @@ Equation hint: gravitational_force
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:07:57,355 - INFO - 
+2026-01-24 13:07:57,355 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -942,7 +942,7 @@ Equation hint: gravitational_force
 2026-01-24 13:08:20,279 - INFO -    Result: -0.22981945
 2026-01-24 13:08:20,279 - INFO -    R² = -0.0257
 2026-01-24 13:08:20,280 - INFO -    [BEST] New best!
-2026-01-24 13:08:20,280 - INFO - 
+2026-01-24 13:08:20,280 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 
 [DISCOVERY] Starting symbolic regression...
@@ -955,7 +955,7 @@ Equation hint: gravitational_force
    R²: -0.0257
 2026-01-24 13:08:43,133 - INFO -    Result: -0.5971072
 2026-01-24 13:08:43,134 - INFO -    R² = -0.0257
-2026-01-24 13:08:43,134 - INFO - 
+2026-01-24 13:08:43,134 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 
 [DISCOVERY] Starting symbolic regression...
@@ -968,7 +968,7 @@ Equation hint: gravitational_force
    R²: -0.0257
 2026-01-24 13:09:05,962 - INFO -    Result: 1.4503475
 2026-01-24 13:09:05,963 - INFO -    R² = -0.0257
-2026-01-24 13:09:05,963 - INFO - 
+2026-01-24 13:09:05,963 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 
 [DISCOVERY] Starting symbolic regression...
@@ -981,7 +981,7 @@ Equation hint: gravitational_force
    R²: -0.0257
 2026-01-24 13:09:28,309 - INFO -    Result: 1.3109097
 2026-01-24 13:09:28,310 - INFO -    R² = -0.0257
-2026-01-24 13:09:28,310 - INFO - 
+2026-01-24 13:09:28,310 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 
 [DISCOVERY] Starting symbolic regression...
@@ -994,7 +994,7 @@ Equation hint: gravitational_force
    R²: -0.0257
 2026-01-24 13:09:49,684 - INFO -    Result: 0.6298781
 2026-01-24 13:09:49,684 - INFO -    R² = -0.0257
-2026-01-24 13:09:49,684 - WARNING - 
+2026-01-24 13:09:49,684 - WARNING -
 [WARNING] SymbolicEngine best R²=-0.0257
 
 [OK] Discovery complete
@@ -1035,7 +1035,7 @@ Equation hint: gravitational_force
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -1079,9 +1079,9 @@ Equation hint: ideal_gas_law
 [DISCOVER] Running symbolic regression...
 2026-01-24 13:09:57,456 - INFO -    Sanitized: T → var_T
 2026-01-24 13:09:57,456 - INFO -    Sanitized: V → var_V
-2026-01-24 13:09:57,456 - INFO - 
+2026-01-24 13:09:57,456 - INFO -
 [SANITIZATION] Detected problematic variable names
-2026-01-24 13:09:57,457 - INFO - 
+2026-01-24 13:09:57,457 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -1132,7 +1132,7 @@ DOMAIN SUMMARY: PHYSICS
   Hybrid System v40              Success: 2/3 ( 66.7%), Avg R²: 1.0000, Avg Extrap:    0.0%
 
 ================================================================================
-                              DOMAIN 4/5: DEFI_AMM                              
+                              DOMAIN 4/5: DEFI_AMM
 ================================================================================
 
 [10/15] impermanent_loss
@@ -1157,7 +1157,7 @@ DOMAIN SUMMARY: PHYSICS
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -1199,7 +1199,7 @@ Equation hint: impermanent_loss
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:10:32,836 - INFO - 
+2026-01-24 13:10:32,836 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -1262,7 +1262,7 @@ R²=1.0000, Extrap: 0.0% ✓
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -1304,7 +1304,7 @@ Equation hint: price_impact
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:11:05,457 - INFO - 
+2026-01-24 13:11:05,457 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -1367,7 +1367,7 @@ R²=1.0000, Extrap: 0.0% ✓
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -1409,7 +1409,7 @@ Equation hint: constant_product
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:11:33,891 - INFO - 
+2026-01-24 13:11:33,891 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -1458,7 +1458,7 @@ DOMAIN SUMMARY: DEFI_AMM
   Hybrid System v40              Success: 3/3 (100.0%), Avg R²: 1.0000, Avg Extrap:    0.0%
 
 ================================================================================
-                             DOMAIN 5/5: DEFI_RISK                              
+                             DOMAIN 5/5: DEFI_RISK
 ================================================================================
 
 [13/15] var_95
@@ -1483,7 +1483,7 @@ DOMAIN SUMMARY: DEFI_AMM
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -1525,7 +1525,7 @@ Equation hint: var_95
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:12:05,682 - INFO - 
+2026-01-24 13:12:05,682 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -1588,7 +1588,7 @@ R²=1.0000, Extrap: 0.0% ✓
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -1630,7 +1630,7 @@ Equation hint: liquidation_long
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:12:39,233 - INFO - 
+2026-01-24 13:12:39,233 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -1693,7 +1693,7 @@ R²=1.0000, Extrap: 0.0% ✓
       [DEBUG] Cache keys: ['compiled_function', 'variable_names']
       [DEBUG] Cached function: True
 R²=1.0000 ✓
-   Running Neural Network... 
+   Running Neural Network...
       [DEBUG] Testing near extrapolation...
       [DEBUG] Cache keys: ['model', 'scaler_X', 'scaler_y']
 
@@ -1735,7 +1735,7 @@ Equation hint: portfolio_var
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-24 13:13:13,392 - INFO - 
+2026-01-24 13:13:13,392 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -1751,7 +1751,7 @@ Equation hint: portfolio_var
 2026-01-24 13:13:39,274 - WARNING -    [WARNING] Possible overfit
 2026-01-24 13:13:39,275 - WARNING -       High complexity (92) but R²=0.9949
 2026-01-24 13:13:39,275 - INFO -    [BEST] New best!
-2026-01-24 13:13:39,275 - INFO - 
+2026-01-24 13:13:39,275 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 
 [DISCOVERY] Starting symbolic regression...
@@ -1766,7 +1766,7 @@ Equation hint: portfolio_var
 2026-01-24 13:14:06,489 - INFO -    R² = 0.9709
 2026-01-24 13:14:06,490 - WARNING -    [WARNING] Possible overfit
 2026-01-24 13:14:06,490 - WARNING -       High complexity (65) but R²=0.9709
-2026-01-24 13:14:06,490 - INFO - 
+2026-01-24 13:14:06,490 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 
 [DISCOVERY] Starting symbolic regression...
@@ -1781,7 +1781,7 @@ Equation hint: portfolio_var
 2026-01-24 13:14:33,775 - INFO -    R² = 0.9845
 2026-01-24 13:14:33,776 - WARNING -    [WARNING] Possible overfit
 2026-01-24 13:14:33,777 - WARNING -       High complexity (109) but R²=0.9845
-2026-01-24 13:14:33,777 - INFO - 
+2026-01-24 13:14:33,777 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 
 [DISCOVERY] Starting symbolic regression...
@@ -1797,7 +1797,7 @@ Equation hint: portfolio_var
 2026-01-24 13:15:03,533 - WARNING -    [WARNING] Possible overfit
 2026-01-24 13:15:03,537 - WARNING -       High complexity (104) but R²=0.9949
 2026-01-24 13:15:03,538 - WARNING -       Suspicious constants: ['18887.658', '15131.131', '3646.9062']
-2026-01-24 13:15:03,538 - INFO - 
+2026-01-24 13:15:03,538 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 
 [DISCOVERY] Starting symbolic regression...
@@ -1812,7 +1812,7 @@ Equation hint: portfolio_var
 2026-01-24 13:15:44,343 - INFO -    R² = 0.9836
 2026-01-24 13:15:44,343 - WARNING -    [WARNING] Possible overfit
 2026-01-24 13:15:44,344 - WARNING -       High complexity (79) but R²=0.9836
-2026-01-24 13:15:44,345 - INFO - 
+2026-01-24 13:15:44,345 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R²=0.9949)
 
 [OK] Discovery complete
@@ -1848,12 +1848,12 @@ DOMAIN SUMMARY: DEFI_RISK
   Hybrid System v40              Success: 3/3 (100.0%), Avg R²: 0.9983, Avg Extrap:    0.0%
 
 ================================================================================
-                              ALL DOMAINS COMPLETE                              
+                              ALL DOMAINS COMPLETE
 ================================================================================
 
 
 ================================================================================
-                          FINAL SUMMARY - ALL DOMAINS                           
+                          FINAL SUMMARY - ALL DOMAINS
 ================================================================================
 
 📊 Total tests: 15
@@ -1935,7 +1935,7 @@ DEFI_RISK:
 💾 Results saved to: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/experiments/pyfigures/5_data/results/all_domains_extrap_v4_20260124_131545.json
 
 ================================================================================
-                          TABLE 1 DATA FOR JMLR PAPER                           
+                          TABLE 1 DATA FOR JMLR PAPER
 ================================================================================
 
 LaTeX table data:
@@ -1956,4 +1956,4 @@ Pure LLM & $1.00 \pm 0.00$ & 0\% & 15/15 (100.0\%) & 6.9s \\
 
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab/experiments/pyfigures/5_data]
-└─$                                                  
+└─$

@@ -121,9 +121,9 @@ E = 0.5 * m * v^2  # Dimensionally correct! ✓
 # Each step has physical meaning:
 Construction:
   Step 1: v · v = speed²     # "squared velocity"
-  Step 2: m × speed²         # "mass times speed squared"  
+  Step 2: m × speed²         # "mass times speed squared"
   Step 3: 0.5 × (m × speed²) # "kinetic energy"
-  
+
 Physical interpretation: ✓ Built-in
 ```
 
@@ -168,18 +168,18 @@ KE = Scalar(dimensions={'mass': 1, 'length': 2, 'time': -2})  # Target
 # Step 2: Find valid construction path
 def construct_kinetic_energy(m, v, target=KE):
     # Axiom: Energy ~ velocity²
-    v_squared = axiom_dot_product(v, v)  
+    v_squared = axiom_dot_product(v, v)
     # Result: Scalar(dimensions={'length': 2, 'time': -2})
-    
+
     # Axiom: Energy ~ mass
     m_times_v2 = axiom_scalar_mult(m, v_squared)
     # Result: Scalar(dimensions={'mass': 1, 'length': 2, 'time': -2})
-    
+
     # Dimensional analysis: Exact match! ✓
-    
+
     # Fit coefficient: 0.5 (from data)
     coefficient = fit_coefficient(data, m_times_v2)
-    
+
     return coefficient * m * v_squared
 
 # Result: KE = 0.5 * m * v²
@@ -198,17 +198,17 @@ DIMENSIONAL_AXIOMS = {
         'rule': 'Scalar(d1) × Scalar(d2) → Scalar(d1 + d2)',
         'example': 'mass × acceleration → force'
     },
-    
+
     'vector_dot': {
         'rule': 'Vector(d1, rank=1) · Vector(d2, rank=1) → Scalar(d1 + d2)',
         'example': 'velocity · velocity → speed²'
     },
-    
+
     'vector_cross': {
         'rule': 'Vector(d1) × Vector(d2) → Vector(d1 + d2, rank=1)',
         'example': 'position × momentum → angular momentum'
     },
-    
+
     'scalar_vector': {
         'rule': 'Scalar(d1) × Vector(d2) → Vector(d1 + d2)',
         'example': 'mass × velocity → momentum'
@@ -224,13 +224,13 @@ CONSERVATION_AXIOMS = {
         'constraint': 'All terms must have same dimensions',
         'example': 'KE + PE = Total Energy'
     },
-    
+
     'force_superposition': {
         'rule': 'Force_1 + Force_2 + ... → Net_Force',
         'constraint': 'Vector addition',
         'example': 'Gravity + Friction + Applied = Net'
     },
-    
+
     'momentum_conservation': {
         'rule': 'Σ momentum_before = Σ momentum_after',
         'constraint': 'In isolated system',
@@ -247,13 +247,13 @@ SYMMETRY_AXIOMS = {
         'implication': 'Equation cannot depend on absolute position',
         'example': 'KE depends on v, not on position'
     },
-    
+
     'rotation_invariance': {
         'rule': 'Scalar quantities unchanged by rotation',
         'implication': 'Use dot products, not component-wise',
         'example': 'KE = 0.5*m*|v|², not 0.5*m*vx²'
     },
-    
+
     'time_reversal': {
         'rule': 'Even functions of velocity for energy',
         'implication': 'Energy ~ v², not v',
@@ -272,7 +272,7 @@ FLUID_AXIOMS = {
         'terms': ['P', '0.5*ρ*v²', 'ρ*g*h'],
         'constraint': 'All terms are pressure (energy density)'
     },
-    
+
     'continuity': {
         'rule': 'ρ₁A₁v₁ = ρ₂A₂v₂',
         'constraint': 'Mass flow rate conserved'
@@ -287,12 +287,12 @@ QUANTUM_AXIOMS = {
         'rule': 'E = n * h * f',
         'constraint': 'Energy proportional to frequency'
     },
-    
+
     'uncertainty': {
         'rule': 'Δx * Δp ≥ ℏ/2',
         'constraint': 'Position-momentum product bounded'
     },
-    
+
     'de_broglie': {
         'rule': 'λ = h / p',
         'constraint': 'Wave-particle duality'
@@ -308,7 +308,7 @@ BIOCHEM_AXIOMS = {
         'constraint': 'Saturation kinetics (hyperbolic)',
         'properties': ['monotonic', 'bounded', 'asymptotic']
     },
-    
+
     'mass_action': {
         'rule': 'Rate ∝ Product of reactant concentrations',
         'constraint': 'Elementary reactions only'
@@ -327,7 +327,7 @@ class MathematicalObject:
     def __init__(self, dimensions: Dict, properties: List):
         self.dimensions = dimensions  # e.g., {'mass': 1, 'length': 2, 'time': -2}
         self.properties = properties  # e.g., ['positive', 'scalar', 'conserved']
-    
+
     def is_compatible(self, other, operation):
         """Check if operation is valid via axioms."""
         return AXIOM_LIBRARY.validate(self, other, operation)
@@ -337,7 +337,7 @@ class Scalar(MathematicalObject):
 
 class Vector(MathematicalObject):
     rank = 1
-    
+
 class Tensor(MathematicalObject):
     rank = 2  # or higher
 ```
@@ -346,31 +346,31 @@ class Tensor(MathematicalObject):
 ```python
 class AxiomEngine:
     """Validates and applies axioms to construct equations."""
-    
+
     def __init__(self):
         self.axioms = load_axiom_library()
-    
+
     def apply_axiom(self, axiom_name, *objects):
         """Apply axiom to mathematical objects."""
         axiom = self.axioms[axiom_name]
-        
+
         # Validate preconditions
         if not axiom.validate_inputs(objects):
             raise AxiomViolation(f"Cannot apply {axiom_name}")
-        
+
         # Apply transformation
         result = axiom.transform(*objects)
-        
+
         # Verify postconditions
         assert axiom.validate_output(result)
-        
+
         return result
-    
+
     def construct_expression(self, target_type, available_objects):
         """Build expression using axioms."""
         # Graph search through axiom space
         candidates = []
-        
+
         for axiom in self.axioms:
             if axiom.can_produce(target_type):
                 try:
@@ -379,7 +379,7 @@ class AxiomEngine:
                         candidates.append((axiom, result))
                 except AxiomViolation:
                     continue
-        
+
         return candidates
 ```
 
@@ -387,28 +387,28 @@ class AxiomEngine:
 ```python
 class StructureSynthesizer:
     """Synthesizes equations from axioms."""
-    
+
     def discover(self, X, y, variable_names, domain, variable_units):
         # 1. Type variables
         typed_vars = self.type_variables(variable_names, variable_units, domain)
-        
+
         # 2. Infer target type from y
         target_type = self.infer_target_type(y, domain)
-        
+
         # 3. Search for valid constructions
         constructions = self.axiom_engine.construct_expression(
             target_type, typed_vars
         )
-        
+
         # 4. Fit coefficients
         fitted = []
         for construction in constructions:
             coeffs, r2 = self.fit_coefficients(construction, X, y)
             fitted.append((construction, coeffs, r2))
-        
+
         # 5. Rank by fit + simplicity
         ranked = self.rank_constructions(fitted)
-        
+
         return ranked[0]  # Best construction
 ```
 
@@ -457,15 +457,15 @@ class StructureSynthesizer:
 ```python
 class AxiomLearner:
     """Discovers new axioms from successful equations."""
-    
+
     def extract_axiom(self, successful_equations):
         # 1. Find common patterns
         patterns = self.pattern_miner.extract(successful_equations)
-        
+
         # 2. Generalize to axiom
         for pattern in patterns:
             axiom_candidate = self.generalize(pattern)
-            
+
             # 3. Validate on test cases
             if self.validate_axiom(axiom_candidate):
                 self.axiom_library.add(axiom_candidate)
@@ -499,7 +499,7 @@ class AxiomLearner:
 ```python
 class HybridDiscoverySystem_v5:
     """Combines LLM + Axioms + PySR"""
-    
+
     def discover(self, X, y, variables, domain):
         # LAYER 1: Axiom-Based Construction (2-5s)
         axiom_result = self.axiom_synthesizer.discover(
@@ -507,15 +507,15 @@ class HybridDiscoverySystem_v5:
         )
         if axiom_result.r2 > 0.95:
             return axiom_result  # ✅ 80% cases solved here!
-        
+
         # LAYER 2: LLM Guidance (5s)
         llm_result = self.llm_guided.discover(
-            X, y, variables, domain, 
+            X, y, variables, domain,
             axiom_hint=axiom_result.structure
         )
         if llm_result.r2 > 0.90:
             return llm_result  # ✅ 15% cases solved here!
-        
+
         # LAYER 3: Full PySR (30-60s)
         return self.pysr_fallback.discover(
             X, y, variables,
@@ -543,7 +543,7 @@ python❌ Current (PySR): Try random combinations until something works
 ### **2. Guaranteed Physical Validity**
 Every equation constructed via axioms is **automatically**:
 - ✅ Dimensionally consistent
-- ✅ Respects conservation laws  
+- ✅ Respects conservation laws
 - ✅ Preserves symmetries
 - ✅ Physically interpretable
 

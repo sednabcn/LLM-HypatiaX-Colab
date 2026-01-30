@@ -68,22 +68,22 @@ class MetaSymbolicRegressor:
     def __init__(self):
         self.equation_bank = {}  # domain → equations
         self.pattern_embeddings = {}  # patterns → templates
-    
+
     def discover(self, X, y, domain, hint=None):
         # 1. Find similar past equations
         similar = self.find_similar(X, y, domain)
-        
+
         # 2. Warm start PySR population
         init_pop = self.generate_variants(similar)
-        
+
         # 3. Run PySR (but 5x fewer iterations!)
-        result = pysr.fit(X, y, 
+        result = pysr.fit(X, y,
                          population=init_pop,
                          niterations=10)  # vs 50
-        
+
         # 4. Store new equation
         self.equation_bank[domain].append(result)
-        
+
         return result
 ```
 
@@ -138,7 +138,7 @@ class NeuroSymbolicDiscovery:
     def __init__(self):
         self.structure_predictor = EquationGNN()
         self.symbolic_refiner = ConstrainedPySR()
-    
+
     def discover(self, X, y, domain):
         # 1. Predict structure (2s)
         structure = self.structure_predictor.predict(
@@ -149,14 +149,14 @@ class NeuroSymbolicDiscovery:
         #   'terms': ['linear', 'quadratic', 'product'],
         #   'operators': ['+', '*', '**']
         # }
-        
+
         # 2. Constrained symbolic search (5s)
         expr = self.symbolic_refiner.fit(
-            X, y, 
+            X, y,
             allowed_structure=structure,
             max_complexity=10
         )
-        
+
         return expr
 ```
 
@@ -245,19 +245,19 @@ class EnsembleDiscovery:
             'transcendental': FullPySR(),
             'quantum': ScaledPySR()
         }
-    
+
     def discover(self, X, y, domain):
         # 1. Route (0.1s)
         eq_type = self.router.classify(X, y, domain)
-        
+
         # 2. Dispatch to specialist (variable time)
         specialist = self.specialists[eq_type]
         result = specialist.fit(X, y)
-        
+
         # 3. Validate and fallback if needed
         if result.score < 0.90:
             result = self.specialists['transcendental'].fit(X, y)
-        
+
         return result
 ```
 
@@ -314,7 +314,7 @@ class LLMGuidedDiscovery:
     def __init__(self):
         self.llm = AnthropicAPI()  # or OpenAI
         self.pysr_fallback = PySRRegressor()
-    
+
     def discover(self, X, y, domain, variables, description):
         # 1. Generate hypotheses (5s)
         hypotheses = self.llm.generate_candidates(
@@ -324,27 +324,27 @@ class LLMGuidedDiscovery:
             data_patterns=self.analyze_patterns(X, y),
             n_candidates=5
         )
-        
+
         # 2. Test hypotheses (2s)
         best = None
         best_score = 0
-        
+
         for hyp in hypotheses:
             expr = parse_expr(hyp['equation'])
             fitted = self.fit_coefficients(expr, X, y)
             score = r2_score(y, fitted.predict(X))
-            
+
             if score > best_score:
                 best = fitted
                 best_score = score
-        
+
         # 3. Fallback if needed (10s)
         if best_score < 0.90:
             best = self.pysr_fallback.fit(
                 X, y,
                 init_population=self.expand_hypotheses(hypotheses)
             )
-        
+
         return best
 ```
 
@@ -456,7 +456,7 @@ Top candidates:
 class LLMHypothesisGenerator:
     def __init__(self, api_key):
         self.client = Anthropic(api_key=api_key)
-    
+
     def generate(self, X, y, domain, variables, description):
         # Analyze data
         patterns = {
@@ -465,27 +465,27 @@ class LLMHypothesisGenerator:
             'power_laws': self.test_power_laws(X, y),
             'correlations': self.compute_correlations(X, y)
         }
-        
+
         # Prompt LLM
         prompt = f"""
         Generate 5 candidate equations for this scientific problem:
-        
+
         Domain: {domain}
         Variables: {variables}
         Description: {description}
-        
+
         Data patterns:
         {json.dumps(patterns, indent=2)}
-        
+
         Return JSON array of:
         {{"equation": "...", "confidence": 0.0-1.0, "reasoning": "..."}}
         """
-        
+
         response = self.client.messages.create(
             model="claude-sonnet-4-20250514",
             messages=[{"role": "user", "content": prompt}]
         )
-        
+
         return json.loads(response.content)
 ```
 

@@ -1,5 +1,5 @@
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/test_suite_symbolic_regression.py                                                                               
+└─$ python tests/test_suite_symbolic_regression.py
 ====================================================== test session starts ======================================================
 platform linux -- Python 3.12.2, pytest-9.0.1, pluggy-1.6.0 -- /home/agagora/Downloads/py312/bin/python
 cachedir: .pytest_cache
@@ -7,7 +7,7 @@ hypothesis profile 'default'
 rootdir: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/tests
 configfile: pytest.ini
 plugins: anyio-4.11.0, xdist-3.8.0, hypothesis-6.148.7, cov-7.0.0
-collected 7 items                                                                                                               
+collected 7 items
 
 tests/test_suite_symbolic_regression.py::TestSymbolicRegressionFailures::test_michaelis_menten_discovery PASSED           [ 14%]
 tests/test_suite_symbolic_regression.py::TestSymbolicRegressionFailures::test_bernoulli_equation_issues PASSED            [ 28%]
@@ -20,11 +20,11 @@ tests/test_suite_symbolic_regression.py::test_full_validation_pipeline PASSED   
 ======================================================= 7 passed in 7.35s =======================================================
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/test_final_veification.py                                                              
+└─$ python tests/test_final_veification.py
 python: can't open file '/home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/tests/test_final_veification.py': [Errno 2] No such file or directory
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/test_final_verification.py                                                                                      
+└─$ python tests/test_final_verification.py
 ================================================================================
 FINAL FIX VERIFICATION
 ================================================================================
@@ -115,14 +115,14 @@ Gen 30: Best R² = -inf
 [2]+  Stopped                 python tests/test_bernoulli_regressor.py
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                                                                              
+└─$
 
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                                                                              
+└─$
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/test_bernoulli_regressor.py                                                                                     
+└─$ python tests/test_bernoulli_regressor.py
 Testing Improved Bernoulli Regressor
 ============================================================
 
@@ -150,7 +150,7 @@ Expected: P + 0.5*rho*v**2 + rho*g*h
 ============================================================
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/test_bernoulli_regressor_v2.py                                                                                  
+└─$ python tests/test_bernoulli_regressor_v2.py
 Testing Improved Bernoulli Regressor
 ============================================================
 
@@ -183,7 +183,7 @@ Best R²: 0.9852
 Expected: P + 0.5*rho*v**2 + rho*g*h
 ============================================================
 ─(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/test_bernoulli_regressor_v3.py                                                                                 
+└─$ python tests/test_bernoulli_regressor_v3.py
 Testing Improved Bernoulli Regressor
 ============================================================
 
@@ -222,7 +222,7 @@ Coefficient comparison:
   rho*g*h:   1.1171 (expected: 1.0)
 ============================================================
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/test_failed_cases_enhanced.py --test bernoulli_equation --use-enhanced                                        
+└─$ python tests/test_failed_cases_enhanced.py --test bernoulli_equation --use-enhanced
 
 ================================================================================
 TEST: bernoulli_equation (ENHANCED MODE)
@@ -268,7 +268,7 @@ Gen 90: Best R² = 0.8766, Valid = 139/150, DimIssues=0
    Time: 1348.8s
 
 ================================================================================
-                                 FINAL SUMMARY                                  
+                                 FINAL SUMMARY
 ================================================================================
 
 📊 Overall Results:
@@ -279,7 +279,7 @@ Gen 90: Best R² = 0.8766, Valid = 139/150, DimIssues=0
    Dimensional checks passed: 1/1
 
 📋 Individual Results:
-   Test                           Status   Eval R²    Val      Dim   Time    
+   Test                           Status   Eval R²    Val      Dim   Time
    --------------------------------------------------------------------------------
    bernoulli_equation             ✅ PASS     0.9846    98.5    ✓    1348.8s
 
@@ -292,10 +292,10 @@ Gen 90: Best R² = 0.8766, Valid = 139/150, DimIssues=0
 ✅ Results saved to: hypatiax/data/results/dimensional_tests_20251229_140838.json
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                               
+└─$
 
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/tools/symbolic/test_physic_regressor_v52.py                                                                
+└─$ python hypatiax/tools/symbolic/test_physic_regressor_v52.py
 ================================================================================
 TESTING: Physics-Aware Regressor v5.2 vs v5.1
 ================================================================================
@@ -333,7 +333,7 @@ Gen 80: Best R² = 0.8925, Valid = 117/150, DimIssues=130
 [2]+  Stopped                 python hypatiax/tools/symbolic/test_physic_regressor_v52.py
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/tools/symbolic/test_physic_regressor_v52.py                                                                
+└─$ python hypatiax/tools/symbolic/test_physic_regressor_v52.py
 ================================================================================
 TESTING: Physics-Aware Regressor v5.2 vs v5.1
 ================================================================================
@@ -383,9 +383,9 @@ INSTRUCTIONS:
 ================================================================================
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                    
+└─$
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python tests/verify_discovered_equation.py                                                                                 
+└─$ python tests/verify_discovered_equation.py
 ================================================================================
 VERIFICATION: Why R² = 0.8923 when equation is correct?
 ================================================================================
@@ -437,7 +437,7 @@ The fix is to improve dimensional checking to recognize:
 ================================================================================
 
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/tools/symbolic/test_physic_regressor_v52.py                                                                
+└─$ python hypatiax/tools/symbolic/test_physic_regressor_v52.py
 ================================================================================
 TESTING: Physics-Aware Regressor v5.2 vs v5.1
 ================================================================================
@@ -487,4 +487,4 @@ INSTRUCTIONS:
 ================================================================================
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$       
+└─$

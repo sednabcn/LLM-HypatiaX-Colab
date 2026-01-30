@@ -1,7 +1,7 @@
 I completely understand! Let me simplify this into ONE simple script that does everything for you.ONE-CLICK Setup - Simple VersionCode #!/bin/bash
 ###############################################################################
 # ONE-CLICK SETUP FOR HYPATIAX VERSION MANAGEMENT
-# 
+#
 # This script does EVERYTHING in one go. Just run it!
 #
 # Usage:
@@ -49,11 +49,11 @@ on:
   # Automatically run when you push code
   push:
     branches: [main, develop]
-  
+
   # Run every day at 2 AM
   schedule:
     - cron: '0 2 * * *'
-  
+
   # Allow manual trigger from GitHub UI
   workflow_dispatch:
 

@@ -169,7 +169,7 @@ import sys
 class WorkflowRunner:
     def __init__(self, base_path: Path, report_dir: Path):
         # ... existing code ...
-        
+
         # Load versions
         try:
             sys.path.insert(0, str(base_path))
@@ -179,32 +179,32 @@ class WorkflowRunner:
         except ImportError:
             self.versions_loaded = False
             print("⚠️  Version loader not available")
-    
+
     def run_workflow(self, modules=None):
         # ... existing code ...
-        
+
         # After successful workflow
         if all_successful:
             print("\n🎯 Workflow succeeded - auto-versioning...")
             self._auto_version_on_success()
-    
+
     def _auto_version_on_success(self):
         """Auto-version all data after successful workflow."""
         try:
             from global_version_manager import GlobalVersionManager
-            
+
             manager = GlobalVersionManager(self.base_path)
             versioned = manager.auto_version_all(
                 notes="Auto-versioned after successful workflow run"
             )
-            
+
             if versioned:
                 # Update version injector
                 from version_injector import VersionInjector
                 injector = VersionInjector(self.base_path)
                 injector.sync_with_global_manager()
                 injector.export_env_file()
-                
+
                 print("✅ Versions updated successfully")
         except Exception as e:
             print(f"⚠️  Auto-versioning failed: {e}")
@@ -410,16 +410,16 @@ if [ $? -eq 0 ]; then
     echo "✅ Scripts successful - auto-versioning..."
     python global_version_manager.py . auto-version \
         --notes "Daily run $(date +%Y-%m-%d)"
-    
+
     # 4. Update environment
     python version_injector.py . sync
     python version_injector.py . export-env
-    
+
     # 5. Create daily snapshot
     python global_version_manager.py . snapshot \
         --name "daily_$(date +%Y%m%d)" \
         --notes "End of day $(date +%Y-%m-%d)"
-    
+
     echo "✅ Daily workflow complete!"
 else
     echo "❌ Scripts failed - versions not updated"

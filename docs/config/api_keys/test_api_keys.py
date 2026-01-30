@@ -2,10 +2,12 @@
 import os
 from pathlib import Path
 
+
 # Try to find and test keys
 def test_openai():
     try:
         import openai
+
         openai.api_key = os.getenv("OPENAI_API_KEY")
         if openai.api_key:
             # Test the key
@@ -20,9 +22,11 @@ def test_openai():
         print(f"❌ OpenAI API error: {e}")
         return False
 
+
 def test_anthropic():
     try:
         import anthropic
+
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if api_key:
             client = anthropic.Anthropic(api_key=api_key)
@@ -30,7 +34,7 @@ def test_anthropic():
             message = client.messages.create(
                 model="claude-3-5-sonnet-20241022",
                 max_tokens=10,
-                messages=[{"role": "user", "content": "Hi"}]
+                messages=[{"role": "user", "content": "Hi"}],
             )
             print("✅ Anthropic API key is valid")
             return True
@@ -40,6 +44,7 @@ def test_anthropic():
     except Exception as e:
         print(f"❌ Anthropic API error: {e}")
         return False
+
 
 if __name__ == "__main__":
     print("Testing API Keys...\n")

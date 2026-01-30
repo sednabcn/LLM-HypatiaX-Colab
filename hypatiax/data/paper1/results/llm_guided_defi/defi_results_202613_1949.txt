@@ -5,7 +5,7 @@
 📄 Loading DeFi Protocol v3.0...
 
 ================================================================================
-                            DEFI PROTOCOL STATISTICS                            
+                            DEFI PROTOCOL STATISTICS
 ================================================================================
 Total tests: 20
 Extrapolation tests: 6
@@ -93,7 +93,7 @@ Equation hint: Kelly Criterion
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:18:04,497 - INFO - 
+2026-01-13 19:18:04,497 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -119,7 +119,7 @@ Equation hint: Kelly Criterion
 2026-01-13 19:21:39,999 - WARNING -    [WARNING] Possible overfit
 2026-01-13 19:21:39,999 - WARNING -       High complexity (133) but R2=0.9338
 2026-01-13 19:21:39,999 - INFO -    [BEST] New best!
-2026-01-13 19:21:39,999 - INFO - 
+2026-01-13 19:21:39,999 - INFO -
 [SYMBOLIC] Attempt 2/3 (seed=43)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -144,7 +144,7 @@ Equation hint: Kelly Criterion
 2026-01-13 19:24:27,846 - INFO -    R2 = 0.9062
 2026-01-13 19:24:27,846 - WARNING -    [WARNING] Possible overfit
 2026-01-13 19:24:27,846 - WARNING -       High complexity (112) but R2=0.9062
-2026-01-13 19:24:27,846 - INFO - 
+2026-01-13 19:24:27,846 - INFO -
 [SYMBOLIC] Attempt 3/3 (seed=44)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -170,7 +170,7 @@ Equation hint: Kelly Criterion
 2026-01-13 19:27:15,149 - WARNING -    [WARNING] Possible overfit
 2026-01-13 19:27:15,149 - WARNING -       High complexity (219) but R2=0.9549
 2026-01-13 19:27:15,149 - INFO -    [BEST] New best!
-2026-01-13 19:27:15,149 - INFO - 
+2026-01-13 19:27:15,149 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9549)
 
 [OK] Discovery complete
@@ -254,7 +254,7 @@ Equation hint: Lp Fee Share
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:27:17,491 - INFO - 
+2026-01-13 19:27:17,491 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -349,7 +349,7 @@ Equation hint: Capital Efficiency
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:27:25,086 - INFO - 
+2026-01-13 19:27:25,086 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -456,7 +456,7 @@ Equation hint: Apy From Apr
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:30:17,293 - INFO - 
+2026-01-13 19:30:17,293 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -552,7 +552,7 @@ Equation hint: Es 95
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:30:26,384 - INFO - 
+2026-01-13 19:30:26,384 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -647,7 +647,7 @@ Equation hint: Es 99
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:30:36,751 - INFO - 
+2026-01-13 19:30:36,751 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -661,7 +661,7 @@ Equation hint: Es 99
 2026-01-13 19:30:44,884 - WARNING -    [WARNING] Possible overfit
 2026-01-13 19:30:44,884 - WARNING -       High complexity (42) but R2=0.9584
 2026-01-13 19:30:44,884 - INFO -    [BEST] New best!
-2026-01-13 19:30:44,884 - INFO - 
+2026-01-13 19:30:44,884 - INFO -
 [SYMBOLIC] Attempt 2/3 (seed=43)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -675,7 +675,7 @@ Equation hint: Es 99
 2026-01-13 19:30:53,321 - WARNING -    [WARNING] Possible overfit
 2026-01-13 19:30:53,321 - WARNING -       High complexity (41) but R2=0.9594
 2026-01-13 19:30:53,322 - INFO -    [BEST] New best!
-2026-01-13 19:30:53,322 - INFO - 
+2026-01-13 19:30:53,322 - INFO -
 [SYMBOLIC] Attempt 3/3 (seed=44)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -688,7 +688,7 @@ Equation hint: Es 99
 2026-01-13 19:31:01,294 - INFO -    R2 = 0.9584
 2026-01-13 19:31:01,295 - WARNING -    [WARNING] Possible overfit
 2026-01-13 19:31:01,295 - WARNING -       High complexity (42) but R2=0.9584
-2026-01-13 19:31:01,295 - INFO - 
+2026-01-13 19:31:01,295 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9594)
 
 [OK] Discovery complete
@@ -772,7 +772,7 @@ Equation hint: Es From Var
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:31:03,045 - INFO - 
+2026-01-13 19:31:03,045 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -867,7 +867,7 @@ Equation hint: Portfolio Es
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:31:12,302 - INFO - 
+2026-01-13 19:31:12,302 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -975,7 +975,7 @@ Equation hint: Liquidation Long
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:34:18,073 - INFO - 
+2026-01-13 19:34:18,073 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1082,7 +1082,7 @@ Equation hint: Liquidation Short
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:37:41,136 - INFO - 
+2026-01-13 19:37:41,136 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1189,7 +1189,7 @@ Equation hint: Max Leverage
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:40:33,713 - INFO - 
+2026-01-13 19:40:33,713 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1296,7 +1296,7 @@ Equation hint: Required Collateral
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:43:14,210 - INFO - 
+2026-01-13 19:43:14,210 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1391,7 +1391,7 @@ Equation hint: Staking Rewards
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:43:21,876 - INFO - 
+2026-01-13 19:43:21,876 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1486,7 +1486,7 @@ Equation hint: Staking Dilution
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:43:29,881 - INFO - 
+2026-01-13 19:43:29,881 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1594,7 +1594,7 @@ Equation hint: Compound Staking
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 19:45:44,658 - INFO - 
+2026-01-13 19:45:44,658 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1637,56 +1637,56 @@ Equation hint: Compound Staking
    Size: 1658.9 KB
 
 ========================================================================================================================
-                                          LLM-GUIDED DISCOVERY - DEFI RESULTS                                           
+                                          LLM-GUIDED DISCOVERY - DEFI RESULTS
 ========================================================================================================================
-Test Name                                |     R² |   Val |   Time | Status | Observations                            
+Test Name                                |     R² |   Val |   Time | Status | Observations
 ------------------------------------------------------------------------------------------------------------------------
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 AMM
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-amm_constant_product                     | 1.0000 |  99.1 |  11.8s | ✅ PASS | Excellent fit, Strong val               
-amm_il_percentage                        | 1.0000 |  98.5 | 290.9s | ✅ PASS | Excellent fit, Strong val               
-amm_impermanent_loss                     | 1.0000 |  90.4 | 293.2s | ✅ PASS | Extrap, Excellent fit, Strong val       
-amm_price_impact                         | 1.0000 |  91.0 |   8.3s | ✅ PASS | Excellent fit, Strong val               
+amm_constant_product                     | 1.0000 |  99.1 |  11.8s | ✅ PASS | Excellent fit, Strong val
+amm_il_percentage                        | 1.0000 |  98.5 | 290.9s | ✅ PASS | Excellent fit, Strong val
+amm_impermanent_loss                     | 1.0000 |  90.4 | 293.2s | ✅ PASS | Extrap, Excellent fit, Strong val
+amm_price_impact                         | 1.0000 |  91.0 |   8.3s | ✅ PASS | Excellent fit, Strong val
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 EXPECTED_SHORTFALL
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-expected_shortfall_es_95                 | 1.0000 |  99.4 |  10.7s | ✅ PASS | Extrap, Excellent fit, Strong val       
-expected_shortfall_es_99                 | 0.9594 | 100.0 |  25.8s | ✅ PASS | Good fit, Strong val                    
-expected_shortfall_es_from_var           | 0.9935 |  99.4 |  10.0s | ✅ PASS | Excellent fit, Strong val               
-expected_shortfall_portfolio_es          | 1.0000 |  99.4 | 185.8s | ✅ PASS | Excellent fit, Strong val               
+expected_shortfall_es_95                 | 1.0000 |  99.4 |  10.7s | ✅ PASS | Extrap, Excellent fit, Strong val
+expected_shortfall_es_99                 | 0.9594 | 100.0 |  25.8s | ✅ PASS | Good fit, Strong val
+expected_shortfall_es_from_var           | 0.9935 |  99.4 |  10.0s | ✅ PASS | Excellent fit, Strong val
+expected_shortfall_portfolio_es          | 1.0000 |  99.4 | 185.8s | ✅ PASS | Excellent fit, Strong val
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 LIQUIDATION
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-liquidation_liquidation_long             | 1.0000 |  98.5 | 203.1s | ✅ PASS | Extrap, Excellent fit, Strong val       
-liquidation_liquidation_short            | 1.0000 |  98.5 | 172.5s | ✅ PASS | Excellent fit, Strong val               
-liquidation_max_leverage                 | 1.0000 |  99.1 | 160.5s | ✅ PASS | Excellent fit, Strong val               
-liquidation_required_collateral          | 1.0000 |  99.1 |   7.6s | ✅ PASS | Excellent fit, Strong val               
+liquidation_liquidation_long             | 1.0000 |  98.5 | 203.1s | ✅ PASS | Extrap, Excellent fit, Strong val
+liquidation_liquidation_short            | 1.0000 |  98.5 | 172.5s | ✅ PASS | Excellent fit, Strong val
+liquidation_max_leverage                 | 1.0000 |  99.1 | 160.5s | ✅ PASS | Excellent fit, Strong val
+liquidation_required_collateral          | 1.0000 |  99.1 |   7.6s | ✅ PASS | Excellent fit, Strong val
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 LIQUIDITY
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-liquidity_apy_from_apr                   | 1.0000 |  91.3 |   8.5s | ✅ PASS | Excellent fit, Strong val               
-liquidity_capital_efficiency             | 1.0000 |  99.4 | 172.2s | ✅ PASS | Excellent fit, Strong val               
-liquidity_kelly_criterion                | 0.9549 |  99.4 | 576.2s | ✅ PASS | Extrap, Good fit, Strong val            
-liquidity_lp_fee_share                   | 1.0000 |  99.1 |   7.6s | ✅ PASS | Excellent fit, Strong val               
+liquidity_apy_from_apr                   | 1.0000 |  91.3 |   8.5s | ✅ PASS | Excellent fit, Strong val
+liquidity_capital_efficiency             | 1.0000 |  99.4 | 172.2s | ✅ PASS | Excellent fit, Strong val
+liquidity_kelly_criterion                | 0.9549 |  99.4 | 576.2s | ✅ PASS | Extrap, Good fit, Strong val
+liquidity_lp_fee_share                   | 1.0000 |  99.1 |   7.6s | ✅ PASS | Excellent fit, Strong val
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 RISK_VAR
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-risk_var_portfolio_var                   | 1.0000 |  91.0 | 263.4s | ✅ PASS | Excellent fit, Strong val               
-risk_var_var_95                          | 1.0000 | 100.0 |  10.3s | ✅ PASS | Extrap, Excellent fit, Strong val       
-risk_var_var_99                          | 1.0000 | 100.0 | 404.8s | ✅ PASS | Excellent fit, Strong val               
-risk_var_var_multiday                    | 1.0000 |  99.4 |  10.3s | ✅ PASS | Excellent fit, Strong val               
+risk_var_portfolio_var                   | 1.0000 |  91.0 | 263.4s | ✅ PASS | Excellent fit, Strong val
+risk_var_var_95                          | 1.0000 | 100.0 |  10.3s | ✅ PASS | Extrap, Excellent fit, Strong val
+risk_var_var_99                          | 1.0000 | 100.0 | 404.8s | ✅ PASS | Excellent fit, Strong val
+risk_var_var_multiday                    | 1.0000 |  99.4 |  10.3s | ✅ PASS | Excellent fit, Strong val
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 STAKING
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-staking_compound_staking                 | 1.0000 |  90.4 |   8.3s | ✅ PASS | Extrap, Excellent fit, Strong val       
-staking_staking_dilution                 | 1.0000 |  91.0 | 134.8s | ✅ PASS | Excellent fit, Strong val               
-staking_staking_rewards                  | 1.0000 |  91.3 |   8.1s | ✅ PASS | Excellent fit, Strong val               
+staking_compound_staking                 | 1.0000 |  90.4 |   8.3s | ✅ PASS | Extrap, Excellent fit, Strong val
+staking_staking_dilution                 | 1.0000 |  91.0 | 134.8s | ✅ PASS | Excellent fit, Strong val
+staking_staking_rewards                  | 1.0000 |  91.3 |   8.1s | ✅ PASS | Excellent fit, Strong val
 ========================================================================================================================
 
 SUMMARY: 23/23 passed (100.0%)
@@ -1708,4 +1708,4 @@ SUMMARY: 23/23 passed (100.0%)
 
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                             
+└─$

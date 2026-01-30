@@ -1,7 +1,7 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/core/training/enhanced_formula_diagnostic.py hypatiax/data/results/baseline_pure_llm_20251220_133110.json  
+└─$ python hypatiax/core/training/enhanced_formula_diagnostic.py hypatiax/data/results/baseline_pure_llm_20251220_133110.json
 ================================================================================
-                       ENHANCED FORMULA DIAGNOSTIC REPORT                       
+                       ENHANCED FORMULA DIAGNOSTIC REPORT
 ================================================================================
 
 [1/8] Hall-Petch relationship: yield strength as function of grain size
@@ -339,7 +339,7 @@ def formula(pressure_drop, pipe_radius, pipe_length):
 ================================================================================
 
 ================================================================================
-                               SUMMARY STATISTICS                               
+                               SUMMARY STATISTICS
 ================================================================================
 
 Total cases: 8
@@ -364,7 +364,7 @@ R² Score Statistics:
    - Hagen-Poiseuille law: volumetric flow rate in laminar pipe flow: R²=1.0000
 
 ================================================================================
-                             PROBLEM CASES SUMMARY                              
+                             PROBLEM CASES SUMMARY
 ================================================================================
 
 4 cases need constant corrections:
@@ -381,4 +381,3 @@ R² Score Statistics:
    Use the fixed baseline_pure_llm.py that passes metadata to the LLM.
    This will provide ground truth constants to guide formula generation.
    Expected improvement: Negative R² → ~1.0 for these 4 cases.
-

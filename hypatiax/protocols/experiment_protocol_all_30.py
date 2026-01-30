@@ -591,7 +591,7 @@ class ExperimentProtocolAll:
 
         elif domain == "quantum":
             # QUANTUM TESTS - v2.1 FIXES APPLIED
-            
+
             # 1. Photon Energy - FIXED: Use eV·s units
             h_ev = np.full(num_samples, 4.136e-15)  # Planck's constant in eV·s
             f = np.random.uniform(4e14, 7.5e14, num_samples)  # Visible light
@@ -637,13 +637,22 @@ class ExperimentProtocolAll:
                         "difficulty": "easy",
                         "formula_type": "algebraic",
                         "ground_truth": "h / (m * v)",
-                        "units": {"h": "normalized", "m": "normalized", "v": "km/s", "lambda": "normalized"},
+                        "units": {
+                            "h": "normalized",
+                            "m": "normalized",
+                            "v": "km/s",
+                            "lambda": "normalized",
+                        },
                         "variable_descriptions": {
                             "h": "Planck's constant (normalized)",
                             "m": "Particle mass (normalized)",
                             "v": "Particle velocity (km/s range)",
                         },
-                        "variable_roles": {"h": "constant", "m": "constant", "v": "varying"},
+                        "variable_roles": {
+                            "h": "constant",
+                            "m": "constant",
+                            "v": "varying",
+                        },
                         "quantum_fix_v22": "Normalized units, reasonable velocity range",
                         "protocol": "A",
                     },

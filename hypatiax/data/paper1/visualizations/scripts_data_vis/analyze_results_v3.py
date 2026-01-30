@@ -865,13 +865,13 @@ def main():
 Examples:
   # Analyze single results file
   python analyze_results.py results.json
-  
+
   # Compare multiple runs
   python analyze_results.py --compare run1.json run2.json run3.json
-  
+
   # Process file list
   python analyze_results.py --file-list json_files.txt
-  
+
   # Plot failure trends
   python analyze_results.py --plot-failures results_directory/
   python analyze_results.py --plot-failures results/ --output trends.png

@@ -9,7 +9,7 @@ find . -name "*.jsonl" -o -name "*.csv" -o -name "*.pkl"
 find . -name "meta.json" -o -name "config.cfg" | grep -v node_modules
 
 # Count rules in JSONL files
-for f in $(find . -name "ruler*.jsonl"); do 
+for f in $(find . -name "ruler*.jsonl"); do
     echo "$f: $(wc -l < "$f") rules"
 done
 

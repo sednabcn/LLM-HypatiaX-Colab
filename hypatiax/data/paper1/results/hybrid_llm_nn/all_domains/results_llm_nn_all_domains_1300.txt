@@ -3,14 +3,14 @@
 ✅ Loaded .env from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/.env
 ✅ Loaded ExperimentProtocolAll from: hypatiax/protocols/
 ================================================================================
-                        🔬 HYBRID SYSTEM - ALL DOMAINS 🔬                         
+                        🔬 HYBRID SYSTEM - ALL DOMAINS 🔬
 ================================================================================
 Strategy: LLM (R²>0.95) → Ensemble (0.80-0.95) → NN (<0.80)
 Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, quantum, chemistry, biology, mathematics, economics
 ================================================================================
 
 ================================================================================
-                               DOMAIN: MECHANICS                                
+                               DOMAIN: MECHANICS
 ================================================================================
 
 [1/3] Kinetic Energy: KE = (1/2)*m*v²
@@ -50,7 +50,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   🎯 EXCELLENT
 
 ================================================================================
-                             DOMAIN: THERMODYNAMICS                             
+                             DOMAIN: THERMODYNAMICS
 ================================================================================
 
 [1/3] Ideal Gas Law: PV = nRT => P = nRT/V
@@ -89,7 +89,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   🎯 EXCELLENT
 
 ================================================================================
-                            DOMAIN: ELECTROMAGNETISM                            
+                            DOMAIN: ELECTROMAGNETISM
 ================================================================================
 
 [1/3] Coulomb's Law: F = k*q1*q2/r²
@@ -128,7 +128,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   🎯 EXCELLENT
 
 ================================================================================
-                             DOMAIN: FLUID_DYNAMICS                             
+                             DOMAIN: FLUID_DYNAMICS
 ================================================================================
 
 [1/3] Bernoulli's Equation: Total = P + (1/2)*ρ*v² + ρ*g*h
@@ -168,7 +168,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   🎯 EXCELLENT
 
 ================================================================================
-                                 DOMAIN: OPTICS                                 
+                                 DOMAIN: OPTICS
 ================================================================================
 
 [1/3] Thin Lens: 1/f = 1/do + 1/di
@@ -208,7 +208,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   🎯 EXCELLENT
 
 ================================================================================
-                                DOMAIN: QUANTUM                                 
+                                DOMAIN: QUANTUM
 ================================================================================
 
 [1/3] Photon Energy: E = h*f (visible light, eV units)
@@ -247,7 +247,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   R²: 0.000000, RMSE: 0.000000
 
 ================================================================================
-                               DOMAIN: CHEMISTRY                                
+                               DOMAIN: CHEMISTRY
 ================================================================================
 
 [1/3] Arrhenius Equation: k = A*exp(-Ea/(R*T))
@@ -287,7 +287,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   🎯 EXCELLENT
 
 ================================================================================
-                                DOMAIN: BIOLOGY                                 
+                                DOMAIN: BIOLOGY
 ================================================================================
 
 [1/3] Michaelis-Menten: v = (Vmax*[S])/(Km+[S])
@@ -327,7 +327,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   🎯 EXCELLENT
 
 ================================================================================
-                              DOMAIN: MATHEMATICS                               
+                              DOMAIN: MATHEMATICS
 ================================================================================
 
 [1/3] Pythagorean Theorem: c = sqrt(a² + b²)
@@ -367,7 +367,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   🎯 EXCELLENT
 
 ================================================================================
-                               DOMAIN: ECONOMICS                                
+                               DOMAIN: ECONOMICS
 ================================================================================
 
 [1/3] Price Elasticity: Ed = (ΔQ/Q)/(ΔP/P)
@@ -408,7 +408,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
 ✅ Results saved: hypatiax/data/results/hybrid_llm_nn_all_domains_20260115_131438.json
 
 ================================================================================
-                                    SUMMARY                                     
+                                    SUMMARY
 ================================================================================
 
 📊 Total: 30

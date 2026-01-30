@@ -5,118 +5,126 @@ from datetime import datetime
 from typing import Optional
 import os
 
+
 class DomainAwareResultsSaver:
     """Save results organized by domain"""
-    
-    DOMAINS = ['all_domains', 'defi', 'lending', 'trading', 'physics']
-    
-    def __init__(self, base_dir: str = 'hypatiax/data/results'):
+
+    DOMAINS = ["all_domains", "defi", "lending", "trading", "physics"]
+
+    def __init__(self, base_dir: str = "hypatiax/data/results"):
         self.base_dir = Path(base_dir)
-    
-    def save_results(self, results: dict, domain: str = 'all_domains') -> Path:
+
+    def save_results(self, results: dict, domain: str = "all_domains") -> Path:
         """
         Save results to domain-specific directory
-        
+
         Args:
             results: Comparison results dictionary
             domain: Domain name (all_domains, defi, lending, trading, physics)
         """
         if domain not in self.DOMAINS:
             raise ValueError(f"Invalid domain: {domain}. Must be one of {self.DOMAINS}")
-        
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        
+
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
         # Create domain-specific directory
-        results_dir = self.base_dir / 'comparison_results' / domain
+        results_dir = self.base_dir / "comparison_results" / domain
         results_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # Save timestamped file
-        filepath = results_dir / f'comparison_results_{timestamp}.json'
-        with open(filepath, 'w') as f:
+        filepath = results_dir / f"comparison_results_{timestamp}.json"
+        with open(filepath, "w") as f:
             json.dump(results, f, indent=2)
-        
+
         # Update 'latest' symlink
-        latest_link = results_dir / 'comparison_results_latest.json'
+        latest_link = results_dir / "comparison_results_latest.json"
         if latest_link.exists() or latest_link.is_symlink():
             latest_link.unlink()
-        
+
         # Create relative symlink
         latest_link.symlink_to(filepath.name)
-        
+
         print(f"✅ Saved [{domain}]: {filepath}")
         print(f"🔗 Updated [{domain}]: {latest_link}")
-        
+
         return filepath
-    
+
     def save_by_domains(self, results: dict) -> dict:
         """
         Save results split by domain
-        
+
         Args:
             results: Full comparison results
-            
+
         Returns:
             Dictionary mapping domain -> filepath
         """
         saved_files = {}
-        
+
         # Save all_domains (full results)
-        saved_files['all_domains'] = self.save_results(results, 'all_domains')
-        
+        saved_files["all_domains"] = self.save_results(results, "all_domains")
+
         # Split and save by domain
         domain_results = self._split_by_domain(results)
-        
+
         for domain, domain_data in domain_results.items():
-            if domain_data['system1'] or domain_data['system2']:
+            if domain_data["system1"] or domain_data["system2"]:
                 saved_files[domain] = self.save_results(domain_data, domain)
-        
+
         return saved_files
-    
+
     def _split_by_domain(self, results: dict) -> dict:
         """Split results by domain"""
-        domain_data = {domain: {'system1': [], 'system2': [], 'metadata': results.get('metadata', {})} 
-                      for domain in self.DOMAINS if domain != 'all_domains'}
-        
+        domain_data = {
+            domain: {
+                "system1": [],
+                "system2": [],
+                "metadata": results.get("metadata", {}),
+            }
+            for domain in self.DOMAINS
+            if domain != "all_domains"
+        }
+
         # Split system1 results
-        for result in results.get('system1', []):
-            domain = result.get('domain', 'unknown')
+        for result in results.get("system1", []):
+            domain = result.get("domain", "unknown")
             if domain in domain_data:
-                domain_data[domain]['system1'].append(result)
-        
+                domain_data[domain]["system1"].append(result)
+
         # Split system2 results
-        for result in results.get('system2', []):
-            domain = result.get('domain', 'unknown')
+        for result in results.get("system2", []):
+            domain = result.get("domain", "unknown")
             if domain in domain_data:
-                domain_data[domain]['system2'].append(result)
-        
+                domain_data[domain]["system2"].append(result)
+
         return domain_data
 
 
 # Update your main test function
 def main():
     parser = argparse.ArgumentParser(...)
-    
+
     parser.add_argument(
-        '--domain',
+        "--domain",
         type=str,
-        default='all_domains',
-        choices=['all_domains', 'defi', 'lending', 'trading', 'physics'],
-        help='Domain to test (or all_domains for everything)'
+        default="all_domains",
+        choices=["all_domains", "defi", "lending", "trading", "physics"],
+        help="Domain to test (or all_domains for everything)",
     )
     parser.add_argument(
-        '--split-domains',
-        action='store_true',
-        help='Save results split by domain in addition to all_domains'
+        "--split-domains",
+        action="store_true",
+        help="Save results split by domain in addition to all_domains",
     )
-    
+
     args = parser.parse_args()
-    
+
     # Run your comparison
     results = run_comparison(args)
-    
+
     # Save results
     saver = DomainAwareResultsSaver()
-    
+
     if args.split_domains:
         # Save to all domain subdirectories
         saved_files = saver.save_by_domains(results)
@@ -125,6 +133,7 @@ def main():
         # Save to single domain directory
         filepath = saver.save_results(results, args.domain)
         print(f"\n✅ Results saved: {filepath}")
+
 
 """
 # USAGE #====================================
@@ -283,4 +292,3 @@ ScriptPurposeInputOutputtest_real_*Execute comparisonsTest definitionsRaw result
 The test script is the data generator, while the analyzer is the insight extractor! 🎯
 
 """
-

@@ -3,14 +3,14 @@
 ✅ Loaded .env from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/.env
 ✅ Loaded ExperimentProtocolAll from: hypatiax/protocols/
 ================================================================================
-                        🔬 HYBRID SYSTEM - ALL DOMAINS 🔬                         
+                        🔬 HYBRID SYSTEM - ALL DOMAINS 🔬
 ================================================================================
 Strategy: LLM (R²>0.95) → Ensemble (0.80-0.95) → NN (<0.80)
 Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, quantum, chemistry, biology, mathematics, economics
 ================================================================================
 
 ================================================================================
-                               DOMAIN: MECHANICS                                
+                               DOMAIN: MECHANICS
 ================================================================================
 
 [1/3] Kinetic Energy: KE = (1/2)*m*v²
@@ -50,7 +50,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   📊 EXCELLENT
 
 ================================================================================
-                             DOMAIN: THERMODYNAMICS                             
+                             DOMAIN: THERMODYNAMICS
 ================================================================================
 
 [1/3] Ideal Gas Law: PV = nRT => P = nRT/V
@@ -90,7 +90,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   📊 EXCELLENT
 
 ================================================================================
-                            DOMAIN: ELECTROMAGNETISM                            
+                            DOMAIN: ELECTROMAGNETISM
 ================================================================================
 
 [1/3] Coulomb's Law: F = k*q1*q2/r²
@@ -130,7 +130,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   📊 EXCELLENT
 
 ================================================================================
-                             DOMAIN: FLUID_DYNAMICS                             
+                             DOMAIN: FLUID_DYNAMICS
 ================================================================================
 
 [1/3] Bernoulli's Equation: Total = P + (1/2)*ρ*v² + ρ*g*h
@@ -170,7 +170,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   📊 EXCELLENT
 
 ================================================================================
-                                 DOMAIN: OPTICS                                 
+                                 DOMAIN: OPTICS
 ================================================================================
 
 [1/3] Thin Lens: 1/f = 1/do + 1/di
@@ -210,7 +210,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   📊 EXCELLENT
 
 ================================================================================
-                                DOMAIN: QUANTUM                                 
+                                DOMAIN: QUANTUM
 ================================================================================
 
 [1/3] Photon Energy: E = h*f (visible light, eV units)
@@ -250,7 +250,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   📊 POOR
 
 ================================================================================
-                               DOMAIN: CHEMISTRY                                
+                               DOMAIN: CHEMISTRY
 ================================================================================
 
 [1/3] Arrhenius Equation: k = A*exp(-Ea/(R*T))
@@ -290,7 +290,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   📊 EXCELLENT
 
 ================================================================================
-                                DOMAIN: BIOLOGY                                 
+                                DOMAIN: BIOLOGY
 ================================================================================
 
 [1/3] Michaelis-Menten: v = (Vmax*[S])/(Km+[S])
@@ -330,7 +330,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   📊 EXCELLENT
 
 ================================================================================
-                              DOMAIN: MATHEMATICS                               
+                              DOMAIN: MATHEMATICS
 ================================================================================
 
 [1/3] Pythagorean Theorem: c = sqrt(a² + b²)
@@ -370,7 +370,7 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
   📊 EXCELLENT
 
 ================================================================================
-                               DOMAIN: ECONOMICS                                
+                               DOMAIN: ECONOMICS
 ================================================================================
 
 [1/3] Price Elasticity: Ed = (ΔQ/Q)/(ΔP/P)
@@ -411,44 +411,44 @@ Domains: mechanics, thermodynamics, electromagnetism, fluid_dynamics, optics, qu
 ✅ Results saved: hypatiax/data/results/hybrid_llm_nn_all_domains_20260115_133510.json
 
 ============================================================================================================================================
-                                                           DETAILED RESULTS TABLE                                                           
+                                                           DETAILED RESULTS TABLE
 ============================================================================================================================================
-#    Domain             Test Case                           R²         Val.Score    Observations                                      
+#    Domain             Test Case                           R²         Val.Score    Observations
 --------------------------------------------------------------------------------------------------------------------------------------------
-1    mechanics          Kinetic Energy: KE = (1/2)*m*v²     1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-2    mechanics          Gravitational Potential Energy: PE  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-3    mechanics          Hooke's Law: F = k*x                1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-4    thermodynamics     Ideal Gas Law: PV = nRT => P = nRT  0.809914 ~ FAIR         NN significantly better                           
-5    thermodynamics     Heat Capacity: Q = m*c*ΔT           1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-6    thermodynamics     Carnot Efficiency: η = 1 - Tc/Th    1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-7    electromagnetism   Coulomb's Law: F = k*q1*q2/r²       0.396325 ✗ POOR         NN significantly better                           
-8    electromagnetism   Ohm's Law: V = I*R                  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-9    electromagnetism   Lorentz Force: F = q*v*B            1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-10   fluid_dynamics     Bernoulli's Equation: Total = P +   0.992586 ✓ FAIR         NN significantly better                           
-11   fluid_dynamics     Reynolds Number: Re = ρ*v*L/μ       1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-12   fluid_dynamics     Hagen-Poiseuille: Q = π*r⁴*ΔP/(8*μ  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-13   optics             Thin Lens: 1/f = 1/do + 1/di        1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-14   optics             Snell's Law: n1*sin(θ1) = n2*sin(θ  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-15   optics             Diffraction: sin(θ) = λ/a           1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-16   quantum            Photon Energy: E = h*f (visible li  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-17   quantum            de Broglie Wavelength: λ = h/(m*v)  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-18   quantum            Compton Shift: Δλ = (h/(me*c))*(1-  0.000000 ✗ POOR         Normal                                            
-19   chemistry          Arrhenius Equation: k = A*exp(-Ea/  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-20   chemistry          Henderson-Hasselbalch: pH = pKa +   1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-21   chemistry          Nernst Equation: E = E0 - (RT/nF)*  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-22   biology            Michaelis-Menten: v = (Vmax*[S])/(  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-23   biology            Logistic Growth: dN/dt = r*N*(1-N/  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-24   biology            Allometric Scaling: Y = a*M^b       1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-25   mathematics        Pythagorean Theorem: c = sqrt(a² +  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-26   mathematics        Compound Interest: A = P*(1+r/n)^(  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-27   mathematics        Quadratic Discriminant: Δ = b² - 4  1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-28   economics          Price Elasticity: Ed = (ΔQ/Q)/(ΔP/  1.000000 ✓ EXCELLENT    Perfect symbolic fit, NN worse than baseline      
-29   economics          Cobb-Douglas: Y = A*K^α*L^β         1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
-30   economics          Break-Even Point: BEP = FC/(P-VC)   1.000000 ✓ EXCELLENT    Perfect symbolic fit                              
+1    mechanics          Kinetic Energy: KE = (1/2)*m*v²     1.000000 ✓ EXCELLENT    Perfect symbolic fit
+2    mechanics          Gravitational Potential Energy: PE  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+3    mechanics          Hooke's Law: F = k*x                1.000000 ✓ EXCELLENT    Perfect symbolic fit
+4    thermodynamics     Ideal Gas Law: PV = nRT => P = nRT  0.809914 ~ FAIR         NN significantly better
+5    thermodynamics     Heat Capacity: Q = m*c*ΔT           1.000000 ✓ EXCELLENT    Perfect symbolic fit
+6    thermodynamics     Carnot Efficiency: η = 1 - Tc/Th    1.000000 ✓ EXCELLENT    Perfect symbolic fit
+7    electromagnetism   Coulomb's Law: F = k*q1*q2/r²       0.396325 ✗ POOR         NN significantly better
+8    electromagnetism   Ohm's Law: V = I*R                  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+9    electromagnetism   Lorentz Force: F = q*v*B            1.000000 ✓ EXCELLENT    Perfect symbolic fit
+10   fluid_dynamics     Bernoulli's Equation: Total = P +   0.992586 ✓ FAIR         NN significantly better
+11   fluid_dynamics     Reynolds Number: Re = ρ*v*L/μ       1.000000 ✓ EXCELLENT    Perfect symbolic fit
+12   fluid_dynamics     Hagen-Poiseuille: Q = π*r⁴*ΔP/(8*μ  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+13   optics             Thin Lens: 1/f = 1/do + 1/di        1.000000 ✓ EXCELLENT    Perfect symbolic fit
+14   optics             Snell's Law: n1*sin(θ1) = n2*sin(θ  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+15   optics             Diffraction: sin(θ) = λ/a           1.000000 ✓ EXCELLENT    Perfect symbolic fit
+16   quantum            Photon Energy: E = h*f (visible li  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+17   quantum            de Broglie Wavelength: λ = h/(m*v)  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+18   quantum            Compton Shift: Δλ = (h/(me*c))*(1-  0.000000 ✗ POOR         Normal
+19   chemistry          Arrhenius Equation: k = A*exp(-Ea/  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+20   chemistry          Henderson-Hasselbalch: pH = pKa +   1.000000 ✓ EXCELLENT    Perfect symbolic fit
+21   chemistry          Nernst Equation: E = E0 - (RT/nF)*  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+22   biology            Michaelis-Menten: v = (Vmax*[S])/(  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+23   biology            Logistic Growth: dN/dt = r*N*(1-N/  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+24   biology            Allometric Scaling: Y = a*M^b       1.000000 ✓ EXCELLENT    Perfect symbolic fit
+25   mathematics        Pythagorean Theorem: c = sqrt(a² +  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+26   mathematics        Compound Interest: A = P*(1+r/n)^(  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+27   mathematics        Quadratic Discriminant: Δ = b² - 4  1.000000 ✓ EXCELLENT    Perfect symbolic fit
+28   economics          Price Elasticity: Ed = (ΔQ/Q)/(ΔP/  1.000000 ✓ EXCELLENT    Perfect symbolic fit, NN worse than baseline
+29   economics          Cobb-Douglas: Y = A*K^α*L^β         1.000000 ✓ EXCELLENT    Perfect symbolic fit
+30   economics          Break-Even Point: BEP = FC/(P-VC)   1.000000 ✓ EXCELLENT    Perfect symbolic fit
 ============================================================================================================================================
 
 ================================================================================
-                               SUMMARY STATISTICS                               
+                               SUMMARY STATISTICS
 ================================================================================
 
 📊 Total Test Cases: 30
@@ -470,4 +470,4 @@ Max R²: 1.000000
 ================================================================================
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                           
+└─$

@@ -6,7 +6,7 @@ Platform Info:
   OS: Linux (x86_64-linux-gnu)
       Kali GNU/Linux Rolling
   uname: Linux 6.12.13-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.12.13-1kali1 (2025-02-11) x86_64 unknown
-  CPU: Celeron(R) Dual-Core CPU       T3100  @ 1.90GHz: 
+  CPU: Celeron(R) Dual-Core CPU       T3100  @ 1.90GHz:
               speed         user         nice          sys         idle          irq
        #1     0 MHz        450 s          9 s        311 s       4547 s          0 s
        #2     0 MHz        549 s          9 s        304 s       4592 s          0 s
@@ -25,7 +25,7 @@ Environment:
   GEM_HOME = /home/agagora/gems
   PYTHONPATH = /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab:
   TERM = xterm-256color
-  NVM_CD_FLAGS = 
+  NVM_CD_FLAGS =
   PATH = /home/agagora/Downloads/py312/bin:/home/agagora/Downloads/google-cloud-sdk/bin:/home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/bin:/home/agagora/.pyenv/shims:/home/agagora/.pyenv/bin:/home/agagora/.pyenv/bin:/home/agagora/.rbenv/shims:/home/agagora/.rbenv/bin:/home/agagora/gems/bin:/home/agagora/.local/share/gem/ruby/3.1.0/bin:/home/agagora/.juliaup/bin:/home/agagora/.local/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/lib/python3.11/dist-packages:/usr/bin:/bin:/usr/local/games:/usr/games:/home/agagora/.local/bin:/bin:/usr/bin:/home/agagora/.dotnet/tools:/home/agagora/.local/bin:/bin:/usr/bin:/usr/local/lib/python3.11/dist-packages:/usr/bin:/usr/local/bin:/home/agagora/Downloads/google-cloud-sdk/bin
 ✅ PySR available
 ⚠️  No .env file found
@@ -40,7 +40,7 @@ Environment:
 ⚠️  HybridDiscoverySystem missing 'discover' method
 
 ================================================================================
-                   ULTIMATE COMPARATIVE SUITE - FIXED VERSION                   
+                   ULTIMATE COMPARATIVE SUITE - FIXED VERSION
 ================================================================================
 Methods available: 9
 PySR: ✅
@@ -53,7 +53,7 @@ API Key: ✅
 
 
 ==============================================================================================================
-                                                  TEST 1/15                                                   
+                                                  TEST 1/15
 ==============================================================================================================
 
 ================================================================================
@@ -81,20 +81,20 @@ Data: 200 samples × 1 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.0s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               0.6744     0.077718     73.2    s 8                          
-Pure PySR                                     0.9959     0.008741     25.7    s 6                          
-Pure LLM (Basic)                              -5574976734176.1924 321567.498006 2.7     s -                          
-Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER            
-Neural Network                                0.9567     0.027896     20.5    s 7                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 3                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 4                          
-Hybrid System v40                             1.0000     0.000000     4.0     s 5                          
+LLM-Guided PySR                               0.6744     0.077718     73.2    s 8
+Pure PySR                                     0.9959     0.008741     25.7    s 6
+Pure LLM (Basic)                              -5574976734176.1924 321567.498006 2.7     s -
+Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER
+Neural Network                                0.9567     0.027896     20.5    s 7
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 3
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 4
+Hybrid System v40                             1.0000     0.000000     4.0     s 5
 ==============================================================================================================
 
 🎯 WINNER: Pure LLM (Enhanced)
@@ -108,7 +108,7 @@ Hybrid System v40                             1.0000     0.000000     4.0     s 
      • Pure PySR: +0.0041 (0.4% better)
 
 ==============================================================================================================
-                                                  TEST 2/15                                                   
+                                                  TEST 2/15
 ==============================================================================================================
 
 ================================================================================
@@ -136,20 +136,20 @@ Data: 200 samples × 2 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               0.9982     0.021000     23.8    s 6                          
-Pure PySR                                     0.9846     0.061331     18.7    s 7                          
-Pure LLM (Basic)                              N/A        N/A          2.7     s -      Code execution      
-Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER            
-Neural Network                                0.9830     0.065990     1.4     s 8                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.0     s 3                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.6     s 4                          
-Hybrid System v40                             1.0000     0.000000     4.1     s 5                          
+LLM-Guided PySR                               0.9982     0.021000     23.8    s 6
+Pure PySR                                     0.9846     0.061331     18.7    s 7
+Pure LLM (Basic)                              N/A        N/A          2.7     s -      Code execution
+Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER
+Neural Network                                0.9830     0.065990     1.4     s 8
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.0     s 3
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.6     s 4
+Hybrid System v40                             1.0000     0.000000     4.1     s 5
 ==============================================================================================================
 
 🎯 WINNER: Pure LLM (Enhanced)
@@ -163,7 +163,7 @@ Hybrid System v40                             1.0000     0.000000     4.1     s 
      • LLM-Guided PySR: +0.0018 (0.2% better)
 
 ==============================================================================================================
-                                                  TEST 3/15                                                   
+                                                  TEST 3/15
 ==============================================================================================================
 
 ================================================================================
@@ -191,20 +191,20 @@ Data: 200 samples × 2 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               1.0000     0.000000     23.6    s 1      🏆 WINNER            
-Pure PySR                                     1.0000     0.000000     17.0    s 2                          
-Pure LLM (Basic)                              -0.6286    15.334288    2.7     s -                          
-Pure LLM (Enhanced)                           1.0000     0.000000     2.5     s 3                          
-Neural Network                                0.9885     1.303460     1.4     s 8                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.3     s 4                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.0     s 5                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.8     s 6                          
-Hybrid System v40                             1.0000     0.000000     4.1     s 7                          
+LLM-Guided PySR                               1.0000     0.000000     23.6    s 1      🏆 WINNER
+Pure PySR                                     1.0000     0.000000     17.0    s 2
+Pure LLM (Basic)                              -0.6286    15.334288    2.7     s -
+Pure LLM (Enhanced)                           1.0000     0.000000     2.5     s 3
+Neural Network                                0.9885     1.303460     1.4     s 8
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.3     s 4
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.0     s 5
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.8     s 6
+Hybrid System v40                             1.0000     0.000000     4.1     s 7
 ==============================================================================================================
 
 🎯 WINNER: LLM-Guided PySR
@@ -218,7 +218,7 @@ Hybrid System v40                             1.0000     0.000000     4.1     s 
      • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
 
 ==============================================================================================================
-                                                  TEST 4/15                                                   
+                                                  TEST 4/15
 ==============================================================================================================
 
 ================================================================================
@@ -246,20 +246,20 @@ Data: 200 samples × 1 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               1.0000     0.002284     24.4    s 7                          
-Pure PySR                                     1.0000     0.000003     14.5    s 6                          
-Pure LLM (Basic)                              -1.6872    49.331392    3.3     s -                          
-Pure LLM (Enhanced)                           1.0000     0.000000     2.8     s 1      🏆 WINNER            
-Neural Network                                0.9980     1.349941     1.5     s 8                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 3                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 4                          
-Hybrid System v40                             1.0000     0.000000     4.1     s 5                          
+LLM-Guided PySR                               1.0000     0.002284     24.4    s 7
+Pure PySR                                     1.0000     0.000003     14.5    s 6
+Pure LLM (Basic)                              -1.6872    49.331392    3.3     s -
+Pure LLM (Enhanced)                           1.0000     0.000000     2.8     s 1      🏆 WINNER
+Neural Network                                0.9980     1.349941     1.5     s 8
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 3
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 4
+Hybrid System v40                             1.0000     0.000000     4.1     s 5
 ==============================================================================================================
 
 🎯 WINNER: Pure LLM (Enhanced)
@@ -273,7 +273,7 @@ Hybrid System v40                             1.0000     0.000000     4.1     s 
      • Pure PySR: +0.0000 (0.0% better)
 
 ==============================================================================================================
-                                                  TEST 5/15                                                   
+                                                  TEST 5/15
 ==============================================================================================================
 
 ================================================================================
@@ -301,20 +301,20 @@ Data: 200 samples × 1 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.9s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               N/A        N/A          0.0     s -      Variable name S     
-Pure PySR                                     N/A        N/A          0.0     s -      Variable name S     
-Pure LLM (Basic)                              -8.8036    32.668533    2.6     s -                          
-Pure LLM (Enhanced)                           1.0000     0.000000     2.5     s 1      🏆 WINNER            
-Neural Network                                0.9835     1.269245     1.4     s 6                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.2     s 3                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     3.6     s 4                          
-Hybrid System v40                             1.0000     0.000000     3.9     s 5                          
+LLM-Guided PySR                               N/A        N/A          0.0     s -      Variable name S
+Pure PySR                                     N/A        N/A          0.0     s -      Variable name S
+Pure LLM (Basic)                              -8.8036    32.668533    2.6     s -
+Pure LLM (Enhanced)                           1.0000     0.000000     2.5     s 1      🏆 WINNER
+Neural Network                                0.9835     1.269245     1.4     s 6
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 2
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.2     s 3
+Integrated LLM Discovery v11.1                1.0000     0.000000     3.6     s 4
+Hybrid System v40                             1.0000     0.000000     3.9     s 5
 ==============================================================================================================
 
 🎯 WINNER: Pure LLM (Enhanced)
@@ -328,7 +328,7 @@ Hybrid System v40                             1.0000     0.000000     3.9     s 
      • Neural Network: +0.0165 (1.7% better)
 
 ==============================================================================================================
-                                                  TEST 6/15                                                   
+                                                  TEST 6/15
 ==============================================================================================================
 
 ================================================================================
@@ -356,20 +356,20 @@ Data: 200 samples × 1 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.9s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               N/A        N/A          0.0     s -      Variable name N     
-Pure PySR                                     N/A        N/A          0.0     s -      Variable name N     
-Pure LLM (Basic)                              -30375.6671 3476.741887  2.3     s -                          
-Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER            
-Neural Network                                0.9778     3.150214     1.4     s 6                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     3.8     s 2                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     3.8     s 3                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.6     s 4                          
-Hybrid System v40                             1.0000     0.000000     3.9     s 5                          
+LLM-Guided PySR                               N/A        N/A          0.0     s -      Variable name N
+Pure PySR                                     N/A        N/A          0.0     s -      Variable name N
+Pure LLM (Basic)                              -30375.6671 3476.741887  2.3     s -
+Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER
+Neural Network                                0.9778     3.150214     1.4     s 6
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     3.8     s 2
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     3.8     s 3
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.6     s 4
+Hybrid System v40                             1.0000     0.000000     3.9     s 5
 ==============================================================================================================
 
 🎯 WINNER: Pure LLM (Enhanced)
@@ -383,7 +383,7 @@ Hybrid System v40                             1.0000     0.000000     3.9     s 
      • Neural Network: +0.0222 (2.3% better)
 
 ==============================================================================================================
-                                                  TEST 7/15                                                   
+                                                  TEST 7/15
 ==============================================================================================================
 
 ================================================================================
@@ -411,20 +411,20 @@ Data: 200 samples × 2 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.0s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               1.0000     0.000000     25.2    s 1      🏆 WINNER            
-Pure PySR                                     1.0000     0.000415     16.8    s 8                          
-Pure LLM (Basic)                              1.0000     0.000000     2.7     s 2                          
-Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 3                          
-Neural Network                                0.9910     188.217332   1.4     s 9                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 4                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 5                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 6                          
-Hybrid System v40                             1.0000     0.000000     4.0     s 7                          
+LLM-Guided PySR                               1.0000     0.000000     25.2    s 1      🏆 WINNER
+Pure PySR                                     1.0000     0.000415     16.8    s 8
+Pure LLM (Basic)                              1.0000     0.000000     2.7     s 2
+Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 3
+Neural Network                                0.9910     188.217332   1.4     s 9
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 4
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 5
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 6
+Hybrid System v40                             1.0000     0.000000     4.0     s 7
 ==============================================================================================================
 
 🎯 WINNER: LLM-Guided PySR
@@ -438,7 +438,7 @@ Hybrid System v40                             1.0000     0.000000     4.0     s 
      • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
 
 ==============================================================================================================
-                                                  TEST 8/15                                                   
+                                                  TEST 8/15
 ==============================================================================================================
 
 ================================================================================
@@ -466,20 +466,20 @@ Data: 200 samples × 3 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.0s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               -0.0257    28438508097774242758656.000000 18.4    s -                          
-Pure PySR                                     -0.0257    28438508097774242758656.000000 15.7    s -                          
-Pure LLM (Basic)                              1.0000     1278326705025671424.000000 2.6     s 6                          
-Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER            
-Neural Network                                0.1531     14507879500151070392320.000000 1.4     s 7                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.9     s 2                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 3                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 4                          
-Hybrid System v40                             1.0000     0.000000     4.0     s 5                          
+LLM-Guided PySR                               -0.0257    28438508097774242758656.000000 18.4    s -
+Pure PySR                                     -0.0257    28438508097774242758656.000000 15.7    s -
+Pure LLM (Basic)                              1.0000     1278326705025671424.000000 2.6     s 6
+Pure LLM (Enhanced)                           1.0000     0.000000     2.6     s 1      🏆 WINNER
+Neural Network                                0.1531     14507879500151070392320.000000 1.4     s 7
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.9     s 2
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 3
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 4
+Hybrid System v40                             1.0000     0.000000     4.0     s 5
 ==============================================================================================================
 
 🎯 WINNER: Pure LLM (Enhanced)
@@ -493,7 +493,7 @@ Hybrid System v40                             1.0000     0.000000     4.0     s 
      • Pure LLM (Basic): +0.0000 (0.0% better)
 
 ==============================================================================================================
-                                                  TEST 9/15                                                   
+                                                  TEST 9/15
 ==============================================================================================================
 
 ================================================================================
@@ -521,20 +521,20 @@ Data: 200 samples × 3 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.2s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               1.0000     0.000847     24.8    s 1      🏆 WINNER            
-Pure PySR                                     1.0000     0.000000     17.3    s 2                          
-Pure LLM (Basic)                              1.0000     0.000000     2.7     s 3                          
-Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 4                          
-Neural Network                                0.6513     95467.797473 2.3     s 9                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 5                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     3.9     s 6                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 7                          
-Hybrid System v40                             1.0000     0.000000     4.2     s 8                          
+LLM-Guided PySR                               1.0000     0.000847     24.8    s 1      🏆 WINNER
+Pure PySR                                     1.0000     0.000000     17.3    s 2
+Pure LLM (Basic)                              1.0000     0.000000     2.7     s 3
+Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 4
+Neural Network                                0.6513     95467.797473 2.3     s 9
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 5
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     3.9     s 6
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 7
+Hybrid System v40                             1.0000     0.000000     4.2     s 8
 ==============================================================================================================
 
 🎯 WINNER: LLM-Guided PySR
@@ -548,7 +548,7 @@ Hybrid System v40                             1.0000     0.000000     4.2     s 
      • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
 
 ==============================================================================================================
-                                                  TEST 10/15                                                  
+                                                  TEST 10/15
 ==============================================================================================================
 
 ================================================================================
@@ -576,20 +576,20 @@ Data: 200 samples × 1 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 3.9s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               1.0000     0.000171     25.0    s 7                          
-Pure PySR                                     0.9999     0.000213     15.9    s 8                          
-Pure LLM (Basic)                              1.0000     0.000000     3.3     s 1      🏆 WINNER            
-Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 2                          
-Neural Network                                0.9793     0.004223     1.4     s 9                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 3                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.3     s 4                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 5                          
-Hybrid System v40                             1.0000     0.000000     3.9     s 6                          
+LLM-Guided PySR                               1.0000     0.000171     25.0    s 7
+Pure PySR                                     0.9999     0.000213     15.9    s 8
+Pure LLM (Basic)                              1.0000     0.000000     3.3     s 1      🏆 WINNER
+Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 2
+Neural Network                                0.9793     0.004223     1.4     s 9
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 3
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.3     s 4
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 5
+Hybrid System v40                             1.0000     0.000000     3.9     s 6
 ==============================================================================================================
 
 🎯 WINNER: Pure LLM (Basic)
@@ -603,7 +603,7 @@ Hybrid System v40                             1.0000     0.000000     3.9     s 
      • Hybrid System v40: +0.0000 (0.0% better)
 
 ==============================================================================================================
-                                                  TEST 11/15                                                  
+                                                  TEST 11/15
 ==============================================================================================================
 
 ================================================================================
@@ -631,20 +631,20 @@ Data: 200 samples × 2 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 5.4s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               1.0000     0.000000     15.7    s 1      🏆 WINNER            
-Pure PySR                                     1.0000     0.000000     14.6    s 2                          
-Pure LLM (Basic)                              1.0000     0.000000     2.5     s 3                          
-Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 4                          
-Neural Network                                0.9908     0.002681     1.4     s 9                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 5                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.0     s 6                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     3.1     s 7                          
-Hybrid System v40                             1.0000     0.000000     5.4     s 8                          
+LLM-Guided PySR                               1.0000     0.000000     15.7    s 1      🏆 WINNER
+Pure PySR                                     1.0000     0.000000     14.6    s 2
+Pure LLM (Basic)                              1.0000     0.000000     2.5     s 3
+Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 4
+Neural Network                                0.9908     0.002681     1.4     s 9
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 5
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.0     s 6
+Integrated LLM Discovery v11.1                1.0000     0.000000     3.1     s 7
+Hybrid System v40                             1.0000     0.000000     5.4     s 8
 ==============================================================================================================
 
 🎯 WINNER: LLM-Guided PySR
@@ -658,7 +658,7 @@ Hybrid System v40                             1.0000     0.000000     5.4     s 
      • LLM+NN Ensemble (Smart): +0.0000 (0.0% better)
 
 ==============================================================================================================
-                                                  TEST 12/15                                                  
+                                                  TEST 12/15
 ==============================================================================================================
 
 ================================================================================
@@ -686,20 +686,20 @@ Data: 200 samples × 1 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.0s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               1.0000     0.000000     18.5    s 1      🏆 WINNER            
-Pure PySR                                     1.0000     0.000000     15.0    s 2                          
-Pure LLM (Basic)                              -0.6535    604.662668   2.5     s -                          
-Pure LLM (Enhanced)                           1.0000     0.000000     2.4     s 3                          
-Neural Network                                0.9047     138.550355   1.4     s 8                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     3.9     s 4                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     3.9     s 5                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.5     s 6                          
-Hybrid System v40                             1.0000     0.000000     4.0     s 7                          
+LLM-Guided PySR                               1.0000     0.000000     18.5    s 1      🏆 WINNER
+Pure PySR                                     1.0000     0.000000     15.0    s 2
+Pure LLM (Basic)                              -0.6535    604.662668   2.5     s -
+Pure LLM (Enhanced)                           1.0000     0.000000     2.4     s 3
+Neural Network                                0.9047     138.550355   1.4     s 8
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     3.9     s 4
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     3.9     s 5
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.5     s 6
+Hybrid System v40                             1.0000     0.000000     4.0     s 7
 ==============================================================================================================
 
 🎯 WINNER: LLM-Guided PySR
@@ -713,7 +713,7 @@ Hybrid System v40                             1.0000     0.000000     4.0     s 
      • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
 
 ==============================================================================================================
-                                                  TEST 13/15                                                  
+                                                  TEST 13/15
 ==============================================================================================================
 
 ================================================================================
@@ -741,20 +741,20 @@ Data: 200 samples × 2 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.5s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               1.0000     0.000000     18.8    s 1      🏆 WINNER            
-Pure PySR                                     1.0000     0.123008     19.0    s 8                          
-Pure LLM (Basic)                              1.0000     0.000000     3.1     s 2                          
-Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 3                          
-Neural Network                                0.9959     1104.808028  1.5     s 9                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 4                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.2     s 5                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     3.0     s 6                          
-Hybrid System v40                             1.0000     0.000000     4.5     s 7                          
+LLM-Guided PySR                               1.0000     0.000000     18.8    s 1      🏆 WINNER
+Pure PySR                                     1.0000     0.123008     19.0    s 8
+Pure LLM (Basic)                              1.0000     0.000000     3.1     s 2
+Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 3
+Neural Network                                0.9959     1104.808028  1.5     s 9
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 4
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.2     s 5
+Integrated LLM Discovery v11.1                1.0000     0.000000     3.0     s 6
+Hybrid System v40                             1.0000     0.000000     4.5     s 7
 ==============================================================================================================
 
 🎯 WINNER: LLM-Guided PySR
@@ -768,7 +768,7 @@ Hybrid System v40                             1.0000     0.000000     4.5     s 
      • Integrated LLM Discovery v11.1: +0.0000 (0.0% better)
 
 ==============================================================================================================
-                                                  TEST 14/15                                                  
+                                                  TEST 14/15
 ==============================================================================================================
 
 ================================================================================
@@ -796,20 +796,20 @@ Data: 200 samples × 2 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               1.0000     0.293465     17.2    s 8                          
-Pure PySR                                     1.0000     0.000244     14.8    s 7                          
-Pure LLM (Basic)                              1.0000     0.000000     2.6     s 1      🏆 WINNER            
-Pure LLM (Enhanced)                           1.0000     0.000000     2.8     s 2                          
-Neural Network                                0.9925     683.118254   1.4     s 9                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 3                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 4                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 5                          
-Hybrid System v40                             1.0000     0.000000     4.1     s 6                          
+LLM-Guided PySR                               1.0000     0.293465     17.2    s 8
+Pure PySR                                     1.0000     0.000244     14.8    s 7
+Pure LLM (Basic)                              1.0000     0.000000     2.6     s 1      🏆 WINNER
+Pure LLM (Enhanced)                           1.0000     0.000000     2.8     s 2
+Neural Network                                0.9925     683.118254   1.4     s 9
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.1     s 3
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 4
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.7     s 5
+Hybrid System v40                             1.0000     0.000000     4.1     s 6
 ==============================================================================================================
 
 🎯 WINNER: Pure LLM (Basic)
@@ -823,7 +823,7 @@ Hybrid System v40                             1.0000     0.000000     4.1     s 
      • Hybrid System v40: +0.0000 (0.0% better)
 
 ==============================================================================================================
-                                                  TEST 15/15                                                  
+                                                  TEST 15/15
 ==============================================================================================================
 
 ================================================================================
@@ -851,20 +851,20 @@ Data: 200 samples × 3 variables
 [9/9] Running Hybrid System v40... ✓ R²: 1.0000, RMSE: 0.0000, Time: 4.1s
 
 ==============================================================================================================
-                                              COMPARISON RESULTS                                              
+                                              COMPARISON RESULTS
 ==============================================================================================================
 
-Method                                        R²         RMSE         Time     Rank   Status              
+Method                                        R²         RMSE         Time     Rank   Status
 --------------------------------------------------------------------------------------------------------------
-LLM-Guided PySR                               0.9653     2437.630735  21.4    s 9                          
-Pure PySR                                     0.9653     2437.630724  17.3    s 8                          
-Pure LLM (Basic)                              1.0000     0.000000     2.9     s 1      🏆 WINNER            
-Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 2                          
-Neural Network                                0.9882     1560.658431  1.5     s 7                          
-LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 3                          
-LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 4                          
-Integrated LLM Discovery v11.1                1.0000     0.000000     2.2     s 5                          
-Hybrid System v40                             1.0000     0.000000     4.1     s 6                          
+LLM-Guided PySR                               0.9653     2437.630735  21.4    s 9
+Pure PySR                                     0.9653     2437.630724  17.3    s 8
+Pure LLM (Basic)                              1.0000     0.000000     2.9     s 1      🏆 WINNER
+Pure LLM (Enhanced)                           1.0000     0.000000     2.7     s 2
+Neural Network                                0.9882     1560.658431  1.5     s 7
+LLM+NN Ensemble (Simple)                      1.0000     0.000000     4.2     s 3
+LLM+NN Ensemble (Smart)                       1.0000     0.000000     4.1     s 4
+Integrated LLM Discovery v11.1                1.0000     0.000000     2.2     s 5
+Hybrid System v40                             1.0000     0.000000     4.1     s 6
 ==============================================================================================================
 
 🎯 WINNER: Pure LLM (Basic)
@@ -878,7 +878,7 @@ Hybrid System v40                             1.0000     0.000000     4.1     s 
      • Hybrid System v40: +0.0000 (0.0% better)
 
 ==============================================================================================================
-                                               OVERALL SUMMARY                                                
+                                               OVERALL SUMMARY
 ==============================================================================================================
 
 📊 Total tests: 15
@@ -915,4 +915,3 @@ Hybrid System v40                             1.0000     0.000000     4.1     s 
 💾 Results saved to: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/experiments/pyfigures/5_data/results/comparison_FIXED_20260124_164440.json
 
 ✅ Complete!
-

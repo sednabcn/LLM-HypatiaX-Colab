@@ -74,7 +74,7 @@ Looking at your LaTeX (Definition 9, line ~2233):
 ```latex
 \begin{definition}[Extrapolation Error]
 E_{\text{extrap}} = \frac{\text{RMSE}(\hat{f}, \mathcal{D}_{\text{extrap}})}
-                         {\text{RMSE}(\hat{f}, \mathcal{D}_{\text{train}})} 
+                         {\text{RMSE}(\hat{f}, \mathcal{D}_{\text{train}})}
                     \times 100\%
 \end{definition}
 ```
@@ -239,8 +239,8 @@ Neural Network  & Medium (2×)   & \textbf{3348×}  & 2995    & 7/15  & \\
 
 **Current** (line ~40):
 ```latex
-Neural networks similarly achieve perfect interpolation (15/15) yet exhibit 
-extreme extrapolation collapse, with errors reaching $3348\times$ despite 
+Neural networks similarly achieve perfect interpolation (15/15) yet exhibit
+extreme extrapolation collapse, with errors reaching $3348\times$ despite
 zero training error.
 ```
 
@@ -310,8 +310,8 @@ Error = 0.05 / 0.05 = 1.0× degradation (perfect)
 
 ### Recommended phrasing:
 ```latex
-HypatiaX v40 achieves \emph{perfect extrapolation} with degradation factor 
-$E_{\text{extrap}} = 1.00 \pm 0.00$ across all 14 successful cases, 
+HypatiaX v40 achieves \emph{perfect extrapolation} with degradation factor
+$E_{\text{extrap}} = 1.00 \pm 0.00$ across all 14 successful cases,
 indicating that extrapolation RMSE equals training RMSE.
 ```
 
@@ -344,7 +344,7 @@ This matches your abstract, is clearest for readers, and avoids the percentage a
 
 **Estimated time to fix**: 30-45 minutes
 - Equation update: 5 min
-- Find-replace: 10 min  
+- Find-replace: 10 min
 - Table updates: 15 min
 - Script fix + re-run: 10 min
 - Verification: 5 min

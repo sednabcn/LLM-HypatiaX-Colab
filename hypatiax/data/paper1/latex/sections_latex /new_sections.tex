@@ -71,10 +71,10 @@ def get_constant_range(X, y):
     """Determine appropriate constant search range"""
     y_scale = np.abs(y).max()
     X_scale = np.abs(X).max(axis=0)
-    
+
     # Estimate potential constant magnitudes
     ratio = y_scale / np.prod(X_scale)
-    
+
     # Search constants in range [ratio/1000, ratio*1000]
     return (ratio / 1000, ratio * 1000)
 \end{lstlisting}
@@ -164,7 +164,7 @@ from hypatiax import AutoSymbolicDiscovery
 discoverer = AutoSymbolicDiscovery()
 
 # Upload CSV data
-discoverer.load_data("experiment_results.csv", 
+discoverer.load_data("experiment_results.csv",
                      target="Young_modulus",
                      features=["grain_size", "temperature"])
 
@@ -300,7 +300,7 @@ Table~\ref{tab:hyperparameters} provides exhaustive configuration for all method
 \toprule
 \textbf{Method} & \textbf{Parameter} & \textbf{Value} \\
 \midrule
-\multirow{5}{*}{Neural Network} 
+\multirow{5}{*}{Neural Network}
 & Architecture & [64, 32, 1] \\
 & Activation & ReLU \\
 & Optimizer & Adam \\
@@ -496,7 +496,7 @@ P = n \times \left(T \times \frac{8.314}{V}\right)
         \item Issue: Gradient vanishing due to $10^{-11}$ scale
         \item Attempted solution: Log-transform → marginal improvement ($R^2 = 0.35$)
     \end{itemize}
-    
+
     \item \textbf{Hybrid v40}: $R^2 = -0.03$ (worse than baseline)
     \begin{itemize}
         \item Issue: PySR constant search range [$10^{-3}$, $10^3$] missed $G$

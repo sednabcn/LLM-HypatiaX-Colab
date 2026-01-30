@@ -118,14 +118,16 @@ def record_execution():
     # Create annotation for GitHub Actions
     if "GITHUB_STEP_SUMMARY" in os.environ:
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
-            f.write(f"""
+            f.write(
+                f"""
 ## Monthly CI Usage
 
 - **Used:** {usage["minutes_used"]} / {usage["minutes_limit"]} minutes
 - **Percentage:** {usage["percentage_used"]:.1f}%
 - **Remaining:** {usage["minutes_remaining"]} minutes
 - **Reset Date:** {usage["reset_date"]}
-""")
+"""
+            )
 
 
 # ============================================================================
@@ -245,9 +247,7 @@ def smart_test_selector():
         selection = (
             "all"
             if core_changed
-            else "critical"
-            if not domains_affected
-            else ",".join(domains_affected)
+            else "critical" if not domains_affected else ",".join(domains_affected)
         )
         with open(os.environ["GITHUB_OUTPUT"], "a") as f:
             f.write(f"test_selection={selection}\n")

@@ -30,14 +30,14 @@ jobs:
           VENV: ${{ github.event.inputs.venv_name }}
         run: |
           ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
-          
+
           VENV_NAME=${VENV:-venv-${PY_VER//./}}
-          
+
           ssh $USER@$HOST bash << 'ENDSSH'
             set -e
             PY_VER="$PY_VER"
             VENV_NAME="$VENV_NAME"
-            
+
             # Find Python
             PYTHON_CMD=""
             for cmd in python$PY_VER python${PY_VER%.*} python3; do
@@ -46,22 +46,22 @@ jobs:
                 break
               fi
             done
-            
+
             if [ -z "$PYTHON_CMD" ]; then
               echo "Python $PY_VER not found!"
               exit 1
             fi
-            
+
             # Create venv
             $PYTHON_CMD -m venv ~/$VENV_NAME
             source ~/$VENV_NAME/bin/activate
-            
+
             # Setup
             export TMPDIR=~/tmp_pip
             mkdir -p $TMPDIR
             pip install --upgrade pip setuptools wheel
             pip install pip-audit safety
-            
+
             echo "✓ Created: ~/$VENV_NAME"
             python --version
           ENDSSH

@@ -215,7 +215,7 @@ class FormulaInterpreter:
     ) -> str:
         """Build comprehensive interpretation prompt for LLM."""
 
-        prompt = f"""You are an expert in scientific formula interpretation and education. 
+        prompt = f"""You are an expert in scientific formula interpretation and education.
 Your task is to provide a complete, educational explanation of a discovered formula.
 
 DISCOVERED FORMULA:

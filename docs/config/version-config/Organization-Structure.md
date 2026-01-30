@@ -489,10 +489,10 @@ def test_with_versioning():
         "./scripts/version_management/workflows/pre_training_snapshot.sh",
         "pre_test"
     ])
-    
+
     # Run tests
     result = run_your_tests()
-    
+
     # Version if successful
     if result.success:
         subprocess.run([
@@ -510,7 +510,7 @@ steps:
     run: |
       source .env.versions
       ./scripts/version_management/utils/version_status.sh
-  
+
   - name: Run Tests
     run: |
       ./scripts/version_management/workflows/pre_training_snapshot.sh "ci_test"

@@ -89,34 +89,34 @@ Different appendices (ground truth formulas, statistical tests, per-equation bre
 So there's no update needed - your jmlr_paper.tex already has complete sections 7-9 and appendices. The other documents are from a separate paper.also results and discuusions.tex are updated te results from the paper..📅 WEEK 1: Debug & Infrastructure (Jan 21-25)
 Wednesday, January 21 - System Diagnosis
 Goal: Identify all bugs preventing experiments from running
-    • Hour 1: Run diagnostic tests 
+    • Hour 1: Run diagnostic tests
 bash
   python standalone_real_methods_test.py --protocol comparative --verbose
-    • Document all error messages 
-    • List which methods fail to initialize 
-    • Check configuration files 
-    • Hour 2: Fix Hybrid System v40 bug 
-        ◦ Locate method name issue: discover_validate_interpret → discover 
-        ◦ Update method calls in test harness 
-        ◦ Verify initialization succeeds 
-    • Hour 3: Fix Integrated LLM v12 bug 
-        ◦ Add missing config parameter 
-        ◦ Test initialization independently 
-        ◦ Document required configuration structure 
+    • Document all error messages
+    • List which methods fail to initialize
+    • Check configuration files
+    • Hour 2: Fix Hybrid System v40 bug
+        ◦ Locate method name issue: discover_validate_interpret → discover
+        ◦ Update method calls in test harness
+        ◦ Verify initialization succeeds
+    • Hour 3: Fix Integrated LLM v12 bug
+        ◦ Add missing config parameter
+        ◦ Test initialization independently
+        ◦ Document required configuration structure
 Deliverable: Bug fix report with verified initialization
 Thursday, January 22 - Test Infrastructure
 Goal: Get all methods running successfully
-    • Hour 1: Verify all baseline methods work 
-        ◦ Pure LLM (Enhanced) 
-        ◦ Neural Network baseline 
-        ◦ Pure PySR 
-        ◦ Test on 2-3 simple cases (Ohm's Law, Kinetic Energy) 
-    • Hour 2: Verify hybrid methods work 
-        ◦ Hybrid System v40 
-        ◦ Integrated LLM Discovery v12 
-        ◦ LLM-Guided variant 
-        ◦ Test on same simple cases 
-    • Hour 3: Create automated test runner 
+    • Hour 1: Verify all baseline methods work
+        ◦ Pure LLM (Enhanced)
+        ◦ Neural Network baseline
+        ◦ Pure PySR
+        ◦ Test on 2-3 simple cases (Ohm's Law, Kinetic Energy)
+    • Hour 2: Verify hybrid methods work
+        ◦ Hybrid System v40
+        ◦ Integrated LLM Discovery v12
+        ◦ LLM-Guided variant
+        ◦ Test on same simple cases
+    • Hour 3: Create automated test runner
 python
   # test_runner.py
   methods = [
@@ -130,7 +130,7 @@ python
 Deliverable: Working test harness for all methods
 Friday, January 23 - Extrapolation Test Suite
 Goal: Implement extrapolation error calculation
-    • Hour 1: Implement extrapolation data generation 
+    • Hour 1: Implement extrapolation data generation
 python
   def generate_extrapolation_data(X_train, formula, factor=2.0):
       """Generate test data 2x outside training range"""
@@ -138,33 +138,33 @@ python
       X_extrap = np.linspace(2*x_max, 4*x_max, 100)
       y_extrap = formula(X_extrap)
       return X_extrap, y_extrap
-    • Hour 2: Implement extrapolation error metric (Eq. 4 from paper) 
+    • Hour 2: Implement extrapolation error metric (Eq. 4 from paper)
 python
   def extrapolation_error(model, D_train, D_extrap):
       rmse_train = calculate_rmse(model, D_train)
       rmse_extrap = calculate_rmse(model, D_extrap)
       return (rmse_extrap / rmse_train) * 100
-    • Hour 3: Test metric on known formulas 
-        ◦ Linear: should have low error (~10-20%) 
-        ◦ LLM overfitting: should have high error (>100%) 
-        ◦ Verify against paper claims 
+    • Hour 3: Test metric on known formulas
+        ◦ Linear: should have low error (~10-20%)
+        ◦ LLM overfitting: should have high error (>100%)
+        ◦ Verify against paper claims
 Deliverable: Extrapolation test module with verification
 Saturday, January 24 - Ground Truth Test Suite
 Goal: Select and prepare 5 ground truth tests
-    • Hour 1: Select tests (must have known analytical solutions) 
-        1. Ohm's Law: V = IR 
-        2. Kinetic Energy: E = ½mv² 
-        3. Ideal Gas Law: PV = nRT 
-        4. Arrhenius Equation: k = A exp(-Ea/RT) 
-        5. Impermanent Loss: IL = (2√r/(1+r) - 1) × 100 
-    • Hour 2: Generate synthetic data for each test 
-        1. Add realistic noise (5-10%) 
-        2. Create training range [x_min, x_max] 
-        3. Create 3 extrapolation ranges (1.2×, 2×, 5×) 
-    • Hour 3: Document ground truth formulas 
-        1. LaTeX format for paper 
-        2. Python reference implementations 
-        3. Expected R² and extrapolation errors 
+    • Hour 1: Select tests (must have known analytical solutions)
+        1. Ohm's Law: V = IR
+        2. Kinetic Energy: E = ½mv²
+        3. Ideal Gas Law: PV = nRT
+        4. Arrhenius Equation: k = A exp(-Ea/RT)
+        5. Impermanent Loss: IL = (2√r/(1+r) - 1) × 100
+    • Hour 2: Generate synthetic data for each test
+        1. Add realistic noise (5-10%)
+        2. Create training range [x_min, x_max]
+        3. Create 3 extrapolation ranges (1.2×, 2×, 5×)
+    • Hour 3: Document ground truth formulas
+        1. LaTeX format for paper
+        2. Python reference implementations
+        3. Expected R² and extrapolation errors
 Deliverable: 5 ground truth test cases ready.Show more5:08 PMUpdated Section 7 (Results), Section 8 (Discussion), and Section 9 (Conclusion) Integration Plan
 Based on your documents, here's what needs to happen:
 
@@ -283,37 +283,37 @@ Section 9: Conclusion (Replace with Enhanced Version)
 Use the stronger conclusion from results_discussion.tex:
 latex\section{Conclusion}
 
-We have demonstrated that neural networks---despite achieving 93\% interpolation 
-accuracy---catastrophically fail when extrapolating beyond their training 
-distribution, with errors reaching 3348\% at merely 2× the training range 
-(p < 0.001, Cohen's d = 2.4). In contrast, our hybrid LLM-symbolic method 
-achieves perfect extrapolation (0\% error) across all regimes by discovering 
+We have demonstrated that neural networks---despite achieving 93\% interpolation
+accuracy---catastrophically fail when extrapolating beyond their training
+distribution, with errors reaching 3348\% at merely 2× the training range
+(p < 0.001, Cohen's d = 2.4). In contrast, our hybrid LLM-symbolic method
+achieves perfect extrapolation (0\% error) across all regimes by discovering
 true functional forms rather than memorizing patterns.
 
 These findings have profound implications for AI-driven scientific discovery:
 
 \begin{enumerate}
-    \item \textbf{Interpolation accuracy is not sufficient}: High R² on test 
+    \item \textbf{Interpolation accuracy is not sufficient}: High R² on test
           sets provides no guarantee of extrapolation capability.
-    
-    \item \textbf{Functional form recovery is essential}: Symbolic methods that 
-          discover correct mathematical structure enable reliable prediction in 
+
+    \item \textbf{Functional form recovery is essential}: Symbolic methods that
+          discover correct mathematical structure enable reliable prediction in
           novel regimes.
-    
-    \item \textbf{Hybrid approaches are necessary}: Combining LLM domain knowledge 
-          with symbolic regression optimization achieves qualitatively superior 
+
+    \item \textbf{Hybrid approaches are necessary}: Combining LLM domain knowledge
+          with symbolic regression optimization achieves qualitatively superior
           generalization.
 \end{enumerate}
 
-Our work provides both a rigorous evaluation framework (15 ground truth equations, 
-3 extrapolation regimes) and a production-ready implementation for LLM-guided 
-symbolic discovery. We anticipate this approach will enable scientific breakthroughs 
-in domains where reliable extrapolation is critical: predicting drug efficacy in 
-untested dosage ranges, forecasting climate under novel CO₂ concentrations, and 
+Our work provides both a rigorous evaluation framework (15 ground truth equations,
+3 extrapolation regimes) and a production-ready implementation for LLM-guided
+symbolic discovery. We anticipate this approach will enable scientific breakthroughs
+in domains where reliable extrapolation is critical: predicting drug efficacy in
+untested dosage ranges, forecasting climate under novel CO₂ concentrations, and
 designing materials with unprecedented properties.
 
-The code, data, and complete experimental protocol are available at 
-\url{https://github.com/hypatiax/llm-symbolic-discovery} to facilitate reproduction 
+The code, data, and complete experimental protocol are available at
+\url{https://github.com/hypatiax/llm-symbolic-discovery} to facilitate reproduction
 and extension of these results.
 
 Updated Appendices (Add from results_discussion.tex)

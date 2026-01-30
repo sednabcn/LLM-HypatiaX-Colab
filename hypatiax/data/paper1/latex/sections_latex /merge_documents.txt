@@ -120,9 +120,9 @@ These findings have profound implications for AI-driven scientific discovery:
 
 \begin{enumerate}
     \item \textbf{Interpolation accuracy is not sufficient}: High $R^2$ on test sets provides no guarantee of extrapolation capability.
-    
+
     \item \textbf{Functional form recovery is essential}: Symbolic methods that discover correct mathematical structure enable reliable prediction in novel regimes.
-    
+
     \item \textbf{Hybrid approaches are necessary}: Combining LLM domain knowledge with symbolic regression optimization achieves qualitatively superior generalization.
 \end{enumerate}
 

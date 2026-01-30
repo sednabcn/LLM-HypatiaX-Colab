@@ -70,7 +70,7 @@ Equation hint: Arrhenius Equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:01:05,049 - INFO - 
+2026-01-13 13:01:05,049 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -180,7 +180,7 @@ Equation hint: Henderson Hasselbalch
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:05:12,581 - INFO - 
+2026-01-13 13:05:12,581 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -210,7 +210,7 @@ Equation hint: Henderson Hasselbalch
 2026-01-13 13:08:17,439 - WARNING -    [WARNING] Possible overfit
 2026-01-13 13:08:17,440 - WARNING -       High complexity (129) but R2=0.9967
 2026-01-13 13:08:17,440 - INFO -    [BEST] New best!
-2026-01-13 13:08:17,440 - INFO - 
+2026-01-13 13:08:17,440 - INFO -
 [SYMBOLIC] Attempt 2/3 (seed=43)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -320,7 +320,7 @@ Equation hint: Nernst Equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:11:19,455 - INFO - 
+2026-01-13 13:11:19,455 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -345,7 +345,7 @@ Equation hint: Nernst Equation
 2026-01-13 13:11:26,467 - INFO -    Result: DISCOVERY_FAILED
 2026-01-13 13:11:26,467 - INFO -    R2 = 0.0000
 2026-01-13 13:11:26,467 - INFO -    [BEST] New best!
-2026-01-13 13:11:26,467 - INFO - 
+2026-01-13 13:11:26,467 - INFO -
 [SYMBOLIC] Attempt 2/3 (seed=43)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -369,7 +369,7 @@ Equation hint: Nernst Equation
    Improvement: -0.4910
 2026-01-13 13:11:33,850 - INFO -    Result: DISCOVERY_FAILED
 2026-01-13 13:11:33,850 - INFO -    R2 = 0.0000
-2026-01-13 13:11:33,850 - INFO - 
+2026-01-13 13:11:33,850 - INFO -
 [SYMBOLIC] Attempt 3/3 (seed=44)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -393,7 +393,7 @@ Equation hint: Nernst Equation
    Improvement: 6.8206
 2026-01-13 13:11:42,017 - INFO -    Result: DISCOVERY_FAILED
 2026-01-13 13:11:42,017 - INFO -    R2 = 0.0000
-2026-01-13 13:11:42,017 - WARNING - 
+2026-01-13 13:11:42,017 - WARNING -
 [WARNING] SymbolicEngine best R2=0.0000
 
 [OK] Discovery complete
@@ -476,7 +476,7 @@ Equation hint: Michaelis Menten
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:11:42,952 - INFO - 
+2026-01-13 13:11:42,952 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -574,7 +574,7 @@ Equation hint: Logistic Growth
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:11:50,757 - INFO - 
+2026-01-13 13:11:50,757 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -668,7 +668,7 @@ Equation hint: Allometric Scaling
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:11:58,928 - INFO - 
+2026-01-13 13:11:58,928 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -766,7 +766,7 @@ Equation hint: Pythagorean Theorem
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:12:09,600 - INFO - 
+2026-01-13 13:12:09,600 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -860,7 +860,7 @@ Equation hint: Compound Interest
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:12:18,168 - INFO - 
+2026-01-13 13:12:18,168 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -954,7 +954,7 @@ Equation hint: Quadratic Discriminant
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:12:25,953 - INFO - 
+2026-01-13 13:12:25,953 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1048,7 +1048,7 @@ Equation hint: Elasticity Demand
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:12:32,451 - INFO - 
+2026-01-13 13:12:32,451 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1142,7 +1142,7 @@ Equation hint: Cobb Douglas
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:12:40,131 - INFO - 
+2026-01-13 13:12:40,131 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1236,7 +1236,7 @@ Equation hint: Break Even Point
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 13:12:48,482 - INFO - 
+2026-01-13 13:12:48,482 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1275,79 +1275,79 @@ Equation hint: Break Even Point
    💾 Saved: economics_break_even_point.json
 
 ========================================================================================================================
-                                     INTEGRATED LLM-GUIDED DISCOVERY RESULTS v11.1                                      
+                                     INTEGRATED LLM-GUIDED DISCOVERY RESULTS v11.1
 ========================================================================================================================
-Test Name                                 R²    Val   Time LLM Mode         Status 
+Test Name                                 R²    Val   Time LLM Mode         Status
 ----------------------------------- -------- ------ ------ --------------- --------
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 BIOLOGY
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-biology_allometric_scaling            1.0000   91.3   10.9s hybrid_llm_only  ✅ PASS 
-biology_logistic_growth               1.0000   98.5    7.9s hybrid_llm_only  ✅ PASS 
-biology_michaelis_menten              1.0000   91.0    7.8s hybrid_llm_only  ✅ PASS 
+biology_allometric_scaling            1.0000   91.3   10.9s hybrid_llm_only  ✅ PASS
+biology_logistic_growth               1.0000   98.5    7.9s hybrid_llm_only  ✅ PASS
+biology_michaelis_menten              1.0000   91.0    7.8s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 CHEMISTRY
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-chemistry_arrhenius_equation          0.9994   39.0  269.0s hybrid_pysr_refined  ✅ PASS 
-chemistry_henderson_hasselbalch       0.9998   65.3  368.9s hybrid_pysr_refined  ✅ PASS 
-chemistry_nernst_equation             0.0000   94.5   23.5s hybrid_pysr_refined  ❌ FAIL 
+chemistry_arrhenius_equation          0.9994   39.0  269.0s hybrid_pysr_refined  ✅ PASS
+chemistry_henderson_hasselbalch       0.9998   65.3  368.9s hybrid_pysr_refined  ✅ PASS
+chemistry_nernst_equation             0.0000   94.5   23.5s hybrid_pysr_refined  ❌ FAIL
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ECONOMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-economics_break_even_point            1.0000   91.0    8.2s hybrid_llm_only  ✅ PASS 
-economics_cobb_douglas                1.0000   91.3    8.3s hybrid_llm_only  ✅ PASS 
-economics_elasticity_demand           1.0000   97.6    7.7s hybrid_llm_only  ✅ PASS 
+economics_break_even_point            1.0000   91.0    8.2s hybrid_llm_only  ✅ PASS
+economics_cobb_douglas                1.0000   91.3    8.3s hybrid_llm_only  ✅ PASS
+economics_elasticity_demand           1.0000   97.6    7.7s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ELECTROMAGNETISM
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-electromagnetism_coulomb_law          1.0000   91.3   10.9s hybrid_llm_only  ✅ PASS 
-electromagnetism_lorentz_force        1.0000  100.0    7.5s hybrid_llm_only  ✅ PASS 
-electromagnetism_ohms_law             1.0000  100.0    7.0s hybrid_llm_only  ✅ PASS 
+electromagnetism_coulomb_law          1.0000   91.3   10.9s hybrid_llm_only  ✅ PASS
+electromagnetism_lorentz_force        1.0000  100.0    7.5s hybrid_llm_only  ✅ PASS
+electromagnetism_ohms_law             1.0000  100.0    7.0s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 FLUID_DYNAMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-fluid_dynamics_bernoulli_equation     1.0000   91.3    8.7s hybrid_llm_only  ✅ PASS 
-fluid_dynamics_hagen_poiseuille       1.0000   90.4  251.6s hybrid_pysr_refined  ✅ PASS 
-fluid_dynamics_reynolds_number        1.0000   91.0    7.6s hybrid_llm_only  ✅ PASS 
+fluid_dynamics_bernoulli_equation     1.0000   91.3    8.7s hybrid_llm_only  ✅ PASS
+fluid_dynamics_hagen_poiseuille       1.0000   90.4  251.6s hybrid_pysr_refined  ✅ PASS
+fluid_dynamics_reynolds_number        1.0000   91.0    7.6s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 MATHEMATICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-mathematics_compound_interest         1.0000   90.4    7.8s hybrid_llm_only  ✅ PASS 
-mathematics_pythagorean_theorem       1.0000  100.0    8.5s hybrid_llm_only  ✅ PASS 
-mathematics_quadratic_discriminant    1.0000   99.4    6.5s hybrid_llm_only  ✅ PASS 
+mathematics_compound_interest         1.0000   90.4    7.8s hybrid_llm_only  ✅ PASS
+mathematics_pythagorean_theorem       1.0000  100.0    8.5s hybrid_llm_only  ✅ PASS
+mathematics_quadratic_discriminant    1.0000   99.4    6.5s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 MECHANICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-mechanics_gravitational_potential_energy   1.0000  100.0    7.7s hybrid_llm_only  ✅ PASS 
-mechanics_hookes_law                  0.9995   65.0  288.5s hybrid_pysr_refined  ✅ PASS 
-mechanics_kinetic_energy              1.0000  100.0   40.9s hybrid_llm_only  ✅ PASS 
+mechanics_gravitational_potential_energy   1.0000  100.0    7.7s hybrid_llm_only  ✅ PASS
+mechanics_hookes_law                  0.9995   65.0  288.5s hybrid_pysr_refined  ✅ PASS
+mechanics_kinetic_energy              1.0000  100.0   40.9s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 OPTICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-optics_single_slit_diffraction        1.0000   99.1   10.3s hybrid_llm_only  ✅ PASS 
-optics_snells_law                     1.0000  100.0   10.7s hybrid_llm_only  ✅ PASS 
-optics_thin_lens_equation             1.0000   89.5  274.5s hybrid_pysr_refined  ✅ PASS 
+optics_single_slit_diffraction        1.0000   99.1   10.3s hybrid_llm_only  ✅ PASS
+optics_snells_law                     1.0000  100.0   10.7s hybrid_llm_only  ✅ PASS
+optics_thin_lens_equation             1.0000   89.5  274.5s hybrid_pysr_refined  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 QUANTUM
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-quantum_compton_shift                 1.0000  100.0  658.9s hybrid_pysr_refined  ✅ PASS 
-quantum_de_broglie_wavelength         1.0000   86.5  657.9s hybrid_pysr_refined  ✅ PASS 
-quantum_photon_energy                 1.0000  100.0  243.4s hybrid_pysr_refined  ✅ PASS 
+quantum_compton_shift                 1.0000  100.0  658.9s hybrid_pysr_refined  ✅ PASS
+quantum_de_broglie_wavelength         1.0000   86.5  657.9s hybrid_pysr_refined  ✅ PASS
+quantum_photon_energy                 1.0000  100.0  243.4s hybrid_pysr_refined  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 THERMODYNAMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-thermodynamics_carnot_efficiency      1.0000   98.5    9.5s hybrid_llm_only  ✅ PASS 
-thermodynamics_heat_capacity          1.0000  100.0    8.2s hybrid_llm_only  ✅ PASS 
-thermodynamics_ideal_gas_law          1.0000   91.0   11.3s hybrid_llm_only  ✅ PASS 
+thermodynamics_carnot_efficiency      1.0000   98.5    9.5s hybrid_llm_only  ✅ PASS
+thermodynamics_heat_capacity          1.0000  100.0    8.2s hybrid_llm_only  ✅ PASS
+thermodynamics_ideal_gas_law          1.0000   91.0   11.3s hybrid_llm_only  ✅ PASS
 ========================================================================================================================
 
 SUMMARY: 29/30 passed (96.7%)
@@ -1356,4 +1356,4 @@ Avg R²: 0.9666 | Avg Val: 91.4 | Avg Time: 108.3s
 
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                  
+└─$

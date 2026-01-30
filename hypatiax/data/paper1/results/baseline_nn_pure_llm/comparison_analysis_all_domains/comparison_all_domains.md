@@ -1,8 +1,8 @@
-─$ python results/comparison_analysis_improved.py results/baseline_llm_PARSED.json results/baseline_nn_PARSED.json              
+─$ python results/comparison_analysis_improved.py results/baseline_llm_PARSED.json results/baseline_nn_PARSED.json
 ✅ Loaded LLM results from: results/baseline_llm_PARSED.json
 ✅ Loaded NN results from: results/baseline_nn_PARSED.json
 ====================================================================================================
-                            GENERATING COMPREHENSIVE COMPARISON ANALYSIS                            
+                            GENERATING COMPREHENSIVE COMPARISON ANALYSIS
 ====================================================================================================
 
 📊 Creating comparison tables...
@@ -18,7 +18,7 @@
 ✅ Saved: results/comparison_analysis/summary_tables.txt
 
 ====================================================================================================
-                                         SUMMARY STATISTICS                                         
+                                         SUMMARY STATISTICS
 ====================================================================================================
 
 Overall Performance:
@@ -41,7 +41,7 @@ Performance by Quality:
     NN:  19/20 (95.0%)
 
 ====================================================================================================
-                                      DOMAIN-SPECIFIC ANALYSIS                                      
+                                      DOMAIN-SPECIFIC ANALYSIS
 ====================================================================================================
 
 CHEMISTRY:
@@ -75,7 +75,7 @@ THERMODYNAMICS:
   Advantage:   +0.0028 (LLM wins)
 
 ====================================================================================================
-                                         CRITICAL INSIGHTS                                          
+                                         CRITICAL INSIGHTS
 ====================================================================================================
 
 ⚠  Cases where NN has advantage (R² diff < -0.1):
@@ -83,7 +83,7 @@ THERMODYNAMICS:
     NN: 0.9969 vs LLM: -3.0003 (Δ = -3.9972)
 
 ====================================================================================================
-                                          FAILURE ANALYSIS                                          
+                                          FAILURE ANALYSIS
 ====================================================================================================
 
 LLM Failures (R² < 0.80): 1/20
@@ -98,7 +98,7 @@ NN Failures (R² < 0.80): 0/20
     • Henderson-Hasselbalch equation: pH of buffer solut: R² = -3.0003
 
 ====================================================================================================
-                                          RECOMMENDATIONS                                           
+                                          RECOMMENDATIONS
 ====================================================================================================
 
 💡 Based on the analysis:
@@ -128,4 +128,3 @@ Generated files:
   • domain_comparison.png
   • formula_type_comparison.png
   • extrapolation_analysis.png
-

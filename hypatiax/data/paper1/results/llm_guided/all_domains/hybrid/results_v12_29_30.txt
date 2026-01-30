@@ -39,7 +39,7 @@ Equation hint: ohms_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 16:34:11,280 - INFO - 
+2026-01-14 16:34:11,280 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -50,7 +50,7 @@ Equation hint: ohms_law
 2026-01-14 16:34:12,361 - INFO -    Result: DISCOVERY_FAILED
 2026-01-14 16:34:12,361 - INFO -    R² = 0.0000
 2026-01-14 16:34:12,362 - INFO -    [BEST] New best!
-2026-01-14 16:34:12,363 - INFO - 
+2026-01-14 16:34:12,363 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 
 [DISCOVERY] Starting symbolic regression...
@@ -60,7 +60,7 @@ Equation hint: ohms_law
    ❌ Discovery failed: Variable name I is already a function name.
 2026-01-14 16:34:12,370 - INFO -    Result: DISCOVERY_FAILED
 2026-01-14 16:34:12,371 - INFO -    R² = 0.0000
-2026-01-14 16:34:12,372 - INFO - 
+2026-01-14 16:34:12,372 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 
 [DISCOVERY] Starting symbolic regression...
@@ -70,7 +70,7 @@ Equation hint: ohms_law
    ❌ Discovery failed: Variable name I is already a function name.
 2026-01-14 16:34:12,375 - INFO -    Result: DISCOVERY_FAILED
 2026-01-14 16:34:12,375 - INFO -    R² = 0.0000
-2026-01-14 16:34:12,375 - INFO - 
+2026-01-14 16:34:12,375 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 
 [DISCOVERY] Starting symbolic regression...
@@ -80,7 +80,7 @@ Equation hint: ohms_law
    ❌ Discovery failed: Variable name I is already a function name.
 2026-01-14 16:34:12,378 - INFO -    Result: DISCOVERY_FAILED
 2026-01-14 16:34:12,378 - INFO -    R² = 0.0000
-2026-01-14 16:34:12,378 - INFO - 
+2026-01-14 16:34:12,378 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 
 [DISCOVERY] Starting symbolic regression...
@@ -90,7 +90,7 @@ Equation hint: ohms_law
    ❌ Discovery failed: Variable name I is already a function name.
 2026-01-14 16:34:12,381 - INFO -    Result: DISCOVERY_FAILED
 2026-01-14 16:34:12,381 - INFO -    R² = 0.0000
-2026-01-14 16:34:12,382 - WARNING - 
+2026-01-14 16:34:12,382 - WARNING -
 [WARNING] SymbolicEngine best R²=0.0000
 
 [OK] Discovery complete
@@ -146,16 +146,16 @@ v4.2 TEST COMPLETE - All features verified!
 ================================================================================
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                                                                              
+└─$
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                                                                              
+└─$
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                                                                              
+└─$
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/tools/symbolic/hybrid_system_v42.py                                                                          
+└─$ python hypatiax/tools/symbolic/hybrid_system_v42.py
 ================================================================================
 HYBRID SYSTEM v4.2 - QUICK TEST
 ================================================================================
@@ -198,7 +198,7 @@ Equation hint: ohms_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 16:45:20,613 - INFO - 
+2026-01-14 16:45:20,613 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 
 [DISCOVERY] Starting symbolic regression...
@@ -277,7 +277,7 @@ v4.2 TEST COMPLETE - All features verified!
 📄 Loading DeFi Protocol v3.0...
 
 ================================================================================
-                            DEFI PROTOCOL STATISTICS                            
+                            DEFI PROTOCOL STATISTICS
 ================================================================================
 Total tests: 20
 Extrapolation tests: 6
@@ -353,7 +353,7 @@ Equation hint: Impermanent Loss
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 17:04:01,880 - INFO - 
+2026-01-14 17:04:01,880 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -367,7 +367,7 @@ Equation hint: Impermanent Loss
 2026-01-14 17:04:11,344 - WARNING -    [WARNING] Possible overfit
 2026-01-14 17:04:11,344 - WARNING -       High complexity (41) but R²=0.9704
 2026-01-14 17:04:11,345 - INFO -    [BEST] New best!
-2026-01-14 17:04:11,345 - INFO - 
+2026-01-14 17:04:11,345 - INFO -
 [SYMBOLIC] Attempt 2/3 (seed=43)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -409,20 +409,20 @@ Equation hint: Impermanent Loss
 ✅ Test passed!
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                                                                              
+└─$
 (emacs:4807): GLib-CRITICAL **: 17:10:05.838: Source ID 23915 was not found when attempting to remove it
 
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ mc                                                                                                                           
+└─$ mc
 
-                                                                                                                                 
-┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]                                                           
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
 └─$ python hypatiax/core/generation/hybrid_llm_guide_validation/llm_guided_symbolic_discovery_v12.py --protocol ALL --batch --mode hybrid --niterations 50
-✅ Using integrated SymbolicEngineWithLLM v20                                                                                    
-✅ Loaded Protocol ALL from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/core/generation/hybrid_llm_guide_validation/experiment_protocol_all_30.py                                                                                                 
-✅ Converted 30 test cases from protocol                                                                                         
-                                                                                                                                 
+✅ Using integrated SymbolicEngineWithLLM v20
+✅ Loaded Protocol ALL from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/core/generation/hybrid_llm_guide_validation/experiment_protocol_all_30.py
+✅ Converted 30 test cases from protocol
+
 ================================================================================
 INTEGRATED LLM-GUIDED DISCOVERY v11.1 - Protocol ALL
 ================================================================================
@@ -487,7 +487,7 @@ Equation hint: Kinetic Energy
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:39:56,095 - INFO - 
+2026-01-14 18:39:56,095 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -583,7 +583,7 @@ Equation hint: Gravitational Potential Energy
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:40:05,608 - INFO - 
+2026-01-14 18:40:05,608 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -679,7 +679,7 @@ Equation hint: Hookes Law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:42:04,412 - INFO - 
+2026-01-14 18:42:04,412 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -787,7 +787,7 @@ Equation hint: Ideal Gas Law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:48:06,342 - INFO - 
+2026-01-14 18:48:06,342 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -883,7 +883,7 @@ Equation hint: Heat Capacity
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:48:15,062 - INFO - 
+2026-01-14 18:48:15,062 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -979,7 +979,7 @@ Equation hint: Carnot Efficiency
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:48:23,983 - INFO - 
+2026-01-14 18:48:23,983 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1075,7 +1075,7 @@ Equation hint: Coulomb Law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:48:32,385 - INFO - 
+2026-01-14 18:48:32,385 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1175,7 +1175,7 @@ Equation hint: Ohms Law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:48:40,885 - INFO - 
+2026-01-14 18:48:40,885 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1271,7 +1271,7 @@ Equation hint: Lorentz Force
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:48:47,849 - INFO - 
+2026-01-14 18:48:47,849 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1367,7 +1367,7 @@ Equation hint: Bernoulli Equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:48:55,206 - INFO - 
+2026-01-14 18:48:55,206 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1463,7 +1463,7 @@ Equation hint: Reynolds Number
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:49:03,692 - INFO - 
+2026-01-14 18:49:03,692 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1559,7 +1559,7 @@ Equation hint: Hagen Poiseuille
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:49:11,962 - INFO - 
+2026-01-14 18:49:11,962 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1655,7 +1655,7 @@ Equation hint: Thin Lens Equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:49:21,399 - INFO - 
+2026-01-14 18:49:21,399 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1763,7 +1763,7 @@ Equation hint: Snells Law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:52:56,370 - INFO - 
+2026-01-14 18:52:56,370 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1859,7 +1859,7 @@ Equation hint: Single Slit Diffraction
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:53:04,065 - INFO - 
+2026-01-14 18:53:04,065 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -1963,7 +1963,7 @@ Equation hint: Photon Energy
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:53:12,277 - INFO - 
+2026-01-14 18:53:12,277 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -2091,7 +2091,7 @@ Equation hint: De Broglie Wavelength
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:56:01,354 - INFO - 
+2026-01-14 18:56:01,354 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -2212,7 +2212,7 @@ Equation hint: Compton Shift
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 18:59:23,799 - INFO - 
+2026-01-14 18:59:23,799 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -2322,7 +2322,7 @@ Equation hint: Arrhenius Equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:02:52,288 - INFO - 
+2026-01-14 19:02:52,288 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -2422,7 +2422,7 @@ Equation hint: Henderson Hasselbalch
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:02:59,927 - INFO - 
+2026-01-14 19:02:59,927 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -2456,7 +2456,7 @@ Equation hint: Henderson Hasselbalch
 2026-01-14 19:06:41,708 - WARNING -    [WARNING] Possible overfit
 2026-01-14 19:06:41,708 - WARNING -       High complexity (149) but R²=0.9980
 2026-01-14 19:06:41,709 - INFO -    [BEST] New best!
-2026-01-14 19:06:41,709 - INFO - 
+2026-01-14 19:06:41,709 - INFO -
 [SYMBOLIC] Attempt 2/3 (seed=43)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -2568,7 +2568,7 @@ Equation hint: Nernst Equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:10:08,895 - INFO - 
+2026-01-14 19:10:08,895 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -2680,7 +2680,7 @@ Equation hint: Michaelis Menten
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:13:26,015 - INFO - 
+2026-01-14 19:13:26,015 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -2780,7 +2780,7 @@ Equation hint: Logistic Growth
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:13:33,767 - INFO - 
+2026-01-14 19:13:33,767 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -2876,7 +2876,7 @@ Equation hint: Allometric Scaling
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:13:41,589 - INFO - 
+2026-01-14 19:13:41,589 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -2976,7 +2976,7 @@ Equation hint: Pythagorean Theorem
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:13:52,097 - INFO - 
+2026-01-14 19:13:52,097 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -3072,7 +3072,7 @@ Equation hint: Compound Interest
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:14:00,327 - INFO - 
+2026-01-14 19:14:00,327 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -3168,7 +3168,7 @@ Equation hint: Quadratic Discriminant
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:14:09,408 - INFO - 
+2026-01-14 19:14:09,408 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -3264,7 +3264,7 @@ Equation hint: Elasticity Demand
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:14:16,017 - INFO - 
+2026-01-14 19:14:16,017 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -3365,7 +3365,7 @@ Equation hint: Cobb Douglas
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:14:24,438 - INFO - 
+2026-01-14 19:14:24,438 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -3461,7 +3461,7 @@ Equation hint: Break Even Point
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-14 19:14:32,850 - INFO - 
+2026-01-14 19:14:32,850 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -3502,79 +3502,79 @@ Equation hint: Break Even Point
    💾 Saved: economics_break_even_point.json
 
 ========================================================================================================================
-                                     INTEGRATED LLM-GUIDED DISCOVERY RESULTS v11.1                                      
+                                     INTEGRATED LLM-GUIDED DISCOVERY RESULTS v11.1
 ========================================================================================================================
-Test Name                                 R²    Val   Time LLM Mode         Status 
+Test Name                                 R²    Val   Time LLM Mode         Status
 ----------------------------------- -------- ------ ------ --------------- --------
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 BIOLOGY
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-biology_allometric_scaling            1.0000   91.3   10.6s hybrid_llm_only  ✅ PASS 
-biology_logistic_growth               1.0000   98.5    7.8s hybrid_llm_only  ✅ PASS 
-biology_michaelis_menten              1.0000   91.0    8.1s hybrid_llm_only  ✅ PASS 
+biology_allometric_scaling            1.0000   91.3   10.6s hybrid_llm_only  ✅ PASS
+biology_logistic_growth               1.0000   98.5    7.8s hybrid_llm_only  ✅ PASS
+biology_michaelis_menten              1.0000   91.0    8.1s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 CHEMISTRY
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-chemistry_arrhenius_equation          1.0000   88.6    7.4s hybrid_llm_only  ✅ PASS 
-chemistry_henderson_hasselbalch       0.9990   91.3  429.3s hybrid_pysr_better  ✅ PASS 
-chemistry_nernst_equation             1.0000  100.0  196.7s hybrid_pysr_better  ✅ PASS 
+chemistry_arrhenius_equation          1.0000   88.6    7.4s hybrid_llm_only  ✅ PASS
+chemistry_henderson_hasselbalch       0.9990   91.3  429.3s hybrid_pysr_better  ✅ PASS
+chemistry_nernst_equation             1.0000  100.0  196.7s hybrid_pysr_better  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ECONOMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-economics_break_even_point            1.0000   91.0    8.8s hybrid_llm_only  ✅ PASS 
-economics_cobb_douglas                1.0000   91.3    8.4s hybrid_llm_only  ✅ PASS 
-economics_elasticity_demand           1.0000   92.1    8.5s hybrid_llm_only  ✅ PASS 
+economics_break_even_point            1.0000   91.0    8.8s hybrid_llm_only  ✅ PASS
+economics_cobb_douglas                1.0000   91.3    8.4s hybrid_llm_only  ✅ PASS
+economics_elasticity_demand           1.0000   92.1    8.5s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ELECTROMAGNETISM
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-electromagnetism_coulomb_law          1.0000   91.3    8.5s hybrid_llm_only  ✅ PASS 
-electromagnetism_lorentz_force        1.0000  100.0    7.5s hybrid_llm_only  ✅ PASS 
-electromagnetism_ohms_law             1.0000  100.0    6.7s hybrid_llm_only  ✅ PASS 
+electromagnetism_coulomb_law          1.0000   91.3    8.5s hybrid_llm_only  ✅ PASS
+electromagnetism_lorentz_force        1.0000  100.0    7.5s hybrid_llm_only  ✅ PASS
+electromagnetism_ohms_law             1.0000  100.0    6.7s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 FLUID_DYNAMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-fluid_dynamics_bernoulli_equation     1.0000   91.3    8.5s hybrid_llm_only  ✅ PASS 
-fluid_dynamics_hagen_poiseuille       1.0000   89.5    9.4s hybrid_llm_only  ✅ PASS 
-fluid_dynamics_reynolds_number        1.0000   91.0    8.3s hybrid_llm_only  ✅ PASS 
+fluid_dynamics_bernoulli_equation     1.0000   91.3    8.5s hybrid_llm_only  ✅ PASS
+fluid_dynamics_hagen_poiseuille       1.0000   89.5    9.4s hybrid_llm_only  ✅ PASS
+fluid_dynamics_reynolds_number        1.0000   91.0    8.3s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 MATHEMATICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-mathematics_compound_interest         1.0000   90.4    9.0s hybrid_llm_only  ✅ PASS 
-mathematics_pythagorean_theorem       1.0000  100.0    8.2s hybrid_llm_only  ✅ PASS 
-mathematics_quadratic_discriminant    1.0000   99.4    6.6s hybrid_llm_only  ✅ PASS 
+mathematics_compound_interest         1.0000   90.4    9.0s hybrid_llm_only  ✅ PASS
+mathematics_pythagorean_theorem       1.0000  100.0    8.2s hybrid_llm_only  ✅ PASS
+mathematics_quadratic_discriminant    1.0000   99.4    6.6s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 MECHANICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-mechanics_gravitational_potential_energy   1.0000  100.0  118.9s hybrid_llm_only  ✅ PASS 
-mechanics_hookes_law                  0.9997   12.1  360.3s hybrid_pysr_better  ❌ FAIL 
-mechanics_kinetic_energy              1.0000  100.0   24.3s hybrid_llm_only  ✅ PASS 
+mechanics_gravitational_potential_energy   1.0000  100.0  118.9s hybrid_llm_only  ✅ PASS
+mechanics_hookes_law                  0.9997   12.1  360.3s hybrid_pysr_better  ❌ FAIL
+mechanics_kinetic_energy              1.0000  100.0   24.3s hybrid_llm_only  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 OPTICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-optics_single_slit_diffraction        1.0000   99.1    8.1s hybrid_llm_only  ✅ PASS 
-optics_snells_law                     1.0000  100.0    8.0s hybrid_llm_only  ✅ PASS 
-optics_thin_lens_equation             1.0000   90.4  214.6s hybrid_pysr_better  ✅ PASS 
+optics_single_slit_diffraction        1.0000   99.1    8.1s hybrid_llm_only  ✅ PASS
+optics_snells_law                     1.0000  100.0    8.0s hybrid_llm_only  ✅ PASS
+optics_thin_lens_equation             1.0000   90.4  214.6s hybrid_pysr_better  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 QUANTUM
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-quantum_compton_shift                 1.0000  100.0  208.4s hybrid_pysr_better  ✅ PASS 
-quantum_de_broglie_wavelength         1.0000   85.6  202.4s hybrid_pysr_better  ✅ PASS 
-quantum_photon_energy                 1.0000  100.0  169.1s hybrid_pysr_better  ✅ PASS 
+quantum_compton_shift                 1.0000  100.0  208.4s hybrid_pysr_better  ✅ PASS
+quantum_de_broglie_wavelength         1.0000   85.6  202.4s hybrid_pysr_better  ✅ PASS
+quantum_photon_energy                 1.0000  100.0  169.1s hybrid_pysr_better  ✅ PASS
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 THERMODYNAMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-thermodynamics_carnot_efficiency      1.0000   98.5    9.3s hybrid_llm_only  ✅ PASS 
-thermodynamics_heat_capacity          1.0000  100.0    8.0s hybrid_llm_only  ✅ PASS 
-thermodynamics_ideal_gas_law          1.0000   91.0   10.0s hybrid_llm_only  ✅ PASS 
+thermodynamics_carnot_efficiency      1.0000   98.5    9.3s hybrid_llm_only  ✅ PASS
+thermodynamics_heat_capacity          1.0000  100.0    8.0s hybrid_llm_only  ✅ PASS
+thermodynamics_ideal_gas_law          1.0000   91.0   10.0s hybrid_llm_only  ✅ PASS
 ========================================================================================================================
 
 SUMMARY: 29/30 passed (96.7%)
@@ -3583,4 +3583,4 @@ Avg R²: 1.0000 | Avg Val: 92.2 | Avg Time: 70.0s
 
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                                                                 
+└─$

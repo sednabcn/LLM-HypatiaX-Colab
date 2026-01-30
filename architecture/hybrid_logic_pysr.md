@@ -28,7 +28,7 @@ Recognizes that quantum problems are harder
 2. Diagnostic Tool - Shows what's actually happening
 Run diagnostics:
 bashpython diagnostic.py quantum    # Shows quantum scaling problem
-python diagnostic.py llm        # Shows LLM integration issue  
+python diagnostic.py llm        # Shows LLM integration issue
 python diagnostic.py compare    # Compares modes side-by-side
 python diagnostic.py analyze results.json  # Analyzes your results
 The Root Causes
@@ -124,7 +124,7 @@ How to Choose
 bash# Quick exploration - try LLM first
 python 5_all_new.py --test bernoulli --mode hybrid
 
-# Conservative - PySR with safety net  
+# Conservative - PySR with safety net
 python 5_all_new.py --test bernoulli --mode fallback
 
 # Let LLM guide PySR's search
@@ -136,11 +136,11 @@ The Problem You Discovered
 Your results showed none and hybrid were identical because:
 python# In hybrid_system_v40.py (line ~94):
 self.symbolic_engine = SymbolicEngine(symbolic_config, domain=domain)
-#                      ^^^^^^^^^^^^^^ 
+#                      ^^^^^^^^^^^^^^
 #                      This is the BASE class without LLM!
 It should be:
 pythonself.symbolic_engine = SymbolicEngineWithLLM(symbolic_config, domain=domain, ...)
-#                      ^^^^^^^^^^^^^^^^^^^^^ 
+#                      ^^^^^^^^^^^^^^^^^^^^^
 #                      This one has LLM capabilities!
 That's why my fix includes the FixedHybridSystemWrapper - it patches the system to actually use the LLM-enabled engine.
 Quick Test to Verify LLM is Working
@@ -154,7 +154,7 @@ python fixed_suite_v24.py --test bernoulli_equation --mode none --iterations 30
 python fixed_suite_v24.py --test bernoulli_equation --mode hybrid --iterations 30
 The hybrid mode should finish faster and might find the answer in fewer iterations!
 Would you like me to create a simple comparison script that runs the same test in all 4 modes side-by-side?──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python experiments/generation/tests/fixed_suite_v24.py --all --mode hybrid --iterations 50                                   
+└─$ python experiments/generation/tests/fixed_suite_v24.py --all --mode hybrid --iterations 50
 
 ================================================================================
 RUNNING COMPREHENSIpasted9:48 AMWow! 🎉 The LLM is working PERFECTLY now! Look at these amazing results:
@@ -251,9 +251,9 @@ This is the "fast first pass" logic:
 pythondef _discover_hybrid(self, X, y, variable_names, equation_name, random_state, **kwargs) -> Dict:
     """Try LLM first, refine with PySR if needed."""
     print("\n[HYBRID MODE] LLM first, PySR refinement...")
-    
+
     start_time = time.time()
-    
+
     # ==========================================
     # PHASE 1: LLM FAST FIRST PASS (5-10 seconds)
     # ==========================================
@@ -264,21 +264,21 @@ pythondef _discover_hybrid(self, X, y, variable_names, equation_name, random_sta
         description=equation_name or "unknown",
         data_patterns=patterns
     )
-    
+
     llm_time = time.time() - start_time
-    
+
     if not hypotheses:
         print("   ⚠️  No LLM hypotheses, falling back to PySR")
         result = super().discover(X, y, variable_names, equation_name, random_state, **kwargs)
         return result
-    
+
     # Evaluate LLM hypotheses
     best_hyp = self._evaluate_hypotheses(hypotheses, X, y, variable_names)
-    
+
     print(f"   LLM best: {best_hyp.equation}")
     print(f"   LLM R²: {best_hyp.r2_score:.4f}")
     print(f"   LLM time: {llm_time:.2f}s")
-    
+
     # ==========================================
     # DECISION POINT: Is LLM good enough?
     # ==========================================
@@ -290,7 +290,7 @@ pythondef _discover_hybrid(self, X, y, variable_names, equation_name, random_sta
             # ... LLM-only result
             "llm_mode": "hybrid_llm_only",  # ← This appeared in your output!
         }
-    
+
     # ==========================================
     # PHASE 2: EXPENSIVE PYSR REFINEMENT (50+ seconds)
     # ==========================================
@@ -298,23 +298,23 @@ pythondef _discover_hybrid(self, X, y, variable_names, equation_name, random_sta
     pysr_start = time.time()
     pysr_result = super().discover(X, y, variable_names, equation_name, random_state, **kwargs)
     pysr_time = time.time() - pysr_start
-    
+
     return pysr_result  # Returns refined result
 Location 2: generate_hypotheses() method (Lines ~160-180)
 This is where the LLM actually calls Claude:
-pythondef generate_hypotheses(self, domain: str, variables: List[str], 
+pythondef generate_hypotheses(self, domain: str, variables: List[str],
                        description: str, data_patterns: Dict,
                        n_candidates: int = None) -> List[EquationHypothesis]:
     """Generate equation hypotheses using LLM."""
-    
+
     if not self.config.enabled or not self.client:
         return []
-    
+
     n_candidates = n_candidates or self.config.n_candidates
-    
+
     # Build the prompt
     prompt = self._build_prompt(domain, variables, description, data_patterns, n_candidates)
-    
+
     try:
         # ==========================================
         # THIS IS WHERE CLAUDE API IS CALLED!
@@ -340,18 +340,18 @@ pythondef _call_llm(self, prompt: str) -> str:
 This file doesn't do the LLM work, but it calls the symbolic engine:
 pythondef _discover_with_retry(self, X, y, variable_names, ...):
     """Discover with retry."""
-    
+
     for attempt in range(self.max_retries):
         # ==========================================
         # THIS CALLS symbolic_engine.discover()
         # Which triggers the LLM hybrid logic!
         # ==========================================
         result = self.symbolic_engine.discover(
-            X, y, variable_names, 
-            equation_name=equation_name, 
+            X, y, variable_names,
+            equation_name=equation_name,
             random_state=seed
         )
-        
+
         # ... retry logic
 ```
 

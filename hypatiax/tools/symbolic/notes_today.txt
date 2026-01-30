@@ -50,13 +50,13 @@ class SymbolicEngineWithLLM(SymbolicEngine):
         X, y, safe_names, _, mapping = auto_sanitize_discovery_input(
             X, y, variable_names, verbose=True
         )
-        
+
         # Continue with discovery using safe_names
         result = super().discover(X, y, safe_names, **kwargs)
-        
+
         # Store mapping for reference
         result['variable_name_mapping'] = mapping
-        
+
         return result
 3. LLM Discovery System Integration
 Add to llm_guided_symbolic_discovery_v11.py:
@@ -70,15 +70,15 @@ class IntegratedLLMDiscovery:
             ground_truth=test_config.get('ground_truth'),
             verbose=True
         )
-        
+
         # Use safe_names for discovery
         result = discoverer.discover(
             X, y, safe_names, ...
         )
-        
+
         if mapping:
             result['sanitization_applied'] = mapping
-        
+
         return result
 4. Protocol Validation Tool
 Run on your protocols:
@@ -141,7 +141,7 @@ except ImportError:
 # ============================================================================
 # VARIABLE NAME VALIDATOR (INTEGRAexperiment_protocol_all_30_v2.2.pyCode ∙ Version 6 class SymbolicEngine:
     """Base Symbolic Regression Engine using PySR with integrated variable name validation."""
-    
+
     def __init__(self, config: DiscoveryConfig, domain: str = "general"):
         """Initialize symbolic engine."""
         selfexperiment_protocol_all_30_v2.2.pyCode ∙ Version 7     def discover(
@@ -165,30 +165,30 @@ except ImportError:
                     "complexity": 0,
                     "experiment_protocol_all_30_v2.2.pyCode ∙ Version 10 class SymbolicEngineWithLLM(SymbolicEngine):
     """Symbolic Engine v20 - Integrated LLM guidance + Variable Name Validation."""
-    
+
     def __init__(
         self,
         config: DiscoveryConfig,
         domain: str = "general",
-        llm_configexperiment_protocol_all_30_v2.2.pyCode ∙ Version 11         
+        llm_configexperiment_protocol_all_30_v2.2.pyCode ∙ Version 11 
         elif self.llm_mode == "seed":
-            return self._discover_with_llm_seed(X, y, variable_names, equation_name, 
+            return self._discover_with_llm_seed(X, y, variable_names, equation_name,
                                                random_state, auto_sanitize, **kwargs)
-        
+
         elif self.llm_experiment_protocol_all_30_v2.2.pyCode ∙ Version 12         """Use LLM to configure PySR operators."""
         print("\n[LLM SEED MODE] Using LLM to configure PySR...")
-        
+
         # Validate variable names first
         safe_names, name_mapping = self.validate_variable_names(
             variablexperiment_protocol_all_30_v2.2.pyCode ∙ Version 13         """Try LLM first, refine with PySR if needed."""
         print("\n[HYBRID MODE] LLM first, PySR refinement...")
-        
+
         start_time = time.time()
-        
+
         # Validate variable names first
         safe_names, name_mapping = selfexperiment_protocol_all_30_v2.2.pyCode ∙ Version 14         """Try PySR first, fallback to LLM if it fails."""
         print("\n[FALLBACK MODE] PySR first, LLM backup...")
-        
+
         # Validate variable names
         safe_names, name_mapping = self.validate_variable_names(
             variable_nexperiment_protocol_all_30_v2.2.pyCode ∙ Version 15 if __name__ == "__main__":

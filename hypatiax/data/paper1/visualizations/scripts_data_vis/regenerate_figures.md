@@ -87,7 +87,7 @@ The `statistical_analysis_full_FIXED.py` includes these improvements:
 
 1. **Explicit PDF format specification:**
    ```python
-   plt.savefig(pdf_file, format='pdf', bbox_inches='tight', 
+   plt.savefig(pdf_file, format='pdf', bbox_inches='tight',
                dpi=300, metadata={'Creator': 'Matplotlib'})
    ```
 
@@ -154,20 +154,20 @@ echo "Check compilation log for 'Dimension too large' - should be gone!"
 ## Troubleshooting
 
 ### "No such file: all_domains_extrap_v4_*.json"
-**Problem:** Data files not in the directory  
+**Problem:** Data files not in the directory
 **Solution:** Either:
 - Copy the JSON files to your paper directory, OR
 - Use the emergency regenerate_figures.py script (creates placeholder)
 
 ### "Module not found: matplotlib"
-**Problem:** Python packages not installed  
+**Problem:** Python packages not installed
 **Solution:**
 ```bash
 pip install matplotlib numpy pandas scipy seaborn
 ```
 
 ### "Permission denied"
-**Problem:** Script not executable  
+**Problem:** Script not executable
 **Solution:**
 ```bash
 chmod +x statistical_analysis_full_FIXED.py
@@ -175,7 +175,7 @@ chmod +x regenerate_figures.py
 ```
 
 ### Still getting "Dimension too large"
-**Problem:** Old PDF cached or LaTeX aux files  
+**Problem:** Old PDF cached or LaTeX aux files
 **Solution:**
 ```bash
 rm -f *.aux *.log *.out
@@ -207,10 +207,10 @@ The fixed version explicitly sets all these parameters, ensuring matplotlib gene
 
 ## Success Criteria
 
-✅ `pdfinfo` shows valid page size (not 0×0)  
-✅ PDF opens correctly in a viewer  
-✅ File size is reasonable (50-500 KB)  
-✅ LaTeX compiles without "Dimension too large" error  
-✅ Figure appears correctly in compiled PDF  
+✅ `pdfinfo` shows valid page size (not 0×0)
+✅ PDF opens correctly in a viewer
+✅ File size is reasonable (50-500 KB)
+✅ LaTeX compiles without "Dimension too large" error
+✅ Figure appears correctly in compiled PDF
 
 If all checkmarks pass, you're done!

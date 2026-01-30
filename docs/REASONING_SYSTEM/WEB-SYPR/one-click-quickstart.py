@@ -14,11 +14,14 @@ import time
 import webbrowser
 from pathlib import Path
 
-print("""
+print(
+    """
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║        Symbolic Regression Pipeline - Automated Setup & Launch               ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
-""")
+"""
+)
+
 
 def check_python_version():
     """Check Python version"""
@@ -29,56 +32,53 @@ def check_python_version():
         sys.exit(1)
     print(f"✅ Python {version.major}.{version.minor}.{version.micro}")
 
+
 def install_dependencies():
     """Install required packages"""
     print("\n[2/8] Installing dependencies...")
-    
+
     packages = [
-        'fastapi',
-        'uvicorn[standard]',
-        'numpy',
-        'sympy',
-        'scikit-learn',
-        'pint',
-        'python-multipart'
+        "fastapi",
+        "uvicorn[standard]",
+        "numpy",
+        "sympy",
+        "scikit-learn",
+        "pint",
+        "python-multipart",
     ]
-    
+
     try:
         for package in packages:
             print(f"  Installing {package}...")
             subprocess.check_call(
-                [sys.executable, '-m', 'pip', 'install', package, '-q'],
-                stdout=subprocess.DEVNULL
+                [sys.executable, "-m", "pip", "install", package, "-q"],
+                stdout=subprocess.DEVNULL,
             )
         print("✅ All dependencies installed")
     except subprocess.CalledProcessError as e:
         print(f"❌ Failed to install dependencies: {e}")
         sys.exit(1)
 
+
 def create_project_structure():
     """Create project directories"""
     print("\n[3/8] Creating project structure...")
-    
-    dirs = [
-        'backend',
-        'frontend',
-        'tests',
-        'data/examples',
-        'results/exports'
-    ]
-    
+
+    dirs = ["backend", "frontend", "tests", "data/examples", "results/exports"]
+
     for dir_path in dirs:
         Path(dir_path).mkdir(parents=True, exist_ok=True)
         print(f"  ✓ {dir_path}/")
-    
+
     print("✅ Project structure created")
+
 
 def create_backend_files():
     """Create backend API files"""
     print("\n[4/8] Creating backend files...")
-    
+
     # Minimal backend for demo
-    backend_code = '''from fastapi import FastAPI
+    backend_code = """from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import numpy as np
 
@@ -111,19 +111,20 @@ async def examples():
             }
         ]
     }
-'''
-    
-    with open('backend/api.py', 'w') as f:
+"""
+
+    with open("backend/api.py", "w") as f:
         f.write(backend_code)
-    
+
     print("  ✓ backend/api.py")
     print("✅ Backend files created")
+
 
 def create_frontend_files():
     """Create frontend HTML file"""
     print("\n[5/8] Creating frontend files...")
-    
-    html_code = '''<!DOCTYPE html>
+
+    html_code = """<!DOCTYPE html>
 <html>
 <head>
     <title>SR Pipeline</title>
@@ -183,19 +184,20 @@ def create_frontend_files():
         </button>
     </div>
 </body>
-</html>'''
-    
-    with open('frontend/index.html', 'w') as f:
+</html>"""
+
+    with open("frontend/index.html", "w") as f:
         f.write(html_code)
-    
+
     print("  ✓ frontend/index.html")
     print("✅ Frontend files created")
+
 
 def create_readme():
     """Create README file"""
     print("\n[6/8] Creating documentation...")
-    
-    readme = '''# Symbolic Regression Pipeline
+
+    readme = """# Symbolic Regression Pipeline
 
 ## Quick Start
 
@@ -225,77 +227,88 @@ curl http://localhost:8000/examples
 
 ## Stop the Server
 Press Ctrl+C in the terminal
-'''
-    
-    with open('README.md', 'w') as f:
+"""
+
+    with open("README.md", "w") as f:
         f.write(readme)
-    
+
     print("  ✓ README.md")
     print("✅ Documentation created")
+
 
 def start_backend():
     """Start the FastAPI backend"""
     print("\n[7/8] Starting backend server...")
-    
+
     try:
         # Start backend in background
         backend_process = subprocess.Popen(
-            [sys.executable, '-m', 'uvicorn', 'backend.api:app', 
-             '--host', '0.0.0.0', '--port', '8000'],
+            [
+                sys.executable,
+                "-m",
+                "uvicorn",
+                "backend.api:app",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000",
+            ],
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
         )
-        
+
         # Wait for server to start
         time.sleep(3)
-        
+
         if backend_process.poll() is None:
             print("✅ Backend running at http://localhost:8000")
             return backend_process
         else:
             print("❌ Backend failed to start")
             return None
-            
+
     except Exception as e:
         print(f"❌ Error starting backend: {e}")
         return None
 
+
 def start_frontend():
     """Start frontend server"""
     print("\n[8/8] Starting frontend server...")
-    
+
     try:
         # Start simple HTTP server for frontend
         frontend_process = subprocess.Popen(
-            [sys.executable, '-m', 'http.server', '8080', '--directory', 'frontend'],
+            [sys.executable, "-m", "http.server", "8080", "--directory", "frontend"],
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stderr=subprocess.PIPE,
         )
-        
+
         time.sleep(2)
-        
+
         if frontend_process.poll() is None:
             print("✅ Frontend running at http://localhost:8080")
             return frontend_process
         else:
             print("❌ Frontend failed to start")
             return None
-            
+
     except Exception as e:
         print(f"❌ Error starting frontend: {e}")
         return None
 
+
 def open_browser():
     """Open browser tabs"""
     print("\n🌐 Opening browser...")
-    
+
     time.sleep(1)
-    
+
     urls = [
-        'http://localhost:8000/docs',  # API docs
-        'http://localhost:8080'         # Frontend
+        "http://localhost:8000/docs",  # API docs
+        "http://localhost:8080",  # Frontend
     ]
-    
+
     for url in urls:
         try:
             webbrowser.open(url)
@@ -303,47 +316,49 @@ def open_browser():
         except:
             print(f"  ⚠ Could not open {url} (open manually)")
 
+
 def print_summary(backend_process, frontend_process):
     """Print startup summary"""
-    print("\n" + "="*80)
+    print("\n" + "=" * 80)
     print("🎉 SYMBOLIC REGRESSION PIPELINE - READY!")
-    print("="*80)
-    
+    print("=" * 80)
+
     if backend_process:
         print("\n📊 Backend API:")
         print("  • URL: http://localhost:8000")
         print("  • Docs: http://localhost:8000/docs")
         print("  • Examples: http://localhost:8000/examples")
-    
+
     if frontend_process:
         print("\n🖥️  Frontend UI:")
         print("  • URL: http://localhost:8080")
-    
+
     print("\n📝 Quick Commands:")
     print("  • Test API: curl http://localhost:8000")
     print("  • View logs: Check this terminal")
     print("  • Stop servers: Press Ctrl+C")
-    
+
     print("\n📚 Documentation:")
     print("  • See README.md for detailed instructions")
     print("  • API docs at /docs endpoint")
-    
+
     print("\n⚡ Next Steps:")
     print("  1. Visit http://localhost:8000/docs to explore API")
     print("  2. Try example endpoints")
     print("  3. Integrate your symbolic regression code")
     print("  4. Build custom workflows")
-    
-    print("\n" + "="*80)
+
+    print("\n" + "=" * 80)
     print("Press Ctrl+C to stop all servers")
-    print("="*80 + "\n")
+    print("=" * 80 + "\n")
+
 
 def main():
     """Main execution"""
-    
+
     backend_process = None
     frontend_process = None
-    
+
     try:
         # Run setup steps
         check_python_version()
@@ -352,41 +367,42 @@ def main():
         create_backend_files()
         create_frontend_files()
         create_readme()
-        
+
         # Start servers
         backend_process = start_backend()
         frontend_process = start_frontend()
-        
+
         if not backend_process or not frontend_process:
             print("\n❌ Failed to start one or more servers")
             sys.exit(1)
-        
+
         # Open browser
         open_browser()
-        
+
         # Print summary
         print_summary(backend_process, frontend_process)
-        
+
         # Keep running
         while True:
             time.sleep(1)
-            
+
     except KeyboardInterrupt:
         print("\n\n🛑 Shutting down servers...")
-        
+
         if backend_process:
             backend_process.terminate()
             print("  ✓ Backend stopped")
-        
+
         if frontend_process:
             frontend_process.terminate()
             print("  ✓ Frontend stopped")
-        
+
         print("\n👋 Goodbye!")
-        
+
     except Exception as e:
         print(f"\n❌ Error: {e}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
@@ -495,7 +511,7 @@ class SymbolicRegressionEngine:
             generations=config.generations
         )
         self.validator = SymbolicRegressionValidator()
-    
+
     async def run_discovery(self, callback):
         # Your actual implementation here
         self.regressor.fit(X, y, variables, units)

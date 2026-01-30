@@ -88,7 +88,7 @@ CONFIG_FILE="$PROJECT_ROOT/hypatiax/config.py"
 if [ ! -f "$CONFIG_FILE" ]; then
     echo "📝 Creating config.py module..."
     mkdir -p "$(dirname "$CONFIG_FILE")"
-    
+
     cat > "$CONFIG_FILE" << 'PYEOF'
 """Auto-generated configuration for HypatiaX."""
 import os
@@ -103,18 +103,18 @@ class PathConfig:
             # Try to find project root
             current = Path(__file__).resolve().parent.parent
             self.root = current
-        
+
         self.hypatiax = self.root / 'hypatiax'
         self.datasets = self.hypatiax / 'datasets'
         self.data_spacy = self.hypatiax / 'data_spacy'
         self.outputs = self.root / 'outputs'
         self.outputs.mkdir(parents=True, exist_ok=True)
-    
+
     def get_output_path(self, *parts):
         path = self.outputs.joinpath(*parts)
         path.parent.mkdir(parents=True, exist_ok=True)
         return path
-    
+
     def print_paths(self):
         print("=" * 70)
         print("HypatiaX Configuration")
@@ -127,7 +127,7 @@ class PathConfig:
 
 config = PathConfig()
 PYEOF
-    
+
     echo "✅ config.py created"
 else
     echo "ℹ️  config.py already exists (skipping)"

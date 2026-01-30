@@ -84,88 +84,88 @@ read -p "Enter choice [1-5]: " choice
 case $choice in
     1)
         echo -e "\n${YELLOW}Fixing CRITICAL and HIGH severity vulnerabilities...${NC}\n"
-        
+
         # CRITICAL
         echo -e "${RED}[CRITICAL]${NC} Updating h11..."
         pip install --upgrade "h11>=0.14.0" || echo "Failed to update h11"
-        
+
         # HIGH
         echo -e "${YELLOW}[HIGH]${NC} Updating Django..."
         pip install --upgrade "django>=4.2.11" || echo "Failed to update django"
-        
+
         echo -e "${YELLOW}[HIGH]${NC} Updating Starlette..."
         pip install --upgrade "starlette>=0.36.2" || echo "Failed to update starlette"
-        
+
         echo -e "${YELLOW}[HIGH]${NC} Updating Brotli..."
         pip install --upgrade "brotli>=1.1.0" || echo "Failed to update brotli"
-        
+
         echo -e "${YELLOW}[HIGH]${NC} Updating protobuf..."
         pip install --upgrade "protobuf>=4.25.3" || echo "Failed to update protobuf"
-        
+
         echo -e "${YELLOW}[HIGH]${NC} Updating jupyter-core..."
         pip install --upgrade "jupyter-core>=5.7.2" || echo "Failed to update jupyter-core"
-        
+
         echo -e "${YELLOW}[HIGH]${NC} Updating tornado..."
         pip install --upgrade "tornado>=6.3.3" || echo "Failed to update tornado"
-        
+
         echo -e "${YELLOW}[HIGH]${NC} Updating setuptools..."
         pip install --upgrade "setuptools>=70.0.0" || echo "Failed to update setuptools"
-        
+
         echo -e "${YELLOW}[HIGH]${NC} Updating redis..."
         pip install --upgrade "redis>=5.0.8" || echo "Failed to update redis"
-        
+
         echo -e "${YELLOW}[HIGH]${NC} Updating ecdsa..."
         pip install --upgrade "ecdsa>=0.19.0" || echo "Failed to update ecdsa"
-        
+
         echo -e "\n${GREEN}✓${NC} Critical and High severity fixes complete"
         ;;
-        
+
     2)
         echo -e "\n${YELLOW}Fixing CRITICAL, HIGH, and MODERATE severity vulnerabilities...${NC}\n"
-        
+
         # CRITICAL
         echo -e "${RED}[CRITICAL]${NC} Updating h11..."
         pip install --upgrade "h11>=0.14.0" || echo "Failed to update h11"
-        
+
         # HIGH
         echo -e "${YELLOW}[HIGH]${NC} Updating multiple packages..."
         pip install --upgrade "django>=4.2.11" "starlette>=0.36.2" "brotli>=1.1.0" \
                               "protobuf>=4.25.3" "jupyter-core>=5.7.2" "tornado>=6.3.3" \
                               "setuptools>=70.0.0" "redis>=5.0.8" "ecdsa>=0.19.0" || echo "Some packages failed"
-        
+
         # MODERATE
         echo -e "${BLUE}[MODERATE]${NC} Updating transformers..."
         pip install --upgrade "transformers>=4.38.0" || echo "Failed to update transformers"
-        
+
         echo -e "${BLUE}[MODERATE]${NC} Updating urllib3..."
         pip install --upgrade "urllib3>=2.0.7" || echo "Failed to update urllib3"
-        
+
         echo -e "${BLUE}[MODERATE]${NC} Updating requests..."
         pip install --upgrade "requests>=2.32.0" || echo "Failed to update requests"
-        
+
         echo -e "${BLUE}[MODERATE]${NC} Updating pypdf..."
         pip install --upgrade "pypdf>=4.0.0" || echo "Failed to update pypdf"
-        
+
         echo -e "${BLUE}[MODERATE]${NC} Updating torch..."
         pip install --no-cache-dir --upgrade "torch>=2.1.0" || echo "Failed to update torch"
-        
+
         echo -e "${BLUE}[MODERATE]${NC} Updating other packages..."
         pip install --upgrade "pillow>=10.3.0" "aiohttp>=3.9.2" "jinja2>=3.1.4" \
                               "certifi>=2024.7.4" "cryptography>=42.0.4" || echo "Some packages failed"
-        
+
         echo -e "\n${GREEN}✓${NC} Critical, High, and Moderate severity fixes complete"
         ;;
-        
+
     3)
         echo -e "\n${YELLOW}Fixing ALL vulnerabilities...${NC}\n"
         echo -e "${RED}Warning: This may cause breaking changes!${NC}\n"
         read -p "Are you sure? (yes/no): " confirm
-        
+
         if [ "$confirm" != "yes" ]; then
             echo -e "${YELLOW}Aborted${NC}"
             exit 0
         fi
-        
+
         # Update all packages with known vulnerabilities
         pip install --upgrade \
             "h11>=0.14.0" "django>=4.2.11" "starlette>=0.36.2" "brotli>=1.1.0" \
@@ -175,29 +175,29 @@ case $choice in
             "jinja2>=3.1.4" "certifi>=2024.7.4" "cryptography>=42.0.4" \
             "zipp>=3.19.1" "werkzeug>=3.0.3" "gunicorn>=22.0.0" "tqdm>=4.66.3" \
             "idna>=3.7" || echo "Some packages failed to update"
-        
+
         # Large packages separately to avoid memory issues
         echo -e "\n${YELLOW}Updating large packages...${NC}"
         pip install --no-cache-dir --upgrade "torch>=2.1.0" || echo "Failed to update torch"
-        
+
         echo -e "\n${GREEN}✓${NC} All vulnerability fixes complete"
         ;;
-        
+
     4)
         echo -e "\n${YELLOW}Running automatic fix with pip-audit...${NC}\n"
         echo -e "${RED}Warning: This may update many packages!${NC}\n"
         read -p "Continue? (yes/no): " confirm
-        
+
         if [ "$confirm" != "yes" ]; then
             echo -e "${YELLOW}Aborted${NC}"
             exit 0
         fi
-        
+
         pip-audit --fix
-        
+
         echo -e "\n${GREEN}✓${NC} Automatic fix complete"
         ;;
-        
+
     5)
         echo -e "\n${MAGENTA}Manual Fix Commands:${NC}\n"
         echo -e "${RED}CRITICAL:${NC}"
@@ -229,7 +229,7 @@ case $choice in
         echo -e "${GREEN}No changes made. Run commands manually as needed.${NC}"
         exit 0
         ;;
-        
+
     *)
         echo -e "${RED}Invalid choice${NC}"
         exit 1

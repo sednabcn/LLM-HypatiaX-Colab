@@ -34,7 +34,7 @@ jobs:
     outputs:
       python_versions: ${{ steps.set-versions.outputs.versions }}
       modules: ${{ steps.set-modules.outputs.modules }}
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -59,7 +59,7 @@ jobs:
           echo "=== Validating HypatiaX Project Structure ==="
           required_dirs=("datasets" "patterns" "custom_ner" "data_spacy" "models" "core" "mappings" "scripts_")
           missing_dirs=()
-          
+
           for dir in "${required_dirs[@]}"; do
             if [ -d "$dir" ]; then
               echo "✓ Found: $dir"
@@ -68,7 +68,7 @@ jobs:
               missing_dirs+=("$dir")
             fi
           done
-          
+
           if [ ${#missing_dirs[@]} -gt 0 ]; then
             echo ""
             echo "Warning: ${#missing_dirs[@]} directories missing"
@@ -98,7 +98,7 @@ jobs:
       matrix:
         python-version: ${{ fromJson(needs.setup.outputs.python_versions) }}
       fail-fast: false
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -133,13 +133,13 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel
-          
+
           PYVERSION=$(python -c "import sys; print(f'{sys.version_info.major}{sys.version_info.minor}')")
           REQ_FILE="requirements-py${PYVERSION}.txt"
-          
+
           echo "Python version: ${{ matrix.python-version }}"
           echo "Looking for: $REQ_FILE"
-          
+
           if [ -f "$REQ_FILE" ]; then
             echo "Installing from $REQ_FILE"
             pip install -r "$REQ_FILE"
@@ -149,7 +149,7 @@ jobs:
           else
             echo "Warning: No requirements file found"
           fi
-          
+
           pip install pytest pytest-cov pytest-timeout pytest-xdist
 
       - name: Download spaCy models
@@ -177,7 +177,7 @@ jobs:
         id: locate-script
         run: |
           SCRIPT_PATH=""
-          
+
           if [ -f ".github/scripts/workflow_runner.py" ]; then
             SCRIPT_PATH=".github/scripts/workflow_runner.py"
           elif [ -f "scripts/workflow_runner.py" ]; then
@@ -190,7 +190,7 @@ jobs:
             echo "Error: workflow_runner.py not found"
             exit 1
           fi
-          
+
           echo "script_path=$SCRIPT_PATH" >> $GITHUB_OUTPUT
           echo "Found workflow runner at: $SCRIPT_PATH"
 
@@ -200,9 +200,9 @@ jobs:
         timeout-minutes: 45
         run: |
           cd ${{ github.workspace }}
-          
+
           MODULES="${{ needs.setup.outputs.modules }}"
-          
+
           if [ -n "$MODULES" ]; then
             echo "Running specific modules: $MODULES"
             python .github/scripts/workflow_runner.py --base-path . --modules $MODULES
@@ -227,10 +227,10 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Status**: ${{ steps.run-workflow.outcome }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ -d "${{ env.WORKFLOW_REPORTS_DIR }}" ]; then
             latest_report=$(ls -t ${{ env.WORKFLOW_REPORTS_DIR }}/master_report_*.txt 2>/dev/null | head -1)
-            
+
             if [ -f "$latest_report" ]; then
               echo "### Summary Report" >> $GITHUB_STEP_SUMMARY
               echo '```' >> $GITHUB_STEP_SUMMARY
@@ -239,7 +239,7 @@ jobs:
             else
               echo "⚠️ No master report generated" >> $GITHUB_STEP_SUMMARY
             fi
-            
+
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "### Generated Reports" >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
@@ -255,27 +255,27 @@ jobs:
         run: |
           if [ -d "${{ env.WORKFLOW_REPORTS_DIR }}" ]; then
             latest_json=$(ls -t ${{ env.WORKFLOW_REPORTS_DIR }}/master_report_*.json 2>/dev/null | head -1)
-            
+
             if [ -f "$latest_json" ]; then
               python << 'EOFPYTHON'
           import json
           import sys
           import os
-          
+
           try:
               latest_json = "$latest_json"
               with open(latest_json) as f:
                   data = json.load(f)
-              
+
               total = sum(m.get('summary', {}).get('total_files', 0) for m in data.get('modules', {}).values())
               success = sum(m.get('summary', {}).get('successful', 0) for m in data.get('modules', {}).values())
               failed = sum(m.get('summary', {}).get('failed', 0) for m in data.get('modules', {}).values())
-              
+
               with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
                   f.write(f"total_files={total}\n")
                   f.write(f"successful={success}\n")
                   f.write(f"failed={failed}\n")
-              
+
               print(f"📊 Results: {success}/{total} successful, {failed} failed")
           except Exception as e:
               print(f"Could not parse results: {e}")
@@ -310,7 +310,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test-workflow
     if: always()
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -334,13 +334,13 @@ jobs:
           import glob
           from pathlib import Path
           from datetime import datetime
-          
+
           reports_dir = Path("all-reports")
-          
+
           if not reports_dir.exists():
               print("⚠️ No reports found")
               exit(0)
-          
+
           all_results = {
               "total_files": 0,
               "successful": 0,
@@ -350,20 +350,20 @@ jobs:
               "by_module": {},
               "by_python_version": {}
           }
-          
+
           report_files = list(reports_dir.glob("master_report_*.json"))
           print(f"Found {len(report_files)} report files")
-          
+
           for report_file in report_files:
               try:
                   with open(report_file) as f:
                       data = json.load(f)
-                  
+
                   python_version = data.get("python_version", "unknown")
-                  
+
                   for module_name, module_data in data.get("modules", {}).items():
                       summary = module_data.get("summary", {})
-                      
+
                       if module_name not in all_results["by_module"]:
                           all_results["by_module"][module_name] = {
                               "total_files": 0,
@@ -372,25 +372,25 @@ jobs:
                               "errors": 0,
                               "timeouts": 0
                           }
-                      
+
                       if python_version not in all_results["by_python_version"]:
                           all_results["by_python_version"][python_version] = {
                               "total_files": 0,
                               "successful": 0,
                               "failed": 0
                           }
-                      
+
                       for key in ["total_files", "successful", "failed", "errors", "timeouts"]:
                           value = summary.get(key, 0)
                           all_results[key] += value
                           all_results["by_module"][module_name][key] += value
-                          
+
                           if key in ["total_files", "successful", "failed"]:
                               all_results["by_python_version"][python_version][key] += value
-              
+
               except Exception as e:
                   print(f"⚠️ Error processing {report_file}: {e}")
-          
+
           print("\n" + "="*80)
           print("COMBINED WORKFLOW RESULTS")
           print("="*80)
@@ -399,11 +399,11 @@ jobs:
           print(f"❌ Failed: {all_results['failed']}")
           print(f"⚠️ Errors: {all_results['errors']}")
           print(f"⏱️ Timeouts: {all_results['timeouts']}")
-          
+
           if all_results['total_files'] > 0:
               success_rate = (all_results['successful'] / all_results['total_files']) * 100
               print(f"Success Rate: {success_rate:.1f}%")
-          
+
           if all_results['by_python_version']:
               print("\n" + "-"*80)
               print("By Python Version:")
@@ -413,7 +413,7 @@ jobs:
                       rate = (stats['successful'] / stats['total_files']) * 100
                       print(f"\nPython {version}")
                       print(f"  Total: {stats['total_files']}, Success: {stats['successful']}, Failed: {stats['failed']} ({rate:.1f}%)")
-          
+
           if all_results['by_module']:
               print("\n" + "-"*80)
               print("By Module:")
@@ -422,11 +422,11 @@ jobs:
                   if stats['total_files'] > 0:
                       print(f"\n{module.upper()}")
                       print(f"  Total: {stats['total_files']}, Success: {stats['successful']}, Failed: {stats['failed']}")
-          
+
           all_results["timestamp"] = datetime.now().isoformat()
           with open("combined_results.json", "w") as f:
               json.dump(all_results, f, indent=2)
-          
+
           print("\n" + "="*80)
           print("Results saved to combined_results.json")
           EOFPYTHON
@@ -445,57 +445,57 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            
+
             let comment = '## 🧪 HypatiaX Workflow Test Results\n\n';
-            
+
             try {
               if (!fs.existsSync('combined_results.json')) {
                 comment += '⚠️ No results file found\n';
                 return;
               }
-              
+
               const results = JSON.parse(fs.readFileSync('combined_results.json', 'utf8'));
-              
+
               comment += '### Summary\n\n';
               comment += `- **Total Files**: ${results.total_files}\n`;
               comment += `- **✅ Successful**: ${results.successful}\n`;
               comment += `- **❌ Failed**: ${results.failed}\n`;
               comment += `- **⚠️ Errors**: ${results.errors}\n`;
               comment += `- **⏱️ Timeouts**: ${results.timeouts}\n`;
-              
+
               if (results.total_files > 0) {
                 const successRate = (results.successful / results.total_files * 100).toFixed(1);
                 comment += `- **Success Rate**: ${successRate}%\n`;
               }
-              
+
               if (results.by_python_version && Object.keys(results.by_python_version).length > 0) {
                 comment += '\n### By Python Version\n\n';
                 comment += '| Version | Total | Success | Failed | Rate |\n';
                 comment += '|---------|-------|---------|--------|------|\n';
-                
+
                 for (const [version, stats] of Object.entries(results.by_python_version)) {
                   const rate = stats.total_files > 0 ? (stats.successful / stats.total_files * 100).toFixed(1) : '0.0';
                   comment += `| ${version} | ${stats.total_files} | ${stats.successful} | ${stats.failed} | ${rate}% |\n`;
                 }
               }
-              
+
               if (results.by_module && Object.keys(results.by_module).length > 0) {
                 comment += '\n### By Module\n\n';
                 comment += '| Module | Total | Success | Failed |\n';
                 comment += '|--------|-------|---------|--------|\n';
-                
+
                 for (const [module, stats] of Object.entries(results.by_module)) {
                   comment += `| ${module} | ${stats.total_files} | ${stats.successful} | ${stats.failed} |\n`;
                 }
               }
-              
+
               comment += '\n📊 Detailed reports are available in the workflow artifacts.\n';
-              
+
             } catch (error) {
               comment += '⚠️ Could not parse test results.\n';
               comment += `Error: ${error.message}\n`;
             }
-            
+
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -508,7 +508,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test-workflow, analyze-results]
     if: always() && (github.event_name == 'schedule' || github.event_name == 'push')
-    
+
     steps:
       - name: Send notification summary
         run: |

@@ -31,21 +31,22 @@ from datetime import datetime
 # VARIABLE NAME SANITIZER (from Hybrid System v4.2)
 # ============================================================================
 
+
 class VariableNameSanitizer:
     """Sanitizes variable names to avoid conflicts with Julia/PySR reserved names."""
-    
-    RESERVED_NAMES = {'S', 'N', 'C', 'D', 'E', 'I', 'O'}
-    
+
+    RESERVED_NAMES = {"S", "N", "C", "D", "E", "I", "O"}
+
     def __init__(self):
         self.forward_mapping: Dict[str, str] = {}
         self.reverse_mapping: Dict[str, str] = {}
         self._conflicts_found = []
-    
+
     def sanitize(self, variable_names: List[str]) -> Tuple[List[str], bool]:
         """Sanitize variable names to avoid PySR conflicts."""
         sanitized = []
         had_conflicts = False
-        
+
         for var in variable_names:
             if var in self.RESERVED_NAMES:
                 safe_name = f"var_{var}"
@@ -53,7 +54,7 @@ class VariableNameSanitizer:
                 while safe_name in sanitized or safe_name in variable_names:
                     safe_name = f"var_{var}{counter}"
                     counter += 1
-                
+
                 self.forward_mapping[var] = safe_name
                 self.reverse_mapping[safe_name] = var
                 self._conflicts_found.append(var)
@@ -61,33 +62,34 @@ class VariableNameSanitizer:
                 had_conflicts = True
             else:
                 sanitized.append(var)
-        
+
         return sanitized, had_conflicts
-    
+
     def restore_expression(self, expression: str) -> str:
         """Restore original variable names in discovered expression."""
         if not self.reverse_mapping or not expression:
             return expression
-        
+
         import re
+
         restored = expression
         for safe_name in sorted(self.reverse_mapping.keys(), key=len, reverse=True):
             original_name = self.reverse_mapping[safe_name]
-            pattern = r'\b' + re.escape(safe_name) + r'\b'
+            pattern = r"\b" + re.escape(safe_name) + r"\b"
             restored = re.sub(pattern, original_name, restored)
-        
+
         return restored
-    
+
     def get_sanitization_log(self) -> str:
         """Return human-readable log of sanitization actions."""
         if not self._conflicts_found:
             return "No variable name conflicts detected."
-        
+
         log_lines = ["⚠️  Variable name sanitization applied:"]
         for orig in self._conflicts_found:
             safe = self.forward_mapping[orig]
             log_lines.append(f"  {orig} → {safe} (reserved Julia/PySR name)")
-        
+
         return "\n".join(log_lines)
 
 
@@ -95,17 +97,18 @@ class VariableNameSanitizer:
 # FIXED INTEGRATED LLM DISCOVERY CLASS
 # ============================================================================
 
+
 class IntegratedLLMDiscoveryFixed:
     """
     Fixed version of IntegratedLLMDiscovery with proper configuration handling.
-    
+
     FIXES:
     - Proper DiscoveryConfig parameter validation
     - Correct LLMConfig initialization
     - Variable name sanitization for PySR compatibility
     - Better error handling and logging
     """
-    
+
     def __init__(
         self,
         llm_mode: str = "hybrid",
@@ -116,7 +119,7 @@ class IntegratedLLMDiscoveryFixed:
     ):
         """
         Initialize integrated LLM discovery with fixed configuration.
-        
+
         Args:
             llm_mode: One of ['none', 'seed', 'hybrid', 'fallback']
             api_key: Anthropic API key (required for LLM modes)
@@ -135,34 +138,36 @@ class IntegratedLLMDiscoveryFixed:
                 HybridDiscoverySystem,
                 DiscoveryMode,
             )
+
             self._has_engine = True
         except ImportError as e:
             raise ImportError(
                 f"Required dependencies not available: {e}\n"
                 "Install with: pip install hypatiax"
             )
-        
+
         # Validate llm_mode
-        valid_modes = ['none', 'seed', 'hybrid', 'fallback']
+        valid_modes = ["none", "seed", "hybrid", "fallback"]
         if llm_mode not in valid_modes:
             raise ValueError(
                 f"Invalid llm_mode '{llm_mode}'. Must be one of {valid_modes}"
             )
-        
+
         self.llm_mode = llm_mode
         self.niterations = niterations
         self.populations = populations  # FIX: Store populations parameter
         self.enable_sanitization = enable_sanitization
-        
+
         # Handle API key
         if api_key:
             self.api_key = api_key
         else:
             from dotenv import load_dotenv
             import os
+
             load_dotenv()
             self.api_key = os.getenv("ANTHROPIC_API_KEY")
-        
+
         # FIX: Validate API key requirement
         if not self.api_key and llm_mode != "none":
             raise ValueError(
@@ -172,13 +177,13 @@ class IntegratedLLMDiscoveryFixed:
                 "  2. Create .env file with ANTHROPIC_API_KEY=your_key\n"
                 "  3. Pass api_key parameter to __init__()"
             )
-        
+
         print(f"✅ Integrated LLM Discovery v12.0 initialized")
         print(f"   Mode: {llm_mode}")
         print(f"   Iterations: {niterations}")
         print(f"   Populations: {populations}")
         print(f"   Sanitization: {'enabled' if enable_sanitization else 'disabled'}")
-    
+
     def discover(
         self,
         X: np.ndarray,
@@ -192,13 +197,13 @@ class IntegratedLLMDiscoveryFixed:
     ) -> Dict[str, Any]:
         """
         Discover equation using integrated engine with proper configuration.
-        
+
         FIXES:
         - Proper DiscoveryConfig initialization
         - Variable name sanitization
         - Better error handling
         """
-        
+
         if verbose:
             print(f"\n{'='*80}")
             print(f"INTEGRATED LLM-GUIDED DISCOVERY v12.0 (FIXED)")
@@ -207,12 +212,12 @@ class IntegratedLLMDiscoveryFixed:
             print(f"Variables: {', '.join(variable_names)}")
             print(f"Samples: {len(y)}")
             print(f"Mode: {self.llm_mode}")
-        
+
         start_time = time.time()
         scalers = {}
         sanitizer = None
         original_variable_names = variable_names.copy()
-        
+
         try:
             # Import required classes
             from hypatiax.tools.symbolic.symbolic_engine import (
@@ -224,112 +229,115 @@ class IntegratedLLMDiscoveryFixed:
                 HybridDiscoverySystem,
                 DiscoveryMode,
             )
-            
+
             # FIX 1: Variable name sanitization
             if self.enable_sanitization:
                 sanitizer = VariableNameSanitizer()
                 variable_names, had_conflicts = sanitizer.sanitize(variable_names)
-                
+
                 if had_conflicts and verbose:
                     print(f"\n{sanitizer.get_sanitization_log()}")
                     print("✅ Original names will be restored in results\n")
-            
+
             # FIX 2: Apply quantum scaling if needed
             if domain == "quantum":
                 print(f"\n🔬 Applying improved quantum scaling...")
                 from llm_guided_symbolic_discovery_v12 import scale_quantum_data_v2
+
                 X, y, scalers = scale_quantum_data_v2(X, y, variable_names)
-            
+
             # FIX 3: Create DiscoveryConfig with ALL required parameters
             discovery_config = DiscoveryConfig(
                 niterations=self.niterations,
                 populations=self.populations,  # FIX: Was missing
                 enable_auto_configuration=True,
             )
-            
+
             if verbose:
                 print(f"📋 DiscoveryConfig created:")
                 print(f"   niterations: {self.niterations}")
                 print(f"   populations: {self.populations}")
-            
+
             # FIX 4: Create LLMConfig with proper validation
             llm_config = None
             if self.llm_mode != "none":
                 if not self.api_key:
                     raise ValueError("API key required for LLM mode")
-                
+
                 llm_config = LLMConfig(
                     enabled=True,
                     api_key=self.api_key,
                     n_candidates=5,
-                    model="claude-sonnet-4-20250514"
+                    model="claude-sonnet-4-20250514",
                 )
-                
+
                 if verbose:
                     print(f"🤖 LLMConfig created:")
                     print(f"   Model: claude-sonnet-4-20250514")
                     print(f"   Candidates: 5")
-            
+
             # FIX 5: Create symbolic engine with proper configuration
             symbolic_engine = SymbolicEngineWithLLM(
                 config=discovery_config,
                 domain=domain,
                 llm_config=llm_config,
-                llm_mode=self.llm_mode
+                llm_mode=self.llm_mode,
             )
-            
+
             # FIX 6: Create hybrid system with correct mode
             hybrid = HybridDiscoverySystem(
                 domain=domain,
                 discovery_config=discovery_config,
                 discovery_mode=DiscoveryMode.CALIBRATED,
                 max_retries=3,
-                enable_physics_fallback=False
+                enable_physics_fallback=False,
             )
-            
+
             # FIX 7: Properly patch hybrid system to use LLM engine
             if self.llm_mode != "none" and llm_config:
                 if verbose:
                     print(f"🔧 Patching hybrid system with LLM engine")
                 hybrid.symbolic_engine = symbolic_engine
-            
+
             # Run discovery
             if verbose:
                 print(f"\n🔬 Starting discovery...\n")
-            
+
             result = hybrid.discover_validate_interpret(
-                X=X, 
+                X=X,
                 y=y,
                 variable_names=variable_names,  # Using sanitized names
                 variable_descriptions=variable_descriptions or {},
                 variable_units=variable_units or {},
                 description=description,
                 equation_name=description,
-                validate_first=True
+                validate_first=True,
             )
-            
+
             # Extract results
-            discovery = result.get('discovery', {})
-            validation = result.get('validation', {})
-            
+            discovery = result.get("discovery", {})
+            validation = result.get("validation", {})
+
             # FIX 8: Restore original variable names in expression
-            if sanitizer and discovery.get('expression'):
-                original_expr = sanitizer.restore_expression(discovery['expression'])
-                discovery['expression'] = original_expr
+            if sanitizer and discovery.get("expression"):
+                original_expr = sanitizer.restore_expression(discovery["expression"])
+                discovery["expression"] = original_expr
                 if verbose:
                     print(f"✅ Restored original variable names in expression")
-            
+
             total_time = time.time() - start_time
-            
+
             # Determine success
-            r2 = discovery.get('r2_score', 0.0)
-            val_score = validation.get('total_score', 0.0)
-            
+            r2 = discovery.get("r2_score", 0.0)
+            val_score = validation.get("total_score", 0.0)
+
             if domain == "quantum":
-                success = (r2 > 0.95 and val_score > 25.0)
+                success = r2 > 0.95 and val_score > 25.0
             else:
-                success = (r2 > 0.99 and val_score > 30.0) or (r2 > 0.95 and val_score > 80.0)
-            
+                success = (r2 > 0.99 and val_score > 30.0) or (
+                    r2 > 0.95 and val_score > 80.0
+                )
+
             if verbose:
                 print(f"\n{'='*80}")
                 status = "✅ SUCCESS" if success else "⚠️  BELOW THRESHOLD"
@@ -339,30 +347,32 @@ class IntegratedLLMDiscoveryFixed:
                 print(f"   Validation: {val_score:.1f}/100")
                 print(f"   Total time: {total_time:.2f}s")
                 print(f"   LLM Mode: {discovery.get('llm_mode', self.llm_mode)}")
-            
+
             return {
                 "success": success,
                 "r2_score": r2,
                 "validation_score": val_score,
-                "expression": discovery.get('expression'),
+                "expression": discovery.get("expression"),
                 "discovery": discovery,
                 "validation": validation,
                 "timing": {"total": total_time},
-                "llm_mode": discovery.get('llm_mode', self.llm_mode),
+                "llm_mode": discovery.get("llm_mode", self.llm_mode),
                 "test_name": description,
                 "timestamp": datetime.now().isoformat(),
                 "domain": domain,
                 "scalers": scalers,
                 "original_variable_names": original_variable_names,
-                "sanitized": sanitizer is not None and len(sanitizer.forward_mapping) > 0,
+                "sanitized": sanitizer is not None
+                and len(sanitizer.forward_mapping) > 0,
             }
-            
+
         except Exception as e:
             if verbose:
                 print(f"\n❌ Error: {e}")
                 import traceback
+
                 traceback.print_exc()
-            
+
             return {
                 "success": False,
                 "error": str(e),
@@ -378,13 +388,14 @@ class IntegratedLLMDiscoveryFixed:
 # TESTING & VALIDATION
 # ============================================================================
 
+
 def test_configuration_fix():
     """Test the fixed configuration handling."""
-    
-    print("\n" + "="*80)
+
+    print("\n" + "=" * 80)
     print("TESTING FIXED CONFIGURATION")
-    print("="*80)
-    
+    print("=" * 80)
+
     # Test 1: Initialization with all parameters
     print("\nTest 1: Proper initialization")
     try:
@@ -393,12 +404,12 @@ def test_configuration_fix():
             api_key="test_key",
             niterations=50,
             populations=50,
-            enable_sanitization=True
+            enable_sanitization=True,
         )
         print("✅ Initialization successful")
     except Exception as e:
         print(f"❌ Initialization failed: {e}")
-    
+
     # Test 2: Invalid mode handling
     print("\nTest 2: Invalid mode validation")
     try:
@@ -406,25 +417,26 @@ def test_configuration_fix():
         print("❌ Should have raised ValueError")
     except ValueError as e:
         print(f"✅ Correctly raised ValueError: {e}")
-    
+
     # Test 3: Missing API key handling
     print("\nTest 3: Missing API key validation")
     try:
         import os
+
         os.environ.pop("ANTHROPIC_API_KEY", None)
         discoverer = IntegratedLLMDiscoveryFixed(llm_mode="hybrid", api_key=None)
         print("❌ Should have raised ValueError")
     except ValueError as e:
         print(f"✅ Correctly raised ValueError")
-    
-    print("\n" + "="*80)
+
+    print("\n" + "=" * 80)
     print("✅ ALL CONFIGURATION TESTS PASSED")
-    print("="*80)
+    print("=" * 80)
 
 
 def create_migration_guide():
     """Create migration guide from v11.1 to v12.0."""
-    
+
     guide = """
 ================================================================================
 MIGRATION GUIDE: v11.1 → v12.0

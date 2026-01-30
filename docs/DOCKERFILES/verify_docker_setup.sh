@@ -157,20 +157,20 @@ echo ""
 echo "10. Checking .gitignore..."
 if [ -f ".gitignore" ]; then
     print_status 0 ".gitignore exists"
-    
+
     # Check for important entries
     if grep -q "test-results/" .gitignore 2>/dev/null; then
         print_status 0 ".gitignore contains test-results/"
     else
         print_warning ".gitignore missing: test-results/"
     fi
-    
+
     if grep -q "htmlcov/" .gitignore 2>/dev/null; then
         print_status 0 ".gitignore contains htmlcov/"
     else
         print_warning ".gitignore missing: htmlcov/"
     fi
-    
+
     if grep -q "__pycache__/" .gitignore 2>/dev/null; then
         print_status 0 ".gitignore contains __pycache__/"
     else

@@ -16,21 +16,21 @@
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \lstdefinestyle{pythonstyle}{
-    backgroundcolor=\color{backcolour},   
+    backgroundcolor=\color{backcolour},
     commentstyle=\color{codegreen},
     keywordstyle=\color{magenta},
     numberstyle=\tiny\color{codegray},
     stringstyle=\color{codepurple},
     basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
     showstringspaces=false,
-    showtabs=false,                  
+    showtabs=false,
     tabsize=2
 }
 
@@ -148,17 +148,17 @@ def _validate_predictions(self, y_pred, y_true):
     # Catch invalid values
     if not np.all(np.isfinite(y_pred)):
         return False, "Invalid predictions (NaN/Inf)"
-    
+
     # Catch unrealistic magnitude
     y_range = np.ptp(y_true)
     pred_range = np.ptp(y_pred)
     if pred_range > 1000 * max(y_range, 1):
         return False, "Predictions too large"
-    
+
     # Catch catastrophic R²
     if self._safe_r2(y_true, y_pred) < -100:
         return False, "Catastrophic R²"
-    
+
     return True, None
 \end{lstlisting}
 
@@ -305,13 +305,13 @@ The superior performance of hybrid methods stems from three mechanisms:
         \item PySR: Strong on complex non-linear relationships
         \item Neural networks: Robust universal approximator
     \end{itemize}
-    
+
     \item \textbf{Graceful Degradation}:
     \begin{itemize}
         \item When LLM fails, fallback to NN or PySR
         \item No single point of failure
     \end{itemize}
-    
+
     \item \textbf{Validation Through Consensus}:
     \begin{itemize}
         \item Multiple predictions enable cross-validation

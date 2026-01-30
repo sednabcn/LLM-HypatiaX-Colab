@@ -185,9 +185,9 @@ This is normal if you don't have write permissions. You can safely ignore this e
 
 ## Summary
 
-✅ **Simple setup:** 2 files  
-✅ **Low usage:** ~300 min/month  
-✅ **Good coverage:** Quick tests on PRs, full tests weekly  
-✅ **Budget safe:** Well under 1000 min limit  
+✅ **Simple setup:** 2 files
+✅ **Low usage:** ~300 min/month
+✅ **Good coverage:** Quick tests on PRs, full tests weekly
+✅ **Budget safe:** Well under 1000 min limit
 
 You're all set! 🚀

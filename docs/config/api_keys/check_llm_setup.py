@@ -21,12 +21,14 @@ print("\n📦 Checking installed packages...\n")
 
 try:
     import openai
+
     print(f"✅ openai: {openai.__version__}")
 except ImportError:
     print("❌ openai: Not installed")
 
 try:
     import anthropic
+
     print(f"✅ anthropic: {anthropic.__version__}")
 except ImportError:
     print("❌ anthropic: Not installed")

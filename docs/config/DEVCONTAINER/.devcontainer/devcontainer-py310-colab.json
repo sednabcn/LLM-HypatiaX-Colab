@@ -1,13 +1,13 @@
 {
   "name": "HypatiaX Development (Python 3.12 - Colab-like)",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
-  
+
   "features": {
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.12"
     }
   },
-  
+
   "customizations": {
     "vscode": {
       "extensions": [
@@ -21,10 +21,10 @@
       }
     }
   },
-  
+
   "postCreateCommand": "bash .devcontainer/setup.sh 3.12",
-  
+
   "forwardPorts": [8888, 5000, 8000],
-  
+
   "remoteUser": "vscode"
 }

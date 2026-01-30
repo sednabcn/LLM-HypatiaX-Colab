@@ -270,43 +270,43 @@ if __name__ == "__main__":
 
     """
     Expected output:
-    
+
     ============================================================
     FORMULA INTERPRETATION REPORT
     ============================================================
-    
+
     📖 WHAT IT CALCULATES:
        This calculates the kinetic energy of a moving object.
-    
+
     🔢 MATHEMATICAL MEANING:
        The formula has three components:
        - 0.5: Classical constant from integration of F=ma
        - m: Mass of the object (resistance to acceleration)
        - v²: Velocity squared (energy scales quadratically)
-    
+
     💡 WHY THIS FORM:
        The quadratic relationship (v²) emerges from integrating
        force over distance. Doubling speed quadruples energy.
-    
+
     🧠 INTUITION:
        Heavier objects or faster speeds require more energy.
        The squared term means small speed increases have
        disproportionate energy costs (important for fuel efficiency).
-    
+
     ✅ DOMAIN OF VALIDITY:
        Ranges: 1-100 kg, 0-50 m/s (non-relativistic speeds)
        Assumes: Classical mechanics, v << speed of light
        Limits: Breaks down near c, ignores friction/air resistance
-    
+
     🎯 CONFIDENCE:
        Level: HIGH
        R² Score: 0.998
        Validation: PASSED
-    
+
     📋 HOW TO USE:
        Use Case: Calculate energy for moving vehicles, projectiles
        Inputs: Mass in kg, velocity in m/s
        Outputs: Energy in Joules
-    
+
     ============================================================
     """

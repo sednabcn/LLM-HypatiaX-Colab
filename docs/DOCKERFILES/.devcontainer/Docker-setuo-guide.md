@@ -395,17 +395,17 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.12', '3.13']
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Build Docker image
       run: |
         docker build \
           --build-arg PYTHON_VERSION=${{ matrix.python-version }} \
           --target testing \
           -t hypatiax:py${{ matrix.python-version }}-test .
-    
+
     - name: Run tests
       run: |
         docker run hypatiax:py${{ matrix.python-version }}-test
@@ -415,11 +415,11 @@ jobs:
 
 ## 📝 Summary
 
-✅ **Python 3.12** - Stable, production-ready  
-✅ **Python 3.13** - Latest features, testing  
-✅ **Docker Compose** - Easy multi-version management  
-✅ **DevContainers** - GitHub Codespaces support  
-✅ **Isolated environments** - No conflicts  
-✅ **Consistent setup** - Works everywhere  
+✅ **Python 3.12** - Stable, production-ready
+✅ **Python 3.13** - Latest features, testing
+✅ **Docker Compose** - Easy multi-version management
+✅ **DevContainers** - GitHub Codespaces support
+✅ **Isolated environments** - No conflicts
+✅ **Consistent setup** - Works everywhere
 
 Now you can develop, test, and deploy HypatiaX across any environment! 🎉

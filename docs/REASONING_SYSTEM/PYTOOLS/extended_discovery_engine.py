@@ -791,7 +791,8 @@ if __name__ == "__main__":
     print("\n" + "=" * 80)
     print("INTEGRATION WITH HybridDiscoverySystem")
     print("=" * 80)
-    print("""
+    print(
+        """
 To integrate with your HybridDiscoverySystem:
 
 from hybrid_system_v31 import HybridDiscoverySystem
@@ -825,7 +826,8 @@ result = system.discover_validate_interpret(
 # 1. ExtendedDiscoveryEngine (30+ templates)
 # 2. SymbolicEngine (general symbolic regression)
 # 3. PhysicsAwareRegressor (domain-specific fallback)
-    """)
+    """
+    )
     print("=" * 80 + "\n")
 
 

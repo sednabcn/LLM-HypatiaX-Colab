@@ -7,7 +7,7 @@ name: HypatiaX Data Processing Pipeline
 
 on:
   push:
-    branches: 
+    branches:
       - main
       - develop
     paths:
@@ -15,7 +15,7 @@ on:
       - 'script.py'
       - '.github/workflows/deployment.yml'
   pull_request:
-    branches: 
+    branches:
       - main
   schedule:
     # Run daily at 2 AM UTC
@@ -40,28 +40,28 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      
+
       - name: Validate paths
         run: |
           python script.py --validate-only
-      
+
       - name: Run unit tests
         run: |
           python -m pytest tests/ -v
@@ -71,27 +71,27 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     if: github.event_name != 'pull_request'
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      
+
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-      
+
       - name: Process tableau testing data
         run: |
           python script.py
         env:
           PROJECT_ROOT: ${{ github.workspace }}
           LOG_LEVEL: INFO
-      
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         if: always()
@@ -107,21 +107,21 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
@@ -132,7 +132,7 @@ jobs:
             type=sha,prefix={{branch}}-
             type=semver,pattern={{version}}
             type=raw,value=latest,enable={{is_default_branch}}
-      
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:

@@ -47,35 +47,35 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       setup-complete: ${{ steps.setup.outputs.complete }}
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
-      
+
       - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
-          
+
           # Check if requirements file exists
           if [ -f "${{ env.HYPATIAX_PATH }}/requirements/requirements.txt" ]; then
             pip install -q -r ${{ env.HYPATIAX_PATH }}/requirements/requirements.txt
           elif [ -f "${{ env.HYPATIAX_PATH }}/requirements.txt" ]; then
             pip install -q -r ${{ env.HYPATIAX_PATH }}/requirements.txt
           fi
-          
+
           # Verify critical packages
           echo "✅ Python environment ready"
           python --version
           pip list | grep -E "(spacy|transformers|torch|pandas|numpy)" || echo "⚠️ Some packages may be missing"
-      
+
       - name: Cache Version System
         uses: actions/cache@v4
         with:
@@ -85,40 +85,40 @@ jobs:
           key: version-system-${{ github.sha }}
           restore-keys: |
             version-system-
-      
+
       - name: Setup Version Management Structure
         id: setup
         run: |
           cd ${{ env.HYPATIAX_PATH }}
-          
+
           # Create directory structure
           mkdir -p .versions
           mkdir -p custom_ner/queries/tableau/rules/rules_versions
           mkdir -p datasets/queries/tableau/training/training_versions
           mkdir -p datasets/queries/tableau/testing/testing_versions
-          
+
           # Verify scripts exist
           if [ ! -f "global_version_manager.py" ] || \
              [ ! -f "version_injector.py" ]; then
             echo "❌ Version management scripts missing!"
             exit 1
           fi
-          
+
           chmod +x global_version_manager.py
           chmod +x version_injector.py
-          
+
           if [ -f "setup_version_system.sh" ]; then
             chmod +x setup_version_system.sh
           fi
-          
+
           echo "complete=true" >> $GITHUB_OUTPUT
           echo "✅ Version system structure ready"
-      
+
       - name: Initialize Version System
         if: steps.setup.outputs.complete == 'true'
         run: |
           cd ${{ env.HYPATIAX_PATH }}
-          
+
           # Create initial snapshot if this is first run
           if [ ! -f ".versions/global_versions.json" ]; then
             echo "📸 Creating initial snapshot..."
@@ -126,13 +126,13 @@ jobs:
               --name "github_actions_init" \
               --notes "Initial snapshot from GitHub Actions on $(date)"
           fi
-          
+
           # Initialize version injector if exists
           if [ -f "version_injector.py" ]; then
             python3 version_injector.py . create-loader 2>/dev/null || echo "⚠️ Version injector initialization skipped"
             python3 version_injector.py . export-env 2>/dev/null || echo "⚠️ Version injector export skipped"
           fi
-          
+
           echo "✅ Version system initialized"
 
   auto-version-changes:
@@ -140,21 +140,21 @@ jobs:
     needs: setup-version-system
     runs-on: ubuntu-latest
     if: |
-      github.event_name == 'push' || 
-      (github.event_name == 'workflow_dispatch' && 
+      github.event_name == 'push' ||
+      (github.event_name == 'workflow_dispatch' &&
        github.event.inputs.action == 'auto-version')
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      
+
       - name: Restore Version System Cache
         uses: actions/cache@v4
         with:
@@ -164,37 +164,37 @@ jobs:
           key: version-system-${{ github.sha }}
           restore-keys: |
             version-system-
-      
+
       - name: Scan for Changes
         id: scan
         run: |
           cd ${{ env.HYPATIAX_PATH }}
-          
+
           echo "🔍 Scanning for versionable files..."
           python3 global_version_manager.py . scan > scan_output.txt
           cat scan_output.txt
-          
+
           # Count files
           FILE_COUNT=$(grep -c "•" scan_output.txt || echo "0")
           echo "file_count=$FILE_COUNT" >> $GITHUB_OUTPUT
-      
+
       - name: Auto-Version Changed Files
         id: version
         run: |
           cd ${{ env.HYPATIAX_PATH }}
-          
+
           NOTES="${{ github.event.inputs.notes }}"
           if [ -z "$NOTES" ]; then
             NOTES="Auto-versioned from commit ${{ github.sha }} by ${{ github.actor }}"
           fi
-          
+
           echo "📝 Auto-versioning with notes: $NOTES"
-          
+
           python3 global_version_manager.py . auto-version \
             --notes "$NOTES" > version_output.txt
-          
+
           cat version_output.txt
-          
+
           # Check if any versioning occurred
           if grep -q "versioned" version_output.txt; then
             echo "versioned=true" >> $GITHUB_OUTPUT
@@ -203,19 +203,19 @@ jobs:
             echo "versioned=false" >> $GITHUB_OUTPUT
             echo "ℹ️ No changes detected"
           fi
-      
+
       - name: Sync Version Injector
         if: steps.version.outputs.versioned == 'true'
         run: |
           cd ${{ env.HYPATIAX_PATH }}
-          
+
           if [ -f "version_injector.py" ]; then
             python3 version_injector.py . sync 2>/dev/null || echo "⚠️ Version injector sync skipped"
             python3 version_injector.py . export-env 2>/dev/null || echo "⚠️ Version injector export skipped"
           fi
-          
+
           echo "✅ Version injector synced"
-      
+
       - name: Upload Version Artifacts
         if: steps.version.outputs.versioned == 'true'
         uses: actions/upload-artifact@v4
@@ -226,17 +226,17 @@ jobs:
             ${{ env.HYPATIAX_PATH }}/.env.versions
             ${{ env.HYPATIAX_PATH }}/version_loader.py
           retention-days: 30
-      
+
       - name: Commit Updated Versions
         if: |
-          steps.version.outputs.versioned == 'true' && 
+          steps.version.outputs.versioned == 'true' &&
           github.event_name == 'push'
         run: |
           cd ${{ env.HYPATIAX_PATH }}
-          
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           git add .versions/ .env.versions version_loader.py 2>/dev/null || true
           git commit -m "🤖 Auto-version: Update versions [skip ci]" || echo "No changes to commit"
           git push || echo "Nothing to push"
@@ -247,20 +247,20 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.schedule == '0 2 * * *' ||
-      (github.event_name == 'workflow_dispatch' && 
+      (github.event_name == 'workflow_dispatch' &&
        github.event.inputs.action == 'create-snapshot')
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      
+
       - name: Restore Version System Cache
         uses: actions/cache@v4
         with:
@@ -270,40 +270,40 @@ jobs:
           key: version-system-${{ github.sha }}
           restore-keys: |
             version-system-
-      
+
       - name: Create Snapshot
         id: snapshot
         run: |
           cd ${{ env.HYPATIAX_PATH }}
-          
+
           SNAPSHOT_NAME="${{ github.event.inputs.snapshot_name }}"
           if [ -z "$SNAPSHOT_NAME" ]; then
             SNAPSHOT_NAME="daily_$(date +%Y%m%d)"
           fi
-          
+
           NOTES="${{ github.event.inputs.notes }}"
           if [ -z "$NOTES" ]; then
             NOTES="Daily snapshot created by GitHub Actions on $(date)"
           fi
-          
+
           echo "📸 Creating snapshot: $SNAPSHOT_NAME"
-          
+
           python3 global_version_manager.py . snapshot \
             --name "$SNAPSHOT_NAME" \
             --notes "$NOTES" > snapshot_output.txt
-          
+
           cat snapshot_output.txt
-          
+
           # Extract snapshot ID
           SNAPSHOT_ID=$(grep -oP 'Snapshot #\K\d+' snapshot_output.txt | head -1)
           echo "snapshot_id=$SNAPSHOT_ID" >> $GITHUB_OUTPUT
           echo "snapshot_name=$SNAPSHOT_NAME" >> $GITHUB_OUTPUT
-      
+
       - name: Export Version Manifest
         run: |
           cd ${{ env.HYPATIAX_PATH }}
           python3 global_version_manager.py . export-manifest
-      
+
       - name: Upload Snapshot Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -312,14 +312,14 @@ jobs:
             ${{ env.HYPATIAX_PATH }}/.versions/snapshot_*/
             ${{ env.HYPATIAX_PATH }}/.versions/version_manifest_*.json
           retention-days: 90
-      
+
       - name: Create Release Tag
         if: github.event_name == 'schedule'
         run: |
           SNAPSHOT_NAME="${{ steps.snapshot.outputs.snapshot_name }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           git tag -a "snapshot-$SNAPSHOT_NAME" -m "Daily snapshot $SNAPSHOT_NAME"
           git push origin "snapshot-$SNAPSHOT_NAME" || echo "Tag already exists"
 
@@ -329,18 +329,18 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event_name == 'pull_request' ||
-      (github.event_name == 'workflow_dispatch' && 
+      (github.event_name == 'workflow_dispatch' &&
        github.event.inputs.action == 'status-check')
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      
+
       - name: Restore Version System Cache
         uses: actions/cache@v4
         with:
@@ -350,12 +350,12 @@ jobs:
           key: version-system-${{ github.sha }}
           restore-keys: |
             version-system-
-      
+
       - name: Check Version Status
         id: status
         run: |
           cd ${{ env.HYPATIAX_PATH }}
-          
+
           echo "📋 Current Version Status:"
           if [ -f "version_injector.py" ]; then
             python3 version_injector.py . show > status_output.txt 2>/dev/null || echo "No status available"
@@ -363,17 +363,17 @@ jobs:
           else
             echo "Version injector not found" > status_output.txt
           fi
-          
+
           echo "📸 Recent Snapshots:"
           python3 global_version_manager.py . list-snapshots | tail -20
-      
+
       - name: Scan for Versionable Files
         run: |
           cd ${{ env.HYPATIAX_PATH }}
-          
+
           echo "🔍 Scanning versionable files:"
           python3 global_version_manager.py . scan
-      
+
       - name: Comment PR with Status
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
@@ -382,27 +382,27 @@ jobs:
             const fs = require('fs');
             const path = require('path');
             const statusFile = path.join(process.env.HYPATIAX_PATH, 'status_output.txt');
-            
+
             let statusOutput = 'No status available';
             if (fs.existsSync(statusFile)) {
               statusOutput = fs.readFileSync(statusFile, 'utf8');
             }
-            
+
             const comment = `## 📊 Version Management Status
-            
+
             ### Current Versions
             \`\`\`
             ${statusOutput}
             \`\`\`
-            
+
             ### Actions Available
             - **Auto-version**: Automatically version changed files
             - **Create Snapshot**: Create a complete system snapshot
             - **Status Check**: View current version status
-            
+
             _This status check was triggered by PR #${{ github.event.pull_request.number }}_
             `;
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -415,18 +415,18 @@ jobs:
     needs: setup-version-system
     runs-on: ubuntu-latest
     if: |
-      github.event_name == 'workflow_dispatch' && 
+      github.event_name == 'workflow_dispatch' &&
       github.event.inputs.action == 'restore-snapshot'
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      
+
       - name: Restore Version System Cache
         uses: actions/cache@v4
         with:
@@ -436,29 +436,29 @@ jobs:
           key: version-system-${{ github.sha }}
           restore-keys: |
             version-system-
-      
+
       - name: Restore Snapshot
         run: |
           cd ${{ env.HYPATIAX_PATH }}
-          
+
           SNAPSHOT_ID="${{ github.event.inputs.snapshot_id }}"
-          
+
           if [ -z "$SNAPSHOT_ID" ]; then
             echo "❌ Snapshot ID required for restore"
             exit 1
           fi
-          
+
           echo "🔄 Restoring snapshot #$SNAPSHOT_ID"
-          
+
           python3 global_version_manager.py . restore "$SNAPSHOT_ID"
-          
+
           echo "✅ Snapshot restored"
-      
+
       - name: Commit Restored State
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           git add -A
           git commit -m "🔄 Restore snapshot #${{ github.event.inputs.snapshot_id }}" || echo "No changes"
           git push || echo "Nothing to push"
@@ -468,18 +468,18 @@ jobs:
     needs: setup-version-system
     runs-on: ubuntu-latest
     if: |
-      github.event_name == 'workflow_dispatch' && 
+      github.event_name == 'workflow_dispatch' &&
       github.event.inputs.action == 'list-snapshots'
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      
+
       - name: Restore Version System Cache
         uses: actions/cache@v4
         with:
@@ -489,7 +489,7 @@ jobs:
           key: version-system-${{ github.sha }}
           restore-keys: |
             version-system-
-      
+
       - name: List Snapshots
         run: |
           cd ${{ env.HYPATIAX_PATH }}
@@ -500,18 +500,18 @@ jobs:
     needs: setup-version-system
     runs-on: ubuntu-latest
     if: |
-      github.event_name == 'workflow_dispatch' && 
+      github.event_name == 'workflow_dispatch' &&
       github.event.inputs.action == 'export-manifest'
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      
+
       - name: Restore Version System Cache
         uses: actions/cache@v4
         with:
@@ -521,12 +521,12 @@ jobs:
           key: version-system-${{ github.sha }}
           restore-keys: |
             version-system-
-      
+
       - name: Export Manifest
         run: |
           cd ${{ env.HYPATIAX_PATH }}
           python3 global_version_manager.py . export-manifest
-      
+
       - name: Upload Manifest
         uses: actions/upload-artifact@v4
         with:
@@ -539,7 +539,7 @@ jobs:
     needs: [auto-version-changes, daily-snapshot]
     runs-on: ubuntu-latest
     if: always()
-    
+
     steps:
       - name: Workflow Summary
         run: |

@@ -1,15 +1,15 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python experiments/generation/tests/10_new_all.py --all --iterations 50                                                        
+└─$ python experiments/generation/tests/10_new_all.py --all --iterations 50
 
-================================================================================                                                   
-RUNNING ALL DOMAIN TESTS (WITH RESUME)                                                                                             
-================================================================================                                                   
-                                                                                                                                   
-📊 Session Status:                                                                                                                 
-   Session ID: 20260106_104019                                                                                                     
-   Total tests: 8                                                                                                                  
-   ✅ Completed: 0                                                                                                                 
-   ⏳ Pending: 8                                                                                                                   
+================================================================================
+RUNNING ALL DOMAIN TESTS (WITH RESUME)
+================================================================================
+
+📊 Session Status:
+   Session ID: 20260106_104019
+   Total tests: 8
+   ✅ Completed: 0
+   ⏳ Pending: 8
    Results dir: hypatiax/data/results/20260106_104019
 
 🔧 Configuration:
@@ -60,7 +60,7 @@ Equation hint: kinetic_energy
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 10:41:24,272 - INFO - 
+2026-01-06 10:41:24,272 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -155,7 +155,7 @@ Equation hint: ohms_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 10:51:58,922 - INFO - 
+2026-01-06 10:51:58,922 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
    [SANITIZE] I -> I_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -250,7 +250,7 @@ Equation hint: henderson_hasselbalch
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 10:54:06,476 - INFO - 
+2026-01-06 10:54:06,476 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -344,7 +344,7 @@ Equation hint: nernst_equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 11:00:10,488 - INFO - 
+2026-01-06 11:00:10,488 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
    [SANITIZE] Q -> Q_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -446,7 +446,7 @@ Equation hint: logistic_growth
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 11:05:20,831 - INFO - 
+2026-01-06 11:05:20,831 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
    [SANITIZE] N -> N_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -545,7 +545,7 @@ Equation hint: bernoulli_equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 11:23:58,448 - INFO - 
+2026-01-06 11:23:58,448 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -644,7 +644,7 @@ Equation hint: elasticity_demand
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 11:30:26,277 - INFO - 
+2026-01-06 11:30:26,277 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
    [SANITIZE] Q -> Q_var (reserved name)
 [ANALYZE] Analyzing data characteristics...
@@ -739,7 +739,7 @@ Equation hint: cobb_douglas
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-06 11:34:08,279 - INFO - 
+2026-01-06 11:34:08,279 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
    [SANITIZE] alpha -> alpha_var (reserved name)
    [SANITIZE] beta -> beta_var (reserved name)
@@ -824,4 +824,3 @@ Detailed Results:
   ✅ logistic_growth           R²=0.9993
 
 ================================================================================
-

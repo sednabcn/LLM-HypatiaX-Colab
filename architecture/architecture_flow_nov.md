@@ -1,5 +1,5 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/LLM-HypatiaX-OLD/hypatiax]
-└─$ tree                                                                                                             
+└─$ tree
 .
 ├── auto_migrate.py
 ├── config
@@ -86,13 +86,13 @@
 │       │   ├── combined_local_data.py
 │       │   ├── __init__.py
 │       │   └── __pycache__
-│       │   
+│       │  
 │       ├── __init__.py
 │       ├── normalize
 │       │   ├── __init__.py
 │       │   └── test.py
 │       ├── __pycache__
-│       │   
+│       │  
 │       └── tableau
 │           ├── data
 │           │   ├── __init__.py
@@ -100,7 +100,7 @@
 │           │   └── test.py
 │           ├── __init__.py
 │           ├── __pycache__
-│           │   
+│           │  
 │           ├── testing
 │           │   ├── formulas_test_combined.xlsx
 │           │   ├── formulas_test_nor_combined.xlsx
@@ -238,7 +238,7 @@
 │   │   │   ├── __init__.py
 │   │   │   ├── meta.json
 │   │   │   └── __pycache__
-│   │   │       
+│   │   │  
 │   │   ├── en_core_web_sm-3.8.0.dist-info
 │   │   │   ├── direct_url.json
 │   │   │   ├── entry_points.txt
@@ -252,11 +252,11 @@
 │   │   │   └── WHEEL
 │   │   └── __init__.py
 │   ├── __pycache__
-│   │   
+│   │  
 │   └── queries
 │       ├── __init__.py
 │       ├── __pycache__
-│       │   
+│       │  
 │       └── tableau
 │           ├── __init__.py
 │           ├── ner_tableau
@@ -389,19 +389,19 @@
 │   ├── complete-system-guide
 │   │   ├── advanced_configuration.md
 │   │   ├── API.md
-│   │   ├── 
+│   │   ├──
 │   │   ├── benchmark
 │   │   │   └── benchmark01.py
 │   │   ├── custom_demos
 │   │   │   ├── batch_processing_demo.py
-│   │   │   
+│   │   │  
 │   │   │   └── simple_clidemo.py
 │   │   ├── example_engine.py
 │   │   ├── Examples-API.md
 │   │   ├── example_ui.py
 │   │   ├── guide.md
 │   │   ├── install_dependencies.sh
-│   │   ├── 
+│   │   ├──
 │   │   ├── integration-patterns
 │   │   │   ├── pattern1.py
 │   │   │   ├── pattern2.py
@@ -413,13 +413,13 @@
 │   │   ├── usage_basic.py~
 │   │   ├── usage_examples.py
 │   │   ├── Web-Interface(Complete Stack).html
-│   │   ├── 
+│   │   ├──
 │   │   └── you're-all-set.md
 │   ├── COMPLETE_SYSTEM_GUIDE.pdf
 │   ├── config.py
 │   ├── demo_examples.py
 │   ├── demo_flow.md
-│   ├── 
+│   ├──
 │   ├── demo_interactive.py
 │   ├── demo_web_api.py
 │   ├── engine.py
@@ -499,11 +499,11 @@
 ├── models
 │   ├── __init__.py
 │   ├── __pycache__
-│   │   
+│   │  
 │   └── queries
 │       ├── __init__.py
 │       ├── __pycache__
-│       │   
+│       │  
 │       └── tableau
 │           ├── checkpoints
 │           │   └── __init__.py
@@ -511,7 +511,7 @@
 │           ├── model_configs
 │           │   └── __init__.py
 │           ├── __pycache__
-│           │   
+│           │  
 │           ├── trained_models
 │           │   ├── Combined_multi_task_data_400.0.5.8
 │           │   │   ├── attribute_ruler
@@ -547,18 +547,18 @@
 │           │   │       └── vectors.cfg
 │           │   ├── __init__.py
 │           │   └── __pycache__
-│           │   
+│           │  
 │           └── training_history
 │               └── __init__.py
 ├── patterns
 │   ├── custom_patterns.py
 │   ├── __init__.py
 │   ├── __pycache__
-│   │   
+│   │  
 │   └── queries
 │       ├── __init__.py
 │       ├── __pycache__
-│       │   
+│       │  
 │       └── tableau
 │           ├── generation.py
 │           ├── __init__.py
@@ -593,4 +593,4 @@
 151 directories, 476 files
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/LLM-HypatiaX-OLD/hypatiax]
-└─$        
+└─$

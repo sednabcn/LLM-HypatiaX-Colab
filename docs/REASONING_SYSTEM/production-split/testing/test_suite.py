@@ -62,7 +62,11 @@ class TestSuite:
         logging.info("COMPREHENSIVE TEST SUITE - STARTING")
         logging.info("=" * 80 + "\n")
 
-        test_queries = TestSuite.get_quick_test_queries() if quick_mode else TestSuite.get_test_queries()
+        test_queries = (
+            TestSuite.get_quick_test_queries()
+            if quick_mode
+            else TestSuite.get_test_queries()
+        )
 
         mode_label = "Quick" if quick_mode else "Full"
         logging.info(f"{mode_label} mode: Testing {len(test_queries)} queries\n")

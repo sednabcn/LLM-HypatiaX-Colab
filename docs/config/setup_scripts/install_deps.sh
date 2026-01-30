@@ -144,7 +144,7 @@ for module, name in tests:
 print("\n=== spaCy Models ===")
 try:
     import spacy
-    
+
     models = ['en_core_web_sm', 'en_core_web_trf']
     for model in models:
         try:

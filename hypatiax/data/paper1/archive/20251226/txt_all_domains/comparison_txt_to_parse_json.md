@@ -1,5 +1,5 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python results/parse_txt_to_json.py                                                                     
+└─$ python results/parse_txt_to_json.py
 ================================================================================
 PARSING TEXT FILES TO JSON FORMAT
 ================================================================================
@@ -41,4 +41,4 @@ Run comparison with:
   python results/comparison_analysis_improved.py results/baseline_llm_PARSED.json results/baseline_nn_PARSED.json
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                
+└─$

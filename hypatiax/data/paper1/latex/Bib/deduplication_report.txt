@@ -62,7 +62,7 @@ GENUINELY NEW ENTRIES (Add to merged bibliography)
       Author: Koza, John R
       Year:   1994
   ✓ la2021contemporary
-      Title:  Contemporary symbolic regression methods and their relative 
+      Title:  Contemporary symbolic regression methods and their relative
       Author: La Cava, William and Orzechowski, Patryk and Burlacu, Bogdan
       Year:   2021
   ✓ lecun2015deep
@@ -83,15 +83,15 @@ GENUINELY NEW ENTRIES (Add to merged bibliography)
       Year:   2020
   ✓ neyshabur2017exploring
       Title:  Exploring generalization in deep learning
-      Author: Neyshabur, Behnam and Bhojanapalli, Srinadh and McAllester, 
+      Author: Neyshabur, Behnam and Bhojanapalli, Srinadh and McAllester,
       Year:   2017
   ✓ paszke2019pytorch
       Title:  PyTorch: An imperative style, high-performance deep learning
-      Author: Paszke, Adam and Gross, Sam and Massa, Francisco and Lerer, 
+      Author: Paszke, Adam and Gross, Sam and Massa, Francisco and Lerer,
       Year:   2019
   ✓ romera2023mathematical
       Title:  Mathematical capabilities of ChatGPT
-      Author: Romera-Paredes, Bernardino and Barekatain, Mohammadamin and 
+      Author: Romera-Paredes, Bernardino and Barekatain, Mohammadamin and
       Year:   2023
   ✓ rudin2019stop
       Title:  Stop explaining black box machine learning models for high s

@@ -20,13 +20,19 @@ from datetime import datetime
 # Add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-from formula_generator_multiverse_v2 import FormulaGeneratorMultiverse, Strategy, TestSuite
+from formula_generator_multiverse_v2 import (
+    FormulaGeneratorMultiverse,
+    Strategy,
+    TestSuite,
+)
 
 
 def setup_logging(verbose: bool = False):
     """Configure logging."""
     level = logging.DEBUG if verbose else logging.INFO
-    logging.basicConfig(level=level, format="%(asctime)s - %(message)s", datefmt="%H:%M:%S")
+    logging.basicConfig(
+        level=level, format="%(asctime)s - %(message)s", datefmt="%H:%M:%S"
+    )
 
 
 def print_banner():
@@ -167,7 +173,9 @@ def run_single_query(query: str, domain: str = "defi"):
     print("=" * 80)
     print(f"Query: {result.query}")
     print(f"Domain: {result.domain}")
-    print(f"Recommended: {result.recommended_strategy.value if result.recommended_strategy else 'None'}")
+    print(
+        f"Recommended: {result.recommended_strategy.value if result.recommended_strategy else 'None'}"
+    )
     print(f"Reason: {result.recommendation_reason}")
     print(f"\nStrategies tested: {len(result.results)}")
     print(f"Succeeded: {result.strategies_succeeded}")
@@ -205,17 +213,35 @@ Examples:
         """,
     )
 
-    parser.add_argument("--quick", action="store_true", help="Run quick test (5 queries instead of full suite)")
-
-    parser.add_argument("--single", type=str, metavar="QUERY", help="Test a single query")
-
     parser.add_argument(
-        "--domain", type=str, default="defi", choices=["defi", "risk"], help="Domain for single query (default: defi)"
+        "--quick",
+        action="store_true",
+        help="Run quick test (5 queries instead of full suite)",
     )
 
-    parser.add_argument("--discovery", action="store_true", help="Enable symbolic discovery strategy (slower)")
+    parser.add_argument(
+        "--single", type=str, metavar="QUERY", help="Test a single query"
+    )
 
-    parser.add_argument("--sequential", action="store_true", help="Run strategies sequentially (easier debugging)")
+    parser.add_argument(
+        "--domain",
+        type=str,
+        default="defi",
+        choices=["defi", "risk"],
+        help="Domain for single query (default: defi)",
+    )
+
+    parser.add_argument(
+        "--discovery",
+        action="store_true",
+        help="Enable symbolic discovery strategy (slower)",
+    )
+
+    parser.add_argument(
+        "--sequential",
+        action="store_true",
+        help="Run strategies sequentially (easier debugging)",
+    )
 
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose logging")
 

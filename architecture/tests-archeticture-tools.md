@@ -72,7 +72,7 @@ pytest tests/
 # Run only unit tests
 pytest tests/unit/
 
-# Run only integration tests  
+# Run only integration tests
 pytest tests/integration/
 
 # Run with verbose output
@@ -149,7 +149,7 @@ def test_description_parsing():
         ("Calculate sum", {"entities": [(10, 13, "FUNCTION")]}),
         ("Get average", {"entities": [(4, 11, "FUNCTION")]})
     ]
-    
+
     # Test
     result = parse_descriptions(sample_data)
     assert len(result) == 2
@@ -161,7 +161,7 @@ def test_formula_parsing():
         ("Calculate sum", {"entities": [(10, 13, "FUNCTION")]}),
         ("Get average", {"entities": [(4, 11, "FUNCTION")]})
     ]
-    
+
     # Test
     result = parse_formulas(sample_data)
     assert len(result) == 2
@@ -182,7 +182,7 @@ def test_description_parsing(sample_data):  # ← Fixture automatically injected
     result = parse_descriptions(sample_data)
     assert len(result) == 2
 
-# test_formulas.py  
+# test_formulas.py
 def test_formula_parsing(sample_data):  # ← Same fixture, no duplication!
     result = parse_formulas(sample_data)
     assert len(result) == 2
@@ -255,16 +255,16 @@ python@pytest.fixture
 def database_connection():
     """Setup: Connect to database."""
     conn = connect_to_db()
-    
+
     yield conn  # This is what the test gets
-    
+
     # Teardown: Close connection after test
     conn.close()
 6. Pytest Configuration
 pythondef pytest_configure(config):
     """Run before any tests."""
     config.addinivalue_line(
-        "markers", 
+        "markers",
         "slow: marks tests as slow"
     )
 
@@ -685,16 +685,16 @@ def test_full_description_processing_pipeline():
     """Test entire pipeline: load → process → train → save"""
     # 1. Load real data file
     data = load_data("datasets/formulas_nor.xlsx")
-    
+
     # 2. Process it
     processed = process_descriptions(data)
-    
+
     # 3. Train model
     model = train_ner_model(processed)
-    
+
     # 4. Save model
     model.save("models/test_model")
-    
+
     # 5. Verify it works end-to-end
     assert model.predict("Calculate SUM") is not None
 
@@ -702,9 +702,9 @@ def test_description_and_formula_combined():
     """Test that descriptions and formulas work together"""
     desc_data = load_descriptions()
     formula_data = load_formulas()
-    
+
     combined = merge_data(desc_data, formula_data)
-    
+
     assert len(combined) > 0
     assert "Description" in combined.columns
     assert "Formulas" in combined.columns
@@ -722,7 +722,7 @@ def test_parse_single_description():
     result = parse_description(desc)
     assert result['entities'] == [(10, 13, "FUNCTION")]
 
-# test_entity_formulas.py  
+# test_entity_formulas.py
 def test_extract_formula_parts():
     """Tests JUST the extraction function"""
     formula = "SUM([Sales])"
@@ -761,11 +761,11 @@ def test_combined_desc_and_formula_system():
     """Tests BOTH systems working together"""
     desc_model = load_model("desc_model")
     formula_model = load_model("formula_model")
-    
+
     text = "Calculate SUM([Sales])"
     desc_result = desc_model.predict(text)
     formula_result = formula_model.predict(text)
-    
+
     combined = merge_predictions(desc_result, formula_result)
     assert combined['entities'] > 0
 ```

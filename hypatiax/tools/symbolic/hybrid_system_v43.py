@@ -32,6 +32,7 @@ from hypatiax.tools.symbolic.symbolic_engine import DiscoveryConfig, SymbolicEng
 # Optional imports with fallbacks
 try:
     from hypatiax.tools.symbolic.physics_aware_regressor import PhysicsAwareRegressor
+
     HAS_PHYSICS = True
 except ImportError:
     HAS_PHYSICS = False
@@ -39,6 +40,7 @@ except ImportError:
 
 try:
     from hypatiax.tools.validation.ensemble_validator import EnsembleValidator
+
     HAS_VALIDATOR = True
 except ImportError:
     HAS_VALIDATOR = False
@@ -56,35 +58,46 @@ logger = logging.getLogger(__name__)
 # VARIABLE NAME SANITIZATION (NEW!)
 # ============================================================================
 
+
 class VariableNameSanitizer:
     """
     Sanitizes variable names to avoid conflicts with Julia/PySR reserved names.
-    
+
     Reserved single-letter names in Julia/SymbolicRegression.jl:
     - S, N, C, D, E, I, O (function names)
     - T, V, X, Y, Z (common conflicts)
-    
+
     Strategy:
     1. Detect problematic single-letter names
     2. Replace with safe alternatives (var_S, var_N, etc.)
     3. Track mapping for reversal
     4. Restore original names in final output
     """
-    
+
     # Known problematic names (Julia reserved or common conflicts)
     RESERVED_NAMES = {
-        'S', 'N', 'C', 'D', 'E', 'I', 'O',  # Julia functions
-        'T', 'V', 'X', 'Y', 'Z',            # Common conflicts
+        "S",
+        "N",
+        "C",
+        "D",
+        "E",
+        "I",
+        "O",  # Julia functions
+        "T",
+        "V",
+        "X",
+        "Y",
+        "Z",  # Common conflicts
     }
-    
+
     @staticmethod
     def sanitize_names(variable_names: List[str]) -> Tuple[List[str], Dict[str, str]]:
         """
         Sanitize variable names to avoid Julia/PySR conflicts.
-        
+
         Args:
             variable_names: Original variable names
-            
+
         Returns:
             (sanitized_names, name_mapping)
             - sanitized_names: Safe variable names for PySR
@@ -92,7 +105,7 @@ class VariableNameSanitizer:
         """
         sanitized = []
         mapping = {}
-        
+
         for name in variable_names:
             # Check if name is problematic
             if name in VariableNameSanitizer.RESERVED_NAMES:
@@ -104,31 +117,31 @@ class VariableNameSanitizer:
             else:
                 # Keep original
                 sanitized.append(name)
-        
+
         return sanitized, mapping
-    
+
     @staticmethod
     def restore_expression(expression: str, mapping: Dict[str, str]) -> str:
         """
         Restore original variable names in discovered expression.
-        
+
         Args:
             expression: Expression with sanitized names
             mapping: {sanitized -> original} mapping
-            
+
         Returns:
             Expression with original names restored
         """
         restored = expression
-        
+
         # Sort by length (longest first) to avoid partial replacements
-        for safe_name, original_name in sorted(mapping.items(), 
-                                              key=lambda x: len(x[0]), 
-                                              reverse=True):
+        for safe_name, original_name in sorted(
+            mapping.items(), key=lambda x: len(x[0]), reverse=True
+        ):
             # Use word boundaries to avoid partial replacements
-            pattern = r'\b' + re.escape(safe_name) + r'\b'
+            pattern = r"\b" + re.escape(safe_name) + r"\b"
             restored = re.sub(pattern, original_name, restored)
-        
+
         return restored
 
 
@@ -136,11 +149,12 @@ class VariableNameSanitizer:
 # UTILITY FUNCTIONS
 # ============================================================================
 
+
 def detect_collapsed_constants(expression: str, variable_names: List[str]) -> List[str]:
     """Detect collapsed physical constants in expressions."""
     collapsed = []
     constants = re.findall(r"(\d+\.?\d*(?:[eE][+-]?\d+)?)", expression)
-    
+
     PHYSICAL_CONSTANTS = {
         "c (speed of light)": [2.998e8, 3.0e8],
         "G (gravitational constant)": [6.674e-11, 6.67e-11],
@@ -148,7 +162,7 @@ def detect_collapsed_constants(expression: str, variable_names: List[str]) -> Li
         "k_B (Boltzmann constant)": [1.381e-23, 1.38e-23],
         "e (elementary charge)": [1.602e-19, 1.60e-19],
     }
-    
+
     for const_str in constants:
         try:
             value = float(const_str)
@@ -160,7 +174,7 @@ def detect_collapsed_constants(expression: str, variable_names: List[str]) -> Li
                         break
         except ValueError:
             continue
-    
+
     return collapsed
 
 
@@ -168,8 +182,10 @@ def detect_collapsed_constants(expression: str, variable_names: List[str]) -> Li
 # ENUMS
 # ============================================================================
 
+
 class DiscoveryMode(Enum):
     """Discovery acceptance modes."""
+
     STRICT = "strict"
     CALIBRATED = "calibrated"
 
@@ -178,15 +194,16 @@ class DiscoveryMode(Enum):
 # HYBRID DISCOVERY SYSTEM v4.2.1 (FIXED)
 # ============================================================================
 
+
 class HybridDiscoverySystem:
     """
     Hybrid Discovery System v4.2.1 - VARIABLE NAME FIX
-    
+
     CRITICAL FIX:
     ✅ Automatic variable name sanitization
     ✅ Handles S, N, C, D, E, I, O conflicts
     ✅ Preserves original names in output
-    
+
     All other features from v4.2 preserved.
     """
 
@@ -291,7 +308,10 @@ class HybridDiscoverySystem:
         self.google_provider = None
 
         try:
-            from hypatiax.tools.llm_providers.anthropic_provider import AnthropicProvider
+            from hypatiax.tools.llm_providers.anthropic_provider import (
+                AnthropicProvider,
+            )
+
             api_key = anthropic_api_key or os.getenv("ANTHROPIC_API_KEY")
             if api_key:
                 self.anthropic_provider = AnthropicProvider(
@@ -302,6 +322,7 @@ class HybridDiscoverySystem:
 
         try:
             from hypatiax.tools.llm_providers.google_provider import GoogleProvider
+
             api_key = google_api_key or os.getenv("GOOGLE_API_KEY")
             if api_key:
                 self.google_provider = GoogleProvider(
@@ -348,35 +369,35 @@ class HybridDiscoverySystem:
     ) -> Dict[str, Any]:
         """
         Discovery with retry logic and variable name sanitization.
-        
+
         NEW: Automatically sanitizes variable names before PySR.
         """
         # SANITIZE VARIABLE NAMES (NEW!)
         sanitized_names, name_mapping = VariableNameSanitizer.sanitize_names(
             variable_names
         )
-        
+
         if name_mapping:
             logger.info(f"\n[SANITIZATION] Detected problematic variable names")
             self.stats["variable_sanitizations"] += 1
-        
+
         # Update descriptions and units with sanitized names
         sanitized_descriptions = {}
         sanitized_units = {}
-        
+
         for orig_name in variable_names:
             # Find sanitized name
             if orig_name in VariableNameSanitizer.RESERVED_NAMES:
                 safe_name = f"var_{orig_name}"
             else:
                 safe_name = orig_name
-            
+
             # Copy metadata
             if orig_name in variable_descriptions:
                 sanitized_descriptions[safe_name] = variable_descriptions[orig_name]
             if orig_name in variable_units:
                 sanitized_units[safe_name] = variable_units[orig_name]
-        
+
         best_result = None
         best_r2 = -np.inf
 
@@ -392,7 +413,11 @@ class HybridDiscoverySystem:
 
                 # Use SANITIZED names for discovery
                 result = self.symbolic_engine.discover(
-                    X, y, sanitized_names, equation_name=equation_name, random_state=seed
+                    X,
+                    y,
+                    sanitized_names,
+                    equation_name=equation_name,
+                    random_state=seed,
                 )
 
                 r2 = result.get("r2_score", 0)
@@ -416,7 +441,7 @@ class HybridDiscoverySystem:
                     result["expression"], variable_names
                 )
                 result["collapsed_constants"] = collapsed
-                
+
                 if collapsed:
                     logger.info(f"   Collapsed constants: {collapsed}")
                     self.stats["collapsed_constants_detected"] += 1
@@ -528,7 +553,7 @@ class HybridDiscoverySystem:
     ) -> Dict[str, Any]:
         """
         Complete discovery workflow with variable name sanitization.
-        
+
         NEW: Automatically handles problematic variable names.
         """
         print(f"\n{'=' * 70}")
@@ -566,7 +591,9 @@ class HybridDiscoverySystem:
                 print(f"   Attempt: {discovery_result['attempt']}/{self.max_retries}")
 
             if discovery_result.get("variable_mapping"):
-                print(f"   Variables sanitized: {list(discovery_result['variable_mapping'].values())}")
+                print(
+                    f"   Variables sanitized: {list(discovery_result['variable_mapping'].values())}"
+                )
 
         except Exception as e:
             logger.error(f"Discovery failed: {e}")
@@ -696,13 +723,13 @@ if __name__ == "__main__":
     print(f"Expression: {result['discovery']['expression']}")
     print(f"R²: {result['discovery']['r2_score']:.4f}")
     print(f"Accepted: {result['acceptance']['accepted']}")
-    
-    if result['discovery'].get('variable_mapping'):
+
+    if result["discovery"].get("variable_mapping"):
         print(f"Variable mapping: {result['discovery']['variable_mapping']}")
         print("✅ Variable sanitization WORKED!")
     else:
         print("ℹ️ No variable sanitization needed")
-    
+
     print("\n" + "=" * 80)
     print("v4.2.1 VARIABLE NAME FIX - Test complete!")
     print("=" * 80)

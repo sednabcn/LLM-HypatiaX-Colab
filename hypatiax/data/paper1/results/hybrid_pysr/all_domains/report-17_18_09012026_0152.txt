@@ -944,55 +944,53 @@ Validation: ENABLED
    💾 Saved: quantum_compton_shift.json
 
 ========================================================================================================================
-                                              LLM-GUIDED DISCOVERY RESULTS                                              
+                                              LLM-GUIDED DISCOVERY RESULTS
 ========================================================================================================================
-Test Name                                 R²    Val   Time  Status  Observation                                  
+Test Name                                 R²    Val   Time  Status  Observation
 ----------------------------------- -------- ------ ------ -------- ---------------------------------------------
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ELECTROMAGNETISM
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-electromagnetism_coulomb_law          1.0000   91.3   13.7s  ✅ PASS  LLM hypothesis successful                    
-electromagnetism_lorentz_force        1.0000  100.0   12.0s  ✅ PASS  LLM hypothesis successful                    
-electromagnetism_ohms_law             1.0000  100.0   12.6s  ✅ PASS  LLM hypothesis successful                    
+electromagnetism_coulomb_law          1.0000   91.3   13.7s  ✅ PASS  LLM hypothesis successful
+electromagnetism_lorentz_force        1.0000  100.0   12.0s  ✅ PASS  LLM hypothesis successful
+electromagnetism_ohms_law             1.0000  100.0   12.6s  ✅ PASS  LLM hypothesis successful
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 FLUID_DYNAMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-fluid_dynamics_bernoulli_equation     1.0000  100.0   15.8s  ✅ PASS  LLM hypothesis successful                    
-fluid_dynamics_hagen_poiseuille       0.6088   89.5   14.9s  ❌ FAIL  Below threshold                              
-fluid_dynamics_reynolds_number        1.0000   91.0   13.6s  ✅ PASS  LLM hypothesis successful                    
+fluid_dynamics_bernoulli_equation     1.0000  100.0   15.8s  ✅ PASS  LLM hypothesis successful
+fluid_dynamics_hagen_poiseuille       0.6088   89.5   14.9s  ❌ FAIL  Below threshold
+fluid_dynamics_reynolds_number        1.0000   91.0   13.6s  ✅ PASS  LLM hypothesis successful
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 MECHANICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-mechanics_gravitational_potential_energy   1.0000  100.0   11.5s  ✅ PASS  LLM hypothesis successful                    
-mechanics_hookes_law                  1.0000  100.0   12.2s  ✅ PASS  LLM hypothesis successful                    
-mechanics_kinetic_energy              1.0000  100.0   14.1s  ✅ PASS  LLM hypothesis successful                    
+mechanics_gravitational_potential_energy   1.0000  100.0   11.5s  ✅ PASS  LLM hypothesis successful
+mechanics_hookes_law                  1.0000  100.0   12.2s  ✅ PASS  LLM hypothesis successful
+mechanics_kinetic_energy              1.0000  100.0   14.1s  ✅ PASS  LLM hypothesis successful
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 OPTICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-optics_single_slit_diffraction        1.0000   99.1   15.1s  ✅ PASS  LLM hypothesis successful                    
-optics_snells_law                     1.0000  100.0   13.7s  ✅ PASS  LLM hypothesis successful                    
-optics_thin_lens_equation             1.0000   97.6   13.4s  ✅ PASS  LLM hypothesis successful                    
+optics_single_slit_diffraction        1.0000   99.1   15.1s  ✅ PASS  LLM hypothesis successful
+optics_snells_law                     1.0000  100.0   13.7s  ✅ PASS  LLM hypothesis successful
+optics_thin_lens_equation             1.0000   97.6   13.4s  ✅ PASS  LLM hypothesis successful
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 QUANTUM
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-quantum_compton_shift                 1.0000  100.0   15.5s  ✅ PASS  LLM hypothesis successful                    
-quantum_de_broglie_wavelength         1.0000  100.0   13.4s  ✅ PASS  LLM hypothesis successful                    
-quantum_photon_energy                 1.0000  100.0   13.1s  ✅ PASS  LLM hypothesis successful                    
+quantum_compton_shift                 1.0000  100.0   15.5s  ✅ PASS  LLM hypothesis successful
+quantum_de_broglie_wavelength         1.0000  100.0   13.4s  ✅ PASS  LLM hypothesis successful
+quantum_photon_energy                 1.0000  100.0   13.1s  ✅ PASS  LLM hypothesis successful
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 THERMODYNAMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-thermodynamics_carnot_efficiency      1.0000   98.5   12.4s  ✅ PASS  LLM hypothesis successful                    
-thermodynamics_heat_capacity          1.0000  100.0   15.9s  ✅ PASS  LLM hypothesis successful                    
-thermodynamics_ideal_gas_law          1.0000   91.0   12.7s  ✅ PASS  LLM hypothesis successful                    
+thermodynamics_carnot_efficiency      1.0000   98.5   12.4s  ✅ PASS  LLM hypothesis successful
+thermodynamics_heat_capacity          1.0000  100.0   15.9s  ✅ PASS  LLM hypothesis successful
+thermodynamics_ideal_gas_law          1.0000   91.0   12.7s  ✅ PASS  LLM hypothesis successful
 ========================================================================================================================
 
-SUMMARY: 17/18 passed (94.4%) | 
+SUMMARY: 17/18 passed (94.4%) |
 Avg R²: 0.9783 | Avg Val: 97.7 | Avg Time: 13.6s
 ========================================================================================================================
-
-

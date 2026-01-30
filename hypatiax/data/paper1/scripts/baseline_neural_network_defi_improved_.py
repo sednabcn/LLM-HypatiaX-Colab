@@ -266,9 +266,9 @@ def train_neural_network(
                 "mean_prediction": float(np.mean(y_all_pred)),
                 "std_prediction": float(np.std(y_all_pred)),
                 "mean_error": float(np.mean(y_all_pred - y)),
-                "extrapolation_quality": "poor"
-                if abs(np.mean(y_all_pred - y)) > np.std(y)
-                else "good",
+                "extrapolation_quality": (
+                    "poor" if abs(np.mean(y_all_pred - y)) > np.std(y) else "good"
+                ),
             }
 
     # =====================================================================
@@ -525,9 +525,7 @@ def compare_with_llm_baseline(nn_report_file, llm_report_file):
     winner = (
         "NN 🏆"
         if nn_success > llm_success
-        else "LLM 🏆"
-        if llm_success > nn_success
-        else "Tie"
+        else "LLM 🏆" if llm_success > nn_success else "Tie"
     )
     print(f"{'Success Rate':<30} {nn_success:<20.2%} {llm_success:<20.2%} {winner}")
 
@@ -555,7 +553,8 @@ if __name__ == "__main__":
     # Parse command line arguments
     if len(sys.argv) > 1:
         if sys.argv[1] == "--help":
-            print("""
+            print(
+                """
 Usage:
   python baseline_neural_network_improved.py [options]
 
@@ -573,7 +572,8 @@ Examples:
   python baseline_neural_network_improved.py --domain amm,liquidation
   python baseline_neural_network_improved.py --quick --verbose
   python baseline_neural_network_improved.py --compare nn_report.json llm_report.json
-""")
+"""
+            )
             sys.exit(0)
 
         elif sys.argv[1] == "--compare":

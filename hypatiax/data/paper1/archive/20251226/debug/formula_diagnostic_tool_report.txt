@@ -1,18 +1,18 @@
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/core/generation/formula_diagnostic_tool.py hypatiax/data/results/baseline_pure_llm_defi_20251220_155651.json 
+└─$ python hypatiax/core/generation/formula_diagnostic_tool.py hypatiax/data/results/baseline_pure_llm_defi_20251220_155651.json
 🔬 Formula Discovery Diagnostic Tool
 ================================================================================
 Loading: hypatiax/data/results/baseline_pure_llm_defi_20251220_155651.json
 
 
 ================================================================================
-                      FORMULA DISCOVERY DIAGNOSTIC REPORT                       
+                      FORMULA DISCOVERY DIAGNOSTIC REPORT
 ================================================================================
 
 📈 Overall Success Rate: 15/20 (75.0%)
 
 ================================================================================
-                            FAILURE ANALYSIS SUMMARY                            
+                            FAILURE ANALYSIS SUMMARY
 ================================================================================
 
 Total failures (R² < 0.95): 5/20
@@ -31,7 +31,7 @@ Total failures (R² < 0.95): 5/20
   hard: 1 failures
 
 ================================================================================
-                      DETAILED DIAGNOSIS OF WORST FAILURES                      
+                      DETAILED DIAGNOSIS OF WORST FAILURES
 ================================================================================
 
 ────────────────────────────────────────────────────────────────────────────────
@@ -151,7 +151,7 @@ DIAGNOSIS: Optimal LP position size using risk-adjusted Kelly criterion
   Generated:     position_size = (expected_fee_apy - il_risk) / (2 * il_risk²)
 
 ================================================================================
-            SPECIAL INVESTIGATION: Liquidation Price (Long Position)            
+            SPECIAL INVESTIGATION: Liquidation Price (Long Position)
 ================================================================================
 
 🔬 Deep Dive Analysis:
@@ -181,5 +181,5 @@ def liquidation_price_long(entry_price, leverage):
   3. Not incorporating the constant correctly
 
 ================================================================================
-                              DIAGNOSTIC COMPLETE                               
+                              DIAGNOSTIC COMPLETE
 ================================================================================

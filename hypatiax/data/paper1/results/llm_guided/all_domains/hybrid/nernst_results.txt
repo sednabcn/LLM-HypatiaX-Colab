@@ -1,14 +1,14 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
 └─$ python hypatiax/core/generation/hybrid_llm_guide_validation/llm_guided_symbolic_discovery_v12.py --protocol ALL --batch --test nernst --niterations 50
 ✅ Using integrated SymbolicEngineWithLLM v20
-✅ Loaded Protocol ALL from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/core/generation/hybrid_llm_guide_validation/experiment_protocol_all_30.py                                                                                                 
-✅ Converted 30 test cases from protocol                                                                                         
-                                                                                                                                 
-🎯 Running single test: chemistry_nernst_equation                                                                                
-                                                                                                                                 
-================================================================================                                                 
-Running: Nernst Equation | Domain: chemistry                                                                                     
-================================================================================                                                 
+✅ Loaded Protocol ALL from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/core/generation/hybrid_llm_guide_validation/experiment_protocol_all_30.py
+✅ Converted 30 test cases from protocol
+
+🎯 Running single test: chemistry_nernst_equation
+
+================================================================================
+Running: Nernst Equation | Domain: chemistry
+================================================================================
 ✅ Integrated LLM Discovery initialized
    Mode: hybrid
    Iterations: 50
@@ -58,7 +58,7 @@ Equation hint: Nernst Equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-13 14:35:54,069 - INFO - 
+2026-01-13 14:35:54,069 - INFO -
 [SYMBOLIC] Attempt 1/3 (seed=42)
 
 [HYBRID MODE] LLM first, PySR refinement...
@@ -114,4 +114,4 @@ Equation hint: Nernst Equation
 ✅ Test passed!
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                   
+└─$

@@ -393,11 +393,11 @@ on:
   # Pull requests - quick smoke tests only
   pull_request:
     branches: [ main, develop ]
-  
+
   # Daily tests - standard suite
   schedule:
     - cron: '0 2 * * *'  # 2 AM daily
-  
+
   # Weekly comprehensive - Sunday nights
   workflow_dispatch:
     inputs:
@@ -422,10 +422,10 @@ jobs:
     outputs:
       should_run: ${{{{ steps.check.outputs.should_run }}}}
       execution_type: ${{{{ steps.check.outputs.execution_type }}}}
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Check execution limits
         id: check
         run: |
@@ -439,9 +439,9 @@ jobs:
           else
             EXEC_TYPE="quick_smoke"
           fi
-          
+
           echo "execution_type=$EXEC_TYPE" >> $GITHUB_OUTPUT
-          
+
           # Check if we should run (would need Python script)
           python .ci/check_limits.py --tier {tier} --type $EXEC_TYPE
           echo "should_run=true" >> $GITHUB_OUTPUT
@@ -451,20 +451,20 @@ jobs:
     if: needs.check-limits.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: {min(limits.max_execution_time_minutes, 60)}
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{{{ env.PYTHON_VERSION }}}}
           cache: 'pip'
-      
+
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-      
+
       - name: Restore cache
         uses: actions/cache@v4
         with:
@@ -474,7 +474,7 @@ jobs:
           key: test-cache-${{{{ runner.os }}}}-${{{{ hashFiles('**/*.py') }}}}
           restore-keys: |
             test-cache-${{{{ runner.os }}}}-
-      
+
       - name: Run tests
         run: |
           python run_robust_tests.py \\
@@ -483,7 +483,7 @@ jobs:
             --max-retries {limits.max_retries_per_test} \\
             --save-baseline \\
             --output reports/
-      
+
       - name: Cleanup artifacts
         if: always()
         run: |
@@ -492,7 +492,7 @@ jobs:
           sm = StorageManager({limits.max_storage_mb}, 'artifacts')
           sm.cleanup_old_artifacts(keep_last_n=3, keep_days=14)
           "
-      
+
       - name: Upload reports
         if: always()
         uses: actions/upload-artifact@v4
@@ -500,7 +500,7 @@ jobs:
           name: test-reports-${{{{ needs.check-limits.outputs.execution_type }}}}
           path: reports/
           retention-days: 14  # Reduce to save storage
-      
+
       - name: Comment on PR
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
@@ -514,7 +514,7 @@ jobs:
               repo: context.repo.repo,
               body: '## Test Results\\n```\\n' + report + '\\n```'
             }});
-      
+
       - name: Record execution
         if: always()
         run: |
@@ -528,7 +528,7 @@ jobs:
     if: github.event_name == 'schedule' && github.event.schedule == '0 2 1 * *'
     runs-on: ubuntu-latest
     timeout-minutes: 120
-    
+
     steps:
       - uses: actions/checkout@v4
       # ... similar setup ...
@@ -566,38 +566,38 @@ from ci_rate_limit_config import (
 def main():
     # Initialize with your tier
     tier = "free"  # or "team", "enterprise"
-    
+
     # Check if we should run
     scheduler = TestScheduler(tier=tier)
     execution_type = ExecutionTier.STANDARD
-    
+
     should_run, reason = scheduler.should_run(execution_type)
-    
+
     if not should_run:
         print(f"⏭️  Skipping tests: {reason}")
         sys.exit(0)
-    
+
     print(f"✅ {reason}")
-    
+
     # Get configuration for this tier
     config = TieredTestConfig.get_config(
         execution_type,
         scheduler.limits
     )
-    
+
     # Cleanup old artifacts first
     storage = StorageManager(scheduler.limits.max_storage_mb)
     storage.cleanup_old_artifacts()
-    
+
     # Run tests with tier-appropriate configuration
     runner = RobustTestRunner(
         max_retries=config['max_retries'],
         base_seed=42
     )
-    
+
     # ... load your test functions ...
     test_functions = {}  # Your tests here
-    
+
     start_time = time.time()
     results, metadata = runner.run_test_suite(
         test_functions=test_functions,
@@ -605,16 +605,16 @@ def main():
         save_history=True,
         generate_reports=storage.should_save_artifact('reports')
     )
-    
+
     # Record execution
     actual_minutes = (time.time() - start_time) / 60
     scheduler.record_execution(execution_type, int(actual_minutes))
-    
+
     # Print usage report
     usage = scheduler.get_monthly_usage_report()
     print(f"\\n📊 Monthly Usage: {usage['minutes_used']}/{usage['minutes_limit']} min "
           f"({usage['percentage_used']:.1f}%)")
-    
+
     # Exit with appropriate code
     if metadata['failed'] > 0:
         sys.exit(1)

@@ -1,7 +1,7 @@
 #!/bin/bash
 ###############################################################################
 # ONE-CLICK SETUP FOR HYPATIAX VERSION MANAGEMENT
-# 
+#
 # This script does EVERYTHING in one go. Just run it!
 #
 # Usage:
@@ -63,36 +63,36 @@ class VersionManager:
         self.versions_dir.mkdir(exist_ok=True)
         self.metadata_file = self.versions_dir / "metadata.json"
         self.metadata = self._load_metadata()
-    
+
     def _load_metadata(self):
         if self.metadata_file.exists():
             with open(self.metadata_file, 'r') as f:
                 return json.load(f)
         return {"snapshots": [], "versions": {}}
-    
+
     def _save_metadata(self):
         with open(self.metadata_file, 'w') as f:
             json.dump(self.metadata, f, indent=2)
-    
+
     def create_snapshot(self, name=None):
         snapshot_id = len(self.metadata["snapshots"]) + 1
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
+
         if not name:
             name = f"snapshot_{snapshot_id}"
-        
+
         snapshot_dir = self.versions_dir / f"{snapshot_id}_{timestamp}"
         snapshot_dir.mkdir(exist_ok=True)
-        
+
         print(f"\n📸 Creating snapshot: {name}")
-        
+
         # Find and copy all important files
         patterns = [
             "**/*.jsonl",  # Rules
             "**/*.xlsx",   # Training data
             "**/*.csv",    # Training data
         ]
-        
+
         files_copied = 0
         for pattern in patterns:
             for file in self.base_path.glob(pattern):
@@ -102,7 +102,7 @@ class VersionManager:
                     dest.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy2(file, dest)
                     files_copied += 1
-        
+
         snapshot_info = {
             "id": snapshot_id,
             "name": name,
@@ -110,26 +110,26 @@ class VersionManager:
             "datetime": datetime.now().isoformat(),
             "files": files_copied
         }
-        
+
         self.metadata["snapshots"].append(snapshot_info)
         self._save_metadata()
-        
+
         print(f"✅ Snapshot created: {files_copied} files backed up")
         return snapshot_id
-    
+
     def list_snapshots(self):
         print("\n📸 Snapshots:")
         for snap in self.metadata["snapshots"]:
             print(f"  #{snap['id']}: {snap['name']} - {snap['datetime']} ({snap['files']} files)")
-    
+
     def set_version(self, component, version):
         self.metadata["versions"][component] = version
         self._save_metadata()
         print(f"✅ Set {component} to version {version}")
-    
+
     def get_version(self, component):
         return self.metadata["versions"].get(component, 1)
-    
+
     def export_env(self):
         env_file = self.base_path / ".env.versions"
         with open(env_file, 'w') as f:
@@ -142,7 +142,7 @@ class VersionManager:
 
 if __name__ == "__main__":
     import sys
-    
+
     if len(sys.argv) < 2:
         print("Usage: python3 version_manager.py <command>")
         print("Commands:")
@@ -151,10 +151,10 @@ if __name__ == "__main__":
         print("  set <comp> <ver> - Set version")
         print("  env             - Export environment file")
         sys.exit(1)
-    
+
     manager = VersionManager(Path.cwd())
     command = sys.argv[1]
-    
+
     if command == "snapshot":
         name = sys.argv[2] if len(sys.argv) > 2 else None
         manager.create_snapshot(name)

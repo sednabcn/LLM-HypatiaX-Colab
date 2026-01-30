@@ -1,5 +1,5 @@
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/core/generation/hybrid_all_domains/suite_hybrid_system_all_domains.py --protocol ALL --batch --iterations 50   
+└─$ python hypatiax/core/generation/hybrid_all_domains/suite_hybrid_system_all_domains.py --protocol ALL --batch --iterations 50
 ✅ Loaded Protocol ALL from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/core/generation/hybrid_all_domains/experiment_protocol_all_30.py
 
 ✅ Converted 30 test cases
@@ -54,7 +54,7 @@ Equation hint: kinetic_energy
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:10:41,277 - INFO - 
+2026-01-07 14:10:41,277 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -143,7 +143,7 @@ Equation hint: gravitational_potential_energy
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:13:56,999 - INFO - 
+2026-01-07 14:13:56,999 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -233,7 +233,7 @@ Equation hint: hookes_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:15:38,189 - INFO - 
+2026-01-07 14:15:38,189 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -320,7 +320,7 @@ Equation hint: ideal_gas_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:16:34,346 - INFO - 
+2026-01-07 14:16:34,346 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -411,7 +411,7 @@ Equation hint: heat_capacity
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:19:15,333 - INFO - 
+2026-01-07 14:19:15,333 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -502,7 +502,7 @@ Equation hint: carnot_efficiency
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:21:02,402 - INFO - 
+2026-01-07 14:21:02,402 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -592,7 +592,7 @@ Equation hint: coulomb_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:21:29,248 - INFO - 
+2026-01-07 14:21:29,248 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -692,7 +692,7 @@ Equation hint: ohms_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:22:51,233 - INFO - 
+2026-01-07 14:22:51,233 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -781,7 +781,7 @@ Equation hint: lorentz_force
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:23:17,463 - INFO - 
+2026-01-07 14:23:17,463 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -871,7 +871,7 @@ Equation hint: bernoulli_equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:24:26,915 - INFO - 
+2026-01-07 14:24:26,915 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -879,9 +879,9 @@ Equation hint: bernoulli_equation
    [SMART] Multiplicative structure: False
    [SMART] Term forms: {'P': 'sqrt', 'rho': 'log', 'v': 'quadratic', 'g': 'exp', 'h': 'linear'}
 
-⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ 
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
    [HINT OVERRIDE] Forcing Bernoulli physical structure
-⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ 
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
    ✓ Structure locked to additive with quadratic velocity term
    [SMART] Confidence: 1.00
 [PATTERNS] polynomial, logarithmic
@@ -900,7 +900,7 @@ Equation hint: bernoulli_equation
 2026-01-07 14:25:54,199 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:25:54,199 - WARNING -       High complexity (64) but R2=0.9627
 2026-01-07 14:25:54,200 - INFO -    [BEST] New best!
-2026-01-07 14:25:54,200 - INFO - 
+2026-01-07 14:25:54,200 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -908,9 +908,9 @@ Equation hint: bernoulli_equation
    [SMART] Multiplicative structure: False
    [SMART] Term forms: {'P': 'sqrt', 'rho': 'log', 'v': 'quadratic', 'g': 'exp', 'h': 'linear'}
 
-⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ 
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
    [HINT OVERRIDE] Forcing Bernoulli physical structure
-⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ 
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
    ✓ Structure locked to additive with quadratic velocity term
    [SMART] Confidence: 1.00
 [PATTERNS] polynomial, logarithmic
@@ -928,7 +928,7 @@ Equation hint: bernoulli_equation
 2026-01-07 14:27:28,609 - INFO -    R2 = 0.8683
 2026-01-07 14:27:28,609 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:27:28,610 - WARNING -       High complexity (30) but R2=0.8683
-2026-01-07 14:27:28,610 - INFO - 
+2026-01-07 14:27:28,610 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -936,9 +936,9 @@ Equation hint: bernoulli_equation
    [SMART] Multiplicative structure: False
    [SMART] Term forms: {'P': 'sqrt', 'rho': 'log', 'v': 'quadratic', 'g': 'exp', 'h': 'linear'}
 
-⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ 
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
    [HINT OVERRIDE] Forcing Bernoulli physical structure
-⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ 
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
    ✓ Structure locked to additive with quadratic velocity term
    [SMART] Confidence: 1.00
 [PATTERNS] polynomial, logarithmic
@@ -956,7 +956,7 @@ Equation hint: bernoulli_equation
 2026-01-07 14:29:00,463 - INFO -    R2 = 0.9589
 2026-01-07 14:29:00,463 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:29:00,463 - WARNING -       High complexity (37) but R2=0.9589
-2026-01-07 14:29:00,463 - INFO - 
+2026-01-07 14:29:00,463 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -964,9 +964,9 @@ Equation hint: bernoulli_equation
    [SMART] Multiplicative structure: False
    [SMART] Term forms: {'P': 'sqrt', 'rho': 'log', 'v': 'quadratic', 'g': 'exp', 'h': 'linear'}
 
-⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ 
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
    [HINT OVERRIDE] Forcing Bernoulli physical structure
-⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ 
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
    ✓ Structure locked to additive with quadratic velocity term
    [SMART] Confidence: 1.00
 [PATTERNS] polynomial, logarithmic
@@ -985,7 +985,7 @@ Equation hint: bernoulli_equation
 2026-01-07 14:30:25,160 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:30:25,160 - WARNING -       High complexity (26) but R2=0.8540
 2026-01-07 14:30:25,160 - WARNING -       Suspicious constants: ['49177.023']
-2026-01-07 14:30:25,161 - INFO - 
+2026-01-07 14:30:25,161 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -993,9 +993,9 @@ Equation hint: bernoulli_equation
    [SMART] Multiplicative structure: False
    [SMART] Term forms: {'P': 'sqrt', 'rho': 'log', 'v': 'quadratic', 'g': 'exp', 'h': 'linear'}
 
-⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ 
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
    [HINT OVERRIDE] Forcing Bernoulli physical structure
-⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ 
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
    ✓ Structure locked to additive with quadratic velocity term
    [SMART] Confidence: 1.00
 [PATTERNS] polynomial, logarithmic
@@ -1013,7 +1013,7 @@ Equation hint: bernoulli_equation
 2026-01-07 14:31:51,637 - INFO -    R2 = 0.9610
 2026-01-07 14:31:51,637 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:31:51,637 - WARNING -       High complexity (39) but R2=0.9610
-2026-01-07 14:31:51,637 - INFO - 
+2026-01-07 14:31:51,637 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9627)
 
 [OK] Discovery complete
@@ -1077,7 +1077,7 @@ Equation hint: reynolds_number
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:31:52,906 - INFO - 
+2026-01-07 14:31:52,906 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1168,7 +1168,7 @@ Equation hint: hagen_poiseuille
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:33:58,289 - INFO - 
+2026-01-07 14:33:58,289 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1197,7 +1197,7 @@ Equation hint: hagen_poiseuille
 2026-01-07 14:35:48,305 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:35:48,305 - WARNING -       High complexity (58) but R2=0.9955
 2026-01-07 14:35:48,305 - INFO -    [BEST] New best!
-2026-01-07 14:35:48,306 - INFO - 
+2026-01-07 14:35:48,306 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1288,7 +1288,7 @@ Equation hint: thin_lens_equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:37:31,347 - INFO - 
+2026-01-07 14:37:31,347 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1317,7 +1317,7 @@ Equation hint: thin_lens_equation
 2026-01-07 14:40:31,567 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:40:31,568 - WARNING -       High complexity (62) but R2=0.9617
 2026-01-07 14:40:31,568 - INFO -    [BEST] New best!
-2026-01-07 14:40:31,568 - INFO - 
+2026-01-07 14:40:31,568 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1346,7 +1346,7 @@ Equation hint: thin_lens_equation
 2026-01-07 14:43:23,207 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:43:23,208 - WARNING -       High complexity (85) but R2=0.9798
 2026-01-07 14:43:23,208 - INFO -    [BEST] New best!
-2026-01-07 14:43:23,208 - INFO - 
+2026-01-07 14:43:23,208 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1374,7 +1374,7 @@ Equation hint: thin_lens_equation
 2026-01-07 14:46:15,738 - INFO -    R2 = 0.9772
 2026-01-07 14:46:15,738 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:46:15,739 - WARNING -       High complexity (78) but R2=0.9772
-2026-01-07 14:46:15,739 - INFO - 
+2026-01-07 14:46:15,739 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1402,7 +1402,7 @@ Equation hint: thin_lens_equation
 2026-01-07 14:49:42,763 - INFO -    R2 = 0.9657
 2026-01-07 14:49:42,764 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:49:42,764 - WARNING -       High complexity (92) but R2=0.9657
-2026-01-07 14:49:42,764 - INFO - 
+2026-01-07 14:49:42,764 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1430,7 +1430,7 @@ Equation hint: thin_lens_equation
 2026-01-07 14:52:24,971 - INFO -    R2 = 0.9696
 2026-01-07 14:52:24,972 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:52:24,972 - WARNING -       High complexity (68) but R2=0.9696
-2026-01-07 14:52:24,972 - INFO - 
+2026-01-07 14:52:24,972 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9798)
 
 [OK] Discovery complete
@@ -1494,7 +1494,7 @@ Equation hint: snells_law
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:52:26,462 - INFO - 
+2026-01-07 14:52:26,462 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1582,7 +1582,7 @@ Equation hint: single_slit_diffraction
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:52:46,311 - INFO - 
+2026-01-07 14:52:46,311 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1672,7 +1672,7 @@ Equation hint: photon_energy
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 14:54:07,835 - INFO - 
+2026-01-07 14:54:07,835 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1699,7 +1699,7 @@ Equation hint: photon_energy
 2026-01-07 14:56:17,010 - WARNING -    [WARNING] Possible overfit
 2026-01-07 14:56:17,010 - WARNING -       High complexity (26) but R2=0.0000
 2026-01-07 14:56:17,011 - INFO -    [BEST] New best!
-2026-01-07 14:56:17,011 - INFO - 
+2026-01-07 14:56:17,011 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1723,7 +1723,7 @@ Equation hint: photon_energy
    R² = 0.0000
 2026-01-07 14:58:12,948 - INFO -    Result: h*(-0.42966664)
 2026-01-07 14:58:12,948 - INFO -    R2 = 0.0000
-2026-01-07 14:58:12,948 - INFO - 
+2026-01-07 14:58:12,948 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1747,7 +1747,7 @@ Equation hint: photon_energy
    R² = 0.0000
 2026-01-07 14:59:56,227 - INFO -    Result: f*h
 2026-01-07 14:59:56,227 - INFO -    R2 = 0.0000
-2026-01-07 14:59:56,227 - INFO - 
+2026-01-07 14:59:56,227 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1771,7 +1771,7 @@ Equation hint: photon_energy
    R² = 0.0000
 2026-01-07 15:01:54,102 - INFO -    Result: h*(-0.7221006)
 2026-01-07 15:01:54,102 - INFO -    R2 = 0.0000
-2026-01-07 15:01:54,102 - INFO - 
+2026-01-07 15:01:54,102 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1795,7 +1795,7 @@ Equation hint: photon_energy
    R² = 0.0000
 2026-01-07 15:03:47,915 - INFO -    Result: f*h
 2026-01-07 15:03:47,915 - INFO -    R2 = 0.0000
-2026-01-07 15:03:47,915 - WARNING - 
+2026-01-07 15:03:47,915 - WARNING -
 [WARNING] SymbolicEngine best R2=0.0000
 
 [OK] Discovery complete
@@ -1859,7 +1859,7 @@ Equation hint: de_broglie_wavelength
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:03:49,009 - INFO - 
+2026-01-07 15:03:49,009 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1884,7 +1884,7 @@ Equation hint: de_broglie_wavelength
 2026-01-07 15:04:53,738 - INFO -    Result: m*v
 2026-01-07 15:04:53,738 - INFO -    R2 = 0.0000
 2026-01-07 15:04:53,738 - INFO -    [BEST] New best!
-2026-01-07 15:04:53,739 - INFO - 
+2026-01-07 15:04:53,739 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1908,7 +1908,7 @@ Equation hint: de_broglie_wavelength
    R² = 0.0000
 2026-01-07 15:05:50,047 - INFO -    Result: h*(-0.027412646)
 2026-01-07 15:05:50,047 - INFO -    R2 = 0.0000
-2026-01-07 15:05:50,047 - INFO - 
+2026-01-07 15:05:50,047 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1932,7 +1932,7 @@ Equation hint: de_broglie_wavelength
    R² = 0.0000
 2026-01-07 15:06:45,362 - INFO -    Result: m*m
 2026-01-07 15:06:45,363 - INFO -    R2 = 0.0000
-2026-01-07 15:06:45,363 - INFO - 
+2026-01-07 15:06:45,363 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1956,7 +1956,7 @@ Equation hint: de_broglie_wavelength
    R² = 0.0000
 2026-01-07 15:07:42,904 - INFO -    Result: -m + m
 2026-01-07 15:07:42,905 - INFO -    R2 = 0.0000
-2026-01-07 15:07:42,905 - INFO - 
+2026-01-07 15:07:42,905 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -1980,7 +1980,7 @@ Equation hint: de_broglie_wavelength
    R² = 0.0000
 2026-01-07 15:08:45,922 - INFO -    Result: m*v
 2026-01-07 15:08:45,923 - INFO -    R2 = 0.0000
-2026-01-07 15:08:45,923 - WARNING - 
+2026-01-07 15:08:45,923 - WARNING -
 [WARNING] SymbolicEngine best R2=0.0000
 
 [OK] Discovery complete
@@ -2044,7 +2044,7 @@ Equation hint: compton_shift
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:08:46,942 - INFO - 
+2026-01-07 15:08:46,942 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2054,7 +2054,7 @@ Equation hint: compton_shift
 /home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.38778e-21): result may not be accurate.
   return f(*arrays, *other_args, **kwargs)
    [SMART] Confidence: 0.50
-[PATTERNS] 
+[PATTERNS]
    [SMART] Configuring based on structure...
    [SMART CONFIG] Smart structure discovery
 [CONFIG] Smart structure discovery
@@ -2068,7 +2068,7 @@ Equation hint: compton_shift
 2026-01-07 15:10:03,067 - INFO -    Result: 1/(c**1.6105695*c)
 2026-01-07 15:10:03,067 - INFO -    R2 = 0.0000
 2026-01-07 15:10:03,067 - INFO -    [BEST] New best!
-2026-01-07 15:10:03,068 - INFO - 
+2026-01-07 15:10:03,068 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2078,7 +2078,7 @@ Equation hint: compton_shift
 /home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.38778e-21): result may not be accurate.
   return f(*arrays, *other_args, **kwargs)
    [SMART] Confidence: 0.50
-[PATTERNS] 
+[PATTERNS]
    [SMART] Configuring based on structure...
    [SMART CONFIG] Smart structure discovery
 [CONFIG] Smart structure discovery
@@ -2091,7 +2091,7 @@ Equation hint: compton_shift
    R² = 0.0000
 2026-01-07 15:11:07,191 - INFO -    Result: me*me
 2026-01-07 15:11:07,191 - INFO -    R2 = 0.0000
-2026-01-07 15:11:07,192 - INFO - 
+2026-01-07 15:11:07,192 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2101,7 +2101,7 @@ Equation hint: compton_shift
 /home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.38778e-21): result may not be accurate.
   return f(*arrays, *other_args, **kwargs)
    [SMART] Confidence: 0.50
-[PATTERNS] 
+[PATTERNS]
    [SMART] Configuring based on structure...
    [SMART CONFIG] Smart structure discovery
 [CONFIG] Smart structure discovery
@@ -2114,7 +2114,7 @@ Equation hint: compton_shift
    R² = 0.0000
 2026-01-07 15:12:10,235 - INFO -    Result: h*me
 2026-01-07 15:12:10,235 - INFO -    R2 = 0.0000
-2026-01-07 15:12:10,235 - INFO - 
+2026-01-07 15:12:10,235 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2124,7 +2124,7 @@ Equation hint: compton_shift
 /home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.38778e-21): result may not be accurate.
   return f(*arrays, *other_args, **kwargs)
    [SMART] Confidence: 0.50
-[PATTERNS] 
+[PATTERNS]
    [SMART] Configuring based on structure...
    [SMART CONFIG] Smart structure discovery
 [CONFIG] Smart structure discovery
@@ -2137,7 +2137,7 @@ Equation hint: compton_shift
    R² = 0.0000
 2026-01-07 15:13:16,469 - INFO -    Result: h*me
 2026-01-07 15:13:16,469 - INFO -    R2 = 0.0000
-2026-01-07 15:13:16,469 - INFO - 
+2026-01-07 15:13:16,469 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2147,7 +2147,7 @@ Equation hint: compton_shift
 /home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.38778e-21): result may not be accurate.
   return f(*arrays, *other_args, **kwargs)
    [SMART] Confidence: 0.50
-[PATTERNS] 
+[PATTERNS]
    [SMART] Configuring based on structure...
    [SMART CONFIG] Smart structure discovery
 [CONFIG] Smart structure discovery
@@ -2160,7 +2160,7 @@ Equation hint: compton_shift
    R² = 0.0000
 2026-01-07 15:14:29,856 - INFO -    Result: cos_theta*me
 2026-01-07 15:14:29,856 - INFO -    R2 = 0.0000
-2026-01-07 15:14:29,856 - WARNING - 
+2026-01-07 15:14:29,856 - WARNING -
 [WARNING] SymbolicEngine best R2=0.0000
 
 [OK] Discovery complete
@@ -2225,7 +2225,7 @@ Equation hint: arrhenius_equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:14:30,916 - INFO - 
+2026-01-07 15:14:30,916 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2326,7 +2326,7 @@ Equation hint: henderson_hasselbalch
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:16:20,326 - INFO - 
+2026-01-07 15:16:20,326 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2352,7 +2352,7 @@ Equation hint: henderson_hasselbalch
 2026-01-07 15:17:33,711 - WARNING -    [WARNING] Possible overfit
 2026-01-07 15:17:33,711 - WARNING -       High complexity (77) but R2=0.9968
 2026-01-07 15:17:33,712 - INFO -    [BEST] New best!
-2026-01-07 15:17:33,712 - INFO - 
+2026-01-07 15:17:33,712 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2441,7 +2441,7 @@ Equation hint: nernst_equation
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:18:23,460 - INFO - 
+2026-01-07 15:18:23,460 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2467,7 +2467,7 @@ Equation hint: nernst_equation
 /home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.23665e-35): result may not be accurate.
   return f(*arrays, *other_args, **kwargs)
    [SMART] Confidence: 0.60
-[PATTERNS] 
+[PATTERNS]
    [HINT] Using config for 'nernst_equation'
    [CHEMISTRY LOG MODE] Simplified additive config
 [CONFIG] Chemistry logarithmic: nernst_equation
@@ -2484,7 +2484,7 @@ Equation hint: nernst_equation
 2026-01-07 15:19:09,639 - WARNING -    [WARNING] Possible overfit
 2026-01-07 15:19:09,640 - WARNING -       High complexity (46) but R2=0.9986
 2026-01-07 15:19:09,640 - INFO -    [BEST] New best!
-2026-01-07 15:19:09,640 - INFO - 
+2026-01-07 15:19:09,640 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2510,7 +2510,7 @@ Equation hint: nernst_equation
 /home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.23665e-35): result may not be accurate.
   return f(*arrays, *other_args, **kwargs)
    [SMART] Confidence: 0.60
-[PATTERNS] 
+[PATTERNS]
    [HINT] Using config for 'nernst_equation'
    [CHEMISTRY LOG MODE] Simplified additive config
 [CONFIG] Chemistry logarithmic: nernst_equation
@@ -2590,7 +2590,7 @@ Equation hint: michaelis_menten
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:20:07,015 - INFO - 
+2026-01-07 15:20:07,015 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2682,7 +2682,7 @@ Equation hint: logistic_growth
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:22:50,631 - INFO - 
+2026-01-07 15:22:50,631 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2711,7 +2711,7 @@ Equation hint: logistic_growth
 2026-01-07 15:24:49,766 - WARNING -    [WARNING] Possible overfit
 2026-01-07 15:24:49,766 - WARNING -       High complexity (58) but R2=0.9051
 2026-01-07 15:24:49,766 - INFO -    [BEST] New best!
-2026-01-07 15:24:49,766 - INFO - 
+2026-01-07 15:24:49,766 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2740,7 +2740,7 @@ Equation hint: logistic_growth
 2026-01-07 15:26:30,620 - WARNING -    [WARNING] Possible overfit
 2026-01-07 15:26:30,620 - WARNING -       High complexity (49) but R2=0.9478
 2026-01-07 15:26:30,620 - INFO -    [BEST] New best!
-2026-01-07 15:26:30,620 - INFO - 
+2026-01-07 15:26:30,620 - INFO -
 [SYMBOLIC] Attempt 3/5 (seed=44)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2768,7 +2768,7 @@ Equation hint: logistic_growth
 2026-01-07 15:28:28,542 - INFO -    R2 = 0.9418
 2026-01-07 15:28:28,542 - WARNING -    [WARNING] Possible overfit
 2026-01-07 15:28:28,542 - WARNING -       High complexity (35) but R2=0.9418
-2026-01-07 15:28:28,543 - INFO - 
+2026-01-07 15:28:28,543 - INFO -
 [SYMBOLIC] Attempt 4/5 (seed=45)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2797,7 +2797,7 @@ Equation hint: logistic_growth
 2026-01-07 15:30:58,228 - WARNING -    [WARNING] Possible overfit
 2026-01-07 15:30:58,228 - WARNING -       High complexity (53) but R2=0.9691
 2026-01-07 15:30:58,228 - INFO -    [BEST] New best!
-2026-01-07 15:30:58,228 - INFO - 
+2026-01-07 15:30:58,228 - INFO -
 [SYMBOLIC] Attempt 5/5 (seed=46)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2826,7 +2826,7 @@ Equation hint: logistic_growth
 2026-01-07 15:33:18,587 - WARNING -    [WARNING] Possible overfit
 2026-01-07 15:33:18,587 - WARNING -       High complexity (59) but R2=0.9779
 2026-01-07 15:33:18,587 - INFO -    [BEST] New best!
-2026-01-07 15:33:18,587 - INFO - 
+2026-01-07 15:33:18,587 - INFO -
 [SUCCESS] SymbolicEngine succeeded (R2=0.9779)
 
 [OK] Discovery complete
@@ -2890,7 +2890,7 @@ Equation hint: allometric_scaling
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:33:19,679 - INFO - 
+2026-01-07 15:33:19,679 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -2978,7 +2978,7 @@ Equation hint: pythagorean_theorem
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:34:53,917 - INFO - 
+2026-01-07 15:34:53,917 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -3067,7 +3067,7 @@ Equation hint: compound_interest
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:35:14,172 - INFO - 
+2026-01-07 15:35:14,172 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -3095,7 +3095,7 @@ Equation hint: compound_interest
 2026-01-07 15:37:29,167 - WARNING -    [WARNING] Possible overfit
 2026-01-07 15:37:29,168 - WARNING -       High complexity (34) but R2=0.9990
 2026-01-07 15:37:29,168 - INFO -    [BEST] New best!
-2026-01-07 15:37:29,168 - INFO - 
+2026-01-07 15:37:29,168 - INFO -
 [SYMBOLIC] Attempt 2/5 (seed=43)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -3185,7 +3185,7 @@ Equation hint: quadratic_discriminant
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:39:27,174 - INFO - 
+2026-01-07 15:39:27,174 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -3276,7 +3276,7 @@ Equation hint: elasticity_demand
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:40:07,209 - INFO - 
+2026-01-07 15:40:07,209 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -3366,7 +3366,7 @@ Equation hint: cobb_douglas
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:40:39,264 - INFO - 
+2026-01-07 15:40:39,264 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
    [SANITIZE] alpha -> alpha_var (reserved name)
    [SANITIZE] beta -> beta_var (reserved name)
@@ -3458,7 +3458,7 @@ Equation hint: break_even_point
 ======================================================================
 
 [DISCOVER] Running symbolic regression...
-2026-01-07 15:42:41,440 - INFO - 
+2026-01-07 15:42:41,440 - INFO -
 [SYMBOLIC] Attempt 1/5 (seed=42)
 [ANALYZE] Analyzing data characteristics...
    [SMART] Analyzing equation structure...
@@ -3505,15 +3505,15 @@ Equation hint: break_even_point
    High R²=1.0000, Val=90.1 (dim check issue)
 
 ========================================================================================================================
-                                                  FINAL RESULTS TABLE                                                   
+                                                  FINAL RESULTS TABLE
 ========================================================================================================================
-Test Name                                 R²    Val  Status  Observation                                       
+Test Name                                 R²    Val  Status  Observation
 ----------------------------------- -------- ------ -------- --------------------------------------------------
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 BIOLOGY
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 biology_allometric_scaling            1.0000   91.3  ✅ PASS  Override: High R²=1.0000, Val=91.3 (dim check issue)
-biology_logistic_growth               0.9779   85.9  ✅ PASS  Good discovery                                    
+biology_logistic_growth               0.9779   85.9  ✅ PASS  Good discovery
 biology_michaelis_menten              0.9999   71.8  ✅ PASS  Override: High R²=0.9999, Val=71.8 (dim check issue)
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -3540,7 +3540,7 @@ electromagnetism_ohms_law             1.0000   95.5  ✅ PASS  Override: High R�
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 FLUID_DYNAMICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-fluid_dynamics_bernoulli_equation     0.9627   39.3  ❌ FAIL  Dimensional check failed                          
+fluid_dynamics_bernoulli_equation     0.9627   39.3  ❌ FAIL  Dimensional check failed
 fluid_dynamics_hagen_poiseuille       1.0000   85.6  ✅ PASS  Override: High R²=1.0000, Val=85.6 (dim check issue)
 fluid_dynamics_reynolds_number        1.0000   91.0  ✅ PASS  Override: High R²=1.0000, Val=91.0 (dim check issue)
 
@@ -3563,14 +3563,14 @@ OPTICS
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 optics_single_slit_diffraction        1.0000   99.1  ✅ PASS  Override: High R²=1.0000, Val=99.1 (dim check issue)
 optics_snells_law                     1.0000  100.0  ✅ PASS  Override: High R²=1.0000, Val=100.0 (dim check issue)
-optics_thin_lens_equation             0.9798   81.1  ✅ PASS  Good discovery                                    
+optics_thin_lens_equation             0.9798   81.1  ✅ PASS  Good discovery
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 QUANTUM
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-quantum_compton_shift                 0.0000   99.5  ❌ FAIL  Low R² - discovery failed                         
-quantum_de_broglie_wavelength         0.0000   99.5  ❌ FAIL  Low R² - discovery failed                         
-quantum_photon_energy                 0.0000   98.6  ❌ FAIL  Low R² - discovery failed                         
+quantum_compton_shift                 0.0000   99.5  ❌ FAIL  Low R² - discovery failed
+quantum_de_broglie_wavelength         0.0000   99.5  ❌ FAIL  Low R² - discovery failed
+quantum_photon_energy                 0.0000   98.6  ❌ FAIL  Low R² - discovery failed
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 THERMODYNAMICS
@@ -3585,4 +3585,4 @@ SUMMARY: 26/30 passed (86.7%) | Avg R²: 0.8973 | Avg Val: 90.1
 
 
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$                                                                                   
+└─$

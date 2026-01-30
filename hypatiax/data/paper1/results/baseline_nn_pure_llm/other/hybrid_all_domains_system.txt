@@ -1,14 +1,14 @@
 ┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
-└─$ python hypatiax/core/generation/hybrid_system_all_domains.py                                                                
+└─$ python hypatiax/core/generation/hybrid_system_all_domains.py
 ================================================================================
-                        🔬 HYBRID SYSTEM - ALL DOMAINS 🔬                         
+                        🔬 HYBRID SYSTEM - ALL DOMAINS 🔬
 ================================================================================
 Strategy: LLM (R²>0.95) → Ensemble (0.80-0.95) → NN (<0.80)
 Domains: materials, fluids, thermodynamics, mechanics, chemistry
 ================================================================================
 
 ================================================================================
-                               DOMAIN: MATERIALS                                
+                               DOMAIN: MATERIALS
 ================================================================================
 
 [1/4] Hall-Petch relationship: yield strength as function of grain size
@@ -37,7 +37,7 @@ Domains: materials, fluids, thermodynamics, mechanics, chemistry
   🎯 EXCELLENT
 
 ================================================================================
-                                 DOMAIN: FLUIDS                                 
+                                 DOMAIN: FLUIDS
 ================================================================================
 
 [1/4] Darcy-Weisbach equation: pressure head loss in pipe flow
@@ -66,7 +66,7 @@ Domains: materials, fluids, thermodynamics, mechanics, chemistry
   🎯 EXCELLENT
 
 ================================================================================
-                             DOMAIN: THERMODYNAMICS                             
+                             DOMAIN: THERMODYNAMICS
 ================================================================================
 
 [1/4] Newton's law of cooling: convective heat transfer rate
@@ -94,7 +94,7 @@ Domains: materials, fluids, thermodynamics, mechanics, chemistry
   🎯 EXCELLENT
 
 ================================================================================
-                               DOMAIN: MECHANICS                                
+                               DOMAIN: MECHANICS
 ================================================================================
 
 [1/4] Euler buckling load: critical load for column buckling
@@ -122,7 +122,7 @@ Domains: materials, fluids, thermodynamics, mechanics, chemistry
   🎯 EXCELLENT
 
 ================================================================================
-                               DOMAIN: CHEMISTRY                                
+                               DOMAIN: CHEMISTRY
 ================================================================================
 
 [1/4] Arrhenius equation: temperature dependence of reaction rate
@@ -151,7 +151,7 @@ Domains: materials, fluids, thermodynamics, mechanics, chemistry
 ✅ Results saved: hypatiax/data/results/hybrid_all_domains_20251223_124902.json
 
 ================================================================================
-                                    SUMMARY                                     
+                                    SUMMARY
 ================================================================================
 
 📊 Total: 20
@@ -164,4 +164,3 @@ Mean R²: 0.999650
   NN: 1/20 (5.0%)
 
 ================================================================================
-

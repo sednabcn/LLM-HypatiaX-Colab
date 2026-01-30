@@ -32,15 +32,15 @@ The LLM generates candidate formulas in closed mathematical form, which are then
 ```python
 class PureLLMBaseline:
     def generate_formula(self, description, domain, variable_names, metadata):
-        prompt = f"""Given {description} in {domain}, 
+        prompt = f"""Given {description} in {domain},
         with variables {variable_names}, discover the mathematical relationship.
         Provide formula in form: y = f(x1, x2, ...)"""
-        
+
         response = anthropic_client.messages.create(
             model="claude-sonnet-4-20250514",
             messages=[{"role": "user", "content": prompt}]
         )
-        
+
         return self.parse_and_compile(response.content)
 ```
 
@@ -71,15 +71,15 @@ Crucially, we store the trained model and both feature/target scalers to enable 
 def train_and_evaluate(X, y, description, domain, metadata, epochs=200):
     scaler_X = StandardScaler()
     scaler_y = StandardScaler()
-    
+
     X_scaled = scaler_X.fit_transform(X)
     y_scaled = scaler_y.fit_transform(y.reshape(-1, 1)).flatten()
-    
+
     model = SimpleNN(X.shape[1])
     optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-    
+
     # Training loop...
-    
+
     return {
         "model": model,
         "scaler_X": scaler_X,
@@ -93,10 +93,10 @@ def train_and_evaluate(X, y, description, domain, metadata, epochs=200):
 def nn_predict(model, scaler_X, scaler_y, X_new):
     model.eval()
     X_scaled = scaler_X.transform(X_new)
-    
+
     with torch.no_grad():
         y_scaled = model(torch.FloatTensor(X_scaled)).numpy()
-    
+
     return scaler_y.inverse_transform(y_scaled.reshape(-1, 1)).flatten()
 ```
 
@@ -130,7 +130,7 @@ To handle reserved Julia/PySR keywords (S, N, C, D, E, I, O), we implemented aut
 ```python
 class VariableNameSanitizer:
     RESERVED_NAMES = {'S', 'N', 'C', 'D', 'E', 'I', 'O'}
-    
+
     def sanitize(self, variable_names):
         sanitized = []
         for var in variable_names:
@@ -141,7 +141,7 @@ class VariableNameSanitizer:
             else:
                 sanitized.append(var)
         return sanitized
-    
+
     def restore_expression(self, expression):
         # Restore original variable names in discovered formula
         for safe_name, orig_name in self.reverse_mapping.items():
@@ -171,7 +171,7 @@ To evaluate generalization beyond the training distribution, we implemented a ri
 For each ground truth equation with known analytical form F(x₁, ..., xₙ) and training range [xₘᵢₙ, xₘₐₓ], we generated extrapolation test sets at three distance scales:
 
 1. **Near Extrapolation (1.2×)**: x ∈ [1.2·xₘₐₓ, 1.44·xₘₐₓ]
-2. **Medium Extrapolation (2×)**: x ∈ [2·xₘₐₓ, 3·xₘₐₓ]  
+2. **Medium Extrapolation (2×)**: x ∈ [2·xₘₐₓ, 3·xₘₐₓ]
 3. **Far Extrapolation (5×)**: x ∈ [5·xₘₐₓ, 7.5·xₘₐₓ]
 
 For multivariate functions, all variables were extrapolated simultaneously by the same factor to test behavior in truly novel regions of the input space.

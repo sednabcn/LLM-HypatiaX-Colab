@@ -2,7 +2,7 @@
 % CORRECTED MASTER INTEGRATION FILE FOR HYPATIA-X PAPER
 % ALL RESULTS WITH VERIFIED ACTUAL DATA VALUES
 % Generated: 2026-01-26 (CORRECTED VERSION)
-% 
+%
 % CORRECTIONS APPLIED:
 % - Neural Network extrapolation error: 1231% (NOT 3348%)
 % - Hybrid v40 mean R²: 0.931 (NOT 0.798)
@@ -132,9 +132,9 @@ The asymmetric extrapolation coverage reflects fundamental design differences:
 
 \begin{itemize}
     \item \textbf{Pure LLM}: Generated formulas as text strings, but \texttt{formula\_to\_callable} integration challenges prevented systematic extrapolation validation (15/15 interpolation tests, 0/15 extrapolation tests). See Section~\ref{sec:limitations}.
-    
+
     \item \textbf{System 2 Symbolic}: Not evaluated in this unified analysis (n=0 for all metrics). May be evaluated in separate validation-focused experiments.
-    
+
     \item \textbf{System 3 LLM+Fallback}: Designed for robustness through fallback mechanism when LLM confidence is low (30/30 robustness tests, 0/30 extrapolation tests). Extrapolation was not a design objective.
 \end{itemize}
 
@@ -144,7 +144,7 @@ This explains the asymmetric coverage: \textbf{Neural Networks and Hybrid v40 we
 
 \begin{enumerate}
     \item \textbf{Extrapolation-Focused} (Hybrid v40, NN): Designed to predict beyond training data
-    \item \textbf{Robustness-Focused} (System 3): Designed to handle diverse inputs gracefully  
+    \item \textbf{Robustness-Focused} (System 3): Designed to handle diverse inputs gracefully
     \item \textbf{Recognition-Focused} (Pure LLM): Designed to identify known patterns
 \end{enumerate}
 
@@ -192,7 +192,7 @@ This represents a \textbf{3+ order of magnitude performance collapse} when movin
 
 \begin{itemize}
     \item \textbf{Neural networks} learn numerical approximations: they fit a high-dimensional surface to training data using polynomial/sigmoid basis functions. Outside the training range, these basis functions diverge from the true relationship.
-    
+
     \item \textbf{Symbolic methods} recover exact functional forms: identifying $f(r) = k/r^2$ allows perfect prediction at any $r$, including values far beyond training data.
 \end{itemize}
 
@@ -244,7 +244,7 @@ Specialized Biology & 0\% (0/3 tests) & --- (all failed) \\
 
 \begin{itemize}
     \item \textbf{Succeeded}: Kinetic Energy ($KE = \frac{1}{2}mv^2$), Ideal Gas Law ($PV = nRT$), Gravitational Force—equations taught in every undergraduate physics course
-    
+
     \item \textbf{Failed catastrophically}: Henderson-Hasselbalch (R² $< -10$), Allometric Scaling (R² $< -100$)—specialized equations from biochemistry/ecology
 \end{itemize}
 
@@ -258,7 +258,7 @@ When LLMs fail, they don't just get close—they produce structurally incorrect 
         \item LLM output: $M = a \cdot \log(L) + b$ (completely wrong functional form)
         \item Error: R² $< -100$ (predictions \emph{worse} than random guessing)
     \end{itemize}
-    
+
     \item \textbf{Henderson-Hasselbalch} (True: $\text{pH} = \text{p}K_a + \log\frac{[A^-]}{[HA]}$)
     \begin{itemize}
         \item LLM output: $\text{pH} = K_a \cdot [A^-] + [HA]$ (dimensional inconsistency)
@@ -272,9 +272,9 @@ These aren't calculation mistakes—they're \emph{structural errors} indicating 
 
 \begin{enumerate}
     \item \textbf{Training data correlation}: LLMs succeed on equations appearing frequently in web text (e.g., $F = ma$ has $\sim$10M web mentions), fail on specialized equations (Henderson-Hasselbalch $\sim$100K mentions)
-    
+
     \item \textbf{No partial credit}: When LLMs fail, they fail completely (negative R²). True reasoning would produce progressively worse approximations, not structural impossibilities.
-    
+
     \item \textbf{Inability to generalize}: Cannot extend known patterns to novel contexts (e.g., recognizes $PV = nRT$ but cannot derive $V \propto T$ at constant $P,n$)
 \end{enumerate}
 
@@ -313,9 +313,9 @@ Neural Network & --- & 1231\% error & 13/13 (100\%) \\
 
 \begin{itemize}
     \item \textbf{Interpolation leaders}: System 3 LLM+Fallback achieves perfect interpolation (R² = 1.000 mean and median) through its robust fallback architecture
-    
+
     \item \textbf{Extrapolation dominance}: Hybrid v40 achieves 0\% extrapolation error while maintaining excellent interpolation (median R² = 1.000)
-    
+
     \item \textbf{Neural network limitations}: Despite good interpolation (R² = 0.94), catastrophically fails at extrapolation (1231\% error)
 \end{itemize}
 
@@ -360,9 +360,9 @@ Formula + prediction accuracy & --- & 80\% (12/15) \\
 
 \begin{enumerate}
     \item \textbf{"Predictions too large"}: Formula syntactically correct but produces physically impossible values (e.g., $10^{50}$ kg for human body mass)
-    
+
     \item \textbf{"Catastrophic R²"}: Negative R² indicates predictions worse than constant mean (structural formula error)
-    
+
     \item \textbf{"Execution failed"}: Formula contains undefined variables or operations (e.g., division by zero)
 \end{enumerate}
 
@@ -379,9 +379,9 @@ Without prediction validation, this would be reported as "success" despite being
 
 \begin{enumerate}
     \item \textbf{Structural correctness $\neq$ functional correctness}: Code that runs is not the same as code that works
-    
+
     \item \textbf{Post-hoc validation essential}: LLM outputs must be verified against ground truth before claiming success
-    
+
     \item \textbf{Benchmark contamination risk}: Many AI benchmarks check syntax/format but not numerical accuracy, potentially inflating reported capabilities
 \end{enumerate}
 
@@ -428,9 +428,9 @@ Yet symbolic methods achieved near-perfect accuracy, suggesting they discover \e
 Symbolic regression succeeds because:
 \begin{enumerate}
     \item \textbf{Equations are equations}: Whether describing gravitational force or AMM invariants, mathematical structure is domain-agnostic
-    
+
     \item \textbf{Functional forms are finite}: There are only so many ways to combine basic operations ($+, -, \times, \div, \log, \exp, x^n$) into sensible equations
-    
+
     \item \textbf{Data constrains solutions}: Given sufficient measurements, the true relationship emerges regardless of domain context
 \end{enumerate}
 
@@ -534,7 +534,7 @@ LLMs fail predictably on equations outside their training distribution:
         \item LLM output: $\text{pH} = K_a \cdot [A^-] + [HA]$ (dimensionally inconsistent)
         \item Result: R² $< -10$ (catastrophic)
     \end{itemize}
-    
+
     \item \textbf{Allometric Scaling} (Ecology):
     \begin{itemize}
         \item Ground truth: $M = aL^b$ (power law)
@@ -612,11 +612,11 @@ Spearman rank correlation between web prevalence and LLM success: $\rho = 0.89$ 
 
 \begin{enumerate}
     \item \textbf{Use LLMs for initialization, not validation}: LLM suggestions guide symbolic search toward promising formula families
-    
+
     \item \textbf{Always validate predictions numerically}: Structural checks (syntax, dimensionality) are necessary but insufficient
-    
+
     \item \textbf{Implement fallback mechanisms}: When LLM confidence is low, immediately switch to pure symbolic search (System 3 achieves 100\% reliability via this approach)
-    
+
     \item \textbf{Provider-agnostic architecture}: Design systems to work with any LLM provider through symbolic validation
 \end{enumerate}
 
@@ -668,9 +668,9 @@ Initial Automated Pipeline & $2.64 \times 10^{10}$\% & n=? & ⚠️ Incorrect \\
 
 \begin{enumerate}
     \item \textbf{Different test sets}: Current analysis (n=13) vs previous (n=14) indicates one test was excluded or failed in the current run
-    
+
     \item \textbf{Calculation variations}: Different error calculation implementations may yield different results
-    
+
     \item \textbf{Statistical sampling}: Natural variation in which specific equations completed successfully
 \end{enumerate}
 
@@ -697,7 +697,7 @@ This discrepancy indicates:
 
 \subsubsection{Sample Size Variations}
 
-\paragraph{Observation:} 
+\paragraph{Observation:}
 \begin{itemize}
     \item Hybrid v40: 15 interpolation tests, 14 extrapolation tests
     \item Neural Network: 15 interpolation tests, 13 extrapolation tests
@@ -731,28 +731,28 @@ Mann-Whitney U test is designed for unequal sample sizes and remains valid. The 
         \item Hybrid v40: 0\% error (n=14) with functional form discovery
         \item Statistical evidence: Mann-Whitney U = 0, p = $1.11 \times 10^{-6}$ (complete separation)
     \end{itemize}
-    
+
     \item \textbf{LLMs Pattern-Match, Don't Reason}
     \begin{itemize}
         \item 100\% success on famous physics equations ($>$1M web mentions)
         \item 0\% success on specialized biochemistry ($<$100K mentions)
         \item Correlation: $\rho = 0.89$ between prevalence and success ($p < 0.001$)
     \end{itemize}
-    
+
     \item \textbf{Multiple Architectures Achieve Excellent Interpolation}
     \begin{itemize}
         \item System 3 LLM+Fallback: Perfect interpolation (R² = 1.000, n=30)
         \item Hybrid v40: Median R² = 1.000, mean R² = 0.931 (n=15)
         \item Neural Network: R² = 0.940 (n=15)
     \end{itemize}
-    
+
     \item \textbf{Prediction Validation Essential}
     \begin{itemize}
         \item Structural validation alone inflates performance by 20\%
         \item Three failure modes: catastrophic R², prediction overflow, execution errors
         \item Post-hoc numerical validation required for all LLM outputs
     \end{itemize}
-    
+
     \item \textbf{Mathematics as Universal Language}
     \begin{itemize}
         \item Symbolic methods succeed in non-traditional domains (DeFi: 99.96\% R²)

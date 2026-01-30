@@ -313,7 +313,7 @@ regressor = PhysicsAwareRegressor(
 
 # Method 1: Train/validation split with early stopping
 regressor.fit_with_validation(
-    X, y, 
+    X, y,
     variable_names=['Vmax', 'Km', 'S'],
     validation_split=0.2,
     early_stopping_rounds=15

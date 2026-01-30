@@ -1087,13 +1087,13 @@ def main():
 Examples:
   # Test kinetic energy
   python llm_guided_symbolic_discovery.py --test kinetic_energy --api-key YOUR_KEY
-  
-  # Test Bernoulli equation  
+
+  # Test Bernoulli equation
   python llm_guided_symbolic_discovery.py --test bernoulli --api-key YOUR_KEY
-  
+
   # Test Michaelis-Menten
   python llm_guided_symbolic_discovery.py --test michaelis_menten --api-key YOUR_KEY
-  
+
   # Run all tests
   python llm_guided_symbolic_discovery.py --test all --api-key YOUR_KEY
 

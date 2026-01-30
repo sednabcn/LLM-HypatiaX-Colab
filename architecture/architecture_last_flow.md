@@ -1,5 +1,5 @@
 ──(py312)(agagora㉿localhost)-[~/Downloads/LLM-HypatiaX-OLD/hypatiax]
-└─$ tree -d -L 2                                                                                                                  
+└─$ tree -d -L 2
 .
 ├── agents
 │   ├── base

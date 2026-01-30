@@ -83,7 +83,11 @@ class HybridDiscoveryAPI:
             }
 
         except Exception as e:
-            return {"status": "error", "error": f"Discovery failed: {str(e)}", "data_strategy": data_strategy}
+            return {
+                "status": "error",
+                "error": f"Discovery failed: {str(e)}",
+                "data_strategy": data_strategy,
+            }
 
     def _plan_data_generation(self, user_query: str, domain: str) -> Dict:
         """Use LLM to plan data generation strategy."""
@@ -127,7 +131,10 @@ Think about what variables affect the outcome."""
             return strategy
 
         except Exception as e:
-            return {"status": "error", "error": f"Failed to plan data generation: {str(e)}"}
+            return {
+                "status": "error",
+                "error": f"Failed to plan data generation: {str(e)}",
+            }
 
     def _generate_synthetic_data(self, strategy: Dict) -> tuple:
         """Generate synthetic data based on strategy."""
@@ -190,7 +197,10 @@ Think about what variables affect the outcome."""
 if __name__ == "__main__":
     api = HybridDiscoveryAPI()
 
-    test_queries = [("Calculate impermanent loss for AMM", "defi"), ("Value at Risk at 95% confidence", "risk")]
+    test_queries = [
+        ("Calculate impermanent loss for AMM", "defi"),
+        ("Value at Risk at 95% confidence", "risk"),
+    ]
 
     for query, domain in test_queries:
         print(f"\n{'='*60}")
