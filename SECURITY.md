@@ -19,3 +19,17 @@ Use this section to tell people how to report a vulnerability.
 Tell them where to go, how often they can expect to get an update on a
 reported vulnerability, what to expect if the vulnerability is accepted or
 declined, etc.
+
+# Security Policy
+
+## Dependency Security
+
+This repository uses automated dependency scanning (`pip-audit`) to
+identify known vulnerabilities in third-party Python packages.
+
+Some dependencies are intentionally pinned due to upstream ecosystem
+constraints. In particular:
+
+### Protobuf Version Pinning
+
+The project pins:
