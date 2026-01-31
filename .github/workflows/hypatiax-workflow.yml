@@ -16,7 +16,7 @@ on:
       python_version:
         description: 'Python version'
         type: choice
-        options: ['3.12', '3.13']
+        options: ['3.12']
         default: '3.12'
       workflow_profile:
         description: 'Workflow profile'
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ${{ github.event.inputs.python_version && fromJSON(format('["{0}"]', github.event.inputs.python_version)) || fromJSON('["3.12", "3.13"]') }}
+        python-version: ${{ github.event.inputs.python_version && fromJSON(format('["{0}"]', github.event.inputs.python_version)) || fromJSON('["3.12"]') }}
 
     steps:
     - uses: actions/checkout@v4
