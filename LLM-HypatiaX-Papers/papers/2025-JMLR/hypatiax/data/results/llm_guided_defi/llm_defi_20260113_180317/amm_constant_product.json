@@ -1,0 +1,18 @@
+{
+  "error": "name 'k' is not defined",
+  "test_name": "amm_constant_product",
+  "timing": {
+    "total": 0.0009884834289550781
+  },
+  "timestamp": "2026-01-13T18:03:17.406579",
+  "success": false,
+  "difficulty": "easy",
+  "extrapolation_test": false,
+  "_metadata": {
+    "session_id": "llm_defi_20260113_180317",
+    "timestamp": "2026-01-13T18:03:17.406642",
+    "passed": false,
+    "test_name": "amm_constant_product",
+    "method": "llm_guided_defi_v1.0"
+  }
+}

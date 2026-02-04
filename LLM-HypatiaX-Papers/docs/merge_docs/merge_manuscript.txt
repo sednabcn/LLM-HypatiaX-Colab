@@ -1,0 +1,175 @@
+MANUSCRIPT MERGE - QUICK REFERENCE CARD
+========================================
+
+LOCATION
+--------
+papers/2025-JMLR/
+
+FILES
+-----
+Original:     paper/jmlr_paper.tex
+Alternative:  supplementaries/manuscript/hypatiax_manuscript.tex
+Working Copy: paper/jmlr_paper_MERGED.tex (you'll create this)
+
+
+QUICK START
+-----------
+cd papers/2025-JMLR/paper/
+cp jmlr_paper.tex jmlr_paper_MERGED.tex
+# Now edit jmlr_paper_MERGED.tex
+
+
+MERGE STRATEGY
+--------------
+Section              | Recommendation
+---------------------|--------------------------------
+Abstract             | Merge both (keep clarity, add depth)
+Introduction         | Use alternative (more detailed)
+Architecture         | Use alternative (6 pages vs 3)
+Methods              | Merge both experiments
+Results              | CAREFULLY merge (no duplication)
+Discussion           | Use alternative (6 pages vs 3)
+Conclusion           | Merge future work from both
+Bibliography         | Combine and deduplicate
+
+
+ESSENTIAL COMMANDS
+------------------
+# Test compilation:
+pdflatex jmlr_paper_MERGED.tex
+
+# Full build:
+pdflatex jmlr_paper_MERGED.tex && bibtex jmlr_paper_MERGED && pdflatex jmlr_paper_MERGED.tex && pdflatex jmlr_paper_MERGED.tex
+
+# Check for errors:
+grep "Error" jmlr_paper_MERGED.log
+
+# Merge bibliographies:
+cat references.bib supplementaries/manuscript/Bib/bibliography.bib | python3 ../../latex/Bib/deduplication_bib.py > references_new.bib
+
+# Count pages:
+pdfinfo jmlr_paper_MERGED.pdf | grep Pages
+
+
+COMMON ISSUES & FIXES
+---------------------
+Issue: LaTeX error "Undefined control sequence"
+Fix: Check for missing packages in preamble
+
+Issue: Figures not appearing
+Fix: Check paths - may need ../figures/ prefix
+
+Issue: Bibliography not resolving
+Fix: Run bibtex, then pdflatex twice more
+
+Issue: "??" in PDF
+Fix: References not resolving - check citation keys
+
+
+EDITING WORKFLOW
+----------------
+1. Open both PDFs side-by-side:
+   - jmlr_paper.pdf (original)
+   - supplementaries/manuscript/hypatiax_manuscript.pdf (if compiled)
+
+2. Open jmlr_paper_MERGED.tex in your editor
+
+3. For each section:
+   - Compare both versions
+   - Copy better content to MERGED.tex
+   - Avoid duplication
+   - Test compile frequently
+
+4. Save often, test often
+
+
+SAFETY
+------
+Backups are in: backups/pre-merge-YYYYMMDD/
+Can always revert with: git checkout jmlr_paper.tex
+
+
+COMPLETION CHECKLIST
+--------------------
+[ ] All sections merged
+[ ] Bibliography combined
+[ ] All figures working
+[ ] Compiles without errors
+[ ] 40-50 pages
+[ ] Team reviewed
+[ ] No duplicate content
+
+
+NEED HELP?
+----------
+- Detailed workflow: merge_workflow.md
+- Full analysis: why_merge_is_right.md
+- Interactive checklist: MERGE_CHECKLIST.txt
+- Commands script: merge_script.sh
+
+
+TIMELINE
+--------
+Day 1: Analysis (2-3h)
+Day 2: Front matter (3-4h)
+Day 3: Core content (4-5h)
+Day 4: Finalize (3-4h)
+Day 5: Review (2-3h)
+Total: ~15-19 hours
+
+
+DONE!
+-----
+When finished:
+mv jmlr_paper_MERGED.tex jmlr_paper.tex
+git commit -m "Merged manuscripts"
+
+
+=========================================================================
+Let me create an editable version for you - I'll make it as a simple text checklist you can actually use and modify:Synthesized practical file solutions for user workflowCreating a simple, editable merge checklist in plain text formatMERGE_CHECKLIST.txtThe user said they cannot edit the merge workflow file. I've created a simple text checklist that should be easier to work with. Let me also create a simplified command script that they can execute step by step.Creating a simple bash script with step-by-step commands they can runmerge_script.shGood, I've created two simpler, more practical files:
+
+A plain text checklist that can be printed or easily edited
+A bash script with commands they can run step by step
+
+Let me also create a very simple quick reference card.Creating a simple one-page quick reference cardQUICK_REFERENCE.txtNow let me copy all these practical files to the outputs directory so the user can access them.Copying all practical merge files to outputs and making script executableScriptGreat! Now let me present these files to the user. I'll focus on the three most practical ones that they can actually use and edit.Presented 3 filesPerfect! I've provided the user with three practical, editable files. Let me summarize what I've created for them.DonePerfect! I've created editable versions for you. Here are three practical files you can actually use:
+1. QUICK_REFERENCE.txt (1 page)
+
+Essential commands at a glance
+Merge strategy for each section
+Common issues and fixes
+Print this and keep it next to you while working
+
+2. MERGE_CHECKLIST.txt (11KB)
+
+Complete checklist with checkboxes [ ]
+Space to write notes and dates
+Track progress through all 5 days
+Fill in as you go
+
+3. merge_script.sh (executable)
+
+Ready-to-run bash commands
+Commented sections you can uncomment as needed
+Run setup, then uncomment sections as you progress
+Safe with backups built in
+
+How to Use
+
+Option A: Manual (recommended for first time)
+bash# Download MERGE_CHECKLIST.txt
+# Print it or open in text editor
+# Follow step by step, checking boxes as you go
+
+
+Option B: Semi-automated
+bash# Download merge_script.sh
+cd papers/2025-JMLR/
+bash merge_script.sh  # Runs setup
+# Then manually edit jmlr_paper_MERGED.tex
+# Uncomment script sections as you complete them
+
+
+Option C: Quick reference
+bash# Keep QUICK_REFERENCE.txt open
+# Use it for commands while you manually edit
+All three files are plain text - you can edit them in any text editor (Notepad, VS Code, vim, nano, etc.). The markdown files are still available if you want the detailed explanations, but these three are for doing the work.Quick referenceTXT DownloadMerge checklistTXT DownloadMerge scriptSH DownloadDownload all

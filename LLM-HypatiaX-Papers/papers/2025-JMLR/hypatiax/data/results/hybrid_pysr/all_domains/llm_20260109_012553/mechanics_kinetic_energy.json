@@ -1,0 +1,119 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "y = 0.5 * m * v**2",
+    "confidence": 0.95,
+    "reasoning": "This is the classical kinetic energy formula from mechanics. The polynomial nature with degree 3 could arise from data with varying units or measurement errors, but the fundamental relationship is quadratic in velocity and linear in mass.",
+    "source": "llm",
+    "fitted_equation": null,
+    "coefficients": null,
+    "r2_score": 0.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": null
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = 0.5 * m * v**2",
+      "confidence": 0.95,
+      "reasoning": "This is the classical kinetic energy formula from mechanics. The polynomial nature with degree 3 could arise from data with varying units or measurement errors, but the fundamental relationship is quadratic in velocity and linear in mass.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = m * v**2",
+      "confidence": 0.85,
+      "reasoning": "Kinetic energy without the 1/2 factor, possibly due to different unit conventions or if measuring total energy in a different reference frame. Still captures the essential m*v\u00b2 relationship.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = 0.5 * m * v**2 + c * m * v",
+      "confidence": 0.75,
+      "reasoning": "Classical kinetic energy plus a linear momentum term. The polynomial degree 3 pattern might include velocity-dependent corrections or relativistic effects at moderate speeds.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = a * m * v**2 + b * m**2 * v",
+      "confidence": 0.65,
+      "reasoning": "Quadratic kinetic energy term plus a mass-squared interaction term. Could explain the polynomial degree 3 pattern and strong correlations with both variables through mass-velocity coupling effects.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "y = 0.5 * m * (v**2 + c * v**3/m)",
+      "confidence": 0.6,
+      "reasoning": "Classical kinetic energy with a cubic velocity correction term that could arise from drag effects or relativistic corrections. The v\u00b3 term divided by mass maintains dimensional consistency and could produce the observed polynomial behavior.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "m": 0.516905651460334,
+      "v": 0.7272334644121585
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      0.0236261458681664,
+      12017.809653804448
+    ],
+    "y_scale": "large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 10.859156847000122,
+    "phase1_analysis": 0.35094451904296875,
+    "phase2_llm": 10.507125616073608,
+    "phase3_verify": 0.0007002353668212891
+  },
+  "r2_score": 0.0,
+  "validation_score": 0.0,
+  "expression": "y = 0.5 * m * v**2",
+  "test_name": "mechanics_kinetic_energy",
+  "timestamp": "2026-01-09T01:26:06.769165",
+  "ground_truth": "(1/2)*m*v**2",
+  "domain": "mechanics",
+  "_metadata": {
+    "session_id": "llm_20260109_012553",
+    "timestamp": "2026-01-09T01:26:06.769261",
+    "passed": false,
+    "test_name": "mechanics_kinetic_energy",
+    "method": "llm_guided"
+  }
+}

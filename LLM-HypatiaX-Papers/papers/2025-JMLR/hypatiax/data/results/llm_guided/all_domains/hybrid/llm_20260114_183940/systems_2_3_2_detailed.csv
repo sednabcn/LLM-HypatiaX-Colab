@@ -1,0 +1,31 @@
+test_name,domain,system_type,success,r2_score,expression,validation_score,total_time,llm_mode,discovery_engine,extrap_near,extrap_medium,extrap_far,extrap_r2_near,extrap_r2_medium,extrap_r2_far,source_file
+biology_allometric_scaling,biology,System_3_LLM_Fallback,True,1.0,a * M**b,91.3,10.550716161727905,hybrid_llm_only,symbolic,,,,,,,biology_allometric_scaling.json
+biology_logistic_growth,biology,System_3_LLM_Fallback,True,1.0,r * N * (1 - N/K),98.5,7.828675031661987,hybrid_llm_only,symbolic,,,,,,,biology_logistic_growth.json
+biology_michaelis_menten,biology,System_3_LLM_Fallback,True,1.0,(Vmax * S) / (Km + S),91.0,8.077127933502197,hybrid_llm_only,symbolic,,,,,,,biology_michaelis_menten.json
+chemistry_arrhenius_equation,chemistry,System_3_LLM_Fallback,True,1.0,A * exp(-Ea / (R * T)),88.6,7.424362659454346,hybrid_llm_only,symbolic,,,,,,,chemistry_arrhenius_equation.json
+chemistry_henderson_hasselbalch,chemistry,System_3_LLM_Fallback,True,0.9990314168440244,pKa - ((A_minus - HA) * ((-2.2914078 / (((HA + 0.06694371) * (A_minus + 0.06868311)) * 18.92267)) - 0.45465365)),91.3,429.30504322052,hybrid_pysr_better,symbolic,,,,,,,chemistry_henderson_hasselbalch.json
+chemistry_nernst_equation,chemistry,System_3_LLM_Fallback,True,0.9999943615210617,(T / ((((R / (Qr + (-0.81812054 / Qr))) + ((R - -0.8443103) - (Qr / (F / Qr)))) - R) * (n / -0.00033086902))) + E0,100.0,196.6800537109375,hybrid_pysr_better,symbolic,,,,,,,chemistry_nernst_equation.json
+economics_break_even_point,economics,System_3_LLM_Fallback,True,1.0,FC / (P - VC),91.0,8.750768899917603,hybrid_llm_only,symbolic,,,,,,,economics_break_even_point.json
+economics_cobb_douglas,economics,System_3_LLM_Fallback,True,1.0,A * K**alpha * L**beta,91.3,8.400819301605225,hybrid_llm_only,symbolic,,,,,,,economics_cobb_douglas.json
+economics_elasticity_demand,economics,System_3_LLM_Fallback,True,1.0,(delta_Q / Qr) / (delta_P / P),92.1,8.478546380996704,hybrid_llm_only,symbolic,,,,,,,economics_elasticity_demand.json
+electromagnetism_coulomb_law,electromagnetism,System_3_LLM_Fallback,True,1.0,k * q1 * q2 / r**2,91.3,8.53644871711731,hybrid_llm_only,symbolic,,,,,,,electromagnetism_coulomb_law.json
+electromagnetism_lorentz_force,electromagnetism,System_3_LLM_Fallback,True,1.0,q * v * B,100.0,7.53851580619812,hybrid_llm_only,symbolic,,,,,,,electromagnetism_lorentz_force.json
+electromagnetism_ohms_law,electromagnetism,System_3_LLM_Fallback,True,1.0,I * R,100.0,6.747997045516968,hybrid_llm_only,symbolic,,,,,,,electromagnetism_ohms_law.json
+fluid_dynamics_bernoulli_equation,fluid_dynamics,System_3_LLM_Fallback,True,1.0,P + 0.5 * rho * v**2 + rho * g * h,91.3,8.473809480667114,hybrid_llm_only,symbolic,,,,,,,fluid_dynamics_bernoulli_equation.json
+fluid_dynamics_hagen_poiseuille,fluid_dynamics,System_3_LLM_Fallback,True,0.9999999999992553,(3.14159 * dP * r**4) / (8 * mu * L),89.5,9.441710233688354,hybrid_llm_only,symbolic,,,,,,,fluid_dynamics_hagen_poiseuille.json
+fluid_dynamics_reynolds_number,fluid_dynamics,System_3_LLM_Fallback,True,1.0,rho * v * L / mu,91.0,8.254697322845459,hybrid_llm_only,symbolic,,,,,,,fluid_dynamics_reynolds_number.json
+mathematics_compound_interest,mathematics,System_3_LLM_Fallback,True,1.0,P * (1 + r/n)**(n*t),90.4,9.031455755233765,hybrid_llm_only,symbolic,,,,,,,mathematics_compound_interest.json
+mathematics_pythagorean_theorem,mathematics,System_3_LLM_Fallback,True,1.0,(a**2 + b**2)**0.5,100.0,8.22202730178833,hybrid_llm_only,symbolic,,,,,,,mathematics_pythagorean_theorem.json
+mathematics_quadratic_discriminant,mathematics,System_3_LLM_Fallback,True,1.0,b**2 - 4*a*c,99.4,6.552982330322266,hybrid_llm_only,symbolic,,,,,,,mathematics_quadratic_discriminant.json
+mechanics_gravitational_potential_energy,mechanics,System_3_LLM_Fallback,True,1.0,m * g * h,100.0,118.94421291351318,hybrid_llm_only,symbolic,,,,,,,mechanics_gravitational_potential_energy.json
+mechanics_hookes_law,mechanics,System_3_LLM_Fallback,True,1.0,k * x,100.0,13.025285005569458,hybrid_llm_only,symbolic,,,,,,,mechanics_hookes_law.json
+mechanics_kinetic_energy,mechanics,System_3_LLM_Fallback,True,1.0,0.5 * m * v**2,100.0,24.349461793899536,hybrid_llm_only,symbolic,,,,,,,mechanics_kinetic_energy.json
+optics_single_slit_diffraction,optics,System_3_LLM_Fallback,True,1.0,wavelength / a,99.1,8.113584756851196,hybrid_llm_only,symbolic,,,,,,,optics_single_slit_diffraction.json
+optics_snells_law,optics,System_3_LLM_Fallback,True,1.0,n1 * sin_theta1,100.0,8.01519250869751,hybrid_llm_only,symbolic,,,,,,,optics_snells_law.json
+optics_thin_lens_equation,optics,System_3_LLM_Fallback,True,0.9999999999999999,(1.0 / do) - ((1.0510925 / di) * -0.95139104),90.4,214.6099328994751,hybrid_pysr_better,symbolic,,,,,,,optics_thin_lens_equation.json
+quantum_compton_shift,quantum,System_3_LLM_Fallback,True,0.9999999999999982,100.1 - (cos_theta + -1.2255921e-6),100.0,208.36099982261658,hybrid_pysr_better,symbolic,,,,,,,quantum_compton_shift.json
+quantum_de_broglie_wavelength,quantum,System_3_LLM_Fallback,True,0.999999999999997,((((23.367804 / ((v + (((m + m) + 13.504067) / 11.090331)) / 5.787419)) + (m + m)) + -1.2378498) - (m - (-0.009802008 / m))) * 0.999844,85.6,202.43238353729248,hybrid_pysr_better,symbolic,,,,,,,quantum_de_broglie_wavelength.json
+quantum_photon_energy,quantum,System_3_LLM_Fallback,True,1.0,f,100.0,169.11778497695923,hybrid_pysr_better,symbolic,,,,,,,quantum_photon_energy.json
+thermodynamics_carnot_efficiency,thermodynamics,System_3_LLM_Fallback,True,1.0,1 - Tc/Th,98.5,9.299617528915405,hybrid_llm_only,symbolic,,,,,,,thermodynamics_carnot_efficiency.json
+thermodynamics_heat_capacity,thermodynamics,System_3_LLM_Fallback,True,1.0,m * c * dT,100.0,7.975822925567627,hybrid_llm_only,symbolic,,,,,,,thermodynamics_heat_capacity.json
+thermodynamics_ideal_gas_law,thermodynamics,System_3_LLM_Fallback,True,1.0,n * R * T / V,91.0,10.019225358963013,hybrid_llm_only,symbolic,,,,,,,thermodynamics_ideal_gas_law.json

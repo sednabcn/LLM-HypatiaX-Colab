@@ -1,0 +1,120 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "P + 0.5 * rho * v**2",
+    "confidence": 0.95,
+    "reasoning": "This is the core Bernoulli equation relating pressure, density, and velocity squared. The high P correlation (0.887) and moderate v correlation (0.454) with polynomial structure fits perfectly.",
+    "source": "llm",
+    "fitted_equation": null,
+    "coefficients": null,
+    "r2_score": 0.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": null
+  },
+  "all_hypotheses": [
+    {
+      "equation": "P + 0.5 * rho * v**2",
+      "confidence": 0.95,
+      "reasoning": "This is the core Bernoulli equation relating pressure, density, and velocity squared. The high P correlation (0.887) and moderate v correlation (0.454) with polynomial structure fits perfectly.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "P + rho * v**2",
+      "confidence": 0.85,
+      "reasoning": "Simplified dynamic pressure form without the 0.5 coefficient. Still captures the fundamental Bernoulli relationship with pressure being the dominant term.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "P * (1 + 0.5 * rho * v**2 / P)",
+      "confidence": 0.75,
+      "reasoning": "Normalized form of Bernoulli equation showing pressure modified by dynamic pressure ratio. Explains the strong P correlation and polynomial behavior.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "P + rho * 9.81 + 0.5 * rho * v**2",
+      "confidence": 0.7,
+      "reasoning": "Complete Bernoulli equation including gravitational potential energy term (rho*g*h approximated as rho*g). The large y-scale suggests significant pressure values.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "P * (1 + v**2 / (2 * P / rho))",
+      "confidence": 0.6,
+      "reasoning": "Alternative form relating pressure to velocity through the speed of sound relationship. The exponential pattern detection could arise from this nonlinear pressure-velocity coupling.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    }
+  ],
+  "patterns": {
+    "is_linear": true,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": true,
+    "is_logarithmic": true,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "P": 0.8865809717841858,
+      "rho": 0.10252668078831619,
+      "v": 0.4537248180077707
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      101725.38599574883,
+      247925.51856731702
+    ],
+    "y_scale": "large",
+    "symmetry": "symmetric",
+    "estimated_complexity": "simple"
+  },
+  "timing": {
+    "total": 9.637657642364502,
+    "phase1_analysis": 0.06355142593383789,
+    "phase2_llm": 9.573200941085815,
+    "phase3_verify": 0.0004715919494628906
+  },
+  "r2_score": 0.0,
+  "validation_score": 0.0,
+  "expression": "P + 0.5 * rho * v**2",
+  "test_name": "fluid_dynamics_bernoulli_equation",
+  "timestamp": "2026-01-09T01:27:36.368409",
+  "ground_truth": "P + 0.5*rho*v**2",
+  "domain": "fluid_dynamics",
+  "_metadata": {
+    "session_id": "llm_20260109_012553",
+    "timestamp": "2026-01-09T01:27:36.368497",
+    "passed": false,
+    "test_name": "fluid_dynamics_bernoulli_equation",
+    "method": "llm_guided"
+  }
+}

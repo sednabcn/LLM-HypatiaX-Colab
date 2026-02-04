@@ -1,0 +1,18 @@
+{
+  "error": "name 'P' is not defined",
+  "test_name": "staking_compound_staking",
+  "timing": {
+    "total": 0.0026912689208984375
+  },
+  "timestamp": "2026-01-13T18:14:10.703074",
+  "success": false,
+  "difficulty": "hard",
+  "extrapolation_test": true,
+  "_metadata": {
+    "session_id": "llm_defi_20260113_180317",
+    "timestamp": "2026-01-13T18:14:10.703153",
+    "passed": false,
+    "test_name": "staking_compound_staking",
+    "method": "llm_guided_defi_v1.0"
+  }
+}

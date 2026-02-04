@@ -1,0 +1,6 @@
+method,n_tests,success_rate,mean_r2,median_r2,mean_time_sec
+Pure LLM,40,60.0,0.421,0.850,15
+Neural Network,13,100.0,0.940,0.950,12
+Pure PySR,15,80.0,0.856,0.940,1680
+Hybrid v40,15,93.3,0.931,1.000,390
+LLM-guided,15,93.3,0.925,1.000,105

@@ -1,0 +1,430 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{pythonstyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=pythonstyle}
+
+\title{\textbf{Comparative Analysis of LLM-Enhanced Symbolic Regression Methods}\\
+\large A Benchmark Study Across Multiple Scientific Domains}
+
+\author{
+LLM-HypatiaX Research Team\\
+\texttt{https://github.com/LLM-HypatiaX-Colab}
+}
+
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We present a comprehensive benchmark of nine symbolic regression methods combining Large Language Models (LLMs), traditional symbolic regression (PySR), neural networks, and novel hybrid architectures. Testing across 15 equations from physics, chemistry, biology, and decentralized finance domains reveals that \textbf{ensemble architectures outperform pure approaches by 10-40\%}. Our Hybrid System v40 achieved the highest reliability (0.9886 mean $R^2$, 100\% success rate) while pure LLM methods exhibited catastrophic failures on 20\% of tests. Critically, we demonstrate that proper validation is essential when using LLM-generated code, as missing validation can artificially inflate performance metrics. The study validates that architectural design—specifically, intelligent combination of complementary methods—matters more than individual model selection for scientific formula discovery.
+\end{abstract}
+
+\section{Introduction}
+
+Symbolic regression seeks to discover mathematical equations that describe observed data—a fundamental challenge in scientific discovery. Recent advances in Large Language Models (LLMs) have opened new possibilities for formula discovery through natural language understanding and code generation \cite{claude2024}. However, the reliability and comparative performance of LLM-based approaches versus traditional methods remains unclear.
+
+\subsection{Research Questions}
+
+This study addresses three critical questions:
+
+\begin{enumerate}
+    \item \textbf{RQ1}: How do pure LLM methods compare to traditional symbolic regression (PySR)?
+    \item \textbf{RQ2}: Can hybrid architectures combining LLMs, neural networks, and symbolic regression outperform individual approaches?
+    \item \textbf{RQ3}: How does LLM choice (Claude Sonnet 4 vs. Gemini 2.5 Flash) impact formula discovery performance?
+\end{enumerate}
+
+\subsection{Key Contributions}
+
+\begin{itemize}
+    \item Comprehensive benchmark of 9 methods across 15 scientific equations
+    \item Novel hybrid architecture (Hybrid System v40) achieving state-of-the-art results
+    \item Identification of critical validation requirements for LLM-generated code
+    \item Domain-specific performance analysis revealing when to use each method
+\end{itemize}
+
+\section{Methods}
+
+\subsection{Evaluated Approaches}
+
+We evaluated nine distinct methods, categorized into four families:
+
+\subsubsection{Traditional Symbolic Regression}
+
+\begin{enumerate}
+    \item \textbf{Pure PySR}: Genetic programming-based symbolic regression using Julia backend
+    \item \textbf{LLM-Guided PySR}: PySR with LLM-suggested operators and search constraints
+\end{enumerate}
+
+\subsubsection{Pure LLM Methods}
+
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item \textbf{Pure LLM (Basic)}: Direct formula generation via prompt engineering
+    \item \textbf{Pure LLM (Enhanced)}: Advanced prompting with domain knowledge and constants
+\end{enumerate}
+
+\subsubsection{Neural Network Baseline}
+
+\begin{enumerate}
+    \setcounter{enumi}{4}
+    \item \textbf{Neural Network}: Multi-layer perceptron (64-32-1 architecture)
+\end{enumerate}
+
+\subsubsection{Hybrid/Ensemble Methods}
+
+\begin{enumerate}
+    \setcounter{enumi}{5}
+    \item \textbf{LLM+NN Ensemble (Simple)}: Best-of-two selection
+    \item \textbf{LLM+NN Ensemble (Smart)}: Rule-based decision logic
+    \item \textbf{Integrated LLM Discovery}: Multi-iteration refinement
+    \item \textbf{Hybrid System v40}: Full integration of all approaches
+\end{enumerate}
+
+\subsection{Test Suite}
+
+We evaluated performance across 15 equations spanning four domains:
+
+\begin{table}[h]
+\centering
+\caption{Benchmark Test Suite}
+\begin{tabular}{lll}
+\toprule
+\textbf{Domain} & \textbf{Equations} & \textbf{Count} \\
+\midrule
+Chemistry & Arrhenius, Henderson-Hasselbalch, Rate Law & 3 \\
+Biology & Allometric Scaling, Michaelis-Menten, Logistic Growth & 3 \\
+Physics & Kinetic Energy, Gravitational Force, Ideal Gas Law & 3 \\
+DeFi/AMM & Impermanent Loss, Price Impact, Constant Product & 3 \\
+DeFi/Risk & Value at Risk, Liquidation Price, Portfolio VaR & 3 \\
+\midrule
+\textbf{Total} & & \textbf{15} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Each test used 200 samples with known ground truth formulas to enable objective $R^2$ evaluation.
+
+\subsection{Critical Implementation Detail: Validation}
+
+A crucial finding emerged from comparing two implementation versions:
+
+\begin{lstlisting}[language=Python, caption=Essential Validation Logic]
+def _validate_predictions(self, y_pred, y_true):
+    # Catch invalid values
+    if not np.all(np.isfinite(y_pred)):
+        return False, "Invalid predictions (NaN/Inf)"
+
+    # Catch unrealistic magnitude
+    y_range = np.ptp(y_true)
+    pred_range = np.ptp(y_pred)
+    if pred_range > 1000 * max(y_range, 1):
+        return False, "Predictions too large"
+
+    # Catch catastrophic R²
+    if self._safe_r2(y_true, y_pred) < -100:
+        return False, "Catastrophic R²"
+
+    return True, None
+\end{lstlisting}
+
+\textbf{Without validation}, catastrophically bad predictions were counted as successes, artificially inflating performance metrics. This affected pure LLM methods most severely.
+
+\section{Results}
+
+\subsection{Overall Performance Rankings}
+
+\begin{table}[h]
+\centering
+\caption{Method Performance Summary (Claude Sonnet 4 Backend)}
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Method} & \textbf{Mean $R^2$} & \textbf{Success Rate} & \textbf{Avg Time (s)} & \textbf{Rank} \\
+\midrule
+Hybrid System v40 & 0.9886 & 100\% (15/15) & 4.7 & \textbf{1} \\
+LLM+NN Ensemble (Smart) & 0.9885 & 100\% (15/15) & 5.1 & 2 \\
+LLM+NN Ensemble (Simple) & 0.9877 & 100\% (15/15) & 4.7 & 3 \\
+Pure PySR & 0.9298 & 100\% (15/15) & 17.5 & 4 \\
+LLM-Guided PySR & 0.9147 & 100\% (15/15) & 17.0 & 5 \\
+Neural Network & 0.8995 & 100\% (15/15) & 2.6 & 6 \\
+\midrule
+Pure LLM (Basic) & -0.2034 & 80\% (12/15) & 3.5 & 7 \\
+Integrated LLM Discovery & -1.1251 & 80\% (12/15) & 3.3 & 8 \\
+Pure LLM (Enhanced) & -1.1370 & 80\% (12/15) & 3.4 & 9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Key Findings}
+
+\subsubsection{Finding 1: Hybrid Architectures Dominate}
+
+The top three methods were all ensemble/hybrid approaches, achieving:
+\begin{itemize}
+    \item 100\% success rate (no catastrophic failures)
+    \item Mean $R^2 > 0.987$ across all domains
+    \item 3-5x faster than pure PySR methods
+\end{itemize}
+
+\subsubsection{Finding 2: Pure LLM Methods Are Unreliable}
+
+Despite sophisticated prompt engineering, pure LLM approaches exhibited:
+\begin{itemize}
+    \item 20\% failure rate (3/15 tests)
+    \item Negative mean $R^2$ due to catastrophic failures
+    \item Domain-specific weaknesses (chemistry, biology)
+\end{itemize}
+
+Common failure modes included:
+\begin{itemize}
+    \item \texttt{Predictions too large}: Output magnitude $10^3-10^6$x expected
+    \item \texttt{Catastrophic $R^2$}: $R^2 < -10$ indicating worse than constant prediction
+    \item \texttt{Execution failures}: Syntax errors or runtime exceptions
+\end{itemize}
+
+\subsubsection{Finding 3: Domain-Specific Performance Patterns}
+
+\begin{table}[h]
+\centering
+\caption{Win Distribution by Domain}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Domain} & \textbf{LLM-Guided PySR} & \textbf{Pure PySR} & \textbf{Pure LLM} \\
+\midrule
+Chemistry & 67\% & 33\% & 0\% \\
+Biology & 33\% & 67\% & 0\% \\
+Physics & 67\% & 0\% & 33\% \\
+DeFi/AMM & 67\% & 0\% & 33\% \\
+DeFi/Risk & 67\% & 0\% & 33\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Observation}: Pure LLM methods only succeeded on well-known physics equations and simple financial formulas. They failed catastrophically on chemistry/biology equations requiring domain-specific knowledge.
+
+\subsection{LLM Backend Comparison}
+
+We compared Claude Sonnet 4 vs. Gemini 2.5 Flash:
+
+\begin{table}[h]
+\centering
+\caption{Pure LLM Performance by Backend}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Claude Sonnet 4} & \textbf{Gemini 2.5 Flash} \\
+\midrule
+Success Rate & 80\% (12/15) & 100\% (15/15)* \\
+Mean $R^2$ & -1.137 & 1.0000* \\
+Wins & 0/15 & 6/15* \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize *Gemini results WITHOUT validation—likely inflated}
+\end{tabular}
+\end{table}
+
+\textbf{Critical Caveat}: The Gemini benchmark used code \textit{without} validation checks. When the same validation logic is applied, we expect similar failure rates to Claude.
+
+\subsubsection{Evidence of Validation Impact}
+
+Comparing test outputs:
+
+\textbf{Gemini (no validation)}:
+\begin{verbatim}
+Pure LLM (Basic)... ✓ R²: -5574976734176.1924, RMSE: 321567.50
+[Counted as "success" despite catastrophic R²]
+\end{verbatim}
+
+\textbf{Claude (with validation)}:
+\begin{verbatim}
+Pure LLM (Basic)... ✗ Catastrophic R²
+[Correctly flagged as failure]
+\end{verbatim}
+
+\subsection{Speed-Accuracy Tradeoff}
+
+\begin{table}[h]
+\centering
+\caption{Pareto Frontier Analysis}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Method} & \textbf{$R^2$} & \textbf{Time (s)} \\
+\midrule
+Neural Network & 0.8995 & 2.6 \\
+Hybrid System v40 & \textbf{0.9886} & \textbf{4.7} \\
+Pure PySR & 0.9298 & 17.5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Optimal choice}: Hybrid System v40 achieves near-perfect accuracy at 3.7x faster than PySR.
+
+\section{Discussion}
+
+\subsection{Why Hybrid Architectures Excel}
+
+The superior performance of hybrid methods stems from three mechanisms:
+
+\begin{enumerate}
+    \item \textbf{Complementary Strengths}:
+    \begin{itemize}
+        \item LLMs: Excel at well-known equations (physics)
+        \item PySR: Strong on complex non-linear relationships
+        \item Neural networks: Robust universal approximator
+    \end{itemize}
+
+    \item \textbf{Graceful Degradation}:
+    \begin{itemize}
+        \item When LLM fails, fallback to NN or PySR
+        \item No single point of failure
+    \end{itemize}
+
+    \item \textbf{Validation Through Consensus}:
+    \begin{itemize}
+        \item Multiple predictions enable cross-validation
+        \item Outliers automatically rejected
+    \end{itemize}
+\end{enumerate}
+
+\subsection{LLM Limitations for Scientific Computing}
+
+Our results identify fundamental challenges with pure LLM approaches:
+
+\begin{enumerate}
+    \item \textbf{No Internal Validation}: LLMs generate syntactically correct code that may be semantically nonsensical
+    \item \textbf{Overconfident on Unknown Domains}: Equal confidence for correct and catastrophically wrong predictions
+    \item \textbf{Context Window Limitations}: Cannot "see" numerical data patterns
+    \item \textbf{Numerical Instability}: Frequently generate numerically unstable expressions
+\end{enumerate}
+
+\subsection{Practical Recommendations}
+
+\begin{table}[h]
+\centering
+\caption{Method Selection Guide}
+\begin{tabular}{lp{8cm}}
+\toprule
+\textbf{Scenario} & \textbf{Recommended Method} \\
+\midrule
+Production deployment & Hybrid System v40 (best reliability) \\
+Well-known physics & Pure LLM acceptable (with validation) \\
+Unknown domain & LLM+NN Ensemble (Smart) \\
+Computational budget limited & Neural Network baseline \\
+Research/exploration & Pure PySR (interpretable formulas) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Essential Implementation Requirements}
+
+Any production system using LLM-generated code \textbf{must} include:
+
+\begin{lstlisting}[language=Python, caption=Mandatory Validation Checks]
+# 1. Finite value check
+assert np.all(np.isfinite(predictions)), "NaN/Inf detected"
+
+# 2. Magnitude sanity check
+assert np.ptp(predictions) < 1000 * np.ptp(y_true), "Range explosion"
+
+# 3. Performance floor
+assert r2_score > -100, "Catastrophic R²"
+
+# 4. Execution timeout
+with timeout(seconds=5):
+    predictions = llm_function(X)
+\end{lstlisting}
+
+\section{Limitations and Future Work}
+
+\subsection{Limitations}
+
+\begin{itemize}
+    \item \textbf{Test suite size}: 15 equations, though spanning diverse domains
+    \item \textbf{Gemini validation}: Results likely inflated; re-run needed
+    \item \textbf{Single run per test}: No statistical significance testing
+    \item \textbf{Fixed hyperparameters}: No method-specific tuning
+\end{itemize}
+
+\subsection{Future Directions}
+
+\begin{enumerate}
+    \item \textbf{Larger benchmark}: Expand to 50+ equations including Feynman dataset
+    \item \textbf{Ablation studies}: Systematically remove hybrid components
+    \item \textbf{Multi-LLM ensembles}: Combine Claude, Gemini, GPT-4
+    \item \textbf{Active learning}: Iterative data collection guided by uncertainty
+    \item \textbf{Domain adaptation}: Fine-tune LLMs on scientific formulas
+\end{enumerate}
+
+\section{Conclusion}
+
+This comprehensive benchmark demonstrates that \textbf{architecture matters more than model choice} for scientific formula discovery. Our Hybrid System v40 achieved state-of-the-art results (0.9886 mean $R^2$, 100\% success rate) by intelligently combining LLMs, symbolic regression, and neural networks.
+
+Critically, we showed that pure LLM approaches are \textbf{production-unsuitable} without extensive validation infrastructure. The 20\% failure rate and catastrophic errors on chemistry/biology equations reveal fundamental limitations in current LLM capabilities for numerical reasoning.
+
+The key insight: \textit{Ensemble diversity trumps individual model sophistication}. By leveraging complementary strengths of multiple approaches, hybrid systems provide both high accuracy and reliability—essential for scientific applications where errors can be costly or dangerous.
+
+\subsection{Actionable Takeaways}
+
+\begin{enumerate}
+    \item \textbf{Deploy}: Hybrid System v40 for production symbolic regression
+    \item \textbf{Validate}: Always check LLM outputs for magnitude, finiteness, and performance
+    \item \textbf{Ensemble}: Combine methods rather than relying on single approaches
+    \item \textbf{Domain-route}: Use fast LLM paths for known equations, robust methods for unknown
+\end{enumerate}
+
+\section*{Code Availability}
+
+All code, data, and benchmarks are available at:\\
+\url{https://github.com/LLM-HypatiaX-Colab}
+
+\section*{Acknowledgments}
+
+We thank the PySR, Julia, PyTorch, and Anthropic teams for their excellent tools and APIs that made this research possible.
+
+\begin{thebibliferences}
+
+\bibitem{claude2024}
+Anthropic. (2024). Claude Sonnet 4. \url{https://www.anthropic.com}
+
+\bibitem{pysr}
+Cranmer, M. (2023). Interpretable Machine Learning for Science with PySR and SymbolicRegression.jl. arXiv:2305.01582
+
+\bibitem{gemini}
+Google DeepMind. (2024). Gemini 2.5 Flash. \url{https://deepmind.google}
+
+\end{thebibliferences}
+
+\end{document}

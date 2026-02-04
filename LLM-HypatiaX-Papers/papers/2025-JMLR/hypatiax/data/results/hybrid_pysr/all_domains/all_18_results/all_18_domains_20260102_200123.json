@@ -1,0 +1,692 @@
+{
+  "timestamp": "2026-01-02T20:01:23.887874",
+  "version": "3.6",
+  "summary": {
+    "total_tests": 18,
+    "successful": 0,
+    "failed": 18,
+    "success_rate": 0.0,
+    "domain_statistics": {
+      "electromagnetism": {
+        "total": 3,
+        "passed": 0,
+        "failed": 3,
+        "success_rate": 0.0
+      },
+      "fluid_dynamics": {
+        "total": 3,
+        "passed": 0,
+        "failed": 3,
+        "success_rate": 0.0
+      },
+      "mechanics": {
+        "total": 3,
+        "passed": 0,
+        "failed": 3,
+        "success_rate": 0.0
+      },
+      "optics": {
+        "total": 3,
+        "passed": 0,
+        "failed": 3,
+        "success_rate": 0.0
+      },
+      "quantum": {
+        "total": 3,
+        "passed": 0,
+        "failed": 3,
+        "success_rate": 0.0
+      },
+      "thermodynamics": {
+        "total": 3,
+        "passed": 0,
+        "failed": 3,
+        "success_rate": 0.0
+      }
+    }
+  },
+  "results": [
+    {
+      "test_name": "em_coulomb_force",
+      "domain": "electromagnetism",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "k*q1*q2/r**2",
+      "n_samples": 300,
+      "variables": [
+        "k",
+        "q1",
+        "q2",
+        "r"
+      ],
+      "units": {
+        "k": "N*m^2/C^2",
+        "q1": "C",
+        "q2": "C",
+        "r": "m"
+      },
+      "elapsed_time": 1.955092191696167,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "em_ohms_law",
+      "domain": "electromagnetism",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "I*R",
+      "n_samples": 300,
+      "variables": [
+        "I",
+        "R"
+      ],
+      "units": {
+        "I": "A",
+        "R": "\u03a9"
+      },
+      "elapsed_time": 0.9517264366149902,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "em_magnetic_force",
+      "domain": "electromagnetism",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "q*v*B",
+      "n_samples": 300,
+      "variables": [
+        "q",
+        "v",
+        "B"
+      ],
+      "units": {
+        "q": "C",
+        "v": "m/s",
+        "B": "T"
+      },
+      "elapsed_time": 0.9467382431030273,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "fluid_bernoulli",
+      "domain": "fluid_dynamics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "P + 0.5*rho*v**2",
+      "n_samples": 300,
+      "variables": [
+        "P",
+        "rho",
+        "v"
+      ],
+      "units": {
+        "P": "Pa",
+        "rho": "kg/m^3",
+        "v": "m/s"
+      },
+      "elapsed_time": 0.9353878498077393,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "fluid_reynolds",
+      "domain": "fluid_dynamics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "rho*v*L/mu",
+      "n_samples": 300,
+      "variables": [
+        "rho",
+        "v",
+        "L",
+        "mu"
+      ],
+      "units": {
+        "rho": "kg/m^3",
+        "v": "m/s",
+        "L": "m",
+        "mu": "Pa*s"
+      },
+      "elapsed_time": 0.9404129981994629,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "fluid_poiseuille",
+      "domain": "fluid_dynamics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "dP*r**4/(mu*L)",
+      "n_samples": 300,
+      "variables": [
+        "dP",
+        "r",
+        "mu",
+        "L"
+      ],
+      "units": {
+        "dP": "Pa",
+        "r": "m",
+        "mu": "Pa*s",
+        "L": "m"
+      },
+      "elapsed_time": 0.9362611770629883,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "mechanics_kinetic_energy",
+      "domain": "mechanics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "(1/2)*m*v**2",
+      "n_samples": 300,
+      "variables": [
+        "m",
+        "v"
+      ],
+      "units": {
+        "m": "kg",
+        "v": "m/s"
+      },
+      "elapsed_time": 0.9334831237792969,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "mechanics_gravitational_potential",
+      "domain": "mechanics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "m*g*h",
+      "n_samples": 300,
+      "variables": [
+        "m",
+        "g",
+        "h"
+      ],
+      "units": {
+        "m": "kg",
+        "g": "m/s^2",
+        "h": "m"
+      },
+      "elapsed_time": 1.2020301818847656,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "mechanics_spring_force",
+      "domain": "mechanics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "k*x",
+      "n_samples": 300,
+      "variables": [
+        "k",
+        "x"
+      ],
+      "units": {
+        "k": "N/m",
+        "x": "m"
+      },
+      "elapsed_time": 0.9394524097442627,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "optics_thin_lens",
+      "domain": "optics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "1/do + 1/di",
+      "n_samples": 300,
+      "variables": [
+        "do",
+        "di"
+      ],
+      "units": {
+        "do": "m",
+        "di": "m"
+      },
+      "elapsed_time": 0.9213979244232178,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "optics_snell",
+      "domain": "optics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "n1*sin_theta1",
+      "n_samples": 300,
+      "variables": [
+        "n1",
+        "sin_theta1"
+      ],
+      "units": {
+        "n1": "dimensionless",
+        "sin_theta1": "dimensionless"
+      },
+      "elapsed_time": 0.9463965892791748,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "optics_diffraction",
+      "domain": "optics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "wavelength/a",
+      "n_samples": 300,
+      "variables": [
+        "wavelength",
+        "a"
+      ],
+      "units": {
+        "wavelength": "m",
+        "a": "m"
+      },
+      "elapsed_time": 1.6487479209899902,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "quantum_photon_energy",
+      "domain": "quantum",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "h*f",
+      "n_samples": 300,
+      "variables": [
+        "h",
+        "f"
+      ],
+      "units": {
+        "h": "J*s",
+        "f": "Hz"
+      },
+      "elapsed_time": 1.6340231895446777,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "quantum_de_broglie",
+      "domain": "quantum",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "h/(m*v)",
+      "n_samples": 300,
+      "variables": [
+        "h",
+        "m",
+        "v"
+      ],
+      "units": {
+        "h": "J*s",
+        "m": "kg",
+        "v": "m/s"
+      },
+      "elapsed_time": 0.9319682121276855,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "quantum_compton",
+      "domain": "quantum",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "(h/(me*c))*(1 - cos_theta)",
+      "n_samples": 300,
+      "variables": [
+        "h",
+        "me",
+        "c",
+        "cos_theta"
+      ],
+      "units": {
+        "h": "J*s",
+        "me": "kg",
+        "c": "m/s",
+        "cos_theta": "dimensionless"
+      },
+      "elapsed_time": 0.9222052097320557,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "thermo_ideal_gas",
+      "domain": "thermodynamics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "n*R*T/V",
+      "n_samples": 300,
+      "variables": [
+        "n",
+        "R",
+        "T",
+        "V"
+      ],
+      "units": {
+        "n": "mol",
+        "R": "J/(mol*K)",
+        "T": "K",
+        "V": "m^3"
+      },
+      "elapsed_time": 1.5048599243164062,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "thermo_heat_transfer",
+      "domain": "thermodynamics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "m*c*dT",
+      "n_samples": 300,
+      "variables": [
+        "m",
+        "c",
+        "dT"
+      ],
+      "units": {
+        "m": "kg",
+        "c": "J/(kg*K)",
+        "dT": "K"
+      },
+      "elapsed_time": 0.9792234897613525,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    },
+    {
+      "test_name": "thermo_carnot_efficiency",
+      "domain": "thermodynamics",
+      "discovered_expression": null,
+      "discovery_r2": 0.0,
+      "discovery_engine": null,
+      "complexity": 0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check_passed": false,
+      "layer_scores": {},
+      "errors": [
+        "HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'"
+      ],
+      "warnings": [],
+      "evaluation_r2": 0.0,
+      "ground_truth": "1 - Tc/Th",
+      "n_samples": 300,
+      "variables": [
+        "Tc",
+        "Th"
+      ],
+      "units": {
+        "Tc": "K",
+        "Th": "K"
+      },
+      "elapsed_time": 0.9384791851043701,
+      "random_seed": 42,
+      "passed": false,
+      "failure_reason": "Test crashed: HybridDiscoverySystem.discover_validate_interpret() got an unexpected keyword argument 'equation_name'",
+      "validator_bug_detected": false,
+      "validator_bug_reason": null,
+      "retry_attempt": 0
+    }
+  ]
+}

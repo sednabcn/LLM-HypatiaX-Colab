@@ -1,0 +1,119 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "y = k * x + 0.5 * k * x**2",
+    "confidence": 0.75,
+    "reasoning": "This combines linear Hooke's law with a quadratic correction term, representing a spring with both linear and nonlinear components, which fits the polynomial degree 2 pattern.",
+    "source": "llm",
+    "fitted_equation": "k * x + 0.5 * k * x**2",
+    "coefficients": {},
+    "r2_score": 0.3969147071467588,
+    "validation_score": 91.3,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = k * x + 0.5 * k * x**2",
+      "confidence": 0.75,
+      "reasoning": "This combines linear Hooke's law with a quadratic correction term, representing a spring with both linear and nonlinear components, which fits the polynomial degree 2 pattern.",
+      "source": "llm",
+      "fitted_equation": "k * x + 0.5 * k * x**2",
+      "coefficients": {},
+      "r2_score": 0.3969147071467588,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = k * x**2",
+      "confidence": 0.85,
+      "reasoning": "Given the polynomial degree 2 pattern and medium complexity, this could represent elastic potential energy (U = 0.5*k*x^2) or a nonlinear spring relationship where force depends on x squared.",
+      "source": "llm",
+      "fitted_equation": "k * x**2",
+      "coefficients": {},
+      "r2_score": -2.404374168441623,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = -k * x",
+      "confidence": 0.95,
+      "reasoning": "This is the classic Hooke's Law formula F = -kx, where the restoring force is proportional to displacement with spring constant k. The negative sign indicates force opposes displacement.",
+      "source": "llm",
+      "fitted_equation": "-k * x",
+      "coefficients": {},
+      "r2_score": -3.001003523035086,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = k * (x**2 - x)",
+      "confidence": 0.6,
+      "reasoning": "This factored form combines linear and quadratic terms with spring constant k, representing a system where the response depends on both displacement and its square, fitting the polynomial structure.",
+      "source": "llm",
+      "fitted_equation": "k * (x**2 - x)",
+      "coefficients": {},
+      "r2_score": -5.396908926987825,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = -k * x + k * x**2",
+      "confidence": 0.7,
+      "reasoning": "This represents a modified Hooke's law with both restoring force (-kx) and a nonlinear stiffening term (kx^2), common in real springs under large deformations.",
+      "source": "llm",
+      "fitted_equation": "-k * x + k * x**2",
+      "coefficients": {},
+      "r2_score": -5.396908926987823,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "k": 0.0018674011356634669,
+      "x": 0.8676508216066791
+    },
+    "polynomial_degree": 2,
+    "power_exponents": {},
+    "y_range": [
+      -185.85733291963777,
+      194.32266996443403
+    ],
+    "y_scale": "medium",
+    "symmetry": "symmetric",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 10.272300958633423,
+    "phase1_analysis": 0.044324398040771484,
+    "phase2_llm": 8.946011066436768,
+    "phase3_verify": 1.2812132835388184
+  },
+  "r2_score": 0.3969147071467588,
+  "validation_score": 91.3,
+  "expression": "k * x + 0.5 * k * x**2",
+  "test_name": "mechanics_hookes_law",
+  "timestamp": "2026-01-09T01:10:35.458233",
+  "ground_truth": "k*x",
+  "domain": "mechanics",
+  "_metadata": {
+    "session_id": "llm_20260109_010950",
+    "timestamp": "2026-01-09T01:10:35.458325",
+    "passed": false,
+    "test_name": "mechanics_hookes_law",
+    "method": "llm_guided"
+  }
+}

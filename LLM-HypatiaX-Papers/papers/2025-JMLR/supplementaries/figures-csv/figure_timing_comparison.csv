@@ -1,0 +1,6 @@
+method,mean_time_sec,median_time_sec,min_time_sec,max_time_sec,speedup_vs_hybrid,success_rate
+Pure LLM,15,12,8,25,26.0x,60.0
+Neural Network,12,10,8,18,32.5x,100.0
+Pure PySR,1680,1623,980,2400,0.23x,80.0
+Hybrid v40,390,385,245,580,1.0x,93.3
+LLM-guided,105,98,65,165,3.7x,93.3

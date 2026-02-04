@@ -1,0 +1,120 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "F = q * v * B",
+    "confidence": 0.95,
+    "reasoning": "This is the fundamental Lorentz force equation for a charged particle moving perpendicular to a magnetic field, directly matching the problem description and involving all three variables linearly",
+    "source": "llm",
+    "fitted_equation": "q * v * B",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "F = q * v * B",
+      "confidence": 0.95,
+      "reasoning": "This is the fundamental Lorentz force equation for a charged particle moving perpendicular to a magnetic field, directly matching the problem description and involving all three variables linearly",
+      "source": "llm",
+      "fitted_equation": "q * v * B",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "F = q * v * B * sin(theta)",
+      "confidence": 0.85,
+      "reasoning": "Complete Lorentz force equation accounting for the angle between velocity and magnetic field, where sin(theta) could be absorbed as a constant coefficient in the data",
+      "source": "llm",
+      "fitted_equation": "q * v * B * sin(theta)",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 86.8,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "F = k * (q**2) * v * B",
+      "confidence": 0.35,
+      "reasoning": "Quadratic charge dependence that might emerge from collective effects or field interactions, though less physically motivated for single particle dynamics",
+      "source": "llm",
+      "fitted_equation": "k * (q**2) * v * B",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 86.8,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "F = q * (v**2) * B / c",
+      "confidence": 0.6,
+      "reasoning": "Relativistic correction term that becomes significant at high velocities, with c as speed of light constant, explaining the polynomial degree 3 pattern",
+      "source": "llm",
+      "fitted_equation": "q * (v**2) * B / c",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 85.9,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "F = q * v * (B**2) / B0",
+      "confidence": 0.45,
+      "reasoning": "Non-linear magnetic field dependence that could arise in complex field configurations, with B0 as a reference field strength",
+      "source": "llm",
+      "fitted_equation": "q * v * (B**2) / B0",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 85.9,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "q": 0.5100580262893359,
+      "v": 0.5003609766220373,
+      "B": 0.49284903529110846
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      1.1492135118447179e-07,
+      0.0007847282470211259
+    ],
+    "y_scale": "small",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 8.773144006729126,
+    "phase1_analysis": 0.0703883171081543,
+    "phase2_llm": 8.382914543151855,
+    "phase3_verify": 0.31942272186279297
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "q * v * B",
+  "test_name": "electromagnetism_lorentz_force",
+  "timestamp": "2026-01-09T01:11:36.527449",
+  "ground_truth": "q*v*B",
+  "domain": "electromagnetism",
+  "_metadata": {
+    "session_id": "llm_20260109_010950",
+    "timestamp": "2026-01-09T01:11:36.527540",
+    "passed": true,
+    "test_name": "electromagnetism_lorentz_force",
+    "method": "llm_guided"
+  }
+}

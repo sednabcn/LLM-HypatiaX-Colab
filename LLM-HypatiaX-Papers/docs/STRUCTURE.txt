@@ -1,0 +1,87 @@
+PAPERS DIRECTORY STRUCTURE
+==========================
+
+papers/
+│
+├── create_new_paper.sh          # Script to create new paper directories
+├── README.md                     # This file - explains the structure
+│
+└── 2025-JMLR/                   # Example paper (JMLR submission)
+    │
+    ├── experiments/
+    │   └── hypatiax/            # ← EXPERIMENTAL CODEBASE (self-contained)
+    │       ├── core/
+    │       │   ├── __init__.py
+    │       │   ├── preprocessing/
+    │       │   │   ├── __init__.py
+    │       │   │   └── preparation_data.py
+    │       │   ├── training/
+    │       │   │   ├── __init__.py
+    │       │   │   └── training_spacy.py
+    │       │   ├── deployment/
+    │       │   │   ├── __init__.py
+    │       │   │   └── evaluate_model.py
+    │       │   └── evaluation/
+    │       │       ├── __init__.py
+    │       │       └── testing_model.py
+    │       ├── tools/           # Utility scripts
+    │       ├── data/            # Training & test datasets
+    │       ├── results/         # Experimental outputs
+    │       └── visualizations/  # Generated plots
+    │
+    ├── latex/
+    │   └── Bib/
+    │       ├── bibliography.bib
+    │       └── deduplication_bib.py
+    │
+    ├── data/                    # Paper-specific processed data
+    ├── figures/                 # Final publication figures
+    │
+    ├── paper/                   # LaTeX compilation
+    │   ├── main.tex
+    │   └── Makefile
+    │
+    ├── scripts/                 # Build automation
+    │   └── build.sh
+    │
+    ├── src/                     # Analysis & plotting scripts
+    │   ├── analyze_data.py
+    │   ├── plot_results.py
+    │   └── statistical_analysis.py
+    │
+    ├── reports/                 # Analysis reports
+    ├── reviews/                 # Peer review responses
+    ├── submission/              # Final submission package
+    ├── supplementaries/         # Supplementary materials
+    │
+    └── README.md                # Paper-specific documentation
+
+
+KEY PRINCIPLES
+==============
+
+1. SELF-CONTAINED: Each paper directory has everything needed to reproduce results
+2. ISOLATED: Changes to one paper don't affect others
+3. VERSIONED: Each paper can have different code/data versions
+4. REPRODUCIBLE: Complete workflow from data to paper
+
+
+WORKFLOW
+========
+
+1. Create Paper:       ./create_new_paper.sh 2026-NeurIPS
+2. Add Code:           cp your_code.py 2026-NeurIPS/experiments/hypatiax/core/
+3. Add Data:           cp your_data.csv 2026-NeurIPS/experiments/hypatiax/data/
+4. Run Experiments:    cd 2026-NeurIPS/experiments/hypatiax && python core/training/...
+5. Generate Figures:   cd 2026-NeurIPS/src && python plot_results.py
+6. Build Paper:        cd 2026-NeurIPS/scripts && ./build.sh
+
+
+MANAGING MULTIPLE PAPERS
+=========================
+
+papers/2025-JMLR/experiments/hypatiax/      # JMLR-specific experiments
+papers/2026-NeurIPS/experiments/hypatiax/   # NeurIPS-specific experiments
+papers/2026-ICML/experiments/hypatiax/      # ICML-specific experiments
+
+Each paper has its own independent experimental codebase!

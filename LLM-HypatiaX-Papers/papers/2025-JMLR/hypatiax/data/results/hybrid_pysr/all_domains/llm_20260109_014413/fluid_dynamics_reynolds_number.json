@@ -1,0 +1,181 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = rho * v * L / mu",
+    "confidence": 0.95,
+    "reasoning": "This is the classic Reynolds number formula from fluid dynamics, matching the domain perfectly and explaining the negative correlation with mu",
+    "source": "llm",
+    "fitted_equation": "rho * v * L / mu",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 91.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = rho * v * L / mu",
+      "confidence": 0.95,
+      "reasoning": "This is the classic Reynolds number formula from fluid dynamics, matching the domain perfectly and explaining the negative correlation with mu",
+      "source": "llm",
+      "fitted_equation": "rho * v * L / mu",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 91.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (rho * v * L) / mu",
+      "confidence": 0.95,
+      "reasoning": "Alternative notation for Reynolds number, emphasizing the numerator-denominator relationship that explains the correlation patterns",
+      "source": "llm",
+      "fitted_equation": "(rho * v * L) / mu",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 91.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (rho * v**2 * L) / (mu * v)",
+      "confidence": 0.8,
+      "reasoning": "Modified Reynolds form using dynamic pressure, simplifies to standard Reynolds but may better capture velocity dependence",
+      "source": "llm",
+      "fitted_equation": "(rho * v**2 * L) / (mu * v)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 91.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (rho * v * L / mu)**1.0",
+      "confidence": 0.7,
+      "reasoning": "Reynolds number with potential for slight power law modification, though exponent is 1.0 for standard case",
+      "source": "llm",
+      "fitted_equation": "(rho * v * L / mu)**1.0",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 91.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = rho * v * L * mu**(-1)",
+      "confidence": 0.5,
+      "reasoning": "Reynolds number written with negative exponent notation, mathematically equivalent but different computational form",
+      "source": "llm",
+      "fitted_equation": "rho * v * L * mu**(-1)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 91.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = rho * v * L / (mu + 1e-6)",
+      "confidence": 0.75,
+      "reasoning": "Reynolds number with small regularization term to prevent division by zero in low viscosity cases",
+      "source": "llm",
+      "fitted_equation": "rho * v * L / (mu + 1e-6)",
+      "coefficients": {},
+      "r2_score": 0.9999995757808815,
+      "validation_score": 91.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (rho + 1) * v * L / mu",
+      "confidence": 0.55,
+      "reasoning": "Reynolds number with density offset, possibly accounting for reference density in relative measurements",
+      "source": "llm",
+      "fitted_equation": "(rho + 1) * v * L / mu",
+      "coefficients": {},
+      "r2_score": 0.9999987740543389,
+      "validation_score": 90.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (rho * v * L) / (mu * (1 + 0.01 * v))",
+      "confidence": 0.45,
+      "reasoning": "Reynolds number with velocity-dependent viscosity correction for non-Newtonian or compressible effects",
+      "source": "llm",
+      "fitted_equation": "(rho * v * L) / (mu * (1 + 0.01 * v))",
+      "coefficients": {},
+      "r2_score": 0.9942546771810424,
+      "validation_score": 90.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = rho**0.5 * v**1.5 * L**0.5 / mu**0.5",
+      "confidence": 0.6,
+      "reasoning": "Modified Reynolds with fractional exponents that might better fit complex flow regimes",
+      "source": "llm",
+      "fitted_equation": "rho**0.5 * v**1.5 * L**0.5 / mu**0.5",
+      "coefficients": {},
+      "r2_score": -0.11209475376569045,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 1000 * rho * v * L / mu",
+      "confidence": 0.85,
+      "reasoning": "Reynolds number with a scaling factor to account for unit conversions or specific flow conditions",
+      "source": "llm",
+      "fitted_equation": "1000 * rho * v * L / mu",
+      "coefficients": {},
+      "r2_score": -1122289.3835207468,
+      "validation_score": 91.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": false,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "rho": 0.031053693360858694,
+      "v": 0.18294070675174384,
+      "L": 0.22001692520009072,
+      "mu": -0.3411014805221379
+    },
+    "polynomial_degree": null,
+    "power_exponents": {},
+    "y_range": [
+      134.98101025611044,
+      6258167.415445607
+    ],
+    "y_scale": "very_large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "complex"
+  },
+  "timing": {
+    "total": 13.552947044372559,
+    "phase1_analysis": 0.08663702011108398,
+    "phase2_llm": 12.816405296325684,
+    "phase3_verify": 0.6494557857513428
+  },
+  "r2_score": 1.0,
+  "validation_score": 91.0,
+  "expression": "rho * v * L / mu",
+  "test_name": "fluid_dynamics_reynolds_number",
+  "timestamp": "2026-01-09T01:46:51.169092",
+  "ground_truth": "rho*v*L/mu",
+  "domain": "fluid_dynamics",
+  "_metadata": {
+    "session_id": "llm_20260109_014413",
+    "timestamp": "2026-01-09T01:46:51.169182",
+    "passed": true,
+    "test_name": "fluid_dynamics_reynolds_number",
+    "method": "llm_guided"
+  }
+}

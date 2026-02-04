@@ -1,0 +1,180 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = 6.626e-34 / (m * v)",
+    "confidence": 0.95,
+    "reasoning": "De Broglie wavelength with Planck's constant explicitly included. The small y-scale matches typical wavelength values.",
+    "source": "llm",
+    "fitted_equation": "6.626e-34 / (m * v)",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = 6.626e-34 / (m * v)",
+      "confidence": 0.95,
+      "reasoning": "De Broglie wavelength with Planck's constant explicitly included. The small y-scale matches typical wavelength values.",
+      "source": "llm",
+      "fitted_equation": "6.626e-34 / (m * v)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h / ((m**2 * v**2)**0.5)",
+      "confidence": 0.78,
+      "reasoning": "De Broglie wavelength expressed using momentum magnitude sqrt((mv)^2), reduces to same formula.",
+      "source": "llm",
+      "fitted_equation": "h / ((m**2 * v**2)**0.5)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h / (m * v)",
+      "confidence": 0.98,
+      "reasoning": "This is the exact de Broglie wavelength formula \u03bb = h/p where momentum p = mv. The negative correlations with m and v match the inverse relationship.",
+      "source": "llm",
+      "fitted_equation": "h / (m * v)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h / (m * v + 1e-50)",
+      "confidence": 0.85,
+      "reasoning": "Modified de Broglie formula with small regularization term to avoid division by zero, maintains inverse relationship.",
+      "source": "llm",
+      "fitted_equation": "h / (m * v + 1e-50)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h * (m * v)**(-1)",
+      "confidence": 0.82,
+      "reasoning": "Alternative form of de Broglie wavelength using negative exponent, mathematically equivalent to h/(mv).",
+      "source": "llm",
+      "fitted_equation": "h * (m * v)**(-1)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h**2 / (m * v * h)",
+      "confidence": 0.7,
+      "reasoning": "Algebraically equivalent to h/(mv) but with h appearing twice, might account for quantum corrections.",
+      "source": "llm",
+      "fitted_equation": "h**2 / (m * v * h)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (h / m) / v",
+      "confidence": 0.68,
+      "reasoning": "Factored form of de Broglie wavelength, emphasizing the inverse velocity dependence.",
+      "source": "llm",
+      "fitted_equation": "(h / m) / v",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h * m**(-1) * v**(-1)",
+      "confidence": 0.55,
+      "reasoning": "Power law form of de Broglie wavelength with explicit negative exponents for both mass and velocity.",
+      "source": "llm",
+      "fitted_equation": "h * m**(-1) * v**(-1)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h / (m * v * (1 + v**2/9e16))",
+      "confidence": 0.6,
+      "reasoning": "Relativistic correction to de Broglie wavelength for high velocities, where 9e16 \u2248 c\u00b2.",
+      "source": "llm",
+      "fitted_equation": "h / (m * v * (1 + v**2/9e16))",
+      "coefficients": {},
+      "r2_score": 0.9999999999999504,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h / (2 * 3.14159 * m * v)",
+      "confidence": 0.75,
+      "reasoning": "Reduced de Broglie wavelength (\u03bb/2\u03c0), commonly used in quantum mechanics as the reduced wavelength.",
+      "source": "llm",
+      "fitted_equation": "h / (2 * 3.14159 * m * v)",
+      "coefficients": {},
+      "r2_score": 0.2848896387178462,
+      "validation_score": 97.6,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": false,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "h": -8.572736342690175e-18,
+      "m": -0.12234527494723589,
+      "v": -0.14374533694311017
+    },
+    "polynomial_degree": null,
+    "power_exponents": {},
+    "y_range": [
+      7.021431349847451e-13,
+      8.301053818601426e-09
+    ],
+    "y_scale": "small",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "complex"
+  },
+  "timing": {
+    "total": 13.366694450378418,
+    "phase1_analysis": 0.06741142272949219,
+    "phase2_llm": 12.720707416534424,
+    "phase3_verify": 0.5769085884094238
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "6.626e-34 / (m * v)",
+  "test_name": "quantum_de_broglie_wavelength",
+  "timestamp": "2026-01-09T01:48:20.244495",
+  "ground_truth": "h/(m*v)",
+  "domain": "quantum",
+  "_metadata": {
+    "session_id": "llm_20260109_014413",
+    "timestamp": "2026-01-09T01:48:20.244599",
+    "passed": true,
+    "test_name": "quantum_de_broglie_wavelength",
+    "method": "llm_guided"
+  }
+}

@@ -1,0 +1,531 @@
+──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/hybrid_defi_llm_nn/hybrid_system_defi_llm_nn.py --samples 200 --verbose                      
+✅ Loaded .env from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/.env
+✅ Loaded protocol from: hypatiax/protocols/
+==================================================================================================================================
+                                           [EXPERIMENT] CONSOLIDATED HYBRID SYSTEM v5.0                                           
+==================================================================================================================================
+All components built-in (no external dependencies except protocol)
+
+Features:
+  ✅ Extrapolation-aware decision logic
+  ✅ Pattern recognition
+  ✅ Specialized formulas
+  ✅ Neural network training
+  ✅ Comprehensive results tables
+==================================================================================================================================
+
+==================================================================================================================================
+                                                           DOMAIN: AMM                                                            
+==================================================================================================================================
+
+[1/4] Impermanent loss in constant product AMM (Uniswap V2)
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: True
+  [LLM] Response length: 424 chars
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:1343: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  current = float(metrics)
+  [NN] Early stopping at epoch 265
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9980
+  [HYBRID] 🔴 EXTRAPOLATION MODE
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: ⭐ EXTRAP: LLM excellent (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[2/4] Impermanent loss percentage in AMM
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 1479 chars
+No price change (r=1.0): 0.00%
+2x price increase (r=2.0): -5.72%
+5x price increase (r=5.0): -25.46%
+50% price drop (r=0.5): -5.72%
+  [NN] Early stopping at epoch 325
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9929
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[3/4] Constant product formula: reserve Y given reserve X and invariant k
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 407 chars
+  [NN] Early stopping at epoch 314
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.2444
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[4/4] Price impact of swap in constant product AMM
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 512 chars
+  [NN] Early stopping at epoch 298
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9910
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+==================================================================================================================================
+                                                         DOMAIN: RISK_VAR                                                         
+==================================================================================================================================
+
+[1/4] Parametric Value at Risk at 95% confidence (1-day)
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: True
+  [LLM] Response length: 1155 chars
+  [NN] Early stopping at epoch 265
+
+  [HYBRID] LLM R²: -999.0000, NN R²: 0.9964
+  [HYBRID] 🔴 EXTRAPOLATION MODE
+
+  [HYBRID] Decision: NN
+  [HYBRID] Reason: ⚠ EXTRAP: NN only (LLM failed)
+  [HYBRID] Final R²: 0.9964
+  Decision: NN
+  R²: 0.996424, RMSE: 1132.363505
+  ⭐ EXCELLENT
+
+[2/4] Parametric Value at Risk at 99% confidence (1-day)
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 531 chars
+  [NN] Early stopping at epoch 457
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9988
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[3/4] Multi-day Value at Risk using square root of time rule
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 483 chars
+  [NN] Early stopping at epoch 270
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9984
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[4/4] Portfolio VaR for two correlated assets
+
+  [PATTERN] linear, Confidence: 0.95
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 657 chars
+  [NN] Early stopping at epoch 384
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9987
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+==================================================================================================================================
+                                                        DOMAIN: LIQUIDITY                                                         
+==================================================================================================================================
+
+[1/4] Optimal LP position size using risk-adjusted Kelly criterion
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: True
+  [LLM] Response length: 1447 chars
+  [NN] Early stopping at epoch 418
+
+  [HYBRID] LLM R²: -999.0000, NN R²: 0.8796
+  [HYBRID] 🔴 EXTRAPOLATION MODE
+
+  [HYBRID] Decision: NN
+  [HYBRID] Reason: ⚠ EXTRAP: NN only (LLM failed)
+  [HYBRID] Final R²: 0.8796
+  Decision: NN
+  R²: 0.879559, RMSE: 0.022294
+  🟡 ACCEPTABLE
+
+[2/4] LP fee earnings based on liquidity share
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 529 chars
+  [NN] Early stopping at epoch 199
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.8971
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[3/4] Capital efficiency multiplier for concentrated liquidity position
+
+  [PATTERN] linear, Confidence: 0.95
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 518 chars
+  [NN] Early stopping at epoch 427
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9988
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[4/4] APY calculation from APR with daily compounding
+
+  [PATTERN] linear, Confidence: 0.95
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 492 chars
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9971
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+==================================================================================================================================
+                                                    DOMAIN: EXPECTED_SHORTFALL                                                    
+==================================================================================================================================
+
+[1/4] Expected Shortfall (CVaR) at 95% confidence for normal returns
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: True
+  [LLM] Response length: 640 chars
+  [NN] Early stopping at epoch 183
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9956
+  [HYBRID] 🔴 EXTRAPOLATION MODE
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: ⭐ EXTRAP: LLM excellent (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[2/4] Expected Shortfall (CVaR) at 99% confidence for normal returns
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 591 chars
+  [NN] Early stopping at epoch 288
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9992
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[3/4] Expected Shortfall from VaR using tail risk multiplier
+
+  [PATTERN] linear, Confidence: 0.95
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 452 chars
+  [NN] Early stopping at epoch 311
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9984
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[4/4] Portfolio Expected Shortfall for correlated positions
+
+  [PATTERN] linear, Confidence: 0.95
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 638 chars
+
+  [HYBRID] LLM R²: 0.8237, NN R²: 0.9978
+
+  [HYBRID] Decision: NN
+  [HYBRID] Reason: NN better (0.9978 > 0.8237)
+  [HYBRID] Final R²: 0.9978
+  Decision: NN
+  R²: 0.997760, RMSE: 2386.923539
+  ⭐ EXCELLENT
+
+==================================================================================================================================
+                                                       DOMAIN: LIQUIDATION                                                        
+==================================================================================================================================
+
+[1/4] Liquidation price for leveraged long position
+
+  [PATTERN] reciprocal, Confidence: 0.90
+  [HYBRID] Extrapolation: True
+  [LLM] Response length: 1248 chars
+  [NN] Early stopping at epoch 210
+
+  [HYBRID] LLM R²: -999.0000, NN R²: 0.9923
+  [HYBRID] 🔴 EXTRAPOLATION MODE
+
+  [HYBRID] Decision: NN
+  [HYBRID] Reason: ⚠ EXTRAP: NN only (LLM failed)
+  [HYBRID] Final R²: 0.9923
+  Decision: NN
+  R²: 0.992267, RMSE: 617.410278
+  ⭐ EXCELLENT
+
+[2/4] Liquidation price for leveraged short position
+
+  [PATTERN] reciprocal, Confidence: 0.90
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 1511 chars
+  [NN] Early stopping at epoch 226
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9972
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[3/4] Maximum safe leverage for given acceptable loss tolerance
+
+  [PATTERN] reciprocal, Confidence: 0.90
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 529 chars
+  [NN] Early stopping at epoch 196
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9980
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[4/4] Required collateral for leveraged position
+
+  [PATTERN] reciprocal, Confidence: 0.90
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 454 chars
+  [NN] Early stopping at epoch 394
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9956
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+==================================================================================================================================
+                                                         DOMAIN: STAKING                                                          
+==================================================================================================================================
+
+[1/3] Simple staking rewards calculation
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 488 chars
+  [NN] Early stopping at epoch 266
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9965
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[2/3] Staker's share after token emissions dilution
+
+  [PATTERN] None, Confidence: 0.00
+  [HYBRID] Extrapolation: False
+  [LLM] Response length: 503 chars
+  [NN] Early stopping at epoch 262
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.8817
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: Excellent LLM (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+
+[3/3] Compound staking rewards with auto-restaking
+
+  [PATTERN] linear, Confidence: 0.95
+  [HYBRID] Extrapolation: True
+  [LLM] Response length: 540 chars
+  [NN] Early stopping at epoch 258
+
+  [HYBRID] LLM R²: 1.0000, NN R²: 0.9942
+  [HYBRID] 🔴 EXTRAPOLATION MODE
+
+  [HYBRID] Decision: LLM
+  [HYBRID] Reason: ⭐ EXTRAP: LLM excellent (R²=1.0000)
+  [HYBRID] Final R²: 1.0000
+  Decision: LLM
+  R²: 1.000000, RMSE: 0.000000
+  ⭐ EXCELLENT
+✅ Results saved: hypatiax/data/results/consolidated_hybrid_20260115_124843.json
+
+
+
+
+==================================================================================================================================
+                                                      DETAILED TEST RESULTS                                                       
+==================================================================================================================================
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|   # | Test Case                                | Domain       | R²      |   Val Score | Observations                                         |
++=====+==========================================+==============+=========+=============+======================================================+
+|   1 | Impermanent loss in constant product AMM | amm          | 1.0000✓ |      0.998  | ⭐Excellent | LLM-Gen | Extrap-Robust✨              |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|   2 | Impermanent loss percentage in AMM       | amm          | 1.0000✓ |      0.9929 | ⭐Excellent | Specialized                            |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|   3 | Constant product formula: reserve Y give | amm          | 1.0000✓ |      0.2444 | ⭐Excellent | LLM-Gen                                |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|   4 | Price impact of swap in constant product | amm          | 1.0000✓ |      0.991  | ⭐Excellent | LLM-Gen                                |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|   5 | Parametric Value at Risk at 95% confiden | risk_var     | 0.9964✓ |      0.9964 | ⭐Excellent | NN-Only | Extrap-Robust✨              |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|   6 | Parametric Value at Risk at 99% confiden | risk_var     | 1.0000✓ |      0.9988 | ⭐Excellent | LLM-Gen                                |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|   7 | Multi-day Value at Risk using square roo | risk_var     | 1.0000✓ |      0.9984 | ⭐Excellent | LLM-Gen                                |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|   8 | Portfolio VaR for two correlated assets  | risk_var     | 1.0000✓ |      0.9987 | ⭐Excellent | LLM-Gen | linear                       |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|   9 | Optimal LP position size using risk-adju | liquidity    | 0.8796  |      0.8796 | 🟡OK | NN-Only | Extrap-Good                         |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  10 | LP fee earnings based on liquidity share | liquidity    | 1.0000✓ |      0.8971 | ⭐Excellent | LLM-Gen                                |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  11 | Capital efficiency multiplier for concen | liquidity    | 1.0000✓ |      0.9988 | ⭐Excellent | LLM-Gen | linear                       |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  12 | APY calculation from APR with daily comp | liquidity    | 1.0000✓ |      0.9971 | ⭐Excellent | LLM-Gen | linear                       |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  13 | Expected Shortfall (CVaR) at 95% confide | expected_sho | 1.0000✓ |      0.9956 | ⭐Excellent | LLM-Gen | Extrap-Robust✨              |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  14 | Expected Shortfall (CVaR) at 99% confide | expected_sho | 1.0000✓ |      0.9992 | ⭐Excellent | LLM-Gen                                |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  15 | Expected Shortfall from VaR using tail r | expected_sho | 1.0000✓ |      0.9984 | ⭐Excellent | LLM-Gen | linear                       |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  16 | Portfolio Expected Shortfall for correla | expected_sho | 0.9978✓ |      0.9978 | ⭐Excellent | NN-Only | linear                       |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  17 | Liquidation price for leveraged long pos | liquidation  | 0.9923✓ |      0.9923 | ⭐Excellent | NN-Only | Extrap-Robust✨ | reciprocal |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  18 | Liquidation price for leveraged short po | liquidation  | 1.0000✓ |      0.9972 | ⭐Excellent | Specialized | reciprocal               |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  19 | Maximum safe leverage for given acceptab | liquidation  | 1.0000✓ |      0.998  | ⭐Excellent | LLM-Gen | reciprocal                   |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  20 | Required collateral for leveraged positi | liquidation  | 1.0000✓ |      0.9956 | ⭐Excellent | LLM-Gen | reciprocal                   |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  21 | Simple staking rewards calculation       | staking      | 1.0000✓ |      0.9965 | ⭐Excellent | LLM-Gen                                |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  22 | Staker's share after token emissions dil | staking      | 1.0000✓ |      0.8817 | ⭐Excellent | LLM-Gen                                |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+|  23 | Compound staking rewards with auto-resta | staking      | 1.0000✓ |      0.9942 | ⭐Excellent | LLM-Gen | Extrap-Robust✨ | linear     |
++-----+------------------------------------------+--------------+---------+-------------+------------------------------------------------------+
+
+====================================================================================================
+                                           DOMAIN SUMMARY                                           
+====================================================================================================
++--------------------+---------+-----------+-------------+------------+-----------------+
+| Domain             |   Tests |   Mean R² |   Extrap R² |   Extrap # | Performance     |
++====================+=========+===========+=============+============+=================+
+| amm                |       4 |    1      |       1     |          1 | 4⭐ 0✅ 0🟡 0❌ |
++--------------------+---------+-----------+-------------+------------+-----------------+
+| expected_shortfall |       4 |    0.9994 |       1     |          1 | 4⭐ 0✅ 0🟡 0❌ |
++--------------------+---------+-----------+-------------+------------+-----------------+
+| liquidation        |       4 |    0.9981 |       0.992 |          1 | 4⭐ 0✅ 0🟡 0❌ |
++--------------------+---------+-----------+-------------+------------+-----------------+
+| liquidity          |       4 |    0.9699 |       0.88  |          1 | 3⭐ 0✅ 1🟡 0❌ |
++--------------------+---------+-----------+-------------+------------+-----------------+
+| risk_var           |       4 |    0.9991 |       0.996 |          1 | 4⭐ 0✅ 0🟡 0❌ |
++--------------------+---------+-----------+-------------+------------+-----------------+
+| staking            |       3 |    1      |       1     |          1 | 3⭐ 0✅ 0🟡 0❌ |
++--------------------+---------+-----------+-------------+------------+-----------------+
+
+==================================================================================================================================
+                                                        OVERALL STATISTICS                                                        
+==================================================================================================================================
+
+Total Cases: 23
+Mean R²: 0.9942
+Median R²: 1.0000
+Min R²: 0.8796
+
+🚀 Extrapolation Tests (n=6):
+   Mean R²: 0.9780
+
+📊 Performance:
+   ⭐ Excellent (>0.99): 22 ( 95.7%)
+   ✅ Very Good (>0.95):  0 (  0.0%)
+   🟡 Acceptable (>0.80):  1 (  4.3%)
+   🟠 Weak (≤0.80):  0 (  0.0%)
+
+🎯 Decisions:
+   LLM     : 19 ( 82.6%) - Mean R² = 1.0000
+   NN      :  4 ( 17.4%) - Mean R² = 0.9665
+
+==================================================================================================================================
+Results saved to: hypatiax/data/results/consolidated_hybrid_20260115_124843.json
+==================================================================================================================================
+
+Excellent! The DeFi hybrid system is working perfectly! 🎉
+Outstanding results:
+
+✅ 95.7% Excellent performance (R² > 0.99)
+✅ Mean R² of 0.9942 across all 23 test cases
+✅ Extrapolation tests performing well (Mean R² = 0.9780)
+✅ LLM dominating with 82.6% of decisions (Mean R² = 1.0000)
+✅ Smart fallback to NN when LLM fails
+

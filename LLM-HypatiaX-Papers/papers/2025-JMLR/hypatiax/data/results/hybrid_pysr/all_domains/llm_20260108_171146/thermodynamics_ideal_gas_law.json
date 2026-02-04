@@ -1,0 +1,13 @@
+{
+  "error": "Object of type bool is not JSON serializable",
+  "test_name": "thermodynamics_ideal_gas_law",
+  "execution_time": 0.9427230358123779,
+  "timestamp": "2026-01-08T17:11:52.518806",
+  "_metadata": {
+    "session_id": "llm_20260108_171146",
+    "timestamp": "2026-01-08T17:11:52.518865",
+    "passed": false,
+    "test_name": "thermodynamics_ideal_gas_law",
+    "method": "llm_guided"
+  }
+}

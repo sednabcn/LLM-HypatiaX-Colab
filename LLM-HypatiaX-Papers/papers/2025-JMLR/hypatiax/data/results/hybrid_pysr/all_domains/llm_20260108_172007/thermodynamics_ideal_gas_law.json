@@ -1,0 +1,97 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "P = n * R * T / V",
+    "confidence": 0.98,
+    "reasoning": "This is the classic Ideal Gas Law (PV = nRT) solved for pressure P. The negative correlation with V (-0.483) and positive correlations with n (0.215) and T (0.095) perfectly match this relationship. The large y-range values are consistent with pressure measurements in Pascals.",
+    "source": "llm",
+    "fitted_equation": null,
+    "coefficients": null,
+    "r2_score": 0.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": null
+  },
+  "all_hypotheses": [
+    {
+      "equation": "P = n * R * T / V",
+      "confidence": 0.98,
+      "reasoning": "This is the classic Ideal Gas Law (PV = nRT) solved for pressure P. The negative correlation with V (-0.483) and positive correlations with n (0.215) and T (0.095) perfectly match this relationship. The large y-range values are consistent with pressure measurements in Pascals.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "P = 8.314 * n * T / V",
+      "confidence": 0.85,
+      "reasoning": "Same as ideal gas law but with R explicitly set to the universal gas constant (8.314 J/mol\u00b7K). This would explain why R shows zero correlation - it's a constant. The mathematical relationships with other variables remain consistent with thermodynamic principles.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "P = (n * T) / (V * 0.001205)",
+      "confidence": 0.7,
+      "reasoning": "Alternative form where R is absorbed into a dimensionless coefficient. This maintains the inverse relationship with V and direct relationships with n and T, but uses a simplified constant that might arise from unit conversions or specific conditions.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": false,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "n": 0.21478244112232112,
+      "R": -7.62631809185162e-17,
+      "T": 0.09467112705246979,
+      "V": -0.482580273459984
+    },
+    "polynomial_degree": null,
+    "power_exponents": {},
+    "y_range": [
+      436.3525610242069,
+      1596281.4545961565
+    ],
+    "y_scale": "very_large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "complex"
+  },
+  "timing": {
+    "total": 8.081474542617798,
+    "phase1_analysis": 0.08792424201965332,
+    "phase2_llm": 7.991485118865967,
+    "phase3_verify": 0.0006814002990722656
+  },
+  "r2_score": 0.0,
+  "validation_score": 0.0,
+  "expression": "P = n * R * T / V",
+  "test_name": "thermodynamics_ideal_gas_law",
+  "timestamp": "2026-01-08T17:21:37.958365",
+  "ground_truth": "n*R*T/V",
+  "domain": "thermodynamics",
+  "_metadata": {
+    "session_id": "llm_20260108_172007",
+    "timestamp": "2026-01-08T17:21:37.958443",
+    "passed": false,
+    "test_name": "thermodynamics_ideal_gas_law",
+    "method": "llm_guided"
+  }
+}

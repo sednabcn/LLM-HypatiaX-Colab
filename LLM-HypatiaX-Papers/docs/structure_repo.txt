@@ -1,0 +1,17 @@
+
+
+papers/
+├── create_new_paper.sh          # Creates new papers
+├── README.md                     # Full documentation
+│
+└── 2025-JMLR/
+    ├── experiments/hypatiax/    # ← Self-contained experiments
+    │   ├── core/                # NER modules
+    │   ├── tools/               # Utilities
+    │   ├── data/                # Datasets
+    │   ├── results/             # Outputs
+    │   └── visualizations/
+    ├── latex/Bib/               # Bibliography + deduplication
+    ├── paper/                   # LaTeX + Makefile
+    ├── scripts/                 # Build automation
+    └── src/                     # Analysis scripts

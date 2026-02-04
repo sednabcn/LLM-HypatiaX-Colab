@@ -1,0 +1,1869 @@
+{
+  "timestamp": "2026-01-04T14:25:59.710707",
+  "hybrid_version": "v3.6 (Auto-Config)",
+  "auto_config_enabled": true,
+  "summary": {
+    "total_tests": 8,
+    "successful": 4,
+    "failed": 4,
+    "success_rate": 0.5
+  },
+  "results": {
+    "logistic_growth": {
+      "timestamp": "2026-01-04T14:10:47.702866",
+      "description": "Logistic Growth Model",
+      "domain": "biology",
+      "discovery": {
+        "expression": "r*(12.084149044275*r + 261.436233609608)",
+        "r2_score": 0.3780178875294788,
+        "complexity": 40,
+        "discovery_engine": "physics_aware",
+        "convergence_history": [
+          -2.733109187024048,
+          -2.6788773182375305,
+          -2.674904455164309,
+          -2.6450664334474863,
+          -2.6231947091071213,
+          -2.6115470268532968,
+          -2.5934373484545548,
+          -2.5838919672022964,
+          -2.5626831482189942,
+          -2.53811669174227,
+          -2.507098087637426,
+          -2.4744950378151733,
+          -2.3829673262247306,
+          -2.34868861956747,
+          -2.3272799721029744,
+          -2.2743078222633955,
+          -2.1984004062892186,
+          -2.055295034090542,
+          -1.9783828994903438,
+          -1.8862117307872572,
+          -1.856094473326138,
+          -1.7341821043121954,
+          -1.5363477525175635,
+          -1.3671642509912578,
+          -1.2552017231064783,
+          -1.1195976101240936,
+          -1.0368401531570623,
+          -0.8712243870274556,
+          -0.772054728879269,
+          -0.6040292517334278,
+          -0.428889506192112,
+          -0.01608142238328543,
+          0.24085943707033022,
+          0.3501162050132424,
+          0.37371037425383563,
+          0.3745074056862923,
+          0.3745074056862923,
+          0.3745074056862923,
+          0.3745074056862923,
+          0.3745074056862923,
+          0.3745382342065366,
+          0.3751672168549886,
+          0.375236576091942,
+          0.3755294686220301,
+          0.3755294686220301,
+          0.3755294686220301,
+          0.37573738580150434,
+          0.37573738580150434,
+          0.3762209937249425,
+          0.3764005698161675,
+          0.3764005698161675,
+          0.3764005698161675,
+          0.3764005698161675,
+          0.3764005698161675,
+          0.3764005698161675,
+          0.37642065311082934,
+          0.3764484320104013,
+          0.3764676588524692,
+          0.3764676588524692,
+          0.3764676588524692,
+          0.3764676588524692,
+          0.3764676588524692,
+          0.3764676588524692,
+          0.3764676588524692,
+          0.3764676588524692,
+          0.3764676588524692,
+          0.37688349241911473,
+          0.37688349241911473,
+          0.37688349241911473,
+          0.37688349241911473,
+          0.3776052393127904,
+          0.37762701566480256,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.37776312170426,
+          0.3777643146347371,
+          0.3777643146347371,
+          0.3777643146347371,
+          0.3777643146347371,
+          0.37796435774691,
+          0.37796435774691,
+          0.37796435774691,
+          0.377968086968048,
+          0.377968086968048,
+          0.3780178875294788,
+          0.3780178875294788
+        ],
+        "quality_check": {
+          "is_overfit": true,
+          "complexity": 40,
+          "warnings": [
+            "High complexity (40 chars) but R\u00b2=0.3780 < 0.999"
+          ],
+          "high_precision_count": 2
+        },
+        "fit_time": 146.3787558078766,
+        "engines_tried": [
+          "symbolic(seed=42)",
+          "symbolic(seed=43)",
+          "symbolic(seed=44)",
+          "physics_aware"
+        ],
+        "best_r2": 0.3780178875294788,
+        "best_quality_score": 0.3280178875294788
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 99.4,
+        "base_score": 99.4,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 98,
+          "dimensional": 100.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [
+              "Can be simplified to: r*(12.084*r + 261.436)"
+            ],
+            "sympy_expr": "r*(12.084*r + 261.436)",
+            "canonical_form": "r*(12.084*r + 261.436)",
+            "score": 98
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [
+              "Unit inference failed; falling back to numeric inference"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "r": "1 / second",
+              "N": "dimensionless",
+              "K": "dimensionless"
+            },
+            "inferred_output_unit": "dimensionless",
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": [],
+            "absorbed_constants_detected": false,
+            "simplified_expression": "r*(12.084*r + 261.436)"
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "biology",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Can be simplified to: r*(12.084*r + 261.436)",
+          "Unit inference failed; falling back to numeric inference"
+        ],
+        "recommendations": [
+          "\u2705 All checks passed"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "all_layers_above_critical": true
+        },
+        "expression": "r*(12.084*r + 261.436)",
+        "canonical_form": "r*(12.084*r + 261.436)",
+        "domain": "biology",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 3,
+        "variable_names": [
+          "r",
+          "N",
+          "K"
+        ],
+        "discovery_engine": "physics_aware",
+        "equation_name": "logistic_growth",
+        "version": "3.6"
+      },
+      "execution_time": 147.91339135169983,
+      "n_samples": 200
+    },
+    "henderson_hasselbalch": {
+      "timestamp": "2026-01-04T14:15:22.217116",
+      "description": "Henderson-Hasselbalch Equation",
+      "domain": "chemistry",
+      "discovery": {
+        "expression": "0.682925029689027*A_minus**2 + 0.987354387792994*pKa*exp(-0.0253189942712255*A_minus)",
+        "r2_score": 0.146953846589337,
+        "complexity": 85,
+        "discovery_engine": "physics_aware",
+        "convergence_history": [
+          -0.1554199414918098,
+          0.04160125992300811,
+          0.04250933303157566,
+          0.04303691195092429,
+          0.04313280519523965,
+          0.043173726894680346,
+          0.043173726894680346,
+          0.04324188931622063,
+          0.043291682251461065,
+          0.04332767603888776,
+          0.04332767603888776,
+          0.04332767603888776,
+          0.04332767603888776,
+          0.04333954220172442,
+          0.04333954220172442,
+          0.04333954220172442,
+          0.04337649852260505,
+          0.0435477061264432,
+          0.04356847283058118,
+          0.04360789113197538,
+          0.04361358044102669,
+          0.04361358044102669,
+          0.04365545764626721,
+          0.04365545764626721,
+          0.04365970246216854,
+          0.043776371302757126,
+          0.043776371302757126,
+          0.04404005040386582,
+          0.044181236975056375,
+          0.0443742354472637,
+          0.0445487036423785,
+          0.0445487036423785,
+          0.04475911260634257,
+          0.04512417508337207,
+          0.04512417508337207,
+          0.04512417508337207,
+          0.04512417508337207,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.0452632673413279,
+          0.13067276652023055,
+          0.13067276652023055,
+          0.13067276652023055,
+          0.13067276652023055,
+          0.13067276652023055,
+          0.13067276652023055,
+          0.13067276652023055,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337,
+          0.146953846589337
+        ],
+        "quality_check": {
+          "is_overfit": true,
+          "complexity": 85,
+          "warnings": [
+            "High complexity (85 chars) but R\u00b2=0.1470 < 0.999",
+            "Multiple high-precision constants: 3"
+          ],
+          "high_precision_count": 3
+        },
+        "fit_time": 260.3025755882263,
+        "engines_tried": [
+          "symbolic(seed=42)",
+          "symbolic(seed=43)",
+          "symbolic(seed=44)",
+          "physics_aware"
+        ],
+        "best_r2": 0.146953846589337,
+        "best_quality_score": 0.09695384658933699
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 89.8,
+        "base_score": 89.8,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 71,
+          "dimensional": 95.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Exponential overflow risk: exp(-0.025*A_minus). Recommend capping argument or using safe_exp",
+              "Multiple multiplications (5 terms) - check for overflow. Consider: 0.683000000000000 * A_minus**2 * 0.987000000000000..."
+            ],
+            "sympy_expr": "0.683*A_minus**2 + 0.987*pKa*exp(-0.025*A_minus)",
+            "canonical_form": "0.683*A_minus**2 + 0.987*pKa*exp(-0.025*A_minus)",
+            "score": 71
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 95.0,
+            "errors": [],
+            "warnings": [
+              "Unit inference failed; falling back to numeric inference",
+              "Exponential overflow risk: exp(-0.025*A_minus). Recommend capping argument or using safe_exp",
+              "Function exp(-0.025*A_minus) has dimensional argument; should be dimensionless"
+            ],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "pKa": "dimensionless",
+              "A_minus": "mole / liter",
+              "HA": "mole / liter"
+            },
+            "inferred_output_unit": "dimensionless",
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [
+                "Exponential overflow risk: exp(-0.025*A_minus). Recommend capping argument or using safe_exp"
+              ],
+              "errors": [],
+              "penalty": 3
+            },
+            "overflow_risks": [],
+            "absorbed_constants_detected": false,
+            "simplified_expression": "0.683*A_minus**2 + 0.987*pKa*exp(-0.025*A_minus)"
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "chemistry",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Exponential overflow risk: exp(-0.025*A_minus). Recommend capping argument or using safe_exp",
+          "Multiple multiplications (5 terms) - check for overflow. Consider: 0.683000000000000 * A_minus**2 * 0.987000000000000...",
+          "Unit inference failed; falling back to numeric inference",
+          "Exponential overflow risk: exp(-0.025*A_minus). Recommend capping argument or using safe_exp",
+          "Function exp(-0.025*A_minus) has dimensional argument; should be dimensionless"
+        ],
+        "recommendations": [
+          "\u2705 All checks passed"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "all_layers_above_critical": true
+        },
+        "expression": "0.683*A_minus**2 + 0.987*pKa*exp(-0.025*A_minus)",
+        "canonical_form": "0.683*A_minus**2 + 0.987*pKa*exp(-0.025*A_minus)",
+        "domain": "chemistry",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 3,
+        "variable_names": [
+          "pKa",
+          "A_minus",
+          "HA"
+        ],
+        "discovery_engine": "physics_aware",
+        "equation_name": "henderson_hasselbalch",
+        "version": "3.6"
+      },
+      "execution_time": 272.77868843078613,
+      "n_samples": 200
+    },
+    "nernst_equation": {
+      "timestamp": "2026-01-04T14:19:26.320332",
+      "description": "Nernst Equation (Simplified)",
+      "domain": "chemistry",
+      "discovery": {
+        "expression": "0.581191089125682*E0**2 + 0.255797249571972*exp(-0.000341106*E0)",
+        "r2_score": 0.9280255042792501,
+        "complexity": 64,
+        "discovery_engine": "physics_aware",
+        "convergence_history": [
+          -0.030074077666298844,
+          -0.030074077666298844,
+          -0.027954028275983107,
+          -0.027576486349696522,
+          -0.025677046119728392,
+          -0.02531255963285602,
+          -0.021313847576199103,
+          -0.021313847576199103,
+          -0.021313847576199103,
+          -0.021313847576199103,
+          -0.02091920973564539,
+          -0.02091920973564539,
+          -0.01998565523758074,
+          -0.01998565523758074,
+          -0.01998565523758074,
+          -0.01998565523758074,
+          -0.01797850623479565,
+          -0.01797850623479565,
+          -0.01797850623479565,
+          -0.01795373942671948,
+          -0.017779212856835886,
+          -0.017779212856835886,
+          -0.017779212856835886,
+          -0.017779212856835886,
+          -0.017779212856835886,
+          -0.017779212856835886,
+          -0.017779212856835886,
+          -0.017779212856835886,
+          -0.017779212856835886,
+          -0.017517289233081674,
+          -0.017517289233081674,
+          -0.017074536712442707,
+          -0.017074536712442707,
+          -0.017074536712442707,
+          -0.017074536712442707,
+          -0.017074536712442707,
+          -0.017074536712442707,
+          -0.015108279037893541,
+          -0.015108279037893541,
+          -0.015108279037893541,
+          -0.015108279037893541,
+          -0.015108279037893541,
+          0.6505377818414806,
+          0.6505377818414806,
+          0.6505377818414806,
+          0.9025416305718136,
+          0.9030907727094842,
+          0.9030907727094842,
+          0.9249302545492049,
+          0.9249302545492049,
+          0.9276899415954877,
+          0.9276899415954877,
+          0.9276899415954877,
+          0.9276899415954877,
+          0.9276899415954877,
+          0.9276899415954877,
+          0.9276899415954877,
+          0.9276899415954877,
+          0.9276899415954877,
+          0.9276899415954877,
+          0.9276899415954877,
+          0.9276947065036552,
+          0.9276947065036552,
+          0.9276947065036552,
+          0.9276947065036552,
+          0.9276947065036552,
+          0.9276947065036552,
+          0.9276947065036552,
+          0.9276947065036552,
+          0.9277042154387136,
+          0.9277042154387136,
+          0.9277042154387136,
+          0.9277177932994101,
+          0.9277177932994101,
+          0.9277177932994101,
+          0.9277177932994101,
+          0.9277177932994101,
+          0.9277177932994101,
+          0.9277218072487485,
+          0.9277218072487485,
+          0.9277218072487485,
+          0.9277405222417852,
+          0.9277405222417852,
+          0.9277405222417852,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280161647680213,
+          0.9280255042792501,
+          0.9280255042792501,
+          0.9280255042792501
+        ],
+        "quality_check": {
+          "is_overfit": true,
+          "complexity": 64,
+          "warnings": [
+            "High complexity (64 chars) but R\u00b2=0.9280 < 0.999",
+            "Multiple high-precision constants: 3"
+          ],
+          "high_precision_count": 3
+        },
+        "fit_time": 241.76065921783447,
+        "engines_tried": [
+          "symbolic(seed=42)",
+          "symbolic(seed=43)",
+          "symbolic(seed=44)",
+          "physics_aware"
+        ],
+        "best_r2": 0.9280255042792501,
+        "best_quality_score": 0.8780255042792501
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 73.4,
+        "base_score": 93.4,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 20.0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 20.0
+        },
+        "layer_scores": {
+          "symbolic": 98,
+          "dimensional": 80.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [],
+            "warnings": [
+              "Can be simplified to: 0.581*E0**2 + 0.256"
+            ],
+            "sympy_expr": "0.581*E0**2 + 0.256",
+            "canonical_form": "0.581*E0**2 + 0.256",
+            "score": 98
+          },
+          "dimensional": {
+            "valid": false,
+            "score": 80.0,
+            "errors": [
+              "Incompatible units in addition/subtraction: dimensionless (constant) vs volt (E0)"
+            ],
+            "warnings": [
+              "Unit inference failed; falling back to numeric inference"
+            ],
+            "dimensionally_consistent": false,
+            "variable_dimensions": {
+              "E0": "volt",
+              "R": "joule / kelvin / mole",
+              "T": "kelvin",
+              "n": "dimensionless",
+              "F": "coulomb / mole",
+              "Q": "dimensionless"
+            },
+            "inferred_output_unit": "dimensionless",
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": [],
+            "absorbed_constants_detected": false,
+            "simplified_expression": "0.581*E0**2 + 0.256"
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "chemistry",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [
+          "Incompatible units in addition/subtraction: dimensionless (constant) vs volt (E0)"
+        ],
+        "warnings": [
+          "Can be simplified to: 0.581*E0**2 + 0.256",
+          "Unit inference failed; falling back to numeric inference"
+        ],
+        "recommendations": [
+          "\ud83d\udd34 FIX: Dimensional inconsistencies"
+        ],
+        "edge_cases_detected": [
+          "DIMENSIONAL: Incompatible units in addition/subtraction: dimensionless (constant) vs volt (E0)"
+        ],
+        "acceptance_criteria": {
+          "minimum_score_met": false,
+          "symbolic_valid": true,
+          "dimensional_valid": false,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "all_layers_above_critical": true
+        },
+        "expression": "0.581*E0**2 + 0.256",
+        "canonical_form": "0.581*E0**2 + 0.256",
+        "domain": "chemistry",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 6,
+        "variable_names": [
+          "E0",
+          "R",
+          "T",
+          "n",
+          "F",
+          "Q"
+        ],
+        "discovery_engine": "physics_aware",
+        "equation_name": "nernst_equation",
+        "version": "3.6"
+      },
+      "execution_time": 242.12532997131348,
+      "n_samples": 200
+    },
+    "elasticity_demand": {
+      "timestamp": "2026-01-04T14:20:35.405962",
+      "description": "Price Elasticity of Demand",
+      "domain": "economics",
+      "discovery": {
+        "expression": "DISCOVERY_FAILED",
+        "sympy_expr": null,
+        "r2_score": 0.0,
+        "complexity": 0,
+        "variable_names": [
+          "Q",
+          "delta_Q",
+          "P",
+          "delta_P"
+        ],
+        "predictions": null,
+        "validation": {
+          "valid": false,
+          "errors": [
+            "Discovery error: Variable name Q is already a function name."
+          ],
+          "warnings": [],
+          "issues": []
+        },
+        "numerical_stability": {
+          "stable": true,
+          "issues": []
+        },
+        "dimensional_validation": {
+          "valid": true,
+          "score": 100.0
+        },
+        "discovery_fixes": {
+          "applied": false,
+          "stats": {}
+        },
+        "auto_configuration": {
+          "used": true,
+          "analysis": {
+            "n_variables": 4,
+            "n_samples": 200,
+            "domain": "economics",
+            "patterns": [
+              "nonlinear_interaction",
+              "ratio_relationship"
+            ],
+            "recommendations": {
+              "operators": "division_focused"
+            },
+            "variable_correlations": [
+              0.13086796680982873,
+              0.030451235877077768,
+              0.039880363411977655,
+              0.007534830591635843
+            ],
+            "weak_correlation_count": 3,
+            "max_ratio_correlation": 0.8062633697980288
+          },
+          "config": {
+            "binary_operators": [
+              "/",
+              "*",
+              "+",
+              "-"
+            ],
+            "unary_operators": [],
+            "complexity_of_operators": {
+              "/": 1,
+              "*": 2,
+              "+": 3,
+              "-": 3
+            },
+            "maxsize": 20,
+            "parsimony": 0.01,
+            "reason": "Detected ratio relationship (elasticity pattern)",
+            "patterns_detected": [
+              "nonlinear_interaction",
+              "ratio_relationship"
+            ]
+          }
+        },
+        "discovery_engine": "symbolic",
+        "quality_check": {
+          "is_overfit": false,
+          "complexity": 16,
+          "warnings": [],
+          "high_precision_count": 0
+        },
+        "attempt": 1,
+        "auto_config": {
+          "binary_operators": [
+            "*",
+            "/",
+            "+",
+            "-"
+          ],
+          "unary_operators": [],
+          "complexity_of_operators": {
+            "*": 1,
+            "/": 2,
+            "+": 3,
+            "-": 3
+          },
+          "maxsize": 30,
+          "parsimony": 0.0001,
+          "nested_constraints": {},
+          "reason": "Nonlinear interactions detected (4 weak correlations)"
+        },
+        "engines_tried": [
+          "symbolic(seed=42)",
+          "symbolic(seed=43)",
+          "symbolic(seed=44)",
+          "physics_aware"
+        ],
+        "best_r2": 0.0,
+        "best_quality_score": 0.0
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 94.5,
+        "base_score": 94.5,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 85,
+          "dimensional": 100.0,
+          "domain": 100.0,
+          "numerical": 90.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": false,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": true,
+            "errors": [
+              "Undefined variables: ['DISCOVERY_FAILED']"
+            ],
+            "warnings": [],
+            "sympy_expr": "DISCOVERY_FAILED",
+            "canonical_form": "DISCOVERY_FAILED",
+            "score": 85
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "Q": "dimensionless",
+              "delta_Q": "dimensionless",
+              "P": "dimensionless",
+              "delta_P": "dimensionless"
+            },
+            "inferred_output_unit": "dimensionless",
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": [],
+            "absorbed_constants_detected": false,
+            "simplified_expression": "DISCOVERY_FAILED"
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "economics",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 90.0,
+            "errors": [],
+            "warnings": [
+              "Missing test data: ['DISCOVERY_FAILED']"
+            ]
+          }
+        },
+        "errors": [
+          "Undefined variables: ['DISCOVERY_FAILED']"
+        ],
+        "warnings": [
+          "Missing test data: ['DISCOVERY_FAILED']"
+        ],
+        "recommendations": [
+          "\ud83d\udd34 FIX: Symbolic errors"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": false,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "all_layers_above_critical": true
+        },
+        "expression": "DISCOVERY_FAILED",
+        "canonical_form": "DISCOVERY_FAILED",
+        "domain": "economics",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 4,
+        "variable_names": [
+          "Q",
+          "delta_Q",
+          "P",
+          "delta_P"
+        ],
+        "discovery_engine": "symbolic",
+        "equation_name": "elasticity_demand",
+        "version": "3.6"
+      },
+      "execution_time": 66.96514010429382,
+      "n_samples": 200
+    },
+    "cobb_douglas": {
+      "timestamp": "2026-01-04T14:22:33.206131",
+      "description": "Cobb-Douglas Production Function",
+      "domain": "economics",
+      "discovery": {
+        "expression": "5.73172597366267*A**2.65311849718172 + 3.1971298997791*L",
+        "r2_score": 0.716841492454513,
+        "complexity": 56,
+        "discovery_engine": "physics_aware",
+        "convergence_history": [
+          -3.0024336485992844,
+          -2.7754224911113705,
+          -2.741419893437409,
+          -2.7021441804930713,
+          -2.0776706341228635,
+          -1.9838516263036112,
+          0.09732015036930426,
+          0.13297858329773088,
+          0.1733083286250146,
+          0.1878164440245011,
+          0.24756958155400927,
+          0.2592765925333626,
+          0.28831249179689905,
+          0.3683694498937968,
+          0.38228282941588654,
+          0.4772990309012665,
+          0.4772990309012665,
+          0.5508297164723779,
+          0.5508297164723779,
+          0.5508297164723779,
+          0.5508297164723779,
+          0.6713953035325211,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.6752909881926175,
+          0.7107373892353384,
+          0.7107373892353384,
+          0.7107373892353384,
+          0.7107373892353384,
+          0.7107373892353384,
+          0.7107373892353384,
+          0.7107373892353384,
+          0.7107373892353384,
+          0.716841492454513,
+          0.716841492454513,
+          0.716841492454513,
+          0.716841492454513,
+          0.716841492454513,
+          0.716841492454513,
+          0.716841492454513,
+          0.716841492454513,
+          0.716841492454513,
+          0.716841492454513,
+          0.716841492454513,
+          0.716841492454513,
+          0.716841492454513
+        ],
+        "quality_check": {
+          "is_overfit": true,
+          "complexity": 56,
+          "warnings": [
+            "High complexity (56 chars) but R\u00b2=0.7168 < 0.999",
+            "Multiple high-precision constants: 3"
+          ],
+          "high_precision_count": 3
+        },
+        "fit_time": 115.65505814552307,
+        "engines_tried": [
+          "symbolic(seed=42)",
+          "symbolic(seed=43)",
+          "symbolic(seed=44)",
+          "physics_aware"
+        ],
+        "best_r2": 0.716841492454513,
+        "best_quality_score": 0.666841492454513
+      },
+      "validation": {
+        "valid": true,
+        "total_score": 91.3,
+        "base_score": 91.3,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 0.0
+        },
+        "layer_scores": {
+          "symbolic": 71,
+          "dimensional": 100.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Can be simplified to: 5.732*A**2.653 + 3.197*L",
+              "Multiple multiplications (4 terms) - check for overflow. Consider: 5.73200000000000 * A**2.653 * 3.19700000000000..."
+            ],
+            "sympy_expr": "5.732*A**2.653 + 3.197*L",
+            "canonical_form": "5.732*A**2.653 + 3.197*L",
+            "score": 71
+          },
+          "dimensional": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "dimensionally_consistent": true,
+            "variable_dimensions": {
+              "A": "dimensionless",
+              "K": "dimensionless",
+              "L": "dimensionless",
+              "alpha": "dimensionless",
+              "beta": "dimensionless"
+            },
+            "inferred_output_unit": "dimensionless",
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": [],
+            "absorbed_constants_detected": false,
+            "simplified_expression": "5.732*A**2.653 + 3.197*L"
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "economics",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [],
+        "warnings": [
+          "Can be simplified to: 5.732*A**2.653 + 3.197*L",
+          "Multiple multiplications (4 terms) - check for overflow. Consider: 5.73200000000000 * A**2.653 * 3.19700000000000..."
+        ],
+        "recommendations": [
+          "\u2705 All checks passed"
+        ],
+        "edge_cases_detected": [],
+        "acceptance_criteria": {
+          "minimum_score_met": true,
+          "symbolic_valid": true,
+          "dimensional_valid": true,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "all_layers_above_critical": true
+        },
+        "expression": "5.732*A**2.653 + 3.197*L",
+        "canonical_form": "5.732*A**2.653 + 3.197*L",
+        "domain": "economics",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 5,
+        "variable_names": [
+          "A",
+          "K",
+          "L",
+          "alpha",
+          "beta"
+        ],
+        "discovery_engine": "physics_aware",
+        "equation_name": "cobb_douglas",
+        "version": "3.6"
+      },
+      "execution_time": 116.03349685668945,
+      "n_samples": 200
+    },
+    "bernoulli_equation": {
+      "timestamp": "2026-01-04T14:22:36.674349",
+      "description": "Bernoulli's Equation",
+      "domain": "engineering",
+      "discovery": {
+        "expression": "0.998642933472443*P + 1.01009834481604*g*h*rho + 0.467838655089085*rho*v**2.02589366900248",
+        "r2_score": 0.9613873559317424,
+        "complexity": 90,
+        "discovery_engine": "physics_aware",
+        "convergence_history": [
+          0.9613873559317424
+        ],
+        "quality_check": {
+          "is_overfit": true,
+          "complexity": 90,
+          "warnings": [
+            "High complexity (90 chars) but R\u00b2=0.9614 < 0.999",
+            "Multiple high-precision constants: 4"
+          ],
+          "high_precision_count": 4
+        },
+        "fit_time": 0.596257209777832,
+        "engines_tried": [
+          "symbolic(seed=42)",
+          "symbolic(seed=43)",
+          "symbolic(seed=44)",
+          "physics_aware"
+        ],
+        "best_r2": 0.9613873559317424,
+        "best_quality_score": 0.9113873559317424
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 39.3,
+        "base_score": 79.3,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 40.0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 40.0
+        },
+        "layer_scores": {
+          "symbolic": 71,
+          "dimensional": 60.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Can be simplified to: P + 1.01*g*h*rho + 0.468*rho*v**2.026",
+              "Multiple multiplications (7 terms) - check for overflow. Consider: 1.01000000000000 * g * h..."
+            ],
+            "sympy_expr": "P + 1.01*g*h*rho + 0.468*rho*v**2.026",
+            "canonical_form": "P + 1.01*g*h*rho + 0.468*rho*v**2.026",
+            "score": 71
+          },
+          "dimensional": {
+            "valid": false,
+            "score": 60.0,
+            "errors": [
+              "Incompatible units in addition/subtraction: pascal (P) vs meter / second (v)",
+              "Incompatible units in addition/subtraction: pascal (P) vs meter / second ** 2 (g)"
+            ],
+            "warnings": [
+              "Unit inference failed; falling back to numeric inference"
+            ],
+            "dimensionally_consistent": false,
+            "variable_dimensions": {
+              "P": "pascal",
+              "rho": "kilogram / meter ** 3",
+              "v": "meter / second",
+              "g": "meter / second ** 2",
+              "h": "meter"
+            },
+            "inferred_output_unit": "dimensionless",
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": [],
+            "absorbed_constants_detected": false,
+            "simplified_expression": "P + 1.01*g*h*rho + 0.468*rho*v**2.026"
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "engineering",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [
+          "Incompatible units in addition/subtraction: pascal (P) vs meter / second (v)",
+          "Incompatible units in addition/subtraction: pascal (P) vs meter / second ** 2 (g)"
+        ],
+        "warnings": [
+          "Can be simplified to: P + 1.01*g*h*rho + 0.468*rho*v**2.026",
+          "Multiple multiplications (7 terms) - check for overflow. Consider: 1.01000000000000 * g * h...",
+          "Unit inference failed; falling back to numeric inference"
+        ],
+        "recommendations": [
+          "\ud83d\udd34 FIX: Dimensional inconsistencies"
+        ],
+        "edge_cases_detected": [
+          "DIMENSIONAL: Incompatible units in addition/subtraction: pascal (P) vs meter / second (v)",
+          "DIMENSIONAL: Incompatible units in addition/subtraction: pascal (P) vs meter / second ** 2 (g)"
+        ],
+        "acceptance_criteria": {
+          "minimum_score_met": false,
+          "symbolic_valid": true,
+          "dimensional_valid": false,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "all_layers_above_critical": true
+        },
+        "expression": "P + 1.01*g*h*rho + 0.468*rho*v**2.026",
+        "canonical_form": "P + 1.01*g*h*rho + 0.468*rho*v**2.026",
+        "domain": "engineering",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 5,
+        "variable_names": [
+          "P",
+          "rho",
+          "v",
+          "g",
+          "h"
+        ],
+        "discovery_engine": "physics_aware",
+        "equation_name": "bernoulli_equation",
+        "version": "3.6"
+      },
+      "execution_time": 1.0570831298828125,
+      "n_samples": 200
+    },
+    "kinetic_energy": {
+      "timestamp": "2026-01-04T14:24:32.796634",
+      "description": "Kinetic Energy",
+      "domain": "physics",
+      "discovery": {
+        "expression": "1.19344469341608*m**2.20963877183368 + 1.52182212266346*v**2.62016877152561",
+        "r2_score": 0.653260970736973,
+        "complexity": 75,
+        "discovery_engine": "physics_aware",
+        "convergence_history": [
+          -0.26868805942916923,
+          0.04567489891689874,
+          0.4067112191048961,
+          0.4067112191048961,
+          0.43007147441890686,
+          0.5351879696652774,
+          0.5467190290407762,
+          0.619638239590651,
+          0.619638239590651,
+          0.638673663008033,
+          0.638673663008033,
+          0.638673663008033,
+          0.638673663008033,
+          0.638673663008033,
+          0.6494559024621673,
+          0.6494559024621673,
+          0.6494559024621673,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973,
+          0.653260970736973
+        ],
+        "quality_check": {
+          "is_overfit": true,
+          "complexity": 75,
+          "warnings": [
+            "High complexity (75 chars) but R\u00b2=0.6533 < 0.999",
+            "Multiple high-precision constants: 4"
+          ],
+          "high_precision_count": 4
+        },
+        "fit_time": 114.07625031471252,
+        "engines_tried": [
+          "symbolic(seed=42)",
+          "symbolic(seed=43)",
+          "symbolic(seed=44)",
+          "physics_aware"
+        ],
+        "best_r2": 0.653260970736973,
+        "best_quality_score": 0.6032609707369729
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 65.9,
+        "base_score": 85.9,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 20.0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 20.0
+        },
+        "layer_scores": {
+          "symbolic": 73,
+          "dimensional": 80.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Multiple multiplications (4 terms) - check for overflow. Consider: 1.19300000000000 * m**2.21 * 1.52200000000000..."
+            ],
+            "sympy_expr": "1.193*m**2.21 + 1.522*v**2.62",
+            "canonical_form": "1.193*m**2.21 + 1.522*v**2.62",
+            "score": 73
+          },
+          "dimensional": {
+            "valid": false,
+            "score": 80.0,
+            "errors": [
+              "Incompatible units in addition/subtraction: kilogram (m) vs meter / second (v)"
+            ],
+            "warnings": [
+              "Unit inference failed; falling back to numeric inference"
+            ],
+            "dimensionally_consistent": false,
+            "variable_dimensions": {
+              "m": "kilogram",
+              "v": "meter / second"
+            },
+            "inferred_output_unit": "dimensionless",
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": [],
+            "absorbed_constants_detected": false,
+            "simplified_expression": "1.193*m**2.21 + 1.522*v**2.62"
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "physics",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [
+          "Incompatible units in addition/subtraction: kilogram (m) vs meter / second (v)"
+        ],
+        "warnings": [
+          "Multiple multiplications (4 terms) - check for overflow. Consider: 1.19300000000000 * m**2.21 * 1.52200000000000...",
+          "Unit inference failed; falling back to numeric inference"
+        ],
+        "recommendations": [
+          "\ud83d\udd34 FIX: Dimensional inconsistencies"
+        ],
+        "edge_cases_detected": [
+          "DIMENSIONAL: Incompatible units in addition/subtraction: kilogram (m) vs meter / second (v)"
+        ],
+        "acceptance_criteria": {
+          "minimum_score_met": false,
+          "symbolic_valid": true,
+          "dimensional_valid": false,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "all_layers_above_critical": true
+        },
+        "expression": "1.193*m**2.21 + 1.522*v**2.62",
+        "canonical_form": "1.193*m**2.21 + 1.522*v**2.62",
+        "domain": "physics",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 2,
+        "variable_names": [
+          "m",
+          "v"
+        ],
+        "discovery_engine": "physics_aware",
+        "equation_name": "kinetic_energy",
+        "version": "3.6"
+      },
+      "execution_time": 114.4250385761261,
+      "n_samples": 200
+    },
+    "ohms_law": {
+      "timestamp": "2026-01-04T14:25:59.659243",
+      "description": "Ohm's Law",
+      "domain": "physics",
+      "discovery": {
+        "expression": "10.2465625353751*I**2.4818109267483 + 4.06504808991455*R",
+        "r2_score": 0.72580211917269,
+        "complexity": 56,
+        "discovery_engine": "physics_aware",
+        "convergence_history": [
+          -0.48824134297511923,
+          -0.30990851948046505,
+          0.2603329524108949,
+          0.4909967385628825,
+          0.4909967385628825,
+          0.5140318811383606,
+          0.514198311685773,
+          0.514198311685773,
+          0.514198311685773,
+          0.514198311685773,
+          0.514198311685773,
+          0.514198311685773,
+          0.514198311685773,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.514202112113135,
+          0.5216792125557534,
+          0.5971444583883323,
+          0.5971887681793799,
+          0.6141808923008549,
+          0.6141808923008549,
+          0.6321010959455393,
+          0.6321987560791085,
+          0.6535597932590307,
+          0.6536010338409664,
+          0.6805236222090503,
+          0.6805236222090503,
+          0.6805236222090503,
+          0.7257461780790603,
+          0.7257461780790603,
+          0.7257461780790603,
+          0.7257461780790603,
+          0.7257461780790603,
+          0.7257461780790603,
+          0.7257461780790603,
+          0.7257461780790603,
+          0.7257461780790603,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269,
+          0.72580211917269
+        ],
+        "quality_check": {
+          "is_overfit": true,
+          "complexity": 56,
+          "warnings": [
+            "High complexity (56 chars) but R\u00b2=0.7258 < 0.999",
+            "Multiple high-precision constants: 3"
+          ],
+          "high_precision_count": 3
+        },
+        "fit_time": 84.86043190956116,
+        "engines_tried": [
+          "symbolic(seed=42)",
+          "symbolic(seed=43)",
+          "symbolic(seed=44)",
+          "physics_aware"
+        ],
+        "best_r2": 0.72580211917269,
+        "best_quality_score": 0.67580211917269
+      },
+      "validation": {
+        "valid": false,
+        "total_score": 65.9,
+        "base_score": 85.9,
+        "penalties_applied": {
+          "critical": 0,
+          "dimensional": 20.0,
+          "domain": 0,
+          "warning": 0,
+          "total_deducted": 20.0
+        },
+        "layer_scores": {
+          "symbolic": 73,
+          "dimensional": 80.0,
+          "domain": 100.0,
+          "numerical": 100.0
+        },
+        "layer_results": {
+          "symbolic": {
+            "valid": true,
+            "syntactically_valid": true,
+            "dimensionally_consistent": true,
+            "domain_valid": true,
+            "numerically_stable": false,
+            "errors": [],
+            "warnings": [
+              "Multiple multiplications (4 terms) - check for overflow. Consider: 10.2470000000000 * I**2.482 * 4.06500000000000..."
+            ],
+            "sympy_expr": "10.247*I**2.482 + 4.065*R",
+            "canonical_form": "10.247*I**2.482 + 4.065*R",
+            "score": 73
+          },
+          "dimensional": {
+            "valid": false,
+            "score": 80.0,
+            "errors": [
+              "Incompatible units in addition/subtraction: ampere (I) vs ohm (R)"
+            ],
+            "warnings": [
+              "Unit inference failed; falling back to numeric inference"
+            ],
+            "dimensionally_consistent": false,
+            "variable_dimensions": {
+              "I": "ampere",
+              "R": "ohm"
+            },
+            "inferred_output_unit": "dimensionless",
+            "numerical_stability": {
+              "stable": true,
+              "issues": [],
+              "overflow_risks": [],
+              "warnings": [],
+              "errors": [],
+              "penalty": 0
+            },
+            "overflow_risks": [],
+            "absorbed_constants_detected": false,
+            "simplified_expression": "10.247*I**2.482 + 4.065*R"
+          },
+          "domain": {
+            "valid": true,
+            "score": 100.0,
+            "errors": [],
+            "warnings": [],
+            "domain": "physics",
+            "constraints_checked": []
+          },
+          "numerical": {
+            "score": 100.0,
+            "errors": [],
+            "warnings": []
+          }
+        },
+        "errors": [
+          "Incompatible units in addition/subtraction: ampere (I) vs ohm (R)"
+        ],
+        "warnings": [
+          "Multiple multiplications (4 terms) - check for overflow. Consider: 10.2470000000000 * I**2.482 * 4.06500000000000...",
+          "Unit inference failed; falling back to numeric inference"
+        ],
+        "recommendations": [
+          "\ud83d\udd34 FIX: Dimensional inconsistencies"
+        ],
+        "edge_cases_detected": [
+          "DIMENSIONAL: Incompatible units in addition/subtraction: ampere (I) vs ohm (R)"
+        ],
+        "acceptance_criteria": {
+          "minimum_score_met": false,
+          "symbolic_valid": true,
+          "dimensional_valid": false,
+          "domain_valid": true,
+          "no_critical_edge_cases": true,
+          "all_layers_above_critical": true
+        },
+        "expression": "10.247*I**2.482 + 4.065*R",
+        "canonical_form": "10.247*I**2.482 + 4.065*R",
+        "domain": "physics",
+        "strict_mode": false
+      },
+      "interpretation": null,
+      "metadata": {
+        "n_samples": 200,
+        "n_features": 2,
+        "variable_names": [
+          "I",
+          "R"
+        ],
+        "discovery_engine": "physics_aware",
+        "equation_name": "ohms_law",
+        "version": "3.6"
+      },
+      "execution_time": 85.11870336532593,
+      "n_samples": 200
+    }
+  }
+}

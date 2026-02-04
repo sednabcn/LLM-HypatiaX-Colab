@@ -1,0 +1,329 @@
+MANUSCRIPT MERGE CHECKLIST
+===========================
+Project: HypatiaX JMLR Paper
+Date Started: _______________
+Expected Completion: _______________
+
+
+PREPARATION PHASE
+=================
+
+[ ] Navigate to project directory
+    cd papers/2025-JMLR/
+
+[ ] Create backup folder
+    mkdir -p backups/pre-merge-$(date +%Y%m%d)
+
+[ ] Backup original manuscript
+    cp paper/jmlr_paper.tex backups/pre-merge-$(date +%Y%m%d)/
+
+[ ] Backup alternative manuscript  
+    cp supplementaries/manuscript/hypatiax_manuscript.tex backups/pre-merge-$(date +%Y%m%d)/
+
+[ ] Backup bibliography
+    cp paper/references.bib backups/pre-merge-$(date +%Y%m%d)/
+
+[ ] Create working copy
+    cd paper/
+    cp jmlr_paper.tex jmlr_paper_MERGED.tex
+
+
+DAY 1: ANALYSIS (2-3 hours)
+============================
+Date: _______________
+
+[ ] Compare document structures
+    grep "\\section\|\\subsection" jmlr_paper.tex > original_structure.txt
+    grep "\\section\|\\subsection" ../supplementaries/manuscript/hypatiax_manuscript.tex > alt_structure.txt
+
+[ ] Count bibliography entries
+    Original: _____ entries
+    Alternative: _____ entries
+
+[ ] Create merge decisions for each section:
+
+    SECTION              | USE ORIGINAL | USE ALTERNATIVE | MERGE BOTH | NOTES
+    ---------------------|--------------|-----------------|------------|-------
+    Abstract             | [ ]          | [ ]             | [ ]        | 
+    Introduction         | [ ]          | [ ]             | [ ]        |
+    Related Work         | [ ]          | [ ]             | [ ]        |
+    Architecture         | [ ]          | [ ]             | [ ]        |
+    Methods              | [ ]          | [ ]             | [ ]        |
+    Experiments          | [ ]          | [ ]             | [ ]        |
+    Results              | [ ]          | [ ]             | [ ]        |
+    Discussion           | [ ]          | [ ]             | [ ]        |
+    Conclusion           | [ ]          | [ ]             | [ ]        |
+    Appendix             | [ ]          | [ ]             | [ ]        |
+
+[ ] Identify quick wins (sections that can be easily merged)
+    _______________________________________________________________
+    _______________________________________________________________
+
+[ ] Identify complex sections (need careful review)
+    _______________________________________________________________
+    _______________________________________________________________
+
+
+DAY 2: MERGE FRONT MATTER (3-4 hours)
+======================================
+Date: _______________
+
+[ ] Merge abstract
+    Strategy: ___________________________________________________
+    [ ] Keep original clarity
+    [ ] Add alternative's depth
+    [ ] 150-200 words final count: _____ words
+    [ ] Test compile
+
+[ ] Merge introduction
+    [ ] Paragraph 1: Motivation (which version? ________________)
+    [ ] Paragraph 2: Problem statement (which? ________________)
+    [ ] Paragraphs 3-4: Approach (which? ________________)
+    [ ] Paragraph 5: Contributions (merge both lists)
+    [ ] Paragraph 6: Paper organization (update for merged structure)
+    [ ] Test compile
+
+[ ] Test compilation
+    pdflatex jmlr_paper_MERGED.tex
+    [ ] No errors
+    [ ] Abstract appears correctly
+    [ ] Introduction appears correctly
+
+
+DAY 3: MERGE CORE CONTENT (4-5 hours)
+======================================
+Date: _______________
+
+[ ] Architecture section
+    Decision: [ ] Use original  [ ] Use alternative  [ ] Merge
+    [ ] Verify all subsections present
+    [ ] Check figure references
+    [ ] Test compile
+
+[ ] Methods section
+    Decision: [ ] Use original  [ ] Use alternative  [ ] Merge
+    [ ] All experiments described
+    [ ] Protocol clear
+    [ ] Test compile
+
+[ ] Results section (CRITICAL)
+    [ ] List all experiments from original:
+        1. _______________________________________________
+        2. _______________________________________________
+        3. _______________________________________________
+        4. _______________________________________________
+        5. _______________________________________________
+    
+    [ ] List all experiments from alternative:
+        1. _______________________________________________
+        2. _______________________________________________
+        3. _______________________________________________
+        4. _______________________________________________
+        5. _______________________________________________
+    
+    [ ] Merge without duplication
+    [ ] Verify all figures referenced
+    [ ] Verify all tables included
+    [ ] Test compile
+
+
+DAY 4: FINALIZE (3-4 hours)
+============================
+Date: _______________
+
+[ ] Merge discussion section
+    Decision: [ ] Use original  [ ] Use alternative  [ ] Merge
+    [ ] Interpretation of results
+    [ ] Limitations
+    [ ] Implications
+    [ ] Future work
+    [ ] Test compile
+
+[ ] Merge conclusion
+    Decision: [ ] Use original  [ ] Use alternative  [ ] Merge
+    [ ] Test compile
+
+[ ] Merge bibliography
+    cat references.bib > references_backup.bib
+    cat ../supplementaries/manuscript/Bib/bibliography.bib >> references_backup.bib
+    python3 ../../latex/Bib/deduplication_bib.py references_backup.bib > references_MERGED.bib
+    
+    [ ] Original: _____ entries
+    [ ] Alternative: _____ entries  
+    [ ] Merged unique: _____ entries
+    [ ] Replace bibliography: mv references_MERGED.bib references.bib
+
+[ ] Check all figures
+    grep "includegraphics" jmlr_paper_MERGED.tex > needed_figures.txt
+    
+    [ ] List needed figures and verify exist:
+        Figure 1: _______________ [ ] exists
+        Figure 2: _______________ [ ] exists
+        Figure 3: _______________ [ ] exists
+        Figure 4: _______________ [ ] exists
+        Figure 5: _______________ [ ] exists
+        Figure 6: _______________ [ ] exists
+        Figure 7: _______________ [ ] exists
+        Other: _________________  [ ] exists
+
+[ ] Full compilation test
+    pdflatex jmlr_paper_MERGED.tex
+    bibtex jmlr_paper_MERGED
+    pdflatex jmlr_paper_MERGED.tex
+    pdflatex jmlr_paper_MERGED.tex
+    
+    [ ] No errors
+    [ ] All references resolve (no "??")
+    [ ] All figures appear
+    [ ] Bibliography complete
+    [ ] Page count: _____ pages (target: 40-50)
+
+
+QUALITY CHECKS
+==============
+
+Content Checklist:
+[ ] Abstract: 150-200 words
+[ ] Introduction: Problem clearly stated
+[ ] Introduction: Contributions listed
+[ ] Architecture: Comprehensive description
+[ ] Methods: All experiments described
+[ ] Results: All data presented
+[ ] Discussion: Thorough interpretation
+[ ] Conclusion: Clear summary
+[ ] References: Complete and formatted
+[ ] Figures: All present and referenced
+
+Technical Checklist:
+[ ] Compiles without errors
+[ ] All citations resolve
+[ ] All figures appear correctly
+[ ] No orphaned references
+[ ] Consistent formatting
+[ ] Page numbers correct
+[ ] No "??" in PDF
+[ ] No LaTeX warnings (or documented)
+
+
+DAY 5: TEAM REVIEW (2-3 hours)
+===============================
+Date: _______________
+
+[ ] Generate comparison PDFs
+    [ ] Original PDF generated
+    [ ] Merged PDF generated
+    [ ] Side-by-side ready for review
+
+[ ] Send to team for review
+    [ ] Email sent on: _______________
+    [ ] Deadline for feedback: _______________
+
+[ ] Team members to review:
+    [ ] _______________ (reviewed: _______)
+    [ ] _______________ (reviewed: _______)
+    [ ] _______________ (reviewed: _______)
+    [ ] _______________ (reviewed: _______)
+
+[ ] Collect feedback:
+    Feedback 1: _______________________________________________
+    Feedback 2: _______________________________________________
+    Feedback 3: _______________________________________________
+    Feedback 4: _______________________________________________
+
+[ ] Incorporate feedback
+    Change 1: [ ] Done - ___________________________________
+    Change 2: [ ] Done - ___________________________________
+    Change 3: [ ] Done - ___________________________________
+    Change 4: [ ] Done - ___________________________________
+
+[ ] Final compilation after changes
+    [ ] No new errors
+    [ ] All feedback addressed
+
+
+FINALIZATION
+============
+
+[ ] Archive old versions
+    mkdir -p archive/pre-merge/
+    mv jmlr_paper.tex archive/pre-merge/jmlr_paper_original.tex
+    mv ../supplementaries/manuscript/hypatiax_manuscript.tex archive/pre-merge/
+
+[ ] Make merged version official
+    mv jmlr_paper_MERGED.tex jmlr_paper.tex
+
+[ ] Update README with merge notes
+    [ ] Added merge date
+    [ ] Documented archive location
+    [ ] Noted manuscript history
+
+[ ] Git commit
+    git add jmlr_paper.tex references.bib README.md
+    git commit -m "Merge manuscripts: combined original + alternative"
+    [ ] Committed successfully
+
+
+FINAL VERIFICATION
+==================
+
+Pre-Submission Checklist:
+[ ] Merged manuscript compiles perfectly
+[ ] All experiments included
+[ ] All results present
+[ ] No duplicate content
+[ ] Narrative coherent
+[ ] Team approval received
+[ ] 40-50 pages total
+[ ] Ready for JMLR submission
+[ ] Old versions safely archived
+[ ] Documentation updated
+
+Team Sign-offs:
+[ ] _______________ (approved: _______)
+[ ] _______________ (approved: _______)
+[ ] _______________ (approved: _______)
+[ ] _______________ (approved: _______)
+
+
+TROUBLESHOOTING LOG
+===================
+
+Issue 1: _______________________________________________
+Solution: _______________________________________________
+Date resolved: _______________
+
+Issue 2: _______________________________________________
+Solution: _______________________________________________
+Date resolved: _______________
+
+Issue 3: _______________________________________________
+Solution: _______________________________________________
+Date resolved: _______________
+
+
+COMPLETION
+==========
+
+[ ] Merge complete
+[ ] All checks passed
+[ ] Team approved
+[ ] Ready for submission
+
+Completion Date: _______________
+Total Time Invested: _____ hours
+Final Page Count: _____ pages
+
+Status: [ ] COMPLETE - READY FOR SUBMISSION
+
+
+NOTES
+=====
+
+_______________________________________________________________
+_______________________________________________________________
+_______________________________________________________________
+_______________________________________________________________
+_______________________________________________________________
+_______________________________________________________________
+_______________________________________________________________
+_______________________________________________________________

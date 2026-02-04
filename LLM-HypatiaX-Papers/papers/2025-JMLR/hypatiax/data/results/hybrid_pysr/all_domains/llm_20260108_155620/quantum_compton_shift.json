@@ -1,0 +1,13 @@
+{
+  "error": "Object of type bool is not JSON serializable",
+  "test_name": "quantum_compton_shift",
+  "execution_time": 1.1559996604919434,
+  "timestamp": "2026-01-08T15:56:50.630706",
+  "_metadata": {
+    "session_id": "llm_20260108_155620",
+    "timestamp": "2026-01-08T15:56:50.630771",
+    "passed": false,
+    "test_name": "quantum_compton_shift",
+    "method": "llm_guided"
+  }
+}

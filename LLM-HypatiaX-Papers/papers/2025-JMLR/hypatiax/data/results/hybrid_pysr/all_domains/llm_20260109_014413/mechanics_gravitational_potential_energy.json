@@ -1,0 +1,180 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = m * g * h",
+    "confidence": 0.95,
+    "reasoning": "This is the standard gravitational potential energy formula U = mgh, which perfectly matches the physics domain and variable names",
+    "source": "llm",
+    "fitted_equation": "m * g * h",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = m * g * h",
+      "confidence": 0.95,
+      "reasoning": "This is the standard gravitational potential energy formula U = mgh, which perfectly matches the physics domain and variable names",
+      "source": "llm",
+      "fitted_equation": "m * g * h",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m * g * h + c",
+      "confidence": 0.85,
+      "reasoning": "Standard potential energy with a constant offset, common when measuring from a reference point other than zero",
+      "source": "llm",
+      "fitted_equation": "m * g * h + c",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 95.5,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = k * m * g * h",
+      "confidence": 0.8,
+      "reasoning": "Standard formula with a dimensionless scaling constant k, possibly accounting for system-specific factors",
+      "source": "llm",
+      "fitted_equation": "k * m * g * h",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 86.8,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m * g * h + k * m * h**2",
+      "confidence": 0.4,
+      "reasoning": "Linear plus quadratic terms in height, representing standard potential plus higher-order gravitational corrections",
+      "source": "llm",
+      "fitted_equation": "m * g * h + k * m * h**2",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 60.8,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m * g**2 * h",
+      "confidence": 0.5,
+      "reasoning": "Quadratic gravity dependence could occur in relativistic corrections or field-dependent scenarios",
+      "source": "llm",
+      "fitted_equation": "m * g**2 * h",
+      "coefficients": {},
+      "r2_score": -176.44932228310836,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m * g * h**2",
+      "confidence": 0.7,
+      "reasoning": "Quadratic height dependence could arise in non-uniform gravitational fields or composite systems",
+      "source": "llm",
+      "fitted_equation": "m * g * h**2",
+      "coefficients": {},
+      "r2_score": -13099.990725428248,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m**2 * g * h",
+      "confidence": 0.65,
+      "reasoning": "Quadratic mass dependence might occur in systems with mass-dependent interactions or multi-body effects",
+      "source": "llm",
+      "fitted_equation": "m**2 * g * h",
+      "coefficients": {},
+      "r2_score": -13659.017396371399,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m * g * h**3",
+      "confidence": 0.6,
+      "reasoning": "Cubic height dependence matches the detected polynomial degree 3, could represent complex gravitational scenarios",
+      "source": "llm",
+      "fitted_equation": "m * g * h**3",
+      "coefficients": {},
+      "r2_score": -95109722.16030692,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = m**3 * g * h",
+      "confidence": 0.55,
+      "reasoning": "Cubic mass dependence aligns with polynomial degree 3, might represent multi-particle gravitational systems",
+      "source": "llm",
+      "fitted_equation": "m**3 * g * h",
+      "coefficients": {},
+      "r2_score": -102119510.60874254,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (m * g * h)**2",
+      "confidence": 0.45,
+      "reasoning": "Squared potential energy might represent energy density or second-order gravitational effects",
+      "source": "llm",
+      "fitted_equation": "(m * g * h)**2",
+      "coefficients": {},
+      "r2_score": -7943077310.833286,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "m": 0.6583003788991689,
+      "g": -0.028189900931615275,
+      "h": 0.6392418558049628
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      0.5228884809196155,
+      94249.42527120479
+    ],
+    "y_scale": "large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 11.488452911376953,
+    "phase1_analysis": 0.06753945350646973,
+    "phase2_llm": 10.91453504562378,
+    "phase3_verify": 0.5059814453125
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "m * g * h",
+  "test_name": "mechanics_gravitational_potential_energy",
+  "timestamp": "2026-01-09T01:44:42.219999",
+  "ground_truth": "m*g*h",
+  "domain": "mechanics",
+  "_metadata": {
+    "session_id": "llm_20260109_014413",
+    "timestamp": "2026-01-09T01:44:42.220094",
+    "passed": true,
+    "test_name": "mechanics_gravitational_potential_energy",
+    "method": "llm_guided"
+  }
+}

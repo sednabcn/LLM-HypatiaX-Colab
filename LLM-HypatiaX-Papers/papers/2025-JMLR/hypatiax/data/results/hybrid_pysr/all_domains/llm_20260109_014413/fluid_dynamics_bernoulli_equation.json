@@ -1,0 +1,180 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "P + 0.5 * rho * v**2",
+    "confidence": 0.95,
+    "reasoning": "This is the core Bernoulli equation relating pressure, density, and velocity squared. The high P correlation (0.887) and moderate v correlation (0.454) with polynomial structure fits perfectly.",
+    "source": "llm",
+    "fitted_equation": "P + 0.5 * rho * v**2",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "P + 0.5 * rho * v**2",
+      "confidence": 0.95,
+      "reasoning": "This is the core Bernoulli equation relating pressure, density, and velocity squared. The high P correlation (0.887) and moderate v correlation (0.454) with polynomial structure fits perfectly.",
+      "source": "llm",
+      "fitted_equation": "P + 0.5 * rho * v**2",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "P * (1 + 0.5 * rho * v**2 / P)",
+      "confidence": 0.8,
+      "reasoning": "Normalized form of Bernoulli equation where dynamic pressure is expressed as a fraction of static pressure, explaining the high P correlation.",
+      "source": "llm",
+      "fitted_equation": "P * (1 + 0.5 * rho * v**2 / P)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "P * (1 + v**2 / (2 * P / rho))",
+      "confidence": 0.7,
+      "reasoning": "Compressible flow approximation where dynamic pressure is normalized by the speed of sound squared (approximated as P/rho).",
+      "source": "llm",
+      "fitted_equation": "P * (1 + v**2 / (2 * P / rho))",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "P * (1 + rho * v**2 / 200000)",
+      "confidence": 0.5,
+      "reasoning": "Linearized compressible flow equation normalized by typical pressure scale matching the y_range [1.02e+05, 2.48e+05].",
+      "source": "llm",
+      "fitted_equation": "P * (1 + rho * v**2 / 200000)",
+      "coefficients": {},
+      "r2_score": 0.8389012132149457,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "P + rho * v**2 / 2 + rho * 9.81",
+      "confidence": 0.75,
+      "reasoning": "Complete Bernoulli equation including gravitational potential energy term (rho*g*h approximated as rho*g), fitting the polynomial degree 3 pattern.",
+      "source": "llm",
+      "fitted_equation": "P + rho * v**2 / 2 + rho * 9.81",
+      "coefficients": {},
+      "r2_score": 0.9114435998536812,
+      "validation_score": 65.3,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "P + rho * v**2",
+      "confidence": 0.85,
+      "reasoning": "Simplified dynamic pressure form without the 0.5 coefficient, which might be absorbed into other terms or represent a modified Bernoulli equation.",
+      "source": "llm",
+      "fitted_equation": "P + rho * v**2",
+      "coefficients": {},
+      "r2_score": 0.5212631803148372,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "P + rho * v**3 / 1000",
+      "confidence": 0.65,
+      "reasoning": "Higher order velocity term that could account for viscous effects or turbulence, matching the polynomial degree 3 detection.",
+      "source": "llm",
+      "fitted_equation": "P + rho * v**3 / 1000",
+      "coefficients": {},
+      "r2_score": 0.5371406660569713,
+      "validation_score": 73.4,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "P * exp(rho * v**2 / (2 * P))",
+      "confidence": 0.6,
+      "reasoning": "Exponential form for compressible flow effects, matching the exponential pattern detection while maintaining Bernoulli-like structure.",
+      "source": "llm",
+      "fitted_equation": "P * exp(rho * v**2 / (2 * P))",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 85.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "P + 1000 * log(1 + rho * v**2 / 1000)",
+      "confidence": 0.45,
+      "reasoning": "Logarithmic correction to pressure accounting for compressibility effects, matching the logarithmic pattern detection.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "P + rho * v**2 * (1 + 0.1 * v)",
+      "confidence": 0.55,
+      "reasoning": "Modified Bernoulli with velocity-dependent correction factor, explaining polynomial structure and moderate correlations.",
+      "source": "llm",
+      "fitted_equation": "P + rho * v**2 * (1 + 0.1 * v)",
+      "coefficients": {},
+      "r2_score": -2.4562002465221826,
+      "validation_score": 73.4,
+      "validation_passed": false,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": true,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": true,
+    "is_logarithmic": true,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "P": 0.8865809717841858,
+      "rho": 0.10252668078831619,
+      "v": 0.4537248180077707
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      101725.38599574883,
+      247925.51856731702
+    ],
+    "y_scale": "large",
+    "symmetry": "symmetric",
+    "estimated_complexity": "simple"
+  },
+  "timing": {
+    "total": 15.84459638595581,
+    "phase1_analysis": 0.07083368301391602,
+    "phase2_llm": 14.41677737236023,
+    "phase3_verify": 1.3546199798583984
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "P + 0.5 * rho * v**2",
+  "test_name": "fluid_dynamics_bernoulli_equation",
+  "timestamp": "2026-01-09T01:46:36.736976",
+  "ground_truth": "P + 0.5*rho*v**2",
+  "domain": "fluid_dynamics",
+  "_metadata": {
+    "session_id": "llm_20260109_014413",
+    "timestamp": "2026-01-09T01:46:36.737065",
+    "passed": true,
+    "test_name": "fluid_dynamics_bernoulli_equation",
+    "method": "llm_guided"
+  }
+}

@@ -1,0 +1,16 @@
+equation,domain,formula,pure_llm_success,pure_llm_r2,nn_success,nn_r2,hybrid_success,hybrid_r2
+arrhenius,chemistry,Arrhenius Equation: k = A*exp(-Ea/(R*T)),TRUE,1.000,TRUE,1.000,TRUE,0.999
+henderson_hasselbalch,chemistry,Henderson-Hasselbalch: pH = pKa + log10([A-]/[HA]),TRUE,1.000,TRUE,0.999,TRUE,0.999
+rate_law,chemistry,Rate Law: rate = k*[A]²*[B],TRUE,1.000,TRUE,0.999,TRUE,1.000
+allometric_scaling,biology,Allometric Scaling: Y = a*M^b (metabolic rate),TRUE,1.000,TRUE,1.000,TRUE,1.000
+michaelis_menten,biology,Michaelis-Menten: v = (Vmax*[S])/(Km+[S]),TRUE,1.000,TRUE,1.000,TRUE,1.000
+logistic_growth,biology,Logistic Growth: dN/dt = r*N*(1-N/K),TRUE,1.000,TRUE,1.000,TRUE,1.000
+kinetic_energy,physics,Kinetic Energy: KE = 0.5*m*v²,TRUE,1.000,TRUE,1.000,TRUE,1.000
+gravitational_force,physics,Gravitational Force: F = G*m1*m2/r²,TRUE,1.000,TRUE,0.293,FALSE,-0.026
+ideal_gas_law,physics,Ideal Gas Law: P = nRT/V,TRUE,1.000,TRUE,0.814,TRUE,1.000
+impermanent_loss,defi_amm,Impermanent Loss: IL = 2*sqrt(r)/(1+r) - 1,TRUE,1.000,TRUE,1.000,TRUE,1.000
+price_impact,defi_amm,Price Impact: impact = dx/(x+dx),TRUE,1.000,TRUE,0.999,TRUE,1.000
+constant_product,defi_amm,Constant Product: y = k/x,TRUE,1.000,TRUE,0.997,TRUE,1.000
+var_95,defi_risk,Value at Risk 95%: VaR = P*σ*1.645,TRUE,1.000,TRUE,1.000,TRUE,1.000
+liquidation_long,defi_risk,Liquidation Price LONG: liq = entry*(1 - 1/(L*0.8)),TRUE,1.000,TRUE,1.000,TRUE,1.000
+portfolio_var,defi_risk,Portfolio VaR: sqrt(var1² + var2² + 2ρ*var1*var2),TRUE,1.000,TRUE,0.999,TRUE,0.995

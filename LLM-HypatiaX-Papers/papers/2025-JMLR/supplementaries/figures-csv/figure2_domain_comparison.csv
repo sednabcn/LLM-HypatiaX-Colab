@@ -1,0 +1,6 @@
+domain,pure_llm_success_rate,pure_llm_mean_r2,hybrid_v40_success_rate,hybrid_v40_mean_r2,n_tests
+biology,100.0,1.000,100.0,1.000,3
+chemistry,100.0,1.000,100.0,0.999,3
+defi_amm,100.0,1.000,100.0,1.000,3
+defi_risk,100.0,1.000,100.0,0.998,3
+physics,100.0,1.000,66.7,0.658,3
