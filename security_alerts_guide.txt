@@ -1,0 +1,414 @@
+# Security Alert Remediation Guide
+
+**Date**: February 4, 2026  
+**Project**: HypatiaX JMLR Repository  
+**Alerts**: 2 Django vulnerabilities detected
+
+---
+
+## Critical Security Alerts
+
+### 🔴 Alert #410: Django SQL Injection (HIGH SEVERITY)
+
+**Status**: ⚠️ URGENT - Requires immediate attention  
+**Severity**: HIGH  
+**Package**: Django (pip)  
+**Location**: requirements_hashed.txt  
+**Opened**: Yesterday
+
+#### What This Means
+
+SQL Injection vulnerabilities allow attackers to:
+- Execute arbitrary SQL queries against your database
+- Access, modify, or delete sensitive data
+- Potentially gain system access
+- Compromise data integrity
+
+**Risk Level**: CRITICAL if your application accepts user input
+
+#### Immediate Action Required
+
+1. **Check Current Django Version**
+   ```bash
+   pip show django
+   # or
+   grep -i django requirements_hashed.txt
+   ```
+
+2. **Update to Patched Version**
+   ```bash
+   # Backup current requirements
+   cp requirements_hashed.txt requirements_hashed.txt.backup
+   
+   # Update Django to latest stable version
+   pip install --upgrade django
+   
+   # Update requirements file
+   pip freeze > requirements_hashed.txt
+   ```
+
+3. **Verify the Fix**
+   ```bash
+   # Check new version
+   pip show django
+   
+   # Run security audit
+   pip-audit
+   # or
+   safety check
+   ```
+
+---
+
+### 🟡 Alert #386: Django Inefficient Algorithmic Complexity (LOW SEVERITY)
+
+**Status**: ⚠️ Should be addressed  
+**Severity**: LOW  
+**Package**: Django (pip)  
+**Location**: requirements_hashed.txt  
+**Opened**: Yesterday
+
+#### What This Means
+
+Inefficient algorithmic complexity can lead to:
+- Denial of Service (DoS) attacks
+- Performance degradation
+- Resource exhaustion
+- Slow response times
+
+**Risk Level**: MEDIUM - Can impact availability
+
+#### Action Required
+
+This will likely be fixed by the same Django update as Alert #410.
+
+---
+
+## Remediation Steps
+
+### Step 1: Identify Current Django Version
+
+```bash
+cd /path/to/hypatiax-jmlr-repo
+
+# Check installed version
+pip show django
+
+# Check requirements file
+cat requirements_hashed.txt | grep -i django
+```
+
+**Current version**: _______________ (fill in after checking)
+
+### Step 2: Check for Breaking Changes
+
+Before updating, check Django release notes:
+- https://docs.djangoproject.com/en/stable/releases/
+
+**Current version**: _______________  
+**Target version**: _______________ (latest stable)  
+**Breaking changes**: [ ] Yes [ ] No
+
+If yes, list changes needed:
+_______________________________________________________________
+_______________________________________________________________
+
+### Step 3: Create Backup
+
+```bash
+# Backup requirements
+cp requirements_hashed.txt requirements_hashed.txt.backup_$(date +%Y%m%d)
+
+# Backup any Django-specific code (if applicable)
+# (your project appears to be research code, not a Django web app)
+
+# Check if Django is actually used
+find . -name "*.py" -type f -exec grep -l "import django\|from django" {} \; | head -10
+```
+
+### Step 4: Update Django
+
+```bash
+# Option A: Update only Django
+pip install --upgrade django
+
+# Option B: Update all packages (more aggressive)
+pip install --upgrade -r requirements_hashed.txt
+
+# Update requirements file
+pip freeze > requirements_hashed.txt
+```
+
+### Step 5: Test
+
+```bash
+# If Django is used in your code, run tests
+python -m pytest tests/
+
+# Or run your specific test suite
+# python manage.py test  # (if Django web app)
+
+# For research code, verify imports still work
+python -c "import django; print(f'Django {django.__version__} imported successfully')"
+```
+
+### Step 6: Verify Fix
+
+```bash
+# Install security audit tools (if not already installed)
+pip install pip-audit safety
+
+# Run security check
+pip-audit
+
+# Alternative
+safety check --file requirements_hashed.txt
+```
+
+### Step 7: Commit Changes
+
+```bash
+git add requirements_hashed.txt
+git commit -m "Security: Update Django to fix CVE vulnerabilities (#410, #386)"
+git push
+```
+
+---
+
+## Important Questions to Answer
+
+### Q1: Is Django Actually Used in Your Project?
+
+```bash
+# Search for Django usage
+find . -name "*.py" -type f -exec grep -l "django" {} \;
+```
+
+**If NO Django imports found**:
+- Django may be a transitive dependency (required by another package)
+- Still should update for security
+- Check what requires it: `pip show django`
+
+**If YES Django imports found**:
+- Review usage to ensure SQL injection protection
+- Use Django ORM properly (don't use raw SQL)
+- Update and test thoroughly
+
+### Q2: What Requires Django?
+
+```bash
+# Find what package depends on Django
+pip show django | grep "Required-by"
+```
+
+Package that requires Django: _______________
+
+### Q3: Is This a Production System?
+
+**If YES** (production):
+- Update immediately
+- Test in staging first if possible
+- Schedule maintenance window
+- Notify team
+
+**If NO** (development/research):
+- Still update for security
+- Lower urgency but don't ignore
+- Good practice to keep dependencies current
+
+---
+
+## Quick Fix Script
+
+Save this as `fix_django_vulnerabilities.sh`:
+
+```bash
+#!/bin/bash
+# Django Security Update Script
+
+echo "=== Django Security Vulnerability Fix ==="
+echo ""
+
+# Check current version
+echo "Current Django version:"
+pip show django | grep Version
+
+# Backup requirements
+echo ""
+echo "Creating backup..."
+cp requirements_hashed.txt requirements_hashed.txt.backup_$(date +%Y%m%d)
+echo "✓ Backup created"
+
+# Update Django
+echo ""
+echo "Updating Django..."
+pip install --upgrade django
+
+# Check new version
+echo ""
+echo "New Django version:"
+pip show django | grep Version
+
+# Update requirements
+echo ""
+echo "Updating requirements file..."
+pip freeze > requirements_hashed.txt
+echo "✓ Requirements updated"
+
+# Verify fix
+echo ""
+echo "Running security audit..."
+if command -v pip-audit &> /dev/null; then
+    pip-audit | grep -i django || echo "✓ No Django vulnerabilities found"
+else
+    echo "⚠ pip-audit not installed. Install with: pip install pip-audit"
+fi
+
+echo ""
+echo "=== Update Complete ==="
+echo "Please test your application and commit changes."
+```
+
+**To use:**
+```bash
+chmod +x fix_django_vulnerabilities.sh
+./fix_django_vulnerabilities.sh
+```
+
+---
+
+## Timeline for Remediation
+
+### Immediate (Today)
+
+- [ ] Check current Django version
+- [ ] Determine if Django is actually used
+- [ ] Identify what requires Django
+- [ ] Create backup of requirements
+
+### Short-term (This Week)
+
+- [ ] Update Django to patched version
+- [ ] Run security audit to verify fix
+- [ ] Test application (if applicable)
+- [ ] Update requirements_hashed.txt
+- [ ] Commit changes
+
+### Ongoing
+
+- [ ] Set up automated dependency scanning
+- [ ] Enable Dependabot alerts
+- [ ] Review security alerts weekly
+- [ ] Keep dependencies updated
+
+---
+
+## Additional Security Recommendations
+
+### 1. Enable Automated Security Updates
+
+If using GitHub:
+```yaml
+# .github/dependabot.yml
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+```
+
+### 2. Install Security Audit Tools
+
+```bash
+pip install pip-audit safety
+
+# Run regularly
+pip-audit
+safety check
+```
+
+### 3. Pin Dependencies Properly
+
+```bash
+# Use exact versions for reproducibility
+pip freeze > requirements_hashed.txt
+
+# But also maintain a requirements.in with ranges
+# Then use pip-compile for controlled updates
+```
+
+### 4. Monitor CVE Databases
+
+- Subscribe to Django security announcements
+- Check https://www.djangoproject.com/weblog/
+- Monitor GitHub Security Advisories
+
+---
+
+## Troubleshooting
+
+### Issue: Update Breaks Dependencies
+
+```bash
+# Rollback
+pip install -r requirements_hashed.txt.backup_YYYYMMDD
+
+# Try updating one at a time
+pip install django==X.Y.Z  # specific version
+
+# Check compatibility
+pip check
+```
+
+### Issue: Tests Fail After Update
+
+```bash
+# Check what changed
+diff requirements_hashed.txt.backup_YYYYMMDD requirements_hashed.txt
+
+# Review Django release notes for breaking changes
+# Update code as needed
+```
+
+### Issue: Can't Find Django Usage
+
+```bash
+# Comprehensive search
+grep -r "django" . --include="*.py"
+grep -r "Django" . --include="*.txt"
+grep -r "django" . --include="*.cfg"
+```
+
+---
+
+## Status Tracking
+
+| Alert | Severity | Status | Date Fixed | New Version |
+|-------|----------|--------|------------|-------------|
+| #410 SQL Injection | HIGH | [ ] Fixed | ___________ | ___________ |
+| #386 Algorithmic Complexity | LOW | [ ] Fixed | ___________ | ___________ |
+
+**Sign-off:**
+- [ ] Updates applied
+- [ ] Tests passed
+- [ ] Security audit clean
+- [ ] Requirements file updated
+- [ ] Changes committed
+- [ ] Team notified
+
+---
+
+## Resources
+
+- Django Security Releases: https://docs.djangoproject.com/en/stable/releases/security/
+- CVE Database: https://cve.mitre.org/
+- pip-audit: https://pypi.org/project/pip-audit/
+- Safety: https://pypi.org/project/safety/
+
+---
+
+**Next Steps**: Run the diagnostic commands above to assess the situation, then execute the fix script.
+
+**Priority**: HIGH - Address within 24-48 hours

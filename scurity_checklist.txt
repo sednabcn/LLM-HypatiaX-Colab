@@ -1,0 +1,169 @@
+DJANGO SECURITY ALERTS - ACTION CHECKLIST
+=========================================
+
+Date: _______________
+Responder: _______________
+
+
+CRITICAL ALERTS
+---------------
+[ ] Alert #410: Django SQL Injection (HIGH) 
+[ ] Alert #386: Django Inefficient Algorithmic Complexity (LOW)
+
+
+IMMEDIATE ACTIONS (TODAY)
+--------------------------
+[ ] Navigate to repository root directory
+    cd /path/to/hypatiax-jmlr-repo
+
+[ ] Check current Django version
+    pip show django
+    Current version: _______________
+
+[ ] Check if Django is used in code
+    find . -name "*.py" -type f -exec grep -l "django" {} \;
+    Files found: _______________
+
+[ ] Identify what requires Django
+    pip show django | grep "Required-by"
+    Required by: _______________
+
+
+REMEDIATION STEPS
+-----------------
+[ ] Create backup of requirements
+    cp requirements_hashed.txt requirements_hashed.txt.backup_$(date +%Y%m%d)
+    Backup location: _______________
+
+[ ] Run automated fix script
+    bash fix_django_security.sh
+    
+    OR manual update:
+    
+[ ] Update Django manually
+    pip install --upgrade django
+    New version: _______________
+
+[ ] Update requirements file
+    pip freeze > requirements_hashed.txt
+
+[ ] Verify security fix
+    pip install pip-audit
+    pip-audit | grep -i django
+    
+    Result: [ ] Clean  [ ] Issues remain
+
+
+TESTING
+-------
+[ ] Import test (if Django used in code)
+    python -c "import django; print(django.__version__)"
+    Result: [ ] Success  [ ] Failed
+
+[ ] Run project tests (if applicable)
+    python -m pytest tests/
+    Result: [ ] Passed  [ ] Failed
+
+[ ] Application smoke test
+    Description of test: _______________________________________________
+    Result: [ ] Passed  [ ] Failed
+
+
+VERIFICATION
+------------
+[ ] Run pip-audit
+    pip-audit
+    Django vulnerabilities: [ ] None  [ ] Still present
+
+[ ] Run safety check  
+    safety check
+    Django vulnerabilities: [ ] None  [ ] Still present
+
+[ ] Check GitHub alerts
+    Alert #410: [ ] Resolved  [ ] Still open
+    Alert #386: [ ] Resolved  [ ] Still open
+
+
+VERSION CONTROL
+---------------
+[ ] Review changes
+    git diff requirements_hashed.txt
+
+[ ] Commit changes
+    git add requirements_hashed.txt
+    git commit -m "Security: Update Django to fix CVE vulnerabilities (#410, #386)"
+    
+[ ] Push to repository
+    git push
+    
+[ ] Verify CI/CD passes (if applicable)
+    Build status: [ ] Passed  [ ] Failed
+
+
+DOCUMENTATION
+-------------
+[ ] Update CHANGELOG (if maintained)
+[ ] Note in security log
+[ ] Notify team members
+    Notified: _______________________________________________
+    Method: [ ] Email  [ ] Slack  [ ] Teams  [ ] Other: _______________
+
+[ ] Comment on GitHub alerts
+    Comment added: [ ] #410  [ ] #386
+
+
+FOLLOW-UP
+---------
+[ ] Set up automated security scanning
+    Tool: [ ] Dependabot  [ ] pip-audit  [ ] safety  [ ] Other: _______________
+
+[ ] Schedule regular dependency updates
+    Frequency: [ ] Weekly  [ ] Monthly  [ ] Quarterly
+
+[ ] Add to monitoring
+    [ ] Subscribe to Django security announcements
+    [ ] Add to security review calendar
+
+
+ROLLBACK PLAN (IF NEEDED)
+--------------------------
+If issues occur after update:
+
+[ ] Restore backup
+    mv requirements_hashed.txt.backup_YYYYMMDD requirements_hashed.txt
+
+[ ] Reinstall dependencies
+    pip install -r requirements_hashed.txt
+
+[ ] Document issue
+    Problem: _______________________________________________
+    _______________________________________________
+    _______________________________________________
+
+
+COMPLETION
+----------
+[ ] All alerts resolved
+[ ] Tests passing
+[ ] Changes committed
+[ ] Team notified
+[ ] Documentation updated
+
+Completed by: _______________
+Date: _______________
+Time spent: _______________
+
+
+NOTES
+-----
+_______________________________________________________________
+_______________________________________________________________
+_______________________________________________________________
+_______________________________________________________________
+_______________________________________________________________
+
+
+SIGN-OFF
+--------
+Security Lead: _______________ Date: _______________
+Tech Lead: _______________ Date: _______________
