@@ -1,5 +1,0 @@
-layer,layer_name,errors_caught,percentage,cumulative_errors,cumulative_percentage
-1,Dimensional Analysis,18,12.0,18,12.0
-2,Physics Constraints,27,18.0,45,30.0
-3,Numerical Stability,35,23.3,80,53.3
-4,Prediction Accuracy,70,46.7,150,100.0
