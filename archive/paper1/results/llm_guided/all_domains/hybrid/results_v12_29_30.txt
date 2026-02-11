@@ -1,0 +1,3586 @@
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/tools/symbolic/hybrid_system_v42.py
+================================================================================
+HYBRID SYSTEM v4.2 - QUICK TEST
+================================================================================
+
+Test: Ohm's Law V = I * R
+--------------------------------------------------------------------------------
+2026-01-14 16:33:41,855 - INFO - ======================================================================
+2026-01-14 16:33:41,856 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 16:33:41,856 - INFO - ======================================================================
+2026-01-14 16:33:41,856 - INFO - Domain: physics
+2026-01-14 16:33:41,856 - INFO - Discovery mode: calibrated
+2026-01-14 16:33:41,856 - INFO - Primary LLM: anthropic
+2026-01-14 16:33:41,856 - INFO - Auto-config: True
+2026-01-14 16:33:41,857 - INFO - Max retries: 5
+2026-01-14 16:33:41,857 - INFO - PhysicsAware fallback: False
+2026-01-14 16:33:41,857 - INFO - Complexity threshold: 20
+2026-01-14 16:33:41,857 - INFO - ======================================================================
+2026-01-14 16:33:41,857 - INFO - Using provided iterations: 60
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 16:34:11,279 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Ohm's Law
+Domain: PHYSICS
+Samples: 100
+Variables: ['I', 'R']
+Equation hint: ohms_law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 16:34:11,280 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: I, R
+   Samples: 100
+   Iterations: 60
+   ❌ Discovery failed: Variable name I is already a function name.
+2026-01-14 16:34:12,361 - INFO -    Result: DISCOVERY_FAILED
+2026-01-14 16:34:12,361 - INFO -    R² = 0.0000
+2026-01-14 16:34:12,362 - INFO -    [BEST] New best!
+2026-01-14 16:34:12,363 - INFO -
+[SYMBOLIC] Attempt 2/5 (seed=43)
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: I, R
+   Samples: 100
+   Iterations: 60
+   ❌ Discovery failed: Variable name I is already a function name.
+2026-01-14 16:34:12,370 - INFO -    Result: DISCOVERY_FAILED
+2026-01-14 16:34:12,371 - INFO -    R² = 0.0000
+2026-01-14 16:34:12,372 - INFO -
+[SYMBOLIC] Attempt 3/5 (seed=44)
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: I, R
+   Samples: 100
+   Iterations: 60
+   ❌ Discovery failed: Variable name I is already a function name.
+2026-01-14 16:34:12,375 - INFO -    Result: DISCOVERY_FAILED
+2026-01-14 16:34:12,375 - INFO -    R² = 0.0000
+2026-01-14 16:34:12,375 - INFO -
+[SYMBOLIC] Attempt 4/5 (seed=45)
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: I, R
+   Samples: 100
+   Iterations: 60
+   ❌ Discovery failed: Variable name I is already a function name.
+2026-01-14 16:34:12,378 - INFO -    Result: DISCOVERY_FAILED
+2026-01-14 16:34:12,378 - INFO -    R² = 0.0000
+2026-01-14 16:34:12,378 - INFO -
+[SYMBOLIC] Attempt 5/5 (seed=46)
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: I, R
+   Samples: 100
+   Iterations: 60
+   ❌ Discovery failed: Variable name I is already a function name.
+2026-01-14 16:34:12,381 - INFO -    Result: DISCOVERY_FAILED
+2026-01-14 16:34:12,381 - INFO -    R² = 0.0000
+2026-01-14 16:34:12,382 - WARNING -
+[WARNING] SymbolicEngine best R²=0.0000
+
+[OK] Discovery complete
+   Expression: DISCOVERY_FAILED
+   R² Score: 0.0000
+   Engine: symbolic
+   Attempt: 1/5
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 93.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: False
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+RESULT:
+================================================================================
+Expression: DISCOVERY_FAILED
+R²: 0.0000
+Engine: symbolic
+Accepted: False
+
+❌ [FAILED] Expression still contains addition
+
+======================================================================
+STATISTICS SUMMARY v4.2
+======================================================================
+
+Overall:
+   Discoveries: 1
+   Validations: 1
+   Collapsed constants detected: 0
+
+SymbolicEngine:
+   Attempts: 5
+   Successes: 0
+   Failures: 1
+   Success rate: 0.0%
+
+Auto-Configuration:
+   Used: 0 times
+
+======================================================================
+
+
+================================================================================
+v4.2 TEST COMPLETE - All features verified!
+================================================================================
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/tools/symbolic/hybrid_system_v42.py
+================================================================================
+HYBRID SYSTEM v4.2 - QUICK TEST
+================================================================================
+
+Test: Ohm's Law V = I * R
+--------------------------------------------------------------------------------
+
+Test: Ohm's Law V = I * R
+--------------------------------------------------------------------------------
+2026-01-14 16:45:14,529 - INFO - ======================================================================
+2026-01-14 16:45:14,529 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 16:45:14,529 - INFO - ======================================================================
+2026-01-14 16:45:14,529 - INFO - Domain: physics
+2026-01-14 16:45:14,530 - INFO - Discovery mode: calibrated
+2026-01-14 16:45:14,530 - INFO - Primary LLM: anthropic
+2026-01-14 16:45:14,530 - INFO - Auto-config: True
+2026-01-14 16:45:14,530 - INFO - Max retries: 5
+2026-01-14 16:45:14,531 - INFO - PhysicsAware fallback: False
+2026-01-14 16:45:14,531 - INFO - Complexity threshold: 20
+2026-01-14 16:45:14,531 - INFO - ======================================================================
+2026-01-14 16:45:14,531 - INFO - Using provided iterations: 60
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 16:45:20,612 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Ohm's Law
+Domain: PHYSICS
+Samples: 100
+Variables: ['current', 'resistance']
+Equation hint: ohms_law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 16:45:20,613 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: current, resistance
+   Samples: 100
+   Iterations: 60
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: current * resistance
+   R²: 0.9998
+2026-01-14 16:46:58,695 - INFO -    Result: current * resistance
+2026-01-14 16:46:58,696 - INFO -    R² = 0.9998
+2026-01-14 16:46:58,697 - INFO -    [BEST] New best!
+2026-01-14 16:46:58,697 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: current * resistance
+   R² Score: 0.9998
+   Engine: symbolic
+   Attempt: 1/5
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 98.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+RESULT:
+================================================================================
+Expression: current * resistance
+R²: 0.9998
+Engine: symbolic
+Accepted: True
+
+✅ [SUCCESS] Found multiplicative relationship (no addition)!
+
+======================================================================
+STATISTICS SUMMARY v4.2
+======================================================================
+
+Overall:
+   Discoveries: 1
+   Validations: 1
+   Collapsed constants detected: 0
+
+SymbolicEngine:
+   Attempts: 1
+   Successes: 1
+   Failures: 0
+   Success rate: 100.0%
+
+Auto-Configuration:
+   Used: 0 times
+
+======================================================================
+
+
+================================================================================
+v4.2 TEST COMPLETE - All features verified!
+================================================================================
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ source ../../py312/bin/activate
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/hybrid_defi_llm_guided/llm_guided_symbolic_discovery_defi.py --test impermanent_loss --mode hybrid
+✅ Using integrated SymbolicEngineWithLLM v20
+✅ Loaded DeFi Protocol v3.0
+
+📄 Loading DeFi Protocol v3.0...
+
+================================================================================
+                            DEFI PROTOCOL STATISTICS
+================================================================================
+Total tests: 20
+Extrapolation tests: 6
+Domains: 6
+Difficulty: Easy: 7 | Medium: 8 | Hard: 5
+================================================================================
+
+📥 Converting DeFi Protocol to test cases...
+   Domains: amm, risk_var, liquidity, expected_shortfall, liquidation, staking
+✅ Converted 23 test cases from protocol
+
+🚀 Extrapolation tests (6):
+   - amm_impermanent_loss
+   - risk_var_var_95
+   - liquidity_kelly_criterion
+   - expected_shortfall_es_95
+   - liquidation_liquidation_long
+   - staking_compound_staking
+
+🎯 Running single test: amm_impermanent_loss
+
+================================================================================
+Running: Impermanent Loss | Domain: amm
+================================================================================
+Difficulty: hard
+🚀 EXTRAPOLATION TEST
+✅ Integrated LLM Discovery initialized (DeFi)
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY - DEFI v1.0
+================================================================================
+Domain: amm
+Variables: price_ratio
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 17:03:55,065 - INFO - ======================================================================
+2026-01-14 17:03:55,066 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 17:03:55,066 - INFO - ======================================================================
+2026-01-14 17:03:55,066 - INFO - Domain: amm
+2026-01-14 17:03:55,066 - INFO - Discovery mode: calibrated
+2026-01-14 17:03:55,066 - INFO - Primary LLM: anthropic
+2026-01-14 17:03:55,067 - INFO - Auto-config: True
+2026-01-14 17:03:55,067 - INFO - Max retries: 3
+2026-01-14 17:03:55,067 - INFO - PhysicsAware fallback: False
+2026-01-14 17:03:55,067 - INFO - Complexity threshold: 20
+2026-01-14 17:03:55,067 - INFO - ======================================================================
+2026-01-14 17:03:55,067 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 17:04:01,879 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Impermanent Loss
+Domain: AMM
+Samples: 1000
+Variables: ['price_ratio']
+Equation hint: Impermanent Loss
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 17:04:01,880 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 17:04:11,236 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: -0.1 * (price_ratio - 1)**2 / price_ratio
+   LLM R²: 0.9704
+   LLM time: 9.45s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 17:04:11,343 - INFO -    Result: -0.1 * (price_ratio - 1)**2 / price_ratio
+2026-01-14 17:04:11,343 - INFO -    R² = 0.9704
+2026-01-14 17:04:11,344 - WARNING -    [WARNING] Possible overfit
+2026-01-14 17:04:11,344 - WARNING -       High complexity (41) but R²=0.9704
+2026-01-14 17:04:11,345 - INFO -    [BEST] New best!
+2026-01-14 17:04:11,345 - INFO -
+[SYMBOLIC] Attempt 2/3 (seed=43)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 17:04:23,437 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: -(1 - 2 * price_ratio**0.5 / (price_ratio + 1))
+   LLM R²: 1.0000
+   LLM time: 12.10s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 17:04:23,451 - INFO -    Result: -(1 - 2 * price_ratio**0.5 / (price_ratio + 1))
+2026-01-14 17:04:23,452 - INFO -    R² = 1.0000
+2026-01-14 17:04:23,452 - INFO -    [BEST] New best!
+2026-01-14 17:04:23,452 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: -(1 - 2 * price_ratio**0.5 / (price_ratio + 1))
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 2/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: -(1 - 2 * price_ratio**0.5 / (price_ratio + 1))
+   R² Score: 1.0000
+   Validation: 91.0/100
+   Total time: 29.24s
+   LLM Mode: hybrid_llm_only
+
+✅ Test passed!
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$
+(emacs:4807): GLib-CRITICAL **: 17:10:05.838: Source ID 23915 was not found when attempting to remove it
+
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ mc
+
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/hybrid_llm_guide_validation/llm_guided_symbolic_discovery_v12.py --protocol ALL --batch --mode hybrid --niterations 50
+✅ Using integrated SymbolicEngineWithLLM v20
+✅ Loaded Protocol ALL from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/core/generation/hybrid_llm_guide_validation/experiment_protocol_all_30.py
+✅ Converted 30 test cases from protocol
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1 - Protocol ALL
+================================================================================
+Tests: 30
+Mode: hybrid
+Iterations: 50
+Running: 30/30 tests
+
+================================================================================
+TEST 1/30: mechanics_kinetic_energy
+================================================================================
+
+================================================================================
+Running: Kinetic Energy | Domain: mechanics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: mechanics
+Variables: m, v
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:39:40,290 - INFO - ======================================================================
+2026-01-14 18:39:40,291 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:39:40,291 - INFO - ======================================================================
+2026-01-14 18:39:40,291 - INFO - Domain: mechanics
+2026-01-14 18:39:40,291 - INFO - Discovery mode: calibrated
+2026-01-14 18:39:40,292 - INFO - Primary LLM: anthropic
+2026-01-14 18:39:40,292 - INFO - Auto-config: True
+2026-01-14 18:39:40,292 - INFO - Max retries: 3
+2026-01-14 18:39:40,292 - INFO - PhysicsAware fallback: False
+2026-01-14 18:39:40,292 - INFO - Complexity threshold: 20
+2026-01-14 18:39:40,293 - INFO - ======================================================================
+2026-01-14 18:39:40,293 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:39:56,094 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Kinetic Energy
+Domain: MECHANICS
+Samples: 1000
+Variables: ['m', 'v']
+Equation hint: Kinetic Energy
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:39:56,095 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:40:03,038 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 0.5 * m * v**2
+   LLM R²: 1.0000
+   LLM time: 6.99s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:40:03,097 - INFO -    Result: 0.5 * m * v**2
+2026-01-14 18:40:03,098 - INFO -    R² = 1.0000
+2026-01-14 18:40:03,099 - INFO -    [BEST] New best!
+2026-01-14 18:40:03,099 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: 0.5 * m * v**2
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: 0.5 * m * v**2
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 24.35s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: mechanics_kinetic_energy.json
+
+================================================================================
+TEST 2/30: mechanics_gravitational_potential_energy
+================================================================================
+
+================================================================================
+Running: Gravitational Potential Energy | Domain: mechanics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: mechanics
+Variables: m, g, h
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:40:04,507 - INFO - ======================================================================
+2026-01-14 18:40:04,508 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:40:04,508 - INFO - ======================================================================
+2026-01-14 18:40:04,508 - INFO - Domain: mechanics
+2026-01-14 18:40:04,508 - INFO - Discovery mode: calibrated
+2026-01-14 18:40:04,509 - INFO - Primary LLM: anthropic
+2026-01-14 18:40:04,509 - INFO - Auto-config: True
+2026-01-14 18:40:04,509 - INFO - Max retries: 3
+2026-01-14 18:40:04,509 - INFO - PhysicsAware fallback: False
+2026-01-14 18:40:04,509 - INFO - Complexity threshold: 20
+2026-01-14 18:40:04,510 - INFO - ======================================================================
+2026-01-14 18:40:04,510 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:40:05,607 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Gravitational Potential Energy
+Domain: MECHANICS
+Samples: 1000
+Variables: ['m', 'g', 'h']
+Equation hint: Gravitational Potential Energy
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:40:05,608 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:42:03,352 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: m * g * h
+   LLM R²: 1.0000
+   LLM time: 117.75s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:42:03,365 - INFO -    Result: m * g * h
+2026-01-14 18:42:03,365 - INFO -    R² = 1.0000
+2026-01-14 18:42:03,366 - INFO -    [BEST] New best!
+2026-01-14 18:42:03,366 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: m * g * h
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: m * g * h
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 118.94s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: mechanics_gravitational_potential_energy.json
+
+================================================================================
+TEST 3/30: mechanics_hookes_law
+================================================================================
+
+================================================================================
+Running: Hookes Law | Domain: mechanics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: mechanics
+Variables: k, x
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:42:03,470 - INFO - ======================================================================
+2026-01-14 18:42:03,471 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:42:03,471 - INFO - ======================================================================
+2026-01-14 18:42:03,471 - INFO - Domain: mechanics
+2026-01-14 18:42:03,471 - INFO - Discovery mode: calibrated
+2026-01-14 18:42:03,472 - INFO - Primary LLM: anthropic
+2026-01-14 18:42:03,472 - INFO - Auto-config: True
+2026-01-14 18:42:03,472 - INFO - Max retries: 3
+2026-01-14 18:42:03,473 - INFO - PhysicsAware fallback: False
+2026-01-14 18:42:03,473 - INFO - Complexity threshold: 20
+2026-01-14 18:42:03,473 - INFO - ======================================================================
+2026-01-14 18:42:03,473 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:42:04,412 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Hookes Law
+Domain: MECHANICS
+Samples: 1000
+Variables: ['k', 'x']
+Equation hint: Hookes Law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:42:04,412 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:42:12,611 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 0.5 * k * x**2
+   LLM R²: 0.7897
+   LLM time: 8.20s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: k, x
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: (((k / (((x * x) * -0.06806514) + -0.30106127)) - (k * -3.7038572)) - (-1.064375 / ((-2.8743856 / k) + ((x / -1.6487162) * x)))) + 1.3760628
+   R²: 0.9997
+   PySR time: 350.02s
+   PySR R²: 0.9997
+   ✅ PySR refinement improved result
+2026-01-14 18:48:02,641 - INFO -    Result: (((k / (((x * x) * -0.06806514) + -0.30106127)) - (k * -3.7038572)) - (-1.064375 / ((-2.8743856 / k) + ((x / -1.6487162) * x)))) + 1.3760628
+2026-01-14 18:48:02,641 - INFO -    R² = 0.9997
+2026-01-14 18:48:02,641 - INFO -    [BEST] New best!
+2026-01-14 18:48:02,642 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (((k / (((x * x) * -0.06806514) + -0.30106127)) - (k * -3.7038572)) - (-1.064375 / ((-2.8743856 / k) + ((x / -1.6487162) * x)))) + 1.3760628
+   R² Score: 0.9997
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 12.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: False
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+⚠  BELOW THRESHOLD
+   Expression: (((k / (((x * x) * -0.06806514) + -0.30106127)) - (k * -3.7038572)) - (-1.064375 / ((-2.8743856 / k) + ((x / -1.6487162) * x)))) + 1.3760628
+   R² Score: 0.9997
+   Validation: 12.1/100
+   Total time: 360.30s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: mechanics_hookes_law.json
+
+================================================================================
+TEST 4/30: thermodynamics_ideal_gas_law
+================================================================================
+
+================================================================================
+Running: Ideal Gas Law | Domain: thermodynamics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: thermodynamics
+Variables: n, R, T, V
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:48:04,181 - INFO - ======================================================================
+2026-01-14 18:48:04,181 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:48:04,181 - INFO - ======================================================================
+2026-01-14 18:48:04,181 - INFO - Domain: thermodynamics
+2026-01-14 18:48:04,181 - INFO - Discovery mode: calibrated
+2026-01-14 18:48:04,182 - INFO - Primary LLM: anthropic
+2026-01-14 18:48:04,182 - INFO - Auto-config: True
+2026-01-14 18:48:04,182 - INFO - Max retries: 3
+2026-01-14 18:48:04,182 - INFO - PhysicsAware fallback: False
+2026-01-14 18:48:04,182 - INFO - Complexity threshold: 20
+2026-01-14 18:48:04,182 - INFO - ======================================================================
+2026-01-14 18:48:04,183 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:48:06,341 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Ideal Gas Law
+Domain: THERMODYNAMICS
+Samples: 1000
+Variables: ['n', 'R', 'T', 'V']
+Equation hint: Ideal Gas Law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:48:06,342 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:48:13,785 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: n * R * T / V
+   LLM R²: 1.0000
+   LLM time: 7.53s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:48:13,889 - INFO -    Result: n * R * T / V
+2026-01-14 18:48:13,889 - INFO -    R² = 1.0000
+2026-01-14 18:48:13,889 - INFO -    [BEST] New best!
+2026-01-14 18:48:13,890 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: n * R * T / V
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: n * R * T / V
+   R² Score: 1.0000
+   Validation: 91.0/100
+   Total time: 10.02s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: thermodynamics_ideal_gas_law.json
+
+================================================================================
+TEST 5/30: thermodynamics_heat_capacity
+================================================================================
+
+================================================================================
+Running: Heat Capacity | Domain: thermodynamics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: thermodynamics
+Variables: m, c, dT
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:48:14,048 - INFO - ======================================================================
+2026-01-14 18:48:14,048 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:48:14,048 - INFO - ======================================================================
+2026-01-14 18:48:14,049 - INFO - Domain: thermodynamics
+2026-01-14 18:48:14,049 - INFO - Discovery mode: calibrated
+2026-01-14 18:48:14,049 - INFO - Primary LLM: anthropic
+2026-01-14 18:48:14,049 - INFO - Auto-config: True
+2026-01-14 18:48:14,050 - INFO - Max retries: 3
+2026-01-14 18:48:14,050 - INFO - PhysicsAware fallback: False
+2026-01-14 18:48:14,050 - INFO - Complexity threshold: 20
+2026-01-14 18:48:14,051 - INFO - ======================================================================
+2026-01-14 18:48:14,051 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:48:15,061 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Heat Capacity
+Domain: THERMODYNAMICS
+Samples: 1000
+Variables: ['m', 'c', 'dT']
+Equation hint: Heat Capacity
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:48:15,062 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:48:21,872 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: m * c * dT
+   LLM R²: 1.0000
+   LLM time: 6.82s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:48:21,904 - INFO -    Result: m * c * dT
+2026-01-14 18:48:21,905 - INFO -    R² = 1.0000
+2026-01-14 18:48:21,905 - INFO -    [BEST] New best!
+2026-01-14 18:48:21,905 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: m * c * dT
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: m * c * dT
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 7.98s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: thermodynamics_heat_capacity.json
+
+================================================================================
+TEST 6/30: thermodynamics_carnot_efficiency
+================================================================================
+
+================================================================================
+Running: Carnot Efficiency | Domain: thermodynamics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: thermodynamics
+Variables: Tc, Th
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:48:22,089 - INFO - ======================================================================
+2026-01-14 18:48:22,089 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:48:22,089 - INFO - ======================================================================
+2026-01-14 18:48:22,089 - INFO - Domain: thermodynamics
+2026-01-14 18:48:22,089 - INFO - Discovery mode: calibrated
+2026-01-14 18:48:22,090 - INFO - Primary LLM: anthropic
+2026-01-14 18:48:22,090 - INFO - Auto-config: True
+2026-01-14 18:48:22,090 - INFO - Max retries: 3
+2026-01-14 18:48:22,090 - INFO - PhysicsAware fallback: False
+2026-01-14 18:48:22,090 - INFO - Complexity threshold: 20
+2026-01-14 18:48:22,092 - INFO - ======================================================================
+2026-01-14 18:48:22,092 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:48:23,979 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Carnot Efficiency
+Domain: THERMODYNAMICS
+Samples: 1000
+Variables: ['Tc', 'Th']
+Equation hint: Carnot Efficiency
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:48:23,983 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:48:31,197 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: 1 - Tc/Th
+   LLM R²: 1.0000
+   LLM time: 7.22s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:48:31,214 - INFO -    Result: 1 - Tc/Th
+2026-01-14 18:48:31,214 - INFO -    R² = 1.0000
+2026-01-14 18:48:31,214 - INFO -    [BEST] New best!
+2026-01-14 18:48:31,215 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: 1 - Tc/Th
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 98.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: 1 - Tc/Th
+   R² Score: 1.0000
+   Validation: 98.5/100
+   Total time: 9.30s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: thermodynamics_carnot_efficiency.json
+
+================================================================================
+TEST 7/30: electromagnetism_coulomb_law
+================================================================================
+
+================================================================================
+Running: Coulomb Law | Domain: electromagnetism
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: electromagnetism
+Variables: k, q1, q2, r
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:48:31,379 - INFO - ======================================================================
+2026-01-14 18:48:31,379 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:48:31,379 - INFO - ======================================================================
+2026-01-14 18:48:31,379 - INFO - Domain: electromagnetism
+2026-01-14 18:48:31,380 - INFO - Discovery mode: calibrated
+2026-01-14 18:48:31,380 - INFO - Primary LLM: anthropic
+2026-01-14 18:48:31,380 - INFO - Auto-config: True
+2026-01-14 18:48:31,380 - INFO - Max retries: 3
+2026-01-14 18:48:31,381 - INFO - PhysicsAware fallback: False
+2026-01-14 18:48:31,381 - INFO - Complexity threshold: 20
+2026-01-14 18:48:31,381 - INFO - ======================================================================
+2026-01-14 18:48:31,381 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:48:32,384 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Coulomb Law
+Domain: ELECTROMAGNETISM
+Samples: 1000
+Variables: ['k', 'q1', 'q2', 'r']
+Equation hint: Coulomb Law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:48:32,385 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+2026-01-14 18:48:39,804 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: k * q1 * q2 / r**2
+   LLM R²: 1.0000
+   LLM time: 7.42s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:48:39,818 - INFO -    Result: k * q1 * q2 / r**2
+2026-01-14 18:48:39,819 - INFO -    R² = 1.0000
+2026-01-14 18:48:39,819 - INFO -    [BEST] New best!
+2026-01-14 18:48:39,820 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: k * q1 * q2 / r**2
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: k * q1 * q2 / r**2
+   R² Score: 1.0000
+   Validation: 91.3/100
+   Total time: 8.54s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: electromagnetism_coulomb_law.json
+
+================================================================================
+TEST 8/30: electromagnetism_ohms_law
+================================================================================
+
+================================================================================
+Running: Ohms Law | Domain: electromagnetism
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: electromagnetism
+Variables: I, R
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:48:39,931 - INFO - ======================================================================
+2026-01-14 18:48:39,931 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:48:39,931 - INFO - ======================================================================
+2026-01-14 18:48:39,931 - INFO - Domain: electromagnetism
+2026-01-14 18:48:39,932 - INFO - Discovery mode: calibrated
+2026-01-14 18:48:39,932 - INFO - Primary LLM: anthropic
+2026-01-14 18:48:39,933 - INFO - Auto-config: True
+2026-01-14 18:48:39,933 - INFO - Max retries: 3
+2026-01-14 18:48:39,933 - INFO - PhysicsAware fallback: False
+2026-01-14 18:48:39,933 - INFO - Complexity threshold: 20
+2026-01-14 18:48:39,934 - INFO - ======================================================================
+2026-01-14 18:48:39,934 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:48:40,884 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Ohms Law
+Domain: ELECTROMAGNETISM
+Samples: 1000
+Variables: ['I', 'R']
+Equation hint: Ohms Law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:48:40,885 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:48:46,487 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: I * R
+   LLM R²: 1.0000
+   LLM time: 5.61s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:48:46,535 - INFO -    Result: I * R
+2026-01-14 18:48:46,535 - INFO -    R² = 1.0000
+2026-01-14 18:48:46,535 - INFO -    [BEST] New best!
+2026-01-14 18:48:46,535 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: I * R
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: I * R
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 6.75s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: electromagnetism_ohms_law.json
+
+================================================================================
+TEST 9/30: electromagnetism_lorentz_force
+================================================================================
+
+================================================================================
+Running: Lorentz Force | Domain: electromagnetism
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: electromagnetism
+Variables: q, v, B
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:48:46,755 - INFO - ======================================================================
+2026-01-14 18:48:46,756 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:48:46,757 - INFO - ======================================================================
+2026-01-14 18:48:46,758 - INFO - Domain: electromagnetism
+2026-01-14 18:48:46,759 - INFO - Discovery mode: calibrated
+2026-01-14 18:48:46,760 - INFO - Primary LLM: anthropic
+2026-01-14 18:48:46,761 - INFO - Auto-config: True
+2026-01-14 18:48:46,762 - INFO - Max retries: 3
+2026-01-14 18:48:46,763 - INFO - PhysicsAware fallback: False
+2026-01-14 18:48:46,763 - INFO - Complexity threshold: 20
+2026-01-14 18:48:46,764 - INFO - ======================================================================
+2026-01-14 18:48:46,765 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:48:47,848 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Lorentz Force
+Domain: ELECTROMAGNETISM
+Samples: 1000
+Variables: ['q', 'v', 'B']
+Equation hint: Lorentz Force
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:48:47,849 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:48:54,145 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: q * v * B
+   LLM R²: 1.0000
+   LLM time: 6.30s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:48:54,158 - INFO -    Result: q * v * B
+2026-01-14 18:48:54,158 - INFO -    R² = 1.0000
+2026-01-14 18:48:54,159 - INFO -    [BEST] New best!
+2026-01-14 18:48:54,159 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: q * v * B
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: q * v * B
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 7.54s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: electromagnetism_lorentz_force.json
+
+================================================================================
+TEST 10/30: fluid_dynamics_bernoulli_equation
+================================================================================
+
+================================================================================
+Running: Bernoulli Equation | Domain: fluid_dynamics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: fluid_dynamics
+Variables: P, rho, v, g, h
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:48:54,273 - INFO - ======================================================================
+2026-01-14 18:48:54,274 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:48:54,275 - INFO - ======================================================================
+2026-01-14 18:48:54,275 - INFO - Domain: fluid_dynamics
+2026-01-14 18:48:54,276 - INFO - Discovery mode: calibrated
+2026-01-14 18:48:54,276 - INFO - Primary LLM: anthropic
+2026-01-14 18:48:54,277 - INFO - Auto-config: True
+2026-01-14 18:48:54,277 - INFO - Max retries: 3
+2026-01-14 18:48:54,278 - INFO - PhysicsAware fallback: False
+2026-01-14 18:48:54,278 - INFO - Complexity threshold: 20
+2026-01-14 18:48:54,279 - INFO - ======================================================================
+2026-01-14 18:48:54,279 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:48:55,205 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Bernoulli Equation
+Domain: FLUID_DYNAMICS
+Samples: 1000
+Variables: ['P', 'rho', 'v', 'g', 'h']
+Equation hint: Bernoulli Equation
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:48:55,206 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:49:02,507 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: P + 0.5 * rho * v**2 + rho * g * h
+   LLM R²: 1.0000
+   LLM time: 7.30s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:49:02,521 - INFO -    Result: P + 0.5 * rho * v**2 + rho * g * h
+2026-01-14 18:49:02,521 - INFO -    R² = 1.0000
+2026-01-14 18:49:02,521 - INFO -    [BEST] New best!
+2026-01-14 18:49:02,522 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: P + 0.5 * rho * v**2 + rho * g * h
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: P + 0.5 * rho * v**2 + rho * g * h
+   R² Score: 1.0000
+   Validation: 91.3/100
+   Total time: 8.47s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: fluid_dynamics_bernoulli_equation.json
+
+================================================================================
+TEST 11/30: fluid_dynamics_reynolds_number
+================================================================================
+
+================================================================================
+Running: Reynolds Number | Domain: fluid_dynamics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: fluid_dynamics
+Variables: rho, v, L, mu
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:49:02,750 - INFO - ======================================================================
+2026-01-14 18:49:02,750 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:49:02,750 - INFO - ======================================================================
+2026-01-14 18:49:02,750 - INFO - Domain: fluid_dynamics
+2026-01-14 18:49:02,751 - INFO - Discovery mode: calibrated
+2026-01-14 18:49:02,751 - INFO - Primary LLM: anthropic
+2026-01-14 18:49:02,751 - INFO - Auto-config: True
+2026-01-14 18:49:02,751 - INFO - Max retries: 3
+2026-01-14 18:49:02,751 - INFO - PhysicsAware fallback: False
+2026-01-14 18:49:02,752 - INFO - Complexity threshold: 20
+2026-01-14 18:49:02,752 - INFO - ======================================================================
+2026-01-14 18:49:02,752 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:49:03,691 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Reynolds Number
+Domain: FLUID_DYNAMICS
+Samples: 1000
+Variables: ['rho', 'v', 'L', 'mu']
+Equation hint: Reynolds Number
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:49:03,692 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:49:10,901 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: rho * v * L / mu
+   LLM R²: 1.0000
+   LLM time: 7.21s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:49:10,914 - INFO -    Result: rho * v * L / mu
+2026-01-14 18:49:10,914 - INFO -    R² = 1.0000
+2026-01-14 18:49:10,915 - INFO -    [BEST] New best!
+2026-01-14 18:49:10,915 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: rho * v * L / mu
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: rho * v * L / mu
+   R² Score: 1.0000
+   Validation: 91.0/100
+   Total time: 8.25s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: fluid_dynamics_reynolds_number.json
+
+================================================================================
+TEST 12/30: fluid_dynamics_hagen_poiseuille
+================================================================================
+
+================================================================================
+Running: Hagen Poiseuille | Domain: fluid_dynamics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: fluid_dynamics
+Variables: dP, r, mu, L
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:49:11,017 - INFO - ======================================================================
+2026-01-14 18:49:11,017 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:49:11,017 - INFO - ======================================================================
+2026-01-14 18:49:11,017 - INFO - Domain: fluid_dynamics
+2026-01-14 18:49:11,018 - INFO - Discovery mode: calibrated
+2026-01-14 18:49:11,018 - INFO - Primary LLM: anthropic
+2026-01-14 18:49:11,018 - INFO - Auto-config: True
+2026-01-14 18:49:11,018 - INFO - Max retries: 3
+2026-01-14 18:49:11,019 - INFO - PhysicsAware fallback: False
+2026-01-14 18:49:11,019 - INFO - Complexity threshold: 20
+2026-01-14 18:49:11,019 - INFO - ======================================================================
+2026-01-14 18:49:11,019 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:49:11,961 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Hagen Poiseuille
+Domain: FLUID_DYNAMICS
+Samples: 1000
+Variables: ['dP', 'r', 'mu', 'L']
+Equation hint: Hagen Poiseuille
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:49:11,962 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:49:20,202 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: (3.14159 * dP * r**4) / (8 * mu * L)
+   LLM R²: 1.0000
+   LLM time: 8.24s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:49:20,216 - INFO -    Result: (3.14159 * dP * r**4) / (8 * mu * L)
+2026-01-14 18:49:20,217 - INFO -    R² = 1.0000
+2026-01-14 18:49:20,217 - INFO -    [BEST] New best!
+2026-01-14 18:49:20,217 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (3.14159 * dP * r**4) / (8 * mu * L)
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 89.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: (3.14159 * dP * r**4) / (8 * mu * L)
+   R² Score: 1.0000
+   Validation: 89.5/100
+   Total time: 9.44s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: fluid_dynamics_hagen_poiseuille.json
+
+================================================================================
+TEST 13/30: optics_thin_lens_equation
+================================================================================
+
+================================================================================
+Running: Thin Lens Equation | Domain: optics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: optics
+Variables: do, di
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:49:20,474 - INFO - ======================================================================
+2026-01-14 18:49:20,474 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:49:20,475 - INFO - ======================================================================
+2026-01-14 18:49:20,475 - INFO - Domain: optics
+2026-01-14 18:49:20,475 - INFO - Discovery mode: calibrated
+2026-01-14 18:49:20,475 - INFO - Primary LLM: anthropic
+2026-01-14 18:49:20,476 - INFO - Auto-config: True
+2026-01-14 18:49:20,476 - INFO - Max retries: 3
+2026-01-14 18:49:20,476 - INFO - PhysicsAware fallback: False
+2026-01-14 18:49:20,476 - INFO - Complexity threshold: 20
+2026-01-14 18:49:20,476 - INFO - ======================================================================
+2026-01-14 18:49:20,477 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:49:21,399 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Thin Lens Equation
+Domain: OPTICS
+Samples: 1000
+Variables: ['do', 'di']
+Equation hint: Thin Lens Equation
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:49:21,399 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:49:28,769 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: (do * di)**0.5 / (do + di)**0.5
+   LLM R²: -0.9473
+   LLM time: 7.37s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: do, di
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: (1.0 / do) - ((1.0510925 / di) * -0.95139104)
+   R²: 1.0000
+   PySR time: 206.10s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-14 18:52:54,887 - INFO -    Result: (1.0 / do) - ((1.0510925 / di) * -0.95139104)
+2026-01-14 18:52:54,887 - INFO -    R² = 1.0000
+2026-01-14 18:52:54,888 - INFO -    [BEST] New best!
+2026-01-14 18:52:54,888 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (1.0 / do) - ((1.0510925 / di) * -0.95139104)
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 90.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: (1.0 / do) - ((1.0510925 / di) * -0.95139104)
+   R² Score: 1.0000
+   Validation: 90.4/100
+   Total time: 214.61s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: optics_thin_lens_equation.json
+
+================================================================================
+TEST 14/30: optics_snells_law
+================================================================================
+
+================================================================================
+Running: Snells Law | Domain: optics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: optics
+Variables: n1, sin_theta1
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:52:55,094 - INFO - ======================================================================
+2026-01-14 18:52:55,095 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:52:55,095 - INFO - ======================================================================
+2026-01-14 18:52:55,095 - INFO - Domain: optics
+2026-01-14 18:52:55,095 - INFO - Discovery mode: calibrated
+2026-01-14 18:52:55,096 - INFO - Primary LLM: anthropic
+2026-01-14 18:52:55,096 - INFO - Auto-config: True
+2026-01-14 18:52:55,096 - INFO - Max retries: 3
+2026-01-14 18:52:55,096 - INFO - PhysicsAware fallback: False
+2026-01-14 18:52:55,096 - INFO - Complexity threshold: 20
+2026-01-14 18:52:55,097 - INFO - ======================================================================
+2026-01-14 18:52:55,097 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:52:56,369 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Snells Law
+Domain: OPTICS
+Samples: 1000
+Variables: ['n1', 'sin_theta1']
+Equation hint: Snells Law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:52:56,370 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:53:03,029 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: n1 * sin_theta1
+   LLM R²: 1.0000
+   LLM time: 6.66s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:53:03,042 - INFO -    Result: n1 * sin_theta1
+2026-01-14 18:53:03,042 - INFO -    R² = 1.0000
+2026-01-14 18:53:03,042 - INFO -    [BEST] New best!
+2026-01-14 18:53:03,043 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: n1 * sin_theta1
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: n1 * sin_theta1
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 8.02s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: optics_snells_law.json
+
+================================================================================
+TEST 15/30: optics_single_slit_diffraction
+================================================================================
+
+================================================================================
+Running: Single Slit Diffraction | Domain: optics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: optics
+Variables: wavelength, a
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:53:03,125 - INFO - ======================================================================
+2026-01-14 18:53:03,125 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:53:03,126 - INFO - ======================================================================
+2026-01-14 18:53:03,126 - INFO - Domain: optics
+2026-01-14 18:53:03,126 - INFO - Discovery mode: calibrated
+2026-01-14 18:53:03,126 - INFO - Primary LLM: anthropic
+2026-01-14 18:53:03,126 - INFO - Auto-config: True
+2026-01-14 18:53:03,127 - INFO - Max retries: 3
+2026-01-14 18:53:03,127 - INFO - PhysicsAware fallback: False
+2026-01-14 18:53:03,127 - INFO - Complexity threshold: 20
+2026-01-14 18:53:03,127 - INFO - ======================================================================
+2026-01-14 18:53:03,128 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:53:04,064 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Single Slit Diffraction
+Domain: OPTICS
+Samples: 1000
+Variables: ['wavelength', 'a']
+Equation hint: Single Slit Diffraction
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:53:04,065 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:53:11,148 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: wavelength / a
+   LLM R²: 1.0000
+   LLM time: 7.09s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 18:53:11,161 - INFO -    Result: wavelength / a
+2026-01-14 18:53:11,162 - INFO -    R² = 1.0000
+2026-01-14 18:53:11,162 - INFO -    [BEST] New best!
+2026-01-14 18:53:11,162 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: wavelength / a
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: wavelength / a
+   R² Score: 1.0000
+   Validation: 99.1/100
+   Total time: 8.11s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: optics_single_slit_diffraction.json
+
+================================================================================
+TEST 16/30: quantum_photon_energy
+================================================================================
+
+================================================================================
+Running: Photon Energy | Domain: quantum
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: quantum
+Variables: h, f
+Samples: 1000
+Mode: hybrid
+
+🔬 Applying improved quantum scaling...
+
+[QUANTUM SCALING v2]
+   h: constant 4.14e-15 → 1.00e-01
+   f: [4.02e+14, 7.50e+14] → [0.10, 100.00]
+   y: [1.66e+00, 3.10e+00] → [0.10, 100.00]
+   ⚠  Warning: h has low variance: 1.39e-17
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:53:11,253 - INFO - ======================================================================
+2026-01-14 18:53:11,253 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:53:11,254 - INFO - ======================================================================
+2026-01-14 18:53:11,254 - INFO - Domain: quantum
+2026-01-14 18:53:11,254 - INFO - Discovery mode: calibrated
+2026-01-14 18:53:11,254 - INFO - Primary LLM: anthropic
+2026-01-14 18:53:11,255 - INFO - Auto-config: True
+2026-01-14 18:53:11,255 - INFO - Max retries: 3
+2026-01-14 18:53:11,255 - INFO - PhysicsAware fallback: False
+2026-01-14 18:53:11,255 - INFO - Complexity threshold: 20
+2026-01-14 18:53:11,255 - INFO - ======================================================================
+2026-01-14 18:53:11,256 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:53:12,277 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Photon Energy
+Domain: QUANTUM
+Samples: 1000
+Variables: ['h', 'f']
+Equation hint: Photon Energy
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:53:12,277 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:53:19,796 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: h * f
+   LLM R²: -2.0597
+   LLM time: 7.52s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: h, f
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+../../../../modules/im/ximcp/imDefLkup.c,355: The key event is already fabricated.
+../../../../modules/im/ximcp/imDefLkup.c,355: The key event is already fabricated.
+../../../../modules/im/ximcp/imDefLkup.c,359: Tried to fabricate a wrong key event.
+../../../../modules/im/ximcp/imDefLkup.c,359: Tried to fabricate a wrong key event.
+../../../../modules/im/ximcp/imDefLkup.c,355: The key event is already fabricated.
+../../../../modules/im/ximcp/imDefLkup.c,355: The key event is already fabricated.
+../../../../modules/im/ximcp/imDefLkup.c,355: The key event is already fabricated.
+../../../../modules/im/ximcp/imDefLkup.c,355: The key event is already fabricated.
+../../../../modules/im/ximcp/imDefLkup.c,355: The key event is already fabricated.
+../../../../modules/im/ximcp/imDefLkup.c,359: Tried to fabricate a wrong key event.
+   ✅ Found: f
+   R²: 1.0000
+   PySR time: 160.52s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-14 18:56:00,328 - INFO -    Result: f
+2026-01-14 18:56:00,328 - INFO -    R² = 1.0000
+2026-01-14 18:56:00,328 - INFO -    [BEST] New best!
+2026-01-14 18:56:00,328 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: f
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: f
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 169.12s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: quantum_photon_energy.json
+
+================================================================================
+TEST 17/30: quantum_de_broglie_wavelength
+================================================================================
+
+================================================================================
+Running: De Broglie Wavelength | Domain: quantum
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: quantum
+Variables: h, m, v
+Samples: 1000
+Mode: hybrid
+
+🔬 Applying improved quantum scaling...
+
+[QUANTUM SCALING v2]
+   h: constant 1.00e+00 → 1.00e-01
+   m: constant 1.00e+00 → 1.00e-01
+   v: [1.32e+02, 9.99e+03] → [0.10, 100.00]
+   y: [1.00e-04, 7.58e-03] → [0.10, 100.00]
+   ⚠  Warning: h has low variance: 1.39e-17
+   ⚠  Warning: m has low variance: 1.39e-17
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:56:00,385 - INFO - ======================================================================
+2026-01-14 18:56:00,385 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:56:00,386 - INFO - ======================================================================
+2026-01-14 18:56:00,386 - INFO - Domain: quantum
+2026-01-14 18:56:00,386 - INFO - Discovery mode: calibrated
+2026-01-14 18:56:00,386 - INFO - Primary LLM: anthropic
+2026-01-14 18:56:00,387 - INFO - Auto-config: True
+2026-01-14 18:56:00,387 - INFO - Max retries: 3
+2026-01-14 18:56:00,387 - INFO - PhysicsAware fallback: False
+2026-01-14 18:56:00,387 - INFO - Complexity threshold: 20
+2026-01-14 18:56:00,388 - INFO - ======================================================================
+2026-01-14 18:56:00,388 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:56:01,353 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: De Broglie Wavelength
+Domain: QUANTUM
+Samples: 1000
+Variables: ['h', 'm', 'v']
+Equation hint: De Broglie Wavelength
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:56:01,354 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:56:09,150 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: h / (m * v**2)
+   LLM R²: -0.0433
+   LLM time: 7.80s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: h, m, v
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+../../../../modules/im/ximcp/imDefLkup.c,419: The application disposed a key event with 2255444 serial.
+   ✅ Found: ((((23.367804 / ((v + (((m + m) + 13.504067) / 11.090331)) / 5.787419)) + (m + m)) + -1.2378498) - (m - (-0.009802008 / m))) * 0.999844
+   R²: 1.0000
+   PySR time: 192.94s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-14 18:59:22,102 - INFO -    Result: ((((23.367804 / ((v + (((m + m) + 13.504067) / 11.090331)) / 5.787419)) + (m + m)) + -1.2378498) - (m - (-0.009802008 / m))) * 0.999844
+2026-01-14 18:59:22,103 - INFO -    R² = 1.0000
+2026-01-14 18:59:22,103 - INFO -    [BEST] New best!
+2026-01-14 18:59:22,103 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: ((((23.367804 / ((v + (((m + m) + 13.504067) / 11.090331)) / 5.787419)) + (m + m)) + -1.2378498) - (m - (-0.009802008 / m))) * 0.999844
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 85.6/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: ((((23.367804 / ((v + (((m + m) + 13.504067) / 11.090331)) / 5.787419)) + (m + m)) + -1.2378498) - (m - (-0.009802008 / m))) * 0.999844
+   R² Score: 1.0000
+   Validation: 85.6/100
+   Total time: 202.43s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: quantum_de_broglie_wavelength.json
+
+================================================================================
+TEST 18/30: quantum_compton_shift
+================================================================================
+
+================================================================================
+Running: Compton Shift | Domain: quantum
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: quantum
+Variables: h, me, c, cos_theta
+Samples: 1000
+Mode: hybrid
+
+🔬 Applying improved quantum scaling...
+
+[QUANTUM SCALING v2]
+   h: constant 6.63e-34 → 1.00e-01
+   me: constant 9.11e-31 → 1.00e-01
+   c: constant 3.00e+08 → 1.00e-01
+   cos_theta: [-1.00e+00, 9.96e-01] → [0.10, 100.00]
+   y: [1.06e-14, 4.85e-12] → [0.10, 100.00]
+   ⚠  Warning: h has low variance: 1.39e-17
+   ⚠  Warning: me has low variance: 1.39e-17
+   ⚠  Warning: c has low variance: 1.39e-17
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 18:59:22,837 - INFO - ======================================================================
+2026-01-14 18:59:22,838 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 18:59:22,838 - INFO - ======================================================================
+2026-01-14 18:59:22,838 - INFO - Domain: quantum
+2026-01-14 18:59:22,838 - INFO - Discovery mode: calibrated
+2026-01-14 18:59:22,838 - INFO - Primary LLM: anthropic
+2026-01-14 18:59:22,839 - INFO - Auto-config: True
+2026-01-14 18:59:22,839 - INFO - Max retries: 3
+2026-01-14 18:59:22,839 - INFO - PhysicsAware fallback: False
+2026-01-14 18:59:22,839 - INFO - Complexity threshold: 20
+2026-01-14 18:59:22,840 - INFO - ======================================================================
+2026-01-14 18:59:22,840 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 18:59:23,798 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Compton Shift
+Domain: QUANTUM
+Samples: 1000
+Variables: ['h', 'me', 'c', 'cos_theta']
+Equation hint: Compton Shift
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 18:59:23,799 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 18:59:30,615 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: (h / (me * c)) * (1 - cos_theta)
+   LLM R²: -429.3777
+   LLM time: 6.82s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: h, me, c, cos_theta
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: 100.1 - (cos_theta + -1.2255921e-6)
+   R²: 1.0000
+   PySR time: 200.43s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-14 19:02:51,063 - INFO -    Result: 100.1 - (cos_theta + -1.2255921e-6)
+2026-01-14 19:02:51,063 - INFO -    R² = 1.0000
+2026-01-14 19:02:51,063 - INFO -    Collapsed constants: ['mu_0 (permeability)']
+2026-01-14 19:02:51,063 - INFO -    [BEST] New best!
+2026-01-14 19:02:51,064 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: 100.1 - (cos_theta + -1.2255921e-6)
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+   Collapsed constants: ['mu_0 (permeability)']
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30 (constants absorbed)
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: 100.1 - (cos_theta + -1.2255921e-6)
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 208.36s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: quantum_compton_shift.json
+
+================================================================================
+TEST 19/30: chemistry_arrhenius_equation
+================================================================================
+
+================================================================================
+Running: Arrhenius Equation | Domain: chemistry
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: chemistry
+Variables: A, Ea, R, T
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:02:51,209 - INFO - ======================================================================
+2026-01-14 19:02:51,209 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:02:51,209 - INFO - ======================================================================
+2026-01-14 19:02:51,210 - INFO - Domain: chemistry
+2026-01-14 19:02:51,210 - INFO - Discovery mode: calibrated
+2026-01-14 19:02:51,210 - INFO - Primary LLM: anthropic
+2026-01-14 19:02:51,210 - INFO - Auto-config: True
+2026-01-14 19:02:51,210 - INFO - Max retries: 3
+2026-01-14 19:02:51,211 - INFO - PhysicsAware fallback: False
+2026-01-14 19:02:51,211 - INFO - Complexity threshold: 20
+2026-01-14 19:02:51,211 - INFO - ======================================================================
+2026-01-14 19:02:51,211 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:02:52,286 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Arrhenius Equation
+Domain: CHEMISTRY
+Samples: 1000
+Variables: ['A', 'Ea', 'R', 'T']
+Equation hint: Arrhenius Equation
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:02:52,288 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+2026-01-14 19:02:58,337 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: A * exp(-Ea / (R * T))
+   LLM R²: 1.0000
+   LLM time: 6.05s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 19:02:58,351 - INFO -    Result: A * exp(-Ea / (R * T))
+2026-01-14 19:02:58,352 - INFO -    R² = 1.0000
+2026-01-14 19:02:58,352 - INFO -    [BEST] New best!
+2026-01-14 19:02:58,352 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: A * exp(-Ea / (R * T))
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 88.6/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: A * exp(-Ea / (R * T))
+   R² Score: 1.0000
+   Validation: 88.6/100
+   Total time: 7.42s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: chemistry_arrhenius_equation.json
+
+================================================================================
+TEST 20/30: chemistry_henderson_hasselbalch
+================================================================================
+
+================================================================================
+Running: Henderson Hasselbalch | Domain: chemistry
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: chemistry
+Variables: pKa, A_minus, HA
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:02:58,650 - INFO - ======================================================================
+2026-01-14 19:02:58,650 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:02:58,651 - INFO - ======================================================================
+2026-01-14 19:02:58,651 - INFO - Domain: chemistry
+2026-01-14 19:02:58,651 - INFO - Discovery mode: calibrated
+2026-01-14 19:02:58,651 - INFO - Primary LLM: anthropic
+2026-01-14 19:02:58,651 - INFO - Auto-config: True
+2026-01-14 19:02:58,652 - INFO - Max retries: 3
+2026-01-14 19:02:58,652 - INFO - PhysicsAware fallback: False
+2026-01-14 19:02:58,652 - INFO - Complexity threshold: 20
+2026-01-14 19:02:58,652 - INFO - ======================================================================
+2026-01-14 19:02:58,652 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:02:59,926 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Henderson Hasselbalch
+Domain: CHEMISTRY
+Samples: 1000
+Variables: ['pKa', 'A_minus', 'HA']
+Equation hint: Henderson Hasselbalch
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:02:59,927 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+2026-01-14 19:03:08,535 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: pKa * (1 + 0.1 * (A_minus - HA) / (A_minus + HA))
+   LLM R²: 0.7766
+   LLM time: 8.61s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: pKa, A_minus, HA
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+
+(emacs:4807): GLib-CRITICAL **: 19:03:33.811: Source ID 99267 was not found when attempting to remove it
+
+(emacs:4807): GLib-CRITICAL **: 19:03:44.888: Source ID 12599 was not found when attempting to remove it
+   ✅ Found: (((((A_minus / HA) + -0.98774016) * 0.045561165) / (A_minus + (0.14727019 / (pKa * HA)))) - -0.7343172) + (pKa - ((HA * 1.4700694) / (A_minus + HA)))
+   R²: 0.9980
+   PySR time: 213.15s
+   PySR R²: 0.9980
+   ✅ PySR refinement improved result
+2026-01-14 19:06:41,707 - INFO -    Result: (((((A_minus / HA) + -0.98774016) * 0.045561165) / (A_minus + (0.14727019 / (pKa * HA)))) - -0.7343172) + (pKa - ((HA * 1.4700694) / (A_minus + HA)))
+2026-01-14 19:06:41,708 - INFO -    R² = 0.9980
+2026-01-14 19:06:41,708 - WARNING -    [WARNING] Possible overfit
+2026-01-14 19:06:41,708 - WARNING -       High complexity (149) but R²=0.9980
+2026-01-14 19:06:41,709 - INFO -    [BEST] New best!
+2026-01-14 19:06:41,709 - INFO -
+[SYMBOLIC] Attempt 2/3 (seed=43)
+
+[HYBRID MODE] LLM first, PySR refinement...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+2026-01-14 19:06:48,613 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: pKa + log10(A_minus / HA)
+   LLM R²: 0.0000
+   LLM time: 6.91s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: pKa, A_minus, HA
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: pKa - ((A_minus - HA) * ((-2.2914078 / (((HA + 0.06694371) * (A_minus + 0.06868311)) * 18.92267)) - 0.45465365))
+   R²: 0.9990
+   PySR time: 198.43s
+   PySR R²: 0.9990
+   ✅ PySR refinement improved result
+2026-01-14 19:10:07,051 - INFO -    Result: pKa - ((A_minus - HA) * ((-2.2914078 / (((HA + 0.06694371) * (A_minus + 0.06868311)) * 18.92267)) - 0.45465365))
+2026-01-14 19:10:07,052 - INFO -    R² = 0.9990
+2026-01-14 19:10:07,052 - INFO -    [BEST] New best!
+2026-01-14 19:10:07,052 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: pKa - ((A_minus - HA) * ((-2.2914078 / (((HA + 0.06694371) * (A_minus + 0.06868311)) * 18.92267)) - 0.45465365))
+   R² Score: 0.9990
+   Engine: symbolic
+   Attempt: 2/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: pKa - ((A_minus - HA) * ((-2.2914078 / (((HA + 0.06694371) * (A_minus + 0.06868311)) * 18.92267)) - 0.45465365))
+   R² Score: 0.9990
+   Validation: 91.3/100
+   Total time: 429.31s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: chemistry_henderson_hasselbalch.json
+
+================================================================================
+TEST 21/30: chemistry_nernst_equation
+================================================================================
+
+================================================================================
+Running: Nernst Equation | Domain: chemistry
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: chemistry
+Variables: E0, R, T, n, F, Qr
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:10:07,972 - INFO - ======================================================================
+2026-01-14 19:10:07,972 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:10:07,972 - INFO - ======================================================================
+2026-01-14 19:10:07,972 - INFO - Domain: chemistry
+2026-01-14 19:10:07,973 - INFO - Discovery mode: calibrated
+2026-01-14 19:10:07,973 - INFO - Primary LLM: anthropic
+2026-01-14 19:10:07,973 - INFO - Auto-config: True
+2026-01-14 19:10:07,973 - INFO - Max retries: 3
+2026-01-14 19:10:07,974 - INFO - PhysicsAware fallback: False
+2026-01-14 19:10:07,974 - INFO - Complexity threshold: 20
+2026-01-14 19:10:07,974 - INFO - ======================================================================
+2026-01-14 19:10:07,974 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:10:08,894 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Nernst Equation
+Domain: CHEMISTRY
+Samples: 1000
+Variables: ['E0', 'R', 'T', 'n', 'F', 'Qr']
+Equation hint: Nernst Equation
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:10:08,895 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+2026-01-14 19:10:17,564 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: E0 * (1.2 - 0.1 * E0) - (R * T * Qr) / (n * F + 1)
+   LLM R²: -6.7774
+   LLM time: 8.67s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: E0, R, T, n, F, Qr
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: (T / ((((R / (Qr + (-0.81812054 / Qr))) + ((R - -0.8443103) - (Qr / (F / Qr)))) - R) * (n / -0.00033086902))) + E0
+   R²: 1.0000
+   PySR time: 186.96s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-14 19:13:24,541 - INFO -    Result: (T / ((((R / (Qr + (-0.81812054 / Qr))) + ((R - -0.8443103) - (Qr / (F / Qr)))) - R) * (n / -0.00033086902))) + E0
+2026-01-14 19:13:24,542 - INFO -    R² = 1.0000
+2026-01-14 19:13:24,542 - INFO -    [BEST] New best!
+2026-01-14 19:13:24,543 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (T / ((((R / (Qr + (-0.81812054 / Qr))) + ((R - -0.8443103) - (Qr / (F / Qr)))) - R) * (n / -0.00033086902))) + E0
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: (T / ((((R / (Qr + (-0.81812054 / Qr))) + ((R - -0.8443103) - (Qr / (F / Qr)))) - R) * (n / -0.00033086902))) + E0
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 196.68s
+   LLM Mode: hybrid_pysr_better
+   💾 Saved: chemistry_nernst_equation.json
+
+================================================================================
+TEST 22/30: biology_michaelis_menten
+================================================================================
+
+================================================================================
+Running: Michaelis Menten | Domain: biology
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: biology
+Variables: Vmax, S, Km
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:13:24,666 - INFO - ======================================================================
+2026-01-14 19:13:24,666 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:13:24,666 - INFO - ======================================================================
+2026-01-14 19:13:24,667 - INFO - Domain: biology
+2026-01-14 19:13:24,667 - INFO - Discovery mode: calibrated
+2026-01-14 19:13:24,667 - INFO - Primary LLM: anthropic
+2026-01-14 19:13:24,667 - INFO - Auto-config: True
+2026-01-14 19:13:24,667 - INFO - Max retries: 3
+2026-01-14 19:13:24,668 - INFO - PhysicsAware fallback: False
+2026-01-14 19:13:24,668 - INFO - Complexity threshold: 20
+2026-01-14 19:13:24,668 - INFO - ======================================================================
+2026-01-14 19:13:24,668 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:13:26,014 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Michaelis Menten
+Domain: BIOLOGY
+Samples: 1000
+Variables: ['Vmax', 'S', 'Km']
+Equation hint: Michaelis Menten
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:13:26,015 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+2026-01-14 19:13:32,613 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: (Vmax * S) / (Km + S)
+   LLM R²: 1.0000
+   LLM time: 6.60s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 19:13:32,626 - INFO -    Result: (Vmax * S) / (Km + S)
+2026-01-14 19:13:32,627 - INFO -    R² = 1.0000
+2026-01-14 19:13:32,627 - INFO -    [BEST] New best!
+2026-01-14 19:13:32,627 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (Vmax * S) / (Km + S)
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: (Vmax * S) / (Km + S)
+   R² Score: 1.0000
+   Validation: 91.0/100
+   Total time: 8.08s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: biology_michaelis_menten.json
+
+================================================================================
+TEST 23/30: biology_logistic_growth
+================================================================================
+
+================================================================================
+Running: Logistic Growth | Domain: biology
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: biology
+Variables: r, N, K
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:13:32,762 - INFO - ======================================================================
+2026-01-14 19:13:32,762 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:13:32,762 - INFO - ======================================================================
+2026-01-14 19:13:32,763 - INFO - Domain: biology
+2026-01-14 19:13:32,763 - INFO - Discovery mode: calibrated
+2026-01-14 19:13:32,763 - INFO - Primary LLM: anthropic
+2026-01-14 19:13:32,763 - INFO - Auto-config: True
+2026-01-14 19:13:32,764 - INFO - Max retries: 3
+2026-01-14 19:13:32,764 - INFO - PhysicsAware fallback: False
+2026-01-14 19:13:32,764 - INFO - Complexity threshold: 20
+2026-01-14 19:13:32,764 - INFO - ======================================================================
+2026-01-14 19:13:32,765 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:13:33,767 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Logistic Growth
+Domain: BIOLOGY
+Samples: 1000
+Variables: ['r', 'N', 'K']
+Equation hint: Logistic Growth
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:13:33,767 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 19:13:40,388 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: r * N * (1 - N/K)
+   LLM R²: 1.0000
+   LLM time: 6.62s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 19:13:40,405 - INFO -    Result: r * N * (1 - N/K)
+2026-01-14 19:13:40,406 - INFO -    R² = 1.0000
+2026-01-14 19:13:40,408 - INFO -    [BEST] New best!
+2026-01-14 19:13:40,409 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: r * N * (1 - N/K)
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 98.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: r * N * (1 - N/K)
+   R² Score: 1.0000
+   Validation: 98.5/100
+   Total time: 7.83s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: biology_logistic_growth.json
+
+================================================================================
+TEST 24/30: biology_allometric_scaling
+================================================================================
+
+================================================================================
+Running: Allometric Scaling | Domain: biology
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: biology
+Variables: a, M, b
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:13:40,600 - INFO - ======================================================================
+2026-01-14 19:13:40,600 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:13:40,601 - INFO - ======================================================================
+2026-01-14 19:13:40,601 - INFO - Domain: biology
+2026-01-14 19:13:40,601 - INFO - Discovery mode: calibrated
+2026-01-14 19:13:40,601 - INFO - Primary LLM: anthropic
+2026-01-14 19:13:40,601 - INFO - Auto-config: True
+2026-01-14 19:13:40,602 - INFO - Max retries: 3
+2026-01-14 19:13:40,602 - INFO - PhysicsAware fallback: False
+2026-01-14 19:13:40,602 - INFO - Complexity threshold: 20
+2026-01-14 19:13:40,602 - INFO - ======================================================================
+2026-01-14 19:13:40,602 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:13:41,588 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Allometric Scaling
+Domain: BIOLOGY
+Samples: 1000
+Variables: ['a', 'M', 'b']
+Equation hint: Allometric Scaling
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:13:41,589 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+2026-01-14 19:13:51,043 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: a * M**b
+   LLM R²: 1.0000
+   LLM time: 9.46s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 19:13:51,056 - INFO -    Result: a * M**b
+2026-01-14 19:13:51,057 - INFO -    R² = 1.0000
+2026-01-14 19:13:51,057 - INFO -    [BEST] New best!
+2026-01-14 19:13:51,057 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: a * M**b
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: a * M**b
+   R² Score: 1.0000
+   Validation: 91.3/100
+   Total time: 10.55s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: biology_allometric_scaling.json
+
+================================================================================
+TEST 25/30: mathematics_pythagorean_theorem
+================================================================================
+
+================================================================================
+Running: Pythagorean Theorem | Domain: mathematics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: mathematics
+Variables: a, b
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:13:51,165 - INFO - ======================================================================
+2026-01-14 19:13:51,165 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:13:51,165 - INFO - ======================================================================
+2026-01-14 19:13:51,165 - INFO - Domain: mathematics
+2026-01-14 19:13:51,166 - INFO - Discovery mode: calibrated
+2026-01-14 19:13:51,166 - INFO - Primary LLM: anthropic
+2026-01-14 19:13:51,166 - INFO - Auto-config: True
+2026-01-14 19:13:51,166 - INFO - Max retries: 3
+2026-01-14 19:13:51,167 - INFO - PhysicsAware fallback: False
+2026-01-14 19:13:51,167 - INFO - Complexity threshold: 20
+2026-01-14 19:13:51,167 - INFO - ======================================================================
+2026-01-14 19:13:51,167 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:13:52,096 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Pythagorean Theorem
+Domain: MATHEMATICS
+Samples: 1000
+Variables: ['a', 'b']
+Equation hint: Pythagorean Theorem
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:13:52,097 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 19:13:59,252 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: (a**2 + b**2)**0.5
+   LLM R²: 1.0000
+   LLM time: 7.16s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 19:13:59,264 - INFO -    Result: (a**2 + b**2)**0.5
+2026-01-14 19:13:59,265 - INFO -    R² = 1.0000
+2026-01-14 19:13:59,265 - INFO -    [BEST] New best!
+2026-01-14 19:13:59,265 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (a**2 + b**2)**0.5
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: (a**2 + b**2)**0.5
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 8.22s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: mathematics_pythagorean_theorem.json
+
+================================================================================
+TEST 26/30: mathematics_compound_interest
+================================================================================
+
+================================================================================
+Running: Compound Interest | Domain: mathematics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: mathematics
+Variables: P, r, n, t
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:13:59,400 - INFO - ======================================================================
+2026-01-14 19:13:59,400 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:13:59,400 - INFO - ======================================================================
+2026-01-14 19:13:59,400 - INFO - Domain: mathematics
+2026-01-14 19:13:59,401 - INFO - Discovery mode: calibrated
+2026-01-14 19:13:59,401 - INFO - Primary LLM: anthropic
+2026-01-14 19:13:59,401 - INFO - Auto-config: True
+2026-01-14 19:13:59,401 - INFO - Max retries: 3
+2026-01-14 19:13:59,401 - INFO - PhysicsAware fallback: False
+2026-01-14 19:13:59,402 - INFO - Complexity threshold: 20
+2026-01-14 19:13:59,402 - INFO - ======================================================================
+2026-01-14 19:13:59,402 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:14:00,326 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Compound Interest
+Domain: MATHEMATICS
+Samples: 1000
+Variables: ['P', 'r', 'n', 't']
+Equation hint: Compound Interest
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:14:00,327 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 19:14:08,248 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: P * (1 + r/n)**(n*t)
+   LLM R²: 1.0000
+   LLM time: 7.92s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 19:14:08,263 - INFO -    Result: P * (1 + r/n)**(n*t)
+2026-01-14 19:14:08,266 - INFO -    R² = 1.0000
+2026-01-14 19:14:08,266 - INFO -    [BEST] New best!
+2026-01-14 19:14:08,267 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: P * (1 + r/n)**(n*t)
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 90.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: P * (1 + r/n)**(n*t)
+   R² Score: 1.0000
+   Validation: 90.4/100
+   Total time: 9.03s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: mathematics_compound_interest.json
+
+================================================================================
+TEST 27/30: mathematics_quadratic_discriminant
+================================================================================
+
+================================================================================
+Running: Quadratic Discriminant | Domain: mathematics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: mathematics
+Variables: a, b, c
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:14:08,447 - INFO - ======================================================================
+2026-01-14 19:14:08,447 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:14:08,447 - INFO - ======================================================================
+2026-01-14 19:14:08,447 - INFO - Domain: mathematics
+2026-01-14 19:14:08,448 - INFO - Discovery mode: calibrated
+2026-01-14 19:14:08,448 - INFO - Primary LLM: anthropic
+2026-01-14 19:14:08,448 - INFO - Auto-config: True
+2026-01-14 19:14:08,448 - INFO - Max retries: 3
+2026-01-14 19:14:08,449 - INFO - PhysicsAware fallback: False
+2026-01-14 19:14:08,449 - INFO - Complexity threshold: 20
+2026-01-14 19:14:08,449 - INFO - ======================================================================
+2026-01-14 19:14:08,449 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:14:09,407 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Quadratic Discriminant
+Domain: MATHEMATICS
+Samples: 1000
+Variables: ['a', 'b', 'c']
+Equation hint: Quadratic Discriminant
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:14:09,408 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 19:14:14,862 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: b**2 - 4*a*c
+   LLM R²: 1.0000
+   LLM time: 5.46s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 19:14:14,876 - INFO -    Result: b**2 - 4*a*c
+2026-01-14 19:14:14,876 - INFO -    R² = 1.0000
+2026-01-14 19:14:14,876 - INFO -    [BEST] New best!
+2026-01-14 19:14:14,877 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: b**2 - 4*a*c
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: b**2 - 4*a*c
+   R² Score: 1.0000
+   Validation: 99.4/100
+   Total time: 6.55s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: mathematics_quadratic_discriminant.json
+
+================================================================================
+TEST 28/30: economics_elasticity_demand
+================================================================================
+
+================================================================================
+Running: Elasticity Demand | Domain: economics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: economics
+Variables: Q, delta_Q, P, delta_P
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:14:15,015 - INFO - ======================================================================
+2026-01-14 19:14:15,015 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:14:15,016 - INFO - ======================================================================
+2026-01-14 19:14:15,016 - INFO - Domain: economics
+2026-01-14 19:14:15,016 - INFO - Discovery mode: calibrated
+2026-01-14 19:14:15,016 - INFO - Primary LLM: anthropic
+2026-01-14 19:14:15,017 - INFO - Auto-config: True
+2026-01-14 19:14:15,017 - INFO - Max retries: 3
+2026-01-14 19:14:15,017 - INFO - PhysicsAware fallback: False
+2026-01-14 19:14:15,017 - INFO - Complexity threshold: 20
+2026-01-14 19:14:15,018 - INFO - ======================================================================
+2026-01-14 19:14:15,018 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:14:16,016 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Elasticity Demand
+Domain: ECONOMICS
+Samples: 1000
+Variables: ['Q', 'delta_Q', 'P', 'delta_P']
+Equation hint: Elasticity Demand
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:14:16,017 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+/home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/tools/symbolic/symbolic_engine.py:137: UserWarning: Variable 'Q' conflicts with PySR reserved word. Renamed to 'Qr'.
+  warnings.warn(
+
+🔧 Variable Name Sanitization:
+   Q → Qr
+2026-01-14 19:14:23,382 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: (delta_Q / Qr) / (delta_P / P)
+   LLM R²: 1.0000
+   LLM time: 7.37s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 19:14:23,394 - INFO -    Result: (delta_Q / Qr) / (delta_P / P)
+2026-01-14 19:14:23,395 - INFO -    R² = 1.0000
+2026-01-14 19:14:23,395 - INFO -    [BEST] New best!
+2026-01-14 19:14:23,395 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (delta_Q / Qr) / (delta_P / P)
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 92.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: (delta_Q / Qr) / (delta_P / P)
+   R² Score: 1.0000
+   Validation: 92.1/100
+   Total time: 8.48s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: economics_elasticity_demand.json
+
+================================================================================
+TEST 29/30: economics_cobb_douglas
+================================================================================
+
+================================================================================
+Running: Cobb Douglas | Domain: economics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: economics
+Variables: A, K, L, alpha, beta
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:14:23,504 - INFO - ======================================================================
+2026-01-14 19:14:23,504 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:14:23,505 - INFO - ======================================================================
+2026-01-14 19:14:23,505 - INFO - Domain: economics
+2026-01-14 19:14:23,505 - INFO - Discovery mode: calibrated
+2026-01-14 19:14:23,505 - INFO - Primary LLM: anthropic
+2026-01-14 19:14:23,506 - INFO - Auto-config: True
+2026-01-14 19:14:23,506 - INFO - Max retries: 3
+2026-01-14 19:14:23,506 - INFO - PhysicsAware fallback: False
+2026-01-14 19:14:23,506 - INFO - Complexity threshold: 20
+2026-01-14 19:14:23,507 - INFO - ======================================================================
+2026-01-14 19:14:23,507 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:14:24,437 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Cobb Douglas
+Domain: ECONOMICS
+Samples: 1000
+Variables: ['A', 'K', 'L', 'alpha', 'beta']
+Equation hint: Cobb Douglas
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:14:24,438 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 19:14:31,797 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: A * K**alpha * L**beta
+   LLM R²: 1.0000
+   LLM time: 7.36s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 19:14:31,811 - INFO -    Result: A * K**alpha * L**beta
+2026-01-14 19:14:31,811 - INFO -    R² = 1.0000
+2026-01-14 19:14:31,811 - INFO -    [BEST] New best!
+2026-01-14 19:14:31,812 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: A * K**alpha * L**beta
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: A * K**alpha * L**beta
+   R² Score: 1.0000
+   Validation: 91.3/100
+   Total time: 8.40s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: economics_cobb_douglas.json
+
+================================================================================
+TEST 30/30: economics_break_even_point
+================================================================================
+
+================================================================================
+Running: Break Even Point | Domain: economics
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: economics
+Variables: FC, P, VC
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-14 19:14:31,920 - INFO - ======================================================================
+2026-01-14 19:14:31,920 - INFO - HybridDiscoverySystem v4.2 - TRUE CONSOLIDATION
+2026-01-14 19:14:31,920 - INFO - ======================================================================
+2026-01-14 19:14:31,920 - INFO - Domain: economics
+2026-01-14 19:14:31,920 - INFO - Discovery mode: calibrated
+2026-01-14 19:14:31,921 - INFO - Primary LLM: anthropic
+2026-01-14 19:14:31,921 - INFO - Auto-config: True
+2026-01-14 19:14:31,921 - INFO - Max retries: 3
+2026-01-14 19:14:31,921 - INFO - PhysicsAware fallback: False
+2026-01-14 19:14:31,921 - INFO - Complexity threshold: 20
+2026-01-14 19:14:31,922 - INFO - ======================================================================
+2026-01-14 19:14:31,922 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-14 19:14:32,850 - INFO - [OK] HybridDiscoverySystem v4.2 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v4.2
+======================================================================
+Description: Break Even Point
+Domain: ECONOMICS
+Samples: 1000
+Variables: ['FC', 'P', 'VC']
+Equation hint: Break Even Point
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-14 19:14:32,850 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+2026-01-14 19:14:40,519 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: FC / (P - VC)
+   LLM R²: 1.0000
+   LLM time: 7.67s
+   ✅ LLM solution excellent, skipping PySR
+2026-01-14 19:14:40,532 - INFO -    Result: FC / (P - VC)
+2026-01-14 19:14:40,532 - INFO -    R² = 1.0000
+2026-01-14 19:14:40,532 - INFO -    [BEST] New best!
+2026-01-14 19:14:40,533 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: FC / (P - VC)
+   R² Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+   Accepted: True
+   Reason: CALIBRATED mode: R² >= 0.99, validation >= 30
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: FC / (P - VC)
+   R² Score: 1.0000
+   Validation: 91.0/100
+   Total time: 8.75s
+   LLM Mode: hybrid_llm_only
+   💾 Saved: economics_break_even_point.json
+
+========================================================================================================================
+                                     INTEGRATED LLM-GUIDED DISCOVERY RESULTS v11.1
+========================================================================================================================
+Test Name                                 R²    Val   Time LLM Mode         Status
+----------------------------------- -------- ------ ------ --------------- --------
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+BIOLOGY
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+biology_allometric_scaling            1.0000   91.3   10.6s hybrid_llm_only  ✅ PASS
+biology_logistic_growth               1.0000   98.5    7.8s hybrid_llm_only  ✅ PASS
+biology_michaelis_menten              1.0000   91.0    8.1s hybrid_llm_only  ✅ PASS
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+CHEMISTRY
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+chemistry_arrhenius_equation          1.0000   88.6    7.4s hybrid_llm_only  ✅ PASS
+chemistry_henderson_hasselbalch       0.9990   91.3  429.3s hybrid_pysr_better  ✅ PASS
+chemistry_nernst_equation             1.0000  100.0  196.7s hybrid_pysr_better  ✅ PASS
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ECONOMICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+economics_break_even_point            1.0000   91.0    8.8s hybrid_llm_only  ✅ PASS
+economics_cobb_douglas                1.0000   91.3    8.4s hybrid_llm_only  ✅ PASS
+economics_elasticity_demand           1.0000   92.1    8.5s hybrid_llm_only  ✅ PASS
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ELECTROMAGNETISM
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+electromagnetism_coulomb_law          1.0000   91.3    8.5s hybrid_llm_only  ✅ PASS
+electromagnetism_lorentz_force        1.0000  100.0    7.5s hybrid_llm_only  ✅ PASS
+electromagnetism_ohms_law             1.0000  100.0    6.7s hybrid_llm_only  ✅ PASS
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+FLUID_DYNAMICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+fluid_dynamics_bernoulli_equation     1.0000   91.3    8.5s hybrid_llm_only  ✅ PASS
+fluid_dynamics_hagen_poiseuille       1.0000   89.5    9.4s hybrid_llm_only  ✅ PASS
+fluid_dynamics_reynolds_number        1.0000   91.0    8.3s hybrid_llm_only  ✅ PASS
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+MATHEMATICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+mathematics_compound_interest         1.0000   90.4    9.0s hybrid_llm_only  ✅ PASS
+mathematics_pythagorean_theorem       1.0000  100.0    8.2s hybrid_llm_only  ✅ PASS
+mathematics_quadratic_discriminant    1.0000   99.4    6.6s hybrid_llm_only  ✅ PASS
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+MECHANICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+mechanics_gravitational_potential_energy   1.0000  100.0  118.9s hybrid_llm_only  ✅ PASS
+mechanics_hookes_law                  0.9997   12.1  360.3s hybrid_pysr_better  ❌ FAIL
+mechanics_kinetic_energy              1.0000  100.0   24.3s hybrid_llm_only  ✅ PASS
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+OPTICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+optics_single_slit_diffraction        1.0000   99.1    8.1s hybrid_llm_only  ✅ PASS
+optics_snells_law                     1.0000  100.0    8.0s hybrid_llm_only  ✅ PASS
+optics_thin_lens_equation             1.0000   90.4  214.6s hybrid_pysr_better  ✅ PASS
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+QUANTUM
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+quantum_compton_shift                 1.0000  100.0  208.4s hybrid_pysr_better  ✅ PASS
+quantum_de_broglie_wavelength         1.0000   85.6  202.4s hybrid_pysr_better  ✅ PASS
+quantum_photon_energy                 1.0000  100.0  169.1s hybrid_pysr_better  ✅ PASS
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+THERMODYNAMICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+thermodynamics_carnot_efficiency      1.0000   98.5    9.3s hybrid_llm_only  ✅ PASS
+thermodynamics_heat_capacity          1.0000  100.0    8.0s hybrid_llm_only  ✅ PASS
+thermodynamics_ideal_gas_law          1.0000   91.0   10.0s hybrid_llm_only  ✅ PASS
+========================================================================================================================
+
+SUMMARY: 29/30 passed (96.7%)
+Avg R²: 1.0000 | Avg Val: 92.2 | Avg Time: 70.0s
+========================================================================================================================
+
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$

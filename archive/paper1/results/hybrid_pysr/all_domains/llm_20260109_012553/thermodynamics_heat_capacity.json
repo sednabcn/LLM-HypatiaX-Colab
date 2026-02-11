@@ -1,0 +1,120 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "Q = m * c * dT",
+    "confidence": 0.95,
+    "reasoning": "This is the fundamental heat capacity equation in thermodynamics, where Q is heat energy, m is mass, c is specific heat capacity, and dT is temperature change. The moderate correlations and polynomial nature could arise from measurement variations or non-linear material properties.",
+    "source": "llm",
+    "fitted_equation": "m * c * dT",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "Q = m * c * dT",
+      "confidence": 0.95,
+      "reasoning": "This is the fundamental heat capacity equation in thermodynamics, where Q is heat energy, m is mass, c is specific heat capacity, and dT is temperature change. The moderate correlations and polynomial nature could arise from measurement variations or non-linear material properties.",
+      "source": "llm",
+      "fitted_equation": "m * c * dT",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = m * c * dT + 0.01 * m**2 * c * dT",
+      "confidence": 0.7,
+      "reasoning": "Heat capacity equation with a mass-squared term that could represent collective thermal effects or heat transfer efficiency changes with system size, contributing to the polynomial complexity.",
+      "source": "llm",
+      "fitted_equation": "m * c * dT + 0.01 * m**2 * c * dT",
+      "coefficients": {},
+      "r2_score": 0.9897103445239872,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = m * c * dT + 0.1 * m * c * dT**2",
+      "confidence": 0.85,
+      "reasoning": "Modified heat capacity equation with a quadratic temperature dependence term to account for temperature-dependent specific heat capacity, which is common in real materials and explains the polynomial degree 3 pattern.",
+      "source": "llm",
+      "fitted_equation": "m * c * dT + 0.1 * m * c * dT**2",
+      "coefficients": {},
+      "r2_score": -106.68123929591944,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = m * c * dT * (1 + 0.05 * m * dT)",
+      "confidence": 0.75,
+      "reasoning": "Heat capacity with mass-temperature interaction term that could account for thermal expansion effects or concentration-dependent heat capacity in mixtures, explaining the detected interactions.",
+      "source": "llm",
+      "fitted_equation": "m * c * dT * (1 + 0.05 * m * dT)",
+      "coefficients": {},
+      "r2_score": -1507.6277385691387,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "Q = m * c * dT + 0.001 * m * c**2 * dT**2",
+      "confidence": 0.65,
+      "reasoning": "Extended heat capacity model with both specific heat and temperature squared terms, accounting for non-linear thermal properties and higher-order effects that could produce the observed polynomial degree 3 behavior.",
+      "source": "llm",
+      "fitted_equation": "m * c * dT + 0.001 * m * c**2 * dT**2",
+      "coefficients": {},
+      "r2_score": -147969.34567347958,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "m": 0.5020542451240794,
+      "c": 0.4409052197967809,
+      "dT": 0.5146688051154419
+    },
+    "polynomial_degree": 3,
+    "power_exponents": {},
+    "y_range": [
+      714.0557909917817,
+      3947461.485082278
+    ],
+    "y_scale": "very_large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 10.928064584732056,
+    "phase1_analysis": 0.06568288803100586,
+    "phase2_llm": 10.148992538452148,
+    "phase3_verify": 0.7126328945159912
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "m * c * dT",
+  "test_name": "thermodynamics_heat_capacity",
+  "timestamp": "2026-01-09T01:26:47.697767",
+  "ground_truth": "m*c*dT",
+  "domain": "thermodynamics",
+  "_metadata": {
+    "session_id": "llm_20260109_012553",
+    "timestamp": "2026-01-09T01:26:47.698210",
+    "passed": true,
+    "test_name": "thermodynamics_heat_capacity",
+    "method": "llm_guided"
+  }
+}

@@ -1,0 +1,49 @@
+Based on the documents you've provided, several files demonstrate the limitations of pure LLMs for formula extraction and implementation:
+Key Files Showing LLM Limitations
+1. baseline_pure_llm_defi_20251220_194959.json
+This file shows several significant failures:
+
+Liquidation formulas: Multiple formulas have poor R² scores, indicating the LLM got the mathematical relationships wrong
+
+Liquidation price for long positions: R² = -4.01 (terrible fit)
+Liquidation price for short positions: R² = 0.60 (mediocre)
+Maximum safe leverage: R² = 0.13 (poor fit)
+
+
+
+2. baseline_pure_llm_20251220_133110.json
+Shows catastrophic failures with incorrect constant values:
+
+Hall-Petch relationship: MSE = 4.9×10¹⁵, R² = -8×10¹⁴ (completely wrong)
+Gibson-Ashby formula: MSE = 7.9×10²¹, R² = -4.5×10¹⁸ (completely wrong)
+Linear thermal expansion: MSE = 1×10⁶, R² = -2×10⁶ (completely wrong)
+
+The LLM used incorrect units (e.g., Pa instead of MPa) and wrong constant values.
+3. baseline_llm_FIXED_20251221_113424.json & baseline_llm_FIXED_20251221_104631.json
+These "fixed" attempts still show failures:
+
+Multiple formulas marked as "error": "No code" - the LLM provided explanations but failed to extract executable code
+Failed formulas include:
+
+Optimal LP position sizing
+Capital efficiency multipliers
+Several liquidation formulas
+Portfolio Expected Shortfall
+
+
+
+4. baseline_pure_llm_20251220_152604.json
+Shows one notable failure:
+
+Henderson-Hasselbalch equation: R² = -3.00 (negative R², indicating worse than baseline)
+
+Main Limitations Demonstrated
+
+Incorrect mathematical formulations - Getting the actual formula structure wrong
+Wrong constant values - Using inappropriate units or numerical values
+Code extraction failures - Unable to produce executable Python code
+Complex formula handling - Struggling with domain-specific DeFi formulas involving liquidations and risk calculations
+Unit conversion errors - Mixing up Pa/MPa, using wrong scales
+
+Comparison Point
+The baseline_nn_defi_IMPROVED_20251221_103119.json file shows neural networks achieving R² > 0.96 on most formulas where pure LLMs failed, demonstrating that the limitation is with the LLM approach rather than the inherent difficulty of the formulas.

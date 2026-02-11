@@ -89,7 +89,7 @@ except ImportError:
 
 # Import DeFi Protocol
 try:
-    from experiment_protocol_defi_20 import DeFiExperimentProtocolExtended
+    from hypatiax.protocols.experiment_protocol_defi_20 import DeFiExperimentProtocolExtended
 
     print("✅ Loaded DeFi Protocol v3.0")
 except ImportError:

@@ -1,0 +1,13 @@
+{
+  "error": "Object of type bool is not JSON serializable",
+  "test_name": "electromagnetism_lorentz_force",
+  "execution_time": 0.8935816287994385,
+  "timestamp": "2026-01-08T15:56:40.869540",
+  "_metadata": {
+    "session_id": "llm_20260108_155620",
+    "timestamp": "2026-01-08T15:56:40.869610",
+    "passed": false,
+    "test_name": "electromagnetism_lorentz_force",
+    "method": "llm_guided"
+  }
+}

@@ -30,6 +30,11 @@ import importlib.util
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
+from hypatiax.protocols.experiment_protocol_all_18_a.py import ExperimentProtocolA
+from hypatiax.protocols.experiment_protocol_all_18_b.py import ExperimentProtocolB
+from hypatiax.protocols.experiment_protocol_all_20_b.py import ExperimentProtocolB
+from hypatiax.protocols.experiment_protocol_all_30.py import ExperimentProtocolAll
+
 
 try:
     from hypatiax.tools.symbolic.hybrid_system_v40 import HybridDiscoverySystem

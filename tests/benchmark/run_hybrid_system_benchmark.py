@@ -70,7 +70,7 @@ def main():
 
     # Step 3: Run performance analysis
     success = run_command(
-        f"python analysis/analyze_hybrid_performance.py",
+        f"python tests/integration/analysis/test_analyze_hybrid_performance.py",
         "Step 3/4: Performance Analysis",
     )
 

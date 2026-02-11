@@ -1,0 +1,97 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "Q = (3.14159 * dP * r**4) / (8 * mu * L)",
+    "confidence": 0.95,
+    "reasoning": "This is the classic Hagen-Poiseuille equation for volumetric flow rate through a cylindrical pipe. The r^4 dependence and inverse relationships with viscosity and length are fundamental to laminar flow physics.",
+    "source": "llm",
+    "fitted_equation": null,
+    "coefficients": null,
+    "r2_score": 0.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": null
+  },
+  "all_hypotheses": [
+    {
+      "equation": "Q = (3.14159 * dP * r**4) / (8 * mu * L)",
+      "confidence": 0.95,
+      "reasoning": "This is the classic Hagen-Poiseuille equation for volumetric flow rate through a cylindrical pipe. The r^4 dependence and inverse relationships with viscosity and length are fundamental to laminar flow physics.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "v_avg = (dP * r**2) / (8 * mu * L)",
+      "confidence": 0.85,
+      "reasoning": "This represents the average velocity in Poiseuille flow, derived from the flow rate equation. The r^2 dependence for velocity is consistent with the parabolic velocity profile in laminar pipe flow.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    },
+    {
+      "equation": "tau_wall = (dP * r) / (2 * L)",
+      "confidence": 0.75,
+      "reasoning": "This is the wall shear stress in pipe flow, derived from momentum balance. It shows linear dependence on pressure gradient and radius, which could explain some of the observed correlations.",
+      "source": "llm",
+      "fitted_equation": null,
+      "coefficients": null,
+      "r2_score": 0.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": null
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": false,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "dP": 0.14159011769535348,
+      "r": 0.29097553429969875,
+      "mu": 2.0161972448071496e-17,
+      "L": -0.27059198430248177
+    },
+    "polynomial_degree": null,
+    "power_exponents": {},
+    "y_range": [
+      5.568394754898292e-07,
+      2957.9031312965444
+    ],
+    "y_scale": "large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "complex"
+  },
+  "timing": {
+    "total": 6.830959320068359,
+    "phase1_analysis": 0.07803940773010254,
+    "phase2_llm": 6.751742124557495,
+    "phase3_verify": 0.0007772445678710938
+  },
+  "r2_score": 0.0,
+  "validation_score": 0.0,
+  "expression": "Q = (3.14159 * dP * r**4) / (8 * mu * L)",
+  "test_name": "fluid_dynamics_hagen_poiseuille",
+  "timestamp": "2026-01-08T17:22:43.069785",
+  "ground_truth": "dP*r**4/(mu*L)",
+  "domain": "fluid_dynamics",
+  "_metadata": {
+    "session_id": "llm_20260108_172007",
+    "timestamp": "2026-01-08T17:22:43.069879",
+    "passed": false,
+    "test_name": "fluid_dynamics_hagen_poiseuille",
+    "method": "llm_guided"
+  }
+}

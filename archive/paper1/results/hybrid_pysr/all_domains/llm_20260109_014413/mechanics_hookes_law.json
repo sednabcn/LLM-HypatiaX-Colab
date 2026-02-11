@@ -1,0 +1,179 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = k * x",
+    "confidence": 0.9,
+    "reasoning": "Simplified Hooke's Law without negative sign, often used when considering magnitude or different sign convention",
+    "source": "llm",
+    "fitted_equation": "k * x",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = k * x",
+      "confidence": 0.9,
+      "reasoning": "Simplified Hooke's Law without negative sign, often used when considering magnitude or different sign convention",
+      "source": "llm",
+      "fitted_equation": "k * x",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = -k * x + c",
+      "confidence": 0.85,
+      "reasoning": "Hooke's Law with offset constant, accounting for equilibrium position or measurement bias",
+      "source": "llm",
+      "fitted_equation": "-k * x + c",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 94.9,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = -k * x * (1 + a * x)",
+      "confidence": 0.55,
+      "reasoning": "Hooke's Law with displacement-dependent spring constant, expands to linear plus quadratic terms",
+      "source": "llm",
+      "fitted_equation": "-k * x * (1 + a * x)",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 86.8,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = -k * x + b * k * x**2",
+      "confidence": 0.45,
+      "reasoning": "Modified Hooke's Law with k appearing in both terms, accounting for spring constant in nonlinear correction",
+      "source": "llm",
+      "fitted_equation": "-k * x + b * k * x**2",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 86.8,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = -k * x - a * x**2",
+      "confidence": 0.65,
+      "reasoning": "Combined linear and quadratic terms for nonlinear spring with both restoring force and nonlinear correction",
+      "source": "llm",
+      "fitted_equation": "-k * x - a * x**2",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 60.8,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = k * x + b * x**2",
+      "confidence": 0.6,
+      "reasoning": "Polynomial with both linear and quadratic terms, fits detected polynomial degree 2 pattern",
+      "source": "llm",
+      "fitted_equation": "k * x + b * x**2",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 60.8,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = k * x**2",
+      "confidence": 0.7,
+      "reasoning": "Quadratic relationship suggested by polynomial degree 2, could represent elastic potential energy relationship",
+      "source": "llm",
+      "fitted_equation": "k * x**2",
+      "coefficients": {},
+      "r2_score": -2.404374168441623,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = -k * x**2",
+      "confidence": 0.75,
+      "reasoning": "Nonlinear spring behavior for large displacements, polynomial degree 2 matches detected pattern",
+      "source": "llm",
+      "fitted_equation": "-k * x**2",
+      "coefficients": {},
+      "r2_score": -2.420809935901849,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = -k * x",
+      "confidence": 0.95,
+      "reasoning": "Classic Hooke's Law for spring force, F = -kx, where k is spring constant and x is displacement",
+      "source": "llm",
+      "fitted_equation": "-k * x",
+      "coefficients": {},
+      "r2_score": -3.001003523035086,
+      "validation_score": 91.3,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = k * (x**2 - x)",
+      "confidence": 0.5,
+      "reasoning": "Quadratic polynomial with interaction between x terms, matches has_interactions pattern",
+      "source": "llm",
+      "fitted_equation": "k * (x**2 - x)",
+      "coefficients": {},
+      "r2_score": -5.396908926987825,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "k": 0.0018674011356634669,
+      "x": 0.8676508216066791
+    },
+    "polynomial_degree": 2,
+    "power_exponents": {},
+    "y_range": [
+      -185.85733291963777,
+      194.32266996443403
+    ],
+    "y_scale": "medium",
+    "symmetry": "symmetric",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 12.18530535697937,
+    "phase1_analysis": 0.04491400718688965,
+    "phase2_llm": 10.93506932258606,
+    "phase3_verify": 1.1893506050109863
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "k * x",
+  "test_name": "mechanics_hookes_law",
+  "timestamp": "2026-01-09T01:44:55.251249",
+  "ground_truth": "k*x",
+  "domain": "mechanics",
+  "_metadata": {
+    "session_id": "llm_20260109_014413",
+    "timestamp": "2026-01-09T01:44:55.251368",
+    "passed": true,
+    "test_name": "mechanics_hookes_law",
+    "method": "llm_guided"
+  }
+}

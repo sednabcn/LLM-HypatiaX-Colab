@@ -1,0 +1,1444 @@
+{
+  "tests": [
+    {
+      "description": "Arrhenius Equation: k = A*exp(-Ea/(R*T))",
+      "domain": "chemistry",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 0.9640895698777525,
+          "rmse": 0.025808390447980133,
+          "formula": "complexity                                                      11\nloss                                                      0.000666\nequation         ((T / (83.811584 - (T * 0.22143343))) / T) + -...\nscore                                                     0.712496\nsympy_format       -0.045830116 + T/(T*(83.811584 - 0.22143343*T))\nlambda_format    PySRFunction(X=>-0.045830116 + T/(T*(83.811584...\nName: 6, dtype: object",
+          "error": null,
+          "time": 70.17192006111145,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 0.9982116896997313,
+          "rmse": 0.005759331224430787,
+          "formula": "complexity                                                      13\nloss                                                      0.000033\nequation         ((T * (-0.04537172 / (T - 390.29343))) + 0.542...\nscore                                                     1.327569\nsympy_format     T*(-0.0023269223) + T*(-0.04537172)/(T - 1*390...\nlambda_format    PySRFunction(X=>T*(-0.0023269223) + T*(-0.0453...\nName: 7, dtype: object",
+          "error": null,
+          "time": 24.026865243911743,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": false,
+          "r2": 0.0,
+          "rmse": Infinity,
+          "formula": "N/A",
+          "error": "Predictions too large",
+          "time": 3.0413904190063477,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": false,
+          "r2": 0.0,
+          "rmse": Infinity,
+          "formula": "N/A",
+          "error": "Predictions too large",
+          "time": 3.7521352767944336,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9731573314558887,
+          "rmse": 0.021955836220532307,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 17.22468638420105,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9752681555235849,
+          "rmse": 0.021074893641878048,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.786256313323975,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9738115501796966,
+          "rmse": 0.021686628209616164,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 6.209707736968994,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": false,
+          "r2": 0.0,
+          "rmse": Infinity,
+          "formula": "N/A",
+          "error": "Predictions too large",
+          "time": 3.208047389984131,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9839850473699863,
+          "rmse": 0.016958989346478135,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.245765447616577,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Henderson-Hasselbalch: pH = pKa + log10([A-]/[HA])",
+      "domain": "chemistry",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 0.9824084297264891,
+          "rmse": 0.0654982878240053,
+          "formula": "complexity                                                       9\nloss                                                       0.00429\nequation           7.5892973 - (2.1925476 / ((A_minus + HA) / HA))\nscore                                                     0.763187\nsympy_format             7.5892973 - 2.1925476/((A_minus + HA)/HA)\nlambda_format    PySRFunction(X=>7.5892973 - 2.1925476/((A_minu...\nName: 5, dtype: object",
+          "error": null,
+          "time": 12.20321536064148,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 0.9964721894390033,
+          "rmse": 0.029331229740357866,
+          "formula": "complexity                                                      14\nloss                                                       0.00086\nequation         square((HA + 0.6595825) ^ -0.6780028) + (((A_m...\nscore                                                     0.758912\nsympy_format     (A_minus**0.10360154 + 1.5636413)**1.8959826 +...\nlambda_format    PySRFunction(X=>(A_minus**0.10360154 + 1.56364...\nName: 10, dtype: object",
+          "error": null,
+          "time": 18.250754356384277,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": false,
+          "r2": 0.0,
+          "rmse": Infinity,
+          "formula": "N/A",
+          "error": "Exec failed",
+          "time": 2.381929397583008,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": -11.558009584764797,
+          "rmse": 1.749999999931298,
+          "formula": "def formula(A_minus, HA):\n    pKa = 4.75  # Example pKa value\n    result = pKa +",
+          "error": null,
+          "time": 2.6724002361297607,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.981540340528474,
+          "rmse": 0.06877249042407015,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 1.5010251998901367,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9868228604558169,
+          "rmse": 0.0581049967765117,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 4.4843909740448,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9875715867065391,
+          "rmse": 0.05643009121773138,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 4.241616249084473,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": -11.414899532674859,
+          "rmse": 1.7399999999312983,
+          "formula": "def formula(A_minus, HA):\n    pKa = 4.76  # assuming acetic acid as default\n    ",
+          "error": null,
+          "time": 2.8392276763916016,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9863241348145443,
+          "rmse": 0.05919435794970938,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 4.23888897895813,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Rate Law: rate = k*[A]\u00b2*[B]",
+      "domain": "chemistry",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "complexity                                               7\nloss                                                   0.0\nequation                ((A_conc * 0.5) * B_conc) * A_conc\nscore                                            28.544649\nsympy_format                      A_conc*0.5*B_conc*A_conc\nlambda_format    PySRFunction(X=>A_conc*0.5*B_conc*A_conc)\nName: 5, dtype: object",
+          "error": null,
+          "time": 14.044625997543335,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "complexity                                               7\nloss                                                   0.0\nequation                (A_conc * (B_conc * 0.5)) * A_conc\nscore                                             9.422722\nsympy_format                      A_conc*B_conc*0.5*A_conc\nlambda_format    PySRFunction(X=>A_conc*B_conc*0.5*A_conc)\nName: 6, dtype: object",
+          "error": null,
+          "time": 16.546918630599976,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": true,
+          "r2": -0.6286345782357083,
+          "rmse": 15.334288190641702,
+          "formula": "def formula(A_conc, B_conc, k=1):\n    return k * np.power(A_conc, 2) * B_conc",
+          "error": null,
+          "time": 2.5587756633758545,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": -0.6286345782357083,
+          "rmse": 15.334288190641702,
+          "formula": "def formula(A_conc, B_conc):\n    k = 1.0\n    result = k * np.power(A_conc, 2) * ",
+          "error": null,
+          "time": 2.8206803798675537,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9969642240809263,
+          "rmse": 0.6710166193596458,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 1.5165741443634033,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9935180014207183,
+          "rmse": 0.9805119400276616,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 4.1422271728515625,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9956399962790877,
+          "rmse": 0.8041588591518577,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 4.248702049255371,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": -0.6286345782357083,
+          "rmse": 15.334288190641702,
+          "formula": "def formula(A_conc, B_conc):\n    k = 1.0\n    result = k * np.power(A_conc, 2) * ",
+          "error": null,
+          "time": 2.957775592803955,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9912763965746355,
+          "rmse": 1.1374868325622665,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 4.370241165161133,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Allometric Scaling: Y = a*M^b (metabolic rate)",
+      "domain": "biology",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 0.9999906854779713,
+          "rmse": 0.09184432722312931,
+          "formula": "complexity                                                      14\nloss                                                      0.008435\nequation         (((log(M) * -0.24024715) + 2.1479979) * ((M + ...\nscore                                                     0.464798\nsympy_format     (2.1479979 - 0.24024715*log(M))*(M - 4.6810096...\nlambda_format    PySRFunction(X=>(2.1479979 - 0.24024715*log(M)...\nName: 8, dtype: object",
+          "error": null,
+          "time": 13.66923713684082,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 0.999999950178985,
+          "rmse": 0.0067170462061077775,
+          "formula": "complexity                                                      11\nloss                                                      0.000045\nequation         (3.501876 * (((M + -0.011503404) ^ 0.7498429) ...\nscore                                                     0.136074\nsympy_format     3.501876*((M - 0.011503404)**0.7498429 - 0.055...\nlambda_format    PySRFunction(X=>3.501876*((M - 0.011503404)**0...\nName: 5, dtype: object",
+          "error": null,
+          "time": 19.074646949768066,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": false,
+          "r2": 0.0,
+          "rmse": Infinity,
+          "formula": "N/A",
+          "error": "Catastrophic R\u00b2",
+          "time": 2.4585256576538086,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": false,
+          "r2": 0.0,
+          "rmse": Infinity,
+          "formula": "N/A",
+          "error": "Catastrophic R\u00b2",
+          "time": 2.4296839237213135,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9982850261848968,
+          "rmse": 1.248280561241163,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 1.4726791381835938,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9986299059209883,
+          "rmse": 1.1157288308730213,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.071404457092285,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9914060930171897,
+          "rmse": 2.794337024946617,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.339036226272583,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 0.9957004538397265,
+          "rmse": 1.9732556641831438,
+          "formula": "def formula(M):\n    a = 3.4\n    b = 0.75\n    result = a * np.power(M, b)\n    ret",
+          "error": null,
+          "time": 2.9508204460144043,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9981580797759643,
+          "rmse": 1.293656184404874,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.208989858627319,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Michaelis-Menten: v = (Vmax*[S])/(Km+[S])",
+      "domain": "biology",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 0.9999999993543645,
+          "rmse": 0.000265112330542867,
+          "formula": "complexity                                                      11\nloss                                                           0.0\nequation         exp(log(var_S * (-6.962796 / ((var_S + 9.99926...\nscore                                                    13.514897\nsympy_format     -6.962796*var_S/(-0.139258426597023*var_S - 1....\nlambda_format    PySRFunction(X=>-6.962796*var_S/(-0.1392584265...\nName: 7, dtype: object",
+          "error": null,
+          "time": 14.518189430236816,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 0.9999999998955783,
+          "rmse": 0.0001066182628494146,
+          "formula": "complexity                                                       9\nloss                                                           0.0\nequation         (var_S * 50.00035) / ((var_S + 13.095545) - 3....\nscore                                                     0.758232\nsympy_format      var_S*50.00035/(var_S - 1*3.0953815 + 13.095545)\nlambda_format    PySRFunction(X=>var_S*50.00035/(var_S - 1*3.09...\nName: 5, dtype: object",
+          "error": null,
+          "time": 15.474207639694214,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": true,
+          "r2": -8.80362920496389,
+          "rmse": 32.668533302260805,
+          "formula": "def formula(S):\n    Vmax = 1.0\n    Km = 1.0\n    result = (Vmax * S) / (Km + S)\n ",
+          "error": null,
+          "time": 2.36086368560791,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": -8.80362920496389,
+          "rmse": 32.668533302260805,
+          "formula": "def formula(S):\n    Vmax = 1.0\n    Km = 1.0\n    result = (Vmax * S) / (Km + S)\n ",
+          "error": null,
+          "time": 2.6707651615142822,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9913625340904245,
+          "rmse": 0.9175431203104314,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 1.4689016342163086,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9887959667252193,
+          "rmse": 1.0450101412936943,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.250197887420654,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.993241659364554,
+          "rmse": 0.8116211369659274,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.047693252563477,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": -8.80362920496389,
+          "rmse": 32.668533302260805,
+          "formula": "def formula(S):\n    Vmax = 1.0\n    Km = 1.0\n    result = (Vmax * S) / (Km + S)\n ",
+          "error": null,
+          "time": 2.77982759475708,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9869081018422027,
+          "rmse": 1.1296258425779018,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.912409067153931,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Logistic Growth: dN/dt = r*N*(1-N/K)",
+      "domain": "biology",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 0.9999999999645244,
+          "rmse": 0.00011881393373986562,
+          "formula": "complexity                                                       7\nloss                                                           0.0\nequation                ((1000.00116 - var_N) * var_N) / 3333.3472\nscore                                                    23.514587\nsympy_format                  var_N*(1000.00116 - var_N)/3333.3472\nlambda_format    PySRFunction(X=>var_N*(1000.00116 - var_N)/333...\nName: 4, dtype: object",
+          "error": null,
+          "time": 13.701049089431763,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 0.8671434121767974,
+          "rmse": 7.27099651064965,
+          "formula": "complexity                                                      11\nloss                                                       52.8668\nequation         square(((var_N / -0.97538894) + (sqrt(var_N) +...\nscore                                                     0.805574\nsympy_format     (sqrt(var_N) - 0.0252320474333039*var_N - 1.58...\nlambda_format    PySRFunction(X=>(sqrt(var_N) - 0.0252320474333...\nName: 6, dtype: object",
+          "error": null,
+          "time": 14.632259845733643,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": false,
+          "r2": 0.0,
+          "rmse": Infinity,
+          "formula": "N/A",
+          "error": "Catastrophic R\u00b2",
+          "time": 2.812628746032715,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": false,
+          "r2": 0.0,
+          "rmse": Infinity,
+          "formula": "N/A",
+          "error": "Catastrophic R\u00b2",
+          "time": 2.6867318153381348,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.989044591677114,
+          "rmse": 2.2142416252230195,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 1.4860467910766602,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9837816922924387,
+          "rmse": 2.694098649954764,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.3096630573272705,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.992035334972982,
+          "rmse": 1.8879673693025367,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.172037601470947,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": false,
+          "r2": 0.0,
+          "rmse": Infinity,
+          "formula": "N/A",
+          "error": "Catastrophic R\u00b2",
+          "time": 3.3496546745300293,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9872905975871482,
+          "rmse": 2.384917122928618,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.688385486602783,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Kinetic Energy: KE = 0.5*m*v\u00b2",
+      "domain": "physics",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 2.347686948420074e-13,
+          "formula": "complexity                                       9\nloss                                           0.0\nequation                ((v * (v + v)) * m) * 0.25\nscore                                     5.159719\nsympy_format                      v*(v + v)*m*0.25\nlambda_format    PySRFunction(X=>v*(v + v)*m*0.25)\nName: 4, dtype: object",
+          "error": null,
+          "time": 12.584358215332031,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 0.9999999999879686,
+          "rmse": 0.007669873709597084,
+          "formula": "complexity                                               7\nloss                                              0.000057\nequation                 (square(v) / sqrt(4.0000205)) * m\nscore                                             0.575425\nsympy_format                      0.499998718754925*m*v**2\nlambda_format    PySRFunction(X=>0.499998718754925*m*v**2)\nName: 6, dtype: object",
+          "error": null,
+          "time": 17.968039512634277,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(m, v):\n    return 0.5 * m * v**2",
+          "error": null,
+          "time": 2.596656560897827,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(m, v):\n    return 0.5 * m * v**2",
+          "error": null,
+          "time": 2.5672576427459717,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9956962016748533,
+          "rmse": 130.41798511165106,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 1.4906141757965088,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(m, v):\n    return 0.5 * m * v**2",
+          "error": null,
+          "time": 4.041747331619263,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(m, v):\n    return 0.5 * m * v**2",
+          "error": null,
+          "time": 3.9537904262542725,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(m, v):\n    return 0.5 * m * v**2",
+          "error": null,
+          "time": 2.5811779499053955,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(m, v):\n    result = 0.5 * m * v**2\n    return result",
+          "error": null,
+          "time": 4.276095390319824,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Gravitational Force: F = G*m1*m2/r\u00b2",
+      "domain": "physics",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": -0.02565054072233286,
+          "rmse": 2.8438508097774243e+22,
+          "formula": "complexity                                        1\nloss                                            inf\nequation                                  -3.194698\nscore                                           0.0\nsympy_format                      -3.19469790000000\nlambda_format    PySRFunction(X=>-3.19469790000000)\nName: 0, dtype: object",
+          "error": null,
+          "time": 12.771435976028442,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": -0.02565054072233286,
+          "rmse": 2.8438508097774243e+22,
+          "formula": "complexity                                          1\nloss                                              inf\nequation                                    -0.088328\nscore                                             0.0\nsympy_format                      -0.0883282800000000\nlambda_format    PySRFunction(X=>-0.0883282800000000)\nName: 0, dtype: object",
+          "error": null,
+          "time": 15.733090162277222,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": true,
+          "r2": 0.9999999979276194,
+          "rmse": 1.2783267050256714e+18,
+          "formula": "def formula(m1, m2, r):\n    G = 6.67430e-11\n    return G * m1 * m2 / (r**2)",
+          "error": null,
+          "time": 2.6313328742980957,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 0.9999999979276194,
+          "rmse": 1.2783267050256714e+18,
+          "formula": "def formula(m1, m2, r):\n    G = 6.67430e-11\n    result = G * m1 * m2 / (r**2)\n  ",
+          "error": null,
+          "time": 2.8137588500976562,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.15712024364228072,
+          "rmse": 1.4473068629808309e+22,
+          "formula": "NN(3\u219232\u21921)",
+          "error": null,
+          "time": 1.4912846088409424,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 0.9999999979276194,
+          "rmse": 1.2783267050256714e+18,
+          "formula": "def formula(m1, m2, r):\n    G = 6.67430e-11\n    result = G * m1 * m2 / (r**2)\n  ",
+          "error": null,
+          "time": 4.3395020961761475,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 0.9999999979276194,
+          "rmse": 1.2783267050256714e+18,
+          "formula": "def formula(m1, m2, r):\n    G = 6.67430e-11\n    result = G * m1 * m2 / (r**2)\n  ",
+          "error": null,
+          "time": 112.95956063270569,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 0.9999999979276194,
+          "rmse": 1.2783267050256714e+18,
+          "formula": "def formula(m1, m2, r):\n    G = 6.67430e-11\n    result = G * m1 * m2 / (r**2)\n  ",
+          "error": null,
+          "time": 2.889979362487793,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 0.9999999979276194,
+          "rmse": 1.2783267050256714e+18,
+          "formula": "def formula(m1, m2, r):\n    G = 6.67430e-11\n    result = G * m1 * m2 / (r**2)\n  ",
+          "error": null,
+          "time": 4.098013162612915,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Ideal Gas Law: P = nRT/V",
+      "domain": "physics",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 1.0973380928144877e-11,
+          "formula": "complexity                                          7\nloss                                         0.000122\nequation                        T / (V / (n * 8.314))\nscore                                       14.988139\nsympy_format                      T/((V/((n*8.314))))\nlambda_format    PySRFunction(X=>T/((V/((n*8.314)))))\nName: 3, dtype: object",
+          "error": null,
+          "time": 13.393232107162476,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 1.3791945437835325e-11,
+          "formula": "complexity                                  7\nloss                                 0.000102\nequation                (n / V) * (T * 8.314)\nscore                               29.847381\nsympy_format                      n*T*8.314/V\nlambda_format    PySRFunction(X=>n*T*8.314/V)\nName: 4, dtype: object",
+          "error": null,
+          "time": 16.46200656890869,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(n, T, V):\n    R = 8.314  # J/(mol*K)\n    return n * R * T / V",
+          "error": null,
+          "time": 2.6148457527160645,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(n, T, V):\n    R = 8.314  # J/(mol\u00b7K)\n    result = n * R * T / V\n    ",
+          "error": null,
+          "time": 2.4824721813201904,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.6041360683267909,
+          "rmse": 101714.9139491812,
+          "formula": "NN(3\u219232\u21921)",
+          "error": null,
+          "time": 2.18942928314209,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(n, T, V):\n    R = 8.314\n    return n * R * T / V",
+          "error": null,
+          "time": 4.351581573486328,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(n, T, V):\n    R = 8.314\n    return n * R * T / V",
+          "error": null,
+          "time": 4.062755107879639,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(n, T, V):\n    R = 8.314\n    return n * R * T / V",
+          "error": null,
+          "time": 2.723900556564331,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(n, T, V):\n    R = 8.314\n    result = n * R * T / V\n    return result",
+          "error": null,
+          "time": 4.123200178146362,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Impermanent Loss: IL = 2*sqrt(r)/(1+r) - 1",
+      "domain": "defi_amm",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 0.9995493912109663,
+          "rmse": 0.0006267597719292553,
+          "formula": "complexity                                                       9\nloss                                                           0.0\nequation         ((log(price_ratio) * -0.11629062) * log(price_...\nscore                                                      0.21677\nsympy_format         -0.11629062*log(price_ratio)**2 - 0.000692653\nlambda_format    PySRFunction(X=>-0.11629062*log(price_ratio)**...\nName: 6, dtype: object",
+          "error": null,
+          "time": 13.492305040359497,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 0.9997186037598969,
+          "rmse": 0.0004952909924854936,
+          "formula": "complexity                                                      13\nloss                                                           0.0\nequation         log(price_ratio) * ((0.012151337 / price_ratio...\nscore                                                     0.459101\nsympy_format     (-0.107101955*log(price_ratio) - 0.01347515563...\nlambda_format    PySRFunction(X=>(-0.107101955*log(price_ratio)...\nName: 7, dtype: object",
+          "error": null,
+          "time": 13.695455074310303,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(price_ratio):\n    r = price_ratio\n    result = 2 * np.sqrt(r) / (1 +",
+          "error": null,
+          "time": 2.756403923034668,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(price_ratio):\n    r = price_ratio\n    result = 2 * np.sqrt(r) / (1 +",
+          "error": null,
+          "time": 2.805962324142456,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9644276908445202,
+          "rmse": 0.005532929473430922,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 1.3732142448425293,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(price_ratio):\n    r = price_ratio\n    result = 2 * np.sqrt(r) / (1 +",
+          "error": null,
+          "time": 4.1086626052856445,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(price_ratio):\n    r = price_ratio\n    result = 2 * np.sqrt(r) / (1 +",
+          "error": null,
+          "time": 4.102579355239868,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(price_ratio):\n    return 2 * np.sqrt(price_ratio) / (1 + price_ratio",
+          "error": null,
+          "time": 2.822117805480957,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(price_ratio):\n    r = price_ratio\n    result = 2 * np.sqrt(r) / (1 +",
+          "error": null,
+          "time": 4.693105459213257,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Price Impact: impact = dx/(x+dx)",
+      "domain": "defi_amm",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "complexity                                            5\nloss                                                0.0\nequation                        swap / (swap + reserve)\nscore                                         14.324463\nsympy_format                      swap/(reserve + swap)\nlambda_format    PySRFunction(X=>swap/(reserve + swap))\nName: 2, dtype: object",
+          "error": null,
+          "time": 11.488480567932129,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "complexity                                            5\nloss                                                0.0\nequation                        swap / (swap + reserve)\nscore                                         14.324463\nsympy_format                      swap/(reserve + swap)\nlambda_format    PySRFunction(X=>swap/(reserve + swap))\nName: 2, dtype: object",
+          "error": null,
+          "time": 12.827946424484253,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(reserve, swap):\n    return swap / (reserve + swap)",
+          "error": null,
+          "time": 2.6225366592407227,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(reserve, swap):\n    result = swap / (reserve + swap)\n    return resu",
+          "error": null,
+          "time": 2.808336019515991,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.982742724782606,
+          "rmse": 0.003668475034469638,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 1.4212620258331299,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(reserve, swap):\n    result = swap / (reserve + swap)\n    return resu",
+          "error": null,
+          "time": 4.126678228378296,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(reserve, swap):\n    result = swap / (reserve + swap)\n    return resu",
+          "error": null,
+          "time": 4.0964035987854,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(reserve, swap):\n    result = swap / (reserve + swap)\n    return resu",
+          "error": null,
+          "time": 2.6730000972747803,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(reserve, swap):\n    result = swap / (reserve + swap)\n    return resu",
+          "error": null,
+          "time": 4.032260417938232,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Constant Product: y = k/x",
+      "domain": "defi_amm",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "complexity                                  3\nloss                                      0.0\nequation                            1.0e6 / x\nscore                                16.55688\nsympy_format                      1000000.0/x\nlambda_format    PySRFunction(X=>1000000.0/x)\nName: 1, dtype: object",
+          "error": null,
+          "time": 13.520488262176514,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "complexity                                  3\nloss                                      0.0\nequation                            1.0e6 / x\nscore                                16.55688\nsympy_format                      1000000.0/x\nlambda_format    PySRFunction(X=>1000000.0/x)\nName: 1, dtype: object",
+          "error": null,
+          "time": 15.450668334960938,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": true,
+          "r2": -0.6534969006889695,
+          "rmse": 604.6626681608352,
+          "formula": "def formula(x, k=1):\n    return k / x",
+          "error": null,
+          "time": 2.3405725955963135,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": -0.6534969006889695,
+          "rmse": 604.6626681608352,
+          "formula": "def formula(x):\n    k = 1\n    result = k / x\n    return result",
+          "error": null,
+          "time": 2.482614040374756,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.8855651255695595,
+          "rmse": 151.80576574944436,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 1.3839704990386963,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.8959203414152284,
+          "rmse": 144.77447463485214,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.1251747608184814,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.881762571534796,
+          "rmse": 154.30732976669938,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 3.922426700592041,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": -0.6534969006889695,
+          "rmse": 604.6626681608352,
+          "formula": "def formula(x):\n    k = 1\n    return k / x",
+          "error": null,
+          "time": 2.385648250579834,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.8846423442154995,
+          "rmse": 152.416603406472,
+          "formula": "NN(1\u219232\u21921)",
+          "error": null,
+          "time": 4.3427512645721436,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Value at Risk 95%: VaR = P*\u03c3*1.645",
+      "domain": "defi_risk",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 2.9583054069536214e-12,
+          "formula": "complexity                                                 5\nloss                                                0.000002\nequation                    portfolio * (volatility * 1.645)\nscore                                              15.849381\nsympy_format                      portfolio*volatility*1.645\nlambda_format    PySRFunction(X=>portfolio*volatility*1.645)\nName: 2, dtype: object",
+          "error": null,
+          "time": 13.794814109802246,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 0.9999999999890405,
+          "rmse": 0.057308125768845766,
+          "formula": "complexity                                                       8\nloss                                                      0.003356\nequation         (portfolio + exp(0.60790503)) * (volatility / ...\nscore                                                     0.439567\nsympy_format     volatility*(portfolio + exp(0.60790503))/0.607...\nlambda_format    PySRFunction(X=>volatility*(portfolio + exp(0....\nName: 3, dtype: object",
+          "error": null,
+          "time": 17.86023473739624,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(portfolio, volatility):\n    return portfolio * volatility * 1.645",
+          "error": null,
+          "time": 2.6721813678741455,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(portfolio, volatility):\n    result = portfolio * volatility * 1.645\n",
+          "error": null,
+          "time": 2.4697425365448,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9921557466633905,
+          "rmse": 1530.610021349009,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 1.4200880527496338,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(portfolio, volatility):\n    return portfolio * volatility * 1.645",
+          "error": null,
+          "time": 4.011203289031982,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(portfolio, volatility):\n    return portfolio * volatility * 1.645",
+          "error": null,
+          "time": 3.947380542755127,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(portfolio, volatility):\n    return portfolio * volatility * 1.645",
+          "error": null,
+          "time": 2.47406005859375,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(portfolio, volatility):\n    result = portfolio * volatility * 1.645\n",
+          "error": null,
+          "time": 4.2869791984558105,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Liquidation Price LONG: liq = entry*(1 - 1/(L*0.8))",
+      "domain": "defi_risk",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 2.890419379049618e-12,
+          "formula": "complexity                                                       7\nloss                                                      0.000003\nequation              ((leverage - 1.25) * entry_price) / leverage\nscore                                                    13.848166\nsympy_format              entry_price*(leverage - 1*1.25)/leverage\nlambda_format    PySRFunction(X=>entry_price*(leverage - 1*1.25...\nName: 3, dtype: object",
+          "error": null,
+          "time": 13.826278448104858,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 2.601218447321133e-12,
+          "formula": "complexity                                                       7\nloss                                                      0.000002\nequation           entry_price - (entry_price * (1.25 / leverage))\nscore                                                    26.376189\nsympy_format               entry_price - 1.25*entry_price/leverage\nlambda_format    PySRFunction(X=>entry_price - 1.25*entry_price...\nName: 4, dtype: object",
+          "error": null,
+          "time": 14.966678619384766,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": false,
+          "r2": 0.0,
+          "rmse": Infinity,
+          "formula": "N/A",
+          "error": "Exec failed",
+          "time": 2.684349298477173,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(entry_price, leverage):\n    return entry_price * (1 - 1 / (leverage ",
+          "error": null,
+          "time": 2.662339210510254,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9945166408403413,
+          "rmse": 584.8306654024944,
+          "formula": "NN(2\u219232\u21921)",
+          "error": null,
+          "time": 1.4251465797424316,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(entry_price, leverage):\n    return entry_price * (1 - 1 / (leverage ",
+          "error": null,
+          "time": 4.03903341293335,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(entry_price, leverage):\n    return entry_price * (1 - 1/(leverage * ",
+          "error": null,
+          "time": 4.373800039291382,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(entry_price, leverage):\n    return entry_price * (1 - 1/(leverage * ",
+          "error": null,
+          "time": 2.649378538131714,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(entry_price, leverage):\n    return entry_price * (1 - 1/(leverage * ",
+          "error": null,
+          "time": 4.778780460357666,
+          "metadata": {}
+        }
+      }
+    },
+    {
+      "description": "Portfolio VaR: sqrt(var1\u00b2 + var2\u00b2 + 2\u03c1*var1*var2)",
+      "domain": "defi_risk",
+      "results": {
+        "LLM-Guided PySR": {
+          "method": "LLM-Guided PySR",
+          "success": true,
+          "r2": 0.9653031576382192,
+          "rmse": 2437.6306982395504,
+          "formula": "complexity                                                       9\nloss                                                     5942041.5\nequation           ((rho * 0.27052465) + 0.747922) * (var1 + var2)\nscore                                                      0.77162\nsympy_format             (var1 + var2)*(rho*0.27052465 + 0.747922)\nlambda_format    PySRFunction(X=>(var1 + var2)*(rho*0.27052465 ...\nName: 5, dtype: object",
+          "error": null,
+          "time": 12.782290697097778,
+          "metadata": {}
+        },
+        "Pure PySR": {
+          "method": "Pure PySR",
+          "success": true,
+          "r2": 0.965303157688709,
+          "rmse": 2437.6306964659643,
+          "formula": "complexity                                                       9\nloss                                                     5942043.0\nequation          (var1 + var2) * ((rho * 0.27052197) + 0.7479212)\nscore                                                     0.675271\nsympy_format            (var1 + var2)*(rho*0.27052197 + 0.7479212)\nlambda_format    PySRFunction(X=>(var1 + var2)*(rho*0.27052197 ...\nName: 5, dtype: object",
+          "error": null,
+          "time": 15.337483644485474,
+          "metadata": {}
+        },
+        "Pure LLM (Basic)": {
+          "method": "Pure LLM (Basic)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(var1, var2, rho):\n    return np.sqrt(var1**2 + var2**2 + 2*rho*var1*",
+          "error": null,
+          "time": 2.46321964263916,
+          "metadata": {}
+        },
+        "Pure LLM (Enhanced)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(var1, var2, rho):\n    return np.sqrt(var1**2 + var2**2 + 2*rho*var1*",
+          "error": null,
+          "time": 2.7700977325439453,
+          "metadata": {}
+        },
+        "Neural Network": {
+          "method": "Neural Network",
+          "success": true,
+          "r2": 0.9933760153539167,
+          "rmse": 1169.3008495009371,
+          "formula": "NN(3\u219232\u21921)",
+          "error": null,
+          "time": 1.525583028793335,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Simple)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(var1, var2, rho):\n    return np.sqrt(var1**2 + var2**2 + 2*rho*var1*",
+          "error": null,
+          "time": 4.1984663009643555,
+          "metadata": {}
+        },
+        "LLM+NN Ensemble (Smart)": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(var1, var2, rho):\n    return np.sqrt(var1**2 + var2**2 + 2*rho*var1*",
+          "error": null,
+          "time": 3.9402215480804443,
+          "metadata": {}
+        },
+        "Integrated LLM Discovery": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(var1, var2, rho):\n    return np.sqrt(var1**2 + var2**2 + 2*rho*var1*",
+          "error": null,
+          "time": 2.381213903427124,
+          "metadata": {}
+        },
+        "Hybrid System v40": {
+          "method": "Pure LLM (Enhanced)",
+          "success": true,
+          "r2": 1.0,
+          "rmse": 0.0,
+          "formula": "def formula(var1, var2, rho):\n    return np.sqrt(var1**2 + var2**2 + 2*rho*var1*",
+          "error": null,
+          "time": 4.041563987731934,
+          "metadata": {}
+        }
+      }
+    }
+  ]
+}

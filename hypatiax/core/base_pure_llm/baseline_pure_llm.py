@@ -14,7 +14,6 @@ from dotenv import load_dotenv
 env_path = Path(__file__).parent.parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
-
 class PureLLMBaseline:
     """
     Pure LLM baseline for formula discovery.
@@ -529,7 +528,7 @@ def load_test_data(
     Returns:
         List of (description, X, y, variable_names, metadata) tuples
     """
-    from experiment_protocol import ExperimentProtocol
+    from hypatiax.protocols.experiment_protocol import ExperimentProtocol
 
     # Load test cases from protocol (now keeping metadata!)
     test_cases = ExperimentProtocol.load_test_data(domain, num_samples=100)
@@ -547,7 +546,7 @@ def run_comprehensive_test(
         domains: List of domains to test (None = all domains)
         save_dir: Directory to save results
     """
-    from experiment_protocol import ExperimentProtocol
+    from hypatiax.protocols.experiment_protocol import ExperimentProtocol
 
     if domains is None:
         domains = ExperimentProtocol.get_all_domains()
@@ -634,7 +633,7 @@ def run_comprehensive_test(
     baseline.save_results(results_file)
 
     # Generate and save comprehensive report
-    from experiment_protocol import ExperimentProtocol
+    from hypatiax.protocols.experiment_protocol import ExperimentProtocol
 
     report = ExperimentProtocol.generate_experiment_report(all_results)
     report_file = f"{save_dir}/experiment_report_{timestamp}.json"
@@ -691,7 +690,7 @@ if __name__ == "__main__":
             run_comprehensive_test(domains=["materials", "fluids"])
         elif sys.argv[1] == "--protocol":
             # Generate protocol documentation
-            from experiment_protocol import ExperimentProtocol
+            from hypatiax.protocols.experiment_protocol import ExperimentProtocol
 
             ExperimentProtocol.save_protocol_documentation()
         else:

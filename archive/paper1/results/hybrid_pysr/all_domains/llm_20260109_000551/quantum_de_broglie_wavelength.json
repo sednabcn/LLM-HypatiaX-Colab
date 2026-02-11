@@ -1,0 +1,120 @@
+{
+  "success": false,
+  "best_hypothesis": {
+    "equation": "y = h / (m * v)",
+    "confidence": 0.95,
+    "reasoning": "This is the exact de Broglie wavelength formula \u03bb = h/p where momentum p = mv. The negative correlations with m and v match the inverse relationship, and h being Planck's constant explains the small y-scale values.",
+    "source": "llm",
+    "fitted_equation": "h / (m * v)",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 0.0,
+    "validation_passed": false,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = h / (m * v)",
+      "confidence": 0.95,
+      "reasoning": "This is the exact de Broglie wavelength formula \u03bb = h/p where momentum p = mv. The negative correlations with m and v match the inverse relationship, and h being Planck's constant explains the small y-scale values.",
+      "source": "llm",
+      "fitted_equation": "h / (m * v)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 6.626e-34 / (m * v)",
+      "confidence": 0.9,
+      "reasoning": "Same as above but with Planck's constant explicitly included as a coefficient. The value 6.626e-34 J\u00b7s would produce wavelengths in the observed range for typical quantum particles.",
+      "source": "llm",
+      "fitted_equation": "6.626e-34 / (m * v)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h / (2 * 3.14159 * m * v)",
+      "confidence": 0.75,
+      "reasoning": "This would be the reduced de Broglie wavelength using \u210f (h-bar) instead of h, where the 2\u03c0 factor accounts for the reduced Planck constant. Less likely but possible variant.",
+      "source": "llm",
+      "fitted_equation": "h / (2 * 3.14159 * m * v)",
+      "coefficients": {},
+      "r2_score": 0.2848896387178462,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h / (m**0.5 * v)",
+      "confidence": 0.3,
+      "reasoning": "A modified form with fractional power on mass, which might account for relativistic corrections or quantum field effects, though this deviates significantly from standard de Broglie theory.",
+      "source": "llm",
+      "fitted_equation": "h / (m**0.5 * v)",
+      "coefficients": {},
+      "r2_score": -0.011442640275712623,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h**2 / (m * v)",
+      "confidence": 0.4,
+      "reasoning": "A variant where h is squared, which could arise in some quantum mechanical derivations involving probability amplitudes, though less standard for wavelength calculations.",
+      "source": "llm",
+      "fitted_equation": "h**2 / (m * v)",
+      "coefficients": {},
+      "r2_score": -0.011442640275729055,
+      "validation_score": 0.0,
+      "validation_passed": false,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": false,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "h": -8.572736342690175e-18,
+      "m": -0.12234527494723589,
+      "v": -0.14374533694311017
+    },
+    "polynomial_degree": null,
+    "power_exponents": {},
+    "y_range": [
+      7.021431349847451e-13,
+      8.301053818601426e-09
+    ],
+    "y_scale": "small",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "complex"
+  },
+  "timing": {
+    "total": 9.994856595993042,
+    "phase1_analysis": 0.07186102867126465,
+    "phase2_llm": 9.909695863723755,
+    "phase3_verify": 0.011178970336914062
+  },
+  "r2_score": 1.0,
+  "validation_score": 0.0,
+  "expression": "h / (m * v)",
+  "test_name": "quantum_de_broglie_wavelength",
+  "timestamp": "2026-01-09T00:08:58.101614",
+  "ground_truth": "h/(m*v)",
+  "domain": "quantum",
+  "_metadata": {
+    "session_id": "llm_20260109_000551",
+    "timestamp": "2026-01-09T00:08:58.101698",
+    "passed": false,
+    "test_name": "quantum_de_broglie_wavelength",
+    "method": "llm_guided"
+  }
+}

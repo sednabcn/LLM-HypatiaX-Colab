@@ -1,0 +1,26 @@
+{
+  "session_id": "20260106_130834",
+  "timestamp": "2026-01-06T14:17:09.873559",
+  "completed": [
+    "physics_kinetic_energy",
+    "biology_logistic_growth",
+    "physics_ideal_gas_law",
+    "chemistry_arrhenius_equation",
+    "physics_projectile_motion",
+    "mathematics_pythagorean_theorem",
+    "economics_elasticity_demand",
+    "physics_ohms_law",
+    "engineering_reynolds_number",
+    "chemistry_henderson_hasselbalch",
+    "mathematics_quadratic_discriminant",
+    "biology_allometric_scaling",
+    "chemistry_nernst_equation",
+    "mathematics_compound_interest",
+    "economics_cobb_douglas",
+    "engineering_hookes_law"
+  ],
+  "failed": [
+    "biology_michaelis_menten",
+    "engineering_bernoulli_equation"
+  ]
+}

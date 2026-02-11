@@ -1,0 +1,179 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = I * R",
+    "confidence": 0.95,
+    "reasoning": "This is Ohm's Law (V = IR), the fundamental relationship in electromagnetism relating voltage, current, and resistance",
+    "source": "llm",
+    "fitted_equation": "I * R",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = I * R",
+      "confidence": 0.95,
+      "reasoning": "This is Ohm's Law (V = IR), the fundamental relationship in electromagnetism relating voltage, current, and resistance",
+      "source": "llm",
+      "fitted_equation": "I * R",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a * I**2 * R + b",
+      "confidence": 0.85,
+      "reasoning": "Power formula with offset constant, accounting for baseline effects or measurement offsets",
+      "source": "llm",
+      "fitted_equation": "a * I**2 * R + b",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 94.9,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a * I * R**2 + b * I",
+      "confidence": 0.6,
+      "reasoning": "Resistance-squared interaction with current plus linear current term",
+      "source": "llm",
+      "fitted_equation": "a * I * R**2 + b * I",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 86.8,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a * I**2 * R**2 + b * I * R",
+      "confidence": 0.5,
+      "reasoning": "Higher-order interaction term combined with basic Ohm's law, for complex circuit behaviors",
+      "source": "llm",
+      "fitted_equation": "a * I**2 * R**2 + b * I * R",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 86.8,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a * (I + R)**2 + b",
+      "confidence": 0.55,
+      "reasoning": "Quadratic relationship in the sum of current and resistance, with offset",
+      "source": "llm",
+      "fitted_equation": "a * (I + R)**2 + b",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 68.9,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a * I * R + b * I**2",
+      "confidence": 0.8,
+      "reasoning": "Mixed linear and quadratic current terms with resistance, capturing both Ohmic and power effects",
+      "source": "llm",
+      "fitted_equation": "a * I * R + b * I**2",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 60.8,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a * I * R + b * R**2",
+      "confidence": 0.75,
+      "reasoning": "Linear current term plus quadratic resistance term, accounting for resistance-dependent losses",
+      "source": "llm",
+      "fitted_equation": "a * I * R + b * R**2",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 60.8,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = a * I**2 + b * R**2",
+      "confidence": 0.65,
+      "reasoning": "Quadratic terms in both variables independently, capturing non-linear effects in both current and resistance",
+      "source": "llm",
+      "fitted_equation": "a * I**2 + b * R**2",
+      "coefficients": {},
+      "r2_score": 0.0,
+      "validation_score": 60.8,
+      "validation_passed": false,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = I**2 * R",
+      "confidence": 0.9,
+      "reasoning": "This is the power dissipation formula (P = I\u00b2R) in electrical circuits, explaining the polynomial degree 2 pattern",
+      "source": "llm",
+      "fitted_equation": "I**2 * R",
+      "coefficients": {},
+      "r2_score": -101.38897077577789,
+      "validation_score": 99.4,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (I * R)**2",
+      "confidence": 0.7,
+      "reasoning": "Squared voltage relationship (V\u00b2), common in power calculations and energy storage",
+      "source": "llm",
+      "fitted_equation": "(I * R)**2",
+      "coefficients": {},
+      "r2_score": -78017795.28407903,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": false,
+    "is_polynomial": true,
+    "is_power_law": false,
+    "is_exponential": false,
+    "is_logarithmic": false,
+    "is_periodic": false,
+    "has_interactions": true,
+    "correlations": {
+      "I": 0.6383681881263266,
+      "R": 0.6349275188886386
+    },
+    "polynomial_degree": 2,
+    "power_exponents": {},
+    "y_range": [
+      1.1667918088220157,
+      9452.589786148825
+    ],
+    "y_scale": "large",
+    "symmetry": "skewed_right",
+    "estimated_complexity": "medium"
+  },
+  "timing": {
+    "total": 12.623171329498291,
+    "phase1_analysis": 0.05896592140197754,
+    "phase2_llm": 11.711591720581055,
+    "phase3_verify": 0.8512446880340576
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "I * R",
+  "test_name": "electromagnetism_ohms_law",
+  "timestamp": "2026-01-09T01:46:07.159310",
+  "ground_truth": "I*R",
+  "domain": "electromagnetism",
+  "_metadata": {
+    "session_id": "llm_20260109_014413",
+    "timestamp": "2026-01-09T01:46:07.159398",
+    "passed": true,
+    "test_name": "electromagnetism_ohms_law",
+    "method": "llm_guided"
+  }
+}

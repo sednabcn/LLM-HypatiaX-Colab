@@ -68,7 +68,7 @@ from hypatiax.tools.validation.ensemble_validator import EnsembleValidator
 
 # Import DeFi protocol
 try:
-    from experiment_protocol_defi_20 import DeFiExperimentProtocolExtended
+    from hypatiax.protocols.experiment_protocol_defi_20 import DeFiExperimentProtocolExtended
 except ImportError:
     print("❌ Error: experiment_protocol_defi_20.py not found in current directory")
     sys.exit(1)

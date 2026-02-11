@@ -1,0 +1,117 @@
+──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/hybrid_llm_guide_validation/llm_guided_symbolic_discovery_v12.py --protocol ALL --batch --test nernst --niterations 50
+✅ Using integrated SymbolicEngineWithLLM v20
+✅ Loaded Protocol ALL from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/core/generation/hybrid_llm_guide_validation/experiment_protocol_all_30.py
+✅ Converted 30 test cases from protocol
+
+🎯 Running single test: chemistry_nernst_equation
+
+================================================================================
+Running: Nernst Equation | Domain: chemistry
+================================================================================
+✅ Integrated LLM Discovery initialized
+   Mode: hybrid
+   Iterations: 50
+
+================================================================================
+INTEGRATED LLM-GUIDED DISCOVERY v11.1
+================================================================================
+Domain: chemistry
+Variables: E0, R, T, n, F, Qr
+Samples: 1000
+Mode: hybrid
+   ✓ LLM engine initialized (claude-sonnet-4-20250514)
+   ✓ LLM mode: hybrid
+2026-01-13 14:35:30,250 - INFO - ======================================================================
+2026-01-13 14:35:30,251 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-13 14:35:30,252 - INFO - ======================================================================
+2026-01-13 14:35:30,252 - INFO - Domain: chemistry
+2026-01-13 14:35:30,252 - INFO - Discovery mode: calibrated
+2026-01-13 14:35:30,253 - INFO - Primary LLM: anthropic
+2026-01-13 14:35:30,253 - INFO - Auto-config: True
+2026-01-13 14:35:30,254 - INFO - Max retries: 3
+2026-01-13 14:35:30,254 - INFO - PhysicsAware fallback: False
+2026-01-13 14:35:30,255 - INFO - Complexity threshold: 20
+2026-01-13 14:35:30,255 - INFO - ======================================================================
+2026-01-13 14:35:30,256 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-13 14:35:54,068 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+   🔧 Patching hybrid system with LLM engine
+
+🔬 Starting discovery...
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Nernst Equation
+Domain: CHEMISTRY
+Samples: 1000
+Variables: ['E0', 'R', 'T', 'n', 'F', 'Qr']
+Equation hint: Nernst Equation
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-13 14:35:54,069 - INFO -
+[SYMBOLIC] Attempt 1/3 (seed=42)
+
+[HYBRID MODE] LLM first, PySR refinement...
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3065: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:3066: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+2026-01-13 14:36:02,646 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+   LLM best: E0 - (R * T * Qr) / (n * F + 1)
+   LLM R²: -7.6671
+   LLM time: 8.66s
+   → Refining with PySR...
+
+[DISCOVERY] Starting symbolic regression...
+   Variables: E0, R, T, n, F, Qr
+   Samples: 1000
+   Iterations: 50
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/pysr/sr.py:1873: UserWarning: Note: Setting `random_state` without also setting `deterministic=True` and `parallelism='serial'` will result in non-deterministic searches.
+  warnings.warn(
+   ✅ Found: E0 - (-3.8086433e-5 / (((-0.119488746 + (-0.8081196 / (Qr + (-0.8081221 / Qr)))) / (T + ((T * Qr) * ((-1.3534302e-5 * Qr) + 0.004650621)))) * n))
+   R²: 1.0000
+   PySR time: 235.99s
+   PySR R²: 1.0000
+   ✅ PySR refinement improved result
+2026-01-13 14:39:58,732 - INFO -    Result: E0 - (-3.8086433e-5 / (((-0.119488746 + (-0.8081196 / (Qr + (-0.8081221 / Qr)))) / (T + ((T * Qr) * ((-1.3534302e-5 * Qr) + 0.004650621)))) * n))
+2026-01-13 14:39:58,732 - INFO -    R2 = 1.0000
+2026-01-13 14:39:58,733 - INFO -    [BEST] New best!
+2026-01-13 14:39:58,733 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: E0 - (-3.8086433e-5 / (((-0.119488746 + (-0.8081196 / (Qr + (-0.8081221 / Qr)))) / (T + ((T * Qr) * ((-1.3534302e-5 * Qr) + 0.004650621)))) * n))
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/3
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+
+================================================================================
+✅ SUCCESS
+   Expression: E0 - (-3.8086433e-5 / (((-0.119488746 + (-0.8081196 / (Qr + (-0.8081221 / Qr)))) / (T + ((T * Qr) * ((-1.3534302e-5 * Qr) + 0.004650621)))) * n))
+   R² Score: 1.0000
+   Validation: 100.0/100
+   Total time: 268.84s
+   LLM Mode: hybrid_pysr_better
+
+✅ Test passed!
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$

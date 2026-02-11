@@ -1,0 +1,181 @@
+{
+  "success": true,
+  "best_hypothesis": {
+    "equation": "y = h * f",
+    "confidence": 0.98,
+    "reasoning": "This is Planck's equation E = hf for photon energy, where h is Planck's constant and f is frequency. Perfect correlation with f and quantum domain strongly suggests this fundamental relationship.",
+    "source": "llm",
+    "fitted_equation": "h * f",
+    "coefficients": {},
+    "r2_score": 1.0,
+    "validation_score": 100.0,
+    "validation_passed": true,
+    "dimensional_check": {}
+  },
+  "all_hypotheses": [
+    {
+      "equation": "y = h * f",
+      "confidence": 0.98,
+      "reasoning": "This is Planck's equation E = hf for photon energy, where h is Planck's constant and f is frequency. Perfect correlation with f and quantum domain strongly suggests this fundamental relationship.",
+      "source": "llm",
+      "fitted_equation": "h * f",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 6.626e-34 * f",
+      "confidence": 0.95,
+      "reasoning": "Direct implementation of Planck's equation with the actual value of Planck's constant (6.626\u00d710\u207b\u00b3\u2074 J\u00b7s), explaining the very small y-scale values.",
+      "source": "llm",
+      "fitted_equation": "6.626e-34 * f",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h * f + 0",
+      "confidence": 0.9,
+      "reasoning": "Linear form of Planck's equation with explicit zero intercept, consistent with photon energy being directly proportional to frequency with no offset.",
+      "source": "llm",
+      "fitted_equation": "h * f + 0",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = f * h",
+      "confidence": 0.88,
+      "reasoning": "Commutative form of Planck's equation, mathematically identical but emphasizing frequency as the primary variable given the perfect correlation.",
+      "source": "llm",
+      "fitted_equation": "f * h",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h * f**1",
+      "confidence": 0.85,
+      "reasoning": "Explicit power law form showing linear dependence on frequency, consistent with detected power exponent of 1.00 for f variable.",
+      "source": "llm",
+      "fitted_equation": "h * f**1",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = (h) * (f)",
+      "confidence": 0.82,
+      "reasoning": "Parenthetical form of Planck's equation emphasizing the multiplicative relationship between the two fundamental quantum variables.",
+      "source": "llm",
+      "fitted_equation": "(h) * (f)",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h * f * 1",
+      "confidence": 0.78,
+      "reasoning": "Planck's equation with unity multiplier, accounting for potential dimensionless factors while maintaining the core hf relationship.",
+      "source": "llm",
+      "fitted_equation": "h * f * 1",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = 1 * h * f",
+      "confidence": 0.75,
+      "reasoning": "Explicit coefficient form of Planck's equation, allowing for potential scaling factors while preserving the fundamental physics.",
+      "source": "llm",
+      "fitted_equation": "1 * h * f",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = h * f + h * 0",
+      "confidence": 0.7,
+      "reasoning": "Expanded linear form showing pure dependence on frequency term with zero contribution from constant term, consistent with photon energy physics.",
+      "source": "llm",
+      "fitted_equation": "h * f + h * 0",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    },
+    {
+      "equation": "y = f * 6.626e-34",
+      "confidence": 0.65,
+      "reasoning": "Simplified form with Planck's constant as coefficient, treating h as the known physical constant rather than a variable in the relationship.",
+      "source": "llm",
+      "fitted_equation": "f * 6.626e-34",
+      "coefficients": {},
+      "r2_score": 1.0,
+      "validation_score": 100.0,
+      "validation_passed": true,
+      "dimensional_check": {}
+    }
+  ],
+  "patterns": {
+    "is_linear": true,
+    "is_polynomial": true,
+    "is_power_law": true,
+    "is_exponential": true,
+    "is_logarithmic": true,
+    "is_periodic": false,
+    "has_interactions": false,
+    "correlations": {
+      "h": 1.8802933873925837e-16,
+      "f": 1.0
+    },
+    "polynomial_degree": 2,
+    "power_exponents": {
+      "f": 1.0000000000000002
+    },
+    "y_range": [
+      6.902226059856487e-20,
+      6.624316372874511e-19
+    ],
+    "y_scale": "very_small",
+    "symmetry": "symmetric",
+    "estimated_complexity": "simple"
+  },
+  "timing": {
+    "total": 13.09441590309143,
+    "phase1_analysis": 0.055905818939208984,
+    "phase2_llm": 12.75434136390686,
+    "phase3_verify": 0.28368520736694336
+  },
+  "r2_score": 1.0,
+  "validation_score": 100.0,
+  "expression": "h * f",
+  "test_name": "quantum_photon_energy",
+  "timestamp": "2026-01-09T01:48:05.939775",
+  "ground_truth": "h*f",
+  "domain": "quantum",
+  "_metadata": {
+    "session_id": "llm_20260109_014413",
+    "timestamp": "2026-01-09T01:48:05.939883",
+    "passed": true,
+    "test_name": "quantum_photon_energy",
+    "method": "llm_guided"
+  }
+}

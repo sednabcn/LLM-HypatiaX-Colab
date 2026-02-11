@@ -1,0 +1,3588 @@
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$ python hypatiax/core/generation/hybrid_all_domains/suite_hybrid_system_all_domains.py --protocol ALL --batch --iterations 50
+✅ Loaded Protocol ALL from: /home/agagora/Downloads/GITHUB/LLM-HypatiaX-Colab/hypatiax/core/generation/hybrid_all_domains/experiment_protocol_all_30.py
+
+✅ Converted 30 test cases
+
+================================================================================
+UNIFIED HYBRID SYSTEM v4.2
+================================================================================
+
+🔧 Mode: FAST
+   Tests: 30/30 | Iterations: 50
+
+================================================================================
+TEST 1/30: mechanics_kinetic_energy
+================================================================================
+
+================================================================================
+Running: Kinetic Energy | Domain: mechanics
+Variables: m, v
+🚀 ENHANCED config
+Descriptions: {'m': 'Object mass', 'v': 'Object velocity'}
+================================================================================
+2026-01-07 14:10:09,048 - INFO - ======================================================================
+2026-01-07 14:10:09,049 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:10:09,049 - INFO - ======================================================================
+2026-01-07 14:10:09,049 - INFO - Domain: mechanics
+2026-01-07 14:10:09,049 - INFO - Discovery mode: strict
+2026-01-07 14:10:09,049 - INFO - Primary LLM: anthropic
+2026-01-07 14:10:09,049 - INFO - Auto-config: True
+2026-01-07 14:10:09,050 - INFO - Max retries: 5
+2026-01-07 14:10:09,050 - INFO - PhysicsAware fallback: False
+2026-01-07 14:10:09,050 - INFO - Complexity threshold: 20
+2026-01-07 14:10:09,050 - INFO - ======================================================================
+2026-01-07 14:10:09,050 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:10:41,277 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Kinetic Energy
+Domain: MECHANICS
+Samples: 1000
+Variables: ['m', 'v']
+Equation hint: kinetic_energy
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:10:41,277 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'m': 'linear', 'v': 'quadratic'}
+   [SMART] Interactions detected: 1
+   [SMART] Physical constants: {'half': 0.5}
+   [SMART] Confidence: 0.83
+[PATTERNS] multiplicative, interactions, polynomial
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: v*0.005345344*v*93.539345*m
+   R² = 1.0000
+2026-01-07 14:13:54,896 - INFO -    Result: v*0.005345344*v*93.539345*m
+2026-01-07 14:13:54,896 - INFO -    R2 = 1.0000
+2026-01-07 14:13:54,897 - INFO -    [BEST] New best!
+2026-01-07 14:13:54,897 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: v*0.005345344*v*93.539345*m
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: mechanics_kinetic_energy.json
+
+📊 R²: 1.0000 | Val: 100.0 | ✅ PASS
+   High R²=1.0000, Val=100.0 (dim check issue)
+
+================================================================================
+TEST 2/30: mechanics_gravitational_potential_energy
+================================================================================
+
+================================================================================
+Running: Gravitational Potential Energy | Domain: mechanics
+Variables: m, g, h
+Descriptions: {'m': 'Object mass', 'g': 'Gravitational acceleration', 'h': 'Height above reference'}
+================================================================================
+2026-01-07 14:13:56,001 - INFO - ======================================================================
+2026-01-07 14:13:56,001 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:13:56,002 - INFO - ======================================================================
+2026-01-07 14:13:56,002 - INFO - Domain: mechanics
+2026-01-07 14:13:56,002 - INFO - Discovery mode: strict
+2026-01-07 14:13:56,002 - INFO - Primary LLM: anthropic
+2026-01-07 14:13:56,002 - INFO - Auto-config: True
+2026-01-07 14:13:56,002 - INFO - Max retries: 5
+2026-01-07 14:13:56,003 - INFO - PhysicsAware fallback: False
+2026-01-07 14:13:56,003 - INFO - Complexity threshold: 20
+2026-01-07 14:13:56,003 - INFO - ======================================================================
+2026-01-07 14:13:56,003 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:13:56,998 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Gravitational Potential Energy
+Domain: MECHANICS
+Samples: 1000
+Variables: ['m', 'g', 'h']
+Equation hint: gravitational_potential_energy
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:13:56,999 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'m': 'linear', 'g': 'log', 'h': 'linear'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.83
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: g*h*m
+   R² = 1.0000
+2026-01-07 14:15:37,081 - INFO -    Result: g*h*m
+2026-01-07 14:15:37,081 - INFO -    R2 = 1.0000
+2026-01-07 14:15:37,081 - INFO -    [BEST] New best!
+2026-01-07 14:15:37,082 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: g*h*m
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: mechanics_gravitational_potential_energy.json
+
+📊 R²: 1.0000 | Val: 100.0 | ✅ PASS
+   High R²=1.0000, Val=100.0 (dim check issue)
+
+================================================================================
+TEST 3/30: mechanics_hookes_law
+================================================================================
+
+================================================================================
+Running: Hookes Law | Domain: mechanics
+Variables: k, x
+Descriptions: {'k': 'Spring stiffness constant', 'x': 'Displacement from equilibrium'}
+================================================================================
+2026-01-07 14:15:37,186 - INFO - ======================================================================
+2026-01-07 14:15:37,186 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:15:37,186 - INFO - ======================================================================
+2026-01-07 14:15:37,186 - INFO - Domain: mechanics
+2026-01-07 14:15:37,187 - INFO - Discovery mode: strict
+2026-01-07 14:15:37,187 - INFO - Primary LLM: anthropic
+2026-01-07 14:15:37,187 - INFO - Auto-config: True
+2026-01-07 14:15:37,187 - INFO - Max retries: 5
+2026-01-07 14:15:37,188 - INFO - PhysicsAware fallback: False
+2026-01-07 14:15:37,188 - INFO - Complexity threshold: 20
+2026-01-07 14:15:37,188 - INFO - ======================================================================
+2026-01-07 14:15:37,188 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:15:38,188 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Hookes Law
+Domain: MECHANICS
+Samples: 1000
+Variables: ['k', 'x']
+Equation hint: hookes_law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:15:38,189 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'k': 'linear', 'x': 'quadratic'}
+   [SMART] Interactions detected: 2
+   [SMART] Confidence: 0.67
+[PATTERNS] interactions, polynomial
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: k*0.7952875/(x*x*1.5815833)**(0.1947416**k - 1*0.49987411)
+   R² = 1.0000
+2026-01-07 14:16:33,028 - INFO -    Result: k*0.7952875/(x*x*1.5815833)**(0.1947416**k - 1*0.49987411)
+2026-01-07 14:16:33,029 - INFO -    R2 = 1.0000
+2026-01-07 14:16:33,029 - INFO -    [BEST] New best!
+2026-01-07 14:16:33,029 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: k*0.7952875/(x*x*1.5815833)**(0.1947416**k - 1*0.49987411)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 86.8/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: mechanics_hookes_law.json
+
+📊 R²: 1.0000 | Val: 86.8 | ✅ PASS
+   High R²=1.0000, Val=86.8 (dim check issue)
+
+================================================================================
+TEST 4/30: thermodynamics_ideal_gas_law
+================================================================================
+
+================================================================================
+Running: Ideal Gas Law | Domain: thermodynamics
+Variables: n, R, T, V
+Descriptions: {'n': 'Number of moles of gas', 'R': 'Universal gas constant', 'T': 'Absolute temperature', 'V': 'Volume of gas container'}
+================================================================================
+2026-01-07 14:16:33,396 - INFO - ======================================================================
+2026-01-07 14:16:33,396 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:16:33,396 - INFO - ======================================================================
+2026-01-07 14:16:33,396 - INFO - Domain: thermodynamics
+2026-01-07 14:16:33,397 - INFO - Discovery mode: strict
+2026-01-07 14:16:33,397 - INFO - Primary LLM: anthropic
+2026-01-07 14:16:33,397 - INFO - Auto-config: True
+2026-01-07 14:16:33,397 - INFO - Max retries: 5
+2026-01-07 14:16:33,397 - INFO - PhysicsAware fallback: False
+2026-01-07 14:16:33,398 - INFO - Complexity threshold: 20
+2026-01-07 14:16:33,398 - INFO - ======================================================================
+2026-01-07 14:16:33,398 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:16:34,345 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Ideal Gas Law
+Domain: THERMODYNAMICS
+Samples: 1000
+Variables: ['n', 'R', 'T', 'V']
+Equation hint: ideal_gas_law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:16:34,346 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'n': 'sqrt', 'R': 'linear', 'T': 'log', 'V': 'log'}
+   [SMART] Interactions detected: 4
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['sqrt', 'log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['sqrt', 'log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: R*T*n/V
+   R² = 1.0000
+2026-01-07 14:19:13,995 - INFO -    Result: R*T*n/V
+2026-01-07 14:19:13,996 - INFO -    R2 = 1.0000
+2026-01-07 14:19:13,996 - INFO -    [BEST] New best!
+2026-01-07 14:19:13,996 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: R*T*n/V
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: thermodynamics_ideal_gas_law.json
+
+📊 R²: 1.0000 | Val: 91.0 | ✅ PASS
+   High R²=1.0000, Val=91.0 (dim check issue)
+
+================================================================================
+TEST 5/30: thermodynamics_heat_capacity
+================================================================================
+
+================================================================================
+Running: Heat Capacity | Domain: thermodynamics
+Variables: m, c, dT
+Descriptions: {'m': 'Mass of substance', 'c': 'Specific heat capacity', 'dT': 'Temperature change'}
+================================================================================
+2026-01-07 14:19:14,095 - INFO - ======================================================================
+2026-01-07 14:19:14,095 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:19:14,095 - INFO - ======================================================================
+2026-01-07 14:19:14,095 - INFO - Domain: thermodynamics
+2026-01-07 14:19:14,096 - INFO - Discovery mode: strict
+2026-01-07 14:19:14,096 - INFO - Primary LLM: anthropic
+2026-01-07 14:19:14,096 - INFO - Auto-config: True
+2026-01-07 14:19:14,096 - INFO - Max retries: 5
+2026-01-07 14:19:14,097 - INFO - PhysicsAware fallback: False
+2026-01-07 14:19:14,097 - INFO - Complexity threshold: 20
+2026-01-07 14:19:14,097 - INFO - ======================================================================
+2026-01-07 14:19:14,097 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:19:15,332 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Heat Capacity
+Domain: THERMODYNAMICS
+Samples: 1000
+Variables: ['m', 'c', 'dT']
+Equation hint: heat_capacity
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:19:15,333 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'m': 'linear', 'c': 'sqrt', 'dT': 'linear'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['sqrt']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['sqrt']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: c*dT*m
+   R² = 1.0000
+2026-01-07 14:21:01,289 - INFO -    Result: c*dT*m
+2026-01-07 14:21:01,289 - INFO -    R2 = 1.0000
+2026-01-07 14:21:01,290 - INFO -    [BEST] New best!
+2026-01-07 14:21:01,290 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: c*dT*m
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: thermodynamics_heat_capacity.json
+
+📊 R²: 1.0000 | Val: 100.0 | ✅ PASS
+   High R²=1.0000, Val=100.0 (dim check issue)
+
+================================================================================
+TEST 6/30: thermodynamics_carnot_efficiency
+================================================================================
+
+================================================================================
+Running: Carnot Efficiency | Domain: thermodynamics
+Variables: Tc, Th
+Descriptions: {'Tc': 'Cold reservoir temperature', 'Th': 'Hot reservoir temperature'}
+================================================================================
+2026-01-07 14:21:01,373 - INFO - ======================================================================
+2026-01-07 14:21:01,373 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:21:01,374 - INFO - ======================================================================
+2026-01-07 14:21:01,374 - INFO - Domain: thermodynamics
+2026-01-07 14:21:01,374 - INFO - Discovery mode: strict
+2026-01-07 14:21:01,374 - INFO - Primary LLM: anthropic
+2026-01-07 14:21:01,375 - INFO - Auto-config: True
+2026-01-07 14:21:01,375 - INFO - Max retries: 5
+2026-01-07 14:21:01,375 - INFO - PhysicsAware fallback: False
+2026-01-07 14:21:01,375 - INFO - Complexity threshold: 20
+2026-01-07 14:21:01,376 - INFO - ======================================================================
+2026-01-07 14:21:01,376 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:21:02,402 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Carnot Efficiency
+Domain: THERMODYNAMICS
+Samples: 1000
+Variables: ['Tc', 'Th']
+Equation hint: carnot_efficiency
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:21:02,402 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: True
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'Tc': 'linear', 'Th': 'log'}
+   [SMART] Confidence: 1.00
+[PATTERNS] additive, multiplicative, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Additive structure detected
+   [SMART] → Pure additive structure: no power operator needed
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: (-Tc + Th)/Th
+   R² = 1.0000
+2026-01-07 14:21:28,113 - INFO -    Result: (-Tc + Th)/Th
+2026-01-07 14:21:28,114 - INFO -    R2 = 1.0000
+2026-01-07 14:21:28,114 - INFO -    [BEST] New best!
+2026-01-07 14:21:28,114 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (-Tc + Th)/Th
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 98.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: thermodynamics_carnot_efficiency.json
+
+📊 R²: 1.0000 | Val: 98.5 | ✅ PASS
+   High R²=1.0000, Val=98.5 (dim check issue)
+
+================================================================================
+TEST 7/30: electromagnetism_coulomb_law
+================================================================================
+
+================================================================================
+Running: Coulomb Law | Domain: electromagnetism
+Variables: k, q1, q2, r
+Descriptions: {'k': "Coulomb's constant", 'q1': 'First point charge', 'q2': 'Second point charge', 'r': 'Distance between charges'}
+================================================================================
+2026-01-07 14:21:28,254 - INFO - ======================================================================
+2026-01-07 14:21:28,255 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:21:28,255 - INFO - ======================================================================
+2026-01-07 14:21:28,255 - INFO - Domain: electromagnetism
+2026-01-07 14:21:28,255 - INFO - Discovery mode: strict
+2026-01-07 14:21:28,255 - INFO - Primary LLM: anthropic
+2026-01-07 14:21:28,255 - INFO - Auto-config: True
+2026-01-07 14:21:28,255 - INFO - Max retries: 5
+2026-01-07 14:21:28,255 - INFO - PhysicsAware fallback: False
+2026-01-07 14:21:28,256 - INFO - Complexity threshold: 20
+2026-01-07 14:21:28,256 - INFO - ======================================================================
+2026-01-07 14:21:28,256 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:21:29,247 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Coulomb Law
+Domain: ELECTROMAGNETISM
+Samples: 1000
+Variables: ['k', 'q1', 'q2', 'r']
+Equation hint: coulomb_law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:21:29,248 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'k': 'cubic', 'q1': 'log', 'q2': 'linear', 'r': 'log'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=4.3674e-36): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.03938e-64): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.22544e-51): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.26396e-64): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 7.317850497588*k*q1*q2*log(log(k))/(r**2*log(k))
+   R² = 1.0000
+2026-01-07 14:22:50,077 - INFO -    Result: 7.317850497588*k*q1*q2*log(log(k))/(r**2*log(k))
+2026-01-07 14:22:50,077 - INFO -    R2 = 1.0000
+2026-01-07 14:22:50,077 - INFO -    [BEST] New best!
+2026-01-07 14:22:50,077 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: 7.317850497588*k*q1*q2*log(log(k))/(r**2*log(k))
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 82.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: electromagnetism_coulomb_law.json
+
+📊 R²: 1.0000 | Val: 82.0 | ✅ PASS
+   High R²=1.0000, Val=82.0 (dim check issue)
+
+================================================================================
+TEST 8/30: electromagnetism_ohms_law
+================================================================================
+
+================================================================================
+Running: Ohms Law | Domain: electromagnetism
+Variables: I, R
+Descriptions: {'I': 'Electric current through conductor', 'R': 'Electrical resistance'}
+================================================================================
+   [SANITIZE] I -> I_val (reserved name)
+2026-01-07 14:22:50,284 - INFO - ======================================================================
+2026-01-07 14:22:50,284 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:22:50,284 - INFO - ======================================================================
+2026-01-07 14:22:50,285 - INFO - Domain: electromagnetism
+2026-01-07 14:22:50,285 - INFO - Discovery mode: strict
+2026-01-07 14:22:50,285 - INFO - Primary LLM: anthropic
+2026-01-07 14:22:50,285 - INFO - Auto-config: True
+2026-01-07 14:22:50,285 - INFO - Max retries: 5
+2026-01-07 14:22:50,286 - INFO - PhysicsAware fallback: False
+2026-01-07 14:22:50,286 - INFO - Complexity threshold: 20
+2026-01-07 14:22:50,286 - INFO - ======================================================================
+2026-01-07 14:22:50,286 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:22:51,232 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Ohms Law
+Domain: ELECTROMAGNETISM
+Samples: 1000
+Variables: ['I_val', 'R']
+Equation hint: ohms_law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:22:51,233 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: True
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'I_val': 'linear', 'R': 'linear'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.93
+[PATTERNS] additive, multiplicative, interactions
+   [SMART] Configuring based on structure...
+   [SMART] → Additive structure detected
+   [SMART] → Pure additive structure: no power operator needed
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: I_val*R
+   R² = 1.0000
+2026-01-07 14:23:16,444 - INFO -    Result: I_val*R
+2026-01-07 14:23:16,444 - INFO -    R2 = 1.0000
+2026-01-07 14:23:16,445 - INFO -    [BEST] New best!
+2026-01-07 14:23:16,445 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: I_val*R
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 95.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: electromagnetism_ohms_law.json
+
+📊 R²: 1.0000 | Val: 95.5 | ✅ PASS
+   High R²=1.0000, Val=95.5 (dim check issue)
+
+================================================================================
+TEST 9/30: electromagnetism_lorentz_force
+================================================================================
+
+================================================================================
+Running: Lorentz Force | Domain: electromagnetism
+Variables: q, v, B
+Descriptions: {'q': 'Electric charge', 'v': 'Particle velocity', 'B': 'Magnetic field strength'}
+================================================================================
+2026-01-07 14:23:16,522 - INFO - ======================================================================
+2026-01-07 14:23:16,523 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:23:16,523 - INFO - ======================================================================
+2026-01-07 14:23:16,523 - INFO - Domain: electromagnetism
+2026-01-07 14:23:16,523 - INFO - Discovery mode: strict
+2026-01-07 14:23:16,523 - INFO - Primary LLM: anthropic
+2026-01-07 14:23:16,524 - INFO - Auto-config: True
+2026-01-07 14:23:16,524 - INFO - Max retries: 5
+2026-01-07 14:23:16,524 - INFO - PhysicsAware fallback: False
+2026-01-07 14:23:16,524 - INFO - Complexity threshold: 20
+2026-01-07 14:23:16,524 - INFO - ======================================================================
+2026-01-07 14:23:16,525 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:23:17,462 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Lorentz Force
+Domain: ELECTROMAGNETISM
+Samples: 1000
+Variables: ['q', 'v', 'B']
+Equation hint: lorentz_force
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:23:17,463 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'q': 'exp', 'v': 'linear', 'B': 'linear'}
+   [SMART] Confidence: 0.80
+[PATTERNS] multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['exp']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['exp']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: B*q*v
+   R² = 1.0000
+2026-01-07 14:24:25,559 - INFO -    Result: B*q*v
+2026-01-07 14:24:25,559 - INFO -    R2 = 1.0000
+2026-01-07 14:24:25,559 - INFO -    [BEST] New best!
+2026-01-07 14:24:25,560 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: B*q*v
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: electromagnetism_lorentz_force.json
+
+📊 R²: 1.0000 | Val: 100.0 | ✅ PASS
+   High R²=1.0000, Val=100.0 (dim check issue)
+
+================================================================================
+TEST 10/30: fluid_dynamics_bernoulli_equation
+================================================================================
+
+================================================================================
+Running: Bernoulli Equation | Domain: fluid_dynamics
+Variables: P, rho, v, g, h
+🚀 ENHANCED config
+Descriptions: {'P': 'Static pressure in fluid', 'rho': 'Fluid density (mass per unit volume)', 'v': 'Flow velocity of fluid', 'g': 'Gravitational acceleration', 'h': 'Height above reference datum'}
+================================================================================
+2026-01-07 14:24:25,645 - INFO - ======================================================================
+2026-01-07 14:24:25,645 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:24:25,646 - INFO - ======================================================================
+2026-01-07 14:24:25,646 - INFO - Domain: fluid_dynamics
+2026-01-07 14:24:25,646 - INFO - Discovery mode: strict
+2026-01-07 14:24:25,646 - INFO - Primary LLM: anthropic
+2026-01-07 14:24:25,647 - INFO - Auto-config: True
+2026-01-07 14:24:25,647 - INFO - Max retries: 5
+2026-01-07 14:24:25,647 - INFO - PhysicsAware fallback: False
+2026-01-07 14:24:25,647 - INFO - Complexity threshold: 20
+2026-01-07 14:24:25,648 - INFO - ======================================================================
+2026-01-07 14:24:25,648 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:24:26,914 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Bernoulli Equation
+Domain: FLUID_DYNAMICS
+Samples: 1000
+Variables: ['P', 'rho', 'v', 'g', 'h']
+Equation hint: bernoulli_equation
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:24:26,915 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'P': 'sqrt', 'rho': 'log', 'v': 'quadratic', 'g': 'exp', 'h': 'linear'}
+
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
+   [HINT OVERRIDE] Forcing Bernoulli physical structure
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
+   ✓ Structure locked to additive with quadratic velocity term
+   [SMART] Confidence: 1.00
+[PATTERNS] polynomial, logarithmic
+
+[HINT OVERRIDE] Applying Bernoulli physics constraints
+[CONFIG] Bernoulli: additive energy conservation (no transcendental functions)
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 75
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: -P/(-1.0914217) + rho**0.26548147*(h + v)*(rho - 1*(-262.87198))
+   R² = 0.9627
+2026-01-07 14:25:54,198 - INFO -    Result: -P/(-1.0914217) + rho**0.26548147*(h + v)*(rho - 1*(-262.87198))
+2026-01-07 14:25:54,199 - INFO -    R2 = 0.9627
+2026-01-07 14:25:54,199 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:25:54,199 - WARNING -       High complexity (64) but R2=0.9627
+2026-01-07 14:25:54,200 - INFO -    [BEST] New best!
+2026-01-07 14:25:54,200 - INFO -
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'P': 'sqrt', 'rho': 'log', 'v': 'quadratic', 'g': 'exp', 'h': 'linear'}
+
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
+   [HINT OVERRIDE] Forcing Bernoulli physical structure
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
+   ✓ Structure locked to additive with quadratic velocity term
+   [SMART] Confidence: 1.00
+[PATTERNS] polynomial, logarithmic
+
+[HINT OVERRIDE] Applying Bernoulli physics constraints
+[CONFIG] Bernoulli: additive energy conservation (no transcendental functions)
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 75
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: P + rho*(h*v - 1*(-49.149197))
+   R² = 0.8683
+2026-01-07 14:27:28,609 - INFO -    Result: P + rho*(h*v - 1*(-49.149197))
+2026-01-07 14:27:28,609 - INFO -    R2 = 0.8683
+2026-01-07 14:27:28,609 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:27:28,610 - WARNING -       High complexity (30) but R2=0.8683
+2026-01-07 14:27:28,610 - INFO -
+[SYMBOLIC] Attempt 3/5 (seed=44)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'P': 'sqrt', 'rho': 'log', 'v': 'quadratic', 'g': 'exp', 'h': 'linear'}
+
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
+   [HINT OVERRIDE] Forcing Bernoulli physical structure
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
+   ✓ Structure locked to additive with quadratic velocity term
+   [SMART] Confidence: 1.00
+[PATTERNS] polynomial, logarithmic
+
+[HINT OVERRIDE] Applying Bernoulli physics constraints
+[CONFIG] Bernoulli: additive energy conservation (no transcendental functions)
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 75
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: P + rho*(-(-8.154094)*h + v*6.441976)
+   R² = 0.9589
+2026-01-07 14:29:00,462 - INFO -    Result: P + rho*(-(-8.154094)*h + v*6.441976)
+2026-01-07 14:29:00,463 - INFO -    R2 = 0.9589
+2026-01-07 14:29:00,463 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:29:00,463 - WARNING -       High complexity (37) but R2=0.9589
+2026-01-07 14:29:00,463 - INFO -
+[SYMBOLIC] Attempt 4/5 (seed=45)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'P': 'sqrt', 'rho': 'log', 'v': 'quadratic', 'g': 'exp', 'h': 'linear'}
+
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
+   [HINT OVERRIDE] Forcing Bernoulli physical structure
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
+   ✓ Structure locked to additive with quadratic velocity term
+   [SMART] Confidence: 1.00
+[PATTERNS] polynomial, logarithmic
+
+[HINT OVERRIDE] Applying Bernoulli physics constraints
+[CONFIG] Bernoulli: additive energy conservation (no transcendental functions)
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 75
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: h*rho*v - (-P - 49177.023)
+   R² = 0.8540
+2026-01-07 14:30:25,159 - INFO -    Result: h*rho*v - (-P - 49177.023)
+2026-01-07 14:30:25,160 - INFO -    R2 = 0.8540
+2026-01-07 14:30:25,160 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:30:25,160 - WARNING -       High complexity (26) but R2=0.8540
+2026-01-07 14:30:25,160 - WARNING -       Suspicious constants: ['49177.023']
+2026-01-07 14:30:25,161 - INFO -
+[SYMBOLIC] Attempt 5/5 (seed=46)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'P': 'sqrt', 'rho': 'log', 'v': 'quadratic', 'g': 'exp', 'h': 'linear'}
+
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
+   [HINT OVERRIDE] Forcing Bernoulli physical structure
+⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠
+   ✓ Structure locked to additive with quadratic velocity term
+   [SMART] Confidence: 1.00
+[PATTERNS] polynomial, logarithmic
+
+[HINT OVERRIDE] Applying Bernoulli physics constraints
+[CONFIG] Bernoulli: additive energy conservation (no transcendental functions)
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 75
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: P - rho*(-h - v + 1.0864253)/0.13387473
+   R² = 0.9610
+2026-01-07 14:31:51,636 - INFO -    Result: P - rho*(-h - v + 1.0864253)/0.13387473
+2026-01-07 14:31:51,637 - INFO -    R2 = 0.9610
+2026-01-07 14:31:51,637 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:31:51,637 - WARNING -       High complexity (39) but R2=0.9610
+2026-01-07 14:31:51,637 - INFO -
+[SUCCESS] SymbolicEngine succeeded (R2=0.9627)
+
+[OK] Discovery complete
+   Expression: -P/(-1.0914217) + rho**0.26548147*(h + v)*(rho - 1*(-262.87198))
+   R2 Score: 0.9627
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Bernoulli: additive energy conservation (no transcendental functions)
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 39.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: fluid_dynamics_bernoulli_equation.json
+
+📊 R²: 0.9627 | Val: 39.3 | ❌ FAIL
+
+================================================================================
+TEST 11/30: fluid_dynamics_reynolds_number
+================================================================================
+
+================================================================================
+Running: Reynolds Number | Domain: fluid_dynamics
+Variables: rho, v, L, mu
+Descriptions: {'rho': 'Fluid density', 'v': 'Flow velocity', 'L': 'Characteristic length scale', 'mu': 'Dynamic viscosity'}
+================================================================================
+2026-01-07 14:31:51,961 - INFO - ======================================================================
+2026-01-07 14:31:51,962 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:31:51,962 - INFO - ======================================================================
+2026-01-07 14:31:51,962 - INFO - Domain: fluid_dynamics
+2026-01-07 14:31:51,962 - INFO - Discovery mode: strict
+2026-01-07 14:31:51,963 - INFO - Primary LLM: anthropic
+2026-01-07 14:31:51,963 - INFO - Auto-config: True
+2026-01-07 14:31:51,963 - INFO - Max retries: 5
+2026-01-07 14:31:51,963 - INFO - PhysicsAware fallback: False
+2026-01-07 14:31:51,964 - INFO - Complexity threshold: 20
+2026-01-07 14:31:51,964 - INFO - ======================================================================
+2026-01-07 14:31:51,964 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:31:52,905 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Reynolds Number
+Domain: FLUID_DYNAMICS
+Samples: 1000
+Variables: ['rho', 'v', 'L', 'mu']
+Equation hint: reynolds_number
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:31:52,906 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'rho': 'log', 'v': 'linear', 'L': 'sqrt', 'mu': 'log'}
+   [SMART] Interactions detected: 4
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log', 'sqrt']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log', 'sqrt']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: rho*v/((mu/L))
+   R² = 1.0000
+2026-01-07 14:33:57,246 - INFO -    Result: rho*v/((mu/L))
+2026-01-07 14:33:57,246 - INFO -    R2 = 1.0000
+2026-01-07 14:33:57,246 - INFO -    [BEST] New best!
+2026-01-07 14:33:57,247 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: rho*v/((mu/L))
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: fluid_dynamics_reynolds_number.json
+
+📊 R²: 1.0000 | Val: 91.0 | ✅ PASS
+   High R²=1.0000, Val=91.0 (dim check issue)
+
+================================================================================
+TEST 12/30: fluid_dynamics_hagen_poiseuille
+================================================================================
+
+================================================================================
+Running: Hagen Poiseuille | Domain: fluid_dynamics
+Variables: dP, r, mu, L
+Descriptions: {'dP': 'Pressure difference', 'r': 'Pipe radius', 'mu': 'Dynamic viscosity', 'L': 'Pipe length'}
+================================================================================
+2026-01-07 14:33:57,344 - INFO - ======================================================================
+2026-01-07 14:33:57,345 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:33:57,345 - INFO - ======================================================================
+2026-01-07 14:33:57,345 - INFO - Domain: fluid_dynamics
+2026-01-07 14:33:57,345 - INFO - Discovery mode: strict
+2026-01-07 14:33:57,346 - INFO - Primary LLM: anthropic
+2026-01-07 14:33:57,346 - INFO - Auto-config: True
+2026-01-07 14:33:57,346 - INFO - Max retries: 5
+2026-01-07 14:33:57,347 - INFO - PhysicsAware fallback: False
+2026-01-07 14:33:57,347 - INFO - Complexity threshold: 20
+2026-01-07 14:33:57,347 - INFO - ======================================================================
+2026-01-07 14:33:57,347 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:33:58,288 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Hagen Poiseuille
+Domain: FLUID_DYNAMICS
+Samples: 1000
+Variables: ['dP', 'r', 'mu', 'L']
+Equation hint: hagen_poiseuille
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:33:58,289 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'dP': 'linear', 'r': 'cubic', 'mu': 'linear', 'L': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 15.0776142811544*(dP**(0.65542555*r))**log(dP)/(L*log(dP))
+   R² = 0.9955
+2026-01-07 14:35:48,304 - INFO -    Result: 15.0776142811544*(dP**(0.65542555*r))**log(dP)/(L*log(dP))
+2026-01-07 14:35:48,305 - INFO -    R2 = 0.9955
+2026-01-07 14:35:48,305 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:35:48,305 - WARNING -       High complexity (58) but R2=0.9955
+2026-01-07 14:35:48,305 - INFO -    [BEST] New best!
+2026-01-07 14:35:48,306 - INFO -
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'dP': 'linear', 'r': 'cubic', 'mu': 'linear', 'L': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: -5.03118418719235*dP*r**3.653936/(L*mu**0.63688546*log(r))
+   R² = 1.0000
+2026-01-07 14:37:30,178 - INFO -    Result: -5.03118418719235*dP*r**3.653936/(L*mu**0.63688546*log(r))
+2026-01-07 14:37:30,179 - INFO -    R2 = 1.0000
+2026-01-07 14:37:30,179 - INFO -    [BEST] New best!
+2026-01-07 14:37:30,179 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: -5.03118418719235*dP*r**3.653936/(L*mu**0.63688546*log(r))
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 2/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 85.6/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: fluid_dynamics_hagen_poiseuille.json
+
+📊 R²: 1.0000 | Val: 85.6 | ✅ PASS
+   High R²=1.0000, Val=85.6 (dim check issue)
+
+================================================================================
+TEST 13/30: optics_thin_lens_equation
+================================================================================
+
+================================================================================
+Running: Thin Lens Equation | Domain: optics
+Variables: do, di
+Descriptions: {'do': 'Object distance from lens', 'di': 'Image distance from lens'}
+================================================================================
+2026-01-07 14:37:30,404 - INFO - ======================================================================
+2026-01-07 14:37:30,404 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:37:30,404 - INFO - ======================================================================
+2026-01-07 14:37:30,405 - INFO - Domain: optics
+2026-01-07 14:37:30,405 - INFO - Discovery mode: strict
+2026-01-07 14:37:30,405 - INFO - Primary LLM: anthropic
+2026-01-07 14:37:30,405 - INFO - Auto-config: True
+2026-01-07 14:37:30,405 - INFO - Max retries: 5
+2026-01-07 14:37:30,406 - INFO - PhysicsAware fallback: False
+2026-01-07 14:37:30,406 - INFO - Complexity threshold: 20
+2026-01-07 14:37:30,406 - INFO - ======================================================================
+2026-01-07 14:37:30,406 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:37:31,346 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Thin Lens Equation
+Domain: OPTICS
+Samples: 1000
+Variables: ['do', 'di']
+Equation hint: thin_lens_equation
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:37:31,347 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'do': 'log', 'di': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 2.7405288*(0.6447788**(do**0.43338415))**log(di)/do**0.5250768
+   R² = 0.9617
+2026-01-07 14:40:31,567 - INFO -    Result: 2.7405288*(0.6447788**(do**0.43338415))**log(di)/do**0.5250768
+2026-01-07 14:40:31,567 - INFO -    R2 = 0.9617
+2026-01-07 14:40:31,567 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:40:31,568 - WARNING -       High complexity (62) but R2=0.9617
+2026-01-07 14:40:31,568 - INFO -    [BEST] New best!
+2026-01-07 14:40:31,568 - INFO -
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'do': 'log', 'di': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: (di**0.25337556/0.45659214)**(do**0.15179276/di)*(do**(-0.6187426))**(di**0.19673419)
+   R² = 0.9798
+2026-01-07 14:43:23,207 - INFO -    Result: (di**0.25337556/0.45659214)**(do**0.15179276/di)*(do**(-0.6187426))**(di**0.19673419)
+2026-01-07 14:43:23,207 - INFO -    R2 = 0.9798
+2026-01-07 14:43:23,207 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:43:23,208 - WARNING -       High complexity (85) but R2=0.9798
+2026-01-07 14:43:23,208 - INFO -    [BEST] New best!
+2026-01-07 14:43:23,208 - INFO -
+[SYMBOLIC] Attempt 3/5 (seed=44)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'do': 'log', 'di': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 2.49653431106937/(do**(0.26738265*log(di))*(di*do)**(0.48832273/do**0.135485))
+   R² = 0.9772
+2026-01-07 14:46:15,737 - INFO -    Result: 2.49653431106937/(do**(0.26738265*log(di))*(di*do)**(0.48832273/do**0.135485))
+2026-01-07 14:46:15,738 - INFO -    R2 = 0.9772
+2026-01-07 14:46:15,738 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:46:15,739 - WARNING -       High complexity (78) but R2=0.9772
+2026-01-07 14:46:15,739 - INFO -
+[SYMBOLIC] Attempt 4/5 (seed=45)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'do': 'log', 'di': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: (di*1.6943345/di)**0.49291483/(((0.11977892/do)**(0.24942192**di))*(do**di)**(0.8513841/di))
+   R² = 0.9657
+2026-01-07 14:49:42,763 - INFO -    Result: (di*1.6943345/di)**0.49291483/(((0.11977892/do)**(0.24942192**di))*(do**di)**(0.8513841/di))
+2026-01-07 14:49:42,763 - INFO -    R2 = 0.9657
+2026-01-07 14:49:42,764 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:49:42,764 - WARNING -       High complexity (92) but R2=0.9657
+2026-01-07 14:49:42,764 - INFO -
+[SYMBOLIC] Attempt 5/5 (seed=46)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'do': 'log', 'di': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: ((do/di)**(0.42141852**di)*2.8858109/(do*1.1162039**di))**0.78925633
+   R² = 0.9696
+2026-01-07 14:52:24,971 - INFO -    Result: ((do/di)**(0.42141852**di)*2.8858109/(do*1.1162039**di))**0.78925633
+2026-01-07 14:52:24,971 - INFO -    R2 = 0.9696
+2026-01-07 14:52:24,972 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:52:24,972 - WARNING -       High complexity (68) but R2=0.9696
+2026-01-07 14:52:24,972 - INFO -
+[SUCCESS] SymbolicEngine succeeded (R2=0.9798)
+
+[OK] Discovery complete
+   Expression: (di**0.25337556/0.45659214)**(do**0.15179276/di)*(do**(-0.6187426))**(di**0.19673419)
+   R2 Score: 0.9798
+   Engine: symbolic
+   Attempt: 2/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 81.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: optics_thin_lens_equation.json
+
+📊 R²: 0.9798 | Val: 81.1 | ✅ PASS
+
+================================================================================
+TEST 14/30: optics_snells_law
+================================================================================
+
+================================================================================
+Running: Snells Law | Domain: optics
+Variables: n1, sin_theta1
+Descriptions: {'n1': 'Refractive index of first medium', 'sin_theta1': 'Sine of incident angle'}
+================================================================================
+2026-01-07 14:52:25,251 - INFO - ======================================================================
+2026-01-07 14:52:25,251 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:52:25,251 - INFO - ======================================================================
+2026-01-07 14:52:25,251 - INFO - Domain: optics
+2026-01-07 14:52:25,252 - INFO - Discovery mode: strict
+2026-01-07 14:52:25,252 - INFO - Primary LLM: anthropic
+2026-01-07 14:52:25,252 - INFO - Auto-config: True
+2026-01-07 14:52:25,252 - INFO - Max retries: 5
+2026-01-07 14:52:25,252 - INFO - PhysicsAware fallback: False
+2026-01-07 14:52:25,253 - INFO - Complexity threshold: 20
+2026-01-07 14:52:25,253 - INFO - ======================================================================
+2026-01-07 14:52:25,253 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:52:26,461 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Snells Law
+Domain: OPTICS
+Samples: 1000
+Variables: ['n1', 'sin_theta1']
+Equation hint: snells_law
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:52:26,462 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: True
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'n1': 'linear', 'sin_theta1': 'linear'}
+   [SMART] Confidence: 0.90
+[PATTERNS] additive, multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Additive structure detected
+   [SMART] → Pure additive structure: no power operator needed
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: n1*sin_theta1
+   R² = 1.0000
+2026-01-07 14:52:45,173 - INFO -    Result: n1*sin_theta1
+2026-01-07 14:52:45,173 - INFO -    R2 = 1.0000
+2026-01-07 14:52:45,173 - INFO -    [BEST] New best!
+2026-01-07 14:52:45,174 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: n1*sin_theta1
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 100.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: optics_snells_law.json
+
+📊 R²: 1.0000 | Val: 100.0 | ✅ PASS
+   High R²=1.0000, Val=100.0 (dim check issue)
+
+================================================================================
+TEST 15/30: optics_single_slit_diffraction
+================================================================================
+
+================================================================================
+Running: Single Slit Diffraction | Domain: optics
+Variables: wavelength, a
+Descriptions: {'wavelength': 'Wavelength of light', 'a': 'Slit width'}
+================================================================================
+2026-01-07 14:52:45,266 - INFO - ======================================================================
+2026-01-07 14:52:45,267 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:52:45,267 - INFO - ======================================================================
+2026-01-07 14:52:45,267 - INFO - Domain: optics
+2026-01-07 14:52:45,267 - INFO - Discovery mode: strict
+2026-01-07 14:52:45,267 - INFO - Primary LLM: anthropic
+2026-01-07 14:52:45,268 - INFO - Auto-config: True
+2026-01-07 14:52:45,268 - INFO - Max retries: 5
+2026-01-07 14:52:45,268 - INFO - PhysicsAware fallback: False
+2026-01-07 14:52:45,268 - INFO - Complexity threshold: 20
+2026-01-07 14:52:45,268 - INFO - ======================================================================
+2026-01-07 14:52:45,269 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:52:46,310 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Single Slit Diffraction
+Domain: OPTICS
+Samples: 1000
+Variables: ['wavelength', 'a']
+Equation hint: single_slit_diffraction
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:52:46,311 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'wavelength': 'exp', 'a': 'log'}
+   [SMART] Interactions detected: 2
+   [SMART] Confidence: 0.87
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['exp', 'log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['exp', 'log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: wavelength/a
+   R² = 1.0000
+2026-01-07 14:54:06,457 - INFO -    Result: wavelength/a
+2026-01-07 14:54:06,457 - INFO -    R2 = 1.0000
+2026-01-07 14:54:06,457 - INFO -    [BEST] New best!
+2026-01-07 14:54:06,458 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: wavelength/a
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: optics_single_slit_diffraction.json
+
+📊 R²: 1.0000 | Val: 99.1 | ✅ PASS
+   High R²=1.0000, Val=99.1 (dim check issue)
+
+================================================================================
+TEST 16/30: quantum_photon_energy
+================================================================================
+
+================================================================================
+Running: Photon Energy | Domain: quantum
+Variables: h, f
+Descriptions: {'h': "Planck's constant", 'f': 'Photon frequency'}
+================================================================================
+2026-01-07 14:54:06,560 - INFO - ======================================================================
+2026-01-07 14:54:06,560 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 14:54:06,561 - INFO - ======================================================================
+2026-01-07 14:54:06,561 - INFO - Domain: quantum
+2026-01-07 14:54:06,561 - INFO - Discovery mode: strict
+2026-01-07 14:54:06,561 - INFO - Primary LLM: anthropic
+2026-01-07 14:54:06,562 - INFO - Auto-config: True
+2026-01-07 14:54:06,562 - INFO - Max retries: 5
+2026-01-07 14:54:06,562 - INFO - PhysicsAware fallback: False
+2026-01-07 14:54:06,562 - INFO - Complexity threshold: 20
+2026-01-07 14:54:06,562 - INFO - ======================================================================
+2026-01-07 14:54:06,563 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 14:54:07,834 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Photon Energy
+Domain: QUANTUM
+Samples: 1000
+Variables: ['h', 'f']
+Equation hint: photon_energy
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 14:54:07,835 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'h': 'linear', 'f': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=7.24011e-34): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.70
+[PATTERNS] multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: -0.973599*h/(0.79265755*f)
+   R² = 0.0000
+2026-01-07 14:56:17,010 - INFO -    Result: -0.973599*h/(0.79265755*f)
+2026-01-07 14:56:17,010 - INFO -    R2 = 0.0000
+2026-01-07 14:56:17,010 - WARNING -    [WARNING] Possible overfit
+2026-01-07 14:56:17,010 - WARNING -       High complexity (26) but R2=0.0000
+2026-01-07 14:56:17,011 - INFO -    [BEST] New best!
+2026-01-07 14:56:17,011 - INFO -
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'h': 'linear', 'f': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=7.24011e-34): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.70
+[PATTERNS] multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: h*(-0.42966664)
+   R² = 0.0000
+2026-01-07 14:58:12,948 - INFO -    Result: h*(-0.42966664)
+2026-01-07 14:58:12,948 - INFO -    R2 = 0.0000
+2026-01-07 14:58:12,948 - INFO -
+[SYMBOLIC] Attempt 3/5 (seed=44)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'h': 'linear', 'f': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=7.24011e-34): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.70
+[PATTERNS] multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: f*h
+   R² = 0.0000
+2026-01-07 14:59:56,227 - INFO -    Result: f*h
+2026-01-07 14:59:56,227 - INFO -    R2 = 0.0000
+2026-01-07 14:59:56,227 - INFO -
+[SYMBOLIC] Attempt 4/5 (seed=45)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'h': 'linear', 'f': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=7.24011e-34): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.70
+[PATTERNS] multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: h*(-0.7221006)
+   R² = 0.0000
+2026-01-07 15:01:54,102 - INFO -    Result: h*(-0.7221006)
+2026-01-07 15:01:54,102 - INFO -    R2 = 0.0000
+2026-01-07 15:01:54,102 - INFO -
+[SYMBOLIC] Attempt 5/5 (seed=46)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'h': 'linear', 'f': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=7.24011e-34): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.70
+[PATTERNS] multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: f*h
+   R² = 0.0000
+2026-01-07 15:03:47,915 - INFO -    Result: f*h
+2026-01-07 15:03:47,915 - INFO -    R2 = 0.0000
+2026-01-07 15:03:47,915 - WARNING -
+[WARNING] SymbolicEngine best R2=0.0000
+
+[OK] Discovery complete
+   Expression: -0.973599*h/(0.79265755*f)
+   R2 Score: 0.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 98.6/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: quantum_photon_energy.json
+
+📊 R²: 0.0000 | Val: 98.6 | ❌ FAIL
+
+================================================================================
+TEST 17/30: quantum_de_broglie_wavelength
+================================================================================
+
+================================================================================
+Running: De Broglie Wavelength | Domain: quantum
+Variables: h, m, v
+Descriptions: {'h': "Planck's constant", 'm': 'Particle mass', 'v': 'Particle velocity'}
+================================================================================
+2026-01-07 15:03:48,076 - INFO - ======================================================================
+2026-01-07 15:03:48,076 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:03:48,077 - INFO - ======================================================================
+2026-01-07 15:03:48,077 - INFO - Domain: quantum
+2026-01-07 15:03:48,077 - INFO - Discovery mode: strict
+2026-01-07 15:03:48,077 - INFO - Primary LLM: anthropic
+2026-01-07 15:03:48,078 - INFO - Auto-config: True
+2026-01-07 15:03:48,078 - INFO - Max retries: 5
+2026-01-07 15:03:48,078 - INFO - PhysicsAware fallback: False
+2026-01-07 15:03:48,079 - INFO - Complexity threshold: 20
+2026-01-07 15:03:48,079 - INFO - ======================================================================
+2026-01-07 15:03:48,079 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:03:49,008 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: De Broglie Wavelength
+Domain: QUANTUM
+Samples: 1000
+Variables: ['h', 'm', 'v']
+Equation hint: de_broglie_wavelength
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:03:49,009 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'h': 'linear', 'm': 'linear', 'v': 'log'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.63
+[PATTERNS] interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: m*v
+   R² = 0.0000
+2026-01-07 15:04:53,738 - INFO -    Result: m*v
+2026-01-07 15:04:53,738 - INFO -    R2 = 0.0000
+2026-01-07 15:04:53,738 - INFO -    [BEST] New best!
+2026-01-07 15:04:53,739 - INFO -
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'h': 'linear', 'm': 'linear', 'v': 'log'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.63
+[PATTERNS] interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: h*(-0.027412646)
+   R² = 0.0000
+2026-01-07 15:05:50,047 - INFO -    Result: h*(-0.027412646)
+2026-01-07 15:05:50,047 - INFO -    R2 = 0.0000
+2026-01-07 15:05:50,047 - INFO -
+[SYMBOLIC] Attempt 3/5 (seed=44)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'h': 'linear', 'm': 'linear', 'v': 'log'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.63
+[PATTERNS] interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: m*m
+   R² = 0.0000
+2026-01-07 15:06:45,362 - INFO -    Result: m*m
+2026-01-07 15:06:45,363 - INFO -    R2 = 0.0000
+2026-01-07 15:06:45,363 - INFO -
+[SYMBOLIC] Attempt 4/5 (seed=45)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'h': 'linear', 'm': 'linear', 'v': 'log'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.63
+[PATTERNS] interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: -m + m
+   R² = 0.0000
+2026-01-07 15:07:42,904 - INFO -    Result: -m + m
+2026-01-07 15:07:42,905 - INFO -    R2 = 0.0000
+2026-01-07 15:07:42,905 - INFO -
+[SYMBOLIC] Attempt 5/5 (seed=46)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'h': 'linear', 'm': 'linear', 'v': 'log'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.63
+[PATTERNS] interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: m*v
+   R² = 0.0000
+2026-01-07 15:08:45,922 - INFO -    Result: m*v
+2026-01-07 15:08:45,923 - INFO -    R2 = 0.0000
+2026-01-07 15:08:45,923 - WARNING -
+[WARNING] SymbolicEngine best R2=0.0000
+
+[OK] Discovery complete
+   Expression: m*v
+   R2 Score: 0.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: quantum_de_broglie_wavelength.json
+
+📊 R²: 0.0000 | Val: 99.5 | ❌ FAIL
+
+================================================================================
+TEST 18/30: quantum_compton_shift
+================================================================================
+
+================================================================================
+Running: Compton Shift | Domain: quantum
+Variables: h, me, c, cos_theta
+Descriptions: {'h': "Planck's constant", 'me': 'Electron mass', 'c': 'Speed of light', 'cos_theta': 'Cosine of scattering angle'}
+================================================================================
+2026-01-07 15:08:46,015 - INFO - ======================================================================
+2026-01-07 15:08:46,016 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:08:46,016 - INFO - ======================================================================
+2026-01-07 15:08:46,016 - INFO - Domain: quantum
+2026-01-07 15:08:46,016 - INFO - Discovery mode: strict
+2026-01-07 15:08:46,016 - INFO - Primary LLM: anthropic
+2026-01-07 15:08:46,017 - INFO - Auto-config: True
+2026-01-07 15:08:46,017 - INFO - Max retries: 5
+2026-01-07 15:08:46,017 - INFO - PhysicsAware fallback: False
+2026-01-07 15:08:46,017 - INFO - Complexity threshold: 20
+2026-01-07 15:08:46,018 - INFO - ======================================================================
+2026-01-07 15:08:46,018 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:08:46,942 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Compton Shift
+Domain: QUANTUM
+Samples: 1000
+Variables: ['h', 'me', 'c', 'cos_theta']
+Equation hint: compton_shift
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:08:46,942 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'h': 'linear', 'me': 'linear', 'c': 'linear', 'cos_theta': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.38778e-21): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.50
+[PATTERNS]
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 1/(c**1.6105695*c)
+   R² = 0.0000
+2026-01-07 15:10:03,067 - INFO -    Result: 1/(c**1.6105695*c)
+2026-01-07 15:10:03,067 - INFO -    R2 = 0.0000
+2026-01-07 15:10:03,067 - INFO -    [BEST] New best!
+2026-01-07 15:10:03,068 - INFO -
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'h': 'linear', 'me': 'linear', 'c': 'linear', 'cos_theta': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.38778e-21): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.50
+[PATTERNS]
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: me*me
+   R² = 0.0000
+2026-01-07 15:11:07,191 - INFO -    Result: me*me
+2026-01-07 15:11:07,191 - INFO -    R2 = 0.0000
+2026-01-07 15:11:07,192 - INFO -
+[SYMBOLIC] Attempt 3/5 (seed=44)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'h': 'linear', 'me': 'linear', 'c': 'linear', 'cos_theta': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.38778e-21): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.50
+[PATTERNS]
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: h*me
+   R² = 0.0000
+2026-01-07 15:12:10,235 - INFO -    Result: h*me
+2026-01-07 15:12:10,235 - INFO -    R2 = 0.0000
+2026-01-07 15:12:10,235 - INFO -
+[SYMBOLIC] Attempt 4/5 (seed=45)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'h': 'linear', 'me': 'linear', 'c': 'linear', 'cos_theta': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.38778e-21): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.50
+[PATTERNS]
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: h*me
+   R² = 0.0000
+2026-01-07 15:13:16,469 - INFO -    Result: h*me
+2026-01-07 15:13:16,469 - INFO -    R2 = 0.0000
+2026-01-07 15:13:16,469 - INFO -
+[SYMBOLIC] Attempt 5/5 (seed=46)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'h': 'linear', 'me': 'linear', 'c': 'linear', 'cos_theta': 'linear'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.38778e-21): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.50
+[PATTERNS]
+   [SMART] Configuring based on structure...
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: cos_theta*me
+   R² = 0.0000
+2026-01-07 15:14:29,856 - INFO -    Result: cos_theta*me
+2026-01-07 15:14:29,856 - INFO -    R2 = 0.0000
+2026-01-07 15:14:29,856 - WARNING -
+[WARNING] SymbolicEngine best R2=0.0000
+
+[OK] Discovery complete
+   Expression: 1/(c**1.6105695*c)
+   R2 Score: 0.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: quantum_compton_shift.json
+
+📊 R²: 0.0000 | Val: 99.5 | ❌ FAIL
+
+================================================================================
+TEST 19/30: chemistry_arrhenius_equation
+================================================================================
+
+================================================================================
+Running: Arrhenius Equation | Domain: chemistry
+Variables: A, Ea, R, T
+🚀 ENHANCED config
+Descriptions: {'A': 'Pre-exponential frequency factor', 'Ea': 'Activation energy', 'R': 'Universal gas constant', 'T': 'Absolute temperature'}
+================================================================================
+2026-01-07 15:14:29,982 - INFO - ======================================================================
+2026-01-07 15:14:29,982 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:14:29,983 - INFO - ======================================================================
+2026-01-07 15:14:29,983 - INFO - Domain: chemistry
+2026-01-07 15:14:29,983 - INFO - Discovery mode: strict
+2026-01-07 15:14:29,983 - INFO - Primary LLM: anthropic
+2026-01-07 15:14:29,983 - INFO - Auto-config: True
+2026-01-07 15:14:29,984 - INFO - Max retries: 5
+2026-01-07 15:14:29,984 - INFO - PhysicsAware fallback: False
+2026-01-07 15:14:29,984 - INFO - Complexity threshold: 20
+2026-01-07 15:14:29,984 - INFO - ======================================================================
+2026-01-07 15:14:29,984 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:14:30,916 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Arrhenius Equation
+Domain: CHEMISTRY
+Samples: 1000
+Variables: ['A', 'Ea', 'R', 'T']
+Equation hint: arrhenius_equation
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:14:30,916 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'A': 'quadratic', 'Ea': 'linear', 'R': 'linear', 'T': 'cubic'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=5.55112e-21): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.26476e-22): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.18442e-62): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.85066e-28): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.71351e-20): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.18442e-18): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Interactions detected: 4
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, polynomial
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: (1.0348152**(T*1.0197493)*T*T/((A*0.8194621)))**(Ea*0.007947931/T)
+   R² = 0.9999
+2026-01-07 15:16:18,852 - INFO -    Result: (1.0348152**(T*1.0197493)*T*T/((A*0.8194621)))**(Ea*0.007947931/T)
+2026-01-07 15:16:18,853 - INFO -    R2 = 0.9999
+2026-01-07 15:16:18,853 - INFO -    [BEST] New best!
+2026-01-07 15:16:18,853 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (1.0348152**(T*1.0197493)*T*T/((A*0.8194621)))**(Ea*0.007947931/T)
+   R2 Score: 0.9999
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 80.2/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: chemistry_arrhenius_equation.json
+
+📊 R²: 0.9999 | Val: 80.2 | ✅ PASS
+   High R²=0.9999, Val=80.2 (dim check issue)
+
+================================================================================
+TEST 20/30: chemistry_henderson_hasselbalch
+================================================================================
+
+================================================================================
+Running: Henderson Hasselbalch | Domain: chemistry
+Variables: pKa, A_minus, HA
+Descriptions: {'pKa': 'Acid dissociation constant (negative log)', 'A_minus': 'Conjugate base concentration', 'HA': 'Weak acid concentration'}
+================================================================================
+2026-01-07 15:16:19,102 - INFO - ======================================================================
+2026-01-07 15:16:19,102 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:16:19,102 - INFO - ======================================================================
+2026-01-07 15:16:19,103 - INFO - Domain: chemistry
+2026-01-07 15:16:19,103 - INFO - Discovery mode: strict
+2026-01-07 15:16:19,103 - INFO - Primary LLM: anthropic
+2026-01-07 15:16:19,103 - INFO - Auto-config: True
+2026-01-07 15:16:19,103 - INFO - Max retries: 5
+2026-01-07 15:16:19,104 - INFO - PhysicsAware fallback: False
+2026-01-07 15:16:19,104 - INFO - Complexity threshold: 20
+2026-01-07 15:16:19,104 - INFO - ======================================================================
+2026-01-07 15:16:19,104 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:16:20,325 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Henderson Hasselbalch
+Domain: CHEMISTRY
+Samples: 1000
+Variables: ['pKa', 'A_minus', 'HA']
+Equation hint: henderson_hasselbalch
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:16:20,326 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'pKa': 'linear', 'A_minus': 'log', 'HA': 'log'}
+   [SMART] Interactions detected: 4
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [HINT] Using config for 'henderson_hasselbalch'
+   [CHEMISTRY LOG MODE] Simplified additive config
+[CONFIG] Chemistry logarithmic: henderson_hasselbalch
+   Operators: ['+', '-', '*', '/', '^']
+   Unary: ['log']
+   Iterations: 75
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: (A_minus - (-5.5122423)*A_minus)/((1/(A_minus*HA**0.06799426))**(-0.9310595))
+   R² = 0.9968
+2026-01-07 15:17:33,711 - INFO -    Result: (A_minus - (-5.5122423)*A_minus)/((1/(A_minus*HA**0.06799426))**(-0.9310595))
+2026-01-07 15:17:33,711 - INFO -    R2 = 0.9968
+2026-01-07 15:17:33,711 - WARNING -    [WARNING] Possible overfit
+2026-01-07 15:17:33,711 - WARNING -       High complexity (77) but R2=0.9968
+2026-01-07 15:17:33,712 - INFO -    [BEST] New best!
+2026-01-07 15:17:33,712 - INFO -
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'pKa': 'linear', 'A_minus': 'log', 'HA': 'log'}
+   [SMART] Interactions detected: 4
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [HINT] Using config for 'henderson_hasselbalch'
+   [CHEMISTRY LOG MODE] Simplified additive config
+[CONFIG] Chemistry logarithmic: henderson_hasselbalch
+   Operators: ['+', '-', '*', '/', '^']
+   Unary: ['log']
+   Iterations: 75
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 0.4342945*log(A_minus/HA) + 6.5
+   R² = 1.0000
+2026-01-07 15:18:22,355 - INFO -    Result: 0.4342945*log(A_minus/HA) + 6.5
+2026-01-07 15:18:22,355 - INFO -    R2 = 1.0000
+2026-01-07 15:18:22,355 - INFO -    [BEST] New best!
+2026-01-07 15:18:22,355 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: 0.4342945*log(A_minus/HA) + 6.5
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 2/5
+   Auto-config: Chemistry logarithmic: henderson_hasselbalch
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 90.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: chemistry_henderson_hasselbalch.json
+
+📊 R²: 1.0000 | Val: 90.4 | ✅ PASS
+   High R²=1.0000, Val=90.4 (dim check issue)
+
+================================================================================
+TEST 21/30: chemistry_nernst_equation
+================================================================================
+
+================================================================================
+Running: Nernst Equation | Domain: chemistry
+Variables: E0, R, T, n, F, Q
+Descriptions: {'E0': 'Standard electrode potential', 'R': 'Universal gas constant', 'T': 'Absolute temperature', 'n': 'Number of electrons transferred', 'F': 'Faraday constant', 'Q': 'Reaction quotient'}
+================================================================================
+   [SANITIZE] Q -> Q_val (reserved name)
+2026-01-07 15:18:22,554 - INFO - ======================================================================
+2026-01-07 15:18:22,554 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:18:22,554 - INFO - ======================================================================
+2026-01-07 15:18:22,555 - INFO - Domain: chemistry
+2026-01-07 15:18:22,555 - INFO - Discovery mode: strict
+2026-01-07 15:18:22,555 - INFO - Primary LLM: anthropic
+2026-01-07 15:18:22,555 - INFO - Auto-config: True
+2026-01-07 15:18:22,555 - INFO - Max retries: 5
+2026-01-07 15:18:22,556 - INFO - PhysicsAware fallback: False
+2026-01-07 15:18:22,556 - INFO - Complexity threshold: 20
+2026-01-07 15:18:22,556 - INFO - ======================================================================
+2026-01-07 15:18:22,556 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:18:23,460 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Nernst Equation
+Domain: CHEMISTRY
+Samples: 1000
+Variables: ['E0', 'R', 'T', 'n', 'F', 'Q_val']
+Equation hint: nernst_equation
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:18:23,460 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'E0': 'linear', 'R': 'linear', 'T': 'cubic', 'n': 'sqrt', 'F': 'cubic', 'Q_val': 'sqrt'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=4.15131e-19): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=7.71263e-34): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.77197e-20): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.22483e-18): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=6.17523e-19): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.51816e-48): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=9.70118e-21): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.8911e-33): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.23665e-35): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.60
+[PATTERNS]
+   [HINT] Using config for 'nernst_equation'
+   [CHEMISTRY LOG MODE] Simplified additive config
+[CONFIG] Chemistry logarithmic: nernst_equation
+   Operators: ['+', '-', '*', '/', '^']
+   Unary: ['log']
+   Iterations: 75
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: E0**1.0005449 - 0.032359204605784*log(Q_val)/n
+   R² = 0.9986
+2026-01-07 15:19:09,639 - INFO -    Result: E0**1.0005449 - 0.032359204605784*log(Q_val)/n
+2026-01-07 15:19:09,639 - INFO -    R2 = 0.9986
+2026-01-07 15:19:09,639 - WARNING -    [WARNING] Possible overfit
+2026-01-07 15:19:09,640 - WARNING -       High complexity (46) but R2=0.9986
+2026-01-07 15:19:09,640 - INFO -    [BEST] New best!
+2026-01-07 15:19:09,640 - INFO -
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'E0': 'linear', 'R': 'linear', 'T': 'cubic', 'n': 'sqrt', 'F': 'cubic', 'Q_val': 'sqrt'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=4.15131e-19): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=7.71263e-34): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.77197e-20): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.22483e-18): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=6.17523e-19): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=1.51816e-48): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=9.70118e-21): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.8911e-33): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=2.23665e-35): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.60
+[PATTERNS]
+   [HINT] Using config for 'nernst_equation'
+   [CHEMISTRY LOG MODE] Simplified additive config
+[CONFIG] Chemistry logarithmic: nernst_equation
+   Operators: ['+', '-', '*', '/', '^']
+   Unary: ['log']
+   Iterations: 75
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: E0 - 0.027469125*log(Q_val)/n
+   R² = 0.9997
+2026-01-07 15:20:05,870 - INFO -    Result: E0 - 0.027469125*log(Q_val)/n
+2026-01-07 15:20:05,870 - INFO -    R2 = 0.9997
+2026-01-07 15:20:05,870 - INFO -    [BEST] New best!
+2026-01-07 15:20:05,871 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: E0 - 0.027469125*log(Q_val)/n
+   R2 Score: 0.9997
+   Engine: symbolic
+   Attempt: 2/5
+   Auto-config: Chemistry logarithmic: nernst_equation
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 85.9/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: chemistry_nernst_equation.json
+
+📊 R²: 0.9997 | Val: 85.9 | ✅ PASS
+   High R²=0.9997, Val=85.9 (dim check issue)
+
+================================================================================
+TEST 22/30: biology_michaelis_menten
+================================================================================
+
+================================================================================
+Running: Michaelis Menten | Domain: biology
+Variables: Vmax, S, Km
+Descriptions: {'Vmax': 'Maximum reaction velocity', 'S': 'Substrate concentration', 'Km': 'Michaelis constant (substrate affinity)'}
+================================================================================
+   [SANITIZE] S -> S_val (reserved name)
+2026-01-07 15:20:06,126 - INFO - ======================================================================
+2026-01-07 15:20:06,126 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:20:06,126 - INFO - ======================================================================
+2026-01-07 15:20:06,127 - INFO - Domain: biology
+2026-01-07 15:20:06,127 - INFO - Discovery mode: strict
+2026-01-07 15:20:06,127 - INFO - Primary LLM: anthropic
+2026-01-07 15:20:06,127 - INFO - Auto-config: True
+2026-01-07 15:20:06,127 - INFO - Max retries: 5
+2026-01-07 15:20:06,128 - INFO - PhysicsAware fallback: False
+2026-01-07 15:20:06,128 - INFO - Complexity threshold: 20
+2026-01-07 15:20:06,128 - INFO - ======================================================================
+2026-01-07 15:20:06,128 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:20:07,014 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Michaelis Menten
+Domain: BIOLOGY
+Samples: 1000
+Variables: ['Vmax', 'S_val', 'Km']
+Equation hint: michaelis_menten
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:20:07,015 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'Vmax': 'linear', 'S_val': 'log', 'Km': 'linear'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: (2.3863626*Vmax*(0.39076996/S_val)**(2.2384968/S_val)/log(Km))**((3.68589591192124*0.12807326**Km*Km)**((Km**(-2.4455783))**(0.82970387*S_val)))
+   R² = 0.9999
+2026-01-07 15:22:49,264 - INFO -    Result: (2.3863626*Vmax*(0.39076996/S_val)**(2.2384968/S_val)/log(Km))**((3.68589591192124*0.12807326**Km*Km)**((Km**(-2.4455783))**(0.82970387*S_val)))
+2026-01-07 15:22:49,265 - INFO -    R2 = 0.9999
+2026-01-07 15:22:49,265 - INFO -    [BEST] New best!
+2026-01-07 15:22:49,265 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (2.3863626*Vmax*(0.39076996/S_val)**(2.2384968/S_val)/log(Km))**((3.68589591192124*0.12807326**Km*Km)**((Km**(-2.4455783))**(0.82970387*S_val)))
+   R2 Score: 0.9999
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 71.8/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: biology_michaelis_menten.json
+
+📊 R²: 0.9999 | Val: 71.8 | ✅ PASS
+   High R²=0.9999, Val=71.8 (dim check issue)
+
+================================================================================
+TEST 23/30: biology_logistic_growth
+================================================================================
+
+================================================================================
+Running: Logistic Growth | Domain: biology
+Variables: r, N, K
+Descriptions: {'r': 'Intrinsic growth rate', 'N': 'Current population size', 'K': 'Carrying capacity (maximum sustainable population)'}
+================================================================================
+   [SANITIZE] N -> N_val (reserved name)
+2026-01-07 15:22:49,720 - INFO - ======================================================================
+2026-01-07 15:22:49,720 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:22:49,721 - INFO - ======================================================================
+2026-01-07 15:22:49,721 - INFO - Domain: biology
+2026-01-07 15:22:49,721 - INFO - Discovery mode: strict
+2026-01-07 15:22:49,721 - INFO - Primary LLM: anthropic
+2026-01-07 15:22:49,721 - INFO - Auto-config: True
+2026-01-07 15:22:49,722 - INFO - Max retries: 5
+2026-01-07 15:22:49,722 - INFO - PhysicsAware fallback: False
+2026-01-07 15:22:49,722 - INFO - Complexity threshold: 20
+2026-01-07 15:22:49,722 - INFO - ======================================================================
+2026-01-07 15:22:49,722 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:22:50,630 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Logistic Growth
+Domain: BIOLOGY
+Samples: 1000
+Variables: ['r', 'N_val', 'K']
+Equation hint: logistic_growth
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:22:50,631 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'r': 'exp', 'N_val': 'sqrt', 'K': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['exp', 'sqrt', 'log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['exp', 'sqrt', 'log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 0.00155484867310871*K*N_val*r/log(0.127363451732945*N_val)
+   R² = 0.9051
+2026-01-07 15:24:49,765 - INFO -    Result: 0.00155484867310871*K*N_val*r/log(0.127363451732945*N_val)
+2026-01-07 15:24:49,765 - INFO -    R2 = 0.9051
+2026-01-07 15:24:49,766 - WARNING -    [WARNING] Possible overfit
+2026-01-07 15:24:49,766 - WARNING -       High complexity (58) but R2=0.9051
+2026-01-07 15:24:49,766 - INFO -    [BEST] New best!
+2026-01-07 15:24:49,766 - INFO -
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'r': 'exp', 'N_val': 'sqrt', 'K': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['exp', 'sqrt', 'log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['exp', 'sqrt', 'log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: -10.5876411265122*r*log(418.5247/K)/sqrt(1/N_val)
+   R² = 0.9478
+2026-01-07 15:26:30,619 - INFO -    Result: -10.5876411265122*r*log(418.5247/K)/sqrt(1/N_val)
+2026-01-07 15:26:30,619 - INFO -    R2 = 0.9478
+2026-01-07 15:26:30,620 - WARNING -    [WARNING] Possible overfit
+2026-01-07 15:26:30,620 - WARNING -       High complexity (49) but R2=0.9478
+2026-01-07 15:26:30,620 - INFO -    [BEST] New best!
+2026-01-07 15:26:30,620 - INFO -
+[SYMBOLIC] Attempt 3/5 (seed=44)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'r': 'exp', 'N_val': 'sqrt', 'K': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['exp', 'sqrt', 'log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['exp', 'sqrt', 'log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 0.00883462283041858*K*sqrt(N_val)*r
+   R² = 0.9418
+2026-01-07 15:28:28,542 - INFO -    Result: 0.00883462283041858*K*sqrt(N_val)*r
+2026-01-07 15:28:28,542 - INFO -    R2 = 0.9418
+2026-01-07 15:28:28,542 - WARNING -    [WARNING] Possible overfit
+2026-01-07 15:28:28,542 - WARNING -       High complexity (35) but R2=0.9418
+2026-01-07 15:28:28,543 - INFO -
+[SYMBOLIC] Attempt 4/5 (seed=45)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'r': 'exp', 'N_val': 'sqrt', 'K': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['exp', 'sqrt', 'log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['exp', 'sqrt', 'log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 1.4841187*r/((K*K)**(12.49476/N_val)*K**(-0.7843368))
+   R² = 0.9691
+2026-01-07 15:30:58,227 - INFO -    Result: 1.4841187*r/((K*K)**(12.49476/N_val)*K**(-0.7843368))
+2026-01-07 15:30:58,227 - INFO -    R2 = 0.9691
+2026-01-07 15:30:58,228 - WARNING -    [WARNING] Possible overfit
+2026-01-07 15:30:58,228 - WARNING -       High complexity (53) but R2=0.9691
+2026-01-07 15:30:58,228 - INFO -    [BEST] New best!
+2026-01-07 15:30:58,228 - INFO -
+[SYMBOLIC] Attempt 5/5 (seed=46)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'r': 'exp', 'N_val': 'sqrt', 'K': 'log'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.90
+[PATTERNS] multiplicative, interactions, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['exp', 'sqrt', 'log']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['exp', 'sqrt', 'log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: N_val*N_val*r*(r*0.3509006/r)**(N_val/(0.73766464*K))/N_val
+   R² = 0.9779
+2026-01-07 15:33:18,586 - INFO -    Result: N_val*N_val*r*(r*0.3509006/r)**(N_val/(0.73766464*K))/N_val
+2026-01-07 15:33:18,586 - INFO -    R2 = 0.9779
+2026-01-07 15:33:18,587 - WARNING -    [WARNING] Possible overfit
+2026-01-07 15:33:18,587 - WARNING -       High complexity (59) but R2=0.9779
+2026-01-07 15:33:18,587 - INFO -    [BEST] New best!
+2026-01-07 15:33:18,587 - INFO -
+[SUCCESS] SymbolicEngine succeeded (R2=0.9779)
+
+[OK] Discovery complete
+   Expression: N_val*N_val*r*(r*0.3509006/r)**(N_val/(0.73766464*K))/N_val
+   R2 Score: 0.9779
+   Engine: symbolic
+   Attempt: 5/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 85.9/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: biology_logistic_growth.json
+
+📊 R²: 0.9779 | Val: 85.9 | ✅ PASS
+
+================================================================================
+TEST 24/30: biology_allometric_scaling
+================================================================================
+
+================================================================================
+Running: Allometric Scaling | Domain: biology
+Variables: a, M, b
+Descriptions: {'a': 'Allometric coefficient', 'M': 'Body mass', 'b': 'Scaling exponent (typically 0.75)'}
+================================================================================
+2026-01-07 15:33:18,745 - INFO - ======================================================================
+2026-01-07 15:33:18,746 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:33:18,746 - INFO - ======================================================================
+2026-01-07 15:33:18,746 - INFO - Domain: biology
+2026-01-07 15:33:18,746 - INFO - Discovery mode: strict
+2026-01-07 15:33:18,747 - INFO - Primary LLM: anthropic
+2026-01-07 15:33:18,747 - INFO - Auto-config: True
+2026-01-07 15:33:18,747 - INFO - Max retries: 5
+2026-01-07 15:33:18,747 - INFO - PhysicsAware fallback: False
+2026-01-07 15:33:18,748 - INFO - Complexity threshold: 20
+2026-01-07 15:33:18,748 - INFO - ======================================================================
+2026-01-07 15:33:18,748 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:33:19,678 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Allometric Scaling
+Domain: BIOLOGY
+Samples: 1000
+Variables: ['a', 'M', 'b']
+Equation hint: allometric_scaling
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:33:19,679 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'a': 'linear', 'M': 'linear', 'b': 'linear'}
+   [SMART] Confidence: 0.70
+[PATTERNS] multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: M**b*a
+   R² = 1.0000
+2026-01-07 15:34:52,848 - INFO -    Result: M**b*a
+2026-01-07 15:34:52,848 - INFO -    R2 = 1.0000
+2026-01-07 15:34:52,848 - INFO -    [BEST] New best!
+2026-01-07 15:34:52,849 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: M**b*a
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: biology_allometric_scaling.json
+
+📊 R²: 1.0000 | Val: 91.3 | ✅ PASS
+   High R²=1.0000, Val=91.3 (dim check issue)
+
+================================================================================
+TEST 25/30: mathematics_pythagorean_theorem
+================================================================================
+
+================================================================================
+Running: Pythagorean Theorem | Domain: mathematics
+Variables: a, b
+🚀 ENHANCED config
+Descriptions: {'a': 'First perpendicular side of right triangle', 'b': 'Second perpendicular side of right triangle'}
+================================================================================
+2026-01-07 15:34:52,975 - INFO - ======================================================================
+2026-01-07 15:34:52,975 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:34:52,975 - INFO - ======================================================================
+2026-01-07 15:34:52,976 - INFO - Domain: mathematics
+2026-01-07 15:34:52,976 - INFO - Discovery mode: strict
+2026-01-07 15:34:52,976 - INFO - Primary LLM: anthropic
+2026-01-07 15:34:52,976 - INFO - Auto-config: True
+2026-01-07 15:34:52,977 - INFO - Max retries: 5
+2026-01-07 15:34:52,977 - INFO - PhysicsAware fallback: False
+2026-01-07 15:34:52,977 - INFO - Complexity threshold: 20
+2026-01-07 15:34:52,977 - INFO - ======================================================================
+2026-01-07 15:34:52,978 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:34:53,916 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Pythagorean Theorem
+Domain: MATHEMATICS
+Samples: 1000
+Variables: ['a', 'b']
+Equation hint: pythagorean_theorem
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:34:53,917 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: True
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'a': 'linear', 'b': 'linear'}
+   [SMART] Confidence: 0.90
+[PATTERNS] additive, multiplicative
+   [SMART] Configuring based on structure...
+   [SMART] → Additive structure detected
+   [SMART] → Pure additive structure: no power operator needed
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: a - (-b - 0.084921464) + (0.015199383 - 1.189365*a)/(((a + b)/b))
+   R² = 0.9998
+2026-01-07 15:35:12,737 - INFO -    Result: a - (-b - 0.084921464) + (0.015199383 - 1.189365*a)/(((a + b)/b))
+2026-01-07 15:35:12,738 - INFO -    R2 = 0.9998
+2026-01-07 15:35:12,738 - INFO -    [BEST] New best!
+2026-01-07 15:35:12,738 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: a - (-b - 0.084921464) + (0.015199383 - 1.189365*a)/(((a + b)/b))
+   R2 Score: 0.9998
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.0/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: mathematics_pythagorean_theorem.json
+
+📊 R²: 0.9998 | Val: 91.0 | ✅ PASS
+   High R²=0.9998, Val=91.0 (dim check issue)
+
+================================================================================
+TEST 26/30: mathematics_compound_interest
+================================================================================
+
+================================================================================
+Running: Compound Interest | Domain: mathematics
+Variables: P, r, n, t
+🚀 ENHANCED config
+Descriptions: {'P': 'Principal amount (initial investment)', 'r': 'Annual interest rate (as decimal)', 'n': 'Compounding frequency per year', 't': 'Time period in years'}
+================================================================================
+2026-01-07 15:35:13,231 - INFO - ======================================================================
+2026-01-07 15:35:13,231 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:35:13,231 - INFO - ======================================================================
+2026-01-07 15:35:13,231 - INFO - Domain: mathematics
+2026-01-07 15:35:13,231 - INFO - Discovery mode: strict
+2026-01-07 15:35:13,232 - INFO - Primary LLM: anthropic
+2026-01-07 15:35:13,232 - INFO - Auto-config: True
+2026-01-07 15:35:13,232 - INFO - Max retries: 5
+2026-01-07 15:35:13,232 - INFO - PhysicsAware fallback: False
+2026-01-07 15:35:13,232 - INFO - Complexity threshold: 20
+2026-01-07 15:35:13,233 - INFO - ======================================================================
+2026-01-07 15:35:13,233 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:35:14,172 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Compound Interest
+Domain: MATHEMATICS
+Samples: 1000
+Variables: ['P', 'r', 'n', 't']
+Equation hint: compound_interest
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:35:14,172 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'P': 'linear', 'r': 'quadratic', 'n': 'log', 't': 'quadratic'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.83
+[PATTERNS] multiplicative, interactions, polynomial, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: P/((0.059941344**t)**(r/2.869463))
+   R² = 0.9990
+2026-01-07 15:37:29,167 - INFO -    Result: P/((0.059941344**t)**(r/2.869463))
+2026-01-07 15:37:29,167 - INFO -    R2 = 0.9990
+2026-01-07 15:37:29,167 - WARNING -    [WARNING] Possible overfit
+2026-01-07 15:37:29,168 - WARNING -       High complexity (34) but R2=0.9990
+2026-01-07 15:37:29,168 - INFO -    [BEST] New best!
+2026-01-07 15:37:29,168 - INFO -
+[SYMBOLIC] Attempt 2/5 (seed=43)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'P': 'linear', 'r': 'quadratic', 'n': 'log', 't': 'quadratic'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.83
+[PATTERNS] multiplicative, interactions, polynomial, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: 2.6385252**(r*t)*P*log(1.8442597**n)**(P**(-0.46342832))
+   R² = 0.9995
+2026-01-07 15:39:25,707 - INFO -    Result: 2.6385252**(r*t)*P*log(1.8442597**n)**(P**(-0.46342832))
+2026-01-07 15:39:25,708 - INFO -    R2 = 0.9995
+2026-01-07 15:39:25,708 - INFO -    [BEST] New best!
+2026-01-07 15:39:25,708 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: 2.6385252**(r*t)*P*log(1.8442597**n)**(P**(-0.46342832))
+   R2 Score: 0.9995
+   Engine: symbolic
+   Attempt: 2/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 86.5/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: mathematics_compound_interest.json
+
+📊 R²: 0.9995 | Val: 86.5 | ✅ PASS
+   High R²=0.9995, Val=86.5 (dim check issue)
+
+================================================================================
+TEST 27/30: mathematics_quadratic_discriminant
+================================================================================
+
+================================================================================
+Running: Quadratic Discriminant | Domain: mathematics
+Variables: a, b, c
+Descriptions: {'a': 'Quadratic coefficient (ax²)', 'b': 'Linear coefficient (bx)', 'c': 'Constant term'}
+================================================================================
+2026-01-07 15:39:25,931 - INFO - ======================================================================
+2026-01-07 15:39:25,931 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:39:25,931 - INFO - ======================================================================
+2026-01-07 15:39:25,932 - INFO - Domain: mathematics
+2026-01-07 15:39:25,932 - INFO - Discovery mode: strict
+2026-01-07 15:39:25,932 - INFO - Primary LLM: anthropic
+2026-01-07 15:39:25,932 - INFO - Auto-config: True
+2026-01-07 15:39:25,933 - INFO - Max retries: 5
+2026-01-07 15:39:25,933 - INFO - PhysicsAware fallback: False
+2026-01-07 15:39:25,933 - INFO - Complexity threshold: 20
+2026-01-07 15:39:25,933 - INFO - ======================================================================
+2026-01-07 15:39:25,934 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:39:27,174 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Quadratic Discriminant
+Domain: MATHEMATICS
+Samples: 1000
+Variables: ['a', 'b', 'c']
+Equation hint: quadratic_discriminant
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:39:27,174 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'a': 'exp', 'b': 'quadratic', 'c': 'quadratic'}
+   [SMART] Interactions detected: 3
+   [SMART] Confidence: 0.70
+[PATTERNS] interactions, polynomial
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['exp']
+   [SMART] → Multiple interactions: increased complexity limit
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['exp']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: -4.0*a*c + b*b
+   R² = 1.0000
+2026-01-07 15:40:06,154 - INFO -    Result: -4.0*a*c + b*b
+2026-01-07 15:40:06,155 - INFO -    R2 = 1.0000
+2026-01-07 15:40:06,155 - INFO -    [BEST] New best!
+2026-01-07 15:40:06,155 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: -4.0*a*c + b*b
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 99.4/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: mathematics_quadratic_discriminant.json
+
+📊 R²: 1.0000 | Val: 99.4 | ✅ PASS
+   High R²=1.0000, Val=99.4 (dim check issue)
+
+================================================================================
+TEST 28/30: economics_elasticity_demand
+================================================================================
+
+================================================================================
+Running: Elasticity Demand | Domain: economics
+Variables: Q, delta_Q, P, delta_P
+Descriptions: {'Q': 'Initial quantity demanded', 'delta_Q': 'Change in quantity demanded', 'P': 'Initial price', 'delta_P': 'Change in price'}
+================================================================================
+   [SANITIZE] Q -> Q_val (reserved name)
+2026-01-07 15:40:06,293 - INFO - ======================================================================
+2026-01-07 15:40:06,294 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:40:06,294 - INFO - ======================================================================
+2026-01-07 15:40:06,294 - INFO - Domain: economics
+2026-01-07 15:40:06,294 - INFO - Discovery mode: strict
+2026-01-07 15:40:06,295 - INFO - Primary LLM: anthropic
+2026-01-07 15:40:06,295 - INFO - Auto-config: True
+2026-01-07 15:40:06,295 - INFO - Max retries: 5
+2026-01-07 15:40:06,297 - INFO - PhysicsAware fallback: False
+2026-01-07 15:40:06,298 - INFO - Complexity threshold: 20
+2026-01-07 15:40:06,299 - INFO - ======================================================================
+2026-01-07 15:40:06,300 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:40:07,209 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Elasticity Demand
+Domain: ECONOMICS
+Samples: 1000
+Variables: ['Q_val', 'delta_Q', 'P', 'delta_P']
+Equation hint: elasticity_demand
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:40:07,209 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'Q_val': 'log', 'delta_Q': 'exp', 'P': 'cubic', 'delta_P': 'quadratic'}
+/home/agagora/Downloads/py312/lib/python3.12/site-packages/scipy/_lib/_util.py:1233: LinAlgWarning: Ill-conditioned matrix (rcond=3.07077e-19): result may not be accurate.
+  return f(*arrays, *other_args, **kwargs)
+   [SMART] Confidence: 0.60
+[PATTERNS] polynomial, logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log', 'exp']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log', 'exp']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: P*delta_Q/(Q_val*delta_P)
+   R² = 1.0000
+2026-01-07 15:40:38,190 - INFO -    Result: P*delta_Q/(Q_val*delta_P)
+2026-01-07 15:40:38,190 - INFO -    R2 = 1.0000
+2026-01-07 15:40:38,190 - INFO -    [BEST] New best!
+2026-01-07 15:40:38,191 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: P*delta_Q/(Q_val*delta_P)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 93.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: economics_elasticity_demand.json
+
+📊 R²: 1.0000 | Val: 93.1 | ✅ PASS
+   High R²=1.0000, Val=93.1 (dim check issue)
+
+================================================================================
+TEST 29/30: economics_cobb_douglas
+================================================================================
+
+================================================================================
+Running: Cobb Douglas | Domain: economics
+Variables: A, K, L, alpha, beta
+Descriptions: {'A': 'Total factor productivity', 'K': 'Capital input', 'L': 'Labor input', 'alpha': 'Output elasticity of capital', 'beta': 'Output elasticity of labor'}
+================================================================================
+2026-01-07 15:40:38,308 - INFO - ======================================================================
+2026-01-07 15:40:38,309 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:40:38,309 - INFO - ======================================================================
+2026-01-07 15:40:38,309 - INFO - Domain: economics
+2026-01-07 15:40:38,309 - INFO - Discovery mode: strict
+2026-01-07 15:40:38,310 - INFO - Primary LLM: anthropic
+2026-01-07 15:40:38,310 - INFO - Auto-config: True
+2026-01-07 15:40:38,310 - INFO - Max retries: 5
+2026-01-07 15:40:38,310 - INFO - PhysicsAware fallback: False
+2026-01-07 15:40:38,311 - INFO - Complexity threshold: 20
+2026-01-07 15:40:38,311 - INFO - ======================================================================
+2026-01-07 15:40:38,311 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:40:39,263 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Cobb Douglas
+Domain: ECONOMICS
+Samples: 1000
+Variables: ['A', 'K', 'L', 'alpha', 'beta']
+Equation hint: cobb_douglas
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:40:39,264 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+   [SANITIZE] alpha -> alpha_var (reserved name)
+   [SANITIZE] beta -> beta_var (reserved name)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: True
+   [SMART] Term forms: {'A': 'linear', 'K': 'sqrt', 'L': 'sqrt', 'alpha_var': 'linear', 'beta_var': 'linear'}
+   [SMART] Interactions detected: 1
+   [SMART] Confidence: 0.83
+[PATTERNS] multiplicative, interactions
+   [SMART] Configuring based on structure...
+   [SMART] → Multiplicative structure: enabling power operators
+   [SMART] → Unary operators: ['sqrt']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['*', '/', '**']
+   Unary: ['sqrt']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: (A**1.9646435*K**0.5875638*L**1.3706005)**(0.931640525212322*sqrt(alpha))
+   R² = 1.0000
+2026-01-07 15:42:40,273 - INFO -    Result: (A**1.9646435*K**0.5875638*L**1.3706005)**(0.931640525212322*sqrt(alpha))
+2026-01-07 15:42:40,274 - INFO -    R2 = 1.0000
+2026-01-07 15:42:40,275 - INFO -    [BEST] New best!
+2026-01-07 15:42:40,276 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (A**1.9646435*K**0.5875638*L**1.3706005)**(0.931640525212322*sqrt(alpha))
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 91.3/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: economics_cobb_douglas.json
+
+📊 R²: 1.0000 | Val: 91.3 | ✅ PASS
+   High R²=1.0000, Val=91.3 (dim check issue)
+
+================================================================================
+TEST 30/30: economics_break_even_point
+================================================================================
+
+================================================================================
+Running: Break Even Point | Domain: economics
+Variables: FC, P, VC
+Descriptions: {'FC': 'Fixed costs', 'P': 'Price per unit', 'VC': 'Variable cost per unit'}
+================================================================================
+2026-01-07 15:42:40,439 - INFO - ======================================================================
+2026-01-07 15:42:40,439 - INFO - HybridDiscoverySystem v4.0 - FIXED AUTO-CONFIGURATION
+2026-01-07 15:42:40,439 - INFO - ======================================================================
+2026-01-07 15:42:40,439 - INFO - Domain: economics
+2026-01-07 15:42:40,440 - INFO - Discovery mode: strict
+2026-01-07 15:42:40,440 - INFO - Primary LLM: anthropic
+2026-01-07 15:42:40,440 - INFO - Auto-config: True
+2026-01-07 15:42:40,440 - INFO - Max retries: 5
+2026-01-07 15:42:40,440 - INFO - PhysicsAware fallback: False
+2026-01-07 15:42:40,441 - INFO - Complexity threshold: 20
+2026-01-07 15:42:40,441 - INFO - ======================================================================
+2026-01-07 15:42:40,441 - INFO - Using provided iterations: 50
+✅ Anthropic Provider initialized
+   Model: claude-sonnet-4-20250514
+   Max tokens: 4096
+   ✅ Using model: models/gemini-2.5-flash
+✅ Google Provider initialized
+   Model: models/gemini-2.5-flash
+   Max output tokens: 8192
+2026-01-07 15:42:41,439 - INFO - [OK] HybridDiscoverySystem v3.8 initialized
+
+
+======================================================================
+DISCOVERY WORKFLOW v3.8
+======================================================================
+Description: Break Even Point
+Domain: ECONOMICS
+Samples: 1000
+Variables: ['FC', 'P', 'VC']
+Equation hint: break_even_point
+======================================================================
+
+[DISCOVER] Running symbolic regression...
+2026-01-07 15:42:41,440 - INFO -
+[SYMBOLIC] Attempt 1/5 (seed=42)
+[ANALYZE] Analyzing data characteristics...
+   [SMART] Analyzing equation structure...
+   [SMART] Additive structure: False
+   [SMART] Multiplicative structure: False
+   [SMART] Term forms: {'FC': 'log', 'P': 'log', 'VC': 'log'}
+   [SMART] Confidence: 0.60
+[PATTERNS] logarithmic
+   [SMART] Configuring based on structure...
+   [SMART] → Unary operators: ['log']
+   [SMART CONFIG] Smart structure discovery
+[CONFIG] Smart structure discovery
+   Operators: ['+', '-', '*', '/', '**']
+   Unary: ['log']
+   Iterations: 50
+
+[PYSR INIT] Creating PySRRegressor
+[FIT] Fitting PySR...
+[OK] Discovered: (FC/P + 0.12533794)*(P - 1*0.58729035 + 0.58238137)/(P - VC)
+   R² = 1.0000
+2026-01-07 15:43:12,202 - INFO -    Result: (FC/P + 0.12533794)*(P - 1*0.58729035 + 0.58238137)/(P - VC)
+2026-01-07 15:43:12,203 - INFO -    R2 = 1.0000
+2026-01-07 15:43:12,203 - INFO -    [BEST] New best!
+2026-01-07 15:43:12,203 - INFO -    [EARLY STOP] Excellent result
+
+[OK] Discovery complete
+   Expression: (FC/P + 0.12533794)*(P - 1*0.58729035 + 0.58238137)/(P - VC)
+   R2 Score: 1.0000
+   Engine: symbolic
+   Attempt: 1/5
+   Auto-config: Smart structure discovery
+
+[VALIDATE] Checking expression quality...
+[OK] Validation complete
+   Score: 90.1/100
+
+======================================================================
+[OK] WORKFLOW COMPLETE
+======================================================================
+
+   💾 Saved: economics_break_even_point.json
+
+📊 R²: 1.0000 | Val: 90.1 | ✅ PASS
+   High R²=1.0000, Val=90.1 (dim check issue)
+
+========================================================================================================================
+                                                  FINAL RESULTS TABLE
+========================================================================================================================
+Test Name                                 R²    Val  Status  Observation
+----------------------------------- -------- ------ -------- --------------------------------------------------
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+BIOLOGY
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+biology_allometric_scaling            1.0000   91.3  ✅ PASS  Override: High R²=1.0000, Val=91.3 (dim check issue)
+biology_logistic_growth               0.9779   85.9  ✅ PASS  Good discovery
+biology_michaelis_menten              0.9999   71.8  ✅ PASS  Override: High R²=0.9999, Val=71.8 (dim check issue)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+CHEMISTRY
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+chemistry_arrhenius_equation          0.9999   80.2  ✅ PASS  Override: High R²=0.9999, Val=80.2 (dim check issue)
+chemistry_henderson_hasselbalch       1.0000   90.4  ✅ PASS  Override: High R²=1.0000, Val=90.4 (dim check issue)
+chemistry_nernst_equation             0.9997   85.9  ✅ PASS  Override: High R²=0.9997, Val=85.9 (dim check issue)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ECONOMICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+economics_break_even_point            1.0000   90.1  ✅ PASS  Override: High R²=1.0000, Val=90.1 (dim check issue)
+economics_cobb_douglas                1.0000   91.3  ✅ PASS  Override: High R²=1.0000, Val=91.3 (dim check issue)
+economics_elasticity_demand           1.0000   93.1  ✅ PASS  Override: High R²=1.0000, Val=93.1 (dim check issue)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ELECTROMAGNETISM
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+electromagnetism_coulomb_law          1.0000   82.0  ✅ PASS  Override: High R²=1.0000, Val=82.0 (dim check issue)
+electromagnetism_lorentz_force        1.0000  100.0  ✅ PASS  Override: High R²=1.0000, Val=100.0 (dim check issue)
+electromagnetism_ohms_law             1.0000   95.5  ✅ PASS  Override: High R²=1.0000, Val=95.5 (dim check issue)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+FLUID_DYNAMICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+fluid_dynamics_bernoulli_equation     0.9627   39.3  ❌ FAIL  Dimensional check failed
+fluid_dynamics_hagen_poiseuille       1.0000   85.6  ✅ PASS  Override: High R²=1.0000, Val=85.6 (dim check issue)
+fluid_dynamics_reynolds_number        1.0000   91.0  ✅ PASS  Override: High R²=1.0000, Val=91.0 (dim check issue)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+MATHEMATICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+mathematics_compound_interest         0.9995   86.5  ✅ PASS  Override: High R²=0.9995, Val=86.5 (dim check issue)
+mathematics_pythagorean_theorem       0.9998   91.0  ✅ PASS  Override: High R²=0.9998, Val=91.0 (dim check issue)
+mathematics_quadratic_discriminant    1.0000   99.4  ✅ PASS  Override: High R²=1.0000, Val=99.4 (dim check issue)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+MECHANICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+mechanics_gravitational_potential_energy   1.0000  100.0  ✅ PASS  Override: High R²=1.0000, Val=100.0 (dim check issue)
+mechanics_hookes_law                  1.0000   86.8  ✅ PASS  Override: High R²=1.0000, Val=86.8 (dim check issue)
+mechanics_kinetic_energy              1.0000  100.0  ✅ PASS  Override: High R²=1.0000, Val=100.0 (dim check issue)
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+OPTICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+optics_single_slit_diffraction        1.0000   99.1  ✅ PASS  Override: High R²=1.0000, Val=99.1 (dim check issue)
+optics_snells_law                     1.0000  100.0  ✅ PASS  Override: High R²=1.0000, Val=100.0 (dim check issue)
+optics_thin_lens_equation             0.9798   81.1  ✅ PASS  Good discovery
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+QUANTUM
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+quantum_compton_shift                 0.0000   99.5  ❌ FAIL  Low R² - discovery failed
+quantum_de_broglie_wavelength         0.0000   99.5  ❌ FAIL  Low R² - discovery failed
+quantum_photon_energy                 0.0000   98.6  ❌ FAIL  Low R² - discovery failed
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+THERMODYNAMICS
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+thermodynamics_carnot_efficiency      1.0000   98.5  ✅ PASS  Override: High R²=1.0000, Val=98.5 (dim check issue)
+thermodynamics_heat_capacity          1.0000  100.0  ✅ PASS  Override: High R²=1.0000, Val=100.0 (dim check issue)
+thermodynamics_ideal_gas_law          1.0000   91.0  ✅ PASS  Override: High R²=1.0000, Val=91.0 (dim check issue)
+========================================================================================================================
+
+SUMMARY: 26/30 passed (86.7%) | Avg R²: 0.8973 | Avg Val: 90.1
+========================================================================================================================
+
+
+┌──(py312)(agagora㉿localhost)-[~/Downloads/GITHUB/LLM-HypatiaX-Colab]
+└─$
