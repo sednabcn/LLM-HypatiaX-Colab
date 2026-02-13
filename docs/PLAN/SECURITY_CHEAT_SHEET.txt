@@ -1,0 +1,185 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                   🚨 SECURITY FIX CHEAT SHEET 🚨                          ║
+║                     Fix in 2 Minutes - Do This Now                        ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ QUICK FIX (Recommended)                                                 │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  chmod +x security_manager.sh
+  ./security_manager.sh quick-fix
+
+  ✓ Backs up requirements
+  ✓ Upgrades vulnerable packages
+  ✓ Verifies fixes
+  ✓ Updates requirements files
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ MANUAL FIX                                                              │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  pip install --upgrade 'nbconvert>=7.16.4'
+  pip install --upgrade 'cryptography>=42.0.4'
+  pip install --upgrade 'Pillow>=10.3.0'
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ THE THREE CRITICAL VULNERABILITIES                                      │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  🔴 #1: nbconvert (Issue #423)
+      What: Code execution on Windows
+      File: requirements/requirements_updated.txt
+      Fix:  nbconvert>=7.16.4
+
+  🔴 #2: cryptography (Issue #433)  
+      What: Subgroup attack on SECT curves
+      File: requirements_hashed.txt
+      Fix:  cryptography>=42.0.4
+
+  🔴 #3: Pillow (Issue #442)
+      What: Out-of-bounds write in PSD files
+      File: setup.py
+      Fix:  Pillow>=10.3.0
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ VERIFY FIXES                                                            │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  ./security_manager.sh verify-fix
+
+  OR manually check:
+  
+  python -c "import nbconvert; print(nbconvert.__version__)"
+  # Should be ≥7.16.4
+  
+  python -c "import cryptography; print(cryptography.__version__)"
+  # Should be ≥42.0.4
+  
+  python -c "from PIL import Image; import PIL; print(PIL.__version__)"
+  # Should be ≥10.3.0
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ SECURITY MANAGER COMMANDS                                               │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  ./security_manager.sh audit              # Full security scan
+  ./security_manager.sh quick-fix          # Fix everything
+  ./security_manager.sh verify-fix         # Check if fixed
+  ./security_manager.sh generate-report    # Detailed report
+  ./security_manager.sh check-specific PKG # Check one package
+  ./security_manager.sh monitor            # Set up CI/CD scanning
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ UPDATE REQUIREMENTS FILES                                               │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Option 1: Use provided safe requirements
+  ────────────────────────────────────────
+  cp requirements_safe.txt requirements.txt
+  pip install -r requirements.txt
+
+  Option 2: Auto-update your existing files
+  ──────────────────────────────────────────
+  ./security_manager.sh update-requirements
+
+  Option 3: Manual edit
+  ─────────────────────
+  vim requirements/requirements_updated.txt
+  # Change: nbconvert==OLD_VERSION
+  # To:     nbconvert>=7.16.4
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ TEST AFTER FIXING                                                       │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  # Run your test suite
+  pytest
+  
+  # Or test manually
+  python -c "import nbconvert, cryptography, PIL; print('✓ All imports work')"
+  
+  # Run your application
+  python your_main_script.py
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ COMMIT CHANGES                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  git add requirements*.txt setup.py
+  git commit -m "fix: upgrade packages to patch critical security vulnerabilities
+
+  - nbconvert >=7.16.4 (fix code execution on Windows)
+  - cryptography >=42.0.4 (fix SECT curve attack)
+  - Pillow >=10.3.0 (fix PSD out-of-bounds write)
+  
+  Issues: #423, #433, #442"
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ IF SOMETHING BREAKS                                                     │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  1. Check for conflicts:
+     pip check
+  
+  2. Restore backup:
+     cp requirements_backup/requirements.txt.TIMESTAMP.bak requirements.txt
+     pip install -r requirements.txt
+  
+  3. Test in isolated environment:
+     python -m venv venv_test
+     source venv_test/bin/activate
+     pip install 'nbconvert>=7.16.4' 'cryptography>=42.0.4' 'Pillow>=10.3.0'
+     # Test your code
+  
+  4. Update incrementally:
+     pip install --upgrade nbconvert   # Fix one at a time
+     # Test
+     pip install --upgrade cryptography
+     # Test
+     pip install --upgrade Pillow
+     # Test
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ PREVENT FUTURE ISSUES                                                   │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  1. Enable Dependabot:
+     ./security_manager.sh monitor
+  
+  2. Add to CI/CD:
+     # See .github/workflows/security-audit.yml
+  
+  3. Weekly audits:
+     crontab -e
+     # Add: 0 9 * * 1 cd /path/to/project && ./security_manager.sh audit
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ TIMELINE                                                                │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  NOW:      ./security_manager.sh quick-fix              (2 minutes)
+  +5 min:   ./security_manager.sh verify-fix            (1 minute)
+  +10 min:  pytest                                       (depends on tests)
+  +15 min:  git commit                                   (1 minute)
+  +30 min:  ./security_manager.sh monitor                (5 minutes)
+  
+  Total:    ~30 minutes to be completely secure
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ HELP & DOCUMENTATION                                                    │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  Detailed instructions:  SECURITY_FIXES_URGENT.md
+  Security manager help:  ./security_manager.sh help
+  All available commands: ./security_manager.sh
+  
+  Questions? Check security_reports/ for detailed scan results
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║   ⚡ PRIORITY: CRITICAL - FIX IMMEDIATELY ⚡                              ║
+║                                                                           ║
+║   Run this now:  ./security_manager.sh quick-fix                         ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
