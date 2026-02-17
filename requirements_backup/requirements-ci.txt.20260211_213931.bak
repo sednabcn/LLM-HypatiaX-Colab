@@ -1,5 +1,0 @@
-# Minimal CI requirements - saves disk space
-black>=23.0.0
-flake8>=6.0.0
-pip-audit>=2.6.0
-safety>=3.0.0

@@ -1,5 +1,0 @@
--r base.txt
-
-# NER dependencies (existing)
-spacy>=3.7.0
-spacy-transformers>=1.3.0

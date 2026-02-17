@@ -49,8 +49,6 @@ cymem==2.0.11
 cytoolz==1.1.0
 debugpy==1.8.17
 decorator==5.2.1
--e git+ssh://git@github.com/sednabcn/defi-risk-mvp.git@ed56d27b88005af019765eabc873a81703ba01b6#egg=defi_risk
--e git+ssh://git@github.com/sednabcn/defi-risk-mvp.git@ed56d27b88005af019765eabc873a81703ba01b6#egg=defi_risk_mvp
 defusedxml==0.7.1
 dill==0.4.1
 distlib==0.4.0
@@ -61,7 +59,6 @@ docstring_parser==0.17.0
 docutils==0.22.4
 dotenv==0.9.9
 dparse==0.6.4
-en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85
 et_xmlfile==2.0.0
 eth-account==0.13.7
 eth-hash==0.7.1
