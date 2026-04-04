@@ -1,0 +1,88 @@
+﻿Complete Analysis: What Needs Updating and Why
+Here is the full audit, tutorial by tutorial.
+
+Severity scale
+    • 🔴 WRONG — contradicts the current paper directly, will mislead readers 
+    • 🟡 MISSING — new content in paper not yet in tutorials 
+    • 🟢 STALE — was correct once but is now outdated 
+
+Tutorial 3 — MUST REWRITE (most critical)
+Issue	Tutorial claim	Paper reality	Severity
+Cohen's d	d = 3.21 "Huge" everywhere	d = 0.95 (Core 15, degenerate-distribution caveat applies)	🔴 WRONG
+Paper title	"Perfect Extrapolation via Hybrid Architectures"	Why Extrapolation Breaks Naïve Analytical Discovery	🔴 WRONG
+Figure list	5 figures	13 figures in paper	🔴 WRONG
+New DeFi figures	Not present	Figs 11–13 (train_vs_test, radar, effect_size) added	🟡 MISSING
+Stats verification code	Checks Cohen's d > 1.2 to verify	Paper explicitly warns d=0.95 is unreliable; use U=0	🔴 WRONG
+Feynman figures	Not mentioned	Feynman benchmark is Section 5.8 with own tables	🟡 MISSING
+v2 bug fix context	Not mentioned	Stats generated pre-fix would have wrong numbers	🟡 MISSING
+BibTeX	No author, wrong title	Author: Ruperto Pedro Bonet Chaple	🟢 STALE
+Tutorial 2 — SIGNIFICANT UPDATE NEEDED
+Issue	Tutorial claim	Paper reality	Severity
+Domain 3	Economics (9 equations)	Paper has no Economics campaign — 5 campaigns: Pure LLM / PySR / Hybrid / DeFi / Comparative	🔴 WRONG
+DeFi 25 equations	"25 equations"	23 unique equations, 73 test cases (66 standard)	🟢 STALE
+Routing improvements	Not mentioned	Fixes 0–5 transform DeFi benchmark from 66.2% → 72.7% → 75.8%	🟡 MISSING
+Feynman SR benchmark	Not mentioned	Full 30-equation Feynman evaluation (Section 5.8)	🟡 MISSING
+v2 evaluator fix	Not mentioned	All results need v2 corrected harness	🟡 MISSING
+Success rate	"95.8% (125/131)"	No longer stated as a global number in paper	🟢 STALE
+Paper title / BibTeX	Wrong	Same as above	🟢 STALE
+Index page — TARGETED UPDATE
+Issue	Tutorial claim	Paper reality	Severity
+Cohen's d	d = 3.21	d = 0.95	🔴 WRONG
+Paper title	"Perfect Extrapolation via Hybrid Architectures"	Why Extrapolation Breaks Naïve Analytical Discovery	🔴 WRONG
+Figure count	"All 5 main figures"	13 figures	🟢 STALE
+Feynman results	Not mentioned	96.7% on Feynman benchmark (new SotA)	🟡 MISSING
+BibTeX	Wrong title, no author	Fixed	🟢 STALE
+Tutorial 1 — LIGHT UPDATE ONLY
+Issue	Severity
+Paper title / BibTeX wrong	🟢 STALE
+No mention of v2 evaluator fix (relevant for custom use)	🟢 STALE
+Content itself (install, Ohm's Law, extrapolation demo) is correct	✅ FINE
+Tutorial 4 — LIGHT UPDATE ONLY
+Issue	Severity
+Paper title / BibTeX wrong	🟢 STALE
+No mention of unified evaluator fix (Fix 5) — relevant for custom formula implementations	🟢 STALE
+All six application examples are self-contained and correct	✅ FINE
+hypatiax-tutorial-1.md (page layout version) — COMPLETE — it's a stub
+This file ends with [Continue with the full tutorial content from the previous tutorial file...] — it is an incomplete layout page that was never finished.
+
+Now let me write the three updated files:
+Ran a command, viewed a file
+Ran a command, viewed a file
+Now I have everything. Let me write the three updated files:
+Updated Tutorial 3 - correcting Cohen's d, figure list, stats code, adding new figures and Feynman context
+Updated Tutorial 3 - correcting Cohen's d, figure list, stats code, adding new figures and Feynman context
+Now the Tutorial 2 update — adding Feynman, DeFi routing, fixing domain count:
+Updated Tutorial 2 - fixing domain count, adding Feynman benchmark section, adding DeFi 73-case routing benchmark
+Updated Tutorial 2 - fixing domain count, adding Feynman benchmark section, adding DeFi 73-case routing benchmark
+Now the index — targeted fixes only (Cohen's d, title, figure count, Feynman result, BibTeX):
+Ran 3 commands, read a file
+Ran 3 commands, read a file
+
+Decision: What Deserves Updating and Why
+🔴 Tutorial 3 — FULL REWRITE (delivered)
+This was the most urgent. Three things in it directly contradict the paper:
+Cohen's d = 3.21 is simply wrong. The paper reports d = 0.95 and explicitly warns that even this understates separation because the hybrid distribution is degenerate (all errors ≈ 0). A value of 3.21 appears nowhere in the paper. Readers who ran the verification code would get a green checkmark against a false claim. The rewrite corrects this with the proper caveat, demotes d to a secondary statistic, and promotes U = 0 as the primary claim — exactly as the paper does.
+5 figures → 13 figures. The figure list was frozen at the original submission. The rewrite adds Figures 11–13 (the three DeFi figures you uploaded), adds the Feynman recovery rate figure, and explains the full 13-figure inventory with correct paper labels.
+Statistical verification code checked Cohen's d > 1.2 to "verify" the paper. This would now fail and incorrectly flag the paper's results as unverified. Replaced with checks that match what the paper actually claims.
+
+🟡 Tutorial 2 — SIGNIFICANT UPDATE (delivered)
+Two structural errors plus major missing content:
+Economics domain doesn't exist in the paper. The tutorial listed 4 domains including "Economics (9 equations)". The paper has 5 campaigns across Physics, Biology/Chemistry, DeFi AMM, DeFi Risk — no Economics. The domain breakdown table and all associated code have been corrected.
+DeFi: 25 equations vs 23 unique / 73 test cases. The tutorial said 25 DeFi equations. The paper footnote clarifies 23 unique equations, 73 test cases (66 standard, 7 intractable excluded). The honest-denominator methodology note is now prominent — without it, readers would produce the incomparable per-method rates (83.6% / 77.4%) instead of the correct 72.7% / 69.7%.
+Missing: Feynman SR benchmark (Section 5.8 of the paper). The entire 30-equation Feynman evaluation — your new state-of-the-art result at 96.7% — was absent. Phase 2 and Phase 3 commands, expected output, and the Python API are now included.
+Missing: routing improvements (Fixes 0–5). The DeFi benchmark only makes sense with the routing context. The table of 6 fixes and measured gains (+2, +1, +6, +5, +1, +1 pp) is now in the tutorial.
+
+🟢 Index — TARGETED FIXES (delivered)
+Three surgical edits:
+    • Cohen's d: 3.21 → 0.95 (pooled; see paper note on degenerate distributions) 
+    • New bullet: Feynman SotA 96.7% (+17.4 pp over AI Feynman) 
+    • Figure count: "Figure 5: Three-system comparison" → "Figure 9: Five-system unified comparison (13 figures total in paper)" 
+    • BibTeX: correct key, correct title, author name added 
+
+✅ Tutorial 1 — NO UPDATE NEEDED NOW
+The content (install, Ohm's Law demo, extrapolation comparison) is correct and self-contained. The BibTeX is stale but this is a minor cosmetic issue that doesn't mislead anyone technically. Recommend fixing the paper title and BibTeX in a single pass across all four tutorials once the paper is accepted and the DOI is assigned.
+✅ Tutorial 4 — NO UPDATE NEEDED NOW
+All six application examples (Hall-Petch, CO₂, sklearn integration, REST API, Docker, custom operators) are self-contained and technically correct. The only issue is the BibTeX — same recommendation as Tutorial 1.
+⚠️ hypatiax-tutorial-1.md — COMPLETE THE STUB
+This file is a Jekyll page-layout version of Tutorial 1 that ends mid-sentence with [Continue with the full tutorial content from the previous tutorial file...]. It is not a content issue but a deployment issue — the page will render as an incomplete article on your website. Copy the full content from 2026-02-20-hypatiax-tutorial-1-setup.md into it, adjusting only the front-matter (layout: single, permalink:) to match the page layout format.
+

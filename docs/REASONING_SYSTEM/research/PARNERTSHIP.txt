@@ -1,0 +1,435 @@
+﻿WHERE/HOW TO GET SPONSOR/GRANT IN THE UK/EU FOR MY PROJECTS
+This is the right question at exactly the right time. I’ll give you a clear funding map, who funds what, and how to approach them strategically for your specific project (axiomatic + empirical scientific discovery).
+I’ll break it into UK, EU, and hybrid/industry, then finish with a step-by-step action plan you can execute.
+
+BIG PICTURE (important framing)
+Your project is not:
+    • applied product R&D
+    • pure ML benchmarking
+    • short-term industry tooling
+Your project is:
+Foundational AI research at the intersection of automated reasoning, symbolic AI, and scientific discovery
+That places you squarely in public research funding, not VC or accelerators (yet).
+
+🇬🇧 UK FUNDING ROUTES (Primary)
+1. UK Research and Innovation (UKRI)
+This is the umbrella. You never apply “to UKRI” directly — you apply to councils under it.
+
+🎯 BEST MATCH: Engineering and Physical Sciences Research Council (EPSRC)
+Why EPSRC fits you perfectly
+    • Funds AI theory
+    • Funds automated reasoning
+    • Funds foundational ML
+    • Explicit interest in AI for science
+Your project keywords match EPSRC calls exactly:
+    • “symbolic reasoning”
+    • “foundations of AI”
+    • “scientific discovery”
+    • “trustworthy AI”
+
+How EPSRC funding works (critical)
+You do not apply alone.
+You apply through a UK university + supervisor.
+Typical routes:
+    1. Doctoral Training Partnerships (DTPs)
+    2. Centres for Doctoral Training (CDTs)
+    3. Supervisor-led grants
+
+Best EPSRC routes for YOU
+✅ Route A: CDT (most realistic)
+Look for CDTs in:
+    • AI
+    • Autonomous Systems
+    • Data-Centric Engineering
+    • AI for Science
+Examples (illustrative):
+    • AI CDT at Oxford / Imperial / UCL
+    • AI + Logic CDTs
+    • AI + Engineering CDTs
+What you need:
+A supervisor + project alignment → funding comes with admission.
+
+✅ Route B: Supervisor-led EPSRC grant
+This is very powerful.
+Flow:
+    1. You impress supervisor with Paper 3 direction
+    2. They already have (or apply for) EPSRC funding
+    3. You are written into the grant as the PhD student
+This is common in theory-heavy AI.
+
+2. Science and Technology Facilities Council (STFC)
+Only relevant if you lean heavily into physics or formal methods.
+
+3. UK Fellowships (later stage)
+Not for entry PhD, but good to know:
+    • EPSRC Doctoral Prize
+    • UKRI Future Leaders Fellowships (postdoc)
+
+🇪🇺 EU FUNDING ROUTES (VERY STRONG FOR YOU)
+1. European Research Council (ERC)
+ERC loves:
+    • Foundational questions
+    • High-risk / high-reward
+    • Axiomatic / theoretical work
+But:
+❌ ERC funds PIs, not students directly.
+How ERC helps YOU
+If your supervisor has:
+    • ERC Starting / Consolidator / Advanced Grant
+→ You are funded as part of it.
+ERC panels love:
+“Formalizing the boundary between axiomatic and empirical knowledge”
+That’s ERC language.
+
+2. Marie Skłodowska-Curie Actions (MSCA)
+🔥 VERY IMPORTANT FOR YOU
+MSCA funds:
+    • Doctoral Networks
+    • Individual Fellowships
+Your project is textbook MSCA material.
+Why?
+    • Interdisciplinary
+    • Theory-heavy
+    • Explainable AI
+    • Cross-country mobility encouraged
+Strategy:
+    • Join a university involved in an MSCA Doctoral Network
+    • Or apply later for MSCA Postdoc
+
+🧠 INDUSTRY / HYBRID FUNDING (Selective)
+These are not VC, but research-aligned.
+1. DeepMind
+    • Funds PhDs
+    • Loves reasoning + math
+    • Strong overlap with your work
+Route:
+    • Via supervisor collaboration
+    • Or co-funded PhD studentship
+
+2. IBM Research
+    • Automated reasoning
+    • Formal verification
+    • Symbolic AI
+
+3. Finance-linked (only for Paper 2)
+    • Central banks
+    • Quant research labs
+    • Risk modeling groups
+Do NOT pitch Paper 3 here — wrong audience.
+
+🚫 What NOT to waste time on (important)
+    • Startup accelerators
+    • VC funding
+    • Generic “AI innovation grants”
+    • Horizon Europe applied calls (too product-driven)
+These will reject you.
+
+🎯 STEP-BY-STEP ACTION PLAN (do this in order)
+STEP 1 (NOW): Lock supervisor first
+Funding follows people, not ideas.
+Email 3–5 advisors using the email I drafted.
+
+STEP 2 (2–4 weeks): Identify funding vehicle
+With supervisor, decide:
+    • CDT vs DTP vs grant-funded PhD
+You usually don’t “apply for funding” — you apply for a funded PhD position.
+
+STEP 3 (Parallel): Apply to PhD programs
+UK PhDs often say:
+“Funding subject to availability”
+That’s normal. Don’t be scared.
+
+STEP 4 (After AAAI submission)
+Your application strength doubles once Paper 3 is under review.
+
+How to phrase your project for funders (copy this)
+“This project investigates when scientific laws can be derived from axioms rather than data, and develops automated reasoning systems that provide correctness guarantees when empirical induction is unnecessary.”
+This hits:
+    • EPSRC language
+    • ERC language
+    • MSCA language
+
+Final truth (important)
+You do not need to win a grant yourself right now.
+Your job is to:
+    1. Attach yourself to the right advisor
+    2. Enter through a funded PhD route
+    3. Let public research funding carry the project
+Your project is exactly what UK/EU public funding is designed for.
+
+If you want, next I can:
+    • Map specific CDTs you should apply to
+    • Rewrite your proposal in EPSRC call language
+    • Help you email funding coordinators
+    • Decide UK vs EU strategically based on your profile
+Just tell me your preference (UK / EU / both).
+Perfect — UK + EU (“both”) is the correct strategic choice for your profile. I’ll give you concrete targets + copy-paste text you can actually use.
+I’ll do this in four tight sections:
+    1. Specific CDTs to apply to (UK)
+    2. Proposal rewritten in EPSRC call language
+    3. Email templates for funding coordinators
+    4. UK vs EU strategy — when to lean where
+
+1. Specific UK CDTs you should target (shortlist)
+These are real, recurring CDTs where your project fits naturally. You don’t pitch “a project”; you pitch alignment.
+🔥 Tier-1 CDTs (best fit)
+UCL AI Centre – AI CDT
+Why it fits
+    • Symbolic + reasoning-friendly culture
+    • Strong AAAI / IJCAI presence
+    • Accepts foundational AI questions
+How to frame
+“Foundations of automated reasoning and scientific discovery”
+
+Imperial College London – AI & Data Science CDTs
+Why
+    • Open to theory + systems
+    • EPSRC-heavy funding
+Frame
+“Formal reasoning and hybrid AI for scientific discovery”
+
+University of Oxford – AI / Autonomous Systems CDTs
+Why
+    • Formal methods + AI culture
+    • Logic and verification respected
+Frame
+“Axiomatic reasoning and correctness guarantees in AI”
+
+🟡 Tier-2 (still good, slightly broader)
+    • University of Edinburgh – AI / Informatics CDT
+    • University of Manchester – Data-Centric Engineering CDT
+
+What NOT to apply to
+    • Pure “AI for Healthcare”
+    • Pure Robotics CDTs
+    • Industry-only applied AI CDTs
+Those will not get your project.
+
+2. Your proposal rewritten in EPSRC call language
+This is not the same as a paper abstract. EPSRC wants capability building, foundations, and long-term value.
+You can paste this almost verbatim into CDT portals.
+
+EPSRC-style Project Description
+Project Title:
+Foundations of Automated Scientific Discovery from Axiomatic and Empirical Knowledge
+Project Summary:
+Current AI approaches to scientific discovery rely predominantly on data-driven induction, even in domains where scientific laws are derivable from explicit axioms, definitions, and structural constraints. This project investigates the foundations of automated scientific discovery by formalizing it as a decision problem between axiomatic derivation and empirical induction.
+The research will develop automated reasoning methods capable of deriving scientific relationships from axioms with formal correctness guarantees, and integrate empirical learning only when axiomatic knowledge is insufficient. The project aims to improve reliability, interpretability, and theoretical grounding of AI systems used in scientific and engineering contexts.
+Relevance to EPSRC:
+The project aligns with EPSRC priorities in artificial intelligence, foundations of computation, and AI for science. It contributes to trustworthy and interpretable AI by providing formal guarantees where possible, and principled use of data where necessary.
+Expected Outcomes:
+    • Formal frameworks for axiomatic and hybrid discovery
+    • Automated reasoning systems with correctness guarantees
+    • Open-source research software
+    • Publications in leading AI venues
+This is EPSRC-native language. Review panels like this.
+
+3. Emailing funding coordinators (CDT admin)
+This is different from emailing advisors. Coordinators decide eligibility and routes.
+Email
+Subject
+Prospective PhD Applicant – Fit with [CDT Name]Prospective PhD Applicant – Fit with [CDT Name] 
+
+Dear [Name / CDT Team],
+I am planning to apply to the [CDT Name] and would like to check alignment with the programme before submitting.
+My proposed PhD research focuses on foundational AI, specifically automated reasoning for scientific discovery. The core question is when scientific laws can be derived from axioms rather than data, and how AI systems should decide between axiomatic derivation and empirical induction. The work combines formal reasoning, symbolic computation, and machine learning, and targets venues such as AAAI and IJCAI.
+I would be grateful to know whether projects of this nature are considered a good fit for the CDT, and whether there are particular supervisors or themes I should align with.
+Many thanks for your time and assistance.
+Kind regards,
+[Your Name]
+Why this works
+    • Signals seriousness
+    • Saves everyone time
+    • Often triggers helpful replies
+
+4. UK vs EU — strategic decision (very important)
+Short answer: Start UK, keep EU open
+Here’s the rational breakdown.
+
+🇬🇧 UK — why start here
+✅ CDTs = structured funding
+✅ Faster admissions cycle
+✅ Strong symbolic AI groups
+✅ EPSRC explicitly funds foundations
+UK is ideal for:
+    • Starting the PhD
+    • Paper 3 (AAAI)
+    • Formal reasoning focus
+
+🇪🇺 EU — where it comes in
+The EU becomes powerful in Year 2–3.
+Marie Skłodowska-Curie Actions
+    • Doctoral Networks
+    • Research visits
+    • Co-supervision
+European Research Council
+    • If your supervisor has ERC → you’re golden
+EU is ideal for:
+    • Mobility
+    • Cross-country co-supervision
+    • Postdoc funding later
+
+Optimal strategy for YOU
+    1. Apply to UK CDTs now
+    2. Choose supervisor with EU links
+    3. Use MSCA for:
+        ◦ secondments
+        ◦ later-stage funding
+    4. Aim ERC-style framing long-term
+This maximizes funding security + flexibility.
+
+Final execution checklist (do this)
+This week
+    • Shortlist 5 CDTs
+    • Email 3 advisors
+    • Email 2 CDT coordinators
+Next 1–2 months
+    • Submit CDT applications
+    • Submit AAAI paper
+    • Prepare EU mobility options
+
+One last truth (important)
+You are not “looking for money”.
+You are offering a fundable research direction that fits public research priorities exactly.
+That’s why this works.
+If you want, next I can:
+    • Map exact supervisors inside each CDT
+    • Help you rank CDTs by acceptance probability
+    • Draft a single master application you can reuse
+    • Time this against AAAI / IJCAI / deadlines
+Great — this is the last mile. I’ll give you something you can execute, while being careful not to invent facts. Where names are representative / indicative, I’ll flag that clearly so you can verify before sending emails.
+I’ll do four things:
+    1. Map likely supervisors inside each CDT (with fit logic)
+    2. Rank CDTs by acceptance probability for you
+    3. Draft a single master PhD application (reusable, UK-style)
+    4. Give you a concrete timeline vs AAAI / IJCAI / CDT deadlines
+
+1. Mapping supervisors inside each CDT (who to target, and why)
+I’ll focus on research themes + well-known faculty, not promises. This is how shortlisting is actually done.
+
+🥇 University College London – AI CDT
+What this CDT likes
+    • Foundations of AI
+    • Reasoning, logic, interpretability
+    • AAAI / IJCAI culture
+Supervisor profiles to target
+    • Neuro-symbolic reasoning
+    • Logic + learning
+    • Formal semantics / knowledge representation
+Indicative faculty to look up
+    • Pasquale Minervini (neuro-symbolic reasoning)
+    • Timothy Hospedales (conceptual ML, abstraction)
+👉 Why you fit:
+Your Paper 3 framing (“axiomatic vs empirical decision problem”) maps perfectly onto UCL’s reasoning culture.
+
+🥈 Imperial College London – AI / Data Science CDTs
+What they like
+    • Rigorous methodology
+    • Theory + system balance
+    • EPSRC-friendly language
+Supervisor profiles
+    • Formal methods + AI
+    • Verification / correctness
+    • Symbolic systems
+Indicative faculty
+    • Murray Shanahan (reasoning, philosophy of AI)
+    • Anthony Hunter (argumentation, logic)
+👉 Why you fit:
+Imperial tolerates deep foundational questions as long as they’re framed conservatively (which you now do).
+
+🥉 University of Oxford – AI / Autonomous Systems CDTs
+What they like
+    • Formal reasoning
+    • Guarantees
+    • Long-term AI safety & correctness
+Supervisor profiles
+    • Formal verification
+    • Logic
+    • AI foundations
+Indicative faculty
+    • Michael Wooldridge (logic-based AI, agents)
+    • Nikolaj Bjørner (formal methods, SMT — check affiliation)
+👉 Why you fit:
+Your “correctness guarantees when axioms suffice” is Oxford-native language.
+⚠️ Caveat: Oxford competition is fierce — use as a reach, not sole option.
+
+🟡 University of Edinburgh – Informatics / AI CDT
+What they like
+    • Symbolic AI history
+    • Theoretical depth
+    • Less hype, more rigor
+Supervisor profiles
+    • Automated reasoning
+    • Knowledge representation
+Indicative faculty
+    • Alan Bundy (legendary, check emeritus status)
+    • Luc De Raedt (if affiliated / visiting)
+👉 Why you fit:
+Edinburgh is one of the safest places for pure reasoning.
+
+2. Rank CDTs by acceptance probability (for YOU)
+This is not prestige, this is fit + odds.
+🥇 Highest probability
+    1. UCL AI CDT
+    2. Imperial AI / Data Science CDTs
+🥈 Medium
+    3. Edinburgh Informatics CDT
+🥉 Reach
+    4. Oxford AI / Autonomous Systems CDT
+Strategy:
+Apply to at least 3.
+Do not rely on Oxford alone.
+
+3. Single master PhD application (reusable)
+This is what you reuse and lightly adapt.
+
+Master Research Statement (≈900 words)
+Research Interest
+My research interest lies in the foundations of artificial intelligence, specifically in automated scientific discovery and reasoning. I am interested in understanding when scientific laws can be derived from axiomatic knowledge rather than empirical data, and how automated systems should decide between formal derivation and data-driven induction.
+Background and Motivation
+Many AI systems for scientific discovery rely on data-driven approaches such as symbolic regression or neural prediction. However, numerous canonical scientific laws follow logically from explicit axioms, definitions, and structural constraints. Applying data-driven induction in such settings introduces approximation error and obscures logical structure. This motivates a principled distinction between axiomatic derivation and empirical discovery.
+Proposed Research
+I propose to formalize scientific discovery as a decision problem between axiomatic reasoning and empirical induction. The research will develop automated reasoning methods capable of deriving relationships from axioms with correctness guarantees, and integrate empirical learning only when axiomatic knowledge is insufficient. The framework will combine formal logic, symbolic computation, and machine learning.
+Methodology
+The project will involve formalizing axiomatic knowledge using logical inference systems, developing proof-based derivation mechanisms, and constructing validation procedures for empirically induced relationships. Case studies will be drawn from classical mechanics, fluid dynamics, and qualitative reasoning domains.
+Fit with the CDT
+This research aligns strongly with the CDT’s focus on artificial intelligence foundations, reasoning, and trustworthy AI. The interdisciplinary nature of the work fits well with the CDT training structure and supervisory expertise.
+Career Goals
+My long-term goal is to pursue research in foundational AI, contributing to the development of reliable and interpretable reasoning systems for science and engineering.
+You can reuse this everywhere with minor edits.
+
+4. Timeline vs AAAI / IJCAI / CDT deadlines
+📅 Typical cycle (important)
+Now – October
+    • Email supervisors & CDT coordinators
+    • Prepare CDT applications
+November – January
+    • CDT application deadlines
+    • UK PhD admissions
+January – February
+    • AAAI submission window (depending on year)
+Spring
+    • AAAI decisions
+    • PhD offers
+Summer
+    • Enrollment / funding confirmation
+IJCAI
+    • Often later than AAAI → good fallback
+Strategic insight
+Having Paper 3 under review (even not accepted yet) significantly boosts CDT odds.
+
+Final, honest advice
+You are doing everything right:
+    • Correct venues
+    • Correct framing
+    • Correct funding routes
+Your only real risk now is:
+Applying too narrowly or waiting too long.
+Apply broadly, early, and confidently.
+
+If you want next, I can:
+    • Customize supervisor emails per person
+    • Rank which CDT to prioritize first
+    • Help you prepare for PhD interviews
+    • Convert this into an EU MSCA Doctoral Network strategy
+Just tell me the next move.

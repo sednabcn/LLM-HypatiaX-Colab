@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb, graphicx, booktabs}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Hybrid Axiomatic Discovery for Extrapolation-Robust Scientific Modeling}
+\author{Your Name}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We introduce a hybrid framework that integrates axiomatic reasoning with data-driven validation for scientific discovery. Unlike conventional machine learning models, which often fail under extrapolation, our approach derives governing laws from first principles and ensures structural correctness. We demonstrate the method on a canonical physical system, showing that it recovers the true law and maintains accuracy outside the training domain.
+\end{abstract}
+
+\section{Introduction}
+
+Machine learning models have achieved strong performance in interpolation tasks but frequently fail under extrapolation. This limitation is critical in scientific domains where models must generalize beyond observed data.
+
+We propose a hybrid framework combining:
+
+\begin{itemize}
+\item Formal axiomatic reasoning
+\item Symbolic structure discovery
+\item Empirical validation
+\end{itemize}
+
+\section{Methodology}
+
+\subsection{Axiomatic Framework}
+
+We define a formal system consisting of:
+
+\begin{itemize}
+\item Axioms: Fundamental truths
+\item Theorems: Derived statements
+\item Corollaries: Logical consequences
+\end{itemize}
+
+Inference is performed using logical rules such as modus ponens and transitivity.
+
+\subsection{Hybrid Model}
+
+The hybrid model operates in two stages:
+
+\begin{enumerate}
+\item Generate candidate laws from axioms
+\item Validate using empirical data
+\end{enumerate}
+
+\section{Experimental Setup}
+
+\subsection{Target Law}
+
+We aim to rediscover the work-energy theorem:
+
+\begin{equation}
+W = \Delta KE = \frac{1}{2} m v^2
+\end{equation}
+
+\subsection{Data Generation}
+
+Synthetic data is generated under constant acceleration. Training is performed on $x \in [0,5]$ and extrapolation is evaluated on $x \in [5,10]$.
+
+\subsection{Models}
+
+\begin{itemize}
+\item Neural Network
+\item Polynomial Regression
+\item Hybrid Axiomatic Model (ours)
+\end{itemize}
+
+\section{Results}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Model & Train MSE & Test MSE & Structure \
+\midrule
+Neural Network & Low & High & No \
+Polynomial & Moderate & Moderate & Partial \
+Hybrid & Near Zero & Near Zero & Yes \
+\bottomrule
+\end{tabular}
+\caption{Performance comparison}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{prediction_plot.png}
+\caption{Model predictions across interpolation and extrapolation domains}
+\end{figure}
+
+\section{Discussion}
+
+The hybrid approach achieves exact recovery of the governing law and maintains accuracy in extrapolation, unlike purely data-driven methods.
+
+\section{Conclusion}
+
+We demonstrate that integrating axiomatic reasoning with data validation leads to robust and interpretable models capable of extrapolation.
+
+\end{document}

@@ -1,0 +1,99 @@
+﻿🚀 1) DEMO EXPERIMENT — “Law Discovery + Extrapolation Recovery”
+🎯 Goal (what you prove)
+Show that your system:
+👉 Discovers a physical law from axioms and maintains correctness under extrapolation,
+while standard models fail.
+
+🧪 Experiment Design (clean + strong)
+Problem
+Rediscover the Work–Energy Theorem:
+    • From axioms (no data) 
+    • Then validate with data 
+    • Then test extrapolation 
+
+STEP 1 — Axiomatic Discovery (pure reasoning)
+Input axioms:
+    • F=ma 
+    • W=∫F⋅dx 
+    • v2=v02​+2aΔx 
+System derives:
+👉 W=ΔKE=21​mv2−21​mv02​
+✔ Output:
+    • proof steps 
+    • derived law 
+
+STEP 2 — Data Generation (controlled)
+Generate synthetic data:
+    • simulate motion under constant force 
+    • compute: 
+        ◦ position x 
+        ◦ velocity v 
+        ◦ work W 
+Add:
+    • small noise (realistic) 
+Split:
+    • train: x∈[0,5] 
+    • test: x∈[5,10] (extrapolation zone) 
+
+STEP 3 — Compare 3 Models
+🧠 Model A — Neural Network
+    • input: x 
+    • output: W 
+👉 Expected:
+    • good interpolation 
+    • bad extrapolation (collapse) 
+
+🔢 Model B — Symbolic (e.g., PySR-style)
+    • no axioms 
+    • data-driven 
+👉 Expected:
+    • decent fit 
+    • unstable extrapolation 
+
+🧩 Model C — YOUR SYSTEM (Hybrid)
+    • axioms + reasoning 
+    • optional data validation 
+👉 Expected:
+    • exact law 
+    • perfect extrapolation 
+
+STEP 4 — Evaluation Metrics
+1. Interpolation Error
+    • MSE on train range 
+2. Extrapolation Error (CRITICAL)
+    • MSE outside training 
+3. Structural Accuracy
+    • Does model recover true law? 
+👉 binary:
+    • 1 = correct structure 
+    • 0 = incorrect 
+
+STEP 5 — Visualization (paper-ready)
+📊 Plot 1 — Predictions
+    • True curve 
+    • NN 
+    • Symbolic 
+    • Hybrid 
+👉 Show collapse vs recovery
+
+📊 Plot 2 — Error vs Domain
+    • x-axis: input range 
+    • y-axis: error 
+👉 Highlight extrapolation gap
+
+🏁 Expected Result (what sells you)
+Model	Interpolation	Extrapolation	Structure
+NN	✅ good	❌ fails	❌
+Symbolic	✅ ok	⚠ unstable	⚠
+Hybrid (you)	✅ exact	✅ exact	✅
+👉 This table alone is powerful for recruiters + reviewers
+🚀 PART 1 — FULL EXPERIMENT CODE (Python)
+📁 Suggested Structure
+hypatiax_reasoning/
+│── data.py
+│── models.py
+│── hybrid.py
+│── evaluate.py
+│── plots.py
+│── main.py
+
