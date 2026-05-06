@@ -8,7 +8,7 @@
 - **Usage Percentage:** ${PERCENTAGE}%
 - **Status:** ${STATUS}
 - **Monthly Limit:** 1900 minutes
-- **Can Run Workflows:** 
+- **Can Run Workflows:** true
 
 ## Thresholds
 
@@ -19,7 +19,7 @@
 ## Top 5 Workflow Consumers (Last 30 Days)
 
 
-Could not parse workflow data.
+No workflow usage data available.
 
 ## Automatic Actions
 
