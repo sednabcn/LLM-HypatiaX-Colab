@@ -29,6 +29,6 @@ smart_open==7.5.0
 sympy==1.14.0
 thinc==8.3.8
 tokenizers==0.21.4
-transformers==4.55.4
+transformers==5.0.0rc3
 typer==0.20.0
 weasel==0.4.2
